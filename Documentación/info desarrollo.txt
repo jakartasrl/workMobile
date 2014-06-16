@@ -1,0 +1,38 @@
+Ruta del ERP nuevo:
+
+C:\Aplicaciones 3000\Common\
+C:\Aplicaciones 3000\JakartaERP\
+
+
+Nomenclatura de las units:
+
+- 'jkt' indica Jakarta
+- La letra 'F' indica si es un Form. 'C' (de 'C'lase) en el caso de Units sin Forms asociados.
+- La letra 'N' indica Nuevo (para distinguir con el Framework existente de Delphi 5)
+- La palabra 'Met' (de 'Met'odología) o 'Seg' (de 'Seg'uridad) o 'Xxx'...
+- Finaliza con una numeración de 4 dígitos incremental.
+
+Ejemplos:
+
+	jktFNMet0000.pas
+	jktFNMet0000.dfm
+
+	jktCNSeg0000.pas
+
+
+
+Para los forms que tienen una grilla, hay dos opciones disponibles para mostrar la solapa Grilla:
+
+1. Cuando se active el form child se busca en los componentes que tiene el form, y si tiene una grilla se activa la solapa en el Main Ribbon, o bien chequear una property que indique si el form tiene una grilla y nos indique cuál es. Habría que evaluar que pasa si el form tiene dos grillas. Para este caso la opción 2 es mejor, más fácil.
+
+2. Crear la solapa en un form child hijo y que todos los forms que vayan a tener una grilla hereden de este form child. Acá la ventaja es que se maneja más fácil el merge del menú de este form con el del padre y, además, si hay más de una grilla en el Form se puede manejar fácilmente la solapa.
+
+Habría que definir las opciones de menú asociadas a la grillas !!!
+
+
+--- Lógica de funcionamiento de botones ---
+
+Nuevo	Buscar
+
+1. ABM: Nuevo habilitado y buscar habilitado
+2. Generación órdenes de pago: Nuevo deshabilitado, entra en modo edit directo y botón Buscar habilitado

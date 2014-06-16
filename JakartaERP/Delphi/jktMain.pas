@@ -1,0 +1,519 @@
+unit jktMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
+  dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
+  dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
+  dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxCustomTileControl, dxTileControl, Vcl.Menus, ShellAPI,
+  Vcl.StdCtrls, Data.DB, Datasnap.DBClient, dxAnimation, cxClasses, dxSkinsForm,
+  cxContainer, cxEdit, cxGroupBox, cxLabel, cxTextEdit, dxSkinscxPCPainter,
+  cxPCdxBarPopupMenu, cxPC, cxSplitter, dxGDIPlusClasses, cxImage, cxButtons,
+  jktUtils, jktFrameListaProgramas;
+
+type
+  TfrmMain = class(TForm)
+    cds_MenuUsuario: TClientDataSet;
+    cds_MenuUsuariocodItemMenu: TIntegerField;
+    cds_MenuUsuariodescItemMenu: TStringField;
+    cds_MenuUsuariocodItemPadre: TIntegerField;
+    cds_MenuUsuarioesGrupo: TBooleanField;
+    cds_MenuUsuarioesItemDeGrupo: TBooleanField;
+    cds_MsjsCliente: TClientDataSet;
+    dxSkinController: TdxSkinController;
+    cxGroupBox1: TcxGroupBox;
+    cxLabel1: TcxLabel;
+    cds_MsjsJakarta: TClientDataSet;
+    cds_MsjsVarios: TClientDataSet;
+    cds_MsjsClienteAlignWithText: TByteField;
+    cds_MsjsClienteImage: TBlobField;
+    cds_MsjsClienteAlign: TByteField;
+    cds_MsjsClienteAnimateText: TBooleanField;
+    cds_MsjsClienteText1: TStringField;
+    cds_MsjsClienteText2: TStringField;
+    cds_MsjsClienteText3: TStringField;
+    cds_MsjsClienteText4: TStringField;
+    cds_MsjsJakartaAlign: TByteField;
+    cds_MsjsJakartaAlignWithText: TByteField;
+    cds_MsjsJakartaImage: TBlobField;
+    cds_MsjsJakartaAnimateText: TBooleanField;
+    cds_MsjsJakartaText1: TStringField;
+    cds_MsjsJakartaText2: TStringField;
+    cds_MsjsJakartaText3: TStringField;
+    cds_MsjsJakartaText4: TStringField;
+    cds_MsjsVariosAlign: TByteField;
+    cds_MsjsVariosAlignWithText: TByteField;
+    cds_MsjsVariosImage: TBlobField;
+    cds_MsjsVariosAnimateText: TBooleanField;
+    cds_MsjsVariosText1: TStringField;
+    cds_MsjsVariosText2: TStringField;
+    cds_MsjsVariosText3: TStringField;
+    cds_MsjsVariosText4: TStringField;
+    gbx_Login: TcxGroupBox;
+    cxLabel2: TcxLabel;
+    cxLabel3: TcxLabel;
+    txtPassword: TcxTextEdit;
+    txtUsuario: TcxTextEdit;
+    cxPageControl: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
+    cxTabSheet2: TcxTabSheet;
+    dxTileControl: TdxTileControl;
+    tcaExit: TdxTileControlActionBarItem;
+    tcaBlackTheme: TdxTileControlActionBarItem;
+    tcaWhiteTheme: TdxTileControlActionBarItem;
+    dxTileControlGroup3: TdxTileControlGroup;
+    dxTileControlGroup2: TdxTileControlGroup;
+    dxTileControlGroup1: TdxTileControlGroup;
+    tci_MsjsVarios: TdxTileControlItem;
+    tci_MsjsCliente: TdxTileControlItem;
+    tci_MsjsJakarta: TdxTileControlItem;
+    cxGroupBox2: TcxGroupBox;
+    tc_Novedades: TdxTileControl;
+    tc_MenuUsuario: TdxTileControl;
+    cxSplitter1: TcxSplitter;
+    cxSplitter2: TcxSplitter;
+    tc_Favoritos: TdxTileControl;
+    tc_FavoritosGroup1: TdxTileControlGroup;
+    procedure FormCreate(Sender: TObject);
+    procedure tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
+    procedure tcaExitClick(Sender: TdxTileControlActionBarItem);
+    procedure tci_MsjsVariosClick(Sender: TdxTileControlItem);
+    procedure txtPasswordKeyPress(Sender: TObject; var Key: Char);
+  private
+    procedure OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
+
+    procedure SelectSkin(ABlackSkin: Boolean);
+    procedure GenerarArchivoMenuUsuario;
+    procedure GenerarArchivosDeMensajes;
+
+    procedure CargarMenuUsuario;
+    procedure CargarNuevosMensajes;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMain: TfrmMain;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure CopyClientDataset(Origen, Destino: TClientDataset);
+var
+  Stream: TMemoryStream;
+begin
+  Stream:= TMemoryStream.Create;
+  try
+    Origen.SaveToStream(Stream);
+    Stream.Position:= 0;
+    Destino.LoadFromStream(Stream);
+  finally
+    Stream.Free;
+  end;
+end;
+
+procedure TfrmMain.CargarNuevosMensajes;
+var
+  AFrame: TdxTileControlItemFrame;
+begin
+  cds_MsjsCliente.LoadFromFile(DataPath + 'MsjsCliente.xml');
+  cds_MsjsJakarta.LoadFromFile(DataPath + 'MsjsJakarta.xml');
+  cds_MsjsVarios.LoadFromFile (DataPath + 'MsjsVarios.xml');
+
+  // cargo los mensajes del cliente como Frames (animados)
+  cds_MsjsCliente.First;
+  while not cds_MsjsCliente.Eof do
+  begin
+    AFrame := tci_MsjsCliente.Frames.Add;
+
+    AFrame.Glyph.Align := TdxTileItemInnerObjectAlignment(cds_MsjsCliente.FieldByName('Align').AsInteger);
+    AFrame.Glyph.AlignWithText := TdxTileControlImageWithTextAlignment(cds_MsjsCliente.FieldByName('AlignWithText').AsInteger);
+    AFrame.Glyph.Image.LoadFromFieldValue(cds_MsjsCliente.FieldByName('Image').Value);
+    AFrame.Glyph.Image.Scale(70, 100);
+
+    AFrame.OptionsAnimate.AnimateText := cds_MsjsCliente.FieldByName('AnimateText').AsBoolean;
+
+    AFrame.Style.BorderColor := $2026BBDA;
+    AFrame.Style.Font.Size := 13;
+    AFrame.Style.Gradient := gmBackwardDiagonal;
+    AFrame.Style.GradientBeginColor := $2000AFD4;
+    AFrame.Style.GradientEndColor := $201AC8E0;
+
+    AFrame.Text1.Value := cds_MsjsCliente.FieldByName('Text1').AsString;
+//    AFrame.Text1.IndentHorz := 10;
+//    AFrame.Text1.IndentVert := 10;
+    AFrame.Text2.Value := cds_MsjsCliente.FieldByName('Text2').AsString;
+//    AFrame.Text2.Align := oaTopLeft;
+//    AFrame.Text2.IndentHorz := 10;
+//    AFrame.Text2.IndentVert := 30;
+    AFrame.Text3.Value := cds_MsjsCliente.FieldByName('Text3').AsString;
+    AFrame.Text4.Value := cds_MsjsCliente.FieldByName('Text4').AsString;
+
+    cds_MsjsCliente.Next;
+  end;
+
+  cds_MsjsCliente.Close;
+  cds_MsjsJakarta.Close;
+  cds_MsjsVarios.Close;
+end;
+
+procedure TfrmMain.CargarMenuUsuario;
+var
+  AGroup: TdxTileControlGroup;
+  AItem: TdxTileControlItem;
+  AFrame: TdxTileControlItemFrame;
+begin
+//  GenerarArchivoMenuUsuario;
+
+  cds_MenuUsuario.LoadFromFile(DataPath + 'MenuUsuario.xml');
+
+  // primero creo los Grupos
+  cds_MenuUsuario.Filtered := False;
+  cds_MenuUsuario.Filter := 'esGrupo = True';
+  cds_MenuUsuario.Filtered := True;
+
+  cds_MenuUsuario.First;
+  while not cds_MenuUsuario.Eof do
+  begin
+    AGroup := tc_MenuUsuario.Groups.Add;
+    AGroup.Caption.Alignment := taLeftJustify;
+    AGroup.Caption.Color := clDefault;
+    AGroup.Caption.Font.Size := 16;
+    AGroup.Caption.Text := cds_MenuUsuario.FieldByName('descItemMenu').AsString;
+    AGroup.Index := cds_MenuUsuario.FieldByName('codItemMenu').AsInteger;
+
+    cds_MenuUsuario.Next;
+  end;
+
+  // creo los Items de los Grupos
+  cds_MenuUsuario.Filtered := False;
+  cds_MenuUsuario.Filter := 'esItemDeGrupo = True';
+  cds_MenuUsuario.Filtered := True;
+
+  cds_MenuUsuario.First;
+  while not cds_MenuUsuario.Eof do
+  begin
+    AItem := tc_MenuUsuario.Items.Add;
+    AItem.AnimationInterval := 3000;
+    AItem.AnimationMode := amScrollUp;
+
+    AItem.DetailOptions.Caption := cds_MenuUsuario.FieldByName('descItemMenu').AsString;
+    AItem.DetailOptions.DetailControl := frameListaProgramas;
+    AItem.DetailOptions.ShowTab := True;
+{
+    AItem.Frames;
+    AItem.Glyph.Image.LoadFromFieldValue( ),
+    AItem.Glyph.Align := oaMiddleRight;
+}
+    AItem.GroupIndex := cds_MenuUsuario.FieldByName('codItemPadre').AsInteger;
+    AItem.Tag := cds_MenuUsuario.FieldByName('codItemMenu').AsInteger;
+    AItem.IsLarge := True;
+    AItem.OptionsAnimate.AnimateText := True;
+    AItem.RowCount := 1;
+    AItem.Style.Gradient := gmVertical;
+    AItem.Style.GradientBeginColor := $20205EE6;
+    AItem.Style.GradientEndColor := $202774EB;
+    AItem.Text1.Align := oaTopLeft;
+    AItem.Text1.Font.Size := 13;
+    AItem.Text1.IndentHorz := 10;
+    AItem.Text1.IndentVert := 10;
+    AItem.Text1.TextColor := clDefault;
+    AItem.Text1.Transparent := True;
+    AItem.Text1.Value := cds_MenuUsuario.FieldByName('descItemMenu').AsString;
+
+    AItem.OnActivateDetail := OnActivateDetail_ItemDeGrupo;
+
+    cds_MenuUsuario.Next;
+  end;
+
+  cds_MenuUsuario.Close;
+{
+
+  cds_MenuUsuario.First;
+  while not cds_MenuUsuario.Eof do
+  begin
+    AFrame := tlAgents.Frames.Add;
+    AFrame.Glyph.Image.LoadFromFieldValue(dsAgents.FieldByName('Photo').Value);
+    AFrame.Glyph.Image.Scale(70, 100);
+    AFrame.Glyph.Align := oaMiddleRight;
+    AFrame.Tag := dsAgents.FieldByName('ID').AsInteger;
+    AFrame.Style.Font.Size := 13;
+    AFrame.Text1.Value := dsAgents.FieldByName('FirstName').AsString + ' ' + dsAgents.FieldByName('LastName').AsString;
+    AFrame.Text1.IndentHorz := 10;
+    AFrame.Text1.IndentVert := 10;
+    AFrame.Text2.Value := dsAgents.FieldByName('Phone').AsString;
+    AFrame.Text2.Align := oaTopLeft;
+    AFrame.Text2.IndentHorz := 10;
+    AFrame.Text2.IndentVert := 30;
+
+    cds_MenuUsuario.Next;
+  end;
+
+}
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  i: Integer;
+begin
+  frameListaProgramas := TframeListaProgramas.Create(Self);
+
+  cxPageControl.ActivePageIndex := 0;
+  dxSkinController.NativeStyle := False;
+  SelectSkin(True);
+  dxTileControl.LookAndFeel.AssignedValues := [];
+
+  tci_MsjsCliente.IsLarge := True;
+  tci_MsjsCliente.OptionsAnimate.AnimateText := False;
+  tci_MsjsCliente.RowCount := 1;
+
+  tci_MsjsJakarta.IsLarge := True;
+  tci_MsjsJakarta.OptionsAnimate.AnimateText := False;
+  tci_MsjsJakarta.RowCount := 1;
+
+  tci_MsjsVarios.IsLarge := False;
+  tci_MsjsVarios.OptionsAnimate.AnimateText := False;
+  tci_MsjsVarios.RowCount := 1;
+
+//  UpdateActionBarsItems;
+
+//  GenerarArchivosDeMensajes;
+  CargarNuevosMensajes;
+
+  dxTileControl.Controller.StopFramesAnimation;
+  try
+    for i := 0 to dxTileControl.Items.Count - 1 do
+      if dxTileControl.Items[i].Frames.Count > 0 then
+        dxTileControl.Items[i].ActiveFrame := dxTileControl.Items[i].Frames[0];
+  finally
+    dxTileControl.Controller.StartFramesAnimation;
+  end;
+end;
+
+procedure TfrmMain.GenerarArchivosDeMensajes;
+begin
+  // creo los Grupos
+  cds_MsjsCliente.CreateDataSet;
+  cds_MsjsJakarta.CreateDataSet;
+  cds_MsjsVarios.CreateDataSet;
+
+  // cada registro del archivo será un Frame que querramos mostrar
+  // Mensajes Cliente
+  cds_MsjsCliente.Append;
+  cds_MsjsCliente.FieldByName('Align').Value         := TdxTileItemInnerObjectAlignment(oaDefault);    // Glyph
+  cds_MsjsCliente.FieldByName('AlignWithText').Value := TdxTileControlImageWithTextAlignment(itaNone); // Glyph
+  cds_MsjsCliente.FieldByName('Image').Value         := '';
+  cds_MsjsCliente.FieldByName('AnimateText').Value   := True;
+  cds_MsjsCliente.FieldByName('Text1').Value := 'Cumpleaños:';
+  cds_MsjsCliente.FieldByName('Text2').Value := '13/05';
+  cds_MsjsCliente.FieldByName('Text3').Value := '';
+  cds_MsjsCliente.FieldByName('Text4').Value := 'Vale Peñalva';
+  cds_MsjsCliente.Post;
+
+  cds_MsjsCliente.Append;
+  cds_MsjsCliente.FieldByName('Align').Value         := TdxTileItemInnerObjectAlignment(oaDefault);    // Glyph
+  cds_MsjsCliente.FieldByName('AlignWithText').Value := TdxTileControlImageWithTextAlignment(itaNone); // Glyph
+  cds_MsjsCliente.FieldByName('Image').Value         := '';
+  cds_MsjsCliente.FieldByName('AnimateText').Value   := True;
+  cds_MsjsCliente.FieldByName('Text1').Value := 'Feriados del mes:';
+  cds_MsjsCliente.FieldByName('Text2').Value := '25/05';
+  cds_MsjsCliente.FieldByName('Text3').Value := '';
+  cds_MsjsCliente.FieldByName('Text4').Value := 'Revolución de Mayo';
+  cds_MsjsCliente.Post;
+
+  // Mensajes Jakarta
+  cds_MsjsJakarta.Append;
+  cds_MsjsJakarta.FieldByName('Align').Value         := TdxTileItemInnerObjectAlignment(oaDefault);    // Glyph
+  cds_MsjsJakarta.FieldByName('AlignWithText').Value := TdxTileControlImageWithTextAlignment(itaNone); // Glyph
+  cds_MsjsJakarta.FieldByName('Image').Value         := '';
+  cds_MsjsJakarta.FieldByName('AnimateText').Value   := True;
+  cds_MsjsJakarta.FieldByName('Text1').Value := '¿Sabías que...?';
+  cds_MsjsJakarta.FieldByName('Text2').Value := '...';
+  cds_MsjsJakarta.FieldByName('Text3').Value := '...';
+  cds_MsjsJakarta.FieldByName('Text4').Value := '...';
+  cds_MsjsJakarta.Post;
+
+  cds_MsjsJakarta.Append;
+  cds_MsjsJakarta.FieldByName('Align').Value         := TdxTileItemInnerObjectAlignment(oaDefault);    // Glyph
+  cds_MsjsJakarta.FieldByName('AlignWithText').Value := TdxTileControlImageWithTextAlignment(itaNone); // Glyph
+  cds_MsjsJakarta.FieldByName('Image').Value         := '';
+  cds_MsjsJakarta.FieldByName('AnimateText').Value   := True;
+  cds_MsjsJakarta.FieldByName('Text1').Value := 'Nueva versión disponible!';
+  cds_MsjsJakarta.FieldByName('Text2').Value := '';
+  cds_MsjsJakarta.FieldByName('Text3').Value := 'Comuníquese al:';
+  cds_MsjsJakarta.FieldByName('Text4').Value := '4999-9999';
+  cds_MsjsJakarta.Post;
+
+  // Acerca de ...
+  cds_MsjsVarios.Append;
+  cds_MsjsVarios.FieldByName('Align').Value         := TdxTileItemInnerObjectAlignment(oaDefault);    // Glyph
+  cds_MsjsVarios.FieldByName('AlignWithText').Value := TdxTileControlImageWithTextAlignment(itaNone); // Glyph
+  cds_MsjsVarios.FieldByName('Image').Value         := '';
+  cds_MsjsVarios.FieldByName('AnimateText').Value   := True;
+  cds_MsjsVarios.FieldByName('Text1').Value := 'Versión: v9.0.0.0';
+  cds_MsjsVarios.FieldByName('Text2').Value := 'Fecha modificación:';
+  cds_MsjsVarios.FieldByName('Text3').Value := '';
+  cds_MsjsVarios.FieldByName('Text4').Value := '';
+  cds_MsjsVarios.Post;
+
+  cds_MsjsCliente.SaveToFile(DataPath + 'MsjsCliente.xml', dfXML); // dfBinary);
+  cds_MsjsJakarta.SaveToFile(DataPath + 'MsjsJakarta.xml', dfXML); // dfBinary);
+  cds_MsjsVarios.SaveToFile (DataPath + 'MsjsVarios.xml' , dfXML); // dfBinary);
+end;
+
+procedure TfrmMain.OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
+begin
+  // en Sender.Tag nos viene el 'codItemMenu' !!!
+  TframeListaProgramas(Sender.DetailOptions.DetailControl).CargarListaProgramas(Sender.Tag);
+end;
+
+procedure TfrmMain.GenerarArchivoMenuUsuario;
+begin
+  // 'codItemMenu' representara el Index del grupo "TdxTileControlGroup" que
+  // crearemos (lo necesitaremos para alojar o ubicar los ItemDeGrupo).
+  // En 'GroupIndex' de los items "TdxTileControlItem" indicaremos este codigo
+  // para que los items se ubiquen en el grupo correspondiente.
+  // Para los Programas seteamos 'esGrupo' y 'esItemDeGrupo' en False, pues
+  // no son ni un Grupo ni un Item de grupo.
+
+  // creo los Grupos
+  cds_MenuUsuario.CreateDataSet;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 0;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Seguridad';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := -1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := True;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 1;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Configuración';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := -1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := True;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 2;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Contabilidad';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := -1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := True;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  // creo los Items de cada grupo
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Administración';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 4;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Interfaces';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 5;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Autorizaciones';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+  // creo los Programas
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 6;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Empresas';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 7;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Menu';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 8;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro Perfil Funcional';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 9;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Usuarios conectados';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
+end;
+
+procedure TfrmMain.SelectSkin(ABlackSkin: Boolean);
+const
+  SkinFileNames: array[Boolean] of string = ('MetroWhite.skinres', 'MetroBlack.skinres');
+begin
+  dxSkinsUserSkinLoadFromFile(DataPath + SkinFileNames[ABlackSkin]);
+  tcaBlackTheme.Visible := not ABlackSkin;
+  tcaWhiteTheme.Visible := ABlackSkin;
+end;
+
+procedure TfrmMain.tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
+begin
+  SelectSkin(Sender.Tag = 0);
+end;
+
+procedure TfrmMain.tcaExitClick(Sender: TdxTileControlActionBarItem);
+begin
+  Close;
+end;
+
+procedure TfrmMain.tci_MsjsVariosClick(Sender: TdxTileControlItem);
+begin
+  ShellExecute(0, 'open', 'http://www.jakartasrl.com.ar', nil, nil, SW_SHOW);
+end;
+
+procedure TfrmMain.txtPasswordKeyPress(Sender: TObject; var Key: Char);
+begin
+  if (Key = #$D) then begin
+    if (Trim(txtUsuario.Text) = 'asutton') and (txtPassword.Text = '123') then begin
+      // iniciamos sesion!
+      gbx_Login.Visible := False;
+      // cambiamos al 'cxTabSheet2' (segunda pagina) y mostramos ahi el Menu de Usuario
+      cxPageControl.ActivePageIndex := 1;
+
+      CargarMenuUsuario;
+    end;
+  end;
+end;
+
+end.

@@ -1,0 +1,152 @@
+// SAMPLE kbmMW configuration file.
+// Here is all posibilities listed. The configuration needs to be adjusted
+// to match your needs.
+// ***********************************************************************
+
+// One of the following must be defined.
+// Only define the one matching your license.
+// Anything else will fail to compile.
+// {$DEFINE KBMMW_CODEGEAR_EDITION}
+// {$DEFINE KBMMW_PRO_EDITION}
+// {$DEFINE KBMMW_ENTERPRISE_EDITION}
+
+// ===========================================================================
+// Transport support.
+// Remove/add // from/to the following lines to enable/disable specific transports.
+// ===========================================================================
+{$DEFINE KBMMW_LOCALTRANSPORT_SUPPORT}             // Client/Server in one app.
+{$DEFINE KBMMW_INDYTCPIPTRANSPORT_SUPPORT}         // Indy TCPIP support.
+//{$DEFINE KBMMW_INDYUDPSAFTRANSPORT_SUPPORT}        // Indy UDP messaging support.
+//{$DEFINE KBMMW_INDYTCPIPSAFTRANSPORT_SUPPORT}      // Indy TCPIP messaging support.
+//{$DEFINE KBMMW_SYNAPSETCPIPTRANSPORT_SUPPORT}      // Synapse TCPIP support.
+//{$DEFINE KBMMW_SYNAPSEUDPSAFTRANSPORT_SUPPORT}     // Synapse UDP messaging support.
+//{$DEFINE KBMMW_SYNAPSETCPIPSAFTRANSPORT_SUPPORT}   // Synapse TCPIP messaging support.
+//{$DEFINE KBMMW_DXSOCKTCPIPTRANSPORT_SUPPORT}       // DXSock 3.0 TCPIP support
+//{$DEFINE KBMMW_NEXUSDBTRANSPORT_SUPPORT}           // NexusDB transport support.
+//{$DEFINE KBMMW_STREAMSEC_SSHSAFTRANSPORT_SUPPORT}  // StreamSec 3 SSH messaging support.
+//{$DEFINE KBMMW_ISAPITRANSPORT_SUPPORT}             // ISAPI support.
+
+// -------------------------------------------------------------------
+// Specific settings for NexusDB transport stream and database.
+// -------------------------------------------------------------------
+{$DEFINE KBMMW_USING_NEXUSDB2}                     // Using NexusDB v2 or up.		
+
+// -------------------------------------------------------------------
+// Specific settings for DXSock TCPIP transport stream.
+// -------------------------------------------------------------------
+//{$DEFINE KBMMW_ISAPITRANSPORT_USING_DXSOCK}      // Use DXSock 3.0 for ISAPI support.
+                                                   // If not defined, will use Indy.
+
+// -------------------------------------------------------------------
+// Specific settings for Indy TCPIP transport stream.
+// Enable the entry (by removing the //) for the version of Indy you
+// are using. Other entries should be remarked.
+// -------------------------------------------------------------------
+//{$DEFINE KBMMW_USING_INDY_8_00_23}
+//{$DEFINE KBMMW_USING_INDY_9}
+//{$DEFINE KBMMW_USING_INDY_10}
+
+// -------------------------------------------------------------------
+// Indy 10 related supports.
+// Enable the entry (by removing the //) for the version of Indy you
+// are using. Other entries should be remarked.
+// -------------------------------------------------------------------
+//{$DEFINE KBMMW_SUPPORT_INDY_10_0_52} 
+//{$DEFINE KBMMW_SUPPORT_INDY_10_2_3}  
+
+
+// ===========================================================================
+// Zip library selection
+// Remove/insert // from the following lines to enable/disable support for specific ZLib libraries.
+// Only one should be enabled. If nothing is enabled Borlands standard ZLib library will be used.
+// ===========================================================================
+//{$DEFINE KBMMW_ZIPPED_USE_FASTZLIB}
+
+// ===========================================================================
+// Transport stream support.
+// Remove/insert // from the following lines to enable/disable specific transport streams.
+// ===========================================================================
+{$DEFINE KBMMW_HTTP_TRANSPORTSTREAM_SUPPORT}           // HTTP Tunneling transport stream format.
+{$DEFINE KBMMW_SOAP_TRANSPORTSTREAM_SUPPORT}           // SOAP transport stream format.
+{$DEFINE KBMMW_XML_TRANSPORTSTREAM_SUPPORT}            // XML transport stream format.
+//{$DEFINE KBMMW_ZIPPED_TRANSPORTSTREAM_SUPPORT}         // Compressed binary transport stream format.
+//{$DEFINE KBMMW_ZIPPED_HTTP_TRANSPORTSTREAM_SUPPORT}    // Compressed HTTP Tunneling transport stream format.
+//{$DEFINE KBMMW_AJAX_TRANSPORTSTREAM_SUPPORT}           // AJAX transport stream format.
+//{$DEFINE KBMMW_AMF3_TRANSPORTSTREAM_SUPPORT}           // AMF3 transport stream format.
+
+
+// ===========================================================================
+// Cryptography support.
+// Remove/insert // from the following lines to enable/disable specific crypts.
+// ===========================================================================
+//{$DEFINE KBMMW_CRYPT_SS2}                              // StreamSec II
+//{$DEFINE KBMMW_CRYPT_DCPCRYPT2}                        // DCPCrypt 2
+
+// -------------------------------------------------------------------
+// Specific settings for StreamSecII.
+// Enable the entry (by removing the //) for the version of Indy you
+// are using. Other entries should be remarked.
+// -------------------------------------------------------------------
+//{$DEFINE KBMMW_USING_SS2_1_7_95_OR_NEWER}                 // Define this if using StreamSecII v. 1.7.95 or newer.
+
+// ===========================================================================
+// Transport plugins.
+// Remove/insert // from the following lines to enable/disable specific plugins.
+// ===========================================================================
+//{$DEFINE KBMMW_TRANSPORTPLUGIN_SS2_TLS}                // StreamSec II TLS/SSL support
+
+// ===========================================================================
+// Special services.
+// Remove/insert // from the following lines to enable/disable specific service.
+// ===========================================================================
+//{$DEFINE KBMMW_JAVA_SERVICE_SUPPORT}                   // Java Service support
+//{$DEFINE KBMMW_ACTIONSCRIPT_SERVICE_SUPPORT}           // ActionScript Service support
+
+
+// ===========================================================================
+// ReportBuilder DADE support.
+// Remove/insert // from the following lines to enable/disable specific version.
+// ===========================================================================
+//{$DEFINE KBMMW_RBDADE_SUPPORT}                         // ReportBuilder DADE support
+//{$DEFINE KBMMW_USING_5_1_OLDER_RB}                     // If using RB 5.1 or older.
+//{$DEFINE KBMMW_USING_7_NEWER_RB}                       // If using RB 7 or newer.
+
+// ===========================================================================
+// Database adapters.
+// Remove the // from the following lines to enable specific database support.
+// ===========================================================================
+{$DEFINE KBMMW_X_SUPPORT}                 // kbmMW Cross adapter support.
+{$DEFINE KBMMW_MT_SUPPORT}                // kbmMemTable backend Support.
+{$DEFINE KBMMW_DBX_SUPPORT}               // Borland dbExpress support.
+{$DEFINE KBMMW_IBX5_SUPPORT}              // Interbase Express 5 support.
+{$DEFINE KBMMW_BDE_SUPPORT}               // BDE Support.
+{$DEFINE KBMMW_ADOX_SUPPORT}              // ADO Express support.
+//{$DEFINE KBMMW_FF2_SUPPORT}               // Flashfiler 2 support.
+//{$DEFINE KBMMW_DBISAM3_SUPPORT}           // DBISAM 3 support.
+//{$DEFINE KBMMW_DBISAM4_SUPPORT}           // DBISAM 4 support.
+//{$DEFINE KBMMW_EDB_SUPPORT}               // ElevateDB v1 support.
+//{$DEFINE KBMMW_ADS6_SUPPORT}              // Advantage 6 support.
+//{$DEFINE KBMMW_IBO_SUPPORT}               // Interbase IBO support.
+//{$DEFINE KBMMW_DADO_SUPPORT}              // Deer-Soft ADO support.
+//{$DEFINE KBMMW_ZEOS6_SUPPORT}             // Zeos v6 support.
+//{$DEFINE KBMMW_ZEOSMSSQL_SUPPORT}         // Zeos MSSQL support.
+//{$DEFINE KBMMW_ZEOSMYSQL_SUPPORT}         // Zeos MYSQL support.
+//{$DEFINE KBMMW_ZEOSPROGRESS_SUPPORT}      // Zeos Progress SQL support.
+//{$DEFINE KBMMW_ZEOSDB2_SUPPORT}           // Zeos DB2 support.
+//{$DEFINE KBMMW_ZEOSORACLE_SUPPORT}        // Zeos Oracle support.
+//{$DEFINE KBMMW_ZEOSIB_SUPPORT}            // Zeos Interbase support.
+//{$DEFINE KBMMW_MYSQLDAC_SUPPORT}          // MySQLDAC support.
+//{$DEFINE KBMMW_DOA_SUPPORT}               // Direct Oracle Access support.
+//{$DEFINE KBMMW_ODAC4_SUPPORT}             // ODAC4 (Oracle Access) support.
+//{$DEFINE KBMMW_DAO_SUPPORT}               // Diamond Access support.
+//{$DEFINE KBMMW_ZEOS6_SUPPORT}             // Zeos 6 support.
+//{$DEFINE KBMMW_NEXUSDB_SUPPORT}           // NexusDB v1 support.
+//{$DEFINE KBMMW_SD_SUPPORT}                // SQLDirect support.
+//{$DEFINE KBMMW_UIB_SUPPORT}               // UIB support.
+//{$DEFINE KBMMW_FIB_SUPPORT}               // FIB support.
+//{$DEFINE KBMMW_ABS_SUPPORT}               // Absolute DB support.
+//{$DEFINE KBMMW_APOLLO_SUPPORT}            // Apollo DB support.
+//{$DEFINE KBMMW_SDAC3_SUPPORT}             // Corelabs SDAC 3 support.
+//{$DEFINE KBMMW_POSTGRESQLDAC_SUPPORT}     // PostgreSQL DAC support.
+//{$DEFINE KBMMW_NATIVEDB_SUPPORT}          // NativeDB support.
+//{$DEFINE KBMMW_MYDAC5_SUPPORT}            // MYDAC5 (Corelab MySQL Access) support.

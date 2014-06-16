@@ -1,0 +1,269 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{a9cee5dd-907a-4527-810f-8748940320ce}</ProjectGuid>
+			<MainSource>kbmMWRunDXE2CG.dpk</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>kbmMWRunDXE2CG.bpl</DCC_DependencyCheckOutputName>
+			<ProjectVersion>13.4</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<FrameworkType>None</FrameworkType>
+			<Base>True</Base>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>7</TargetedPlatforms>
+			<AppType>Package</AppType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+			<Base_Win64>true</Base_Win64>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+			<Cfg_1_Win32>true</Cfg_1_Win32>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+			<Cfg_2_Win32>true</Cfg_2_Win32>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1030</VerInfo_Locale>
+			<DCC_ImageBase>04210001</DCC_ImageBase>
+			<DCC_IOChecking>false</DCC_IOChecking>
+			<DCC_DependencyCheckOutputName>kbmMWRunDXE2CG.bpl</DCC_DependencyCheckOutputName>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Description>kbmMW CodeGear Edition - High performance n-tier - Delphi XE2 for Win32/64/MacOS - Runtime - www.Components4Developers.com</DCC_Description>
+			<RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+			<DCC_WriteableConstants>true</DCC_WriteableConstants>
+			<DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+			<DCC_OutputNeverBuildDcps>true</DCC_OutputNeverBuildDcps>
+			<GenDll>true</GenDll>
+			<DCC_DcuOutput>.\DXE2\$(Platform)\$(Config)</DCC_DcuOutput>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<GenPackage>true</GenPackage>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win64)'!=''">
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<Version>7.0</Version>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_IOChecking>False</DCC_IOChecking>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_ObjOutput>.\DXE2\$(Platform)\$(Config)</DCC_ObjOutput>
+			<DCC_HppOutput>.\DXE2\$(Platform)\$(Config)</DCC_HppOutput>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_UNSAFE_TYPE>True</DCC_UNSAFE_TYPE>
+			<DCC_UNSAFE_CODE>True</DCC_UNSAFE_CODE>
+			<DCC_UNSAFE_CAST>True</DCC_UNSAFE_CAST>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_DebugDCUs>true</DCC_DebugDCUs>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_Define>KBMMEMTABLE_PRO_EDITION;$(DCC_Define)</DCC_Define>
+			<Version>7.0</Version>
+			<DCC_DebugInformation>true</DCC_DebugInformation>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
+			<DCC_ObjOutput>.\DXE2\$(Platform)\$(Config)</DCC_ObjOutput>
+			<DCC_HppOutput>.\DXE2\$(Platform)\$(Config)</DCC_HppOutput>
+			<DCC_UNSAFE_TYPE>True</DCC_UNSAFE_TYPE>
+			<DCC_UNSAFE_CODE>True</DCC_UNSAFE_CODE>
+			<DCC_UNSAFE_CAST>True</DCC_UNSAFE_CAST>
+			<DCC_AssertionsAtRuntime>true</DCC_AssertionsAtRuntime>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+			<DCC_DcuOutput>.\DXE2\$(Platform)\$(Config)</DCC_DcuOutput>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="$(MainSource)">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="dbexpress.dcp"/>
+			<DCCReference Include="ibxpress.dcp"/>
+			<DCCReference Include="IndyCore.dcp"/>
+			<DCCReference Include="IndySystem.dcp"/>
+			<DCCReference Include="rtl.dcp"/>
+			<DCCReference Include="kbmMemRunDXE2CG.dcp"/>
+			<DCCReference Include="vclx.dcp"/>
+			<DCCReference Include="vcl.dcp"/>
+			<DCCReference Include="bdertl.dcp"/>
+			<DCCReference Include="kbmMWBDE.pas"/>
+			<DCCReference Include="kbmMWBinaryStreamFormat.pas"/>
+			<DCCReference Include="kbmMWClient.pas"/>
+			<DCCReference Include="kbmMWClientDataset.pas"/>
+			<DCCReference Include="kbmMWConnectionString.pas"/>
+			<DCCReference Include="kbmMWCustomConnectionPool.pas"/>
+			<DCCReference Include="kbmMWCustomDataset.pas"/>
+			<DCCReference Include="kbmMWCustomMemoryStreamFormatter.pas"/>
+			<DCCReference Include="kbmMWCustomQueryService.pas">
+				<Form>kbmMWCustomQueryService</Form>
+				<DesignClass>TkbmMWCustomService</DesignClass>
+			</DCCReference>
+			<DCCReference Include="kbmMWCustomSQLMetaData.pas"/>
+			<DCCReference Include="kbmMWCustomTransport.pas"/>
+			<DCCReference Include="kbmMWExceptions.pas"/>
+			<DCCReference Include="kbmMWGlobal.pas"/>
+			<DCCReference Include="kbmMWHTTPStdTransStream.pas"/>
+			<DCCReference Include="kbmMWIBX5.pas"/>
+			<DCCReference Include="kbmMWInterbaseMetaData.pas"/>
+			<DCCReference Include="kbmMWInventoryClient.pas"/>
+			<DCCReference Include="kbmMWInventoryService.pas">
+				<Form>kbmMWInventoryService</Form>
+				<DesignClass>TkbmMWCustomService</DesignClass>
+			</DCCReference>
+			<DCCReference Include="kbmMWISAPIClientTransport.pas"/>
+			<DCCReference Include="kbmMWISAPIServerTransport.pas"/>
+			<DCCReference Include="kbmMWISAPITransport.pas"/>
+			<DCCReference Include="kbmMWLocalStats.pas"/>
+			<DCCReference Include="kbmMWLocalTransport.pas"/>
+			<DCCReference Include="kbmMWMime.pas"/>
+			<DCCReference Include="kbmMWMSSQLMetaData.pas"/>
+			<DCCReference Include="kbmMWMT.pas"/>
+			<DCCReference Include="kbmMWObject.pas"/>
+			<DCCReference Include="kbmMWObjectUtils.pas"/>
+			<DCCReference Include="kbmMWOracleMetaData.pas"/>
+			<DCCReference Include="kbmMWProxyService.pas">
+				<Form>kbmMWProxyService</Form>
+			</DCCReference>
+			<DCCReference Include="kbmMWQueryService.pas">
+				<Form>kbmMWQueryService</Form>
+				<DesignClass>TkbmMWCustomQueryService</DesignClass>
+			</DCCReference>
+			<DCCReference Include="kbmMWResolvers.pas"/>
+			<DCCReference Include="kbmMWSecurity.pas"/>
+			<DCCReference Include="kbmMWSequence.pas"/>
+			<DCCReference Include="kbmMWServer.pas">
+				<Form>kbmMWCustomService</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="kbmMWServiceUtils.pas"/>
+			<DCCReference Include="kbmMWSOAPTransStream.pas"/>
+			<DCCReference Include="kbmMWSQLite.pas"/>
+			<DCCReference Include="kbmMWStats.pas"/>
+			<DCCReference Include="kbmMWStreamFormat.pas"/>
+			<DCCReference Include="kbmMWSubjectUtils.pas"/>
+			<DCCReference Include="kbmMWTCPIPIndyClientTransport.pas"/>
+			<DCCReference Include="kbmMWTCPIPIndyServerTransport.pas"/>
+			<DCCReference Include="kbmMWTCPIPIndyTransport.pas"/>
+			<DCCReference Include="kbmMWXML.pas"/>
+			<DCCReference Include="kbmMWXMLDomStreamFormatter.pas"/>
+			<DCCReference Include="kbmMWXMLStreamFormat.pas"/>
+			<DCCReference Include="kbmMWXMLTransStream.pas"/>
+			<DCCReference Include="kbmMWMD.pas"/>
+			<DCCReference Include="kbmMWJSON.pas"/>
+			<DCCReference Include="kbmMWJSONStreamFormat.pas"/>
+			<DCCReference Include="kbmMWHTTPUtils.pas"/>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>Package</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Compiler>
+						<Compiler Name="UsePackages">False</Compiler>
+						<Compiler Name="Packages"/>
+					</Compiler>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1030</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">kbmMWRunDXE2CG.dpk</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcboffice2k160.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcbofficexp160.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k160.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp160.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win64">True</Platform>
+					<Platform value="OSX32">True</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>

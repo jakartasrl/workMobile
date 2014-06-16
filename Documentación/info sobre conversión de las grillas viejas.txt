@@ -1,0 +1,24 @@
+So, you can migrate from Grid v3 to 6 with Delphi 7 IDE and then simply open your project with Delphi XE IDE.
+
+I suggest that you upgrade your TdxDbGrid to TcxGrid v6 under Delphi 6 IDE and then migrate to the newest version with Delphi XE IDE.
+
+
+
+In brief, you should perform the following steps to convert your current project:
+
+1) Install both versions of the ExpressQuantumGrid (v3 and v6) for Delphi6;
+2) Convert your old grid's layout to the latest product version (please refer to the "Converting to ExpressQuantumGrid" topic in the ExpressQuantumGrid's documentation to find more information on this subject);
+3) Adjust your code to use the latest product version;
+4) Install the latest version of the ExpressQuantumGrid (v6) for Delphi 2007;
+5) Use the converted project in Delphi 2007.
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+The latest available build of our components for Delphi 5 is build 27. Feel free to download it using our Client Center and contact us if you have any questions.
+
+Build 27 also contains ExpressQuantumGrid v4.27 (in the meantime, we use unified version numbers). You can download this build via your Client Center account, and install ExpressQuantumGrid v4 without any problems.
+Please feel free to contact us if you have any questions.

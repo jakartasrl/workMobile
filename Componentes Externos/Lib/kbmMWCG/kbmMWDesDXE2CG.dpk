@@ -1,0 +1,49 @@
+package kbmMWDesDXE2CG;
+
+{$R *.res}
+{$R 'kbmMWReg.dcr'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS OFF}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $4220001}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'kbmMW CodeGear Edition - High performance n-tier - Delphi XE2 for Win32 - Designtime - www.Components4Developers.com'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  dbrtl,
+  designide,
+  kbmMemRunDXE2CG,
+  kbmMWRunDXE2CG,
+  rtl,
+  vcldb;
+
+contains
+  kbmMWParamsEditor in 'kbmMWParamsEditor.pas' {kbmMWParamsEditor: TkbmMWParamsEditor},
+  kbmMWQueryServiceSetup in 'kbmMWQueryServiceSetup.pas' {frQueryService: TFrame},
+  kbmMWReg in 'kbmMWReg.pas',
+  kbmMWServiceSetup in 'kbmMWServiceSetup.pas',
+  kbmMWServiceWizard in 'kbmMWServiceWizard.pas',
+  kbmMWServiceWizardForm in 'kbmMWServiceWizardForm.pas' {frmServiceWizard: TfrmServiceWizard},
+  kbmMWStringListEditor in 'kbmMWStringListEditor.pas' {kbmMWStringListEditor: TkbmMWStringListEditor};
+
+end.
