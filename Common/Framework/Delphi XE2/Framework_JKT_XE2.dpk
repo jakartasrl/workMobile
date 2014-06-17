@@ -100,8 +100,7 @@ contains
   jktCNMet0002 in 'jktCNMet0002.pas',
   jktCNMet0008 in 'jktCNMet0008.pas',
   jktCNMet0014 in 'jktCNMet0014.pas',
-  jktCNMet0030 in 'jktCNMet0030.pas',
-  jktNFMet0030 in '..\..\..\Pruebas Framework\jktNFMet0030.pas' {FAttributeEditor};
+  jktCNMet0030 in 'jktCNMet0030.pas';
 
 end.
 
