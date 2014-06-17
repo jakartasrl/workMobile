@@ -1,8 +1,9 @@
 unit jktCNMet0030;
 
 interface
+
 uses
- Classes, kbmMemTable, data.db;
+  Classes, kbmMemTable, data.db;
  //DesignEditors, DesignIntf;
 
 
@@ -80,7 +81,9 @@ type
  procedure Register;
 
 implementation
-uses jktNFMet0030;
+
+uses
+  jktFNMet0030;
 
 
 procedure Register;
@@ -175,7 +178,7 @@ end;
 
 procedure TjktOperAttributeList.Update(Item: TjktOperAttribute);
 begin
-  inherited update(Item);
+  inherited Update(Item);
 end;
 
 function TjktOperAttributeList.add : TjktOperAttribute;
