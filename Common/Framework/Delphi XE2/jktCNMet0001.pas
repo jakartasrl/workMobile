@@ -338,6 +338,8 @@ begin
   enabledAction('acNew',  false);
   enabledAction('acFind', false);
   enabledAction('acSave', true);
+  enabledAction('acClose', true);
+
   if (opImprimir in FOpciones)
     then     enabledAction('acPrint', true)
     else if (opImportar in FOpciones)
@@ -351,6 +353,8 @@ begin
   enabledAction('acNew',  false);
   enabledAction('acFind', false);
   enabledAction('acSave', true);
+  enabledAction('acClose', true);
+
   if (opImprimir in FOpciones)
     then     enabledAction('acPrint',  true)
     else if (opImportar in FOpciones )
@@ -896,7 +900,8 @@ end;
 procedure TjktDriver.enabledAction(actionName: string; enabled: boolean);
 begin
   if not Assigned(FActionList) then exit;
-  TAction (FActionList.FindComponent(actionName)).enabled  := enabled;
+  if self.Owner.FindComponent(actionName) = nil then exit;
+  TAction (self.Owner.FindComponent(actionName)).enabled  := enabled;
 end;
 
 
