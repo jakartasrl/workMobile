@@ -85,13 +85,7 @@
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="jktFNSeg0001.pas">
-				<Form>;
-
-{$R *.res</Form>
-			</DCCReference>
-			<DCCReference Include="jktNFMet0030.pas">
-				<Form>FAttributeEditor</Form>
-				<FormType>dfm</FormType>
+				<Form>$R *.res</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

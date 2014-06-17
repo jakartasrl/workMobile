@@ -10253,7 +10253,7 @@ object Form2: TForm2
       FieldName = 'oid'
     end
     object mtTipoCtaProvCodigo: TStringField
-      Tag = 1
+      Tag = 2
       FieldName = 'codigo'
     end
     object mtTipoCtaProvdescripcion: TStringField
