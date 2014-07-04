@@ -137,6 +137,8 @@ object frmMain: TfrmMain
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -342,9 +344,6 @@ object frmMain: TfrmMain
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
         TabOrder = 0
-        ExplicitLeft = 501
-        ExplicitTop = 208
-        ExplicitWidth = 766
       end
       object cxSplitter1: TcxSplitter
         Left = 300
@@ -352,8 +351,7 @@ object frmMain: TfrmMain
         Width = 5
         Height = 315
         AllowHotZoneDrag = False
-        ExplicitLeft = 576
-        ExplicitTop = 40
+        Control = tc_Favoritos
       end
       object cxSplitter2: TcxSplitter
         Left = 0
@@ -371,8 +369,6 @@ object frmMain: TfrmMain
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
-        ExplicitLeft = -1
-        ExplicitTop = -1
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0
