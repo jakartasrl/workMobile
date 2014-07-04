@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/06/18 17:19:34.000.279,=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/06/18 17:20:47.000.185,C:\Aplicaciones 3000\Prototipo Los Conce\Unit1.pas=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/06/18 17:20:47.000.185,C:\Aplicaciones 3000\Prototipo Los Conce\Unit1.dfm=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2014/06/18 17:24:54.000.299,C:\Aplicaciones 3000\Prototipo Los Conce\JakartaERP.dproj=C:\Users\sbraceras\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2014/06/18 17:56:33.000.973,=C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0000.pas</Transaction>
+    <Transaction>2014/06/18 17:56:45.000.024,=C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0001.pas</Transaction>
+    <Transaction>2014/06/18 18:49:20.000.203,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/18 18:49:56.000.685,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/18 18:50:28.000.837,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/18 18:50:40.000.921,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/18 18:57:05.000.182,C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0001.pas=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/18 18:57:05.000.183,C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0001.dfm=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.dfm</Transaction>
+    <Transaction>2014/06/18 19:29:19.000.999,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/19 09:48:52.000.581,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/19 09:49:20.000.428,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/06/19 09:55:55.000.376,C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0001.pas=</Transaction>
+    <Transaction>2014/06/19 09:57:23.000.692,C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas=C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0001.pas</Transaction>
+    <Transaction>2014/06/19 09:57:23.000.692,C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.dfm=C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0001.dfm</Transaction>
+    <Transaction>2014/07/03 10:25:05.000.082,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/07/03 10:28:14.000.202,C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas=C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0002.pas</Transaction>
+    <Transaction>2014/07/03 10:28:14.000.202,C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.dfm=C:\Aplicaciones 3000\Prototipo Los Conce\jktFNProg0002.dfm</Transaction>
+    <Transaction>2014/07/03 18:26:31.533,=C:\Program Files\Developer Express.VCL\ExpressScheduler\Sources\cxSchedulerEventEditor.pas</Transaction>
+    <Transaction>2014/07/03 19:55:51.946,=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/07/03 20:17:13.794,C:\Aplicaciones 3000\Prototipo Los Conce\jktFNCustomizedEventEditor.pas=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.pas</Transaction>
+    <Transaction>2014/07/03 20:17:13.794,C:\Aplicaciones 3000\Prototipo Los Conce\jktFNCustomizedEventEditor.dfm=C:\Aplicaciones 3000\Prototipo Los Conce\Unit2.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
