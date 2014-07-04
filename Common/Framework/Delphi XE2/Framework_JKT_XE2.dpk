@@ -93,7 +93,8 @@ requires
   dxSkinWhiteprintRS16,
   dxSkinXmas2008BlueRS16,
   dxSkinscxPCPainterRS16,
-  cxTreeListRS16;
+  cxTreeListRS16,
+  cxSchedulerRS16;
 
 contains
   jktCNMet0001 in 'jktCNMet0001.pas',

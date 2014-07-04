@@ -218,7 +218,7 @@ end;
 
 procedure TjktOperacion.obtenerDatasets;
 var
-  x: word;
+  x: integer;
   att :TjktOperAttribute;
 begin
     DatasetsList := TList.create;

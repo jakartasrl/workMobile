@@ -7,7 +7,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs,Vcl.ActnList,  db, kbmMemTable,
+  Dialogs,Vcl.ActnList,  db, kbmMemTable, cxScheduler,
   jktCNMet0002, jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030;
 
 type
@@ -43,6 +43,7 @@ type
     FOperacionTraer             :TjktOperacion;
     FServiceCaller              :TjktServiceCaller;
     FActionList                 :TActionList;
+    FScheduler                  :TcxScheduler;
     { Agregar  :
         FiltroActivos
         FiltroInActivos
@@ -150,10 +151,11 @@ type
     property IgnoreTags            : Boolean read fIgnoreTags write fIgnoreTags;
     property NoAutoEditarDataSets  : Boolean read FNoAutoEditarDataSets write FNoAutoEditarDataSets;
     property DataSetCab            : TDataSet read FDataSetCab          write FDataSetCab;
-    property OperacionSave         :TjktOperacion  read FOperacionSave write FOperacionSave;
-    property OperacionTraer        :TjktOperacion  read FOperacionTraer write FOperacionTraer;
-    property ServiceCaller         :TjktServiceCaller read FServiceCaller write FServiceCaller;
-    property ActionList            :TActionList   read FActionList write FActionList;
+    property OperacionSave         : TjktOperacion  read FOperacionSave write FOperacionSave;
+    property OperacionTraer        : TjktOperacion  read FOperacionTraer write FOperacionTraer;
+    property ServiceCaller         : TjktServiceCaller read FServiceCaller write FServiceCaller;
+    property ActionList            : TActionList read FActionList write FActionList;
+    property Scheduler             : TcxScheduler read FScheduler write FScheduler;
     property ConfirmarCancelacion  : Boolean read FConfirmarCancelacion write FConfirmarCancelacion;
 
     property Opciones              : TjktOpciones     read FOpciones     write FOpciones;
@@ -215,13 +217,13 @@ end;
 
 procedure TjktDriver.DoInhibirBotones;
 var
- x :word;
+ x :integer;
 begin
   if not Assigned(FActionList) then exit;
 
   for x := 0 to FActionList.ActionCount -1  do
     begin
-       TAction (FActionList.Actions[x]).Enabled := false;
+       TAction (FActionList.Actions[x]).Enabled := False;
     end;
     enabledAction('acNew',  true);
     enabledAction('acFind', true);
@@ -338,7 +340,7 @@ begin
   enabledAction('acNew',  false);
   enabledAction('acFind', false);
   enabledAction('acSave', true);
-  enabledAction('acClose', true);
+  enabledAction('acCancel', true);
 
   if (opImprimir in FOpciones)
     then     enabledAction('acPrint', true)
@@ -353,7 +355,7 @@ begin
   enabledAction('acNew',  false);
   enabledAction('acFind', false);
   enabledAction('acSave', true);
-  enabledAction('acClose', true);
+  enabledAction('acCancel', true);
 
   if (opImprimir in FOpciones)
     then     enabledAction('acPrint',  true)
@@ -481,9 +483,6 @@ end;
 
 procedure TjktDriver.DoFiltrar;
 begin
-  if FDataSetCab <> nil
-     then FDataSetCab.Open;
-
   self.abrirDataSets;
 
   // mostrar el HELP (o FILTRO) segun el help asignado en la property HelpFiltro
@@ -530,7 +529,7 @@ end;
 
 procedure TjktDriver.completarAtributosOperacion(aOper :TjktOperacion);
 var
- x :word;
+ x :integer;
  count :integer;
  att :TjktOperAttribute;
 begin
@@ -567,8 +566,9 @@ begin
        if dataSet is TjktMemTable
           then TjktMemTable(dataSet).NoAutoEditarCabecera := FNoAutoEditarDataSets;
 
-       if (not dataSet.Active) then
-         dataSet.open;
+       if (not dataSet.Active)
+         then   dataSet.open;
+       dataSet.Append;
     end;
 end;
 
@@ -898,10 +898,18 @@ begin
 end;
 
 procedure TjktDriver.enabledAction(actionName: string; enabled: boolean);
+var
+  i: integer;
 begin
   if not Assigned(FActionList) then exit;
-  if self.Owner.FindComponent(actionName) = nil then exit;
-  TAction (self.Owner.FindComponent(actionName)).enabled  := enabled;
+
+  for i := 0 to FActionList.ActionCount - 1 do
+    begin
+      if TAction(FActionList.Actions[i]).Name = actionName then begin
+        TAction(FActionList.Actions[i]).Enabled := enabled;
+        Break;
+      end;
+    end;
 end;
 
 
