@@ -1,15 +1,15 @@
 inherited FNProg0002: TFNProg0002
   Caption = 'FNProg0002'
   ClientHeight = 533
-  ClientWidth = 769
-  ExplicitWidth = 785
+  ClientWidth = 806
+  ExplicitWidth = 822
   ExplicitHeight = 571
   PixelsPerInch = 96
   TextHeight = 13
-  object cxScheduler1: TcxScheduler [0]
+  object Scheduler: TcxScheduler [0]
     Left = 0
     Top = 65
-    Width = 769
+    Width = 806
     Height = 468
     ViewGantt.Active = True
     ViewGantt.Scales.MajorUnit = suMonth
@@ -18,6 +18,7 @@ inherited FNProg0002: TFNProg0002
     ViewTimeGrid.Scales.MinorUnit = suDay
     Align = alClient
     EventPopupMenu.Items = [epmiEditSeries, epmiShowTimeAs, epmiLabel, epmiDelete]
+    EventPopupMenu.OnPopup = SchedulerEventPopupMenuPopup
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -25,11 +26,9 @@ inherited FNProg0002: TFNProg0002
     Font.Style = []
     Storage = Storage
     TabOrder = 4
-    ExplicitWidth = 791
-    ExplicitHeight = 459
     Splitters = {
-      710200007E00000000030000830000006C0200000100000071020000D3010000}
-    StoredClientBounds = {010000000100000000030000D3010000}
+      960200007E0000002503000083000000910200000100000096020000D3010000}
+    StoredClientBounds = {010000000100000025030000D3010000}
   end
   object cxGroupBox1: TcxGroupBox [1]
     Left = 0
@@ -37,9 +36,8 @@ inherited FNProg0002: TFNProg0002
     Align = alTop
     Caption = 'Selecci'#243'n de Agenda'
     TabOrder = 5
-    ExplicitWidth = 791
     Height = 65
-    Width = 769
+    Width = 806
     object cxComboBox1: TcxComboBox
       Left = 120
       Top = 23
@@ -51,6 +49,7 @@ inherited FNProg0002: TFNProg0002
         'Laboratorio Qu'#237'mico'
         'Laboratorio El'#233'ctrico'
         'Legales')
+      Properties.OnChange = cxComboBox1PropertiesChange
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -12
@@ -77,7 +76,7 @@ inherited FNProg0002: TFNProg0002
       0)
   end
   inherited Driver: TjktDriver
-    Scheduler = cxScheduler1
+    Scheduler = Scheduler
     Left = 672
   end
   inherited IdHTTP: TIdHTTP

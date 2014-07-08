@@ -16,59 +16,62 @@ inherited FNProg0001: TFNProg0001
     LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 273
-      Top = 41
+      Top = 23
       Style.HotTrack = False
       TabOrder = 1
       Width = 117
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 539
-      Top = 41
+      Top = 23
       Style.HotTrack = False
       TabOrder = 2
       Width = 121
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 760
-      Top = 41
+      Top = 23
       Style.HotTrack = False
       TabOrder = 3
       Width = 121
     end
     object cxDBDateEdit1: TcxDBDateEdit
       Left = 99
-      Top = 41
+      Top = 23
       Style.HotTrack = False
       TabOrder = 0
       Width = 99
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 273
-      Top = 107
+      Top = 89
       Style.HotTrack = False
       TabOrder = 6
       Width = 387
     end
     object cxDBTextEdit7: TcxDBTextEdit
-      Left = 224
-      Top = 213
+      Left = 10000
+      Top = 10000
       Style.HotTrack = False
       TabOrder = 8
+      Visible = False
       Width = 132
     end
     object cxDBTextEdit8: TcxDBTextEdit
-      Left = 443
-      Top = 213
+      Left = 10000
+      Top = 10000
       Style.HotTrack = False
       TabOrder = 9
+      Visible = False
       Width = 121
     end
     object jktExpDBGrid1: TjktExpDBGrid
-      Left = 32
-      Top = 302
+      Left = 10000
+      Top = 10000
       Width = 452
       Height = 120
       TabOrder = 10
+      Visible = False
       DataSource = dsContactosComerciales
       object jktExpDBGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -98,11 +101,12 @@ inherited FNProg0001: TFNProg0001
       end
     end
     object jktExpDBGrid2: TjktExpDBGrid
-      Left = 490
-      Top = 302
+      Left = 10000
+      Top = 10000
       Width = 452
       Height = 120
       TabOrder = 11
+      Visible = False
       DataSource = dsContactosTecnicos
       object jktExpDBGrid2DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -132,11 +136,12 @@ inherited FNProg0001: TFNProg0001
       end
     end
     object jktExpDBGrid3: TjktExpDBGrid
-      Left = 32
-      Top = 583
+      Left = 10000
+      Top = 10000
       Width = 438
       Height = 120
       TabOrder = 18
+      Visible = False
       DataSource = dsCondicionesFacturacion
       object jktExpDBGrid3DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -167,7 +172,7 @@ inherited FNProg0001: TFNProg0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 99
-      Top = 107
+      Top = 89
       Properties.Buttons = <
         item
           Default = True
@@ -178,30 +183,32 @@ inherited FNProg0001: TFNProg0001
       Width = 99
     end
     object cxRadioButton1: TcxRadioButton
-      Left = 42
-      Top = 503
+      Left = 10000
+      Top = 10000
       Width = 90
       Height = 17
       Caption = 'Los Conce'
       Color = 15919591
       ParentColor = False
       TabOrder = 12
+      Visible = False
       ParentBackground = False
     end
     object cxRadioButton2: TcxRadioButton
-      Left = 138
-      Top = 503
+      Left = 10000
+      Top = 10000
       Width = 65
       Height = 17
       Caption = 'Cliente'
       Color = 15919591
       ParentColor = False
       TabOrder = 13
+      Visible = False
       ParentBackground = False
     end
     object cxRadioButton3: TcxRadioButton
-      Left = 229
-      Top = 503
+      Left = 10000
+      Top = 10000
       Width = 90
       Height = 17
       Caption = 'Los Conce'
@@ -210,24 +217,26 @@ inherited FNProg0001: TFNProg0001
       ParentColor = False
       TabOrder = 14
       TabStop = True
+      Visible = False
       GroupIndex = 1
       ParentBackground = False
     end
     object cxRadioButton4: TcxRadioButton
-      Left = 325
-      Top = 503
+      Left = 10000
+      Top = 10000
       Width = 65
       Height = 17
       Caption = 'Cliente'
       Color = 15919591
       ParentColor = False
       TabOrder = 15
+      Visible = False
       GroupIndex = 1
       ParentBackground = False
     end
     object cxRadioButton5: TcxRadioButton
-      Left = 416
-      Top = 503
+      Left = 10000
+      Top = 10000
       Width = 90
       Height = 17
       Caption = 'Los Conce'
@@ -236,24 +245,26 @@ inherited FNProg0001: TFNProg0001
       ParentColor = False
       TabOrder = 16
       TabStop = True
+      Visible = False
       GroupIndex = 2
       ParentBackground = False
     end
     object cxRadioButton6: TcxRadioButton
-      Left = 512
-      Top = 503
+      Left = 10000
+      Top = 10000
       Width = 65
       Height = 17
       Caption = 'Cliente'
       Color = 15919591
       ParentColor = False
       TabOrder = 17
+      Visible = False
       GroupIndex = 2
       ParentBackground = False
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
-      Left = 136
-      Top = 213
+      Left = 10000
+      Top = 10000
       Properties.Buttons = <
         item
           Default = True
@@ -261,6 +272,7 @@ inherited FNProg0001: TFNProg0001
         end>
       Style.HotTrack = False
       TabOrder = 7
+      Visible = False
       Width = 82
     end
     object jktExpDBGrid4: TjktExpDBGrid
@@ -341,6 +353,9 @@ inherited FNProg0001: TFNProg0001
             item
               Default = True
               Kind = bkEllipsis
+            end
+            item
+              Hint = 'Abrir archivo...'
             end>
           Properties.OnButtonClick = jktExpDBGrid5DBTableView1ArchivoPropertiesButtonClick
           Width = 389
@@ -697,7 +712,7 @@ inherited FNProg0001: TFNProg0001
     end
     object cxComboBox1: TcxComboBox
       Left = 99
-      Top = 68
+      Top = 50
       Properties.DropDownListStyle = lsFixedList
       Properties.Items.Strings = (
         'Venta'
@@ -855,6 +870,7 @@ inherited FNProg0001: TFNProg0001
       OptionsView.AdditionalTimeZone = 17
       OptionsView.AdditionalTimeZoneLabel = 'Am'#233'rica Central'
       OptionsView.CurrentTimeZoneLabel = 'Buenos Aires'
+      OptionsView.GroupingKind = gkNone
       OptionsView.ResourcesPerPage = 3
       OptionsView.ShowAdditionalTimeZone = True
       OptionsView.WorkStart = 0.375000000000000000
@@ -877,7 +893,6 @@ inherited FNProg0001: TFNProg0001
         TabOrder = 0
         Properties.ActivePage = tbsGantt
         Properties.CustomButtons.Buttons = <>
-        ExplicitHeight = 342
         ClientRectBottom = 246
         ClientRectLeft = 2
         ClientRectRight = 138
@@ -885,7 +900,6 @@ inherited FNProg0001: TFNProg0001
         object tbsGantt: TcxTabSheet
           Caption = 'Gantt'
           ImageIndex = 3
-          ExplicitHeight = 140
           DesignSize = (
             136
             221)
@@ -973,7 +987,6 @@ inherited FNProg0001: TFNProg0001
         object cxTabSheet1: TcxTabSheet
           Caption = 'Vista'
           ImageIndex = 1
-          ExplicitHeight = 312
           object cxGroupBox1: TcxGroupBox
             Left = 3
             Top = 11
@@ -997,6 +1010,7 @@ inherited FNProg0001: TFNProg0001
               Left = 11
               Top = 8
               Caption = 'Agrupar por:'
+              Transparent = True
             end
           end
         end
@@ -1296,7 +1310,7 @@ inherited FNProg0001: TFNProg0001
       CaptionOptions.Text = 'General'
       Parent = lcMainGroup3
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
+      ItemIndex = 3
       Index = 0
     end
     object lcMainGroup3: TdxLayoutGroup
@@ -1313,6 +1327,7 @@ inherited FNProg0001: TFNProg0001
       Parent = lcMainGroup4
       ButtonOptions.Buttons = <>
       ButtonOptions.ShowExpandButton = True
+      Expanded = False
       ItemIndex = 1
       LayoutDirection = ldHorizontal
       Index = 2
@@ -1322,6 +1337,7 @@ inherited FNProg0001: TFNProg0001
       Parent = lcMainGroup4
       ButtonOptions.Buttons = <>
       ButtonOptions.ShowExpandButton = True
+      Expanded = False
       Index = 3
     end
     object lcMainGroup7: TdxLayoutGroup
@@ -1368,6 +1384,7 @@ inherited FNProg0001: TFNProg0001
       Parent = lcMainGroup4
       ButtonOptions.Buttons = <>
       ButtonOptions.ShowExpandButton = True
+      Expanded = False
       ItemIndex = 1
       LayoutDirection = ldHorizontal
       Index = 1
@@ -1393,6 +1410,7 @@ inherited FNProg0001: TFNProg0001
       Parent = lcMainGroup4
       ButtonOptions.Buttons = <>
       ButtonOptions.ShowExpandButton = True
+      Expanded = False
       ItemIndex = 1
       LayoutDirection = ldHorizontal
       Index = 0
@@ -1693,6 +1711,7 @@ inherited FNProg0001: TFNProg0001
       0)
   end
   inherited Driver: TjktDriver
+    Scheduler = Scheduler
     Left = 608
     Top = 8
   end
@@ -2452,7 +2471,11 @@ inherited FNProg0001: TFNProg0001
     Top = 368
   end
   object Storage: TcxSchedulerStorage
-    CustomFields = <>
+    CustomFields = <
+      item
+        Name = 'Duracion'
+        ValueType = 'Integer'
+      end>
     Resources.Items = <
       item
         Name = 'Legales'
@@ -2482,6 +2505,7 @@ inherited FNProg0001: TFNProg0001
     Links = <
       item
         AdapterClass = 'TcxSchedulerIDFieldAdapter'
+        FieldIndex = 0
         Item = jktExpDBGrid1TableView1cxGridColumn1
       end
       item

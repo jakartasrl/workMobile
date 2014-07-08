@@ -25,10 +25,14 @@ uses
 type
   TEventEditorCustomized = class(TcxSchedulerEventEditorForm)
     lbDuracion: TcxLabel;
-    cxSpinEdit1: TcxSpinEdit;
+    seDuracion: TcxSpinEdit;
+    procedure seDuracionPropertiesChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   protected
+    procedure SetCaptions; override;
+
     procedure LoadEventValuesIntoControls; override;
     procedure UpdateEventValuesFromControls; override;
   public
@@ -47,6 +51,14 @@ uses
 
 { TEventEditorCustomized }
 
+procedure TEventEditorCustomized.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  deEnd.Enabled := False;
+  seDuracion.EditValue := Event.Duration;
+end;
+
 procedure TEventEditorCustomized.LoadEventValuesIntoControls;
 const
   CLRF = #13#10;
@@ -57,13 +69,41 @@ begin
   try
     // load the data into the custom editing controls
     // no checking for a null value is needed. The null value is automatically replaced with empty string in the editing controls
-    teFirstName.EditValue := Event.GetCustomFieldValueByName('FName');
-    teLastName.EditValue := Event.GetCustomFieldValueByName('LName');
-    cbGender.EditValue := Event.GetCustomFieldValueByName('Gender');
+
+//    seDuracion.EditValue := Event.GetCustomFieldValueByName('Duracion');
   except
     on E: Exception do
       ShowMessage(DlgMsg + CLRF + E.Message);
   end;
+end;
+
+procedure TEventEditorCustomized.seDuracionPropertiesChange(Sender: TObject);
+begin
+  inherited;
+
+  Event.Duration := seDuracion.EditingValue;
+  LoadValuesIntoTimeControls(Event.Start, Event.Finish, Event.AllDayEvent);
+end;
+
+procedure TEventEditorCustomized.SetCaptions;
+begin
+  inherited;
+
+  // ATENCION: PARA LA DEMO SE SETEAN EN RUNTIME LOS CAPTIONS EN ESPAÑOL.
+  // ANALIZAR COMO TRADUCIR LOS COMPONENTES DE DEVEXPRESS
+  Caption := 'Tarea' + ' - ' + EventName;
+  // events
+  lbResource.Caption := 'Sector';
+  lbSubject.Caption := 'Tarea:';
+  lbLocation.Caption := 'Lugar:';
+  lbShowTimeAs.Caption := 'Mostrar como:';
+  lbStartTime.Caption := 'Inicio:';
+  lbEndTime.Caption := 'Finalización:';
+  cbAllDayEvent.Caption := 'Evento de todo el día';
+  cbReminder.Caption := 'Recordatorio:';
+  lbTaskComplete.Caption := 'Avance:';
+  lbTaskStatus.Caption := 'Estado de la tarea:';
+  // buttons
 end;
 
 procedure TEventEditorCustomized.UpdateEventValuesFromControls;
@@ -75,9 +115,8 @@ begin
   inherited UpdateEventValuesFromControls;
   try
     // post the data from the custom editing controls
-    Event.SetCustomFieldValueByName('FName', teFirstName.EditValue);
-    Event.SetCustomFieldValueByName('LName', teLastName.EditValue);
-    Event.SetCustomFieldValueByName('Gender', cbGender.EditValue);
+    Event.SetCustomFieldValueByName('Duracion', seDuracion.EditValue);
+    // synchronize changes made by the end-user in the Event dialog with the storage
     FModified := True;
   except
     on E: Exception do

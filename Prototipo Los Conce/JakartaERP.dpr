@@ -7,6 +7,8 @@ uses
   jktFNMet0001 in '..\Common\Framework\Delphi XE2\jktFNMet0001.pas' {frmChild},
   jktFNProg0001 in 'jktFNProg0001.pas' {FNProg0001},
   jktFNProg0002 in 'jktFNProg0002.pas' {FNProg0002},
+  jktFNProg0003 in 'jktFNProg0003.pas' {FNProg0003},
+  jktFNProg0004 in 'jktFNProg0004.pas' {FNProg0004},
   cxSchedulerEventEditor in 'C:\Program Files\Developer Express.VCL\ExpressScheduler\Sources\cxSchedulerEventEditor.pas' {cxSchedulerEventEditorForm},
   jktFNCustomizedEventEditor in 'jktFNCustomizedEventEditor.pas' {EventEditorCustomized};
 

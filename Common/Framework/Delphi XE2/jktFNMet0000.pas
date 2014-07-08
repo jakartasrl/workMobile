@@ -24,7 +24,7 @@ uses
   cxBarEditItem, dxScreenTip, Vcl.ActnList, cxContainer, cxEdit, cxTextEdit,
   cxMemo, cxScrollBox, dxBevel, cxLabel, cxGroupBox, Vcl.ExtCtrls, dxSkinsForm,
   cxPC, dxSkinscxPCPainter, cxPCdxBarPopupMenu, dxTabbedMDI, jktFNMet0001,
-  Vcl.DBActns, cxSchedulerCustomControls;
+  Vcl.DBActns, cxSchedulerCustomControls, Unit1;
 
 type
   TfrmRibbonMain = class(TdxRibbonForm) //
@@ -219,6 +219,7 @@ type
     dxbtnNavigator: TdxBarButton;
     dxbViewOptions: TdxBar;
     RibbonTab4: TdxRibbonTab;
+    bbMenuPrincipal: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure acNewExecute(Sender: TObject);
     procedure acExitExecute(Sender: TObject);
@@ -242,6 +243,7 @@ type
     procedure acViewTypeExecute(Sender: TObject);
     procedure dxbtnControlBoxClick(Sender: TObject);
     procedure dxbtnNavigatorClick(Sender: TObject);
+    procedure bbMenuPrincipalClick(Sender: TObject);
   private
     function CreateChildForm: TfrmChild;
     function CreateNewChild: TfrmChild;
@@ -358,6 +360,12 @@ end;
 procedure TfrmRibbonMain.bbApplicationButtonClick(Sender: TObject);
 begin
   Ribbon.ApplicationButton.Visible := bbApplicationButton.Down;
+end;
+
+procedure TfrmRibbonMain.bbMenuPrincipalClick(Sender: TObject);
+begin
+  Self.Hide;
+  FormMenu.Show;
 end;
 
 procedure TfrmRibbonMain.bbQATVisibleClick(Sender: TObject);

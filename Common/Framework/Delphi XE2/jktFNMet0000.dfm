@@ -303,6 +303,7 @@ object frmRibbonMain: TfrmRibbonMain
     TabOrder = 0
     TabStop = False
     object RibbonTab3: TdxRibbonTab
+      Active = True
       Caption = 'Inicio'
       Groups = <
         item
@@ -346,7 +347,6 @@ object frmRibbonMain: TfrmRibbonMain
       ContextIndex = 0
     end
     object RibbonTab4: TdxRibbonTab
-      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -371,6 +371,13 @@ object frmRibbonMain: TfrmRibbonMain
         PanelStyle.Container = dxRibbonStatusBar1Container1
       end
       item
+        PanelStyleClassName = 'TdxStatusBarStateIndicatorPanelStyle'
+        PanelStyle.Indicators = <>
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarToolbarPanelStyle'
+      end
+      item
         PanelStyleClassName = 'TdxStatusBarKeyboardStatePanelStyle'
         PanelStyle.Color = 15451044
         PanelStyle.CapsLockKeyAppearance.ActiveFontColor = clDefault
@@ -385,13 +392,6 @@ object frmRibbonMain: TfrmRibbonMain
         PanelStyle.InsertKeyAppearance.ActiveFontColor = clDefault
         PanelStyle.InsertKeyAppearance.ActiveCaption = 'OVR'
         PanelStyle.InsertKeyAppearance.InactiveCaption = 'INS'
-      end
-      item
-        PanelStyleClassName = 'TdxStatusBarStateIndicatorPanelStyle'
-        PanelStyle.Indicators = <>
-      end
-      item
-        PanelStyleClassName = 'TdxStatusBarToolbarPanelStyle'
       end>
     Ribbon = Ribbon
     Font.Charset = DEFAULT_CHARSET
@@ -408,10 +408,10 @@ object frmRibbonMain: TfrmRibbonMain
     end
   end
   object BackstageView: TdxRibbonBackstageView
-    Left = 35
-    Top = 187
-    Width = 841
-    Height = 400
+    Left = 19
+    Top = 170
+    Width = 740
+    Height = 280
     Buttons = <
       item
         Item = bbNew
@@ -431,28 +431,33 @@ object frmRibbonMain: TfrmRibbonMain
       Caption = 'Open'
       SizeOptions.MinWidth = 700
       object bvlSpacer1: TBevel
-        Left = 667
+        Left = 658
         Top = 60
         Width = 42
-        Height = 314
+        Height = 194
         Align = alRight
         Shape = bsSpacer
+        ExplicitLeft = 667
+        ExplicitHeight = 314
       end
       object bvSpacer2: TBevel
         Left = 0
         Top = 60
         Width = 42
-        Height = 314
+        Height = 194
         Align = alLeft
         Shape = bsSpacer
+        ExplicitHeight = 314
       end
       object bvSpacer7: TBevel
         Left = 0
-        Top = 374
-        Width = 709
+        Top = 254
+        Width = 700
         Height = 26
         Align = alBottom
         Shape = bsSpacer
+        ExplicitTop = 374
+        ExplicitWidth = 709
       end
       object gbBackstageViewTabCaption: TcxGroupBox
         Left = 0
@@ -467,15 +472,17 @@ object frmRibbonMain: TfrmRibbonMain
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
         Transparent = True
+        ExplicitWidth = 709
         Height = 60
-        Width = 709
+        Width = 700
         object bvSpacer4: TBevel
-          Left = 667
+          Left = 658
           Top = 0
           Width = 42
           Height = 60
           Align = alRight
           Shape = bsSpacer
+          ExplicitLeft = 667
         end
         object bvSpacer3: TBevel
           Left = 0
@@ -499,8 +506,9 @@ object frmRibbonMain: TfrmRibbonMain
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 625
           Height = 60
-          Width = 625
+          Width = 616
         end
         object lbbvTabCaption2013: TcxLabel
           Left = 42
@@ -516,6 +524,7 @@ object frmRibbonMain: TfrmRibbonMain
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 625
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -531,8 +540,10 @@ object frmRibbonMain: TfrmRibbonMain
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 1
         Transparent = True
-        Height = 314
-        Width = 625
+        ExplicitWidth = 625
+        ExplicitHeight = 314
+        Height = 194
+        Width = 616
         object gbLocationsPane: TcxGroupBox
           Left = 0
           Top = 0
@@ -546,43 +557,49 @@ object frmRibbonMain: TfrmRibbonMain
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
           Transparent = True
-          Height = 314
+          ExplicitHeight = 314
+          Height = 194
           Width = 337
           object bvSpacer5: TBevel
             Left = 305
             Top = 0
             Width = 32
-            Height = 314
+            Height = 194
             Align = alRight
             Shape = bsSpacer
+            ExplicitHeight = 314
           end
           object dxBevel1: TdxBevel
             Left = 303
             Top = 0
             Width = 2
-            Height = 314
+            Height = 194
             Align = alRight
             AutoSize = True
             Shape = dxbsLineLeft
             ExplicitLeft = 304
+            ExplicitHeight = 314
           end
         end
         object gbRecentPathsPane: TcxScrollBox
           Left = 337
           Top = 0
-          Width = 288
-          Height = 314
+          Width = 279
+          Height = 194
           Align = alClient
           BorderStyle = cxcbsNone
           TabOrder = 1
           Transparent = True
+          ExplicitWidth = 288
+          ExplicitHeight = 314
           object bvSpacer6: TBevel
             Left = 0
             Top = 28
-            Width = 288
+            Width = 262
             Height = 16
             Align = alTop
             Shape = bsSpacer
+            ExplicitWidth = 288
           end
           object gbRecentPathsPaneBottom: TcxGroupBox
             Left = 0
@@ -597,8 +614,9 @@ object frmRibbonMain: TfrmRibbonMain
             StyleHot.LookAndFeel.NativeStyle = True
             TabOrder = 0
             Transparent = True
+            ExplicitWidth = 288
             Height = 95
-            Width = 288
+            Width = 262
           end
           object gbRecentPathsPaneCurrentFolder: TcxGroupBox
             Left = 0
@@ -613,8 +631,9 @@ object frmRibbonMain: TfrmRibbonMain
             StyleHot.LookAndFeel.NativeStyle = True
             TabOrder = 2
             Transparent = True
+            ExplicitWidth = 288
             Height = 85
-            Width = 288
+            Width = 262
             object lbCurrentFolder: TcxLabel
               Left = 0
               Top = 0
@@ -628,6 +647,7 @@ object frmRibbonMain: TfrmRibbonMain
               Style.Font.Style = []
               Style.IsFontAssigned = True
               Transparent = True
+              ExplicitWidth = 288
             end
           end
           object lbComputer: TcxLabel
@@ -644,24 +664,28 @@ object frmRibbonMain: TfrmRibbonMain
             Style.TransparentBorder = True
             Style.IsFontAssigned = True
             Transparent = True
+            ExplicitWidth = 288
           end
         end
         object gbRecentDocumentsPane: TcxScrollBox
           Left = 337
           Top = 0
-          Width = 288
-          Height = 314
+          Width = 279
+          Height = 194
           Align = alClient
           BorderStyle = cxcbsNone
           TabOrder = 2
           Transparent = True
+          ExplicitWidth = 288
+          ExplicitHeight = 314
           object bvSpacer8: TBevel
             Left = 0
             Top = 28
-            Width = 288
+            Width = 279
             Height = 16
             Align = alTop
             Shape = bsSpacer
+            ExplicitWidth = 288
           end
           object lbRecentDocuments: TcxLabel
             Left = 0
@@ -677,6 +701,7 @@ object frmRibbonMain: TfrmRibbonMain
             Style.TransparentBorder = True
             Style.IsFontAssigned = True
             Transparent = True
+            ExplicitWidth = 288
           end
         end
       end
@@ -690,25 +715,30 @@ object frmRibbonMain: TfrmRibbonMain
         Left = 0
         Top = 0
         Width = 42
-        Height = 374
+        Height = 254
         Align = alLeft
         Shape = bsSpacer
+        ExplicitHeight = 374
       end
       object Bevel2: TBevel
-        Left = 667
+        Left = 658
         Top = 0
         Width = 42
-        Height = 374
+        Height = 254
         Align = alRight
         Shape = bsSpacer
+        ExplicitLeft = 667
+        ExplicitHeight = 374
       end
       object Bevel3: TBevel
         Left = 0
-        Top = 374
-        Width = 709
+        Top = 254
+        Width = 700
         Height = 26
         Align = alBottom
         Shape = bsSpacer
+        ExplicitTop = 374
+        ExplicitWidth = 709
       end
     end
     object bvtsAbout: TdxRibbonBackstageViewTabSheet
@@ -720,29 +750,33 @@ object frmRibbonMain: TfrmRibbonMain
         Left = 0
         Top = 0
         Width = 42
-        Height = 374
+        Height = 254
         Align = alLeft
         Shape = bsSpacer
         ExplicitLeft = 480
         ExplicitTop = 24
+        ExplicitHeight = 374
       end
       object Bevel5: TBevel
-        Left = 667
+        Left = 566
         Top = 0
         Width = 42
-        Height = 374
+        Height = 254
         Align = alRight
         Shape = bsSpacer
         ExplicitLeft = 139
         ExplicitTop = 88
+        ExplicitHeight = 374
       end
       object Bevel6: TBevel
         Left = 0
-        Top = 374
-        Width = 709
+        Top = 254
+        Width = 608
         Height = 26
         Align = alBottom
         Shape = bsSpacer
+        ExplicitTop = 374
+        ExplicitWidth = 709
       end
       object meAbout: TcxMemo
         Left = 42
@@ -754,8 +788,10 @@ object frmRibbonMain: TfrmRibbonMain
         StyleFocused.BorderStyle = ebsNone
         StyleHot.BorderStyle = ebsNone
         TabOrder = 0
-        Height = 374
-        Width = 625
+        ExplicitWidth = 625
+        ExplicitHeight = 374
+        Height = 254
+        Width = 524
       end
     end
   end
@@ -13240,6 +13276,10 @@ object frmRibbonMain: TfrmRibbonMain
         item
           Visible = True
           ItemName = 'bbTabbedView'
+        end
+        item
+          Visible = True
+          ItemName = 'bbMenuPrincipal'
         end>
       OneOnRow = False
       Row = 0
@@ -13961,6 +14001,14 @@ object frmRibbonMain: TfrmRibbonMain
       ButtonStyle = bsChecked
       Down = True
       OnClick = dxbtnNavigatorClick
+    end
+    object bbMenuPrincipal: TdxBarLargeButton
+      Caption = 'Menu Principal'
+      Category = 0
+      Hint = 'Menu Principal'
+      Visible = ivAlways
+      LargeImageIndex = 37
+      OnClick = bbMenuPrincipalClick
     end
   end
   object dxSkinController: TdxSkinController

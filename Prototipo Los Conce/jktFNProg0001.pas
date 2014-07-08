@@ -34,7 +34,7 @@ uses
   cxSchedulerWeekView, cxSchedulerYearView, cxSchedulerGanttView,
   cxSchedulerTreeListBrowser, dxSkinscxSchedulerPainter, cxPCdxBarPopupMenu,
   cxGroupBox, cxLabel, cxPC, cxSchedulercxGridConnection, cxImageComboBox,
-  cxColorComboBox, cxProgressBar;
+  cxColorComboBox, cxProgressBar, ShellApi;
 
 type
   TFNProg0001 = class(TfrmChild)
@@ -414,14 +414,18 @@ begin
   if TcxComboBox(Sender).ItemIndex = 0 then
     begin
       // Venta
-      lcMainGroupService.Visible := False;
-      lcMainGroupLaboratorio.Visible := False;      
+      lcMainGroupService.Visible := True;
+      lcMainGroupLaboratorio.Visible := False;
+
+      lcMainGroupService.Caption := 'Venta';
     end
   else if TcxComboBox(Sender).ItemIndex = 1 then
     begin
       // Reparaciones
-      lcMainGroupService.Visible := False;
+      lcMainGroupService.Visible := True;
       lcMainGroupLaboratorio.Visible := False;
+
+      lcMainGroupService.Caption := 'Reparaciones';
     end
   else if TcxComboBox(Sender).ItemIndex = 2 then
     begin
@@ -434,6 +438,8 @@ begin
       // Service
       lcMainGroupService.Visible := True;
       lcMainGroupLaboratorio.Visible := False;
+
+      lcMainGroupService.Caption := 'Service';
     end;
 end;
 
@@ -475,8 +481,15 @@ procedure TFNProg0001.jktExpDBGrid5DBTableView1ArchivoPropertiesButtonClick(
 begin
   inherited;
 
-  if OpenDialog.Execute then
-    TArchivosAsociadosArchivo.AsString := OpenDialog.FileName;
+  if AButtonIndex = 0 then begin
+    if OpenDialog.Execute then
+      TArchivosAsociadosArchivo.AsString := OpenDialog.FileName
+  end else if AButtonIndex = 1 then begin
+    // Abro el archivo
+    if (TArchivosAsociados.FieldByName('Archivo').AsString <> '') then
+      ShellExecute(Self.Handle, 'open',
+        PChar(TArchivosAsociados.FieldByName('Archivo').AsString), nil, nil, SW_SHOWNORMAL);
+  end;
 end;
 
 procedure TFNProg0001.TTareasLaboQuimicoAfterOpen(DataSet: TDataSet);

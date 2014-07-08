@@ -16,16 +16,25 @@ uses
   dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
-  dxSkinXmas2008Blue, Vcl.StdCtrls, cxButtons, jktFNMet0000, jktFNProg0001, jktFNProg0002;
+  dxSkinXmas2008Blue, Vcl.StdCtrls, cxButtons,
+  jktFNProg0001, jktFNProg0002, jktFNProg0003, jktFNProg0004,
+  cxControls, cxContainer, cxEdit,
+  dxBevel, cxImage;
 
 type
   TFormMenu = class(TForm)
     cxButton1: TcxButton;
     cxButton2: TcxButton;
+    cxButton3: TcxButton;
+    cxImage1: TcxImage;
+    dxBevel1: TdxBevel;
+    cxButton4: TcxButton;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
+    procedure cxButton3Click(Sender: TObject);
+    procedure cxButton4Click(Sender: TObject);
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -36,6 +45,9 @@ var
 implementation
 
 {$R *.dfm}
+
+uses
+  jktFNMet0000;
 
 procedure TFormMenu.cxButton1Click(Sender: TObject);
 begin
@@ -48,6 +60,20 @@ procedure TFormMenu.cxButton2Click(Sender: TObject);
 begin
   frmRibbonMain.Show;
   FNProg0002 := TFNProg0002.Create(frmRibbonMain, frmRibbonMain.alActions);
+  Self.Hide;
+end;
+
+procedure TFormMenu.cxButton3Click(Sender: TObject);
+begin
+  frmRibbonMain.Show;
+  FNProg0003 := TFNProg0003.Create(frmRibbonMain, frmRibbonMain.alActions);
+  Self.Hide;
+end;
+
+procedure TFormMenu.cxButton4Click(Sender: TObject);
+begin
+  frmRibbonMain.Show;
+  FNProg0004 := TFNProg0004.Create(frmRibbonMain, frmRibbonMain.alActions);
   Self.Hide;
 end;
 

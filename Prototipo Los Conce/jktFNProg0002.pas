@@ -28,15 +28,19 @@ uses
 
 type
   TFNProg0002 = class(TfrmChild)
-    cxScheduler1: TcxScheduler;
+    Scheduler: TcxScheduler;
     Storage: TcxSchedulerStorage;
     cxGroupBox1: TcxGroupBox;
     cxComboBox1: TcxComboBox;
     cxLabel1: TcxLabel;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxComboBox1PropertiesChange(Sender: TObject);
+    procedure SchedulerEventPopupMenuPopup(Sender: TcxSchedulerEventPopupMenu;
+      ABuiltInMenu: TPopupMenu; var AHandled: Boolean);
   private
-    { Private declarations }
+    procedure MarcarComoCompletadaClick(Sender: TObject);
+
   public
     { Public declarations }
   end;
@@ -47,6 +51,20 @@ var
 implementation
 
 {$R *.dfm}
+
+var
+  ASelectedEvent: TcxSchedulerEvent;
+
+procedure TFNProg0002.cxComboBox1PropertiesChange(Sender: TObject);
+var
+  i: Integer;
+begin
+  inherited;
+
+  for i := 0 to Storage.ResourceCount - 1 do
+    Storage.Resources.ResourceItems[i].Visible :=
+      Storage.Resources.ResourceItems[i].ResourceID = TcxComboBox(Sender).ItemIndex;
+end;
 
 procedure TFNProg0002.FormClose(Sender: TObject; var Action: TCloseAction);
 const
@@ -70,6 +88,34 @@ begin
     Storage.LoadFromFile(FileName)
    else
      ShowMessage(DlgMsg);
+end;
+
+procedure TFNProg0002.MarcarComoCompletadaClick(Sender: TObject);
+begin
+  if not (Sender is TMenuItem) then Exit;
+
+  ASelectedEvent.TaskComplete := 100;
+end;
+
+procedure TFNProg0002.SchedulerEventPopupMenuPopup(
+  Sender: TcxSchedulerEventPopupMenu; ABuiltInMenu: TPopupMenu;
+  var AHandled: Boolean);
+var
+  AItem: TMenuItem;
+begin
+  inherited;
+
+  // Guardo el evento que ha sido clickeado
+  ASelectedEvent := Sender.Event.Source;
+
+  // Creo un nuevo Item de Menu
+  AItem := TMenuItem.Create(ABuiltInMenu);
+  AItem.Caption := 'Marcar como ''Completada''';
+  AItem.OnClick := MarcarComoCompletadaClick;
+  // AItem.Tag := clRed;
+
+  // Agrego el nuevo item al popup menu
+  ABuiltInMenu.Items.Add(AItem);
 end;
 
 end.

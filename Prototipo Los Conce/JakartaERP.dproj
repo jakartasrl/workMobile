@@ -97,12 +97,17 @@
 				<Form>FNProg0002</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
+			<DCCReference Include="jktFNProg0003.pas">
+				<Form>FNProg0003</Form>
+			</DCCReference>
+			<DCCReference Include="jktFNProg0004.pas">
+				<Form>FNProg0004</Form>
+			</DCCReference>
 			<DCCReference Include="C:\Program Files\Developer Express.VCL\ExpressScheduler\Sources\cxSchedulerEventEditor.pas">
 				<Form>cxSchedulerEventEditorForm</Form>
 			</DCCReference>
 			<DCCReference Include="jktFNCustomizedEventEditor.pas">
 				<Form>EventEditorCustomized</Form>
-				<FormType>dfm</FormType>
 			</DCCReference>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
