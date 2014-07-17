@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XPD:UNIT xmlns:XPD="http://www.staruml.com" version="1">
+<XPD:HEADER>
+<XPD:SUBUNITS>
+</XPD:SUBUNITS>
+</XPD:HEADER>
+<XPD:BODY>
+<XPD:OBJ name="DocumentElement" type="UMLSubsystem" guid="4jrKUbX2P02cL7xTQd20tQAA">
+<XPD:ATTR name="Name" type="string">Stock</XPD:ATTR>
+<XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
+<XPD:REF name="Views[0]">gb6IivHoJk+rKpmA4r1AaAAA</XPD:REF>
+<XPD:REF name="Views[1]">CDsoF38Ky0CczTeDbBvzpAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:BODY>
+</XPD:UNIT>

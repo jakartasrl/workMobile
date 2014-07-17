@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XPD:UNIT xmlns:XPD="http://www.staruml.com" version="1">
+<XPD:HEADER>
+<XPD:SUBUNITS>
+</XPD:SUBUNITS>
+</XPD:HEADER>
+<XPD:BODY>
+<XPD:OBJ name="DocumentElement" type="UMLSubsystem" guid="Cz4konMFm02WFTFPfkv89QAA">
+<XPD:ATTR name="Name" type="string">Framework</XPD:ATTR>
+<XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
+<XPD:REF name="Views[0]">1ZUT5Sioekaync0MUbM6hwAA</XPD:REF>
+<XPD:REF name="Views[1]">8ii82X875UaWTXrdbTGm9gAA</XPD:REF>
+<XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
+<XPD:REF name="Associations[0]" pathname="::Modelo de Diseño::::">kt90SkOI3ECB5EPmAGIFCwAA</XPD:REF>
+</XPD:OBJ>
+</XPD:BODY>
+</XPD:UNIT>
