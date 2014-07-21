@@ -122,7 +122,7 @@ end;
 procedure TFNUti0001.completarOperaciones;
 begin
    mtConfigOper.first;
-   operacionSave.OperName := mtConfigOper.FieldByName('operSave').AsString;
+   operacionSave.OperName  := mtConfigOper.FieldByName('operSave').AsString;
    operacionTraer.OperName := mtConfigOper.FieldByName('operTraer').AsString;
 end;
 

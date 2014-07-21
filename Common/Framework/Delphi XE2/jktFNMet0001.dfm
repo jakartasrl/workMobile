@@ -103,8 +103,8 @@ object frmChild: TfrmChild
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 272
-    Top = 32
+    Left = 264
+    Top = 96
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
@@ -115,6 +115,7 @@ object frmChild: TfrmChild
   object OperacionSave: TjktOperacion
     EnviarTodo = False
     Atributos = <>
+    ServiceCaller = Service
     Left = 448
     Top = 32
   end
