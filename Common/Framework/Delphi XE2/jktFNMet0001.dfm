@@ -81,10 +81,8 @@ object frmChild: TfrmChild
     end
   end
   object Driver: TjktDriver
-    IgnoreTags = False
     NoAutoEditarDataSets = False
     OperacionSave = OperacionSave
-    ServiceCaller = Service
     ConfirmarCancelacion = True
     Opciones = []
     TipoPrograma = tpABM
@@ -119,5 +117,30 @@ object frmChild: TfrmChild
     Atributos = <>
     Left = 448
     Top = 32
+  end
+  object mtParametroInicial: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 536
+    Top = 48
+    object mtParametroInicialvalor: TStringField
+      FieldName = 'valor'
+      Size = 255
+    end
   end
 end

@@ -154,6 +154,7 @@
 			<DCCReference Include="jktCNMet0008.pas"/>
 			<DCCReference Include="jktCNMet0014.pas"/>
 			<DCCReference Include="jktCNMet0030.pas"/>
+			<DCCReference Include="jktCNMet0011.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

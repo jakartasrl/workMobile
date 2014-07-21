@@ -101,7 +101,8 @@ contains
   jktCNMet0002 in 'jktCNMet0002.pas',
   jktCNMet0008 in 'jktCNMet0008.pas',
   jktCNMet0014 in 'jktCNMet0014.pas',
-  jktCNMet0030 in 'jktCNMet0030.pas';
+  jktCNMet0030 in 'jktCNMet0030.pas',
+  jktCNMet0011 in 'jktCNMet0011.pas';
 
 end.
 

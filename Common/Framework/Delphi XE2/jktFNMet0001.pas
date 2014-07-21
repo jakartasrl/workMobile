@@ -6,6 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxRibbonForm, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
+
   dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint, dxSkinCaramel,
   dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle,
   dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast,
@@ -16,11 +17,13 @@ uses
   dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
-  dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit, cxMemo, Vcl.Menus,
+  dxSkinWhiteprint, dxSkinXmas2008Blue,
+
+   cxTextEdit, cxMemo, Vcl.Menus,
   Vcl.StdCtrls, cxButtons, dxRibbonSkins, dxSkinsdxRibbonPainter, cxClasses,
   dxRibbon, dxSkinsdxBarPainter, dxBar, jktCNMet0002, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, jktCNMet0001, Vcl.ActnList,
-  jktCNMet0030;
+  jktCNMet0030, Data.DB, kbmMemTable, jktCNMet0012;
 
 type
   TjktEstado = (esAlta, esEdit, esRehabilita, esNil);
@@ -36,6 +39,8 @@ type
     IdHTTP: TIdHTTP;
     Service: TjktServiceCaller;
     OperacionSave: TjktOperacion;
+    mtParametroInicial: TjktMemTable;
+    mtParametroInicialvalor: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormActivate(Sender: TObject);
@@ -55,6 +60,9 @@ type
     function QuerySaveFile: Integer;
     procedure DoActivateChild;
     procedure DoChanged;
+    procedure setParametroInicial(aValue :string);
+  protected
+    procedure llamarOperacionConfiguracion;  dynamic; abstract;
 
   public
     constructor Create(AOwner: TComponent; ParentActionList: TActionList); overload;
@@ -63,9 +71,11 @@ type
     property CanSave: Boolean read GetCanSave;
     property Modified: Boolean read FModified write FModified;
     property Estado: TjktEstado read FEstado write FEstado;
+    property ParametroInicial :string write setParametroInicial;
     //
     property OnActivateChild: TNotifyEvent read FOnActivateChild write FOnActivateChild;
     property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
+
 
   published
     property TipoABM: TjktTipoABM read FTipoABM write FTipoABM;
@@ -89,6 +99,17 @@ begin
       ID_CANCEL:
         Result := False;
     end;
+end;
+
+procedure TfrmChild.setParametroInicial(aValue :string);
+begin
+  if not mtParametroInicial.Active
+    then begin
+           mtParametroInicial.open;
+           mtParametroInicial.append;
+    end;
+  mtParametroInicial.FieldByName('valor').AsString := aValue;
+  llamarOperacionConfiguracion;
 end;
 
 constructor TfrmChild.Create(AOwner: TComponent; ParentActionList: TActionList);

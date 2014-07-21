@@ -24,7 +24,7 @@ uses
   cxBarEditItem, dxScreenTip, Vcl.ActnList, cxContainer, cxEdit, cxTextEdit,
   cxMemo, cxScrollBox, dxBevel, cxLabel, cxGroupBox, Vcl.ExtCtrls, dxSkinsForm,
   cxPC, dxSkinscxPCPainter, cxPCdxBarPopupMenu, dxTabbedMDI, jktFNMet0001,
-  Vcl.DBActns, cxSchedulerCustomControls, Unit1;
+  Vcl.DBActns, cxSchedulerCustomControls;
 
 type
   TfrmRibbonMain = class(TdxRibbonForm) //
@@ -365,7 +365,6 @@ end;
 procedure TfrmRibbonMain.bbMenuPrincipalClick(Sender: TObject);
 begin
   Self.Hide;
-  FormMenu.Show;
 end;
 
 procedure TfrmRibbonMain.bbQATVisibleClick(Sender: TObject);
@@ -398,20 +397,21 @@ end;
 
 procedure TfrmRibbonMain.dxbtnControlBoxClick(Sender: TObject);
 begin
-  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
-    ActiveChild.Driver.Scheduler.ControlBox.Visible := dxbtnControlBox.Down;
+//  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
+//    ActiveChild.Driver.Scheduler.ControlBox.Visible := dxbtnControlBox.Down;
 end;
 
 procedure TfrmRibbonMain.dxbtnNavigatorClick(Sender: TObject);
 begin
-  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
-    ActiveChild.Driver.Scheduler.DateNavigator.Visible := dxbtnNavigator.Down;
+//  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
+//    ActiveChild.Driver.Scheduler.DateNavigator.Visible := dxbtnNavigator.Down;
 end;
 
 procedure TfrmRibbonMain.acViewTypeExecute(Sender: TObject);
 var
   ADate: TDateTime;
 begin
+  {
   if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then begin
 
     ADate := Trunc(ActiveChild.Driver.Scheduler.SelStart);
@@ -438,6 +438,7 @@ begin
     end;
 
   end;
+  }
 end;
 
 procedure TfrmRibbonMain.FormCreate(Sender: TObject);
