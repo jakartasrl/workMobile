@@ -11,8 +11,6 @@ object frameListaProgramas: TframeListaProgramas
     Height = 360
     OptionsBehavior.ItemMoving = False
     TabOrder = 0
-    ExplicitLeft = 352
-    ExplicitTop = 328
     object tc_ProgramasGroup1: TdxTileControlGroup
       Index = 0
     end

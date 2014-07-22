@@ -14,10 +14,6 @@ inherited FNProg0004: TFNProg0004
     Align = alClient
     TabOrder = 4
     DataSource = dsPresupuesto
-    ExplicitLeft = 24
-    ExplicitTop = 88
-    ExplicitWidth = 633
-    ExplicitHeight = 313
     object jktExpDBGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = dsPresupuesto
@@ -29,11 +25,22 @@ inherited FNProg0004: TFNProg0004
           Column = jktExpDBGrid1DBTableView1Importe
           DisplayText = 'Total'
         end>
-      DataController.Summary.SummaryGroups = <>
+      DataController.Summary.SummaryGroups = <
+        item
+          Links = <
+            item
+              Column = jktExpDBGrid1DBTableView1DescGrupo
+            end>
+          SummaryItems = <
+            item
+              Kind = skCount
+              FieldName = 'Total'
+              DisplayText = 'Cantidad Items'
+            end>
+        end>
       OptionsBehavior.FocusCellOnTab = True
       OptionsView.Footer = True
       OptionsView.FooterAutoHeight = True
-      OptionsView.GroupFooters = gfVisibleWhenExpanded
       object jktExpDBGrid1DBTableView1DescGrupo: TcxGridDBColumn
         Caption = 'Grupo'
         DataBinding.FieldName = 'DescGrupo'
@@ -85,6 +92,7 @@ inherited FNProg0004: TFNProg0004
       object jktExpDBGrid1DBTableView1Importe: TcxGridDBColumn
         Caption = 'Importe'
         DataBinding.FieldName = 'Total'
+        Width = 82
       end
     end
     object jktExpDBGrid1Level1: TcxGridLevel

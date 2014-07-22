@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Datasnap.DBClient,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   jktUtils, Vcl.StdCtrls, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, dxSkinBlack,
   dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
@@ -14,11 +14,13 @@ uses
   dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
   dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
   dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
+  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, cxClasses,
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, cxLabel, dxCustomTileControl, dxTileControl, dxAnimation,
-  cxClasses;
+
+  // ANALIZAR DONDE PONER TODOS LOS PROGRAMAS!
+  jktFNMet0000,   jktFNSeg0001, jktFNSeg0002, Data.DB, Datasnap.DBClient;
 
 type
   TframeListaProgramas = class(TFrame)
@@ -82,7 +84,7 @@ begin
 
   // Filtro todos los Programas que tienen como Padre al codItemDeGrupo pasado
   cds_Programas.Filtered := False;
-  cds_Programas.Filter := 'codItemPadre = ' + IntToStr(codItemDeGrupo);
+  cds_Programas.Filter := 'codItemPadre = ' + QuotedStr(IntToStr(codItemDeGrupo));
   cds_Programas.Filtered := True;
 
 //  TopValue := 50;
@@ -156,7 +158,25 @@ end;
 procedure TframeListaProgramas.OnButtonClick(Sender: TdxTileControlItem);
 begin
   // aca abrimos los Forms (los Programas)
-  MessageBox(0, PChar(Sender.Text1.Value), PChar('Programa ' + IntToStr(Sender.Tag)), 0);
+
+
+//  MessageBox(0, PChar(Sender.Text1.Value), PChar('Programa ' + IntToStr(Sender.Tag)), 0);
+
+  frmMainForm.Show;
+
+  if Sender.Tag = 6 then
+    begin
+      // Maestro de Empresas
+      FNSeg0001 := TFNSeg0001.Create(frmMainForm, frmMainForm.alActions)
+    end
+  else if Sender.Tag = 9 then
+    begin
+      // Maestro de Usuarios
+      FNSeg0002 := TFNSeg0002.Create(frmMainForm, frmMainForm.alActions)
+    end;
+
+  // Oculto el Menu Principal
+  TForm(Owner).Hide;
 end;
 
 end.
