@@ -264,7 +264,8 @@ begin
   FServiceCaller.setOperacion(operName);
   FServiceCaller.addAtribute('codigo',    trim(sender.AsString));
   FServiceCaller.addAtribute('entidad',   FEntidad);
-  FServiceCaller.addAtribute('dataset',   FTempMemTable.Name);
+  if FValidacion = tExistente
+      then FServiceCaller.addAtribute('dataset',   FTempMemTable.Name);
   FServiceCaller.execute;
 end;
 
