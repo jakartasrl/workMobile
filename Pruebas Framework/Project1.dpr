@@ -2,16 +2,19 @@ program Project1;
 
 uses
   Vcl.Forms,
-  jktPrograma1 in 'jktPrograma1.pas' {Form2},
-  jktFNSeg0001 in 'jktFNSeg0001.pas';
+  jktFNMet0000 in '..\Common\Framework\Delphi XE2\jktFNMet0000.pas' {frmRibbonMain},
+  jktFNMet0001 in '..\Common\Framework\Delphi XE2\jktFNMet0001.pas' {frmChild},
+  jktFNUti0001 in '..\Common\Framework\Delphi XE2\jktFNUti0001.pas' {FNUti0001},
+  jktPrueba in 'jktPrueba.pas' {Form1},
+  jktPrueba2 in 'jktPrueba2.pas' {prueba3};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm2, Form2);
-  Application.CreateForm(TFPampaSG0005, FPampaSG0005);
-  // Application.CreateForm(TFAttributeEditor, FAttributeEditor);
+  Application.ShowMainForm := False;
+  Application.CreateForm(TfrmRibbonMain, frmRibbonMain);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.
