@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/03/25 14:08:45.000.731,=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/03/27 12:58:54.000.896,=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/03/27 12:59:39.000.245,C:\Pasaje a XE2\Pruebas\FUnit1.dfm=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2014/03/27 12:59:39.000.245,C:\Pasaje a XE2\Pruebas\FUnit1.pas=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/03/27 12:59:49.000.045,C:\Pasaje a XE2\Pruebas\Project1.dproj=C:\Users\sbraceras\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2014/03/27 13:29:53.000.629,=C:\Pasaje a XE2\Pruebas\jktCMet002.pas</Transaction>
+    <Transaction>2014/03/27 13:39:31.000.987,C:\Pasaje a XE2\Pruebas\jktCMet002.pas=</Transaction>
+    <Transaction>2014/03/27 13:39:40.000.677,=C:\Pasaje a XE2\Pruebas\jktCMet003.pas</Transaction>
+    <Transaction>2014/03/27 13:58:18.000.265,=C:\Pasaje a XE2\Pruebas\jktCMet002.pas</Transaction>
+    <Transaction>2014/03/27 14:11:29.000.176,C:\Pasaje a XE2\Pruebas\jktCMet002.pas=</Transaction>
+    <Transaction>2014/03/27 14:14:53.000.683,=C:\Pasaje a XE2\Pruebas\jktCMet005.pas</Transaction>
+    <Transaction>2014/03/27 14:15:29.000.712,=C:\Pasaje a XE2\Pruebas\jktFMet005.pas</Transaction>
+    <Transaction>2014/03/27 14:16:07.000.372,=C:\Pasaje a XE2\Pruebas\jktMisc.pas</Transaction>
+    <Transaction>2014/03/27 14:18:16.000.787,=C:\Pasaje a XE2\Pruebas\jktCMet002.pas</Transaction>
+    <Transaction>2014/03/27 14:20:06.000.739,C:\Pasaje a XE2\Pruebas\jktMisc.pas=</Transaction>
+    <Transaction>2014/03/28 14:54:19.000.642,=C:\Pasaje a XE2\Pruebas\Unit1.pas</Transaction>
+    <Transaction>2014/03/28 14:54:52.000.411,C:\Pasaje a XE2\Pruebas\jktMisc02.pas=C:\Pasaje a XE2\Pruebas\Unit1.pas</Transaction>
+    <Transaction>2014/03/28 16:20:32.000.703,=C:\Pasaje a XE2\Pruebas\jktFPampaSG0005.pas</Transaction>
+    <Transaction>2014/04/03 17:10:29.000.354,=C:\Pasaje a XE2\Pruebas\jktCMet001.pas</Transaction>
+    <Transaction>2014/04/04 16:41:57.000.171,C:\Pasaje a XE2\Pruebas\FUnit1.pas=</Transaction>
+    <Transaction>2014/04/04 16:42:10.000.517,C:\Pasaje a XE2\Pruebas\jktFMet005.pas=</Transaction>
+    <Transaction>2014/04/04 16:42:40.000.485,=C:\Pasaje a XE2\Pruebas\santi02.pas</Transaction>
+    <Transaction>2014/04/07 10:04:47.000.412,C:\Pasaje a XE2\Pruebas\santi02.pas=</Transaction>
+    <Transaction>2014/04/07 10:08:00.000.278,=C:\Pasaje a XE2\Pruebas\FUnit1.pas</Transaction>
+    <Transaction>2014/04/07 15:41:15.000.339,=C:\Pasaje a XE2\Pruebas\FUnit2.pas</Transaction>
+    <Transaction>2014/04/07 18:28:03.000.353,=C:\Pasaje a XE2\Pruebas\Unit1.pas</Transaction>
+    <Transaction>2014/04/07 18:32:53.000.452,C:\Pasaje a XE2\Pruebas\Unit1.pas=C:\Pasaje a XE2\Pruebas\santi04.pas</Transaction>
+    <Transaction>2014/04/07 18:50:50.000.797,=C:\Pasaje a XE2\Pruebas\Unit2.pas</Transaction>
+    <Transaction>2014/04/07 18:55:00.000.568,C:\Pasaje a XE2\Pruebas\Unit2.dfm=C:\Pasaje a XE2\Pruebas\santi03.dfm</Transaction>
+    <Transaction>2014/04/07 18:55:00.000.568,C:\Pasaje a XE2\Pruebas\Unit2.pas=C:\Pasaje a XE2\Pruebas\santi03.pas</Transaction>
+    <Transaction>2014/04/09 15:12:04.000.301,=C:\Pasaje a XE2\Pruebas\Unit1.pas</Transaction>
+    <Transaction>2014/04/09 15:13:44.000.292,C:\Pasaje a XE2\Pruebas\dxDBGridTypes.pas=C:\Pasaje a XE2\Pruebas\Unit1.pas</Transaction>
+    <Transaction>2014/04/14 14:36:10.000.684,C:\Pasaje a XE2\Pruebas\santi02.dfm=C:\Pasaje a XE2\Pruebas\santi03.dfm</Transaction>
+    <Transaction>2014/04/14 14:36:10.000.713,C:\Pasaje a XE2\Pruebas\santi03.pas=C:\Pasaje a XE2\Pruebas\santi02.pas</Transaction>
+    <Transaction>2014/04/14 14:36:10.000.713,C:\Pasaje a XE2\Pruebas\santi03.dfm=C:\Pasaje a XE2\Pruebas\santi02.dfm</Transaction>
+    <Transaction>2014/04/14 14:36:10.000.662,C:\Pasaje a XE2\Pruebas\santi02.pas=C:\Pasaje a XE2\Pruebas\santi03.pas</Transaction>
+    <Transaction>2014/04/14 14:36:39.000.592,C:\Pasaje a XE2\Pruebas\santi03.pas=</Transaction>
+    <Transaction>2014/04/14 14:38:07.000.761,=C:\Pasaje a XE2\Pruebas\santi02.pas</Transaction>
+  </Transactions>
+</BorlandProject>
