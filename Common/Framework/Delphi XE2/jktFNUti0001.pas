@@ -21,7 +21,7 @@ uses
   cxLookAndFeelPainters, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012;
+  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, jktCNMet0011, Vcl.StdCtrls;
 
 type
   TFNUti0001 = class(TfrmChild)
@@ -38,21 +38,30 @@ type
     mtConfigCamposreadOnly: TBooleanField;
     dsInput: TDataSource;
     mtInput: TjktMemTable;
-    operacionTraer: TjktOperacion;
     mtConfigCamposorden: TSmallintField;
     mtConfigOper: TjktMemTable;
     mtConfigOperoperSave: TStringField;
     mtConfigOperoperTraer: TStringField;
+    mtConfigValidador: TjktMemTable;
+    mtConfigValidadorfieldName: TStringField;
+    mtConfigValidadortipoValidacion: TStringField;
+    jktValidador1: TjktValidador;
+    mtConfigValidadorentidad: TStringField;
+    mtConfigValidadoroidName: TStringField;
+    mtConfigValidadordescrName: TStringField;
+    procedure mtInputNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
    procedure crearColumnasDataset;
    procedure crearColumnasGrilla;
    procedure completarOperaciones;
+   procedure crearValidaciones;
   protected
-    procedure llamarOperacionConfiguracion; override;
+
 
   public
     { Public declarations }
+    procedure llamarOperacionConfiguracion;
   end;
 
 var
@@ -61,10 +70,13 @@ var
 implementation
 
 {$R *.dfm}
+
 procedure TFNUti0001.llamarOperacionConfiguracion;
 begin
    //operConfig.execute;
+
    // solo para probar
+   // luego hay que descomentar la linea de arriba y borrar hasta donde esta marcado
      mtConfigOper.Open;
      mtConfigOper.append;
      mtConfigOper.FieldByName('operSave').AsString := 'saveEmpresa';
@@ -84,7 +96,7 @@ begin
 
     mtConfigCampos.append;
     mtConfigCampos.fieldByName('fieldName').AsString    := 'codigo';
-    mtConfigCampos.fieldByName('tipo').AsString         := 'String';
+    mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
     mtConfigCampos.fieldByName('longitud').AsInteger    := 10;
     mtConfigCampos.fieldByName('visible').AsBoolean     := true;
     mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
@@ -111,13 +123,37 @@ begin
     mtConfigCampos.fieldByName('orden').AsInteger       := 4;
     mtConfigCampos.fieldByName('label').AsString        := 'Activo';
 
+    mtConfigValidador.open;
+    mtConfigValidador.append;
+    mtConfigValidador.fieldByName('fieldName').AsString       := 'codigo';
+    mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'MayorCero';
+    mtConfigValidador.fieldByName('entidad').AsString    := '';
+    mtConfigValidador.fieldByName('oidName').AsString    := '';
+    mtConfigValidador.fieldByName('descrName').AsString    := '';
+
+       mtConfigValidador.append;
+    mtConfigValidador.fieldByName('fieldName').AsString       := 'descripcion';
+    mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'DistintoEspacio';
+    mtConfigValidador.fieldByName('entidad').AsString    := '';
+    mtConfigValidador.fieldByName('oidName').AsString    := '';
+    mtConfigValidador.fieldByName('descrName').AsString    := '';
+    // fin solo para probar
+
+
    //
    crearColumnasDataset;
    crearColumnasGrilla;
+   crearValidaciones;
    completarOperaciones;
 
 end;
 
+
+procedure TFNUti0001.mtInputNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  mtInput.FieldByName('key').AsInteger := mtInput.RecordCount + 1;
+end;
 
 procedure TFNUti0001.completarOperaciones;
 begin
@@ -130,7 +166,8 @@ procedure TFNUti0001.crearColumnasDataset;
 var
   name :string;
   tipo :TFieldType;
-  size :integer;
+  size, x :integer;
+  fieldDef :TFieldDef;
 
 begin
   mtConfigCampos.First;
@@ -163,9 +200,20 @@ begin
                    tipo := ftBoolean;
                    size := 0;
                  end;
-       mtInput.FieldDefs.Add(name, tipo, size,  false);
+       fieldDef := mtInput.FieldDefs.AddFieldDef ;
+       fieldDef.name := name;
+       fieldDef.dataType := tipo;
+       fieldDef.Size := size;
+       fieldDef.Required := false;
+       //mtInput.FieldDefs.Add(name, tipo, size,  false);
        mtConfigCampos.Next;
     end;
+    fieldDef := mtInput.FieldDefs.AddFieldDef ;
+    fieldDef.name := 'key';
+    fieldDef.dataType := ftInteger;
+    fieldDef.Size := 0;
+    fieldDef.Required := false;
+    mtInput.CreateTable;
     mtInput.Close;
     mtInput.Open;
 end;
@@ -201,5 +249,56 @@ begin
 
 
 end;
+
+procedure TFNUti0001.crearValidaciones;
+  var
+   validador :TjktValidador;
+   validadorField :TjktValidadorField;
+
+   validacion :TjktValidacion;
+   asignador  : TjktAsignadorField;
+begin
+    mtConfigValidador.first;
+    while not mtConfigValidador.eof do
+    begin
+      validador :=TjktValidador.Create(self);
+      validador.Entidad := mtConfigValidador.fieldByName('entidad').AsString ;
+
+      if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'Existente'
+              then validacion := tExistente
+      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'Inexistente'
+              then validacion := tInexistente
+      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MayorCero'
+              then validacion := tMayorCero
+      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MayorIgualCero'
+              then validacion := tMayorIgualCero
+      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MenorIgualCien'
+              then validacion := tMenorIgualCien
+      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'DistintoEspacio'
+              then validacion := tDistintoEspacio;
+      validador.Validacion := validacion;
+      validadorField := validadorForm.ListaValidaciones.add;
+      validadorField.Validador := validador;
+      validadorField.Field     := mtInput.FieldByName(mtConfigValidador.FieldByName('fieldName').AsString);
+      if validacion = tExistente
+        then begin
+              //oid
+              asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
+              asignador.FieldName := mtConfigValidador.fieldByName('oidName').AsString;
+              asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+              // Descripcion
+              asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
+              asignador.FieldName := mtConfigValidador.fieldByName('descrName').AsString;
+              asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+             end;
+
+      validadorField.Field.OnValidate := validadorForm.validar;
+      mtConfigValidador.Next;
+    end;
+
+
+end;
+
+
 
 end.

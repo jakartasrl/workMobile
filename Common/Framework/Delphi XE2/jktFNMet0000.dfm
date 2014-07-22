@@ -303,6 +303,7 @@ object frmRibbonMain: TfrmRibbonMain
     TabOrder = 0
     TabStop = False
     object RibbonTab3: TdxRibbonTab
+      Active = True
       Caption = 'Inicio'
       Groups = <
         item
@@ -346,7 +347,6 @@ object frmRibbonMain: TfrmRibbonMain
       ContextIndex = 0
     end
     object RibbonTab4: TdxRibbonTab
-      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -476,7 +476,7 @@ object frmRibbonMain: TfrmRibbonMain
         Height = 60
         Width = 700
         object bvSpacer4: TBevel
-          Left = 566
+          Left = 658
           Top = 0
           Width = 42
           Height = 60
@@ -506,8 +506,9 @@ object frmRibbonMain: TfrmRibbonMain
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 524
           Height = 60
-          Width = 524
+          Width = 616
         end
         object lbbvTabCaption2013: TcxLabel
           Left = 42
@@ -523,6 +524,7 @@ object frmRibbonMain: TfrmRibbonMain
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 524
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -715,7 +717,7 @@ object frmRibbonMain: TfrmRibbonMain
         ExplicitHeight = 374
       end
       object Bevel2: TBevel
-        Left = 566
+        Left = 658
         Top = 0
         Width = 42
         Height = 254
@@ -727,7 +729,7 @@ object frmRibbonMain: TfrmRibbonMain
       object Bevel3: TBevel
         Left = 0
         Top = 254
-        Width = 608
+        Width = 700
         Height = 26
         Align = alBottom
         Shape = bsSpacer

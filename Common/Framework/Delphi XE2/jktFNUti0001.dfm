@@ -38,7 +38,6 @@ inherited FNUti0001: TFNUti0001
   end
   inherited Driver: TjktDriver
     DataSetCab = mtInput
-    OperacionTraer = operacionTraer
   end
   inherited OperacionSave: TjktOperacion
     Atributos = <
@@ -48,10 +47,70 @@ inherited FNUti0001: TFNUti0001
         Tag = 0
       end>
     Left = 440
-    Top = 208
+    Top = 216
   end
   inherited mtParametroInicial: TjktMemTable
     Left = 576
+  end
+  inherited ValidadorForm: TjktValidadorForm
+    Left = 288
+    Top = 256
+  end
+  object dsInput: TDataSource
+    DataSet = mtInput
+    Left = 328
+    Top = 144
+  end
+  object mtInput: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    OnNewRecord = mtInputNewRecord
+    Left = 560
+    Top = 120
+  end
+  object mtConfigOper: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 664
+    Top = 200
+    object mtConfigOperoperSave: TStringField
+      FieldName = 'operSave'
+      Size = 50
+    end
+    object mtConfigOperoperTraer: TStringField
+      FieldName = 'operTraer'
+      Size = 50
+    end
   end
   object operConfig: TjktOperacion
     OperName = 'TraerConfigAbmGenerico'
@@ -111,12 +170,7 @@ inherited FNUti0001: TFNUti0001
       FieldName = 'orden'
     end
   end
-  object dsInput: TDataSource
-    DataSet = mtInput
-    Left = 328
-    Top = 144
-  end
-  object mtInput: TjktMemTable
+  object mtConfigValidador: TjktMemTable
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
@@ -134,43 +188,33 @@ inherited FNUti0001: TFNUti0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 560
+    Left = 640
     Top = 120
-  end
-  object operacionTraer: TjktOperacion
-    EnviarTodo = False
-    Atributos = <>
-    ServiceCaller = Service
-    Left = 488
-    Top = 208
-  end
-  object mtConfigOper: TjktMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    EnableVersioning = True
-    FilterOptions = []
-    Version = '7.12.10 CodeGear Edition'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 0
-    LocaleID = 0
-    Left = 664
-    Top = 200
-    object mtConfigOperoperSave: TStringField
-      FieldName = 'operSave'
-      Size = 50
+    object mtConfigValidadorfieldName: TStringField
+      FieldName = 'fieldName'
+      Size = 30
     end
-    object mtConfigOperoperTraer: TStringField
-      FieldName = 'operTraer'
-      Size = 50
+    object mtConfigValidadortipoValidacion: TStringField
+      FieldName = 'tipoValidacion'
+      Size = 30
     end
+    object mtConfigValidadorentidad: TStringField
+      FieldName = 'entidad'
+      Size = 40
+    end
+    object mtConfigValidadoroidName: TStringField
+      FieldName = 'oidName'
+    end
+    object mtConfigValidadordescrName: TStringField
+      FieldName = 'descrName'
+    end
+  end
+  object jktValidador1: TjktValidador
+    Validacion = tInexistente
+    ListaAsignaciones = <
+      item
+      end>
+    Left = 144
+    Top = 288
   end
 end

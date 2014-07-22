@@ -23,7 +23,8 @@ uses
   Vcl.StdCtrls, cxButtons, dxRibbonSkins, dxSkinsdxRibbonPainter, cxClasses,
   dxRibbon, dxSkinsdxBarPainter, dxBar, jktCNMet0002, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, jktCNMet0001, Vcl.ActnList,
-  jktCNMet0030, Data.DB, kbmMemTable, jktCNMet0012;
+  jktCNMet0030, Data.DB, kbmMemTable, jktCNMet0012, jktCNMet0011;
+
 
 type
   TjktEstado = (esAlta, esEdit, esRehabilita, esNil);
@@ -41,6 +42,8 @@ type
     OperacionSave: TjktOperacion;
     mtParametroInicial: TjktMemTable;
     mtParametroInicialvalor: TStringField;
+    operacionTraer: TjktOperacion;
+    ValidadorForm: TjktValidadorForm;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormActivate(Sender: TObject);
@@ -61,17 +64,18 @@ type
     procedure DoActivateChild;
     procedure DoChanged;
     procedure setParametroInicial(aValue :string);
+    procedure setParentActionList(aValue :TActionList);
   protected
-    procedure llamarOperacionConfiguracion;  dynamic; abstract;
+ //   procedure llamarOperacionConfiguracion;  dynamic;
 
   public
-    constructor Create(AOwner: TComponent; ParentActionList: TActionList); overload;
     property CanEdit: Boolean read GetCanEdit;
     property CanPaste: Boolean read GetCanPaste;
     property CanSave: Boolean read GetCanSave;
     property Modified: Boolean read FModified write FModified;
     property Estado: TjktEstado read FEstado write FEstado;
     property ParametroInicial :string write setParametroInicial;
+    property ParentActionList :TActionList write setParentActionList;
     //
     property OnActivateChild: TNotifyEvent read FOnActivateChild write FOnActivateChild;
     property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
@@ -88,6 +92,7 @@ var
 implementation
 
 {$R *.dfm}
+
 
 function TfrmChild.CheckSaveChanges: Boolean;
 begin
@@ -109,17 +114,15 @@ begin
            mtParametroInicial.append;
     end;
   mtParametroInicial.FieldByName('valor').AsString := aValue;
-  llamarOperacionConfiguracion;
+  //llamarOperacionConfiguracion;
 end;
 
-constructor TfrmChild.Create(AOwner: TComponent; ParentActionList: TActionList);
+procedure TfrmChild.setParentActionList(aValue: TActionList);
 begin
-  inherited Create(AOwner);
-  // Guardo la referencia del ActionList del padre para que el Driver pueda
-  // inhibir o desinhibir los botones del menu
-  FParentActionList := ParentActionList;
+  FParentActionList := aValue;
   Driver.ActionList := FParentActionList;
 end;
+
 
 procedure TfrmChild.DoActivateChild;
 begin
@@ -150,6 +153,7 @@ end;
 
 procedure TfrmChild.FormShow(Sender: TObject);
 begin
+  validadorForm.inicializar;
   Driver.Inicio;
 end;
 
