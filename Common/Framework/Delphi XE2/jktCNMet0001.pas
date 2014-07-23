@@ -206,7 +206,6 @@ end;
 
 procedure TjktDriver.Inicio;
 begin
-
   Self.DoInhibirBotones;
 
   if (FTipoPrograma = tp_abmLista) and (Self.FEstado = esNil) then

@@ -1,25 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>2014/06/03 11:17:12.000.211,=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2014/06/03 18:04:45.000.385,C:\Users\sbraceras\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\sbraceras\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2014/06/04 12:59:26.000.258,=C:\Aplicaciones\JakartaERP\Delphi\work\jktFPampaSG0005.pas</Transaction>
-    <Transaction>2014/06/04 14:54:47.000.315,C:\Users\sbraceras\Documents\RAD Studio\Projects\jktFNSeg0001.pas=C:\Aplicaciones\JakartaERP\Delphi\work\jktFPampaSG0005.pas</Transaction>
-    <Transaction>2014/06/04 14:54:47.000.315,C:\Users\sbraceras\Documents\RAD Studio\Projects\jktFNSeg0001.dfm=C:\Aplicaciones\JakartaERP\Delphi\work\jktFPampaSG0005.dfm</Transaction>
-    <Transaction>2014/06/04 16:19:53.000.752,C:\Aplicaciones 3000\Pruebas Framework\Project1.dproj=C:\Users\sbraceras\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2014/06/04 16:21:14.000.806,C:\Aplicaciones 3000\Pruebas Framework\jktFNSeg0001.pas=C:\Users\sbraceras\Documents\RAD Studio\Projects\jktFNSeg0001.pas</Transaction>
-    <Transaction>2014/06/04 16:21:14.000.806,C:\Aplicaciones 3000\Pruebas Framework\jktFNSeg0001.dfm=C:\Users\sbraceras\Documents\RAD Studio\Projects\jktFNSeg0001.dfm</Transaction>
-    <Transaction>2014/06/04 16:21:56.000.517,C:\Users\sbraceras\Documents\RAD Studio\Projects\jktPrograma1.dfm=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit2.dfm</Transaction>
-    <Transaction>2014/06/04 16:21:56.000.517,C:\Users\sbraceras\Documents\RAD Studio\Projects\jktPrograma1.pas=C:\Users\sbraceras\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2014/06/04 16:22:28.000.314,C:\Aplicaciones 3000\Pruebas Framework\jktPrograma1.pas=C:\Users\sbraceras\Documents\RAD Studio\Projects\jktPrograma1.pas</Transaction>
-    <Transaction>2014/06/04 16:22:28.000.315,C:\Aplicaciones 3000\Pruebas Framework\jktPrograma1.dfm=C:\Users\sbraceras\Documents\RAD Studio\Projects\jktPrograma1.dfm</Transaction>
-    <Transaction>2014/06/06 16:27:42.000.306,=C:\Aplicaciones 3000\Pruebas Framework\Unit1.pas</Transaction>
-    <Transaction>2014/06/06 16:36:32.000.927,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktCNMet0030.pas=C:\Aplicaciones 3000\Pruebas Framework\Unit1.pas</Transaction>
-    <Transaction>2014/06/08 13:57:35.000.914,=C:\Aplicaciones 3000\Pruebas Framework\Unit1.pas</Transaction>
-    <Transaction>2014/06/08 14:03:37.000.930,C:\Aplicaciones 3000\Pruebas Framework\Unit1.pas=C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.pas</Transaction>
-    <Transaction>2014/06/08 14:03:37.000.930,C:\Aplicaciones 3000\Pruebas Framework\Unit1.dfm=C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.dfm</Transaction>
-    <Transaction>2014/06/09 13:50:35.000.217,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktCNMet0030.pas=</Transaction>
-    <Transaction>2014/06/16 17:00:30.000.528,C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.pas=C:\Aplicaciones 3000\Pruebas Framework\jktFNMet0030.pas</Transaction>
-    <Transaction>2014/06/16 17:00:30.000.528,C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.dfm=C:\Aplicaciones 3000\Pruebas Framework\jktFNMet0030.dfm</Transaction>
-  </Transactions>
-</BorlandProject>
+<BorlandProject/>

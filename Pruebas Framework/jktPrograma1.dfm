@@ -10197,7 +10197,6 @@ object Form2: TForm2
     DataSetCab = mtTipoCtaProv
     OperacionSave = operSave
     OperacionTraer = OperTraer
-    ServiceCaller = service
     ActionList = alActions
     ConfirmarCancelacion = True
     Opciones = []
@@ -10284,6 +10283,7 @@ object Form2: TForm2
         Dataset = mtTipoCtaProv
         Tag = 1
       end>
+    ServiceCaller = service
     Left = 600
     Top = 296
   end
@@ -10308,13 +10308,40 @@ object Form2: TForm2
     OperName = 'TraerTipoCtaProv'
     EnviarTodo = False
     Atributos = <>
-    Left = 488
-    Top = 336
+    ServiceCaller = service
+    Left = 464
+    Top = 288
   end
   object service: TjktServiceCaller
     HTTP = IdHTTP
     IgnoreException = False
     Left = 360
     Top = 320
+  end
+  object jktValidadorForm1: TjktValidadorForm
+    ListaValidaciones = <
+      item
+        Field = mtTipoCtaProvprueba
+        Validador = jktValidador1
+      end>
+    Left = 696
+    Top = 264
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 512
+    Top = 344
+  end
+  object jktOperacion1: TjktOperacion
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = service
+    Left = 280
+    Top = 280
+  end
+  object jktValidador1: TjktValidador
+    Validacion = tMayorCero
+    ListaAsignaciones = <>
+    Left = 688
+    Top = 368
   end
 end

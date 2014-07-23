@@ -34,8 +34,8 @@ object frmChild: TfrmChild
       True)
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 56
-    Top = 32
+    Left = 72
+    Top = 96
     DockControlHeights = (
       0
       0
@@ -81,10 +81,9 @@ object frmChild: TfrmChild
     end
   end
   object Driver: TjktDriver
-    IgnoreTags = False
     NoAutoEditarDataSets = False
     OperacionSave = OperacionSave
-    ServiceCaller = Service
+    OperacionTraer = operacionTraer
     ConfirmarCancelacion = True
     Opciones = []
     TipoPrograma = tp_abmLista
@@ -105,8 +104,8 @@ object frmChild: TfrmChild
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 272
-    Top = 32
+    Left = 240
+    Top = 184
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
@@ -117,7 +116,45 @@ object frmChild: TfrmChild
   object OperacionSave: TjktOperacion
     EnviarTodo = False
     Atributos = <>
+    ServiceCaller = Service
     Left = 448
     Top = 32
+  end
+  object mtParametroInicial: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 536
+    Top = 48
+    object mtParametroInicialvalor: TStringField
+      FieldName = 'valor'
+      Size = 255
+    end
+  end
+  object operacionTraer: TjktOperacion
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 464
+    Top = 160
+  end
+  object ValidadorForm: TjktValidadorForm
+    ListaValidaciones = <>
+    Left = 472
+    Top = 296
   end
 end
