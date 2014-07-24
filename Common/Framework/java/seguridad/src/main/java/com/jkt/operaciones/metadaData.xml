@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<!DOCTYPE entity [
+  <!ELEMENT entidad     	(operacion, campos*,validadores*)>
+  <!ELEMENT campos   		(campo*)>
+  <!ELEMENT campo 			EMPTY>
+  
+  <!ELEMENT validadores 	(validador*)>
+  <!ELEMENT validador 		EMPTY>
+  
+  <!ATTLIST entidad nombre	CDATA #REQUIRED>
+  
+  <!ATTLIST operacion operSave CDATA #REQUIRED>
+  <!ATTLIST operacion operTraer CDATA #REQUIRED>
+
+  <!ATTLIST campo fieldName CDATA #REQUIRED>
+  <!ATTLIST campo tipo CDATA #REQUIRED>
+  <!ATTLIST campo longitud CDATA #REQUIRED>
+  <!ATTLIST campo readOnly CDATA #REQUIRED>
+  <!ATTLIST campo visible CDATA #REQUIRED>
+  <!ATTLIST campo orden CDATA #REQUIRED>
+  <!ATTLIST campo label CDATA #REQUIRED>
+
+  <!ATTLIST validador fieldName CDATA #REQUIRED>
+  <!ATTLIST validador tipoValidacion CDATA #REQUIRED>
+  <!ATTLIST validador entidad CDATA #REQUIRED>
+  <!ATTLIST validador oidName CDATA #REQUIRED>
+  <!ATTLIST validador descrName CDATA #REQUIRED>
+  
+]>
+
+<entidades>
+	<entidad nombre="empresa">
+
+		<operacion operSave="GuardarEmpresa" operTraer="TraerEmpresas" />
+		
+		<campos>
+			<campo fieldName="oid" tipo="String" longitud="3" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="codigo" tipo="String" longitud="3" visible="true" readOnly="false" orden="0" label="codigo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="codigo" tipoValidacion="MayorCero" entidad="" oidName="" descrName="" />
+			<validador fieldName="codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+	
+	
+	<!-- Seccion que maneja los datos enviados al cliente para armar la estructura correspondiente -->
+	<entidad nombre="usuario">
+
+		<operacion operSave="GuardarUsuario" operTraer="TraerUsuarios" />
+		
+		<campos>
+			<campo fieldName="oid" tipo="String" longitud="2" visible="false" readOnly="false" orden="0" label="oid_usuario" />
+			<campo fieldName="codigo" tipo="String" longitud="1" visible="false" readOnly="false" orden="1" label="codigo-dni" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="codigo" tipoValidacion="DistintoCero" entidad="" oidName="" descrName="" />
+			<validador fieldName="codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+	
+</entidades>
+

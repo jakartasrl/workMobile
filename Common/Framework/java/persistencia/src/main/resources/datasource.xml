@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-4.0.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+
+	<!-- data source config -->
+	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${db.className}" />
+		<property name="url"
+			value="jdbc:${db.engine}://${db.host}:${db.port}/${db.jakarta}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.password}" />
+		<property name="validationQuery" value="select now()" />
+	</bean>
+
+	<!-- SessionFactory of Hibernate config -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+
+		<!-- <qualifier value="digitalSessionObjective"></qualifier> -->
+
+<!-- 		<property name="configLocation" value="classpath:mapping.xml" /> -->
+		
+		<property name="mappingLocations">
+            <list>
+<!--                 <value>classpath:mappings/Orden.hbm.xml</value> -->
+                <value>classpath:mappings/Factura.hbm.xml</value>
+                <value>classpath:mappings/Empresa.hbm.xml</value>
+                <value>classpath:mappings/Usuario.hbm.xml</value>
+                <value>classpath:mappings/HistorialPassword.hbm.xml</value>
+
+                <value>classpath:mappings/Menu.hbm.xml</value>
+                <value>classpath:mappings/TextosMenu.hbm.xml</value>
+
+            </list>
+		</property>
+		
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.dialect">${dialect.class}</prop>
+
+				<!-- TODO study this -->
+				<!-- <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop> -->
+				<!-- <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop> -->
+
+				<!-- <prop key="jadira.usertype.autoRegisterUserTypes">${jadira.usertype.autoRegisterUserTypes}</prop> -->
+				<!-- TODO study this -->
+
+			</props>
+		</property>
+	</bean>
+
+	<!-- config of transaction manager of hibernate 4 -->
+	<bean id="transactionManagerJakarta"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<context:property-placeholder location="classpath:database.properties"></context:property-placeholder>
+
+
+
+</beans>

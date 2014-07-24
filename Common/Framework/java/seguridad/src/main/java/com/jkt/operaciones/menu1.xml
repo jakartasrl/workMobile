@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE entity [
+  <!ELEMENT menu        (elementos*)>
+  <!ELEMENT elementos   (elemento*)>
+  <!ELEMENT elemento 	(elemento*, texto*)>
+  <!ELEMENT texto 		EMPTY>
+  
+  <!ATTLIST elemento tipo 			CDATA #REQUIRED>
+  <!ATTLIST elemento codigo			CDATA #REQUIRED>
+  <!ATTLIST elemento descripcion	CDATA #REQUIRED>
+  <!ATTLIST elemento orden			CDATA #REQUIRED>
+  <!ATTLIST elemento imagen			CDATA #IMPLIED>
+  <!ATTLIST elemento rutaImagen		CDATA #IMPLIED>
+  <!ATTLIST elemento argumento		CDATA #IMPLIED>
+  
+  <!ATTLIST texto texto			CDATA #REQUIRED>
+  <!ATTLIST texto alineacion	CDATA #REQUIRED>
+  <!ATTLIST texto fuente		CDATA #REQUIRED>
+  <!ATTLIST texto tamanio		CDATA #REQUIRED>
+  
+]>
+
+<menues>
+	<elemento tipo="MENU" codigo="001" descripcion="Menu" orden="0" imagen="leo.jpg" rutaImagen="C:" argumento="qseyo">
+
+		<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0"/>
+		<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
+		
+		<elemento tipo="MENU" codigo="004" descripcion="SubMenu" imagen="leo.jpg" orden="0" rutaImagen="C:" argumento="qseyo">
+			<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0" />
+			<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
+			
+			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
+			<texto texto="qseyo" alineacion="derecha" fuente="arial" tamanio="9" />
+			<texto texto="kljsdajkldsa" alineacion="derecha" fuente="arial" tamanio="10" />
+			<texto texto="ejemplo" alineacion="izquierda" fuente="arial" tamanio="10" />
+			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
+
+		</elemento>
+		
+	</elemento>
+	
+	<elemento tipo="MENU" codigo="0044" descripcion="Menu" orden="0">
+
+		<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0"/>
+		<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
+		
+	</elemento>
+	
+	
+	<elemento tipo="MENU" codigo="00554" descripcion="Menu" orden="0">
+
+		<elemento tipo="MENU" codigo="004" descripcion="SubMenu" imagen="leo.jpg" orden="0" rutaImagen="C:" argumento="qseyo">
+			
+			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
+			<texto texto="qseyo" alineacion="derecha" fuente="arial" tamanio="9" />
+			<texto texto="ejemplo" alineacion="izquierda" fuente="arial" tamanio="10" />
+			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
+
+		</elemento>		
+	</elemento>
+	
+	
+</menues>

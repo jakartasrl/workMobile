@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE entidades [
+  <!ELEMENT entidades        		(entidad*)>
+  <!ELEMENT entidad		  			(observador*)>
+  <!ELEMENT observador	  			EMPTY>
+
+  <!ATTLIST entidad 	clase       CDATA 	#REQUIRED>
+  <!ATTLIST observador 	clase	 	CDATA   #REQUIRED>
+  
+]>
+
+<entidades>
+	<entidad clase="com.jkt.dominio.Factura">
+		<observador clase="com.jkt.eventos.EventoPostGuardar" />
+	</entidad>
+	
+	<entidad clase="com.jkt.dominio.Descripcion">
+		<observador clase="com.jkt.eventos.EventoPostGuardar" />
+		<observador clase="com.jkt.eventos.EventoPostGuardar" />
+	</entidad>
+</entidades>
+	
