@@ -68,7 +68,7 @@
 
 <entity>
 
-	<operacion name="ObtenerMetaData" clase="com.jkt.operaciones.OperacionRecuperarEstructura">
+	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.OperacionRecuperarEstructura">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
 			<campoSalida name="resultado">
