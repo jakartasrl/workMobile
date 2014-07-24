@@ -70,6 +70,8 @@
 			<DCC_RemoteDebug>true</DCC_RemoteDebug>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Locale>1033</VerInfo_Locale>
 			<DCC_RemoteDebug>false</DCC_RemoteDebug>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -82,8 +84,8 @@
 			<DelphiCompile Include="$(MainSource)">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="jktMain.pas">
-				<Form>frmMain</Form>
+			<DCCReference Include="jktFNMenuPrincipal.pas">
+				<Form>frmMenuPrincipal</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="jktFrameListaProgramas.pas">
@@ -92,8 +94,19 @@
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
 			<DCCReference Include="jktUtils.pas"/>
-			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0000.pas"/>
-			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0001.pas"/>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0000.pas">
+				<Form>frmMainForm</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0001.pas">
+				<Form>frmChild</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktCNMet0005.pas"/>
+			<DCCReference Include="jktFNSeg0001.pas">
+				<Form>FNSeg0001</Form>
+			</DCCReference>
+			<DCCReference Include="jktFNSeg0002.pas">
+				<Form>FNSeg0002</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

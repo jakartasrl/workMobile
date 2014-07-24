@@ -623,9 +623,7 @@ begin
                 //mostrarMensErrorAbort('Error en el Response del Servlet');
 
                 raise Exception.Create(FMensaje);
-                end;
-
-
+             end;
 end;
 
 procedure TjktServiceCaller.setOperacion(aOper :String);

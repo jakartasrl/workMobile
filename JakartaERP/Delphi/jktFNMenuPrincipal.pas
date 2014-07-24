@@ -1,4 +1,4 @@
-unit jktMain;
+unit jktFNMenuPrincipal;
 
 interface
 
@@ -20,10 +20,12 @@ uses
   Vcl.StdCtrls, Data.DB, Datasnap.DBClient, dxAnimation, cxClasses, dxSkinsForm,
   cxContainer, cxEdit, cxGroupBox, cxLabel, cxTextEdit, dxSkinscxPCPainter,
   cxPCdxBarPopupMenu, cxPC, cxSplitter, dxGDIPlusClasses, cxImage, cxButtons,
-  jktUtils, jktFrameListaProgramas;
+  jktUtils, jktFrameListaProgramas, jktCNMet0005, jktCNMet0002, IdBaseComponent,
+  IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, kbmMemTable, jktCNMet0012,
+  cxDBEdit, jktCNMet0030, jktCNMet0001, cxCheckBox;
 
 type
-  TfrmMain = class(TForm)
+  TfrmMenuPrincipal = class(TForm)
     cds_MenuUsuario: TClientDataSet;
     cds_MenuUsuariocodItemMenu: TIntegerField;
     cds_MenuUsuariodescItemMenu: TStringField;
@@ -63,8 +65,8 @@ type
     gbx_Login: TcxGroupBox;
     cxLabel2: TcxLabel;
     cxLabel3: TcxLabel;
-    txtPassword: TcxTextEdit;
-    txtUsuario: TcxTextEdit;
+    txtPassword: TcxDBTextEdit;
+    txtUsuario: TcxDBTextEdit;
     cxPageControl: TcxPageControl;
     cxTabSheet1: TcxTabSheet;
     cxTabSheet2: TcxTabSheet;
@@ -85,6 +87,34 @@ type
     cxSplitter2: TcxSplitter;
     tc_Favoritos: TdxTileControl;
     tc_FavoritosGroup1: TdxTileControlGroup;
+    IdHTTP: TIdHTTP;
+    Service: TjktServiceCaller;
+    TUsuario: TjktMemTable;
+    TUsuariosesionID: TStringField;
+    TUsuariodecimalSeparator: TStringField;
+    TUsuariocertificado: TStringField;
+    TLogin: TjktMemTable;
+    TLoginusuario: TStringField;
+    TLoginpassword: TStringField;
+    dsLogin: TDataSource;
+    OperConsultaLogin: TjktOperacion;
+    Driver: TjktDriver;
+    TUsuariooid_usuario: TIntegerField;
+    TUsuarioCodigo: TStringField;
+    TUsuarioApellido: TStringField;
+    TUsuarioNombre: TStringField;
+    TUsuarioEmail: TStringField;
+    cxTabSheet3: TcxTabSheet;
+    cxGroupBox3: TcxGroupBox;
+    cxLabel4: TcxLabel;
+    cxLabel5: TcxLabel;
+    cxLabel6: TcxLabel;
+    cxLabel7: TcxLabel;
+    cxCheckBox1: TcxCheckBox;
+    EHost: TcxTextEdit;
+    EPort: TcxTextEdit;
+    EAplicacion: TcxTextEdit;
+    EServlet: TcxTextEdit;
     procedure FormCreate(Sender: TObject);
     procedure tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
     procedure tcaExitClick(Sender: TdxTileControlActionBarItem);
@@ -100,12 +130,15 @@ type
     procedure CargarMenuUsuario;
     procedure CargarNuevosMensajes;
 
+    function ValidarLogin: Boolean;
+    procedure CrearLogin;
+
   public
     { Public declarations }
   end;
 
 var
-  frmMain: TfrmMain;
+  frmMenuPrincipal: TfrmMenuPrincipal;
 
 implementation
 
@@ -126,7 +159,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.CargarNuevosMensajes;
+procedure TfrmMenuPrincipal.CargarNuevosMensajes;
 var
   AFrame: TdxTileControlItemFrame;
 begin
@@ -171,7 +204,81 @@ begin
   cds_MsjsVarios.Close;
 end;
 
-procedure TfrmMain.CargarMenuUsuario;
+procedure TfrmMenuPrincipal.CrearLogin;
+var
+  OidEmpresaActiva : Integer;
+begin
+  OidEmpresaActiva := 0;
+
+  TUsuario.First;
+  Login := TjktLogin.New(TUsuario.FieldByName('oid_usuario').AsInteger,
+                         TUsuario.FieldByName('Apellido').AsString + ' ' + TUsuario.fieldByName('Nombres').AsString,
+                         TUsuario.FieldByName('sesionID').AsString,
+                         TUsuario.FieldByName('certificado').AsString);
+
+//  Login.OidSucursal :=  mtSucursalLogin.fieldByName('oid_suc').AsInteger;
+
+{
+  Empresa.First;
+  while not Empresa.Eof do
+    begin
+       Login.addEmpresa( Empresa.fieldByName('oid_emp').AsInteger,
+                         Empresa.FieldByName('descEmpresa').asString,
+                         0,
+                         0);
+
+       if Empresa.fieldByName('is_default').AsBoolean
+          then begin
+                 OidEmpresaActiva := Empresa.fieldByName('oid_emp').AsInteger;
+                 if Empresa.fieldByName('color').asString <> ''
+                      then FPrimerColor      := Empresa.fieldByName('color').AsInteger
+                      else FPrimerColor      := clBtnFace;
+                end;
+
+       Empresa.Next;
+    end;
+}
+
+
+{******     AGREGADO POR AHORA... QUITAR CUANDO SE IMPLEMENTEN LAS EMPRESAS ******}
+
+       Login.addEmpresa( 0,
+                         'Empresa FAKE',
+                         0,
+                         0);
+
+{*********************************************************************************}
+
+  // Seteo Datos del Login
+  Login.setEmpresaActiva(OidEmpresaActiva);
+
+  Login.Host       := EHost.Text;
+  Login.Port       := EPort.Text;
+  Login.Servlet    := EServlet.Text;
+  Login.Aplicacion := EAplicacion.Text;
+  Login.Protocolo  := 'http://';
+
+{
+
+  if (integAuth = 'S')
+     then begin
+            Login.IntegAuth   := True;
+            Login.HTTPOptions := [hoInProcessAuth,hoForceEncodeParams];
+          end
+     else begin
+            Login.IntegAuth   := False;
+            Login.HTTPOptions := [hoForceEncodeParams];
+          end;
+
+  if (trace = 'S')
+      then Login.trace := true
+      else Login.trace := false;
+
+}
+
+end;
+
+procedure TfrmMenuPrincipal.CargarMenuUsuario;
 var
   AGroup: TdxTileControlGroup;
   AItem: TdxTileControlItem;
@@ -266,11 +373,19 @@ begin
 }
 end;
 
-procedure TfrmMain.FormCreate(Sender: TObject);
+procedure TfrmMenuPrincipal.FormCreate(Sender: TObject);
 var
   i: Integer;
 begin
   frameListaProgramas := TframeListaProgramas.Create(Self);
+
+  // Cargo los datos de conexion al server en la solapa de 'Parámetros de Conexión'
+  if FileExists(ApplicationFile.FileName) then begin
+    EHost.Text := ApplicationFile.ReadString('LOGIN', 'host', '');
+    EPort.Text := ApplicationFile.ReadString('LOGIN', 'port', '');
+    EAplicacion.Text := ApplicationFile.ReadString('LOGIN', 'aplicacion', '');
+    EServlet.Text := ApplicationFile.ReadString('LOGIN', 'servlet', '');
+  end;
 
   cxPageControl.ActivePageIndex := 0;
   dxSkinController.NativeStyle := False;
@@ -304,7 +419,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.GenerarArchivosDeMensajes;
+procedure TfrmMenuPrincipal.GenerarArchivosDeMensajes;
 begin
   // creo los Grupos
   cds_MsjsCliente.CreateDataSet;
@@ -375,13 +490,13 @@ begin
   cds_MsjsVarios.SaveToFile (DataPath + 'MsjsVarios.xml' , dfXML); // dfBinary);
 end;
 
-procedure TfrmMain.OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
+procedure TfrmMenuPrincipal.OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
 begin
   // en Sender.Tag nos viene el 'codItemMenu' !!!
   TframeListaProgramas(Sender.DetailOptions.DetailControl).CargarListaProgramas(Sender.Tag);
 end;
 
-procedure TfrmMain.GenerarArchivoMenuUsuario;
+procedure TfrmMenuPrincipal.GenerarArchivoMenuUsuario;
 begin
   // 'codItemMenu' representara el Index del grupo "TdxTileControlGroup" que
   // crearemos (lo necesitaremos para alojar o ubicar los ItemDeGrupo).
@@ -469,7 +584,7 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 9;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Usuarios conectados';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Usuarios';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
@@ -478,7 +593,7 @@ begin
   cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;
 
-procedure TfrmMain.SelectSkin(ABlackSkin: Boolean);
+procedure TfrmMenuPrincipal.SelectSkin(ABlackSkin: Boolean);
 const
   SkinFileNames: array[Boolean] of string = ('MetroWhite.skinres', 'MetroBlack.skinres');
 begin
@@ -487,25 +602,25 @@ begin
   tcaWhiteTheme.Visible := ABlackSkin;
 end;
 
-procedure TfrmMain.tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
+procedure TfrmMenuPrincipal.tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
 begin
   SelectSkin(Sender.Tag = 0);
 end;
 
-procedure TfrmMain.tcaExitClick(Sender: TdxTileControlActionBarItem);
+procedure TfrmMenuPrincipal.tcaExitClick(Sender: TdxTileControlActionBarItem);
 begin
   Close;
 end;
 
-procedure TfrmMain.tci_MsjsVariosClick(Sender: TdxTileControlItem);
+procedure TfrmMenuPrincipal.tci_MsjsVariosClick(Sender: TdxTileControlItem);
 begin
   ShellExecute(0, 'open', 'http://www.jakartasrl.com.ar', nil, nil, SW_SHOW);
 end;
 
-procedure TfrmMain.txtPasswordKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmMenuPrincipal.txtPasswordKeyPress(Sender: TObject; var Key: Char);
 begin
   if (Key = #$D) then begin
-    if (Trim(txtUsuario.Text) = 'asutton') and (txtPassword.Text = '123') then begin
+    if ValidarLogin then begin
       // iniciamos sesion!
       gbx_Login.Visible := False;
       // cambiamos al 'cxTabSheet2' (segunda pagina) y mostramos ahi el Menu de Usuario
@@ -514,6 +629,58 @@ begin
       CargarMenuUsuario;
     end;
   end;
+end;
+
+function TfrmMenuPrincipal.ValidarLogin: Boolean;
+begin
+  Result := False;
+
+  if Login = nil then begin
+
+    if TUsuario.Active then
+      TUsuario.Close;
+    TUsuario.Open;
+
+    Service.Host       := EHost.Text;
+    Service.Port       := EPort.Text;
+    Service.Servlet    := EServlet.Text;    // 'FrontServletXML';
+    Service.Aplicacion := EAplicacion.Text; // 'JakartaERP';
+    Service.Protocolo  := 'http://';
+
+{
+    if (integAuth = 'S')
+       then Service.HTTP.HTTPOptions := [hoInProcessAuth,hoForceEncodeParams];
+}
+
+
+    // Por ahora ejecuto el 'Guardar' del Driver que es quien envia la consulta
+    // al servidor a traves de la operacion 'OperConsultaLogin'
+    Driver.Guardar;
+
+{
+    Service.InicioOperacion;
+    Service.setOperacion('Login');
+    Service.addAtribute('usuario', txtUsuario.Text);
+    Service.addAtribute('password',  txtPassword.Text);
+}
+
+{
+    if (FAutoLogin)
+       then Service.addAtribute('autologin', 'S')
+       else Service.addAtribute('autologin', 'N');
+
+    if instalacion
+       then Service.addAtribute('instalacion', '1');
+}
+
+//    Service.execute;
+
+    CrearLogin;
+
+    Result := True;
+
+  end;
+
 end;
 
 end.

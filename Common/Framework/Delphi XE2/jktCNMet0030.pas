@@ -203,7 +203,6 @@ begin
           then FServiceCaller := TjktServiceCaller (aOwner.Components[x]);
 
     end;
-
 end;
 
 

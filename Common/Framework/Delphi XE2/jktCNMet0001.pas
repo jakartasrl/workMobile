@@ -7,7 +7,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs,Vcl.ActnList,  db, kbmMemTable,
+  Dialogs, Vcl.ActnList, db, kbmMemTable, dxRibbonStatusBar,
   jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030;
 
 type
@@ -19,11 +19,12 @@ type
                 // 'opNuevo', 'opBaja', 'opBuscar' , 'opEjecutar',
                 // 'opLookUp', 'opCustom'
 
-  TjktOpciones     = set of TjktOpcion;
+  TjktOpciones = set of TjktOpcion;
 
-  TjktEstado       = (esAlta, esEdit, esRehabilita, esNil);
+  TjktEstado   = (esAlta, esEdit, esRehabilita, esNil);
 
-  TjktTipoPrograma = (tpABM, tpOtro); // renombrar 'tpOtro' por otro nombre más explícito
+  TjktTipoPrograma = (tp_abmLista, tp_abmListaConFiltro, tp_Otro); // renombrar 'tp_Otro' por otro nombre más explícito
+//  TjktTipoABM = (abmLista, abmIndividual, abmListaConFiltro, abmEstandar);
 
   TLineaMensajeEvent = procedure(Sender: TObject; Texto: string) of object;
 
@@ -177,7 +178,7 @@ end;
 constructor TjktDriver.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  Self.FEstado     := esNil;
+  Self.FEstado := esNil;
 end;
 
 destructor TjktDriver.Destroy;
@@ -188,9 +189,15 @@ end;
 
 procedure TjktDriver.Inicio;
 begin
-   Self.FEstado   := esNil;
-   self.DoLineaMensaje(' ');
-   Self.DoInhibirBotones;
+  Self.DoInhibirBotones;
+
+  if (FTipoPrograma = tp_abmLista) and (Self.FEstado = esNil) then
+    Filtrar
+  else
+    begin
+      Self.FEstado := esNil;
+      Self.DoLineaMensaje(' ');
+    end;
 end;
 
 
@@ -204,11 +211,12 @@ begin
     begin
        TAction (FActionList.Actions[x]).Enabled := False;
     end;
-    enabledAction('acNew',  true);
-    enabledAction('acFind', true);
+
+  if FTipoPrograma = tp_Otro then
+    enabledAction('acNew', True);
+  enabledAction('acFind', True);
+  enabledAction('acFindRemoved', True);
 end;
-
-
 
 procedure TjktDriver.New;
 begin
@@ -318,6 +326,7 @@ procedure TjktDriver.DoBotonesNew;
 begin
   enabledAction('acNew',  false);
   enabledAction('acFind', false);
+  enabledAction('acFindRemoved', false);
   enabledAction('acSave', true);
   enabledAction('acCancel', true);
 
@@ -333,6 +342,7 @@ procedure TjktDriver.DoBotonesFiltrar;
 begin
   enabledAction('acNew',  false);
   enabledAction('acFind', false);
+  enabledAction('acFindRemoved', false);
   enabledAction('acSave', true);
   enabledAction('acCancel', true);
 
@@ -418,30 +428,32 @@ begin
 
   try
     DoGuardar;
-    if (FEstado = esAlta) then begin
-      // Dejo vacios los DataSets
-      Self.cerrarDataSets;
-      DoNuevo;
-    end
-    else
-    if ((FEstado = esEdit) or (FEstado = esRehabilita))
-     then begin
-      Self.DoOperacionTraer;
-      if FDatasetCab <> nil then begin
-        FDataSetCab.First;
-        FDataSetCab.Edit;
-      end;
-      Self.AnalizarDataSet;
-    end;
 
-  except
-     on E: Exception do
+    if (FEstado = esAlta) and (FTipoPrograma = tp_Otro) then
+      begin
+        // Dejo vacios los DataSets
+        Self.cerrarDataSets;
+        DoNuevo;
+      end
+    else if (FTipoPrograma = tp_abmLista) or
+      (FEstado = esEdit) or (FEstado = esRehabilita) then
         begin
-          Self.TratarMensajeException(E);
-          if FDatasetCab <> nil
-             then FDataSetCab.Edit;
+          Self.DoOperacionTraer;
+          if FDatasetCab <> nil then begin
+            FDataSetCab.First;
+            FDataSetCab.Edit;
+          end;
+          Self.AnalizarDataSet;
         end;
+  except
+    on E: Exception do
+      begin
+        Self.TratarMensajeException(E);
+        if FDatasetCab <> nil then
+          FDataSetCab.Edit;
+      end;
   end;
+
 end;
 
 procedure TjktDriver.AnalizarDataSet;
@@ -587,12 +599,11 @@ end;
 
 procedure TjktDriver.DoLineaMensaje(aTexto: string);
 var
-  compo :TComponent;
+  StatusBar: TComponent;
 begin
-  compo := owner.FindComponent('ponerNombreCampoLinea de abajo del form');
-  if (compo <> nil)
-    then ; // castear compo al componente y asignarle el texto
-
+  StatusBar := Owner.Owner.FindComponent('RibbonStatusBar');
+  if (StatusBar <> nil) then
+    TdxRibbonStatusBar(StatusBar).Panels[0].Text := aTexto;
 end;
 
 procedure TjktDriver.DoDesInhibirBotonAnt;

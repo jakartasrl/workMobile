@@ -78,7 +78,6 @@ begin
   inherited;
 
  // TPresupuesto.LoadFromFileViaFormat('Presupuesto', kbmBSF);
-  //dataset.Refresh;
 
    Dataset.Append;
    DataSet.FieldByName('CodGrupo').AsInteger := 1;

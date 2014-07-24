@@ -34,8 +34,8 @@ object frmChild: TfrmChild
       True)
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 56
-    Top = 32
+    Left = 72
+    Top = 96
     DockControlHeights = (
       0
       0
@@ -83,9 +83,10 @@ object frmChild: TfrmChild
   object Driver: TjktDriver
     NoAutoEditarDataSets = False
     OperacionSave = OperacionSave
+    OperacionTraer = operacionTraer
     ConfirmarCancelacion = True
     Opciones = []
-    TipoPrograma = tpABM
+    TipoPrograma = tp_abmLista
     Left = 384
     Top = 32
   end
@@ -103,8 +104,8 @@ object frmChild: TfrmChild
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 272
-    Top = 32
+    Left = 240
+    Top = 184
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
@@ -115,6 +116,7 @@ object frmChild: TfrmChild
   object OperacionSave: TjktOperacion
     EnviarTodo = False
     Atributos = <>
+    ServiceCaller = Service
     Left = 448
     Top = 32
   end
@@ -142,5 +144,17 @@ object frmChild: TfrmChild
       FieldName = 'valor'
       Size = 255
     end
+  end
+  object operacionTraer: TjktOperacion
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 464
+    Top = 160
+  end
+  object ValidadorForm: TjktValidadorForm
+    ListaValidaciones = <>
+    Left = 472
+    Top = 296
   end
 end

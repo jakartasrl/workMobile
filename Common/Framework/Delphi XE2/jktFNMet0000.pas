@@ -27,7 +27,7 @@ uses
   Vcl.DBActns, cxSchedulerCustomControls;
 
 type
-  TfrmRibbonMain = class(TdxRibbonForm) //
+  TfrmMainForm = class(TdxRibbonForm)
     Ribbon: TdxRibbon;
     RibbonStatusBar: TdxRibbonStatusBar;
     dxRibbonStatusBar1Container1: TdxStatusBarContainerControl;
@@ -86,8 +86,6 @@ type
     acReplace: TAction;
     acUndo: TAction;
     acRedo: TAction;
-    acQATAboveRibbon: TAction;
-    acQATBelowRibbon: TAction;
     BarManager: TdxBarManager;
     dxbFile: TdxBar;
     dxbQAT: TdxBar;
@@ -213,13 +211,14 @@ type
     dxbtnTimeGridView: TdxBarButton;
     dxbtnYearView: TdxBarButton;
     dxbtnGanttView: TdxBarButton;
-    dxbtnView: TdxBarSubItem;
     dxbtnCurrentView: TdxBarSubItem;
     dxbtnControlBox: TdxBarButton;
     dxbtnNavigator: TdxBarButton;
     dxbViewOptions: TdxBar;
     RibbonTab4: TdxRibbonTab;
     bbMenuPrincipal: TdxBarLargeButton;
+    bbFindRemoved: TdxBarLargeButton;
+    acFindRemoved: TAction;
     procedure FormCreate(Sender: TObject);
     procedure acNewExecute(Sender: TObject);
     procedure acExitExecute(Sender: TObject);
@@ -244,6 +243,7 @@ type
     procedure dxbtnControlBoxClick(Sender: TObject);
     procedure dxbtnNavigatorClick(Sender: TObject);
     procedure bbMenuPrincipalClick(Sender: TObject);
+    procedure acFindRemovedExecute(Sender: TObject);
   private
     function CreateChildForm: TfrmChild;
     function CreateNewChild: TfrmChild;
@@ -260,52 +260,60 @@ type
   end;
 
 var
-  frmRibbonMain: TfrmRibbonMain;
+  frmMainForm: TfrmMainForm;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmRibbonMain.acCancelExecute(Sender: TObject);
+uses
+  jktFNMenuPrincipal;
+
+procedure TfrmMainForm.acCancelExecute(Sender: TObject);
 begin
   if ActiveChild <> nil then
     ActiveChild.Driver.Cancelar;
 end;
 
-procedure TfrmRibbonMain.acCopyExecute(Sender: TObject);
+procedure TfrmMainForm.acCopyExecute(Sender: TObject);
 begin
   //
 end;
 
-procedure TfrmRibbonMain.acCutExecute(Sender: TObject);
+procedure TfrmMainForm.acCutExecute(Sender: TObject);
 begin
   //
 end;
 
-procedure TfrmRibbonMain.acDataSetNextExecute(Sender: TObject);
+procedure TfrmMainForm.acDataSetNextExecute(Sender: TObject);
 begin
   if ActiveChild <> nil then
     ActiveChild.Driver.Proximo;
 end;
 
-procedure TfrmRibbonMain.acDataSetPriorExecute(Sender: TObject);
+procedure TfrmMainForm.acDataSetPriorExecute(Sender: TObject);
 begin
   if ActiveChild <> nil then
     ActiveChild.Driver.Anterior;
 end;
 
-procedure TfrmRibbonMain.acExitExecute(Sender: TObject);
+procedure TfrmMainForm.acExitExecute(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TfrmRibbonMain.acFindExecute(Sender: TObject);
+procedure TfrmMainForm.acFindExecute(Sender: TObject);
 begin
   if ActiveChild <> nil then
     ActiveChild.Driver.Filtrar;
 end;
 
-procedure TfrmRibbonMain.acNewExecute(Sender: TObject);
+procedure TfrmMainForm.acFindRemovedExecute(Sender: TObject);
+begin
+  //
+end;
+
+procedure TfrmMainForm.acNewExecute(Sender: TObject);
 begin
   if ActiveChild <> nil then
     ActiveChild.Driver.New;
@@ -317,101 +325,103 @@ begin
 }
 end;
 
-procedure TfrmRibbonMain.acOpenExecute(Sender: TObject);
+procedure TfrmMainForm.acOpenExecute(Sender: TObject);
 begin
   //
 end;
 
-procedure TfrmRibbonMain.acPasteExecute(Sender: TObject);
+procedure TfrmMainForm.acPasteExecute(Sender: TObject);
 begin
   //
 end;
 
-procedure TfrmRibbonMain.acPrintExecute(Sender: TObject);
+procedure TfrmMainForm.acPrintExecute(Sender: TObject);
 begin
   //
 end;
 
-procedure TfrmRibbonMain.acQATBelowRibbonExecute(Sender: TObject);
+procedure TfrmMainForm.acQATBelowRibbonExecute(Sender: TObject);
 begin
-  if TAction(Sender).Tag <> 0 then
+  if TdxBarButton(Sender).Tag <> 0 then
     Ribbon.QuickAccessToolbar.Position := qtpBelowRibbon
   else
     Ribbon.QuickAccessToolbar.Position := qtpAboveRibbon;
 end;
 
-procedure TfrmRibbonMain.acSaveExecute(Sender: TObject);
+procedure TfrmMainForm.acSaveExecute(Sender: TObject);
 begin
   if ActiveChild <> nil then
     ActiveChild.Driver.Guardar;
 end;
 
-procedure TfrmRibbonMain.acSelectAllExecute(Sender: TObject);
+procedure TfrmMainForm.acSelectAllExecute(Sender: TObject);
 begin
   //
 end;
 
-procedure TfrmRibbonMain.ActivateChildHandler(Sender: TObject);
+procedure TfrmMainForm.ActivateChildHandler(Sender: TObject);
 begin
   if Sender = ActiveMDIChild then
     UpdateControls;
 end;
 
-procedure TfrmRibbonMain.bbApplicationButtonClick(Sender: TObject);
+procedure TfrmMainForm.bbApplicationButtonClick(Sender: TObject);
 begin
   Ribbon.ApplicationButton.Visible := bbApplicationButton.Down;
 end;
 
-procedure TfrmRibbonMain.bbMenuPrincipalClick(Sender: TObject);
+procedure TfrmMainForm.bbMenuPrincipalClick(Sender: TObject);
 begin
+  // Oculto el frmMainForm y muestro el Menu Principal
   Self.Hide;
+
+  frmMenuPrincipal.Show;
 end;
 
-procedure TfrmRibbonMain.bbQATVisibleClick(Sender: TObject);
+procedure TfrmMainForm.bbQATVisibleClick(Sender: TObject);
 begin
   Ribbon.QuickAccessToolbar.Visible := bbQATVisible.Down;
 end;
 
-procedure TfrmRibbonMain.bbRibbonFormClick(Sender: TObject);
+procedure TfrmMainForm.bbRibbonFormClick(Sender: TObject);
 begin
   Ribbon.SupportNonClientDrawing := bbRibbonForm.Down;
 end;
 
-procedure TfrmRibbonMain.bbTabbedViewClick(Sender: TObject);
+procedure TfrmMainForm.bbTabbedViewClick(Sender: TObject);
 begin
   dxTabbedMDIManager.Active := bbTabbedView.Down;
 end;
 
-function TfrmRibbonMain.CreateChildForm: TfrmChild;
+function TfrmMainForm.CreateChildForm: TfrmChild;
 begin
   Result := TfrmChild.Create(Self);
   Result.Caption := 'Child ' + IntToStr(MDIChildCount);
 end;
 
-function TfrmRibbonMain.CreateNewChild: TfrmChild;
+function TfrmMainForm.CreateNewChild: TfrmChild;
 begin
   Result := CreateChildForm;
   Result.OnActivateChild := ActivateChildHandler;
   Result.OnChanged := nil;
 end;
 
-procedure TfrmRibbonMain.dxbtnControlBoxClick(Sender: TObject);
+procedure TfrmMainForm.dxbtnControlBoxClick(Sender: TObject);
 begin
-//  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
-//    ActiveChild.Driver.Scheduler.ControlBox.Visible := dxbtnControlBox.Down;
+  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
+    ActiveChild.Driver.Scheduler.ControlBox.Visible := dxbtnControlBox.Down;
 end;
 
-procedure TfrmRibbonMain.dxbtnNavigatorClick(Sender: TObject);
+procedure TfrmMainForm.dxbtnNavigatorClick(Sender: TObject);
 begin
-//  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
-//    ActiveChild.Driver.Scheduler.DateNavigator.Visible := dxbtnNavigator.Down;
+  if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
+    ActiveChild.Driver.Scheduler.DateNavigator.Visible := dxbtnNavigator.Down;
 end;
 
-procedure TfrmRibbonMain.acViewTypeExecute(Sender: TObject);
+procedure TfrmMainForm.acViewTypeExecute(Sender: TObject);
 var
   ADate: TDateTime;
 begin
-  {
   if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then begin
 
     ADate := Trunc(ActiveChild.Driver.Scheduler.SelStart);
@@ -438,15 +448,14 @@ begin
     end;
 
   end;
-  }
 end;
 
-procedure TfrmRibbonMain.FormCreate(Sender: TObject);
+procedure TfrmMainForm.FormCreate(Sender: TObject);
 begin
   Self.RibbonAlwaysOnTop := True;
 end;
 
-function TfrmRibbonMain.GetActiveChild: TfrmChild;
+function TfrmMainForm.GetActiveChild: TfrmChild;
 begin
   if ActiveMDIChild <> nil then
     Result := ActiveMDIChild as TfrmChild
@@ -454,7 +463,7 @@ begin
     Result := nil;
 end;
 
-procedure TfrmRibbonMain.scgiLookAndFeelSkinChanged(Sender: TObject; const ASkinName: string);
+procedure TfrmMainForm.scgiLookAndFeelSkinChanged(Sender: TObject; const ASkinName: string);
 begin
 {
   Leer bien el topic 'How to Apply Skins in the Application' del help de
@@ -472,7 +481,7 @@ begin
   SetColorScheme(ASkinName);
 end;
 
-procedure TfrmRibbonMain.SetColorScheme(const AName: string);
+procedure TfrmMainForm.SetColorScheme(const AName: string);
 begin
   scgiLookAndFeel.SelectedSkinName := AName;
   Ribbon.ColorSchemeName := AName;
@@ -487,7 +496,7 @@ begin
   end;
 end;
 
-procedure TfrmRibbonMain.UpdateControls;
+procedure TfrmMainForm.UpdateControls;
 begin
   acNew.Enabled := ActiveChild <> nil;
   acOpen.Enabled := ActiveChild <> nil;
@@ -509,7 +518,7 @@ begin
     Ribbon.Contexts[0].Visible := False;
 end;
 
-procedure TfrmRibbonMain.UpdateStatusBar;
+procedure TfrmMainForm.UpdateStatusBar;
 begin
   RibbonStatusBar.Panels[0].Text := 'Ventanas abiertas = ' + IntToStr(MDIChildCount);
 end;

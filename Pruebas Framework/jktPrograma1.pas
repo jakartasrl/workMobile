@@ -25,7 +25,8 @@ uses
   cxGridCustomView, cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012,
   cxContainer, cxTextEdit, cxDBEdit, cxLabel, cxGroupBox, jktCNMet0002, jktCNMet0001,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, cxCheckBox,
-  jktCNMet0005, jktFNSeg0001, jktCNMet0030;
+  jktCNMet0005, jktFNSeg0001, jktCNMet0030, jktCNMet0011, Vcl.StdCtrls,
+  Vcl.Menus;
 
 type
   TForm2 = class(TForm)
@@ -167,6 +168,13 @@ type
     cxDBCheckBox2: TcxDBCheckBox;
     OperTraer: TjktOperacion;
     service: TjktServiceCaller;
+    jktValidadorForm1: TjktValidadorForm;
+    PopupMenu1: TPopupMenu;
+    jktOperacion1: TjktOperacion;
+    jktExpDBGrid1DBTableView1Column1: TcxGridDBColumn;
+    mtTipoCtaProvprueba: TIntegerField;
+    cxDBTextEdit1: TcxDBTextEdit;
+    jktValidador1: TjktValidador;
     procedure acNewExecute(Sender: TObject);
     procedure acSaveExecute(Sender: TObject);
     procedure acPrintExecute(Sender: TObject);
@@ -200,9 +208,14 @@ begin
 end;
 
 procedure TForm2.acNewExecute(Sender: TObject);
+var x:integer;
 begin
   if (Driver.TipoPrograma = tpABM) then
     Driver.New;
+
+
+
+
 end;
 
 procedure TForm2.acPrintExecute(Sender: TObject);
@@ -248,6 +261,7 @@ begin
 
     FPampaSG0005.Free;
   end;
+  jktValidadorForm1.inicializar;
 end;
 
 end.

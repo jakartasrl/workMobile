@@ -69,7 +69,7 @@ object Form2: TForm2
         Width = 62
       end
       object jktExpDBGrid1DBTableView1Codigo: TcxGridDBColumn
-        DataBinding.FieldName = 'Codigo'
+        DataBinding.FieldName = 'codigo'
       end
       object jktExpDBGrid1DBTableView1Descripcion: TcxGridDBColumn
         DataBinding.FieldName = 'Descripcion'
@@ -82,6 +82,8 @@ object Form2: TForm2
         DataBinding.FieldName = 'Activo'
         Width = 65
       end
+      object jktExpDBGrid1DBTableView1Column1: TcxGridDBColumn
+      end
     end
     object jktExpDBGrid1Level1: TcxGridLevel
       GridView = jktExpDBGrid1DBTableView1
@@ -92,7 +94,7 @@ object Form2: TForm2
     Top = 135
     Align = alTop
     Caption = 'Clientes'
-    TabOrder = 6
+    TabOrder = 2
     Height = 107
     Width = 788
     object cxLabel1: TcxLabel
@@ -158,6 +160,15 @@ object Form2: TForm2
       Properties.NullStyle = nssUnchecked
       TabOrder = 7
       Width = 65
+    end
+    object cxDBTextEdit1: TcxDBTextEdit
+      Left = 322
+      Top = 37
+      DataBinding.DataField = 'prueba'
+      DataBinding.DataSource = DataSource
+      StyleDisabled.Color = 14540253
+      TabOrder = 8
+      Width = 121
     end
   end
   object cxLargeImages: TcxImageList
@@ -10192,12 +10203,10 @@ object Form2: TForm2
     end
   end
   object Driver: TjktDriver
-    IgnoreTags = False
     NoAutoEditarDataSets = False
     DataSetCab = mtTipoCtaProv
     OperacionSave = operSave
     OperacionTraer = OperTraer
-    ServiceCaller = service
     ActionList = alActions
     ConfirmarCancelacion = True
     Opciones = []
@@ -10253,7 +10262,7 @@ object Form2: TForm2
       FieldName = 'oid'
     end
     object mtTipoCtaProvCodigo: TStringField
-      Tag = 2
+      Tag = 1
       FieldName = 'codigo'
     end
     object mtTipoCtaProvdescripcion: TStringField
@@ -10268,6 +10277,9 @@ object Form2: TForm2
     object mtTipoCtaProvActivo: TBooleanField
       Tag = 1
       FieldName = 'activo'
+    end
+    object mtTipoCtaProvprueba: TIntegerField
+      FieldName = 'prueba'
     end
   end
   object DataSource: TDataSource
@@ -10284,6 +10296,7 @@ object Form2: TForm2
         Dataset = mtTipoCtaProv
         Tag = 1
       end>
+    ServiceCaller = service
     Left = 600
     Top = 296
   end
@@ -10301,20 +10314,47 @@ object Form2: TForm2
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 648
-    Top = 296
+    Left = 576
+    Top = 272
   end
   object OperTraer: TjktOperacion
     OperName = 'TraerTipoCtaProv'
     EnviarTodo = False
     Atributos = <>
-    Left = 488
-    Top = 336
+    ServiceCaller = service
+    Left = 464
+    Top = 288
   end
   object service: TjktServiceCaller
     HTTP = IdHTTP
     IgnoreException = False
     Left = 360
     Top = 320
+  end
+  object jktValidadorForm1: TjktValidadorForm
+    ListaValidaciones = <
+      item
+        Field = mtTipoCtaProvprueba
+        Validador = jktValidador1
+      end>
+    Left = 696
+    Top = 264
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 512
+    Top = 344
+  end
+  object jktOperacion1: TjktOperacion
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = service
+    Left = 280
+    Top = 280
+  end
+  object jktValidador1: TjktValidador
+    Validacion = tMayorCero
+    ListaAsignaciones = <>
+    Left = 688
+    Top = 368
   end
 end

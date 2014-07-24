@@ -110,14 +110,15 @@ type TjktValidadorForm = class(TComponent)
   private
      FListaValidaciones         :TjktValidadorFieldList;
      FValidarCampo              :TFieldNotifyEvent;
-     procedure agregarValidacion(campo : TField);
-     procedure Validar(Sender: TField);
+     procedure agregarValidacion(validadorField :TjktValidadorField);
+  //   procedure Validar(Sender: TField);
 
   public
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
     destructor Destroy; override;
     procedure  inicializar;
+    procedure Validar(Sender: TField);
   published
      property ListaValidaciones :TjktValidadorFieldList     read FListaValidaciones     write FListaValidaciones;
 end;
@@ -264,7 +265,8 @@ begin
   FServiceCaller.setOperacion(operName);
   FServiceCaller.addAtribute('codigo',    trim(sender.AsString));
   FServiceCaller.addAtribute('entidad',   FEntidad);
-  FServiceCaller.addAtribute('dataset',   FTempMemTable.Name);
+  if FValidacion = tExistente
+      then FServiceCaller.addAtribute('dataset',   FTempMemTable.Name);
   FServiceCaller.execute;
 end;
 
@@ -272,7 +274,7 @@ end;
 
 procedure TjktValidador.validacionLocal(sender :TField);
 begin
-try
+
    if      FValidacion =  tMayorCero
             then begin
                    if sender.asFloat <= 0 then raise Exception.Create('Debe ser mayor a cero');
@@ -289,14 +291,7 @@ try
                  end
 
   else if   FValidacion =  tDistintoEspacio
-            then if trim(sender.asString) = '' then raise Exception.Create('Debe ser distinto de espacios');
-except
- on e : Exception do begin
-   ShowMessage(e.Message);
-   sender.FocusControl;
- end;
-
-end;
+          then if trim(sender.asString) = '' then raise Exception.Create('Debe ser distinto de espacios');
 
 end;
 
@@ -319,31 +314,29 @@ end;
 procedure  TjktValidadorForm.inicializar;
 var
   x: integer;
-  campo :TField;
-begin
-  for x:= 0 to self.Owner.ComponentCount - 1 do
-    begin
-      if self.Owner.Components[x] is TField
-         then begin
-                campo := TField (self.Owner.Components[x]);
-                agregarValidacion(campo);
-              end;
-    end;
-end;
-
-procedure TjktValidadorForm.agregarValidacion(campo : TField);
-var
-  x: integer;
   validadorField :TjktValidadorField;
 begin
    for x:=0 to FListaValidaciones.Count -1 do
      begin
         validadorField := TjktValidadorField (FListaValidaciones.Items[x]);
-        if validadorField.Field = campo
-            then  campo.OnValidate := validar;
-
+        agregarValidacion(validadorField);
      end;
+end;
 
+procedure TjktValidadorForm.agregarValidacion(validadorField : TjktValidadorField);
+var
+  x: integer;
+  campo :TField;
+begin
+ for x:= 0 to self.Owner.ComponentCount - 1 do
+    begin
+      if self.Owner.Components[x] is TField
+         then begin
+                campo := TField (self.Owner.Components[x]);
+                if validadorField.Field = campo
+                    then  campo.OnValidate := validar;
+              end;
+    end;
 end;
 
 procedure TjktValidadorForm.Validar(Sender: TField);

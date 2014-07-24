@@ -1,7 +1,7 @@
-object frmRibbonMain: TfrmRibbonMain
+object frmMainForm: TfrmMainForm
   Left = 0
   Top = 0
-  Caption = 'frmRibbonMain'
+  Caption = 'frmMainForm'
   ClientHeight = 499
   ClientWidth = 780
   Color = clBtnFace
@@ -303,16 +303,17 @@ object frmRibbonMain: TfrmRibbonMain
     TabOrder = 0
     TabStop = False
     object RibbonTab3: TdxRibbonTab
+      Active = True
       Caption = 'Inicio'
       Groups = <
         item
           ToolbarName = 'dxbFile'
         end
         item
-          ToolbarName = 'dxbClipboard'
+          ToolbarName = 'dxbEditing'
         end
         item
-          ToolbarName = 'dxbEditing'
+          ToolbarName = 'dxbClipboard'
         end>
       KeyTip = 'I'
       Index = 0
@@ -321,17 +322,16 @@ object frmRibbonMain: TfrmRibbonMain
       Caption = 'Vista'
       Groups = <
         item
+          ToolbarName = 'dxbVentanas'
+        end
+        item
           ToolbarName = 'dxbRibbonOptions'
         end
         item
-          Caption = 'Quick Access Toolbar'
           ToolbarName = 'dxbQATOptions'
         end
         item
           ToolbarName = 'dxbColorScheme'
-        end
-        item
-          ToolbarName = 'dxbVentanas'
         end>
       Index = 1
     end
@@ -346,7 +346,6 @@ object frmRibbonMain: TfrmRibbonMain
       ContextIndex = 0
     end
     object RibbonTab4: TdxRibbonTab
-      Active = True
       Caption = 'Agenda'
       Groups = <
         item
@@ -364,6 +363,12 @@ object frmRibbonMain: TfrmRibbonMain
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.Color = 14994615
+        PanelStyle.Font.Charset = DEFAULT_CHARSET
+        PanelStyle.Font.Color = clDefault
+        PanelStyle.Font.Height = -13
+        PanelStyle.Font.Name = 'Tahoma'
+        PanelStyle.Font.Style = []
+        PanelStyle.ParentFont = False
         Width = 130
       end
       item
@@ -476,7 +481,7 @@ object frmRibbonMain: TfrmRibbonMain
         Height = 60
         Width = 700
         object bvSpacer4: TBevel
-          Left = 566
+          Left = 658
           Top = 0
           Width = 42
           Height = 60
@@ -506,8 +511,9 @@ object frmRibbonMain: TfrmRibbonMain
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 524
           Height = 60
-          Width = 524
+          Width = 616
         end
         object lbbvTabCaption2013: TcxLabel
           Left = 42
@@ -523,6 +529,7 @@ object frmRibbonMain: TfrmRibbonMain
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 524
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -715,7 +722,7 @@ object frmRibbonMain: TfrmRibbonMain
         ExplicitHeight = 374
       end
       object Bevel2: TBevel
-        Left = 566
+        Left = 658
         Top = 0
         Width = 42
         Height = 254
@@ -727,7 +734,7 @@ object frmRibbonMain: TfrmRibbonMain
       object Bevel3: TBevel
         Left = 0
         Top = 254
-        Width = 608
+        Width = 700
         Height = 26
         Align = alBottom
         Shape = bsSpacer
@@ -789,7 +796,7 @@ object frmRibbonMain: TfrmRibbonMain
   end
   object cxSmallImages: TcxImageList
     FormatVersion = 1
-    DesignInfo = 5767734
+    DesignInfo = 8913462
     ImageInfo = <
       item
         Image.Data = {
@@ -9347,6 +9354,140 @@ object frmRibbonMain: TfrmRibbonMain
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000000000000000
           0000}
+      end
+      item
+        Image.Data = {
+          36100000424D3610000000000000360000002800000020000000200000000100
+          2000000000000010000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000009797
+          9B00232361004141630000000000000000000000000000000000000000000000
+          0000000000000000000000000000949497009696990000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000007575
+          86000C0CBF000909AA004B4B6900000000000000000000000000000000000000
+          000000000000000000007E7E8500181867002D2D6700CFCFCF00000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          00006D6D90001110D7000808A30056566C000000000000000000000000000000
+          0000000000007C7C830016166F000D0DB4007070880000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000006D6D90001110D70008089E005F5F710000000000000000000000
+          00007A7A8200141474000708C100666687000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000029231F00423A3200312D2900232222001B19170000000000000000000000
+          0000000000000000000065658E001212D9000909980068687400000000007575
+          7E00121279000A0AC6005F5F8900000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000070606004842
+          3D006A5E5500A78E7900D6B19300CBA6870035302C00302D2B00000000000000
+          00000000000000000000000000006D6D90001212DA000B0B9100353556000E0E
+          81000C0CCA005C5C8A0000000000000000000000000000000000000000000000
+          00000000000000000000000000000000000000000000000000004D4843009E8F
+          8300F7D7BD00F8D4B700F7D0B100F7CEAD00947B66005A524D00333333000000
+          0000000000000000000000000000000000006C6C8F001415D3000D0EB3001010
+          D20055558C000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000027262500756F6A00F9E2
+          D000FADFC900F9DBC200F8D8BD00F8D6B900C9AD960062574D006C6C6C003737
+          370071717100000000000000000000000000626280001414DB001313DB001616
+          D1006C6C85000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000056535200B3AAA300FBE9
+          DA00FBE5D400FAE2CF00FADFCA00F9DDC600EDD2BC00534A4300888888007C7C
+          7C0049494900585858000000000057576F000F0F9F001919DF003939A3002222
+          BC00161787008282890000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000059585700E0D7D000FCEE
+          E300FCEBDD00FBE8D900FBE6D500FBE5D300F0DAC900655C5500999999009090
+          9000888888005E5E5E004C4C70001313AC001D1DE10059599300000000009191
+          9E002D2DA80019197D0086868C00000000000000000000000000000000000303
+          0300232221003332300025232100000000000000000051515100FBF3ED00FDF3
+          EB00FDF0E600FCEEE300FCECDF00FCEBDE00D9CBBF008D857E00AFAFAF00A4A4
+          A4009B9B9B004C4C70001010D2002121E5005A5A940000000000000000000000
+          0000A0A0A80039399D001A1A790088888E000000000000000000010101003B39
+          3900857D78009E90850058514C0048474600323232005E5E5E00E4E1DE00FEF8
+          F300FDF5EF00FDF3EB00FDF2E900FDF1E700C2B9B200B2ADA900C2C2C200AFAA
+          A7004C4C70001010D2002626E7005E5E96004B4B4B0069696900000000000000
+          000000000000A0A0A80039399D001B1B79008A8A900000000000262626007A77
+          7600FCEEE300FBE6D600BDA9980071675F006A6A6A005F5F5F00B0AFAE00FEFC
+          F900FEFAF600FEF8F400FEF7F200ECE5E000AFAAA700D0CFCE00D2D2D2004C4C
+          70001010D2002626E70062629700AAAAAA00313131005B5B5B005A5A5A000000
+          00000000000000000000A0A0A800555591003C3C7700DCDCDC0048484800BFBD
+          BB00FDF5EE00FCEEE300EBDACC00645C5500A2A2A2008989890075757500C8C8
+          C800F1EFEE00F3F0EF00DBD9D700C3C1BF00D7D6D500E8E8E800E3E3E3009B9B
+          9B004141B20066669700D9D9D900C6C6C6004B4B4B008C8C8C006F6F6F005B5B
+          5B0000000000000000000000000000000000C4C4C6000000000062626200E3E3
+          E300FEFBF800FEF6F100EFE5DD007B757000B9B9B900AFAFAF008F8F8F007B7B
+          7B008F8F8F00A9A9A900C1C1C100D3D3D300E0E0E000E7E7E700EBEBEB00EAEA
+          EA00CCCCCC00E5E5E500E9E9E900BDBDBD007E7E7E00ABABAB009E9E9E008989
+          890061616100000000000000000000000000000000000000000070707000C9C9
+          C900FFFFFF00FFFDFC00D8D6D300AAA8A500D2D2D200C8C8C800BDBDBD00A7A7
+          A7008989890086868600A6A6A600CCCCCC00D6D6D600DEDEDE00E5E5E500EAEA
+          EA00EEEEEE00ECECEC00F3F3F300B3B3B300B4B4B400C3C3C300BBBBBB00B2B2
+          B200A2A2A200747474004444440000000000000000000000000075757500A3A3
+          A300EBEBEB00EDEDED00C8C8C800D5D5D500E8E8E800DFDFDF00D5D5D500CBCB
+          CB00BBBBBB00868686008D8D8D008E8E8E00ADADAD00D0D0D000DDDDDD00E2E2
+          E200ECECEC00ECECEC00D6D6D600CFCFCF00E2E2E200DADADA00D2D2D200CACA
+          CA00C1C1C100B9B9B9008F8F8F00696969000404040000000000444444009898
+          9800B5B5B500CBCBCB00DFDFDF00F1F1F100F1F1F100EDEDED00E9E9E900E2E2
+          E200CECECE008D8D8D008787870087878700929292008E8E8E00B9B9B900E3E3
+          E300E5E5E500E3E3E300E4E4E400EFEFEF00EEEEEE00EAEAEA00E5E5E500E0E0
+          E000DADADA00D1D1D100C9C9C900AEAEAE007A7A7A0018181800000000002C2C
+          2C008E8E8E008F8F8F00B0B0B000D1D1D100EDEDED00F1F1F100F1F1F100EFEF
+          EF00E4E4E400B9B9B9009E9E9E00939393008787870081818100949494009393
+          9300AEAEAE00D4D4D400E4E4E400EBEBEB00EFEFEF00EFEFEF00EEEEEE00EDED
+          ED00EAEAEA00E5E5E500DFDFDF00D8D8D800B0B0B00068686800000000000000
+          0000000000000404040048484800878787008E8E8E00A9A9A900C7C7C700E7E7
+          E700F1F1F100F0F0F000ECECEC00DADADA00BDBDBD00989898007B7B7B006D6D
+          6D00919191009A9A9A00AEAEAE00D3D3D300E8E8E800EEEEEE00F0F0F000EFEF
+          EF00EEEEEE00EEEEEE00EBEBEB00E7E7E700D9D9D90091919100000000000000
+          0000000000000000000000000000000000000000000030303000797979009595
+          9500A2A2A200C0C0C000DDDDDD00F1F1F100EDEDED00E9E9E900D7D7D700CECE
+          CE00CECECE00C4C4C400B3B3B300A4A4A400ACACAC00D1D1D100ECECEC00F1F1
+          F100F0F0F000F0F0F000EFEFEF00EEEEEE00E1E1E10098989800000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          00001818180067676700999999009C9C9C00B9B9B900D4D4D400ECECEC00EAEA
+          EA00E5E5E500DCDCDC00D2D2D200C8C8C800B9B9B900ACACAC00ACACAC00CFCF
+          CF00EEEEEE00F1F1F100F0F0F000F0F0F000CECECE007E7E7E00000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000060606004B4B4B008F8F8F009B9B9B00B1B1
+          B100CCCCCC00E3E3E300E8E8E800DFDFDF00D5D5D500C2C2C2009F9F9F008686
+          8600AAAAAA00C6C6C600E3E3E300D1D1D100A0A0A00025252500000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000003030
+          30007F7F7F00A0A0A000ACACAC00C3C3C300CFCFCF00BEBEBE00636363000000
+          00000707070066666500A4A4A400838383002626260000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000019191900676767008E8E8E0069696900070707000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000}
+        MaskColor = clBlack
       end>
   end
   object dxBarScreenTipRepository: TdxBarScreenTipRepository
@@ -12229,7 +12370,7 @@ object frmRibbonMain: TfrmRibbonMain
   end
   object alActions: TActionList
     Images = cxSmallImages
-    Left = 417
+    Left = 425
     Top = 88
     object acNew: TAction
       Caption = '&Nuevo'
@@ -12253,8 +12394,8 @@ object frmRibbonMain: TfrmRibbonMain
       OnExecute = acOpenExecute
     end
     object acSave: TAction
-      Caption = '&Save'
-      Hint = 'Save'
+      Caption = '&Guardar'
+      Hint = 'Guardar'
       ImageIndex = 2
       ShortCut = 16467
       OnExecute = acSaveExecute
@@ -12266,20 +12407,20 @@ object frmRibbonMain: TfrmRibbonMain
       ShortCut = 24659
     end
     object acCut: TAction
-      Caption = 'Cu&t'
-      Hint = 'Cut'
+      Caption = 'Cor&tar'
+      Hint = 'Cortar'
       ImageIndex = 6
       OnExecute = acCutExecute
     end
     object acCopy: TAction
-      Caption = '&Copy'
-      Hint = 'Copy'
+      Caption = 'Copiar'
+      Hint = 'Copiar'
       ImageIndex = 7
       OnExecute = acCopyExecute
     end
     object acPaste: TAction
-      Caption = '&Paste'
-      Hint = 'Paste'
+      Caption = '&Pegar'
+      Hint = 'Pegar'
       ImageIndex = 5
       OnExecute = acPasteExecute
     end
@@ -12290,15 +12431,15 @@ object frmRibbonMain: TfrmRibbonMain
       OnExecute = acCancelExecute
     end
     object acSelectAll: TAction
-      Caption = 'Select &All'
-      Hint = 'Select All'
+      Caption = 'Selec. todo'
+      Hint = 'Selecciona todo el texto del campo actual'
       ImageIndex = 23
       ShortCut = 16449
       OnExecute = acSelectAllExecute
     end
     object acPrint: TAction
-      Caption = '&Print'
-      Hint = 'Print'
+      Caption = '&Imprimir'
+      Hint = 'Imprimir'
       ImageIndex = 3
       ShortCut = 16464
       OnExecute = acPrintExecute
@@ -12367,11 +12508,17 @@ object frmRibbonMain: TfrmRibbonMain
       ImageIndex = 34
     end
     object acFind: TAction
-      Caption = '&Find'
-      Hint = 'Find'
+      Caption = '&Buscar'
+      Hint = 'Buscar'
       ImageIndex = 8
       ShortCut = 16454
       OnExecute = acFindExecute
+    end
+    object acFindRemoved: TAction
+      Caption = 'Buscar Eliminados'
+      Hint = 'Permite buscar registros que han sido eliminados'
+      ImageIndex = 8
+      OnExecute = acFindRemovedExecute
     end
     object acReplace: TAction
       Caption = '&Replace'
@@ -12390,18 +12537,6 @@ object frmRibbonMain: TfrmRibbonMain
       Hint = 'Redo'
       ImageIndex = 39
       ShortCut = 16473
-    end
-    object acQATAboveRibbon: TAction
-      Caption = 'Ab&ove the Ribbon'
-      Checked = True
-      GroupIndex = 3
-      OnExecute = acQATBelowRibbonExecute
-    end
-    object acQATBelowRibbon: TAction
-      Tag = 1
-      Caption = 'B&elow the Ribbon'
-      GroupIndex = 3
-      OnExecute = acQATBelowRibbonExecute
     end
     object acDataSetPrior: TDataSetPrior
       Category = 'Dataset'
@@ -12438,14 +12573,14 @@ object frmRibbonMain: TfrmRibbonMain
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 488
-    Top = 88
+    Top = 136
     DockControlHeights = (
       0
       0
       0
       0)
     object dxbFile: TdxBar
-      Caption = 'File'
+      Caption = 'Registro'
       CaptionButtons = <>
       DockedLeft = 0
       DockedTop = 0
@@ -12499,11 +12634,11 @@ object frmRibbonMain: TfrmRibbonMain
         end
         item
           Visible = True
-          ItemName = 'bbPrint'
+          ItemName = 'bbCancel'
         end
         item
           Visible = True
-          ItemName = 'bbCancel'
+          ItemName = 'bbPrint'
         end>
       OneOnRow = False
       Row = 0
@@ -12544,9 +12679,9 @@ object frmRibbonMain: TfrmRibbonMain
       WholeRow = False
     end
     object dxbClipboard: TdxBar
-      Caption = 'Clipboard'
+      Caption = 'Portapapeles'
       CaptionButtons = <>
-      DockedLeft = 206
+      DockedLeft = 460
       DockedTop = 0
       FloatLeft = 390
       FloatTop = 356
@@ -12614,9 +12749,9 @@ object frmRibbonMain: TfrmRibbonMain
       WholeRow = False
     end
     object dxbEditing: TdxBar
-      Caption = 'Editing'
+      Caption = 'Modificaci'#243'n'
       CaptionButtons = <>
-      DockedLeft = 334
+      DockedLeft = 242
       DockedTop = 0
       FloatLeft = 661
       FloatTop = 344
@@ -12661,6 +12796,10 @@ object frmRibbonMain: TfrmRibbonMain
         item
           Visible = True
           ItemName = 'bbFind'
+        end
+        item
+          Visible = True
+          ItemName = 'bbFindRemoved'
         end
         item
           Visible = True
@@ -12944,8 +13083,8 @@ object frmRibbonMain: TfrmRibbonMain
       DockedLeft = 0
       DockedTop = 0
       DockingStyle = dsNone
-      FloatLeft = 393
-      FloatTop = 503
+      FloatLeft = 212
+      FloatTop = 491
       FloatClientWidth = 314
       FloatClientHeight = 83
       ItemLinks = <
@@ -12995,9 +13134,9 @@ object frmRibbonMain: TfrmRibbonMain
       WholeRow = False
     end
     object dxbRibbonOptions: TdxBar
-      Caption = 'Ribbon Options'
+      Caption = 'Opciones Ribbon'
       CaptionButtons = <>
-      DockedLeft = 0
+      DockedLeft = 133
       DockedTop = 0
       FloatLeft = 597
       FloatTop = 370
@@ -13054,9 +13193,9 @@ object frmRibbonMain: TfrmRibbonMain
       WholeRow = False
     end
     object dxbQATOptions: TdxBar
-      Caption = 'Quick Access Toolbar Options'
+      Caption = 'Barra de acceso r'#225'pido'
       CaptionButtons = <>
-      DockedLeft = 140
+      DockedLeft = 273
       DockedTop = 0
       FloatLeft = 436
       FloatTop = 351
@@ -13118,9 +13257,9 @@ object frmRibbonMain: TfrmRibbonMain
       WholeRow = False
     end
     object dxbColorScheme: TdxBar
-      Caption = 'Color Scheme'
+      Caption = 'Esquema de colores'
       CaptionButtons = <>
-      DockedLeft = 329
+      DockedLeft = 466
       DockedTop = 0
       FloatLeft = 729
       FloatTop = 399
@@ -13258,7 +13397,7 @@ object frmRibbonMain: TfrmRibbonMain
     object dxbVentanas: TdxBar
       Caption = 'Ventanas'
       CaptionButtons = <>
-      DockedLeft = 438
+      DockedLeft = 0
       DockedTop = 0
       FloatLeft = 814
       FloatTop = 8
@@ -13267,11 +13406,11 @@ object frmRibbonMain: TfrmRibbonMain
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'bbTabbedView'
+          ItemName = 'bbMenuPrincipal'
         end
         item
           Visible = True
-          ItemName = 'bbMenuPrincipal'
+          ItemName = 'bbTabbedView'
         end>
       OneOnRow = False
       Row = 0
@@ -13296,7 +13435,7 @@ object frmRibbonMain: TfrmRibbonMain
       WholeRow = False
     end
     object dxbViewOptions: TdxBar
-      Caption = 'View Options'
+      Caption = 'Opciones de vista'
       CaptionButtons = <>
       DockedLeft = 0
       DockedTop = 0
@@ -13307,7 +13446,15 @@ object frmRibbonMain: TfrmRibbonMain
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxbtnView'
+          ItemName = 'dxbtnCurrentView'
+        end
+        item
+          Visible = True
+          ItemName = 'dxbtnControlBox'
+        end
+        item
+          Visible = True
+          ItemName = 'dxbtnNavigator'
         end>
       OneOnRow = True
       Row = 0
@@ -13667,11 +13814,14 @@ object frmRibbonMain: TfrmRibbonMain
       ImageIndex = 17
     end
     object bbQATAboveRibbon: TdxBarButton
-      Action = acQATAboveRibbon
+      Caption = 'Encima del Ribbon'
       Category = 0
+      Hint = 'Encima del Ribbon'
       ScreenTip = stQATAbove
+      Visible = ivAlways
       ButtonStyle = bsChecked
       GroupIndex = 3
+      Down = True
       Glyph.Data = {
         76020000424D760200000000000036000000280000000C0000000C0000000100
         2000000000004002000000000000000000000000000000000000000000000000
@@ -13693,11 +13843,15 @@ object frmRibbonMain: TfrmRibbonMain
         0000000000000000000000000000808080808080808000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
+      OnClick = acQATBelowRibbonExecute
     end
     object bbQATBelowRibbon: TdxBarButton
-      Action = acQATBelowRibbon
+      Tag = 1
+      Caption = 'Debajo del Ribbon'
       Category = 0
+      Hint = 'Debajo del Ribbon'
       ScreenTip = stQATBelow
+      Visible = ivAlways
       ButtonStyle = bsChecked
       GroupIndex = 3
       Glyph.Data = {
@@ -13721,6 +13875,7 @@ object frmRibbonMain: TfrmRibbonMain
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
+      OnClick = acQATBelowRibbonExecute
     end
     object bbFont: TdxBarButton
       Action = acFont
@@ -13831,9 +13986,9 @@ object frmRibbonMain: TfrmRibbonMain
       ImageIndex = 19
     end
     object bbTabbedView: TdxBarLargeButton
-      Caption = '&Tabbed View'
+      Caption = 'En Pesta'#241'as'
       Category = 0
-      Hint = 'Tabbed View'
+      Hint = 'En Pesta'#241'as'
       Visible = ivAlways
       ButtonStyle = bsChecked
       LargeImageIndex = 41
@@ -13923,29 +14078,11 @@ object frmRibbonMain: TfrmRibbonMain
       GroupIndex = 1
       OnClick = acViewTypeExecute
     end
-    object dxbtnView: TdxBarSubItem
-      Caption = '&Vista'
-      Category = 0
-      Visible = ivAlways
-      LargeImageIndex = 37
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxbtnCurrentView'
-        end
-        item
-          Visible = True
-          ItemName = 'dxbtnControlBox'
-        end
-        item
-          Visible = True
-          ItemName = 'dxbtnNavigator'
-        end>
-    end
     object dxbtnCurrentView: TdxBarSubItem
       Caption = 'Vista actual'
       Category = 0
       Visible = ivAlways
+      LargeImageIndex = 37
       ItemLinks = <
         item
           Visible = True
@@ -13986,9 +14123,9 @@ object frmRibbonMain: TfrmRibbonMain
       OnClick = dxbtnControlBoxClick
     end
     object dxbtnNavigator: TdxBarButton
-      Caption = 'Date navigator'
+      Caption = 'Navegador de fechas'
       Category = 0
-      Hint = 'Date navigator'
+      Hint = 'Navegador de fechas'
       Visible = ivAlways
       ButtonStyle = bsChecked
       Down = True
@@ -14001,6 +14138,11 @@ object frmRibbonMain: TfrmRibbonMain
       Visible = ivAlways
       LargeImageIndex = 37
       OnClick = bbMenuPrincipalClick
+    end
+    object bbFindRemoved: TdxBarLargeButton
+      Action = acFindRemoved
+      Category = 0
+      LargeImageIndex = 46
     end
   end
   object dxSkinController: TdxSkinController

@@ -1,4 +1,4 @@
-object frmMain: TfrmMain
+object frmMenuPrincipal: TfrmMenuPrincipal
   Left = 0
   Top = 0
   ClientHeight = 496
@@ -11,6 +11,7 @@ object frmMain: TfrmMain
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  Visible = True
   WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -39,8 +40,8 @@ object frmMain: TfrmMain
       Transparent = True
     end
     object gbx_Login: TcxGroupBox
-      Left = 192
-      Top = 5
+      Left = 193
+      Top = 20
       Align = alRight
       Ctl3D = True
       ParentCtl3D = False
@@ -49,12 +50,12 @@ object frmMain: TfrmMain
       TabOrder = 1
       DesignSize = (
         577
-        66)
-      Height = 66
+        50)
+      Height = 50
       Width = 577
       object cxLabel2: TcxLabel
         Left = 268
-        Top = 19
+        Top = 3
         Anchors = [akRight, akBottom]
         Caption = 'Password'
         ParentFont = False
@@ -70,7 +71,7 @@ object frmMain: TfrmMain
       end
       object cxLabel3: TcxLabel
         Left = 20
-        Top = 19
+        Top = 3
         Anchors = [akRight, akBottom]
         Caption = 'Usuario'
         ParentFont = False
@@ -84,10 +85,12 @@ object frmMain: TfrmMain
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object txtPassword: TcxTextEdit
+      object txtPassword: TcxDBTextEdit
         Left = 356
-        Top = 17
+        Top = 1
         Anchors = [akRight, akBottom]
+        DataBinding.DataField = 'password'
+        DataBinding.DataSource = dsLogin
         ParentFont = False
         Properties.PasswordChar = '*'
         Style.Font.Charset = DEFAULT_CHARSET
@@ -95,17 +98,17 @@ object frmMain: TfrmMain
         Style.Font.Height = -17
         Style.Font.Name = 'Segoe UI'
         Style.Font.Style = []
-        Style.Shadow = False
         Style.IsFontAssigned = True
         TabOrder = 3
-        TextHint = 'Password'
         OnKeyPress = txtPasswordKeyPress
         Width = 160
       end
-      object txtUsuario: TcxTextEdit
+      object txtUsuario: TcxDBTextEdit
         Left = 92
-        Top = 17
+        Top = 1
         Anchors = [akRight, akBottom]
+        DataBinding.DataField = 'usuario'
+        DataBinding.DataSource = dsLogin
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
         Style.Font.Color = clWindowText
@@ -114,7 +117,6 @@ object frmMain: TfrmMain
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 2
-        TextHint = 'Usuario'
         OnKeyPress = txtPasswordKeyPress
         Width = 160
       end
@@ -126,24 +128,32 @@ object frmMain: TfrmMain
     Width = 771
     Height = 423
     Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
-    Properties.ActivePage = cxTabSheet2
+    Properties.ActivePage = cxTabSheet3
     Properties.CustomButtons.Buttons = <>
-    Properties.HideTabs = True
     Properties.Style = 11
-    ClientRectBottom = 423
-    ClientRectRight = 771
-    ClientRectTop = 0
+    ClientRectBottom = 418
+    ClientRectLeft = 2
+    ClientRectRight = 766
+    ClientRectTop = 25
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 0
       ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
-        Width = 771
-        Height = 423
+        Width = 764
+        Height = 393
         OptionsBehavior.GroupMoving = True
         OptionsBehavior.ItemCheckMode = tcicmNone
         OptionsBehavior.ItemMoving = False
@@ -312,9 +322,13 @@ object frmMain: TfrmMain
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGroupBox2: TcxGroupBox
         Left = 0
-        Top = 320
+        Top = 290
         Align = alBottom
         Caption = ' Novedades '
         ParentFont = False
@@ -326,20 +340,20 @@ object frmMain: TfrmMain
         Style.IsFontAssigned = True
         TabOrder = 1
         Height = 103
-        Width = 771
+        Width = 764
         object tc_Novedades: TdxTileControl
-          Left = 2
-          Top = 33
-          Width = 767
-          Height = 68
+          Left = 3
+          Top = 30
+          Width = 758
+          Height = 63
           TabOrder = 0
         end
       end
       object tc_MenuUsuario: TdxTileControl
-        Left = 305
+        Left = 306
         Top = 0
-        Width = 466
-        Height = 315
+        Width = 458
+        Height = 284
         OptionsBehavior.GroupMoving = True
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
@@ -348,16 +362,16 @@ object frmMain: TfrmMain
       object cxSplitter1: TcxSplitter
         Left = 300
         Top = 0
-        Width = 5
-        Height = 315
+        Width = 6
+        Height = 284
         AllowHotZoneDrag = False
         Control = tc_Favoritos
       end
       object cxSplitter2: TcxSplitter
         Left = 0
-        Top = 315
-        Width = 771
-        Height = 5
+        Top = 284
+        Width = 764
+        Height = 6
         AlignSplitter = salBottom
         Control = cxGroupBox2
       end
@@ -365,13 +379,157 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 300
-        Height = 315
+        Height = 284
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0
+        end
+      end
+    end
+    object cxTabSheet3: TcxTabSheet
+      Caption = 'cxTabSheet3'
+      ImageIndex = 2
+      object cxGroupBox3: TcxGroupBox
+        Left = 106
+        Top = 36
+        Caption = 'Par'#225'metros de Conexi'#243'n'
+        ParentFont = False
+        Style.Edges = [bTop, bBottom]
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -17
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        TabOrder = 0
+        Height = 305
+        Width = 567
+        object cxLabel4: TcxLabel
+          Left = 87
+          Top = 51
+          Caption = 'Servidor :'
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          Transparent = True
+        end
+        object cxLabel5: TcxLabel
+          Left = 87
+          Top = 95
+          Caption = 'Puerto :'
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          Transparent = True
+        end
+        object cxLabel6: TcxLabel
+          Left = 87
+          Top = 140
+          Caption = 'Aplicaci'#243'n :'
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          Transparent = True
+        end
+        object cxLabel7: TcxLabel
+          Left = 87
+          Top = 185
+          Caption = 'EServlet :'
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          Transparent = True
+        end
+        object cxCheckBox1: TcxCheckBox
+          Left = 87
+          Top = 240
+          Caption = 'Usar por Defecto'
+          ParentFont = False
+          Properties.Alignment = taRightJustify
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          TabOrder = 4
+          Transparent = True
+          Width = 161
+        end
+        object EHost: TcxTextEdit
+          Left = 184
+          Top = 49
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          TabOrder = 5
+          Text = 'EHost'
+          Width = 147
+        end
+        object EPort: TcxTextEdit
+          Left = 184
+          Top = 93
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          TabOrder = 6
+          Text = 'EPort'
+          Width = 91
+        end
+        object EAplicacion: TcxTextEdit
+          Left = 184
+          Top = 138
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          TabOrder = 7
+          Text = 'EAplicacion'
+          Width = 297
+        end
+        object EServlet: TcxTextEdit
+          Left = 184
+          Top = 183
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -17
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          TabOrder = 8
+          Text = 'EServlet'
+          Width = 297
         end
       end
     end
@@ -433,7 +591,8 @@ object frmMain: TfrmMain
     end
   end
   object dxSkinController: TdxSkinController
-    SkinName = 'UserSkin'
+    NativeStyle = False
+    SkinName = 'Black'
     Left = 48
     Top = 96
   end
@@ -504,5 +663,145 @@ object frmMain: TfrmMain
       FieldName = 'Text4'
       Size = 50
     end
+  end
+  object IdHTTP: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html, */*'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 640
+    Top = 88
+  end
+  object Service: TjktServiceCaller
+    HTTP = IdHTTP
+    IgnoreException = False
+    Left = 584
+    Top = 88
+  end
+  object TUsuario: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 712
+    Top = 16
+    object TUsuariooid_usuario: TIntegerField
+      FieldName = 'oid_usuario'
+    end
+    object TUsuarioCodigo: TStringField
+      FieldName = 'Codigo'
+      Size = 15
+    end
+    object TUsuarioApellido: TStringField
+      FieldName = 'Apellido'
+      Size = 30
+    end
+    object TUsuarioNombre: TStringField
+      FieldName = 'Nombres'
+      Size = 40
+    end
+    object TUsuarioEmail: TStringField
+      FieldName = 'Mail'
+      Size = 50
+    end
+    object TUsuariosesionID: TStringField
+      FieldName = 'sesionID'
+      Size = 50
+    end
+    object TUsuariodecimalSeparator: TStringField
+      FieldName = 'decimalSeparator'
+      Size = 1
+    end
+    object TUsuariocertificado: TStringField
+      FieldName = 'certificado'
+      Size = 2000
+    end
+  end
+  object TLogin: TjktMemTable
+    Active = True
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'usuario'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'password'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 664
+    Top = 16
+    object TLoginusuario: TStringField
+      FieldName = 'usuario'
+    end
+    object TLoginpassword: TStringField
+      FieldName = 'password'
+    end
+  end
+  object dsLogin: TDataSource
+    DataSet = TLogin
+    Left = 616
+    Top = 16
+  end
+  object OperConsultaLogin: TjktOperacion
+    OperName = 'Login'
+    EnviarTodo = False
+    Atributos = <
+      item
+        Dataset = TLogin
+        Tag = 0
+      end>
+    Left = 640
+    Top = 144
+  end
+  object Driver: TjktDriver
+    IgnoreTags = False
+    NoAutoEditarDataSets = False
+    OperacionSave = OperConsultaLogin
+    ServiceCaller = Service
+    ConfirmarCancelacion = True
+    Opciones = []
+    TipoPrograma = tp_abmLista
+    Left = 584
+    Top = 144
   end
 end
