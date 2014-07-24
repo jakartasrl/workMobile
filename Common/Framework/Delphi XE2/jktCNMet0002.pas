@@ -603,8 +603,14 @@ begin
 end;
 
 function TjktServiceCaller.obtenerDataset(aDatasetName: AnsiString) :TDataset;
+var
+ x :integer;
 begin
   result := TDataset (self.Owner.FindComponent(aDatasetName));
+  if result = nil
+     then   if FListaDataSetsToAssing.Find(aDatasetName, x)  = true
+                then result := TDataset (FListaDataSetsToAssing.Objects[x]);
+
 end;
 
 
@@ -634,6 +640,7 @@ begin
               then FXML.addAtribute('certificado', Login.Certificado)
               else FXML.addAtribute('certificado', Certificado);
            end;
+   FXML.addElement(1, 'Campos');
 end;
 
 procedure TjktServiceCaller.addAtribute(aAttName, aAttValue :string);
@@ -865,24 +872,25 @@ begin
     begin
       if ((aDataset.Fields[idx] is TIntegerField) or (aDataset.Fields[idx] is TFloatField) or (aDataset.Fields[idx] is TCurrencyField))
      and  (aDataset.Fields[idx].IsNull)
-
           then if (aTag <> 0)
                   then begin
-                         if (aDataset.Fields[idx].Tag = aTag)
+                         if (aDataset.Fields[idx].Tag >= aTag)
                             then addAtribute(aDataset.Fields[idx].FieldName, '0')
                        end
                   else addAtribute(aDataset.Fields[idx].FieldName, '0')
 
-          else if (aTag <> 0)
-                  then begin
-                         if (aDataset.Fields[idx].Tag = aTag)
-                            then addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
-                       end
-                  else begin
-                       if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size>=255))
+     else if (aTag <> 0)
+              then begin
+                    if (aDataset.Fields[idx].Tag >= aTag)
+                        then if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size>=255))
+                                    then addAtribute (aDataset.Fields[idx].FieldName, getRichToText(aDataset.Fields[idx].AsString))
+                                    else addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
+                   end
+              else begin
+                    if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size>=255))
                           then addAtribute (aDataset.Fields[idx].FieldName, getRichToText(aDataset.Fields[idx].AsString))
                           else addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
-                       end;
+                   end;
 
     end;
 end;

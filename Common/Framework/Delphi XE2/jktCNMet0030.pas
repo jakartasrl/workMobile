@@ -3,7 +3,7 @@ unit jktCNMet0030;
 interface
 
 uses
-  Classes, kbmMemTable, data.db;
+  Classes, kbmMemTable, data.db, jktCNMet0002;
  //DesignEditors, DesignIntf;
 
 
@@ -57,16 +57,18 @@ type
       FOperName       :string;
       FEnviarTodo     :boolean;
       FAtributos      :TjktOperAttributeList;
+      FServiceCaller  :TjktServiceCaller;
       DatasetsList    :TList;
 
       function        getCountDatasets :integer;
-
+      procedure       completarAtributosOperacion();
       procedure       obtenerDatasets;
       function        GetDataset(Index: Integer): TkbmMemTable;
 
    public
       constructor Create(AOwner: TComponent); override;
       destructor  Destroy; override;
+      procedure   execute;
       property    CountDatasets :integer read getCountDatasets;
       property    ItemsDataset[Index: Integer]:TkbmMemTable read GetDataset ;
 
@@ -74,7 +76,8 @@ type
    published
       property OperName      :string   read FOperName     write FOperName;
       property EnviarTodo    :boolean  read FEnviarTodo   write FEnviarTodo;
-      property Atributos :TjktOperAttributeList read FAtributos write FAtributos;
+      property Atributos     :TjktOperAttributeList read FAtributos write FAtributos;
+      property ServiceCaller :TjktServiceCaller read FServiceCaller write FServiceCaller;
 
  end;
 
@@ -83,7 +86,7 @@ type
 implementation
 
 uses
-  jktFNMet0030;
+  jktFNMet0030, SysUtils;
 
 
 procedure Register;
@@ -188,11 +191,18 @@ end;
 
 //----------------------------------------------------------------------
 constructor TjktOperacion.Create(AOwner: TComponent);
+var
+  x:integer;
 begin
   inherited Create(AOwner);
   FAtributos  := TjktOperAttributeList.create(self);
   FEnviarTodo := false;
+  for x := 0 to aOwner.ComponentCount -1 do
+    begin
+       if aOwner.Components[x] is TjktServiceCaller
+          then FServiceCaller := TjktServiceCaller (aOwner.Components[x]);
 
+    end;
 end;
 
 
@@ -203,6 +213,17 @@ begin
   inherited Destroy;
 end;
 
+
+procedure TjktOperacion.execute;
+begin
+  if not Assigned(FServiceCaller)
+     then  raise Exception.Create('No esta asignada la propiedad ServiceCaller');
+
+  FServiceCaller.InicioOperacion;
+  FServiceCaller.setOperacion(FOperName);
+  completarAtributosOperacion();
+  FServiceCaller.execute;
+end;
 
 function TjktOperacion.getCountDatasets: integer;
 begin
@@ -230,5 +251,31 @@ begin
       end;
 
 end;
+
+procedure TjktOperacion.completarAtributosOperacion();
+var
+ x :integer;
+ count :integer;
+ att :TjktOperAttribute;
+begin
+  count :=  self.FAtributos.Count;
+  // Mandar primero los campos sueltos
+  for x := 0 to count - 1 do
+    begin
+       att :=  self.FAtributos.Items[x];
+       if  att.Field = nil
+          then continue;
+       FServiceCaller.addAtribute(att.Attribute, att.Field.AsString);
+    end;
+   // Mandar luego los datasets
+  for x := 0 to count -1 do
+    begin
+       att :=  self.FAtributos.Items[x];
+       if  att.Dataset = nil
+          then continue;
+       FServiceCaller.addDataSet(att.Dataset, '', att.Tag);
+    end;
+end;
+
 
 end.

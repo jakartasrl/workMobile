@@ -7,8 +7,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, Vcl.ActnList, db, kbmMemTable, cxScheduler, dxRibbonStatusBar,
-  jktCNMet0002, jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030;
+  Dialogs, Vcl.ActnList, db, kbmMemTable, dxRibbonStatusBar,
+  jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030;
 
 type
   TjktOpcion = (opImprimir, opExportar, opImportar);
@@ -34,7 +34,6 @@ type
   private
     { Private declarations }
     FConfirmarCancelacion       :Boolean;
-    FIgnoreTags                 :Boolean;
     FDataSetCab                 :TDataSet;
     FEstado                     :TjktEstado;
     FTipoPrograma               :TjktTipoPrograma;
@@ -42,9 +41,7 @@ type
     FFocoEnModificacion         :TField;
     FOperacionSave              :TjktOperacion;
     FOperacionTraer             :TjktOperacion;
-    FServiceCaller              :TjktServiceCaller;
     FActionList                 :TActionList;
-    FScheduler                  :TcxScheduler;
     { Agregar  :
         FiltroActivos
         FiltroInActivos
@@ -62,15 +59,12 @@ type
     FOnFiltroInActivos          :TNotifyEvent;
     FOnOperacionTraer           :TNotifyEvent;
     FOnEjecutar                 :TNotifyEvent;
-    FOnLookUp                   :TNotifyEvent;
     FOnNuevo                    :TNotifyEvent;
     FOnGuardar                  :TNotifyEvent;
     FOnCustomToolButton         :TNotifyEvent;
     FOnImprimir                 :TNotifyEvent;
 
 
-    function cuelgaDe(DataSetAVerificar : TDataSet ; DataSetPadre : TDataSet) : boolean;
-    procedure marcarRegistrosPadres(DataSet : TDataSet);
     procedure DoSetDefaults;
     procedure DoSetFocoAlta;
     procedure DoSetFocoModi;
@@ -98,24 +92,17 @@ type
     procedure DoCustomOper;
     procedure DoGuardar;
     procedure DoCustomToolButton;
-    procedure camposDataset(aDataset:TDataSet);
-    procedure recorrerDataSet(aDataset:TDataSet ; aLista: TList;  aNivel, aNivelDataSet: integer);
-    procedure MarcarRegistrosComoModif(aDataset: TkbmMemTable ; aLista: TList);
     procedure abrirDataSets;
     procedure cerrarDataSets;
     procedure postDataSets;
     procedure DoImprimir;
     function  verModificados: Boolean;
-    function  obtenerListaDataSet(aDataset:TDataSet) : TList;
     procedure TratarMensajeException(excep : Exception);
-    procedure ejecutarOperacion(aOper : TjktOperacion);
-    procedure completarAtributosOperacion(aOper :TjktOperacion);
     procedure enabledAction(actionName :string;  enabled :boolean);
     procedure DoDesInhibirCamposNoModificables;
     procedure DoInhibirCamposNoModificables;
     procedure modificarReadOnly(aValue :boolean);
-    procedure LookUp;
-
+    
   protected
     { Protected declarations }
     FOpciones : TjktOpciones;
@@ -140,7 +127,6 @@ type
     procedure Imprimir;
     procedure CustomToolButton;
     procedure OpenRehabilitar;
-    procedure newRecord(aDataSet: TDataSet);
     function  CanClose: Boolean;
     function  esNuevo(): Boolean;
     function  esAbrir(): Boolean;
@@ -149,14 +135,11 @@ type
   published
     { Published declarations }
 
-    property IgnoreTags            : Boolean read fIgnoreTags write fIgnoreTags;
     property NoAutoEditarDataSets  : Boolean read FNoAutoEditarDataSets write FNoAutoEditarDataSets;
     property DataSetCab            : TDataSet read FDataSetCab          write FDataSetCab;
     property OperacionSave         : TjktOperacion  read FOperacionSave write FOperacionSave;
     property OperacionTraer        : TjktOperacion  read FOperacionTraer write FOperacionTraer;
-    property ServiceCaller         : TjktServiceCaller read FServiceCaller write FServiceCaller;
     property ActionList            : TActionList read FActionList write FActionList;
-    property Scheduler             : TcxScheduler read FScheduler write FScheduler;
     property ConfirmarCancelacion  : Boolean read FConfirmarCancelacion write FConfirmarCancelacion;
 
     property Opciones              : TjktOpciones     read FOpciones     write FOpciones;
@@ -217,10 +200,6 @@ begin
     end;
 end;
 
-procedure TjktDriver.LookUp;
-begin
-
-end;
 
 procedure TjktDriver.DoInhibirBotones;
 var
@@ -521,46 +500,9 @@ begin
   if not Assigned(FOperacionSave)
      then  raise Exception.Create('No esta asignada la propiedad Operacion Save');
 
-  if not Assigned(FServiceCaller)
-     then  raise Exception.Create('No esta asignada la propiedad ServiceCaller');
-
-  ejecutarOperacion(FOperacionSave);
+  FOperacionSave.execute;
 end;
 
-procedure TjktDriver.ejecutarOperacion(aOper : TjktOperacion);
-begin
-  FServiceCaller.InicioOperacion;
-  FServiceCaller.setOperacion(aOper.OperName);
-  if aOper.Atributos.Count > 0
-     then completarAtributosOperacion(aOper);
-
-  FServiceCaller.execute;
-end;
-
-procedure TjktDriver.completarAtributosOperacion(aOper :TjktOperacion);
-var
- x :integer;
- count :integer;
- att :TjktOperAttribute;
-begin
-  count :=  aOper.Atributos.Count;
-  // Mandar primero los campos sueltos
-  for x := 0 to count - 1 do
-    begin
-       att :=  aOper.Atributos.Items[x];
-       if  att.Field = nil
-          then continue;
-       FServiceCaller.addAtribute(att.Attribute, att.Field.AsString);
-    end;
-  // Mandar luego los datasets
-  for x := 0 to count - 1 do
-    begin
-       att :=  aOper.Atributos.Items[x];
-       if  att.Dataset = nil
-          then continue;
-       FServiceCaller.addDataSet(att.Dataset, '', att.Tag);
-    end;
-end;
 
 procedure TjktDriver.abrirDataSets;
 var
@@ -721,10 +663,7 @@ begin
   if not Assigned(FOperacionTraer)
      then  raise Exception.Create('No esta asignada la propiedad Operacion Traer');
 
-  if not Assigned(FServiceCaller)
-     then  raise Exception.Create('No esta asignada la propiedad ServiceCaller');
-
-  ejecutarOperacion(FOperacionTraer);
+  FOperacionTraer.execute;
 end;
 
 function TjktDriver.CanClose: Boolean;
@@ -733,145 +672,7 @@ begin
 end;
 
 
-function TjktDriver.cuelgaDe(DataSetAVerificar : TDataSet ; DataSetPadre : TDataSet) : boolean;
-begin
-  if ((DataSetAVerificar = nil) or (DataSetPadre = nil))
-     then result := false
-  else
-  if (DataSetAVerificar.name = DataSetPadre.name)
-     then result := false
-  else
-  if (TkbmMemTable(DataSetAVerificar).MasterSource = nil)
-      then result := false
-  else if (TkbmMemTable(DataSetAVerificar).MasterSource <> nil)
-           then begin
-                if (TkbmMemTable(DataSetAVerificar).MasterSource.dataset.Name = DataSetPadre.name)
-                   then result := true
-                   else result := cuelgaDe(TkbmMemTable(DataSetAVerificar).MasterSource.DataSet,
-                                           DataSetPadre);
-                end
-           else result := false;
-end;
 
-procedure TjktDriver.MarcarRegistrosComoModif(aDataset: TkbmMemTable ; aLista: TList);
-var
-  datasetHijo : TkbmMemTable;
-  i : integer;
-begin
-  if (aLista = nil) then Exit;
-
-  aDataset.First;
-  while (not aDataset.Eof) do
-    begin
-    // Recorrer solo los DataSets Hijos
-    if ((aDataset.UpdateStatus <> usUnModified) or (aDataset.RecordTag > 0))
-      then marcarRegistrosPadres(aDataset);
-
-    // Recorrer los DataSets Hijos
-    for i := 0 to aLista.count - 1 do
-      begin
-      datasetHijo := TkbmMemTable (aLista.Items[i]);
-      if ((datasetHijo.MasterSource <> nil) and (datasetHijo.MasterSource.DataSet.Name = aDataset.Name))
-        then MarcarRegistrosComoModif(datasetHijo, aLista);
-      end;
-
-    aDataset.Next;
-  end;
-end;
-
-procedure TjktDriver.marcarRegistrosPadres(DataSet : TDataSet);
-var
-  DataSetPadre: TkbmMemTable;
-begin
-  if (TkbmMemTable(DataSet).MasterSource <> nil)
-    then begin
-      DataSetPadre := TkbmMemTable(TkbmMemTable(DataSet).MasterSource.DataSet);
-      DataSetPadre.RecordTag := 1;
-      marcarRegistrosPadres(DataSetPadre);
-    end;
-end;
-
-
-function  TjktDriver.obtenerListaDataSet(aDataset: TDataSet): TList;
-var
-  i: Integer;
-  dataSet: TkbmMemTable;
-begin
-  result := TList.create;
-  for i := 0 to FOperacionSave.CountDatasets - 1 do
-    begin
-      dataSet :=  FOperacionSave.ItemsDataset[i];
-      if (dataSet.MasterSource <> nil) and (dataSet.MasterSource.DataSet = aDataSet)
-        then result.Add(dataSet);
-    end;
-end;
-
-procedure TjktDriver.recorrerDataSet(aDataset: TDataSet; aLista :TList; aNivel, aNivelDataSet: integer);
-var
-  wrkDataSet: TDataset;
-  lista2 : TList;
-  i: Integer;
-begin
-  aDataSet.BlockReadSize := 1;
-  try
-      if aDataset = nil
-         then exit;
-      aDataset.first;
-      // Tabla de Cabecera
-      FServiceCaller.addElement(aNivel, 'Tabla');
-      FServiceCaller.addAtribute('nombre', aDataset.name);
-      while not aDataSet.Eof do
-        begin
-        // Fila
-           FServiceCaller.addElement(aNivel + 1 ,'Fila');
-           camposDataset(aDataSet);
-           if (aLista <> nil)
-             then for i := 0 to aLista.count - 1 do
-                     begin
-                       wrkDataset := TDataSet(aLista.items[i]);
-                            // Dario para compatibilidad con lo viejo.
-                            // 25-02-2005
-                       lista2 := nil;
-                       if (FOperacionSave.CountDatasets <> 0)
-                              then lista2 := obtenerListaDataSet(wrkDataset);
-
-                       recorrerDataset(wrkDataset, lista2,  aNivel + 2, aNivelDataSet + 1);
-                       lista2.free;
-                     end;
-          aDataSet.Next;
-        end;
-  finally
-     aDataSet.BlockReadSize := 0;
-  end;
-end;
-
-procedure TjktDriver.camposDataset(aDataset:TDataSet);
-var
-  i:integer;
-  fieldName :string;
-begin
-  for i := 0 to aDataSet.FieldCount - 1 do
-    begin
-      if (not FIgnoreTags) and (aDataSet.Fields[i].Tag = 0)
-         then continue;
-      fieldName := aDataSet.Fields[i].FieldName;
-      if  ((aDataSet.Fields[i] is TIntegerField) or
-           (aDataSet.Fields[i] is TFloatField) or
-           (aDataSet.Fields[i] is TCurrencyField))
-      and (aDataSet.Fields[i].IsNull)
-          then FServiceCaller.addAtribute(fieldName, '0')
-          else begin
-
-               if ((aDataset.fieldByName(fieldName).size>=255) or (aDataset.fieldByName(fieldName).DataType = ftMemo))
-                  then begin
-                       if (aDataset is TkbmMemTable)
-                           then FServiceCaller.addAtribute(fieldName, jktMisc0001.getRichToText(TkbmMemTable(aDataset).fieldByName(fieldName).AsString))
-                           else FServiceCaller.addAtribute(fieldName, jktMisc0001.getRichToText(aDataset.fieldByName(fieldName).AsString));
-                       end
-                  else FServiceCaller.addAtribute(fieldName,aDataset.fieldByName(fieldName).AsString);
-               end;
-    end;
-end;
 
 function TjktDriver.esNuevo() : Boolean;
 begin
@@ -931,12 +732,6 @@ begin
 end;
 
 
-procedure TjktDriver.newRecord(aDataSet :TDataSet);
-begin
-  aDataSet.FieldByName('new').asBoolean    := true;
-  aDataSet.FieldByName('modif').asBoolean  := false;
-  aDataSet.FieldByName('activo').asBoolean := true;
-end;
 
 procedure TjktDriver.postDataSets;
 var
