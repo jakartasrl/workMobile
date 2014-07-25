@@ -32,7 +32,7 @@ tmp/**/*
 local.properties
 .classpath
 .settings/
-.Servers/
+Servers
 .loadpath
 
 # External tool builders
