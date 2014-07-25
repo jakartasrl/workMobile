@@ -8,15 +8,21 @@ import java.util.Map;
 import org.apache.commons.digester3.Digester;
 import org.xml.sax.SAXException;
 
+import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.entidades.xml.Campo;
 import com.jkt.dominio.entidades.xml.Entidad;
 import com.jkt.dominio.entidades.xml.EntidadContainer;
 import com.jkt.dominio.entidades.xml.Operacion;
 import com.jkt.dominio.entidades.xml.Validador;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.transformers.Notificacion;
 
+@OperacionBean
 public class OperacionRecuperarEstructura extends Operation {
 
+	/*
+	 * Metodo estatico que es ejecutado solamente una vez.
+	 */
 	static EntidadContainer entidadContainer;
 	
 	static{
@@ -25,14 +31,19 @@ public class OperacionRecuperarEstructura extends Operation {
 			InputStream in = OperacionRecuperarEstructura.class.getResourceAsStream("metadaData.xml");
 			entidadContainer=(EntidadContainer)digester.parse(in);
 		} catch (IOException e) {
+			throw new RuntimeException("Error de entrada/salida.");
 		} catch (SAXException e) {
+			throw new RuntimeException("Error de parseo en el archivo de configuracion xml.");
 		}
 	}
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
+
 		Entidad entidad = entidadContainer.getEntidad((String)aParams.get("entidad"));
-		String nombre = entidad.getNombre();
+		if (entidad==null) {
+			throw new JakartaException("No se encontro la estructura de la entidad solicitada");
+		}
 
 		//notifica operacion
 		this.notificarObjecto(Notificacion.getNew("mtConfigOper", entidad.getOperacion()));
@@ -51,6 +62,11 @@ public class OperacionRecuperarEstructura extends Operation {
 		
 	}
 
+	/**
+	 * Genera las correspondientes reglas para que digester mapeé desde el xml a entidades java
+	 * 
+	 * @return
+	 */
 	private static Digester generarReglas() {
 		Digester digester = new Digester();
 		digester.setValidating(false);
