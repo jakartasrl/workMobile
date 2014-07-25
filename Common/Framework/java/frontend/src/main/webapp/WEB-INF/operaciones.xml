@@ -68,6 +68,11 @@
 
 <entity>
 
+
+
+
+
+
 	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.OperacionRecuperarEstructura">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
@@ -107,6 +112,12 @@
 		
 	</operacion>
 
+
+
+
+
+
+
 	<!-- GUARDAR O ACTUALIZAR EL MENU -->
 	<operacion name="GenerarMenu" clase="com.jkt.operaciones.OperacionCrearMenues">
 		
@@ -120,6 +131,8 @@
 		</forms>
 		
 	</operacion>
+	
+	
 	
 	<!-- RECUPERAR EL MENU -->
 	<operacion name="TrearMenu" clase="com.jkt.operaciones.OperacionRecuperarMenu">
@@ -154,6 +167,12 @@
 		
 	</operacion>
 
+
+
+
+
+
+	<!-- 	VALIDAR IN EXISTENCIA -->
 	<operacion name="ValidacionInexistencia" clase="com.jkt.operaciones.OperacionValidarInexistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
@@ -170,6 +189,7 @@
 	</operacion>
 
 
+	<!-- 	VALIDAR EXISTENCIA -->
 	<operacion name="ValidacionExistencia" clase="com.jkt.operaciones.OperacionValidarExistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
@@ -183,7 +203,6 @@
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
-		
 		<forms>
 			<form name="TUsuario"></form>
 		</forms>
@@ -191,6 +210,10 @@
 	</operacion>
 
 
+
+
+
+	<!-- 	RECUPERAR USUARIOS -->
 	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Usuario">
 		
 		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_usuario'>
@@ -217,6 +240,9 @@
 		</forms>
 		
 	</operacion>
+	
+	
+	<!-- 	RECUPERAR EMPRESAS -->
 	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Empresa">
 		
 		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_fac'>

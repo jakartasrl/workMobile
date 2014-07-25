@@ -46,22 +46,24 @@
 	</entidad>
 	
 	
-	<!-- Seccion que maneja los datos enviados al cliente para armar la estructura correspondiente -->
 	<entidad nombre="usuario">
 
 		<operacion operSave="GuardarUsuario" operTraer="TraerUsuarios" />
 		
 		<campos>
-			<campo fieldName="oid" tipo="String" longitud="2" visible="false" readOnly="false" orden="0" label="oid_usuario" />
-			<campo fieldName="codigo" tipo="String" longitud="1" visible="false" readOnly="false" orden="1" label="codigo-dni" />
+			<campo fieldName="oid_usuario" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_usuario" />
+			<campo fieldName="Codigo" tipo="String" longitud="10" visible="true" readOnly="false" orden="2" label="Codigo" />
+			<campo fieldName="Nombre" tipo="String" longitud="40" visible="true" readOnly="false" orden="3" label="Nombre" />
+			<campo fieldName="Apellido" tipo="String" longitud="50" visible="true" readOnly="false" orden="4" label="Apellido" />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
 		</campos>
 
 		<validadores>
-			<validador fieldName="codigo" tipoValidacion="DistintoCero" entidad="" oidName="" descrName="" />
-			<validador fieldName="codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="Codigo" tipoValidacion="MayorCero" entidad="" oidName="" descrName="" />
+			<validador fieldName="Nombre" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="Apellido" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 		
 	</entidad>
 	
 </entidades>
-
