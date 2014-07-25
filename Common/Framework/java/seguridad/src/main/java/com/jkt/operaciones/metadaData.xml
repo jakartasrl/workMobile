@@ -34,13 +34,17 @@
 		<operacion operSave="GuardarEmpresa" operTraer="TraerEmpresas" />
 		
 		<campos>
-			<campo fieldName="oid" tipo="String" longitud="3" visible="false" readOnly="false" orden="1" label="oid" />
-			<campo fieldName="codigo" tipo="String" longitud="3" visible="true" readOnly="false" orden="0" label="codigo" />
+			<campo fieldName="oid_empresa" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_empresa" />
+			<campo fieldName="Codigo" tipo="String" longitud="10" visible="true" readOnly="false" orden="2" label="Codigo" />
+			<campo fieldName="RazonSocial" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Razon Social" />
+			<campo fieldName="UrlDB" tipo="String" longitud="60" visible="true" readOnly="false" orden="4" label="UrlDB" />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
 		</campos>
 
 		<validadores>
-			<validador fieldName="codigo" tipoValidacion="MayorCero" entidad="" oidName="" descrName="" />
-			<validador fieldName="codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="Codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="RazonSocial" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="UrlDB" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 		
 	</entidad>
@@ -53,8 +57,8 @@
 		<campos>
 			<campo fieldName="oid_usuario" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_usuario" />
 			<campo fieldName="Codigo" tipo="String" longitud="10" visible="true" readOnly="false" orden="2" label="Codigo" />
-			<campo fieldName="Nombre" tipo="String" longitud="40" visible="true" readOnly="false" orden="3" label="Nombre" />
-			<campo fieldName="Apellido" tipo="String" longitud="50" visible="true" readOnly="false" orden="4" label="Apellido" />
+			<campo fieldName="Nombre" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Nombre" />
+			<campo fieldName="Apellido" tipo="String" longitud="60" visible="true" readOnly="false" orden="4" label="Apellido" />
 			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
 		</campos>
 
@@ -62,6 +66,7 @@
 			<validador fieldName="Codigo" tipoValidacion="MayorCero" entidad="" oidName="" descrName="" />
 			<validador fieldName="Nombre" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 			<validador fieldName="Apellido" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="" tipoValidacion="Existente" entidad="com.jkt.dominio.Usuario" oidName="codigo" descrName="" />
 		</validadores>
 		
 	</entidad>
