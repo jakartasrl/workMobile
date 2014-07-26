@@ -173,7 +173,7 @@
 
 
 	<!-- 	VALIDAR IN EXISTENCIA -->
-	<operacion name="ValidacionInexistencia" clase="com.jkt.operaciones.OperacionValidarInexistencia">
+	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.OperacionValidarInexistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
@@ -190,7 +190,7 @@
 
 
 	<!-- 	VALIDAR EXISTENCIA -->
-	<operacion name="ValidacionExistencia" clase="com.jkt.operaciones.OperacionValidarExistencia">
+	<operacion name="ValidarExistente" clase="com.jkt.operaciones.OperacionValidarExistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
