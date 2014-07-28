@@ -23,6 +23,7 @@
 <menues>
 	<elemento tipo="MENU" codigo="001" descripcion="Menu" orden="0" imagen="leo.jpg" rutaImagen="C:" argumento="qseyo">
 
+
 		<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0"/>
 		<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
 		
@@ -30,13 +31,16 @@
 			<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0" />
 			<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
 			
-			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
-			<texto texto="qseyo" alineacion="derecha" fuente="arial" tamanio="9" />
-			<texto texto="kljsdajkldsa" alineacion="derecha" fuente="arial" tamanio="10" />
-			<texto texto="ejemplo" alineacion="izquierda" fuente="arial" tamanio="10" />
-			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
+			<texto texto="texto1" alineacion="derecha" fuente="arial" tamanio="10" />
+			<texto texto="texto2" alineacion="derecha" fuente="arial" tamanio="9" />
+			<texto texto="otrotexto" alineacion="derecha" fuente="arial" tamanio="10" />
+			<texto texto="textoultimo" alineacion="izquierda" fuente="arial" tamanio="10" />
+			<texto texto="sequedoafueraeltexto" alineacion="derecha" fuente="arial" tamanio="10" />
 
 		</elemento>
+
+		<texto texto="TextoPrincipal" alineacion="izquierda" fuente="arial" tamanio="38" />
+		<texto texto="TextoSecundario" alineacion="derecha" fuente="times" tamanio="8" />
 		
 	</elemento>
 	

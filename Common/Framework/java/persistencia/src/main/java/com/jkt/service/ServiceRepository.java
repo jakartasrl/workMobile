@@ -34,7 +34,7 @@ public class ServiceRepository implements IServiceRepository {
 	}
 
 	@JKTTransaction
-	public List<PersistentEntity> saveObjects(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		for (PersistentEntity persistentEntity : aEntities) {
 			repositorio.save(persistentEntity);
 		}
@@ -42,7 +42,7 @@ public class ServiceRepository implements IServiceRepository {
 	}
 
 	@JKTTransactionReadOnly
-	public List<PersistentEntity> getAll(Class clazz) throws Exception {
+	public List<PersistentEntity> recuperarTodos(Class clazz) throws Exception {
 		return repositorio.getAll(clazz);
 	}
 

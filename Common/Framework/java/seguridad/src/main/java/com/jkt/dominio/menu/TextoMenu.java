@@ -17,6 +17,17 @@ public class TextoMenu extends PersistentEntity {
 	private String fuente;
 	private int tamanio;
 
+	// Transient campo, para enviar como referencia a la salida.
+	private String oidMenu;
+
+	public String getOidMenu() {
+		return oidMenu;
+	}
+
+	public void setOidMenu(String oidMenu) {
+		this.oidMenu = oidMenu;
+	}
+
 	public String getTexto() {
 		return texto;
 	}

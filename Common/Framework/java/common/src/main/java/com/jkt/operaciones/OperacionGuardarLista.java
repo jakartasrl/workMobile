@@ -15,7 +15,7 @@ public class OperacionGuardarLista extends OperacionGuardar {
 
 	@SuppressWarnings("unchecked")
 	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		this.serviceRepository.saveObjects(object);
+		this.serviceRepository.guardarObjetos(object);
 	}
 
 }

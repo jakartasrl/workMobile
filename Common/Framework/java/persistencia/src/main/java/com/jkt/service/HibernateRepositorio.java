@@ -142,10 +142,12 @@ public class HibernateRepositorio {
 	public List<PersistentEntity> getByFilters(Class clazz, Map<String,String> filtros){
 		Criteria criteria = getSession().createCriteria(clazz);
 		
-		Entry<String, String> prop;
-		for (Iterator<Entry<String, String>> iterator = filtros.entrySet().iterator(); iterator.hasNext();) {
-			prop = (Entry<String, String>) iterator.next();
-			criteria.add(Restrictions.like(prop.getKey(), String.format("%s%s%s", WILD_CHAR, prop.getValue(),WILD_CHAR)));
+		if (filtros!=null && !filtros.isEmpty()) {
+			Entry<String, String> prop;
+			for (Iterator<Entry<String, String>> iterator = filtros.entrySet().iterator(); iterator.hasNext();) {
+				prop = (Entry<String, String>) iterator.next();
+				criteria.add(Restrictions.like(prop.getKey(), String.format("%s%s%s", WILD_CHAR, prop.getValue(),WILD_CHAR)));
+			}
 		}
 		
 		return criteria.list();

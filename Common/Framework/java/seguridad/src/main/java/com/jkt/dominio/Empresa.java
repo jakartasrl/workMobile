@@ -5,12 +5,23 @@ package com.jkt.dominio;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Empresa extends PersistentEntity implements IDescriptible{
+public class Empresa extends PersistentEntity implements IDescriptible {
 
 	private String codigo;
 	private String razonSocial;
 	private String urlDB;
-	private boolean activo=true;
+	private boolean activo = true;
+
+	// Transient value!
+	private String oidUsuario;
+
+	public String getOidUsuario() {
+		return oidUsuario;
+	}
+
+	public void setOidUsuario(String oidUsuario) {
+		this.oidUsuario = oidUsuario;
+	}
 
 	/**
 	 * El parser hecho anteriormente no se encargaba de los atributos booleanos,

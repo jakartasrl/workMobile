@@ -75,7 +75,7 @@ public interface IServiceRepository {
 	 * @return
 	 * @throws Exception
 	 */
-	List<PersistentEntity> getAll(Class className) throws Exception;
+	List<PersistentEntity> recuperarTodos(Class className) throws Exception;
 	/**
 	 * Recupera usando la clase y un id una entidad
 	 * @param className
@@ -92,7 +92,7 @@ public interface IServiceRepository {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	List<PersistentEntity> saveObjects(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException;
+	List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException;
 
 	/**
 	 * Ejecuta un metodo dentro de una transaccion.

@@ -21,6 +21,9 @@ public class OperacionActualizarPassword extends Operation {
 		HistorialPassword historialPassword = new HistorialPassword();
 		historialPassword.setPassword(usuario.getPassword().getBytes());
 		historialPassword.setFechaVencimiento(LocalDateTime.now());
+		
+		usuario.addPassword(historialPassword);
+		
 		this.serviceRepository.save(usuario);
 	}
 

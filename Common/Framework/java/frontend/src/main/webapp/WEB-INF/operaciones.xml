@@ -137,9 +137,9 @@
 	<!-- RECUPERAR EL MENU -->
 	<operacion name="TrearMenu" clase="com.jkt.operaciones.OperacionRecuperarMenu">
 		
-		<output name="resultado" tableName="TMenues">
+		<output name="TMenues" tableName="TMenues">
 			<campoSalida name="resultado">
-				<campoSalida name="oid" value="oid" target="id" />
+				<campoSalida name="oid_menu" value="oid_menu" target="id" />
 				<campoSalida name="Codigo" value="Codigo" target="codigo" />
 				<campoSalida name="Descripcion" value="Descripcion" target="descripcion" />
 				<campoSalida name="Tipo" value="Tipo" target="tipoMenu" />
@@ -149,17 +149,20 @@
 				<campoSalida name="Orden" value="Orden" target="orden" />
 				<campoSalida name="Argumento" value="Argumento" target="argumento" />
 				
-<!-- 				<campoSalida name="textos" target="textos" tableName="TMenues"> -->
-<!-- 					<campoSalida name="texto" value="texto" target="texto" /> -->
-<!-- 					<campoSalida name="alineacion" value="alineacion" target="alineacion" /> -->
-<!-- 					<campoSalida name="tamanio" value="tamanio" target="tamanio" /> -->
-<!-- 					<campoSalida name="fuente" value="fuente" target="fuente" /> -->
-<!-- 				</campoSalida> -->
-
 			</campoSalida>
 		</output>		
+
+		<output name="TTextosMenues" tableName="TTextosMenues">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_menu" value="oid_menu" target="oidMenu" />
+				<campoSalida name="texto" value="texto" target="texto" />
+				<campoSalida name="alineacion" value="alineacion" target="alineacion" />
+				<campoSalida name="tamanio" value="tamanio" target="tamanio" />
+				<campoSalida name="fuente" value="fuente" target="fuente" />
+			</campoSalida>
+		</output>
 			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 			
 		<forms>
 			<form name="TUsuario"></form>
@@ -241,13 +244,77 @@
 		
 	</operacion>
 	
+	<!-- 	TRAE TODAS LAS EMPRESAS Y TODOS LOS USUARIOS -->
+	<operacion name="TraerUsuariosYEmpresas" clase="com.jkt.operaciones.OperacionRecuperarEmpresasYUsuarios">
+					
+		<output name="TUsuarios" tableName="TUsuarios">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="Activo" value="Activo" target="activo" />
+				<campoSalida name="Nombre" value="Nombre" target="nombres" />
+				<campoSalida name="Apellido" value="Apellido" target="apellido" />
+				<campoSalida name="Email" value="Email" target="mail" />
+			</campoSalida>
+		</output>	
+		
+		<output name="TEmpresas" tableName="TEmpresas">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
+				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" />
+				<campoSalida name="Activo" value="Activo" target="activo" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- 	RECUPERAR EMPRESAS DE USUARIO -->
+	<operacion name="TraerEmpresasDeUsuario" clase="com.jkt.operaciones.OperacionRecuperarEmpresasDeUsuario">
+					
+		<output name="TUsuario" tableName="TUsuario">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="Activo" value="Activo" target="activo" />
+				<campoSalida name="Nombre" value="Nombre" target="nombres" />
+				<campoSalida name="Apellido" value="Apellido" target="apellido" />
+				<campoSalida name="Email" value="Email" target="mail" />
+			</campoSalida>
+		</output>	
+		
+		<output name="TEmpresas" tableName="TEmpresas">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
+				<campoSalida name="oid_usuario" value="oid_usuario" target="oidUsuario" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
+				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" />
+				<campoSalida name="Activo" value="Activo" target="activo" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
 	
 	<!-- 	RECUPERAR EMPRESAS -->
 	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Empresa">
 		
 		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_fac'>
 			
-			<campoEntrada oid_fac="00" >
+			<campoEntrada>
 				<campoEntrada nombreEntidad="com.jkt.dominio.Empresa" />
 			</campoEntrada>
 			
@@ -276,7 +343,7 @@
 	<!-- GUARDAR EMPRESA -->
 	<operacion name="GuardarEmpresa" clase="com.jkt.operaciones.OperacionGuardarLista">
 		<input name="TEmpresas" keyName="objeto" clase="com.jkt.dominio.Empresa" fieldID='oid_empresa'>
-			<campoEntrada oid_fac="00" >
+			<campoEntrada>
 				
 				<!-- Campo simple -->
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
@@ -345,17 +412,17 @@
 	
 	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
 	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.OperacionGuardar">
-		<input name="usuario" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_fac'>
+		<input name="usuario" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid'>
 			<campoEntrada>
 				<campoEntrada name="empresa" metodo="addEmpresa" clase="com.jkt.dominio.Empresa" />
 			</campoEntrada>
 		</input>
 		
-		<output name="resultado" tableName="TUsuario">
-			<campoSalida name="objeto1">
-				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigo" />
-			</campoSalida>
-		</output>		
+<!-- 		<output name="resultado" tableName="TUsuario"> -->
+<!-- 			<campoSalida name="objeto1"> -->
+<!-- 				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigo" /> -->
+<!-- 			</campoSalida> -->
+<!-- 		</output>		 -->
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
