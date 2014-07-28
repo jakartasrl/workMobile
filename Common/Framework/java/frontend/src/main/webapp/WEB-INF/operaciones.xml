@@ -107,7 +107,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 			
 		<forms>
-			<form name="TUsuario"></form>
+			<form name="form"></form>
 		</forms>
 		
 	</operacion>
@@ -258,16 +258,26 @@
 			</campoSalida>
 		</output>	
 		
-		<output name="TEmpresas" tableName="TEmpresas">
+<!-- 		<output name="TEmpresas" tableName="TEmpresas"> -->
+<!-- 			<campoSalida name="resultado"> -->
+<!-- 				<campoSalida name="oid_empresa" value="oid_empresa" target="id" /> -->
+<!-- 				<campoSalida name="Codigo" value="Codigo" target="codigo" /> -->
+<!-- 				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" /> -->
+<!-- 				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" /> -->
+<!-- 				<campoSalida name="Activo" value="Activo" target="activo" /> -->
+<!-- 			</campoSalida> -->
+<!-- 		</output>		 -->
+
+		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
+				<campoSalida name="oid_empresa" value="oid_empresa" target="oidEmpresa" />
+				<campoSalida name="oid_usuario" value="oid_usuario" target="oidUsuario" />
 				<campoSalida name="Codigo" value="Codigo" target="codigo" />
 				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
-				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" />
 				<campoSalida name="Activo" value="Activo" target="activo" />
 			</campoSalida>
 		</output>		
-			
+		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 		
 		<forms>

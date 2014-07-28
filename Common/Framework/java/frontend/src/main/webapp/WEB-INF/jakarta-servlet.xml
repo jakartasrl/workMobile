@@ -27,6 +27,8 @@
 	</bean>
 	
 	<import resource="classpath:web-context.xml" />
+	<import resource="classpath:seguridad-context.xml" />
+	
 <!-- 	<import resource="classpath*:*context.xml" /> -->
 
 	

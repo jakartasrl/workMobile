@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.eventos.EventoGuardar;
 import com.jkt.eventos.ManagerEventos;
-import com.jkt.persistencia.WrapperTransactional;
 
 
 /**
