@@ -14,7 +14,6 @@ inherited FNSeg0001: TFNSeg0001
     Align = alClient
     TabOrder = 4
     DataSource = dsEmpresas
-    ExplicitWidth = 696
     object dbgEmpresasDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = dsEmpresas
@@ -63,7 +62,7 @@ inherited FNSeg0001: TFNSeg0001
       0)
   end
   inherited Driver: TjktDriver
-    OperacionTraer = OperacionTraer
+    DataSetCab = TEmpresas
     FocoEnAlta = TEmpresasRazonSocial
     FocoEnModificacion = TEmpresasRazonSocial
     Left = 512
@@ -86,6 +85,18 @@ inherited FNSeg0001: TFNSeg0001
       end>
     Left = 576
     Top = 24
+  end
+  inherited mtParametroInicial: TjktMemTable
+    Left = 672
+  end
+  inherited OperacionTraer: TjktOperacion
+    OperName = 'TraerEmpresas'
+    Left = 576
+    Top = 80
+  end
+  inherited ValidadorForm: TjktValidadorForm
+    Left = 400
+    Top = 80
   end
   object TEmpresas: TjktMemTable
     DesignActivation = True
@@ -130,12 +141,5 @@ inherited FNSeg0001: TFNSeg0001
     DataSet = TEmpresas
     Left = 104
     Top = 112
-  end
-  object OperacionTraer: TjktOperacion
-    OperName = 'TraerEmpresas'
-    EnviarTodo = False
-    Atributos = <>
-    Left = 576
-    Top = 80
   end
 end

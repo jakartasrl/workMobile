@@ -22,7 +22,7 @@ uses
   cxGroupBox, cxCheckBox, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, dxBevel;
+  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, dxBevel, jktCNMet0011;
 
 type
   TFNSeg0002 = class(TfrmChild)
@@ -72,7 +72,7 @@ type
     dbgUsuarioEmpresasDBTableView1RazonSocial: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Activo: TcxGridDBColumn;
-    OperacionTraer: TjktOperacion;
+    procedure cxDBCheckBox1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,5 +85,32 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFNSeg0002.cxDBCheckBox1Click(Sender: TObject);
+begin
+  inherited;
+
+{
+  TUsuarioEmpresas.Close;
+  TUsuarioEmpresas.Open;
+
+  TEmpresas.First;
+  while not TEmpresas.Eof do begin
+
+    TUsuarioEmpresas.Append;
+    TUsuarioEmpresas.FieldByName('oid_usu_emp').AsInteger := 0;
+    TUsuarioEmpresas.FieldByName('oid_usuario').AsInteger := TUsuario;
+    TUsuarioEmpresas.FieldByName('oid_empresa').AsInteger := TEmpresas.FieldByName('oid_empresa').Value;
+    TUsuarioEmpresas.FieldByName('Codigo').AsString       := TEmpresas.FieldByName('Codigo').Value;
+    TUsuarioEmpresas.FieldByName('RazonSocial').AsString  := TEmpresas.FieldByName('RazonSocial').Value;
+    TUsuarioEmpresas.FieldByName('Default').AsBoolean     := False;
+    TUsuarioEmpresas.FieldByName('Activo').AsBoolean      := TEmpresas.FieldByName('Activo').Value;
+    TUsuarioEmpresas.Post;
+
+    TEmpresas.Next;
+  end;
+}
+
+end;
 
 end.

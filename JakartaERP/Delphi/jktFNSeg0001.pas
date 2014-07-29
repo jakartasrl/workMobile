@@ -21,7 +21,7 @@ uses
   cxLookAndFeelPainters, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012;
+  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, jktCNMet0011;
 
 type
   TFNSeg0001 = class(TfrmChild)
@@ -36,8 +36,7 @@ type
     dbgEmpresasDBTableView1Codigo: TcxGridDBColumn;
     dbgEmpresasDBTableView1RazonSocial: TcxGridDBColumn;
     dbgEmpresasDBTableView1UrlDB: TcxGridDBColumn;
-    TEmpresasoid_empresa: TIntegerField;
-    OperacionTraer: TjktOperacion;
+    TEmpresasoid_empresa: TIntegerField;   
     TEmpresasActivo: TBooleanField;
     dbgEmpresasDBTableView1oid_empresa: TcxGridDBColumn;
     dbgEmpresasDBTableView1Activo: TcxGridDBColumn;

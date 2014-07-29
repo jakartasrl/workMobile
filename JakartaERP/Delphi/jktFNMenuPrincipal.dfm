@@ -40,7 +40,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Transparent = True
     end
     object gbx_Login: TcxGroupBox
-      Left = 193
+      Left = 176
       Top = 20
       Align = alRight
       Ctl3D = True
@@ -49,12 +49,12 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Style.Edges = [bLeft, bTop, bRight, bBottom]
       TabOrder = 1
       DesignSize = (
-        577
+        594
         50)
       Height = 50
-      Width = 577
+      Width = 594
       object cxLabel2: TcxLabel
-        Left = 268
+        Left = 256
         Top = 3
         Anchors = [akRight, akBottom]
         Caption = 'Password'
@@ -70,7 +70,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Transparent = True
       end
       object cxLabel3: TcxLabel
-        Left = 20
+        Left = 8
         Top = 3
         Anchors = [akRight, akBottom]
         Caption = 'Usuario'
@@ -86,7 +86,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Transparent = True
       end
       object txtPassword: TcxDBTextEdit
-        Left = 356
+        Left = 344
         Top = 1
         Anchors = [akRight, akBottom]
         DataBinding.DataField = 'password'
@@ -104,7 +104,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Width = 160
       end
       object txtUsuario: TcxDBTextEdit
-        Left = 92
+        Left = 80
         Top = 1
         Anchors = [akRight, akBottom]
         DataBinding.DataField = 'usuario'
@@ -119,6 +119,14 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         TabOrder = 2
         OnKeyPress = txtPasswordKeyPress
         Width = 160
+      end
+      object cxButton1: TcxButton
+        Left = 522
+        Top = 1
+        Width = 31
+        Height = 31
+        TabOrder = 4
+        OnClick = cxButton1Click
       end
     end
   end
@@ -137,23 +145,24 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     TabOrder = 1
     Properties.ActivePage = cxTabSheet3
     Properties.CustomButtons.Buttons = <>
+    Properties.HideTabs = True
     Properties.Style = 11
-    ClientRectBottom = 418
-    ClientRectLeft = 2
-    ClientRectRight = 766
-    ClientRectTop = 25
+    ClientRectBottom = 422
+    ClientRectLeft = 1
+    ClientRectRight = 770
+    ClientRectTop = 1
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitLeft = 2
+      ExplicitTop = 25
+      ExplicitWidth = 764
+      ExplicitHeight = 393
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
-        Width = 764
-        Height = 393
+        Width = 769
+        Height = 421
         OptionsBehavior.GroupMoving = True
         OptionsBehavior.ItemCheckMode = tcicmNone
         OptionsBehavior.ItemMoving = False
@@ -162,6 +171,8 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         OptionsView.CenterContentVert = True
         OptionsView.ItemSize = 180
         TabOrder = 0
+        ExplicitWidth = 764
+        ExplicitHeight = 393
         object tcaExit: TdxTileControlActionBarItem
           Align = abiaRight
           Caption = 'Salir'
@@ -322,13 +333,13 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitLeft = 2
+      ExplicitTop = 25
+      ExplicitWidth = 764
+      ExplicitHeight = 393
       object cxGroupBox2: TcxGroupBox
         Left = 0
-        Top = 290
+        Top = 318
         Align = alBottom
         Caption = ' Novedades '
         ParentFont = False
@@ -339,50 +350,59 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 1
+        ExplicitTop = 290
+        ExplicitWidth = 764
         Height = 103
-        Width = 764
+        Width = 769
         object tc_Novedades: TdxTileControl
           Left = 3
           Top = 30
-          Width = 758
+          Width = 763
           Height = 63
           TabOrder = 0
+          ExplicitWidth = 758
         end
       end
       object tc_MenuUsuario: TdxTileControl
         Left = 306
         Top = 0
-        Width = 458
-        Height = 284
+        Width = 463
+        Height = 312
         OptionsBehavior.GroupMoving = True
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
         TabOrder = 0
+        ExplicitWidth = 458
+        ExplicitHeight = 284
       end
       object cxSplitter1: TcxSplitter
         Left = 300
         Top = 0
         Width = 6
-        Height = 284
+        Height = 312
         AllowHotZoneDrag = False
         Control = tc_Favoritos
+        ExplicitHeight = 284
       end
       object cxSplitter2: TcxSplitter
         Left = 0
-        Top = 284
-        Width = 764
+        Top = 312
+        Width = 769
         Height = 6
         AlignSplitter = salBottom
         Control = cxGroupBox2
+        ExplicitTop = 284
+        ExplicitWidth = 764
       end
       object tc_Favoritos: TdxTileControl
         Left = 0
         Top = 0
         Width = 300
-        Height = 284
+        Height = 312
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
+        ExplicitHeight = 284
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0
@@ -392,8 +412,12 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet3: TcxTabSheet
       Caption = 'cxTabSheet3'
       ImageIndex = 2
+      ExplicitLeft = 2
+      ExplicitTop = 25
+      ExplicitWidth = 764
+      ExplicitHeight = 393
       object cxGroupBox3: TcxGroupBox
-        Left = 106
+        Left = 101
         Top = 36
         Caption = 'Par'#225'metros de Conexi'#243'n'
         ParentFont = False
@@ -678,7 +702,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 640
+    Left = 632
     Top = 88
   end
   object Service: TjktServiceCaller
@@ -787,21 +811,89 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     EnviarTodo = False
     Atributos = <
       item
-        Dataset = TLogin
+        Attribute = 'usuario'
+        Field = TLoginusuario
+        Tag = 0
+      end
+      item
+        Attribute = 'password'
+        Field = TLoginpassword
         Tag = 0
       end>
-    Left = 640
-    Top = 144
-  end
-  object Driver: TjktDriver
-    IgnoreTags = False
-    NoAutoEditarDataSets = False
-    OperacionSave = OperConsultaLogin
     ServiceCaller = Service
-    ConfirmarCancelacion = True
-    Opciones = []
-    TipoPrograma = tp_abmLista
-    Left = 584
-    Top = 144
+    Left = 704
+    Top = 88
+  end
+  object TMenues: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 232
+    Top = 96
+    object TMenuesoid_menu: TIntegerField
+      FieldName = 'oid_menu'
+    end
+    object TMenuesCodigo: TStringField
+      FieldName = 'Codigo'
+      Size = 50
+    end
+    object TMenuesDescripcion: TStringField
+      FieldName = 'Descripcion'
+      Size = 100
+    end
+    object TMenuesTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 15
+    end
+    object TMenuesImagen: TStringField
+      FieldName = 'Imagen'
+      Size = 50
+    end
+    object TMenuesRutaDeImagen: TStringField
+      FieldName = 'RutaDeImagen'
+      Size = 255
+    end
+    object TMenuesOrden: TIntegerField
+      FieldName = 'Orden'
+    end
+    object TMenuesArgumento: TStringField
+      FieldName = 'Argumento'
+      Size = 255
+    end
+  end
+  object TTextosMenues: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 296
+    Top = 96
   end
 end

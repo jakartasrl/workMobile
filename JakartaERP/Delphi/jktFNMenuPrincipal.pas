@@ -98,7 +98,6 @@ type
     TLoginpassword: TStringField;
     dsLogin: TDataSource;
     OperConsultaLogin: TjktOperacion;
-    Driver: TjktDriver;
     TUsuariooid_usuario: TIntegerField;
     TUsuarioCodigo: TStringField;
     TUsuarioApellido: TStringField;
@@ -115,11 +114,23 @@ type
     EPort: TcxTextEdit;
     EAplicacion: TcxTextEdit;
     EServlet: TcxTextEdit;
+    cxButton1: TcxButton;
+    TMenues: TjktMemTable;
+    TMenuesoid_menu: TIntegerField;
+    TMenuesCodigo: TStringField;
+    TMenuesDescripcion: TStringField;
+    TMenuesTipo: TStringField;
+    TMenuesImagen: TStringField;
+    TMenuesRutaDeImagen: TStringField;
+    TMenuesOrden: TIntegerField;
+    TMenuesArgumento: TStringField;
+    TTextosMenues: TjktMemTable;
     procedure FormCreate(Sender: TObject);
     procedure tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
     procedure tcaExitClick(Sender: TdxTileControlActionBarItem);
     procedure tci_MsjsVariosClick(Sender: TdxTileControlItem);
     procedure txtPasswordKeyPress(Sender: TObject; var Key: Char);
+    procedure cxButton1Click(Sender: TObject);
   private
     procedure OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
 
@@ -276,6 +287,12 @@ begin
 
 }
 
+end;
+
+procedure TfrmMenuPrincipal.cxButton1Click(Sender: TObject);
+begin
+  cxPageControl.ActivePageIndex := 2;
+  cxGroupBox3.Left :=  (cxTabSheet3.Width div 2) - (cxGroupBox3.Width div 2);
 end;
 
 procedure TfrmMenuPrincipal.CargarMenuUsuario;
@@ -652,10 +669,8 @@ begin
        then Service.HTTP.HTTPOptions := [hoInProcessAuth,hoForceEncodeParams];
 }
 
-
-    // Por ahora ejecuto el 'Guardar' del Driver que es quien envia la consulta
-    // al servidor a traves de la operacion 'OperConsultaLogin'
-    Driver.Guardar;
+    TLogin.Post;
+    OperConsultaLogin.execute;
 
 {
     Service.InicioOperacion;
