@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.dominio.menu.ElementoMenu" table="MENU">
+		<id name="id" column="MENU_ID">
+			<generator class="native" />
+		</id>
+		<discriminator column="TIPO_ELEMENTO" type="string" />
+
+		<property name="codigo" column="CODIGO" />
+		<property name="descripcion" column="DESCRIPCION" />
+
+		<subclass name="com.jkt.dominio.menu.Programa" discriminator-value="PROGRAMA">
+		</subclass>
+
+		<subclass name="com.jkt.dominio.menu.Script" discriminator-value="SCRIPT">
+		</subclass>
+
+		<subclass name="com.jkt.dominio.menu.Menu" discriminator-value="MENU">
+			<property name="orden" column="ORDEN" type="integer" />
+			<property name="imagen" column="IMAGEN" type="string" />
+			<property name="rutaDeImagen" column="RUTA_IMAGEN" type="string" />
+			<property name="argumento" column="ARGUMENTO" type="string" />
+			
+			<list name="textos" table="TEXTOS_MENU" lazy="false" cascade="all">
+				<key>
+					<column name="MENU_ID"></column>
+				</key>
+				<index column="ORDEN" />
+				<one-to-many class="com.jkt.dominio.menu.TextoMenu"/>
+			</list>
+			
+			<list name="elementos" table="MENU_HIJOS" lazy="false" cascade="all">
+				<key>
+					<column name="MENU_ID"></column>
+				</key>
+				<index column="ORDEN" />
+				<many-to-many class="com.jkt.dominio.menu.ElementoMenu" column="MENU_ID_HIJO">
+				</many-to-many>
+			</list>
+			
+		</subclass>
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,541 @@
+<?xml version="1.0" ?>
+<!DOCTYPE entity [
+  <!ELEMENT entity        (operacion*)>
+  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  
+  <!ELEMENT input		  (campoEntrada*)>
+  <!ELEMENT forms		  (form*)>
+  <!ELEMENT output		  (campoSalida)>
+  <!ELEMENT transformer	  EMPTY>
+
+
+  <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
+  <!ELEMENT campoSalida   (output*|campoSalida*)>  
+  
+  <!ELEMENT dataset       (campo*)>
+  <!ELEMENT campo         EMPTY>
+  <!ELEMENT tables       (tableDef+)>
+  <!ELEMENT tableDef     (campoTable*)>
+  <!ELEMENT campoTable   EMPTY>
+  
+  
+  <!ATTLIST transformer clase           CDATA #REQUIRED>
+  
+  <!ATTLIST form name	CDATA #REQUIRED>
+  
+  
+  
+  <!ATTLIST input name           	 	CDATA    #IMPLIED>
+  <!ATTLIST input keyName           	CDATA    #IMPLIED>
+  <!ATTLIST input clase           	 	CDATA    #IMPLIED>
+  <!ATTLIST input fieldID           	CDATA    #IMPLIED>
+  <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
+
+  
+  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
+  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada oid_fac		CDATA #IMPLIED>
+ 
+  <!ATTLIST output name					CDATA #REQUIRED> 
+  <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
+
+
+  <!ATTLIST campoSalida name			CDATA #REQUIRED> <!-- De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL -->
+  <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
+  <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
+  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
+
+
+  <!ATTLIST operacion name              ID    #REQUIRED>
+  <!ATTLIST operacion clase             CDATA #IMPLIED>
+  <!ATTLIST operacion entidad           CDATA #IMPLIED>
+  <!ATTLIST operacion XMLWriter         CDATA #IMPLIED>
+  <!ATTLIST operacion redirect          CDATA #IMPLIED>
+  <!ATTLIST operacion usaJMS            CDATA #IMPLIED>
+  
+  <!ATTLIST dataset name                CDATA #REQUIRED>
+  <!ATTLIST dataset value               CDATA #IMPLIED>
+  <!ATTLIST dataset tabla               CDATA #IMPLIED>
+  
+  <!ATTLIST campo   name                CDATA #REQUIRED>
+  <!ATTLIST campo   value               CDATA #IMPLIED>
+  
+  <!ATTLIST tableDef    name           CDATA #REQUIRED>
+
+  <!ATTLIST campoTable     name        CDATA #REQUIRED>
+  <!ATTLIST campoTable     orden       CDATA #IMPLIED>
+  <!ATTLIST campoTable     tipo        CDATA #IMPLIED>
+  <!ATTLIST campoTable     longitud    CDATA #IMPLIED>
+  
+]>
+
+<entity>
+
+	<operacion name="ValidacionInexistencia" clase="com.jkt.operaciones.OperacionValidarInexistencia">
+		
+		<output name="resultado" tableName="TUsuarios">
+			<campoSalida name="resultado">
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<operacion name="Validacion" clase="com.jkt.operaciones.OperacionValidarExistencia">
+		
+<!-- 		<input name="-" keyName="-" clase="-" fieldID='oid'> -->
+<!-- 		</input> -->
+					
+		<output name="resultado" tableName="TUsuarios">
+			<campoSalida name="resultado">
+				<campoSalida name="oid" value="oid" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="Otro" value="Otro" target="cadena" />
+				<campoSalida name="correo" value="correo" target="cadena2" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Usuario">
+		
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_fac'>
+			
+			<campoEntrada >
+				<campoEntrada nombreEntidad="com.jkt.dominio.Empresa" />
+			</campoEntrada>
+			
+		</input>
+					
+		<output name="resultado" tableName="TUsuarios">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="Activo" value="Activo" target="activo" />
+				<campoSalida name="Nombre" value="Nombre" target="nombres" />
+				<campoSalida name="Apellido" value="Apellido" target="apellido" />
+				<campoSalida name="Email" value="Email" target="mail" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Empresa">
+		
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_fac'>
+			
+			<campoEntrada oid_fac="00" >
+				<campoEntrada nombreEntidad="com.jkt.dominio.Empresa" />
+			</campoEntrada>
+			
+		</input>
+					
+		<output name="resultado" tableName="TEmpresas">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
+				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" />
+				<campoSalida name="Activo" value="Activo" target="activo" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+
+	<operacion name="regenerarSaldosContables" clase="com.jkt.operacion.RegenerarSaldosContables">
+		<input name="parametro1" keyName="factura" clase="com.jkt.dominio.Factura" fieldID='oid_fac'>
+			<campoEntrada oid_fac="00" >
+				
+				<!-- Campo complejo -->
+				<!-- Campo con 3 niveles de complejidad -->
+				<campoEntrada name="mem2" metodo="setDescripcion" clase="com.jkt.dominio.Descripcion">
+				
+					<!--  Campo simple -->
+					<campoEntrada name="ejemploDeDescripcionParaTomarElCampo" clase="String" metodo="setDescripcion"></campoEntrada>
+					
+					<!--  Otro campo complejo -->
+					<campoEntrada name="fechaObjeto" metodo="setFecha" clase="com.jkt.entities.Fecha">
+							<campoEntrada name="fecha" clase="String" metodo="setFecha"></campoEntrada>
+					</campoEntrada>
+					
+				</campoEntrada>
+
+				<!-- Campo simple -->				
+				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+				<campoEntrada name="fecha" clase="String" metodo="setFecha" />
+				<campoEntrada name="codigoPostal" clase="Integer" metodo="setCodigoPostal" />
+
+
+			</campoEntrada>
+			
+		</input>
+		
+		<output name="salida" tableName="resultadoDeUnaFactura">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar2" value="codigoPostal" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar3" value="valorComplejo" target="descripcion.descripcion" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+	<operacion name="consultarSaldos" clase="com.jkt.operacion.ConsultarSaldos">
+		<input name="parametro1" keyName="factura" clase="com.jkt.dominio.Factura" fieldID='oid_fac'>
+			<campoEntrada oid_fac="00" >
+				
+				<!-- Campo complejo -->
+				<!-- Campo con 3 niveles de complejidad -->
+				<campoEntrada name="mem2" metodo="setDescripcion" clase="com.jkt.dominio.Descripcion">
+				
+					<!--  Campo simple -->
+					<campoEntrada name="ejemploDeDescripcionParaTomarElCampo" clase="String" metodo="setDescripcion"></campoEntrada>
+					
+					<!--  Otro campo complejo -->
+					<campoEntrada name="fechaObjeto" metodo="setFecha" clase="com.jkt.dominio.Fecha">
+							<campoEntrada name="fecha" clase="String" metodo="setFecha"></campoEntrada>
+					</campoEntrada>
+					
+				</campoEntrada>
+
+				<!-- Campo simple -->				
+				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+				<campoEntrada name="fecha" clase="String" metodo="setFecha" />
+				<campoEntrada name="codigoPostal" clase="Integer" metodo="setCodigoPostal" />
+
+
+			</campoEntrada>
+			
+		</input>
+		
+<!-- 		dos tablas de salida para ir mechando datos entre ambas!! -->
+		<output name="salida" tableName="resultadoDeUnaFactura">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar2" value="codigoPostal" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar3" value="valorComplejo" target="descripcion.descripcion" />
+				<campoSalida name="nombreChe" value="valor" target="nombre" />
+			</campoSalida>
+		</output>		
+		
+		<output name="salida2" tableName="segundaTabla">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar2" value="codigoPostal" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar3" value="valorComplejo" target="descripcion.descripcion" />
+				<campoSalida name="VALORPARANOPISAREY" value="nombreRecuperado" target="nombre" />
+				
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<operacion name="operacionGuardarGenerico" clase="com.jkt.operaciones.OperacionGuardar">
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Factura" fieldID='oid_fac'>
+			<campoEntrada oid_fac="00" >
+				
+				<!-- Campo complejo -->
+				<!-- Campo con 3 niveles de complejidad -->
+				<campoEntrada name="mem2" metodo="setDescripcion" clase="com.jkt.dominio.Descripcion">
+				
+					<!--  Campo simple -->
+					<campoEntrada name="ejemploDeDescripcionParaTomarElCampo" clase="String" metodo="setDescripcion"></campoEntrada>
+					
+					<!--  Otro campo complejo -->
+					<campoEntrada name="fechaObjeto" metodo="setFecha" clase="com.jkt.dominio.Fecha">
+							<campoEntrada name="fecha" clase="String" metodo="setFecha"></campoEntrada>
+					</campoEntrada>
+					
+				</campoEntrada>
+
+				<!-- Campo simple -->				
+				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+				<campoEntrada name="fecha" clase="String" metodo="setFecha" />
+				<campoEntrada name="codigoPostal" clase="Integer" metodo="setCodigoPostal" />
+
+
+			</campoEntrada>
+			
+		</input>
+		
+		<output name="resultado" tableName="segundaTabla">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar2" value="codigoPostal" target="codigoPostal" />
+				<campoSalida name="campoParaMostrar3" value="valorComplejo" target="descripcion.descripcion" />
+			</campoSalida>
+		</output>		
+		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+			<form name="TEmpresa"></form>
+			<form name="TLogin"></form>
+		</forms>
+		
+		
+	</operacion>
+	
+	
+	<operacion name="helper" clase="com.jkt.operaciones.OperacionHelper">
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Filtro" fieldID='oid'>
+			<campoEntrada>
+				<campoEntrada name="clase" clase="String" metodo="setClase" />
+				
+				<campoEntrada name="par" metodo="addValor" clase="com.jkt.dominio.Par"> 
+	<!-- 			par es el nombre de la tabla -->
+					<campoEntrada name="campo" clase="String" metodo="setCampo" />
+					<campoEntrada name="valor" clase="String" metodo="setValor" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<output name="salida2" tableName="segundaTabla">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="nombre" />
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+		
+	<operacion name="getById" clase="com.jkt.operaciones.OperacionObtenerPorIdentificador">
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Filtro" fieldID='oid'>
+			<campoEntrada>
+				<campoEntrada name="clase" clase="String" metodo="setClase" />
+				
+				<campoEntrada name="par" metodo="addValor" clase="com.jkt.dominio.Par"> 
+	<!-- 			par es el nombre de la tabla -->
+					<campoEntrada name="campo" clase="String" metodo="setCampo" />
+					<campoEntrada name="valor" clase="String" metodo="setValor" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<output name="sal" tableName="segundaTabla">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="nombre" />
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	
+	
+	<!-- GUARDAR EMPRESA -->
+	<operacion name="GuardarEmpresa" clase="com.jkt.operaciones.OperacionGuardarLista">
+		<input name="TEmpresas" keyName="objeto" clase="com.jkt.dominio.Empresa" fieldID='oid_empresa'>
+			<campoEntrada oid_fac="00" >
+				
+				<!-- Campo simple -->
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
+				<campoEntrada name="UrlDB" clase="String" metodo="setUrlDB" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+
+			</campoEntrada>
+			
+		</input>
+		
+		<output name="-" tableName="-">
+			<campoSalida name="-">
+			</campoSalida>
+		</output>		
+		
+		<forms>
+			<form name="TUsuario"></form>
+			<form name="TUsuario"></form>
+			<form name="TUsuario"></form>
+			<form name="TLogin"></form>
+			<form name="TUsuario"></form>
+			<form name="TUsuario"></form>
+		</forms>
+
+	</operacion>
+	
+	<!-- 	GUARDAR USUARIO -->
+	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.OperacionGuardar">
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
+			<campoEntrada >
+				
+				<!-- Campo simple -->				
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
+<!-- 				<campoEntrada name="UserName" clase="String" metodo="setUserName" /> -->
+				<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
+				<campoEntrada name="Email" clase="String" metodo="setMail" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				
+				<campoEntrada name="password" metodo="addPassword" clase="com.jkt.dominio.HistorialPassword"> 
+	<!-- 			password es el nombre de la tabla recibida desde delphi -->
+					<campoEntrada name="password" clase="ByteArray" metodo="setPassword" />
+<!-- 					<campoEntrada name="fechaVencimiento" clase="LocalDateTime" metodo="setFechaVencimiento" /> -->
+				</campoEntrada>
+
+			</campoEntrada>
+			
+		</input>
+		
+		<output name="resultado" tableName="tabla">
+			<campoSalida name="objeto1">
+<!-- 				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigo" /> -->
+<!-- 				<campoSalida name="campoParaMostrar2" value="codigoPostal" target="razonSocial" /> -->
+			</campoSalida>
+		</output>		
+		
+<!-- 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer> -->
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+		
+	</operacion>
+	
+	<!-- 	ACTUALIZAR PASSWORD DE USUARIO -->
+	<operacion name="actualizarPassword" clase="com.jkt.operaciones.OperacionActualizarPassword">
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
+			<campoEntrada>
+				<campoEntrada name="password" clase="String" metodo="setPassword" />
+			</campoEntrada>
+		</input>
+		
+		<output name="resultado" tableName="tabla">
+			<campoSalida name="objeto1">
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+		
+	</operacion>
+	
+	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
+	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.OperacionGuardar">
+		<input name="usuario" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_fac'>
+			<campoEntrada>
+
+				<!-- Campo simple -->				
+<!-- 				<campoEntrada name="codigo" clase="String" metodo="setCodigo" /> -->
+<!-- 				<campoEntrada name="nombres" clase="String" metodo="setNombres" /> -->
+<!-- 				<campoEntrada name="apellido" clase="String" metodo="setApellido" /> -->
+<!-- 				<campoEntrada name="mail" clase="String" metodo="setMail" /> -->
+
+				<campoEntrada name="empresa" metodo="addEmpresa" clase="com.jkt.dominio.Empresa">
+				
+				</campoEntrada>
+
+			</campoEntrada>
+			
+		</input>
+		
+		<output name="resultado" tableName="TUsuario">
+			<campoSalida name="objeto1">
+				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigo" />
+<!-- 				<campoSalida name="campoParaMostrar2" value="codigoPostal" target="razonSocial" /> -->
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+		
+	</operacion>
+	
+	
+	<!-- LOGIN -->
+	<operacion name="Login" clase="com.jkt.operaciones.OperacionLogin">
+		<input name="TLogin" keyName="login" clase="com.jkt.dominio.Login">
+			<campoEntrada>
+
+				<campoEntrada name="usuario" clase="String" metodo="setUsuario" />
+				<campoEntrada name="password" clase="String" metodo="setPassword" />
+
+			</campoEntrada>
+			
+		</input>
+		
+		<output name="resultado" tableName="TUsuario">
+			<campoSalida name="objeto1">
+				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
+				<campoSalida name="nombres" value="nombres" target="nombres" />
+				<campoSalida name="apellido" value="apellido" target="apellido" />
+				<campoSalida name="mail" value="mail" target="mail" />
+				<campoSalida name="codigo" value="codigo" target="userName" />
+
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+		
+	</operacion>
+	
+
+</entity>
