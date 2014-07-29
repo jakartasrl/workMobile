@@ -458,9 +458,8 @@ end;
 
 procedure TjktDriver.AnalizarDataSet;
 begin
-  if FDataSetCab <> nil
-   then
-     begin
+  if FDataSetCab <> nil then
+    begin
        if FDataSetCab.EOF
           then self.doInhibirBotonSig()
           else self.doDesInhibirBotonSig();
@@ -500,7 +499,7 @@ begin
   if not Assigned(FOperacionSave)
      then  raise Exception.Create('No esta asignada la propiedad Operacion Save');
 
-  FOperacionSave.execute;
+  FOperacionSave.executeGuardar(FDataSetCab);
 end;
 
 
@@ -608,23 +607,23 @@ end;
 
 procedure TjktDriver.DoDesInhibirBotonAnt;
 begin
-   enabledAction('acAnt', true);
+   enabledAction('acDataSetPrior', true);
 end;
 
 procedure TjktDriver.DoDesInhibirBotonSig;
 begin
-   enabledAction('acSig', true);
+   enabledAction('acDataSetNext', true);
 end;
 
 
 procedure TjktDriver.DoInhibirBotonAnt;
 begin
-   enabledAction('acAnt', false);
+   enabledAction('acDataSetPrior', false);
 end;
 
 procedure TjktDriver.DoInhibirBotonSig;
 begin
-   enabledAction('acSig', false);
+   enabledAction('acDataSetNext', false);
 end;
 
 

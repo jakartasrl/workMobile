@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2014/06/16 17:00:30.000.537,C:\Aplicaciones 3000\Pruebas Framework\jktFNMet0030.pas=C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.pas</Transaction>
-    <Transaction>2014/06/16 17:00:30.000.537,C:\Aplicaciones 3000\Pruebas Framework\jktFNMet0030.dfm=C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.dfm</Transaction>
+    <Transaction>2014/06/16 17:00:30.000.537,C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.pas=C:\Aplicaciones 3000\Pruebas Framework\jktFNMet0030.pas</Transaction>
+    <Transaction>2014/06/16 17:00:30.000.537,C:\Aplicaciones 3000\Pruebas Framework\jktNFMet0030.dfm=C:\Aplicaciones 3000\Pruebas Framework\jktFNMet0030.dfm</Transaction>
     <Transaction>2014/07/03 16:17:35.000.943,=cxSchedulerRS16.dcp</Transaction>
-    <Transaction>2014/07/18 13:30:13.217,=dxBarRS16.dcp</Transaction>
-    <Transaction>2014/07/18 13:30:13.250,=dxRibbonRS16.dcp</Transaction>
+    <Transaction>2014/07/18 13:30:13.000.217,=dxBarRS16.dcp</Transaction>
+    <Transaction>2014/07/18 13:30:13.000.250,=dxRibbonRS16.dcp</Transaction>
   </Transactions>
 </BorlandProject>

@@ -64,11 +64,16 @@ type
       procedure       completarAtributosOperacion();
       procedure       obtenerDatasets;
       function        GetDataset(Index: Integer): TkbmMemTable;
-
+      procedure       addAtributosOperacion;
+      procedure       addDatasetOperacion;
+      procedure       setXMLSave(aDataSet :TDataSet);
+      function        obtenerListaDataSet(aDataset:TDataSet) : TList;
+      procedure       recorrerDataSet(aDataset:TDataSet ; aLista :TList; aNivel, aNivelDataSet: integer);
    public
       constructor Create(AOwner: TComponent); override;
       destructor  Destroy; override;
       procedure   execute;
+      procedure   executeGuardar(aDataSet :TDataSet);
       property    CountDatasets :integer read getCountDatasets;
       property    ItemsDataset[Index: Integer]:TkbmMemTable read GetDataset ;
 
@@ -225,6 +230,24 @@ begin
   FServiceCaller.execute;
 end;
 
+
+procedure TjktOperacion.executeGuardar(aDataSet :TDataSet);
+begin
+  if not Assigned(FServiceCaller)
+     then  raise Exception.Create('No esta asignada la propiedad ServiceCaller');
+
+  if not Assigned(aDataSet)
+     then  raise Exception.Create('No esta asignada la propiedad DataSetCab del Driver');
+
+  FServiceCaller.InicioOperacion;
+  FServiceCaller.setOperacion(FOperName);
+  addAtributosOperacion();
+  self.setXMLSave(aDataset);
+  FServiceCaller.execute;
+end;
+
+
+
 function TjktOperacion.getCountDatasets: integer;
 begin
    if DatasetsList = nil
@@ -252,7 +275,7 @@ begin
 
 end;
 
-procedure TjktOperacion.completarAtributosOperacion();
+procedure TjktOperacion.addAtributosOperacion();
 var
  x :integer;
  count :integer;
@@ -267,7 +290,16 @@ begin
           then continue;
        FServiceCaller.addAtribute(att.Attribute, att.Field.AsString);
     end;
-   // Mandar luego los datasets
+end;
+
+
+procedure TjktOperacion.addDatasetOperacion();
+var
+ x :integer;
+ count :integer;
+ att :TjktOperAttribute;
+begin
+  count :=  self.FAtributos.Count;
   for x := 0 to count -1 do
     begin
        att :=  self.FAtributos.Items[x];
@@ -275,7 +307,90 @@ begin
           then continue;
        FServiceCaller.addDataSet(att.Dataset, '', att.Tag);
     end;
+
 end;
+
+
+
+procedure TjktOperacion.completarAtributosOperacion();
+begin
+  addAtributosOperacion;
+  addDatasetOperacion
+end;
+
+
+procedure TjktOperacion.SetXMLSave(aDataSet :TDataSet);
+var
+  lista : TList;
+  i     : Integer;
+begin
+
+
+  lista := nil;
+  self.obtenerDatasets;
+  if (CountDatasets <> 0)
+     then lista := obtenerListaDataSet(aDataSet);
+
+  recorrerDataSet(aDataSet, lista, 1, 1);
+  lista.Free;
+end;
+
+
+function  TjktOperacion.obtenerListaDataSet(aDataset:TDataSet) : TList;
+var
+  i :integer;
+  dataSet :TkbmMemTable;
+begin
+  result := TList.create;
+  for i:=0 to CountDatasets -1 do
+    begin
+       dataSet := self.GetDataset(i);
+       if  (dataSet.MasterSource <> nil)
+       and (dataSet.MasterSource.DataSet = aDataSet)
+            then result.Add(dataSet);
+    end;
+end;
+
+procedure TjktOperacion.recorrerDataSet(aDataset:TDataSet ; aLista :TList; aNivel, aNivelDataSet: integer);
+var
+  wrkDataSet :TDataset;
+  modif  : boolean;
+  lista2 : TList;
+  i :integer;
+begin
+  aDataSet.BlockReadSize := 1;
+  try
+      if aDataset = nil
+         then exit;
+      aDataset.first;
+      // Tabla de Cabcera
+      FServiceCaller.addElement(aNivel, 'Tabla');
+      FServiceCaller.addAtribute('nombre', aDataset.name);
+      while not aDataSet.Eof do
+        begin
+                    // Fila
+                    FServiceCaller.enviarCampos(aDataSet, 0, aNivel + 1);
+                    if (aLista<>Nil)
+                       then for i:=0 to aLista.count -1 do
+                              begin
+                                wrkDataset := TDataset (aLista.items[i]);
+                                // Dario para compatibilidad con lo viejo.
+                                // 25-02-2005
+                                if (CountDatasets <> 0)
+                                   then lista2     :=  obtenerListaDataSet(wrkDataset);
+
+                                recorrerDataset(wrkDataset, lista2,  aNivel + 2, aNivelDataSet + 1 );
+                                lista2.free;
+                              end;
+
+          aDataSet.Next;
+        end;
+  finally
+     aDataSet.BlockReadSize := 0;
+  end;
+end;
+
+
 
 
 end.

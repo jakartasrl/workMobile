@@ -24,7 +24,6 @@ uses
 
 type
   TjktEstado = (esAlta, esEdit, esRehabilita, esNil);
-  TjktTipoABM = (abmLista, abmIndividual, abmListaConFiltro, abmEstandar);
 
 type
   TfrmChild = class(TdxRibbonForm)
@@ -37,16 +36,15 @@ type
     Service: TjktServiceCaller;
     OperacionSave: TjktOperacion;
     mtParametroInicial: TjktMemTable;
-    mtParametroInicialvalor: TStringField;
-    operacionTraer: TjktOperacion;
+    mtParametroInicialKey: TStringField;
+    OperacionTraer: TjktOperacion;
     ValidadorForm: TjktValidadorForm;
+    mtParametroInicialValue: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormActivate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     FEstado: TjktEstado;
-    FTipoABM: TjktTipoABM;
     FParentActionList: TActionList; // guardamos la referencia al 'ActionList' del padre
     FModified: Boolean;
     FOnActivateChild: TNotifyEvent;
@@ -60,9 +58,9 @@ type
     procedure DoActivateChild;
     procedure DoChanged;
     procedure setParametroInicial(aValue :string);
-    procedure setParentActionList(aValue :TActionList);
+
   protected
- //   procedure llamarOperacionConfiguracion;  dynamic;
+    procedure llamarOperacionConfiguracion; virtual; abstract;
 
   public
     property CanEdit: Boolean read GetCanEdit;
@@ -70,14 +68,13 @@ type
     property CanSave: Boolean read GetCanSave;
     property Modified: Boolean read FModified write FModified;
     property Estado: TjktEstado read FEstado write FEstado;
-    property ParametroInicial :string write setParametroInicial;
-    property ParentActionList :TActionList write setParentActionList;
     //
     property OnActivateChild: TNotifyEvent read FOnActivateChild write FOnActivateChild;
     property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
 
+    procedure InicializarChild(ParentActionList: TActionList; ParametroInicial: string = '');
+
   published
-    property TipoABM: TjktTipoABM read FTipoABM write FTipoABM;
 
   end;
 
@@ -101,30 +98,19 @@ begin
     end;
 end;
 
-procedure TfrmChild.setParametroInicial(aValue :string);
+procedure TfrmChild.setParametroInicial(aValue: string);
 begin
   if not mtParametroInicial.Active
     then begin
-           mtParametroInicial.open;
-           mtParametroInicial.append;
+      mtParametroInicial.open;
+      mtParametroInicial.append;
     end;
-  mtParametroInicial.FieldByName('valor').AsString := aValue;
-  //llamarOperacionConfiguracion;
+
+  mtParametroInicial.FieldByName('Key').AsString := 'entidad';
+  mtParametroInicial.FieldByName('Value').AsString := aValue;
+
+  llamarOperacionConfiguracion;
 end;
-
-procedure TfrmChild.setParentActionList(aValue: TActionList);
-begin
-  FParentActionList := aValue;
-  Driver.ActionList := FParentActionList;
-
-  // Cargo los datos de conexion al server para que se conecten todos los Programas
-  Service.Host       := Login.Host;
-  Service.Port       := Login.Port;
-  Service.Servlet    := Login.Servlet;
-  Service.Aplicacion := Login.Aplicacion;
-  Service.Protocolo  := Login.Protocolo;
-end;
-
 
 procedure TfrmChild.DoActivateChild;
 begin
@@ -153,12 +139,6 @@ begin
   CanClose := CheckSaveChanges;
 end;
 
-procedure TfrmChild.FormShow(Sender: TObject);
-begin
-  validadorForm.inicializar;
-  Driver.Inicio;
-end;
-
 function TfrmChild.GetCanEdit: Boolean;
 begin
   Result := False;
@@ -172,6 +152,26 @@ end;
 function TfrmChild.GetCanSave: Boolean;
 begin
   Result := Modified;
+end;
+
+procedure TfrmChild.InicializarChild(ParentActionList: TActionList;
+  ParametroInicial: string);
+begin
+  // Cargo los datos de conexion al server para que se conecten todos los Programas
+  Service.Host       := Login.Host;
+  Service.Port       := Login.Port;
+  Service.Servlet    := Login.Servlet;
+  Service.Aplicacion := Login.Aplicacion;
+  Service.Protocolo  := Login.Protocolo;
+
+  if ParametroInicial <> '' then
+    setParametroInicial(ParametroInicial);
+
+  FParentActionList := ParentActionList;
+  Driver.ActionList := FParentActionList;
+
+  ValidadorForm.inicializar;
+  Driver.Inicio;
 end;
 
 function TfrmChild.QuerySaveFile: Integer;

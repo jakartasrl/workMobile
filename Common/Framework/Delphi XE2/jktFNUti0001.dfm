@@ -3,7 +3,7 @@ inherited FNUti0001: TFNUti0001
   ClientHeight = 384
   ClientWidth = 738
   ExplicitWidth = 754
-  ExplicitHeight = 423
+  ExplicitHeight = 422
   PixelsPerInch = 96
   TextHeight = 13
   object jktExpDBGrid1: TjktExpDBGrid [0]
@@ -38,6 +38,7 @@ inherited FNUti0001: TFNUti0001
   end
   inherited Driver: TjktDriver
     DataSetCab = mtInput
+    TipoPrograma = tp_Otro
   end
   inherited OperacionSave: TjktOperacion
     Atributos = <
@@ -46,20 +47,29 @@ inherited FNUti0001: TFNUti0001
         Dataset = mtInput
         Tag = 0
       end>
-    Left = 440
-    Top = 216
+    Top = 88
   end
   inherited mtParametroInicial: TjktMemTable
-    Left = 576
+    Left = 600
+  end
+  inherited OperacionTraer: TjktOperacion
+    Top = 32
   end
   inherited ValidadorForm: TjktValidadorForm
-    Left = 288
-    Top = 256
+    ListaValidaciones = <
+      item
+        Field = mtConfigCamposlabel
+        Validador = jktValidador1
+      end
+      item
+      end>
+    Left = 520
+    Top = 88
   end
   object dsInput: TDataSource
     DataSet = mtInput
-    Left = 328
-    Top = 144
+    Left = 344
+    Top = 304
   end
   object mtInput: TjktMemTable
     DesignActivation = True
@@ -80,8 +90,8 @@ inherited FNUti0001: TFNUti0001
     SubLanguageID = 0
     LocaleID = 0
     OnNewRecord = mtInputNewRecord
-    Left = 560
-    Top = 120
+    Left = 392
+    Top = 304
   end
   object mtConfigOper: TjktMemTable
     DesignActivation = True
@@ -101,8 +111,8 @@ inherited FNUti0001: TFNUti0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 664
-    Top = 200
+    Left = 616
+    Top = 240
     object mtConfigOperoperSave: TStringField
       FieldName = 'operSave'
       Size = 50
@@ -117,13 +127,18 @@ inherited FNUti0001: TFNUti0001
     EnviarTodo = False
     Atributos = <
       item
-        Attribute = 'ParametroInicial'
-        Field = mtParametroInicialvalor
+        Attribute = 'key'
+        Field = mtParametroInicialKey
+        Tag = 0
+      end
+      item
+        Attribute = 'value'
+        Field = mtParametroInicialValue
         Tag = 0
       end>
     ServiceCaller = Service
-    Left = 512
-    Top = 56
+    Left = 520
+    Top = 32
   end
   object mtConfigCampos: TjktMemTable
     DesignActivation = True
@@ -143,8 +158,8 @@ inherited FNUti0001: TFNUti0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 576
-    Top = 200
+    Left = 616
+    Top = 192
     object mtConfigCamposfieldName: TStringField
       FieldName = 'fieldName'
       Size = 40
@@ -188,8 +203,8 @@ inherited FNUti0001: TFNUti0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 640
-    Top = 120
+    Left = 616
+    Top = 144
     object mtConfigValidadorfieldName: TStringField
       FieldName = 'fieldName'
       Size = 30
@@ -214,7 +229,7 @@ inherited FNUti0001: TFNUti0001
     ListaAsignaciones = <
       item
       end>
-    Left = 144
-    Top = 288
+    Left = 96
+    Top = 280
   end
 end

@@ -351,6 +351,7 @@ object frmMainForm: TfrmMainForm
         item
           ToolbarName = 'dxbViewOptions'
         end>
+      Visible = False
       Index = 3
     end
   end
@@ -481,7 +482,7 @@ object frmMainForm: TfrmMainForm
         Height = 60
         Width = 700
         object bvSpacer4: TBevel
-          Left = 658
+          Left = 566
           Top = 0
           Width = 42
           Height = 60
@@ -511,9 +512,8 @@ object frmMainForm: TfrmMainForm
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
-          ExplicitWidth = 524
           Height = 60
-          Width = 616
+          Width = 524
         end
         object lbbvTabCaption2013: TcxLabel
           Left = 42
@@ -529,7 +529,6 @@ object frmMainForm: TfrmMainForm
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
-          ExplicitWidth = 524
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -722,7 +721,7 @@ object frmMainForm: TfrmMainForm
         ExplicitHeight = 374
       end
       object Bevel2: TBevel
-        Left = 658
+        Left = 566
         Top = 0
         Width = 42
         Height = 254
@@ -734,7 +733,7 @@ object frmMainForm: TfrmMainForm
       object Bevel3: TBevel
         Left = 0
         Top = 254
-        Width = 700
+        Width = 608
         Height = 26
         Align = alBottom
         Shape = bsSpacer
@@ -12371,7 +12370,7 @@ object frmMainForm: TfrmMainForm
   object alActions: TActionList
     Images = cxSmallImages
     Left = 425
-    Top = 88
+    Top = 136
     object acNew: TAction
       Caption = '&Nuevo'
       Hint = 'Nuevo'
@@ -12538,15 +12537,13 @@ object frmMainForm: TfrmMainForm
       ImageIndex = 39
       ShortCut = 16473
     end
-    object acDataSetPrior: TDataSetPrior
-      Category = 'Dataset'
+    object acDataSetPrior: TAction
       Caption = '&Prior'
       Hint = 'Prior'
       ImageIndex = 46
       OnExecute = acDataSetPriorExecute
     end
-    object acDataSetNext: TDataSetNext
-      Category = 'Dataset'
+    object acDataSetNext: TAction
       Caption = '&Next'
       Hint = 'Next'
       ImageIndex = 47
@@ -13991,6 +13988,7 @@ object frmMainForm: TfrmMainForm
       Hint = 'En Pesta'#241'as'
       Visible = ivAlways
       ButtonStyle = bsChecked
+      Down = True
       LargeImageIndex = 41
       OnClick = bbTabbedViewClick
     end
@@ -14152,7 +14150,7 @@ object frmMainForm: TfrmMainForm
     Top = 32
   end
   object dxTabbedMDIManager: TdxTabbedMDIManager
-    Active = False
+    Active = True
     TabProperties.AllowTabDragDrop = True
     TabProperties.CloseButtonMode = cbmActiveTab
     TabProperties.CloseTabWithMiddleClick = True

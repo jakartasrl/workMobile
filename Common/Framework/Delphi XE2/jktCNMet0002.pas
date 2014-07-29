@@ -76,7 +76,6 @@ type
     procedure executeHTTP;
     procedure executeFile;
     procedure     asignarDataSetsLista(aDatasetName :string);
-    procedure enviarCampos(aDataset: TDataSet; aTag : Integer);
     procedure copiarDatasetEventos;
     procedure tratarDatosMemTable(response: AnsiString);
     function  obtenerDataset(aDatasetName: AnsiString) :TDataset;
@@ -94,7 +93,7 @@ type
     procedure   addAtribute(aAttName : String; aAttValue : Boolean); overload;
     procedure   addAtribute(aAttName : String; aAttValue : Integer); overload;
     procedure   addDataSet(DataSet : TDataSet ; condicion : variant; aTag : Integer = 0 ; DataSetName : string = '');
-
+    procedure enviarCampos(aDataset: TDataSet; aTag : Integer; aNivel : Integer);
     property Dataset :TDataset read FDataset  write FDataset;
     property ModoExecute  :boolean  read FModoExecute write FModoExecute;
     property Log  :string read FLog;
@@ -273,6 +272,11 @@ begin
   try
      Params := TMemoryStream.Create;
      FXML.toStringList.saveToStream(Params);
+    {***************}
+    FMet005 := TFMet005.Create(nil);
+    FMet005.mostrarError(FXML.toStringList.Text);
+    FMet005.Free;
+    {***************}
 
      try
        // Trace
@@ -851,10 +855,10 @@ begin
         if (condicion = 'modif')
            then begin
                   if (DataSet.FieldByName('modif').AsBoolean)
-                     then enviarCampos(DataSet, aTag);
+                     then enviarCampos(DataSet, aTag, 2);
                 end
            else begin
-                  enviarCampos(DataSet, aTag);
+                  enviarCampos(DataSet, aTag, 2);
                 end;
 
         DataSet.Next;
@@ -862,11 +866,11 @@ begin
 end;
 
 
-procedure TjktServiceCaller.enviarCampos(aDataset: TDataSet; aTag : Integer);
+procedure TjktServiceCaller.enviarCampos(aDataset: TDataSet; aTag : Integer; aNivel :integer);
 var
   idx : integer;
 begin
-  addElement ( 2, 'Fila');
+  addElement ( aNivel, 'Fila');
 
   for idx := 0 to aDataset.Fields.Count - 1 do
     begin
