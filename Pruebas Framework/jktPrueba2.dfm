@@ -1,12 +1,16 @@
 inherited prueba3: Tprueba3
   Caption = 'prueba3'
+  ClientHeight = 464
+  ClientWidth = 738
+  ExplicitWidth = 754
+  ExplicitHeight = 502
   PixelsPerInch = 96
   TextHeight = 13
   object DBGrid1: TDBGrid [0]
     Left = 0
     Top = 0
-    Width = 635
-    Height = 364
+    Width = 738
+    Height = 464
     Align = alClient
     DataSource = DataSource1
     TabOrder = 4
