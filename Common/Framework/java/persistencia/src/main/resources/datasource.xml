@@ -43,6 +43,11 @@
                 <value>classpath:mappings/Menu.hbm.xml</value>
                 <value>classpath:mappings/TextosMenu.hbm.xml</value>
 
+                <value>classpath:mappings/Vendedor.hbm.xml</value>
+                <value>classpath:mappings/Representante.hbm.xml</value>
+                <value>classpath:mappings/ZonaComercial.hbm.xml</value>
+
+
             </list>
 		</property>
 		
