@@ -258,16 +258,6 @@
 			</campoSalida>
 		</output>	
 		
-<!-- 		<output name="TEmpresas" tableName="TEmpresas"> -->
-<!-- 			<campoSalida name="resultado"> -->
-<!-- 				<campoSalida name="oid_empresa" value="oid_empresa" target="id" /> -->
-<!-- 				<campoSalida name="Codigo" value="Codigo" target="codigo" /> -->
-<!-- 				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" /> -->
-<!-- 				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" /> -->
-<!-- 				<campoSalida name="Activo" value="Activo" target="activo" /> -->
-<!-- 			</campoSalida> -->
-<!-- 		</output>		 -->
-
 		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
 				<campoSalida name="oid_empresa" value="oid_empresa" target="oidEmpresa" />
@@ -461,7 +451,7 @@
 				<campoSalida name="mail" value="mail" target="mail" />
 				<campoSalida name="codigo" value="codigo" target="userName" />
 			</campoSalida>
-		</output>		
+		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		

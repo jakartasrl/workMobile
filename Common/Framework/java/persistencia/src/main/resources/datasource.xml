@@ -34,6 +34,7 @@
 		
 		<property name="mappingLocations">
             <list>
+            
 <!--                 <value>classpath:mappings/Orden.hbm.xml</value> -->
                 <value>classpath:mappings/Factura.hbm.xml</value>
                 <value>classpath:mappings/Empresa.hbm.xml</value>
@@ -47,6 +48,9 @@
                 <value>classpath:mappings/Representante.hbm.xml</value>
                 <value>classpath:mappings/ZonaComercial.hbm.xml</value>
 
+                <value>classpath:mappings/Idioma.hbm.xml</value>
+                <value>classpath:mappings/Pais.hbm.xml</value>
+                <value>classpath:mappings/Provincia.hbm.xml</value>
 
             </list>
 		</property>

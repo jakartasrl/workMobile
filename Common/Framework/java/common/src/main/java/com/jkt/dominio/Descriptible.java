@@ -7,6 +7,7 @@ package com.jkt.dominio;
  */
 public class Descriptible extends PersistentEntity {
 
+	private static final long serialVersionUID = -6218376283846355915L;
 	private String codigo;
 	private String descripcion;
 
