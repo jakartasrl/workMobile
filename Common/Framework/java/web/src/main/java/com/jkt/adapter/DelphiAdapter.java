@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.request.EventBusiness;
 import com.jkt.util.Campos;
@@ -115,15 +116,23 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 
 		List<Campos> camposCollection = ((MapDS)input).getCollectionOfCampos();
 		for (Campos campos : camposCollection) {
-			if (!campos.getCampos().containsKey("key")) {
-				//log this element!
-				continue;
-			}
+//			if (!campos.getCampos().containsKey("key")) {
+//				//log this element!
+//				continue;
+//			}
 			if (campos.getCampos().containsKey("oid") && campos.getCampos().containsKey("class") && campos.getCampos().containsKey("key")) {
 				PersistentEntity objetoRecuperado = recuperarObjecto(Class.forName(campos.getCampos().get("class")), Long.valueOf(campos.getCampos().get("oid")));
 				finalResult.put((String)campos.getCampos().get("key"), objetoRecuperado);
 			}else{
-				finalResult.put((String)campos.getCampos().get("key"),(String)campos.getCampos().get("value"));
+//				finalResult.put((String)campos.getCampos().get("key"),(String)campos.getCampos().get("value"));
+				
+				Map<String,String> valoresDelTagCampos = campos.getCampos();
+				Entry<String,String> entry=null;
+				
+				for (Iterator<Entry<String, String>> iterator = valoresDelTagCampos.entrySet().iterator(); iterator.hasNext();) {
+					entry = (Entry<String,String>) iterator.next();
+					finalResult.put(entry.getKey(), entry.getValue());
+				}
 			}
 		}
 		
@@ -326,7 +335,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			try{
 				newInstance=repository.getByOid(clazz, oid);
 			}catch(Exception e){
-				throw new RuntimeException("No existe la entidad solicitada.");
+				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz, String.valueOf(oid)));
 			}
 		}
 		return (PersistentEntity) newInstance;

@@ -133,9 +133,41 @@
 	</operacion>
 	
 	
+<!-- 	RECUPERAR MENU PARA ERP -->
+
+	<operacion name="TrearMenuERP" clase="com.jkt.operaciones.erp.OperacionRecuperarMenuParaERP">
+		
+		<output name="resultado" tableName="TMenu">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_menu" value="oid_menu" target="value" />
+			</campoSalida>
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+			
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
 	
 	<!-- RECUPERAR EL MENU -->
 	<operacion name="TrearMenu" clase="com.jkt.operaciones.OperacionRecuperarMenu">
+		
+		<output name="TCabecera" tableName="TCabecera">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_menu" value="oid_menu" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="Descripcion" value="Descripcion" target="descripcion" />
+				<campoSalida name="Tipo" value="Tipo" target="tipoMenu" />
+
+				<campoSalida name="Imagen" value="Imagen" target="imagen" />
+				<campoSalida name="RutaDeImagen" value="RutaDeImagen" target="rutaDeImagen" />
+				<campoSalida name="Orden" value="Orden" target="orden" />
+				<campoSalida name="Argumento" value="Argumento" target="argumento" />
+				
+			</campoSalida>
+		</output>
 		
 		<output name="TMenues" tableName="TMenues">
 			<campoSalida name="resultado">
@@ -151,7 +183,7 @@
 				
 			</campoSalida>
 		</output>		
-
+		
 		<output name="TTextosMenues" tableName="TTextosMenues">
 			<campoSalida name="resultado">
 				<campoSalida name="oid_menu" value="oid_menu" target="oidMenu" />
@@ -312,7 +344,7 @@
 	<!-- 	RECUPERAR EMPRESAS -->
 	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Empresa">
 		
-		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_fac'>
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_empresa'>
 			
 			<campoEntrada>
 				<campoEntrada nombreEntidad="com.jkt.dominio.Empresa" />
@@ -413,6 +445,13 @@
 	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
 	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.OperacionGuardar">
 		<input name="usuario" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid'>
+		
+			<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+			<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
+			<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
+			<campoEntrada name="Email" clase="String" metodo="setMail" />
+			<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			
 			<campoEntrada>
 				<campoEntrada name="empresa" metodo="addEmpresa" clase="com.jkt.dominio.Empresa" />
 			</campoEntrada>
@@ -433,13 +472,14 @@
 	
 	<!-- LOGIN -->
 	<operacion name="Login" clase="com.jkt.operaciones.OperacionLogin">
-		<input name="TLogin" keyName="login" clase="com.jkt.dominio.Login">
-			<campoEntrada>
+		<input name="TLogin" keyName="login">
+<!-- 		<input name="TLogin" keyName="login" clase="com.jkt.dominio.Login"> -->
+<!-- 			<campoEntrada> -->
 
-				<campoEntrada name="usuario" clase="String" metodo="setUsuario" />
-				<campoEntrada name="password" clase="String" metodo="setPassword" />
+<!-- 				<campoEntrada name="usuario" clase="String" metodo="setUsuario" /> -->
+<!-- 				<campoEntrada name="password" clase="String" metodo="setPassword" /> -->
 
-			</campoEntrada>
+<!-- 			</campoEntrada> -->
 			
 		</input>
 		

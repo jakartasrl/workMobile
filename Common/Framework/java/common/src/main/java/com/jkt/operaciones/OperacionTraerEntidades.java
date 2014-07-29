@@ -12,7 +12,7 @@ public class OperacionTraerEntidades extends Operation {
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String nombreClase = (String)aParams.get("entidad");
-		List<PersistentEntity> allElements = this.serviceRepository.recuperarTodos(Class.forName(nombreClase));
+		List<PersistentEntity> allElements = this.serviceRepository.getAll(Class.forName(nombreClase));
 		
 		for (PersistentEntity persistentEntity : allElements) {
 			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));

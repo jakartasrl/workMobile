@@ -3,7 +3,6 @@ package com.jkt.operaciones;
 import java.util.Map;
 
 import com.jkt.annotations.OperacionBean;
-import com.jkt.dominio.Login;
 import com.jkt.dominio.Usuario;
 import com.jkt.exception.LoginException;
 import com.jkt.transformers.Notificacion;
@@ -16,24 +15,30 @@ import com.jkt.transformers.Notificacion;
 @OperacionBean
 public class OperacionLogin extends Operation {
 
+	/**
+	 * Es el campo por el cual se filtra al usuario. Por protocolo, el codigo será igual al username, solamente en esta entidad.
+	 */
 	private static final String CAMPO_USUARIO = "codigo";
 
 	public void execute(Map<String, Object> aParams) throws Exception {
-		Login login=(Login) aParams.get("login");
+//		Login login=(Login) aParams.get("login");
+		String usuario=(String) aParams.get("usuario");
+		String password=(String) aParams.get("password");
 		
-		Usuario user = (Usuario) this.serviceRepository.getUniqueByProperty(Usuario.class, CAMPO_USUARIO, login.getUsuario());
-		if (user==null) {
-//			this.notificarObjecto(Notificacion.getNew("resultado", new Error("Problemas al acceder al sistema")));
+		if (usuario.isEmpty() || password.isEmpty()) {
 			throw new LoginException();
-//			throw new RuntimeException("dakljjkldsa");
-//			return;
+		}
+		
+		Usuario user = (Usuario) this.serviceRepository.getUniqueByProperty(Usuario.class, CAMPO_USUARIO, usuario);
+		if (user==null) {
+			throw new LoginException();
 		} 
 		
 		/*
 		 * TODO Persistir el objeto login en la base junto a un ID autogenerado, que sera utilizado como sesion.
 		 */
 		
-		log.info(login.getUsuario()+" "+login.getPassword());
+		log.info(usuario+" "+password);
 		this.notificarObjecto(Notificacion.getNew("resultado", user));
 		
 	}

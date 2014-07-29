@@ -42,7 +42,7 @@ public class ServiceRepository implements IServiceRepository {
 	}
 
 	@JKTTransactionReadOnly
-	public List<PersistentEntity> recuperarTodos(Class clazz) throws Exception {
+	public List<PersistentEntity> getAll(Class clazz) throws Exception {
 		return repositorio.getAll(clazz);
 	}
 

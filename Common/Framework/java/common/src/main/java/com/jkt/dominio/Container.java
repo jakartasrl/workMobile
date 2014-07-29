@@ -9,14 +9,28 @@ package com.jkt.dominio;
  */
 public class Container extends PersistentEntity {
 
-	private String nombreEntidad;
+//	private String nombreEntidad;
+//
+//	public String getNombreEntidad() {
+//		return nombreEntidad;
+//	}
+//
+//	public void setNombreEntidad(String nombreEntidad) {
+//		this.nombreEntidad = nombreEntidad;
+//	}
+	
+	private String value;
 
-	public String getNombreEntidad() {
-		return nombreEntidad;
+	public String getValue() {
+		return value;
 	}
 
-	public void setNombreEntidad(String nombreEntidad) {
-		this.nombreEntidad = nombreEntidad;
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+	public Container(String value) {
+		this.value=value;
 	}
 
 }

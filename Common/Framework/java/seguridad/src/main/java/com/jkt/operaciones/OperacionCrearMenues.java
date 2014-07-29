@@ -54,6 +54,9 @@ public class OperacionCrearMenues extends Operation {
 		digester.addSetProperties("menues/elemento");
 		digester.addSetNext("menues/elemento", "agregarMenu", MenuXML.class.getName());
 
+		/*
+		 * Solucion poco elegante para cubrir varios niveles de tags anidados
+		 */
 		String value="elemento";
 		for (int i = 0; i < 5; i++) {
 			

@@ -75,7 +75,7 @@ public interface IServiceRepository {
 	 * @return
 	 * @throws Exception
 	 */
-	List<PersistentEntity> recuperarTodos(Class className) throws Exception;
+	List<PersistentEntity> getAll(Class className) throws Exception;
 	/**
 	 * Recupera usando la clase y un id una entidad
 	 * @param className
