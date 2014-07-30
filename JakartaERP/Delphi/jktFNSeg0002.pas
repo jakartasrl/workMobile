@@ -72,6 +72,7 @@ type
     dbgUsuarioEmpresasDBTableView1RazonSocial: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Activo: TcxGridDBColumn;
+    valUsuario: TjktValidador;
     procedure cxDBCheckBox1Click(Sender: TObject);
   private
     { Private declarations }

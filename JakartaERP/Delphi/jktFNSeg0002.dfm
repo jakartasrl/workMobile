@@ -258,6 +258,8 @@ inherited FNSeg0002: TFNSeg0002
   inherited ValidadorForm: TjktValidadorForm
     ListaValidaciones = <
       item
+        Field = TUsuariosCodigo
+        Validador = valUsuario
       end>
     Left = 528
     Top = 64
@@ -449,5 +451,24 @@ inherited FNSeg0002: TFNSeg0002
     DataSet = TUsuarioEmpresas
     Left = 568
     Top = 200
+  end
+  object valUsuario: TjktValidador
+    Entidad = 'com.jkt.dominio.Usuario'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        FieldName = 'oid'
+        FieldTarget = TUsuariosoid_usuario
+      end
+      item
+        FieldName = 'descripcion'
+        FieldTarget = TUsuariosApellido
+      end
+      item
+        FieldName = 'cadena'
+        FieldTarget = TUsuariosNombre
+      end>
+    Left = 16
+    Top = 232
   end
 end
