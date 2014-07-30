@@ -64,7 +64,7 @@ public class BaseController{
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
 //		outputStream.
-		xmlStreamMaker.writeStartTagWarning("Ocurrio un error al intentar acceder al sistema");
+		xmlStreamMaker.writeStartTagException("Ocurrio un error al intentar acceder al sistema");
 	}
 	
 	@ExceptionHandler(RuntimeException.class)
