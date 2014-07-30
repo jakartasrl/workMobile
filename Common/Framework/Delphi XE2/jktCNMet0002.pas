@@ -270,13 +270,14 @@ begin
   HTTP.HandleRedirects      := True;
 
   try
-     Params := TMemoryStream.Create;
-     FXML.toStringList.saveToStream(Params);
-    {***************}
+    Params := TMemoryStream.Create;
+    FXML.toStringList.saveToStream(Params);
+
+    {$IFDEF DEBUGGING}
     FMet005 := TFMet005.Create(nil);
     FMet005.mostrarError(FXML.toStringList.Text);
     FMet005.Free;
-    {***************}
+    {$ENDIF}
 
      try
        // Trace
