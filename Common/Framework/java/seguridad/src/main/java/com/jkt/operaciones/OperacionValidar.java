@@ -13,6 +13,7 @@ import com.jkt.transformers.Notificacion;
  */
 public abstract class OperacionValidar extends Operation{
 
+	private static final String ENTIDAD_FIELD = "entidad";
 	private static final String CODIGO_FIELD = "codigo";
 
 	@Override
@@ -22,7 +23,7 @@ public abstract class OperacionValidar extends Operation{
 		 * Recupera de los parametros el codigo y el nombre de la entidad
 		 */
 		String codigo=(String) aParams.get(CODIGO_FIELD);
-		String className=(String) aParams.get("entidad");
+		String className=(String) aParams.get(ENTIDAD_FIELD);
 		
 		//Realiza la consulta a la base
 		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(className), CODIGO_FIELD, codigo);

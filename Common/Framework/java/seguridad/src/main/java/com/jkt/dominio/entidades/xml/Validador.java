@@ -1,7 +1,7 @@
 package com.jkt.dominio.entidades.xml;
 
 /**
- * Validador que representa a los validadores
+ * Validador que representa a los validadores para el ABM generico
  *
  * @author Leonel Suarez - Jakarta SRL
  */

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.digester3.Digester;
 
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.menu.ElementoMenu;
 import com.jkt.dominio.menu.Menu;
 import com.jkt.dominio.menu.Programa;
