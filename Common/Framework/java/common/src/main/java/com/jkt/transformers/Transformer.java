@@ -57,7 +57,7 @@ public abstract class Transformer implements Observer {
 	/**
 	 * Metodo que se ejecuta al ser notificada alguna instancia de esta clase por algun Observable
 	 * 
-	 * @param arg1
+	 * @param Notificacion 
 	 */
 	protected abstract void update(Notificacion arg1);
 	
@@ -74,6 +74,6 @@ public abstract class Transformer implements Observer {
 	 * @param outputStream
 	 * @throws JakartaException
 	 */
-	public abstract void setup(ServletOutputStream outputStream) throws JakartaException;
+	public abstract void setup(ServletOutputStream outputStream, String outputName) throws JakartaException;
 	
 }

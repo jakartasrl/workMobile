@@ -38,6 +38,8 @@ import com.jkt.xmlreader.XMLEntity;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public abstract class RequestProcessor extends BaseController{
 	
+	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
+
 	@Autowired
 	protected IServiceRepository serviceRepository;
 	
@@ -104,7 +106,7 @@ public abstract class RequestProcessor extends BaseController{
 		
 
 		log.debug("Recuperando un transformer para la operación actual...");
-		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation);
+		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME));
 
 		log.debug("Ejecutando la operación...");
 		operation.execute(parametersAdapted);

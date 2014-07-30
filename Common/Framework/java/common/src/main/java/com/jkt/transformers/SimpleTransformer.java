@@ -22,6 +22,7 @@ import com.jkt.xmlreader.Output;
  */
 public class SimpleTransformer extends Transformer {
 
+	private String outputName;
 	private boolean flag=false;
 	
 	/*
@@ -107,10 +108,11 @@ public class SimpleTransformer extends Transformer {
 	}
 
 	@Override
-	public void setup(ServletOutputStream outputStream) throws JakartaException {
+	public void setup(ServletOutputStream outputStream, String ouputName) throws JakartaException {
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
-		this.setWriter(xmlStreamMaker);
+		setWriter(xmlStreamMaker);
+		this.outputName=ouputName;
 	}
 
 	public boolean isFlag() {
@@ -131,7 +133,7 @@ public class SimpleTransformer extends Transformer {
 		getWriter().writeStartTag();
 		EventBusiness eventBusiness=(EventBusiness) this.getEvent();
 		Output oElement = (Output)eventBusiness.getHijoOutput("resultado");
-		getWriter().addTabla(oElement.getTableName());
+		getWriter().addTabla(outputName==null?oElement.getTableName():outputName);
 	}
 	
 	

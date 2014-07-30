@@ -132,11 +132,11 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	}
 
 	public String getCadena() {
-		return this.getApellido()+" "+this.getNombres();
+		return this.getApellido();
 	}
 
 	public String getCadena2() {
-		return this.getMail();
+		return this.getNombres();
 	}
 
 	public int getEntero() {

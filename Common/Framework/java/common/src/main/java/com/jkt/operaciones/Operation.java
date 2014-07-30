@@ -67,7 +67,7 @@ public abstract class Operation extends Observable {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public Transformer generateTransformer(ServletOutputStream outputStream, EventBusiness eventBusiness) throws JakartaException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public Transformer generateTransformer(ServletOutputStream outputStream, EventBusiness eventBusiness, String outputName) throws JakartaException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		ElementTransformer elementTransformer = eventBusiness.getTransformer();
 		
 		/*
@@ -90,9 +90,10 @@ public abstract class Operation extends Observable {
 		}else{
 			transformer=new EmptyTransformer();
 		}
+		
 		//Parametrizacion del mismo
 		transformer.setEvent(eventBusiness);
-		transformer.setup(outputStream);
+		transformer.setup(outputStream, outputName);
 		this.addObserver(transformer);
 		
 		return transformer;
