@@ -13,7 +13,7 @@ import com.jkt.transformers.Notificacion;
  * @author Leonel Suarez - Jakarta SRL
  */
 @OperacionBean
-public class OperacionLogin extends Operation {
+public class Login extends Operation {
 
 	/**
 	 * Es el campo por el cual se filtra al usuario. Por protocolo, el codigo será igual al username, solamente en esta entidad.

@@ -5,21 +5,26 @@ import org.springframework.stereotype.Component;
 
 import com.jkt.dominio.PersistentEntity;
 
+/**
+ * Clase que se encarga de retornar una instancia de la clase recibida por parametros, 
+ * desde la base, o en su defecto, desde memoria(Nueva instancia)
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 @Component
 public class Factory {
 
 	@Autowired
 	static private ServiceRepository serviceRepository;
 
-	private static final String CODIGO2 = "codigo";
+	private static final String CODIGO = "codigo";
 	
-	public static PersistentEntity getInstance(Class className, String codigo){
-		PersistentEntity instanciaRecuperada = serviceRepository.getUniqueByProperty(className, CODIGO2, codigo);
+	public static PersistentEntity getInstance(Class className, String codigo) throws InstantiationException, IllegalAccessException{
+		PersistentEntity instanciaRecuperada = serviceRepository.getUniqueByProperty(className, CODIGO, codigo);
 		if (instanciaRecuperada==null) {
-//			instanciaRecuperada=
+			instanciaRecuperada = (PersistentEntity) className.newInstance();
 		}
-		return null;
-		
+		return instanciaRecuperada;
 	}
 	
 }

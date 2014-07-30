@@ -14,7 +14,7 @@ import com.jkt.dominio.Usuario;
  * @author Leonel Suarez - Jakarta SRL
  */
 @OperacionBean
-public class OperacionActualizarPassword extends Operation {
+public class ActualizarPassword extends Operation {
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Usuario usuario=(Usuario) aParams.get("objeto");

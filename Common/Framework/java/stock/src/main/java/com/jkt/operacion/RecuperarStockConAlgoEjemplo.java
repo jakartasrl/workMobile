@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.jkt.operaciones.Operation;
 
-public class OperacionNueva extends Operation {
+public class RecuperarStockConAlgoEjemplo extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {

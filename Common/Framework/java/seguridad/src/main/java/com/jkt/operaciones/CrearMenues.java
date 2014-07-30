@@ -24,7 +24,7 @@ import com.jkt.excepcion.JakartaException;
  *
  * @author Leonel Suarez - Jakarta SRL
  */
-public class OperacionCrearMenues extends Operation {
+public class CrearMenues extends Operation {
 
 	
 	private static final String CODIGO_MENU = "codigoMenu";

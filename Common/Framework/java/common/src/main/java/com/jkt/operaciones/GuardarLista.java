@@ -11,7 +11,7 @@ import com.jkt.annotations.OperacionBean;
  * @author Leonel Suarez - Jakarta SRL
  */
 @OperacionBean
-public class OperacionGuardarLista extends OperacionGuardar {
+public class GuardarLista extends Guardar {
 
 	@SuppressWarnings("unchecked")
 	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException {

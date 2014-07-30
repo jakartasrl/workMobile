@@ -12,7 +12,7 @@ import com.jkt.transformers.Notificacion;
  *
  * @author Leonel Suarez - Jakarta SRL
  */
-public class OperacionHelper extends Operation {
+public class Helper extends Operation {
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Filtro filtro = (Filtro) aParams.get("objeto");

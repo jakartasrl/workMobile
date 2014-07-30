@@ -8,7 +8,7 @@ import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.transformers.Notificacion;
 
-public class OperacionRecuperarEmpresasDeUsuario extends Operation {
+public class RecuperarEmpresasDeUsuario extends Operation {
 
 	private static final String OID_USUARIO = "oid_usuario";
 

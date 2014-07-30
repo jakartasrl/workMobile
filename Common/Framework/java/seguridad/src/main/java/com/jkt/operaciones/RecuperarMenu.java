@@ -14,7 +14,7 @@ import com.jkt.transformers.Notificacion;
  *
  * @author Leonel Suarez - Jakarta SRL
  */
-public class OperacionRecuperarMenu extends Operation {
+public class RecuperarMenu extends Operation {
 
 	private static final String CAMPO_OID_MENU = "oid_menu";
 	private static final String NOMBRE_TABLA_TEXTOS = "TTextosMenues";

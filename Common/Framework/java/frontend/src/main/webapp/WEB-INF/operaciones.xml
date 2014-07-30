@@ -73,7 +73,7 @@
 
 
 
-	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.OperacionRecuperarEstructura">
+	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructura">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
 			<campoSalida name="resultado">
@@ -119,7 +119,7 @@
 
 
 	<!-- GUARDAR O ACTUALIZAR EL MENU -->
-	<operacion name="GenerarMenu" clase="com.jkt.operaciones.OperacionCrearMenues">
+	<operacion name="GenerarMenu" clase="com.jkt.operaciones.CrearMenues">
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
@@ -135,7 +135,7 @@
 	
 <!-- 	RECUPERAR MENU PARA ERP -->
 
-	<operacion name="TrearMenuERP" clase="com.jkt.operaciones.erp.OperacionRecuperarMenuParaERP">
+	<operacion name="TrearMenuERP" clase="com.jkt.operaciones.erp.RecuperarMenuParaERP">
 		
 		<output name="resultado" tableName="TMenu">
 			<campoSalida name="resultado">
@@ -152,7 +152,7 @@
 	</operacion>
 	
 	<!-- RECUPERAR EL MENU -->
-	<operacion name="TrearMenu" clase="com.jkt.operaciones.OperacionRecuperarMenu">
+	<operacion name="TrearMenu" clase="com.jkt.operaciones.RecuperarMenu">
 		
 		<output name="TCabecera" tableName="TCabecera">
 			<campoSalida name="resultado">
@@ -208,7 +208,7 @@
 
 
 	<!-- 	VALIDAR IN EXISTENCIA -->
-	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.OperacionValidarInexistencia">
+	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.ValidarInexistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
@@ -225,7 +225,7 @@
 
 
 	<!-- 	VALIDAR EXISTENCIA -->
-	<operacion name="ValidarExistente" clase="com.jkt.operaciones.OperacionValidarExistencia">
+	<operacion name="ValidarExistente" clase="com.jkt.operaciones.ValidarExistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
@@ -249,7 +249,7 @@
 
 
 	<!-- 	RECUPERAR USUARIOS -->
-	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Usuario">
+	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Usuario">
 		
 		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_usuario'>
 			<campoEntrada >
@@ -277,7 +277,7 @@
 	</operacion>
 	
 	<!-- 	TRAE TODAS LAS EMPRESAS Y TODOS LOS USUARIOS -->
-	<operacion name="TraerUsuariosYEmpresas" clase="com.jkt.operaciones.OperacionRecuperarEmpresasYUsuarios">
+	<operacion name="TraerUsuariosYEmpresas" clase="com.jkt.operaciones.RecuperarEmpresasYUsuarios">
 					
 		<output name="TUsuarios" tableName="TUsuarios">
 			<campoSalida name="resultado">
@@ -309,7 +309,7 @@
 	</operacion>
 	
 	<!-- 	RECUPERAR EMPRESAS DE USUARIO -->
-	<operacion name="TraerEmpresasDeUsuario" clase="com.jkt.operaciones.OperacionRecuperarEmpresasDeUsuario">
+	<operacion name="TraerEmpresasDeUsuario" clase="com.jkt.operaciones.RecuperarEmpresasDeUsuario">
 					
 		<output name="TUsuario" tableName="TUsuario">
 			<campoSalida name="resultado">
@@ -342,7 +342,7 @@
 	</operacion>
 	
 	<!-- 	RECUPERAR EMPRESAS -->
-	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.OperacionTraerEntidades" entidad="com.jkt.dominio.Empresa">
+	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Empresa">
 		
 		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_empresa'>
 			
@@ -373,7 +373,7 @@
 	
 	
 	<!-- GUARDAR EMPRESA -->
-	<operacion name="GuardarEmpresa" clase="com.jkt.operaciones.OperacionGuardarLista">
+	<operacion name="GuardarEmpresa" clase="com.jkt.operaciones.GuardarLista">
 		<input name="TEmpresas" keyName="objeto" clase="com.jkt.dominio.Empresa" fieldID='oid_empresa'>
 			<campoEntrada>
 				
@@ -395,7 +395,7 @@
 	</operacion>
 	
 	<!-- 	GUARDAR USUARIO -->
-	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.OperacionGuardar">
+	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.Guardar">
 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
 			<campoEntrada >
 				
@@ -423,7 +423,7 @@
 	</operacion>
 	
 	<!-- 	ACTUALIZAR PASSWORD DE USUARIO -->
-	<operacion name="actualizarPassword" clase="com.jkt.operaciones.OperacionActualizarPassword">
+	<operacion name="actualizarPassword" clase="com.jkt.operaciones.ActualizarPassword">
 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
 			<campoEntrada>
 				<campoEntrada name="password" clase="String" metodo="setPassword" />
@@ -443,7 +443,7 @@
 	</operacion>
 	
 	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
-	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.OperacionGuardar">
+	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.Guardar">
 		<input name="usuario" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid'>
 		
 			<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
@@ -471,7 +471,7 @@
 	</operacion>
 	
 	<!-- LOGIN -->
-	<operacion name="Login" clase="com.jkt.operaciones.OperacionLogin">
+	<operacion name="Login" clase="com.jkt.operaciones.Login">
 		<input name="TLogin" keyName="login">
 <!-- 		<input name="TLogin" keyName="login" clase="com.jkt.dominio.Login"> -->
 <!-- 			<campoEntrada> -->

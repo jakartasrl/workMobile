@@ -11,7 +11,7 @@ import com.jkt.transformers.Notificacion;
  *
  * @author Leonel Suarez - Jakarta SRL
  */
-public abstract class OperacionValidar extends Operation{
+public abstract class Validar extends Operation{
 
 	private static final String ENTIDAD_FIELD = "entidad";
 	private static final String CODIGO_FIELD = "codigo";

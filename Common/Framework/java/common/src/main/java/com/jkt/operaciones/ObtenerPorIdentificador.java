@@ -10,7 +10,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.transformers.Notificacion;
 
 @OperacionBean
-public class OperacionObtenerPorIdentificador extends Operation{
+public class ObtenerPorIdentificador extends Operation{
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Filtro filtro = (Filtro) aParams.get("objeto");

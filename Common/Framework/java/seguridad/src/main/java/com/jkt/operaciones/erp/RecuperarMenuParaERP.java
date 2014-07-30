@@ -11,7 +11,7 @@ import com.jkt.transformers.Notificacion;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class OperacionRecuperarMenuParaERP extends Operation {
+public class RecuperarMenuParaERP extends Operation {
 
 	/*
 	 * Este valor deberia estar en una tabla de parametrización en la base

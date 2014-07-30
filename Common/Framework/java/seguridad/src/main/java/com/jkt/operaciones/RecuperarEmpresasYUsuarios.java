@@ -14,7 +14,7 @@ import com.jkt.dominio.Usuario;
 import com.jkt.dominio.UsuarioEmpresa;
 import com.jkt.transformers.Notificacion;
 
-public class OperacionRecuperarEmpresasYUsuarios extends Operation{
+public class RecuperarEmpresasYUsuarios extends Operation{
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {

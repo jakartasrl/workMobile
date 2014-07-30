@@ -15,7 +15,7 @@ import com.jkt.excepcion.JakartaException;
  * @author Leonel Suarez - Jakarta SRL
  */
 @OperacionBean
-public class OperacionGuardar extends Operation {
+public class Guardar extends Operation {
 
 	
 	

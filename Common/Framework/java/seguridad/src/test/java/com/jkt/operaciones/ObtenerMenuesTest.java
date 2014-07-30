@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public class OperacionObtenerMenuesTest {
+public class ObtenerMenuesTest {
 
-	private OperacionCrearMenues op=new OperacionCrearMenues();
+	private CrearMenues op=new CrearMenues();
 	
 	@Test
 	public void execute() throws Exception{

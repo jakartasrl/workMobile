@@ -9,7 +9,7 @@ import com.jkt.transformers.Notificacion;
  *
  * @author Leonel Suarez - Jakarta SRL
  */
-public class OperacionValidarExistencia extends OperacionValidar {
+public class ValidarExistencia extends Validar {
 
 	@Override
 	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws EntityNotFoundException {
