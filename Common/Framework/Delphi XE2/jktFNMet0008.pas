@@ -15,14 +15,14 @@ type
     Button1: TButton;
     Etiqueta: TLabel;
     Image1: TImage;
-    procedure LMasInfoMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
     procedure FormCreate(Sender: TObject);
     procedure LMasInfoClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure LMasInfoMouseEnter(Sender: TObject);
+    procedure LMasInfoMouseLeave(Sender: TObject);
   private
     { Private declarations }
     fMensaje : String;
@@ -45,10 +45,14 @@ implementation
 
 {$R *.DFM}
 
-procedure TFMet008.LMasInfoMouseMove(Sender: TObject; Shift: TShiftState; X,
-  Y: Integer);
+procedure TFMet008.LMasInfoMouseEnter(Sender: TObject);
 begin
   LMasInfo.Font.Color := clBlue;
+end;
+
+procedure TFMet008.LMasInfoMouseLeave(Sender: TObject);
+begin
+  LMasInfo.Font.Color := clWindowText;
 end;
 
 procedure TFMet008.FormCreate(Sender: TObject);
@@ -80,7 +84,10 @@ end;
 procedure mostrarMensErrorAbort(Mensaje : String);
 begin
   mostrarMensError(Mensaje);
-  abort;
+  // Abort raises a special "silent exception" (EAbort), which operates like any
+  // other exception (escaping from an execution path), but does not display an
+  // error message to the end user.
+  Abort;
 end;
 
 procedure TFMet008.Button1Click(Sender: TObject);
