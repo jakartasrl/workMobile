@@ -230,9 +230,8 @@
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
 				<campoSalida name="oid" value="oid" target="id" />
-<!-- 				<campoSalida name="Descripcion" value="Descripcion" target="apellido" /> -->
-				<campoSalida name="Nombre" value="Nombre" target="cadena" />
 				<campoSalida name="Descripcion" value="Descripcion" target="cadena2" />
+				<campoSalida name="Cadena" value="Cadena" target="cadena" />
 			</campoSalida>
 		</output>		
 			

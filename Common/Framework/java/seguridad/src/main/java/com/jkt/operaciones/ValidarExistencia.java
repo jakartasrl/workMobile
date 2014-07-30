@@ -14,7 +14,8 @@ public class ValidarExistencia extends Validar {
 	@Override
 	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws EntityNotFoundException {
 		if (entity==null) {
-			throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con codigo %s.", className, codigo));
+			throw new EntityNotFoundException(String.format("El codigo solicitado no existe.", className, codigo));
+//			throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con codigo %s.", className, codigo));
 		}
 		notificarObjecto(Notificacion.getNew("resultado", entity));
 	}

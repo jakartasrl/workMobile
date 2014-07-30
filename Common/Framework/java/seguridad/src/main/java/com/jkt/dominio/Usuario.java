@@ -19,12 +19,23 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	private String mail;
 	private String skin;
 	
+	/**
+	 * Obtiene la ultima password!
+	 */
+	public HistorialPassword getUltimaPassword(){
+		if (historialPassword.isEmpty()) {
+			return null;
+		}
+		int cantidadPasswords = this.historialPassword.size();
+		HistorialPassword password = this.historialPassword.get(cantidadPasswords-1);//Inicia desde cero
+		return password;
+	}
+	
 	private List<HistorialPassword> historialPassword = new ArrayList<HistorialPassword>();
 	private Set<Empresa> empresasPermitidas = new HashSet<Empresa>();
-
+	private Set<EmpresaHabilitada> empresasHabilitadas = new HashSet<EmpresaHabilitada>();
+	
 	private String password;//Elemento transiente para setear datos desde la entrada de delphi¿?
-	
-	
 	private boolean activo=true;
 
 	/**
@@ -44,7 +55,14 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	
+
+	public Set<EmpresaHabilitada> getEmpresasHabilitadas() {
+		return empresasHabilitadas;
+	}
+
+	public void setEmpresasHabilitadas(Set<EmpresaHabilitada> empresasHabilitadas) {
+		this.empresasHabilitadas = empresasHabilitadas;
+	}
 	
 	public String getPassword() {
 		return password;
@@ -53,7 +71,6 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public void addEmpresa(Empresa e) {
 		this.empresasPermitidas.add(e);
@@ -132,11 +149,11 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	}
 
 	public String getCadena() {
-		return this.getApellido();
+		return this.getNombres();
 	}
 
 	public String getCadena2() {
-		return this.getNombres();
+		return this.getApellido();
 	}
 
 	public int getEntero() {
@@ -144,17 +161,14 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	}
 
 	public int getEntero2() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public float getFloat() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public float getFloat2() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

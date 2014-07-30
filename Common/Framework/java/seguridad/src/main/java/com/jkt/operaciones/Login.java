@@ -3,6 +3,7 @@ package com.jkt.operaciones;
 import java.util.Map;
 
 import com.jkt.annotations.OperacionBean;
+import com.jkt.dominio.HistorialPassword;
 import com.jkt.dominio.Usuario;
 import com.jkt.exception.LoginException;
 import com.jkt.transformers.Notificacion;
@@ -25,15 +26,21 @@ public class Login extends Operation {
 		String usuario=(String) aParams.get("usuario");
 		String password=(String) aParams.get("password");
 		
-		if (usuario.isEmpty() || password.isEmpty()) {
-			throw new LoginException();
+		if (!validarConsistenciaDelCampo(usuario) || !validarConsistenciaDelCampo(password)) {
+			throw new LoginException("Es necesario que complete los campos.");
 		}
 		
 		Usuario user = (Usuario) this.serviceRepository.getUniqueByProperty(Usuario.class, CAMPO_USUARIO, usuario);
 		if (user==null) {
-			throw new LoginException();
+			throw new LoginException("Los datos de ingreso son erroneos. Verifique usuario y/o password.");
 		} 
 		
+		//Validando la password.
+		HistorialPassword ultimaPassword = user.getUltimaPassword();
+		if (ultimaPassword==null || !ultimaPassword.compararPasswords(password)){
+			throw new LoginException("Los datos de ingreso son erroneos. Verifique usuario y/o password.");
+		}
+//		
 		/*
 		 * TODO Persistir el objeto login en la base junto a un ID autogenerado, que sera utilizado como sesion.
 		 */
@@ -41,6 +48,13 @@ public class Login extends Operation {
 		log.info(usuario+" "+password);
 		this.notificarObjecto(Notificacion.getNew("resultado", user));
 		
+	}
+	
+	private boolean validarConsistenciaDelCampo(String value){
+		if (value==null || value.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 }

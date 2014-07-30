@@ -109,9 +109,9 @@ public class ParalelResponseListenerTransformer extends Transformer {
 	@Override
 	public void setup(ServletOutputStream outputStream, String outputName) throws JakartaException {
 		
-		if (outputName!=null || !outputName.equals("")) {
-			throw new JakartaException("El transformer paralelo no permite como salida un nombre recibido.No envíe el valor de la tabla de salida.");
-		}
+//		if (outputName!=null || !outputName.equals("")) {
+//			throw new JakartaException("El transformer paralelo no permite como salida un nombre recibido.No envíe el valor de la tabla de salida.");
+//		}
 		
 		this.servletOutputStream=outputStream;
 		List<Output> outputs = ((EventBusiness)this.getEvent()).getOutputs();
@@ -119,7 +119,7 @@ public class ParalelResponseListenerTransformer extends Transformer {
 		for (Output output : outputs) {
 			nameOfOutput = output.getName();
 			this.addWriter(nameOfOutput, outputStream);
-		}		
+		}
 	}
 
 }

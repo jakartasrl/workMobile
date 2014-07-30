@@ -2,6 +2,7 @@ package com.jkt.operaciones;
 
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.joda.time.LocalDateTime;
 
 import com.jkt.annotations.OperacionBean;
@@ -19,7 +20,7 @@ public class ActualizarPassword extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Usuario usuario=(Usuario) aParams.get("objeto");
 		HistorialPassword historialPassword = new HistorialPassword();
-		historialPassword.setPassword(usuario.getPassword().getBytes());
+		historialPassword.setPassword(DigestUtils.md5(usuario.getPassword().getBytes()));
 		historialPassword.setFechaVencimiento(LocalDateTime.now());
 		
 		usuario.addPassword(historialPassword);

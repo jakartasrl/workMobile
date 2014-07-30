@@ -46,7 +46,7 @@ public class BaseController{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
-		xmlStreamMaker.writeStartTagWarning(exceptionDS.getMessage());
+		xmlStreamMaker.writeStartTagException(exceptionDS.getMessage());
 	} 
 	
 	
@@ -55,7 +55,7 @@ public class BaseController{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
-		xmlStreamMaker.writeStartTagWarning(e.getMessage());
+		xmlStreamMaker.writeStartTagException(e.getMessage());
 	}
 	
 	@ExceptionHandler(LoginException.class)
@@ -63,8 +63,7 @@ public class BaseController{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
-//		outputStream.
-		xmlStreamMaker.writeStartTagException("Ocurrio un error al intentar acceder al sistema");
+		xmlStreamMaker.writeStartTagException(loginException.getMessage());
 	}
 	
 	@ExceptionHandler(RuntimeException.class)
@@ -91,7 +90,7 @@ public class BaseController{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
-		xmlStreamMaker.writeStartTagWarning(exception.getMessage());
+		xmlStreamMaker.writeStartTagException(exception.getMessage());
 	} 
 
 	@ExceptionHandler(JakartaException.class)
@@ -99,7 +98,7 @@ public class BaseController{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
-		xmlStreamMaker.writeStartTagWarning(exception.getMessage());
+		xmlStreamMaker.writeStartTagException(exception.getMessage());
 	} 
 	
 }

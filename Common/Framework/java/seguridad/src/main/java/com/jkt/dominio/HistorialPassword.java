@@ -1,8 +1,10 @@
 package com.jkt.dominio;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -33,43 +35,33 @@ public class HistorialPassword extends PersistentEntity {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 
-	public void setPassword(byte[] password) {
-		this.password = Base64.encodeBase64(password);
+	public byte[] getPassword() {
+		return password;
 	}
-	
+
+	public void setPassword(byte[] password) {
+		this.password = password;
+	}
+
+	public boolean compararPasswords(String passwordAComparar) {
+		byte[] passwordActual = this.getPassword();//Esta en md5
+		byte[] passwordRecibida = DigestUtils.md5(passwordAComparar.getBytes());
+		return Arrays.equals(passwordActual, passwordRecibida);
+	}
+
 	/**
 	 * Compara una password dada contra la de esta entidad.
 	 * 
 	 * @param passwordAComparar
 	 * @return
 	 */
-	public boolean compararPasswords(String passwordAComparar){
-		byte[] encodeBase64 = Base64.encodeBase64(passwordAComparar.getBytes());
-		return this.password.equals(encodeBase64);
-	}
-
-	public byte[] getPassword() {
-		return password;
-	}
+//	public boolean compararPasswords(String passwordAComparar){
+//		return this.password.equals(DigestUtils.md5(passwordAComparar));
+//		byte[] decoded = Base64.decodeBase64(this.password);
+//		byte[] encodeBase64 = Base64.encodeBase64(passwordAComparar.getBytes());
+//		return decoded.equals(passwordAComparar.getBytes());
+//	}
 
 	
-	/*
-	public static void main(String  [] args){
-//		HistorialPassword historialPassword = new HistorialPassword();
-//		historialPassword.set
-		
-		byte[] encoded = Base64.encodeBase64("leonelSuarez".getBytes());
-		System.out.println(encoded);
-		
-		String string = new String(encoded);
-		System.out.println(string);
-		
-		   //decoding byte array into base64
-        byte[] decoded = Base64.decodeBase64(encoded);      
-        System.out.println("Base 64 Decoded  String : " + new String(decoded));
-        System.out.println("Base 64 Decoded  String2 : " + Base64.decodeBase64(string));
-
-
-		
-	}*/
+	
 }
