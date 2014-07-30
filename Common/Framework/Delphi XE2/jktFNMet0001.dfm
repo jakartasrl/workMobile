@@ -2,8 +2,8 @@ object frmChild: TfrmChild
   Left = 0
   Top = 0
   Caption = 'frmChild'
-  ClientHeight = 364
-  ClientWidth = 635
+  ClientHeight = 318
+  ClientWidth = 674
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,6 @@ object frmChild: TfrmChild
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object BarManager: TdxBarManager
@@ -34,8 +33,8 @@ object frmChild: TfrmChild
       True)
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 72
-    Top = 96
+    Left = 104
+    Top = 32
     DockControlHeights = (
       0
       0
@@ -83,11 +82,11 @@ object frmChild: TfrmChild
   object Driver: TjktDriver
     NoAutoEditarDataSets = False
     OperacionSave = OperacionSave
-    OperacionTraer = operacionTraer
+    OperacionTraer = OperacionTraer
     ConfirmarCancelacion = True
     Opciones = []
     TipoPrograma = tp_abmLista
-    Left = 384
+    Left = 360
     Top = 32
   end
   object IdHTTP: TIdHTTP
@@ -104,20 +103,20 @@ object frmChild: TfrmChild
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 240
-    Top = 184
+    Left = 256
+    Top = 32
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
     IgnoreException = False
-    Left = 224
+    Left = 200
     Top = 32
   end
   object OperacionSave: TjktOperacion
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 448
+    Left = 424
     Top = 32
   end
   object mtParametroInicial: TjktMemTable
@@ -138,23 +137,27 @@ object frmChild: TfrmChild
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 536
-    Top = 48
-    object mtParametroInicialvalor: TStringField
-      FieldName = 'valor'
+    Left = 520
+    Top = 32
+    object mtParametroInicialKey: TStringField
+      FieldName = 'Key'
+      Size = 255
+    end
+    object mtParametroInicialValue: TStringField
+      FieldName = 'Value'
       Size = 255
     end
   end
-  object operacionTraer: TjktOperacion
+  object OperacionTraer: TjktOperacion
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 464
-    Top = 160
+    Left = 424
+    Top = 96
   end
   object ValidadorForm: TjktValidadorForm
     ListaValidaciones = <>
-    Left = 472
-    Top = 296
+    Left = 256
+    Top = 96
   end
 end

@@ -167,12 +167,14 @@ begin
   if Sender.Tag = 6 then
     begin
       // Maestro de Empresas
-      FNSeg0001 := TFNSeg0001.Create(frmMainForm, frmMainForm.alActions)
+      FNSeg0001 := TFNSeg0001.Create(frmMainForm);
+      FNSeg0001.InicializarChild(frmMainForm.alActions);
     end
   else if Sender.Tag = 9 then
     begin
       // Maestro de Usuarios
-      FNSeg0002 := TFNSeg0002.Create(frmMainForm, frmMainForm.alActions)
+      FNSeg0002 := TFNSeg0002.Create(frmMainForm);
+      FNSeg0002.InicializarChild(frmMainForm.alActions);
     end;
 
   // Oculto el Menu Principal

@@ -19,5 +19,6 @@ begin
   Application.ShowMainForm := False;
   Application.CreateForm(TfrmMainForm, frmMainForm);
   Application.CreateForm(TfrmMenuPrincipal, frmMenuPrincipal);
+  frmMainForm.MenuPrincipal := frmMenuPrincipal;
   Application.Run;
 end.

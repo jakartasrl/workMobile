@@ -85,7 +85,7 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="..\Common\Framework\Delphi XE2\jktFNMet0000.pas">
-				<Form>frmRibbonMain</Form>
+				<Form>frmMainForm</Form>
 			</DCCReference>
 			<DCCReference Include="..\Common\Framework\Delphi XE2\jktFNMet0001.pas">
 				<Form>frmChild</Form>

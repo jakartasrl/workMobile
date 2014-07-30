@@ -61,17 +61,16 @@ type
     procedure  validacionServer(sender :TField);
     procedure  validacionExistenciaInexistencia(sender :TField);
 
-
   protected
     { Protected declarations }
 
   public
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
-    destructor  destroy; override;
+    destructor  Destroy; override;
     procedure validar(sender : TField);
     procedure procesarResultado;
-    property ServiceCaller      :TjktServiceCaller read FServiceCaller write FServiceCaller;
+    property ServiceCaller: TjktServiceCaller read FServiceCaller write FServiceCaller;
 
   published
     { Published declarations }
@@ -81,32 +80,34 @@ type
     property OperacionEspecial  :TjktOperacion    read FOperacionEspecial  write FOperacionEspecial ;
   end;
 
-type TjktValidadorField = class(TCollectionItem)
+type
+  TjktValidadorField = class(TCollectionItem)
   private
      FField      :TField;
      FValidador  :TjktValidador;
   published
      property Field      :TField           read FField     write FField;
      property Validador  :TjktValidador    read FValidador write FValidador;
-end;
+  end;
 
 type
   TjktValidadorFieldList = class(TCollection)
-    private
-      FOwner : TComponent;
-    protected
-      function  GetOwner : TPersistent; override;
-      function  GetItem(Index: Integer): TjktValidadorField;
-      procedure SetItem(Index: Integer; Value:TjktValidadorField);
-      procedure Update(Item: TjktValidadorField);
-    public
-      constructor Create(AOwner : TComponent);
-      function add : TjktValidadorField;
-      property Items[Index: Integer]: TjktValidadorField read GetItem write SetItem;
-end;
+  private
+    FOwner : TComponent;
+  protected
+    function  GetOwner : TPersistent; override;
+    function  GetItem(Index: Integer): TjktValidadorField;
+    procedure SetItem(Index: Integer; Value:TjktValidadorField);
+    procedure Update(Item: TjktValidadorField);
+  public
+    constructor Create(AOwner : TComponent);
+    function add : TjktValidadorField;
+    property Items[Index: Integer]: TjktValidadorField read GetItem write SetItem;
+  end;
 
 
-type TjktValidadorForm = class(TComponent)
+type
+  TjktValidadorForm = class(TComponent)
   private
      FListaValidaciones         :TjktValidadorFieldList;
      FValidarCampo              :TFieldNotifyEvent;
@@ -121,7 +122,7 @@ type TjktValidadorForm = class(TComponent)
     procedure Validar(Sender: TField);
   published
      property ListaValidaciones :TjktValidadorFieldList     read FListaValidaciones     write FListaValidaciones;
-end;
+  end;
 
 procedure Register;
 

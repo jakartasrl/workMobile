@@ -57,11 +57,11 @@ type
    procedure completarOperaciones;
    procedure crearValidaciones;
   protected
-
+    procedure llamarOperacionConfiguracion; override;
 
   public
     { Public declarations }
-    procedure llamarOperacionConfiguracion;
+
   end;
 
 var
@@ -73,79 +73,81 @@ implementation
 
 procedure TFNUti0001.llamarOperacionConfiguracion;
 begin
-   //operConfig.execute;
+  operConfig.execute;
 
-   // solo para probar
-   // luego hay que descomentar la linea de arriba y borrar hasta donde esta marcado
-     mtConfigOper.Open;
-     mtConfigOper.append;
-     mtConfigOper.FieldByName('operSave').AsString := 'saveEmpresa';
-     mtConfigOper.FieldByName('operTraer').AsString  := 'traerEmpresa';
-     mtConfigoper.post;
+{
 
-    mtConfigCampos.Open;
+  // solo para probar
+  // luego hay que descomentar la linea de arriba y borrar hasta donde esta marcado
 
-    mtConfigCampos.append;
-    mtConfigCampos.fieldByName('fieldName').AsString    := 'oid';
-    mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
-    mtConfigCampos.fieldByName('longitud').AsInteger    := 0;
-    mtConfigCampos.fieldByName('visible').AsBoolean     := false;
-    mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-    mtConfigCampos.fieldByName('orden').AsInteger       := 1;
-    mtConfigCampos.fieldByName('label').AsString        := 'oid';
-
-    mtConfigCampos.append;
-    mtConfigCampos.fieldByName('fieldName').AsString    := 'codigo';
-    mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
-    mtConfigCampos.fieldByName('longitud').AsInteger    := 10;
-    mtConfigCampos.fieldByName('visible').AsBoolean     := true;
-    mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-    mtConfigCampos.fieldByName('orden').AsInteger       := 2;
-    mtConfigCampos.fieldByName('label').AsString        := 'Codigo';
+  mtConfigOper.Open;
+  mtConfigOper.append;
+  mtConfigOper.FieldByName('operSave').AsString := 'saveEmpresa';
+  mtConfigOper.FieldByName('operTraer').AsString  := 'traerEmpresa';
+  mtConfigoper.post;
 
 
-    mtConfigCampos.append;
-    mtConfigCampos.fieldByName('fieldName').AsString    := 'descripcion';
-    mtConfigCampos.fieldByName('tipo').AsString         := 'String';
-    mtConfigCampos.fieldByName('longitud').AsInteger    := 60;
-    mtConfigCampos.fieldByName('visible').AsBoolean     := true;
-    mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-    mtConfigCampos.fieldByName('orden').AsInteger       := 3;
-    mtConfigCampos.fieldByName('label').AsString        := 'Descripcion';
+  mtConfigCampos.Open;
+  mtConfigCampos.append;
+  mtConfigCampos.fieldByName('fieldName').AsString    := 'oid';
+  mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
+  mtConfigCampos.fieldByName('longitud').AsInteger    := 0;
+  mtConfigCampos.fieldByName('visible').AsBoolean     := false;
+  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
+  mtConfigCampos.fieldByName('orden').AsInteger       := 1;
+  mtConfigCampos.fieldByName('label').AsString        := 'oid';
+
+  mtConfigCampos.append;
+  mtConfigCampos.fieldByName('fieldName').AsString    := 'codigo';
+  mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
+  mtConfigCampos.fieldByName('longitud').AsInteger    := 10;
+  mtConfigCampos.fieldByName('visible').AsBoolean     := true;
+  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
+  mtConfigCampos.fieldByName('orden').AsInteger       := 2;
+  mtConfigCampos.fieldByName('label').AsString        := 'Codigo';
+
+  mtConfigCampos.append;
+  mtConfigCampos.fieldByName('fieldName').AsString    := 'descripcion';
+  mtConfigCampos.fieldByName('tipo').AsString         := 'String';
+  mtConfigCampos.fieldByName('longitud').AsInteger    := 60;
+  mtConfigCampos.fieldByName('visible').AsBoolean     := true;
+  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
+  mtConfigCampos.fieldByName('orden').AsInteger       := 3;
+  mtConfigCampos.fieldByName('label').AsString        := 'Descripcion';
+
+  mtConfigCampos.append;
+  mtConfigCampos.fieldByName('fieldName').AsString    := 'activo';
+  mtConfigCampos.fieldByName('tipo').AsString         := 'Boolean';
+  mtConfigCampos.fieldByName('longitud').AsInteger    := 0;
+  mtConfigCampos.fieldByName('visible').AsBoolean     := true;
+  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
+  mtConfigCampos.fieldByName('orden').AsInteger       := 4;
+  mtConfigCampos.fieldByName('label').AsString        := 'Activo';
 
 
-    mtConfigCampos.append;
-    mtConfigCampos.fieldByName('fieldName').AsString    := 'activo';
-    mtConfigCampos.fieldByName('tipo').AsString         := 'Boolean';
-    mtConfigCampos.fieldByName('longitud').AsInteger    := 0;
-    mtConfigCampos.fieldByName('visible').AsBoolean     := true;
-    mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-    mtConfigCampos.fieldByName('orden').AsInteger       := 4;
-    mtConfigCampos.fieldByName('label').AsString        := 'Activo';
+  mtConfigValidador.open;
+  mtConfigValidador.append;
+  mtConfigValidador.fieldByName('fieldName').AsString       := 'codigo';
+  mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'MayorCero';
+  mtConfigValidador.fieldByName('entidad').AsString    := '';
+  mtConfigValidador.fieldByName('oidName').AsString    := '';
+  mtConfigValidador.fieldByName('descrName').AsString    := '';
 
-    mtConfigValidador.open;
-    mtConfigValidador.append;
-    mtConfigValidador.fieldByName('fieldName').AsString       := 'codigo';
-    mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'MayorCero';
-    mtConfigValidador.fieldByName('entidad').AsString    := '';
-    mtConfigValidador.fieldByName('oidName').AsString    := '';
-    mtConfigValidador.fieldByName('descrName').AsString    := '';
+  mtConfigValidador.append;
+  mtConfigValidador.fieldByName('fieldName').AsString       := 'descripcion';
+  mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'DistintoEspacio';
+  mtConfigValidador.fieldByName('entidad').AsString    := '';
+  mtConfigValidador.fieldByName('oidName').AsString    := '';
+  mtConfigValidador.fieldByName('descrName').AsString    := '';
 
-       mtConfigValidador.append;
-    mtConfigValidador.fieldByName('fieldName').AsString       := 'descripcion';
-    mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'DistintoEspacio';
-    mtConfigValidador.fieldByName('entidad').AsString    := '';
-    mtConfigValidador.fieldByName('oidName').AsString    := '';
-    mtConfigValidador.fieldByName('descrName').AsString    := '';
-    // fin solo para probar
+  // fin solo para probar
 
+}
 
-   //
    crearColumnasDataset;
    crearColumnasGrilla;
    crearValidaciones;
    completarOperaciones;
-
 end;
 
 
@@ -166,9 +168,8 @@ procedure TFNUti0001.crearColumnasDataset;
 var
   name :string;
   tipo :TFieldType;
-  size, x :integer;
+  size :integer;
   fieldDef :TFieldDef;
-
 begin
   mtConfigCampos.First;
   while not mtConfigCampos.Eof do
@@ -225,7 +226,6 @@ var
   visible  :boolean;
   readOnly :boolean;
   columna  :TcxGridDBColumn;
-
 begin
   mtConfigCampos.SortFields:='orden';
   mtConfigCampos.SortDefault;
@@ -246,59 +246,54 @@ begin
        columna.DataBinding.FieldName := name;
        mtConfigCampos.Next;
     end;
-
-
 end;
 
 procedure TFNUti0001.crearValidaciones;
-  var
-   validador :TjktValidador;
-   validadorField :TjktValidadorField;
+var
+  validador :TjktValidador;
+  validadorField :TjktValidadorField;
 
-   validacion :TjktValidacion;
-   asignador  : TjktAsignadorField;
+  validacion :TjktValidacion;
+  asignador  : TjktAsignadorField;
 begin
-    mtConfigValidador.first;
-    while not mtConfigValidador.eof do
-    begin
-      validador :=TjktValidador.Create(self);
-      validador.Entidad := mtConfigValidador.fieldByName('entidad').AsString ;
+  mtConfigValidador.first;
+  while not mtConfigValidador.eof do
+  begin
+    validador :=TjktValidador.Create(self);
+    validador.Entidad := mtConfigValidador.fieldByName('entidad').AsString ;
 
-      if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'Existente'
-              then validacion := tExistente
-      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'Inexistente'
-              then validacion := tInexistente
-      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MayorCero'
-              then validacion := tMayorCero
-      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MayorIgualCero'
-              then validacion := tMayorIgualCero
-      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MenorIgualCien'
-              then validacion := tMenorIgualCien
-      else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'DistintoEspacio'
-              then validacion := tDistintoEspacio;
-      validador.Validacion := validacion;
-      validadorField := validadorForm.ListaValidaciones.add;
-      validadorField.Validador := validador;
-      validadorField.Field     := mtInput.FieldByName(mtConfigValidador.FieldByName('fieldName').AsString);
-      if validacion = tExistente
-        then begin
-              //oid
-              asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
-              asignador.FieldName := mtConfigValidador.fieldByName('oidName').AsString;
-              asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
-              // Descripcion
-              asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
-              asignador.FieldName := mtConfigValidador.fieldByName('descrName').AsString;
-              asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
-             end;
+    if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'Existente'
+            then validacion := tExistente
+    else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'Inexistente'
+            then validacion := tInexistente
+    else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MayorCero'
+            then validacion := tMayorCero
+    else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MayorIgualCero'
+            then validacion := tMayorIgualCero
+    else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'MenorIgualCien'
+            then validacion := tMenorIgualCien
+    else if mtConfigValidador.fieldByName('tipoValidacion').AsString = 'DistintoEspacio'
+            then validacion := tDistintoEspacio;
+    validador.Validacion := validacion;
+    validadorField := validadorForm.ListaValidaciones.add;
+    validadorField.Validador := validador;
+    validadorField.Field     := mtInput.FieldByName(mtConfigValidador.FieldByName('fieldName').AsString);
+    if validacion = tExistente
+      then begin
+            //oid
+            asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
+            asignador.FieldName := mtConfigValidador.fieldByName('oidName').AsString;
+            asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+            // Descripcion
+            asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
+            asignador.FieldName := mtConfigValidador.fieldByName('descrName').AsString;
+            asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+           end;
 
-      validadorField.Field.OnValidate := validadorForm.validar;
-      mtConfigValidador.Next;
-    end;
-
-
+    validadorField.Field.OnValidate := validadorForm.validar;
+    mtConfigValidador.Next;
+  end;
 end;
-
 
 
 end.

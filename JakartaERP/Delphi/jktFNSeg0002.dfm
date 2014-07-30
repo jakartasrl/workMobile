@@ -12,6 +12,7 @@ inherited FNSeg0002: TFNSeg0002
     Align = alTop
     Caption = 'Datos del Usuario'
     TabOrder = 4
+    ExplicitTop = -6
     Height = 153
     Width = 785
     object dxBevel1: TdxBevel
@@ -106,6 +107,7 @@ inherited FNSeg0002: TFNSeg0002
       Properties.Alignment = taRightJustify
       TabOrder = 8
       Transparent = True
+      OnClick = cxDBCheckBox1Click
       Width = 97
     end
     object cxDBTextEdit6: TcxDBTextEdit
@@ -215,7 +217,7 @@ inherited FNSeg0002: TFNSeg0002
       0)
   end
   inherited Driver: TjktDriver
-    OperacionTraer = OperacionTraer
+    DataSetCab = TUsuarios
     TipoPrograma = tp_Otro
     FocoEnAlta = TUsuariosCodigo
     FocoEnModificacion = TUsuariosCodigo
@@ -236,9 +238,29 @@ inherited FNSeg0002: TFNSeg0002
       item
         Dataset = TUsuarios
         Tag = 0
+      end
+      item
+        Dataset = TUsuarioEmpresas
+        Tag = 0
       end>
     Left = 704
     Top = 8
+  end
+  inherited mtParametroInicial: TjktMemTable
+    Left = 704
+    Top = 120
+  end
+  inherited OperacionTraer: TjktOperacion
+    OperName = 'TraerUsuariosYEmpresas'
+    Left = 704
+    Top = 64
+  end
+  inherited ValidadorForm: TjktValidadorForm
+    ListaValidaciones = <
+      item
+      end>
+    Left = 528
+    Top = 64
   end
   object TUsuarios: TjktMemTable
     DesignActivation = True
@@ -372,6 +394,7 @@ inherited FNSeg0002: TFNSeg0002
         DataType = ftBoolean
       end>
     IndexFieldNames = 'oid_usuario'
+    IndexName = 'TUsuarioEmpresasIndex1'
     IndexDefs = <
       item
         Name = 'TUsuarioEmpresasIndex1'
@@ -391,8 +414,8 @@ inherited FNSeg0002: TFNSeg0002
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 160
-    Top = 248
+    Left = 568
+    Top = 256
     object TUsuarioEmpresasoid_usu_emp: TIntegerField
       FieldName = 'oid_usu_emp'
     end
@@ -424,18 +447,7 @@ inherited FNSeg0002: TFNSeg0002
   end
   object dsUsuarioEmpresas: TDataSource
     DataSet = TUsuarioEmpresas
-    Left = 120
-    Top = 248
-  end
-  object OperacionTraer: TjktOperacion
-    OperName = 'TraerUsuarios'
-    EnviarTodo = False
-    Atributos = <
-      item
-        Dataset = TUsuarios
-        Tag = 0
-      end>
-    Left = 704
-    Top = 64
+    Left = 568
+    Top = 200
   end
 end

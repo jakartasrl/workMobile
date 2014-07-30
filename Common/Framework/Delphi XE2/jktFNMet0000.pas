@@ -24,7 +24,7 @@ uses
   cxBarEditItem, dxScreenTip, Vcl.ActnList, cxContainer, cxEdit, cxTextEdit,
   cxMemo, cxScrollBox, dxBevel, cxLabel, cxGroupBox, Vcl.ExtCtrls, dxSkinsForm,
   cxPC, dxSkinscxPCPainter, cxPCdxBarPopupMenu, dxTabbedMDI, jktFNMet0001,
-  Vcl.DBActns, cxSchedulerCustomControls;
+  Vcl.DBActns;
 
 type
   TfrmMainForm = class(TdxRibbonForm)
@@ -245,6 +245,7 @@ type
     procedure bbMenuPrincipalClick(Sender: TObject);
     procedure acFindRemovedExecute(Sender: TObject);
   private
+    FMenuPrincipal: TForm;
     function CreateChildForm: TfrmChild;
     function CreateNewChild: TfrmChild;
     function GetActiveChild: TfrmChild;
@@ -255,6 +256,7 @@ type
     procedure SetColorScheme(const AName: string);
 
   public
+    property MenuPrincipal: TForm read FMenuPrincipal write FMenuPrincipal;
     property ActiveChild: TfrmChild read GetActiveChild;
 
   end;
@@ -266,8 +268,6 @@ implementation
 
 {$R *.dfm}
 
-uses
-  jktFNMenuPrincipal;
 
 procedure TfrmMainForm.acCancelExecute(Sender: TObject);
 begin
@@ -372,10 +372,13 @@ end;
 
 procedure TfrmMainForm.bbMenuPrincipalClick(Sender: TObject);
 begin
+  if FMenuPrincipal = nil then
+    raise Exception.Create('Debe asignar un Menu Principal (Form) a la property ''MenuPrincipal''');
+
   // Oculto el frmMainForm y muestro el Menu Principal
   Self.Hide;
 
-  frmMenuPrincipal.Show;
+  FMenuPrincipal.Show;
 end;
 
 procedure TfrmMainForm.bbQATVisibleClick(Sender: TObject);
@@ -408,20 +411,25 @@ end;
 
 procedure TfrmMainForm.dxbtnControlBoxClick(Sender: TObject);
 begin
+{
   if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
     ActiveChild.Driver.Scheduler.ControlBox.Visible := dxbtnControlBox.Down;
+}
 end;
 
 procedure TfrmMainForm.dxbtnNavigatorClick(Sender: TObject);
 begin
+{
   if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then
     ActiveChild.Driver.Scheduler.DateNavigator.Visible := dxbtnNavigator.Down;
+}
 end;
 
 procedure TfrmMainForm.acViewTypeExecute(Sender: TObject);
 var
   ADate: TDateTime;
 begin
+{
   if (ActiveChild <> nil) and Assigned(ActiveChild.Driver.Scheduler) then begin
 
     ADate := Trunc(ActiveChild.Driver.Scheduler.SelStart);
@@ -448,6 +456,7 @@ begin
     end;
 
   end;
+}
 end;
 
 procedure TfrmMainForm.FormCreate(Sender: TObject);
@@ -512,15 +521,31 @@ begin
   acFind.Enabled := ActiveChild <> nil;
   acCancel.Enabled := acCopy.Enabled and ActiveChild.CanEdit;
 
-  if (ActiveChild <> nil) and (ActiveChild.TipoABM = abmListaConFiltro) then
+{
+
+  if (ActiveChild <> nil) and (ActiveChild.Driver.TipoPrograma = tp_abmListaConFiltro) then
     Ribbon.Contexts[0].Activate(False)
   else
     Ribbon.Contexts[0].Visible := False;
+
+}
 end;
 
 procedure TfrmMainForm.UpdateStatusBar;
+var
+  Texto: string;
+  ProgramasAbiertos: Integer;
 begin
-  RibbonStatusBar.Panels[0].Text := 'Ventanas abiertas = ' + IntToStr(MDIChildCount);
+  ProgramasAbiertos := MDIChildCount;
+
+  if ProgramasAbiertos = 0 then
+    Texto := 'Ningún programa abierto'
+  else if ProgramasAbiertos = 1 then
+    Texto := '1 programa abierto'
+  else
+    Texto := IntToStr(ProgramasAbiertos) + ' programas abiertos';
+
+  RibbonStatusBar.Panels[0].Text := Texto;
 end;
 
 end.
