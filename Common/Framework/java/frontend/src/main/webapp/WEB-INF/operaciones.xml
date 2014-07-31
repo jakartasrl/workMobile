@@ -71,8 +71,6 @@
 
 
 
-
-
 	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructura">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
@@ -111,9 +109,6 @@
 		</forms>
 		
 	</operacion>
-
-
-
 
 
 
@@ -210,13 +205,6 @@
 	<!-- 	VALIDAR IN EXISTENCIA -->
 	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.ValidarInexistencia">
 		
-		<output name="resultado" tableName="TUsuarios">
-			<campoSalida name="resultado">
-			</campoSalida>
-		</output>		
-			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
-			
 		<forms>
 			<form name="TUsuario"></form>
 		</forms>
@@ -291,11 +279,13 @@
 		
 		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="oidEmpresa" />
-				<campoSalida name="oid_usuario" value="oid_usuario" target="oidUsuario" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
-				<campoSalida name="Activo" value="Activo" target="activo" />
+				<campoSalida name="oid_usu_emp" value="oid_usu_emp" target="id" />
+				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
+				<campoSalida name="oid_usuario" value="oid_usuario" target="usuario.id" />
+				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
+				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
+				<campoSalida name="Default" value="Default" target="porDefecto" />
 			</campoSalida>
 		</output>		
 		
@@ -323,16 +313,39 @@
 		
 		<output name="TEmpresas" tableName="TEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
-				<campoSalida name="oid_usuario" value="oid_usuario" target="oidUsuario" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
-				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" />
-				<campoSalida name="Activo" value="Activo" target="activo" />
+				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
+				<campoSalida name="oid_usuario" value="oid_usuario" target="usuario.id" />
+				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
+				<campoSalida name="UrlDB" value="UrlDB" target="empresa.urlDB" />
+				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
 			</campoSalida>
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- 	RECUPERAR EMPRESAS PARA UN USUARIO -->
+	<operacion name="TraerEmpresasParaUsuarios" clase="com.jkt.operaciones.TraerEmpresasParaUsuarios">
+					
+		<output name="resultado" tableName="TUsuarioEmpresas">
+			<campoSalida name="resultado">
+<!-- 				<campoSalida name="oid_usu_emp" value="oid_usu_emp" target="id" /> -->
+				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
+<!-- 				<campoSalida name="oid_usuario" value="oid_usuario" target="usuario.id" /> -->
+				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
+				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
+				<campoSalida name="Default" value="Default" target="porDefecto" />
+			</campoSalida>
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
 			<form name="TUsuario"></form>
@@ -376,7 +389,6 @@
 		<input name="TEmpresas" keyName="objeto" clase="com.jkt.dominio.Empresa" fieldID='oid_empresa'>
 			<campoEntrada>
 				
-				<!-- Campo simple -->
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
 				<campoEntrada name="UrlDB" clase="String" metodo="setUrlDB" />
@@ -393,8 +405,10 @@
 
 	</operacion>
 	
-	<!-- 	GUARDAR USUARIO -->
-	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.Guardar">
+	
+	
+	
+	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.GuardarUsuario">
 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
 			<campoEntrada >
 				
@@ -404,16 +418,14 @@
 				<campoEntrada name="Email" clase="String" metodo="setMail" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name="password" metodo="addPassword" clase="com.jkt.dominio.HistorialPassword"> 
-					<campoEntrada name="password" clase="ByteArray" metodo="setPassword" />
+				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" >
+					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
+					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
+					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />
 				</campoEntrada>
-
+				
 			</campoEntrada>
 		</input>
-		
-		<output name="resultado" tableName="tabla">
-			<campoSalida name="objeto1" />
-		</output>		
 		
 		<forms>
 			<form name="TUsuario"></form>
@@ -421,6 +433,37 @@
 		
 	</operacion>
 	
+	
+	
+	<!-- 	GUARDAR USUARIO -->
+<!-- 	<operacion name="GuardarUsuario2" clase="com.jkt.operaciones.Guardar"> -->
+<!-- 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'> -->
+<!-- 			<campoEntrada > -->
+				
+<!-- 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" /> -->
+<!-- 				<campoEntrada name="Nombre" clase="String" metodo="setNombres" /> -->
+<!-- 				<campoEntrada name="Apellido" clase="String" metodo="setApellido" /> -->
+<!-- 				<campoEntrada name="Email" clase="String" metodo="setMail" /> -->
+<!-- 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+				
+<!-- 				<campoEntrada name="password" metodo="addPassword" clase="com.jkt.dominio.HistorialPassword">  -->
+<!-- 					<campoEntrada name="password" clase="ByteArray" metodo="setPassword" /> -->
+<!-- 				</campoEntrada> -->
+
+<!-- 			</campoEntrada> -->
+<!-- 		</input> -->
+		
+<!-- 		<output name="resultado" tableName="tabla"> -->
+<!-- 			<campoSalida name="objeto1" /> -->
+<!-- 		</output>		 -->
+		
+<!-- 		<forms> -->
+<!-- 			<form name="TUsuario"></form> -->
+<!-- 		</forms> -->
+		
+<!-- 	</operacion> -->
+	
+
 	<!-- 	ACTUALIZAR PASSWORD DE USUARIO -->
 	<operacion name="actualizarPassword" clase="com.jkt.operaciones.ActualizarPassword">
 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
@@ -429,40 +472,29 @@
 			</campoEntrada>
 		</input>
 		
-		<output name="resultado" tableName="tabla">
-			<campoSalida name="objeto1">
-			</campoSalida>
-		</output>		
-		
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
-		
 		<forms>
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
 	
 	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
-	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.Guardar">
-		<input name="usuario" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid'>
+	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.AgregarEmpresasAlUsuario">
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
 		
 			<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 			<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
 			<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
 			<campoEntrada name="Email" clase="String" metodo="setMail" />
 			<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-			
+		
 			<campoEntrada>
-				<campoEntrada name="empresa" metodo="addEmpresa" clase="com.jkt.dominio.Empresa" />
+				<campoEntrada name="empresa" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" >
+					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
+					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
+					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />
+				</campoEntrada>
 			</campoEntrada>
 		</input>
-		
-<!-- 		<output name="resultado" tableName="TUsuario"> -->
-<!-- 			<campoSalida name="objeto1"> -->
-<!-- 				<campoSalida name="campoParaMostrar1" value="campoParaMostrarEnLaSalida" target="codigo" /> -->
-<!-- 			</campoSalida> -->
-<!-- 		</output>		 -->
-		
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
 			<form name="TUsuario"></form>
@@ -471,16 +503,7 @@
 	
 	<!-- LOGIN -->
 	<operacion name="Login" clase="com.jkt.operaciones.Login">
-		<input name="TLogin" keyName="login">
-<!-- 		<input name="TLogin" keyName="login" clase="com.jkt.dominio.Login"> -->
-<!-- 			<campoEntrada> -->
-
-<!-- 				<campoEntrada name="usuario" clase="String" metodo="setUsuario" /> -->
-<!-- 				<campoEntrada name="password" clase="String" metodo="setPassword" /> -->
-
-<!-- 			</campoEntrada> -->
-			
-		</input>
+		<input name="TLogin" keyName="login" />
 		
 		<output name="resultado" tableName="TUsuario">
 			<campoSalida name="objeto1">

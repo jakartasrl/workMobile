@@ -11,32 +11,33 @@ import java.util.Set;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Usuario extends PersistentEntity implements IDescriptible{
+public class Usuario extends PersistentEntity implements IDescriptible {
 
 	private String codigo;
 	private String userName;
 	private String nombres, apellido;
 	private String mail;
 	private String skin;
-	
+
 	/**
 	 * Obtiene la ultima password!
 	 */
-	public HistorialPassword getUltimaPassword(){
+	public HistorialPassword getUltimaPassword() {
 		if (historialPassword.isEmpty()) {
 			return null;
 		}
 		int cantidadPasswords = this.historialPassword.size();
-		HistorialPassword password = this.historialPassword.get(cantidadPasswords-1);//Inicia desde cero
+		HistorialPassword password = this.historialPassword
+				.get(cantidadPasswords - 1);// Inicia desde cero
 		return password;
 	}
-	
+
 	private List<HistorialPassword> historialPassword = new ArrayList<HistorialPassword>();
-	private Set<Empresa> empresasPermitidas = new HashSet<Empresa>();
 	private Set<EmpresaHabilitada> empresasHabilitadas = new HashSet<EmpresaHabilitada>();
-	
-	private String password;//Elemento transiente para setear datos desde la entrada de delphi¿?
-	private boolean activo=true;
+
+	private String password;// Elemento transiente para setear datos desde la
+							// entrada de delphi¿?
+	private boolean activo = true;
 
 	/**
 	 * El parser hecho anteriormente no se encargaba de los atributos booleanos,
@@ -60,10 +61,11 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 		return empresasHabilitadas;
 	}
 
-	public void setEmpresasHabilitadas(Set<EmpresaHabilitada> empresasHabilitadas) {
+	public void setEmpresasHabilitadas(
+			Set<EmpresaHabilitada> empresasHabilitadas) {
 		this.empresasHabilitadas = empresasHabilitadas;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -72,8 +74,9 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 		this.password = password;
 	}
 
-	public void addEmpresa(Empresa e) {
-		this.empresasPermitidas.add(e);
+	public void agregarEmpresaHabilitada(EmpresaHabilitada empresaHabilitada) {
+		empresaHabilitada.setHabilitada(true);
+		this.empresasHabilitadas.add(empresaHabilitada);
 	}
 
 	public void addPassword(HistorialPassword password) {
@@ -90,14 +93,6 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 
 	public void ingresarNuevaPassword(HistorialPassword h) {
 		this.historialPassword.add(h);
-	}
-
-	public Set<Empresa> getEmpresasPermitidas() {
-		return empresasPermitidas;
-	}
-
-	public void setEmpresasPermitidas(Set<Empresa> empresasPermitidas) {
-		this.empresasPermitidas = empresasPermitidas;
 	}
 
 	public List<HistorialPassword> getHistorialPassword() {
@@ -171,5 +166,23 @@ public class Usuario extends PersistentEntity implements IDescriptible{
 	public float getFloat2() {
 		return 0;
 	}
+	
+	/*
+	 * Metodo utilitario para recibir datos de delphi.TRANSIENT FIELD.
+	 */
+	private List<EmpresaHabilitada> empresasHabilitadasPlanas=new ArrayList<EmpresaHabilitada>();
+	public void agregarEmpresaHabilitadaPlana(EmpresaHabilitada empresaHabilitada){
+		empresasHabilitadasPlanas.add(empresaHabilitada);
+	}
+
+	public List<EmpresaHabilitada> getEmpresasHabilitadasPlanas() {
+		return empresasHabilitadasPlanas;
+	}
+
+	public void setEmpresasHabilitadasPlanas(
+			List<EmpresaHabilitada> empresasHabilitadasPlanas) {
+		this.empresasHabilitadasPlanas = empresasHabilitadasPlanas;
+	}
+	
 
 }

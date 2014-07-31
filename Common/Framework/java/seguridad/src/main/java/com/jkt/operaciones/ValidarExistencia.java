@@ -1,7 +1,7 @@
 package com.jkt.operaciones;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.excepcion.EntityNotFoundException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.transformers.Notificacion;
 
 /**
@@ -12,10 +12,9 @@ import com.jkt.transformers.Notificacion;
 public class ValidarExistencia extends Validar {
 
 	@Override
-	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws EntityNotFoundException {
+	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws ValidacionException {
 		if (entity==null) {
-			throw new EntityNotFoundException(String.format("El codigo solicitado no existe.", className, codigo));
-//			throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con codigo %s.", className, codigo));
+			throw new ValidacionException(String.format("El codigo solicitado no existe.", className, codigo));
 		}
 		notificarObjecto(Notificacion.getNew("resultado", entity));
 	}

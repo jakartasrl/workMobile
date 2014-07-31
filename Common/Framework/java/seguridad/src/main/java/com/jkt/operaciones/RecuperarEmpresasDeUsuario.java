@@ -3,6 +3,7 @@ package com.jkt.operaciones;
 import java.util.Map;
 
 import com.jkt.dominio.Empresa;
+import com.jkt.dominio.EmpresaHabilitada;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
@@ -26,9 +27,7 @@ public class RecuperarEmpresasDeUsuario extends Operation {
 		//Luego de encontrar la entidad usuario, debo notificar la misma y tambien la lista de empresas...
 		notificarObjecto(Notificacion.getNew("TUsuario", usuario));
 		
-		long idUsuario = usuario.getId();
-		for (Empresa empresa : usuario.getEmpresasPermitidas()) {
-			empresa.setOidUsuario(String.valueOf(idUsuario));
+		for (EmpresaHabilitada empresa : usuario.getEmpresasHabilitadas()) {
 			notificarObjecto(Notificacion.getNew("TEmpresas", empresa));
 		}
 		

@@ -3,8 +3,8 @@ package com.jkt.operaciones;
 import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.excepcion.EntityNotFoundException;
-import com.jkt.transformers.Notificacion;
+import com.jkt.excepcion.ValidacionException;
+import com.jkt.util.RepositorioClases;
 
 /**
  * Operacion generica para validar existencia, o no existencia.
@@ -26,11 +26,11 @@ public abstract class Validar extends Operation{
 		String className=(String) aParams.get(ENTIDAD_FIELD);
 		
 		//Realiza la consulta a la base
-		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(className), CODIGO_FIELD, codigo);
+		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(RepositorioClases.getClass(className)), CODIGO_FIELD, codigo);
 		
 		manejarExistencia(objectRetrieved,className, codigo);
 	}
 	
-	protected abstract void manejarExistencia(PersistentEntity entity,String className, String codigo)throws EntityNotFoundException;
+	protected abstract void manejarExistencia(PersistentEntity entity,String className, String codigo)throws ValidacionException;
 
 }

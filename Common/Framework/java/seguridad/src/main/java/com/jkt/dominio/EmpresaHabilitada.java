@@ -9,10 +9,26 @@ package com.jkt.dominio;
  */
 public class EmpresaHabilitada extends PersistentEntity {
 
-	private static final long serialVersionUID = -2782650488978062493L;
-
+	private static final long serialVersionUID = 1L;
+	private Usuario usuario;
 	private Empresa empresa;
-	private boolean habilitada;
+	
+	private boolean habilitada = false;
+	private boolean porDefecto = false; // Dentro de cada usuario, que tiene una
+										// lista de empresas habilitadas, una y
+										// solamente una debe ser la empresa por
+										// defecto.
+
+	private String oidEmpresa;
+	private String oidUsuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -30,4 +46,42 @@ public class EmpresaHabilitada extends PersistentEntity {
 		this.habilitada = habilitada;
 	}
 
+	public boolean isPorDefecto() {
+		return porDefecto;
+	}
+
+	public void setPorDefecto(boolean porDefecto) {
+		this.porDefecto = porDefecto;
+	}
+
+	public String getOidEmpresa() {
+		return oidEmpresa;
+	}
+
+	public void setOidEmpresa(String oidEmpresa) {
+		this.oidEmpresa = oidEmpresa;
+	}
+
+	public String getOidUsuario() {
+		return oidUsuario;
+	}
+
+	public void setOidUsuario(String oidUsuario) {
+		this.oidUsuario = oidUsuario;
+	}
+	
+	
+	/*
+	 * Nuevamente...parche para que consulte campos booleanos...
+	 * 
+	 */
+
+	public boolean getHabilitada(){
+		return isHabilitada();
+	}
+	public boolean getPorDefecto(){
+		return isPorDefecto();
+	}
+
 }
+
