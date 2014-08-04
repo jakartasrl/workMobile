@@ -17,6 +17,7 @@ object frmChild: TfrmChild
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object BarManager: TdxBarManager
