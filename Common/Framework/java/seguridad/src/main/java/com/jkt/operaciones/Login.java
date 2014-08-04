@@ -30,7 +30,7 @@ public class Login extends Operation {
 			throw new LoginException("Es necesario que complete los campos.");
 		}
 		
-		Usuario user = (Usuario) this.serviceRepository.getUniqueByProperty(Usuario.class, CAMPO_USUARIO, usuario);
+		Usuario user = (Usuario) serviceRepository.getUniqueByProperty(Usuario.class, CAMPO_USUARIO, usuario);
 		if (user==null) {
 			throw new LoginException("Los datos de ingreso son erroneos. Verifique usuario y/o password.");
 		} 

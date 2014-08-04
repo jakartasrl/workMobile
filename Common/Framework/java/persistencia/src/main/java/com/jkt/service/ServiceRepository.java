@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import com.jkt.annotations.JKTTransactionReadOnly;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.persistencia.IServiceRepository;
+import com.jkt.persistencia.ISessionProvider;
 
 /**
  * Implementacion del servicio.
@@ -29,36 +33,54 @@ public class ServiceRepository implements IServiceRepository {
 	
 	@JKTTransaction
 	public PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		PersistentEntity save = repositorio.save(entity);
-		return save;
+		getSession().save(entity);
+		return entity;
 	}
 
-	@JKTTransaction
+	protected ISessionProvider sessionProvider;
+	
+	@Autowired
+	public void setSessionProvider(ISessionProvider sessionProvider) {
+		this.sessionProvider=sessionProvider;
+	}
+	
+	private Session getSession(){
+		return sessionProvider.getSession();
+	}
+
 	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		for (PersistentEntity persistentEntity : aEntities) {
-			repositorio.save(persistentEntity);
+			getSession().save(persistentEntity);
 		}
 		return aEntities;
 	}
-
-	@JKTTransactionReadOnly
+	
 	public List<PersistentEntity> getAll(Class clazz) throws Exception {
-		return repositorio.getAll(clazz);
+		Criteria criteria = getSession().createCriteria(clazz);
+		return criteria.list();
 	}
 
-//	@JKTTransactionReadOnly
 	public PersistentEntity getByOid(Class clazz, long id) throws Exception,EntityNotFoundException {
-		PersistentEntity entityRetrieved = repositorio.getByOid(clazz, id);
+		PersistentEntity entityRetrieved = (PersistentEntity) getSession().get(clazz, id);
 		if (entityRetrieved==null) {
 			throw new EntityNotFoundException("No existe la entidad solicitada.");
 		}
 		return entityRetrieved;
 	}
-
-	@JKTTransactionReadOnly
+	
 	public PersistentEntity getUniqueByProperty(Class className, String propertyName,	String value) {
-		return repositorio.getUniqueByFilter(className, propertyName, value);
+		Criteria criteria = getSession().createCriteria(className);
+		criteria.add(Restrictions.eq(propertyName, value));
+		return (PersistentEntity) criteria.uniqueResult();
 	}
+
+	/*
+	 * 
+	 * FALTA MODIFICAR DE ACA PARA ABAJO
+	 * 
+	 * 
+	 */
+	
 	
 	@JKTTransactionReadOnly
 	public List<PersistentEntity> getByProperty(Class className, String propertyName,	String value) {
@@ -75,9 +97,4 @@ public class ServiceRepository implements IServiceRepository {
 		return repositorio.getByFilters(className, properties);
 	}
 
-	@JKTTransactionReadOnly
-	public void executeMethodTransactional(Method method, Object instance,Object complexInstance) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		method.invoke(instance, complexInstance);
-	}
-	
 }

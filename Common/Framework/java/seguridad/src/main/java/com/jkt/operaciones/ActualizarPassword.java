@@ -26,7 +26,7 @@ public class ActualizarPassword extends Operation {
 		
 		usuario.addPassword(historialPassword);
 		
-		session.save(usuario);
+		serviceRepository.save(usuario);
 	}
 
 }

@@ -153,10 +153,28 @@ public abstract class Operation extends Observable {
 	 */
 	public void runOperation(Map<String, Object> aParams) throws Exception{
 		session = sessionProvider.getSession();
+		serviceRepository.setSessionProvider(sessionProvider);
 		Transaction tx = session.beginTransaction();
+		try{
 			execute(aParams);//UOW
-		tx.commit();
-		sessionProvider.destroySession();
+			tx.commit();
+			sessionProvider.destroySession();
+		}catch(RuntimeException exception){
+			//Hago el rollback y muestro el mensaje critido en frontend.
+			tx.rollback();
+			sessionProvider.destroySession();
+			throw new RuntimeException(exception);
+		}catch(Exception exception){
+			//Hago el rollback y muestro el mensaje critido en frontend.
+			tx.rollback();
+			sessionProvider.destroySession();
+			throw new Exception(exception);
+		}finally{
+			if (tx.isActive()) {
+				tx.commit();
+			}
+			sessionProvider.destroySession();
+		}
 	}
 	
 	public abstract void execute(Map<String, Object> aParams) throws Exception;
