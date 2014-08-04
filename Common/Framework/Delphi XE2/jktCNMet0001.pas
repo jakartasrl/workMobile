@@ -42,6 +42,8 @@ type
     FOperacionSave              :TjktOperacion;
     FOperacionTraer             :TjktOperacion;
     FActionList                 :TActionList;
+    FOperacionesOnShow          :TjktOperacionesList;
+    FOperacionesDefault         :TjktOperacionesList;
     { Agregar  :
         FiltroActivos
         FiltroInActivos
@@ -54,7 +56,6 @@ type
     FOnReHabilitar              :TNotifyEvent;
     FOnCancel                   :TNotifyEvent;
     FOnCompletarCampos          :TNotifyEvent;
-    FOnCustomOper               :TNotifyEvent;
     FOnFiltroActivos            :TNotifyEvent;
     FOnFiltroInActivos          :TNotifyEvent;
     FOnOperacionTraer           :TNotifyEvent;
@@ -89,7 +90,6 @@ type
     procedure DoOperacionTraer;
     procedure DoEjecutar;
     procedure DoNuevo;
-    procedure DoCustomOper;
     procedure DoGuardar;
     procedure DoCustomToolButton;
     procedure abrirDataSets;
@@ -102,7 +102,8 @@ type
     procedure DoDesInhibirCamposNoModificables;
     procedure DoInhibirCamposNoModificables;
     procedure modificarReadOnly(aValue :boolean);
-    
+    procedure ejecutarListaOperaciones(aListaOper :TjktOperacionesList) ;
+
   protected
     { Protected declarations }
     FOpciones : TjktOpciones;
@@ -116,7 +117,6 @@ type
     destructor  Destroy; override;
     procedure Inicio;
     procedure New;
-    procedure CustomOperation;
     procedure Eliminar;
     procedure Rehabilitar;
     procedure Guardar;
@@ -127,10 +127,13 @@ type
     procedure Imprimir;
     procedure CustomToolButton;
     procedure OpenRehabilitar;
+    procedure doOperacionesOnShow;
+    procedure doOperacionesDefault;
     function  CanClose: Boolean;
     function  esNuevo(): Boolean;
     function  esAbrir(): Boolean;
     function  Cancelar: Boolean;
+
 
   published
     { Published declarations }
@@ -146,6 +149,8 @@ type
     property TipoPrograma          : TjktTipoPrograma read FTipoPrograma write FTipoPrograma;
     property FocoEnAlta            : TField read FFocoEnAlta         write FFocoEnAlta;
     property FocoEnModificacion    : TField read FFocoEnModificacion write FFocoEnModificacion;
+    property OperacionesOnShow     : TjktOperacionesList read FOperacionesOnShow   write FOperacionesOnShow;
+    property OperacionesDefault    : TjktOperacionesList read FOperacionesDefault  write FOperacionesDefault;
 
     property OnSetDefaults         :TNotifyEvent read FOnSetDefaults        write FOnSetDefaults;
     property OnEliminar            :TNotifyEvent read FOnEliminar           write FOnEliminar;
@@ -157,7 +162,6 @@ type
     property OnFiltrar             :TNotifyEvent read FOnFiltrar            write FOnFiltrar;
     property OnEjecutar            :TNotifyEvent read FOnEjecutar write FOnEjecutar;
     property OnNuevo               :TNotifyEvent read FOnNuevo write FOnNuevo;
-    property OnCustomOper          :TNotifyEvent read FOnCustomOper write FOnCustomOper;
     property OnGuardar             :TNotifyEvent read FOnGuardar write FOnGuardar;
     property OnCustomToolButton    :TNotifyEvent read FOnCustomToolButton write FOnCustomToolButton;
     property OnImprimir            :TNotifyEvent read FOnImprimir write FOnImprimir;
@@ -234,10 +238,6 @@ begin
   end;
 end;
 
-procedure TjktDriver.CustomOperation;
-begin
-  Self.DoCustomOper;
-end;
 
 procedure TjktDriver.OpenRehabilitar;
 begin
@@ -316,8 +316,7 @@ end;
 
 procedure TjktDriver.DoSetDefaults;
 begin
-  if Assigned(FOnSetDefaults)
-     then FOnSetDefaults(self);
+   self.doOperacionesDefault;
 end;
 
 
@@ -491,10 +490,6 @@ begin
   Self.DoSetFocoAlta;
 end;
 
-
-procedure TjktDriver.DoCustomOper;
-begin
-end;
 
 procedure TjktDriver.DoGuardar;
 begin
@@ -767,5 +762,32 @@ begin
 end;
 
 
+
+procedure TjktDriver.ejecutarListaOperaciones(aListaOper :TjktOperacionesList) ;
+var
+  x:integer;
+  operItem : TjktOperacionItemList;
+begin
+  if not assigned(aListaOper)
+     then exit;
+  for x := 0 to aListaOper.Count -1  do
+    begin
+       operItem := TjktOperacionItemList(aListaOper.Items[x]);
+       if assigned (operItem.Operacion)
+          then  operItem.Operacion.execute;
+    end;
+end;
+
+procedure TjktDriver.doOperacionesOnShow;
+begin
+    ejecutarListaOperaciones(FOperacionesOnShow);
+end;
+
+procedure TjktDriver.doOperacionesDefault;
+begin
+    ejecutarListaOperaciones(FOperacionesDefault);
+end;
+
 end.
+
 

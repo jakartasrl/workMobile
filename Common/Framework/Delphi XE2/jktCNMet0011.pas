@@ -83,11 +83,16 @@ type
 type
   TjktValidadorField = class(TCollectionItem)
   private
-     FField      :TField;
-     FValidador  :TjktValidador;
+     FField                :TField;
+     FValidadorNew         :TjktValidador;
+     FValidadorModif       :TjktValidador;
+     FValidadorGral        :TjktValidador;
+
   published
-     property Field      :TField           read FField     write FField;
-     property Validador  :TjktValidador    read FValidador write FValidador;
+     property Field                :TField           read FField               write FField;
+     property ValidadorNew         :TjktValidador    read FValidadorNew        write FValidadorNew;
+     property ValidadorModif       :TjktValidador    read FValidadorModif      write FValidadorModif;
+     property ValidadorGral        :TjktValidador    read FValidadorGral       write FValidadorGral;
   end;
 
 type
@@ -112,7 +117,7 @@ type
      FListaValidaciones         :TjktValidadorFieldList;
      FValidarCampo              :TFieldNotifyEvent;
      procedure agregarValidacion(validadorField :TjktValidadorField);
-  //   procedure Validar(Sender: TField);
+     function  isEstadoNew :boolean;
 
   public
     { Public declarations }
@@ -127,6 +132,7 @@ type
 procedure Register;
 
 implementation
+uses jktCNMet0001;
 
 procedure Register;
 begin
@@ -333,6 +339,7 @@ begin
      end;
 end;
 
+
 procedure TjktValidadorForm.agregarValidacion(validadorField : TjktValidadorField);
 var
   x: integer;
@@ -353,16 +360,45 @@ procedure TjktValidadorForm.Validar(Sender: TField);
 var
   x: integer;
   validadorField :TjktValidadorField;
+  isNew :boolean;
 begin
+   isNew := isEstadoNew;
    for x:=0 to FListaValidaciones.Count -1 do
      begin
         validadorField := TjktValidadorField (FListaValidaciones.Items[x]);
         if validadorField.Field = sender
-            then if not validadorField.Validador.ServiceCaller.ModoExecute
-                    then  validadorField.Validador.validar(sender);
+            then begin
+                 if (isNew)  and ( validadorField.ValidadorNew <> nil) and (not validadorField.ValidadorNew.ServiceCaller.ModoExecute)
+                      then  validadorField.ValidadorNew.validar(sender)
+                 else
+                 if (isNew = false)  and ( validadorField.ValidadorModif <> nil) and (not validadorField.ValidadorModif.ServiceCaller.ModoExecute)
+                      then  validadorField.ValidadorModif.validar(sender)
+                 else
+                 if (validadorField.ValidadorGral <> nil) and (not validadorField.ValidadorGral.ServiceCaller.ModoExecute)
+                      then  validadorField.ValidadorGral.validar(sender);
+
+                 end;
      end;
 end;
 
+
+function TjktValidadorForm.isEstadoNew: boolean;
+var
+x:integer;
+driver :TjktDriver;
+begin
+  driver := nil;
+  for x := 0 to owner.ComponentCount -1 do
+    begin
+       if owner.Components[x] is TjktDriver
+          then driver := TjktDriver(owner.Components[x]);
+    end;
+  result := false;
+  if driver <> nil
+    then result := driver.esNuevo;
+
+
+end;
 //--------------------------------------------------------
 
 constructor TjktValidadorFieldList.Create(AOwner: TComponent);
