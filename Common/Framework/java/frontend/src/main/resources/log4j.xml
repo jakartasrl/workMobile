@@ -11,35 +11,35 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.jkt.controller">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="com.jkt.controller"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
-	<logger name="com.jkt.operaciones">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="com.jkt.operaciones"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
 	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.core"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.beans"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.context"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="org.springframework.web"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 
 	<!-- Root Logger -->
-	<root>
-		<priority value="warn" />
-		<appender-ref ref="console" />
-	</root>
+<!-- 	<root> -->
+<!-- 		<priority value="warn" /> -->
+<!-- 		<appender-ref ref="console" /> -->
+<!-- 	</root> -->
 	
 </log4j:configuration>

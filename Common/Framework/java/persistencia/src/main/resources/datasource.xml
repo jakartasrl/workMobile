@@ -40,6 +40,7 @@
                 <value>classpath:mappings/Empresa.hbm.xml</value>
                 <value>classpath:mappings/Usuario.hbm.xml</value>
                 <value>classpath:mappings/HistorialPassword.hbm.xml</value>
+                <value>classpath:mappings/EmpresaHabilitada.hbm.xml</value>
 
                 <value>classpath:mappings/Menu.hbm.xml</value>
                 <value>classpath:mappings/TextosMenu.hbm.xml</value>
@@ -51,6 +52,7 @@
                 <value>classpath:mappings/Idioma.hbm.xml</value>
                 <value>classpath:mappings/Pais.hbm.xml</value>
                 <value>classpath:mappings/Provincia.hbm.xml</value>
+                
 
             </list>
 		</property>

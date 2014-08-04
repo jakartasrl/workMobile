@@ -29,8 +29,8 @@ public class EmptyTransformer extends Transformer {
 
 	@Override
 	public void write() throws JakartaException {
-		//do nothing
 		try {
+			getWriter().writeStartTag();
 			getWriter().write();
 			getWriter().writeEndTag();
 		} catch (IOException e) {
@@ -40,22 +40,9 @@ public class EmptyTransformer extends Transformer {
 
 	@Override
 	public void setup(ServletOutputStream outputStream, String outputName) throws JakartaException {
-		
-		if (outputName!=null || !outputName.equals("")) {
-			throw new JakartaException("El transformer paralelo no permite como salida un nombre recibido.No envíe el valor de la tabla de salida.");
-		}
-		
-		//do nothing
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
 		this.setWriter(xmlStreamMaker);
-		try {
-			getWriter().writeStartTag();
-		} catch (IOException e) {
-		}
-
-		
-		
 	}
 
 }

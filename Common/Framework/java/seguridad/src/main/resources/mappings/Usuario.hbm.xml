@@ -18,9 +18,9 @@
 		<property name="mail" column="MAIL" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 
-		<set name="empresasPermitidas" table="USUARIO_EMPRESAS" inverse="false" lazy="false" fetch="select" cascade="all">
+		<set name="empresasHabilitadas" table="EMPRESAS_HABILITADAS" lazy="false" fetch="select" cascade="all">
 			<key column="USUARIO_ID" />
-			<many-to-many column="EMPRESA_ID" class="com.jkt.dominio.Empresa" />
+			<one-to-many class="com.jkt.dominio.EmpresaHabilitada"/>
 		</set>
 
 		<list name="historialPassword" table="HISTORIAL_PASSWORD" lazy="false" cascade="all">

@@ -13,6 +13,7 @@ import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.excepcion.ExceptionValidacion;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.exception.LoginException;
 import com.jkt.framework.writers.XMLStreamMaker;
 
@@ -47,11 +48,19 @@ public class BaseController{
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
 		xmlStreamMaker.writeStartTagException(exceptionDS.getMessage());
-	} 
+	}
 	
 	
 	@ExceptionHandler(EntityNotFoundException.class)
 	public @ResponseBody void manejarEntityNotFoundException(EntityNotFoundException e) throws IOException{
+		outputStream.flush();
+		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
+		xmlStreamMaker.setStream(outputStream);
+		xmlStreamMaker.writeStartTagException(e.getMessage());
+	}
+
+	@ExceptionHandler(ValidacionException.class)
+	public @ResponseBody void manejarValidacionException(ValidacionException e) throws IOException{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);

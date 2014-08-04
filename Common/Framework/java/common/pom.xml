@@ -27,6 +27,14 @@
 			<version>2.1</version>
 		</dependency>
 
+		<!-- digester dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-digester3</artifactId>
+			<version>3.2</version>
+			<classifier>with-deps</classifier>
+		</dependency>
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

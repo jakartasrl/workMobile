@@ -38,6 +38,7 @@ import com.jkt.xmlreader.XMLEntity;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public abstract class RequestProcessor extends BaseController{
 	
+	private static final String KEY_NOMBRE_OPERACION = "op";
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
 	@Autowired
@@ -71,7 +72,7 @@ public abstract class RequestProcessor extends BaseController{
 		MapDS parameters = (MapDS) retrieveParameters(request);
 		
 		log.debug("Recuperando nombre y objeto de operacion.");
-		String operationName = parameters.getString("op");
+		String operationName = parameters.getString(KEY_NOMBRE_OPERACION);
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {

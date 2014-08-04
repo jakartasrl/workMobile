@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!DOCTYPE elementos [
+	<!ELEMENT elementos			(elemento*)>
+	<!ELEMENT elemento			EMPTY>
+
+	<!ATTLIST elemento	key		CDATA 	#REQUIRED>
+	<!ATTLIST elemento	value	CDATA   #REQUIRED>
+  
+]>
+
+<elementos>
+	<elemento key="empresa" value="com.jkt.dominio.Empresa" />
+	<elemento key="usuario" value="com.jkt.dominio.Usuario" />
+</elementos>
