@@ -15,6 +15,7 @@ object FMet008: TFMet008
   FormStyle = fsStayOnTop
   KeyPreview = True
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -28,7 +29,6 @@ object FMet008: TFMet008
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 508
     object LMasInfo: TLabel
       Left = 8
       Top = 85
@@ -109,8 +109,6 @@ object FMet008: TFMet008
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 1
-    ExplicitWidth = 508
-    ExplicitHeight = 1
     object MemoDetalle: TMemo
       Left = 5
       Top = 5
@@ -124,7 +122,6 @@ object FMet008: TFMet008
       ReadOnly = True
       ShowHint = True
       TabOrder = 0
-      ExplicitWidth = 498
     end
   end
 end

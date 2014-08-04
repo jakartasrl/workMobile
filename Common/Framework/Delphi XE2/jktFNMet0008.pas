@@ -71,10 +71,9 @@ procedure mostrarMensError(Mensaje : String);
 var
   FormError : TFMet008;
 begin
-
   FormError := TFMet008.Create(Nil);
   FormError.setMensaje(Mensaje);
-  FormError.Etiqueta.Caption := FormError.GetMensaje(); 
+  FormError.Etiqueta.Caption := FormError.GetMensaje();
   FormError.MemoDetalle.Lines.Clear;
   FormError.MemoDetalle.Lines.Add(FormError.getMensajeCuerpo());
   FormError.ShowModal;

@@ -21,7 +21,7 @@ object frmMainForm: TfrmMainForm
     Left = 0
     Top = 0
     Width = 780
-    Height = 159
+    Height = 158
     ApplicationButton.Glyph.Data = {
       1E210000424D1E21000000000000360000002800000027000000360000000100
       200000000000E820000000000000000000000000000000000000DEDEDEFFDEDE
@@ -292,7 +292,7 @@ object frmMainForm: TfrmMainForm
     ApplicationButton.ScreenTip = stAppMenu
     ApplicationButton.Menu = BackstageView
     BarManager = BarManager
-    ColorSchemeName = 'Black'
+    ColorSchemeName = 'Whiteprint'
     PopupMenuItems = [rpmiItems, rpmiQATAddRemoveItem, rpmiMinimizeRibbon]
     QuickAccessToolbar.Toolbar = dxbQAT
     Contexts = <
@@ -407,7 +407,7 @@ object frmMainForm: TfrmMainForm
     Font.Style = []
     ExplicitTop = 477
     object dxRibbonStatusBar1Container1: TdxStatusBarContainerControl
-      Left = 135
+      Left = 137
       Top = 0
       Width = 52
       Height = 23
@@ -482,7 +482,7 @@ object frmMainForm: TfrmMainForm
         Height = 60
         Width = 700
         object bvSpacer4: TBevel
-          Left = 566
+          Left = 658
           Top = 0
           Width = 42
           Height = 60
@@ -512,8 +512,9 @@ object frmMainForm: TfrmMainForm
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 524
           Height = 60
-          Width = 524
+          Width = 616
         end
         object lbbvTabCaption2013: TcxLabel
           Left = 42
@@ -529,6 +530,7 @@ object frmMainForm: TfrmMainForm
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
+          ExplicitWidth = 524
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -572,15 +574,14 @@ object frmMainForm: TfrmMainForm
             ExplicitHeight = 314
           end
           object dxBevel1: TdxBevel
-            Left = 303
+            Left = 304
             Top = 0
-            Width = 2
+            Width = 1
             Height = 194
             Align = alRight
             AutoSize = True
             Shape = dxbsLineLeft
-            ExplicitLeft = 304
-            ExplicitHeight = 314
+            ExplicitLeft = 303
           end
         end
         object gbRecentPathsPane: TcxScrollBox
@@ -795,7 +796,7 @@ object frmMainForm: TfrmMainForm
   end
   object cxSmallImages: TcxImageList
     FormatVersion = 1
-    DesignInfo = 8913462
+    DesignInfo = 7340734
     ImageInfo = <
       item
         Image.Data = {
@@ -2866,7 +2867,7 @@ object frmMainForm: TfrmMainForm
     Height = 32
     Width = 32
     FormatVersion = 1
-    DesignInfo = 5767814
+    DesignInfo = 3670718
     ImageInfo = <
       item
         Image.Data = {
@@ -9527,7 +9528,7 @@ object frmMainForm: TfrmMainForm
       B0FFF9D4ACFFF9D3AAFFF8D0A6FFF8CEA3FFE4AC79FF00000000}
     StandardFooter.Text = 'Visita www.jakartasrl.com.ar'
     Left = 488
-    Top = 32
+    Top = 8
     object stBold: TdxBarScreenTip
       Header.Text = 'Bold'
       Description.Text = 'Make the selected text bold'
@@ -12369,8 +12370,8 @@ object frmMainForm: TfrmMainForm
   end
   object alActions: TActionList
     Images = cxSmallImages
-    Left = 425
-    Top = 136
+    Left = 289
+    Top = 184
     object acNew: TAction
       Caption = '&Nuevo'
       Hint = 'Nuevo'
@@ -12569,8 +12570,8 @@ object frmMainForm: TfrmMainForm
     MenuAnimations = maFade
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 488
-    Top = 136
+    Left = 344
+    Top = 184
     DockControlHeights = (
       0
       0
@@ -12678,7 +12679,7 @@ object frmMainForm: TfrmMainForm
     object dxbClipboard: TdxBar
       Caption = 'Portapapeles'
       CaptionButtons = <>
-      DockedLeft = 460
+      DockedLeft = 456
       DockedTop = 0
       FloatLeft = 390
       FloatTop = 356
@@ -12748,7 +12749,7 @@ object frmMainForm: TfrmMainForm
     object dxbEditing: TdxBar
       Caption = 'Modificaci'#243'n'
       CaptionButtons = <>
-      DockedLeft = 242
+      DockedLeft = 240
       DockedTop = 0
       FloatLeft = 661
       FloatTop = 344
@@ -14145,9 +14146,9 @@ object frmMainForm: TfrmMainForm
   end
   object dxSkinController: TdxSkinController
     NativeStyle = False
-    SkinName = 'Black'
+    SkinName = 'Whiteprint'
     Left = 624
-    Top = 32
+    Top = 8
   end
   object dxTabbedMDIManager: TdxTabbedMDIManager
     Active = True
@@ -14157,6 +14158,6 @@ object frmMainForm: TfrmMainForm
     TabProperties.CustomButtons.Buttons = <>
     TabProperties.Options = [pcoAlwaysShowGoDialogButton, pcoCloseButton, pcoGradient, pcoGradientClientArea, pcoRedrawOnResize]
     Left = 360
-    Top = 32
+    Top = 8
   end
 end

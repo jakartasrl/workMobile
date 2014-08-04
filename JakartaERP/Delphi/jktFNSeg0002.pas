@@ -63,7 +63,7 @@ type
     TUsuarioEmpresasoid_usuario: TIntegerField;
     TUsuarioEmpresasCodigo: TStringField;
     TUsuarioEmpresasRazonSocial: TStringField;
-    TUsuarioEmpresasActivo: TBooleanField;
+    TUsuarioEmpresasHabilitada: TBooleanField;
     TUsuarioEmpresasDefault: TBooleanField;
     dbgUsuarioEmpresasDBTableView1oid_usu_emp: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1oid_usuario: TcxGridDBColumn;
@@ -71,10 +71,13 @@ type
     dbgUsuarioEmpresasDBTableView1Codigo: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1RazonSocial: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn;
-    dbgUsuarioEmpresasDBTableView1Activo: TcxGridDBColumn;
+    dbgUsuarioEmpresasDBTableView1Habilitada: TcxGridDBColumn;
     valUsuario: TjktValidador;
     valUsuario2: TjktValidador;
+    OperTraerEmpresas: TjktOperacion;
+    cxDBCheckBox2: TcxDBCheckBox;
     procedure cxDBCheckBox1Click(Sender: TObject);
+    procedure DriverSetDefaults(Sender: TObject);
   private
     { Private declarations }
   public
@@ -113,6 +116,13 @@ begin
   end;
 }
 
+end;
+
+procedure TFNSeg0002.DriverSetDefaults(Sender: TObject);
+begin
+  inherited;
+
+  OperTraerEmpresas.execute;
 end;
 
 end.
