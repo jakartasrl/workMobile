@@ -40,10 +40,10 @@ import com.jkt.xmlreader.ElementTransformer;
 public abstract class Operation extends Observable {
 	protected static final Logger log = Logger.getLogger(Operation.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
-	
 	private ISessionProvider sessionProvider;
+	protected Session session;
+	protected IServiceRepository serviceRepository;
+	protected IEventBusiness ev;
 
 	
 	public ISessionProvider getSessionProvider() {
@@ -55,28 +55,13 @@ public abstract class Operation extends Observable {
 		this.sessionProvider = sessionProvider;
 	}
 
-	protected Session session;
 	
 	protected void destroySession(){
 		session.close();
 		session=null;
 	}
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	protected IServiceRepository serviceRepository;
-
-	protected IEventBusiness ev;
-
-	public Operation() {
-	}
+	public Operation() {}
 
 	public IHeaderDataSet getHeaderDataSet(String aTabName) {
 		return ev.getHeaderDataSet(aTabName);

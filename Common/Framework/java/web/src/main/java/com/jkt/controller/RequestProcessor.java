@@ -46,9 +46,9 @@ public abstract class RequestProcessor extends BaseController{
 	@Autowired
 	protected SessionProvider sessionProvider;
 	
-	@Autowired
-	private SessionFactory sessionFactory;
-	
+//	@Autowired
+//	private SessionFactory sessionFactory;
+//	
 	@Autowired
 	protected IServiceRepository serviceRepository;
 	
@@ -140,7 +140,7 @@ public abstract class RequestProcessor extends BaseController{
 		Object newInstance = forName.newInstance();
 		Operation op=(Operation)newInstance;
 		op.setServiceRepository(serviceRepository);
-		op.setSessionFactory(sessionFactory);
+//		op.setSessionFactory(sessionFactory);
 		op.setSessionProvider(sessionProvider);
 		return op;
 	}

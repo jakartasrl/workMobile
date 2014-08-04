@@ -111,12 +111,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		session = sessionProvider.getSession();
 		Transaction tx = session.beginTransaction();
-			
 			Map map = adaptRequestHook(input, operation);
-		
 		tx.commit();
-//		session.close();
-//		session=null;
 		return map;
 	}
 	
