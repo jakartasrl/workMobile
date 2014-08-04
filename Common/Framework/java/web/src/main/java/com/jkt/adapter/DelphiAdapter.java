@@ -20,7 +20,9 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.persistencia.IServiceRepository;
+import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
+import com.jkt.service.SessionProvider;
 import com.jkt.util.Campos;
 import com.jkt.util.MapDS;
 import com.jkt.util.Registro;
@@ -49,10 +51,13 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
 
-	@Autowired
-	private SessionFactory sessionFactory;
-	private Session session;
 	
+	private ISessionProvider sessionProvider;
+	
+//	@Autowired
+//	private SessionFactory sessionFactory;
+	private Session session;
+//	
 	
 	/*
 	 * Definición de estregias para el guardado de parametros.
@@ -104,14 +109,14 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 */
 	
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
-		session = sessionFactory.openSession();
+		session = sessionProvider.getSession();
 		Transaction tx = session.beginTransaction();
 			
 			Map map = adaptRequestHook(input, operation);
 		
 		tx.commit();
-		session.close();
-		session=null;
+//		session.close();
+//		session=null;
 		return map;
 	}
 	
@@ -440,6 +445,11 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	
 	private boolean esTabla(Object obj){
 		return obj instanceof Tabla;
+	}
+
+	@Autowired
+	public void setSession(SessionProvider sessionProvider) {
+		this.sessionProvider=sessionProvider;
 	}
 
 }

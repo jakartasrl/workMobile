@@ -152,11 +152,6 @@
 			<version>1.7.1.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>jkt.com</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>com.jkt</groupId>
 			<artifactId>context</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

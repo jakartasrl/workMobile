@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.springframework.stereotype.Component;
 
 import com.jkt.request.EventBusiness;
+import com.jkt.service.SessionProvider;
 
 /**
  * 
@@ -32,5 +33,7 @@ public interface Adapter<T,T2> {
 	 * @throws Exception 
 	 */
 	public T adaptRequest(T2 input, EventBusiness operation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, Exception;
+
+	public void setSession(SessionProvider sessionProvider);
 
 }

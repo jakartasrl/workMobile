@@ -20,8 +20,6 @@ public class ActualizarPassword extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Usuario usuario=(Usuario) aParams.get("objeto");
 		
-//		usuario = (Usuario) session.get(usuario.getClass(), usuario.getId());
-		
 		HistorialPassword historialPassword = new HistorialPassword();
 		historialPassword.setPassword(DigestUtils.md5(usuario.getPassword().getBytes()));
 		historialPassword.setFechaVencimiento(LocalDateTime.now());
@@ -29,7 +27,6 @@ public class ActualizarPassword extends Operation {
 		usuario.addPassword(historialPassword);
 		
 		session.save(usuario);
-//		this.serviceRepository.save(usuario);
 	}
 
 }

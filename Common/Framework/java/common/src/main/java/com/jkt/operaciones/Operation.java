@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.framework.writers.IHeaderDataSet;
 import com.jkt.persistencia.IServiceRepository;
+import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
@@ -41,14 +42,21 @@ public abstract class Operation extends Observable {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	private ISessionProvider sessionProvider;
+
+	
+	public ISessionProvider getSessionProvider() {
+		return sessionProvider;
+	}
+
+	@Autowired
+	public void setSessionProvider(ISessionProvider sessionProvider) {
+		this.sessionProvider = sessionProvider;
+	}
 
 	protected Session session;
 	
-	protected Session getSession() {
-		session= this.sessionFactory.openSession();
-		return session;
-	}
-
 	protected void destroySession(){
 		session.close();
 		session=null;
@@ -159,11 +167,11 @@ public abstract class Operation extends Observable {
 	 *             guardarle dentro de {@link Exception}
 	 */
 	public void runOperation(Map<String, Object> aParams) throws Exception{
-		Session session = getSession();
+		session = sessionProvider.getSession();
 		Transaction tx = session.beginTransaction();
 			execute(aParams);//UOW
 		tx.commit();
-		destroySession();
+		sessionProvider.destroySession();
 	}
 	
 	public abstract void execute(Map<String, Object> aParams) throws Exception;

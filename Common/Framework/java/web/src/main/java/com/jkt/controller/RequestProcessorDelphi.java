@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,6 +41,11 @@ import com.jkt.util.Tabla;
 public class RequestProcessorDelphi extends RequestProcessor{
 
 	private static final String TIPO_CLIENTE = "Delphi";
+
+	@PostConstruct
+	public void inyectarSessionEnAdapter(){
+		delphiAdapter.setSession(sessionProvider);
+	}
 	
 	@Autowired(required=true)
 	@Qualifier("delphiAdapter")
