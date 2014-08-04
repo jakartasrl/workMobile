@@ -3,6 +3,8 @@ package com.jkt.operaciones;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.Empresa;
 import com.jkt.dominio.EmpresaHabilitada;
