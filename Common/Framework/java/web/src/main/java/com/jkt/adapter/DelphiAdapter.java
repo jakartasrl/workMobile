@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -47,17 +50,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String BOOLEAN_TYPE = "Boolean";
 
 	@Autowired
-	private IServiceRepository repository;
-
+	private SessionFactory sessionFactory;
+	private Session session;
 	
-	public IServiceRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(IServiceRepository repository) {
-		this.repository = repository;
-	}
-
+	
 	/*
 	 * Definición de estregias para el guardado de parametros.
 	 * Básicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
@@ -108,6 +104,18 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 */
 	
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
+		session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+			
+			Map map = adaptRequestHook(input, operation);
+		
+		tx.commit();
+		session.close();
+		session=null;
+		return map;
+	}
+	
+	private Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		
 		final HashMap<String, Object> finalResult = new HashMap<String, Object>();
 		String keyName="";
@@ -259,13 +267,13 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								/*
 								 * PROXY INITIALIZATION EXCEPTION
 								 */
-								if (idObject>0) {
-									//ejecuta transaccionalmente el metodo!
-									this.repository.executeMethodTransactional(method, instance, complexInstance);
-									
-								}else{
+//								if (idObject>0) {
+//									//ejecuta transaccionalmente el metodo!
+//									this.repository.executeMethodTransactional(method, instance, complexInstance);
+//									
+//								}else{
 									method.invoke(instance,complexInstance);
-								}
+//								}
 								
 							}
 							/*
@@ -333,7 +341,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			newInstance	= clazz.newInstance();
 		}else{
 			try{
-				newInstance=repository.getByOid(clazz, oid);
+				newInstance=session.get(clazz, oid);
 			}catch(Exception e){
 				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz, String.valueOf(oid)));
 			}

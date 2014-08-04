@@ -166,5 +166,10 @@
 			<artifactId>produccion</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jkt</groupId>
+			<artifactId>seguridad</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

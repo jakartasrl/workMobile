@@ -46,7 +46,7 @@ public class ServiceRepository implements IServiceRepository {
 		return repositorio.getAll(clazz);
 	}
 
-	@JKTTransactionReadOnly
+//	@JKTTransactionReadOnly
 	public PersistentEntity getByOid(Class clazz, long id) throws Exception,EntityNotFoundException {
 		PersistentEntity entityRetrieved = repositorio.getByOid(clazz, id);
 		if (entityRetrieved==null) {
