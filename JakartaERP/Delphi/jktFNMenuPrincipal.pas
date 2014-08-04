@@ -33,7 +33,6 @@ type
     cds_MenuUsuarioesGrupo: TBooleanField;
     cds_MenuUsuarioesItemDeGrupo: TBooleanField;
     cds_MsjsCliente: TClientDataSet;
-    dxSkinController: TdxSkinController;
     cxGroupBox1: TcxGroupBox;
     cxLabel1: TcxLabel;
     cds_MsjsJakarta: TClientDataSet;
@@ -129,8 +128,8 @@ type
     procedure tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
     procedure tcaExitClick(Sender: TdxTileControlActionBarItem);
     procedure tci_MsjsVariosClick(Sender: TdxTileControlItem);
-    procedure txtPasswordKeyPress(Sender: TObject; var Key: Char);
-    procedure cxButton1Click(Sender: TObject);
+    procedure txtPasswordKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     procedure OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
 
@@ -289,12 +288,6 @@ begin
 
 end;
 
-procedure TfrmMenuPrincipal.cxButton1Click(Sender: TObject);
-begin
-  cxPageControl.ActivePageIndex := 2;
-  cxGroupBox3.Left :=  (cxTabSheet3.Width div 2) - (cxGroupBox3.Width div 2);
-end;
-
 procedure TfrmMenuPrincipal.CargarMenuUsuario;
 var
   AGroup: TdxTileControlGroup;
@@ -404,8 +397,10 @@ begin
     EServlet.Text := ApplicationFile.ReadString('LOGIN', 'servlet', '');
   end;
 
+  TLogin.Open;
+
   cxPageControl.ActivePageIndex := 0;
-  dxSkinController.NativeStyle := False;
+
   SelectSkin(True);
   dxTileControl.LookAndFeel.AssignedValues := [];
 
@@ -634,18 +629,29 @@ begin
   ShellExecute(0, 'open', 'http://www.jakartasrl.com.ar', nil, nil, SW_SHOW);
 end;
 
-procedure TfrmMenuPrincipal.txtPasswordKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmMenuPrincipal.txtPasswordKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
-  if (Key = #$D) then begin
-    if ValidarLogin then begin
-      // iniciamos sesion!
-      gbx_Login.Visible := False;
-      // cambiamos al 'cxTabSheet2' (segunda pagina) y mostramos ahi el Menu de Usuario
-      cxPageControl.ActivePageIndex := 1;
+  if Key = VK_F1 then
+    begin
+      cxPageControl.ActivePageIndex := 2;
+      cxGroupBox3.Left :=  (cxTabSheet3.Width div 2) - (cxGroupBox3.Width div 2);
+    end
+  else if (Key = 13) then
+    begin
+      if TLogin.isEditando then
+        TLogin.Post;
 
-      CargarMenuUsuario;
-    end;
-  end;
+      if ValidarLogin then
+        begin
+          // iniciamos sesion!
+          gbx_Login.Visible := False;
+          // cambiamos al 'cxTabSheet2' (segunda pagina) y mostramos ahi el Menu de Usuario
+          cxPageControl.ActivePageIndex := 1;
+
+          CargarMenuUsuario;
+        end;
+    end
 end;
 
 function TfrmMenuPrincipal.ValidarLogin: Boolean;
@@ -669,7 +675,6 @@ begin
        then Service.HTTP.HTTPOptions := [hoInProcessAuth,hoForceEncodeParams];
 }
 
-    TLogin.Post;
     OperConsultaLogin.execute;
 
 {

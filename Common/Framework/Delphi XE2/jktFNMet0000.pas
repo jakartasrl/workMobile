@@ -200,8 +200,8 @@ type
     RibbonTab2: TdxRibbonTab;
     dxbGrillas: TdxBar;
     bbCancel: TdxBarLargeButton;
-    acDataSetPrior: TDataSetPrior;
-    acDataSetNext: TDataSetNext;
+    acDataSetPrior: TAction;
+    acDataSetNext: TAction;
     bbAnterior: TdxBarLargeButton;
     bbSiguiente: TdxBarLargeButton;
     dxbtnDayView: TdxBarButton;

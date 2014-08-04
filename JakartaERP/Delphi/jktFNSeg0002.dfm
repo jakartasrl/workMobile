@@ -1,9 +1,9 @@
 inherited FNSeg0002: TFNSeg0002
   Caption = 'ABM de Usuarios'
-  ClientHeight = 335
+  ClientHeight = 363
   ClientWidth = 785
   ExplicitWidth = 801
-  ExplicitHeight = 373
+  ExplicitHeight = 401
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -12,7 +12,6 @@ inherited FNSeg0002: TFNSeg0002
     Align = alTop
     Caption = 'Datos del Usuario'
     TabOrder = 4
-    ExplicitTop = -6
     Height = 153
     Width = 785
     object dxBevel1: TdxBevel
@@ -27,7 +26,6 @@ inherited FNSeg0002: TFNSeg0002
       Top = 30
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsUsuarios
-      Properties.ValidationOptions = []
       TabOrder = 0
       Width = 121
     end
@@ -53,7 +51,7 @@ inherited FNSeg0002: TFNSeg0002
       DataBinding.DataField = 'Email'
       DataBinding.DataSource = dsUsuarios
       TabOrder = 3
-      Width = 184
+      Width = 233
     end
     object cxLabel1: TcxLabel
       Left = 14
@@ -101,27 +99,28 @@ inherited FNSeg0002: TFNSeg0002
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 432
-      Top = 105
+      Top = 108
       Caption = 'Sin vencimiento'
       DataBinding.DataField = 'SinVencimientoPwd'
       DataBinding.DataSource = dsUsuarios
       Properties.Alignment = taRightJustify
-      TabOrder = 8
+      TabOrder = 7
       Transparent = True
       OnClick = cxDBCheckBox1Click
       Width = 97
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 293
-      Top = 104
+      Top = 107
       DataBinding.DataField = 'ConfPassword'
       DataBinding.DataSource = dsUsuarios
-      TabOrder = 9
+      Properties.EchoMode = eemPassword
+      TabOrder = 6
       Width = 121
     end
     object cxLabel7: TcxLabel
       Left = 214
-      Top = 106
+      Top = 109
       AutoSize = False
       Caption = 'Confirmaci'#243'n :'
       Properties.Alignment.Horz = taRightJustify
@@ -132,15 +131,16 @@ inherited FNSeg0002: TFNSeg0002
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 91
-      Top = 104
+      Top = 107
       DataBinding.DataField = 'Password'
       DataBinding.DataSource = dsUsuarios
-      TabOrder = 11
+      Properties.EchoMode = eemPassword
+      TabOrder = 5
       Width = 121
     end
     object cxLabel6: TcxLabel
       Left = 19
-      Top = 106
+      Top = 109
       AutoSize = False
       Caption = 'Password :'
       Properties.Alignment.Horz = taRightJustify
@@ -149,6 +149,17 @@ inherited FNSeg0002: TFNSeg0002
       Width = 72
       AnchorX = 91
     end
+    object cxDBCheckBox2: TcxDBCheckBox
+      Left = 370
+      Top = 65
+      Caption = 'Activo :'
+      DataBinding.DataField = 'Activo'
+      DataBinding.DataSource = dsUsuarios
+      Properties.Alignment = taRightJustify
+      TabOrder = 4
+      Transparent = True
+      Width = 61
+    end
   end
   object cxGroupBox3: TcxGroupBox [1]
     Left = 0
@@ -156,22 +167,27 @@ inherited FNSeg0002: TFNSeg0002
     Align = alClient
     Caption = 'Empresas'
     TabOrder = 5
-    Height = 182
+    ExplicitTop = 177
+    ExplicitHeight = 215
+    Height = 210
     Width = 785
     object dbgUsuarioEmpresas: TjktExpDBGrid
       Left = 3
       Top = 15
-      Width = 515
-      Height = 157
+      Width = 525
+      Height = 185
       Align = alLeft
       TabOrder = 0
       DataSource = dsUsuarioEmpresas
+      ExplicitHeight = 190
       object dbgUsuarioEmpresasDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsUsuarioEmpresas
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsData.Inserting = False
         OptionsView.GroupByBox = False
         object dbgUsuarioEmpresasDBTableView1oid_usu_emp: TcxGridDBColumn
           DataBinding.FieldName = 'oid_usu_emp'
@@ -187,20 +203,22 @@ inherited FNSeg0002: TFNSeg0002
         end
         object dbgUsuarioEmpresasDBTableView1Codigo: TcxGridDBColumn
           DataBinding.FieldName = 'Codigo'
+          Options.Editing = False
         end
         object dbgUsuarioEmpresasDBTableView1RazonSocial: TcxGridDBColumn
           DataBinding.FieldName = 'RazonSocial'
+          Options.Editing = False
           Width = 319
         end
         object dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn
           DataBinding.FieldName = 'Default'
           HeaderAlignmentHorz = taCenter
-          Width = 50
+          Width = 55
         end
-        object dbgUsuarioEmpresasDBTableView1Activo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
+        object dbgUsuarioEmpresasDBTableView1Habilitada: TcxGridDBColumn
+          DataBinding.FieldName = 'Habilitada'
           HeaderAlignmentHorz = taCenter
-          Width = 50
+          Width = 55
         end
       end
       object dbgUsuarioEmpresasLevel1: TcxGridLevel
@@ -222,6 +240,7 @@ inherited FNSeg0002: TFNSeg0002
     TipoPrograma = tp_Otro
     FocoEnAlta = TUsuariosCodigo
     FocoEnModificacion = TUsuariosCodigo
+    OnSetDefaults = DriverSetDefaults
     Left = 640
     Top = 8
   end
@@ -443,8 +462,8 @@ inherited FNSeg0002: TFNSeg0002
     object TUsuarioEmpresasDefault: TBooleanField
       FieldName = 'Default'
     end
-    object TUsuarioEmpresasActivo: TBooleanField
-      FieldName = 'Activo'
+    object TUsuarioEmpresasHabilitada: TBooleanField
+      FieldName = 'Habilitada'
     end
   end
   object dsUsuarios: TDataSource
@@ -458,7 +477,7 @@ inherited FNSeg0002: TFNSeg0002
     Top = 200
   end
   object valUsuario: TjktValidador
-    Entidad = 'com.jkt.dominio.Usuario'
+    Entidad = 'usuario'
     Validacion = tInexistente
     ListaAsignaciones = <>
     Left = 168
@@ -468,6 +487,14 @@ inherited FNSeg0002: TFNSeg0002
     Validacion = tDistintoEspacio
     ListaAsignaciones = <>
     Left = 168
-    Top = 88
+    Top = 96
+  end
+  object OperTraerEmpresas: TjktOperacion
+    OperName = 'TraerEmpresasParaUsuarios'
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 88
+    Top = 216
   end
 end

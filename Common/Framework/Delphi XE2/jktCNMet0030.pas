@@ -86,6 +86,33 @@ type
 
  end;
 
+ type
+  TjktOperacionItemList = class(TCollectionItem)
+   private
+    FOperacion       :TjktOperacion;
+   protected
+   public
+    procedure Assign(Source: TPersistent); override;
+   published
+    property Operacion : TjktOperacion       read FOperacion write FOperacion;
+ end;
+
+ type
+  TjktOperacionesList = class(TCollection)
+    private
+      FOwner : TComponent;
+    protected
+      function  GetOwner : TPersistent; override;
+      function  GetItem(Index: Integer): TjktOperacionItemList;
+      procedure SetItem(Index: Integer; Value:TjktOperacionItemList);
+      procedure Update(Item: TjktOperacionItemList);
+    public
+      constructor Create(AOwner : TComponent);
+      function add : TjktOperacionItemList;
+      property Items[Index: Integer]: TjktOperacionItemList read GetItem write SetItem;
+end;
+
+
  procedure Register;
 
 implementation
@@ -324,8 +351,6 @@ var
   lista : TList;
   i     : Integer;
 begin
-
-
   lista := nil;
   self.obtenerDatasets;
   if (CountDatasets <> 0)
@@ -354,7 +379,6 @@ end;
 procedure TjktOperacion.recorrerDataSet(aDataset:TDataSet ; aLista :TList; aNivel, aNivelDataSet: integer);
 var
   wrkDataSet :TDataset;
-  modif  : boolean;
   lista2 : TList;
   i :integer;
 begin
@@ -362,32 +386,80 @@ begin
   try
       if aDataset = nil
          then exit;
-      aDataset.first;
-      // Tabla de Cabcera
+
+      // Tabla de Cabecera
       FServiceCaller.addElement(aNivel, 'Tabla');
       FServiceCaller.addAtribute('nombre', aDataset.name);
+
+      aDataset.first;
       while not aDataSet.Eof do
         begin
-                    // Fila
-                    FServiceCaller.enviarCampos(aDataSet, 0, aNivel + 1);
-                    if (aLista<>Nil)
-                       then for i:=0 to aLista.count -1 do
-                              begin
-                                wrkDataset := TDataset (aLista.items[i]);
-                                // Dario para compatibilidad con lo viejo.
-                                // 25-02-2005
-                                if (CountDatasets <> 0)
-                                   then lista2     :=  obtenerListaDataSet(wrkDataset);
+          // Fila
+          FServiceCaller.enviarCampos(aDataSet, 0, aNivel + 1);
+          if (aLista <> nil) then
+            for i:=0 to aLista.count -1 do
+              begin
+                wrkDataset := TDataset (aLista.items[i]);
 
-                                recorrerDataset(wrkDataset, lista2,  aNivel + 2, aNivelDataSet + 1 );
-                                lista2.free;
-                              end;
+                if (CountDatasets <> 0)
+                   then lista2 := obtenerListaDataSet(wrkDataset);
+
+                recorrerDataset(wrkDataset, lista2,  aNivel + 2, aNivelDataSet + 1 );
+                lista2.free;
+              end;
 
           aDataSet.Next;
         end;
   finally
      aDataSet.BlockReadSize := 0;
   end;
+end;
+
+//-------------------------------------------------------------------------------------------------------------
+
+
+procedure TjktOperacionItemList.Assign(Source: TPersistent);
+begin
+if Source is TjktOperAttribute
+      then begin
+            operacion :=  TjktOperacionItemList(Source).Operacion;
+           end
+else
+     inherited; //raises an exception
+end;
+
+//----------------------------------------------------------------------
+
+constructor TjktOperacionesList.Create(AOwner: TComponent);
+begin
+  inherited Create(TjktOperacionItemList);
+  FOwner := AOwner;
+end;
+
+function TjktOperacionesList.GetOwner: TPersistent;
+begin
+  Result := FOwner;
+end;
+
+function  TjktOperacionesList.GetItem(Index: Integer): TjktOperacionItemList;
+begin
+  result := TjktOperacionItemList (inherited getItem(index));
+end;
+
+procedure TjktOperacionesList.SetItem(Index: Integer; Value:TjktOperacionItemList);
+begin
+  inherited setItem(index, value);
+end;
+
+
+procedure TjktOperacionesList.Update(Item: TjktOperacionItemList);
+begin
+  inherited Update(Item);
+end;
+
+function TjktOperacionesList.add : TjktOperacionItemList;
+begin
+  result := TjktOperacionItemList (inherited add());
 end;
 
 

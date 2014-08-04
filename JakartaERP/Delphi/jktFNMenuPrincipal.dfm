@@ -92,7 +92,8 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         DataBinding.DataField = 'password'
         DataBinding.DataSource = dsLogin
         ParentFont = False
-        Properties.PasswordChar = '*'
+        Properties.EchoMode = eemPassword
+        Properties.ValidateOnEnter = True
         Style.Font.Charset = DEFAULT_CHARSET
         Style.Font.Color = clWindowText
         Style.Font.Height = -17
@@ -100,7 +101,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 3
-        OnKeyPress = txtPasswordKeyPress
+        OnKeyDown = txtPasswordKeyDown
         Width = 160
       end
       object txtUsuario: TcxDBTextEdit
@@ -110,6 +111,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         DataBinding.DataField = 'usuario'
         DataBinding.DataSource = dsLogin
         ParentFont = False
+        Properties.ValidateOnEnter = True
         Style.Font.Charset = DEFAULT_CHARSET
         Style.Font.Color = clWindowText
         Style.Font.Height = -17
@@ -117,7 +119,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 2
-        OnKeyPress = txtPasswordKeyPress
+        OnKeyDown = txtPasswordKeyDown
         Width = 160
       end
       object cxButton1: TcxButton
@@ -126,7 +128,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Width = 31
         Height = 31
         TabOrder = 4
-        OnClick = cxButton1Click
       end
     end
   end
@@ -154,10 +155,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
-      ExplicitLeft = 2
-      ExplicitTop = 25
-      ExplicitWidth = 764
-      ExplicitHeight = 393
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -171,8 +168,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         OptionsView.CenterContentVert = True
         OptionsView.ItemSize = 180
         TabOrder = 0
-        ExplicitWidth = 764
-        ExplicitHeight = 393
         object tcaExit: TdxTileControlActionBarItem
           Align = abiaRight
           Caption = 'Salir'
@@ -333,10 +328,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 2
-      ExplicitTop = 25
-      ExplicitWidth = 764
-      ExplicitHeight = 393
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318
@@ -350,8 +341,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 1
-        ExplicitTop = 290
-        ExplicitWidth = 764
         Height = 103
         Width = 769
         object tc_Novedades: TdxTileControl
@@ -360,49 +349,48 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Width = 763
           Height = 63
           TabOrder = 0
-          ExplicitWidth = 758
         end
       end
       object tc_MenuUsuario: TdxTileControl
-        Left = 306
+        Left = 305
         Top = 0
-        Width = 463
-        Height = 312
+        Width = 464
+        Height = 313
         OptionsBehavior.GroupMoving = True
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
         TabOrder = 0
-        ExplicitWidth = 458
-        ExplicitHeight = 284
+        ExplicitLeft = 306
+        ExplicitWidth = 463
+        ExplicitHeight = 312
       end
       object cxSplitter1: TcxSplitter
         Left = 300
         Top = 0
-        Width = 6
-        Height = 312
+        Width = 5
+        Height = 313
         AllowHotZoneDrag = False
         Control = tc_Favoritos
-        ExplicitHeight = 284
+        ExplicitHeight = 314
       end
       object cxSplitter2: TcxSplitter
         Left = 0
-        Top = 312
+        Top = 313
         Width = 769
-        Height = 6
+        Height = 5
         AlignSplitter = salBottom
         Control = cxGroupBox2
-        ExplicitTop = 284
-        ExplicitWidth = 764
+        ExplicitTop = 314
       end
       object tc_Favoritos: TdxTileControl
         Left = 0
         Top = 0
         Width = 300
-        Height = 312
+        Height = 313
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
-        ExplicitHeight = 284
+        ExplicitHeight = 312
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0
@@ -412,10 +400,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet3: TcxTabSheet
       Caption = 'cxTabSheet3'
       ImageIndex = 2
-      ExplicitLeft = 2
-      ExplicitTop = 25
-      ExplicitWidth = 764
-      ExplicitHeight = 393
       object cxGroupBox3: TcxGroupBox
         Left = 101
         Top = 36
@@ -495,7 +479,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.Font.Name = 'Segoe UI'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 4
+          TabOrder = 5
           Transparent = True
           Width = 161
         end
@@ -509,7 +493,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.Font.Name = 'Segoe UI'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 5
+          TabOrder = 1
           Text = 'EHost'
           Width = 147
         end
@@ -523,7 +507,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.Font.Name = 'Segoe UI'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 6
+          TabOrder = 2
           Text = 'EPort'
           Width = 91
         end
@@ -537,7 +521,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.Font.Name = 'Segoe UI'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 7
+          TabOrder = 3
           Text = 'EAplicacion'
           Width = 297
         end
@@ -551,7 +535,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.Font.Name = 'Segoe UI'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 8
+          TabOrder = 4
           Text = 'EServlet'
           Width = 297
         end
@@ -613,12 +597,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       FieldName = 'Text4'
       Size = 50
     end
-  end
-  object dxSkinController: TdxSkinController
-    NativeStyle = False
-    SkinName = 'Black'
-    Left = 48
-    Top = 96
   end
   object cds_MsjsJakarta: TClientDataSet
     Aggregates = <>
@@ -729,7 +707,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 712
+    Left = 640
     Top = 16
     object TUsuariooid_usuario: TIntegerField
       FieldName = 'oid_usuario'
@@ -764,7 +742,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     end
   end
   object TLogin: TjktMemTable
-    Active = True
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
@@ -792,7 +769,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 664
+    Left = 592
     Top = 16
     object TLoginusuario: TStringField
       FieldName = 'usuario'
@@ -803,7 +780,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
   end
   object dsLogin: TDataSource
     DataSet = TLogin
-    Left = 616
+    Left = 544
     Top = 16
   end
   object OperConsultaLogin: TjktOperacion

@@ -43,6 +43,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormActivate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FEstado: TjktEstado;
     FParentActionList: TActionList; // guardamos la referencia al 'ActionList' del padre
@@ -137,6 +138,11 @@ end;
 procedure TfrmChild.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose := CheckSaveChanges;
+end;
+
+procedure TfrmChild.FormShow(Sender: TObject);
+begin
+  driver.doOperacionesOnShow;
 end;
 
 function TfrmChild.GetCanEdit: Boolean;
