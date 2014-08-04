@@ -73,6 +73,7 @@ type
     dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Activo: TcxGridDBColumn;
     valUsuario: TjktValidador;
+    valUsuario2: TjktValidador;
     procedure cxDBCheckBox1Click(Sender: TObject);
   private
     { Private declarations }

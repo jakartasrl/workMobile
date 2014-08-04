@@ -2,9 +2,10 @@ object FMet008: TFMet008
   Left = 213
   Top = 198
   BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Mensaje'
-  ClientHeight = 104
-  ClientWidth = 508
+  ClientHeight = 114
+  ClientWidth = 518
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,11 +23,12 @@ object FMet008: TFMet008
   object PCabecera: TPanel
     Left = 0
     Top = 0
-    Width = 508
+    Width = 518
     Height = 114
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 508
     object LMasInfo: TLabel
       Left = 8
       Top = 85
@@ -35,7 +37,8 @@ object FMet008: TFMet008
       Cursor = crHandPoint
       Caption = 'Informaci'#243'n Detallada ...'
       OnClick = LMasInfoClick
-      OnMouseMove = LMasInfoMouseMove
+      OnMouseEnter = LMasInfoMouseEnter
+      OnMouseLeave = LMasInfoMouseLeave
     end
     object Etiqueta: TLabel
       Left = 60
@@ -100,16 +103,18 @@ object FMet008: TFMet008
   object PCuerpo: TPanel
     Left = 0
     Top = 114
-    Width = 508
-    Height = 1
+    Width = 518
+    Height = 0
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 1
+    ExplicitWidth = 508
+    ExplicitHeight = 1
     object MemoDetalle: TMemo
       Left = 5
       Top = 5
-      Width = 498
+      Width = 508
       Height = 0
       Hint = 
         'Por favor enviar por mail el mensaje al Administrador del Sistem' +
@@ -119,6 +124,7 @@ object FMet008: TFMet008
       ReadOnly = True
       ShowHint = True
       TabOrder = 0
+      ExplicitWidth = 498
     end
   end
 end

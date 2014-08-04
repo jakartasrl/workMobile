@@ -27,6 +27,7 @@ inherited FNSeg0002: TFNSeg0002
       Top = 30
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsUsuarios
+      Properties.ValidationOptions = []
       TabOrder = 0
       Width = 121
     end
@@ -259,6 +260,10 @@ inherited FNSeg0002: TFNSeg0002
     ListaValidaciones = <
       item
         Field = TUsuariosCodigo
+        Validador = valUsuario2
+      end
+      item
+        Field = TUsuariosCodigo
         Validador = valUsuario
       end>
     Left = 528
@@ -454,21 +459,15 @@ inherited FNSeg0002: TFNSeg0002
   end
   object valUsuario: TjktValidador
     Entidad = 'com.jkt.dominio.Usuario'
-    Validacion = tExistente
-    ListaAsignaciones = <
-      item
-        FieldName = 'oid'
-        FieldTarget = TUsuariosoid_usuario
-      end
-      item
-        FieldName = 'descripcion'
-        FieldTarget = TUsuariosApellido
-      end
-      item
-        FieldName = 'cadena'
-        FieldTarget = TUsuariosNombre
-      end>
-    Left = 16
-    Top = 232
+    Validacion = tInexistente
+    ListaAsignaciones = <>
+    Left = 168
+    Top = 32
+  end
+  object valUsuario2: TjktValidador
+    Validacion = tDistintoEspacio
+    ListaAsignaciones = <>
+    Left = 168
+    Top = 88
   end
 end
