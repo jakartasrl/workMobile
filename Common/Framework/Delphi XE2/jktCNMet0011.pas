@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs ,
-  jktCNMet0002 , jktCNMet0030 ,DB , kbmMemTable;
+  jktCNMet0002, jktCNMet0030, jktFNMet0008, DB, kbmMemTable;
 
 const
   operExistente       = 'ValidarExistente';
@@ -161,7 +161,6 @@ var
   tipo :TFieldType;
   size :integer;
   campo :TField;
-
 begin
   FTempMemTable := TkbmMemTable.Create(self);
   FTempMemTable.Name := 'TMemVal' + IntToStr(random(100000));
@@ -196,28 +195,30 @@ begin
                  end;
        FTempMemTable.FieldDefs.Add(name, tipo, size,  false);
     end;
-  datasetCreado := true;
+
+  DatasetCreado := true;
   FTempMemTable.Close;
   FTempMemTable.Open;
+
   for x := 0 to FListaAsignaciones.Count -1 do
     begin
        name :=  FListaAsignaciones.Items[x].FieldName;
        campo := FTempMemTable.FieldByName(name);
        FListaAsignaciones.Items[x].FieldSource   := campo;
     end;
+
   FServiceCaller.asignarDataSet(FTempMemTable.Name, FTempMemTable);
 end;
 
-
-
-
-
 procedure TjktValidador.procesarResultado();
 var
-  x:integer;
+  x: Integer;
 begin
-  if (FTempMemTable.IsEmpty)
-     then exit;
+  if not Assigned(FTempMemTable) then
+    Exit;
+
+  if FTempMemTable.IsEmpty then
+    Exit;
 
   for x:= 0 to FListaAsignaciones.Count -1 do
     begin
@@ -243,9 +244,6 @@ begin
   if (FServiceCaller.ModoExecute)
      then Exit;
 
-  if self.DatasetCreado = false
-      then   crearDatasetResult;
-
   if FValidacion = tEspecial
       then FOperacionEspecial.execute
       else validacionExistenciaInexistencia(sender);
@@ -253,47 +251,58 @@ begin
   procesarResultado;
 end;
 
-
-procedure  TjktValidador.validacionExistenciaInexistencia(sender :TField);
+procedure TjktValidador.validacionExistenciaInexistencia(sender :TField);
 var
   operName :string;
 begin
-  if      FValidacion = tExistente
-            then operName := operExistente
-  else if FValidacion = tInexistente
-            then operName := operInexistente;
+  if FValidacion = tExistente then
+    operName := operExistente
+  else if FValidacion = tInexistente then
+    operName := operInexistente;
+
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(operName);
   FServiceCaller.addAtribute('codigo',    trim(sender.AsString));
   FServiceCaller.addAtribute('entidad',   FEntidad);
-  if FValidacion = tExistente
-      then FServiceCaller.addAtribute('outputDatasetName',   FTempMemTable.Name);
+
+  if FValidacion = tExistente then
+    begin
+      if not Self.DatasetCreado then
+        crearDatasetResult;
+
+      FServiceCaller.addAtribute('outputDatasetName',   FTempMemTable.Name);
+    end;
+
   FServiceCaller.execute;
 end;
 
-
-
 procedure TjktValidador.validacionLocal(sender :TField);
 begin
-
-   if      FValidacion =  tMayorCero
-            then begin
-                   if sender.asFloat <= 0 then raise Exception.Create('Debe ser mayor a cero');
-                 end
-
-  else if FValidacion =  tMayorIgualCero
-            then begin
-                  if sender.asFloat < 0 then raise Exception.Create('Debe ser mayor o igual a cero') ;
-                 end
-
-  else if  FValidacion =  tMenorIgualCien
-            then begin
-                    if sender.asFloat < 100 then raise Exception.Create('Debe ser menor o igual a cien') ;
-                 end
-
-  else if   FValidacion =  tDistintoEspacio
-          then if trim(sender.asString) = '' then raise Exception.Create('Debe ser distinto de espacios');
-
+  try
+    if FValidacion =  tMayorCero then
+      begin
+        if sender.asFloat <= 0 then raise Exception.Create('Debe ser mayor a cero');
+      end
+    else if FValidacion =  tMayorIgualCero then
+      begin
+        if sender.asFloat < 0 then raise Exception.Create('Debe ser mayor o igual a cero') ;
+      end
+    else if FValidacion =  tMenorIgualCien then
+      begin
+        if sender.asFloat < 100 then raise Exception.Create('Debe ser menor o igual a cien') ;
+      end
+    else if FValidacion =  tDistintoEspacio then
+      begin
+        if trim(sender.asString) = '' then raise Exception.Create('Debe ser distinto de espacios');
+      end;
+  except
+    on E: Exception do begin
+      // El componente TcxCustomEdit de 'DevExpress' captura el raise (en el DoExit)
+      // y no muestra mensaje alguno! Es por esto que capturo la Exception antes que lo
+      // haga el componente, para poder mostrar el error
+      mostrarMensErrorAbort(E.Message);
+    end;
+  end;
 end;
 
 
@@ -352,7 +361,6 @@ begin
             then if not validadorField.Validador.ServiceCaller.ModoExecute
                     then  validadorField.Validador.validar(sender);
      end;
-
 end;
 
 //--------------------------------------------------------
