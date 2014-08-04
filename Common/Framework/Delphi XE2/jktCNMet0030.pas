@@ -86,6 +86,33 @@ type
 
  end;
 
+ type
+  TjktOperacionItemList = class(TCollectionItem)
+   private
+    FOperacion       :TjktOperacion;
+   protected
+   public
+    procedure Assign(Source: TPersistent); override;
+   published
+    property Operacion : TjktOperacion       read FOperacion write FOperacion;
+ end;
+
+ type
+  TjktOperacionesList = class(TCollection)
+    private
+      FOwner : TComponent;
+    protected
+      function  GetOwner : TPersistent; override;
+      function  GetItem(Index: Integer): TjktOperacionItemList;
+      procedure SetItem(Index: Integer; Value:TjktOperacionItemList);
+      procedure Update(Item: TjktOperacionItemList);
+    public
+      constructor Create(AOwner : TComponent);
+      function add : TjktOperacionItemList;
+      property Items[Index: Integer]: TjktOperacionItemList read GetItem write SetItem;
+end;
+
+
  procedure Register;
 
 implementation
@@ -386,6 +413,53 @@ begin
   finally
      aDataSet.BlockReadSize := 0;
   end;
+end;
+
+//-------------------------------------------------------------------------------------------------------------
+
+
+procedure TjktOperacionItemList.Assign(Source: TPersistent);
+begin
+if Source is TjktOperAttribute
+      then begin
+            operacion :=  TjktOperacionItemList(Source).Operacion;
+           end
+else
+     inherited; //raises an exception
+end;
+
+//----------------------------------------------------------------------
+
+constructor TjktOperacionesList.Create(AOwner: TComponent);
+begin
+  inherited Create(TjktOperacionItemList);
+  FOwner := AOwner;
+end;
+
+function TjktOperacionesList.GetOwner: TPersistent;
+begin
+  Result := FOwner;
+end;
+
+function  TjktOperacionesList.GetItem(Index: Integer): TjktOperacionItemList;
+begin
+  result := TjktOperacionItemList (inherited getItem(index));
+end;
+
+procedure TjktOperacionesList.SetItem(Index: Integer; Value:TjktOperacionItemList);
+begin
+  inherited setItem(index, value);
+end;
+
+
+procedure TjktOperacionesList.Update(Item: TjktOperacionItemList);
+begin
+  inherited Update(Item);
+end;
+
+function TjktOperacionesList.add : TjktOperacionItemList;
+begin
+  result := TjktOperacionItemList (inherited add());
 end;
 
 
