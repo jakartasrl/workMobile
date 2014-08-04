@@ -1,9 +1,9 @@
 package com.jkt.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jkt.annotations.JKTTransaction;
-import com.jkt.annotations.JKTTransactionReadOnly;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.persistencia.IServiceRepository;
@@ -28,16 +27,14 @@ import com.jkt.persistencia.ISessionProvider;
 @SuppressWarnings("rawtypes")
 public class ServiceRepository implements IServiceRepository {
 
-	@Autowired
-	private HibernateRepositorio repositorio;
+	private static final String WILD_CHAR = "%";
+	protected ISessionProvider sessionProvider;
 	
-	@JKTTransaction
 	public PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		getSession().save(entity);
 		return entity;
 	}
 
-	protected ISessionProvider sessionProvider;
 	
 	@Autowired
 	public void setSessionProvider(ISessionProvider sessionProvider) {
@@ -74,27 +71,31 @@ public class ServiceRepository implements IServiceRepository {
 		return (PersistentEntity) criteria.uniqueResult();
 	}
 
-	/*
-	 * 
-	 * FALTA MODIFICAR DE ACA PARA ABAJO
-	 * 
-	 * 
-	 */
-	
-	
-	@JKTTransactionReadOnly
 	public List<PersistentEntity> getByProperty(Class className, String propertyName,	String value) {
-		return repositorio.getByFilter(className, propertyName, value);
+		Criteria criteria = getSession().createCriteria(className);
+		criteria.add(Restrictions.like(propertyName, value));
+		return criteria.list();
 	}
 
-	@JKTTransactionReadOnly
-	public PersistentEntity getUniqueByProperty(Class className,String propertyName, Long value) {
-		return repositorio.getUniqueByFilter(className, propertyName, value);
-	}
 	
-	@JKTTransactionReadOnly
+	public PersistentEntity getUniqueByProperty(Class className,String propertyName, Long value) {
+		Criteria criteria = getSession().createCriteria(className);
+		criteria.add(Restrictions.eq(propertyName, value));
+		return (PersistentEntity) criteria.uniqueResult();
+	}
+
+	
 	public List<PersistentEntity> getByProperties(Class className, Map<String, String> properties) {
-		return repositorio.getByFilters(className, properties);
+		Criteria criteria = getSession().createCriteria(className);
+		
+		if (properties!=null && !properties.isEmpty()) {
+			Entry<String, String> prop;
+			for (Iterator<Entry<String, String>> iterator = properties.entrySet().iterator(); iterator.hasNext();) {
+				prop = (Entry<String, String>) iterator.next();
+				criteria.add(Restrictions.like(prop.getKey(), String.format("%s%s%s", WILD_CHAR, prop.getValue(),WILD_CHAR)));
+			}
+		}
+		return criteria.list();
 	}
 
 }
