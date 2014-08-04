@@ -223,7 +223,6 @@ begin
   try
     Self.FEstado := esAlta;
     Self.DoLineaMensaje('Alta');
-
     Self.DoNuevo;
   except
     on E: Exception do
@@ -480,6 +479,9 @@ end;
 
 procedure TjktDriver.DoNuevo;
 begin
+  if Assigned(FOnNuevo) then
+    FOnNuevo(Self);
+
   self.DoDesInhibirCamposNoModificables;
   Self.abrirDataSets;
   // agregar InhibirControlesXSeguridad
@@ -626,18 +628,15 @@ begin
    enabledAction('acDataSetNext', false);
 end;
 
-
 procedure TjktDriver.DoInhibirCamposNoModificables;
 begin
   modificarReadOnly(true);
 end;
 
-
 procedure TjktDriver.DoDesInhibirCamposNoModificables;
 begin
   modificarReadOnly(false);
 end;
-
 
 procedure TjktDriver.modificarReadOnly(aValue :boolean);
 var
