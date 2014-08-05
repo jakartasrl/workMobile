@@ -59,7 +59,6 @@ inherited FNUti0001: TFNUti0001
     ListaValidaciones = <
       item
         Field = mtConfigCamposlabel
-        Validador = jktValidador1
       end
       item
       end>
@@ -223,13 +222,8 @@ inherited FNUti0001: TFNUti0001
     object mtConfigValidadordescrName: TStringField
       FieldName = 'descrName'
     end
-  end
-  object jktValidador1: TjktValidador
-    Validacion = tInexistente
-    ListaAsignaciones = <
-      item
-      end>
-    Left = 96
-    Top = 280
+    object mtConfigValidadorestadoForm: TStringField
+      FieldName = 'estadoForm'
+    end
   end
 end

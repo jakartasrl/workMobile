@@ -17,7 +17,6 @@ object frmChild: TfrmChild
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object BarManager: TdxBarManager
@@ -87,6 +86,8 @@ object frmChild: TfrmChild
     ConfirmarCancelacion = True
     Opciones = []
     TipoPrograma = tp_abmLista
+    OperacionesIniciales = <>
+    OperacionesDefault = <>
     Left = 360
     Top = 32
   end

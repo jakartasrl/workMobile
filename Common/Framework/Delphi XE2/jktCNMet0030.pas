@@ -18,8 +18,9 @@ type
 }
 
 
- type
-    TjktOperAttribute = class(TCollectionItem)
+type
+
+  TjktOperAttribute = class(TCollectionItem)
   private
     FAttribute :String;
     FDataset   :TkbmMemTable;
@@ -33,22 +34,21 @@ type
     property Dataset  :TkbmMemTable   read FDataset write FDataset;
     property Field    :TField         read FField   write FField;
     property Tag      :integer        read FTag   write FTag;
-end;
+  end;
 
-type
   TjktOperAttributeList = class(TCollection)
-    private
-      FOwner : TComponent;
-    protected
-      function  GetOwner : TPersistent; override;
-      function  GetItem(Index: Integer): TjktOperAttribute;
-      procedure SetItem(Index: Integer; Value:TjktOperAttribute);
-      procedure Update(Item: TjktOperAttribute);
-    public
-      constructor Create(AOwner : TComponent);
-      function add : TjktOperAttribute;
-      property Items[Index: Integer]: TjktOperAttribute read GetItem write SetItem;
-end;
+  private
+    FOwner : TComponent;
+  protected
+    function  GetOwner : TPersistent; override;
+    function  GetItem(Index: Integer): TjktOperAttribute;
+    procedure SetItem(Index: Integer; Value:TjktOperAttribute);
+    procedure Update(Item: TjktOperAttribute);
+  public
+    constructor Create(AOwner : TComponent);
+    function add : TjktOperAttribute;
+    property Items[Index: Integer]: TjktOperAttribute read GetItem write SetItem;
+  end;
 
 
 type
@@ -86,34 +86,37 @@ type
 
  end;
 
- type
+type
+
   TjktOperacionItemList = class(TCollectionItem)
-   private
-    FOperacion       :TjktOperacion;
-   protected
-   public
+  private
+    FOperacion: TjktOperacion;
+
+  protected
+  public
     procedure Assign(Source: TPersistent); override;
-   published
-    property Operacion : TjktOperacion       read FOperacion write FOperacion;
- end;
+
+  published
+    property Operacion: TjktOperacion read FOperacion write FOperacion;
+  end;
 
  type
   TjktOperacionesList = class(TCollection)
-    private
-      FOwner : TComponent;
-    protected
-      function  GetOwner : TPersistent; override;
-      function  GetItem(Index: Integer): TjktOperacionItemList;
-      procedure SetItem(Index: Integer; Value:TjktOperacionItemList);
-      procedure Update(Item: TjktOperacionItemList);
-    public
-      constructor Create(AOwner : TComponent);
-      function add : TjktOperacionItemList;
-      property Items[Index: Integer]: TjktOperacionItemList read GetItem write SetItem;
-end;
+  private
+    FOwner : TComponent;
+  protected
+    function  GetOwner : TPersistent; override;
+    function  GetItem(Index: Integer): TjktOperacionItemList;
+    procedure SetItem(Index: Integer; Value: TjktOperacionItemList);
+    procedure Update(Item: TjktOperacionItemList);
+  public
+    constructor Create(AOwner : TComponent);
+    function add : TjktOperacionItemList;
+    property Items[Index: Integer]: TjktOperacionItemList read GetItem write SetItem;
+  end;
 
 
- procedure Register;
+procedure Register;
 
 implementation
 
@@ -172,22 +175,20 @@ begin
   end;
 end;
  }
-//---------------------------------------
 
 
 procedure TjktOperAttribute.Assign(Source: TPersistent);
 begin
-if Source is TjktOperAttribute
-      then begin
-            Attribute :=  TjktOperAttribute(Source).Attribute;
-            Dataset   :=  TjktOperAttribute(Source).Dataset;
-            Field     :=  TjktOperAttribute(Source).Field;
-           end
-else
-     inherited; //raises an exception
+  if Source is TjktOperAttribute then
+    begin
+      Attribute :=  TjktOperAttribute(Source).Attribute;
+      Dataset   :=  TjktOperAttribute(Source).Dataset;
+      Field     :=  TjktOperAttribute(Source).Field;
+    end
+  else
+    inherited; //raises an exception
 end;
 
-//----------------------------------------------------------------------
 
 constructor TjktOperAttributeList.Create(AOwner: TComponent);
 begin
@@ -415,20 +416,18 @@ begin
   end;
 end;
 
-//-------------------------------------------------------------------------------------------------------------
-
 
 procedure TjktOperacionItemList.Assign(Source: TPersistent);
 begin
-if Source is TjktOperAttribute
-      then begin
-            operacion :=  TjktOperacionItemList(Source).Operacion;
-           end
-else
-     inherited; //raises an exception
+  if Source is TjktOperacionItemList then
+    operacion :=  TjktOperacionItemList(Source).Operacion
+  else
+    inherited; //raises an exception
 end;
 
-//----------------------------------------------------------------------
+
+
+
 
 constructor TjktOperacionesList.Create(AOwner: TComponent);
 begin
