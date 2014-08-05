@@ -44,6 +44,7 @@ public class SessionProvider implements ISessionProvider{
 
 	public void destroySession() {
 		if (session!=null) {
+			session.flush();
 			session.clear();
 			session.close();
 			session=null;

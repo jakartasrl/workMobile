@@ -10,7 +10,6 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	private String codigo;
 	private String razonSocial;
 	private String urlDB;
-	private boolean activo = true;
 
 	// Transient value!
 	private String oidUsuario;
@@ -31,14 +30,6 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	 */
 	public boolean getActivo() {
 		return isActivo();
-	}
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
 	}
 
 	public String getCodigo() {

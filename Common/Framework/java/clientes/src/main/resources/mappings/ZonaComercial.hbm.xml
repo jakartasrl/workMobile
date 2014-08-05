@@ -13,6 +13,8 @@
         </property>
 		
 		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+
 
 		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="none"  column="VENDEDOR_ID"/>				
 	</class>

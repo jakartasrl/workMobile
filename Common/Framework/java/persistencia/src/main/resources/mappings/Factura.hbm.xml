@@ -12,6 +12,8 @@
 		<property name="nombre" column="NOMBRE"/>
 		<property name="fecha" column="FECHA"/>
 		<property name="codigoPostal" column="CODIGO_POSTAL"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
 
 	</class>
 	

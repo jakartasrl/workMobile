@@ -17,16 +17,14 @@ public class TraerEmpresasParaUsuarios extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List<PersistentEntity> empresas = serviceRepository.getAll(Empresa.class);
-		Empresa emp;
+		Empresa empresa;
 		for (PersistentEntity persistentEntity : empresas) {
-			emp=(Empresa) persistentEntity;
+			empresa=(Empresa) persistentEntity;
 			EmpresaHabilitada empresaHabilitada = new EmpresaHabilitada();
-			empresaHabilitada.setEmpresa(emp);
+			empresaHabilitada.setEmpresa(empresa);
 			empresaHabilitada.setOidEmpresa(String.valueOf(persistentEntity.getId()));
 			notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", empresaHabilitada));
 		}
-		
-		
 	}
 
 }

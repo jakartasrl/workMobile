@@ -75,7 +75,7 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	}
 
 	public void agregarEmpresaHabilitada(EmpresaHabilitada empresaHabilitada) {
-		empresaHabilitada.setHabilitada(true);
+//		empresaHabilitada.setHabilitada(true);
 		this.empresasHabilitadas.add(empresaHabilitada);
 	}
 

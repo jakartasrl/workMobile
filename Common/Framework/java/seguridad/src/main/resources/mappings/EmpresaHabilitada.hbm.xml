@@ -9,8 +9,8 @@
 			<generator class="native"></generator>
 		</id>
 
-		<many-to-one name="usuario" column="USUARIO_ID" not-null="false" class="com.jkt.dominio.Usuario" cascade="save-update" lazy="false"></many-to-one>
-		<many-to-one name="empresa" column="EMPRESA_ID" not-null="false" class="com.jkt.dominio.Empresa" cascade="save-update" lazy="false"></many-to-one>
+		<many-to-one name="usuario" column="USUARIO_ID" not-null="false" class="com.jkt.dominio.Usuario" cascade="save-update" ></many-to-one>
+		<many-to-one name="empresa" column="EMPRESA_ID" not-null="false" class="com.jkt.dominio.Empresa" cascade="save-update" ></many-to-one>
 <!-- 		<many-to-one name="usuario" column="USUARIO_ID" not-null="true" class="com.jkt.dominio.Usuario" cascade="save-update" lazy="false"></many-to-one> -->
 <!-- 		<many-to-one name="empresa" column="EMPRESA_ID" not-null="true" class="com.jkt.dominio.Empresa" cascade="save-update" lazy="false"></many-to-one> -->
 

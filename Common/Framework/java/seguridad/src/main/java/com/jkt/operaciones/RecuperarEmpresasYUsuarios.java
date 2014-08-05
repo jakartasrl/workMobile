@@ -1,8 +1,12 @@
 package com.jkt.operaciones;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.collections.Closure;
+import org.apache.commons.collections.CollectionUtils;
 
 import com.jkt.dominio.Empresa;
 import com.jkt.dominio.EmpresaHabilitada;
@@ -26,7 +30,6 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 				notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", uniqueByProperty));
 			}
 		}
-		
 	}
 
 }

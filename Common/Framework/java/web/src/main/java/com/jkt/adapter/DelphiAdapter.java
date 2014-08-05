@@ -265,16 +265,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								Class<?> otraClase = Class.forName(metaDataOfCurrentField.getClase());
 								Method method = clazz.getMethod(metaDataOfCurrentField.getMetodo(), otraClase);
 								
-								/*
-								 * PROXY INITIALIZATION EXCEPTION
-								 */
-//								if (idObject>0) {
-//									//ejecuta transaccionalmente el metodo!
-//									this.repository.executeMethodTransactional(method, instance, complexInstance);
-//									
-//								}else{
-									method.invoke(instance,complexInstance);
-//								}
+								method.invoke(instance,complexInstance);
 								
 							}
 							/*

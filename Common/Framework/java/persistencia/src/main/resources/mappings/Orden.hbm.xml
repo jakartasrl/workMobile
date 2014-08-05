@@ -13,8 +13,4 @@
 		<property name="fecha" column="FECHA"/>
 	</class>
 	
-<!-- 	<query name="buscarPorNombre"> -->
-<!--         <![CDATA[from Orden o where o.nombre =:parameterName]]> -->
-<!--     </query> -->
-	
 </hibernate-mapping>

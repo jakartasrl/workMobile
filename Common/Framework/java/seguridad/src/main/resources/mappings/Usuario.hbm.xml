@@ -18,6 +18,7 @@
 		<property name="mail" column="MAIL" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 
+
 		<set name="empresasHabilitadas" table="EMPRESAS_HABILITADAS" lazy="true" fetch="select" cascade="all">
 			<key column="USUARIO_ID" />
 			<one-to-many class="com.jkt.dominio.EmpresaHabilitada"/>
