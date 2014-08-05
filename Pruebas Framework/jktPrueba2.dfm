@@ -41,11 +41,9 @@ inherited prueba3: Tprueba3
     ListaValidaciones = <
       item
         Field = tabla1a
-        Validador = jktValidador1
       end
       item
         Field = tabla1b
-        Validador = jktValidador2
       end>
   end
   object tabla1: TjktMemTable
