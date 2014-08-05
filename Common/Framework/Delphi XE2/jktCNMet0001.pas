@@ -42,14 +42,16 @@ type
     FOperacionSave              :TjktOperacion;
     FOperacionTraer             :TjktOperacion;
     FActionList                 :TActionList;
-    FOperacionesOnShow          :TjktOperacionesList;
+    FOperacionesIniciales       :TjktOperacionesList;
     FOperacionesDefault         :TjktOperacionesList;
+
     { Agregar  :
         FiltroActivos
         FiltroInActivos
     }
+
     // Eventos
-    FOnSetDefaults              :TNotifyEvent;
+//    FOnSetDefaults              :TNotifyEvent;
     FOnModoAppend               :TNotifyEvent;
     FOnFiltrar                  :TNotifyEvent;
     FOnEliminar                 :TNotifyEvent;
@@ -64,7 +66,6 @@ type
     FOnGuardar                  :TNotifyEvent;
     FOnCustomToolButton         :TNotifyEvent;
     FOnImprimir                 :TNotifyEvent;
-
 
     procedure DoSetDefaults;
     procedure DoSetFocoAlta;
@@ -127,7 +128,7 @@ type
     procedure Imprimir;
     procedure CustomToolButton;
     procedure OpenRehabilitar;
-    procedure doOperacionesOnShow;
+    procedure doOperacionesIniciales;
     procedure doOperacionesDefault;
     function  CanClose: Boolean;
     function  esNuevo(): Boolean;
@@ -149,10 +150,10 @@ type
     property TipoPrograma          : TjktTipoPrograma read FTipoPrograma write FTipoPrograma;
     property FocoEnAlta            : TField read FFocoEnAlta         write FFocoEnAlta;
     property FocoEnModificacion    : TField read FFocoEnModificacion write FFocoEnModificacion;
-    property OperacionesOnShow     : TjktOperacionesList read FOperacionesOnShow   write FOperacionesOnShow;
-    property OperacionesDefault    : TjktOperacionesList read FOperacionesDefault  write FOperacionesDefault;
+    property OperacionesIniciales  : TjktOperacionesList read FOperacionesIniciales write FOperacionesIniciales;
+    property OperacionesDefault    : TjktOperacionesList read FOperacionesDefault   write FOperacionesDefault;
 
-    property OnSetDefaults         :TNotifyEvent read FOnSetDefaults        write FOnSetDefaults;
+//    property OnSetDefaults         :TNotifyEvent read FOnSetDefaults        write FOnSetDefaults;
     property OnEliminar            :TNotifyEvent read FOnEliminar           write FOnEliminar;
     property OnRehabilitar         :TNotifyEvent read FOnRehabilitar        write FOnRehabilitar;
     property OnCancel              :TNotifyEvent read FOnCancel             write FOnCancel;
@@ -182,12 +183,19 @@ end;
 constructor TjktDriver.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+
+  FOperacionesIniciales := TjktOperacionesList.Create(self);
+  FOperacionesDefault   := TjktOperacionesList.Create(self);
+
   Self.FEstado := esNil;
 end;
 
 destructor TjktDriver.Destroy;
 begin
-  FDataSetCab  := nil;
+  FDataSetCab := nil;
+  FOperacionesIniciales.Free;
+  FOperacionesDefault.Free;
+
   inherited Destroy;
 end;
 
@@ -203,7 +211,6 @@ begin
       Self.DoLineaMensaje(' ');
     end;
 end;
-
 
 procedure TjktDriver.DoInhibirBotones;
 var
@@ -294,14 +301,10 @@ begin
   Self.DoImprimir;
 end;
 
-
-
-
 procedure TjktDriver.Anterior;
 begin
   Self.DoAnterior;
 end;
-
 
 procedure TjktDriver.DoEjecutar;
 begin
@@ -313,12 +316,10 @@ begin
      then FOnImprimir(self);
 end;
 
-
 procedure TjktDriver.DoSetDefaults;
 begin
    self.doOperacionesDefault;
 end;
-
 
 procedure TjktDriver.DoBotonesNew;
 begin
@@ -359,7 +360,6 @@ end;
 procedure TjktDriver.DoBotonesEjecutar;
 begin
 end;
-
 
 procedure TjktDriver.DoSetFocoAlta;
 begin
@@ -468,7 +468,6 @@ begin
     end;
 end;
 
-
 procedure TjktDriver.DoFiltrar;
 begin
   self.abrirDataSets;
@@ -490,7 +489,6 @@ begin
   Self.DoSetFocoAlta;
 end;
 
-
 procedure TjktDriver.DoGuardar;
 begin
   if not Assigned(FOperacionSave)
@@ -498,7 +496,6 @@ begin
 
   FOperacionSave.executeGuardar(FDataSetCab);
 end;
-
 
 procedure TjktDriver.abrirDataSets;
 var
@@ -542,7 +539,6 @@ begin
      then FDataSetCab.Cancel;
 end;
 
-
 procedure TjktDriver.DoCloseDataSet;
 begin
   Self.cerrarDataSets;
@@ -558,7 +554,6 @@ begin
      then FDataSetCab.Post;
 end;
 
-
 procedure TjktDriver.DoRehabilitar;
 begin
   if (FDataSetCab <> nil)
@@ -570,7 +565,6 @@ begin
   if (FDataSetCab <> nil)
      then FDataSetCab.Post;
 end;
-
 
 procedure TjktDriver.DoProximo;
 begin
@@ -650,7 +644,6 @@ begin
 
 end;
 
-
 procedure TjktDriver.DoOperacionTraer;
 begin
   if not Assigned(FOperacionTraer)
@@ -663,9 +656,6 @@ function TjktDriver.CanClose: Boolean;
 begin
   result := Self.Cancelar;
 end;
-
-
-
 
 function TjktDriver.esNuevo() : Boolean;
 begin
@@ -715,16 +705,12 @@ begin
     end;
 end;
 
-
-
 function TjktDriver.esAbrir() : Boolean;
 begin
   if (FEstado = esEdit)
       then result := true
       else result := false;
 end;
-
-
 
 procedure TjktDriver.postDataSets;
 var
@@ -743,17 +729,14 @@ begin
     end;
 end;
 
-
 procedure TjktDriver.CustomToolButton;
 begin
   Self.DoCustomToolButton;
 end;
 
-
 procedure TjktDriver.DoCustomToolButton();
 begin
 end;
-
 
 procedure TjktDriver.TratarMensajeException(excep : Exception);
 begin
@@ -761,31 +744,30 @@ begin
      then mostrarMensError(excep.Message);
 end;
 
-
-
 procedure TjktDriver.ejecutarListaOperaciones(aListaOper :TjktOperacionesList) ;
 var
-  x:integer;
+  x: Integer;
   operItem : TjktOperacionItemList;
 begin
-  if not assigned(aListaOper)
-     then exit;
-  for x := 0 to aListaOper.Count -1  do
+  if not Assigned(aListaOper) then
+    Exit;
+
+  for x := 0 to aListaOper.Count - 1 do
     begin
-       operItem := TjktOperacionItemList(aListaOper.Items[x]);
-       if assigned (operItem.Operacion)
-          then  operItem.Operacion.execute;
+      operItem := TjktOperacionItemList(aListaOper.Items[x]);
+      if assigned (operItem.Operacion) then
+        operItem.Operacion.execute;
     end;
 end;
 
-procedure TjktDriver.doOperacionesOnShow;
+procedure TjktDriver.doOperacionesIniciales;
 begin
-    ejecutarListaOperaciones(FOperacionesOnShow);
+  ejecutarListaOperaciones(FOperacionesIniciales);
 end;
 
 procedure TjktDriver.doOperacionesDefault;
 begin
-    ejecutarListaOperaciones(FOperacionesDefault);
+  ejecutarListaOperaciones(FOperacionesDefault);
 end;
 
 end.
