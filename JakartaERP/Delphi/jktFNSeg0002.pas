@@ -72,8 +72,8 @@ type
     dbgUsuarioEmpresasDBTableView1RazonSocial: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn;
     dbgUsuarioEmpresasDBTableView1Habilitada: TcxGridDBColumn;
-    valUsuario: TjktValidador;
-    valUsuario2: TjktValidador;
+    valCodigo2: TjktValidador;
+    valCodigo1: TjktValidador;
     OperTraerEmpresas: TjktOperacion;
     cxDBCheckBox2: TcxDBCheckBox;
     procedure cxDBCheckBox1Click(Sender: TObject);

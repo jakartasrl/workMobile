@@ -95,6 +95,15 @@ inherited FNSeg0001: TFNSeg0001
     Top = 80
   end
   inherited ValidadorForm: TjktValidadorForm
+    ListaValidaciones = <
+      item
+        Field = TEmpresasCodigo
+        ValidadorModif = valCodigo1
+      end
+      item
+        Field = TEmpresasCodigo
+        ValidadorModif = valCodigo2
+      end>
     Left = 400
     Top = 80
   end
@@ -141,5 +150,18 @@ inherited FNSeg0001: TFNSeg0001
     DataSet = TEmpresas
     Left = 104
     Top = 112
+  end
+  object valCodigo1: TjktValidador
+    Validacion = tDistintoEspacio
+    ListaAsignaciones = <>
+    Left = 288
+    Top = 144
+  end
+  object valCodigo2: TjktValidador
+    Entidad = 'empresa'
+    Validacion = tInexistente
+    ListaAsignaciones = <>
+    Left = 360
+    Top = 144
   end
 end

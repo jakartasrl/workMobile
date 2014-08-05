@@ -40,6 +40,8 @@ type
     TEmpresasActivo: TBooleanField;
     dbgEmpresasDBTableView1oid_empresa: TcxGridDBColumn;
     dbgEmpresasDBTableView1Activo: TcxGridDBColumn;
+    valCodigo1: TjktValidador;
+    valCodigo2: TjktValidador;
   private
     { Private declarations }
   public
