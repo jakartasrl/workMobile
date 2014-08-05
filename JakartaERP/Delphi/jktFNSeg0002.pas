@@ -22,7 +22,8 @@ uses
   cxGroupBox, cxCheckBox, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, dxBevel, jktCNMet0011;
+  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, dxBevel, jktCNMet0011,
+  jktCNMet0014;
 
 type
   TFNSeg0002 = class(TfrmChild)
@@ -76,8 +77,9 @@ type
     valCodigo1: TjktValidador;
     OperTraerEmpresas: TjktOperacion;
     cxDBCheckBox2: TcxDBCheckBox;
+    HelpGenerico: TjktHelpGenerico;
     procedure cxDBCheckBox1Click(Sender: TObject);
-    procedure DriverSetDefaults(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -116,13 +118,6 @@ begin
   end;
 }
 
-end;
-
-procedure TFNSeg0002.DriverSetDefaults(Sender: TObject);
-begin
-  inherited;
-
-  OperTraerEmpresas.execute;
 end;
 
 end.

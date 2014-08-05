@@ -237,6 +237,10 @@ inherited FNSeg0002: TFNSeg0002
     TipoPrograma = tp_Otro
     FocoEnAlta = TUsuariosCodigo
     FocoEnModificacion = TUsuariosCodigo
+    OperacionesDefault = <
+      item
+        Operacion = OperTraerEmpresas
+      end>
     Left = 640
     Top = 8
   end
@@ -494,5 +498,11 @@ inherited FNSeg0002: TFNSeg0002
     ServiceCaller = Service
     Left = 88
     Top = 216
+  end
+  object HelpGenerico: TjktHelpGenerico
+    AltaNuevos = False
+    Query = 3
+    Left = 264
+    Top = 200
   end
 end
