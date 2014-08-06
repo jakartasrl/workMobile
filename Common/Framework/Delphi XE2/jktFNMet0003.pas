@@ -20,30 +20,29 @@ uses
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
   cxDataStorage, cxEdit, cxNavigator, cxDBData, cxCheckBox, cxBlobEdit,
-  cxMaskEdit;
+  cxMaskEdit, cxContainer, cxGroupBox;
 
 type
   TFMet003 = class(TForm)
     dsHelp: TDataSource;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    btnAceptar: TButton;
-    btnCancelar: TButton;
     popSeleccion: TPopupMenu;
     MISeleccionarTodos: TMenuItem;
     MIAnularSeleccion: TMenuItem;
     MISeleccionar: TMenuItem;
     N1: TMenuItem;
     MIInvertirSeleccion: TMenuItem;
-    Button1: TButton;
-//    DBF: TDBFinderEdit;       reemplazo este componente obsoleto por el filtro que tiene la grilla
+    cxGroupBox1: TcxGroupBox;
+    cxGroupBox2: TcxGroupBox;
     dbgHelp: TjktExpDBGrid;
-    dbgHelpLevel1: TcxGridLevel;
     dbgHelpDBTableView1: TcxGridDBTableView;
     dbgHelpSeleccionar: TcxGridDBColumn;
     dbgHelpDescripcion: TcxGridDBColumn;
     dbgHelpCodigo: TcxGridDBColumn;
     dbgHelSelec: TcxGridDBColumn;
+    dbgHelpLevel1: TcxGridLevel;
+    cxGroupBox3: TcxGroupBox;
+    btnAceptar: TButton;
+    btnCancelar: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -56,7 +55,6 @@ type
     procedure MISeleccionarClick(Sender: TObject);
     procedure MISeleccionarTodosClick(Sender: TObject);
     procedure MIAnularSeleccionClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FDataSet         : TDataSet;
@@ -69,7 +67,6 @@ type
     FAllowNuevos : boolean;
     FFormNameABM : string;
     fSeleccionMultiple : boolean;
-    function CrearABM(NombreForm : string) : TForm;
     procedure ValidateProperties();
     procedure setLayOut();
     procedure MarcarDesmarcaReg();
@@ -335,28 +332,6 @@ begin
   dbgHelp.GotoFirst;
 end;
 
-function TFMet003.CrearABM(NombreForm : string) : TForm;
-var
-  formClase : TFormClass;
-  form : TForm;
-begin
-  formClase := TFormClass(FindClass(NombreForm));
-  form := formClase.Create(Nil);
-  result := form;
-end;
-
-procedure TFMet003.Button1Click(Sender: TObject);
-var
-  form : TForm;
-begin
-//  if (FormNameABM<>'')
-//      then begin
-//           form := CrearABM(FormNameABM);
-//           if (form is TFjkt001)
-//               then TFjkt001(form).comportamiento := 'ALTA_DESDE_HELP';
-//           form.showModal;
-//           end;
-end;
 
 end.
 
