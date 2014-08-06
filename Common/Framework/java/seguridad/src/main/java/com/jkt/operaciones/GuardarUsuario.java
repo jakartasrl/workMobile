@@ -1,5 +1,6 @@
 package com.jkt.operaciones;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.jkt.dominio.HistorialPassword;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.util.RepositorioClases;
 
 /**
  * Operacion customizada ya que el manejo de empresas habilitadas escapa a la traza por defecto.
@@ -57,6 +59,16 @@ public class GuardarUsuario extends Operation{
 			historialPassword.setPassword(DigestUtils.md5(usuario.getPassword().getBytes()));
 			
 			usuario.addPassword(historialPassword);
+			
+			
+//			String validadorClassName = RepositorioClases.getValidador(usuario.getClass().getCanonicalName()); //La clase la tomo desde la entidad. objeto.getClass();
+//			if (validadorClassName!=null && !validadorClassName.isEmpty()) {
+//				Class<?> clase = Class.forName(validadorClassName);
+//				Method method = clase.getMethod("validar", PersistentEntity.class);
+//				Object instance = clase.newInstance();
+//				method.invoke(instance, usuario);
+//			}
+			
 			
 			serviceRepository.save(usuario);
 		}

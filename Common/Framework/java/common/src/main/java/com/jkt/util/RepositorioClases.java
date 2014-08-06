@@ -22,7 +22,8 @@ import com.jkt.excepcion.JakartaException;
 @SuppressWarnings("rawtypes")
 public class RepositorioClases {
 
-	static Map<String, String> mapa = new HashMap<String, String>();
+	static Map<String, String> alias = new HashMap<String, String>();
+	static Map<String, String> validadores = new HashMap<String, String>();
 
 	static {
 		
@@ -34,7 +35,8 @@ public class RepositorioClases {
 			Entry currentEntry;
 			for (Object elemento : elementos) {
 				currentEntry=(Entry) elemento;
-				mapa.put(currentEntry.getKey(), currentEntry.getValue());
+				alias.put(currentEntry.getKey(), currentEntry.getValue());
+				validadores.put(currentEntry.getValue(), currentEntry.getValidador());
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Error de entrada/salida.");
@@ -50,10 +52,23 @@ public class RepositorioClases {
 	 * @throws JakartaException
 	 */
 	public static String getClass(String value) throws JakartaException {
-		String valueRetrieved = mapa.get(value);
+		String valueRetrieved = alias.get(value);
 		if (valueRetrieved == null || valueRetrieved.isEmpty()) {
 			throw new JakartaException("No existe la clase solicitada. Pruebe indicando la clase con minuscula y respetante la nomenclatura camelCase.");
 		}
+		return valueRetrieved;
+	}
+	
+	/**
+	 * Retorna el nombre de la clase del validador.
+	 * Si no existe el validador de regla de negocio de retorna null.
+	 * 
+	 * @param value
+	 * @return
+	 * @throws JakartaException
+	 */
+	public static String getValidador(String value) throws JakartaException {
+		String valueRetrieved = validadores.get(value);
 		return valueRetrieved;
 	}
 

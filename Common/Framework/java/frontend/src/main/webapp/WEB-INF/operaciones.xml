@@ -238,12 +238,6 @@
 	<!-- 	RECUPERAR USUARIOS -->
 	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Usuario">
 		
-		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_usuario'>
-			<campoEntrada >
-				<campoEntrada nombreEntidad="com.jkt.dominio.Empresa" />
-			</campoEntrada>
-		</input>
-					
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
 				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
@@ -335,9 +329,7 @@
 					
 		<output name="resultado" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
-<!-- 				<campoSalida name="oid_usu_emp" value="oid_usu_emp" target="id" /> -->
 				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
-<!-- 				<campoSalida name="oid_usuario" value="oid_usuario" target="usuario.id" /> -->
 				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
 				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
 				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
@@ -435,36 +427,6 @@
 	</operacion>
 	
 	
-	
-	<!-- 	GUARDAR USUARIO -->
-<!-- 	<operacion name="GuardarUsuario2" clase="com.jkt.operaciones.Guardar"> -->
-<!-- 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'> -->
-<!-- 			<campoEntrada > -->
-				
-<!-- 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" /> -->
-<!-- 				<campoEntrada name="Nombre" clase="String" metodo="setNombres" /> -->
-<!-- 				<campoEntrada name="Apellido" clase="String" metodo="setApellido" /> -->
-<!-- 				<campoEntrada name="Email" clase="String" metodo="setMail" /> -->
-<!-- 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
-				
-<!-- 				<campoEntrada name="password" metodo="addPassword" clase="com.jkt.dominio.HistorialPassword">  -->
-<!-- 					<campoEntrada name="password" clase="ByteArray" metodo="setPassword" /> -->
-<!-- 				</campoEntrada> -->
-
-<!-- 			</campoEntrada> -->
-<!-- 		</input> -->
-		
-<!-- 		<output name="resultado" tableName="tabla"> -->
-<!-- 			<campoSalida name="objeto1" /> -->
-<!-- 		</output>		 -->
-		
-<!-- 		<forms> -->
-<!-- 			<form name="TUsuario"></form> -->
-<!-- 		</forms> -->
-		
-<!-- 	</operacion> -->
-	
-
 	<!-- 	ACTUALIZAR PASSWORD DE USUARIO -->
 	<operacion name="actualizarPassword" clase="com.jkt.operaciones.ActualizarPassword">
 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>

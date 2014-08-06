@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.Factura;
+import com.jkt.excepcion.ValidacionException;
 //import com.jkt.entities.Factura;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
@@ -32,7 +33,7 @@ public class ConsultarSaldos extends Operation {
 		this.guardar(factura);
 	}
 
-	private void guardar(Factura factura) throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+	private void guardar(Factura factura) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException{
 		serviceRepository.save(factura);
 	}
 

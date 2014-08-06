@@ -7,6 +7,7 @@ import java.util.Map;
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 
 /**
  * Esta operacion recibe una entidad y la persiste.
@@ -28,7 +29,7 @@ public class Guardar extends Operation {
 		guardar(object);
 	}
 
-	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
 		serviceRepository.save((PersistentEntity) object.get(0));//save the first		
 	}
 

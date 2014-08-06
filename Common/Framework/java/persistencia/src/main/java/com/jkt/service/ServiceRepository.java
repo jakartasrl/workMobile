@@ -1,5 +1,7 @@
 package com.jkt.service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +16,11 @@ import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
+import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
+import com.jkt.util.RepositorioClases;
 
 /**
  * Implementacion del servicio.
@@ -41,14 +46,40 @@ public class ServiceRepository implements IServiceRepository {
 		return sessionProvider.getSession();
 	}
 
-	public PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException {
+		ejecutarValidacionDeNegocio(entity);
 		getSession().save(entity);
 		return entity;
 	}
 
-	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
+		String validadorClassName;
+		try {
+			validadorClassName = validadorClassName = RepositorioClases.getValidador(entity.getClass().getCanonicalName());
+			if (validadorClassName != null && !validadorClassName.isEmpty()) {
+				Class<?> clase = Class.forName(validadorClassName);
+				Method method;
+				method = clase.getMethod("validar", PersistentEntity.class);
+				Object instance = clase.newInstance();
+				method.invoke(instance, entity);
+			}
+		}catch (JakartaException e) {
+			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+		}catch (NoSuchMethodException e) {
+			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+		}catch (SecurityException e) {
+			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+		}catch (IllegalArgumentException e) {
+			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+		}catch (InvocationTargetException e) {
+			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+		}
+	}
+
+	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
 		for (PersistentEntity persistentEntity : aEntities) {
-			getSession().save(persistentEntity);
+			save(persistentEntity);
+//			getSession().save(persistentEntity);
 		}
 		return aEntities;
 	}
