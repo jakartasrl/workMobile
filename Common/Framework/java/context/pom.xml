@@ -1,16 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.jkt</groupId>
+
+
+  <parent>
+    <groupId>com.jkt</groupId>
+    <artifactId>jkt</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
 	<artifactId>context</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>context</name>
 	<description>Context es un modulo que ofrece informacion de contexto al desarrollador</description>
 	<dependencies>
 		<dependency>
-			<groupId>jkt.com</groupId>
+			<groupId>com.jkt</groupId>
 			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 	<!-- Servlet -->

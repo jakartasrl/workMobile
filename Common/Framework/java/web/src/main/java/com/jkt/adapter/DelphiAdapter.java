@@ -8,18 +8,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
-import com.jkt.excepcion.JakartaException;
-import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.service.SessionProvider;
@@ -111,9 +115,15 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		session = sessionProvider.getSession();
 		Transaction tx = session.beginTransaction();
-			Map map = adaptRequestHook(input, operation);
-		tx.commit();
-		return map;
+			try{
+				Map map = adaptRequestHook(input, operation);
+				tx.commit();
+				return map;
+			}catch(Exception e){
+				tx.rollback();
+				sessionProvider.destroySession();
+				throw e;
+			}
 	}
 	
 	private Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
@@ -303,13 +313,13 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 			Validator validator = factory.getValidator();
 			
-			ArrayList<Factura> lista = (ArrayList<Factura>) strategy.getInstance();
-			Factura factura = lista.get(0);
-			Set<ConstraintViolation<Factura>> validate = validator.validate(factura);
-			if (validate.size()>0) {
-				throw new RuntimeException("Valide su entidad");
+			ArrayList<PersistentEntity> lista = (ArrayList<PersistentEntity>) strategy.getInstance();
+			for (PersistentEntity persistentEntity : lista) {
+				Set<ConstraintViolation<PersistentEntity>> validate = validator.validate(persistentEntity);
+				if (validate.size()>0) {
+					throw new Exception("Ocurrio un error. Su entidad no pasa las validaciones correspondientes.");
+				}
 			}
-			
 			*/
 			
 			Object object = strategy.getInstance();

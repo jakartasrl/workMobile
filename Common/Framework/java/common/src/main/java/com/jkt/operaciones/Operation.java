@@ -1,9 +1,16 @@
 package com.jkt.operaciones;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -12,6 +19,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.framework.writers.IHeaderDataSet;
 import com.jkt.persistencia.IServiceRepository;
@@ -152,6 +160,19 @@ public abstract class Operation extends Observable {
 	 *             guardarle dentro de {@link Exception}
 	 */
 	public void runOperation(Map<String, Object> aParams) throws Exception{
+		
+//		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//		Validator validator = factory.getValidator();
+//		
+//		ArrayList<PersistentEntity> lista = (ArrayList<PersistentEntity>) recuperarObjeto(aParams);
+//		for (PersistentEntity persistentEntity : lista) {
+//			Set<ConstraintViolation<PersistentEntity>> validate = validator.validate(persistentEntity);
+//			if (validate.size()>0) {
+//				throw new Exception("Ocurrio un error. Su entidad no pasa las validaciones correspondientes.");
+//			}
+//		}
+		
+		
 		session = sessionProvider.getSession();
 		serviceRepository.setSessionProvider(sessionProvider);
 		Transaction tx = session.beginTransaction();
@@ -163,12 +184,12 @@ public abstract class Operation extends Observable {
 			//Hago el rollback y muestro el mensaje critido en frontend.
 			tx.rollback();
 			sessionProvider.destroySession();
-			throw new RuntimeException(exception);
+			throw exception;
 		}catch(Exception exception){
 			//Hago el rollback y muestro el mensaje critido en frontend.
 			tx.rollback();
 			sessionProvider.destroySession();
-			throw new Exception(exception);
+			throw exception;
 		}finally{
 			if (tx.isActive()) {
 				tx.commit();
@@ -178,4 +199,15 @@ public abstract class Operation extends Observable {
 	}
 	
 	public abstract void execute(Map<String, Object> aParams) throws Exception;
+	
+	private List recuperarObjeto(Map<String, Object> aParams) {
+		List object;
+		if (aParams.get("objeto")  instanceof List) {
+			object = (List) aParams.get("objeto");
+		}else{
+			object = new ArrayList<Object>();
+			object.add(aParams.get("objeto"));
+		}
+		return object;
+	}
 }
