@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.jkt</groupId>
-    <artifactId>jkt</artifactId>
-    <version>0.0.1</version>
-  </parent>
+	<parent>
+		<groupId>com.jkt</groupId>
+		<artifactId>jkt</artifactId>
+		<version>0.0.1</version>
+	</parent>
 
 	<artifactId>persistencia</artifactId>
 	<name>persistencia</name>
@@ -25,10 +25,23 @@
 
 	<dependencies>
 
+		<!-- Hibernate c3p0 connection pool -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time-hibernate</artifactId>
 			<version>1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
 		</dependency>
 
 		<dependency>

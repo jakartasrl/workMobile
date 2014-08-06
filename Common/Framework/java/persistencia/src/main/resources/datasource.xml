@@ -16,11 +16,11 @@
 	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${db.className}" />
-		<property name="url"
-			value="jdbc:${db.engine}://${db.host}:${db.port}/${db.jakarta}" />
+		<property name="url" value="jdbc:${db.engine}://${db.host}:${db.port}/${db.jakarta}" />
 		<property name="username" value="${db.user}" />
 		<property name="password" value="${db.password}" />
 		<property name="validationQuery" value="select now()" />
+
 	</bean>
 
 	<!-- SessionFactory of Hibernate config -->
@@ -28,14 +28,13 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
-		<!-- <qualifier value="digitalSessionObjective"></qualifier> -->
+		<property name="configLocation">
+			<value>classpath:configuracionHibernate.xml</value>
+     	</property>
 
-<!-- 		<property name="configLocation" value="classpath:mapping.xml" /> -->
-		
 		<property name="mappingLocations">
             <list>
             
-<!--                 <value>classpath:mappings/Orden.hbm.xml</value> -->
                 <value>classpath:mappings/Factura.hbm.xml</value>
                 <value>classpath:mappings/Empresa.hbm.xml</value>
                 <value>classpath:mappings/Usuario.hbm.xml</value>
@@ -53,7 +52,6 @@
                 <value>classpath:mappings/Pais.hbm.xml</value>
                 <value>classpath:mappings/Provincia.hbm.xml</value>
                 
-
             </list>
 		</property>
 		
@@ -65,14 +63,7 @@
 
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="hibernate.dialect">${dialect.class}</prop>
-
-				<!-- TODO study this -->
-				<!-- <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop> -->
-				<!-- <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop> -->
-
-				<!-- <prop key="jadira.usertype.autoRegisterUserTypes">${jadira.usertype.autoRegisterUserTypes}</prop> -->
-				<!-- TODO study this -->
-
+				
 			</props>
 		</property>
 	</bean>

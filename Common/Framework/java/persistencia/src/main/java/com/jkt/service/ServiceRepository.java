@@ -32,6 +32,7 @@ import com.jkt.util.RepositorioClases;
 @SuppressWarnings("rawtypes")
 public class ServiceRepository implements IServiceRepository {
 
+	private static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validación de regla de negocio.";
 	private static final String CAMPO_ACTIVO = "activo";
 	private static final String WILD_CHAR = "%";
 	private ISessionProvider sessionProvider;
@@ -52,7 +53,7 @@ public class ServiceRepository implements IServiceRepository {
 		return entity;
 	}
 
-	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
+	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws InstantiationException, IllegalAccessException, ValidacionException {
 		String validadorClassName;
 		try {
 			validadorClassName = validadorClassName = RepositorioClases.getValidador(entity.getClass().getCanonicalName());
@@ -63,23 +64,24 @@ public class ServiceRepository implements IServiceRepository {
 				Object instance = clase.newInstance();
 				method.invoke(instance, entity);
 			}
+		}catch(ClassNotFoundException e){
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (JakartaException e) {
-			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (NoSuchMethodException e) {
-			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (SecurityException e) {
-			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (IllegalArgumentException e) {
-			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (InvocationTargetException e) {
-			throw new ValidacionException("Error al intentar ejecutar la validación de regla de negocio.");
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}
 	}
 
 	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
 		for (PersistentEntity persistentEntity : aEntities) {
 			save(persistentEntity);
-//			getSession().save(persistentEntity);
 		}
 		return aEntities;
 	}
