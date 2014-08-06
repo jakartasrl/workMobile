@@ -95,14 +95,10 @@ public interface IServiceRepository {
 	List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException;
 
 	/**
-	 * Ejecuta un metodo dentro de una transaccion.
-	 * @param method
-	 * @param instance
-	 * @param complexInstance
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
+	 * La clase concreta debe implementar este metodo para recibir un proveedor de sesiones e inyectarlo
+	 * 
+	 * @param sessionProvider
 	 */
-	void executeMethodTransactional(Method method, Object instance, Object complexInstance) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+	void setSessionProvider(ISessionProvider sessionProvider);
 	
 }

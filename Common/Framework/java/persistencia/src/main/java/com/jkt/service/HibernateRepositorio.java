@@ -1,7 +1,5 @@
 package com.jkt.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +8,15 @@ import java.util.Map.Entry;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jkt.dominio.HistorialPassword;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.dominio.Usuario;
 import com.jkt.eventos.EventoGuardar;
 import com.jkt.eventos.ManagerEventos;
 
@@ -62,7 +64,32 @@ public class HibernateRepositorio {
 	 * @throws Exception Si pasa como parametro una entidad no persistente.
 	 */
 	public PersistentEntity getByOid(@SuppressWarnings("rawtypes") Class clazz, long id) throws Exception {
-		return (PersistentEntity) getSession().get(clazz, id);
+//		Session session = getSession();
+		
+		Session sess = sessionFactory.openSession();
+		
+		
+//		Session sess=getSession();
+		Transaction tx=sess.beginTransaction();
+		//do something using teh session
+//		sess.save(obj);
+
+		Object persistentEntity = sess.get(clazz, id);
+		
+		Usuario usuario;
+		usuario=(Usuario) persistentEntity;
+		
+		HistorialPassword password=new HistorialPassword();
+		password.setPassword("leonel".getBytes());
+		password.setFechaVencimiento(LocalDateTime.now());
+		
+		usuario.addPassword(password);
+		
+		tx.commit();
+		sess.close();
+
+		return null;
+//		return (PersistentEntity) sess.get(clazz, id);
 	}
 
 	/**
@@ -151,5 +178,5 @@ public class HibernateRepositorio {
 		
 		return criteria.list();
 	}
-	
+
 }

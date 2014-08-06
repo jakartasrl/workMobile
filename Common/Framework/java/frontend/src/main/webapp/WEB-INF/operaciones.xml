@@ -417,6 +417,7 @@
 				<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
 				<campoEntrada name="Email" clase="String" metodo="setMail" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="Password" clase="String" metodo="setPassword" />
 				
 				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" >
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />

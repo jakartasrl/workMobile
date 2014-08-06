@@ -13,6 +13,8 @@
         </property>
 		
 		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
 
 		<many-to-one name="pais" class="com.jkt.varios.Pais" cascade="none" column="PAIS_ID"/>				
 	</class>

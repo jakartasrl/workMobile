@@ -1,9 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.jkt</groupId>
+  <parent>
+    <groupId>com.jkt</groupId>
+    <artifactId>jkt</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
 	<artifactId>seguridad</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>seguridad</name>
 	<description>seguridad es un modulo de maven, o en este caso, proyecto maven, que contiene logica para manejar seguridad dentro del sistema</description>
 
@@ -38,9 +42,9 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>jkt.com</groupId>
+			<groupId>com.jkt</groupId>
 			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
@@ -53,7 +57,12 @@
 		<dependency>
 			<groupId>com.jkt</groupId>
 			<artifactId>context</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.0.3.Final</version>
 		</dependency>
 	</dependencies>
 

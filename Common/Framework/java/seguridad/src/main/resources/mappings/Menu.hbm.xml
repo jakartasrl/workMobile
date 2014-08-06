@@ -12,6 +12,8 @@
 
 		<property name="codigo" column="CODIGO" />
 		<property name="descripcion" column="DESCRIPCION" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+
 
 		<subclass name="com.jkt.dominio.menu.Programa" discriminator-value="PROGRAMA">
 		</subclass>
@@ -25,7 +27,7 @@
 			<property name="rutaDeImagen" column="RUTA_IMAGEN" type="string" />
 			<property name="argumento" column="ARGUMENTO" type="string" />
 			
-			<list name="textos" table="TEXTOS_MENU" lazy="false" cascade="all">
+			<list name="textos" table="TEXTOS_MENU" lazy="true" cascade="all">
 				<key>
 					<column name="MENU_ID"></column>
 				</key>
@@ -33,7 +35,7 @@
 				<one-to-many class="com.jkt.dominio.menu.TextoMenu"/>
 			</list>
 			
-			<list name="elementos" table="MENU_HIJOS" lazy="false" cascade="all">
+			<list name="elementos" table="MENU_HIJOS" lazy="true" cascade="all">
 				<key>
 					<column name="MENU_ID"></column>
 				</key>

@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.Empresa;
 import com.jkt.dominio.EmpresaHabilitada;
+import com.jkt.dominio.HistorialPassword;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.JakartaException;
@@ -31,7 +34,8 @@ public class GuardarUsuario extends Operation{
 
 			List<EmpresaHabilitada> empresasHabilitadasPlanas = usuario.getEmpresasHabilitadasPlanas();//Uso los campos planchados para recuperar desde la base
 			for (EmpresaHabilitada empresaHabilitada : empresasHabilitadasPlanas) {
-				Empresa empresa = (Empresa) serviceRepository.getUniqueByProperty(Empresa.class, "id", Long.valueOf(empresaHabilitada.getOidEmpresa()));
+//				Empresa empresa = (Empresa) serviceRepository.getUniqueByProperty(Empresa.class, "id", Long.valueOf(empresaHabilitada.getOidEmpresa()));
+				Empresa empresa = (Empresa) serviceRepository.getByOid(Empresa.class, Long.valueOf(empresaHabilitada.getOidEmpresa()) );
 				
 				if (empresa==null) {
 					throw new JakartaException("Existe una inconsistencia en los datos. La empresa ingresada no existe.");
@@ -45,6 +49,15 @@ public class GuardarUsuario extends Operation{
 				
 				usuario.agregarEmpresaHabilitada(empresaAGuardarEnUsuario);
 			}
+			
+			/*
+			 * Manejo de la password del usuario.
+			 */
+			HistorialPassword historialPassword = new HistorialPassword();
+			historialPassword.setPassword(DigestUtils.md5(usuario.getPassword().getBytes()));
+			
+			usuario.addPassword(historialPassword);
+			
 			serviceRepository.save(usuario);
 		}
 	}

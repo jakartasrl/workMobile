@@ -8,12 +8,21 @@ import java.util.Date;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-abstract public class PersistentEntity implements Serializable{
+abstract public class PersistentEntity implements Serializable {
 
 	private long id;
 	private Date creationDate;
 	private int version;
-	
+	private boolean activo = true;
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
 	public int getVersion() {
 		return version;
 	}

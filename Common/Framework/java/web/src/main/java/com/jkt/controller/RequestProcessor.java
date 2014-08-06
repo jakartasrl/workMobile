@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +23,7 @@ import com.jkt.operaciones.Operation;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
+import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.MapDS;
 import com.jkt.xmlreader.XMLEntity;
@@ -41,6 +43,9 @@ public abstract class RequestProcessor extends BaseController{
 	private static final String KEY_NOMBRE_OPERACION = "op";
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
+	@Autowired
+	protected SessionProvider sessionProvider;
+	
 	@Autowired
 	protected IServiceRepository serviceRepository;
 	
@@ -110,7 +115,7 @@ public abstract class RequestProcessor extends BaseController{
 		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME));
 
 		log.debug("Ejecutando la operación...");
-		operation.execute(parametersAdapted);
+		operation.runOperation(parametersAdapted);
 		
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
@@ -125,12 +130,12 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws ClassNotFoundException 
 	 */
 	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-//		return this.applicationContext.retrieveOperation(clase);
 		String clase = ((EventBusiness)eventBusinessOperation).getClase();
 		Class<?> forName = Class.forName(clase);
 		Object newInstance = forName.newInstance();
 		Operation op=(Operation)newInstance;
 		op.setServiceRepository(serviceRepository);
+		op.setSessionProvider(sessionProvider);
 		return op;
 	}
 

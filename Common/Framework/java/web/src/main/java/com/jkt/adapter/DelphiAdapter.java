@@ -8,16 +8,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
-import com.jkt.excepcion.JakartaException;
-import com.jkt.persistencia.IServiceRepository;
+import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
+import com.jkt.service.SessionProvider;
 import com.jkt.util.Campos;
 import com.jkt.util.MapDS;
 import com.jkt.util.Registro;
@@ -46,18 +55,14 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
 
-	@Autowired
-	private IServiceRepository repository;
-
 	
-	public IServiceRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(IServiceRepository repository) {
-		this.repository = repository;
-	}
-
+	private ISessionProvider sessionProvider;
+	
+//	@Autowired
+//	private SessionFactory sessionFactory;
+	private Session session;
+//	
+	
 	/*
 	 * Definición de estregias para el guardado de parametros.
 	 * Básicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
@@ -108,6 +113,20 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 */
 	
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
+		session = sessionProvider.getSession();
+		Transaction tx = session.beginTransaction();
+			try{
+				Map map = adaptRequestHook(input, operation);
+				tx.commit();
+				return map;
+			}catch(Exception e){
+				tx.rollback();
+				sessionProvider.destroySession();
+				throw e;
+			}
+	}
+	
+	private Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		
 		final HashMap<String, Object> finalResult = new HashMap<String, Object>();
 		String keyName="";
@@ -256,16 +275,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								Class<?> otraClase = Class.forName(metaDataOfCurrentField.getClase());
 								Method method = clazz.getMethod(metaDataOfCurrentField.getMetodo(), otraClase);
 								
-								/*
-								 * PROXY INITIALIZATION EXCEPTION
-								 */
-								if (idObject>0) {
-									//ejecuta transaccionalmente el metodo!
-									this.repository.executeMethodTransactional(method, instance, complexInstance);
-									
-								}else{
-									method.invoke(instance,complexInstance);
-								}
+								method.invoke(instance,complexInstance);
 								
 							}
 							/*
@@ -303,13 +313,13 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 			Validator validator = factory.getValidator();
 			
-			ArrayList<Factura> lista = (ArrayList<Factura>) strategy.getInstance();
-			Factura factura = lista.get(0);
-			Set<ConstraintViolation<Factura>> validate = validator.validate(factura);
-			if (validate.size()>0) {
-				throw new RuntimeException("Valide su entidad");
+			ArrayList<PersistentEntity> lista = (ArrayList<PersistentEntity>) strategy.getInstance();
+			for (PersistentEntity persistentEntity : lista) {
+				Set<ConstraintViolation<PersistentEntity>> validate = validator.validate(persistentEntity);
+				if (validate.size()>0) {
+					throw new Exception("Ocurrio un error. Su entidad no pasa las validaciones correspondientes.");
+				}
 			}
-			
 			*/
 			
 			Object object = strategy.getInstance();
@@ -333,7 +343,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			newInstance	= clazz.newInstance();
 		}else{
 			try{
-				newInstance=repository.getByOid(clazz, oid);
+				newInstance=session.get(clazz, oid);
 			}catch(Exception e){
 				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz, String.valueOf(oid)));
 			}
@@ -432,6 +442,11 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	
 	private boolean esTabla(Object obj){
 		return obj instanceof Tabla;
+	}
+
+	@Autowired
+	public void setSession(SessionProvider sessionProvider) {
+		this.sessionProvider=sessionProvider;
 	}
 
 }

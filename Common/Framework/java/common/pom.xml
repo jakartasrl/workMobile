@@ -1,9 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>jkt.com</groupId>
+
+	<parent>
+		<groupId>com.jkt</groupId>
+		<artifactId>jkt</artifactId>
+		<version>0.0.1</version>
+	</parent>
+
 	<artifactId>common</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+
 	<name>common</name>
 	<description>Utilidades que serviran a todos los modulos de la aplicacion</description>
 
@@ -20,6 +26,13 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- hibernate validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>joda-time</groupId>

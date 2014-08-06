@@ -19,13 +19,14 @@ public class ActualizarPassword extends Operation {
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Usuario usuario=(Usuario) aParams.get("objeto");
+		
 		HistorialPassword historialPassword = new HistorialPassword();
 		historialPassword.setPassword(DigestUtils.md5(usuario.getPassword().getBytes()));
 		historialPassword.setFechaVencimiento(LocalDateTime.now());
 		
 		usuario.addPassword(historialPassword);
 		
-		this.serviceRepository.save(usuario);
+		serviceRepository.save(usuario);
 	}
 
 }

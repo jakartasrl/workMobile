@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.jkt.request.EventBusiness;
+import com.jkt.service.SessionProvider;
 
 /**
  * 
@@ -17,6 +18,11 @@ public class WebAdapter implements Adapter<String, Integer> {
 
 	public String adaptRequest(Integer input, EventBusiness operation) {
 		return null;
+	}
+
+	public void setSession(SessionProvider sessionProvider) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

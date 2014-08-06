@@ -13,7 +13,9 @@
         </property>
 		
 		<property name="descripcion" column="DESCRIPCION"/>
-				
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+
 	</class>
 	
 </hibernate-mapping>

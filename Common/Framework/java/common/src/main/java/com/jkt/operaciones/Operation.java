@@ -1,21 +1,32 @@
 package com.jkt.operaciones;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.framework.writers.IHeaderDataSet;
 import com.jkt.persistencia.IServiceRepository;
+import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
-import com.jkt.transformers.Notificacion;
 import com.jkt.transformers.Transformer;
 import com.jkt.xmlreader.ElementTransformer;
 
@@ -27,19 +38,39 @@ import com.jkt.xmlreader.ElementTransformer;
  * Dentro de este metodo (abstracto en esta clase), esta la logica de la
  * resolucion del evento. Copyright: Copyright (c) 2001 Company: JAKARTA SRL
  * 
- * Modificacion de esta clase para permitir el manejo de un servicio que se encarga del manejo de transacciones.
+ * Modificacion de esta clase para permitir el manejo de un servicio que se
+ * encarga del manejo de transacciones.
+ * 
  * @see ServiceRepository
  */
 
+@Service
 public abstract class Operation extends Observable {
 	protected static final Logger log = Logger.getLogger(Operation.class);
-	
+
+	private ISessionProvider sessionProvider;
+	protected Session session;
 	protected IServiceRepository serviceRepository;
-	
 	protected IEventBusiness ev;
 
-	public Operation() {}
 	
+	public ISessionProvider getSessionProvider() {
+		return sessionProvider;
+	}
+
+	@Autowired
+	public void setSessionProvider(ISessionProvider sessionProvider) {
+		this.sessionProvider = sessionProvider;
+	}
+
+	
+	protected void destroySession(){
+		session.close();
+		session=null;
+	}
+
+	public Operation() {}
+
 	public IHeaderDataSet getHeaderDataSet(String aTabName) {
 		return ev.getHeaderDataSet(aTabName);
 	}
@@ -53,7 +84,6 @@ public abstract class Operation extends Observable {
 		this.serviceRepository = serviceRepository;
 	}
 
-
 	/**
 	 * Patron Template method. Se define un estructura basica, y se toma la
 	 * implementacion de las subclases.
@@ -63,61 +93,121 @@ public abstract class Operation extends Observable {
 	 * @param eventBusiness
 	 * @return
 	 * @throws JakartaException
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
-	public Transformer generateTransformer(ServletOutputStream outputStream, EventBusiness eventBusiness, String outputName) throws JakartaException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public Transformer generateTransformer(ServletOutputStream outputStream,
+			EventBusiness eventBusiness, String outputName)
+			throws JakartaException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
 		ElementTransformer elementTransformer = eventBusiness.getTransformer();
-		
+
 		/*
-		 * Creacion del transformer. Cada bean de los transformers son de scope prototype, xq se agregaran como 
-		 * observers a diferentes instancias.
+		 * Creacion del transformer. Cada bean de los transformers son de scope
+		 * prototype, xq se agregaran como observers a diferentes instancias.
 		 * 
-		 * Desde el contexto web es complicado recuperar beans, no es tan simple como recuperar el contexto con 
-		 * XMLClassPath o FileClassPath.
+		 * Desde el contexto web es complicado recuperar beans, no es tan simple
+		 * como recuperar el contexto con XMLClassPath o FileClassPath.
 		 * 
-		 * Lo que se hace es instanciar el transformer con reflection. Posteriormente, se inyecta por constructor lo
-		 * necesario.
-		 * 
+		 * Lo que se hace es instanciar el transformer con reflection.
+		 * Posteriormente, se inyecta por constructor lo necesario.
 		 */
-		
-		Transformer transformer=null;
-		if (elementTransformer!=null) {
+
+		Transformer transformer = null;
+		if (elementTransformer != null) {
 			Class<?> clazz = Class.forName(elementTransformer.getClase());
 			Object instance = clazz.newInstance();
-			transformer=(Transformer)instance;
-		}else{
-			transformer=new EmptyTransformer();
+			transformer = (Transformer) instance;
+		} else {
+			transformer = new EmptyTransformer();
 		}
-		
-		//Parametrizacion del mismo
+
+		// Parametrizacion del mismo
 		transformer.setEvent(eventBusiness);
 		transformer.setup(outputStream, outputName);
 		this.addObserver(transformer);
-		
+
 		return transformer;
 	}
-	
+
 	/**
 	 * 
 	 * Notifica al transformer un objeto para que lo procese.
 	 * 
-	 * @param parameter que llegara el transformer.Dependiendo del tipo de transformer se notifica de diferentes maneras.
+	 * @param parameter
+	 *            que llegara el transformer.Dependiendo del tipo de transformer
+	 *            se notifica de diferentes maneras.
 	 * 
 	 */
-	protected void notificarObjecto(Object parameter){
+	protected void notificarObjecto(Object parameter) {
 		setChanged();
 		notifyObservers(parameter);
 	}
 
 	/**
-	 * <p>Metodo principal de la operacion.</p>
-	 * <p>Es el metodo a implementar en cualquier operacion.</p>
+	 * <p>
+	 * Metodo principal de la operacion.
+	 * </p>
+	 * <p>
+	 * Es el metodo a implementar en cualquier operacion.
+	 * </p>
 	 * 
 	 * 
 	 * @param aParams
-	 * @throws Exception cuando ocurre cualquier error, deberia wrapper la exception y guardarle dentro de {@link Exception}
+	 * @throws Exception
+	 *             cuando ocurre cualquier error, deberia wrapper la exception y
+	 *             guardarle dentro de {@link Exception}
 	 */
+	public void runOperation(Map<String, Object> aParams) throws Exception{
+		
+//		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//		Validator validator = factory.getValidator();
+//		
+//		ArrayList<PersistentEntity> lista = (ArrayList<PersistentEntity>) recuperarObjeto(aParams);
+//		for (PersistentEntity persistentEntity : lista) {
+//			Set<ConstraintViolation<PersistentEntity>> validate = validator.validate(persistentEntity);
+//			if (validate.size()>0) {
+//				throw new Exception("Ocurrio un error. Su entidad no pasa las validaciones correspondientes.");
+//			}
+//		}
+		
+		
+		session = sessionProvider.getSession();
+		serviceRepository.setSessionProvider(sessionProvider);
+		Transaction tx = session.beginTransaction();
+		try{
+			execute(aParams);//UOW
+			tx.commit();
+			sessionProvider.destroySession();
+		}catch(RuntimeException exception){
+			//Hago el rollback y muestro el mensaje critido en frontend.
+			tx.rollback();
+			sessionProvider.destroySession();
+			throw exception;
+		}catch(Exception exception){
+			//Hago el rollback y muestro el mensaje critido en frontend.
+			tx.rollback();
+			sessionProvider.destroySession();
+			throw exception;
+		}finally{
+			if (tx.isActive()) {
+				tx.commit();
+			}
+			sessionProvider.destroySession();
+		}
+	}
+	
 	public abstract void execute(Map<String, Object> aParams) throws Exception;
+	
+	private List recuperarObjeto(Map<String, Object> aParams) {
+		List object;
+		if (aParams.get("objeto")  instanceof List) {
+			object = (List) aParams.get("objeto");
+		}else{
+			object = new ArrayList<Object>();
+			object.add(aParams.get("objeto"));
+		}
+		return object;
+	}
 }

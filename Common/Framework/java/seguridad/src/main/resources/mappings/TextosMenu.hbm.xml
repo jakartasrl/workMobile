@@ -13,6 +13,7 @@
 		<property name="alineacion" column="ALINEACION" type="string" />
 		<property name="fuente" column="FUENTE" type="string" />
 		<property name="tamanio" column="TAMANIO" type="integer" />
+		<property name="activo" column="ACTIVO" type="boolean" />
 
 	</class>
 </hibernate-mapping>
