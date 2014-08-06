@@ -1,10 +1,10 @@
-unit jktCMet014;
+unit jktCNMet0014;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs ,
-  jktCMet002 , DB , kbmMemTable, jktFMet003;
+  jktCNMet0002, DB , kbmMemTable, jktFNMet0003;
 
 const
   oid         = 'oid';
@@ -18,7 +18,7 @@ type
   private
      FClasificador : Boolean;
      FComponente   : String;
-     FOperacion    : TjktOperacion;
+     FOperacion    : TjktServiceCaller;
      FOSName       : String;
      FQuery        : Integer;
      FRefreshDatos : Boolean;
@@ -26,7 +26,7 @@ type
   published
     property Clasificador : Boolean       read FClasificador  write FClasificador  default False;
     property Componente   : String        read FComponente    write FComponente;
-    property Operacion    : TjktOperacion read FOperacion     write FOperacion;
+    property Operacion    : TjktServiceCaller read FOperacion     write FOperacion;
     property OSName       : String        read FOSName        write FOSName;
     property Query        : Integer       read FQuery         write FQuery;
     property RefreshDatos : Boolean       read FRefreshDatos  write FRefreshDatos  default False;
@@ -37,7 +37,20 @@ type
 
   TNotifyAcepto = procedure (DataSet : TDataSet) of object;
 
-  TjktHelp      = class(TComponent)
+
+  TjktHelp = class(TComponent)
+  private
+
+  protected
+
+  public
+
+  published
+
+  end;
+
+
+  TjktHelpGenerico = class(TjktHelp)
   private
     { Private declarations }
     FTempMemTable   : TkbmMemTable;
@@ -50,7 +63,7 @@ type
     FQuery          : Integer;
     FUnirCodigoDesc : Boolean;
     FRefreshDatos   : Boolean;
-    FOperacion      : TjktOperacion;
+    FOperacion      : TjktServiceCaller;
     FOid            : integer;
     FCodigo         : String;
     FDescripcion    : String;
@@ -99,7 +112,7 @@ type
     property UnirCodigoDesc : Boolean       read FUnirCodigoDesc write FUnirCodigoDesc default False;
     property RefreshDatos   : Boolean       read FRefreshDatos   write FRefreshDatos   default False;
 
-    property Operacion      : TjktOperacion read FOperacion      write FOperacion;
+    property Operacion      : TjktServiceCaller read FOperacion      write FOperacion;
     property SetHlpActivo   : TSetHlpActivo read FSetHlpActivo   write FSetHlpActivo   default tHlpServerDataSet;
     property Clasificador   : Boolean       read FClasificador   write FClasificador   default False;
     property SeleccionMultiple : boolean read FSeleccionMultiple write FSeleccionMultiple default false;
@@ -116,11 +129,11 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('Jakarta', [TjktHelp]);
+  RegisterComponents('Jakarta', [TjktHelpGenerico]);
 end;
 
 
-constructor TjktHelp.create(AOwner : TComponent);
+constructor TjktHelpGenerico.create(AOwner : TComponent);
 begin
   inherited create(AOwner);
 
@@ -165,7 +178,7 @@ begin
 end;
 
 
-function TjktHelp.Help (aFieldCodigo : TField) : boolean;
+function TjktHelpGenerico.Help (aFieldCodigo : TField) : boolean;
 begin
   if (FOperacion.ModoExecute)
      then Exit;
@@ -174,7 +187,7 @@ begin
 end;
 
 
-function TjktHelp.GetDataSet () : TDataSet;
+function TjktHelpGenerico.GetDataSet () : TDataSet;
 begin
   if (FOperacion.ModoExecute)
      then Exit;
@@ -184,7 +197,7 @@ begin
 end;
 
 
-function TjktHelp.GetDataSource () : TDataSource;
+function TjktHelpGenerico.GetDataSource () : TDataSource;
 begin
   if (FOperacion.ModoExecute)
      then Exit;
@@ -198,23 +211,23 @@ begin
 end;
 
 
-function TjktHelp.GetCodigo() : String;
+function TjktHelpGenerico.GetCodigo() : String;
 begin
   result := fCodigo;
 end;
 
-function TjktHelp.GetDescripcion() : String;
+function TjktHelpGenerico.GetDescripcion() : String;
 begin
   result := fDescripcion;
 end;
 
-function TjktHelp.GetOid() : Integer;
+function TjktHelpGenerico.GetOid() : Integer;
 begin
   result := fOid;
 end;
 
 
-procedure TjktHelp.TraerDataSet();
+procedure TjktHelpGenerico.TraerDataSet();
 begin
 
   if (FSetHlpActivo = tHlpLocalDataSet) then Exit;
@@ -260,7 +273,7 @@ begin
   FOperacion.execute;
 end;
 
-procedure TjktHelp.ArmarOperHelpGenerico();
+procedure TjktHelpGenerico.ArmarOperHelpGenerico();
 var
   i : integer;
 
@@ -285,7 +298,7 @@ begin
 
 end;
 
-procedure TjktHelp.ArmarOperHelpMetaClass();
+procedure TjktHelpGenerico.ArmarOperHelpMetaClass();
 var
   i           : integer;
 begin
@@ -310,7 +323,7 @@ begin
 end;
 
 
-function TjktHelp.SeleccionarRegistro(aFieldCodigo : TField) : boolean;
+function TjktHelpGenerico.SeleccionarRegistro(aFieldCodigo : TField) : boolean;
 var
   HelpDialog: TFMet003;
   CodigoMultiple : string;
@@ -361,27 +374,27 @@ begin
   end;
 end;
 
-destructor TjktHelp.destroy;
+destructor TjktHelpGenerico.destroy;
 begin
   FListaParams.Free;
   FListaValoresParams.Free;
   inherited destroy;
 end;
 
-function TjktHelp.mostrarHelp() : boolean;
+function TjktHelpGenerico.mostrarHelp() : boolean;
 begin
   if (FOperacion.ModoExecute)
      then Exit;
   result := Help(Nil);
 end;
 
-procedure TjktHelp.clearParams();
+procedure TjktHelpGenerico.clearParams();
 begin
   FListaParams.Clear;
   FListaValoresParams.Clear;
 end;
 
-procedure TjktHelp.addParam(ParamName : string ; valor : string );
+procedure TjktHelpGenerico.addParam(ParamName : string ; valor : string );
 var
   indice : integer;
 begin
@@ -395,12 +408,12 @@ begin
    FListaValoresParams.Add(valor);
 end;
 
-procedure TjktHelp.setDataSet(DataSet : TDataSet);
+procedure TjktHelpGenerico.setDataSet(DataSet : TDataSet);
 begin
   FTempMemTable.LoadFromDataSet(DataSet,[]);
 end;
 
-function TjktHelp.GetSelectedRecord(): TkbmMemTable;
+function TjktHelpGenerico.GetSelectedRecord(): TkbmMemTable;
 begin
 (*
   -- vieja implementacion, no se usaba en ningun proyecto y estaba mal --
@@ -443,7 +456,7 @@ begin
   result := FSeleccionReg;
 end;
 
-function TjktHelp.cargarRegistrosMultiSelec(DataSet : TDataSet) : string;
+function TjktHelpGenerico.cargarRegistrosMultiSelec(DataSet : TDataSet) : string;
 var
   codigoMultiple : string;
 begin
@@ -475,7 +488,7 @@ begin
   result := codigoMultiple;
 end;
 
-function TjktHelp.validar(aCodigo : String; raiseException : Boolean) : Boolean;
+function TjktHelpGenerico.validar(aCodigo : String; raiseException : Boolean) : Boolean;
 begin
   if (FOperacion.ModoExecute)
      then Exit;
@@ -497,7 +510,7 @@ begin
           end;
 end;
 
-function TjktHelp.validar(aOid : Integer; raiseException : Boolean) : Boolean;
+function TjktHelpGenerico.validar(aOid : Integer; raiseException : Boolean) : Boolean;
 begin
   if (FOperacion.ModoExecute)
      then Exit;
@@ -522,7 +535,7 @@ begin
 end;
 
 
-procedure TjktHelp.LimpiarDataSets();
+procedure TjktHelpGenerico.LimpiarDataSets();
 begin
   if (Assigned(FTempMemTable))
  and (FTempMemTable.Active)
@@ -534,7 +547,7 @@ begin
 
 end;
 
-function TjktHelp.getSeparadorCodigo(): String;
+function TjktHelpGenerico.getSeparadorCodigo(): String;
 begin
   if ( FSeparador = '' )
      then begin

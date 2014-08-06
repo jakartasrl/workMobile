@@ -4,8 +4,8 @@ object FMet003: TFMet003
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Ayuda'
-  ClientHeight = 464
-  ClientWidth = 524
+  ClientHeight = 472
+  ClientWidth = 523
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,26 +21,39 @@ object FMet003: TFMet003
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel2: TPanel
+  object cxGroupBox1: TcxGroupBox
     Left = 0
     Top = 0
-    Width = 524
-    Height = 435
-    Align = alClient
-    BevelOuter = bvNone
-    BorderWidth = 10
+    Align = alTop
     TabOrder = 0
+    ExplicitTop = -1
+    Height = 63
+    Width = 523
+  end
+  object cxGroupBox2: TcxGroupBox
+    Left = 0
+    Top = 63
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 388
+    ExplicitTop = 8
+    ExplicitWidth = 375
+    ExplicitHeight = 303
+    Height = 353
+    Width = 523
     object dbgHelp: TjktExpDBGrid
-      Left = 10
-      Top = 10
-      Width = 504
-      Height = 415
+      Left = 2
+      Top = 5
+      Width = 519
+      Height = 346
       Align = alClient
       TabOrder = 0
       LookAndFeel.Kind = lfFlat
       LookAndFeel.NativeStyle = True
       LookAndFeel.SkinName = ''
       DataSource = dsHelp
+      ExplicitWidth = 371
+      ExplicitHeight = 296
       object dbgHelpDBTableView1: TcxGridDBTableView
         PopupMenu = popSeleccion
         OnDblClick = dbgHelpDblClick
@@ -115,17 +128,16 @@ object FMet003: TFMet003
       end
     end
   end
-  object Panel3: TPanel
+  object cxGroupBox3: TcxGroupBox
     Left = 0
-    Top = 435
-    Width = 524
-    Height = 29
+    Top = 416
     Align = alBottom
-    BevelOuter = bvNone
-    TabOrder = 1
+    TabOrder = 2
+    Height = 56
+    Width = 523
     object btnAceptar: TButton
-      Left = 352
-      Top = 0
+      Left = 349
+      Top = 16
       Width = 75
       Height = 25
       Caption = '&Aceptar'
@@ -135,22 +147,13 @@ object FMet003: TFMet003
       OnClick = btnAceptarClick
     end
     object btnCancelar: TButton
-      Left = 440
-      Top = 0
+      Left = 430
+      Top = 16
       Width = 75
       Height = 25
       Caption = '&Cancelar'
       ModalResult = 2
       TabOrder = 1
-    end
-    object Button1: TButton
-      Left = 264
-      Top = 0
-      Width = 75
-      Height = 25
-      Caption = 'Nuevo'
-      TabOrder = 2
-      OnClick = Button1Click
     end
   end
   object dsHelp: TDataSource
