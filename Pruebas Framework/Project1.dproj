@@ -90,9 +90,6 @@
 			<DCCReference Include="..\Common\Framework\Delphi XE2\jktFNMet0001.pas">
 				<Form>frmChild</Form>
 			</DCCReference>
-			<DCCReference Include="..\Common\Framework\Delphi XE2\jktFNUti0001.pas">
-				<Form>FNUti0001</Form>
-			</DCCReference>
 			<DCCReference Include="jktPrueba.pas">
 				<Form>Form1</Form>
 			</DCCReference>

@@ -102,7 +102,7 @@ type
   protected
     function  GetOwner : TPersistent; override;
     function  GetItem(Index: Integer): TjktValidadorField;
-    procedure SetItem(Index: Integer; Value:TjktValidadorField);
+    procedure SetItem(Index: Integer; Value: TjktValidadorField);
     procedure Update(Item: TjktValidadorField);
   public
     constructor Create(AOwner : TComponent);
@@ -126,13 +126,15 @@ type
     procedure  inicializar;
     procedure Validar(Sender: TField);
   published
-     property ListaValidaciones :TjktValidadorFieldList     read FListaValidaciones     write FListaValidaciones;
+    property ListaValidaciones: TjktValidadorFieldList read FListaValidaciones write FListaValidaciones;
   end;
 
 procedure Register;
 
 implementation
-uses jktCNMet0001;
+
+uses
+  jktCNMet0001;
 
 procedure Register;
 begin

@@ -167,8 +167,6 @@ inherited FNSeg0002: TFNSeg0002
     Align = alClient
     Caption = 'Empresas'
     TabOrder = 5
-    ExplicitTop = 177
-    ExplicitHeight = 215
     Height = 210
     Width = 785
     object dbgUsuarioEmpresas: TjktExpDBGrid
@@ -179,7 +177,6 @@ inherited FNSeg0002: TFNSeg0002
       Align = alLeft
       TabOrder = 0
       DataSource = dsUsuarioEmpresas
-      ExplicitHeight = 190
       object dbgUsuarioEmpresasDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsUsuarioEmpresas
@@ -240,7 +237,10 @@ inherited FNSeg0002: TFNSeg0002
     TipoPrograma = tp_Otro
     FocoEnAlta = TUsuariosCodigo
     FocoEnModificacion = TUsuariosCodigo
-    OnSetDefaults = DriverSetDefaults
+    OperacionesDefault = <
+      item
+        Operacion = OperTraerEmpresas
+      end>
     Left = 640
     Top = 8
   end
@@ -279,11 +279,13 @@ inherited FNSeg0002: TFNSeg0002
     ListaValidaciones = <
       item
         Field = TUsuariosCodigo
-        Validador = valUsuario2
+        ValidadorNew = valCodigo1
+        ValidadorModif = valCodigo1
       end
       item
         Field = TUsuariosCodigo
-        Validador = valUsuario
+        ValidadorNew = valCodigo2
+        ValidadorModif = valCodigo2
       end>
     Left = 528
     Top = 64
@@ -476,18 +478,18 @@ inherited FNSeg0002: TFNSeg0002
     Left = 568
     Top = 200
   end
-  object valUsuario: TjktValidador
+  object valCodigo2: TjktValidador
     Entidad = 'usuario'
     Validacion = tInexistente
     ListaAsignaciones = <>
-    Left = 168
-    Top = 32
+    Left = 160
+    Top = 64
   end
-  object valUsuario2: TjktValidador
+  object valCodigo1: TjktValidador
     Validacion = tDistintoEspacio
     ListaAsignaciones = <>
-    Left = 168
-    Top = 96
+    Left = 96
+    Top = 64
   end
   object OperTraerEmpresas: TjktOperacion
     OperName = 'TraerEmpresasParaUsuarios'
@@ -496,5 +498,11 @@ inherited FNSeg0002: TFNSeg0002
     ServiceCaller = Service
     Left = 88
     Top = 216
+  end
+  object HelpGenerico: TjktHelpGenerico
+    AltaNuevos = False
+    Query = 3
+    Left = 264
+    Top = 200
   end
 end

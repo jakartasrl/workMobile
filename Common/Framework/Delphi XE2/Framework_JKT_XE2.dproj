@@ -148,7 +148,6 @@
 			<DCCReference Include="dxSkinXmas2008BlueRS16.dcp"/>
 			<DCCReference Include="dxSkinscxPCPainterRS16.dcp"/>
 			<DCCReference Include="cxTreeListRS16.dcp"/>
-			<DCCReference Include="cxSchedulerRS16.dcp"/>
 			<DCCReference Include="dxBarRS16.dcp"/>
 			<DCCReference Include="dxRibbonRS16.dcp"/>
 			<DCCReference Include="jktCNMet0001.pas"/>

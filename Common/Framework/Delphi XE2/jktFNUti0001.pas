@@ -45,10 +45,10 @@ type
     mtConfigValidador: TjktMemTable;
     mtConfigValidadorfieldName: TStringField;
     mtConfigValidadortipoValidacion: TStringField;
-    jktValidador1: TjktValidador;
     mtConfigValidadorentidad: TStringField;
     mtConfigValidadoroidName: TStringField;
     mtConfigValidadordescrName: TStringField;
+    mtConfigValidadorestadoForm: TStringField;
     procedure mtInputNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
@@ -276,8 +276,14 @@ begin
             then validacion := tDistintoEspacio;
     validador.Validacion := validacion;
     validadorField := validadorForm.ListaValidaciones.add;
-    validadorField.Validador := validador;
-    validadorField.Field     := mtInput.FieldByName(mtConfigValidador.FieldByName('fieldName').AsString);
+    if  mtConfigValidador.fieldByName('estadoForm').AsString = 'New' then
+      validadorField.ValidadorNew := validador
+    else if  mtConfigValidador.fieldByName('estadoForm').AsString = 'Modif' then
+      validadorField.ValidadorModif := validador
+    else
+      validadorField.ValidadorGral  := validador;
+
+    validadorField.Field := mtInput.FieldByName(mtConfigValidador.FieldByName('fieldName').AsString);
     if validacion = tExistente
       then begin
             //oid

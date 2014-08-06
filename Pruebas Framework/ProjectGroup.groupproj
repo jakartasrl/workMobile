@@ -4,7 +4,7 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<Projects Include="Project1.dproj">
-				<Dependencies>..\Common\Framework\Delphi XE2\Framework_JKT_XE2.dproj</Dependencies>
+				<Dependencies/>
 			</Projects>
 			<Projects Include="..\Common\Framework\Delphi XE2\Framework_JKT_XE2.dproj">
 				<Dependencies/>
@@ -17,13 +17,13 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="Project1" DependsOnTargets="Framework_JKT_XE2">
+		<Target Name="Project1">
 			<MSBuild Projects="Project1.dproj"/>
 		</Target>
-		<Target Name="Project1:Clean" DependsOnTargets="Framework_JKT_XE2:Clean">
+		<Target Name="Project1:Clean">
 			<MSBuild Projects="Project1.dproj" Targets="Clean"/>
 		</Target>
-		<Target Name="Project1:Make" DependsOnTargets="Framework_JKT_XE2:Make">
+		<Target Name="Project1:Make">
 			<MSBuild Projects="Project1.dproj" Targets="Make"/>
 		</Target>
 		<Target Name="Framework_JKT_XE2">
