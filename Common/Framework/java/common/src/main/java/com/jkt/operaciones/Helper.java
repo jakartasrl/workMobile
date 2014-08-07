@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.jkt.dominio.Filtros;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.transformers.Notificacion;
 import com.jkt.util.RepositorioClases;

@@ -69,7 +69,6 @@
 <entity>
 
 
-	<!-- 	Operacion generica de filtros (se tardo en llegar hasta acá) -->
 	<operacion name="filtrar" clase="com.jkt.operaciones.Helper">
 		<input name="TFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
 			<campoEntrada>
@@ -89,7 +88,6 @@
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
-		
 		
 		<forms>
 			<form name="TUsuario"></form>
@@ -124,8 +122,6 @@
 		</forms>
 		
 	</operacion>
-
-
 
 
 	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructuraABMGenerico">
