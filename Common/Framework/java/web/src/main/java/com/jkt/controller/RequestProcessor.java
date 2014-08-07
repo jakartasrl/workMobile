@@ -126,6 +126,7 @@ public abstract class RequestProcessor extends BaseController{
 		}catch(Exception exception){
 			//Hago el rollback y muestro el mensaje critido en frontend.
 //			tx.rollback();
+			throw exception;
 		}finally{
 //			if (tx.isActive()) {
 //				tx.commit();

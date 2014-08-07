@@ -20,7 +20,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		List<PersistentEntity> usuarios = serviceRepository.getByProperties(Usuario.class, null);
+		List<PersistentEntity> usuarios = serviceRepository.getAll(Usuario.class);
 		List<PersistentEntity> empresas = serviceRepository.getAll(Empresa.class);
 		Empresa empresa;
 		

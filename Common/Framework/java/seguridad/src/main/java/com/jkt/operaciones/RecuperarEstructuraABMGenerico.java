@@ -18,7 +18,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.transformers.Notificacion;
 
 @OperacionBean
-public class RecuperarEstructura extends Operation {
+public class RecuperarEstructuraABMGenerico extends Operation {
 
 	/*
 	 * Metodo estatico que es ejecutado solamente una vez.
@@ -28,7 +28,7 @@ public class RecuperarEstructura extends Operation {
 	static{
 		try {
 			Digester digester = generarReglas();
-			InputStream in = RecuperarEstructura.class.getResourceAsStream("metadaData.xml");
+			InputStream in = RecuperarEstructuraABMGenerico.class.getResourceAsStream("abmGenericoMetaData.xml");
 			entidadContainer=(EntidadContainer)digester.parse(in);
 		} catch (IOException e) {
 			throw new RuntimeException("Error de entrada/salida.");

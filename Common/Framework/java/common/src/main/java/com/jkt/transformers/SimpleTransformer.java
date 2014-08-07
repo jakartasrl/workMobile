@@ -53,8 +53,10 @@ public class SimpleTransformer extends Transformer {
 		}
 		
 		if (arg1 != null) { //SOLAMENTE SE PREGUNTA ESO PARA CERRAR CON EL METODO WRITER Y PODER DARLE LOS TAGS DE CIERRE AL TAG TABLA.
-			PersistentEntity instance = (PersistentEntity) arg1.getParameter();
-			
+
+			Object instance = (Object) arg1.getParameter();
+//			PersistentEntity instance = (PersistentEntity) arg1.getParameter();
+
 			EventBusiness eventBusiness=(EventBusiness) this.getEvent();
 	
 			// 1- Por cada OUTPUT se genera una tabla.

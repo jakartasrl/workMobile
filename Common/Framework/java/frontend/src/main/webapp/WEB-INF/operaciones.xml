@@ -69,9 +69,66 @@
 <entity>
 
 
+	<!-- 	Operacion generica de filtros (se tardo en llegar hasta acá) -->
+	<operacion name="filtrar" clase="com.jkt.operaciones.Helper">
+		<input name="TFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+			<campoEntrada>
+				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+				<campoEntrada name="valor" clase="String" metodo="setValor" />
+				<campoEntrada name="condicion" clase="String" metodo="setCondicion" />
+				<campoEntrada name="tipoDeDato" clase="String" metodo="setTipoDeDato" />
+			</campoEntrada>
+		</input>
+
+		<output name="resultado" tableName="TUsuarioEmpresas">
+			<campoSalida name="resultado">
+				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
+				<campoSalida name="Codigo" value="Codigo" target="codigo" />
+				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
+			</campoSalida>
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
 
 
-	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructura">
+	<operacion name="CA---M--B---I--EC---OM----OQ-UI---ER--A-S" clase="com.jkt.operaciones.RecuperarEstructuraHelpGenerico">
+		
+		<output name="resultado" tableName="mtConfigCampos">
+<!-- 			NO TE PREOCUPES POR EL NOMBRE DELA TABLA EN TABLENAME, YA QUE VOS ENVIAS EL PARAMETRO PARA RECIBIR LA TABLA QUE VOS QUERES.-->
+
+
+		
+<!-- 			SANTI CAMBIA COMO TE QUEDE MEJOR LOS CAMPOS VALUE SOLAMENTEEEE slave-->
+		
+			<campoSalida name="resultado">
+				<campoSalida name="1" value="fieldName" target="fieldName" />
+				<campoSalida name="2" value="tipo" target="tipo" />
+				<campoSalida name="3" value="longitud" target="longitud" />
+				<campoSalida name="4" value="visible" target="visible" />
+				<campoSalida name="5" value="readOnly" target="readOnly" />
+				<campoSalida name="6" value="orden" target="orden" />
+				<campoSalida name="7" value="label" target="label" />
+			</campoSalida>
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+			
+		<forms>
+			<form name="form"></form>
+		</forms>
+		
+	</operacion>
+
+
+
+
+	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructuraABMGenerico">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
 			<campoSalida name="resultado">

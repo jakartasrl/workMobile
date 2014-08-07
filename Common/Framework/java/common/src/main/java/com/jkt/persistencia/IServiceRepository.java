@@ -59,7 +59,7 @@ public interface IServiceRepository {
 	 * @param properties
 	 * @return
 	 */
-	List<PersistentEntity> getByProperties(Class className, Map<String,String> properties);
+	List<PersistentEntity> getByProperties(Class className, List properties);
 
 	/**
 	 * Recupera filtrando por una propiedad y la clase
