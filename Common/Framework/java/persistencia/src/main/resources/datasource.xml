@@ -10,17 +10,14 @@
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-
-
 	<!-- data source config -->
-	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${db.className}" />
 		<property name="url" value="jdbc:${db.engine}://${db.host}:${db.port}/${db.jakarta}" />
 		<property name="username" value="${db.user}" />
 		<property name="password" value="${db.password}" />
 		<property name="validationQuery" value="select now()" />
-
+		<property name="initialSize" value="10"/>
 	</bean>
 
 	<!-- SessionFactory of Hibernate config -->

@@ -8,7 +8,7 @@ public class ValidadorEmpresa implements IValidador{
 
 	public void validar(PersistentEntity entity) throws ValidacionException {
 		Empresa e=(Empresa) entity;
-		throw new ValidacionException();
+//		throw new ValidacionException();
 	}
 
 }
