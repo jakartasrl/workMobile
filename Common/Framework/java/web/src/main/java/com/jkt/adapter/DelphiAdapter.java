@@ -124,10 +124,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				sessionProvider.destroySession();
 				throw e;
 			}finally{
-				if (tx.isActive()) {
-					tx.commit();
-				}
-				sessionProvider.destroySession();
+//				if (tx.isActive()) {
+//					tx.commit();
+//				}
+//				sessionProvider.destroySession();
 			}
 	}
 	

@@ -38,7 +38,8 @@
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
 
-  <!ATTLIST campoSalida name			CDATA #REQUIRED> <!-- De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL -->
+<!--   <!ATTLIST campoSalida name			CDATA #REQUIRED>  De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL --> 
+  <!ATTLIST campoSalida name			CDATA #IMPLIED> <!-- De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL -->  
   <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
   <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
   <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
@@ -81,9 +82,12 @@
 
 		<output name="resultado" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
+				<campoSalida value="oid_empresa" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="RazonSocial" target="razonSocial" />
+<!-- 				<campoSalida name="oid_empresa" value="oid_empresa" target="id" /> -->
+<!-- 				<campoSalida name="Codigo" value="Codigo" target="codigo" /> -->
+<!-- 				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" /> -->
 			</campoSalida>
 		</output>		
 		
@@ -105,13 +109,13 @@
 <!-- 			SANTI CAMBIA COMO TE QUEDE MEJOR LOS CAMPOS VALUE SOLAMENTEEEE slave-->
 		
 			<campoSalida name="resultado">
-				<campoSalida name="1" value="fieldName" target="fieldName" />
-				<campoSalida name="2" value="tipo" target="tipo" />
-				<campoSalida name="3" value="longitud" target="longitud" />
-				<campoSalida name="4" value="visible" target="visible" />
-				<campoSalida name="5" value="readOnly" target="readOnly" />
-				<campoSalida name="6" value="orden" target="orden" />
-				<campoSalida name="7" value="label" target="label" />
+				<campoSalida value="fieldName" target="fieldName" />
+				<campoSalida value="tipo" target="tipo" />
+				<campoSalida value="longitud" target="longitud" />
+				<campoSalida value="visible" target="visible" />
+				<campoSalida value="readOnly" target="readOnly" />
+				<campoSalida value="orden" target="orden" />
+				<campoSalida value="label" target="label" />
 			</campoSalida>
 		</output>
 		
@@ -128,30 +132,30 @@
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
 			<campoSalida name="resultado">
-				<campoSalida name="operSave" value="operSave" target="operSave" />
-				<campoSalida name="operTraer" value="operTraer" target="operTraer" />
+				<campoSalida value="operSave" target="operSave" />
+				<campoSalida value="operTraer" target="operTraer" />
 			</campoSalida>
 		</output>		
 
 		<output name="mtConfigCampos" tableName="mtConfigCampos">
 			<campoSalida name="resultado">
-				<campoSalida name="fieldName" value="fieldName" target="fieldName" />
-				<campoSalida name="tipo" value="tipo" target="tipo" />
-				<campoSalida name="longitud" value="longitud" target="longitud" />
-				<campoSalida name="visible" value="visible" target="visible" />
-				<campoSalida name="readOnly" value="readOnly" target="readOnly" />
-				<campoSalida name="orden" value="orden" target="orden" />
-				<campoSalida name="label" value="label" target="label" />
+				<campoSalida value="fieldName" target="fieldName" />
+				<campoSalida value="tipo" target="tipo" />
+				<campoSalida value="longitud" target="longitud" />
+				<campoSalida value="visible" target="visible" />
+				<campoSalida value="readOnly" target="readOnly" />
+				<campoSalida value="orden" target="orden" />
+				<campoSalida value="label" target="label" />
 			</campoSalida>
 		</output>
 		
 		<output name="mtConfigValidador" tableName="mtConfigValidador">
 			<campoSalida name="resultado">
-				<campoSalida name="fieldName" value="fieldName" target="fieldName" />
-				<campoSalida name="tipoValidacion" value="tipoValidacion" target="tipoValidacion" />
-				<campoSalida name="entidad" value="entidad" target="entidad" />
-				<campoSalida name="oidName" value="oidName" target="oidName" />
-				<campoSalida name="descrName" value="descrName" target="descrName" />
+				<campoSalida value="fieldName" target="fieldName" />
+				<campoSalida value="tipoValidacion" target="tipoValidacion" />
+				<campoSalida value="entidad" target="entidad" />
+				<campoSalida value="oidName" target="oidName" />
+				<campoSalida value="descrName" target="descrName" />
 			</campoSalida>
 		</output>
 		
@@ -187,7 +191,7 @@
 		
 		<output name="resultado" tableName="TMenu">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_menu" value="oid_menu" target="value" />
+				<campoSalida value="oid_menu" target="value" />
 			</campoSalida>
 		</output>		
 
@@ -204,41 +208,41 @@
 		
 		<output name="TCabecera" tableName="TCabecera">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_menu" value="oid_menu" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="Descripcion" value="Descripcion" target="descripcion" />
-				<campoSalida name="Tipo" value="Tipo" target="tipoMenu" />
+				<campoSalida value="oid_menu" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="Descripcion" target="descripcion" />
+				<campoSalida value="Tipo" target="tipoMenu" />
 
-				<campoSalida name="Imagen" value="Imagen" target="imagen" />
-				<campoSalida name="RutaDeImagen" value="RutaDeImagen" target="rutaDeImagen" />
-				<campoSalida name="Orden" value="Orden" target="orden" />
-				<campoSalida name="Argumento" value="Argumento" target="argumento" />
+				<campoSalida value="Imagen" target="imagen" />
+				<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
+				<campoSalida value="Orden" target="orden" />
+				<campoSalida value="Argumento" target="argumento" />
 				
 			</campoSalida>
 		</output>
 		
 		<output name="TMenues" tableName="TMenues">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_menu" value="oid_menu" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="Descripcion" value="Descripcion" target="descripcion" />
-				<campoSalida name="Tipo" value="Tipo" target="tipoMenu" />
+				<campoSalida value="oid_menu" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="Descripcion" target="descripcion" />
+				<campoSalida value="Tipo" target="tipoMenu" />
 
-				<campoSalida name="Imagen" value="Imagen" target="imagen" />
-				<campoSalida name="RutaDeImagen" value="RutaDeImagen" target="rutaDeImagen" />
-				<campoSalida name="Orden" value="Orden" target="orden" />
-				<campoSalida name="Argumento" value="Argumento" target="argumento" />
+				<campoSalida value="Imagen" target="imagen" />
+				<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
+				<campoSalida value="Orden" target="orden" />
+				<campoSalida value="Argumento" target="argumento" />
 				
 			</campoSalida>
 		</output>		
 		
 		<output name="TTextosMenues" tableName="TTextosMenues">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_menu" value="oid_menu" target="oidMenu" />
-				<campoSalida name="texto" value="texto" target="texto" />
-				<campoSalida name="alineacion" value="alineacion" target="alineacion" />
-				<campoSalida name="tamanio" value="tamanio" target="tamanio" />
-				<campoSalida name="fuente" value="fuente" target="fuente" />
+				<campoSalida value="oid_menu" target="oidMenu" />
+				<campoSalida value="texto" target="texto" />
+				<campoSalida value="alineacion" target="alineacion" />
+				<campoSalida value="tamanio" target="tamanio" />
+				<campoSalida value="fuente" target="fuente" />
 			</campoSalida>
 		</output>
 			
@@ -270,9 +274,9 @@
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
-				<campoSalida name="oid" value="oid" target="id" />
-				<campoSalida name="Descripcion" value="Descripcion" target="cadena2" />
-				<campoSalida name="Cadena" value="Cadena" target="cadena" />
+				<campoSalida value="oid" target="id" />
+				<campoSalida value="Descripcion" target="cadena2" />
+				<campoSalida value="Cadena" target="cadena" />
 			</campoSalida>
 		</output>		
 			
@@ -293,12 +297,12 @@
 		
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="Activo" value="Activo" target="activo" />
-				<campoSalida name="Nombre" value="Nombre" target="nombres" />
-				<campoSalida name="Apellido" value="Apellido" target="apellido" />
-				<campoSalida name="Email" value="Email" target="mail" />
+				<campoSalida value="oid_usuario" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="Activo" target="activo" />
+				<campoSalida value="Nombre" target="nombres" />
+				<campoSalida value="Apellido" target="apellido" />
+				<campoSalida value="Email" target="mail" />
 			</campoSalida>
 		</output>		
 			
@@ -315,24 +319,24 @@
 					
 		<output name="TUsuarios" tableName="TUsuarios">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="Activo" value="Activo" target="activo" />
-				<campoSalida name="Nombre" value="Nombre" target="nombres" />
-				<campoSalida name="Apellido" value="Apellido" target="apellido" />
-				<campoSalida name="Email" value="Email" target="mail" />
+				<campoSalida value="oid_usuario" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="Activo" target="activo" />
+				<campoSalida value="Nombre" target="nombres" />
+				<campoSalida value="Apellido" target="apellido" />
+				<campoSalida value="Email" target="mail" />
 			</campoSalida>
 		</output>	
 		
 		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_usu_emp" value="oid_usu_emp" target="id" />
-				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
-				<campoSalida name="oid_usuario" value="oid_usuario" target="usuario.id" />
-				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
-				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
-				<campoSalida name="Default" value="Default" target="porDefecto" />
+				<campoSalida value="oid_usu_emp" target="id" />
+				<campoSalida value="oid_empresa" target="empresa.id" />
+				<campoSalida value="oid_usuario" target="usuario.id" />
+				<campoSalida value="Codigo" target="empresa.codigo" />
+				<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+				<campoSalida value="Habilitada" target="habilitada" />
+				<campoSalida value="Default" target="porDefecto" />
 			</campoSalida>
 		</output>		
 		
@@ -349,23 +353,23 @@
 					
 		<output name="TUsuario" tableName="TUsuario">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="Activo" value="Activo" target="activo" />
-				<campoSalida name="Nombre" value="Nombre" target="nombres" />
-				<campoSalida name="Apellido" value="Apellido" target="apellido" />
-				<campoSalida name="Email" value="Email" target="mail" />
+				<campoSalida value="oid_usuario" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="Activo" target="activo" />
+				<campoSalida value="Nombre" target="nombres" />
+				<campoSalida value="Apellido" target="apellido" />
+				<campoSalida value="Email" target="mail" />
 			</campoSalida>
 		</output>	
 		
 		<output name="TEmpresas" tableName="TEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
-				<campoSalida name="oid_usuario" value="oid_usuario" target="usuario.id" />
-				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
-				<campoSalida name="UrlDB" value="UrlDB" target="empresa.urlDB" />
-				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
+				<campoSalida value="oid_empresa" target="empresa.id" />
+				<campoSalida value="oid_usuario" target="usuario.id" />
+				<campoSalida value="Codigo" target="empresa.codigo" />
+				<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+				<campoSalida value="UrlDB" target="empresa.urlDB" />
+				<campoSalida value="Habilitada" target="habilitada" />
 			</campoSalida>
 		</output>		
 			
@@ -382,11 +386,11 @@
 					
 		<output name="resultado" tableName="TUsuarioEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="empresa.id" />
-				<campoSalida name="Codigo" value="Codigo" target="empresa.codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="empresa.razonSocial" />
-				<campoSalida name="Habilitada" value="Habilitada" target="habilitada" />
-				<campoSalida name="Default" value="Default" target="porDefecto" />
+				<campoSalida value="oid_empresa" target="empresa.id" />
+				<campoSalida value="Codigo" target="empresa.codigo" />
+				<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+				<campoSalida value="Habilitada" target="habilitada" />
+				<campoSalida value="Default" target="porDefecto" />
 			</campoSalida>
 		</output>		
 			
@@ -411,11 +415,11 @@
 					
 		<output name="resultado" tableName="TEmpresas">
 			<campoSalida name="resultado">
-				<campoSalida name="oid_empresa" value="oid_empresa" target="id" />
-				<campoSalida name="Codigo" value="Codigo" target="codigo" />
-				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" />
-				<campoSalida name="UrlDB" value="UrlDB" target="urlDB" />
-				<campoSalida name="Activo" value="Activo" target="activo" />
+				<campoSalida value="oid_empresa" target="id" />
+				<campoSalida value="Codigo" target="codigo" />
+				<campoSalida value="RazonSocial" target="razonSocial" />
+				<campoSalida value="UrlDB" target="urlDB" />
+				<campoSalida value="Activo" target="activo" />
 			</campoSalida>
 		</output>		
 			
@@ -523,11 +527,11 @@
 		
 		<output name="resultado" tableName="TUsuario">
 			<campoSalida name="objeto1">
-				<campoSalida name="oid_usuario" value="oid_usuario" target="id" />
-				<campoSalida name="nombres" value="nombres" target="nombres" />
-				<campoSalida name="apellido" value="apellido" target="apellido" />
-				<campoSalida name="mail" value="mail" target="mail" />
-				<campoSalida name="codigo" value="codigo" target="userName" />
+				<campoSalida value="oid_usuario" target="id" />
+				<campoSalida value="nombres" target="nombres" />
+				<campoSalida value="apellido" target="apellido" />
+				<campoSalida value="mail" target="mail" />
+				<campoSalida value="codigo" target="userName" />
 			</campoSalida>
 		</output>
 		
