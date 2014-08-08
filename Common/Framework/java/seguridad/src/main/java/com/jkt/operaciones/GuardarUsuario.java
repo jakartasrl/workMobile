@@ -60,7 +60,7 @@ public class GuardarUsuario extends Operation{
 			 */
 			HistorialPassword historialPassword = new HistorialPassword();
 			historialPassword.setPassword(DigestUtils.md5(usuario.getPassword().getBytes()));
-R			
+			
 			usuario.addPassword(historialPassword);
 			
 			serviceRepository.save(usuario);
