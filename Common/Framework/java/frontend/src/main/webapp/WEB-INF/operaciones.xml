@@ -3,10 +3,10 @@
   <!ELEMENT entity        (operacion*)>
   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
   
-  <!ELEMENT input		  (campoEntrada*)>
-  <!ELEMENT forms		  (form*)>
-  <!ELEMENT output		  (campoSalida*)>
-  <!ELEMENT transformer	  EMPTY>
+  <!ELEMENT input		  (campoEntrada*)><!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
+  <!ELEMENT forms		  (form*)><!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
+  <!ELEMENT output		  (campoSalida*)><!--   Define el formato de salida -->
+  <!ELEMENT transformer	  EMPTY><!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
 
 
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
@@ -22,10 +22,10 @@
   
   <!ATTLIST form name	CDATA #REQUIRED>
   
-  <!ATTLIST input name           	 	CDATA    #IMPLIED>
-  <!ATTLIST input keyName           	CDATA    #IMPLIED>
-  <!ATTLIST input clase           	 	CDATA    #IMPLIED>
-  <!ATTLIST input fieldID           	CDATA    #IMPLIED>
+  <!ATTLIST input name           	 	CDATA    #IMPLIED><!--   Nombre que se corresponde con la entrada de delphi. Si en delphi mandan el valor Name, acá debe exstir en valor Name para obtener los demas datos -->
+  <!ATTLIST input keyName           	CDATA    #IMPLIED><!--   Indica el key del mapa que llega a la operacion. Si el valor es 'leo', se debera recuperar usando la key 'leo' sobre el mapa en la operacion -->
+  <!ATTLIST input clase           	 	CDATA    #IMPLIED><!-- 	define la clase del parmetro recibido -->
+  <!ATTLIST input fieldID           	CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
   <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
   
   <!ATTLIST campoEntrada name			CDATA #IMPLIED>
@@ -37,7 +37,6 @@
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
 
-  <!ATTLIST campoSalida name			CDATA #IMPLIED> <!-- De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL -->  
   <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
   <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
   <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
