@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -123,10 +120,10 @@ public abstract class RequestProcessor extends BaseController{
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
-		}catch(Exception exception){
+//		}catch(Exception exception){
 			//Hago el rollback y muestro el mensaje critido en frontend.
 //			tx.rollback();
-			throw exception;
+//			throw exception;
 		}finally{
 //			if (tx.isActive()) {
 //				tx.commit();

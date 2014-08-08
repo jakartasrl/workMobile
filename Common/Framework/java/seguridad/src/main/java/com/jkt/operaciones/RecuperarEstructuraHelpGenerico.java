@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.digester3.Digester;
+import org.aspectj.weaver.patterns.IfPointcut.IfFalsePointcut;
 import org.xml.sax.SAXException;
 
 import com.jkt.annotations.OperacionBean;
@@ -19,6 +20,7 @@ import com.jkt.transformers.Notificacion;
 @OperacionBean
 public class RecuperarEstructuraHelpGenerico extends Operation {
 
+	private static final String KEY_ENTIDAD = "entidad";
 	/*
 	 * Metodo estatico que es ejecutado solamente una vez.
 	 */
@@ -39,16 +41,18 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 
-		Entidad entidad = entidadContainer.getEntidad((String)aParams.get("entidad"));
+		Entidad entidad = entidadContainer.getEntidad((String)aParams.get(KEY_ENTIDAD));
 		if (entidad==null) {
-			throw new JakartaException("No se encontro la estructura de la entidad solicitada");
+			entidad=entidadContainer.getEntidad(KEY_ENTIDAD);
+			if (entidad==null) {
+				throw new JakartaException("No se encontro la estructura de la entidad solicitada");
+			}
 		}
 
 		//notifica campos
 		List<Campo> campos = entidad.getCampos();
 		for (Campo campo : campos) {
 			this.notificarObjecto(Notificacion.getNew("resultado", campo));
-//			this.notificarObjecto(Notificacion.getNew("mtConfigCampos", campo));//COMO ES UN SIMPLE TRANSFORMER, SE DEBE INFORMAR SIEMPRE EN RESULTADO?
 		}
 		
 	}
@@ -75,14 +79,4 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 		return digester;
 	}
 	
-	public static void main(String args[]) throws Exception{
-		RecuperarEstructuraHelpGenerico a = new RecuperarEstructuraHelpGenerico();
-		
-		Map<String, Object> aParams=new HashMap<String, Object>();
-		aParams.put("entidad", new String("empresa"));
-		
-		a.execute(aParams);
-		
-	}
-
 }

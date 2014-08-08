@@ -67,8 +67,40 @@
 
 <entity>
 
-	<operacion name="filtrar" clase="com.jkt.operaciones.Helper">
-		<input name="TFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
+
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="cadena" />
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+
+
+	<operacion name="FiltroInactivos" clase="com.jkt.operaciones.HelperInactivos">
+
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="cadena" />
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+
+
+	<operacion name="FiltroAvanzado" clase="com.jkt.operaciones.Helper">
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
 			<campoEntrada>
 				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
 				<campoEntrada name="valor" clase="String" metodo="setValor" />
@@ -77,10 +109,10 @@
 			</campoEntrada>
 		</input>
 
-		<output name="resultado" tableName="TUsuarioEmpresas">
-			<campoSalida value="oid_empresa" target="id" />
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="RazonSocial" target="razonSocial" />
+			<campoSalida value="Descripcion" target="cadena" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

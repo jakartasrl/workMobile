@@ -29,5 +29,15 @@
 		</campos>
 
 	</entidad>
+
+	<entidad nombre="entidad">
+
+		<campos>
+			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="50" visible="true" readOnly="false" orden="2" label="codigo" />
+			<campo fieldName="Descripcion" tipo="String" longitud="200" visible="true" readOnly="false" orden="3" label="Descripcion" />
+		</campos>
+
+	</entidad>
 	
 </entidades>

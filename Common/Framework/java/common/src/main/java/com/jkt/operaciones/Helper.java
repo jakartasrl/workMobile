@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.transformers.Notificacion;
 import com.jkt.util.RepositorioClases;
@@ -15,13 +16,13 @@ import com.jkt.util.RepositorioClases;
  */
 public class Helper extends Operation {
 
-	private static final String KEY_ENTIDAD = "entidad";
-	private static final String KEY_FILTROS = "filtros";
+	protected static final String KEY_ENTIDAD = "entidad";
+	protected static final String KEY_FILTROS = "filtros";
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD);
 		String className = RepositorioClases.getClass(nombreEntidad);
-		List objetos = recuperarObjeto(aParams);
+		List objetos = recuperarObjetoUsandoKey(aParams);
 		
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
@@ -30,7 +31,7 @@ public class Helper extends Operation {
 		}
 	}
 	
-	private List recuperarObjeto(Map<String, Object> aParams) {
+	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) {
 		List object;
 		if (aParams.get(KEY_FILTROS)  instanceof List) {
 			object = (List) aParams.get(KEY_FILTROS);
@@ -40,5 +41,17 @@ public class Helper extends Operation {
 		}
 		return object;
 	}
+	
+	protected Filtro crearFiltro(String nombre, String valor, String condicion,String tipo) {
+		Filtro filtro = new Filtro();
+		
+		filtro.setCondicion(condicion);
+		filtro.setNombre(nombre);
+		filtro.setValor(valor);
+		filtro.setTipoDeDato(tipo);
+		
+		return filtro;
+	}
+
 
 }
