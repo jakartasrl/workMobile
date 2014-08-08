@@ -5,7 +5,7 @@
   
   <!ELEMENT input		  (campoEntrada*)>
   <!ELEMENT forms		  (form*)>
-  <!ELEMENT output		  (campoSalida)>
+  <!ELEMENT output		  (campoSalida*)>
   <!ELEMENT transformer	  EMPTY>
 
 
@@ -17,7 +17,6 @@
   <!ELEMENT tables       (tableDef+)>
   <!ELEMENT tableDef     (campoTable*)>
   <!ELEMENT campoTable   EMPTY>
-  
   
   <!ATTLIST transformer clase           CDATA #REQUIRED>
   
@@ -38,7 +37,6 @@
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
 
-<!--   <!ATTLIST campoSalida name			CDATA #REQUIRED>  De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL --> 
   <!ATTLIST campoSalida name			CDATA #IMPLIED> <!-- De la forma como esta hecha en el framework anterior...y como quieren mantener esas cosas, esto es super necesario xq si no tiene el tag name, siempre pone los tags en la misma key, q es NULL -->  
   <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
   <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
@@ -69,7 +67,6 @@
 
 <entity>
 
-
 	<operacion name="filtrar" clase="com.jkt.operaciones.Helper">
 		<input name="TFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
 			<campoEntrada>
@@ -81,14 +78,9 @@
 		</input>
 
 		<output name="resultado" tableName="TUsuarioEmpresas">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_empresa" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="RazonSocial" target="razonSocial" />
-<!-- 				<campoSalida name="oid_empresa" value="oid_empresa" target="id" /> -->
-<!-- 				<campoSalida name="Codigo" value="Codigo" target="codigo" /> -->
-<!-- 				<campoSalida name="RazonSocial" value="RazonSocial" target="razonSocial" /> -->
-			</campoSalida>
+			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="RazonSocial" target="razonSocial" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -102,21 +94,13 @@
 	<operacion name="CA---M--B---I--EC---OM----OQ-UI---ER--A-S" clase="com.jkt.operaciones.RecuperarEstructuraHelpGenerico">
 		
 		<output name="resultado" tableName="mtConfigCampos">
-<!-- 			NO TE PREOCUPES POR EL NOMBRE DELA TABLA EN TABLENAME, YA QUE VOS ENVIAS EL PARAMETRO PARA RECIBIR LA TABLA QUE VOS QUERES.-->
-
-
-		
-<!-- 			SANTI CAMBIA COMO TE QUEDE MEJOR LOS CAMPOS VALUE SOLAMENTEEEE slave-->
-		
-			<campoSalida name="resultado">
-				<campoSalida value="fieldName" target="fieldName" />
-				<campoSalida value="tipo" target="tipo" />
-				<campoSalida value="longitud" target="longitud" />
-				<campoSalida value="visible" target="visible" />
-				<campoSalida value="readOnly" target="readOnly" />
-				<campoSalida value="orden" target="orden" />
-				<campoSalida value="label" target="label" />
-			</campoSalida>
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="longitud" target="longitud" />
+			<campoSalida value="visible" target="visible" />
+			<campoSalida value="readOnly" target="readOnly" />
+			<campoSalida value="orden" target="orden" />
+			<campoSalida value="label" target="label" />
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -131,32 +115,26 @@
 	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructuraABMGenerico">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
-			<campoSalida name="resultado">
-				<campoSalida value="operSave" target="operSave" />
-				<campoSalida value="operTraer" target="operTraer" />
-			</campoSalida>
+			<campoSalida value="operSave" target="operSave" />
+			<campoSalida value="operTraer" target="operTraer" />
 		</output>		
 
 		<output name="mtConfigCampos" tableName="mtConfigCampos">
-			<campoSalida name="resultado">
-				<campoSalida value="fieldName" target="fieldName" />
-				<campoSalida value="tipo" target="tipo" />
-				<campoSalida value="longitud" target="longitud" />
-				<campoSalida value="visible" target="visible" />
-				<campoSalida value="readOnly" target="readOnly" />
-				<campoSalida value="orden" target="orden" />
-				<campoSalida value="label" target="label" />
-			</campoSalida>
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="longitud" target="longitud" />
+			<campoSalida value="visible" target="visible" />
+			<campoSalida value="readOnly" target="readOnly" />
+			<campoSalida value="orden" target="orden" />
+			<campoSalida value="label" target="label" />
 		</output>
 		
 		<output name="mtConfigValidador" tableName="mtConfigValidador">
-			<campoSalida name="resultado">
-				<campoSalida value="fieldName" target="fieldName" />
-				<campoSalida value="tipoValidacion" target="tipoValidacion" />
-				<campoSalida value="entidad" target="entidad" />
-				<campoSalida value="oidName" target="oidName" />
-				<campoSalida value="descrName" target="descrName" />
-			</campoSalida>
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipoValidacion" target="tipoValidacion" />
+			<campoSalida value="entidad" target="entidad" />
+			<campoSalida value="oidName" target="oidName" />
+			<campoSalida value="descrName" target="descrName" />
 		</output>
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -167,14 +145,11 @@
 		
 	</operacion>
 
-
-
-
 	<!-- GUARDAR O ACTUALIZAR EL MENU -->
 	<operacion name="GenerarMenu" clase="com.jkt.operaciones.CrearMenues">
 		
 		<output name="resultado" tableName="TUsuarios">
-			<campoSalida name="resultado">
+			<campoSalida>
 			</campoSalida>
 		</output>		
 			
@@ -184,15 +159,11 @@
 		
 	</operacion>
 	
-	
-<!-- 	RECUPERAR MENU PARA ERP -->
-
+	<!-- RECUPERAR MENU PARA ERP -->
 	<operacion name="TrearMenuERP" clase="com.jkt.operaciones.erp.RecuperarMenuParaERP">
 		
 		<output name="resultado" tableName="TMenu">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_menu" target="value" />
-			</campoSalida>
+			<campoSalida value="oid_menu" target="value" />
 		</output>		
 
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -207,43 +178,35 @@
 	<operacion name="TrearMenu" clase="com.jkt.operaciones.RecuperarMenu">
 		
 		<output name="TCabecera" tableName="TCabecera">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_menu" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="Descripcion" target="descripcion" />
-				<campoSalida value="Tipo" target="tipoMenu" />
+			<campoSalida value="oid_menu" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Tipo" target="tipoMenu" />
 
-				<campoSalida value="Imagen" target="imagen" />
-				<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
-				<campoSalida value="Orden" target="orden" />
-				<campoSalida value="Argumento" target="argumento" />
-				
-			</campoSalida>
+			<campoSalida value="Imagen" target="imagen" />
+			<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
+			<campoSalida value="Orden" target="orden" />
+			<campoSalida value="Argumento" target="argumento" />
 		</output>
 		
 		<output name="TMenues" tableName="TMenues">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_menu" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="Descripcion" target="descripcion" />
-				<campoSalida value="Tipo" target="tipoMenu" />
+			<campoSalida value="oid_menu" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Tipo" target="tipoMenu" />
 
-				<campoSalida value="Imagen" target="imagen" />
-				<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
-				<campoSalida value="Orden" target="orden" />
-				<campoSalida value="Argumento" target="argumento" />
-				
-			</campoSalida>
+			<campoSalida value="Imagen" target="imagen" />
+			<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
+			<campoSalida value="Orden" target="orden" />
+			<campoSalida value="Argumento" target="argumento" />
 		</output>		
 		
 		<output name="TTextosMenues" tableName="TTextosMenues">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_menu" target="oidMenu" />
-				<campoSalida value="texto" target="texto" />
-				<campoSalida value="alineacion" target="alineacion" />
-				<campoSalida value="tamanio" target="tamanio" />
-				<campoSalida value="fuente" target="fuente" />
-			</campoSalida>
+			<campoSalida value="oid_menu" target="oidMenu" />
+			<campoSalida value="texto" target="texto" />
+			<campoSalida value="alineacion" target="alineacion" />
+			<campoSalida value="tamanio" target="tamanio" />
+			<campoSalida value="fuente" target="fuente" />
 		</output>
 			
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -254,12 +217,7 @@
 		
 	</operacion>
 
-
-
-
-
-
-	<!-- 	VALIDAR IN EXISTENCIA -->
+	<!-- VALIDAR IN EXISTENCIA -->
 	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.ValidarInexistencia">
 		
 		<forms>
@@ -269,15 +227,13 @@
 	</operacion>
 
 
-	<!-- 	VALIDAR EXISTENCIA -->
+	<!-- VALIDAR EXISTENCIA -->
 	<operacion name="ValidarExistente" clase="com.jkt.operaciones.ValidarExistencia">
 		
 		<output name="resultado" tableName="TUsuarios">
-			<campoSalida name="resultado">
-				<campoSalida value="oid" target="id" />
-				<campoSalida value="Descripcion" target="cadena2" />
-				<campoSalida value="Cadena" target="cadena" />
-			</campoSalida>
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Descripcion" target="cadena2" />
+			<campoSalida value="Cadena" target="cadena" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -288,22 +244,16 @@
 		
 	</operacion>
 
-
-
-
-
-	<!-- 	RECUPERAR USUARIOS -->
+	<!-- RECUPERAR USUARIOS -->
 	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Usuario">
 		
 		<output name="resultado" tableName="TUsuarios">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_usuario" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="Activo" target="activo" />
-				<campoSalida value="Nombre" target="nombres" />
-				<campoSalida value="Apellido" target="apellido" />
-				<campoSalida value="Email" target="mail" />
-			</campoSalida>
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Nombre" target="nombres" />
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Email" target="mail" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -314,30 +264,26 @@
 		
 	</operacion>
 	
-	<!-- 	TRAE TODAS LAS EMPRESAS Y TODOS LOS USUARIOS -->
+	<!-- TRAE TODAS LAS EMPRESAS Y TODOS LOS USUARIOS -->
 	<operacion name="TraerUsuariosYEmpresas" clase="com.jkt.operaciones.RecuperarEmpresasYUsuarios">
 					
 		<output name="TUsuarios" tableName="TUsuarios">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_usuario" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="Activo" target="activo" />
-				<campoSalida value="Nombre" target="nombres" />
-				<campoSalida value="Apellido" target="apellido" />
-				<campoSalida value="Email" target="mail" />
-			</campoSalida>
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Nombre" target="nombres" />
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Email" target="mail" />
 		</output>	
 		
 		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_usu_emp" target="id" />
-				<campoSalida value="oid_empresa" target="empresa.id" />
-				<campoSalida value="oid_usuario" target="usuario.id" />
-				<campoSalida value="Codigo" target="empresa.codigo" />
-				<campoSalida value="RazonSocial" target="empresa.razonSocial" />
-				<campoSalida value="Habilitada" target="habilitada" />
-				<campoSalida value="Default" target="porDefecto" />
-			</campoSalida>
+			<campoSalida value="oid_usu_emp" target="id" />
+			<campoSalida value="oid_empresa" target="empresa.id" />
+			<campoSalida value="oid_usuario" target="usuario.id" />
+			<campoSalida value="Codigo" target="empresa.codigo" />
+			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+			<campoSalida value="Habilitada" target="habilitada" />
+			<campoSalida value="Default" target="porDefecto" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -348,29 +294,25 @@
 		
 	</operacion>
 	
-	<!-- 	RECUPERAR EMPRESAS DE USUARIO -->
+	<!-- RECUPERAR EMPRESAS DE USUARIO -->
 	<operacion name="TraerEmpresasDeUsuario" clase="com.jkt.operaciones.RecuperarEmpresasDeUsuario">
 					
 		<output name="TUsuario" tableName="TUsuario">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_usuario" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="Activo" target="activo" />
-				<campoSalida value="Nombre" target="nombres" />
-				<campoSalida value="Apellido" target="apellido" />
-				<campoSalida value="Email" target="mail" />
-			</campoSalida>
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Nombre" target="nombres" />
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Email" target="mail" />
 		</output>	
 		
 		<output name="TEmpresas" tableName="TEmpresas">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_empresa" target="empresa.id" />
-				<campoSalida value="oid_usuario" target="usuario.id" />
-				<campoSalida value="Codigo" target="empresa.codigo" />
-				<campoSalida value="RazonSocial" target="empresa.razonSocial" />
-				<campoSalida value="UrlDB" target="empresa.urlDB" />
-				<campoSalida value="Habilitada" target="habilitada" />
-			</campoSalida>
+			<campoSalida value="oid_empresa" target="empresa.id" />
+			<campoSalida value="oid_usuario" target="usuario.id" />
+			<campoSalida value="Codigo" target="empresa.codigo" />
+			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+			<campoSalida value="UrlDB" target="empresa.urlDB" />
+			<campoSalida value="Habilitada" target="habilitada" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -381,17 +323,15 @@
 		
 	</operacion>
 	
-	<!-- 	RECUPERAR EMPRESAS PARA UN USUARIO -->
+	<!-- RECUPERAR EMPRESAS PARA UN USUARIO -->
 	<operacion name="TraerEmpresasParaUsuarios" clase="com.jkt.operaciones.TraerEmpresasParaUsuarios">
 					
 		<output name="resultado" tableName="TUsuarioEmpresas">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_empresa" target="empresa.id" />
-				<campoSalida value="Codigo" target="empresa.codigo" />
-				<campoSalida value="RazonSocial" target="empresa.razonSocial" />
-				<campoSalida value="Habilitada" target="habilitada" />
-				<campoSalida value="Default" target="porDefecto" />
-			</campoSalida>
+			<campoSalida value="oid_empresa" target="empresa.id" />
+			<campoSalida value="Codigo" target="empresa.codigo" />
+			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+			<campoSalida value="Habilitada" target="habilitada" />
+			<campoSalida value="Default" target="porDefecto" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -402,7 +342,7 @@
 		
 	</operacion>
 	
-	<!-- 	RECUPERAR EMPRESAS -->
+	<!-- RECUPERAR EMPRESAS -->
 	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Empresa">
 		
 		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_empresa'>
@@ -414,13 +354,11 @@
 		</input>
 					
 		<output name="resultado" tableName="TEmpresas">
-			<campoSalida name="resultado">
-				<campoSalida value="oid_empresa" target="id" />
-				<campoSalida value="Codigo" target="codigo" />
-				<campoSalida value="RazonSocial" target="razonSocial" />
-				<campoSalida value="UrlDB" target="urlDB" />
-				<campoSalida value="Activo" target="activo" />
-			</campoSalida>
+			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="RazonSocial" target="razonSocial" />
+			<campoSalida value="UrlDB" target="urlDB" />
+			<campoSalida value="Activo" target="activo" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -453,11 +391,10 @@
 		</forms>
 
 	</operacion>
-	
-	
-	
-	
+
+	<!-- GUARDAR UN USUARIO	 -->
 	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.GuardarUsuario">
+
 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
 			<campoEntrada >
 				
@@ -498,41 +435,39 @@
 	</operacion>
 	
 	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
-	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.AgregarEmpresasAlUsuario">
-		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
+<!-- 	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.AgregarEmpresasAlUsuario"> -->
+<!-- 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'> -->
 		
-			<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-			<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
-			<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
-			<campoEntrada name="Email" clase="String" metodo="setMail" />
-			<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+<!-- 			<campoEntrada name="Codigo" clase="String" metodo="setCodigo" /> -->
+<!-- 			<campoEntrada name="Nombre" clase="String" metodo="setNombres" /> -->
+<!-- 			<campoEntrada name="Apellido" clase="String" metodo="setApellido" /> -->
+<!-- 			<campoEntrada name="Email" clase="String" metodo="setMail" /> -->
+<!-- 			<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
 		
-			<campoEntrada>
-				<campoEntrada name="empresa" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" >
-					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
-					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
-					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />
-				</campoEntrada>
-			</campoEntrada>
-		</input>
+<!-- 			<campoEntrada> -->
+<!-- 				<campoEntrada name="empresa" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" > -->
+<!-- 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" /> -->
+<!-- 					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" /> -->
+<!-- 					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" /> -->
+<!-- 				</campoEntrada> -->
+<!-- 			</campoEntrada> -->
+<!-- 		</input> -->
 		
-		<forms>
-			<form name="TUsuario"></form>
-		</forms>
-	</operacion>
+<!-- 		<forms> -->
+<!-- 			<form name="TUsuario"></form> -->
+<!-- 		</forms> -->
+<!-- 	</operacion> -->
 	
 	<!-- LOGIN -->
 	<operacion name="Login" clase="com.jkt.operaciones.Login">
 		<input name="TLogin" keyName="login" />
 		
 		<output name="resultado" tableName="TUsuario">
-			<campoSalida name="objeto1">
-				<campoSalida value="oid_usuario" target="id" />
-				<campoSalida value="nombres" target="nombres" />
-				<campoSalida value="apellido" target="apellido" />
-				<campoSalida value="mail" target="mail" />
-				<campoSalida value="codigo" target="userName" />
-			</campoSalida>
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="nombres" target="nombres" />
+			<campoSalida value="apellido" target="apellido" />
+			<campoSalida value="mail" target="mail" />
+			<campoSalida value="codigo" target="userName" />
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

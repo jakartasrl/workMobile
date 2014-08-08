@@ -53,31 +53,23 @@ public class ParalelResponseListenerTransformer extends Transformer {
 		} catch (JakartaException e) {
 			throw new RuntimeException("Error al recuperar el esqueleto de la tabla solicitada.");
 		}
+		writer.addFila();
 		for (CampoSalida currentFila : currentTable.getCamposDeSalida()) { 
-			writer.addFila();
-			for (CampoSalida currentColumna : currentFila.getCamposDeSalida()) {
-				Object resultado;
-				try {
-					resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), parameter);
-				} catch (ExceptionDS e) {
-					resultado=null;
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					resultado=null;
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				} 
-				catch (SecurityException e) {
-					resultado=null;
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
-				}
-				if (resultado!=null) {
-					writer.addColumna(currentColumna.getValue(), resultado);
-				}else{
-					//log this
-				}
+			Object resultado;
+			try {
+				resultado = solver.resolveMethodInvocation(currentFila.getTarget(), parameter);
+			} catch (ExceptionDS e) {
+				resultado=null;
+			} catch (NoSuchMethodException e) {
+				resultado=null;
+			} 
+			catch (SecurityException e) {
+				resultado=null;
+			}
+			if (resultado!=null) {
+				writer.addColumna(currentFila.getValue(), resultado);
+			}else{
+				//log this
 			}
 		}
 	}
@@ -108,11 +100,6 @@ public class ParalelResponseListenerTransformer extends Transformer {
 
 	@Override
 	public void setup(ServletOutputStream outputStream, String outputName) throws JakartaException {
-		
-//		if (outputName!=null || !outputName.equals("")) {
-//			throw new JakartaException("El transformer paralelo no permite como salida un nombre recibido.No envíe el valor de la tabla de salida.");
-//		}
-		
 		this.servletOutputStream=outputStream;
 		List<Output> outputs = ((EventBusiness)this.getEvent()).getOutputs();
 		String nameOfOutput = "";

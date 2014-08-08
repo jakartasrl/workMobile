@@ -1,11 +1,9 @@
 package com.jkt.transformers;
 
-import java.beans.XMLEncoder;
 import java.io.IOException;
 
 import javax.servlet.ServletOutputStream;
 
-import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.framework.writers.AbsWriter;
@@ -55,37 +53,30 @@ public class SimpleTransformer extends Transformer {
 		if (arg1 != null) { //SOLAMENTE SE PREGUNTA ESO PARA CERRAR CON EL METODO WRITER Y PODER DARLE LOS TAGS DE CIERRE AL TAG TABLA.
 
 			Object instance = (Object) arg1.getParameter();
-//			PersistentEntity instance = (PersistentEntity) arg1.getParameter();
 
 			EventBusiness eventBusiness=(EventBusiness) this.getEvent();
 	
 			// 1- Por cada OUTPUT se genera una tabla.
 			for (Output currentTable : eventBusiness.getOutputs()) {
-				
-				for (CampoSalida currentFila : currentTable.getCamposDeSalida()) {
+				// 2 - Por cada CAMPOSALIDA que tenga esa tabla, se genera una FILA
+				this.getWriter().addFila();
 					
-					// 2 - Por cada CAMPOSALIDA que tenga esa tabla, se genera una FILA
-					this.getWriter().addFila();
-					
-					for (CampoSalida currentColumna : currentFila.getCamposDeSalida()) {
-						// 3 - Por cada CAMPOSALIDA que tenga esa fila, se genera una COLUMNA
-
-						//campoSalida.tieneHijos();//RECURSION
-						Object resultado;
-						try {
-							resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
-						} catch (ExceptionDS e) {
-							resultado=null;
-						} catch (NoSuchMethodException e) {
-							resultado=null;
-						} catch (SecurityException e) {
-							resultado=null;
-						}
-						if (resultado!=null) {
-							this.getWriter().addColumna(currentColumna.getValue(), resultado);
-						}else{
-							//TODO loguear algo y continuar con el siguiente campo!!!!
-						}
+				for (CampoSalida currentColumna : currentTable.getCamposDeSalida()) {
+					// 3 - Por cada CAMPOSALIDA que tenga esa fila, se genera una COLUMNA
+					Object resultado;
+					try {
+						resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
+					} catch (ExceptionDS e) {
+						resultado=null;
+					} catch (NoSuchMethodException e) {
+						resultado=null;
+					} catch (SecurityException e) {
+						resultado=null;
+					}
+					if (resultado!=null) {
+						this.getWriter().addColumna(currentColumna.getValue(), resultado);
+					}else{
+						//TODO loguear algo y continuar con el siguiente campo!!!!
 					}
 				}
 			}
