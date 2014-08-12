@@ -5,7 +5,8 @@ uses
   jktFNMet0000 in '..\Common\Framework\Delphi XE2\jktFNMet0000.pas' {frmMainForm},
   jktFNMet0001 in '..\Common\Framework\Delphi XE2\jktFNMet0001.pas' {frmChild},
   jktPrueba in 'jktPrueba.pas' {Form1},
-  jktPrueba2 in 'jktPrueba2.pas' {prueba3};
+  jktPrueba2 in 'jktPrueba2.pas' {FPrueba2},
+  jktPrueba3 in 'jktPrueba3.pas' {FPrueba3};
 
 {$R *.res}
 

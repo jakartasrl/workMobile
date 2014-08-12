@@ -70,6 +70,7 @@
 			<DCC_RemoteDebug>true</DCC_RemoteDebug>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<DCC_Define>DEBUGGING;$(DCC_Define)</DCC_Define>
 			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
 			<VerInfo_Locale>1033</VerInfo_Locale>
 			<DCC_RemoteDebug>false</DCC_RemoteDebug>
@@ -94,7 +95,11 @@
 				<Form>Form1</Form>
 			</DCCReference>
 			<DCCReference Include="jktPrueba2.pas">
-				<Form>prueba3</Form>
+				<Form>FPrueba2</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="jktPrueba3.pas">
+				<Form>FPrueba3</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<BuildConfiguration Include="Release">
