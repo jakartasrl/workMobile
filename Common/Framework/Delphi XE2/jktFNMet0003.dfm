@@ -3,8 +3,8 @@ object FMet003: TFMet003
   Top = 133
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Ayuda'
-  ClientHeight = 472
+  Caption = 'Filtro de '
+  ClientHeight = 512
   ClientWidth = 523
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,45 +21,44 @@ object FMet003: TFMet003
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGroupBox1: TcxGroupBox
+  object gbFiltroAvanzado: TcxGroupBox
     Left = 0
     Top = 0
     Align = alTop
     TabOrder = 0
-    ExplicitTop = -1
-    Height = 63
+    Visible = False
+    Height = 113
     Width = 523
   end
   object cxGroupBox2: TcxGroupBox
     Left = 0
-    Top = 63
+    Top = 118
     Align = alClient
+    PanelStyle.Active = True
     TabOrder = 1
-    ExplicitLeft = 388
-    ExplicitTop = 8
-    ExplicitWidth = 375
-    ExplicitHeight = 303
-    Height = 353
+    ExplicitLeft = 320
+    ExplicitTop = 503
+    ExplicitHeight = 333
+    Height = 338
     Width = 523
     object dbgHelp: TjktExpDBGrid
       Left = 2
-      Top = 5
+      Top = 2
       Width = 519
-      Height = 346
+      Height = 334
       Align = alClient
       TabOrder = 0
-      LookAndFeel.Kind = lfFlat
-      LookAndFeel.NativeStyle = True
-      LookAndFeel.SkinName = ''
-      DataSource = dsHelp
-      ExplicitWidth = 371
-      ExplicitHeight = 296
-      object dbgHelpDBTableView1: TcxGridDBTableView
+      DataSource = dsInput
+      ExplicitLeft = 115
+      ExplicitTop = 107
+      ExplicitWidth = 517
+      ExplicitHeight = 327
+      object dbgHelpDBTableView: TcxGridDBTableView
         PopupMenu = popSeleccion
         OnDblClick = dbgHelpDblClick
         OnKeyDown = dbgHelpKeyDown
         Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsHelp
+        DataController.DataSource = dsInput
         DataController.Filter.MaxValueListCount = 1000
         DataController.Filter.Options = [fcoCaseInsensitive]
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -70,6 +69,10 @@ object FMet003: TFMet003
         FilterRow.Visible = True
         FilterRow.ApplyChanges = fracImmediately
         OptionsBehavior.FocusCellOnTab = True
+        OptionsCustomize.ColumnHiding = True
+        OptionsData.Deleting = False
+        OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
         OptionsSelection.HideFocusRectOnExit = False
         OptionsSelection.InvertSelect = False
         OptionsView.CellAutoHeight = True
@@ -77,60 +80,15 @@ object FMet003: TFMet003
         OptionsView.GroupFooters = gfVisibleWhenExpanded
         Preview.AutoHeight = False
         Preview.MaxLineCount = 2
-        object dbgHelpSeleccionar: TcxGridDBColumn
-          Caption = 'Sel.'
-          DataBinding.FieldName = 'seleccionado'
-          PropertiesClassName = 'TcxCheckBoxProperties'
-          Properties.Alignment = taLeftJustify
-          Properties.NullStyle = nssUnchecked
-          Properties.ValueChecked = 'True'
-          Properties.ValueGrayed = ''
-          Properties.ValueUnchecked = 'False'
-          Options.Filtering = False
-          Width = 47
-        end
-        object dbgHelpDescripcion: TcxGridDBColumn
-          Caption = 'Descripci'#243'n'
-          HeaderAlignmentHorz = taCenter
-          Options.Editing = False
-          SortIndex = 0
-          SortOrder = soAscending
-          Width = 326
-        end
-        object dbgHelpCodigo: TcxGridDBColumn
-          Caption = 'C'#243'digo'
-          PropertiesClassName = 'TcxMaskEditProperties'
-          Properties.Alignment.Horz = taLeftJustify
-          Properties.MaxLength = 0
-          HeaderAlignmentHorz = taCenter
-          Options.Editing = False
-          Options.Filtering = False
-          Width = 128
-        end
-        object dbgHelSelec: TcxGridDBColumn
-          Caption = 'Seleccion'
-          PropertiesClassName = 'TcxCheckBoxProperties'
-          Properties.Alignment = taLeftJustify
-          Properties.NullStyle = nssUnchecked
-          Properties.ReadOnly = True
-          Properties.ValueChecked = 'True'
-          Properties.ValueGrayed = ''
-          Properties.ValueUnchecked = 'False'
-          Visible = False
-          HeaderAlignmentHorz = taCenter
-          MinWidth = 16
-          Options.Filtering = False
-          Width = 73
-        end
       end
       object dbgHelpLevel1: TcxGridLevel
-        GridView = dbgHelpDBTableView1
+        GridView = dbgHelpDBTableView
       end
     end
   end
   object cxGroupBox3: TcxGroupBox
     Left = 0
-    Top = 416
+    Top = 456
     Align = alBottom
     TabOrder = 2
     Height = 56
@@ -142,7 +100,6 @@ object FMet003: TFMet003
       Height = 25
       Caption = '&Aceptar'
       Default = True
-      ModalResult = 1
       TabOrder = 0
       OnClick = btnAceptarClick
     end
@@ -156,14 +113,24 @@ object FMet003: TFMet003
       TabOrder = 1
     end
   end
-  object dsHelp: TDataSource
-    Left = 128
-    Top = 72
+  object cxSplitter: TcxSplitter
+    Left = 0
+    Top = 113
+    Width = 523
+    Height = 5
+    AlignSplitter = salTop
+    Control = gbFiltroAvanzado
+    Visible = False
+  end
+  object dsInput: TDataSource
+    DataSet = mtInput
+    Left = 392
+    Top = 304
   end
   object popSeleccion: TPopupMenu
     OnPopup = popSeleccionPopup
-    Left = 184
-    Top = 72
+    Left = 88
+    Top = 344
     object MISeleccionar: TMenuItem
       Caption = 'Seleccionar'
       OnClick = MISeleccionarClick
@@ -183,5 +150,172 @@ object FMet003: TFMet003
       Caption = 'Anular Seleccion'
       OnClick = MIAnularSeleccionClick
     end
+  end
+  object mtConfigCampos: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 231
+    Top = 160
+    object mtConfigCamposfieldName: TStringField
+      FieldName = 'fieldName'
+      Size = 40
+    end
+    object mtConfigCampostipo: TStringField
+      FieldName = 'tipo'
+      Size = 40
+    end
+    object mtConfigCamposlongitud: TIntegerField
+      FieldName = 'longitud'
+    end
+    object mtConfigCamposlabel: TStringField
+      FieldName = 'label'
+      Size = 50
+    end
+    object mtConfigCamposvisible: TBooleanField
+      FieldName = 'visible'
+    end
+    object mtConfigCamposreadOnly: TBooleanField
+      FieldName = 'readOnly'
+    end
+    object mtConfigCamposorden: TSmallintField
+      FieldName = 'orden'
+    end
+    object mtConfigCamposcolumnWidth: TSmallintField
+      FieldName = 'columnWidth'
+    end
+  end
+  object mtInput: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 440
+    Top = 304
+  end
+  object opConfig: TjktOperacion
+    OperName = 'TraerConfigHelpGenerico'
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'entidad'
+        Field = mtParametrosEntidad
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    Left = 304
+    Top = 160
+  end
+  object opFiltrado: TjktOperacion
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'entidad'
+        Field = mtParametrosEntidad
+        Tag = 0
+      end
+      item
+        Dataset = mtFiltros
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    Left = 304
+    Top = 216
+  end
+  object mtFiltros: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 232
+    Top = 216
+  end
+  object mtParametros: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 97
+    Top = 160
+    object mtParametrosEntidad: TStringField
+      FieldName = 'Entidad'
+      Size = 255
+    end
+  end
+  object Service: TjktServiceCaller
+    HTTP = IdHTTP
+    IgnoreException = False
+    Left = 120
+    Top = 64
+  end
+  object IdHTTP: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html, */*'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 168
+    Top = 64
   end
 end

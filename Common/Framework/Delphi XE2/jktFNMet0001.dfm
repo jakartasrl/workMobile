@@ -141,12 +141,8 @@ object frmChild: TfrmChild
     LocaleID = 0
     Left = 520
     Top = 32
-    object mtParametroInicialKey: TStringField
-      FieldName = 'Key'
-      Size = 255
-    end
-    object mtParametroInicialValue: TStringField
-      FieldName = 'Value'
+    object mtParametroInicialEntidad: TStringField
+      FieldName = 'Entidad'
       Size = 255
     end
   end
