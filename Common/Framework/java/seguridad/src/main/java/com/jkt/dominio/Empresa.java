@@ -60,6 +60,13 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 		this.urlDB = urlDB;
 	}
 
+	
+	/*
+	 * METODOS DE LA INTERFACE DESCRIPTIBLE
+	 * 
+	 * 
+	 */
+	
 	public String getCadena() {
 		return getRazonSocial();
 	}
@@ -69,22 +76,18 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	}
 
 	public int getEntero() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public int getEntero2() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public float getFloat() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public float getFloat2() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
