@@ -118,7 +118,7 @@ public class ServiceRepository implements IServiceRepository {
 	
 	public List<PersistentEntity> getAll(Class clazz) throws Exception {
 		Criteria criteria = createCriteria(clazz);
-		criteria.add(getRestrictionForRetrieveActive());
+//		criteria.add(getRestrictionForRetrieveActive());
 		return criteria.list();
 	}
 

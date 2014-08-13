@@ -104,7 +104,7 @@ public abstract class RequestProcessor extends BaseController{
 
 		try{
 		String entidad = ((EventBusiness) eventBusinessOperation).getEntidad();
-		if (entidad!=null || !entidad.isEmpty()) {
+		if (entidad!=null && !entidad.isEmpty()) {
 			log.debug("No existen parametros de entrada. Se toma como filtro una entidad...");
 //			parametersAdapted = new HashMap<String, String>();
 			parametersAdapted.put("entidad", entidad);
