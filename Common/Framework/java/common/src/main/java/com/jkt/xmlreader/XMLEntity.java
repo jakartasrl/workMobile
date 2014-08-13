@@ -100,8 +100,21 @@ public class XMLEntity implements IName {
 		if (hijos == null) {
 			hijos = new HashMap();
 		}
-		hijos.put(aObj.getName(), aObj);// peligroso esto, si no tiene name te
-										// pone siempre al objeto en null!!
+		
+		if (aObj.getName()==null || aObj.getName().isEmpty()) {
+			String hijo="hijo";
+			int indice=0;
+			boolean containsKey = hijos.containsKey(hijo);
+			while (containsKey) {
+				indice++;
+				hijo=hijo.concat(String.valueOf(indice));
+				containsKey = hijos.containsKey(hijo);
+			}
+			hijos.put(hijo, aObj);
+		}else{
+			hijos.put(aObj.getName(), aObj);// peligroso esto, si no tiene name te pone siempre al objeto en null!!
+		}
+		
 	}
 
 	public void addHijoInput(XMLEntity aObj) {

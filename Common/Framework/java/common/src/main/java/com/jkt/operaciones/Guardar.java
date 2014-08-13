@@ -7,6 +7,7 @@ import java.util.Map;
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 
 /**
  * Esta operacion recibe una entidad y la persiste.
@@ -28,19 +29,8 @@ public class Guardar extends Operation {
 		guardar(object);
 	}
 
-	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
 		serviceRepository.save((PersistentEntity) object.get(0));//save the first		
-	}
-
-	private List recuperarObjeto(Map<String, Object> aParams) {
-		List object;
-		if (aParams.get("objeto")  instanceof List) {
-			object = (List) aParams.get("objeto");
-		}else{
-			object = new ArrayList<Object>();
-			object.add(aParams.get("objeto"));
-		}
-		return object;
 	}
 
 }

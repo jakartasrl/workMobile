@@ -1,11 +1,13 @@
 package com.jkt.operaciones;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.transformers.Notificacion;
+import com.jkt.util.RepositorioClases;
 
 /**
  * Operacion para recuperar un elemento dado tales filtros.
@@ -14,19 +16,42 @@ import com.jkt.transformers.Notificacion;
  */
 public class Helper extends Operation {
 
-	public void execute(Map<String, Object> aParams) throws Exception {
-		Filtro filtro = (Filtro) aParams.get("objeto");
-		
-		
-		Map<String, String> mapa = filtro.valoresToMap();
-		
-//		busca en el repo (contra la base)
-		List<PersistentEntity> list = this.getServiceRepository().getByProperties(Class.forName(filtro.getClase()), mapa);
+	protected static final String KEY_ENTIDAD = "entidad";
+	protected static final String KEY_FILTROS = "filtros";
 
-//		Notifica resultados
+	public void execute(Map<String, Object> aParams) throws Exception {
+		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD);
+		String className = RepositorioClases.getClass(nombreEntidad);
+		List objetos = recuperarObjetoUsandoKey(aParams);
+		
+		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
+
 		for (PersistentEntity persistentEntity : list) {
-			this.notificarObjecto(Notificacion.getNew("salida2", persistentEntity));
+			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
 		}
 	}
+	
+	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) {
+		List object;
+		if (aParams.get(KEY_FILTROS)  instanceof List) {
+			object = (List) aParams.get(KEY_FILTROS);
+		}else{
+			object = new ArrayList<Object>();
+			object.add(aParams.get(KEY_FILTROS));
+		}
+		return object;
+	}
+	
+	protected Filtro crearFiltro(String nombre, String valor, String condicion,String tipo) {
+		Filtro filtro = new Filtro();
+		
+		filtro.setCondicion(condicion);
+		filtro.setNombre(nombre);
+		filtro.setValor(valor);
+		filtro.setTipoDeDato(tipo);
+		
+		return filtro;
+	}
+
 
 }

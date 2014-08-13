@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +35,7 @@ import com.jkt.xmlreader.XMLEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope("request")
 public abstract class RequestProcessor extends BaseController{
 	
 	private static final String KEY_NOMBRE_OPERACION = "op";
@@ -100,6 +98,8 @@ public abstract class RequestProcessor extends BaseController{
 		 * 3-request con argumentos de configuracion y ademas parametros
 		 * 
 		 */
+		
+		try{
 		String entidad = ((EventBusiness) eventBusinessOperation).getEntidad();
 		if (entidad==null || entidad.isEmpty()) {
 			log.debug("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
@@ -119,6 +119,17 @@ public abstract class RequestProcessor extends BaseController{
 		
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
+		
+//		}catch(Exception exception){
+			//Hago el rollback y muestro el mensaje critido en frontend.
+//			tx.rollback();
+//			throw exception;
+		}finally{
+//			if (tx.isActive()) {
+//				tx.commit();
+//			}
+			sessionProvider.destroySession();
+		}
 		log.debug("Finalizó la operación...");
 	}
 

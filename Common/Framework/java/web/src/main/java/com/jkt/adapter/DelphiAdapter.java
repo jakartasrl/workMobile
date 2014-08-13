@@ -123,6 +123,11 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				tx.rollback();
 				sessionProvider.destroySession();
 				throw e;
+			}finally{
+//				if (tx.isActive()) {
+//					tx.commit();
+//				}
+//				sessionProvider.destroySession();
 			}
 	}
 	

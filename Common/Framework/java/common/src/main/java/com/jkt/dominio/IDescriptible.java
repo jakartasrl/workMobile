@@ -1,7 +1,7 @@
 package com.jkt.dominio;
 
 /**
- * Interface para implementar metodos. :\
+ * Interface para implementar metodos.
  *
  */
 public interface IDescriptible {

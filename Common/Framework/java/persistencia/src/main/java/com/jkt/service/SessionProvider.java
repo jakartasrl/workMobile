@@ -2,12 +2,15 @@ package com.jkt.service;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.jkt.operaciones.Operation;
 import com.jkt.persistencia.ISessionProvider;
 
 /**
@@ -22,17 +25,23 @@ import com.jkt.persistencia.ISessionProvider;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Component
+@Scope("prototype")
 public class SessionProvider implements ISessionProvider{
+	
+	private static final Logger LOG = Logger.getLogger(SessionProvider.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;//gets from hibernate and datasource config
 	
 	private static Session session;
 	
-	@SuppressWarnings("restriction")
-	@PostConstruct
-	public void setup(){
-		session=sessionFactory.openSession();
+//	@SuppressWarnings("restriction")
+//	@PostConstruct
+//	public void setup(){
+//		session=sessionFactory.openSession();
+//	}
+	public SessionProvider() {
+		LOG.info("Iniciando el bean proveedor de sesiones.");
 	}
 	
 	public Session getSession(){
@@ -44,8 +53,6 @@ public class SessionProvider implements ISessionProvider{
 
 	public void destroySession() {
 		if (session!=null) {
-			session.flush();
-			session.clear();
 			session.close();
 			session=null;
 		}

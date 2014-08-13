@@ -10,7 +10,10 @@ import java.util.Map;
 
 
 
+
+
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.ValidacionException;
 
 
 /**
@@ -30,7 +33,7 @@ public interface IServiceRepository {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException;
+	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;
 	/**
 	 * Usando la clase filtra por un nombre de su campo
 	 * @param className
@@ -56,7 +59,7 @@ public interface IServiceRepository {
 	 * @param properties
 	 * @return
 	 */
-	List<PersistentEntity> getByProperties(Class className, Map<String,String> properties);
+	List<PersistentEntity> getByProperties(Class className, List properties);
 
 	/**
 	 * Recupera filtrando por una propiedad y la clase
@@ -92,8 +95,7 @@ public interface IServiceRepository {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException;
-
+	List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;
 	/**
 	 * La clase concreta debe implementar este metodo para recibir un proveedor de sesiones e inyectarlo
 	 * 

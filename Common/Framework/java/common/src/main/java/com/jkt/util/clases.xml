@@ -3,12 +3,13 @@
 	<!ELEMENT elementos			(elemento*)>
 	<!ELEMENT elemento			EMPTY>
 
-	<!ATTLIST elemento	key		CDATA 	#REQUIRED>
-	<!ATTLIST elemento	value	CDATA   #REQUIRED>
+	<!ATTLIST elemento	key			CDATA 	#REQUIRED>
+	<!ATTLIST elemento	value		CDATA   #REQUIRED>
+	<!ATTLIST elemento	validador	CDATA   #IMPLIED>
   
 ]>
 
 <elementos>
-	<elemento key="empresa" value="com.jkt.dominio.Empresa" />
-	<elemento key="usuario" value="com.jkt.dominio.Usuario" />
+	<elemento key="empresa" value="com.jkt.dominio.Empresa" validador="com.jkt.validadores.ValidadorEmpresa" />
+	<elemento key="usuario" value="com.jkt.dominio.Usuario" validador="com.jkt.validadores.ValidadorUsuario" />
 </elementos>

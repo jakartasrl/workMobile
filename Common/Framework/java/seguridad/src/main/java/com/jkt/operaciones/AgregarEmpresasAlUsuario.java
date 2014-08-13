@@ -42,16 +42,4 @@ public class AgregarEmpresasAlUsuario extends Operation {
 
 	}
 
-	
-	private List recuperarObjeto(Map<String, Object> aParams) {
-		List object;
-		if (aParams.get("objeto")  instanceof List) {
-			object = (List) aParams.get("objeto");
-		}else{
-			object = new ArrayList<Object>();
-			object.add(aParams.get("objeto"));
-		}
-		return object;
-	}
-	
 }
