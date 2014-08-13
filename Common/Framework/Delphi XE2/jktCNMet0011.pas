@@ -114,10 +114,10 @@ type
 type
   TjktValidadorForm = class(TComponent)
   private
-     FListaValidaciones         :TjktValidadorFieldList;
-     FValidarCampo              :TFieldNotifyEvent;
-     procedure agregarValidacion(validadorField :TjktValidadorField);
-     function  isEstadoNew :boolean;
+     FListaValidaciones : TjktValidadorFieldList;
+     FValidarCampo      : TFieldNotifyEvent;
+     procedure agregarValidacion(validadorField: TjktValidadorField);
+     function isEstadoNew: Boolean;
 
   public
     { Public declarations }

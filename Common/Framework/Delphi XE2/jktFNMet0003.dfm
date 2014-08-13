@@ -36,9 +36,6 @@ object FMet003: TFMet003
     Align = alClient
     PanelStyle.Active = True
     TabOrder = 1
-    ExplicitLeft = 320
-    ExplicitTop = 503
-    ExplicitHeight = 333
     Height = 338
     Width = 523
     object dbgHelp: TjktExpDBGrid
@@ -49,10 +46,6 @@ object FMet003: TFMet003
       Align = alClient
       TabOrder = 0
       DataSource = dsInput
-      ExplicitLeft = 115
-      ExplicitTop = 107
-      ExplicitWidth = 517
-      ExplicitHeight = 327
       object dbgHelpDBTableView: TcxGridDBTableView
         PopupMenu = popSeleccion
         OnDblClick = dbgHelpDblClick

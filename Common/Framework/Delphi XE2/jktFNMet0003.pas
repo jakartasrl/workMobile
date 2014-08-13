@@ -22,10 +22,8 @@ uses
   cxDataStorage, cxEdit, cxNavigator, cxDBData, cxCheckBox, cxBlobEdit,
   cxMaskEdit, cxContainer, cxGroupBox, cxSplitter, jktCNMet0012, jktCNMet0002,
   jktCNMet0030, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdHTTP;
+  IdHTTP, jktCNTypes;
 
-type
-  TjktTipoFiltro = (fi_Activos, fi_Inactivos, fi_Avanzado);
 
 type
   TFMet003 = class(TForm)

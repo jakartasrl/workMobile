@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs ,
-  jktCNMet0002, DB , kbmMemTable, jktFNMet0003;
+  jktCNMet0002, DB , kbmMemTable, jktFNMet0003, jktCNTypes;
 
 const
   oid         = 'oid';

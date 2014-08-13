@@ -8,7 +8,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, Vcl.ActnList, db, kbmMemTable, dxRibbonStatusBar,
-  jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030;
+  jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030, jktCNMet0014;
 
 type
   TjktOpcion = (opImprimir, opExportar, opImportar);
@@ -33,44 +33,36 @@ type
   TjktDriver = class(TComponent)
   private
     { Private declarations }
-    FConfirmarCancelacion       :Boolean;
-    FDataSetCab                 :TDataSet;
-    FEstado                     :TjktEstado;
-    FTipoPrograma               :TjktTipoPrograma;
-    FFocoEnAlta                 :TField;
-    FFocoEnModificacion         :TField;
-    FOperacionSave              :TjktOperacion;
-    FOperacionTraer             :TjktOperacion;
-    FActionList                 :TActionList;
-    FOperacionesIniciales       :TjktOperacionesList;
-    FOperacionesDefault         :TjktOperacionesList;
-
-    { Agregar  :
-        FiltroActivos
-        FiltroInActivos
-    }
-
-    // Eventos
-//    FOnSetDefaults              :TNotifyEvent;
-    FOnModoAppend               :TNotifyEvent;
-    FOnFiltrar                  :TNotifyEvent;
-    FOnEliminar                 :TNotifyEvent;
-    FOnReHabilitar              :TNotifyEvent;
-    FOnCancel                   :TNotifyEvent;
-    FOnCompletarCampos          :TNotifyEvent;
-    FOnFiltroActivos            :TNotifyEvent;
-    FOnFiltroInActivos          :TNotifyEvent;
-    FOnOperacionTraer           :TNotifyEvent;
-    FOnEjecutar                 :TNotifyEvent;
-    FOnNuevo                    :TNotifyEvent;
-    FOnGuardar                  :TNotifyEvent;
-    FOnCustomToolButton         :TNotifyEvent;
-    FOnImprimir                 :TNotifyEvent;
+    FConfirmarCancelacion : Boolean;
+    FDataSetCab           : TDataSet;
+    FEstado               : TjktEstado;
+    FTipoPrograma         : TjktTipoPrograma;
+    FFocoEnAlta           : TField;
+    FFocoEnModificacion   : TField;
+    FOperacionSave        : TjktOperacion;
+    FOperacionTraer       : TjktOperacion;
+    FActionList           : TActionList;
+    FOperacionesIniciales : TjktOperacionesList;
+    FOperacionesDefault   : TjktOperacionesList;
+    FFiltro               : TjktHelpGenerico;
+    {********   Eventos   ********}
+//    FOnSetDefaults        : TNotifyEvent;
+    FOnFiltrar            : TNotifyEvent;
+    FOnEliminar           : TNotifyEvent;
+    FOnReHabilitar        : TNotifyEvent;
+    FOnCancel             : TNotifyEvent;
+    FOnCompletarCampos    : TNotifyEvent;
+    FOnEjecutar           : TNotifyEvent;
+    FOnNuevo              : TNotifyEvent;
+    FOnGuardar            : TNotifyEvent;
+    FOnCustomToolButton   : TNotifyEvent;
+    FOnImprimir           : TNotifyEvent;
 
     procedure DoSetDefaults;
     procedure DoSetFocoAlta;
     procedure DoSetFocoModi;
     procedure AnalizarDataSet;
+    procedure Filtrar;
     procedure DoFiltrar;
     procedure DoCancel;
     procedure DoCloseDataSet;
@@ -123,7 +115,9 @@ type
     procedure Guardar;
     procedure Proximo;
     procedure Anterior;
-    procedure Filtrar;
+    procedure FiltrarActivos;
+    procedure FiltrarInactivos;
+    procedure FiltrarAvanzado;
     procedure Ejecutar;
     procedure Imprimir;
     procedure CustomToolButton;
@@ -138,7 +132,6 @@ type
 
   published
     { Published declarations }
-
     property NoAutoEditarDataSets  : Boolean read FNoAutoEditarDataSets write FNoAutoEditarDataSets;
     property DataSetCab            : TDataSet read FDataSetCab          write FDataSetCab;
     property OperacionSave         : TjktOperacion  read FOperacionSave write FOperacionSave;
@@ -148,6 +141,7 @@ type
 
     property Opciones              : TjktOpciones     read FOpciones     write FOpciones;
     property TipoPrograma          : TjktTipoPrograma read FTipoPrograma write FTipoPrograma;
+    property Filtro                : TjktHelpGenerico read FFiltro       write FFiltro;
     property FocoEnAlta            : TField read FFocoEnAlta         write FFocoEnAlta;
     property FocoEnModificacion    : TField read FFocoEnModificacion write FFocoEnModificacion;
     property OperacionesIniciales  : TjktOperacionesList read FOperacionesIniciales write FOperacionesIniciales;
@@ -158,8 +152,6 @@ type
     property OnRehabilitar         :TNotifyEvent read FOnRehabilitar        write FOnRehabilitar;
     property OnCancel              :TNotifyEvent read FOnCancel             write FOnCancel;
     property OnCompletarCampos     :TNotifyEvent read FOnCompletarCampos    write FOnCompletarCampos;
-    property OnFiltroActivos       :TNotifyEvent read FOnFiltroActivos      write FOnFiltroActivos;
-    property OnFiltroInActivos     :TNotifyEvent read FOnFiltroInActivos    write FOnFiltroInActivos;
     property OnFiltrar             :TNotifyEvent read FOnFiltrar            write FOnFiltrar;
     property OnEjecutar            :TNotifyEvent read FOnEjecutar write FOnEjecutar;
     property OnNuevo               :TNotifyEvent read FOnNuevo write FOnNuevo;
@@ -173,7 +165,7 @@ procedure Register;
 implementation
 
 uses
-  jktFNMet0008;
+  jktFNMet0008, jktCNTypes;
 
 procedure Register;
 begin
@@ -470,9 +462,17 @@ end;
 
 procedure TjktDriver.DoFiltrar;
 begin
-  self.abrirDataSets;
+  Self.abrirDataSets;
 
-  // mostrar el HELP (o FILTRO) segun el help asignado en la property HelpFiltro
+  // Muestro el Help (o Filtro) asignado
+  if Assigned(FFiltro) then
+    begin
+      if FFiltro.Ejecutar then
+        ShowMessage('Seleccionó un registro')
+      else
+        ShowMessage('No seleccionó nada!');
+    end;
+
 end;
 
 procedure TjktDriver.DoNuevo;
@@ -500,20 +500,20 @@ end;
 procedure TjktDriver.abrirDataSets;
 var
   i: Integer;
-  dataSet: TkbmMemTable;
+  DataSet: TkbmMemTable;
 begin
   if FDataSetCab <> nil then
     FDataSetCab.Open;
 
   for i:= 0 to FOperacionSave.CountDatasets - 1 do
     begin
-       dataSet :=  FOperacionSave.ItemsDataset[i];
-       if dataSet is TjktMemTable
-          then TjktMemTable(dataSet).NoAutoEditarCabecera := FNoAutoEditarDataSets;
+      DataSet :=  FOperacionSave.ItemsDataset[i];
+      if DataSet is TjktMemTable then
+        TjktMemTable(DataSet).NoAutoEditarCabecera := FNoAutoEditarDataSets;
 
-       if (not dataSet.Active)
-         then   dataSet.open;
-       dataSet.Append;
+      if (not DataSet.Active) then
+        DataSet.Open;
+      DataSet.Append;
     end;
 end;
 
@@ -675,11 +675,11 @@ begin
     self.DoInhibirCamposNoModificables;
     Self.DoSetFocoModi;
 
-    if (Self.FDataSetCab <> nil)
-       then begin
-              FDatasetCab.First;
-              FDatasetCab.Edit;
-            end;
+    if (Self.FDataSetCab <> nil) then
+      begin
+        FDatasetCab.First;
+        FDatasetCab.Edit;
+      end;
     Self.AnalizarDataSet;
   except
     on E: Exception do
@@ -688,6 +688,33 @@ begin
          self.Cancelar;
        end;
   end;
+end;
+
+procedure TjktDriver.FiltrarActivos;
+begin
+  // Si no asociaron un Filtro, no pasa nada
+  if Assigned(FFiltro) then
+    FFiltro.TipoFiltro := fi_Activos;
+
+  Filtrar;
+end;
+
+procedure TjktDriver.FiltrarInactivos;
+begin
+  // Si no asociaron un Filtro, no pasa nada
+  if Assigned(FFiltro) then
+    FFiltro.TipoFiltro := fi_Inactivos;
+
+  Filtrar;
+end;
+
+procedure TjktDriver.FiltrarAvanzado;
+begin
+  // Si no asociaron un Filtro, no pasa nada
+  if Assigned(FFiltro) then
+    FFiltro.TipoFiltro := fi_Avanzado;
+
+  Filtrar;
 end;
 
 procedure TjktDriver.enabledAction(actionName: string; enabled: boolean);
