@@ -126,13 +126,8 @@ inherited FNUti0001: TFNUti0001
     EnviarTodo = False
     Atributos = <
       item
-        Attribute = 'key'
-        Field = mtParametroInicialKey
-        Tag = 0
-      end
-      item
-        Attribute = 'value'
-        Field = mtParametroInicialValue
+        Attribute = 'entidad'
+        Field = mtParametroInicialEntidad
         Tag = 0
       end>
     ServiceCaller = Service

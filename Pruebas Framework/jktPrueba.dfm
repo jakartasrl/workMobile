@@ -32,4 +32,13 @@ object Form1: TForm1
     TabOrder = 1
     OnClick = Button2Click
   end
+  object cxButton1: TcxButton
+    Left = 152
+    Top = 160
+    Width = 89
+    Height = 34
+    Caption = 'Prueba Help'
+    TabOrder = 2
+    OnClick = cxButton1Click
+  end
 end

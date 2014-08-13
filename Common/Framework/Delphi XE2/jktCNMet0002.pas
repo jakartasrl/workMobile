@@ -836,7 +836,6 @@ procedure TjktServiceCaller.addDataSet(DataSet : TDataSet ;
                                    aTag : Integer = 0 ;
                                    DataSetName : string = '');
 begin
-
     if (DataSet = nil)
        then Exit;
 

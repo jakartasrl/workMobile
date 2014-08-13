@@ -249,8 +249,8 @@ end;
 
 procedure TjktOperacion.execute;
 begin
-  if not Assigned(FServiceCaller)
-     then  raise Exception.Create('No esta asignada la propiedad ServiceCaller');
+  if not Assigned(FServiceCaller) then
+    raise Exception.Create('No esta asignada la propiedad ServiceCaller');
 
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(FOperName);

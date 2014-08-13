@@ -10,114 +10,88 @@ const
   oid         = 'oid';
   codigo      = 'codigo';
   descripcion = 'descripcion';
-  selec       = 'seleccionado';
 
 type
   { Propiedades del Componente Help para uso Externo }
   TPropertysTjktHelp = class(TPersistent)
   private
-     FClasificador : Boolean;
-     FComponente   : String;
-     FOperacion    : TjktServiceCaller;
-     FOSName       : String;
-     FQuery        : Integer;
-     FRefreshDatos : Boolean;
-     FDataSetName  : String;
+     FClasificador  : Boolean;
+     FComponente    : String;
+     FServiceCaller : TjktServiceCaller;
+     FOSName        : String;
+     FQuery         : Integer;
+     FRefreshDatos  : Boolean;
+     FDataSetName   : String;
   published
-    property Clasificador : Boolean       read FClasificador  write FClasificador  default False;
-    property Componente   : String        read FComponente    write FComponente;
-    property Operacion    : TjktServiceCaller read FOperacion     write FOperacion;
-    property OSName       : String        read FOSName        write FOSName;
-    property Query        : Integer       read FQuery         write FQuery;
-    property RefreshDatos : Boolean       read FRefreshDatos  write FRefreshDatos  default False;
-    property DataSetName  : String        read FDataSetName   write FDataSetName;
+    property Clasificador  : Boolean       read FClasificador  write FClasificador  default False;
+    property Componente    : String        read FComponente    write FComponente;
+    property ServiceCaller : TjktServiceCaller read FServiceCaller write FServiceCaller;
+    property OSName        : String        read FOSName        write FOSName;
+    property Query         : Integer       read FQuery         write FQuery;
+    property RefreshDatos  : Boolean       read FRefreshDatos  write FRefreshDatos  default False;
+    property DataSetName   : String        read FDataSetName   write FDataSetName;
   end;
 
-  TSetHlpActivo = (tHlpServerDataSet, tHlpLocalDataSet);
-
-  TNotifyAcepto = procedure (DataSet : TDataSet) of object;
+  TNotifyAcepto = procedure(DataSet : TDataSet) of object;
 
 
-  TjktHelp = class(TComponent)
-  private
-
-  protected
-
-  public
-
-  published
-
-  end;
-
-
-  TjktHelpGenerico = class(TjktHelp)
+  TjktHelpGenerico = class(TComponent)
   private
     { Private declarations }
-    FTempMemTable   : TkbmMemTable;
-    FSeleccionReg   : TkbmMemTable;
-    FTempMemTableParam : TkbmMemTable;
-    FDataSource     : TDataSource;
-    FOSName         : String;
-    FComponente     : String;
-    FSeparador      : String;
-    FQuery          : Integer;
-    FUnirCodigoDesc : Boolean;
-    FRefreshDatos   : Boolean;
-    FOperacion      : TjktServiceCaller;
-    FOid            : integer;
-    FCodigo         : String;
-    FDescripcion    : String;
-    FSetHlpActivo   : TSetHlpActivo;
-    FListaParams    : TStringList;
+    FTempMemTable  : TkbmMemTable;
+    FSeleccionReg  : TkbmMemTable;
+    FDataSource    : TDataSource;
+    FRefreshDatos  : Boolean;
+    FServiceCaller : TjktServiceCaller;
+
+    FOid             : Integer;
+    FOidRespuesta    : TIntegerField;
+    FCodigo          : string;
+    FCodigoRespuesta : TStringField;
+
+    FDescripcion : string;
+    FListaParams : TStringList;
     FListaValoresParams : TStringList;
-    FClasificador   : Boolean;
     FSeleccionMultiple : boolean;
     FNotifyAcepto : TNotifyAcepto;
-    FNombreOperHelp : string;
-    FFormNameABM : string;
-    FAltaNuevos  : boolean;
-    procedure TraerDataSet ();
-    function SeleccionarRegistro(aFieldCodigo : TField) : boolean;
+    FTipoFiltro : TjktTipoFiltro;
+    FEntidad : string;
+    procedure TraerDataSet();
+    function SeleccionarRegistro() : Boolean;
     procedure ArmarOperHelpGenerico();
-    procedure ArmarOperHelpMetaClass();
+    procedure ValidateProperties();
     function cargarRegistrosMultiSelec(DataSet : TDataSet) : string;
-    function getSeparadorCodigo(): String;
+    function getSeparadorCodigo() : string;
   protected
     { Protected declarations }
   public
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
     destructor Destroy; override;
-    function Help(aFieldCodigo : TField) : Boolean;
-    function GetCodigo() : String;
+    function Ejecutar() : Boolean;
+    function GetCodigo() : string;
     function GetOid() : integer;
-    function getDescripcion() : string;
+    function GetDescripcion() : string;
     function GetDataSet () : TDataSet;
     function GetDataSource () : TDataSource;
-    function mostrarHelp() : boolean;
-    function GetSelectedRecord(): TkbmMemTable;
     procedure clearParams();
     procedure addParam(ParamName : string ; valor : string );
     procedure setDataSet(DataSet : TDataSet);
-    function validar(aCodigo : String;  raiseException : Boolean) : Boolean; overload;
+    function validar(aCodigo : string;  raiseException : Boolean) : Boolean; overload;
     function validar(aOid    : Integer; raiseException : Boolean) : Boolean; overload;
     procedure LimpiarDataSets();
   published
     { Published declarations }
-    property AltaNuevos  : boolean read fAltaNuevos write fAltaNuevos;
-    property FormNameABM    : string read fFormNameABM write fFormNameABM;
-    property OSName         : String        read FOSName         write FOSName;
-    property Componente     : String        read FComponente     write FComponente;
-    property Query          : Integer       read FQuery          write FQuery;
-    property UnirCodigoDesc : Boolean       read FUnirCodigoDesc write FUnirCodigoDesc default False;
-    property RefreshDatos   : Boolean       read FRefreshDatos   write FRefreshDatos   default False;
+    property ServiceCaller : TjktServiceCaller read FServiceCaller write FServiceCaller;
+    property Entidad : string read FEntidad write FEntidad;
+    property TipoFiltro : TjktTipoFiltro read FTipoFiltro write FTipoFiltro default fi_Activos;
+    property OidRespuesta : TIntegerField read FOidRespuesta write FOidRespuesta;
+    property CodigoRespuesta : TStringField read FCodigoRespuesta write FCodigoRespuesta;
 
-    property Operacion      : TjktServiceCaller read FOperacion      write FOperacion;
-    property SetHlpActivo   : TSetHlpActivo read FSetHlpActivo   write FSetHlpActivo   default tHlpServerDataSet;
-    property Clasificador   : Boolean       read FClasificador   write FClasificador   default False;
-    property SeleccionMultiple : boolean read FSeleccionMultiple write FSeleccionMultiple default false;
+    property RefreshDatos : Boolean read FRefreshDatos write FRefreshDatos default False;
+    property SeleccionMultiple : Boolean read FSeleccionMultiple write FSeleccionMultiple default false;
     property NotifyAcepto : TNotifyAcepto read FNotifyAcepto write FNotifyAcepto;
-    property NombreOperHelp : string read FNombreOperHelp write FNombreOperHelp;
+
   end;
 
 
@@ -133,259 +107,179 @@ begin
 end;
 
 
-constructor TjktHelpGenerico.create(AOwner : TComponent);
+constructor TjktHelpGenerico.Create(AOwner : TComponent);
 begin
-  inherited create(AOwner);
+  inherited Create(AOwner);
 
   FSeleccionReg := TkbmMemTable.Create(Self);
-  FSeleccionReg.FieldDefs.Add(oid,         ftInteger, 0,  false);
-  FSeleccionReg.FieldDefs.Add(codigo,      ftString,  50, false);
-  FSeleccionReg.FieldDefs.Add(descripcion, ftString,  1000, false);
 
-  //FSeleccionMultiple := false;
-  FTempMemTable      := TkbmMemTable.Create(Self);
-  FTempMemTable.FieldDefs.Add(oid,         ftInteger, 0,  false);
-  FTempMemTable.FieldDefs.Add(codigo,      ftString,  50, false);
-  FTempMemTable.FieldDefs.Add(descripcion, ftString,  1000, false);
-  FTempMemTable.FieldDefs.Add(selec,       ftBoolean,  0, false);
-
-  FTempMemTableParam  := TkbmMemTable.Create(Self);
-  FTempMemTableParam.FieldDefs.Add('separador', ftString,  1000, false);
-
-// Para no duplicar los nombres de los DataSet.
-{$IFDEF PRUEBA}
-  FTempMemTable.Name := Self.Name;
-{$ELSE}
+  FTempMemTable := TkbmMemTable.Create(Self);
   FTempMemTable.Name := 'TMemHlp' + IntToStr(AOwner.ComponentCount);
-  FTempMemTableParam.Name := 'FTempMemTableParam';
-{$ENDIF}
-  FTempMemTable.Close;
-  FTempMemTable.Open;
-
-  FTempMemTableParam.Close;
-  FTempMemTableParam.Open;
 
   FDataSource         := TDataSource.Create(Self);
   FDataSource.DataSet := FTempMemTable;
 
-  FQuery := 3;
-
   FListaParams        := TStringList.Create;
   FListaValoresParams := TStringList.Create;
 
-  FNombreOperHelp := '';
-
+  FEntidad := '';
 end;
 
-
-function TjktHelpGenerico.Help (aFieldCodigo : TField) : boolean;
+function TjktHelpGenerico.Ejecutar(): Boolean;
 begin
-  if (FOperacion.ModoExecute)
-     then Exit;
-  Self.TraerDataSet();
-  result := Self.SeleccionarRegistro(aFieldCodigo);
-end;
+  Result := False;
 
+  ValidateProperties;
+
+  if FServiceCaller.ModoExecute then
+    Exit;
+
+  Result := SeleccionarRegistro();
+end;
 
 function TjktHelpGenerico.GetDataSet () : TDataSet;
 begin
-  if (FOperacion.ModoExecute)
-     then Exit;
+  Result := nil;
+
+  if FServiceCaller.ModoExecute then
+    Exit;
 
   Self.TraerDataSet();
   result := FTempMemTable;
 end;
 
-
 function TjktHelpGenerico.GetDataSource () : TDataSource;
 begin
-  if (FOperacion.ModoExecute)
-     then Exit;
+  Result := nil;
+
+  if FServiceCaller.ModoExecute then
+    Exit;
 
   if (not FTempMemTable.Active)
   or ((FTempMemTable.Active) and (FTempMemTable.IsEmpty))
   or FRefreshDatos
      then Self.TraerDataSet();
 
-  result := FDataSource;
+  Result := FDataSource;
 end;
 
-
-function TjktHelpGenerico.GetCodigo() : String;
+function TjktHelpGenerico.GetCodigo() : string;
 begin
-  result := fCodigo;
+  result := FCodigo;
 end;
 
-function TjktHelpGenerico.GetDescripcion() : String;
+function TjktHelpGenerico.GetDescripcion() : string;
 begin
-  result := fDescripcion;
+  result := FDescripcion;
 end;
 
 function TjktHelpGenerico.GetOid() : Integer;
 begin
-  result := fOid;
+  result := FOid;
 end;
-
 
 procedure TjktHelpGenerico.TraerDataSet();
 begin
+  // Si no refresca los datos de la ayuda y la Tabla no esta vacia, no busco la
+  // ayuda nuevamente.
+  if not FRefreshDatos and (not FTempMemTable.IsEmpty) then
+    Exit;
 
-  if (FSetHlpActivo = tHlpLocalDataSet) then Exit;
-
-// Si no refresca los datos de la ayuda y la Tabla no esta vacia, no busco la
-// ayuda nuevamente.
-   if (not FRefreshDatos )
-  and (not FTempMemTable.IsEmpty )
-      then Exit;
-
-// Si refresca los datos, cierra y abre la tabla para borrar los datos anteriores.
-  if ( FRefreshDatos )
-     then begin
-            FTempMemTable.Close;
-            FTempMemTable.Open;
-          end;
-
-// Para no duplicar los nombres de los DataSet.
-{$IFDEF PRUEBA}
-  Randomize;
-  FTempMemTable.Name := Self.Name + Inttostr(random(1000000));
-{$ELSE}
-  //FTempMemTable.Name := FTempMemTable.Name + FOSName;
-{$ENDIF}
-  if (Self.Name = '')
-     then begin
-          Randomize;
-          FTempMemTable.Name := 'THelp' + Inttostr(random(1000000));
-          end;
-
-
-  FOperacion.asignarDataSet(FTempMemTable.Name, FTempMemTable);
-
-  FOperacion.InicioOperacion;
-
-  if not FClasificador
-     then begin
-          if (self.OSName = '') then Exit;
-          Self.ArmarOperHelpGenerico();
-          end
-     else Self.ArmarOperHelpMetaClass();
-
-  FOperacion.execute;
+  // Si refresca los datos, cierra y abre la tabla para borrar los datos anteriores.
+  if FRefreshDatos then
+    begin
+      FTempMemTable.Close;
+      FTempMemTable.Open;
+    end;
 end;
 
 procedure TjktHelpGenerico.ArmarOperHelpGenerico();
 var
-  i : integer;
-
+  i: Integer;
 begin
-  if (FNombreOperHelp<>'')
-     then FOperacion.setOperacion(FNombreOperHelp)
-     else FOperacion.setOperacion('HelpGenerico');
-
-  FOperacion.addElement  (1, 'Tabla');
-  FOperacion.addAtribute ('nombre', 'Params');
-
-  FOperacion.addElement  (2, 'Fila');
-  FOperacion.addAtribute ('OSName',  FOSName);
-  FOperacion.addAtribute ('query',   IntToStr( FQuery ) );
-  FOperacion.addAtribute ('dataset', FTempMemTable.Name);
-
   for i:=0 to FListaParams.Count-1 do
-    FOperacion.addAtribute(FListaParams.Strings[i],FListaValoresParams.Strings[i]);
-
-  if ( FUnirCodigoDesc )
-     then FOperacion.addAtribute ('UnirCodigoDesc', 'true');
-
+    FServiceCaller.addAtribute(FListaParams.Strings[i],FListaValoresParams.Strings[i]);
 end;
 
-procedure TjktHelpGenerico.ArmarOperHelpMetaClass();
-var
-  i           : integer;
-begin
-
-  if (FNombreOperHelp<>'')
-     then FOperacion.setOperacion(FNombreOperHelp)
-     else FOperacion.setOperacion('HelpMetaClass');
-
-  FOperacion.addElement  (1, 'Tabla');
-  FOperacion.addAtribute ('nombre', 'Params');
-
-  FOperacion.addElement  (2, 'Fila');
-  FOperacion.addAtribute ('OSCompoName',       FOSName);
-  FOperacion.addAtribute ('codigo_componente', FComponente );
-  FOperacion.addAtribute ('dataset',           FTempMemTable.Name);
-
-  for i:=0 to FListaParams.Count-1 do
-    FOperacion.addAtribute(FListaParams.Strings[i],FListaValoresParams.Strings[i]);
-
-  if ( FUnirCodigoDesc )
-     then FOperacion.addAtribute ('UnirCodigoDesc', 'true');
-end;
-
-
-function TjktHelpGenerico.SeleccionarRegistro(aFieldCodigo : TField) : boolean;
+function TjktHelpGenerico.SeleccionarRegistro(): Boolean;
 var
   HelpDialog: TFMet003;
-  CodigoMultiple : string;
+  CodigoMultiple: string;
 begin
-  result := false;
-  HelpDialog := TFMet003.Create(Nil);
+  Result := False;
+
+  HelpDialog := TFMet003.Create(nil);
   try
-    HelpDialog.FormNameABM := self.FormNameABM;
-    HelpDialog.AllowNuevos := self.AltaNuevos;
-    HelpDialog.DataSet         := FTempMemTable;
-    HelpDialog.SeleccionMultiple := self.SeleccionMultiple;
+    HelpDialog.Service.Host       := FServiceCaller.Host;
+    HelpDialog.Service.Port       := FServiceCaller.Port;
+    HelpDialog.Service.Servlet    := FServiceCaller.Servlet;
+    HelpDialog.Service.Aplicacion := FServiceCaller.Aplicacion;
+    HelpDialog.Service.Protocolo  := FServiceCaller.Protocolo;
+
+    HelpDialog.Entidad       := FEntidad;
+    HelpDialog.TipoFiltro    := FTipoFiltro;
+    HelpDialog.SeleccionMultiple := Self.SeleccionMultiple;
+
     HelpDialog.OidFieldName    := oid;
     HelpDialog.CodFieldName    := codigo;
     HelpDialog.DescFieldName   := descripcion;
     HelpDialog.ResultFieldName := 'codigo';
-    HelpDialog.ShowModal();
-    if (HelpDialog.ModalResult = mrOk)
-       then begin
-              result       := true;
-              fOid         := FTempMemTable.FieldByName(oid).AsInteger;
-              fCodigo      := FTempMemTable.FieldByName(codigo).AsString;
-              fDescripcion := FTempMemTable.FieldByName(descripcion).AsString;
 
-              if (not SeleccionMultiple)
-                 then begin
-                      if Assigned(aFieldCodigo)
-                         then begin
-                              if (not (aFieldCodigo.DataSet.State in [dsEdit, dsInsert]))
-                                 then aFieldCodigo.DataSet.Edit();
-                              aFieldCodigo.Value := getCodigo();
-                              end;
-                      end
-                 else begin
-                        CodigoMultiple := cargarRegistrosMultiSelec(FTempMemTable);
-                        self.fCodigo   := CodigoMultiple;
-                        if (Assigned(FNotifyAcepto))
-                           then FNotifyAcepto(FSeleccionReg);
-                        if Assigned(aFieldCodigo)
-                           then begin
-                                  if (not (aFieldCodigo.DataSet.State in [dsEdit, dsInsert]))
-                                     then aFieldCodigo.DataSet.Edit();
-                                  aFieldCodigo.Value := CodigoMultiple;
-                                end;
-                      end;
-            end;
+    HelpDialog.ShowModal();
+    if (HelpDialog.ModalResult = mrOk) then
+      begin
+        Result := True;
+
+        FOid         := HelpDialog.mtInput.FieldByName(oid).AsInteger;
+        FCodigo      := HelpDialog.mtInput.FieldByName(codigo).AsString;
+        FDescripcion := HelpDialog.mtInput.FieldByName(descripcion).AsString;
+
+        if not SeleccionMultiple then
+          begin
+            // Devuelvo los datos donde los quieren
+            if Assigned(CodigoRespuesta) then
+              begin
+                if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                  CodigoRespuesta.DataSet.Edit();
+
+                CodigoRespuesta.Value := GetCodigo();
+              end;
+
+            if Assigned(OidRespuesta) then
+              begin
+                if not (OidRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                  OidRespuesta.DataSet.Edit();
+
+                OidRespuesta.Value := GetOid();
+              end;
+          end
+        else
+          begin
+            CodigoMultiple := cargarRegistrosMultiSelec(FTempMemTable);
+            FCodigo := CodigoMultiple;
+            // Envio una tabla con los registros seleccionados!
+            if (Assigned(FNotifyAcepto)) then FNotifyAcepto(FSeleccionReg);
+
+            if Assigned(CodigoRespuesta) then
+              begin
+                if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                  CodigoRespuesta.DataSet.Edit();
+
+                CodigoRespuesta.Value := CodigoMultiple;
+              end;
+          end;
+      end;
   finally
     HelpDialog.Free();
   end;
 end;
 
-destructor TjktHelpGenerico.destroy;
+destructor TjktHelpGenerico.Destroy;
 begin
   FListaParams.Free;
   FListaValoresParams.Free;
-  inherited destroy;
-end;
 
-function TjktHelpGenerico.mostrarHelp() : boolean;
-begin
-  if (FOperacion.ModoExecute)
-     then Exit;
-  result := Help(Nil);
+  inherited Destroy;
 end;
 
 procedure TjktHelpGenerico.clearParams();
@@ -413,49 +307,6 @@ begin
   FTempMemTable.LoadFromDataSet(DataSet,[]);
 end;
 
-function TjktHelpGenerico.GetSelectedRecord(): TkbmMemTable;
-begin
-(*
-  -- vieja implementacion, no se usaba en ningun proyecto y estaba mal --
-  HelpDialog := TFMet003.Create(Nil);
-  try
-    HelpDialog.DataSet         := FTempMemTable;
-    HelpDialog.OidFieldName    := oid;
-    HelpDialog.CodFieldName    := codigo;
-    HelpDialog.DescFieldName   := descripcion;
-    HelpDialog.SelecFieldName  := selec;
-    HelpDialog.ResultFieldName := 'codigo';
-    HelpDialog.MostrarColSelec := True;
-    HelpDialog.ShowModal();
-
-    DasetResult:= TkbmMemTable.Create(Self);    // Crea DasetResult
-    DasetResult.CreateTableAs(HelpDialog.DataSet, []);    // Copia la estructura
-
-    if ( HelpDialog.ModalResult = mrOk )
-       then begin
-              HelpDialog.DataSet.First;
-              while not HelpDialog.DataSet.Eof do
-                begin
-                  if HelpDialog.DataSet.FieldByName('selec').AsBoolean
-                     then begin
-                            DasetResult.Append;
-                            DasetResult.FieldByName('oid').AsInteger        :=  HelpDialog.DataSet.FieldByName('oid').AsInteger;
-                            DasetResult.FieldByName('codigo').AsString      :=  HelpDialog.DataSet.FieldByName('codigo').AsString;
-                            DasetResult.FieldByName('descripcion').AsString :=  HelpDialog.DataSet.FieldByName('descripcion').AsString;
-                            DasetResult.Post;
-                          end;
-                  HelpDialog.DataSet.Next;
-                end;
-
-              result := DasetResult;
-            end;
-  finally
-    HelpDialog.Free();
-  end;
-*)
-  result := FSeleccionReg;
-end;
-
 function TjktHelpGenerico.cargarRegistrosMultiSelec(DataSet : TDataSet) : string;
 var
   codigoMultiple : string;
@@ -475,7 +326,7 @@ begin
                  FSeleccionReg.FieldByName('codigo').AsString := DataSet.FieldByName('codigo').AsString;
                  FSeleccionReg.FieldByName('descripcion').AsString := DataSet.FieldByName('descripcion').AsString;
 
-                 if (codigoMultiple<>'')
+                 if (codigoMultiple <> '')
                     then codigoMultiple := codigoMultiple + getSeparadorCodigo() + DataSet.FieldByName('codigo').AsString
                     else codigoMultiple := DataSet.FieldByName('codigo').AsString;
                end;
@@ -490,17 +341,17 @@ end;
 
 function TjktHelpGenerico.validar(aCodigo : String; raiseException : Boolean) : Boolean;
 begin
-  if (FOperacion.ModoExecute)
-     then Exit;
+  Result := False;
 
-  result := False;
+  if FServiceCaller.ModoExecute then
+    Exit;
 
   Self.TraerDataSet();
 
   if not FTempMemTable.Locate('codigo',aCodigo,[loCaseInsensitive])
      then begin
             if raiseException
-               then raise Exception.Create('Codigo Inexistente ');
+               then raise Exception.Create('Codigo Inexistente');
           end
      else begin
             result       := True;
@@ -512,54 +363,53 @@ end;
 
 function TjktHelpGenerico.validar(aOid : Integer; raiseException : Boolean) : Boolean;
 begin
-  if (FOperacion.ModoExecute)
-     then Exit;
+  Result := False;
+
+  if FServiceCaller.ModoExecute then
+    Exit;
 
   Self.TraerDataSet();
 
-  if not FTempMemTable.Locate('oid',aOid,[loCaseInsensitive])
-     then begin
-            result := False;
-            FOid         := 0;
-            FCodigo      := '';
-            FDescripcion := '';
-            if raiseException
-               then raise Exception.Create('Registro Inexistente ');
-          end
-     else begin
-            result       := True;
-            FOid         := FTempMemTable.FieldByName(oid).AsInteger;
-            FCodigo      := FTempMemTable.FieldByName(codigo).AsString;
-            FDescripcion := FTempMemTable.FieldByName(descripcion).AsString;
-          end;
+  if not FTempMemTable.Locate('oid',aOid,[loCaseInsensitive]) then
+    begin
+      result := False;
+      FOid         := 0;
+      FCodigo      := '';
+      FDescripcion := '';
+      if raiseException
+         then raise Exception.Create('Registro Inexistente ');
+    end
+  else
+    begin
+      result       := True;
+      FOid         := FTempMemTable.FieldByName(oid).AsInteger;
+      FCodigo      := FTempMemTable.FieldByName(codigo).AsString;
+      FDescripcion := FTempMemTable.FieldByName(descripcion).AsString;
+    end;
 end;
 
+procedure TjktHelpGenerico.ValidateProperties;
+begin
+  if (FServiceCaller = nil) then
+    raise Exception.Create('La propiedad ServiceCaller no fue asignada');
+
+  if (FEntidad = '') then
+    raise Exception.Create('La propiedad Entidad no fue asignada');
+end;
 
 procedure TjktHelpGenerico.LimpiarDataSets();
 begin
-  if (Assigned(FTempMemTable))
- and (FTempMemTable.Active)
-     then FTempMemTable.EmptyTable;
+  if Assigned(FTempMemTable) and (FTempMemTable.Active) then
+    FTempMemTable.EmptyTable;
 
-  if (Assigned(FSeleccionReg))
- and (FSeleccionReg.Active)
-     then FSeleccionReg.EmptyTable;
-
+  if Assigned(FSeleccionReg) and (FSeleccionReg.Active) then
+    FSeleccionReg.EmptyTable;
 end;
 
 function TjktHelpGenerico.getSeparadorCodigo(): String;
 begin
-  if ( FSeparador = '' )
-     then begin
-            FOperacion.asignarDataSet('FTempMemTableParam', FTempMemTableParam);
-            FOperacion.InicioOperacion;
-            FOperacion.setOperacion('TraerSeparadorCodigo');
-            FOperacion.execute;
 
-            FTempMemTableParam.First;
-            FSeparador := FTempMemTableParam.FieldByName('separador').AsString;
-          end;
-  result := FSeparador;
 end;
+
 
 end.

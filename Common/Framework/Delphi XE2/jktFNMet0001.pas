@@ -36,10 +36,9 @@ type
     Service: TjktServiceCaller;
     OperacionSave: TjktOperacion;
     mtParametroInicial: TjktMemTable;
-    mtParametroInicialKey: TStringField;
+    mtParametroInicialEntidad: TStringField;
     OperacionTraer: TjktOperacion;
     ValidadorForm: TjktValidadorForm;
-    mtParametroInicialValue: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormActivate(Sender: TObject);
@@ -106,8 +105,7 @@ begin
       mtParametroInicial.append;
     end;
 
-  mtParametroInicial.FieldByName('Key').AsString := 'entidad';
-  mtParametroInicial.FieldByName('Value').AsString := aValue;
+  mtParametroInicial.FieldByName('Entidad').AsString := aValue;
 
   llamarOperacionConfiguracion;
 end;
@@ -183,3 +181,4 @@ begin
 end;
 
 end.
+

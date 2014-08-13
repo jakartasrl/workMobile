@@ -1,5 +1,5 @@
-inherited prueba3: Tprueba3
-  Caption = 'prueba3'
+inherited FPrueba2: TFPrueba2
+  Caption = 'FPrueba2'
   ClientHeight = 464
   ClientWidth = 738
   ExplicitWidth = 754
