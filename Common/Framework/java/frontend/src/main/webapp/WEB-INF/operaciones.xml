@@ -66,10 +66,13 @@
 
 <entity>
 
-<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
-
+	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
+		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+		</input>
+		
 		<output name="resultado" tableName="mtInput">
-			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="cadena" />
 		</output>		
@@ -84,8 +87,12 @@
 
 	<operacion name="FiltroInactivos" clase="com.jkt.operaciones.HelperInactivos">
 
+<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+		</input>
+
 		<output name="resultado" tableName="mtInput">
-			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="cadena" />
 		</output>		
@@ -122,7 +129,7 @@
 	</operacion>
 
 
-	<operacion name="CA---M--B---I--EC---OM----OQ-UI---ER--A-S" clase="com.jkt.operaciones.RecuperarEstructuraHelpGenerico">
+	<operacion name="TraerConfigHelpGenerico" clase="com.jkt.operaciones.RecuperarEstructuraHelpGenerico">
 		
 		<output name="resultado" tableName="mtConfigCampos">
 			<campoSalida value="fieldName" target="fieldName" />
@@ -132,6 +139,7 @@
 			<campoSalida value="readOnly" target="readOnly" />
 			<campoSalida value="orden" target="orden" />
 			<campoSalida value="label" target="label" />
+			<campoSalida value="columnWidth" target="columnWidth" />
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -337,7 +345,7 @@
 			<campoSalida value="Email" target="mail" />
 		</output>	
 		
-		<output name="TEmpresas" tableName="TEmpresas">
+		<output name="TUsuarioEmpresas" tableName="TEmpresas">
 			<campoSalida value="oid_empresa" target="empresa.id" />
 			<campoSalida value="oid_usuario" target="usuario.id" />
 			<campoSalida value="Codigo" target="empresa.codigo" />
@@ -411,7 +419,7 @@
 				<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
 				<campoEntrada name="UrlDB" clase="String" metodo="setUrlDB" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-
+				<!-- <campoEntrada name="unOid" clase="com.jkt.dominio.Empresa" metodo="setEmpresa" /> -->
 			</campoEntrada>
 			
 		</input>

@@ -3,6 +3,9 @@ package com.jkt.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.Empresa;
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -20,11 +23,18 @@ public class Factory {
 	private static final String CODIGO = "codigo";
 	
 	public static PersistentEntity getInstance(Class className, String codigo) throws InstantiationException, IllegalAccessException{
+		if (codigo==null || codigo.isEmpty()) {
+			return (PersistentEntity) className.newInstance();
+		}
+		
 		PersistentEntity instanciaRecuperada = serviceRepository.getUniqueByProperty(className, CODIGO, codigo);
+		
+
+		
 		if (instanciaRecuperada==null) {
 			instanciaRecuperada = (PersistentEntity) className.newInstance();
 		}
 		return instanciaRecuperada;
 	}
-	
+
 }

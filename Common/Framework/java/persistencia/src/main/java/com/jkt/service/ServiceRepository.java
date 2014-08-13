@@ -86,7 +86,7 @@ public class ServiceRepository implements IServiceRepository {
 	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws InstantiationException, IllegalAccessException, ValidacionException {
 		String validadorClassName;
 		try {
-			validadorClassName = validadorClassName = RepositorioClases.getValidador(entity.getClass().getCanonicalName());
+			validadorClassName = RepositorioClases.getValidador(entity.getClass().getCanonicalName());
 			if (validadorClassName != null && !validadorClassName.isEmpty()) {
 				Class<?> clase = Class.forName(validadorClassName);
 				Method method;

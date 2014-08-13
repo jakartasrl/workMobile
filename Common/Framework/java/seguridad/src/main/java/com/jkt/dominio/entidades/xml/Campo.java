@@ -2,12 +2,20 @@ package com.jkt.dominio.entidades.xml;
 
 /**
  * Representa al tag campos del tag campo en el archivo metaData.xml
- *
+ * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Campo {
 
-	private String fieldName,tipo,longitud,visible,readOnly,orden,label;
+	private String fieldName, tipo, longitud, visible, readOnly, orden, label, columnWidth;
+
+	public String getColumnWidth() {
+		return columnWidth;
+	}
+
+	public void setColumnWidth(String columnWidth) {
+		this.columnWidth = columnWidth;
+	}
 
 	public String getFieldName() {
 		return fieldName;
@@ -64,6 +72,5 @@ public class Campo {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
+
 }

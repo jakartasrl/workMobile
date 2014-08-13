@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.service.SessionProvider;
@@ -54,6 +55,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String BYTE_ARRAY_TYPE = "ByteArray";
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
+	private static final String INTEGER_TYPE = "Integer";
 
 	
 	private ISessionProvider sessionProvider;
@@ -363,8 +365,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 * @param value
 	 * @param nombreClase
 	 * @return
+	 * @throws S 
 	 */
-	private Object resolvePrimitiveType(Object value, String nombreClase){
+	private Object resolvePrimitiveType(Object value, String nombreClase) throws JakartaException{
 		Object result=null;
 		
 		if (STRING_TYPE.equals(nombreClase)) {
@@ -373,8 +376,18 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			result=((String)value).getBytes();
 		}else if (BOOLEAN_TYPE.equals(nombreClase)) {
 			result="true".equals(((String)value).toLowerCase())?true:false;
-		}else{
+		}else if(INTEGER_TYPE.equals(nombreClase)){
 			result=Integer.valueOf((String)value);
+		}else{
+			try {
+				session = sessionProvider.getSession();
+				Transaction tx = session.getTransaction();
+				result=session.get(Class.forName(nombreClase), Long.valueOf((String)value));
+			} catch (NumberFormatException e) {
+				throw new JakartaException("Este valor representa un oid, pero no es numerico.");
+			} catch (ClassNotFoundException e) {
+				throw new JakartaException("No existe la clase solicitada.");
+			}
 		}
 		return result;
 	}
@@ -383,9 +396,11 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	/**
 	 * 
 	 * Setea un campo simple a una instancia recibida.
+	 * @throws JakartaException 
+	 * @throws ClassNotFoundException 
 	 * 
 	 */
-	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException, ClassNotFoundException{
 		
 		Class primitiveWrapper;
 		
@@ -396,8 +411,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			primitiveWrapper=b.getClass();
 		}else if(BOOLEAN_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=boolean.class;
-		}else{
+		}else if(INTEGER_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=Integer.class;
+		}else{
+			primitiveWrapper=Class.forName(campoEntrada.getClase());
 		}
 		
 //		Class primitiveWrapper=STRING_TYPE.equals(campoEntrada.getClase())?String.class:Integer.class;
@@ -407,7 +424,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	}
 	
 	
-	private void resolverCampoCompuesto(Class parentClass, Object parentObject, CampoEntrada parentMetadata, List<Registro> registros ) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException{
+	private void resolverCampoCompuesto(Class parentClass, Object parentObject, CampoEntrada parentMetadata, List<Registro> registros ) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException, JakartaException{
 		
 		//Cada vez que se genera esta iteracion, creo una nueva estrategia...
 //		AdapterStrategy estrategia=null;

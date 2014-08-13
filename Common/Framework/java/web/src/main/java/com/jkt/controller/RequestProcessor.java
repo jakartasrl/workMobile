@@ -99,14 +99,14 @@ public abstract class RequestProcessor extends BaseController{
 		 * 
 		 */
 		
+		log.debug("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
+		parametersAdapted = this.adaptParameters(parameters, eventBusinessOperation);
+
 		try{
 		String entidad = ((EventBusiness) eventBusinessOperation).getEntidad();
-		if (entidad==null || entidad.isEmpty()) {
-			log.debug("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
-			parametersAdapted = this.adaptParameters(parameters, eventBusinessOperation);
-		}else{
+		if (entidad!=null || !entidad.isEmpty()) {
 			log.debug("No existen parametros de entrada. Se toma como filtro una entidad...");
-			parametersAdapted = new HashMap<String, String>();
+//			parametersAdapted = new HashMap<String, String>();
 			parametersAdapted.put("entidad", entidad);
 		}
 		
