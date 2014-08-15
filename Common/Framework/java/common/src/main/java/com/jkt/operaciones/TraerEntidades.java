@@ -7,6 +7,7 @@ import java.util.Map;
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.transformers.Notificacion;
 
 /**
@@ -29,8 +30,10 @@ public class TraerEntidades extends Operation {
 		String oidEntity = (String) aParams.get(KEY_OID);
 		
 		List<PersistentEntity> allElements;
-		if (oidEntity==null || oidEntity.isEmpty()) {
+		if (oidEntity==null) {
 			allElements = serviceRepository.getAll(Class.forName(nombreClase));
+		}else if(oidEntity.isEmpty()){
+			throw new JakartaException("Debe completar el campo ID.");
 		}else{
 			allElements = new ArrayList<PersistentEntity>();
 			PersistentEntity entity = serviceRepository.getByOid(Class.forName(nombreClase), Long.valueOf(oidEntity).longValue());

@@ -39,7 +39,7 @@
 
 	</entidad>
 
-	<entidad nombre="entidad">
+	<entidad nombre="generico">
 
 		<campos>
 			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />

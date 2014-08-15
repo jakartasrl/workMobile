@@ -41,12 +41,14 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 
-		Entidad entidad = entidadContainer.getEntidad((String)aParams.get(KEY_ENTIDAD));
+		String keyName = (String)aParams.get(KEY_ENTIDAD);
+		if ((keyName==null) || ((keyName!=null) && (keyName.isEmpty()))) {
+			throw new JakartaException("Es necesario completar el ID.");
+		}
+		
+		Entidad entidad = entidadContainer.getEntidad(keyName);
 		if (entidad==null) {
-			entidad=entidadContainer.getEntidad(KEY_ENTIDAD);
-			if (entidad==null) {
-				throw new JakartaException("No se encontro la estructura de la entidad solicitada");
-			}
+			throw new JakartaException("No se encontro la estructura de la entidad solicitada");
 		}
 
 		//notifica campos

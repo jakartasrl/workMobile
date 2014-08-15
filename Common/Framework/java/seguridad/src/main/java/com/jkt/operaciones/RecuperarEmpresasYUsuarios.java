@@ -8,6 +8,7 @@ import com.jkt.dominio.Empresa;
 import com.jkt.dominio.EmpresaHabilitada;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.Usuario;
+import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.transformers.Notificacion;
 
 /**
@@ -17,10 +18,28 @@ import com.jkt.transformers.Notificacion;
  */
 public class RecuperarEmpresasYUsuarios extends Operation{
 
+	private static final String KEY_ENTIDAD = "entidad";
+	private static final String KEY_OID = "oid";
+
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		List<PersistentEntity> usuarios = serviceRepository.getAll(Usuario.class);
+		String nombreClase = (String)aParams.get(KEY_ENTIDAD);
+		String oidEntity = (String) aParams.get(KEY_OID);
+		
+		List<PersistentEntity> usuarios;
+//		if (oidEntity==null || oidEntity.isEmpty()) {
+		if (oidEntity==null) {
+				usuarios = serviceRepository.getAll(Usuario.class);
+		}else{
+			usuarios = new ArrayList<PersistentEntity>();
+			Usuario usuario= (Usuario) serviceRepository.getByOid(Usuario.class, Long.valueOf(oidEntity).longValue());
+			if (usuario==null) {
+				throw new EntityNotFoundException("No existe la entidad solicitada con el ID recibido.");
+			}
+			usuarios.add(usuario);
+		}
+		
 		List<PersistentEntity> empresas = serviceRepository.getAll(Empresa.class);
 		Empresa empresa;
 		
