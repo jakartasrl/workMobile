@@ -310,7 +310,8 @@ end;
 
 procedure TfrmMainForm.acFindRemovedExecute(Sender: TObject);
 begin
-  //
+  if ActiveChild <> nil then
+    ActiveChild.Driver.FiltrarInactivos;
 end;
 
 procedure TfrmMainForm.acNewExecute(Sender: TObject);

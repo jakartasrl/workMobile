@@ -124,6 +124,7 @@ end;
 
 procedure TfrmChild.FormActivate(Sender: TObject);
 begin
+  Driver.ActualizarEstadoBotones;
   DoActivateChild;
 end;
 

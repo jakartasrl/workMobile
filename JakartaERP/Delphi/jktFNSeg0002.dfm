@@ -11,6 +11,8 @@ inherited FNSeg0002: TFNSeg0002
     Top = 0
     Align = alTop
     Caption = 'Datos del Usuario'
+    Ctl3D = False
+    ParentCtl3D = False
     TabOrder = 4
     Height = 153
     Width = 785
@@ -106,7 +108,6 @@ inherited FNSeg0002: TFNSeg0002
       Properties.Alignment = taRightJustify
       TabOrder = 7
       Transparent = True
-      OnClick = cxDBCheckBox1Click
       Width = 97
     end
     object cxDBTextEdit6: TcxDBTextEdit
@@ -234,9 +235,10 @@ inherited FNSeg0002: TFNSeg0002
   end
   inherited Driver: TjktDriver
     DataSetCab = TUsuarios
-    TipoPrograma = tp_Otro
+    TipoPrograma = tp_abmIndividual
+    Filtro = Help
     FocoEnAlta = TUsuariosCodigo
-    FocoEnModificacion = TUsuariosCodigo
+    FocoEnModificacion = TUsuariosApellido
     OperacionesDefault = <
       item
         Operacion = OperTraerEmpresas
@@ -272,6 +274,12 @@ inherited FNSeg0002: TFNSeg0002
   end
   inherited OperacionTraer: TjktOperacion
     OperName = 'TraerUsuariosYEmpresas'
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = TUsuariosoid_usuario
+        Tag = 0
+      end>
     Left = 704
     Top = 64
   end
@@ -280,12 +288,10 @@ inherited FNSeg0002: TFNSeg0002
       item
         Field = TUsuariosCodigo
         ValidadorNew = valCodigo1
-        ValidadorModif = valCodigo1
       end
       item
         Field = TUsuariosCodigo
         ValidadorNew = valCodigo2
-        ValidadorModif = valCodigo2
       end>
     Left = 528
     Top = 64
@@ -337,6 +343,7 @@ inherited FNSeg0002: TFNSeg0002
         Name = 'SinVencimientoPwd'
         DataType = ftBoolean
       end>
+    AutoReposition = True
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
@@ -356,6 +363,7 @@ inherited FNSeg0002: TFNSeg0002
       FieldName = 'oid_usuario'
     end
     object TUsuariosCodigo: TStringField
+      Tag = 2
       FieldName = 'Codigo'
       Size = 15
     end
@@ -499,10 +507,11 @@ inherited FNSeg0002: TFNSeg0002
     Left = 88
     Top = 216
   end
-  object HelpGenerico: TjktHelpGenerico
-    AltaNuevos = False
-    Query = 3
-    Left = 264
-    Top = 200
+  object Help: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'usuario'
+    OidRespuesta = TUsuariosoid_usuario
+    Left = 640
+    Top = 64
   end
 end

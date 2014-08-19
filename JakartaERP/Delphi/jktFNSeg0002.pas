@@ -77,8 +77,7 @@ type
     valCodigo1: TjktValidador;
     OperTraerEmpresas: TjktOperacion;
     cxDBCheckBox2: TcxDBCheckBox;
-    HelpGenerico: TjktHelpGenerico;
-    procedure cxDBCheckBox1Click(Sender: TObject);
+    Help: TjktHelpGenerico;
 
   private
     { Private declarations }
@@ -92,32 +91,5 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TFNSeg0002.cxDBCheckBox1Click(Sender: TObject);
-begin
-  inherited;
-
-{
-  TUsuarioEmpresas.Close;
-  TUsuarioEmpresas.Open;
-
-  TEmpresas.First;
-  while not TEmpresas.Eof do begin
-
-    TUsuarioEmpresas.Append;
-    TUsuarioEmpresas.FieldByName('oid_usu_emp').AsInteger := 0;
-    TUsuarioEmpresas.FieldByName('oid_usuario').AsInteger := TUsuario;
-    TUsuarioEmpresas.FieldByName('oid_empresa').AsInteger := TEmpresas.FieldByName('oid_empresa').Value;
-    TUsuarioEmpresas.FieldByName('Codigo').AsString       := TEmpresas.FieldByName('Codigo').Value;
-    TUsuarioEmpresas.FieldByName('RazonSocial').AsString  := TEmpresas.FieldByName('RazonSocial').Value;
-    TUsuarioEmpresas.FieldByName('Default').AsBoolean     := False;
-    TUsuarioEmpresas.FieldByName('Activo').AsBoolean      := TEmpresas.FieldByName('Activo').Value;
-    TUsuarioEmpresas.Post;
-
-    TEmpresas.Next;
-  end;
-}
-
-end;
 
 end.

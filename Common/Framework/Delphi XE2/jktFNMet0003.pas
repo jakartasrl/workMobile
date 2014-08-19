@@ -156,6 +156,8 @@ begin
       cxSplitter.Visible := True;
       opFiltrado.OperName := 'FiltroAvanzado';
     end;
+
+  btnAceptar.Enabled := True;
 end;
 
 
@@ -199,7 +201,7 @@ end;
 
 procedure TFMet003.btnAceptarClick(Sender: TObject);
 begin
-  if (mtInput.Active) and (mtInput.IsEmpty) then
+  if not (mtInput.Active) or ((mtInput.Active) and (mtInput.IsEmpty)) then
     Exit;
 
   if (SeleccionMultiple) and (not HaySeleccionados()) then
