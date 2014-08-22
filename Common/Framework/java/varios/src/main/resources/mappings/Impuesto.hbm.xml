@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.erp.impuestos.dominio.Impuesto" table="IMPUESTOS">
+		<id name="id" column="IMPUESTO_ID">
+			<generator class="native" />
+		</id>
+		<discriminator column="COMPORTAMIENTO" type="string" />
+
+		<property name="codigo" column="CODIGO" />
+		<property name="descripcion" column="DESCRIPCION" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<subclass name="com.jkt.erp.impuestos.dominio.Iva" discriminator-value="IVA">
+		</subclass>
+
+		<subclass name="com.jkt.erp.impuestos.dominio.IngresosBrutos" discriminator-value="INGRESOS_BRUTOS">
+		</subclass>
+
+		<subclass name="com.jkt.erp.impuestos.dominio.Ganancias" discriminator-value="GANANCIAS">
+		</subclass>
+
+		<subclass name="com.jkt.erp.impuestos.dominio.SUSS" discriminator-value="SUSS">
+		</subclass>
+
+	</class>
+
+</hibernate-mapping>

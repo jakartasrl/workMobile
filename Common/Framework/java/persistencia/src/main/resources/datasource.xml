@@ -49,6 +49,8 @@
                 <value>classpath:mappings/Pais.hbm.xml</value>
                 <value>classpath:mappings/Provincia.hbm.xml</value>
                 
+                <value>classpath:mappings/Impuesto.hbm.xml</value>
+                <value>classpath:mappings/CategoriaImpuesto.hbm.xml</value>
             </list>
 		</property>
 		
