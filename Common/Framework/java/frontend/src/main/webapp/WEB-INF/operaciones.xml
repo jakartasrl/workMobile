@@ -66,6 +66,15 @@
 
 <entity>
 
+
+	<operacion name="traerClasificador" clase="com.jkt.varios.operaciones.TraerClasificador">
+
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
 	<operacion name="articulos" clase="com.jkt.operaciones.Ejemplo2">
 
 		<forms>

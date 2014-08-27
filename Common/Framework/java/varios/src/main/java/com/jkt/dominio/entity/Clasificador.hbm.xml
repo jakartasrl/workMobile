@@ -15,7 +15,7 @@
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-<!-- 		<one-to-one name="componentePadre" class="com.jkt.varios.dominio.Componente"></one-to-one> -->
+		<one-to-one name="componentePadre" class="com.jkt.varios.dominio.Componente" cascade="all"></one-to-one>
 				
 	</class>
 	
