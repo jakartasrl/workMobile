@@ -12,4 +12,5 @@
 <elementos>
 	<elemento key="empresa" value="com.jkt.dominio.Empresa" validador="com.jkt.validadores.ValidadorEmpresa" />
 	<elemento key="usuario" value="com.jkt.dominio.Usuario" validador="com.jkt.validadores.ValidadorUsuario" />
+	<elemento key="condicionPago" value="com.jkt.varios.CondPago" validador="com.jkt.varios.validadores.ValidadorCondPago" />
 </elementos>

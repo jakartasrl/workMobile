@@ -5,18 +5,10 @@
     <artifactId>jkt</artifactId>
     <version>0.0.1</version>
   </parent>
-
-
-  <artifactId>stock</artifactId>
-  <name>stock</name>
-  <description>Stock es el modulo correspondiente al manejo de stocks en la aplicacion
-</description>
+  <artifactId>articulos</artifactId>
+  <name>articulos</name>
+  <description>Modulo que representa a la sección de articulos</description>
   <dependencies>
-  	<dependency>
-  		<groupId>com.jkt</groupId>
-  		<artifactId>articulo</artifactId>
-  		<version>0.0.1</version>
-  	</dependency>
   	<dependency>
   		<groupId>com.jkt</groupId>
   		<artifactId>common</artifactId>

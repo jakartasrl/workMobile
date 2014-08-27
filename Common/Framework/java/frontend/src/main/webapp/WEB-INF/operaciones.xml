@@ -66,6 +66,14 @@
 
 <entity>
 
+	<operacion name="articulos" clase="com.jkt.operaciones.Ejemplo2">
+
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
 		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">

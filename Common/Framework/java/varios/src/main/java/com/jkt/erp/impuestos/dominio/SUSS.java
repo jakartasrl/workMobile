@@ -6,7 +6,7 @@ import java.util.List;
 public class SUSS extends Impuesto {
 
 	@Override
-	List getCategorias() {
+	public List getCategorias() {
 		return Arrays.asList(new Object[]{"a","b"});
 	}
 

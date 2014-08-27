@@ -13,10 +13,16 @@
 
 
   <dependencies>
-  	<dependency>
+<!--   	<dependency> -->
+<!--   		<groupId>com.jkt</groupId> -->
+<!--   		<artifactId>persistencia</artifactId> -->
+<!--   		<version>0.0.1</version> -->
+<!--   	</dependency> -->
+	<dependency>
   		<groupId>com.jkt</groupId>
-  		<artifactId>persistencia</artifactId>
+  		<artifactId>common</artifactId>
   		<version>0.0.1</version>
   	</dependency>
+  	
   </dependencies>
 </project>

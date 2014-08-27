@@ -25,34 +25,54 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
-		<property name="configLocation">
-			<value>classpath:configuracionHibernate.xml</value>
-     	</property>
-
+<!-- 		<property name="configLocation"> -->
+<!-- 			<value>configuracionHibernate.xml</value> -->
+<!-- 			<value>classpath:configuracionHibernate.xml</value> -->
+<!--      	</property> -->
+     	
+     	
 		<property name="mappingLocations">
-            <list>
-            
-                <value>classpath:mappings/Factura.hbm.xml</value>
-                <value>classpath:mappings/Empresa.hbm.xml</value>
-                <value>classpath:mappings/Usuario.hbm.xml</value>
-                <value>classpath:mappings/HistorialPassword.hbm.xml</value>
-                <value>classpath:mappings/EmpresaHabilitada.hbm.xml</value>
-
-                <value>classpath:mappings/Menu.hbm.xml</value>
-                <value>classpath:mappings/TextosMenu.hbm.xml</value>
-
-                <value>classpath:mappings/Vendedor.hbm.xml</value>
-                <value>classpath:mappings/Representante.hbm.xml</value>
-                <value>classpath:mappings/ZonaComercial.hbm.xml</value>
-
-                <value>classpath:mappings/Idioma.hbm.xml</value>
-                <value>classpath:mappings/Pais.hbm.xml</value>
-                <value>classpath:mappings/Provincia.hbm.xml</value>
-                
-                <value>classpath:mappings/Impuesto.hbm.xml</value>
-                <value>classpath:mappings/CategoriaImpuesto.hbm.xml</value>
-            </list>
+			<list>
+				<value>classpath*:com/jkt/dominio/entity/*.hbm.xml</value>
+<!-- 								com.jkt.dominio.entity -->
+<!-- com.jkt.dominio.entity -->
+			</list>
 		</property>
+
+<!--   <property name="mappingDirectoryLocations" value="file:target/classes"/> -->
+
+<!-- 		<property name="mappingDirectoryLocations"> -->
+<!-- 			<list> -->
+<!-- 				<value>/mappings</value> -->
+<!-- 				<value>classpath:mappings</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+
+<!-- 		<property name="mappingLocations"> -->
+<!--             <list> -->
+            
+<!--                 <value>classpath:mappings/Factura.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/Empresa.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/Usuario.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/HistorialPassword.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/EmpresaHabilitada.hbm.xml</value> -->
+
+<!--                 <value>classpath:mappings/Menu.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/TextosMenu.hbm.xml</value> -->
+
+<!--                 <value>classpath:mappings/Vendedor.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/Representante.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/ZonaComercial.hbm.xml</value> -->
+
+<!--                 <value>classpath:mappings/Idioma.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/Pais.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/Provincia.hbm.xml</value> -->
+                
+<!--                 <value>classpath:mappings/Impuesto.hbm.xml</value> -->
+<!--                 <value>classpath:mappings/CategoriaImpuesto.hbm.xml</value> -->
+                
+<!--             </list> -->
+<!-- 		</property> -->
 		
 		
 		<property name="hibernateProperties">

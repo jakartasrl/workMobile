@@ -9,18 +9,15 @@
 	<name>jkt</name>
 
 	<modules>
-		<module>articulo</module>
 		<module>clientes</module>
 		<module>common</module>
 		<module>context</module>
 		<module>frontend</module>
 		<module>varios</module>
-		<module>produccion</module>
 		<module>web</module>
-		<module>stock</module>
 		<module>persistencia</module>
 		<module>seguridad</module>
-
+		<module>articulos</module>
 	</modules>
 
 

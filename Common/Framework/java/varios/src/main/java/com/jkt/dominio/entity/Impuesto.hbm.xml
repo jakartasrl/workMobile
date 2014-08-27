@@ -13,7 +13,13 @@
 		<property name="codigo" column="CODIGO" />
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-
+		
+		<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="false" cascade="all">
+			<key column="IMPUESTO_ID"></key>
+			<index column="ORDEN"></index>
+			<one-to-many class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto"/>
+		</list>
+				
 		<subclass name="com.jkt.erp.impuestos.dominio.Iva" discriminator-value="IVA">
 		</subclass>
 
