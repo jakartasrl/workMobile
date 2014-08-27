@@ -5,6 +5,10 @@
 <hibernate-configuration>
 	<session-factory>
 
+		<!-- <mapping resource="Employee.hbm.xml"/> -->
+
+		<!-- <value>classpath:mappings/Empresa.hbm.xml</value> -->
+
 		<!-- <property name="c3p0.initialPoolSize">1</property> -->
 		<!-- <property name="c3p0.minPoolSize">5</property> -->
 		<!-- <property name="c3p0.maxPoolSize">20</property> -->
@@ -17,13 +21,13 @@
 		<!-- <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
 		<!-- <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
 
-<!-- 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property> -->
-<!-- 		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:MKYONG</property> -->
-<!-- 		<property name="hibernate.connection.username">mkyong</property> -->
-<!-- 		<property name="hibernate.connection.password">password</property> -->
-<!-- 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property> -->
-<!-- 		<property name="hibernate.default_schema">MKYONG</property> -->
-<!-- 		<property name="show_sql">true</property> -->
+		<!-- <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:MKYONG</property> -->
+		<!-- <property name="hibernate.connection.username">mkyong</property> -->
+		<!-- <property name="hibernate.connection.password">password</property> -->
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property> -->
+		<!-- <property name="hibernate.default_schema">MKYONG</property> -->
+		<!-- <property name="show_sql">true</property> -->
 
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">20</property>
@@ -31,6 +35,26 @@
 		<property name="hibernate.c3p0.max_statements">50</property>
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 
+		<mapping resource="mappings/Empresa.hbm.xml" />
+		<mapping resource="mappings/nuevo.hbm.xml" />
+
+		<mapping resource="mappings/Usuario.hbm.xml" />
+		<mapping resource="mappings/HistorialPassword.hbm.xml" />
+		<mapping resource="mappings/EmpresaHabilitada.hbm.xml" />
+
+		<mapping resource="mappings/Menu.hbm.xml" />
+		<mapping resource="mappings/TextosMenu.hbm.xml" />
+
+		<mapping resource="mappings/Vendedor.hbm.xml" />
+		<mapping resource="mappings/Representante.hbm.xml" />
+		<mapping resource="mappings/ZonaComercial.hbm.xml" />
+
+		<mapping resource="mappings/Idioma.hbm.xml" />
+		<mapping resource="mappings/Pais.hbm.xml" />
+		<mapping resource="mappings/Provincia.hbm.xml" />
+
+		<mapping resource="mappings/Impuesto.hbm.xml" />
+		<mapping resource="mappings/CategoriaImpuesto.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

@@ -27,8 +27,7 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 			return null;
 		}
 		int cantidadPasswords = this.historialPassword.size();
-		HistorialPassword password = this.historialPassword
-				.get(cantidadPasswords - 1);// Inicia desde cero
+		HistorialPassword password = this.historialPassword.get(cantidadPasswords - 1);// Inicia desde cero
 		return password;
 	}
 

@@ -3,9 +3,6 @@ package com.jkt.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.jkt.dominio.Descriptible;
-import com.jkt.dominio.Empresa;
-import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 
 /**

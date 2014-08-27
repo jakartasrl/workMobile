@@ -1,28 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>clientes</artifactId>
-
-  <name>clientes</name>
-
   <parent>
     <groupId>com.jkt</groupId>
     <artifactId>jkt</artifactId>
     <version>0.0.1</version>
   </parent>
-
-
+  <artifactId>articulos</artifactId>
+  <name>articulos</name>
+  <description>Modulo que representa a la sección de articulos</description>
   <dependencies>
-<!--   	<dependency> -->
-<!--   		<groupId>com.jkt</groupId> -->
-<!--   		<artifactId>persistencia</artifactId> -->
-<!--   		<version>0.0.1</version> -->
-<!--   	</dependency> -->
-	<dependency>
+  	<dependency>
   		<groupId>com.jkt</groupId>
   		<artifactId>common</artifactId>
   		<version>0.0.1</version>
   	</dependency>
-  	
   </dependencies>
 </project>

@@ -171,14 +171,11 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.6</version>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>com.jkt</groupId>
 			<artifactId>persistencia</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jkt</groupId>
-			<artifactId>produccion</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 		<dependency>
@@ -206,6 +203,19 @@
 			<artifactId>varios</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jkt</groupId>
+			<artifactId>articulos</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		
+		<!-- dependencia del modulo desarrollado adhoc -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.jkt</groupId> -->
+<!-- 			<artifactId>clientes-adhoc</artifactId> -->
+<!-- 			<version>0.0.1</version> -->
+<!-- 		</dependency> -->
+		
 	</dependencies>
 
 </project>
