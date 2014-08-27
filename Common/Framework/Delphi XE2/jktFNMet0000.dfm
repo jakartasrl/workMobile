@@ -314,6 +314,9 @@ object frmMainForm: TfrmMainForm
         end
         item
           ToolbarName = 'dxbClipboard'
+        end
+        item
+          ToolbarName = 'dxbMenuPrincipal'
         end>
       KeyTip = 'I'
       Index = 0
@@ -12637,7 +12640,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbPrint'
         end>
       OneOnRow = False
-      Row = 0
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12739,7 +12742,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbSelectAll'
         end>
       OneOnRow = False
-      Row = 0
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12806,7 +12809,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbSiguiente'
         end>
       OneOnRow = False
-      Row = 0
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12983,8 +12986,8 @@ object frmMainForm: TfrmMainForm
       DockedLeft = 438
       DockedTop = 0
       DockingStyle = dsNone
-      FloatLeft = 422
-      FloatTop = 494
+      FloatLeft = 382
+      FloatTop = 485
       FloatClientWidth = 158
       FloatClientHeight = 51
       ItemLinks = <
@@ -13132,7 +13135,7 @@ object frmMainForm: TfrmMainForm
     object dxbRibbonOptions: TdxBar
       Caption = 'Opciones Ribbon'
       CaptionButtons = <>
-      DockedLeft = 133
+      DockedLeft = 69
       DockedTop = 0
       FloatLeft = 597
       FloatTop = 370
@@ -13191,7 +13194,7 @@ object frmMainForm: TfrmMainForm
     object dxbQATOptions: TdxBar
       Caption = 'Barra de acceso r'#225'pido'
       CaptionButtons = <>
-      DockedLeft = 273
+      DockedLeft = 207
       DockedTop = 0
       FloatLeft = 436
       FloatTop = 351
@@ -13255,7 +13258,7 @@ object frmMainForm: TfrmMainForm
     object dxbColorScheme: TdxBar
       Caption = 'Esquema de colores'
       CaptionButtons = <>
-      DockedLeft = 466
+      DockedLeft = 398
       DockedTop = 0
       FloatLeft = 729
       FloatTop = 399
@@ -13307,15 +13310,15 @@ object frmMainForm: TfrmMainForm
       Visible = True
       WholeRow = False
     end
-    object dxBarManagerBar1: TdxBar
-      Caption = 'Custom 1'
+    object dxbAbout: TdxBar
+      Caption = 'About'
       CaptionButtons = <>
       DockedDockingStyle = dsTop
       DockedLeft = 0
       DockedTop = 0
       DockingStyle = dsNone
-      FloatLeft = 543
-      FloatTop = 508
+      FloatLeft = 499
+      FloatTop = 392
       FloatClientWidth = 51
       FloatClientHeight = 54
       ItemLinks = <
@@ -13402,10 +13405,6 @@ object frmMainForm: TfrmMainForm
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'bbMenuPrincipal'
-        end
-        item
-          Visible = True
           ItemName = 'bbTabbedView'
         end>
       OneOnRow = False
@@ -13451,6 +13450,26 @@ object frmMainForm: TfrmMainForm
         item
           Visible = True
           ItemName = 'dxbtnNavigator'
+        end>
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object dxbMenuPrincipal: TdxBar
+      Caption = 'Men'#250' Principal'
+      CaptionButtons = <>
+      DockedLeft = 594
+      DockedTop = 0
+      FloatLeft = 407
+      FloatTop = 440
+      FloatClientWidth = 96
+      FloatClientHeight = 54
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'bbMenuPrincipal'
         end>
       OneOnRow = True
       Row = 0
@@ -14129,9 +14148,9 @@ object frmMainForm: TfrmMainForm
       OnClick = dxbtnNavigatorClick
     end
     object bbMenuPrincipal: TdxBarLargeButton
-      Caption = 'Menu Principal'
+      Caption = 'Men'#250' Principal'
       Category = 0
-      Hint = 'Menu Principal'
+      Hint = 'Men'#250' Principal'
       Visible = ivAlways
       LargeImageIndex = 37
       OnClick = bbMenuPrincipalClick

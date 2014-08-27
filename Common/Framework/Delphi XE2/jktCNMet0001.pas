@@ -104,9 +104,9 @@ type
 
   public
     { Public declarations }
-    property Estado : TjktEstado read FEstado;
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
+
     procedure Inicio;
     procedure New;
     procedure Eliminar;
@@ -124,10 +124,13 @@ type
     procedure OpenRehabilitar;
     procedure doOperacionesIniciales;
     procedure doOperacionesDefault;
-    function  CanClose: Boolean;
-    function  esNuevo(): Boolean;
-    function  esAbrir(): Boolean;
-    function  Cancelar: Boolean;
+
+    function CanClose: Boolean;
+    function esNuevo(): Boolean;
+    function esAbrir(): Boolean;
+    function Cancelar: Boolean;
+
+    property Estado : TjktEstado read FEstado;
 
   published
     { Published declarations }
@@ -672,7 +675,9 @@ end;
 
 function TjktDriver.CanClose: Boolean;
 begin
-  result := Self.Cancelar;
+  Result := not (FEstado in [esAlta, esEdit]);
+
+//  Result := Cancelar;
 end;
 
 function TjktDriver.esNuevo() : Boolean;

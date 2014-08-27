@@ -45,13 +45,11 @@ type
   private
     FEstado: TjktEstado;
     FParentActionList: TActionList; // guardamos la referencia al 'ActionList' del padre
-    FModified: Boolean;
     FOnActivateChild: TNotifyEvent;
     FOnChanged: TNotifyEvent;
 
     function GetCanEdit: Boolean;
     function GetCanPaste: Boolean;
-    function GetCanSave: Boolean;
     function CheckSaveChanges: Boolean;
     function QuerySaveFile: Integer;
     procedure DoActivateChild;
@@ -64,8 +62,6 @@ type
   public
     property CanEdit: Boolean read GetCanEdit;
     property CanPaste: Boolean read GetCanPaste;
-    property CanSave: Boolean read GetCanSave;
-    property Modified: Boolean read FModified write FModified;
     property Estado: TjktEstado read FEstado write FEstado;
     //
     property OnActivateChild: TNotifyEvent read FOnActivateChild write FOnActivateChild;
@@ -88,12 +84,16 @@ implementation
 function TfrmChild.CheckSaveChanges: Boolean;
 begin
   Result := True;
-  if Modified then
-    case QuerySaveFile of
-      ID_YES:
-        Result := True; // SaveFile(False);
-      ID_CANCEL:
-        Result := False;
+
+  if not Driver.CanClose then
+    begin
+      Show;
+      case QuerySaveFile of
+        ID_YES:
+          Result := True; // SaveFile(False);
+        ID_NO:
+          Result := False;
+      end;
     end;
 end;
 
@@ -148,11 +148,6 @@ begin
   Result := False;
 end;
 
-function TfrmChild.GetCanSave: Boolean;
-begin
-  Result := Modified;
-end;
-
 procedure TfrmChild.InicializarChild(ParentActionList: TActionList;
   ParametroInicial: string);
 begin
@@ -176,9 +171,10 @@ end;
 
 function TfrmChild.QuerySaveFile: Integer;
 begin
+  // '¿Desea guardar los cambios realizados a "%s"?'
   Result := Application.MessageBox(
-    PChar(Format('¿Desea guardar los cambios realizados a "%s"?', [Caption])),
-    PChar(Application.Title), MB_ICONQUESTION or MB_YESNOCANCEL);
+    PChar(Format('Perderá los datos editados en "%s",' + #$0D + #$0A + '¿Confirma Cancelar?', [Caption])),
+    PChar(Application.Title), MB_ICONQUESTION or MB_YESNO);
 end;
 
 end.
