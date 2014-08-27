@@ -4,7 +4,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.varios.CondPago" table="CONDICION_PAGO">
+	<class name="com.jkt.varios.dominio.CondPago" table="CONDICION_PAGO">
 		<id name="id" column="COND_PAGO_ID">
 			<generator class="native" />
 		</id>
@@ -18,7 +18,7 @@
 		<list name="detalles" table="COND_PAGO_DET" lazy="true" cascade="all">
 			<key column="COND_PAGO_ID"></key>
 			<index column="ORDEN"></index>
-			<one-to-many class="com.jkt.varios.CondPagoDet"/>
+			<one-to-many class="com.jkt.varios.dominio.CondPagoDet"/>
 		</list>
 
 	</class>

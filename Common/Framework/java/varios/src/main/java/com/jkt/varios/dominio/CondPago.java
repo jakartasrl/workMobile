@@ -1,4 +1,4 @@
-package com.jkt.varios;
+package com.jkt.varios.dominio;
 
 import java.util.ArrayList;
 import java.util.List;

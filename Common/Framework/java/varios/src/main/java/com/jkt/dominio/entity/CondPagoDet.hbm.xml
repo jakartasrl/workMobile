@@ -4,12 +4,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.varios.CondPagoDet" table="CONDICION_PAGO_DETALLE">
+	<class name="com.jkt.varios.dominio.CondPagoDet" table="CONDICION_PAGO_DETALLE">
 		<id name="id" column="COND_PAGO_DET_ID">
 			<generator class="native" />
 		</id>
 		
-		<one-to-one name="condicionDePago" class="com.jkt.varios.CondPagoDet"></one-to-one>
+		<one-to-one name="condicionDePago" class="com.jkt.varios.dominio.CondPagoDet"></one-to-one>
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="dias" column="DIAS" type="integer" />

@@ -3,8 +3,8 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.varios.dominio.Pais" table="PAIS">
-		<id name="id" column="PAIS_ID">
+	<class name="com.jkt.varios.dominio.Componente" table="COMPONENTE">
+		<id name="id" column="COMPONENTE_ID">
 			<generator class="native"></generator>
 		</id>
 		
@@ -14,8 +14,12 @@
 		
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<one-to-one name="clasificador" class="com.jkt.varios.dominio.Clasificador"></one-to-one>
 
-
+		<one-to-one name="componenteHijo" class="com.jkt.varios.dominio.Componente"></one-to-one>
+		<one-to-one name="componentePadre" class="com.jkt.varios.dominio.Componente"></one-to-one>
+				
 	</class>
 	
 </hibernate-mapping>
