@@ -13,6 +13,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
   Position = poScreenCenter
   Visible = True
   WindowState = wsMaximized
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -360,9 +361,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
         TabOrder = 0
-        ExplicitLeft = 306
-        ExplicitWidth = 463
-        ExplicitHeight = 312
       end
       object cxSplitter1: TcxSplitter
         Left = 300
@@ -371,7 +369,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Height = 313
         AllowHotZoneDrag = False
         Control = tc_Favoritos
-        ExplicitHeight = 314
       end
       object cxSplitter2: TcxSplitter
         Left = 0
@@ -380,7 +377,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Height = 5
         AlignSplitter = salBottom
         Control = cxGroupBox2
-        ExplicitTop = 314
       end
       object tc_Favoritos: TdxTileControl
         Left = 0
@@ -390,7 +386,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
-        ExplicitHeight = 312
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0
