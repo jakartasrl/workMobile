@@ -100,7 +100,7 @@ type
     dxbRibbonOptions: TdxBar;
     dxbQATOptions: TdxBar;
     dxbColorScheme: TdxBar;
-    dxBarManagerBar1: TdxBar;
+    dxbAbout: TdxBar;
     dxbContextMenuStyle: TdxBar;
     bbCursorLine: TdxBarButton;
     bbCursorColumn: TdxBarButton;
@@ -219,6 +219,7 @@ type
     bbMenuPrincipal: TdxBarLargeButton;
     bbFindRemoved: TdxBarLargeButton;
     acFindRemoved: TAction;
+    dxbMenuPrincipal: TdxBar;
     procedure FormCreate(Sender: TObject);
     procedure acNewExecute(Sender: TObject);
     procedure acExitExecute(Sender: TObject);
@@ -510,7 +511,7 @@ procedure TfrmMainForm.UpdateControls;
 begin
   acNew.Enabled := ActiveChild <> nil;
   acOpen.Enabled := ActiveChild <> nil;
-  acSave.Enabled := (ActiveChild <> nil) and ActiveChild.CanSave;
+  acSave.Enabled := (ActiveChild <> nil);
   acSaveAs.Enabled := ActiveChild <> nil;
   acPrint.Enabled := ActiveChild <> nil;
 

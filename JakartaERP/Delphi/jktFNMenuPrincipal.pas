@@ -130,6 +130,7 @@ type
     procedure tci_MsjsVariosClick(Sender: TdxTileControlItem);
     procedure txtPasswordKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     procedure OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
 
@@ -381,6 +382,17 @@ begin
   end;
 
 }
+end;
+
+procedure TfrmMenuPrincipal.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  // No cierro este Form, solo lo oculto. El MainForm se encargará de hacerlo!
+  CanClose := False;
+
+  Self.Hide;
+  Application.MainForm.Show;
+  Application.MainForm.Close;
 end;
 
 procedure TfrmMenuPrincipal.FormCreate(Sender: TObject);
