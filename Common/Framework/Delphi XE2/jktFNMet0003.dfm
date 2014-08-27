@@ -93,6 +93,7 @@ object FMet003: TFMet003
       Height = 25
       Caption = '&Aceptar'
       Default = True
+      Enabled = False
       TabOrder = 0
       OnClick = btnAceptarClick
     end

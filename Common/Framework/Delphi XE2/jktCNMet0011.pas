@@ -392,14 +392,15 @@ begin
   driver := nil;
   for x := 0 to owner.ComponentCount -1 do
     begin
-       if owner.Components[x] is TjktDriver
-          then driver := TjktDriver(owner.Components[x]);
+       if owner.Components[x] is TjktDriver then
+        begin
+          driver := TjktDriver(owner.Components[x]);
+          Break;
+        end;
     end;
   result := false;
   if driver <> nil
     then result := driver.esNuevo;
-
-
 end;
 //--------------------------------------------------------
 

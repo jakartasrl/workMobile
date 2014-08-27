@@ -248,8 +248,7 @@ var
   Params   : TStream;
   Response : AnsiString;
   i        : integer;
-  DatasetEventos :TDataset;
-
+  DatasetEventos: TDataset;
 begin
   Screen.cursor := crHourGlass;
   FModoExecute  := true;
@@ -275,25 +274,35 @@ begin
 
     {$IFDEF DEBUGGING}
     FMet005 := TFMet005.Create(nil);
-    FMet005.mostrarError(FXML.toStringList.Text);
-    FMet005.Free;
     {$ENDIF}
 
-     try
-       // Trace
-       if FTrace
-          then InicioPost := FormatDateTime('hh:mm:ss:zzz', Now());
-       // Fin
+    {$IFDEF DEBUGGING}
+    FMet005.mostrarError(FXML.toStringList.Text);
+    {$ENDIF}
 
-       Response  := HTTP.Post(URL, Params); // advertimos que se hace un cast implicito con potencial perdida de datos de 'string' a 'AnsiString'.
-                                            // Como el servidor java no esta manejando Unicode tampoco, suponemos que no habra perdida de datos
-       FResponse := Response;
+    try
+      // Trace
+      if FTrace then
+        InicioPost := FormatDateTime('hh:mm:ss:zzz', Now());
+      // Fin
 
-       // Trace
-       if FTrace
-          then FinPost := FormatDateTime('hh:mm:ss:zzz',Now());
-       // Fin
-     except
+      Response  := HTTP.Post(URL, Params); // advertimos que se hace un cast implicito con potencial perdida de datos de 'string' a 'AnsiString'.
+                                           // Como el servidor java no esta manejando Unicode tampoco, suponemos que no habra perdida de datos
+      FResponse := Response;
+
+      {$IFDEF DEBUGGING}
+      FMet005.mostrarError(FResponse);
+      {$ENDIF}
+
+      {$IFDEF DEBUGGING}
+      FMet005.Free;
+      {$ENDIF}
+
+      // Trace
+      if FTrace then
+        FinPost := FormatDateTime('hh:mm:ss:zzz',Now());
+      // Fin
+    except
       on E: Exception do
         begin
           FreeAndNil(Params);
@@ -301,18 +310,19 @@ begin
           FModoExecute := false;
           FMensaje := E.Message;
           //mostrarMensErrorAbort(FMensaje) o mandar una Excepcion Silenciona;
-          if (IgnoreException=false)
-             then raise Exception.Create(FMensaje)
-             else Abort;
+          if (IgnoreException=false) then
+            raise Exception.Create(FMensaje)
+          else
+            Abort;
         end;
-     end;
+    end;
 
      //  Trace
       if FTrace
          then InicioParser := FormatDateTime('hh:mm:ss:zzz',Now());
      // Fin
 
-     Self.tratarResponse(response);
+     Self.tratarResponse(Response);
 
     //  Trace
       if FTrace

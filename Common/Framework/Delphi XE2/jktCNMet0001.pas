@@ -23,8 +23,7 @@ type
 
   TjktEstado   = (esAlta, esEdit, esRehabilita, esNil);
 
-  TjktTipoPrograma = (tp_abmLista, tp_abmListaConFiltro, tp_Otro); // renombrar 'tp_Otro' por otro nombre más explícito
-//  TjktTipoABM = (abmLista, abmIndividual, abmListaConFiltro, abmEstandar);
+  TjktTipoPrograma = (tp_abmLista, tp_abmListaConFiltro, tp_abmIndividual);
 
   TLineaMensajeEvent = procedure(Sender: TObject; Texto: string) of object;
 
@@ -63,13 +62,13 @@ type
     procedure DoSetFocoModi;
     procedure AnalizarDataSet;
     procedure Filtrar;
-    procedure DoFiltrar;
     procedure DoCancel;
     procedure DoCloseDataSet;
     procedure DoEliminar;
     procedure DoRehabilitar;
     procedure DoLineaMensaje(aTexto :string);
     procedure DoInhibirBotones;
+    procedure DoBotonesInicio;
     procedure DoBotonesNew;
     procedure DoBotonesFiltrar;
     procedure DoBotonesOpenReha;
@@ -115,6 +114,7 @@ type
     procedure Guardar;
     procedure Proximo;
     procedure Anterior;
+    procedure ActualizarEstadoBotones;
     procedure FiltrarActivos;
     procedure FiltrarInactivos;
     procedure FiltrarAvanzado;
@@ -128,7 +128,6 @@ type
     function  esNuevo(): Boolean;
     function  esAbrir(): Boolean;
     function  Cancelar: Boolean;
-
 
   published
     { Published declarations }
@@ -193,46 +192,42 @@ end;
 
 procedure TjktDriver.Inicio;
 begin
-  Self.DoInhibirBotones;
-
   if (FTipoPrograma = tp_abmLista) and (Self.FEstado = esNil) then
-    Filtrar
+    begin
+      DoBotonesInicio;
+      Filtrar;
+    end
   else
     begin
       Self.FEstado := esNil;
-      Self.DoLineaMensaje(' ');
+      Self.ActualizarEstadoBotones;
     end;
 end;
 
 procedure TjktDriver.DoInhibirBotones;
 var
- x :integer;
+  x: Integer;
 begin
-  if not Assigned(FActionList) then exit;
+  if not Assigned(FActionList) then Exit;
 
-  for x := 0 to FActionList.ActionCount -1  do
+  for x := 0 to FActionList.ActionCount - 1 do
     begin
-       TAction (FActionList.Actions[x]).Enabled := False;
+       TAction(FActionList.Actions[x]).Enabled := False;
     end;
-
-  if FTipoPrograma = tp_Otro then
-    enabledAction('acNew', True);
-  enabledAction('acFind', True);
-  enabledAction('acFindRemoved', True);
 end;
 
 procedure TjktDriver.New;
 begin
   try
     Self.FEstado := esAlta;
-    Self.DoLineaMensaje('Alta');
+    Self.ActualizarEstadoBotones;
+
     Self.DoNuevo;
   except
     on E: Exception do
       begin
         Self.TratarMensajeException(E);
         Self.Cancelar;
-        Self.FEstado := esNil;
       end;
   end;
 end;
@@ -242,9 +237,9 @@ procedure TjktDriver.OpenRehabilitar;
 begin
   try
     Self.FEstado := esRehabilita;
-    self.DoLineaMensaje('Rehabilitar');
+    Self.ActualizarEstadoBotones;
+
     Self.DoOperacionTraer;
-    Self.DoBotonesOpenReha;
     Self.DoSetFocoModi;
     if (Self.FDataSetCab <> nil)
        then begin
@@ -345,6 +340,21 @@ begin
     then     enabledAction('acExport', true);
 end;
 
+procedure TjktDriver.DoBotonesInicio;
+begin
+  Self.DoInhibirBotones;
+
+  // Por ahora, si es 'tp_abmLista' (ABM con una grilla) solo mostramos el
+  // boton 'Buscar' ya que, al no tener un Filtro, nos traera TODOS los
+  // registros en la grilla (los Activos e Inactivos).
+  if FTipoPrograma = tp_abmIndividual then
+    begin
+      enabledAction('acNew', True);
+      enabledAction('acFindRemoved', True);
+    end;
+  enabledAction('acFind', True);
+end;
+
 procedure TjktDriver.DoBotonesOpenReha;
 begin
 end;
@@ -419,22 +429,25 @@ begin
   try
     DoGuardar;
 
-    if (FEstado = esAlta) and (FTipoPrograma = tp_Otro) then
+    if (FTipoPrograma = tp_abmIndividual) then
       begin
-        // Dejo vacios los DataSets
-        Self.cerrarDataSets;
-        DoNuevo;
+        Self.DoCloseDataSet;
+
+        if (FEstado = esAlta) then
+          Self.DoNuevo
+
+        else if (FEstado = esEdit) then
+          Self.Inicio;
       end
-    else if (FTipoPrograma = tp_abmLista) or
-      (FEstado = esEdit) or (FEstado = esRehabilita) then
-        begin
-          Self.DoOperacionTraer;
-          if FDatasetCab <> nil then begin
-            FDataSetCab.First;
-            FDataSetCab.Edit;
-          end;
-          Self.AnalizarDataSet;
+    else if (FTipoPrograma = tp_abmLista) then
+      begin
+        Self.DoOperacionTraer;
+        if FDatasetCab <> nil then begin
+          FDataSetCab.First;
+          FDataSetCab.Edit;
         end;
+        Self.AnalizarDataSet;
+      end;
   except
     on E: Exception do
       begin
@@ -443,7 +456,30 @@ begin
           FDataSetCab.Edit;
       end;
   end;
+end;
 
+procedure TjktDriver.ActualizarEstadoBotones;
+begin
+  if FEstado = esNil then
+    begin
+      DoBotonesInicio;
+      DoLineaMensaje(' ');
+    end
+  else if FEstado = esAlta then
+    begin
+      DoBotonesNew;
+      DoLineaMensaje('Alta');
+    end
+  else if FEstado = esEdit then
+    begin
+      DoBotonesFiltrar;
+      DoLineaMensaje('Edicion');
+    end
+  else if FEstado = esRehabilita then
+    begin
+      DoBotonesOpenReha;
+      DoLineaMensaje('Rehabilitar');
+    end
 end;
 
 procedure TjktDriver.AnalizarDataSet;
@@ -460,32 +496,15 @@ begin
     end;
 end;
 
-procedure TjktDriver.DoFiltrar;
-begin
-  Self.abrirDataSets;
-
-  // Muestro el Help (o Filtro) asignado
-  if Assigned(FFiltro) then
-    begin
-      if FFiltro.Ejecutar then
-        ShowMessage('Seleccionó un registro')
-      else
-        ShowMessage('No seleccionó nada!');
-    end;
-
-end;
-
 procedure TjktDriver.DoNuevo;
 begin
   if Assigned(FOnNuevo) then
     FOnNuevo(Self);
 
-  self.DoDesInhibirCamposNoModificables;
+  Self.DoDesInhibirCamposNoModificables;
   Self.abrirDataSets;
   // agregar InhibirControlesXSeguridad
   Self.DoSetDefaults;
-  // Cambiar el estado de los botones
-  Self.DoBotonesNew;
   Self.DoSetFocoAlta;
 end;
 
@@ -583,7 +602,7 @@ begin
            FDataSetCab.Prior;
            FDataSetCab.Edit;
           end;
-  self.AnalizarDataSet;
+  Self.AnalizarDataSet;
 end;
 
 
@@ -641,7 +660,6 @@ begin
                then  dataset.Fields.Fields[j].ReadOnly := aValue;
         end;
     end;
-
 end;
 
 procedure TjktDriver.DoOperacionTraer;
@@ -666,13 +684,38 @@ end;
 
 procedure TjktDriver.Filtrar;
 begin
+  if not Assigned(FFiltro) and (FTipoPrograma = tp_abmIndividual) then
+    raise Exception.Create('Debe asignarle un Filtro al Driver para este Tipo de Programa');
+
+  if Assigned(FFiltro) and not Assigned(FFiltro.OidRespuesta) then
+    raise Exception.Create('Debe asignar el campo "OidRespuesta" del Filtro, ' +
+      'y este debe ser el mismo que el asignado en el Atributo "oid" de la '   +
+      'OperacionTraer del Driver');
+
   try
     Self.FEstado := esEdit;
-    Self.DoLineaMensaje('Edicion');
-    Self.DoFiltrar;
+    Self.ActualizarEstadoBotones;
+
+    Self.DoDesInhibirCamposNoModificables;
+    Self.abrirDataSets;
+
+    if Assigned(FFiltro) then
+      begin
+        // Muestro el Help (o Filtro) asignado
+        if FFiltro.Ejecutar then
+          begin
+            // Seleccionó un registro
+          end
+        else
+          begin
+            // No seleccionó nada! Creo una exception silenciosa...
+            Self.cerrarDataSets;
+            Abort;
+          end;
+      end;
+
     Self.DoOperacionTraer;
-    Self.DoBotonesFiltrar;
-    self.DoInhibirCamposNoModificables;
+    Self.DoInhibirCamposNoModificables;
     Self.DoSetFocoModi;
 
     if (Self.FDataSetCab <> nil) then
@@ -684,15 +727,14 @@ begin
   except
     on E: Exception do
        begin
-         self.TratarMensajeException(E);
-         self.Cancelar;
+         Self.TratarMensajeException(E);
+         Self.Cancelar;
        end;
   end;
 end;
 
 procedure TjktDriver.FiltrarActivos;
 begin
-  // Si no asociaron un Filtro, no pasa nada
   if Assigned(FFiltro) then
     FFiltro.TipoFiltro := fi_Activos;
 
@@ -701,7 +743,6 @@ end;
 
 procedure TjktDriver.FiltrarInactivos;
 begin
-  // Si no asociaron un Filtro, no pasa nada
   if Assigned(FFiltro) then
     FFiltro.TipoFiltro := fi_Inactivos;
 
@@ -710,7 +751,6 @@ end;
 
 procedure TjktDriver.FiltrarAvanzado;
 begin
-  // Si no asociaron un Filtro, no pasa nada
   if Assigned(FFiltro) then
     FFiltro.TipoFiltro := fi_Avanzado;
 

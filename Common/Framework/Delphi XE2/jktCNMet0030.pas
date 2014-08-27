@@ -350,7 +350,6 @@ end;
 procedure TjktOperacion.SetXMLSave(aDataSet :TDataSet);
 var
   lista : TList;
-  i     : Integer;
 begin
   lista := nil;
   self.obtenerDatasets;
