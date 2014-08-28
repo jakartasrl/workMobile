@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.varios.Idioma" table="IDIOMA">
+	<class name="com.jkt.varios.dominio.Idioma" table="IDIOMA">
 		<id name="id" column="IDIOMA_ID">
 			<generator class="native"></generator>
 		</id>

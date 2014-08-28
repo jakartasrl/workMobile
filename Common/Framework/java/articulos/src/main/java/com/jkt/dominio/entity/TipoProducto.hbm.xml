@@ -3,8 +3,8 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.varios.dominio.Pais" table="PAIS">
-		<id name="id" column="PAIS_ID">
+	<class name="com.jkt.erp.articulos.TipoProducto" table="TipoProd">
+		<id name="id" column="TipoProd_ID">
 			<generator class="native"></generator>
 		</id>
 		
@@ -12,10 +12,17 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="descripcion" column="descripcion"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
-
-
+		
+		
+		<!--  OJO SAQUE ESTO PARA PROBAR QUE HACE table="TipoProductoDet"  -->
+		<list name="caracteristicas" lazy="true" cascade="all">
+			<key column="TipoProd_ID" />
+			<index column="secu" />
+			<one-to-many class="com.jkt.erp.articulos.TipoProductoDet" />
+		</list>
+		
 	</class>
 	
 </hibernate-mapping>

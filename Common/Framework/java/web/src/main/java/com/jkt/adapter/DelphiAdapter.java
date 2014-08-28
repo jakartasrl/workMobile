@@ -50,6 +50,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
 	private static final String INTEGER_TYPE = "Integer";
+	private static final String DOUBLE_TYPE = "Double";
 
 	
 	private ISessionProvider sessionProvider;
@@ -238,10 +239,12 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 							Long idObject=null;
 							for (Registro reg : registross) {
 								
-								if (keyParaRecuperarObjeto==null) {
+								String keyParaRecuperarObjetoHijo = metaDataOfCurrentField.getFieldID();
+								
+								if (keyParaRecuperarObjetoHijo==null) {
 									idObject=Long.valueOf(0);
 								}else{
-									String value = (String) reg.getCampos().get(keyParaRecuperarObjeto);
+									String value = (String) reg.getCampos().get(keyParaRecuperarObjetoHijo);
 									if (value==null || value.isEmpty()) {
 										idObject = Long.valueOf(0);
 									}else{
@@ -372,6 +375,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			result="true".equals(((String)value).toLowerCase())?true:false;
 		}else if(INTEGER_TYPE.equals(nombreClase)){
 			result=Integer.valueOf((String)value);
+		}else if(DOUBLE_TYPE.equals(nombreClase)){
+			result=Double.valueOf((String)value);
 		}else{
 			try {
 				session = sessionProvider.getSession();
@@ -406,7 +411,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}else if(BOOLEAN_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=boolean.class;
 		}else if(INTEGER_TYPE.equals(campoEntrada.getClase())){
-			primitiveWrapper=Integer.class;
+			primitiveWrapper=int.class;
+		}else if(DOUBLE_TYPE.equals(campoEntrada.getClase())){
+			primitiveWrapper=double.class;
 		}else{
 			primitiveWrapper=Class.forName(campoEntrada.getClase());
 		}
@@ -414,7 +421,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 //		Class primitiveWrapper=STRING_TYPE.equals(campoEntrada.getClase())?String.class:Integer.class;
 		Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
 		Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
+		
 		method.invoke(instance,value);
+		
 	}
 	
 	

@@ -11,7 +11,7 @@ import com.jkt.util.Tabla;
 public class XMLTableMaker extends AbsWriter{
 	
 	private String identificadorTabla;
-	private Tabla tabla;
+	private Tabla  tabla;
 	
 	
 	
@@ -27,8 +27,8 @@ public class XMLTableMaker extends AbsWriter{
 //		aOper.addWriter(this);
 //	}
 
-	public XMLTableMaker(String descriptor, ServletOutputStream stream) {
-		this.identificadorTabla=descriptor;
+	public XMLTableMaker(String descriptor, String aOutputName, ServletOutputStream stream) {
+		this.identificadorTabla=aOutputName;
 		this.setStream(stream);
 		this.addTabla(descriptor);
 	}

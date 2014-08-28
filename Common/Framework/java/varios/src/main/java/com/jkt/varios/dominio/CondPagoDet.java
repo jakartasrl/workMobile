@@ -1,4 +1,4 @@
-package com.jkt.varios;
+package com.jkt.varios.dominio;
 
 import com.jkt.dominio.PersistentEntity;
 
@@ -8,8 +8,6 @@ import com.jkt.dominio.PersistentEntity;
  * @author Leonel Suarez - Jakarta SRL
  */
 public class CondPagoDet extends PersistentEntity {
-
-	private static final long serialVersionUID = 3815149294480787624L;
 
 	private int dias;
 	private double porcentaje;

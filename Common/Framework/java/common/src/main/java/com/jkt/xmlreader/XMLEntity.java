@@ -15,7 +15,7 @@ public class XMLEntity implements IName {
 	protected String value;
 	protected String custom;// VARIABLE COMODIN PARA GUARDAR CUALQUIER TEXTO
 
-	private String keyName, clase, fieldID; // para input
+	private String keyName, clase, fieldID; // para input y campo de entrada
 	private String tableName; // para output
 	private Forms forms;
 	

@@ -3,8 +3,8 @@ package com.jkt.varios.validadores;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.validadores.IValidador;
-import com.jkt.varios.CondPago;
-import com.jkt.varios.CondPagoDet;
+import com.jkt.varios.dominio.CondPago;
+import com.jkt.varios.dominio.CondPagoDet;
 
 /**
  * Regla de negocio de la entidad {@link CondPago}
