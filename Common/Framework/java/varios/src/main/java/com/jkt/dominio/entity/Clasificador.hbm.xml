@@ -16,7 +16,9 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		<one-to-one name="componentePadre" class="com.jkt.varios.dominio.Componente" cascade="all"></one-to-one>
-				
+<!-- 		<many-to-one name="componenteHijo" column="COMPONENTE_HIJO_ID" unique="true" class="com.jkt.varios.dominio.Componente" cascade="all" /> -->
+		
+		
 	</class>
 	
 </hibernate-mapping>

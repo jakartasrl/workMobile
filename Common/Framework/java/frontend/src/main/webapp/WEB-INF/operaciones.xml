@@ -32,7 +32,7 @@
   <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
   <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
   <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada oid_fac		CDATA #IMPLIED>
+  <!ATTLIST campoEntrada fieldID        CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
  
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
@@ -451,7 +451,7 @@
 	<!-- GUARDAR UN USUARIO	 -->
 	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.GuardarUsuario">
 
-		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID="oid_usuario" >
 			<campoEntrada >
 				
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
@@ -461,7 +461,7 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Password" clase="String" metodo="setPassword" />
 				
-				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" >
+				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
 					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
 					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />
@@ -613,23 +613,23 @@
 
 
 	<!-- TRAER UNA CONDICION DE PAGO Y SU DETALLE -->
-	<operacion name="TraerCondPago" clase="">
+	<operacion name="TraerCondPago" clase="com.jkt.varios.operaciones.TraerCondPago">
 										
-		<output name="" tableName="mtCondicionDePago">
-			<campoSalida value="oid_CondPago" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->			
-			<campoSalida value="APartirFechaFactura" target="" /> Boolean
-			<campoSalida value="APartirFechaRecepcion" target="" /> Boolean			
-			<campoSalida value="Activo" target="" />
+		<output name="condicion" tableName="mtCondicionDePago">
+			<campoSalida value="oid_CondPago" target="id" />
+			<campoSalida value="Codigo" target="codigo" /> <!-- String  Size = 15 -->			
+			<campoSalida value="Descripcion" target="descripcion" /> <!-- String  Size = 100 -->			
+			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" /> <!--Boolean -->
+			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" /> <!--Boolean	-->		
+			<campoSalida value="Activo" target="activo" />
 		</output>
 				
-		<output name="" tableName="mtDetalleCondicionDePago">		
-			<campoSalida value="oid_Det_CondPago" target="" />
-			<campoSalida value="oid_CondPago" target="" />						
-			<campoSalida value="oid_Detalle" target="" />						
-			<campoSalida value="Dias" target="" /> <!-- Integer -->						   
-			<campoSalida value="Porcentaje" target="" /> <!-- Integer -->			
+		<output name="detalle" tableName="mtDetalleCondicionDePago">		
+<!-- 			<campoSalida value="oid_Det_CondPago" target="" /> -->
+			<campoSalida value="oid_Detalle" target="id" />						
+			<campoSalida value="oid_CondPago" target="condicionDePago.id" />						
+			<campoSalida value="Dias" target="dias" /> <!-- Integer -->						   
+			<campoSalida value="Porcentaje" target="porcentaje" /> <!-- Integer -->			
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -642,23 +642,23 @@
 
 
 	<!-- GUARDAR UNA CONDICION DE PAGO Y SU DETALLE -->
-	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarCondPago">
+	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarLista">
 
-		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_CondPago'>
+		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.varios.dominio.CondPago" fieldID="oid_CondPago">
 			<campoEntrada>
 
-				<campoEntrada name="Codigo" clase="String" metodo="" />
-				<campoEntrada name="Descripcion" clase="String" metodo="" />
-				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="" />
-				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="" />				
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="setBaseFechaFactura" />
+				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="setBaseFechaRecep" />				
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
-				<campoEntrada name="mtDetalleCondicionDePago" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_Det_CondPago" clase="String" metodo="" />
-					<campoEntrada name="oid_CondPago" clase="String" metodo="" />
-					<campoEntrada name="oid_Detalle" clase="String" metodo="" />
-					<campoEntrada name="Dias" clase="Integer" metodo="" />
-					<campoEntrada name="Porcentaje" clase="Integer" metodo="" />
+				<campoEntrada name="mtDetalleCondicionDePago" metodo="addDetalle" clase="com.jkt.varios.dominio.CondPagoDet" fieldID="oid_Detalle">
+<!-- 					<campoEntrada name="oid_Det_CondPago" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_CondPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionDePago" /> -->
+<!-- 					<campoEntrada name="oid_Detalle" clase="String" metodo="" /> -->
+					<campoEntrada name="Dias" clase="Integer" metodo="setDias" />
+					<campoEntrada name="Porcentaje" clase="Double" metodo="setPorcentaje" />
 				</campoEntrada>
 				
 			</campoEntrada>

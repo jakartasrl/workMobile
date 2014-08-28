@@ -9,11 +9,11 @@
 			<generator class="native" />
 		</id>
 		
-		<one-to-one name="condicionDePago" class="com.jkt.varios.dominio.CondPagoDet"></one-to-one>
-		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="dias" column="DIAS" type="integer" />
 		<property name="porcentaje" column="PORCENTAJE" type="double" />
+
+		<many-to-one name="condicionDePago" column="COND_PAGO_ID" class="com.jkt.varios.dominio.CondPago"></many-to-one>
 		
 	</class>
 

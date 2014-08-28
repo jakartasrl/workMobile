@@ -9,8 +9,6 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class CondPagoDet extends PersistentEntity {
 
-	private static final long serialVersionUID = 3815149294480787624L;
-
 	private int dias;
 	private double porcentaje;
 	private CondPago condicionDePago;

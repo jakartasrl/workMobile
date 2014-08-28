@@ -40,6 +40,21 @@ public class CondPago extends Descriptible {
 		this.detalles = detalles;
 	}
 
+	
+	/*
+	 * Metodos para los booleanos, para ser utilizados desde el core dnd solo se entiende GET o SET.
+	 */
+	public boolean getBaseFechaFactura(){
+		return isBaseFechaFactura();
+	}
 
+	public boolean getBaseFechaRecep(){
+		return isBaseFechaRecep();
+	}
+	
+	public void addDetalle(CondPagoDet detalle){
+		detalles.add(detalle);
+		detalle.setCondicionDePago(this);
+	}
 
 }
