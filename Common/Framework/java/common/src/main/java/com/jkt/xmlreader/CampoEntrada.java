@@ -12,15 +12,15 @@ public class CampoEntrada extends XMLEntity {
 	private String name;
 	private String clase;
 	private String metodo;
-	private String oid_fac;
+//	private String oid_fac;
 
-	public String getOid_fac() {
-		return oid_fac;
-	}
-
-	public void setOid_fac(String oid_fac) {
-		this.oid_fac = oid_fac;
-	}
+//	public String getOid_fac() {
+//		return oid_fac;
+//	}
+//
+//	public void setOid_fac(String oid_fac) {
+//		this.oid_fac = oid_fac;
+//	}
 
 	public String getName() {
 		return name;

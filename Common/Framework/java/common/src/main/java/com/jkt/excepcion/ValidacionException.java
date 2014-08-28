@@ -1,6 +1,6 @@
 package com.jkt.excepcion;
 
-public class ValidacionException extends JakartaException {
+public class ValidacionException extends RuntimeException {
 
 	private static final String MESSAGE = "Regla de negocio: La entidad no es consitente con la lógica de negocio declarada.";
 

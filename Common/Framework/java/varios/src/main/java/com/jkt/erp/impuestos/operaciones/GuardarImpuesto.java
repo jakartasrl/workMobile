@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.jkt.annotations.OperacionBean;
 import com.jkt.operaciones.Operation;
-import com.jkt.varios.Pais;
+import com.jkt.varios.dominio.Pais;
 
 @OperacionBean
 public class GuardarImpuesto extends Operation {

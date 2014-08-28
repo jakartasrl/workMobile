@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.varios.dominio.Componente" table="COMPONENTE">
+		<id name="id" column="COMPONENTE_ID">
+			<generator class="native"></generator>
+		</id>
+
+<!-- 		<id name="id" column="personId"> -->
+<!-- 			<generator class="foreign"> -->
+<!-- 				<param name="property">person</param> -->
+<!-- 			</generator> -->
+<!-- 		</id> -->
+
+		<property name="codigo" type="string">
+			<column name="CODIGO" length="15" />
+		</property>
+
+		<property name="descripcion" column="DESCRIPCION" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<many-to-one name="clasificador" column="CLASIFICADOR_ID"
+			class="com.jkt.varios.dominio.Clasificador"></many-to-one>
+
+		<!-- <one-to-one name="componenteHijo" constrained="true" class="com.jkt.varios.dominio.Componente"></one-to-one> -->
+		<many-to-one name="componenteHijo" column="COMPONENTE_HIJO_ID" unique="true" class="com.jkt.varios.dominio.Componente" cascade="all" />
+		<many-to-one name="componentePadre" column="COMPONENTE_PADRE_ID" unique="true" class="com.jkt.varios.dominio.Componente" cascade="all"/>
+		
+<!-- 		 property-ref="actividadFront" -->
+		<!-- <one-to-one name="componentePadre" class="com.jkt.varios.dominio.Componente"></one-to-one> -->
+
+	</class>
+
+</hibernate-mapping>

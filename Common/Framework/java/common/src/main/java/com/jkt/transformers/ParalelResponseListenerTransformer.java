@@ -106,6 +106,7 @@ public class ParalelResponseListenerTransformer extends Transformer {
 		String nameOfTable  = "";
 		
 		for (Output output : outputs) {
+//			nameOfOutput = output.getTableName();
 			nameOfOutput = output.getName();
 			nameOfTable  = output.getTableName();
 			this.addWriter(nameOfOutput, nameOfTable, outputStream);
