@@ -26,10 +26,10 @@ public class TraerCondPago extends Operation {
 			throw new EntityNotFoundException();
 		}
 		
-		notificarObjecto(Notificacion.getNew("condicion", condicion));
+		notificarObjecto(Notificacion.getNew("mtCondicionDePago", condicion));
 		
 		for (CondPagoDet condPagoDet : condicion.getDetalles()) {
-			notificarObjecto(Notificacion.getNew("detalle", condPagoDet));
+			notificarObjecto(Notificacion.getNew("mtDetalleCondicionDePago", condPagoDet));
 		}
 	}
 

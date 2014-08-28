@@ -615,7 +615,7 @@
 	<!-- TRAER UNA CONDICION DE PAGO Y SU DETALLE -->
 	<operacion name="TraerCondPago" clase="com.jkt.varios.operaciones.TraerCondPago">
 										
-		<output name="condicion" tableName="mtCondicionDePago">
+		<output name="mtCondicionDePago" tableName="mtCondicionDePago">
 			<campoSalida value="oid_CondPago" target="id" />
 			<campoSalida value="Codigo" target="codigo" /> <!-- String  Size = 15 -->			
 			<campoSalida value="Descripcion" target="descripcion" /> <!-- String  Size = 100 -->			
@@ -624,7 +624,7 @@
 			<campoSalida value="Activo" target="activo" />
 		</output>
 				
-		<output name="detalle" tableName="mtDetalleCondicionDePago">		
+		<output name="mtDetalleCondicionDePago" tableName="mtDetalleCondicionDePago">		
 <!-- 			<campoSalida value="oid_Det_CondPago" target="" /> -->
 			<campoSalida value="oid_Detalle" target="id" />						
 			<campoSalida value="oid_CondPago" target="condicionDePago.id" />						

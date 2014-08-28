@@ -104,6 +104,7 @@ public class ParalelResponseListenerTransformer extends Transformer {
 		List<Output> outputs = ((EventBusiness)this.getEvent()).getOutputs();
 		String nameOfOutput = "";
 		for (Output output : outputs) {
+//			nameOfOutput = output.getTableName();
 			nameOfOutput = output.getName();
 			this.addWriter(nameOfOutput, outputStream);
 		}
