@@ -406,7 +406,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}else if(BOOLEAN_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=boolean.class;
 		}else if(INTEGER_TYPE.equals(campoEntrada.getClase())){
-			primitiveWrapper=Integer.class;
+			primitiveWrapper=int.class;
 		}else{
 			primitiveWrapper=Class.forName(campoEntrada.getClase());
 		}
@@ -414,7 +414,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 //		Class primitiveWrapper=STRING_TYPE.equals(campoEntrada.getClase())?String.class:Integer.class;
 		Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
 		Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
+		
 		method.invoke(instance,value);
+		
 	}
 	
 	

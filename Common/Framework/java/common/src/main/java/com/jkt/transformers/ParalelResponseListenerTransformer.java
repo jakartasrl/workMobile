@@ -33,8 +33,8 @@ public class ParalelResponseListenerTransformer extends Transformer {
 	 */
 	private Map<String, XMLTableMaker> writers=new HashMap<String, XMLTableMaker>();
 
-	public void addWriter(String nameOfWriter,ServletOutputStream outputStream){
-		this.writers.put(nameOfWriter, new XMLTableMaker(nameOfWriter, outputStream));
+	public void addWriter(String nameOfWriter, String nameOfTable, ServletOutputStream outputStream){
+		this.writers.put(nameOfWriter, new XMLTableMaker(nameOfTable, nameOfWriter, outputStream));
 	}
 
 	@Override
@@ -103,9 +103,12 @@ public class ParalelResponseListenerTransformer extends Transformer {
 		this.servletOutputStream=outputStream;
 		List<Output> outputs = ((EventBusiness)this.getEvent()).getOutputs();
 		String nameOfOutput = "";
+		String nameOfTable  = "";
+		
 		for (Output output : outputs) {
 			nameOfOutput = output.getName();
-			this.addWriter(nameOfOutput, outputStream);
+			nameOfTable  = output.getTableName();
+			this.addWriter(nameOfOutput, nameOfTable, outputStream);
 		}
 	}
 
