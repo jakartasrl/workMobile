@@ -104,10 +104,10 @@ inherited FNVar0001: TFNVar0001
     Height = 193
     Width = 684
     object dbgDetalleCondicion: TjktExpDBGrid
-      Left = 2
-      Top = 18
+      Left = 3
+      Top = 15
       Width = 367
-      Height = 173
+      Height = 168
       Align = alLeft
       TabOrder = 0
       DataSource = dsDetalleCondicionDePago
@@ -118,7 +118,6 @@ inherited FNVar0001: TFNVar0001
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsBehavior.FocusCellOnTab = True
-        OptionsData.Inserting = False
         OptionsView.GroupByBox = False
         object dbgDetalleCondicionDBTableView1oid_Det_CondPago: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Det_CondPago'
@@ -195,6 +194,14 @@ inherited FNVar0001: TFNVar0001
   end
   inherited ValidadorForm: TjktValidadorForm
     ListaValidaciones = <
+      item
+        Field = mtCondicionDePagoCodigo
+        ValidadorNew = valCodigo1
+      end
+      item
+        Field = mtCondicionDePagoCodigo
+        ValidadorNew = valCodigo2
+      end
       item
         Field = mtDetalleCondicionDePagoDias
         ValidadorGral = valDias
@@ -355,5 +362,18 @@ inherited FNVar0001: TFNVar0001
     ListaAsignaciones = <>
     Left = 80
     Top = 160
+  end
+  object valCodigo1: TjktValidador
+    Validacion = tDistintoEspacio
+    ListaAsignaciones = <>
+    Left = 72
+    Top = 64
+  end
+  object valCodigo2: TjktValidador
+    Entidad = 'condicionPago'
+    Validacion = tInexistente
+    ListaAsignaciones = <>
+    Left = 136
+    Top = 64
   end
 end

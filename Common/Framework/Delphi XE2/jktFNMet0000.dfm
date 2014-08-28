@@ -440,7 +440,7 @@ object frmMainForm: TfrmMainForm
       Caption = 'Open'
       SizeOptions.MinWidth = 700
       object bvlSpacer1: TBevel
-        Left = 658
+        Left = 566
         Top = 60
         Width = 42
         Height = 194
@@ -461,7 +461,7 @@ object frmMainForm: TfrmMainForm
       object bvSpacer7: TBevel
         Left = 0
         Top = 254
-        Width = 700
+        Width = 608
         Height = 26
         Align = alBottom
         Shape = bsSpacer
@@ -481,9 +481,8 @@ object frmMainForm: TfrmMainForm
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
         Transparent = True
-        ExplicitWidth = 608
         Height = 60
-        Width = 700
+        Width = 608
         object bvSpacer4: TBevel
           Left = 566
           Top = 0
@@ -547,9 +546,8 @@ object frmMainForm: TfrmMainForm
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 1
         Transparent = True
-        ExplicitWidth = 524
         Height = 194
-        Width = 616
+        Width = 524
         object gbLocationsPane: TcxGroupBox
           Left = 0
           Top = 0
@@ -588,17 +586,16 @@ object frmMainForm: TfrmMainForm
         object gbRecentPathsPane: TcxScrollBox
           Left = 337
           Top = 0
-          Width = 279
+          Width = 187
           Height = 194
           Align = alClient
           BorderStyle = cxcbsNone
           TabOrder = 1
           Transparent = True
-          ExplicitWidth = 187
           object bvSpacer6: TBevel
             Left = 0
             Top = 28
-            Width = 262
+            Width = 170
             Height = 16
             Align = alTop
             Shape = bsSpacer
@@ -617,9 +614,9 @@ object frmMainForm: TfrmMainForm
             StyleHot.LookAndFeel.NativeStyle = True
             TabOrder = 0
             Transparent = True
-            ExplicitWidth = 170
+            ExplicitWidth = 262
             Height = 95
-            Width = 262
+            Width = 170
           end
           object gbRecentPathsPaneCurrentFolder: TcxGroupBox
             Left = 0
@@ -634,9 +631,9 @@ object frmMainForm: TfrmMainForm
             StyleHot.LookAndFeel.NativeStyle = True
             TabOrder = 2
             Transparent = True
-            ExplicitWidth = 170
+            ExplicitTop = 37
             Height = 85
-            Width = 262
+            Width = 170
             object lbCurrentFolder: TcxLabel
               Left = 0
               Top = 0
@@ -650,7 +647,6 @@ object frmMainForm: TfrmMainForm
               Style.Font.Style = []
               Style.IsFontAssigned = True
               Transparent = True
-              ExplicitWidth = 170
             end
           end
           object lbComputer: TcxLabel
@@ -667,23 +663,21 @@ object frmMainForm: TfrmMainForm
             Style.TransparentBorder = True
             Style.IsFontAssigned = True
             Transparent = True
-            ExplicitWidth = 170
           end
         end
         object gbRecentDocumentsPane: TcxScrollBox
           Left = 337
           Top = 0
-          Width = 279
+          Width = 187
           Height = 194
           Align = alClient
           BorderStyle = cxcbsNone
           TabOrder = 2
           Transparent = True
-          ExplicitWidth = 187
           object bvSpacer8: TBevel
             Left = 0
             Top = 28
-            Width = 279
+            Width = 187
             Height = 16
             Align = alTop
             Shape = bsSpacer
@@ -703,7 +697,6 @@ object frmMainForm: TfrmMainForm
             Style.TransparentBorder = True
             Style.IsFontAssigned = True
             Transparent = True
-            ExplicitWidth = 187
           end
         end
       end
@@ -12640,7 +12633,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbPrint'
         end>
       OneOnRow = False
-      Row = 1
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12742,7 +12735,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbSelectAll'
         end>
       OneOnRow = False
-      Row = 1
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12809,7 +12802,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbSiguiente'
         end>
       OneOnRow = False
-      Row = 1
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -13471,7 +13464,7 @@ object frmMainForm: TfrmMainForm
           Visible = True
           ItemName = 'bbMenuPrincipal'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True

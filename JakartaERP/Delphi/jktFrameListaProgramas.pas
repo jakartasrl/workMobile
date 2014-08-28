@@ -18,9 +18,10 @@ uses
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, cxLabel, dxCustomTileControl, dxTileControl, dxAnimation,
+  Data.DB, Datasnap.DBClient,
 
   // ANALIZAR DONDE PONER TODOS LOS PROGRAMAS!
-  jktFNMet0000,   jktFNSeg0001, jktFNSeg0002, Data.DB, Datasnap.DBClient;
+  jktFNMet0000,   jktFNSeg0001, jktFNSeg0002, jktFNVar0001;
 
 type
   TframeListaProgramas = class(TFrame)
@@ -175,6 +176,12 @@ begin
       // Maestro de Usuarios
       FNSeg0002 := TFNSeg0002.Create(frmMainForm);
       FNSeg0002.InicializarChild(frmMainForm.alActions);
+    end
+  else if Sender.Tag = 8 then
+    begin
+      // Maestro de Condiciones de Pago
+      FNVar0001 := TFNVar0001.Create(frmMainForm);
+      FNVar0001.InicializarChild(frmMainForm.alActions);
     end;
 
   // Oculto el Menu Principal

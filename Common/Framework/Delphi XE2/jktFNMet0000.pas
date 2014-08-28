@@ -257,6 +257,8 @@ type
     procedure SetColorScheme(const AName: string);
 
   public
+    procedure AbrirPrograma(ClassName: string);
+
     property MenuPrincipal: TForm read FMenuPrincipal write FMenuPrincipal;
     property ActiveChild: TfrmChild read GetActiveChild;
 
@@ -269,6 +271,11 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TfrmMainForm.AbrirPrograma(ClassName: string);
+begin
+  //
+end;
 
 procedure TfrmMainForm.acCancelExecute(Sender: TObject);
 begin

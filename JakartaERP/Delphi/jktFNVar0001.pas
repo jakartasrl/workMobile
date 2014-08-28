@@ -61,6 +61,8 @@ type
     dbgDetalleCondicionDBTableView1Porcentaje: TcxGridDBColumn;
     valDias: TjktValidador;
     valPorcentaje: TjktValidador;
+    valCodigo1: TjktValidador;
+    valCodigo2: TjktValidador;
   private
     { Private declarations }
   public
