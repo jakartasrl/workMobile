@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.erp.articulos.TipoProducto" table="TipoProd">
+		<id name="id" column="TipoProd_ID">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="descripcion"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		
+		<!--  OJO SAQUE ESTO PARA PROBAR QUE HACE table="TipoProductoDet"  -->
+		<list name="caracteristicas" lazy="true" cascade="all">
+			<key column="TipoProd_ID" />
+			<index column="secu" />
+			<one-to-many class="com.jkt.erp.articulos.TipoProductoDet" />
+		</list>
+		
+	</class>
+	
+</hibernate-mapping>

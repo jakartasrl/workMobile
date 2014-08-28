@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-
 //import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
@@ -422,7 +421,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 //		Class primitiveWrapper=STRING_TYPE.equals(campoEntrada.getClase())?String.class:Integer.class;
 		Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
 		Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
+		
 		method.invoke(instance,value);
+		
 	}
 	
 	

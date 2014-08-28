@@ -534,133 +534,98 @@
 		</forms>
 		
 	</operacion>
-
-
-	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
-	<operacion name="TraerImpuestos" clase="">
-										
-		<output name="" tableName="mtImpuesto">
-			<campoSalida value="oid_Impuesto" target="" />
-			<campoSalida value="oid_Comportamiento" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->
-			<campoSalida value="Activo" target="" />	
-		</output>
-				
-		<output name="" tableName="mtImpuestoCategorias">		
-			<campoSalida value="oid_ImpCat" target="" />			
-			<campoSalida value="oid_Impuesto" target="" />			
-			<campoSalida value="oid_Categoria" target="" />			
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			   
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	 			
-			<campoSalida value="Activa" target="" />			
-		</output>		
+	
+	
 		
-		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
-		
-		<forms>
-			<form name=""> </form>
-		</forms>
-		
-	</operacion>
-
-
-	<!-- GUARDAR UN IMPUESTO -->
-	<operacion name="GuardarImpuestos" clase="com.jkt.operaciones.GuardarImpuesto">
-
-		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Impuesto'>
-			<campoEntrada>
-
-				<campoEntrada name="Codigo" clase="String" metodo="" />
-				<campoEntrada name="Descripcion" clase="String" metodo="" />
-				<campoEntrada name="oid_Comportamiento" clase="String" metodo="" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-
-				<campoEntrada name="mtImpuestoCategorias" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_ImpCat" clase="String" metodo="" />
-					<campoEntrada name="oid_Impuesto" clase="String" metodo="" />
-					<campoEntrada name="oid_Categoria" clase="String" metodo="" />
-					<campoEntrada name="Codigo" clase="String" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Activa" clase="Boolean" metodo="" />
-				</campoEntrada>
-				
-			</campoEntrada>
-		</input>
-		
-		<forms>
-			<form name=""></form>
-		</forms>
-		
-	</operacion>
-
-
-	<!-- TRAE LOS COMPORTAMIENTOS DEL IMPUESTO -->
-	<operacion name="TraerComportamientosImpuesto" clase="">
-										
-		<output name="" tableName="mtComportamientos">		
-			<campoSalida value="oid_Comportamiento" target="" />
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	
-		</output>
-						
-		<transformer clase="com.jkt.transformers."></transformer>
-		
-		<forms>
-			<form name=""> </form>
-		</forms>
-		
-	</operacion>
-
-
-	<!-- TRAER UNA CONDICION DE PAGO Y SU DETALLE -->
-	<operacion name="TraerCondPago" clase="com.jkt.varios.operaciones.TraerCondPago">
-										
-		<output name="mtCondicionDePago" tableName="mtCondicionDePago">
-			<campoSalida value="oid_CondPago" target="id" />
-			<campoSalida value="Codigo" target="codigo" /> <!-- String  Size = 15 -->			
-			<campoSalida value="Descripcion" target="descripcion" /> <!-- String  Size = 100 -->			
-			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" /> <!--Boolean -->
-			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" /> <!--Boolean	-->		
-			<campoSalida value="Activo" target="activo" />
-		</output>
-				
-		<output name="mtDetalleCondicionDePago" tableName="mtDetalleCondicionDePago">		
-<!-- 			<campoSalida value="oid_Det_CondPago" target="" /> -->
-			<campoSalida value="oid_Detalle" target="id" />						
-			<campoSalida value="oid_CondPago" target="condicionDePago.id" />						
-			<campoSalida value="Dias" target="dias" /> <!-- Integer -->						   
-			<campoSalida value="Porcentaje" target="porcentaje" /> <!-- Integer -->			
-		</output>		
-		
-		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
-		
-		<forms>
-			<form name="FNVar0001"> </form>
-		</forms>
-		
-	</operacion>
-
-
-	<!-- GUARDAR UNA CONDICION DE PAGO Y SU DETALLE -->
-	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarLista">
-
-		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.varios.dominio.CondPago" fieldID="oid_CondPago">
-			<campoEntrada>
-
+	
+	
+	<!-- GUARDAR Tablas Validaciones Caracteristicas de Producto  -->
+	<operacion name="GuardarTablaValCarac" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtTabla" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'>
+			<campoEntrada>			
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
-				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="setBaseFechaFactura" />
-				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="setBaseFechaRecep" />				
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-
-				<campoEntrada name="mtDetalleCondicionDePago" metodo="addDetalle" clase="com.jkt.varios.dominio.CondPagoDet" fieldID="oid_Detalle">
-<!-- 					<campoEntrada name="oid_Det_CondPago" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_CondPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionDePago" /> -->
-<!-- 					<campoEntrada name="oid_Detalle" clase="String" metodo="" /> -->
-					<campoEntrada name="Dias" clase="Integer" metodo="setDias" />
-					<campoEntrada name="Porcentaje" clase="Double" metodo="setPorcentaje" />
-				</campoEntrada>
+			</campoEntrada>			
+		</input>		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	
+	<!-- RECUPERAR Tablas Validaciones Caracteristicas de Producto -->
+	<operacion name="TraerTablaValCarac" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TablaValoresCaracProd">
+		<output name="resultado" tableName="mtTabla">
+			<campoSalida value="oid_tabla" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="activo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+		
+	
+	<!-- GUARDAR Caracteristicas de Producto  -->
+	<operacion name="GuardarCaracProducto" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtCarac" keyName="objeto" clase="com.jkt.erp.articulos.CaracteristicaProducto" fieldID='oid_carac'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="tipo_dato" clase="String" metodo="setTipoDato" />
+				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
 				
+			</campoEntrada>			
+		</input>		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	<!-- RECUPERAR  Caracteristicas de Producto -->
+	<operacion name="TraerCaracProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.CaracteristicaProducto">
+		<output name="resultado" tableName="mtTabla">
+			<campoSalida value="oid_carac" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="razonSocial" />
+			<campoSalida value="Activo"    target="activo" />
+			<campoSalida value="tipo_dato"    target="tipoDato" />
+			<campoSalida value="oid_tabla"    target="tabla.id" />
+			<campoSalida value="cod_tabla"    target="tabla.codigo" />
+			<campoSalida value="des_tabla"    target="tabla.descripcion" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>		
+	</operacion>
+	
+	
+	<!-- GUARDAR Tipo de Producto	 -->
+	<operacion name="GuardarTipoProducto" clase="com.jkt.operaciones.Guardar">
+		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo">
+			<campoEntrada >		
+				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
+				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				
+				<campoEntrada name="mtDet" metodo="addCaracteristica" clase="com.jkt.erp.articulos.TipoProductoDet"   >
+					<campoEntrada name="oid_carac" 	clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
+					<campoEntrada name="oblig" 		clase="Boolean" metodo="setObligatorio" />
+					<campoEntrada name="arma_cod" 	clase="Boolean" metodo="setArmaCodigo" />
+					<campoEntrada name="arma_desc" 	clase="Boolean" metodo="setArmaDescripcion" />
+					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
+				</campoEntrada>
 			</campoEntrada>
 		</input>
 		

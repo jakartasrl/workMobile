@@ -20,8 +20,9 @@ import com.jkt.xmlreader.Output;
  */
 public class SimpleTransformer extends Transformer {
 
-	private String outputName;
+	//private String outputName;
 	private boolean flag=false;
+	private String currentTableName  = "";
 	
 	/*
 	 * Por defecto se setea el writer simple.
@@ -38,7 +39,7 @@ public class SimpleTransformer extends Transformer {
 
 	@Override
 	protected void update(Notificacion arg1) {
-		
+
 		if (!flag) {
 			try {
 				iniciar();
@@ -49,37 +50,47 @@ public class SimpleTransformer extends Transformer {
 				throw new RuntimeException(e);
 			}
 		}
-		
+
 		if (arg1 != null) { //SOLAMENTE SE PREGUNTA ESO PARA CERRAR CON EL METODO WRITER Y PODER DARLE LOS TAGS DE CIERRE AL TAG TABLA.
 
 			Object instance = (Object) arg1.getParameter();
+			String outputName = arg1.getWriterKey();
 
 			EventBusiness eventBusiness=(EventBusiness) this.getEvent();
-	
-			// 1- Por cada OUTPUT se genera una tabla.
-			for (Output currentTable : eventBusiness.getOutputs()) {
-				// 2 - Por cada CAMPOSALIDA que tenga esa tabla, se genera una FILA
-				this.getWriter().addFila();
-					
-				for (CampoSalida currentColumna : currentTable.getCamposDeSalida()) {
-					// 3 - Por cada CAMPOSALIDA que tenga esa fila, se genera una COLUMNA
-					Object resultado;
-					try {
-						resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
-					} catch (ExceptionDS e) {
-						resultado=null;
-					} catch (NoSuchMethodException e) {
-						resultado=null;
-					} catch (SecurityException e) {
-						resultado=null;
-					}
-					if (resultado!=null) {
-						this.getWriter().addColumna(currentColumna.getValue(), resultado);
-					}else{
-						//TODO loguear algo y continuar con el siguiente campo!!!!
-					}
+
+			Output currentTable = null;
+			try {
+				currentTable = eventBusiness.getHijoOutput(outputName);
+			} catch (JakartaException e1) {
+				throw new RuntimeException("El outputName: " + outputName + " no esta definido en la operacion");
+			}
+
+			if (! currentTableName.equals(currentTable.getTableName())){
+				this.getWriter().addTabla(currentTable.getTableName());
+				currentTableName = currentTable.getTableName();
+			}
+			
+			this.getWriter().addFila();
+
+			for (CampoSalida currentColumna : currentTable.getCamposDeSalida()) {
+				// 3 - Por cada CAMPOSALIDA que tenga esa fila, se genera una COLUMNA
+				Object resultado;
+				try {
+					resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
+				} catch (ExceptionDS e) {
+					resultado=null;
+				} catch (NoSuchMethodException e) {
+					resultado=null;
+				} catch (SecurityException e) {
+					resultado=null;
+				}
+				if (resultado!=null) {
+					this.getWriter().addColumna(currentColumna.getValue(), resultado);
+				}else{
+					//TODO loguear algo y continuar con el siguiente campo!!!!
 				}
 			}
+
 		}
 	}
 
@@ -105,7 +116,7 @@ public class SimpleTransformer extends Transformer {
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
 		setWriter(xmlStreamMaker);
-		this.outputName=ouputName;
+	//	this.outputName=ouputName;
 	}
 
 	public boolean isFlag() {
@@ -125,8 +136,8 @@ public class SimpleTransformer extends Transformer {
 	public void iniciar() throws IOException, JakartaException{
 		getWriter().writeStartTag();
 		EventBusiness eventBusiness=(EventBusiness) this.getEvent();
-		Output oElement = (Output)eventBusiness.getHijoOutput("resultado");
-		getWriter().addTabla(outputName==null?oElement.getTableName():outputName);
+	//	Output oElement = (Output)eventBusiness.getHijoOutput("resultado");
+	//	getWriter().addTabla(outputName==null?oElement.getTableName():outputName);
 	}
 	
 	
