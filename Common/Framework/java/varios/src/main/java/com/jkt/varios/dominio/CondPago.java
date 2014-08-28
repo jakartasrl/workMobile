@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDescriptible;
 import com.jkt.varios.validadores.ValidadorCondPago;
 
 /**
@@ -15,7 +16,7 @@ import com.jkt.varios.validadores.ValidadorCondPago;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class CondPago extends Descriptible {
+public class CondPago extends Descriptible implements IDescriptible{
 
 	private static final long serialVersionUID = -9158567606744309528L;
 	private boolean baseFechaFactura, baseFechaRecep;
@@ -55,6 +56,29 @@ public class CondPago extends Descriptible {
 	public void addDetalle(CondPagoDet detalle){
 		detalles.add(detalle);
 		detalle.setCondicionDePago(this);
+	}
+	public String getCadena() {
+		return this.getDescripcion();
+	}
+	public String getCadena2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getEntero() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public int getEntero2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public float getFloat() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public float getFloat2() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

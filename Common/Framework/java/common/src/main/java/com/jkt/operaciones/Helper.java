@@ -27,7 +27,7 @@ public class Helper extends Operation {
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
 		for (PersistentEntity persistentEntity : list) {
-			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
+			notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
 		}
 	}
 	
