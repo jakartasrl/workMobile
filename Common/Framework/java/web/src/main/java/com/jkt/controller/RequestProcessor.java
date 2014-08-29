@@ -23,6 +23,7 @@ import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
+import com.jkt.util.IRepositorioClases;
 import com.jkt.util.MapDS;
 import com.jkt.xmlreader.XMLEntity;
 
@@ -41,6 +42,9 @@ public abstract class RequestProcessor extends BaseController{
 	private static final String KEY_NOMBRE_OPERACION = "op";
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
+	@Autowired
+	protected IRepositorioClases repositorioClases;
+	
 	@Autowired
 	protected SessionProvider sessionProvider;
 	
@@ -147,6 +151,7 @@ public abstract class RequestProcessor extends BaseController{
 		Operation op=(Operation)newInstance;
 		op.setServiceRepository(serviceRepository);
 		op.setSessionProvider(sessionProvider);
+		op.setRepositorioClases(repositorioClases);
 		return op;
 	}
 

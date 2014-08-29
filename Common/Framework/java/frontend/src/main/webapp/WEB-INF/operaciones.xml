@@ -777,5 +777,133 @@
 		
 	</operacion>
 
+	<!-- TRAER UNA CONDICION DE PAGO Y SU DETALLE -->
+	<operacion name="TraerCondPago" clase="com.jkt.varios.operaciones.TraerCondPago">
+										
+		<output name="condicion" tableName="mtCondicionDePago">
+			<campoSalida value="oid_CondPago" target="id" />
+			<campoSalida value="Codigo" target="codigo" /> <!-- String  Size = 15 -->			
+			<campoSalida value="Descripcion" target="descripcion" /> <!-- String  Size = 100 -->			
+			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" /> <!--Boolean -->
+			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" /> <!--Boolean	-->		
+			<campoSalida value="Activo" target="activo" />
+		</output>
+				
+		<output name="detalle" tableName="mtDetalleCondicionDePago">		
+			<campoSalida value="oid_Det_CondPago" target="id" />
+			<campoSalida value="oid_CondPago" target="condicionDePago.id" />						
+			<campoSalida value="Dias" target="dias" /> <!-- Integer -->						   
+			<campoSalida value="Porcentaje" target="porcentaje" /> <!-- Integer -->			
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="FNVar0001"> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- GUARDAR UNA CONDICION DE PAGO Y SU DETALLE -->
+	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarLista">
+
+		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.varios.dominio.CondPago" fieldID="oid_CondPago">
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="setBaseFechaFactura" />
+				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="setBaseFechaRecep" />				
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="mtDetalleCondicionDePago" metodo="addDetalle" clase="com.jkt.varios.dominio.CondPagoDet" fieldID="oid_Det_CondPago">
+					<campoEntrada name="Dias" clase="Integer" metodo="setDias" />
+					<campoEntrada name="Porcentaje" clase="Double" metodo="setPorcentaje" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="FNVar0001"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
+	<operacion name="TraerImpuestos" clase="">
+										
+		<output name="" tableName="mtImpuesto">
+			<campoSalida value="oid_Impuesto" target="" />
+			<campoSalida value="oid_Comportamiento" target="" />
+			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->
+			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->
+			<campoSalida value="Activo" target="" />	
+		</output>
+				
+		<output name="" tableName="mtImpuestoCategorias">		
+			<campoSalida value="oid_ImpCat" target="" />			
+			<campoSalida value="oid_Impuesto" target="" />			
+			<campoSalida value="oid_Categoria" target="" />			
+			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			   
+			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	 			
+			<campoSalida value="Activa" target="" />			
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- GUARDAR UN IMPUESTO -->
+	<operacion name="GuardarImpuestos" clase="com.jkt.operaciones.GuardarImpuesto">
+
+		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Impuesto'>
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="" />
+				<campoEntrada name="Descripcion" clase="String" metodo="" />
+				<campoEntrada name="oid_Comportamiento" clase="String" metodo="" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="mtImpuestoCategorias" metodo="" clase="com.jkt.dominio." >
+					<campoEntrada name="oid_ImpCat" clase="String" metodo="" />
+					<campoEntrada name="oid_Impuesto" clase="String" metodo="" />
+					<campoEntrada name="oid_Categoria" clase="String" metodo="" />
+					<campoEntrada name="Codigo" clase="String" metodo="" />
+					<campoEntrada name="Descripcion" clase="String" metodo="" />
+					<campoEntrada name="Activa" clase="Boolean" metodo="" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name=""></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- TRAE LOS COMPORTAMIENTOS DEL IMPUESTO -->
+	<operacion name="TraerComportamientosImpuesto" clase="">
+										
+		<output name="" tableName="mtComportamientos">		
+			<campoSalida value="oid_Comportamiento" target="" />
+			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	
+		</output>
+						
+		<transformer clase="com.jkt.transformers."></transformer>
+		
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
 
 </entity>

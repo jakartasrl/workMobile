@@ -6,6 +6,7 @@ import javax.persistence.EntityNotFoundException;
 
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
+import com.jkt.util.IRepositorioClases;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.CondPagoDet;
 
@@ -20,6 +21,7 @@ public class TraerCondPago extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
+		
 		String oidEntity = (String) aParams.get(KEY_OID);
 		CondPago condicion = (CondPago) serviceRepository.getByOid(CondPago.class, Long.valueOf(oidEntity).longValue());
 		if (condicion==null) {

@@ -12,8 +12,10 @@ import java.util.Map;
 
 
 
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.ValidacionException;
+import com.jkt.util.IRepositorioClases;
 
 
 /**
@@ -102,5 +104,6 @@ public interface IServiceRepository {
 	 * @param sessionProvider
 	 */
 	void setSessionProvider(ISessionProvider sessionProvider);
+	void setRepositorioClases(IRepositorioClases repositorio);
 	
 }

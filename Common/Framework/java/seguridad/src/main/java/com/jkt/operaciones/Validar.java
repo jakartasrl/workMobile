@@ -26,7 +26,7 @@ public abstract class Validar extends Operation{
 		String className=(String) aParams.get(ENTIDAD_FIELD);
 		
 		//Realiza la consulta a la base
-		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(RepositorioClases.getClass(className)), CODIGO_FIELD, codigo);
+		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(this.getRepositorioClases().getClass(className)), CODIGO_FIELD, codigo);
 		
 		manejarExistencia(objectRetrieved,className, codigo);
 	}

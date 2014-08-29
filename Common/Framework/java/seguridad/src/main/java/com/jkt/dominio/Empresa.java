@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class Empresa extends PersistentEntity implements IDescriptible {
 
-//	@NotEmpty
+	@NotEmpty
 	private String codigo;
 
 	private String razonSocial;

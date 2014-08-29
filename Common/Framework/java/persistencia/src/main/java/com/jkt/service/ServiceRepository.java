@@ -15,6 +15,7 @@ import org.hibernate.Session;
 
 
 
+
 //import org.hibernate.criterion.Restrictions;
 import static org.hibernate.criterion.Restrictions.like;
 import static org.hibernate.criterion.Restrictions.eq;
@@ -35,6 +36,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
+import com.jkt.util.IRepositorioClases;
 import com.jkt.util.RepositorioClases;
 
 /**
@@ -66,8 +68,18 @@ public class ServiceRepository implements IServiceRepository {
 
 	
 	private ISessionProvider sessionProvider;
-
 	
+	protected IRepositorioClases repositorioClases;
+	
+	public IRepositorioClases getRepositorioClases() {
+		return repositorioClases;
+	}
+
+	@Autowired
+	public void setRepositorioClases(IRepositorioClases repositorioClases) {
+		this.repositorioClases = repositorioClases;
+	}
+
 	@Autowired
 	public void setSessionProvider(ISessionProvider sessionProvider) {
 		this.sessionProvider=sessionProvider;
@@ -86,7 +98,7 @@ public class ServiceRepository implements IServiceRepository {
 	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws InstantiationException, IllegalAccessException, ValidacionException {
 		String validadorClassName;
 		try {
-			validadorClassName = RepositorioClases.getValidador(entity.getClass().getCanonicalName());
+			validadorClassName = repositorioClases.getValidador(entity.getClass().getCanonicalName());
 			if (validadorClassName != null && !validadorClassName.isEmpty()) {
 				Class<?> clase = Class.forName(validadorClassName);
 				Method method;
