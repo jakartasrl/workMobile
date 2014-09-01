@@ -38,11 +38,14 @@ import com.jkt.xmlreader.XMLEntity;
 @Scope("request")
 public abstract class RequestProcessor extends BaseController{
 	
-	private static final String KEY_NOMBRE_OPERACION = "op";
+	private static final String KEY_NOMBRE_OPERACION      = "op";
+	private static final String KEY_NOMBRE_OPERACION_TEST = "opTest";
+	
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
 	@Autowired
 	protected SessionProvider sessionProvider;
+	protected boolean test;
 	
 	@Autowired
 	protected IServiceRepository serviceRepository;
@@ -75,7 +78,17 @@ public abstract class RequestProcessor extends BaseController{
 		MapDS parameters = (MapDS) retrieveParameters(request);
 		
 		log.debug("Recuperando nombre y objeto de operacion.");
-		String operationName = parameters.getString(KEY_NOMBRE_OPERACION);
+		String key = "";
+		if (parameters.containsKey(KEY_NOMBRE_OPERACION)){
+			key = KEY_NOMBRE_OPERACION;
+			test = false;
+		}
+		else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
+			key = KEY_NOMBRE_OPERACION_TEST;
+			test = true;
+		}
+		String operationName = parameters.getString(key);
+	
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {

@@ -70,5 +70,47 @@
 		</validadores>
 		
 	</entidad>
+
+<entidad nombre="TablaValidacionCaracProducto">
+
+		<operacion operSave="GuardarTablaValCarac" operTraer="TraerTablaValCarac" />
+		
+		<campos>
+			<campo fieldName="oid_tabla" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_tabla" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo" />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion" />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+	
+<entidad nombre="CaracProducto">
+
+		<operacion operSave="GuardarCaracProducto" operTraer="TraerCaracProducto" />
+		
+		<campos>
+			<campo fieldName="oid_carac" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo" />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion" />
+			<campo fieldName="tipo_dato"  tipo="String" longitud="20" visible="true" readOnly="false" orden="4" label="Tipo de Dato" />
+			<campo fieldName="cod_tabla"  tipo="String" longitud="10" visible="true" readOnly="false" orden="5" label="Tabla" />
+			<campo fieldName="des_tabla"  tipo="String" longitud="60" visible="true" readOnly="true" orden="6" label="Descripcion" />
+			<campo fieldName="oid_tabla"  tipo="Integer" longitud="0" visible="false" readOnly="false" orden="7" label="oid" />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="8" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="TablaValoresCaracProd" oidName="oid_tabla" descrName="desc_tabla" />
+		</validadores>
+		
+	</entidad>
+
 	
 </entidades>
