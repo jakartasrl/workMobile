@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.varios.dominio.ComponenteValor" table="COMPONENTE_VALOR">
+
+		<id name="id" column="COMPONENTE_VALOR_ID">
+			<generator class="foreign">
+				<param name="property">componente</param>
+			</generator>
+		</id>
+
+		<property name="codigo" type="string">
+			<column name="CODIGO" length="15" />
+		</property>
+
+		<property name="descripcion" column="DESCRIPCION" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<one-to-one name="componente" constrained="true"></one-to-one>
+
+	</class>
+
+</hibernate-mapping>

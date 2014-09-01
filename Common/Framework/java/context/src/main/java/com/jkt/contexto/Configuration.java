@@ -159,6 +159,10 @@ public class Configuration {
 		digester.addSetProperties("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada");
 		digester.addSetNext("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada", "addHijo", CampoEntrada.class.getName());
 		
+		digester.addObjectCreate("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada", CampoEntrada.class.getName());
+		digester.addSetProperties("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada");
+		digester.addSetNext("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada", "addHijo", CampoEntrada.class.getName());
+		
 		
 		
 		//de cada un de los elementos INPUT agregados recien, busca x cada uno los tag CAMPOENTRADA y los agrega

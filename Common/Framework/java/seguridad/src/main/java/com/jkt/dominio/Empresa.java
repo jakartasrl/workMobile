@@ -12,7 +12,9 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	@NotEmpty
 	private String codigo;
 
+	@NotEmpty
 	private String razonSocial;
+
 	private String urlDB;
 
 	// Transient value!

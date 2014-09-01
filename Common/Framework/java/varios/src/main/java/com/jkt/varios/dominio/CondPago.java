@@ -3,6 +3,10 @@ package com.jkt.varios.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.varios.validadores.ValidadorCondPago;
@@ -19,7 +23,14 @@ import com.jkt.varios.validadores.ValidadorCondPago;
 public class CondPago extends Descriptible implements IDescriptible{
 
 	private static final long serialVersionUID = -9158567606744309528L;
-	private boolean baseFechaFactura, baseFechaRecep;
+	
+	@NotNull
+	private boolean baseFechaFactura;
+
+	@NotNull
+	private boolean baseFechaRecep;
+
+	@NotEmpty
 	private List<CondPagoDet> detalles = new ArrayList<CondPagoDet>();
 	
 	public boolean isBaseFechaFactura() {
@@ -54,9 +65,13 @@ public class CondPago extends Descriptible implements IDescriptible{
 	}
 	
 	public void addDetalle(CondPagoDet detalle){
-		detalles.add(detalle);
-		detalle.setCondicionDePago(this);
+		if(!detalles.contains(detalle)){
+			detalles.add(detalle);
+			detalle.setCondicionDePago(this);
+		}
 	}
+	
+	
 	public String getCadena() {
 		return this.getDescripcion();
 	}

@@ -17,7 +17,41 @@ public class Componente extends Descriptible {
 	private Clasificador clasificador;
 	private Componente componentePadre;
 	private Componente componenteHijo;
+	private ComponenteValor valor;
+	
+	public ComponenteValor getValor() {
+		return valor;
+	}
 
+	public void setValor(ComponenteValor valor) {
+		this.valor = valor;
+	}
+
+	/*
+	 * Campos transientes para facilitar la lectura en los clientes
+	 */
+	private int nivel, nivelSuperior;
+	
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+	public int getNivelSuperior() {
+		return nivelSuperior;
+	}
+
+	public void setNivelSuperior(int nivelSuperior) {
+		this.nivelSuperior = nivelSuperior;
+	}
+	/*
+	 * Campos transientes para facilitar la lectura en los clientes
+	 */
+
+	
 	public Clasificador getClasificador() {
 		return clasificador;
 	}

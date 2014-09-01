@@ -30,6 +30,9 @@ import com.jkt.excepcion.JakartaException;
 @Scope(value=ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class RepositorioClases implements IRepositorioClases{
 
+	//variable que contiene todas las clases creadas.Esto es para evitar el uso de reflection y creación de clases manualmente
+	private Map<String, Class> clases=new HashMap<String, Class>();
+	
 	private Map<String, String> alias = new HashMap<String, String>();
 	private Map<String, String> validadores = new HashMap<String, String>();
 
@@ -48,6 +51,7 @@ public class RepositorioClases implements IRepositorioClases{
 				currentEntry=(Entry) elemento;
 				alias.put(currentEntry.getKey(), currentEntry.getValue());
 				validadores.put(currentEntry.getValue(), currentEntry.getValidador());
+				
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Error de entrada/salida.");
