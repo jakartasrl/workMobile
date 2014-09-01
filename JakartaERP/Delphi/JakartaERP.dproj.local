@@ -20,15 +20,15 @@
     <Transaction>2014/05/19 18:18:08.000.730,C:\Aplicaciones\JakartaERP 3000\Delphi\Unit1.dfm=C:\Aplicaciones\JakartaERP 3000\Delphi\jktMainRibbon.dfm</Transaction>
     <Transaction>2014/06/17 12:30:23.000.154,=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0001.pas</Transaction>
     <Transaction>2014/06/17 12:36:22.000.164,=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0000.pas</Transaction>
-    <Transaction>2014/06/18 15:50:21.000.293,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0001.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0001.dfm</Transaction>
     <Transaction>2014/06/18 15:50:21.000.293,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0001.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0001.pas</Transaction>
-    <Transaction>2014/06/18 16:00:15.000.385,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0000.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0000.pas</Transaction>
+    <Transaction>2014/06/18 15:50:21.000.293,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0001.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0001.dfm</Transaction>
     <Transaction>2014/06/18 16:00:15.000.385,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0000.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0000.dfm</Transaction>
-    <Transaction>2014/07/14 14:55:10.000.220,C:\Aplicaciones 3000\JakartaERP\Delphi\jktMain.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMenuPrincipal.pas</Transaction>
+    <Transaction>2014/06/18 16:00:15.000.385,C:\Aplicaciones 3000\Common\Framework\Delphi XE2\jktFNMet0000.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMet0000.pas</Transaction>
     <Transaction>2014/07/14 14:55:10.000.240,C:\Aplicaciones 3000\JakartaERP\Delphi\jktMain.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMenuPrincipal.dfm</Transaction>
+    <Transaction>2014/07/14 14:55:10.000.220,C:\Aplicaciones 3000\JakartaERP\Delphi\jktMain.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNMenuPrincipal.pas</Transaction>
     <Transaction>2014/07/14 15:48:18.000.899,=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
-    <Transaction>2014/07/14 15:50:57.000.418,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0001.pas</Transaction>
     <Transaction>2014/07/14 15:50:57.000.418,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0001.dfm</Transaction>
+    <Transaction>2014/07/14 15:50:57.000.418,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0001.pas</Transaction>
     <Transaction>2014/07/14 17:17:43.000.268,=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
     <Transaction>2014/07/14 17:19:17.000.492,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0002.dfm</Transaction>
     <Transaction>2014/07/14 17:19:17.000.492,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0002.pas</Transaction>
@@ -43,7 +43,15 @@
     <Transaction>2014/08/25 12:02:12.000.141,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0001.pas</Transaction>
     <Transaction>2014/08/25 12:02:12.000.141,C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0001.dfm</Transaction>
     <Transaction>2014/08/26 14:51:48.624,=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
-    <Transaction>2014/08/26 15:01:38.238,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0002.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
     <Transaction>2014/08/26 15:01:38.238,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0002.dfm=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.dfm</Transaction>
+    <Transaction>2014/08/26 15:01:38.238,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0002.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
+    <Transaction>2014/08/29 15:45:32.957,=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
+    <Transaction>2014/08/29 15:47:43.032,C:\Aplicaciones 3000\JakartaERP\Delphi\jktCForms.pas=C:\Aplicaciones 3000\JakartaERP\Delphi\Unit1.pas</Transaction>
+    <Transaction>2014/08/29 16:10:55.820,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNVar0001.pas=</Transaction>
+    <Transaction>2014/08/29 16:15:33.364,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0002.pas=</Transaction>
+    <Transaction>2014/08/29 16:18:06.338,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNSeg0001.pas=</Transaction>
+    <Transaction>2014/08/29 16:24:33.485,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNImp0001.pas=</Transaction>
+    <Transaction>2014/08/29 16:28:46.887,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0001.pas=</Transaction>
+    <Transaction>2014/08/29 16:31:42.229,C:\Aplicaciones 3000\JakartaERP\Delphi\jktFNCla0002.pas=</Transaction>
   </Transactions>
 </BorlandProject>

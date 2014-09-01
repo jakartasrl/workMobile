@@ -18,10 +18,7 @@ uses
   dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
   dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint,
   dxSkinXmas2008Blue, cxLabel, dxCustomTileControl, dxTileControl, dxAnimation,
-  Data.DB, Datasnap.DBClient,
-
-  // ANALIZAR DONDE PONER TODOS LOS PROGRAMAS!
-  jktFNMet0000,   jktFNSeg0001, jktFNSeg0002, jktFNVar0001;
+  Data.DB, Datasnap.DBClient, jktFNMet0000;
 
 type
   TframeListaProgramas = class(TFrame)
@@ -157,33 +154,27 @@ begin
 end;
 
 procedure TframeListaProgramas.OnButtonClick(Sender: TdxTileControlItem);
+var
+  NombrePrograma: string;
 begin
   // aca abrimos los Forms (los Programas)
 
-
 //  MessageBox(0, PChar(Sender.Text1.Value), PChar('Programa ' + IntToStr(Sender.Tag)), 0);
 
-  frmMainForm.Show;
+  NombrePrograma := '';
 
   if Sender.Tag = 6 then
-    begin
-      // Maestro de Empresas
-      FNSeg0001 := TFNSeg0001.Create(frmMainForm);
-      FNSeg0001.InicializarChild(frmMainForm.alActions);
-    end
+    // Maestro de Empresas
+    NombrePrograma := 'TFNSeg0001'
   else if Sender.Tag = 9 then
-    begin
-      // Maestro de Usuarios
-      FNSeg0002 := TFNSeg0002.Create(frmMainForm);
-      FNSeg0002.InicializarChild(frmMainForm.alActions);
-    end
+    // Maestro de Usuarios
+    NombrePrograma := 'TFNSeg0002'
   else if Sender.Tag = 8 then
-    begin
-      // Maestro de Condiciones de Pago
-      FNVar0001 := TFNVar0001.Create(frmMainForm);
-      FNVar0001.InicializarChild(frmMainForm.alActions);
-    end;
+    // Maestro de Condiciones de Pago
+    NombrePrograma := 'TFNVar0001';
 
+  frmMainForm.Show;
+  frmMainForm.AbrirPrograma(NombrePrograma);
   // Oculto el Menu Principal
   TForm(Owner).Hide;
 end;

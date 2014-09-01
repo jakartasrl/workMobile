@@ -76,4 +76,7 @@ implementation
 
 {$R *.dfm}
 
+initialization
+  RegisterClass(TFNVar0001);
+
 end.

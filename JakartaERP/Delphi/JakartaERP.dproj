@@ -85,6 +85,13 @@
 			<DelphiCompile Include="$(MainSource)">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0000.pas">
+				<Form>frmMainForm</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0001.pas">
+				<Form>frmChild</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktCNMet0005.pas"/>
 			<DCCReference Include="jktFNMenuPrincipal.pas">
 				<Form>frmMenuPrincipal</Form>
 				<FormType>dfm</FormType>
@@ -95,35 +102,7 @@
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
 			<DCCReference Include="jktUtils.pas"/>
-			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0000.pas">
-				<Form>frmMainForm</Form>
-			</DCCReference>
-			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0001.pas">
-				<Form>frmChild</Form>
-			</DCCReference>
-			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktCNMet0005.pas"/>
-			<DCCReference Include="jktFNSeg0001.pas">
-				<Form>FNSeg0001</Form>
-			</DCCReference>
-			<DCCReference Include="jktFNSeg0002.pas">
-				<Form>FNSeg0002</Form>
-			</DCCReference>
-			<DCCReference Include="jktFNImp0001.pas">
-				<Form>FNImp0001</Form>
-				<FormType>dfm</FormType>
-			</DCCReference>
-			<DCCReference Include="jktFNVar0001.pas">
-				<Form>FNVar0001</Form>
-				<FormType>dfm</FormType>
-			</DCCReference>
-			<DCCReference Include="jktFNCla0001.pas">
-				<Form>FNCla0001</Form>
-				<FormType>dfm</FormType>
-			</DCCReference>
-			<DCCReference Include="jktFNCla0002.pas">
-				<Form>FNCla0002</Form>
-				<FormType>dfm</FormType>
-			</DCCReference>
+			<DCCReference Include="jktCForms.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
