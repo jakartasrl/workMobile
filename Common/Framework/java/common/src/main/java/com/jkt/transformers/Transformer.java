@@ -27,7 +27,7 @@ public abstract class Transformer implements Observer {
 	protected static PropertySolver solver=new PropertySolver();
 	
 	private IEventBusiness event;
-	private boolean        test;
+	protected boolean        test;
 	
 	public IEventBusiness getEvent() {
 		return event;
