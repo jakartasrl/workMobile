@@ -85,6 +85,9 @@ public class SimpleTransformer extends Transformer {
 					if (!test){
 					   resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
 					}
+					else{
+						resultado = new Integer(1);
+					}
 				} catch (ExceptionDS e) {
 					resultado=null;
 				} catch (NoSuchMethodException e) {

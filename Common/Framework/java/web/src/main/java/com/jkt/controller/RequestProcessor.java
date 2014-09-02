@@ -126,10 +126,11 @@ public abstract class RequestProcessor extends BaseController{
 
 		log.debug("Recuperando un transformer para la operación actual...");
 		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME));
-
+		transformer.setTest(test);
 		log.debug("Ejecutando la operación...");
-		operation.runOperation(parametersAdapted);
-		
+		if (!test){
+		   operation.runOperation(parametersAdapted);
+		}
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		

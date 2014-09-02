@@ -35,5 +35,6 @@ public interface Adapter<T,T2> {
 	public T adaptRequest(T2 input, EventBusiness operation) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException, Exception;
 
 	public void setSession(SessionProvider sessionProvider);
+	public void setTest(boolean aTest);
 
 }

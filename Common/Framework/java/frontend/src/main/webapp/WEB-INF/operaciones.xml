@@ -866,7 +866,7 @@
 			<campoEntrada>			
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="tipo_dato" clase="String" metodo="setTipoDato" />
 				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
 				
