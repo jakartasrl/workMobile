@@ -6,7 +6,13 @@
 
 	<class name="com.jkt.varios.dominio.CondPago" table="CONDICION_PAGO">
 		<id name="id" column="COND_PAGO_ID">
-			<generator class="native" />
+			<generator class="hilo" >
+<!-- 				<param name="initialValue">10000</param> -->
+				<param name="sequence">COND_PAGO_ID_SEQ</param>
+				<param name="allocationSize">1</param>
+				<param name="initialValue">17599</param>
+			</generator>
+			
 		</id>
 		
 		<property name="codigo" column="CODIGO" />

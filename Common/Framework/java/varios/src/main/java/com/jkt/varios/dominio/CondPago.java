@@ -71,6 +71,11 @@ public class CondPago extends Descriptible implements IDescriptible{
 	}
 	
 	public void addDetalle(CondPagoDet detalle){
+		if (detalle.getId()==0) {
+			detalles.add(detalle);
+			return;
+		}
+		
 		if(!detalles.contains(detalle)){
 			detalles.add(detalle);
 			detalle.setCondicionDePago(this);

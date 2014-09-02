@@ -5,9 +5,4 @@ import java.util.List;
 
 public class IngresosBrutos extends Impuesto {
 
-	@Override
-	public List getCategorias() {
-		return Arrays.asList(new Object[]{"a","b"});
-	}
-
 }

@@ -43,6 +43,9 @@ public class CondPagoDet extends PersistentEntity {
 
 	        final CondPagoDet condPagoDet = (CondPagoDet) other;
 
+	        	
+	        if (condPagoDet.getId()==0) return false;
+				
 	        if ( !(condPagoDet.getId()==getId())) return false;
 //	        if ( !cat.getMother().equals( getMother() ) ) return false;
 
