@@ -28,6 +28,7 @@ tmp/**/*
 *.tmp
 *.bak
 *.swp
+
 *~.nib
 local.properties
 .classpath
@@ -49,3 +50,6 @@ Servers
 
 *.jpg
 *.~*
+
+# Para evitar archivos en estado de merge.
+*xml.orig
