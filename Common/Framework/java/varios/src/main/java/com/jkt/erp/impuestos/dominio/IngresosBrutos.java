@@ -5,4 +5,8 @@ import java.util.List;
 
 public class IngresosBrutos extends Impuesto {
 
+	public String getComportamiento(){
+		return "IIBB";
+	}
+	
 }

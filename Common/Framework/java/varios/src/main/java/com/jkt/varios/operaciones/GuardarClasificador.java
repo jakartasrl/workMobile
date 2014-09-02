@@ -9,8 +9,14 @@ import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 
+/**
+ * Guardar una {@link Clasificador} que contiene una cadena de hijos {@link Componente}s
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class GuardarClasificador extends Operation {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List objetoRecuperado = recuperarObjeto(aParams);
@@ -21,9 +27,10 @@ public class GuardarClasificador extends Operation {
 		if (componentes!= null && !componentes.isEmpty()) {
 			
 			Collections.sort(componentes, new Comparator() {
+				Componente v1,v2;
 				public int compare(Object o1, Object o2) {
-					Componente v1=(Componente) o1;
-					Componente v2=(Componente) o2;
+					v1=(Componente) o1;
+					v2=(Componente) o2;
 					return new Integer(v1.getNivel()).compareTo(new Integer(v2.getNivel()));
 				}
 			});

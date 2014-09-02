@@ -5,4 +5,7 @@ import java.util.List;
 
 public class Iva extends Impuesto {
 	
+	public String getComportamiento(){
+		return "IVA";
+	}
 }

@@ -793,23 +793,23 @@
 	</operacion>
 
 	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
-	<operacion name="TraerImpuestos" clase="">
+	<operacion name="TraerImpuestos" clase="com.jkt.erp.impuestos.operaciones.TraerImpuestos">
 										
-		<output name="" tableName="mtImpuesto">
-			<campoSalida value="oid_Impuesto" target="" />
-			<campoSalida value="oid_Comportamiento" target="" />
-			<campoSalida value="Codigo" target="" /> 
-			<campoSalida value="Descripcion" target="" />
-			<campoSalida value="Activo" target="" />	
+		<output name="impuesto" tableName="mtImpuesto">
+			<campoSalida value="oid_Impuesto" target="id" />
+			<campoSalida value="oid_Comportamiento" target="comportamiento" />
+			<campoSalida value="Codigo" target="codigo" /> 
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="activo" />	
 		</output>
 				
-		<output name="" tableName="mtImpuestoCategorias">		
-			<campoSalida value="oid_ImpCat" target="" />			
-			<campoSalida value="oid_Impuesto" target="" />			
-			<campoSalida value="oid_Categoria" target="" />			
-			<campoSalida value="Codigo" target="" />
-			<campoSalida value="Descripcion" target="" />
-			<campoSalida value="Activa" target="" />			
+		<output name="categorias" tableName="mtImpuestoCategorias">		
+<!-- 			<campoSalida value="oid_ImpCat" target="" />			 -->
+			<campoSalida value="oid_Impuesto" target="impuesto.id" />			
+			<campoSalida value="oid_Categoria" target="id" />			
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activa" target="activo" />			
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -821,30 +821,29 @@
 	</operacion>
 
 
+
 	<!-- GUARDAR UN IMPUESTO -->
 	<operacion name="GuardarImpuestos" clase="com.jkt.erp.impuestos.operaciones.GuardarImpuesto">
 
-		<!-- 
-		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Impuesto'>
+		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.erp.impuestos.dominio.Impuesto" fieldID='oid_Impuesto'>
 			<campoEntrada>
 
-				<campoEntrada name="Codigo" clase="String" metodo="" />
-				<campoEntrada name="Descripcion" clase="String" metodo="" />
-				<campoEntrada name="oid_Comportamiento" clase="String" metodo="" />
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="oid_Comportamiento" clase="String" metodo="setComportamiento" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
-				<campoEntrada name="mtImpuestoCategorias" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_ImpCat" clase="String" metodo="" />
-					<campoEntrada name="oid_Impuesto" clase="String" metodo="" />
-					<campoEntrada name="oid_Categoria" clase="String" metodo="" />
-					<campoEntrada name="Codigo" clase="String" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Activa" clase="Boolean" metodo="" />
+				<campoEntrada name="mtImpuestoCategorias" metodo="agregarCategoria" clase="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" fieldID="oid_Categoria">
+<!-- 					<campoEntrada name="oid_ImpCat" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Impuesto" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Categoria" clase="String" metodo="" /> -->
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="Activa" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 				
 			</campoEntrada>
 		</input>
-		 -->
 		
 		<forms>
 			<form name=""></form>
@@ -854,14 +853,15 @@
 
 
 	<!-- TRAE LOS COMPORTAMIENTOS DEL IMPUESTO -->
-	<operacion name="TraerComportamientosImpuesto" clase="">
+	<operacion name="TraerComportamientosImpuesto" clase="com.jkt.erp.impuestos.operaciones.TraerComportamientosImpuesto">
 										
-		<output name="" tableName="mtComportamientos">		
-			<campoSalida value="oid_Comportamiento" target="" />
-			<campoSalida value="Descripcion" target="" />
+		<output name="resultado" tableName="mtComportamientos">		
+			<campoSalida value="oid_Comportamiento" target="codigo" />
+<!-- 			<campoSalida value="oid_Comportamiento" target="codigo" /> -->
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>
 						
-		<transformer clase="com.jkt.transformers."></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
 			<form name=""> </form>

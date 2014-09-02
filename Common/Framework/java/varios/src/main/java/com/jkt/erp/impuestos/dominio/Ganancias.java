@@ -5,4 +5,8 @@ import java.util.List;
 
 public class Ganancias extends Impuesto {
 
+	public String getComportamiento(){
+		return "GANANCIAS";
+	}
+	
 }

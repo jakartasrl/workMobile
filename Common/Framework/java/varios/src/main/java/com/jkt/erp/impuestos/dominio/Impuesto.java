@@ -11,11 +11,21 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-abstract public class Impuesto extends Descriptible {
+public class Impuesto extends Descriptible {
 
 	private static final long serialVersionUID = -7825370624771296086L;
 
 	private List<CategoriaImpuesto> categorias = new ArrayList<CategoriaImpuesto>();
+
+	private String comportamiento;
+	
+	public String getComportamiento() {
+		return comportamiento;
+	}
+
+	public void setComportamiento(String comportamiento) {
+		this.comportamiento = comportamiento;
+	}
 
 	public List<CategoriaImpuesto> getCategorias() {
 		return categorias;
@@ -24,11 +34,12 @@ abstract public class Impuesto extends Descriptible {
 	public void setCategorias(List<CategoriaImpuesto> categorias) {
 		this.categorias = categorias;
 	}
-	
-	public void agregarCategoria(CategoriaImpuesto categoria){
+
+	public void agregarCategoria(CategoriaImpuesto categoria) {
+		categoria.setImpuesto(this);
 		getCategorias().add(categoria);
 	}
-	
+
 	// abstract List getCategorias();
 
 }

@@ -4,25 +4,24 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.erp.impuestos.dominio.Impuesto" table="IMPUESTOS">
+	<class name="com.jkt.erp.impuestos.dominio.Impuesto" table="IMPUESTOS" discriminator-value="IMPUESTO">
 		<id name="id" column="IMPUESTO_ID">
 			<generator class="native" />
 		</id>
 		<discriminator column="DISCRIMINADOR" type="string" />
 
-		<property name="comportamiento" column="COMPORTAMIENTO" type="string" />
+<!-- 		<property name="comportamiento" column="COMPORTAMIENTO" type="string" /> -->
 		<property name="codigo" column="CODIGO" />
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 
-		<!-- <list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="false" cascade="all"> -->
-		<!-- <key column="IMPUESTO_ID"></key> -->
-		<!-- <index column="ORDEN"></index> -->
-		<!-- <one-to-many class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto"/> -->
-		<!-- </list> -->
-
-		<subclass name="com.jkt.erp.impuestos.dominio.Iva"
-			discriminator-value="IVA">
+<!-- 		<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="true" cascade="all"> -->
+<!-- 			<key column="IMPUESTO_ID"></key> -->
+<!-- 			<index column="ORDEN"></index> -->
+<!-- 			<one-to-many class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" /> -->
+<!-- 		</list> -->
+			
+		<subclass name="com.jkt.erp.impuestos.dominio.Iva" discriminator-value="IVA">
 			<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="true"
 				cascade="all">
 				<key column="IMPUESTO_ID"></key>
@@ -31,8 +30,7 @@
 			</list>
 		</subclass>
 
-		<subclass name="com.jkt.erp.impuestos.dominio.IngresosBrutos"
-			discriminator-value="INGRESOS_BRUTOS">
+		<subclass name="com.jkt.erp.impuestos.dominio.IngresosBrutos" discriminator-value="INGRESOS_BRUTOS">
 			<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="true"
 				cascade="all">
 				<key column="IMPUESTO_ID"></key>
@@ -41,8 +39,7 @@
 			</list>
 		</subclass>
 
-		<subclass name="com.jkt.erp.impuestos.dominio.Ganancias"
-			discriminator-value="GANANCIAS">
+		<subclass name="com.jkt.erp.impuestos.dominio.Ganancias" discriminator-value="GANANCIAS">
 			<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="true"
 				cascade="all">
 				<key column="IMPUESTO_ID"></key>
@@ -51,8 +48,7 @@
 			</list>
 		</subclass>
 
-		<subclass name="com.jkt.erp.impuestos.dominio.SUSS"
-			discriminator-value="SUSS">
+		<subclass name="com.jkt.erp.impuestos.dominio.SUSS" discriminator-value="SUSS">
 			<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="true"
 				cascade="all">
 				<key column="IMPUESTO_ID"></key>

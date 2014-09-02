@@ -5,4 +5,7 @@ import java.util.List;
 
 public class SUSS extends Impuesto {
 
+	public String getComportamiento(){
+		return "SUSS";
+	}
 }
