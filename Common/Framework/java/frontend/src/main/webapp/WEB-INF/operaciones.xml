@@ -829,7 +829,8 @@
 
 	<!-- RECUPERAR Tipo Producto -->
 	<operacion name="TraerTipoProducto" clase="com.jkt.erp.articulos.operaciones.TraerTipoProducto" >
-		
+		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo">
+		</input>			
 		<output name="out1" tableName="mtTipoProd">
 			<campoSalida value="oid_tipo" 	target="id" />
 			<campoSalida value="Codigo" 	target="codigo" />
@@ -879,5 +880,56 @@
 	</operacion>
 
 
+	<!-- RECUPERAR  Caracteristicas de Producto -->
+	<operacion name="TraerCaracProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.CaracteristicaProducto">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_carac" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="tipo_dato"    target="tipoDato" />
+			<campoSalida value="oid_tabla"    target="tabla.id" />
+			<campoSalida value="cod_tabla"    target="tabla.codigo" />
+			<campoSalida value="des_tabla"    target="tabla.descripcion" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>		
+	</operacion>
+	
+	
+	<operacion name="TraerTablaValCarac" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TablaValoresCaracProd">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_tabla" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="activo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- GUARDAR Tablas Validaciones Caracteristicas de Producto  -->
+	<operacion name="GuardarTablaValCarac" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
 
 </entity>
