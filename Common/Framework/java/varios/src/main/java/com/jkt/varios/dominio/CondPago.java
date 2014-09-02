@@ -1,7 +1,7 @@
 package com.jkt.varios.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
@@ -31,7 +31,7 @@ public class CondPago extends Descriptible implements IDescriptible{
 	private boolean baseFechaRecep;
 
 	@NotEmpty
-	private List<CondPagoDet> detalles = new ArrayList<CondPagoDet>();
+	private Set<CondPagoDet> detalles = new HashSet<CondPagoDet>();
 	
 	public boolean isBaseFechaFactura() {
 		return baseFechaFactura;
@@ -45,12 +45,12 @@ public class CondPago extends Descriptible implements IDescriptible{
 	public void setBaseFechaRecep(boolean baseFechaRecep) {
 		this.baseFechaRecep = baseFechaRecep;
 	}
-	public List<CondPagoDet> getDetalles() {
-		return detalles;
-	}
-	public void setDetalles(List<CondPagoDet> detalles) {
-		this.detalles = detalles;
-	}
+//	public List<CondPagoDet> getDetalles() {
+//		return detalles;
+//	}
+//	public void setDetalles(List<CondPagoDet> detalles) {
+//		this.detalles = detalles;
+//	}
 
 	
 	/*
@@ -60,6 +60,12 @@ public class CondPago extends Descriptible implements IDescriptible{
 		return isBaseFechaFactura();
 	}
 
+	public Set<CondPagoDet> getDetalles() {
+		return detalles;
+	}
+	public void setDetalles(Set<CondPagoDet> detalles) {
+		this.detalles = detalles;
+	}
 	public boolean getBaseFechaRecep(){
 		return isBaseFechaRecep();
 	}

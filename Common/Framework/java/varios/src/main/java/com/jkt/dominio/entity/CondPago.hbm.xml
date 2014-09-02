@@ -15,11 +15,11 @@
 		<property name="baseFechaFactura" column="BASE_FECHA_FACTURA" type="boolean" />
 		<property name="baseFechaRecep" column="BASE_FECHA_RECEP" type="boolean" />
 		
-		<list name="detalles" table="COND_PAGO_DET" lazy="true" cascade="all">
+		<set name="detalles" table="COND_PAGO_DET" lazy="true" cascade="all">
 			<key column="COND_PAGO_ID"></key>
-			<index column="ORDEN"></index>
+<!-- 			<index column="ORDEN"></index> -->
 			<one-to-many class="com.jkt.varios.dominio.CondPagoDet"/>
-		</list>
+		</set>
 
 	</class>
 
