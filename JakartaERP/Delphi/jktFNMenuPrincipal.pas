@@ -600,7 +600,7 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 8;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro Perfil Funcional';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Condiciones de Pago';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;

@@ -24,7 +24,7 @@ uses
   cxBarEditItem, dxScreenTip, Vcl.ActnList, cxContainer, cxEdit, cxTextEdit,
   cxMemo, cxScrollBox, dxBevel, cxLabel, cxGroupBox, Vcl.ExtCtrls, dxSkinsForm,
   cxPC, dxSkinscxPCPainter, cxPCdxBarPopupMenu, dxTabbedMDI, jktFNMet0001,
-  Vcl.DBActns;
+  Vcl.DBActns, jktUtils;
 
 type
   TfrmMainForm = class(TdxRibbonForm)
@@ -257,6 +257,8 @@ type
     procedure SetColorScheme(const AName: string);
 
   public
+    procedure AbrirPrograma(ClassName: string);
+
     property MenuPrincipal: TForm read FMenuPrincipal write FMenuPrincipal;
     property ActiveChild: TfrmChild read GetActiveChild;
 
@@ -269,6 +271,35 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TfrmMainForm.AbrirPrograma(ClassName: string);
+var
+  fc : TFormClass;
+  f : TfrmChild;
+  i: Integer;
+begin
+  for i := 0 to MDIChildCount - 1 do
+    if (MDIChildren[i].ClassName = ClassName) then
+      begin
+        // Ya está abierto el Programa!
+        MDIChildren[i].Show;
+        Exit;
+      end;
+
+  try
+    // FindClass busca en las clases registradas del sistema.
+    // Si el nombre de la clase pasada no se encuentra, FindClass lanza una exception.
+    fc := TFormClass(FindClass(ClassName));
+  except
+    // No registró la clase!
+    MessageDlg(Format('No se encuentra el Programa "%s".' + CRLF +
+      'Debe registrar la clase con "RegisterClass".', [ClassName]), mtError, [mbOK], 0);
+    Exit;
+  end;
+
+  f := TfrmChild(fc.Create(Self));
+  f.InicializarChild(Self.alActions);
+end;
 
 procedure TfrmMainForm.acCancelExecute(Sender: TObject);
 begin

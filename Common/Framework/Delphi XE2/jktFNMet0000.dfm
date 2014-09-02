@@ -12640,7 +12640,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbPrint'
         end>
       OneOnRow = False
-      Row = 1
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12742,7 +12742,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbSelectAll'
         end>
       OneOnRow = False
-      Row = 1
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -12809,7 +12809,7 @@ object frmMainForm: TfrmMainForm
           ItemName = 'bbSiguiente'
         end>
       OneOnRow = False
-      Row = 1
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -13471,7 +13471,7 @@ object frmMainForm: TfrmMainForm
           Visible = True
           ItemName = 'bbMenuPrincipal'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True

@@ -595,18 +595,18 @@
 										
 		<output name="condicion" tableName="mtCondicionDePago">
 			<campoSalida value="oid_CondPago" target="id" />
-			<campoSalida value="Codigo" target="codigo" /> <!-- String  Size = 15 -->			
-			<campoSalida value="Descripcion" target="descripcion" /> <!-- String  Size = 100 -->			
-			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" /> <!--Boolean -->
-			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" /> <!--Boolean	-->		
+			<campoSalida value="Codigo" target="codigo" /> 
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" />
+			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" /> 
 			<campoSalida value="Activo" target="activo" />
 		</output>
 				
 		<output name="detalle" tableName="mtDetalleCondicionDePago">		
 			<campoSalida value="oid_Det_CondPago" target="id" />
 			<campoSalida value="oid_CondPago" target="condicionDePago.id" />						
-			<campoSalida value="Dias" target="dias" /> <!-- Integer -->						   
-			<campoSalida value="Porcentaje" target="porcentaje" /> <!-- Integer -->			
+			<campoSalida value="Dias" target="dias" /> 
+			<campoSalida value="Porcentaje" target="porcentaje" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
