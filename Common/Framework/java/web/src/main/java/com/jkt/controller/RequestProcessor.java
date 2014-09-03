@@ -1,6 +1,8 @@
 package com.jkt.controller;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jkt.contexto.ApplicationContext;
+import com.jkt.dominio.Container;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
@@ -23,6 +26,7 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.MapDS;
+import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.XMLEntity;
 
 /**
@@ -127,9 +131,11 @@ public abstract class RequestProcessor extends BaseController{
 		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME));
 		transformer.setTest(test);
 		log.debug("Ejecutando la operación...");
-		if (!test){
-		   operation.runOperation(parametersAdapted);
+		if (test){
+			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
+		operation.runOperation(parametersAdapted);
+		
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
@@ -146,6 +152,16 @@ public abstract class RequestProcessor extends BaseController{
 		log.debug("Finalizó la operación...");
 	}
 
+	private Map<String, Object> getObjetosOutput(Operation aOper,	IEventBusiness aEB) {
+		Map<String, Object> res = new HashMap<String, Object>();
+		Iterator<Output> it = aEB.getOutputs().iterator();
+		while (it.hasNext()){
+			Output out = (Output) it.next();
+			res.put(out.getName(),new Container("Prueba"));
+		}
+		return res;
+	}
+
 	/**
 	 * @param eventBusinessOperation
 	 * @return
@@ -156,7 +172,7 @@ public abstract class RequestProcessor extends BaseController{
 	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException, JakartaException {
 		String clase = ((EventBusiness)eventBusinessOperation).getClase();
 		if (test){
-			clase="com.jkt.operaciones.OperacionTester";
+			clase="com.jkt.operaciones.OperacionTest";
 		}
 		Class<?> forName = null;
 		try{

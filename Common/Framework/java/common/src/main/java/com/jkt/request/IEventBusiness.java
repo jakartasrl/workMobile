@@ -1,7 +1,10 @@
 package com.jkt.request;
 
+import java.util.List;
+
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.framework.writers.IHeaderDataSet;
+import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.digester.IName;
 
 public interface IEventBusiness extends IName{
@@ -25,5 +28,5 @@ public interface IEventBusiness extends IName{
 
 	public boolean getExecuteGarbageCollection();
 	public IHeaderDataSet getHeaderDataSet(String aTabname);
-;    
+	public List<Output> getOutputs();    
 }
