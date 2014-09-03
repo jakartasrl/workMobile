@@ -20,6 +20,8 @@ public class GuardarClasificador extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List objetoRecuperado = recuperarObjeto(aParams);
+		
+		/*
 		Clasificador clasificador=(Clasificador) objetoRecuperado.get(0);
 
 		List<Componente> componentes = clasificador.getComponentes();
@@ -55,7 +57,7 @@ public class GuardarClasificador extends Operation {
 			serviceRepository.save(clasificador);
 		}
 		
-		
+		*/
 	}
 
 }

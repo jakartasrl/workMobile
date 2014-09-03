@@ -8,6 +8,11 @@ import com.jkt.erp.articulos.TipoProductoDet;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 
+/**
+ * Recupera todos los tipos de producto existentes, y sus correspondientes detalles
+ * 
+ * @author DHS- Jakarta SRL
+ */
 public class TraerTipoProducto extends Operation {
 
 	@Override

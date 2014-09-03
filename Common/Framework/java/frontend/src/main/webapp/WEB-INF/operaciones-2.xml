@@ -1,0 +1,16 @@
+	<!-- TRAE LOS COMPORTAMIENTOS DEL IMPUESTO -->
+	<operacion name="TraerComportamientosImpuesto2" clase="com.jkt.erp.impuestos.operaciones.TraerComportamientosImpuesto">
+										
+		<output name="resultado" tableName="mtComportamientos">		
+			<campoSalida value="oid_Comportamiento" target="codigo" />
+<!-- 			<campoSalida value="oid_Comportamiento" target="codigo" /> -->
+			<campoSalida value="Descripcion" target="descripcion" />
+		</output>
+						
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>

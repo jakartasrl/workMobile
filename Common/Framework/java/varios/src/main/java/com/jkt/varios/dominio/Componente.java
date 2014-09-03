@@ -1,5 +1,8 @@
 package com.jkt.varios.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -17,14 +20,35 @@ public class Componente extends Descriptible {
 	private Clasificador clasificador;
 	private Componente componentePadre;
 	private Componente componenteHijo;
-	private ComponenteValor valor;
+	private List<ComponenteValor> valores=new ArrayList<ComponenteValor>();
 	
-	public ComponenteValor getValor() {
-		return valor;
+	
+	
+	private boolean flag=false;
+	public void agregarValor(ComponenteValor valor){
+		
+		//Ejecucion de este metodo como si fuese estatico, ejecutado una sola vez, la primera vez que es ejecutado el metodo agregarValor
+		if(!flag){
+			for (ComponenteValor valorActual : valores) {
+				valorActual.setActivo(false);
+			}
+			flag=true;
+		}
+		
+		if (!valores.contains(valor)) {
+			valores.add(valor);
+			valor.setComponente(this);
+		}else{
+			valor.setActivo(true);
+		}
 	}
 
-	public void setValor(ComponenteValor valor) {
-		this.valor = valor;
+	public List<ComponenteValor> getValores() {
+		return valores;
+	}
+
+	public void setValores(List<ComponenteValor> valores) {
+		this.valores = valores;
 	}
 
 	/*
