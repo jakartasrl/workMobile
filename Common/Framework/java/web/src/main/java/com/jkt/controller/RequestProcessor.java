@@ -1,7 +1,6 @@
 package com.jkt.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -154,9 +153,18 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException, JakartaException {
 		String clase = ((EventBusiness)eventBusinessOperation).getClase();
-		Class<?> forName = Class.forName(clase);
+		if (test){
+			clase="com.jkt.operaciones.OperacionTester";
+		}
+		Class<?> forName = null;
+		try{
+		   forName = Class.forName(clase);
+		}
+		catch (ClassNotFoundException e){
+			throw new JakartaException("La clase " + clase + " no existe");
+		}
 		Object newInstance = forName.newInstance();
 		Operation op=(Operation)newInstance;
 		op.setServiceRepository(serviceRepository);
