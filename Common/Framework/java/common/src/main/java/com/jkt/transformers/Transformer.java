@@ -27,13 +27,18 @@ public abstract class Transformer implements Observer {
 	protected static PropertySolver solver=new PropertySolver();
 	
 	private IEventBusiness event;
-
+	protected boolean        test;
+	
 	public IEventBusiness getEvent() {
 		return event;
 	}
 
 	public void setEvent(IEventBusiness event) {
 		this.event = event;
+	}
+	
+	public void setTest(boolean aTest){
+		test = aTest;
 	}
 
 	public void update(Observable arg0, Object arg1) {

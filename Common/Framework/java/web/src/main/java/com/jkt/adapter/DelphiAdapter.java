@@ -59,6 +59,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 //	private SessionFactory sessionFactory;
 	private Session session;
 //	
+	private boolean test;
 	
 	/*
 	 * Definición de estregias para el guardado de parametros.
@@ -142,8 +143,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 //				continue;
 //			}
 			if (campos.getCampos().containsKey("oid") && campos.getCampos().containsKey("class") && campos.getCampos().containsKey("key")) {
-				PersistentEntity objetoRecuperado = recuperarObjecto(Class.forName(campos.getCampos().get("class")), Long.valueOf(campos.getCampos().get("oid")));
-				finalResult.put((String)campos.getCampos().get("key"), objetoRecuperado);
+				if (!test){
+				   PersistentEntity objetoRecuperado = recuperarObjecto(Class.forName(campos.getCampos().get("class")), Long.valueOf(campos.getCampos().get("oid")));
+				   finalResult.put((String)campos.getCampos().get("key"), objetoRecuperado);
+				}
 			}else{
 //				finalResult.put((String)campos.getCampos().get("key"),(String)campos.getCampos().get("value"));
 				
@@ -171,10 +174,20 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 
 			//Recupera el nombre de la variable que contendra el ID que puede servir para recuperar una entidad de la base de datos.
 			final String keyParaRecuperarObjeto = inputElement.getFieldID();
+			if (keyParaRecuperarObjeto == null || keyParaRecuperarObjeto.isEmpty()){
+				throw new JakartaException("No esta en operaciones.xml el FieldID");
+			}
 			
 			//Se obtiene el tipo de clase de la tabla. Todos los registros de este nivel serán de esta clase
-			Class<?> clazz = Class.forName(inputElement.getClase());
-			
+			Class<?> clazz = null;
+			if (! test){
+			   try{
+			     clazz = Class.forName(inputElement.getClase());
+			   }
+			   catch (ClassNotFoundException e){
+				   throw new JakartaException("La clase " + inputElement.getClase() + " no existe");
+			   }
+			}
 			//Setear la estrategia para determinar si es un objeto unico o una lista de los mismos...
 			List<Registro> registros = table.getRegitros();
 			if (registros.size()>1) {
@@ -198,10 +211,14 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				if (keyParaRecuperarObjeto==null) {
 					oid=0;
 				}else{
+					if (! mapaConCampos.containsKey(keyParaRecuperarObjeto)){
+						throw new JakartaException("El campo " + keyParaRecuperarObjeto + " no viene de delphi");
+					}
 					oid = Long.valueOf((String) mapaConCampos.get(keyParaRecuperarObjeto));
 				}
-				entity = recuperarObjecto(clazz, oid);
-				
+				if (! test){
+				   entity = recuperarObjecto(clazz, oid);
+				}
 				if(entity!=null){
 					instance=entity;
 				}
@@ -218,10 +235,16 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 					
 					for (Iterator<Entry<Object, Object>> iterator = mapaConCampos.entrySet().iterator(); iterator.hasNext();) {
 						entry = (Entry<Object, Object>) iterator.next();
-						
+						String key = (String)entry.getKey();
+						if (keyParaRecuperarObjeto.equals(key)){
+							continue;
+						}
 						metaDataOfCurrentField = campoEntrada.getHijo((String)entry.getKey());
 						
-						if (metaDataOfCurrentField==null) { continue; }
+						if (metaDataOfCurrentField==null) {
+							//continue;
+							throw new JakartaException("El campo: "  + (String)entry.getKey() + " no esta en operaciones.xml");
+						}
 						
 						/*
 						 * La generación de cada campo puede ser primitiva o compuesta.
@@ -229,8 +252,15 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 						 */
 						if(esTabla(entry.getValue())){
 							//Creo la instancia del objeto compuesto
-							Class<?> complexClazz = Class.forName(metaDataOfCurrentField.getClase());
-							
+							Class<?> complexClazz = null;
+							if (!test){
+							  try{	
+							   complexClazz = Class.forName(metaDataOfCurrentField.getClase());
+							  
+							  } catch (ClassNotFoundException e) {
+								  throw new JakartaException("Clase: " + metaDataOfCurrentField.getClase() + " Inexistente");
+							  }
+							}
 							
 							Object complexInstance=null;// = complexClazz.newInstance();
 							
@@ -242,18 +272,22 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								String keyParaRecuperarObjetoHijo = metaDataOfCurrentField.getFieldID();
 								
 								if (keyParaRecuperarObjetoHijo==null) {
-									idObject=Long.valueOf(0);
+									//idObject=Long.valueOf(0);
+									  throw new JakartaException(" No esta configurado el campo FieldID");
+										
 								}else{
 									String value = (String) reg.getCampos().get(keyParaRecuperarObjetoHijo);
 									if (value==null || value.isEmpty()) {
-										idObject = Long.valueOf(0);
+										// idObject = Long.valueOf(0);
+										 throw new JakartaException("El campo: " + keyParaRecuperarObjetoHijo + " no viene en los datos que envia Delphi");
 									}else{
 										idObject = Long.valueOf(value);
 									}
 								}
 							
-								complexInstance = recuperarObjecto(complexClazz, idObject.longValue());
-								
+								if (!test){
+								   complexInstance = recuperarObjecto(complexClazz, idObject.longValue());
+								}
 								if (complexInstance==null) {
 									complexInstance = complexClazz.newInstance();
 								}
@@ -265,21 +299,28 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 									entryR = (Entry<Object, Object>) iteratorR.next();
 									childCampoEntrada = metaDataOfCurrentField.getHijo((String)entryR.getKey());
 									
+									if (childCampoEntrada==null){
+										 throw new JakartaException("El campo: " + (String)entryR.getKey() + " no viene en los datos que envia Delphi");
+									}
 									if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
 										continue;
 									}
 									
+								
 									if(esTabla(entryR.getValue())){
 										resolverCampoCompuesto(complexClazz, complexInstance, childCampoEntrada, ((Tabla)entryR.getValue()).getRegitros());
 									}else{
 										resolvePrimitiveObject(childCampoEntrada, complexClazz, complexInstance, entryR.getValue());
 									}
 								}
-								
-								Class<?> otraClase = Class.forName(metaDataOfCurrentField.getClase());
-								Method method = clazz.getMethod(metaDataOfCurrentField.getMetodo(), otraClase);
-								
-								method.invoke(instance,complexInstance);
+								try{
+								   Class<?> otraClase = Class.forName(metaDataOfCurrentField.getClase());
+					     		   Method method = clazz.getMethod(metaDataOfCurrentField.getMetodo(), otraClase);								
+								   method.invoke(instance,complexInstance);
+								}
+								catch(ClassNotFoundException e){
+									throw new JakartaException("La clase " + metaDataOfCurrentField.getClase() + " no existe" );
+								}
 								
 							}
 							/*
@@ -400,7 +441,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 * 
 	 */
 	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException, ClassNotFoundException{
-		
+		if (test){
+			return;
+		}
 		Class primitiveWrapper;
 		
 		if (STRING_TYPE.equals(campoEntrada.getClase())) {
@@ -434,9 +477,17 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		
 		
 		//creacion de clase e instancia del objeto compuesto.
-		Class<?> childClazz = Class.forName(parentMetadata.getClase());
-		Object childInstance = childClazz.newInstance();
-		
+		Class<?> childClazz  = null;
+		Object childInstance = null;
+		if (!test){
+			try{
+			   childClazz = Class.forName(parentMetadata.getClase());
+			}
+			catch (ClassNotFoundException e){
+				throw new JakartaException("La clase: " + parentMetadata.getClase() + " es Inexistente");
+			}
+			childInstance = childClazz.newInstance();
+		}
 		Registro primerRegistro=registros.get(0);//es un for esto carajo!
 		
 //		if (registros.size()>1) {
@@ -459,10 +510,11 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				resolvePrimitiveObject(childMetadata, childClazz, childInstance, entryR.getValue());
 			}
 		}
-		
-		Class<?> otraClase = Class.forName(parentMetadata.getClase());
-		Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase);
-		method.invoke(parentObject,childInstance);
+		if (!test){
+		   Class<?> otraClase = Class.forName(parentMetadata.getClase());
+		   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase);
+		   method.invoke(parentObject,childInstance);
+		}
 	}
 	
 	private boolean esTabla(Object obj){
@@ -472,6 +524,12 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	@Autowired
 	public void setSession(SessionProvider sessionProvider) {
 		this.sessionProvider=sessionProvider;
+	}
+	
+
+	public void setTest(boolean aTest) {
+		test = aTest;
+		
 	}
 
 }
