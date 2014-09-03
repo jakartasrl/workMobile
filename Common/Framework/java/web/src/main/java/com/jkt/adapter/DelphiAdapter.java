@@ -29,9 +29,6 @@ import com.jkt.util.Tabla;
 import com.jkt.xmlreader.CampoEntrada;
 import com.jkt.xmlreader.Input;
 
-
-
-
 /**
  * Adapter para transformar las peticiones desde y hacia el cliente delphi.
  * 
@@ -488,7 +485,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			}
 			childInstance = childClazz.newInstance();
 		}
-		Registro primerRegistro=registros.get(0);//es un for esto carajo!
+		Registro primerRegistro=registros.get(0);//es un for esto!
 		
 //		if (registros.size()>1) {
 //			estrategia=new StrategyManyInstances();
