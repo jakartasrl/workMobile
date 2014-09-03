@@ -614,6 +614,34 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 10;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Tablas de Validacion ';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 11;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Caracteristicas de Producto ';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 12;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Tipo de Producto ';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
   cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;
 

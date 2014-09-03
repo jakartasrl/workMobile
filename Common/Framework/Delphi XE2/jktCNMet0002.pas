@@ -642,10 +642,17 @@ begin
 end;
 
 procedure TjktServiceCaller.setOperacion(aOper :String);
+var
+  keyName :string;
 begin
    currentOper := aOper;
    FXML.addElement(0, 'Request');
-   FXML.addAtribute('op', aOPer);
+   {$IfDef SIN_JAVA}
+      keyName := 'opTest';
+  {$Else}
+      keyName := 'op';
+  {$EndIf}
+   FXML.addAtribute(keyName, aOPer);
    if Login <> nil
       then begin
            FXML.addAtribute('sesionID',    Login.sesionID);
