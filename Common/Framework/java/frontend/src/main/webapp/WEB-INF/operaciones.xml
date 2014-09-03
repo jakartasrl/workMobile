@@ -823,7 +823,7 @@
 
 
 	<!-- GUARDAR UN IMPUESTO -->
-	<operacion name="GuardarImpuestos" clase="com.jkt.erp.impuestos.operaciones.GuardarImpuesto">
+	<operacion name="GuardarImpuestos" clase="com.jkt.operaciones.GuardarLista">
 
 		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.erp.impuestos.dominio.Impuesto" fieldID='oid_Impuesto'>
 			<campoEntrada>

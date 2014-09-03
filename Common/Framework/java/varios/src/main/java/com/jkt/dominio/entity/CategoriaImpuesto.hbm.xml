@@ -5,29 +5,14 @@
 <hibernate-mapping>
 
 	<class name="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" table="CATEGORIA_IMPUESTOS" >
-<!-- 	<class name="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" table="CATEGORIA_IMPUESTOS" discriminator-value="CATEGORIA"> -->
 		<id name="id" column="CATEGORIA_IMPUESTO_ID">
 			<generator class="native" />
 		</id>
-		<discriminator column="CATEGORIA" type="string" />
-		
 		<many-to-one name="impuesto" class="com.jkt.erp.impuestos.dominio.Impuesto" column="IMPUESTO_ID"></many-to-one>
 
 		<property name="codigo" column="CODIGO" />
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-
-		<subclass name="com.jkt.erp.impuestos.dominio.CategoriaIva" discriminator-value="CATEGORIA_IVA">
-		</subclass>
-
-		<subclass name="com.jkt.erp.impuestos.dominio.CategoriaIIBB" discriminator-value="CATEGORIA_IIBB">
-		</subclass>
-
-		<subclass name="com.jkt.erp.impuestos.dominio.CategoriaGanancias" discriminator-value="CATEGORIA_GANANCIAS">
-		</subclass>
-
-		<subclass name="com.jkt.erp.impuestos.dominio.CategoriaSUSS" discriminator-value="CATEGORIA_SUSS">
-		</subclass>
 
 	</class>
 
