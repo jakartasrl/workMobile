@@ -238,7 +238,7 @@ procedure TjktValidador.validar(sender :TField);
 begin
   if (FValidacion =  tMayorCero)
   or (FValidacion =  tMayorIgualCero)
-  or (FValidacion =  tMenorIgualCien )
+  or (FValidacion =  tMenorIgualCien)
   or (FValidacion =  tDistintoEspacio)
       then validacionLocal(sender)
       else validacionServer(sender);
@@ -284,22 +284,22 @@ begin
   FServiceCaller.execute;
 end;
 
-procedure TjktValidador.validacionLocal(sender :TField);
+procedure TjktValidador.validacionLocal(sender: TField);
 begin
   try
-    if FValidacion =  tMayorCero then
+    if FValidacion = tMayorCero then
       begin
         if sender.asFloat <= 0 then raise Exception.Create('Debe ser mayor a cero');
       end
-    else if FValidacion =  tMayorIgualCero then
+    else if FValidacion = tMayorIgualCero then
       begin
         if sender.asFloat < 0 then raise Exception.Create('Debe ser mayor o igual a cero') ;
       end
-    else if FValidacion =  tMenorIgualCien then
+    else if FValidacion = tMenorIgualCien then
       begin
-        if sender.asFloat < 100 then raise Exception.Create('Debe ser menor o igual a cien') ;
+        if (sender.AsFloat > 100) or (sender.AsFloat <= 0) then raise Exception.Create('El valor debe ser mayor a cero y menor o igual a cien');
       end
-    else if FValidacion =  tDistintoEspacio then
+    else if FValidacion = tDistintoEspacio then
       begin
         if trim(sender.asString) = '' then raise Exception.Create('Debe ser distinto de espacios');
       end;
@@ -360,27 +360,26 @@ end;
 
 procedure TjktValidadorForm.Validar(Sender: TField);
 var
-  x: integer;
-  validadorField :TjktValidadorField;
-  isNew :boolean;
+  x: Integer;
+  validadorField: TjktValidadorField;
+  isNew: Boolean;
 begin
-   isNew := isEstadoNew;
-   for x:=0 to FListaValidaciones.Count -1 do
-     begin
-        validadorField := TjktValidadorField (FListaValidaciones.Items[x]);
-        if validadorField.Field = sender
-            then begin
-                 if (isNew)  and ( validadorField.ValidadorNew <> nil) and (not validadorField.ValidadorNew.ServiceCaller.ModoExecute)
-                      then  validadorField.ValidadorNew.validar(sender)
-                 else
-                 if (isNew = false)  and ( validadorField.ValidadorModif <> nil) and (not validadorField.ValidadorModif.ServiceCaller.ModoExecute)
-                      then  validadorField.ValidadorModif.validar(sender)
-                 else
-                 if (validadorField.ValidadorGral <> nil) and (not validadorField.ValidadorGral.ServiceCaller.ModoExecute)
-                      then  validadorField.ValidadorGral.validar(sender);
-
-                 end;
-     end;
+  isNew := isEstadoNew;
+  for x := 0 to FListaValidaciones.Count - 1 do
+    begin
+      validadorField := TjktValidadorField (FListaValidaciones.Items[x]);
+      if validadorField.Field = sender then
+        begin
+          if (isNew) and (validadorField.ValidadorNew <> nil) and (not validadorField.ValidadorNew.ServiceCaller.ModoExecute) then
+            validadorField.ValidadorNew.validar(sender)
+          else
+            if (isNew = false) and (validadorField.ValidadorModif <> nil) and (not validadorField.ValidadorModif.ServiceCaller.ModoExecute) then
+              validadorField.ValidadorModif.validar(sender)
+            else
+              if (validadorField.ValidadorGral <> nil) and (not validadorField.ValidadorGral.ServiceCaller.ModoExecute) then
+                validadorField.ValidadorGral.validar(sender);
+        end;
+    end;
 end;
 
 

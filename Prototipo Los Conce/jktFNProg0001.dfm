@@ -16,35 +16,35 @@ inherited FNProg0001: TFNProg0001
     LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 273
-      Top = 23
+      Top = 41
       Style.HotTrack = False
       TabOrder = 1
       Width = 117
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 539
-      Top = 23
+      Top = 41
       Style.HotTrack = False
       TabOrder = 2
       Width = 121
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 760
-      Top = 23
+      Top = 41
       Style.HotTrack = False
       TabOrder = 3
       Width = 121
     end
     object cxDBDateEdit1: TcxDBDateEdit
       Left = 99
-      Top = 23
+      Top = 41
       Style.HotTrack = False
       TabOrder = 0
       Width = 99
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 273
-      Top = 89
+      Top = 107
       Style.HotTrack = False
       TabOrder = 6
       Width = 387
@@ -172,7 +172,7 @@ inherited FNProg0001: TFNProg0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 99
-      Top = 89
+      Top = 107
       Properties.Buttons = <
         item
           Default = True
@@ -188,7 +188,7 @@ inherited FNProg0001: TFNProg0001
       Width = 90
       Height = 17
       Caption = 'Los Conce'
-      Color = 15919591
+      Color = clWhite
       ParentColor = False
       TabOrder = 12
       Visible = False
@@ -200,7 +200,7 @@ inherited FNProg0001: TFNProg0001
       Width = 65
       Height = 17
       Caption = 'Cliente'
-      Color = 15919591
+      Color = clWhite
       ParentColor = False
       TabOrder = 13
       Visible = False
@@ -213,7 +213,7 @@ inherited FNProg0001: TFNProg0001
       Height = 17
       Caption = 'Los Conce'
       Checked = True
-      Color = 15919591
+      Color = clWhite
       ParentColor = False
       TabOrder = 14
       TabStop = True
@@ -227,7 +227,7 @@ inherited FNProg0001: TFNProg0001
       Width = 65
       Height = 17
       Caption = 'Cliente'
-      Color = 15919591
+      Color = clWhite
       ParentColor = False
       TabOrder = 15
       Visible = False
@@ -241,7 +241,7 @@ inherited FNProg0001: TFNProg0001
       Height = 17
       Caption = 'Los Conce'
       Checked = True
-      Color = 15919591
+      Color = clWhite
       ParentColor = False
       TabOrder = 16
       TabStop = True
@@ -255,7 +255,7 @@ inherited FNProg0001: TFNProg0001
       Width = 65
       Height = 17
       Caption = 'Cliente'
-      Color = 15919591
+      Color = clWhite
       ParentColor = False
       TabOrder = 17
       Visible = False
@@ -712,7 +712,7 @@ inherited FNProg0001: TFNProg0001
     end
     object cxComboBox1: TcxComboBox
       Left = 99
-      Top = 50
+      Top = 68
       Properties.DropDownListStyle = lsFixedList
       Properties.Items.Strings = (
         'Venta'
@@ -893,16 +893,19 @@ inherited FNProg0001: TFNProg0001
         TabOrder = 0
         Properties.ActivePage = tbsGantt
         Properties.CustomButtons.Buttons = <>
+        ExplicitHeight = 243
         ClientRectBottom = 246
         ClientRectLeft = 2
         ClientRectRight = 138
-        ClientRectTop = 25
+        ClientRectTop = 28
         object tbsGantt: TcxTabSheet
           Caption = 'Gantt'
           ImageIndex = 3
+          ExplicitTop = 25
+          ExplicitHeight = 221
           DesignSize = (
             136
-            221)
+            218)
           object btnGanttExpandAll: TcxButton
             Tag = 1
             Left = 8
@@ -987,6 +990,8 @@ inherited FNProg0001: TFNProg0001
         object cxTabSheet1: TcxTabSheet
           Caption = 'Vista'
           ImageIndex = 1
+          ExplicitTop = 25
+          ExplicitHeight = 221
           object cxGroupBox1: TcxGroupBox
             Left = 3
             Top = 11
@@ -1711,7 +1716,6 @@ inherited FNProg0001: TFNProg0001
       0)
   end
   inherited Driver: TjktDriver
-    Scheduler = Scheduler
     Left = 608
     Top = 8
   end
