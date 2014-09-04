@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDescriptible;
@@ -30,7 +30,7 @@ public class CondPago extends Descriptible implements IDescriptible{
 	@NotNull
 	private boolean baseFechaRecep;
 
-	@NotEmpty
+	@NotBlank
 	private Set<CondPagoDet> detalles = new HashSet<CondPagoDet>();
 	
 	public boolean isBaseFechaFactura() {

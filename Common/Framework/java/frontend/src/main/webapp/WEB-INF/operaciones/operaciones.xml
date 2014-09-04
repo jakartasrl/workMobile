@@ -69,7 +69,6 @@
 
 <entity>
 
-
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
 		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
@@ -728,6 +727,7 @@
 
 <!-- 					<campoEntrada name="oid_CompClasif" clase="String" metodo="" /> -->
 <!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
+
 <!-- 					<campoEntrada name="oid_Nivel" clase="Integer" metodo="setNivel" /> -->
 <!-- 					<campoEntrada name="oid_NivelPadre" clase="Integer" metodo="setNivelSuperior" /> -->
 

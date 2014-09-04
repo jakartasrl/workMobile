@@ -75,7 +75,7 @@ public abstract class RequestProcessor extends BaseController{
 
 		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
 
-		log.debug(String.format("Se inicia una solicitud desde un cliente %s",this.getAppRequest()));
+		log.debug(String.format("Se inicia una solicitud desde un cliente %s",getAppRequest()));
 		
 		log.debug("Parseando la solicitud a un mapa...");
 		MapDS parameters = (MapDS) retrieveParameters(request);
@@ -138,7 +138,7 @@ public abstract class RequestProcessor extends BaseController{
 		transformer.write();
 		
 //		}catch(Exception exception){
-			//Hago el rollback y muestro el mensaje critido en frontend.
+			//Hago el rollback y muestro el mensaje critico en frontend.
 //			tx.rollback();
 //			throw exception;
 		}finally{

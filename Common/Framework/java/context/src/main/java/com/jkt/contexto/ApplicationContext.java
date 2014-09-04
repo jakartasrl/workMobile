@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
+import com.jkt.excepcion.JakartaException;
 import com.jkt.xmlreader.XMLEntity;
 import com.jkt.xmlreader.XMLEvento;
 import com.jkt.xmlreader.XMLObservador;
@@ -43,9 +44,10 @@ public class ApplicationContext {
 	 * 
 	 * @throws SAXException 
 	 * @throws IOException 
+	 * @throws JakartaException 
 	 */
 	@PostConstruct
-	public void initMethod() throws IOException, SAXException{
+	public void initMethod() throws IOException, SAXException, JakartaException{
 		configuration.iniciarOperacionesYEventos();
 	}
 	
