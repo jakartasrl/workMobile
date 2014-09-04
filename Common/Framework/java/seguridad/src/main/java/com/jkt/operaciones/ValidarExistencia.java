@@ -1,5 +1,6 @@
 package com.jkt.operaciones;
 
+import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.transformers.Notificacion;
@@ -13,6 +14,9 @@ public class ValidarExistencia extends Validar {
 
 	@Override
 	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws ValidacionException {
+		if (codigo.isEmpty() || codigo.trim().equals("")){
+			entity = new Container("vacio");
+		}
 		if (entity==null) {
 			throw new ValidacionException(String.format("El codigo solicitado no existe.", className, codigo));
 		}

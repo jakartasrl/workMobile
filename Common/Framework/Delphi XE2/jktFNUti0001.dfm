@@ -3,7 +3,7 @@ inherited FNUti0001: TFNUti0001
   ClientHeight = 384
   ClientWidth = 738
   ExplicitWidth = 754
-  ExplicitHeight = 422
+  ExplicitHeight = 423
   PixelsPerInch = 96
   TextHeight = 13
   object jktExpDBGrid1: TjktExpDBGrid [0]
@@ -38,7 +38,6 @@ inherited FNUti0001: TFNUti0001
   end
   inherited Driver: TjktDriver
     DataSetCab = mtInput
-    TipoPrograma = tp_Otro
   end
   inherited OperacionSave: TjktOperacion
     Atributos = <
@@ -88,7 +87,6 @@ inherited FNUti0001: TFNUti0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    OnNewRecord = mtInputNewRecord
     Left = 392
     Top = 304
   end

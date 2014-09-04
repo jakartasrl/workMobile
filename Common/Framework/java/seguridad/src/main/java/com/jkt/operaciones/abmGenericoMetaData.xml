@@ -107,7 +107,7 @@
 		<validadores>
 			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="TablaValoresCaracProd" oidName="oid_tabla" descrName="desc_tabla" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="TablaValoresCaracProd" oidName="oid_tabla" descrName="des_tabla" />
 		</validadores>
 		
 	</entidad>

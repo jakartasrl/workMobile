@@ -49,7 +49,7 @@ type
     mtConfigValidadoroidName: TStringField;
     mtConfigValidadordescrName: TStringField;
     mtConfigValidadorestadoForm: TStringField;
-    procedure mtInputNewRecord(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
    procedure crearColumnasDataset;
@@ -64,8 +64,6 @@ type
 
   end;
 
-var
-  FNUti0001: TFNUti0001;
 
 implementation
 
@@ -151,12 +149,6 @@ begin
 end;
 
 
-procedure TFNUti0001.mtInputNewRecord(DataSet: TDataSet);
-begin
-  inherited;
-  mtInput.FieldByName('key').AsInteger := mtInput.RecordCount + 1;
-end;
-
 procedure TFNUti0001.completarOperaciones;
 begin
    mtConfigOper.first;
@@ -209,11 +201,6 @@ begin
        //mtInput.FieldDefs.Add(name, tipo, size,  false);
        mtConfigCampos.Next;
     end;
-    fieldDef := mtInput.FieldDefs.AddFieldDef ;
-    fieldDef.name := 'key';
-    fieldDef.dataType := ftInteger;
-    fieldDef.Size := 0;
-    fieldDef.Required := false;
     mtInput.CreateTable;
     mtInput.Close;
     mtInput.Open;
@@ -290,10 +277,14 @@ begin
             asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
             asignador.FieldName := mtConfigValidador.fieldByName('oidName').AsString;
             asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+            asignador.SourceName  := 'oid';
+
             // Descripcion
             asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
             asignador.FieldName := mtConfigValidador.fieldByName('descrName').AsString;
             asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+            asignador.SourceName  := 'descripcion';
+
            end;
 
     validadorField.Field.OnValidate := validadorForm.validar;
@@ -301,5 +292,13 @@ begin
   end;
 end;
 
+procedure TFNUti0001.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FMultipleInstancia := true;
+end;
+
+initialization
+  RegisterClass(TFNUti0001);
 
 end.

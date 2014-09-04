@@ -66,6 +66,9 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	 * 
 	 * 
 	 */
+	public String getDescripcion() {
+		return getRazonSocial();
+	}
 	
 	public String getCadena() {
 		return getRazonSocial();

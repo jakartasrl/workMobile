@@ -270,9 +270,7 @@ begin
   else if FValidacion = tInexistente then
     operName := operInexistente;
 
-  if (sender.IsNull) or (trim(sender.asString) = '')
-        then exit;
-
+  
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(operName);
   FServiceCaller.addAtribute('codigo',    trim(sender.AsString));
