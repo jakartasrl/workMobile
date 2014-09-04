@@ -174,6 +174,7 @@ public class RequestProcessorDelphi extends RequestProcessor{
 
 	@Override
 	protected Map adaptParameters(Object input, IEventBusiness operation) throws Exception,EntityNotFoundException {
+		this.delphiAdapter.setTest(test);
 		Map result=(Map)this.delphiAdapter.adaptRequest((MapDS) input, (EventBusiness)operation);																
 		return result;
 	}

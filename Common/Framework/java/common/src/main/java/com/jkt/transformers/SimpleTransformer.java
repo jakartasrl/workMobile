@@ -20,7 +20,7 @@ import com.jkt.xmlreader.Output;
  */
 public class SimpleTransformer extends Transformer {
 
-	//private String outputName;
+	private String outputName;
 	private boolean flag=false;
 	private String currentTableName  = "";
 	
@@ -54,29 +54,40 @@ public class SimpleTransformer extends Transformer {
 		if (arg1 != null) { //SOLAMENTE SE PREGUNTA ESO PARA CERRAR CON EL METODO WRITER Y PODER DARLE LOS TAGS DE CIERRE AL TAG TABLA.
 
 			Object instance = (Object) arg1.getParameter();
+			
 			String outputName = arg1.getWriterKey();
-
+			
 			EventBusiness eventBusiness=(EventBusiness) this.getEvent();
 
 			Output currentTable = null;
 			try {
 				currentTable = eventBusiness.getHijoOutput(outputName);
+				
 			} catch (JakartaException e1) {
 				throw new RuntimeException("El outputName: " + outputName + " no esta definido en la operacion");
 			}
 
-			if (! currentTableName.equals(currentTable.getTableName())){
-				this.getWriter().addTabla(currentTable.getTableName());
-				currentTableName = currentTable.getTableName();
+			String tableName = currentTable.getTableName();
+			if (this.outputName != null){
+				tableName = this.outputName;
+			}
+			if (! currentTableName.equals(tableName)){
+				this.getWriter().addTabla(tableName);
+				currentTableName = tableName;
 			}
 			
 			this.getWriter().addFila();
 
 			for (CampoSalida currentColumna : currentTable.getCamposDeSalida()) {
 				// 3 - Por cada CAMPOSALIDA que tenga esa fila, se genera una COLUMNA
-				Object resultado;
+				Object resultado = null;
 				try {
-					resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
+					if (!test){
+					   resultado = solver.resolveMethodInvocation(currentColumna.getTarget(), instance);
+					}
+					else{
+						resultado = new Integer(1);
+					}
 				} catch (ExceptionDS e) {
 					resultado=null;
 				} catch (NoSuchMethodException e) {
@@ -116,7 +127,7 @@ public class SimpleTransformer extends Transformer {
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
 		setWriter(xmlStreamMaker);
-	//	this.outputName=ouputName;
+		this.outputName=ouputName;
 	}
 
 	public boolean isFlag() {

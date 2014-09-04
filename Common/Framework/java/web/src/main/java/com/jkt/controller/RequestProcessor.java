@@ -1,7 +1,6 @@
 package com.jkt.controller;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -38,11 +37,14 @@ import com.jkt.xmlreader.XMLEntity;
 @Scope("request")
 public abstract class RequestProcessor extends BaseController{
 	
-	private static final String KEY_NOMBRE_OPERACION = "op";
+	private static final String KEY_NOMBRE_OPERACION      = "op";
+	private static final String KEY_NOMBRE_OPERACION_TEST = "opTest";
+	
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
 	@Autowired
 	protected SessionProvider sessionProvider;
+	protected boolean test;
 	
 	@Autowired
 	protected IServiceRepository serviceRepository;
@@ -75,7 +77,17 @@ public abstract class RequestProcessor extends BaseController{
 		MapDS parameters = (MapDS) retrieveParameters(request);
 		
 		log.debug("Recuperando nombre y objeto de operacion.");
-		String operationName = parameters.getString(KEY_NOMBRE_OPERACION);
+		String key = "";
+		if (parameters.containsKey(KEY_NOMBRE_OPERACION)){
+			key = KEY_NOMBRE_OPERACION;
+			test = false;
+		}
+		else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
+			key = KEY_NOMBRE_OPERACION_TEST;
+			test = true;
+		}
+		String operationName = parameters.getString(key);
+	
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {
@@ -113,10 +125,11 @@ public abstract class RequestProcessor extends BaseController{
 
 		log.debug("Recuperando un transformer para la operación actual...");
 		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME));
-
+		transformer.setTest(test);
 		log.debug("Ejecutando la operación...");
-		operation.runOperation(parametersAdapted);
-		
+		if (!test){
+		   operation.runOperation(parametersAdapted);
+		}
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
@@ -140,9 +153,18 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
-	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException, JakartaException {
 		String clase = ((EventBusiness)eventBusinessOperation).getClase();
-		Class<?> forName = Class.forName(clase);
+		if (test){
+			clase="com.jkt.operaciones.OperacionTester";
+		}
+		Class<?> forName = null;
+		try{
+		   forName = Class.forName(clase);
+		}
+		catch (ClassNotFoundException e){
+			throw new JakartaException("La clase " + clase + " no existe");
+		}
 		Object newInstance = forName.newInstance();
 		Operation op=(Operation)newInstance;
 		op.setServiceRepository(serviceRepository);

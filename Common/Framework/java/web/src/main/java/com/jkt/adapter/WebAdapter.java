@@ -25,4 +25,11 @@ public class WebAdapter implements Adapter<String, Integer> {
 		
 	}
 
+	
+
+	public void setTest(boolean aTest) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
