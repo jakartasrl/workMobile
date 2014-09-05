@@ -24,7 +24,7 @@ uses
   cxBarEditItem, dxScreenTip, Vcl.ActnList, cxContainer, cxEdit, cxTextEdit,
   cxMemo, cxScrollBox, dxBevel, cxLabel, cxGroupBox, Vcl.ExtCtrls, dxSkinsForm,
   cxPC, dxSkinscxPCPainter, cxPCdxBarPopupMenu, dxTabbedMDI, jktFNMet0001,
-  Vcl.DBActns, jktUtils;
+  Vcl.DBActns, jktUtils, IdBaseComponent, IdAntiFreezeBase, Vcl.IdAntiFreeze;
 
 type
   TfrmMainForm = class(TdxRibbonForm)
@@ -257,7 +257,7 @@ type
     procedure SetColorScheme(const AName: string);
 
   public
-    procedure AbrirPrograma(ClassName: string);
+    procedure AbrirPrograma(ClassName: string;  paramName: string);
 
     property MenuPrincipal: TForm read FMenuPrincipal write FMenuPrincipal;
     property ActiveChild: TfrmChild read GetActiveChild;
@@ -272,20 +272,32 @@ implementation
 {$R *.dfm}
 
 
-procedure TfrmMainForm.AbrirPrograma(ClassName: string);
+procedure TfrmMainForm.AbrirPrograma(ClassName: string; paramName: string);
 var
   fc : TFormClass;
   f : TfrmChild;
   i: Integer;
 begin
   for i := 0 to MDIChildCount - 1 do
-    if (MDIChildren[i].ClassName = ClassName) then
+   begin
+    f :=  TfrmChild (MDIChildren[i]);
+    if  (MDIChildren[i].ClassName = ClassName)
+    and (f.MultipleInstancia = false) then
       begin
         // Ya está abierto el Programa!
         MDIChildren[i].Show;
         Exit;
       end;
 
+    if  (MDIChildren[i].ClassName = ClassName)
+    and (f.MultipleInstancia = true)
+    and (f.ParametroInicial = paramName) then
+      begin
+        // Ya está abierto el Programa!
+        MDIChildren[i].Show;
+        Exit;
+      end;
+   end;
   try
     // FindClass busca en las clases registradas del sistema.
     // Si el nombre de la clase pasada no se encuentra, FindClass lanza una exception.
@@ -298,7 +310,7 @@ begin
   end;
 
   f := TfrmChild(fc.Create(Self));
-  f.InicializarChild(Self.alActions);
+  f.InicializarChild(Self.alActions, paramName);
 end;
 
 procedure TfrmMainForm.acCancelExecute(Sender: TObject);

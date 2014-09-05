@@ -3,7 +3,7 @@ inherited FNVar0001: TFNVar0001
   ClientHeight = 306
   ClientWidth = 684
   ExplicitWidth = 700
-  ExplicitHeight = 344
+  ExplicitHeight = 345
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -266,6 +266,7 @@ inherited FNVar0001: TFNVar0001
     Left = 608
     Top = 64
     object mtCondicionDePagooid_CondPago: TIntegerField
+      Tag = 1
       FieldName = 'oid_CondPago'
     end
     object mtCondicionDePagoCodigo: TStringField
@@ -274,16 +275,20 @@ inherited FNVar0001: TFNVar0001
       Size = 15
     end
     object mtCondicionDePagoDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtCondicionDePagoAPartirFechaFactura: TBooleanField
+      Tag = 1
       FieldName = 'APartirFechaFactura'
     end
     object mtCondicionDePagoAPartirFechaRecepcion: TBooleanField
+      Tag = 1
       FieldName = 'APartirFechaRecepcion'
     end
     object mtCondicionDePagoActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -334,15 +339,19 @@ inherited FNVar0001: TFNVar0001
     Left = 224
     Top = 192
     object mtDetalleCondicionDePagooid_Det_CondPago: TIntegerField
+      Tag = 1
       FieldName = 'oid_Det_CondPago'
     end
     object mtDetalleCondicionDePagooid_CondPago: TIntegerField
+      Tag = 1
       FieldName = 'oid_CondPago'
     end
     object mtDetalleCondicionDePagoDias: TIntegerField
+      Tag = 1
       FieldName = 'Dias'
     end
     object mtDetalleCondicionDePagoPorcentaje: TIntegerField
+      Tag = 1
       FieldName = 'Porcentaje'
     end
   end

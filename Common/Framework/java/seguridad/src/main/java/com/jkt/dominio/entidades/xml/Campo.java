@@ -7,7 +7,7 @@ package com.jkt.dominio.entidades.xml;
  */
 public class Campo {
 
-	private String fieldName, tipo, longitud, visible, readOnly, orden, label, columnWidth;
+	private String fieldName, tipo, longitud, visible, readOnly, orden, label, columnWidth, tag;
 
 	public String getColumnWidth() {
 		return columnWidth;
@@ -71,6 +71,15 @@ public class Campo {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String aTag) {
+		this.tag = aTag;
 	}
 
 }

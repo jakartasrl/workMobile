@@ -156,6 +156,7 @@ end;
 procedure TframeListaProgramas.OnButtonClick(Sender: TdxTileControlItem);
 var
   NombrePrograma: string;
+  parametroInicial :string;
 begin
   // aca abrimos los Forms (los Programas)
 
@@ -171,10 +172,22 @@ begin
     NombrePrograma := 'TFNSeg0002'
   else if Sender.Tag = 8 then
     // Maestro de Condiciones de Pago
-    NombrePrograma := 'TFNVar0001';
+    NombrePrograma := 'TFNVar0001'
+  else if Sender.Tag = 10 then
+    // Maestro de Tablas de Validacion
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'TablaValidacionCaracProducto' ;
+    end
+  else if Sender.Tag = 11 then
+    // Maestro de Caracteristicas
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'CaracProducto' ;
+    end;
 
   frmMainForm.Show;
-  frmMainForm.AbrirPrograma(NombrePrograma);
+  frmMainForm.AbrirPrograma(NombrePrograma, parametroInicial);
   // Oculto el Menu Principal
   TForm(Owner).Hide;
 end;

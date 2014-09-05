@@ -6,6 +6,8 @@ package com.jkt.dominio;
  */
 public interface IDescriptible {
 
+	String getCodigo();
+	String getDescripcion();
 	String getCadena();
 	String getCadena2();
 	

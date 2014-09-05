@@ -17,6 +17,7 @@ type
   TjktAsignadorField = class(TCollectionItem)
   private
      FFieldName        :string;
+     FSourceName       :string;
      FFieldTarget      :TField;
      FFieldSource      :TField;
   public
@@ -25,6 +26,7 @@ type
 
   published
      property FieldName        :string           read FFieldName       write FFieldName;
+     property SourceName       :string           read FSourceName      write FSourceName;
      property FieldTarget      :TField           read FFieldTarget     write FFieldTarget;
 end;
 
@@ -174,7 +176,7 @@ begin
   FTempMemTable.Name := 'TMemVal' + IntToStr(random(100000));
   for x := 0 to FListaAsignaciones.Count -1 do
     begin
-       name :=  FListaAsignaciones.Items[x].FieldName;
+       name :=  FListaAsignaciones.Items[x].SourceName;
        if        FListaAsignaciones.Items[x].FieldTarget is TIntegerField
        then      begin
                    tipo := ftInteger;
@@ -210,7 +212,7 @@ begin
 
   for x := 0 to FListaAsignaciones.Count -1 do
     begin
-       name :=  FListaAsignaciones.Items[x].FieldName;
+       name :=  FListaAsignaciones.Items[x].SourceName;
        campo := FTempMemTable.FieldByName(name);
        FListaAsignaciones.Items[x].FieldSource   := campo;
     end;
@@ -268,6 +270,7 @@ begin
   else if FValidacion = tInexistente then
     operName := operInexistente;
 
+  
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(operName);
   FServiceCaller.addAtribute('codigo',    trim(sender.AsString));

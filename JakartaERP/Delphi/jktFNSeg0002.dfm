@@ -3,7 +3,7 @@ inherited FNSeg0002: TFNSeg0002
   ClientHeight = 363
   ClientWidth = 785
   ExplicitWidth = 801
-  ExplicitHeight = 401
+  ExplicitHeight = 402
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -360,6 +360,7 @@ inherited FNSeg0002: TFNSeg0002
     Left = 304
     Top = 80
     object TUsuariosoid_usuario: TIntegerField
+      Tag = 1
       FieldName = 'oid_usuario'
     end
     object TUsuariosCodigo: TStringField
@@ -368,29 +369,36 @@ inherited FNSeg0002: TFNSeg0002
       Size = 15
     end
     object TUsuariosApellido: TStringField
+      Tag = 1
       FieldName = 'Apellido'
       Size = 30
     end
     object TUsuariosNombre: TStringField
+      Tag = 1
       FieldName = 'Nombre'
       Size = 40
     end
     object TUsuariosPassword: TStringField
+      Tag = 1
       FieldName = 'Password'
       Size = 30
     end
     object TUsuariosConfPassword: TStringField
+      Tag = 1
       FieldName = 'ConfPassword'
       Size = 30
     end
     object TUsuariosEmail: TStringField
+      Tag = 1
       FieldName = 'Email'
       Size = 50
     end
     object TUsuariosActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
     object TUsuariosSinVencimientoPwd: TBooleanField
+      Tag = 1
       FieldName = 'SinVencimientoPwd'
     end
   end
@@ -453,12 +461,15 @@ inherited FNSeg0002: TFNSeg0002
     Left = 568
     Top = 256
     object TUsuarioEmpresasoid_usu_emp: TIntegerField
+      Tag = 1
       FieldName = 'oid_usu_emp'
     end
     object TUsuarioEmpresasoid_usuario: TIntegerField
+      Tag = 1
       FieldName = 'oid_usuario'
     end
     object TUsuarioEmpresasoid_empresa: TIntegerField
+      Tag = 1
       FieldName = 'oid_empresa'
     end
     object TUsuarioEmpresasCodigo: TStringField
@@ -470,9 +481,11 @@ inherited FNSeg0002: TFNSeg0002
       Size = 255
     end
     object TUsuarioEmpresasDefault: TBooleanField
+      Tag = 1
       FieldName = 'Default'
     end
     object TUsuarioEmpresasHabilitada: TBooleanField
+      Tag = 1
       FieldName = 'Habilitada'
     end
   end
