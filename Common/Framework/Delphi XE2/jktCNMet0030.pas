@@ -4,19 +4,16 @@ interface
 
 uses
   Classes, kbmMemTable, data.db, jktCNMet0002;
- //DesignEditors, DesignIntf;
-
 
 {
-type
-  TjktOperacionEditor = class (TComponentEditor)
-    function GetVerbCount: Integer; override;
-    function GetVerb(Index: Integer): string; override;
-    procedure ExecuteVerb(Index: Integer); override;
-    procedure Edit; override;
-  end;
+  type
+    TjktOperacionEditor = class (TComponentEditor)
+      function GetVerbCount: Integer; override;
+      function GetVerb(Index: Integer): string; override;
+      procedure ExecuteVerb(Index: Integer); override;
+      procedure Edit; override;
+    end;
 }
-
 
 type
 
@@ -50,41 +47,47 @@ type
     property Items[Index: Integer]: TjktOperAttribute read GetItem write SetItem;
   end;
 
-
+  
 type
- TjktOperacion = class(TComponent)
-   private
-      FOperName       :string;
-      FEnviarTodo     :boolean;
-      FAtributos      :TjktOperAttributeList;
-      FServiceCaller  :TjktServiceCaller;
-      DatasetsList    :TList;
 
-      function        getCountDatasets :integer;
-      procedure       completarAtributosOperacion();
-      procedure       obtenerDatasets;
-      function        GetDataset(Index: Integer): TkbmMemTable;
-      procedure       addAtributosOperacion;
-      procedure       addDatasetOperacion;
-      procedure       setXMLSave(aDataSet :TDataSet);
-      function        obtenerListaDataSet(aDataset:TDataSet) : TList;
-      procedure       recorrerDataSet(aDataset:TDataSet ; aLista :TList; aNivel, aNivelDataSet: integer);
-   public
-      constructor Create(AOwner: TComponent); override;
-      destructor  Destroy; override;
-      procedure   execute;
-      procedure   executeGuardar(aDataSet :TDataSet);
-      property    CountDatasets :integer read getCountDatasets;
-      property    ItemsDataset[Index: Integer]:TkbmMemTable read GetDataset ;
+  TjktOperacion = class(TComponent)
+  private
+    FOperName      : string;
+    FEnviarTodo    : Boolean;
+    FAtributos     : TjktOperAttributeList;
+    FServiceCaller : TjktServiceCaller;
+    DatasetsList   : TList;
+      
+    {********   Eventos   ********}
+    FOnAfterEjecutar : TNotifyEvent;
 
+    function  getCountDatasets :integer;
+    procedure completarAtributosOperacion();
+    procedure obtenerDatasets;
+    function  GetDataset(Index: Integer): TkbmMemTable;
+    procedure addAtributosOperacion;
+    procedure addDatasetOperacion;
+    procedure setXMLSave(aDataSet :TDataSet);
+    function  obtenerListaDataSet(aDataset:TDataSet) : TList;
+    procedure recorrerDataSet(aDataset:TDataSet ; aLista :TList; aNivel, aNivelDataSet: integer);
+      
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor  Destroy; override;
+    procedure   execute;
+    procedure   executeGuardar(aDataSet :TDataSet);
+    property    CountDatasets :integer read getCountDatasets;
+    property    ItemsDataset[Index: Integer]:TkbmMemTable read GetDataset ;
 
-   published
-      property OperName      :string   read FOperName     write FOperName;
-      property EnviarTodo    :boolean  read FEnviarTodo   write FEnviarTodo;
-      property Atributos     :TjktOperAttributeList read FAtributos write FAtributos;
-      property ServiceCaller :TjktServiceCaller read FServiceCaller write FServiceCaller;
+  published
+    property OperName      :string   read FOperName     write FOperName;
+    property EnviarTodo    :boolean  read FEnviarTodo   write FEnviarTodo;
+    property Atributos     :TjktOperAttributeList read FAtributos write FAtributos;
+    property ServiceCaller :TjktServiceCaller read FServiceCaller write FServiceCaller;
 
- end;
+    property OnAfterEjecutar : TNotifyEvent read FOnAfterEjecutar write FOnAfterEjecutar;
+    
+  end;
 
 type
 
@@ -238,14 +241,11 @@ begin
     end;
 end;
 
-
-
 destructor TjktOperacion.Destroy;
 begin
   FAtributos.free;
   inherited Destroy;
 end;
-
 
 procedure TjktOperacion.execute;
 begin
@@ -255,9 +255,11 @@ begin
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(FOperName);
   completarAtributosOperacion();
+  
   FServiceCaller.execute;
+  if Assigned(FOnAfterEjecutar) then
+    FOnAfterEjecutar(Self);
 end;
-
 
 procedure TjktOperacion.executeGuardar(aDataSet :TDataSet);
 begin
@@ -270,8 +272,11 @@ begin
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(FOperName);
   addAtributosOperacion();
-  self.setXMLSave(aDataset);
+  Self.setXMLSave(aDataset);
+  
   FServiceCaller.execute;
+  if Assigned(FOnAfterEjecutar) then
+    FOnAfterEjecutar(Self);
 end;
 
 

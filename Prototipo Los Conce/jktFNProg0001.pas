@@ -34,7 +34,7 @@ uses
   cxSchedulerWeekView, cxSchedulerYearView, cxSchedulerGanttView,
   cxSchedulerTreeListBrowser, dxSkinscxSchedulerPainter, cxPCdxBarPopupMenu,
   cxGroupBox, cxLabel, cxPC, cxSchedulercxGridConnection, cxImageComboBox,
-  cxColorComboBox, cxProgressBar, ShellApi;
+  cxColorComboBox, cxProgressBar, ShellApi, jktCNMet0011;
 
 type
   TFNProg0001 = class(TfrmChild)
