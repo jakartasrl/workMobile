@@ -12,7 +12,7 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class InscripcionesImpositivas extends PersistentEntity {
+public class InscripcionImpositiva extends PersistentEntity {
 
 	private static final long serialVersionUID = -409178696744353678L;
 

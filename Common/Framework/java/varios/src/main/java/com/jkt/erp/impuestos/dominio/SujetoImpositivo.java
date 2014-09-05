@@ -39,7 +39,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	
 	private String cuit;
 	
-	private List<InscripcionesImpositivas> incripcionesImpositivas;
+	private List<InscripcionImpositiva> inscripcionesImpositivas;
 
 	/*
 	 * Variables de instancia
@@ -48,6 +48,15 @@ public class SujetoImpositivo extends PersistentEntity {
 
 	public String getRazonSocial() {
 		return razonSocial;
+	}
+
+	public List<InscripcionImpositiva> getInscripcionesImpositivas() {
+		return inscripcionesImpositivas;
+	}
+
+	public void setInscripcionesImpositivas(
+			List<InscripcionImpositiva> inscripcionesImpositivas) {
+		this.inscripcionesImpositivas = inscripcionesImpositivas;
 	}
 
 	public void setRazonSocial(String razonSocial) {
@@ -86,14 +95,18 @@ public class SujetoImpositivo extends PersistentEntity {
 		this.cuit = cuit;
 	}
 
-	public List<InscripcionesImpositivas> getIncripcionesImpositivas() {
-		return incripcionesImpositivas;
-	}
+	
+	/*
+	 * Helper methods
+	 */
 
-	public void setIncripcionesImpositivas(
-			List<InscripcionesImpositivas> incripcionesImpositivas) {
-		this.incripcionesImpositivas = incripcionesImpositivas;
+	public void addInscripcionImpositiva(InscripcionImpositiva inscripcion){
+		agregarObjectoAColeccion(inscripcionesImpositivas, inscripcion);
 	}
+	
+	/*
+	 * Helper methods
+	 */
 
 	
 	
