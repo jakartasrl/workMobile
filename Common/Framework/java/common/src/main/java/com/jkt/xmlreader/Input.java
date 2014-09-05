@@ -19,6 +19,11 @@ public class Input extends EventBusiness{
 		return nombreEntidad;
 	}
 
+	
+	public void setName(String name) {
+		this.name = name.toUpperCase();
+	}
+
 
 
 	public void setNombreEntidad(String nombreEntidad) {

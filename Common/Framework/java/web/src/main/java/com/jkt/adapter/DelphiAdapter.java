@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.jkt.dominio.Container;
 //import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
@@ -287,10 +288,14 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 							
 								if (!test){
 								   complexInstance = recuperarObjecto(complexClazz, idObject.longValue());
+								   if (complexInstance==null) {
+										complexInstance = complexClazz.newInstance();
+									}
 								}
-								if (complexInstance==null) {
-									complexInstance = complexClazz.newInstance();
+								else{
+									complexInstance  = new Container("test");
 								}
+								
 								//Obtengo todos los campos que contiene el elemento actual
 								campos = reg.getCampos();
 								CampoEntrada childCampoEntrada=null;
@@ -313,15 +318,16 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 										resolvePrimitiveObject(childCampoEntrada, complexClazz, complexInstance, entryR.getValue());
 									}
 								}
-								try{
+								if (! test){
+								 try{
 								   Class<?> otraClase = Class.forName(metaDataOfCurrentField.getClase());
 					     		   Method method = clazz.getMethod(metaDataOfCurrentField.getMetodo(), otraClase);								
 								   method.invoke(instance,complexInstance);
-								}
-								catch(ClassNotFoundException e){
+								 }
+								 catch(ClassNotFoundException e){
 									throw new JakartaException("La clase " + metaDataOfCurrentField.getClase() + " no existe" );
+								 }
 								}
-								
 							}
 							/*
 							primerRegistro=(Registro) ((Tabla) entry.getValue()).getRegitros().get(0);//TODO Hacer para N registros
