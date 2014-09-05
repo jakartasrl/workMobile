@@ -16,22 +16,22 @@ public class Direccion extends PersistentEntity {
 	
 	private static final long serialVersionUID = -8514592739178919248L;
 
-	@NotBlank
+	@NotBlank(message="El nombre no puede ser vacio.")
 	private String nombre;
 
-	@NotBlank
+	@NotBlank(message="La direccion no debe estar vacia.")
 	private String direccion;
 
-	@NotBlank
+	@NotBlank(message="El codigo postal no puede estar vacio.")
 	private String codigoPostal;
 
-	@NotBlank
+	@NotBlank(message="La localidad no puede estar vacia.")
 	private String localidad;
 
-	@NotNull
+	@NotNull(message="La provincia no puede ser nula.")
 	private Provincia provincia;
 
-	@NotNull
+	@NotNull(message="El pais no puede ser nulo.")
 	private Pais pais;
 
 	public String getNombre() {

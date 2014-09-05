@@ -20,22 +20,22 @@ import com.jkt.varios.dominio.Idioma;
  */
 public class Cliente extends Descriptible {
 
+	/*
+	 * ***********************************************************************************************
+	 * Variables de instancia
+	 */
+	
+	
 //	String codigo heredado de descriptible
 //	String nombreComercial es la descripcion
 	
-	@NotNull
+	@NotNull(message="El Sujeto impositivo no debe ser nulo.")
 	private SujetoImpositivo sujetoImpositivo;
 	
-	/**
-	 * Idioma en el que se mostraran los productos o servicios en la documentacion del cliente
-	 */
-	@NotNull
-	private Idioma idioma;
+	@NotNull(message="El idioma no debe ser nulo.")
+	private Idioma idioma;//Idioma en el que se mostraran los productos o servicios en la documentacion del cliente
 	
-	/**
-	 * Lista de las condicines de pago vigentes que tuvo el cliente
-	 */
-	private List<CondPagoCliente> listaCondicionPago=new ArrayList<CondPagoCliente>();
+	private List<CondPagoCliente> listaCondicionPago=new ArrayList<CondPagoCliente>();//Lista de las condicines de pago vigentes que tuvo el cliente
 	
 	/**
 	 * JKT Pendiente 
@@ -46,9 +46,17 @@ public class Cliente extends Descriptible {
 	
 	private List<ComponenteValor> listaClasificadores=new ArrayList<ComponenteValor>();
 	
-	@NotEmpty
+	@NotEmpty(message="El cliente debe tener como minimo una cuenta corriente.")
 	private List<ClienteCtaCte> listaCtaCte=new ArrayList<ClienteCtaCte>();
 
+	
+	/*
+	 * Variables de instancia
+	 * ***********************************************************************************************
+	 */
+	
+	
+	
 	public SujetoImpositivo getSujetoImpositivo() {
 		return sujetoImpositivo;
 	}

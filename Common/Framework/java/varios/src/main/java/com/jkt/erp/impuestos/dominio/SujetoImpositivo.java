@@ -1,5 +1,6 @@
 package com.jkt.erp.impuestos.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	 * Variables de instancia
 	 * 
 	 */
-	@NotBlank
+	@NotBlank(message="La razon social no puede ser vacia.")
 	private String razonSocial;
 	
 	/**
@@ -32,14 +33,14 @@ public class SujetoImpositivo extends PersistentEntity {
 	 */
 	private boolean personaJuridica;
 	
-	@NotNull
+	@NotNull(message="Debe completar la direccion legal.")
 	private Direccion direccionLegal;
 	
 	private boolean local;
 	
 	private String cuit;
 	
-	private List<InscripcionImpositiva> inscripcionesImpositivas;
+	private List<InscripcionImpositiva> inscripcionesImpositivas=new ArrayList<InscripcionImpositiva>();
 
 	/*
 	 * Variables de instancia

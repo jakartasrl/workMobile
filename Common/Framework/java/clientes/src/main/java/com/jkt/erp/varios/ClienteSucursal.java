@@ -23,25 +23,26 @@ public class ClienteSucursal extends PersistentEntity {
 
 	private static final long serialVersionUID = 7007220789644015327L;
 
-	@NotNull
+	@NotNull(message="Esta entidad debe tener un cliente.")
 	private Cliente cliente;
 	
-	@Min(1)
+	@Min(message="El numero debe ser mayor a cero.",value=1)
 	private int numero;
 	
-	@NotBlank
+	@NotBlank(message="La descripcion debe no estar vacia.")
 	private String descripcion;
 	
-	@NotNull
+	@NotNull(message="La direccion no puede ser nula.")
 	private Direccion direccion;
 	
-	@NotNull
+	@NotNull(message="El vendedor comercial debe estar cargado.")
 	private Vendedor vendedorComercial;
 	
 	private Vendedor vendedorTecnico;
 	
 	private Representante representante;
 	
+	@NotNull(message="Debe existir la cuenta conrriente relacionada al cliente/sucursal.")
 	private ClienteCtaCte cuentaCorriente;
 	
 	/**
@@ -54,7 +55,7 @@ public class ClienteSucursal extends PersistentEntity {
 	/**
 	 * Los distintos domicilios de entrega de la sucursal
 	 */
-	@NotEmpty
+	@NotEmpty(message="Debe como minimo existir un domicilio de entrega.")
 	private List<DomicilioEntrega> domiciliosDeEntrega=new ArrayList<DomicilioEntrega>();
 
 	public Cliente getCliente() {

@@ -16,7 +16,7 @@ public class InscripcionImpositiva extends PersistentEntity {
 
 	private static final long serialVersionUID = -409178696744353678L;
 
-	@NotNull
+	@NotNull(message="El sujeto impositivo debe estar cargado.")
 	private SujetoImpositivo sujetoImpositivo;
 	
 	private Impuesto impuesto;
@@ -65,7 +65,5 @@ public class InscripcionImpositiva extends PersistentEntity {
 	public void setCategoriaActual(CategoriaImpuesto categoriaActual) {
 		this.categoriaActual = categoriaActual;
 	}
-	
-	
 
 }

@@ -24,19 +24,19 @@ public class DomicilioEntrega extends PersistentEntity {
 	/**
 	 * El cliente/sucursal al que referencia el domicilio de entrega
 	 */
-	@NotNull
+	@NotNull(message="El cliente/sucursal debe no ser nulo.")
 	private ClienteSucursal clienteSucursal;
 	
 	/**
-	 * Indica el nro correlative de domicilio de entrega
+	 * Indica el nro correlativo de domicilio de entrega
 	 */
-	@Min(1)
+	@Min(message="El numero debe ser mayor a cero.", value=1)
 	private int numero;
 	
 	/**
 	 * Indica el nro correlative de domicilio de entrega
 	 */
-	@NotNull
+	@NotNull(message="La direccion no puede ser nula.")
 	private Direccion direccion;
 	
 	/**
@@ -44,7 +44,7 @@ public class DomicilioEntrega extends PersistentEntity {
 	 */
 	private Transporte transporte;
 	
-	@NotBlank
+	@NotBlank(message="La descripcion no puede estar vacia.")
 	private String descripcion;
 	
 	/**
