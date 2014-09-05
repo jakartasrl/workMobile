@@ -239,8 +239,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 						metaDataOfCurrentField = campoEntrada.getHijo((String)entry.getKey());
 						
 						if (metaDataOfCurrentField==null) {
-							//continue;
+//							continue;
 							throw new JakartaException("El campo: "  + (String)entry.getKey() + " no esta en operaciones.xml");
+//							throw new JakartaException("El campo: "  + (String)entry.getKey() + " no esta en operaciones.xml");
 						}
 						
 						/*

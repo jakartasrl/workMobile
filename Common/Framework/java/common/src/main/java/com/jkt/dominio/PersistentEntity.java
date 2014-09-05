@@ -53,7 +53,14 @@ abstract public class PersistentEntity implements Serializable {
 		this.creationDate = new Date();
 	}
 
-	
+	public Date getModificationDate() {
+		return modificationDate;
+	}
+
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
+	}
+
 	/*
 	 * Helper methods for all entities
 	 */

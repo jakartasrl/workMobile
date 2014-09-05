@@ -39,7 +39,7 @@ import com.jkt.xmlreader.XMLObservador;
 public class Configuration {
 	
 	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
-	private static final String OPERACIONES_PATH_2 = "/WEB-INF/operaciones/operaciones-temporales2.xml";
+	private static final String OPERACIONES_PATH_2 = "/WEB-INF/operaciones/operaciones-temporales.xml";
 
 	public XMLEventos getEventos() {
 		return eventos;
