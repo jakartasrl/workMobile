@@ -394,7 +394,7 @@ begin
 
       // Tabla de Cabecera
       FServiceCaller.addElement(aNivel, 'Tabla');
-      FServiceCaller.addAtribute('nombre', aDataset.name);
+      FServiceCaller.addAtribute('nombre', upperCase(aDataset.name));
 
       aDataset.first;
       while not aDataSet.Eof do

@@ -43,12 +43,16 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 
 		String keyName = (String)aParams.get(KEY_ENTIDAD.toUpperCase());
 		if ((keyName==null) || ((keyName!=null) && (keyName.isEmpty()))) {
-			throw new JakartaException("Es necesario completar el ID.");
+			throw new JakartaException("No ENvio desde delphi la Entidad del Help a condigurar ");
 		}
 		
 		Entidad entidad = entidadContainer.getEntidad(keyName);
 		if (entidad==null) {
-			throw new JakartaException("No se encontro la estructura de la entidad solicitada");
+			entidad = entidadContainer.getEntidad("generico");
+		}
+
+		if (entidad==null) {
+			throw new JakartaException("No se encontro la estructura del help de: " + keyName);
 		}
 
 		//notifica campos

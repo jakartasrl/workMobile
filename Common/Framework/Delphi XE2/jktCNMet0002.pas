@@ -862,8 +862,8 @@ begin
     addElement ( 1, 'Tabla');
 
     if (DataSetName<>'')
-       then addAtribute ( 'nombre' , DataSetName)
-       else addAtribute ( 'nombre' , DataSet.Name);
+       then addAtribute ( 'nombre' , upperCase(DataSetName))
+       else addAtribute ( 'nombre' , upperCase(DataSet.Name));
 
     if not DataSet.Active
        then Exit;
