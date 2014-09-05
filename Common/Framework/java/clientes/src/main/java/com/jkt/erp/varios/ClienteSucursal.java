@@ -146,5 +146,27 @@ public class ClienteSucursal extends PersistentEntity {
 	}
 	
 	
+	/*
+	 * Helper methods
+	 */
+	public void addContacto(Contacto c){
+		agregarObjectoAColeccion(contactos, c);
+	}
+
+	public void addValorClasificador(ComponenteValor c){
+		agregarObjectoAColeccion(clasificadores, c);
+	}
+	
+	public void deleteContacto(Contacto c){
+		borrarObjetoDeColeccion(contactos, c);
+	}
+
+	public void deleteValorClasificador(ComponenteValor c){
+		borrarObjetoDeColeccion(clasificadores, c);
+	}
+	
+	/*
+	 * Helper methods
+	 */
 
 }

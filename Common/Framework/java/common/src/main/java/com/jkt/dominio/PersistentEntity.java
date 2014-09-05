@@ -53,4 +53,38 @@ abstract public class PersistentEntity implements Serializable {
 		this.creationDate = new Date();
 	}
 
+	
+	/*
+	 * Helper methods for all entities
+	 */
+	/**
+	 * Agrega un objeto a una coleccion, si es que no existe.
+	 * 
+	 * @param coleccion
+	 * @param objeto
+	 */
+	protected void agregarObjectoAColeccion(java.util.Collection coleccion, Object objeto){
+		if(!coleccion.contains(objeto)){
+			coleccion.add(objeto);
+		}
+	}
+	
+	/**
+	 * Elimina un objeto de una coleccion, si es que existe.
+	 * 
+	 * @param coleccion
+	 * @param objeto
+	 */
+	protected void borrarObjetoDeColeccion(java.util.Collection coleccion, Object objeto) {
+		if(!coleccion.contains(objeto)){
+			coleccion.remove(objeto);
+		}
+	}
+	
+	/*
+	 * Helper methods for all entities
+	 */
+	
+	
+	
 }

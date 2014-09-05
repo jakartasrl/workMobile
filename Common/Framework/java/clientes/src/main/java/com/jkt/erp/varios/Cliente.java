@@ -106,7 +106,37 @@ public class Cliente extends Descriptible {
 		this.listaCtaCte = listaCtaCte;
 	}
 	
+	/*
+	 * helper methods
+	 */
+
+	public void addClienteSucursal(ClienteSucursal clienteSucursal){
+		agregarObjectoAColeccion(listaSucursales, clienteSucursal);
+	}
 	
+	public void addEsquemaPrecios(EsquemaPreciosCliente precioCliente){
+		agregarObjectoAColeccion(listaEsquemaPrecios, precioCliente);
+	}
+	
+	public void addCondPago(CondPagoCliente cpCliente){
+		agregarObjectoAColeccion(listaCondicionPago, cpCliente);
+	}
+	
+	public void addCtaCte(ClienteCtaCte cuenta){
+		agregarObjectoAColeccion(listaCtaCte, cuenta);
+	}
+	
+	public void addValorClasificador(ComponenteValor componenteValor){
+		agregarObjectoAColeccion(listaClasificadores, componenteValor);
+	}
+	
+	public void deleteValorClasificador(ComponenteValor componenteValor){
+		borrarObjetoDeColeccion(listaClasificadores, componenteValor);
+	}
+
+	/*
+	 * helper methods
+	 */
 	
 	
 	
