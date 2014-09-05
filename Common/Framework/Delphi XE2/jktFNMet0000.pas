@@ -24,7 +24,7 @@ uses
   cxBarEditItem, dxScreenTip, Vcl.ActnList, cxContainer, cxEdit, cxTextEdit,
   cxMemo, cxScrollBox, dxBevel, cxLabel, cxGroupBox, Vcl.ExtCtrls, dxSkinsForm,
   cxPC, dxSkinscxPCPainter, cxPCdxBarPopupMenu, dxTabbedMDI, jktFNMet0001,
-  Vcl.DBActns, jktUtils;
+  Vcl.DBActns, jktUtils, IdBaseComponent, IdAntiFreezeBase, Vcl.IdAntiFreeze;
 
 type
   TfrmMainForm = class(TdxRibbonForm)

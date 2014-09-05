@@ -395,7 +395,7 @@ begin
       while not aDataSet.Eof do
         begin
           // Fila
-          FServiceCaller.enviarCampos(aDataSet, 0, aNivel + 1);
+          FServiceCaller.enviarCampos(aDataSet, 1, aNivel + 1);
           if (aLista <> nil) then
             for i:=0 to aLista.count -1 do
               begin

@@ -176,6 +176,9 @@ inherited FNUti0001: TFNUti0001
     object mtConfigCamposorden: TSmallintField
       FieldName = 'orden'
     end
+    object mtConfigCampostag: TIntegerField
+      FieldName = 'tag'
+    end
   end
   object mtConfigValidador: TjktMemTable
     DesignActivation = True

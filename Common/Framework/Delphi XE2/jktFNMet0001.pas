@@ -20,7 +20,8 @@ uses
   Vcl.StdCtrls, cxButtons, dxRibbonSkins, dxSkinsdxRibbonPainter, cxClasses,
   dxRibbon, dxSkinsdxBarPainter, dxBar, jktCNMet0002, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, jktCNMet0001, Vcl.ActnList,
-  jktCNMet0030, jktCNMet0005, Data.DB, kbmMemTable, jktCNMet0012, jktCNMet0011;
+  jktCNMet0030, jktCNMet0005, Data.DB, kbmMemTable, jktCNMet0012, jktCNMet0011,
+  IdAntiFreezeBase, Vcl.IdAntiFreeze;
 
 type
   TjktEstado = (esAlta, esEdit, esRehabilita, esNil);
