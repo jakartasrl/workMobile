@@ -48,11 +48,12 @@ type
     { Public declarations }
   end;
 
-var
-  FNSeg0001: TFNSeg0001;
+
 
 implementation
 
 {$R *.dfm}
+initialization
+  RegisterClass(TFNSeg0001);
 
 end.

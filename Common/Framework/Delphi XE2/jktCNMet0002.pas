@@ -667,16 +667,19 @@ end;
 
 procedure TjktServiceCaller.addAtribute(aAttName, aAttValue :string);
 begin
+  aAttName := upperCase(aAttName);
   FXML.addAtribute(aAttName, aAttValue);
 end;
 
 procedure TjktServiceCaller.addAtribute(aAttName : String; aAttValue : Integer);
 begin
+  aAttName := upperCase(aAttName);
   FXML.addAtribute(aAttName, IntToStr(aAttValue));
 end;
 
 procedure TjktServiceCaller.addAtribute(aAttName : String; aAttValue : Boolean);
 begin
+  aAttName := upperCase(aAttName);
   if (aAttValue)
      then FXML.addAtribute(aAttName, 'True')
      else FXML.addAtribute(aAttName, 'False');

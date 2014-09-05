@@ -49,13 +49,10 @@ type
     TUsuariosApellido: TStringField;
     TUsuariosNombre: TStringField;
     TUsuariosPassword: TStringField;
-    TUsuariosConfPassword: TStringField;
     TUsuariosEmail: TStringField;
     TUsuariosActivo: TBooleanField;
     TUsuariosSinVencimientoPwd: TBooleanField;
     cxDBCheckBox1: TcxDBCheckBox;
-    cxDBTextEdit6: TcxDBTextEdit;
-    cxLabel7: TcxLabel;
     cxDBTextEdit5: TcxDBTextEdit;
     cxLabel6: TcxLabel;
     dxBevel1: TdxBevel;
@@ -85,11 +82,11 @@ type
     { Public declarations }
   end;
 
-var
-  FNSeg0002: TFNSeg0002;
-
 implementation
 
 {$R *.dfm}
+
+initialization
+  RegisterClass(TFNSeg0002);
 
 end.

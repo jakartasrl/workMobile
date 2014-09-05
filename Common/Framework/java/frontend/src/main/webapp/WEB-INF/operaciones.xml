@@ -76,13 +76,13 @@
 
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
-		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro" fieldID="oid" >
 		</input>
 		
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -374,7 +374,7 @@
 	<!-- RECUPERAR EMPRESAS PARA UN USUARIO -->
 	<operacion name="TraerEmpresasParaUsuarios" clase="com.jkt.operaciones.TraerEmpresasParaUsuarios">
 					
-		<output name="resultado" tableName="TUsuarioEmpresas">
+		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
 			<campoSalida value="oid_empresa" target="empresa.id" />
 			<campoSalida value="Codigo" target="empresa.codigo" />
 			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
@@ -867,7 +867,7 @@
 			<campoEntrada>			
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="tipo_dato" clase="String" metodo="setTipoDato" />
 				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
 				

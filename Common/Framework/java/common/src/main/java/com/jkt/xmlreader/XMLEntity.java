@@ -77,7 +77,7 @@ public class XMLEntity implements IName {
 	}
 
 	public void setFieldID(String fieldID) {
-		this.fieldID = fieldID;
+		this.fieldID = fieldID.toUpperCase();
 	}
 
 	public String getName() {

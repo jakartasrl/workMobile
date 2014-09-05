@@ -39,6 +39,17 @@
 
 	</entidad>
 
+	<entidad nombre="condicionPago">
+
+		<campos>
+			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="id" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" columnWidth="120" readOnly="true" orden="2" label="Codigo" />
+			<campo fieldName="Descripcion" tipo="String" longitud="100" visible="true" columnWidth="380" readOnly="true" orden="3" label="Descripcion" />
+		</campos>
+
+	</entidad>
+
+
 	<entidad nombre="generico">
 
 		<campos>

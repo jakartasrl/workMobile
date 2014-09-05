@@ -77,8 +77,7 @@ type
     { Public declarations }
   end;
 
-var
-  FNCla0001: TFNCla0001;
+
 
 implementation
 
@@ -99,5 +98,10 @@ begin
   mtComponentesClasificador.FieldByName('oid_NivelPadre').Value := oid_NivelPadre;
   mtComponentesClasificador.FieldByName('Activo').Value := True;
 end;
+
+
+
+initialization
+  RegisterClass(TFNCla0001);
 
 end.

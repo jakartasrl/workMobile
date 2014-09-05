@@ -3,7 +3,7 @@ inherited FNImp0001: TFNImp0001
   ClientHeight = 390
   ClientWidth = 736
   ExplicitWidth = 752
-  ExplicitHeight = 428
+  ExplicitHeight = 429
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -95,16 +95,13 @@ inherited FNImp0001: TFNImp0001
     Height = 277
     Width = 736
     object dbgImpuestoCategorias: TjktExpDBGrid
-      Left = 2
-      Top = 18
+      Left = 3
+      Top = 15
       Width = 422
-      Height = 257
+      Height = 252
       Align = alLeft
       TabOrder = 0
       DataSource = dsImpuestoCategorias
-      ExplicitLeft = 3
-      ExplicitTop = 15
-      ExplicitHeight = 252
       object dbgImpuestoCategoriasDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsImpuestoCategorias

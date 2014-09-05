@@ -246,11 +246,14 @@ type
     { Public declarations }
   end;
 
-var
-  FNCli0001: TFNCli0001;
 
 implementation
 
 {$R *.dfm}
+
+
+initialization
+  RegisterClass(TFNCli0001);
+
 
 end.

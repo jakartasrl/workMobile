@@ -20,7 +20,7 @@ public class TraerCondPago extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String oidEntity = (String) aParams.get(KEY_OID);
+		String oidEntity = (String) aParams.get(KEY_OID.toUpperCase());
 		CondPago condicion = (CondPago) serviceRepository.getByOid(CondPago.class, Long.valueOf(oidEntity).longValue());
 		if (condicion==null) {
 			throw new EntityNotFoundException();

@@ -41,7 +41,7 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 
-		String keyName = (String)aParams.get(KEY_ENTIDAD);
+		String keyName = (String)aParams.get(KEY_ENTIDAD.toUpperCase());
 		if ((keyName==null) || ((keyName!=null) && (keyName.isEmpty()))) {
 			throw new JakartaException("Es necesario completar el ID.");
 		}

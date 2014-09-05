@@ -3,7 +3,7 @@ inherited FNCla0001: TFNCla0001
   ClientHeight = 398
   ClientWidth = 704
   ExplicitWidth = 720
-  ExplicitHeight = 436
+  ExplicitHeight = 437
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -104,10 +104,10 @@ inherited FNCla0001: TFNCla0001
     Height = 301
     Width = 704
     object cxDBTreeList1: TcxDBTreeList
-      Left = 2
-      Top = 18
+      Left = 3
+      Top = 15
       Width = 502
-      Height = 281
+      Height = 276
       Align = alLeft
       Bands = <
         item
@@ -120,9 +120,6 @@ inherited FNCla0001: TFNCla0001
       OptionsData.AutoCalcKeyValue = True
       RootValue = -1
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 15
-      ExplicitHeight = 276
       object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
         Visible = False
         DataBinding.FieldName = 'oid_CompClasif'
