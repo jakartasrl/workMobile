@@ -37,7 +37,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	
 	private boolean local;
 	
-	private String CUIT;
+	private String cuit;
 	
 	private List<InscripcionesImpositivas> incripcionesImpositivas;
 
@@ -78,12 +78,12 @@ public class SujetoImpositivo extends PersistentEntity {
 		this.local = local;
 	}
 
-	public String getCUIT() {
-		return CUIT;
+	public String getCuit() {
+		return cuit;
 	}
 
-	public void setCUIT(String cUIT) {
-		CUIT = cUIT;
+	public void setCuit(String cuit) {
+		this.cuit = cuit;
 	}
 
 	public List<InscripcionesImpositivas> getIncripcionesImpositivas() {

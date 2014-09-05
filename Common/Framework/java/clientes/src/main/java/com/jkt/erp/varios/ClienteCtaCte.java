@@ -8,7 +8,24 @@ import com.jkt.dominio.PersistentEntity;
  * @author Leonel Suarez - Jakarta SRL
  */
 public class ClienteCtaCte extends PersistentEntity {
-	
-	
-	
+
+	private Cliente cliente;
+	private ClienteSucursal clienteSucursal;
+
+	public ClienteSucursal getClienteSucursal() {
+		return clienteSucursal;
+	}
+
+	public void setClienteSucursal(ClienteSucursal clienteSucursal) {
+		this.clienteSucursal = clienteSucursal;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 }
