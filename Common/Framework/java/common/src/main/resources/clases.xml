@@ -21,6 +21,5 @@
 	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
 	<elemento key="zonaComercial" value="com.jkt.erp.varios.ZonaComercial" />
 	
-	<elemento key="TablaValoresCaracProd" value=".jkt.erp.articulos.TablaValoresCaracProd" />
 	
 </elementos>
