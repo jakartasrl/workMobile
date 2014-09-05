@@ -119,7 +119,12 @@ public class Cliente extends Descriptible {
 	 */
 
 	public void addClienteSucursal(ClienteSucursal clienteSucursal){
-		agregarObjectoAColeccion(listaSucursales, clienteSucursal);
+//		agregarObjectoAColeccion(listaSucursales, clienteSucursal);
+		if(!listaSucursales.contains(clienteSucursal)){
+			listaSucursales.add(clienteSucursal);
+			clienteSucursal.setCliente(this);
+		}
+		
 	}
 	
 	public void addEsquemaPrecios(EsquemaPreciosCliente precioCliente){
@@ -127,11 +132,20 @@ public class Cliente extends Descriptible {
 	}
 	
 	public void addCondPago(CondPagoCliente cpCliente){
-		agregarObjectoAColeccion(listaCondicionPago, cpCliente);
+//		agregarObjectoAColeccion(listaCondicionPago, cpCliente);
+		if(!listaCondicionPago.contains(cpCliente)){
+			listaCondicionPago.add(cpCliente);
+			cpCliente.setCliente(this);
+		}
+
 	}
 	
 	public void addCtaCte(ClienteCtaCte cuenta){
-		agregarObjectoAColeccion(listaCtaCte, cuenta);
+//		agregarObjectoAColeccion(listaCtaCte, cuenta);
+		if(!listaCtaCte.contains(cuenta)){
+			listaCtaCte.add(cuenta);
+			cuenta.setCliente(this);
+		}
 	}
 	
 	public void addValorClasificador(ComponenteValor componenteValor){
