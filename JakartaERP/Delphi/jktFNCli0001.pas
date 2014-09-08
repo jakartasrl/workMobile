@@ -239,7 +239,9 @@ type
     cxGridDBTableView1CodValorClasif: TcxGridDBColumn;
     cxGridDBTableView1DescValorClasif: TcxGridDBColumn;
     cxGridDBTableView1Activo: TcxGridDBColumn;
-    jktHelpGenerico1: TjktHelpGenerico;
+    Help: TjktHelpGenerico;
+    OperTraerClasifCliente: TjktOperacion;
+    OperTraerClasifSucur: TjktOperacion;
   private
     { Private declarations }
   public
