@@ -13,7 +13,7 @@
 		<many-to-one name="listaPrecios" column="LISTA_PRECIOS_ID" class="com.jkt.erp.varios.ListaPrecios"></many-to-one>
 		<many-to-one name="esquemaBonificacion" column="ESQUEMA_PRECIOS_ID" class="com.jkt.erp.varios.EsquemaBonificacion"></many-to-one>
 		
-		<!-- @JKT falta cliente -->
+		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"></many-to-one>
 		
 	</class>
 	

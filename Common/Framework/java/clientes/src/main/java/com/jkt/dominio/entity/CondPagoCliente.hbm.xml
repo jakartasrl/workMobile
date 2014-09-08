@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.erp.varios.CondPagoCliente" table="COND_PAGO_CLIENTE" >
+		<id name="id" column="COND_PAGO_CLIENTE_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"></many-to-one>
+		<property name="fechaVigencia" column="FECHA_VIGENCIA" type="date"></property>
+		
+	</class>
+
+</hibernate-mapping>

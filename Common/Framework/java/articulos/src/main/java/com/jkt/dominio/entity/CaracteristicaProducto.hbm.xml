@@ -19,7 +19,6 @@
 		<property name="tipoDato"   column="tipo_dato" type="string"  length="20"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		
 
 	</class>
 </hibernate-mapping>

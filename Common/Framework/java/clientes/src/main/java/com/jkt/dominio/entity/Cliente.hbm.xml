@@ -10,12 +10,41 @@
 			<generator class="native" />
 		</id>
 
-<!-- 		<property name="numero" column="NUMERO" /> -->
-<!-- 		<property name="fechaInscripcion" column="FECHA_INSCRIPCION" type="date"></property> -->
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="RAZON_SOCIAL"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<many-to-one name="idioma" class="com.jkt.varios.dominio.Idioma" column="IDIOMA_ID"></many-to-one>
+		
+		<list name="listaCondicionPago" table="COND_PAGO_CLIENTE" lazy="true" cascade="all">
+			<key column="CLIENTE_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.varios.CondPagoCliente" />
+		</list>
 
-<!-- 		<many-to-one name="impuesto" class="com.jkt.erp.impuestos.dominio.Impuesto" column="IMPUESTO_ID"></many-to-one> -->
-<!-- 		<many-to-one name="categoriaActual" class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" column="CATEGORIA_IMPUESTO_ID"></many-to-one> -->
-<!-- 		<many-to-one name="sujetoImpositivo" class="com.jkt.erp.impuestos.dominio.SujetoImpositivo" column="SUJETO_IMPOSITIVO_ID"></many-to-one> -->
+		<list name="listaEsquemaPrecios" table="ESQUEMA_PRECIOS_CLIENTE" lazy="true" cascade="all">
+			<key column="CLIENTE_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.varios.EsquemaPreciosCliente" />
+		</list>
+
+		<list name="listaSucursales" table="CLIENTE_SUCURSAL" lazy="true" cascade="all">
+			<key column="CLIENTE_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.varios.ClienteSucursal" />
+		</list>
+
+
+<!-- deberia ir en una nueva tabla, ya que la tabla de componentes puede tener relacionada a ella cualquier tipo de clase -->
+		<list name="listaClasificadores" table="CLASIFICADORES_CLIENTE" lazy="true" cascade="all">
+			<key column="CLIENTE_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.varios.dominio.ComponenteValor" />
+		</list>
+		
 		
 	</class>
 
