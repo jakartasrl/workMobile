@@ -1,5 +1,6 @@
 package com.jkt.erp.varios;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
@@ -23,6 +24,7 @@ public class Contacto extends PersistentEntity {
 	private String telefono;
 	
 	@NotBlank
+	@Email(message="El correo ingresado no parece tener el formato correcto.")
 	private String mail;
 
 	@NotBlank

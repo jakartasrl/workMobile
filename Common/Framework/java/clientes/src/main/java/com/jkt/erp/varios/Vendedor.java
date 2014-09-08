@@ -1,5 +1,8 @@
 package com.jkt.erp.varios;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -11,10 +14,18 @@ public class Vendedor extends PersistentEntity {
 
 	private static final long serialVersionUID = -6026853125242306297L;
 
+	@NotBlank(message="No puede estar vacio el codigo.")
 	private String codigo;
+
+	@NotBlank(message="Debe completar el nombre del usuario.")
 	private String nombres;
+
+	@NotBlank(message="Debe completar el apellido de usuario.")
 	private String apellido;
+	
+	@Email(message="El correo ingresado no parece tener el formato correcto.")
 	private String mail;
+
 	private String telefono;
 
 	public String getCodigo() {

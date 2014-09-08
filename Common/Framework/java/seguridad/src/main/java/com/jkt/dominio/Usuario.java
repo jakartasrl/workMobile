@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * Representa a un usuario que accede al sistema y consulta su password, la
  * cambia, y consulta las empresas que tiene habilitadas.
@@ -13,10 +16,21 @@ import java.util.Set;
  */
 public class Usuario extends PersistentEntity implements IDescriptible {
 
+	@NotBlank(message="No puede estar vacio el codigo.")
 	private String codigo;
+	
+	@NotBlank(message="El nombre de usuario no puede ser vacio.")
 	private String userName;
-	private String nombres, apellido;
+	
+	@NotBlank(message="Debe completar el nombre del usuario.")
+	private String nombres;
+	
+	@NotBlank(message="Debe completar el apellido de usuario.")
+	private String apellido;
+	
+	@Email(message="El correo ingresado no parece tener el formato correcto.")
 	private String mail;
+	
 	private String skin;
 
 	/**
