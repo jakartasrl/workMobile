@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.erp.varios.DomicilioEntrega" table="DOMICILIO_ENTREGA">
+		<id name="id" column="DOMICILIO_ENTREGA_ID">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="numero" column="NUMERO" type="integer"/>
+		<property name="descripcion" column="DESCRIPCION" />
+		<property name="diasEntrega" column="DIAS_ENTREGA" />
+
+		<many-to-one name="transporte" class="com.jkt.erp.varios.Transporte" cascade="none" column="TRANSPORTE_ID"/>
+		<many-to-one name="direccion" class="com.jkt.varios.dominio.Direccion" cascade="none" column="DIRECCION_ID"/>
+		
+		<!-- @JKT	FALTA CLIENTE SUCURSAL -->
+						
+	</class>
+	
+</hibernate-mapping>

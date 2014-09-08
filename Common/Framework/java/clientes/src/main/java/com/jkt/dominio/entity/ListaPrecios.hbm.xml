@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.erp.varios.ListaPrecios" table="LISTA_PRECIOS">
+		<id name="id" column="LISTA_PRECIOS_ID">
+			<generator class="native"></generator>
+		</id>
+		
+	</class>
+	
+</hibernate-mapping>

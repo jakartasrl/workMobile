@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.erp.varios.EsquemaPreciosCliente" table="ESQUEMA_PRECIOS_CLIENTE">
+		<id name="id" column="ESQUEMA_PRECIOS_CLIENTE_ID">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="fechaVigencia" column="FECHA_VIGENCIA" type="date"></property>
+		
+		<many-to-one name="listaPrecios" class="com.jkt.erp.varios.ListaPrecios"></many-to-one>
+		<many-to-one name="esquemaBonificacion" class="com.jkt.erp.varios.EsquemaBonificacion"></many-to-one>
+		
+		<!-- @JKT falta cliente -->
+		
+	</class>
+	
+</hibernate-mapping>
