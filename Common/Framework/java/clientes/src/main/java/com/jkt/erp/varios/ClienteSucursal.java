@@ -42,8 +42,8 @@ public class ClienteSucursal extends PersistentEntity {
 	
 	private Representante representante;
 	
-	@NotNull(message="Debe existir la cuenta conrriente relacionada al cliente/sucursal.")
-	private ClienteCtaCte cuentaCorriente;
+//	@NotNull(message="Debe existir la cuenta conrriente relacionada al cliente/sucursal.")
+//	private ClienteCtaCte cuentaCorriente;
 	
 	/**
 	 * Contactos en la sucursal
@@ -114,13 +114,13 @@ public class ClienteSucursal extends PersistentEntity {
 		this.representante = representante;
 	}
 
-	public ClienteCtaCte getCuentaCorriente() {
-		return cuentaCorriente;
-	}
-
-	public void setCuentaCorriente(ClienteCtaCte cuentaCorriente) {
-		this.cuentaCorriente = cuentaCorriente;
-	}
+//	public ClienteCtaCte getCuentaCorriente() {
+//		return cuentaCorriente;
+//	}
+//
+//	public void setCuentaCorriente(ClienteCtaCte cuentaCorriente) {
+//		this.cuentaCorriente = cuentaCorriente;
+//	}
 
 	public List<Contacto> getContactos() {
 		return contactos;

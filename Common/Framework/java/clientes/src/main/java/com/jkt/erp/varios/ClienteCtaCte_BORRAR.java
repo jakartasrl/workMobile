@@ -7,7 +7,7 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class ClienteCtaCte extends PersistentEntity {
+public class ClienteCtaCte_BORRAR extends PersistentEntity {
 
 	private Cliente cliente;
 	private ClienteSucursal clienteSucursal;

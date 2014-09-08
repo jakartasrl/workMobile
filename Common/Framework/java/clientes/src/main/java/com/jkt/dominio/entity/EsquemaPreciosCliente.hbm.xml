@@ -10,8 +10,8 @@
 		
 		<property name="fechaVigencia" column="FECHA_VIGENCIA" type="date"></property>
 		
-		<many-to-one name="listaPrecios" class="com.jkt.erp.varios.ListaPrecios"></many-to-one>
-		<many-to-one name="esquemaBonificacion" class="com.jkt.erp.varios.EsquemaBonificacion"></many-to-one>
+		<many-to-one name="listaPrecios" column="LISTA_PRECIOS_ID" class="com.jkt.erp.varios.ListaPrecios"></many-to-one>
+		<many-to-one name="esquemaBonificacion" column="ESQUEMA_PRECIOS_ID" class="com.jkt.erp.varios.EsquemaBonificacion"></many-to-one>
 		
 		<!-- @JKT falta cliente -->
 		

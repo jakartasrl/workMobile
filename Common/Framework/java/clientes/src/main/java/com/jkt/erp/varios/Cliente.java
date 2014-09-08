@@ -46,8 +46,8 @@ public class Cliente extends Descriptible {
 	
 	private List<ComponenteValor> listaClasificadores=new ArrayList<ComponenteValor>();
 	
-	@NotEmpty(message="El cliente debe tener como minimo una cuenta corriente.")
-	private List<ClienteCtaCte> listaCtaCte=new ArrayList<ClienteCtaCte>();
+//	@NotEmpty(message="El cliente debe tener como minimo una cuenta corriente.")
+//	private List<ClienteCtaCte> listaCtaCte=new ArrayList<ClienteCtaCte>();
 
 	
 	/*
@@ -106,13 +106,13 @@ public class Cliente extends Descriptible {
 		this.listaClasificadores = listaClasificadores;
 	}
 
-	public List<ClienteCtaCte> getListaCtaCte() {
-		return listaCtaCte;
-	}
-
-	public void setListaCtaCte(List<ClienteCtaCte> listaCtaCte) {
-		this.listaCtaCte = listaCtaCte;
-	}
+//	public List<ClienteCtaCte> getListaCtaCte() {
+//		return listaCtaCte;
+//	}
+//
+//	public void setListaCtaCte(List<ClienteCtaCte> listaCtaCte) {
+//		this.listaCtaCte = listaCtaCte;
+//	}
 	
 	/*
 	 * helper methods
@@ -140,13 +140,13 @@ public class Cliente extends Descriptible {
 
 	}
 	
-	public void addCtaCte(ClienteCtaCte cuenta){
-//		agregarObjectoAColeccion(listaCtaCte, cuenta);
-		if(!listaCtaCte.contains(cuenta)){
-			listaCtaCte.add(cuenta);
-			cuenta.setCliente(this);
-		}
-	}
+//	public void addCtaCte(ClienteCtaCte cuenta){
+////		agregarObjectoAColeccion(listaCtaCte, cuenta);
+//		if(!listaCtaCte.contains(cuenta)){
+//			listaCtaCte.add(cuenta);
+//			cuenta.setCliente(this);
+//		}
+//	}
 	
 	public void addValorClasificador(ComponenteValor componenteValor){
 		agregarObjectoAColeccion(listaClasificadores, componenteValor);
