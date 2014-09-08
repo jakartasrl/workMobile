@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.erp.varios.Cliente" table="CLIENTE" >
+		
+		<id name="id" column="CLIENTE_ID">
+			<generator class="native" />
+		</id>
+
+<!-- 		<property name="numero" column="NUMERO" /> -->
+<!-- 		<property name="fechaInscripcion" column="FECHA_INSCRIPCION" type="date"></property> -->
+
+<!-- 		<many-to-one name="impuesto" class="com.jkt.erp.impuestos.dominio.Impuesto" column="IMPUESTO_ID"></many-to-one> -->
+<!-- 		<many-to-one name="categoriaActual" class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" column="CATEGORIA_IMPUESTO_ID"></many-to-one> -->
+<!-- 		<many-to-one name="sujetoImpositivo" class="com.jkt.erp.impuestos.dominio.SujetoImpositivo" column="SUJETO_IMPOSITIVO_ID"></many-to-one> -->
+		
+	</class>
+
+</hibernate-mapping>

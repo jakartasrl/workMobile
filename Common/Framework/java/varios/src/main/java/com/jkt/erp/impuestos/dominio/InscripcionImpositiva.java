@@ -1,6 +1,8 @@
 package com.jkt.erp.impuestos.dominio;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,11 @@ public class InscripcionImpositiva extends PersistentEntity {
 
 	private static final long serialVersionUID = -409178696744353678L;
 
+	/*
+	 * ************************************************************************************************************
+	 * Variables de instancia
+	 */
+	
 	@NotNull(message="El sujeto impositivo debe estar cargado.")
 	private SujetoImpositivo sujetoImpositivo;
 	
@@ -24,7 +31,23 @@ public class InscripcionImpositiva extends PersistentEntity {
 	
 	private Date fechaInscripcion;
 	
-	private CategoriaImpuesto categoriaActual;
+//	private CategoriaImpuesto categoriaActual;
+	
+	private List<CategorizacionImpositiva> categorizacionImpositiva=new ArrayList<CategorizacionImpositiva>();
+
+	/*
+	 * Variables de instancia
+	 * ************************************************************************************************************
+	 */
+	
+	public List<CategorizacionImpositiva> getCategorizacionImpositiva() {
+		return categorizacionImpositiva;
+	}
+
+	public void setCategorizacionImpositiva(
+			List<CategorizacionImpositiva> categorizacionImpositiva) {
+		this.categorizacionImpositiva = categorizacionImpositiva;
+	}
 
 	public SujetoImpositivo getSujetoImpositivo() {
 		return sujetoImpositivo;
@@ -32,14 +55,6 @@ public class InscripcionImpositiva extends PersistentEntity {
 
 	public void setSujetoImpositivo(SujetoImpositivo sujetoImpositivo) {
 		this.sujetoImpositivo = sujetoImpositivo;
-	}
-
-	public Impuesto getImpuesto() {
-		return impuesto;
-	}
-
-	public void setImpuesto(Impuesto impuesto) {
-		this.impuesto = impuesto;
 	}
 
 	public String getNumero() {
@@ -58,12 +73,13 @@ public class InscripcionImpositiva extends PersistentEntity {
 		this.fechaInscripcion = fechaInscripcion;
 	}
 
-	public CategoriaImpuesto getCategoriaActual() {
-		return categoriaActual;
+	public Impuesto getImpuesto() {
+		return impuesto;
 	}
 
-	public void setCategoriaActual(CategoriaImpuesto categoriaActual) {
-		this.categoriaActual = categoriaActual;
+	public void setImpuesto(Impuesto impuesto) {
+		this.impuesto = impuesto;
 	}
+
 
 }

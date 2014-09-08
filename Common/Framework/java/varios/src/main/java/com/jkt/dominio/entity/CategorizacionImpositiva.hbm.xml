@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.erp.impuestos.dominio.CategorizacionImpositiva" table="CATEGORIZACION_IMPOSITIVA" >
+		
+		<id name="id" column="CATEGORIZACION_IMPOSITIVA_ID">
+			<generator class="native" />
+		</id>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="fechaDesde" column="FECHA_DESDE" type="date"></property>
+
+		<many-to-one name="categoriaImpositiva" class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" column="CATEGORIA_IMPUESTO_ID"></many-to-one>
+		<many-to-one name="inscripcionImpositiva" class="com.jkt.erp.impuestos.dominio.InscripcionImpositiva" column="INSCRIPCION_IMPOSITIVA_ID"></many-to-one>
+		
+
+	</class>
+
+</hibernate-mapping>

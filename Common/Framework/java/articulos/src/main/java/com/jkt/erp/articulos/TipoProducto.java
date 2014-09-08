@@ -27,7 +27,4 @@ public class TipoProducto extends Descriptible {
 		aCarac.setActivo(false);
 	}
 	
-	
-	
-	
 }

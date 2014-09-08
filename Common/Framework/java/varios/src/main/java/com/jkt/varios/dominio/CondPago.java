@@ -45,6 +45,7 @@ public class CondPago extends Descriptible implements IDescriptible{
 	public void setBaseFechaRecep(boolean baseFechaRecep) {
 		this.baseFechaRecep = baseFechaRecep;
 	}
+
 //	public List<CondPagoDet> getDetalles() {
 //		return detalles;
 //	}
