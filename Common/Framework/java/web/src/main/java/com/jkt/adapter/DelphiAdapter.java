@@ -49,13 +49,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String INTEGER_TYPE = "Integer";
 	private static final String DOUBLE_TYPE = "Double";
 
-	
 	private ISessionProvider sessionProvider;
-	
-//	@Autowired
-//	private SessionFactory sessionFactory;
 	private Session session;
-//	
 	private boolean test;
 	
 	/*

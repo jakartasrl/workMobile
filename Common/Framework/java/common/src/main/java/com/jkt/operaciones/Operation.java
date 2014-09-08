@@ -13,7 +13,9 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.framework.writers.IHeaderDataSet;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
@@ -202,5 +204,10 @@ public abstract class Operation extends Observable {
 			object.add(aParams.get("objeto"));
 		}
 		return object;
+	}
+	
+	protected PersistentEntity guardar(PersistentEntity entityToSave) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException{
+		serviceRepository.save(entityToSave);
+		return entityToSave;
 	}
 }

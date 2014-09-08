@@ -122,5 +122,15 @@
 		</forms>
 		
 	</operacion>
+	
+	
+	<operacion name="probandoGuardarCliente" clase="com.jkt.erp.operaciones.EjemploParaGuardarCliente">
+		
+		<forms>
+			<form name="FNVar0001"></form>
+		</forms>
+		
+	</operacion>
+	
 
 </entity>
