@@ -21,7 +21,9 @@
 			<one-to-many class="com.jkt.erp.impuestos.dominio.InscripcionImpositiva" />
 		</list>
 		
-		<!--  @JKT Falta el cliente -->
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+<!-- 		@JKT Falta el cliente -->
 		
 	</class>
 

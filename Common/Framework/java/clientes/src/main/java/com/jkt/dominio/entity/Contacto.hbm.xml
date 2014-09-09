@@ -14,6 +14,7 @@
 		<property name="telefono" column="TELEFONO"/>
 		<property name="mail" column="MAIL"/>
 		<property name="tratamiento" column="TRATAMIENTO"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
 
 	</class>
 	

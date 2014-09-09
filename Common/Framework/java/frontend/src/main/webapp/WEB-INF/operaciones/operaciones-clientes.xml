@@ -159,7 +159,7 @@
 
 		<output name="inscripciones" tableName="mtInscripImposit">
 			<campoSalida value="oid_InscClie" target="id" />
-<!-- 			<campoSalida value="oid_Cliente" target="" /> FALTA ARMAR LA RELACION DE LA INSCRIPCION IMPOSITIVA CON EL SUJETO IMPOSITIVO, Y Q ESTE CONTENGA AL CLIENTE--> 
+<!-- 			<campoSalida value="oid_Cliente" target="" /> FALTA ARMAR LA RELACION DE LA INSCRIPCION IMPOSITIVA CON EL SUJETO IMPOSITIVO, Y Q ESTE CONTENGA AL CLIENTE- OJO XQ SUJETO IMPOSITIVO ESTA EN EL MODULO VARIOS Y NO CONOCE AL CLIENTE.--> 
 			<campoSalida value="oid_Impuesto" target="impuesto.id" />
 			<campoSalida value="DescImpuesto" target="impuesto.descripcion" />
 			<campoSalida value="NroInscripcion" target="numero" />
@@ -179,58 +179,58 @@
 			<campoSalida value="Activo" target="componenteValor.activo" />
 		</output>
 
-		<output name="" tableName="mtSucursalesCliente">
+		<output name="sucursalesCliente" tableName="mtSucursalesCliente">
 			<campoSalida value="oid_SucClie" target="id" />
-			<campoSalida value="oid_Cliente" target="" />
-			<campoSalida value="NroSucursal" target="" />
-			<campoSalida value="Descripcion" target="" />
-			<campoSalida value="Direccion" target="" />
-			<campoSalida value="Localidad" target="" />
-			<campoSalida value="CodPostal" target="" />
-			<campoSalida value="oid_Provincia" target="" />
-			<campoSalida value="CodProvincia" target="" />
-			<campoSalida value="DescProvincia" target="" />
-			<campoSalida value="oid_Vendedor" target="" />
-			<campoSalida value="CodVendedor" target="" />
-			<campoSalida value="DescVendedor" target="" />
-			<campoSalida value="Telefonos" target="" />
+			<campoSalida value="oid_Cliente" target="cliente.id" />
+			<campoSalida value="NroSucursal" target="numero" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Direccion" target="direccion.direccion" />
+			<campoSalida value="Localidad" target="direccion.localidad" />
+			<campoSalida value="CodPostal" target="direccion.codigoPostal" />
+			<campoSalida value="oid_Provincia" target="direccion.provincia.id" />
+			<campoSalida value="CodProvincia" target="direccion.provincia.codigo" />
+			<campoSalida value="DescProvincia" target="direccion.provincia.descripcion" />
+			<campoSalida value="oid_Vendedor" target="vendedorComercial.id" />
+			<campoSalida value="CodVendedor" target="vendedorComercial.codigo" />
+			<campoSalida value="DescVendedor" target="vendedorComercial.descripcion" />
+<!-- 			<campoSalida value="Telefonos" target="" /> -->
 			<campoSalida value="Activo" target="activo" />
 		</output>
 
-		<output name="" tableName="mtDomiciliosEntrega">
+		<output name="domiciliosEntrega" tableName="mtDomiciliosEntrega">
 			<campoSalida value="oid_DomSuc" target="id" />
-			<campoSalida value="oid_SucClie" target="" />
-			<campoSalida value="NroDomicilio" target="" />
-			<campoSalida value="Descripcion" target="" />
-			<campoSalida value="Direccion" target="" />
-			<campoSalida value="Localidad" target="" />
-			<campoSalida value="CodPostal" target="" />
-			<campoSalida value="oid_Provincia" target="" />
-			<campoSalida value="CodProvincia" target="" />
-			<campoSalida value="DescProvincia" target="" />
-			<campoSalida value="HorariosEntrega" target="" />
-			<campoSalida value="Telefonos" target="" />
+			<campoSalida value="oid_SucClie" target="clienteSucursal.id" />
+			<campoSalida value="NroDomicilio" target="numero" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Direccion" target="direccion.direccion" />
+			<campoSalida value="Localidad" target="direccion.localidad" />
+			<campoSalida value="CodPostal" target="direccion.codigoPostal" />
+			<campoSalida value="oid_Provincia" target="direccion.provincia.id" />
+			<campoSalida value="CodProvincia" target="direccion.provincia.codigo" />
+			<campoSalida value="DescProvincia" target="direccion.provincia.descripcion" />
+			<campoSalida value="HorariosEntrega" target="diasEntrega" />
+<!-- 			<campoSalida value="Telefonos" target="" /> -->
 			<campoSalida value="Activo" target="activo" />
 		</output>
 
-		<output name="" tableName="mtContactos">
+		<output name="contactos" tableName="mtContactos">
 			<campoSalida value="oid_ContSuc" target="id" />
-			<campoSalida value="oid_SucClie" target="" />
-			<campoSalida value="Apellido" target="" />
-			<campoSalida value="Nombres" target="" />
-			<campoSalida value="Cargo" target="" />
-			<campoSalida value="Telefonos" target="" />
-			<campoSalida value="Email" target="" />
+<!-- 			<campoSalida value="oid_SucClie" target="" /> CONTACTO ESTA EN EL MODULO 'VARIOS' Y NO CONOCE A LA SUCURSAL_CLIENTE, PUEDO GUARDAR UN DATO PLANO.-->
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Nombres" target="nombre" />
+			<campoSalida value="Cargo" target="tratamiento" />
+			<campoSalida value="Telefonos" target="telefono" />
+			<campoSalida value="Email" target="mail" />
 			<campoSalida value="Activo" target="activo" />
 		</output>
 
-		<output name="" tableName="mtClasificadoresSucursal">
+		<output name="clasificadoresSucursales" tableName="mtClasificadoresSucursal">
 			<campoSalida value="oid_ClasifSuc" target="id" />
-			<campoSalida value="oid_SucClie" target="" />
-			<campoSalida value="DescClasif" target="" />
-			<campoSalida value="oid_ValorClasif" target="" />
-			<campoSalida value="CodValorClasif" target="" />
-			<campoSalida value="DescValorClasif" target="" />
+			<campoSalida value="oid_SucClie" target="clienteSucursal.id" />
+			<campoSalida value="DescClasif" target="componenteValor.componente.clasificador.descripcion" />
+			<campoSalida value="oid_ValorClasif" target="componenteValor.id" />
+			<campoSalida value="CodValorClasif" target="componenteValor.codigo" />
+			<campoSalida value="DescValorClasif" target="componenteValor.descripcion" />
 			<campoSalida value="Activo" target="activo" />
 		</output>
 
@@ -243,6 +243,16 @@
 
 	</operacion>
 
+
+
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
+<!-- ************************************************************************************************************************************************************ -->
 
 	<!-- GUARDAR UN CLIENTE -->
 	<operacion name="GuardarCliente" clase="com.jkt.varios.operaciones.GuardarCliente">

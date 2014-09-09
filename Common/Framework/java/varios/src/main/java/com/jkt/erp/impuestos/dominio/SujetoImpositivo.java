@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.websocket.ClientEndpoint;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,6 +26,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	 * Variables de instancia
 	 * 
 	 */
+	
 	@NotBlank(message="La razon social no puede ser vacia.")
 	private String razonSocial;
 	

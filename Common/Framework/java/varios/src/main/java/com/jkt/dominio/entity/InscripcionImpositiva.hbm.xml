@@ -10,6 +10,8 @@
 			<generator class="native" />
 		</id>
 
+		<property name="activo" column="ACTIVO" type="boolean" />
+
 		<property name="numero" column="NUMERO" />
 		<property name="fechaInscripcion" column="FECHA_INSCRIPCION" type="date"></property>
 

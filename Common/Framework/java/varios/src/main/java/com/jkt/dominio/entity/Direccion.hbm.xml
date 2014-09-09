@@ -12,6 +12,8 @@
 		<property name="direccion" column="DIRECCION"/>
 		<property name="codigoPostal" column="CODIGO_POSTAL"/>
 		<property name="localidad" column="LOCALIDAD"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
 		
 		<many-to-one name="pais" class="com.jkt.varios.dominio.Pais" cascade="none" column="PAIS_ID"/>				
 		<many-to-one name="provincia" class="com.jkt.varios.dominio.Provincia" cascade="none" column="PROVINCIA_ID"/>				
