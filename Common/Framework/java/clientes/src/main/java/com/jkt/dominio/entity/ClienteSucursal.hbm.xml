@@ -36,7 +36,7 @@
 		<list name="clasificadores" table="CLASIFICADORES_CLIENTE_SUCURSAL" lazy="true" cascade="all">
 			<key column="CLIENTE_SUCURSAL_ID" />
 			<index column="ORDEN" />
-			<one-to-many class="com.jkt.varios.dominio.ComponenteValor" />
+			<many-to-many column="COMPONENTE_VALOR_ID" unique="true" class="com.jkt.varios.dominio.ComponenteValor" />
 		</list>
 		
 	</class>

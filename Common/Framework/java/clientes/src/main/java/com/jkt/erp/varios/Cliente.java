@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.jkt.dominio.Descriptible;
 import com.jkt.erp.impuestos.dominio.SujetoImpositivo;
 import com.jkt.varios.dominio.ComponenteValor;
@@ -25,7 +23,6 @@ public class Cliente extends Descriptible {
 	 * Variables de instancia
 	 */
 	
-	
 //	String codigo heredado de descriptible
 //	String nombreComercial es la descripcion
 	
@@ -37,18 +34,12 @@ public class Cliente extends Descriptible {
 	
 	private List<CondPagoCliente> listaCondicionPago=new ArrayList<CondPagoCliente>();//Lista de las condicines de pago vigentes que tuvo el cliente
 	
-	/**
-	 * JKT Pendiente 
-	 */
 	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();
 	
 	private List<ClienteSucursal> listaSucursales=new ArrayList<ClienteSucursal>();
 	
 	private List<ComponenteValor> listaClasificadores=new ArrayList<ComponenteValor>();
 	
-//	@NotEmpty(message="El cliente debe tener como minimo una cuenta corriente.")
-//	private List<ClienteCtaCte> listaCtaCte=new ArrayList<ClienteCtaCte>();
-
 	
 	/*
 	 * Variables de instancia
@@ -106,25 +97,14 @@ public class Cliente extends Descriptible {
 		this.listaClasificadores = listaClasificadores;
 	}
 
-//	public List<ClienteCtaCte> getListaCtaCte() {
-//		return listaCtaCte;
-//	}
-//
-//	public void setListaCtaCte(List<ClienteCtaCte> listaCtaCte) {
-//		this.listaCtaCte = listaCtaCte;
-//	}
-	
 	/*
 	 * helper methods
 	 */
-
 	public void addClienteSucursal(ClienteSucursal clienteSucursal){
-//		agregarObjectoAColeccion(listaSucursales, clienteSucursal);
 		if(!listaSucursales.contains(clienteSucursal)){
 			listaSucursales.add(clienteSucursal);
 			clienteSucursal.setCliente(this);
 		}
-		
 	}
 	
 	public void addEsquemaPrecios(EsquemaPreciosCliente precioCliente){
@@ -132,21 +112,11 @@ public class Cliente extends Descriptible {
 	}
 	
 	public void addCondPago(CondPagoCliente cpCliente){
-//		agregarObjectoAColeccion(listaCondicionPago, cpCliente);
 		if(!listaCondicionPago.contains(cpCliente)){
 			listaCondicionPago.add(cpCliente);
 			cpCliente.setCliente(this);
 		}
-
 	}
-	
-//	public void addCtaCte(ClienteCtaCte cuenta){
-////		agregarObjectoAColeccion(listaCtaCte, cuenta);
-//		if(!listaCtaCte.contains(cuenta)){
-//			listaCtaCte.add(cuenta);
-//			cuenta.setCliente(this);
-//		}
-//	}
 	
 	public void addValorClasificador(ComponenteValor componenteValor){
 		agregarObjectoAColeccion(listaClasificadores, componenteValor);
@@ -159,7 +129,5 @@ public class Cliente extends Descriptible {
 	/*
 	 * helper methods
 	 */
-	
-	
 	
 }
