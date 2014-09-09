@@ -256,8 +256,7 @@
 
 	<!-- GUARDAR UN CLIENTE -->
 	<operacion name="GuardarCliente" clase="com.jkt.varios.operaciones.GuardarCliente">
-		<input name="mtCliente" keyName="objeto" clase="com.jkt.varios.dominio.Cliente"
-			fieldID="oid_Cliente">
+		<input name="mtCliente" keyName="objeto" clase="com.jkt.varios.dominio.Cliente" fieldID="oid_Cliente">
 			<campoEntrada>
 				<campoEntrada name="Codigo" clase="String" metodo="" />
 				<campoEntrada name="RazonSocial" clase="String" metodo="" />
