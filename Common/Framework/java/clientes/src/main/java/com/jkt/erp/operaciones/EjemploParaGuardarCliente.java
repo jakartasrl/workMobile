@@ -47,7 +47,7 @@ public class EjemploParaGuardarCliente extends Operation{
 		SujetoImpositivo sujetoImpositivo = new SujetoImpositivo();
 		sujetoImpositivo.setDireccionLegal(direccion);
 		sujetoImpositivo.setRazonSocial("razon social");
-		guardar(sujetoImpositivo);
+//		guardar(sujetoImpositivo);
 		//guardo sujeto impositivo
 		
 		Cliente leonelCliente = new Cliente();
