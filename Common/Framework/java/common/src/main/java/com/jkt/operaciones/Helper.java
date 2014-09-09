@@ -21,13 +21,13 @@ public class Helper extends Operation {
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD);
-		String className = RepositorioClases.getClass(nombreEntidad);
+		String className = this.getRepositorioClases().getClass(nombreEntidad);
 		List objetos = recuperarObjetoUsandoKey(aParams);
 		
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
 		for (PersistentEntity persistentEntity : list) {
-			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
+			notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
 		}
 	}
 	

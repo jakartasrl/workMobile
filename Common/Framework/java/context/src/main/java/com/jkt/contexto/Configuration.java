@@ -2,6 +2,7 @@ package com.jkt.contexto;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 
 import javax.servlet.ServletContext;
 
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
+import com.jkt.excepcion.JakartaException;
 import com.jkt.request.EventBusiness;
 import com.jkt.xmlreader.CampoDef;
 import com.jkt.xmlreader.CampoEntrada;
@@ -36,6 +38,9 @@ import com.jkt.xmlreader.XMLObservador;
 @Scope(value=ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class Configuration {
 	
+	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
+	private static final String OPERACIONES_PATH_2 = "/WEB-INF/operaciones/operaciones-temporales.xml";
+
 	public XMLEventos getEventos() {
 		return eventos;
 	}
@@ -50,17 +55,44 @@ public class Configuration {
 	@Autowired
 	private ServletContext servletContext;
 	
-	public void iniciarOperacionesYEventos() throws IOException, SAXException{
+	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
 		Digester digester = this.generateReaderOperation();
-		InputStream inputStream = servletContext.getResourceAsStream("/WEB-INF/operaciones.xml");
+		
+		
+		InputStream inputStream = abrirRecurso(OPERACIONES_PATH);
+		
+//		validarInputStream(inputStream);
+		
 		this.operaciones = (XMLEntity) digester.parse(inputStream);
 		
+		inputStream = abrirRecurso(OPERACIONES_PATH_2);
+//		validarInputStream(inputStream);
+		XMLEntity operaciones2 = (XMLEntity) digester.parse(inputStream);
+		
+		Collection hijos = operaciones2.getHijos();
+		XMLEntity xml;
+		for (Object object : hijos) {
+			xml=(XMLEntity) object;
+			this.operaciones.addHijo(xml);
+		}
 		
 		digester = this.generateReaderEventos();
 		inputStream = servletContext.getResourceAsStream("/WEB-INF/eventos.xml");
 		this.eventos = (XMLEventos) digester.parse(inputStream);
 	}
 	
+	private InputStream abrirRecurso(String operacionesPath) throws JakartaException {
+		InputStream inputStream=servletContext.getResourceAsStream(operacionesPath);
+		validarInputStream(inputStream, operacionesPath);
+		return inputStream;
+	}
+
+	private void validarInputStream(InputStream inputStream,String nombreDelArchivo) throws JakartaException {
+		if (inputStream==null) {
+			throw new JakartaException("No se encuentra el archivo de las operaciones denominado ".concat(nombreDelArchivo));
+		}
+	}
+
 	private Digester generateReaderEventos() {
 		Digester digester = new Digester();
 		digester.setValidating(false);
@@ -158,6 +190,10 @@ public class Configuration {
 		digester.addObjectCreate("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada", CampoEntrada.class.getName());
 		digester.addSetProperties("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada");
 		digester.addSetNext("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada", "addHijo", CampoEntrada.class.getName());
+		
+		digester.addObjectCreate("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada", CampoEntrada.class.getName());
+		digester.addSetProperties("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada");
+		digester.addSetNext("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada", "addHijo", CampoEntrada.class.getName());
 		
 		
 		

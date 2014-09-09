@@ -28,6 +28,7 @@ public class CampoEntrada extends XMLEntity {
 
 	public void setName(String name) {
 		this.name = name;
+//		this.name = name.toUpperCase();
 	}
 
 	public String getClase() {

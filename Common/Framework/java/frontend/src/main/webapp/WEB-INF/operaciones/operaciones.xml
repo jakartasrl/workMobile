@@ -1,5 +1,8 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" standalone="yes"?>
 <!DOCTYPE entity [
+
+<!--   <!ENTITY operacionesExternas SYSTEM "file:///operaciones-2.xml"> -->
+	
   <!ELEMENT entity        (operacion*)>
   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
   
@@ -66,6 +69,7 @@
 
 <entity>
 
+<<<<<<< HEAD:Common/Framework/java/frontend/src/main/webapp/WEB-INF/operaciones.xml
 
      <!-- TRAER UN CLIENTE -->
      <operacion name="TraerCliente" clase="com.jkt.varios.operaciones.TraerCliente">
@@ -377,6 +381,8 @@
 		
 	</operacion>
 
+=======
+>>>>>>> origin/master:Common/Framework/java/frontend/src/main/webapp/WEB-INF/operaciones/operaciones.xml
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
 		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
@@ -580,7 +586,7 @@
 	<!-- VALIDAR EXISTENCIA -->
 	<operacion name="ValidarExistente" clase="com.jkt.operaciones.ValidarExistencia">
 		
-		<output name="resultado" tableName="TUsuarios">
+		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="cadena2" />
 			<campoSalida value="Cadena" target="cadena" />
@@ -745,7 +751,7 @@
 	<!-- GUARDAR UN USUARIO	 -->
 	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.GuardarUsuario">
 
-		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID="oid_usuario" >
 			<campoEntrada >
 				
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
@@ -755,7 +761,7 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Password" clase="String" metodo="setPassword" />
 				
-				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" >
+				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
 					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
 					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />
@@ -784,30 +790,6 @@
 		</forms>
 	</operacion>
 	
-	<!-- 	GUARDAR USUARIO Y UNA EMPRESA ASOCIADA -->
-<!-- 	<operacion name="agregarEmpresa" clase="com.jkt.operaciones.AgregarEmpresasAlUsuario"> -->
-<!-- 		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'> -->
-		
-<!-- 			<campoEntrada name="Codigo" clase="String" metodo="setCodigo" /> -->
-<!-- 			<campoEntrada name="Nombre" clase="String" metodo="setNombres" /> -->
-<!-- 			<campoEntrada name="Apellido" clase="String" metodo="setApellido" /> -->
-<!-- 			<campoEntrada name="Email" clase="String" metodo="setMail" /> -->
-<!-- 			<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
-		
-<!-- 			<campoEntrada> -->
-<!-- 				<campoEntrada name="empresa" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada" > -->
-<!-- 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" /> -->
-<!-- 					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" /> -->
-<!-- 					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" /> -->
-<!-- 				</campoEntrada> -->
-<!-- 			</campoEntrada> -->
-<!-- 		</input> -->
-		
-<!-- 		<forms> -->
-<!-- 			<form name="TUsuario"></form> -->
-<!-- 		</forms> -->
-<!-- 	</operacion> -->
-	
 	<!-- LOGIN -->
 	<operacion name="Login" clase="com.jkt.operaciones.Login">
 	
@@ -828,102 +810,24 @@
 		</forms>
 		
 	</operacion>
-
-
-	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
-	<operacion name="TraerImpuestos" clase="">
-										
-		<output name="" tableName="mtImpuesto">
-			<campoSalida value="oid_Impuesto" target="" />
-			<campoSalida value="oid_Comportamiento" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->
-			<campoSalida value="Activo" target="" />	
-		</output>
-				
-		<output name="" tableName="mtImpuestoCategorias">		
-			<campoSalida value="oid_ImpCat" target="" />			
-			<campoSalida value="oid_Impuesto" target="" />			
-			<campoSalida value="oid_Categoria" target="" />			
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			   
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	 			
-			<campoSalida value="Activa" target="" />			
-		</output>		
-		
-		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
-		
-		<forms>
-			<form name=""> </form>
-		</forms>
-		
-	</operacion>
-
-
-	<!-- GUARDAR UN IMPUESTO -->
-	<operacion name="GuardarImpuestos" clase="com.jkt.operaciones.GuardarImpuesto">
-
-		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Impuesto'>
-			<campoEntrada>
-
-				<campoEntrada name="Codigo" clase="String" metodo="" />
-				<campoEntrada name="Descripcion" clase="String" metodo="" />
-				<campoEntrada name="oid_Comportamiento" clase="String" metodo="" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-
-				<campoEntrada name="mtImpuestoCategorias" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_ImpCat" clase="String" metodo="" />
-					<campoEntrada name="oid_Impuesto" clase="String" metodo="" />
-					<campoEntrada name="oid_Categoria" clase="String" metodo="" />
-					<campoEntrada name="Codigo" clase="String" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Activa" clase="Boolean" metodo="" />
-				</campoEntrada>
-				
-			</campoEntrada>
-		</input>
-		
-		<forms>
-			<form name=""></form>
-		</forms>
-		
-	</operacion>
-
-
-	<!-- TRAE LOS COMPORTAMIENTOS DEL IMPUESTO -->
-	<operacion name="TraerComportamientosImpuesto" clase="">
-										
-		<output name="" tableName="mtComportamientos">		
-			<campoSalida value="oid_Comportamiento" target="" />
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	
-		</output>
-						
-		<transformer clase="com.jkt.transformers."></transformer>
-		
-		<forms>
-			<form name=""> </form>
-		</forms>
-		
-	</operacion>
-
-
+	
 	<!-- TRAER UNA CONDICION DE PAGO Y SU DETALLE -->
-	<operacion name="TraerCondPago" clase="">
+	<operacion name="TraerCondPago" clase="com.jkt.varios.operaciones.TraerCondPago">
 										
-		<output name="" tableName="mtCondicionDePago">
-			<campoSalida value="oid_CondPago" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->			
-			<campoSalida value="APartirFechaFactura" target="" /> 
-			<campoSalida value="APartirFechaRecepcion" target="" /> 			
-			<campoSalida value="Activo" target="" />
+		<output name="condicion" tableName="mtCondicionDePago">
+			<campoSalida value="oid_CondPago" target="id" />
+			<campoSalida value="Codigo" target="codigo" /> 
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" />
+			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" /> 
+			<campoSalida value="Activo" target="activo" />
 		</output>
 				
-		<output name="" tableName="mtDetalleCondicionDePago">		
-			<campoSalida value="oid_Det_CondPago" target="" />
-			<campoSalida value="oid_CondPago" target="" />						
-			<campoSalida value="oid_Detalle" target="" />						
-			<campoSalida value="Dias" target="" /> <!-- Integer -->						   
-			<campoSalida value="Porcentaje" target="" /> <!-- Integer -->			
+		<output name="detalle" tableName="mtDetalleCondicionDePago">		
+			<campoSalida value="oid_Det_CondPago" target="id" />
+			<campoSalida value="oid_CondPago" target="condicionDePago.id" />						
+			<campoSalida value="Dias" target="dias" /> 
+			<campoSalida value="Porcentaje" target="porcentaje" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -936,23 +840,20 @@
 
 
 	<!-- GUARDAR UNA CONDICION DE PAGO Y SU DETALLE -->
-	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarCondPago">
+	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarLista">
 
-		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_CondPago'>
+		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.varios.dominio.CondPago" fieldID="oid_CondPago">
 			<campoEntrada>
 
-				<campoEntrada name="Codigo" clase="String" metodo="" />
-				<campoEntrada name="Descripcion" clase="String" metodo="" />
-				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="" />
-				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="" />				
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="setBaseFechaFactura" />
+				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="setBaseFechaRecep" />				
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
-				<campoEntrada name="mtDetalleCondicionDePago" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_Det_CondPago" clase="String" metodo="" />
-					<campoEntrada name="oid_CondPago" clase="String" metodo="" />
-					<campoEntrada name="oid_Detalle" clase="String" metodo="" />
-					<campoEntrada name="Dias" clase="Integer" metodo="" />
-					<campoEntrada name="Porcentaje" clase="Integer" metodo="" />
+				<campoEntrada name="mtDetalleCondicionDePago" metodo="addDetalle" clase="com.jkt.varios.dominio.CondPagoDet" fieldID="oid_Det_CondPago">
+					<campoEntrada name="Dias" clase="Integer" metodo="setDias" />
+					<campoEntrada name="Porcentaje" clase="Double" metodo="setPorcentaje" />
 				</campoEntrada>
 				
 			</campoEntrada>
@@ -966,25 +867,25 @@
 
 
 	<!-- TRAER UN CLASIFICADOR Y SUS COMPONENTES -->
-	<operacion name="TraerClasificador" clase="">
+	<operacion name="TraerClasificador" clase="com.jkt.varios.operaciones.TraerClasificador">
 										
-		<output name="" tableName="mtClasificador">
-			<campoSalida value="oid_Clasificador" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->
-			<campoSalida value="oid_Entidad" target="" />
-			<campoSalida value="Obligatorio" target="" />						
-			<campoSalida value="Activo" target="" />	
+		<output name="clasificador" tableName="mtClasificador">
+			<campoSalida value="oid_Clasificador" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="oid_Entidad" target="entidad" />  <!-- se supone que es la clase que representa, y no una instancia. -->
+<!-- 			<campoSalida value="Obligatorio" target="" />	ver esto					 -->
+			<campoSalida value="Activo" target="activo" />	
 		</output>
 				
-		<output name="" tableName="mtComponentesClasificador">		
-			<campoSalida value="oid_CompClasif" target="" />			
-			<campoSalida value="oid_Clasificador" target="" />			
-			<campoSalida value="oid_Nivel" target="" />			
-			<campoSalida value="oid_NivelPadre" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			   
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	 			
-			<campoSalida value="Activo" target="" />			
+		<output name="componentes" tableName="mtComponentesClasificador">		
+			<campoSalida value="oid_CompClasif" target="id" />			
+<!-- 			<campoSalida value="oid_Clasificador" target="" />			 -->
+			<campoSalida value="oid_Nivel" target="nivel" />			
+			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="activo" />			
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -997,25 +898,31 @@
 
 
 	<!-- GUARDAR UN CLASIFICADOR Y SUS COMPONENTES -->
-	<operacion name="GuardarClasificador" clase="com.jkt.operaciones.GuardarClasificador">
+	<operacion name="GuardarClasificador" clase="com.jkt.varios.operaciones.GuardarClasificador">
 
-		<input name="mtClasificador" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Clasificador'>
+		<input name="mtClasificador" keyName="objeto" clase="com.jkt.varios.dominio.Clasificador" fieldID="oid_Clasificador">
 			<campoEntrada>
 
-				<campoEntrada name="Codigo" clase="String" metodo="" />
-				<campoEntrada name="Descripcion" clase="String" metodo="" />
-				<campoEntrada name="oid_Entidad" clase="String" metodo="" />
-				<campoEntrada name="Obligatorio" clase="Boolean" metodo="setObligatorio" />
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="oid_Entidad" clase="String" metodo="setEntidad" />
+<!-- 				<campoEntrada name="Obligatorio" clase="Boolean" metodo="setObligatorio" /> -->
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
-				<campoEntrada name="mtComponentesClasificador" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_CompClasif" clase="String" metodo="" />
-					<campoEntrada name="oid_Clasificador" clase="String" metodo="" />
-					<campoEntrada name="oid_Nivel" clase="String" metodo="" />
-					<campoEntrada name="oid_NivelPadre" clase="String" metodo="" />
-					<campoEntrada name="Codigo" clase="String" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="" />
+				<campoEntrada name="mtComponentesClasificador" metodo="agregarComponente" clase="com.jkt.varios.dominio.Componente" fieldID="oid_CompClasif">
+
+<!-- 					<campoEntrada name="oid_CompClasif" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
+
+<!-- 					<campoEntrada name="oid_Nivel" clase="Integer" metodo="setNivel" /> -->
+<!-- 					<campoEntrada name="oid_NivelPadre" clase="Integer" metodo="setNivelSuperior" /> -->
+
+					<campoEntrada name="oid_Nivel" clase="com.jkt.varios.dominio.Componente" metodo="setComponentePadre" />
+					<campoEntrada name="oid_NivelPadre" clase="com.jkt.varios.dominio.Componente" metodo="setComponenteHijo" />
+
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 				
 			</campoEntrada>
@@ -1028,15 +935,21 @@
 	</operacion>
 
 
+
+
 	<!-- TRAER LAS ENTIDADES CLASIFICABLES -->
-	<operacion name="TraerEntidadesClasificables" clase="">
+	<operacion name="TraerEntidadesClasificables" clase="com.jkt.varios.operaciones.TraerEntidadesClasificables">
 										
-		<output name="" tableName="mtEntidades">		
-			<campoSalida value="oid_Entidad" target="" />
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	
+		<output name="entidades" tableName="mtEntidades">		
+<!-- 			<campoSalida value="oid_Entidad" target="" /> -->
+<!-- 			<campoSalida value="Descripcion" target="" /> -->
+<!-- 			Esto creo que está mal, lo que se clasifica es la clase. -->
+			<campoSalida value="Descripcion" target="value" />
+			
+			
 		</output>
 						
-		<transformer clase="com.jkt.transformers."></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
 			<form name="FNCla0001"> </form>
@@ -1046,30 +959,35 @@
 
 
 	<!-- TRAER LOS VALORES DE UN CLASIFICADOR, LOS DATOS DEL CLASIFICADOR Y SUS COMPONENTES (JERARQUIA) -->
-	<operacion name="TraerValoresClasificador" clase="">
+	<operacion name="TraerValoresClasificador" clase="com.jkt.varios.operaciones.TraerValoresClasificador">
 										
-		<output name="" tableName="mtClasificador">
-			<campoSalida value="oid_Clasificador" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->				
+		<output name="clasificador" tableName="mtClasificador">
+			<campoSalida value="oid_Clasificador" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>
 				
-		<output name="" tableName="mtComponentesClasificador">					
-			<campoSalida value="oid_Nivel" target="" />			
-			<campoSalida value="oid_NivelPadre" target="" />
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			   
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	 			
-			<campoSalida value="Activo" target="" />			
+		<output name="componentes" tableName="mtComponentesClasificador">	
+		
+			<campoSalida value="oid_CompClasif" target="id" />			
+		
+						
+			<campoSalida value="oid_Nivel" target="nivel" />			
+			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="activo" />			
 		</output>
 
-		<output name="" tableName="mtValoresClasificador">					
-			<campoSalida value="oid_ValorClasif" target="" />			
-			<campoSalida value="oid_Clasificador" target="" />
-			<campoSalida value="oid_Valor" target="" />
-			<campoSalida value="oid_ValorPadre" target="" />			
-			<campoSalida value="Codigo" target="" /> <!-- String  Size = 15 -->			   
-			<campoSalida value="Descripcion" target="" /> <!-- String  Size = 100 -->	 			
-			<campoSalida value="Activo" target="" />			
+		<output name="valores" tableName="mtValoresClasificador">					
+			<campoSalida value="oid_CompClasif" target="componente.id" />			
+<!-- 			<campoSalida value="oid_ValorClasif" target="" />			 -->
+<!-- 			<campoSalida value="oid_Clasificador" target="" /> -->
+			<campoSalida value="oid_Valor" target="id" />
+<!-- 			<campoSalida value="oid_ValorPadre" target="" />			 -->
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="activo" />			
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -1082,29 +1000,108 @@
 
 
 	<!-- GUARDAR LOS VALORES DE UN CLASIFICADOR -->
-	<operacion name="GuardarValoresClasificador" clase="com.jkt.operaciones.GuardarValoresClasificador">
+	<operacion name="GuardarValoresClasificador" clase="com.jkt.varios.operaciones.GuardarValoresClasificador">
 
-		<input name="mtClasificador" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Clasificador'>
-			<campoEntrada>
+<!-- 		<input name="mtClasificador" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Clasificador'> -->
+<!-- 			<campoEntrada> -->
 
-				<campoEntrada name="mtValoresClasificador" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-					<campoEntrada name="oid_Clasificador" clase="String" metodo="" />
-					<campoEntrada name="oid_Valor" clase="String" metodo="" />
-					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" />
-					<campoEntrada name="Codigo" clase="String" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="" />
-				</campoEntrada>
+<!-- 				<campoEntrada name="mtValoresClasificador" metodo="" clase="com.jkt.dominio." > -->
+<!-- 					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Valor" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="Codigo" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="Descripcion" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="" /> -->
+<!-- 				</campoEntrada> -->
 				
-			</campoEntrada>
-		</input>
+<!-- 			</campoEntrada> -->
+<!-- 		</input> -->
 		
 		<forms>
 			<form name="FNCla0002"></form>
 		</forms>
 		
 	</operacion>
+
+	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
+	<operacion name="TraerImpuestos" clase="com.jkt.erp.impuestos.operaciones.TraerImpuestos">
+										
+		<output name="impuesto" tableName="mtImpuesto">
+			<campoSalida value="oid_Impuesto" target="id" />
+			<campoSalida value="oid_Comportamiento" target="comportamiento" />
+			<campoSalida value="Codigo" target="codigo" /> 
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="activo" />	
+		</output>
+				
+		<output name="categorias" tableName="mtImpuestoCategorias">		
+<!-- 			<campoSalida value="oid_ImpCat" target="" />			 -->
+			<campoSalida value="oid_Impuesto" target="impuesto.id" />			
+			<campoSalida value="oid_Categoria" target="id" />			
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activa" target="activo" />			
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+
+	<!-- GUARDAR UN IMPUESTO -->
+	<operacion name="GuardarImpuestos" clase="com.jkt.operaciones.GuardarLista">
+
+		<input name="mtImpuesto" keyName="objeto" clase="com.jkt.erp.impuestos.dominio.Impuesto" fieldID='oid_Impuesto'>
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="oid_Comportamiento" clase="String" metodo="setComportamiento" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="mtImpuestoCategorias" metodo="agregarCategoria" clase="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" fieldID="oid_Categoria">
+<!-- 					<campoEntrada name="oid_ImpCat" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Impuesto" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Categoria" clase="String" metodo="" /> -->
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="Activa" clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name=""></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- TRAE LOS COMPORTAMIENTOS DEL IMPUESTO -->
+	<operacion name="TraerComportamientosImpuesto" clase="com.jkt.erp.impuestos.operaciones.TraerComportamientosImpuesto">
+										
+		<output name="resultado" tableName="mtComportamientos">		
+			<campoSalida value="oid_Comportamiento" target="codigo" />
+<!-- 			<campoSalida value="oid_Comportamiento" target="codigo" /> -->
+			<campoSalida value="Descripcion" target="descripcion" />
+		</output>
+						
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+<!-- 	&operacionesExternas; -->
 
 	<!-- GUARDAR Tipo de Producto	 -->
 	<operacion name="GuardarTipoProducto" clase="com.jkt.operaciones.Guardar">
@@ -1169,7 +1166,7 @@
 			<campoEntrada>			
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
-				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="tipo_dato" clase="String" metodo="setTipoDato" />
 				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
 				
@@ -1233,6 +1230,6 @@
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
-	
+
 
 </entity>

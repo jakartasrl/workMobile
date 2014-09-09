@@ -6,7 +6,13 @@
 
 	<class name="com.jkt.varios.dominio.CondPago" table="CONDICION_PAGO">
 		<id name="id" column="COND_PAGO_ID">
-			<generator class="native" />
+			<generator class="hilo" >
+<!-- 				<param name="initialValue">10000</param> -->
+				<param name="sequence">COND_PAGO_ID_SEQ</param>
+				<param name="allocationSize">1</param>
+				<param name="initialValue">17599</param>
+			</generator>
+			
 		</id>
 		
 		<property name="codigo" column="CODIGO" />
@@ -15,11 +21,11 @@
 		<property name="baseFechaFactura" column="BASE_FECHA_FACTURA" type="boolean" />
 		<property name="baseFechaRecep" column="BASE_FECHA_RECEP" type="boolean" />
 		
-		<list name="detalles" table="COND_PAGO_DET" lazy="true" cascade="all">
+		<set name="detalles" table="COND_PAGO_DET" lazy="true" cascade="all">
 			<key column="COND_PAGO_ID"></key>
-			<index column="ORDEN"></index>
+<!-- 			<index column="ORDEN"></index> -->
 			<one-to-many class="com.jkt.varios.dominio.CondPagoDet"/>
-		</list>
+		</set>
 
 	</class>
 

@@ -43,7 +43,17 @@
 
 		<campos>
 			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
-			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="codigo" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Codigo" />
+			<campo fieldName="Descripcion" tipo="String" longitud="100" columnWidth="380" visible="true" readOnly="false" orden="3" label="Descripcion" />
+		</campos>
+
+	</entidad>
+	
+	<entidad nombre="condicionPago">
+
+		<campos>
+			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Codigo" />
 			<campo fieldName="Descripcion" tipo="String" longitud="100" columnWidth="380" visible="true" readOnly="false" orden="3" label="Descripcion" />
 		</campos>
 

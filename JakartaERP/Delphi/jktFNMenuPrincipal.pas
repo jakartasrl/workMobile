@@ -22,7 +22,8 @@ uses
   cxPCdxBarPopupMenu, cxPC, cxSplitter, dxGDIPlusClasses, cxImage, cxButtons,
   jktUtils, jktFrameListaProgramas, jktCNMet0005, jktCNMet0002, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, kbmMemTable, jktCNMet0012,
-  cxDBEdit, jktCNMet0030, jktCNMet0001, cxCheckBox;
+  cxDBEdit, jktCNMet0030, jktCNMet0001, cxCheckBox, IdAntiFreezeBase,
+  Vcl.IdAntiFreeze;
 
 type
   TfrmMenuPrincipal = class(TForm)
@@ -124,6 +125,7 @@ type
     TMenuesOrden: TIntegerField;
     TMenuesArgumento: TStringField;
     TTextosMenues: TjktMemTable;
+    IdAntiFreeze1: TIdAntiFreeze;
     procedure FormCreate(Sender: TObject);
     procedure tcaChangeThemeClick(Sender: TdxTileControlActionBarItem);
     procedure tcaExitClick(Sender: TdxTileControlActionBarItem);
@@ -295,7 +297,7 @@ var
   AItem: TdxTileControlItem;
   AFrame: TdxTileControlItemFrame;
 begin
-//  GenerarArchivoMenuUsuario;
+  GenerarArchivoMenuUsuario;
 
   cds_MenuUsuario.LoadFromFile(DataPath + 'MenuUsuario.xml');
 
@@ -613,6 +615,34 @@ begin
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 10;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Tablas de Validacion ';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 11;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Caracteristicas de Producto ';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 12;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Tipo de Producto ';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
 
   cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;

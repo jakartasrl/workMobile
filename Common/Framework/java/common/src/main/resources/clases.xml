@@ -21,4 +21,5 @@
 	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
 	<elemento key="zonaComercial" value="com.jkt.erp.varios.ZonaComercial" />
 	
+	
 </elementos>

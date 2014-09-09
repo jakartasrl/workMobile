@@ -49,7 +49,8 @@ type
     mtConfigValidadoroidName: TStringField;
     mtConfigValidadordescrName: TStringField;
     mtConfigValidadorestadoForm: TStringField;
-    procedure mtInputNewRecord(DataSet: TDataSet);
+    mtConfigCampostag: TIntegerField;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
    procedure crearColumnasDataset;
@@ -64,8 +65,6 @@ type
 
   end;
 
-var
-  FNUti0001: TFNUti0001;
 
 implementation
 
@@ -75,87 +74,12 @@ procedure TFNUti0001.llamarOperacionConfiguracion;
 begin
   operConfig.execute;
 
-{
-
-  // solo para probar
-  // luego hay que descomentar la linea de arriba y borrar hasta donde esta marcado
-
-  mtConfigOper.Open;
-  mtConfigOper.append;
-  mtConfigOper.FieldByName('operSave').AsString := 'saveEmpresa';
-  mtConfigOper.FieldByName('operTraer').AsString  := 'traerEmpresa';
-  mtConfigoper.post;
-
-
-  mtConfigCampos.Open;
-  mtConfigCampos.append;
-  mtConfigCampos.fieldByName('fieldName').AsString    := 'oid';
-  mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
-  mtConfigCampos.fieldByName('longitud').AsInteger    := 0;
-  mtConfigCampos.fieldByName('visible').AsBoolean     := false;
-  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-  mtConfigCampos.fieldByName('orden').AsInteger       := 1;
-  mtConfigCampos.fieldByName('label').AsString        := 'oid';
-
-  mtConfigCampos.append;
-  mtConfigCampos.fieldByName('fieldName').AsString    := 'codigo';
-  mtConfigCampos.fieldByName('tipo').AsString         := 'Integer';
-  mtConfigCampos.fieldByName('longitud').AsInteger    := 10;
-  mtConfigCampos.fieldByName('visible').AsBoolean     := true;
-  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-  mtConfigCampos.fieldByName('orden').AsInteger       := 2;
-  mtConfigCampos.fieldByName('label').AsString        := 'Codigo';
-
-  mtConfigCampos.append;
-  mtConfigCampos.fieldByName('fieldName').AsString    := 'descripcion';
-  mtConfigCampos.fieldByName('tipo').AsString         := 'String';
-  mtConfigCampos.fieldByName('longitud').AsInteger    := 60;
-  mtConfigCampos.fieldByName('visible').AsBoolean     := true;
-  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-  mtConfigCampos.fieldByName('orden').AsInteger       := 3;
-  mtConfigCampos.fieldByName('label').AsString        := 'Descripcion';
-
-  mtConfigCampos.append;
-  mtConfigCampos.fieldByName('fieldName').AsString    := 'activo';
-  mtConfigCampos.fieldByName('tipo').AsString         := 'Boolean';
-  mtConfigCampos.fieldByName('longitud').AsInteger    := 0;
-  mtConfigCampos.fieldByName('visible').AsBoolean     := true;
-  mtConfigCampos.fieldByName('readOnly').AsBoolean    := false;
-  mtConfigCampos.fieldByName('orden').AsInteger       := 4;
-  mtConfigCampos.fieldByName('label').AsString        := 'Activo';
-
-
-  mtConfigValidador.open;
-  mtConfigValidador.append;
-  mtConfigValidador.fieldByName('fieldName').AsString       := 'codigo';
-  mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'MayorCero';
-  mtConfigValidador.fieldByName('entidad').AsString    := '';
-  mtConfigValidador.fieldByName('oidName').AsString    := '';
-  mtConfigValidador.fieldByName('descrName').AsString    := '';
-
-  mtConfigValidador.append;
-  mtConfigValidador.fieldByName('fieldName').AsString       := 'descripcion';
-  mtConfigValidador.fieldByName('tipoValidacion').AsString    := 'DistintoEspacio';
-  mtConfigValidador.fieldByName('entidad').AsString    := '';
-  mtConfigValidador.fieldByName('oidName').AsString    := '';
-  mtConfigValidador.fieldByName('descrName').AsString    := '';
-
-  // fin solo para probar
-
-}
-
-   crearColumnasDataset;
-   crearColumnasGrilla;
-   crearValidaciones;
-   completarOperaciones;
+  crearColumnasDataset;
+  crearColumnasGrilla;
+  crearValidaciones;
+  completarOperaciones;
 end;
 
-
-procedure TFNUti0001.mtInputNewRecord(DataSet: TDataSet);
-begin
-  inherited;
-  mtInput.FieldByName('key').AsInteger := mtInput.RecordCount + 1;
-end;
 
 procedure TFNUti0001.completarOperaciones;
 begin
@@ -169,6 +93,7 @@ var
   name :string;
   tipo :TFieldType;
   size :integer;
+  tag :integer;
   fieldDef :TFieldDef;
 begin
   mtConfigCampos.First;
@@ -206,17 +131,24 @@ begin
        fieldDef.dataType := tipo;
        fieldDef.Size := size;
        fieldDef.Required := false;
+
        //mtInput.FieldDefs.Add(name, tipo, size,  false);
        mtConfigCampos.Next;
     end;
-    fieldDef := mtInput.FieldDefs.AddFieldDef ;
-    fieldDef.name := 'key';
-    fieldDef.dataType := ftInteger;
-    fieldDef.Size := 0;
-    fieldDef.Required := false;
-    mtInput.CreateTable;
-    mtInput.Close;
-    mtInput.Open;
+
+  mtInput.CreateTable;
+
+  mtConfigCampos.First;
+  while not mtConfigCampos.Eof do
+    begin
+      tag := mtConfigCampos.FieldByName('tag').AsInteger;
+      name :=  mtConfigCampos.FieldByName('fieldName').AsString;
+      mtInput.FindField(name).Tag := tag;
+      mtConfigCampos.Next;
+    end;
+
+  mtInput.Close;
+  mtInput.Open;
 end;
 
 procedure TFNUti0001.crearColumnasGrilla;
@@ -290,10 +222,14 @@ begin
             asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
             asignador.FieldName := mtConfigValidador.fieldByName('oidName').AsString;
             asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+            asignador.SourceName  := 'oid';
+
             // Descripcion
             asignador  := TjktAsignadorField.Create(validador.ListaAsignaciones);
             asignador.FieldName := mtConfigValidador.fieldByName('descrName').AsString;
             asignador.FieldTarget := mtInput.FieldByName(asignador.FieldName);
+            asignador.SourceName  := 'descripcion';
+
            end;
 
     validadorField.Field.OnValidate := validadorForm.validar;
@@ -301,5 +237,14 @@ begin
   end;
 end;
 
+procedure TFNUti0001.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+  FMultipleInstancia := True;
+end;
+
+initialization
+  RegisterClass(TFNUti0001);
 
 end.

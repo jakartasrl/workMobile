@@ -29,9 +29,6 @@ import com.jkt.util.Tabla;
 import com.jkt.xmlreader.CampoEntrada;
 import com.jkt.xmlreader.Input;
 
-
-
-
 /**
  * Adapter para transformar las peticiones desde y hacia el cliente delphi.
  * 
@@ -242,8 +239,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 						metaDataOfCurrentField = campoEntrada.getHijo((String)entry.getKey());
 						
 						if (metaDataOfCurrentField==null) {
-							//continue;
+//							continue;
 							throw new JakartaException("El campo: "  + (String)entry.getKey() + " no esta en operaciones.xml");
+//							throw new JakartaException("El campo: "  + (String)entry.getKey() + " no esta en operaciones.xml");
 						}
 						
 						/*
@@ -299,9 +297,13 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 									entryR = (Entry<Object, Object>) iteratorR.next();
 									childCampoEntrada = metaDataOfCurrentField.getHijo((String)entryR.getKey());
 									
+									
+									//TODO ESTA MAL ESTE COMPORTAMIENDO QUE HIZO DANIEL, ESTOY PASANDO EL VALOR CON =0 Y LEVANTA ESTA EXCEPCION
+									/*
 									if (childCampoEntrada==null){
 										 throw new JakartaException("El campo: " + (String)entryR.getKey() + " no viene en los datos que envia Delphi");
 									}
+									*/
 									if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
 										continue;
 									}
@@ -488,7 +490,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			}
 			childInstance = childClazz.newInstance();
 		}
-		Registro primerRegistro=registros.get(0);//es un for esto carajo!
+		Registro primerRegistro=registros.get(0);//es un for esto!
 		
 //		if (registros.size()>1) {
 //			estrategia=new StrategyManyInstances();
@@ -512,7 +514,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}
 		if (!test){
 		   Class<?> otraClase = Class.forName(parentMetadata.getClase());
-		   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase);
+		   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
 		   method.invoke(parentObject,childInstance);
 		}
 	}

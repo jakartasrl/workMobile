@@ -6,7 +6,7 @@ import com.jkt.annotations.OperacionBean;
 import com.jkt.excepcion.ValidacionException;
 
 /**
- * Esta operacion recibe una lista de entidades persiste a las mismas.
+ * Esta operacion recibe una lista de entidades y persiste a las mismas.
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL

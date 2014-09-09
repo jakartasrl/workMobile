@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.varios.dominio.ComponenteValor" table="COMPONENTE_VALOR" >
+		<id name="id" column="COMPONENTE_VALOR_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="codigo" column="CODIGO" />
+		<property name="descripcion" column="DESCRIPCION" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+
+		<many-to-one name="componenteValorPadre" class="com.jkt.varios.dominio.ComponenteValor" column="COMPONENTE_VALOR_PADRE_ID" not-null="false" />
+		<list name="valores" table="COMPONENTE_VALOR" lazy="false" cascade="all-delete-orphan" inverse="false">
+			<key column="COMPONENTE_VALOR_ID_2"></key>
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.varios.dominio.ComponenteValor"  />
+		</list>
+		
+
+	</class>
+</hibernate-mapping>
+
+

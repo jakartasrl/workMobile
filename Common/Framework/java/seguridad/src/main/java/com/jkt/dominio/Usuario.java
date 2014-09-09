@@ -142,6 +142,10 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 		this.skin = skin;
 	}
 
+	public String getDescripcion() {
+		return this.getApellido().concat(", ").concat(this.getNombres());
+	}
+	
 	public String getCadena() {
 		return this.getNombres().concat(" ").concat(this.getApellido());
 	}

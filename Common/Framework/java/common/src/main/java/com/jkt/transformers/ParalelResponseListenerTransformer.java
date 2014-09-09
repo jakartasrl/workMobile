@@ -23,6 +23,7 @@ import com.jkt.xmlreader.Output;
  * @see Notificacion
  * 
  * @author Leonel Suarez - Jakarta SRL
+ * @author DHS - Jakarta SRL
  */
 public class ParalelResponseListenerTransformer extends Transformer {
 	

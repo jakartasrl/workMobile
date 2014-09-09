@@ -3,7 +3,7 @@ inherited FNSeg0001: TFNSeg0001
   ClientHeight = 252
   ClientWidth = 748
   ExplicitWidth = 764
-  ExplicitHeight = 290
+  ExplicitHeight = 291
   PixelsPerInch = 96
   TextHeight = 13
   object dbgEmpresas: TjktExpDBGrid [0]
@@ -128,21 +128,26 @@ inherited FNSeg0001: TFNSeg0001
     Left = 160
     Top = 112
     object TEmpresasoid_empresa: TIntegerField
+      Tag = 1
       FieldName = 'oid_empresa'
     end
     object TEmpresasCodigo: TStringField
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object TEmpresasRazonSocial: TStringField
+      Tag = 1
       FieldName = 'RazonSocial'
       Size = 255
     end
     object TEmpresasUrlDB: TStringField
+      Tag = 1
       FieldName = 'UrlDB'
       Size = 255
     end
     object TEmpresasActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end

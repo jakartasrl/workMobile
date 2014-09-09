@@ -3,9 +3,12 @@ package com.jkt.varios.operaciones;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
+import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 
@@ -20,43 +23,31 @@ public class TraerClasificador extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		List<PersistentEntity> all = this.serviceRepository.getAll(Clasificador.class);
-	
-		Clasificador c;
-		for (PersistentEntity persistentEntity : all) {
-			c=(Clasificador) persistentEntity;
-			Componente componentePadre = c.getComponentePadre();
-			Componente componenteHijo = componentePadre.getComponenteHijo();
-			long id = componenteHijo.getId();
+		String id=(String) aParams.get("oid");
+		Clasificador clasificador=(Clasificador) this.serviceRepository.getByOid(Clasificador.class, Long.valueOf(id).longValue());
+		
+		if (clasificador==null) {
+			throw new EntityNotFoundException("No existe el clasificador solicitado");
 		}
 		
+		notificarObjecto(Notificacion.getNew("clasificador", clasificador));
 		
-		Componente componenteHijo=new Componente();
-		componenteHijo.setCodigo("rrr");
-		Componente componenteHijo2=new Componente();
-		componenteHijo2.setCodigo("zzz");
-		
-		Componente componentePadre=new Componente();
-		componentePadre.setCodigo("aaa");
-		
-		Clasificador clasificador = new Clasificador();
-		clasificador.setCodigo("asd");
-		
-		componentePadre.setClasificador(clasificador);
-		
-		componentePadre.setComponenteHijo(componenteHijo);
-		componenteHijo.setComponentePadre(componentePadre);
-		
-		componenteHijo.setComponenteHijo(componenteHijo2);
-		componenteHijo2.setComponentePadre(componenteHijo);
-		
-		clasificador.setComponentePadre(componentePadre);
-		
-		
+		Componente componente = clasificador.getComponentePadre();
+		int nivel=0;
+		while(componente!=null){
 
-		this.serviceRepository.save(clasificador);
-		
-		
+//			if (nivel>0) {
+//				componente.setNivelSuperior(nivel-1);
+//			}
+//			
+			componente.setNivelSuperior(nivel-1);
+			
+			
+			componente.setNivel(nivel++); //Seteo el valor actual y luego es aumentado.
+			
+			notificarObjecto(Notificacion.getNew("componentes", componente));
+			componente=componente.getComponenteHijo();
+		}
 		
 	}
 

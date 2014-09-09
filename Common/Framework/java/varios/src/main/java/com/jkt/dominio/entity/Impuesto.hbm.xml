@@ -8,30 +8,18 @@
 		<id name="id" column="IMPUESTO_ID">
 			<generator class="native" />
 		</id>
-		<discriminator column="COMPORTAMIENTO" type="string" />
 
+		<property name="comportamiento" column="COMPORTAMIENTO" type="string" />
 		<property name="codigo" column="CODIGO" />
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-		
-		<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="false" cascade="all">
+
+		<list name="categorias" table="CATEGORIA_IMPUESTOS" lazy="true" cascade="all">
 			<key column="IMPUESTO_ID"></key>
 			<index column="ORDEN"></index>
-			<one-to-many class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto"/>
+			<one-to-many class="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" />
 		</list>
-				
-		<subclass name="com.jkt.erp.impuestos.dominio.Iva" discriminator-value="IVA">
-		</subclass>
-
-		<subclass name="com.jkt.erp.impuestos.dominio.IngresosBrutos" discriminator-value="INGRESOS_BRUTOS">
-		</subclass>
-
-		<subclass name="com.jkt.erp.impuestos.dominio.Ganancias" discriminator-value="GANANCIAS">
-		</subclass>
-
-		<subclass name="com.jkt.erp.impuestos.dominio.SUSS" discriminator-value="SUSS">
-		</subclass>
-
+			
 	</class>
 
 </hibernate-mapping>
