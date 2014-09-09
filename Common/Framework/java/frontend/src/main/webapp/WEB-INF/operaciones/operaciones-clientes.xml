@@ -117,7 +117,7 @@
 		</input>
 
 		<forms>
-			<form name="FNVar0001"></form>
+			<form name="FNVar0001"/>
 		</forms>
 
 	</operacion>
@@ -127,7 +127,7 @@
 		clase="com.jkt.erp.operaciones.EjemploParaGuardarCliente">
 
 		<forms>
-			<form name="FNVar0001"></form>
+			<form name="FNVar0001"/>
 		</forms>
 
 	</operacion>
@@ -237,8 +237,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
 		<forms>
-			<form name="FNCli0001">
-			</form>
+			<form name="FNCli0001" />
 		</forms>
 
 	</operacion>
@@ -335,7 +334,7 @@
 		</input>
 
 		<forms>
-			<form name="FNCli0001"></form>
+			<form name="FNCli0001" />
 		</forms>
 
 	</operacion>
@@ -343,7 +342,7 @@
 
 
 	<!-- TRAER LOS CLASIFICADORES DEL CLIENTE -->
-	<operacion name="TraerClasifCliente" clase="com.jkt.varios.operaciones.TraerClasifCliente">
+	<operacion name="TraerClasifCliente" clase="com.jkt.erp.operaciones.TraerClasifCliente">
 		
 		<output name="" tableName="mtClasificadoresCliente">
 			<campoSalida value="oid_ClasifClie" target="id" />
@@ -353,13 +352,13 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
 		<forms>
-			<form name="FNCli0001"></form>
+			<form name="FNCli0001" />
 		</forms>
 	</operacion>
 
 
 	<!-- TRAER LOS CLASIFICADORES DE LA SUCURSAL -->
-	<operacion name="TraerClasifSucur" clase="com.jkt.varios.operaciones.TraerClasifSucur">
+	<operacion name="TraerClasifSucur" clase="com.jkt.erp.operaciones.TraerClasifSucur">
 
 		<output name="" tableName="mtClasificadoresSucursal">
 			<campoSalida value="oid_ClasifSuc" target="id" />
@@ -370,8 +369,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
 		<forms>
-			<form name="FNCli0001">
-			</form>
+			<form name="FNCli0001" />
 		</forms>
 
 	</operacion>
