@@ -8,12 +8,8 @@ import javax.validation.constraints.NotNull;
 import com.jkt.dominio.Descriptible;
 
 /**
- * <p>
- * Representa a un valor de un componente.
- * </p>
- * <p>
- * Cada componente puede tener una lista de hijos valores
- * </p>
+ * <p>Representa a un valor de un componente.</p>
+ * <p>Cada componente puede tener una lista de hijos valores.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -52,7 +48,7 @@ public class ComponenteValor extends Descriptible {
 
 	/**
 	 * Agrega un componente valor a la lista de valores.
-	 * FIXME Ser cuidadoso con la entida del objeto recuperado desde la base de datos.
+	 * FIXME Ser cuidadoso con la entidad del objeto recuperado desde la base de datos. (eq hashcode)
 	 * 
 	 * @param componenteValor
 	 */

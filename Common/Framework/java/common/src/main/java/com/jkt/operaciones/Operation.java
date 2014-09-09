@@ -210,4 +210,8 @@ public abstract class Operation extends Observable {
 		serviceRepository.save(entityToSave);
 		return entityToSave;
 	}
+	
+	protected PersistentEntity obtener(Class<? extends PersistentEntity> className, long id) throws Exception{
+		return serviceRepository.getByOid(className, id);
+	}
 }

@@ -10,6 +10,7 @@ import com.jkt.dominio.Descriptible;
  * <p>Se utilizará para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
  * <p>Un mismo componente puede estar en 2 clasificadores distintos</p>
  * 
+ * @see ComponenteValor
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -24,10 +25,15 @@ public class Componente extends Descriptible {
 	
 	
 	
+	/*
+	 * Metodo para agregar como corresponde el arbol en forma de lista enlazada.
+	 * 
+	 */
 	private boolean flag=false;
 	public void agregarValor(ComponenteValor valor){
 		
 		//Ejecucion de este metodo como si fuese estatico, ejecutado una sola vez, la primera vez que es ejecutado el metodo agregarValor
+		//SETEA A TODOS EN DESACTIVADOS
 		if(!flag){
 			for (ComponenteValor valorActual : valores) {
 				valorActual.setActivo(false);

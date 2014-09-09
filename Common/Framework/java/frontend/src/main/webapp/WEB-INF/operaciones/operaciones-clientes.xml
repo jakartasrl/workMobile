@@ -99,20 +99,16 @@
 	<!-- GUARDAR UNA CONDICION DE PAGO Y SU DETALLE -->
 	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.GuardarLista">
 
-		<input name="mtCondicionDePago" keyName="objeto"
-			clase="com.jkt.varios.dominio.CondPago" fieldID="oid_CondPago">
+		<input name="mtCondicionDePago" keyName="objeto" clase="com.jkt.varios.dominio.CondPago" fieldID="oid_CondPago">
 			<campoEntrada>
 
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
-				<campoEntrada name="APartirFechaFactura" clase="Boolean"
-					metodo="setBaseFechaFactura" />
-				<campoEntrada name="APartirFechaRecepcion" clase="Boolean"
-					metodo="setBaseFechaRecep" />
+				<campoEntrada name="APartirFechaFactura" clase="Boolean" metodo="setBaseFechaFactura" />
+				<campoEntrada name="APartirFechaRecepcion" clase="Boolean" metodo="setBaseFechaRecep" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
-				<campoEntrada name="mtDetalleCondicionDePago" metodo="addDetalle"
-					clase="com.jkt.varios.dominio.CondPagoDet" fieldID="oid_Det_CondPago">
+				<campoEntrada name="mtDetalleCondicionDePago" metodo="addDetalle" clase="com.jkt.varios.dominio.CondPagoDet" fieldID="oid_Det_CondPago">
 					<campoEntrada name="Dias" clase="Integer" metodo="setDias" />
 					<campoEntrada name="Porcentaje" clase="Double" metodo="setPorcentaje" />
 				</campoEntrada>
@@ -138,49 +134,49 @@
 
 
 	<!-- TRAER UN CLIENTE -->
-	<operacion name="TraerCliente" clase="com.jkt.varios.operaciones.TraerCliente">
-		<output name="" tableName="mtCliente">
+	<operacion name="TraerCliente" clase="com.jkt.erp.operaciones.TraerCliente">
+		<output name="cliente" tableName="mtCliente">
 			<campoSalida value="oid_Cliente" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="RazonSocial" target="" />
-			<campoSalida value="Direccion" target="" />
-			<campoSalida value="Localidad" target="" />
-			<campoSalida value="CodPostal" target="" />
-			<campoSalida value="oid_Provincia" target="" />
-			<campoSalida value="CodProvincia" target="" />
-			<campoSalida value="DescProvincia" target="" />
-			<campoSalida value="oid_Pais" target="" />
-			<campoSalida value="CodPais" target="" />
-			<campoSalida value="DescPais" target="" />
-			<campoSalida value="Telefonos" target="" />
-			<campoSalida value="PersonaJuridica" target="" />
-			<campoSalida value="Cuit" target="" />
-			<campoSalida value="oid_CondPago" target="" />
-			<campoSalida value="CodCondPago" target="" />
-			<campoSalida value="DescCondPago" target="" />
+			<campoSalida value="RazonSocial" target="sujetoImpositivo.razonSocial" />
+			<campoSalida value="Direccion" target="sujetoImpositivo.direccionLegal.direccion" />
+			<campoSalida value="Localidad" target="sujetoImpositivo.direccionLegal.localidad" />
+			<campoSalida value="CodPostal" target="sujetoImpositivo.direccionLegal.codigoPostal" />
+			<campoSalida value="oid_Provincia" target="sujetoImpositivo.direccionLegal.provincia.id" />
+			<campoSalida value="CodProvincia" target="sujetoImpositivo.direccionLegal.provincia.codigo" />
+			<campoSalida value="DescProvincia" target="sujetoImpositivo.direccionLegal.provincia.descripcion" />
+			<campoSalida value="oid_Pais" target="sujetoImpositivo.direccionLegal.pais.id" />
+			<campoSalida value="CodPais" target="sujetoImpositivo.direccionLegal.pais.codigo" />
+			<campoSalida value="DescPais" target="sujetoImpositivo.direccionLegal.pais.descripcion" />
+<!-- 			<campoSalida value="Telefonos" target="" /> -->
+			<campoSalida value="PersonaJuridica" target="sujetoImpositivo.personaJuridica" />
+			<campoSalida value="Cuit" target="sujetoImpositivo.cuit" />
+<!-- 			<campoSalida value="oid_CondPago" target="" /> -->
+<!-- 			<campoSalida value="CodCondPago" target="" /> -->
+<!-- 			<campoSalida value="DescCondPago" target="" /> -->
 			<campoSalida value="Activo" target="activo" />
 		</output>
 
-		<output name="" tableName="mtInscripImposit">
+		<output name="inscripciones" tableName="mtInscripImposit">
 			<campoSalida value="oid_InscClie" target="id" />
-			<campoSalida value="oid_Cliente" target="" />
-			<campoSalida value="oid_Impuesto" target="" />
-			<campoSalida value="DescImpuesto" target="" />
-			<campoSalida value="NroInscripcion" target="" />
-			<campoSalida value="oid_Categoria" target="" />
-			<campoSalida value="DescCategoria" target="" />
-			<campoSalida value="VigenciaDesde" target="" />
+<!-- 			<campoSalida value="oid_Cliente" target="" /> FALTA ARMAR LA RELACION DE LA INSCRIPCION IMPOSITIVA CON EL SUJETO IMPOSITIVO, Y Q ESTE CONTENGA AL CLIENTE--> 
+			<campoSalida value="oid_Impuesto" target="impuesto.id" />
+			<campoSalida value="DescImpuesto" target="impuesto.descripcion" />
+			<campoSalida value="NroInscripcion" target="numero" />
+			<campoSalida value="oid_Categoria" target="oidCategoria" />
+			<campoSalida value="DescCategoria" target="descripcionCategoria" />
+			<campoSalida value="VigenciaDesde" target="vigencia" />
 			<campoSalida value="Activo" target="activo" />
 		</output>
 
-		<output name="" tableName="mtClasificadoresCliente">
+		<output name="clasificadoresCliente" tableName="mtClasificadoresCliente">
 			<campoSalida value="oid_ClasifClie" target="id" />
-			<campoSalida value="oid_Cliente" target="" />
-			<campoSalida value="DescClasif" target="" />
-			<campoSalida value="oid_ValorClasif" target="" />
-			<campoSalida value="CodValorClasif" target="" />
-			<campoSalida value="DescValorClasif" target="" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="oid_Cliente" target="cliente.id" />
+			<campoSalida value="DescClasif" target="componenteValor.componente.clasificador.descripcion" />
+			<campoSalida value="oid_ValorClasif" target="componenteValor.id" />
+			<campoSalida value="CodValorClasif" target="componenteValor.codigo" />
+			<campoSalida value="DescValorClasif" target="componenteValor.descripcion" />
+			<campoSalida value="Activo" target="componenteValor.activo" />
 		</output>
 
 		<output name="" tableName="mtSucursalesCliente">
@@ -265,6 +261,7 @@
 				<campoEntrada name="Cuit" clase="String" metodo="" />
 				<campoEntrada name="oid_CondPago" clase="String" metodo="" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				
 				<campoEntrada name="mtInscripImposit" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_InscClie">
 					<campoEntrada name="oid_Impuesto" clase="" metodo="" />
 					<campoEntrada name="DescImpuesto" clase="" metodo="" />
@@ -307,8 +304,7 @@
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
-					<campoEntrada name="mtContactos" metodo=""
-						clase="com.jkt.varios.dominio." fieldID="oid_ContSuc">
+					<campoEntrada name="mtContactos" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ContSuc">
 						<campoEntrada name="Apellido" clase="String" metodo="" />
 						<campoEntrada name="Nombres" clase="String" metodo="" />
 						<campoEntrada name="Cargo" clase="String" metodo="" />
@@ -317,8 +313,7 @@
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
-					<campoEntrada name="mtClasificadoresSucursal" metodo=""
-						clase="com.jkt.varios.dominio." fieldID="oid_ClasifSuc">
+					<campoEntrada name="mtClasificadoresSucursal" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifSuc">
 						<campoEntrada name="DescClasif" clase="String" metodo="" />
 						<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
 						<campoEntrada name="CodValorClasif" clase="String" metodo="" />

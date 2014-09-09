@@ -1,3 +1,4 @@
+
 package com.jkt.erp.varios;
 
 import com.jkt.dominio.PersistentEntity;
@@ -10,7 +11,16 @@ import com.jkt.varios.dominio.ComponenteValor;
  */
 public class ClienteClasificador extends PersistentEntity {
 
+	private Cliente cliente;
 	private ComponenteValor componenteValor;
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public ComponenteValor getComponenteValor() {
 		return componenteValor;

@@ -50,7 +50,7 @@ public class ClienteSucursal extends PersistentEntity {
 	 */
 	private List<Contacto> contactos=new ArrayList<Contacto>();
 	
-	private List<ComponenteValor> clasificadores=new ArrayList<ComponenteValor>(); 
+	private List<ClienteSucursalClasificador> clasificadores=new ArrayList<ClienteSucursalClasificador>(); 
 
 	/**
 	 * Los distintos domicilios de entrega de la sucursal
@@ -114,13 +114,13 @@ public class ClienteSucursal extends PersistentEntity {
 		this.representante = representante;
 	}
 
-//	public ClienteCtaCte getCuentaCorriente() {
-//		return cuentaCorriente;
-//	}
-//
-//	public void setCuentaCorriente(ClienteCtaCte cuentaCorriente) {
-//		this.cuentaCorriente = cuentaCorriente;
-//	}
+	public List<ClienteSucursalClasificador> getClasificadores() {
+		return clasificadores;
+	}
+
+	public void setClasificadores(List<ClienteSucursalClasificador> clasificadores) {
+		this.clasificadores = clasificadores;
+	}
 
 	public List<Contacto> getContactos() {
 		return contactos;
@@ -128,14 +128,6 @@ public class ClienteSucursal extends PersistentEntity {
 
 	public void setContactos(List<Contacto> contactos) {
 		this.contactos = contactos;
-	}
-
-	public List<ComponenteValor> getClasificadores() {
-		return clasificadores;
-	}
-
-	public void setClasificadores(List<ComponenteValor> clasificadores) {
-		this.clasificadores = clasificadores;
 	}
 
 	public List<DomicilioEntrega> getDomiciliosDeEntrega() {

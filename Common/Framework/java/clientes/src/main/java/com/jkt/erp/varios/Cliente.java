@@ -38,7 +38,7 @@ public class Cliente extends Descriptible {
 	
 	private List<ClienteSucursal> listaSucursales=new ArrayList<ClienteSucursal>();
 	
-	private List<ComponenteValor> listaClasificadores=new ArrayList<ComponenteValor>();
+	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();
 	
 	
 	/*
@@ -89,11 +89,11 @@ public class Cliente extends Descriptible {
 		this.listaSucursales = listaSucursales;
 	}
 
-	public List<ComponenteValor> getListaClasificadores() {
+	public List<ClienteClasificador> getListaClasificadores() {
 		return listaClasificadores;
 	}
 
-	public void setListaClasificadores(List<ComponenteValor> listaClasificadores) {
+	public void setListaClasificadores(List<ClienteClasificador> listaClasificadores) {
 		this.listaClasificadores = listaClasificadores;
 	}
 

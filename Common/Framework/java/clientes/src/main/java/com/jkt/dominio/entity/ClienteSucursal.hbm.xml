@@ -33,10 +33,10 @@
 			<one-to-many class="com.jkt.erp.varios.DomicilioEntrega" />
 		</list>
 
-		<list name="clasificadores" table="CLASIFICADORES_CLIENTE_SUCURSAL" lazy="true" cascade="all">
+		<list name="clasificadores" table="CLIENTE_SUCURSAL_CLASIFICADORES" lazy="true" cascade="all">
 			<key column="CLIENTE_SUCURSAL_ID" />
 			<index column="ORDEN" />
-			<many-to-many column="COMPONENTE_VALOR_ID" unique="true" class="com.jkt.varios.dominio.ComponenteValor" />
+			<one-to-many class="com.jkt.erp.varios.ClienteSucursalClasificador" />
 		</list>
 		
 	</class>

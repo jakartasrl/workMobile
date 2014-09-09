@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.erp.varios.ClienteSucursalClasificador" table="CLIENTE_SUCURSAL_CLASIFICADORES" >
+		
+		<id name="id" column="CLIENTE_SUCURSAL_CLASIFICADORES_ID">
+			<generator class="native" />
+		</id>
+
+		<many-to-one name="componenteValor" class="com.jkt.varios.dominio.ComponenteValor" column="COMPONENTE_VALOR_ID"></many-to-one>
+		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" column="CLIENTE_SUCURSAL_ID"></many-to-one>
+
+	</class>
+
+</hibernate-mapping>
