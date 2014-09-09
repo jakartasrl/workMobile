@@ -21,6 +21,8 @@ import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
 import com.jkt.transformers.Transformer;
+import com.jkt.util.IRepositorioClases;
+import com.jkt.util.RepositorioClases;
 import com.jkt.xmlreader.ElementTransformer;
 
 /**
@@ -46,7 +48,17 @@ public abstract class Operation extends Observable {
 	protected IServiceRepository serviceRepository;
 	protected IEventBusiness ev;
 
+	private IRepositorioClases repositorioClases;
 	
+	public IRepositorioClases getRepositorioClases() {
+		return repositorioClases;
+	}
+
+	@Autowired
+	public void setRepositorioClases(IRepositorioClases repositorioClases) {
+		this.repositorioClases = repositorioClases;
+	}
+
 	public ISessionProvider getSessionProvider() {
 		return sessionProvider;
 	}
@@ -154,6 +166,7 @@ public abstract class Operation extends Observable {
 	public void runOperation(Map<String, Object> aParams) throws Exception{
 		session = sessionProvider.getSession();
 		serviceRepository.setSessionProvider(sessionProvider);
+		serviceRepository.setRepositorioClases(repositorioClases);
 		Transaction tx = session.beginTransaction();
 		try{
 			execute(aParams);//UOW

@@ -35,6 +35,7 @@ import com.jkt.util.Tabla;
  * Clase de tipo controller para proveer un endpoint que recibe todas las operaciones desde aplicaciones de escritorio.
  * 
  * @author Leonel Suarez - Jakarta SRL
+ * @author DHS - Jakarta SRL
  */
 @Controller
 @RequestMapping(value = "/processorDelphi")

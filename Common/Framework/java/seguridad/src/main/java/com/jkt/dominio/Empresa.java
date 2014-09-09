@@ -1,6 +1,6 @@
 package com.jkt.dominio;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Representa a una empresa dentro del sistema.
@@ -9,10 +9,12 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class Empresa extends PersistentEntity implements IDescriptible {
 
-//	@NotEmpty
+	@NotBlank
 	private String codigo;
 
+	@NotBlank
 	private String razonSocial;
+
 	private String urlDB;
 
 	// Transient value!

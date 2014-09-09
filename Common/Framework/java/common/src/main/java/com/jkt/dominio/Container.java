@@ -1,14 +1,28 @@
 package com.jkt.dominio;
 
 /**
- * Wrapper de un simple texto. xq no usaste solo la clase string, xq como estan hechas
- * las cosas, solo se permiten persistentEntities.
  * 
+ * <p>
+ * Wrapper de una entidad descriptible.
+ * </p>
+ * 
+ * <p>Wrapper de un simple texto. xq no usaste solo la clase string, xq como estan hechas
+ * las cosas, solo se permiten persistentEntities.
+ * </p>
  *
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Container extends PersistentEntity {
+public class Container extends Descriptible {
 
+	
+	public Container(String codigo, String descripcion) {
+		this.setCodigo(codigo);
+		this.setDescripcion(descripcion);
+	}
+	
+	public Container() {}
+	
+	
 //	private String nombreEntidad;
 //
 //	public String getNombreEntidad() {

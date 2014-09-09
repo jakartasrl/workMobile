@@ -82,6 +82,8 @@
 
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="hibernate.dialect">${dialect.class}</prop>
+				<prop key="hibernate.id.new_generator_mappings">true</prop>
+
 				
 			</props>
 		</property>
@@ -95,6 +97,7 @@
 		</property>
 	</bean>
 
+<!-- 	<context:property-placeholder location="WEB-INF/database.properties"></context:property-placeholder> -->
 	<context:property-placeholder location="classpath:database.properties"></context:property-placeholder>
 
 

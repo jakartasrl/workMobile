@@ -26,8 +26,6 @@ public class Factory {
 		
 		PersistentEntity instanciaRecuperada = serviceRepository.getUniqueByProperty(className, CODIGO, codigo);
 		
-
-		
 		if (instanciaRecuperada==null) {
 			instanciaRecuperada = (PersistentEntity) className.newInstance();
 		}

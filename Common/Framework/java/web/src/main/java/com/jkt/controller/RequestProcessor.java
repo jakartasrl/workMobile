@@ -25,6 +25,7 @@ import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
+import com.jkt.util.IRepositorioClases;
 import com.jkt.util.MapDS;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.XMLEntity;
@@ -46,6 +47,9 @@ public abstract class RequestProcessor extends BaseController{
 	
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
+	@Autowired
+	protected IRepositorioClases repositorioClases;
+	
 	@Autowired
 	protected SessionProvider sessionProvider;
 	protected boolean test;
@@ -75,7 +79,7 @@ public abstract class RequestProcessor extends BaseController{
 
 		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
 
-		log.debug(String.format("Se inicia una solicitud desde un cliente %s",this.getAppRequest()));
+		log.debug(String.format("Se inicia una solicitud desde un cliente %s",getAppRequest()));
 		
 		log.debug("Parseando la solicitud a un mapa...");
 		MapDS parameters = (MapDS) retrieveParameters(request);
@@ -140,7 +144,7 @@ public abstract class RequestProcessor extends BaseController{
 		transformer.write();
 		
 //		}catch(Exception exception){
-			//Hago el rollback y muestro el mensaje critido en frontend.
+			//Hago el rollback y muestro el mensaje critico en frontend.
 //			tx.rollback();
 //			throw exception;
 		}finally{
@@ -185,6 +189,7 @@ public abstract class RequestProcessor extends BaseController{
 		Operation op=(Operation)newInstance;
 		op.setServiceRepository(serviceRepository);
 		op.setSessionProvider(sessionProvider);
+		op.setRepositorioClases(repositorioClases);
 		return op;
 	}
 

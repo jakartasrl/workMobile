@@ -8,10 +8,10 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-abstract public class CategoriaImpuesto extends Descriptible {
-
+public class CategoriaImpuesto extends Descriptible {
+	
 	private Impuesto impuesto;
-
+	
 	public Impuesto getImpuesto() {
 		return impuesto;
 	}
@@ -21,3 +21,4 @@ abstract public class CategoriaImpuesto extends Descriptible {
 	}
 
 }
+

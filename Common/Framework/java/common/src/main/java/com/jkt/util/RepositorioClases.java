@@ -7,8 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 
 import org.apache.commons.digester3.Digester;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
 import com.jkt.excepcion.JakartaException;
@@ -20,16 +26,24 @@ import com.jkt.excepcion.JakartaException;
  * @author Leonel Suarez - Jakarta SRL
  */
 @SuppressWarnings("rawtypes")
-public class RepositorioClases {
+@Component
+@Scope(value=ConfigurableBeanFactory.SCOPE_SINGLETON)
+public class RepositorioClases implements IRepositorioClases{
 
-	static Map<String, String> alias = new HashMap<String, String>();
-	static Map<String, String> validadores = new HashMap<String, String>();
+	//variable que contiene todas las clases creadas.Esto es para evitar el uso de reflection y creación de clases manualmente
+	private Map<String, Class> clases=new HashMap<String, Class>();
+	
+	private Map<String, String> alias = new HashMap<String, String>();
+	private Map<String, String> validadores = new HashMap<String, String>();
 
-	static {
-		
+	@Autowired
+	private ServletContext servletContext;
+	
+	@PostConstruct
+	public void initMethod() {
 		try {
 			Digester digester = generarReglas();
-			InputStream in = RepositorioClases.class.getResourceAsStream("clases.xml");
+			InputStream in = servletContext.getResourceAsStream("/WEB-INF/clases.xml");
 			List elementos=(List)digester.parse(in);
 
 			Entry currentEntry;
@@ -37,21 +51,21 @@ public class RepositorioClases {
 				currentEntry=(Entry) elemento;
 				alias.put(currentEntry.getKey(), currentEntry.getValue());
 				validadores.put(currentEntry.getValue(), currentEntry.getValidador());
+				
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Error de entrada/salida.");
 		} catch (SAXException e) {
 			throw new RuntimeException("Error de parseo en el archivo de configuracion xml.");
 		}
-
 	}
-
+	
 	/**
 	 * @param value usado como key
 	 * @return El valor completo de la clase
 	 * @throws JakartaException
 	 */
-	public static String getClass(String value) throws JakartaException {
+	public String getClass(String value) throws JakartaException {
 		String valueRetrieved = alias.get(value);
 		if (valueRetrieved == null || valueRetrieved.isEmpty()) {
 			throw new JakartaException("No existe la clase solicitada. Pruebe indicando la clase con minuscula y respetante la nomenclatura camelCase.");
@@ -67,12 +81,12 @@ public class RepositorioClases {
 	 * @return
 	 * @throws JakartaException
 	 */
-	public static String getValidador(String value) throws JakartaException {
+	public String getValidador(String value) throws JakartaException {
 		String valueRetrieved = validadores.get(value);
 		return valueRetrieved;
 	}
 
-	private static Digester generarReglas() {
+	private Digester generarReglas() {
 		Digester digester = new Digester();
 		digester.setValidating(false);
 		
