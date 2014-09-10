@@ -239,18 +239,23 @@ type
     cxGridDBTableView1CodValorClasif: TcxGridDBColumn;
     cxGridDBTableView1DescValorClasif: TcxGridDBColumn;
     cxGridDBTableView1Activo: TcxGridDBColumn;
-    jktHelpGenerico1: TjktHelpGenerico;
+    Help: TjktHelpGenerico;
+    OperTraerClasifCliente: TjktOperacion;
+    OperTraerClasifSucur: TjktOperacion;
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
-var
-  FNCli0001: TFNCli0001;
 
 implementation
 
 {$R *.dfm}
+
+
+initialization
+  RegisterClass(TFNCli0001);
+
 
 end.

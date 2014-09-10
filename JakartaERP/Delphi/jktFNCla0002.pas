@@ -82,8 +82,6 @@ type
     { Public declarations }
   end;
 
-var
-  FNCla0002: TFNCla0002;
 
 implementation
 
@@ -144,5 +142,10 @@ begin
       menEliminar.Enabled := False;
     end;
 end;
+
+
+
+initialization
+  RegisterClass(TFNCla0002);
 
 end.

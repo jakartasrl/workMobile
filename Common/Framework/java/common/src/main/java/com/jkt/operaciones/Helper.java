@@ -20,24 +20,24 @@ public class Helper extends Operation {
 	protected static final String KEY_FILTROS = "filtros";
 
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD);
+		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD.toUpperCase());
 		String className = this.getRepositorioClases().getClass(nombreEntidad);
 		List objetos = recuperarObjetoUsandoKey(aParams);
 		
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
 		for (PersistentEntity persistentEntity : list) {
-			notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
+			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
 		}
 	}
 	
 	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) {
 		List object;
-		if (aParams.get(KEY_FILTROS)  instanceof List) {
-			object = (List) aParams.get(KEY_FILTROS);
+		if (aParams.get(KEY_FILTROS.toUpperCase())  instanceof List) {
+			object = (List) aParams.get(KEY_FILTROS.toUpperCase());
 		}else{
 			object = new ArrayList<Object>();
-			object.add(aParams.get(KEY_FILTROS));
+			object.add(aParams.get(KEY_FILTROS.toUpperCase()));
 		}
 		return object;
 	}

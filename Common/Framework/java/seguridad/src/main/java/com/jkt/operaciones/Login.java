@@ -23,8 +23,8 @@ public class Login extends Operation {
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 //		Login login=(Login) aParams.get("login");
-		String usuario=(String) aParams.get("usuario");
-		String password=(String) aParams.get("password");
+		String usuario=(String) aParams.get("USUARIO");
+		String password=(String) aParams.get("PASSWORD");
 		
 		if (!validarConsistenciaDelCampo(usuario) || !validarConsistenciaDelCampo(password)) {
 			throw new LoginException("Es necesario que complete los campos.");

@@ -257,7 +257,7 @@ type
     procedure SetColorScheme(const AName: string);
 
   public
-    procedure AbrirPrograma(ClassName: string;  paramName: string);
+    procedure AbrirPrograma(ClassName: string; paramName: string);
 
     property MenuPrincipal: TForm read FMenuPrincipal write FMenuPrincipal;
     property ActiveChild: TfrmChild read GetActiveChild;
@@ -279,25 +279,25 @@ var
   i: Integer;
 begin
   for i := 0 to MDIChildCount - 1 do
-   begin
-    f :=  TfrmChild (MDIChildren[i]);
-    if  (MDIChildren[i].ClassName = ClassName)
-    and (f.MultipleInstancia = false) then
-      begin
-        // Ya está abierto el Programa!
-        MDIChildren[i].Show;
-        Exit;
-      end;
+    begin
+      f := TfrmChild(MDIChildren[i]);
 
-    if  (MDIChildren[i].ClassName = ClassName)
-    and (f.MultipleInstancia = true)
-    and (f.ParametroInicial = paramName) then
-      begin
-        // Ya está abierto el Programa!
-        MDIChildren[i].Show;
-        Exit;
-      end;
-   end;
+      if (MDIChildren[i].ClassName = ClassName) and (f.MultipleInstancia = False) then
+        begin
+          // Ya está abierto el Programa!
+          MDIChildren[i].Show;
+          Exit;
+        end;
+
+      if (MDIChildren[i].ClassName = ClassName) and (f.MultipleInstancia = True) and
+        (f.ParametroInicial = paramName) then
+        begin
+          // Ya está abierto el Programa!
+          MDIChildren[i].Show;
+          Exit;
+        end;
+    end;
+
   try
     // FindClass busca en las clases registradas del sistema.
     // Si el nombre de la clase pasada no se encuentra, FindClass lanza una exception.

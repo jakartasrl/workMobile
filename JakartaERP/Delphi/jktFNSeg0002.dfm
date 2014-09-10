@@ -106,29 +106,9 @@ inherited FNSeg0002: TFNSeg0002
       DataBinding.DataField = 'SinVencimientoPwd'
       DataBinding.DataSource = dsUsuarios
       Properties.Alignment = taRightJustify
-      TabOrder = 7
+      TabOrder = 6
       Transparent = True
       Width = 97
-    end
-    object cxDBTextEdit6: TcxDBTextEdit
-      Left = 293
-      Top = 107
-      DataBinding.DataField = 'ConfPassword'
-      DataBinding.DataSource = dsUsuarios
-      Properties.EchoMode = eemPassword
-      TabOrder = 6
-      Width = 121
-    end
-    object cxLabel7: TcxLabel
-      Left = 214
-      Top = 109
-      AutoSize = False
-      Caption = 'Confirmaci'#243'n :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 79
-      AnchorX = 293
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 91
@@ -381,11 +361,6 @@ inherited FNSeg0002: TFNSeg0002
     object TUsuariosPassword: TStringField
       Tag = 1
       FieldName = 'Password'
-      Size = 30
-    end
-    object TUsuariosConfPassword: TStringField
-      Tag = 1
-      FieldName = 'ConfPassword'
       Size = 30
     end
     object TUsuariosEmail: TStringField

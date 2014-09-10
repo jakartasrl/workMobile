@@ -1,21 +1,22 @@
 inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
   ClientHeight = 500
-  ClientWidth = 764
-  ExplicitWidth = 780
+  ClientWidth = 758
+  ExplicitWidth = 774
   ExplicitHeight = 538
   PixelsPerInch = 96
   TextHeight = 13
   object lcMain: TdxLayoutControl [0]
     Left = 0
     Top = 0
-    Width = 764
+    Width = 758
     Height = 500
     Align = alClient
     TabOrder = 4
+    ExplicitWidth = 764
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 67
-      Top = 28
+      Top = -584
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -26,7 +27,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 321
-      Top = 28
+      Top = -584
       DataBinding.DataField = 'RazonSocial'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -37,7 +38,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 101
-      Top = 103
+      Top = -509
       DataBinding.DataField = 'Direccion'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -48,7 +49,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 101
-      Top = 130
+      Top = -482
       DataBinding.DataField = 'Localidad'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -59,7 +60,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 101
-      Top = 157
+      Top = -455
       DataBinding.DataField = 'CodPostal'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -70,7 +71,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 166
-      Top = 184
+      Top = -428
       DataBinding.DataField = 'DescProvincia'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -81,7 +82,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit9: TcxDBTextEdit
       Left = 166
-      Top = 211
+      Top = -401
       DataBinding.DataField = 'DescPais'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -92,7 +93,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 101
-      Top = 184
+      Top = -428
       DataBinding.DataField = 'CodProvincia'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -109,7 +110,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 101
-      Top = 211
+      Top = -401
       DataBinding.DataField = 'CodPais'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -126,7 +127,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 81
-      Top = 250
+      Top = -362
       DataBinding.DataField = 'Telefonos'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -137,7 +138,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 81
-      Top = 277
+      Top = -335
       DataBinding.DataField = 'Cuit'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -148,7 +149,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 112
-      Top = 304
+      Top = -308
       DataBinding.DataField = 'PersonaJuridica'
       DataBinding.DataSource = dsCliente
       Properties.Alignment = taLeftJustify
@@ -160,7 +161,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 34
-      Top = 349
+      Top = -263
       Width = 391
       Height = 200
       TabOrder = 12
@@ -208,7 +209,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = 597
+      Top = -15
       Width = 391
       Height = 200
       TabOrder = 13
@@ -247,7 +248,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxButtonEdit1: TcxDBButtonEdit
       Left = 122
-      Top = 833
+      Top = 221
       DataBinding.DataField = 'CodCondPago'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -264,7 +265,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxTextEdit1: TcxDBTextEdit
       Left = 207
-      Top = 833
+      Top = 221
       DataBinding.DataField = 'DescCondPago'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -275,7 +276,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 890
+      Top = 278
       Width = 211
       Height = 200
       TabOrder = 16
@@ -698,6 +699,12 @@ inherited FNCli0001: TFNCli0001
       0)
   end
   inherited Driver: TjktDriver
+    DataSetCab = mtCliente
+    Filtro = Help
+    FocoEnAlta = mtClienteCodigo
+    OperacionesDefault = <
+      item
+      end>
     Left = 472
     Top = 56
   end
@@ -710,6 +717,32 @@ inherited FNCli0001: TFNCli0001
     Top = 56
   end
   inherited OperacionSave: TjktOperacion
+    OperName = 'GuardarCliente'
+    Atributos = <
+      item
+        Dataset = mtInscripImposit
+        Tag = 0
+      end
+      item
+        Dataset = mtClasificadoresCliente
+        Tag = 0
+      end
+      item
+        Dataset = mtSucursalesCliente
+        Tag = 0
+      end
+      item
+        Dataset = mtDomiciliosEntrega
+        Tag = 0
+      end
+      item
+        Dataset = mtContactos
+        Tag = 0
+      end
+      item
+        Dataset = mtClasificadoresSucursal
+        Tag = 0
+      end>
     Left = 536
     Top = 56
   end
@@ -718,6 +751,13 @@ inherited FNCli0001: TFNCli0001
     Top = 56
   end
   inherited OperacionTraer: TjktOperacion
+    OperName = 'TraerCliente'
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = mtClienteoid_Cliente
+        Tag = 0
+      end>
     Left = 536
     Top = 120
   end
@@ -1278,8 +1318,56 @@ inherited FNCli0001: TFNCli0001
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
+    FieldDefs = <
+      item
+        Name = 'oid_InscClie'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_Cliente'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_Impuesto'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DescImpuesto'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'NroInscripcion'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_Categoria'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodCategoria'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'DescCategoria'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'VigenciaDesde'
+        DataType = ftDate
+      end
+      item
+        Name = 'Activo'
+        DataType = ftBoolean
+      end>
+    IndexFieldNames = 'oid_Cliente'
+    IndexDefs = <
+      item
+        Name = 'mtInscripImpositIndex'
+        Fields = 'oid_Cliente'
+      end>
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
@@ -1287,6 +1375,8 @@ inherited FNCli0001: TFNCli0001
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterFields = 'oid_Cliente'
+    MasterSource = dsCliente
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -1332,8 +1422,44 @@ inherited FNCli0001: TFNCli0001
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
+    FieldDefs = <
+      item
+        Name = 'oid_ClasifClie'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_Cliente'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DescClasif'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'oid_ValorClasif'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodValorClasif'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'DescValorClasif'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'Activo'
+        DataType = ftBoolean
+      end>
+    IndexFieldNames = 'oid_Cliente'
+    IndexDefs = <
+      item
+        Name = 'mtClasificadoresClienteIndex'
+        Fields = 'oid_Cliente'
+      end>
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
@@ -1341,6 +1467,8 @@ inherited FNCli0001: TFNCli0001
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterFields = 'oid_Cliente'
+    MasterSource = dsCliente
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -1387,8 +1515,27 @@ inherited FNCli0001: TFNCli0001
     Left = 432
     Top = 280
   end
-  object jktHelpGenerico1: TjktHelpGenerico
+  object Help: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'clientes'
+    OidRespuesta = mtClienteoid_Cliente
     Left = 472
     Top = 120
+  end
+  object OperTraerClasifCliente: TjktOperacion
+    OperName = 'TraerClasifCliente'
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 640
+    Top = 120
+  end
+  object OperTraerClasifSucur: TjktOperacion
+    OperName = 'TraerClasifSucur'
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 640
+    Top = 176
   end
 end

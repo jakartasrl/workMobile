@@ -49,8 +49,7 @@ type
     FParentActionList: TActionList; // guardamos la referencia al 'ActionList' del padre
     FOnActivateChild: TNotifyEvent;
     FOnChanged: TNotifyEvent;
-    FParametroInicial :string;
-
+    FParametroInicial: string;
 
     function GetCanEdit: Boolean;
     function GetCanPaste: Boolean;
@@ -61,15 +60,15 @@ type
     procedure setParametroInicial(aValue :string);
 
   protected
-    FMultipleInstancia :boolean;
+    FMultipleInstancia: Boolean;
     procedure llamarOperacionConfiguracion; virtual; abstract;
 
   public
     property CanEdit: Boolean read GetCanEdit;
     property CanPaste: Boolean read GetCanPaste;
     property Estado: TjktEstado read FEstado write FEstado;
-    property MultipleInstancia :boolean read FMultipleInstancia write FMultipleInstancia;
-    property ParametroInicial  :string read FParametroInicial;
+    property MultipleInstancia: Boolean read FMultipleInstancia write FMultipleInstancia;
+    property ParametroInicial: string read FParametroInicial;
     //
     property OnActivateChild: TNotifyEvent read FOnActivateChild write FOnActivateChild;
     property OnChanged: TNotifyEvent read FOnChanged write FOnChanged;
@@ -107,10 +106,11 @@ end;
 procedure TfrmChild.setParametroInicial(aValue: string);
 begin
   FParametroInicial := aValue;
+
   if not mtParametroInicial.Active
     then begin
-      mtParametroInicial.open;
-      mtParametroInicial.append;
+      mtParametroInicial.Open;
+      mtParametroInicial.Append;
     end;
 
   mtParametroInicial.FieldByName('Entidad').AsString := aValue;
@@ -148,7 +148,7 @@ end;
 
 procedure TfrmChild.FormCreate(Sender: TObject);
 begin
-   FMultipleInstancia := false;
+  FMultipleInstancia := False;
 end;
 
 function TfrmChild.GetCanEdit: Boolean;
@@ -170,7 +170,6 @@ begin
   Service.Servlet    := Login.Servlet;
   Service.Aplicacion := Login.Aplicacion;
   Service.Protocolo  := Login.Protocolo;
-
 
   if ParametroInicial <> '' then
     setParametroInicial(ParametroInicial);

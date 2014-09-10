@@ -162,7 +162,8 @@ begin
 
 //  MessageBox(0, PChar(Sender.Text1.Value), PChar('Programa ' + IntToStr(Sender.Tag)), 0);
 
-  NombrePrograma := '';
+  NombrePrograma   := '';
+  parametroInicial := '';
 
   if Sender.Tag = 6 then
     // Maestro de Empresas

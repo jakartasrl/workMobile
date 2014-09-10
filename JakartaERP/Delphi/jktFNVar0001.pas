@@ -69,8 +69,7 @@ type
     { Public declarations }
   end;
 
-var
-  FNVar0001: TFNVar0001;
+
 
 implementation
 

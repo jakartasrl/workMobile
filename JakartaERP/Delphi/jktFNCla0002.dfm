@@ -14,7 +14,6 @@ inherited FNCla0002: TFNCla0002
     Ctl3D = False
     ParentCtl3D = False
     TabOrder = 4
-    ExplicitWidth = 745
     Height = 73
     Width = 633
     object txtCodigo: TcxDBTextEdit
@@ -63,8 +62,6 @@ inherited FNCla0002: TFNCla0002
     TabOrder = 5
     ExplicitLeft = 264
     ExplicitTop = 353
-    ExplicitWidth = 745
-    ExplicitHeight = 307
     Height = 226
     Width = 633
     object cxDBTreeList1: TcxDBTreeList
@@ -163,7 +160,6 @@ inherited FNCla0002: TFNCla0002
     TabOrder = 6
     ExplicitLeft = 457
     ExplicitTop = 144
-    ExplicitWidth = 185
     Height = 105
     Width = 633
     object cxDBTreeList2: TcxDBTreeList

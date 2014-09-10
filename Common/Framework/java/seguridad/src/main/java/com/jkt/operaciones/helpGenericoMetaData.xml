@@ -19,26 +19,6 @@
 
 <entidades>
 
-	<entidad nombre="usuario">
-
-		<campos>
-			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="oid_usuario" />
-			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" columnWidth="120" readOnly="true" orden="2" label="Codigo" />
-			<campo fieldName="Descripcion" tipo="String" longitud="100" visible="true" columnWidth="380" readOnly="true" orden="3" label="Nombre y Apellido" />
-		</campos>
-		
-	</entidad>
-		
-	<entidad nombre="empresa">
-
-		<campos>
-			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="oid_empresa" />
-			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" columnWidth="120" readOnly="true" orden="2" label="Codigo" />
-			<campo fieldName="Descripcion" tipo="String" longitud="100" visible="true" columnWidth="380" readOnly="true" orden="3" label="Razon Social" />
-		</campos>
-
-	</entidad>
-
 	<entidad nombre="generico">
 
 		<campos>

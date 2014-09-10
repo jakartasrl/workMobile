@@ -74,10 +74,10 @@ procedure TFNUti0001.llamarOperacionConfiguracion;
 begin
   operConfig.execute;
 
-   crearColumnasDataset;
-   crearColumnasGrilla;
-   crearValidaciones;
-   completarOperaciones;
+  crearColumnasDataset;
+  crearColumnasGrilla;
+  crearValidaciones;
+  completarOperaciones;
 end;
 
 
@@ -135,20 +135,20 @@ begin
        //mtInput.FieldDefs.Add(name, tipo, size,  false);
        mtConfigCampos.Next;
     end;
-    mtInput.CreateTable;
-    mtConfigCampos.First;
-    while not mtConfigCampos.Eof do
-      begin
-        tag := mtConfigCampos.FieldByName('tag').AsInteger;
-        name :=  mtConfigCampos.FieldByName('fieldName').AsString;
-        mtInput.FindField(name).Tag := tag;
-        mtConfigCampos.Next;
-      end;
 
+  mtInput.CreateTable;
 
+  mtConfigCampos.First;
+  while not mtConfigCampos.Eof do
+    begin
+      tag := mtConfigCampos.FieldByName('tag').AsInteger;
+      name :=  mtConfigCampos.FieldByName('fieldName').AsString;
+      mtInput.FindField(name).Tag := tag;
+      mtConfigCampos.Next;
+    end;
 
-    mtInput.Close;
-    mtInput.Open;
+  mtInput.Close;
+  mtInput.Open;
 end;
 
 procedure TFNUti0001.crearColumnasGrilla;
@@ -240,7 +240,8 @@ end;
 procedure TFNUti0001.FormCreate(Sender: TObject);
 begin
   inherited;
-  FMultipleInstancia := true;
+
+  FMultipleInstancia := True;
 end;
 
 initialization

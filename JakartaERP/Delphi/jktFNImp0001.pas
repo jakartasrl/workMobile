@@ -73,11 +73,12 @@ type
     { Public declarations }
   end;
 
-var
-  FNImp0001: TFNImp0001;
-
 implementation
 
 {$R *.dfm}
+
+
+initialization
+  RegisterClass(TFNImp0001);
 
 end.

@@ -114,7 +114,7 @@ public class RequestProcessorDelphi extends RequestProcessor{
 			NamedNodeMap att = nodo.getAttributes();
 			IMapRequest mapa;
 			if (nodo.getNodeName().equalsIgnoreCase("Tabla")) {
-				mapa = new Tabla(nodo.getAttributes().getNamedItem("nombre").getNodeValue());
+				mapa = new Tabla(nodo.getAttributes().getNamedItem("NOMBRE").getNodeValue());
 			}else if (nodo.getNodeName().equalsIgnoreCase("Campos")) {
 				Campos campos = new Campos();
 				NamedNodeMap attributes2 = nodo.getAttributes();
@@ -142,7 +142,7 @@ public class RequestProcessorDelphi extends RequestProcessor{
 			}
 
 			if (nodo.getNodeName().equalsIgnoreCase("Tabla")) {
-				String tabName = nodo.getAttributes().getNamedItem("nombre").getNodeValue();
+				String tabName = nodo.getAttributes().getNamedItem("NOMBRE").getNodeValue();
 				mapaPadre.put(tabName, mapa);
 			} else if(nodo.getNodeName().equalsIgnoreCase("Campos")){
 //				String camposName = nodo.getAttributes().getNamedItem("nombre").getNodeValue();

@@ -40,7 +40,7 @@ public class RecuperarEstructuraABMGenerico extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 
-		Entidad entidad = entidadContainer.getEntidad((String)aParams.get("entidad"));
+		Entidad entidad = entidadContainer.getEntidad((String)aParams.get("ENTIDAD"));
 		if (entidad==null) {
 			throw new JakartaException("No se encontro la estructura de la entidad solicitada");
 		}
