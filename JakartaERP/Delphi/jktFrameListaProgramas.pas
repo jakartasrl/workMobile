@@ -156,7 +156,7 @@ end;
 procedure TframeListaProgramas.OnButtonClick(Sender: TdxTileControlItem);
 var
   NombrePrograma: string;
-  parametroInicial :string;
+  parametroInicial: string;
 begin
   // aca abrimos los Forms (los Programas)
 
@@ -174,6 +174,12 @@ begin
   else if Sender.Tag = 8 then
     // Maestro de Condiciones de Pago
     NombrePrograma := 'TFNVar0001'
+  else if Sender.Tag = 13 then
+    // Maestro de Impuestos
+    NombrePrograma := 'TFNImp0001'
+  else if Sender.Tag = 7 then
+    // Maestro de Clientes
+    NombrePrograma := 'TFNCli0001'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin

@@ -594,7 +594,7 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 7;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Menu';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Clientes';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
@@ -643,6 +643,13 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 13;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Impuestos';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
 
   cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;

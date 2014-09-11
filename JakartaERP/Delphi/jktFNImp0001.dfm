@@ -3,7 +3,7 @@ inherited FNImp0001: TFNImp0001
   ClientHeight = 390
   ClientWidth = 736
   ExplicitWidth = 752
-  ExplicitHeight = 429
+  ExplicitHeight = 428
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -81,7 +81,12 @@ inherited FNImp0001: TFNImp0001
       Top = 64
       DataBinding.DataField = 'oid_Comportamiento'
       DataBinding.DataSource = dsImpuesto
-      Properties.ListColumns = <>
+      Properties.KeyFieldNames = 'oid_Comportamiento'
+      Properties.ListColumns = <
+        item
+          FieldName = 'Descripcion'
+        end>
+      Properties.ListSource = dsComportamientos
       TabOrder = 2
       Width = 162
     end
@@ -109,7 +114,7 @@ inherited FNImp0001: TFNImp0001
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsBehavior.FocusCellOnTab = True
-        OptionsData.Inserting = False
+        OptionsBehavior.FocusFirstCellOnNewRecord = True
         OptionsView.GroupByBox = False
         object dbgImpuestoCategoriasDBTableView1oid_ImpCat: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ImpCat'
@@ -156,6 +161,7 @@ inherited FNImp0001: TFNImp0001
   inherited Driver: TjktDriver
     DataSetCab = mtImpuesto
     TipoPrograma = tp_abmIndividual
+    Filtro = Help
     FocoEnAlta = mtImpuestoCodigo
     FocoEnModificacion = mtImpuestoDescripcion
     OperacionesIniciales = <
@@ -268,21 +274,25 @@ inherited FNImp0001: TFNImp0001
     Left = 536
     Top = 64
     object mtImpuestooid_Impuesto: TIntegerField
+      Tag = 1
       FieldName = 'oid_Impuesto'
     end
     object mtImpuestoCodigo: TStringField
-      Tag = 2
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object mtImpuestoDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtImpuestooid_Comportamiento: TIntegerField
+      Tag = 1
       FieldName = 'oid_Comportamiento'
     end
     object mtImpuestoActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -304,8 +314,8 @@ inherited FNImp0001: TFNImp0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 264
-    Top = 112
+    Left = 320
+    Top = 64
     object mtComportamientosoid_Comportamiento: TIntegerField
       FieldName = 'oid_Comportamiento'
     end
@@ -317,6 +327,7 @@ inherited FNImp0001: TFNImp0001
   object Help: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'impuesto'
+    OidRespuesta = mtImpuestooid_Impuesto
     Left = 504
     Top = 264
   end
@@ -374,23 +385,29 @@ inherited FNImp0001: TFNImp0001
     Left = 56
     Top = 216
     object mtImpuestoCategoriasoid_ImpCat: TIntegerField
+      Tag = 1
       FieldName = 'oid_ImpCat'
     end
     object mtImpuestoCategoriasoid_Impuesto: TIntegerField
+      Tag = 1
       FieldName = 'oid_Impuesto'
     end
     object mtImpuestoCategoriasoid_Categoria: TIntegerField
+      Tag = 1
       FieldName = 'oid_Categoria'
     end
     object mtImpuestoCategoriasCodigo: TStringField
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object mtImpuestoCategoriasDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtImpuestoCategoriasActiva: TBooleanField
+      Tag = 1
       FieldName = 'Activa'
     end
   end
@@ -411,5 +428,10 @@ inherited FNImp0001: TFNImp0001
     ListaAsignaciones = <>
     Left = 160
     Top = 168
+  end
+  object dsComportamientos: TDataSource
+    DataSet = mtComportamientos
+    Left = 320
+    Top = 112
   end
 end

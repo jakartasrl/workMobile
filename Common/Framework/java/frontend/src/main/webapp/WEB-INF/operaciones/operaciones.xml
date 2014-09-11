@@ -35,7 +35,7 @@
   <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
   <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
   <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada fieldID        CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
  
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
@@ -208,20 +208,20 @@
 
                  <campoEntrada name="mtInscripImposit" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_InscClie">
                      <campoEntrada name="oid_Impuesto" clase="" metodo="" />
-                     <campoEntrada name="DescImpuesto" clase="" metodo="" />
+<!--                      <campoEntrada name="DescImpuesto" clase="" metodo="" /> -->
                      <campoEntrada name="NroInscripcion" clase="Integer" metodo="" />
                      <campoEntrada name="oid_Categoria" clase="String" metodo="" />
-                     <campoEntrada name="CodCategoria" clase="String" metodo="" />
-                     <campoEntrada name="DescCategoria" clase="String" metodo="" />
+<!--                      <campoEntrada name="CodCategoria" clase="String" metodo="" /> -->
+<!--                      <campoEntrada name="DescCategoria" clase="String" metodo="" /> -->
                      <campoEntrada name="VigenciaDesde" clase="Date" metodo="" />
                      <campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
                  </campoEntrada>
 
                  <campoEntrada name="mtClasificadoresCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifClie">
-                     <campoEntrada name="DescClasif" clase="String" metodo="" />
+<!--                      <campoEntrada name="DescClasif" clase="String" metodo="" /> -->
                      <campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-                     <campoEntrada name="CodValorClasif" clase="String" metodo="" />
-                     <campoEntrada name="DescValorClasif" clase="String" metodo="" />
+<!--                      <campoEntrada name="CodValorClasif" clase="String" metodo="" /> -->
+<!--                      <campoEntrada name="DescValorClasif" clase="String" metodo="" /> -->
                      <campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
                  </campoEntrada>
 
@@ -259,10 +259,10 @@
 					 </campoEntrada>
 
 					 <campoEntrada name="mtClasificadoresSucursal" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifSuc">
-	        		 	<campoEntrada name="DescClasif" clase="String" metodo="" />
+<!-- 	        		 	<campoEntrada name="DescClasif" clase="String" metodo="" /> -->
 	                    <campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-	                    <campoEntrada name="CodValorClasif" clase="String" metodo="" />
-	                    <campoEntrada name="DescValorClasif" clase="String" metodo="" />
+<!-- 	                    <campoEntrada name="CodValorClasif" clase="String" metodo="" /> -->
+<!-- 	                    <campoEntrada name="DescValorClasif" clase="String" metodo="" /> -->
 	                 	<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					 </campoEntrada>
 
@@ -387,7 +387,7 @@
 
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
-		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro" fieldID="PRUEBA">
 		</input>
 		
 		<output name="resultado" tableName="mtInput">
@@ -760,8 +760,9 @@
 				<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
 				<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
 				<campoEntrada name="Email" clase="String" metodo="setMail" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Password" clase="String" metodo="setPassword" />
+<!-- 				<campoEntrada name="SinVencimientoPwd" clase="Boolean" metodo="setSinVencimientoPwd" /> -->
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />				
 				
 				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
