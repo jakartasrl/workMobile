@@ -16,7 +16,7 @@ public class TraerValoresClasificador extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String id=(String) aParams.get("oid".toUpperCase());
-		Clasificador clasificador=(Clasificador) this.serviceRepository.getByOid(Clasificador.class, Long.valueOf(id).longValue());
+		Clasificador clasificador=(Clasificador) obtener(Clasificador.class, id);
 		
 		if (clasificador==null) {
 			throw new EntityNotFoundException("No existe el clasificador solicitado");

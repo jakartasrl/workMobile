@@ -37,9 +37,7 @@ public class TraerCliente extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String oid = (String) aParams.get(IDENTIFICADOR);
-		
-		Cliente cliente = (Cliente) obtener(Cliente.class, Long.valueOf(oid).longValue());
+		Cliente cliente = (Cliente) obtener(Cliente.class, (String) aParams.get(IDENTIFICADOR));
 		mostrarCliente(cliente);
 		mostrarClasificadores(cliente);
 		mostrarInscripcions(cliente);
@@ -49,7 +47,8 @@ public class TraerCliente extends Operation {
 	
 	
 	/**
-	 * Muestra un simple cliente en la salida de la operacion.
+	 * <p>Muestra un simple cliente en la salida de la operacion.</p>
+	 * <p>Ademas de mostrar datos de clientes, muestra datos del sujeto impositivo</p>
 	 */
 	private void mostrarCliente(Cliente cliente) {
 		notificarObjecto(Notificacion.getNew(WRITER_CLIENTE, cliente));

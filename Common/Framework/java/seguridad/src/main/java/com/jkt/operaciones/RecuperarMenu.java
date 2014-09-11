@@ -30,7 +30,7 @@ public class RecuperarMenu extends Operation {
 		}
 
 		int oidMenu = Integer.valueOf(oidRecibido).intValue();
-		menu = (Menu) serviceRepository.getByOid(Menu.class, oidMenu);
+		menu = (Menu) obtener(Menu.class, oidMenu);
 		
 		enviarResultados(menu, NOMBRE_TABLA_CABECERA);
 		

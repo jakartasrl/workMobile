@@ -26,7 +26,7 @@ public class RecuperarEmpresasDeUsuario extends Operation {
 		if (oidUsuario==null || oidUsuario.isEmpty()) {
 			throw new JakartaException(String.format("Debe ingresar el parametro denominado %s para poder realizar exitosamente la operacion.",OID_USUARIO));
 		}
-		Usuario usuario = (Usuario) serviceRepository.getByOid(Usuario.class, Long.valueOf(oidUsuario));
+		Usuario usuario = (Usuario)obtener(Usuario.class, oidUsuario);
 		if (usuario==null) {
 			throw new EntityNotFoundException("No existe la entidad solicitada");
 		}
