@@ -19,7 +19,7 @@ public class TraerImpuestos extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String oid = (String) aParams.get("oid");
+		String oid = (String) aParams.get("OID".toUpperCase());
 		Impuesto impuesto = (Impuesto) serviceRepository.getByOid(Impuesto.class, Long.valueOf(oid).longValue());
 		
 		if (impuesto==null) {

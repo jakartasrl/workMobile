@@ -26,10 +26,10 @@ public class Cliente extends Descriptible {
 //	String codigo heredado de descriptible
 //	String nombreComercial es la descripcion
 	
-	@NotNull(message="El Sujeto impositivo no debe ser nulo.")
+//	@NotNull(message="El Sujeto impositivo no debe ser nulo.")
 	private SujetoImpositivo sujetoImpositivo;
 	
-	@NotNull(message="El idioma no debe ser nulo.")
+//	@NotNull(message="El idioma no debe ser nulo.")
 	private Idioma idioma;//Idioma en el que se mostraran los productos o servicios en la documentacion del cliente
 	
 	private List<CondPagoCliente> listaCondicionPago=new ArrayList<CondPagoCliente>();//Lista de las condicines de pago vigentes que tuvo el cliente
@@ -40,7 +40,7 @@ public class Cliente extends Descriptible {
 	
 	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();
 	
-	
+//	
 	/*
 	 * Variables de instancia
 	 * ***********************************************************************************************

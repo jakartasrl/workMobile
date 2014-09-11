@@ -23,7 +23,7 @@ public class TraerClasificador extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		String id=(String) aParams.get("oid");
+		String id=(String) aParams.get("oid".toUpperCase());
 		Clasificador clasificador=(Clasificador) this.serviceRepository.getByOid(Clasificador.class, Long.valueOf(id).longValue());
 		
 		if (clasificador==null) {

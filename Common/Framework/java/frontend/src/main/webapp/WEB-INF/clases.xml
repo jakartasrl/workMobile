@@ -3,8 +3,8 @@
 	<!ELEMENT elementos			(elemento*)>
 	<!ELEMENT elemento			EMPTY>
 
-	<!ATTLIST elemento	key			CDATA 	#REQUIRED>
-	<!ATTLIST elemento	value		CDATA   #REQUIRED>
+	<!ATTLIST elemento	key			CDATA 	#REQUIRED> <!-- key se corresponde con la entidad solicitada. es un alias. -->
+	<!ATTLIST elemento	value		CDATA   #REQUIRED> <!-- value es la ruta completa de la clase -->
 	<!ATTLIST elemento	validador	CDATA   #IMPLIED>
   
 ]>

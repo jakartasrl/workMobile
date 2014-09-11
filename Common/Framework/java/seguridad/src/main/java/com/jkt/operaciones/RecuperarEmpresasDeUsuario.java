@@ -14,7 +14,7 @@ import com.jkt.transformers.Notificacion;
 
 public class RecuperarEmpresasDeUsuario extends Operation {
 
-	private static final String OID_USUARIO = "oid_usuario";
+	private static final String OID_USUARIO = "oid_usuario".toUpperCase();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {

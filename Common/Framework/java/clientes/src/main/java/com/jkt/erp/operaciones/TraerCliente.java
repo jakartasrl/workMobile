@@ -24,7 +24,7 @@ import com.jkt.varios.dominio.Direccion;
  */
 public class TraerCliente extends Operation {
 
-	private static final String IDENTIFICADOR = "oid";
+	private static final String IDENTIFICADOR = "oid".toUpperCase();
 
 	private static final String WRITER_CLIENTE = "cliente";
 	private static final String WRITER_INSCRIPCIONES = "inscripciones";

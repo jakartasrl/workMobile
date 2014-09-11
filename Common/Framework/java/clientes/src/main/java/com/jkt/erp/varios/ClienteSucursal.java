@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los lugares en donde el cliente recibe las compras que ha realizado</p>
@@ -142,24 +143,62 @@ public class ClienteSucursal extends PersistentEntity {
 	/*
 	 * Helper methods
 	 */
+	
+	
+	public void addClasificador(ClienteSucursalClasificador clienteSucursalClasificador){
+		clasificadores.add(clienteSucursalClasificador);
+	}
+	
+	public void addDomicilioEntrega(DomicilioEntrega domicilioEntrega){
+		domiciliosDeEntrega.add(domicilioEntrega);
+		domicilioEntrega.setClienteSucursal(this);
+	}
+	
 	public void addContacto(Contacto c){
 		agregarObjectoAColeccion(contactos, c);
 	}
 
-	public void addValorClasificador(ComponenteValor c){
-		agregarObjectoAColeccion(clasificadores, c);
-	}
-	
 	public void deleteContacto(Contacto c){
 		borrarObjetoDeColeccion(contactos, c);
 	}
 
-	public void deleteValorClasificador(ComponenteValor c){
-		borrarObjetoDeColeccion(clasificadores, c);
-	}
-	
 	/*
 	 * Helper methods
+	 */
+	
+	
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
+	
+	public void setearProvincia(Provincia provincia){
+		generarDireccion();
+		this.direccion.setProvincia(provincia);
+	}
+	
+	public void setearDireccion(String direccion){
+		generarDireccion();
+		this.direccion.setDireccion(direccion);
+	}
+
+	public void setearLocalidad(String localidad){
+		generarDireccion();
+		this.direccion.setLocalidad(localidad);
+	}
+	
+	
+	public void setearCodPostal(String cp){
+		generarDireccion();
+		this.direccion.setCodigoPostal(cp);
+	}
+	
+	private void generarDireccion(){
+		if (this.direccion==null) {
+			this.direccion=new Direccion();
+		}
+	}
+	/*
+	 * Metodos para el manejo de la direccion.
 	 */
 
 }

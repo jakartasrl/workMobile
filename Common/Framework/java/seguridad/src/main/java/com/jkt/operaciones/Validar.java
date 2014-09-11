@@ -13,7 +13,7 @@ import com.jkt.util.RepositorioClases;
  */
 public abstract class Validar extends Operation{
 
-	private static final String ENTIDAD_FIELD = "entidad";
+	private static final String ENTIDAD_FIELD = "entidad".toUpperCase();
 	private static final String CODIGO_FIELD = "codigo";
 
 	@Override
@@ -23,7 +23,7 @@ public abstract class Validar extends Operation{
 		 * Recupera de los parametros el codigo y el nombre de la entidad
 		 */
 		String codigo=(String) aParams.get(CODIGO_FIELD.toUpperCase());
-		String className=(String) aParams.get(ENTIDAD_FIELD.toUpperCase());
+		String className=(String) aParams.get(ENTIDAD_FIELD);
 		
 		//Realiza la consulta a la base
 		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(this.getRepositorioClases().getClass(className)), CODIGO_FIELD, codigo);

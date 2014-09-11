@@ -16,11 +16,11 @@ import com.jkt.varios.dominio.CondPagoDet;
  */
 public class TraerCondPago extends Operation {
 
-	private static final String KEY_OID = "oid";
+	private static final String KEY_OID = "oid".toUpperCase();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String oidEntity = (String) aParams.get(KEY_OID.toUpperCase());
+		String oidEntity = (String) aParams.get(KEY_OID);
 		CondPago condicion = (CondPago) serviceRepository.getByOid(CondPago.class, Long.valueOf(oidEntity).longValue());
 		if (condicion==null) {
 			throw new EntityNotFoundException();

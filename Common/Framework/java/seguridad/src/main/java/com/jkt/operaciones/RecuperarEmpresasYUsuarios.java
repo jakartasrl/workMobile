@@ -18,8 +18,8 @@ import com.jkt.transformers.Notificacion;
  */
 public class RecuperarEmpresasYUsuarios extends Operation{
 
-	private static final String KEY_ENTIDAD = "entidad";
-	private static final String KEY_OID = "oid";
+	private static final String KEY_ENTIDAD = "entidad".toUpperCase();
+	private static final String KEY_OID = "oid".toUpperCase();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {

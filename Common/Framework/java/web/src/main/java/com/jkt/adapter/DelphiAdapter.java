@@ -507,6 +507,14 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			
 			CampoEntrada childMetadata = parentMetadata.getHijo((String)entryR.getKey());
 			
+			
+			if (childMetadata==null) {
+				continue;
+			}
+//			if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
+//				continue;
+//			}
+			
 			if(esTabla(entryR.getValue())){
 				resolverCampoCompuesto(childClazz, childInstance, childMetadata, ((Tabla)entryR.getValue()).getRegitros());
 			}else{

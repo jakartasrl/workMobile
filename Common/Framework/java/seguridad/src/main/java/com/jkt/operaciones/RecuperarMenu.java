@@ -16,7 +16,7 @@ import com.jkt.transformers.Notificacion;
  */
 public class RecuperarMenu extends Operation {
 
-	private static final String CAMPO_OID_MENU = "oid_menu";
+	private static final String CAMPO_OID_MENU = "oid_menu".toUpperCase();
 	private static final String NOMBRE_TABLA_TEXTOS = "TTextosMenues";
 	private static final String NOMBRE_TABLA_MENUES = "TMenues";
 	private static final String NOMBRE_TABLA_CABECERA = "TCabecera";

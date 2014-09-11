@@ -20,7 +20,7 @@ import com.jkt.transformers.Notificacion;
 @OperacionBean
 public class RecuperarEstructuraHelpGenerico extends Operation {
 
-	private static final String KEY_ENTIDAD = "entidad";
+	private static final String KEY_ENTIDAD = "entidad".toUpperCase();
 	/*
 	 * Metodo estatico que es ejecutado solamente una vez.
 	 */

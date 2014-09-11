@@ -16,11 +16,11 @@ import com.jkt.util.RepositorioClases;
  */
 public class Helper extends Operation {
 
-	protected static final String KEY_ENTIDAD = "entidad";
-	protected static final String KEY_FILTROS = "filtros";
+	protected static final String KEY_ENTIDAD = "entidad".toUpperCase();
+	protected static final String KEY_FILTROS = "filtros".toUpperCase();
 
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD.toUpperCase());
+		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD);
 		String className = this.getRepositorioClases().getClass(nombreEntidad);
 		List objetos = recuperarObjetoUsandoKey(aParams);
 		
@@ -34,10 +34,10 @@ public class Helper extends Operation {
 	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) {
 		List object;
 		if (aParams.get(KEY_FILTROS.toUpperCase())  instanceof List) {
-			object = (List) aParams.get(KEY_FILTROS.toUpperCase());
+			object = (List) aParams.get(KEY_FILTROS);
 		}else{
 			object = new ArrayList<Object>();
-			object.add(aParams.get(KEY_FILTROS.toUpperCase()));
+			object.add(aParams.get(KEY_FILTROS));
 		}
 		return object;
 	}

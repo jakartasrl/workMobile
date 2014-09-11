@@ -254,10 +254,13 @@
 <!-- ************************************************************************************************************************************************************ -->
 
 	<!-- GUARDAR UN CLIENTE -->
-	<operacion name="GuardarCliente" clase="com.jkt.varios.operaciones.GuardarCliente">
-		<input name="mtCliente" keyName="objeto" clase="com.jkt.varios.dominio.Cliente" fieldID="oid_Cliente">
+	<operacion name="GuardarCliente" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtCliente" keyName="objeto" clase="com.jkt.erp.varios.Cliente" fieldID="oid_Cliente">
 			<campoEntrada>
-				<campoEntrada name="Codigo" clase="String" metodo="" />
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				
+				
+				<!-- 
 				<campoEntrada name="RazonSocial" clase="String" metodo="" />
 				<campoEntrada name="Direccion" clase="String" metodo="" />
 				<campoEntrada name="Localidad" clase="String" metodo="" />
@@ -268,8 +271,14 @@
 				<campoEntrada name="PersonaJuridica" clase="Boolean" metodo="" />
 				<campoEntrada name="Cuit" clase="String" metodo="" />
 				<campoEntrada name="oid_CondPago" clase="String" metodo="" />
+				 -->
+				 
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
+				<!-- 
+				
+				FALTA VER COMO SETEAR DATOS DEL SUJETO IMPOSITIVO
+								
 				<campoEntrada name="mtInscripImposit" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_InscClie">
 					<campoEntrada name="oid_Impuesto" clase="" metodo="" />
 					<campoEntrada name="DescImpuesto" clase="" metodo="" />
@@ -289,38 +298,51 @@
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 
-				<campoEntrada name="mtSucursalesCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_SucClie">
-					<campoEntrada name="NroSucursal" clase="Smallint" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Direccion" clase="String" metodo="" />
-					<campoEntrada name="Localidad" clase="String" metodo="" />
-					<campoEntrada name="CodPostal" clase="String" metodo="" />
-					<campoEntrada name="oid_Provincia" clase="String" metodo="" />
-					<campoEntrada name="oid_Vendedor" clase="String" metodo="" />
-					<campoEntrada name="Telefonos" clase="String" metodo="" />
+				 -->
+
+				<campoEntrada name="mtSucursalesCliente" metodo="addClienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" fieldID="oid_SucClie">
+					<campoEntrada name="NroSucursal" clase="Integer" metodo="setNumero" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					
+					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
+					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
+					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
+					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
+<!-- 					<campoEntrada name="Telefonos" clase="String" metodo="" /> -->
+					 
+					<campoEntrada name="oid_Vendedor" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedorComercial" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
-					<campoEntrada name="mtDomiciliosEntrega" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_DomSuc">
-						<campoEntrada name="NroDomicilio" clase="Smallint" metodo="" />
-						<campoEntrada name="Descripcion" clase="String" metodo="" />
+					<campoEntrada name="mtDomiciliosEntrega" metodo="addDomicilioEntrega" clase="com.jkt.erp.varios.DomicilioEntrega" fieldID="oid_DomSuc">
+						<campoEntrada name="NroDomicilio" clase="Integer" metodo="setNumero" />
+						<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+						
+						<!--  
 						<campoEntrada name="Direccion" clase="String" metodo="" />
 						<campoEntrada name="Localidad" clase="String" metodo="" />
 						<campoEntrada name="CodPostal" clase="String" metodo="" />
 						<campoEntrada name="oid_Provincia" clase="String" metodo="" />
-						<campoEntrada name="HorariosEntrega" clase="String" metodo="" />
 						<campoEntrada name="Telefonos" clase="String" metodo="" />
+						-->
+						<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
+						<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
+						<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
+						<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
+
+						<campoEntrada name="HorariosEntrega" clase="String" metodo="setDiasEntrega" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
-					<campoEntrada name="mtContactos" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ContSuc">
-						<campoEntrada name="Apellido" clase="String" metodo="" />
-						<campoEntrada name="Nombres" clase="String" metodo="" />
-						<campoEntrada name="Cargo" clase="String" metodo="" />
-						<campoEntrada name="Telefonos" clase="String" metodo="" />
-						<campoEntrada name="Email" clase="String" metodo="" />
+					<campoEntrada name="mtContactos" metodo="addContacto" clase="com.jkt.erp.varios.Contacto" fieldID="oid_ContSuc">
+						<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
+						<campoEntrada name="Nombres" clase="String" metodo="setNombre" />
+						<campoEntrada name="Cargo" clase="String" metodo="setTratamiento" />
+						<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
+						<campoEntrada name="Email" clase="String" metodo="setMail" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
+<!-- 					
 					<campoEntrada name="mtClasificadoresSucursal" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifSuc">
 						<campoEntrada name="DescClasif" clase="String" metodo="" />
 						<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
@@ -328,6 +350,7 @@
 						<campoEntrada name="DescValorClasif" clase="String" metodo="" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
+  -->
 				</campoEntrada>
 			</campoEntrada>
 

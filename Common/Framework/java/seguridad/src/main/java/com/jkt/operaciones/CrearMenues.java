@@ -27,8 +27,8 @@ import com.jkt.excepcion.JakartaException;
 public class CrearMenues extends Operation {
 
 	
-	private static final String CODIGO_MENU = "codigoMenu";
-	private static final String FILE_NAME = "fileName";
+	private static final String CODIGO_MENU = "codigoMenu".toUpperCase();
+	private static final String FILE_NAME = "fileName".toUpperCase();
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String fileName = (String) aParams.get(FILE_NAME);

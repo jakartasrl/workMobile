@@ -87,6 +87,7 @@ public class CondPago extends Descriptible implements IDescriptible{
 	public String getCadena() {
 		return this.getDescripcion();
 	}
+
 	public String getCadena2() {
 		// TODO Auto-generated method stub
 		return null;

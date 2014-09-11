@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los lugares en donde el cliente recibe las compras que ha realizado</p>
@@ -104,6 +105,39 @@ public class DomicilioEntrega extends PersistentEntity {
 		this.diasEntrega = diasEntrega;
 	}
 
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
+	
+	public void setearProvincia(Provincia provincia){
+		generarDireccion();
+		this.direccion.setProvincia(provincia);
+	}
+	
+	public void setearDireccion(String direccion){
+		generarDireccion();
+		this.direccion.setDireccion(direccion);
+	}
+
+	public void setearLocalidad(String localidad){
+		generarDireccion();
+		this.direccion.setLocalidad(localidad);
+	}
+	
+	
+	public void setearCodPostal(String cp){
+		generarDireccion();
+		this.direccion.setCodigoPostal(cp);
+	}
+	
+	private void generarDireccion(){
+		if (this.direccion==null) {
+			this.direccion=new Direccion();
+		}
+	}
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
 	
 	
 }
