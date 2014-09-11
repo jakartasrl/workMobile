@@ -2,8 +2,13 @@ package com.jkt.varios.operaciones;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.persistence.EntityNotFoundException;
 
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Clasificador;
@@ -16,10 +21,31 @@ import com.jkt.varios.dominio.Componente;
  */
 public class GuardarClasificador extends Operation {
 
+	private static final String OID_FIELD = "OID";
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		List objetoRecuperado = recuperarObjeto(aParams);
+//		List objetoRecuperado = recuperarObjeto(aParams);
+		Clasificador clasificador=(Clasificador) aParams.get(OID_FIELD);
+		
+		if (clasificador==null) {
+			throw new EntityNotFoundException("No existe el clasificador buscado.");
+		}
+		
+		List<Componente> componentes = clasificador.getComponentes();
+
+		Map<String,Componente> mapaDesordenado=new HashMap<String, Componente>();
+		for (Componente componente : componentes) {
+			mapaDesordenado.put(String.valueOf(componente.getNivel()), componente);
+		}
+		
+		Entry<String, Componente> entry;
+		for(Iterator<Entry<String, Componente>> iterator = mapaDesordenado.entrySet().iterator(); iterator.hasNext();){
+			entry = (Entry<String, Componente>) iterator.next();
+			
+		}
+		
 		
 		/*
 		Clasificador clasificador=(Clasificador) objetoRecuperado.get(0);

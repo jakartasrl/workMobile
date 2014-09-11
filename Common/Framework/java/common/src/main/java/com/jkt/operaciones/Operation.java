@@ -211,7 +211,24 @@ public abstract class Operation extends Observable {
 		return entityToSave;
 	}
 	
+	/**
+	 * Recupera una entidad persistente utilizando el nombre de la clase y el id
+	 * 
+	 */
 	protected PersistentEntity obtener(Class<? extends PersistentEntity> className, long id) throws Exception{
 		return serviceRepository.getByOid(className, id);
+	}
+	
+	/**
+	 * Verifica que el mapa de los parametros no venga nulo/vacio y en darse este caso se levanta una excepcion.
+	 * 
+	 * @see JakartaException
+	 * @see Operation
+	 * 
+	 */
+	protected void verificarMapaVacio(Map<String, Object> aParams) throws JakartaException{
+		if (aParams==null || aParams.isEmpty()) {
+			throw new JakartaException("La operacion necesita recibir parametros.");
+		}
 	}
 }
