@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDescriptible;
 
 /**
  * Representa todos los tipos de impuestos que se asociaran a los clientes y
@@ -11,7 +12,7 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Impuesto extends Descriptible {
+public class Impuesto extends Descriptible implements IDescriptible{
 
 	private static final long serialVersionUID = -7825370624771296086L;
 
@@ -38,6 +39,36 @@ public class Impuesto extends Descriptible {
 	public void agregarCategoria(CategoriaImpuesto categoria) {
 		categoria.setImpuesto(this);
 		getCategorias().add(categoria);
+	}
+
+	public String getCadena() {
+		// TODO Auto-generated method stub
+		return getDescripcion();
+	}
+
+	public String getCadena2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getEntero() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getEntero2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public float getFloat() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public float getFloat2() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	// abstract List getCategorias();

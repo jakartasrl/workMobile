@@ -67,6 +67,7 @@ type
     dbgImpuestoCategoriasDBTableView1Codigo: TcxGridDBColumn;
     dbgImpuestoCategoriasDBTableView1Descripcion: TcxGridDBColumn;
     dbgImpuestoCategoriasDBTableView1Activa: TcxGridDBColumn;
+    dsComportamientos: TDataSource;
   private
     { Private declarations }
   public

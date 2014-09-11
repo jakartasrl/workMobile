@@ -1,22 +1,22 @@
 inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
-  ClientHeight = 500
+  ClientHeight = 520
   ClientWidth = 758
   ExplicitWidth = 774
-  ExplicitHeight = 538
+  ExplicitHeight = 558
   PixelsPerInch = 96
   TextHeight = 13
   object lcMain: TdxLayoutControl [0]
     Left = 0
     Top = 0
     Width = 758
-    Height = 500
+    Height = 520
     Align = alClient
     TabOrder = 4
-    ExplicitWidth = 764
+    ExplicitHeight = 500
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 67
-      Top = -584
+      Top = -227
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -27,7 +27,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 321
-      Top = -584
+      Top = -227
       DataBinding.DataField = 'RazonSocial'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -38,7 +38,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 101
-      Top = -509
+      Top = -152
       DataBinding.DataField = 'Direccion'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -49,7 +49,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 101
-      Top = -482
+      Top = -125
       DataBinding.DataField = 'Localidad'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -60,7 +60,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 101
-      Top = -455
+      Top = -98
       DataBinding.DataField = 'CodPostal'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -71,7 +71,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 166
-      Top = -428
+      Top = -71
       DataBinding.DataField = 'DescProvincia'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -82,7 +82,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit9: TcxDBTextEdit
       Left = 166
-      Top = -401
+      Top = -44
       DataBinding.DataField = 'DescPais'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -93,7 +93,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 101
-      Top = -428
+      Top = -71
       DataBinding.DataField = 'CodProvincia'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -110,7 +110,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 101
-      Top = -401
+      Top = -44
       DataBinding.DataField = 'CodPais'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -127,7 +127,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 81
-      Top = -362
+      Top = -5
       DataBinding.DataField = 'Telefonos'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -138,7 +138,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 81
-      Top = -335
+      Top = 22
       DataBinding.DataField = 'Cuit'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -149,7 +149,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 112
-      Top = -308
+      Top = 49
       DataBinding.DataField = 'PersonaJuridica'
       DataBinding.DataSource = dsCliente
       Properties.Alignment = taLeftJustify
@@ -161,7 +161,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 34
-      Top = -263
+      Top = 94
       Width = 391
       Height = 200
       TabOrder = 12
@@ -209,10 +209,10 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = -15
+      Top = 399
       Width = 391
       Height = 200
-      TabOrder = 13
+      TabOrder = 15
       DataSource = dsClasificadoresCliente
       object cxGridDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -248,7 +248,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxButtonEdit1: TcxDBButtonEdit
       Left = 122
-      Top = 221
+      Top = 342
       DataBinding.DataField = 'CodCondPago'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -260,25 +260,25 @@ inherited FNCli0001: TFNCli0001
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
       Style.ButtonStyle = bts3D
-      TabOrder = 14
+      TabOrder = 13
       Width = 79
     end
     object cxTextEdit1: TcxDBTextEdit
       Left = 207
-      Top = 221
+      Top = 342
       DataBinding.DataField = 'DescCondPago'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      TabOrder = 15
+      TabOrder = 14
       Width = 274
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 278
-      Width = 211
-      Height = 200
+      Top = 635
+      Width = 491
+      Height = 288
       TabOrder = 16
       DataSource = dsSucursalesCliente
       object tvSucursales: TcxGridDBTableView
@@ -475,7 +475,7 @@ inherited FNCli0001: TFNCli0001
       end
     end
     object lcMainGroup_Root: TdxLayoutGroup
-      AlignHorz = ahLeft
+      AlignHorz = ahClient
       AlignVert = avTop
       ButtonOptions.Buttons = <>
       Hidden = True
@@ -525,7 +525,7 @@ inherited FNCli0001: TFNCli0001
       Parent = lcMainGroup2
       ButtonOptions.Buttons = <>
       LayoutDirection = ldHorizontal
-      Index = 2
+      Index = 1
     end
     object lcMainGroup5: TdxLayoutGroup
       CaptionOptions.Text = 'Sucursales'
@@ -647,7 +647,6 @@ inherited FNCli0001: TFNCli0001
       CaptionOptions.Visible = False
       Parent = lcMainGroup8
       Control = jktExpDBGrid1
-      ControlOptions.AlignHorz = ahLeft
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -655,13 +654,12 @@ inherited FNCli0001: TFNCli0001
       CaptionOptions.Text = 'Clasificadores del Cliente'
       Parent = lcMainGroup2
       ButtonOptions.Buttons = <>
-      Index = 1
+      Index = 2
     end
     object lcMainItem14: TdxLayoutItem
       CaptionOptions.Visible = False
       Parent = lcMainGroup9
       Control = jktExpDBGrid2
-      ControlOptions.AlignHorz = ahLeft
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -700,6 +698,7 @@ inherited FNCli0001: TFNCli0001
   end
   inherited Driver: TjktDriver
     DataSetCab = mtCliente
+    TipoPrograma = tp_abmIndividual
     Filtro = Help
     FocoEnAlta = mtClienteCodigo
     OperacionesDefault = <
@@ -862,31 +861,39 @@ inherited FNCli0001: TFNCli0001
     Left = 64
     Top = 320
     object mtSucursalesClienteoid_SucClie: TIntegerField
+      Tag = 1
       FieldName = 'oid_SucClie'
     end
     object mtSucursalesClienteoid_Cliente: TIntegerField
+      Tag = 1
       FieldName = 'oid_Cliente'
     end
     object mtSucursalesClienteNroSucursal: TSmallintField
+      Tag = 1
       FieldName = 'NroSucursal'
     end
     object mtSucursalesClienteDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 50
     end
     object mtSucursalesClienteDireccion: TStringField
+      Tag = 1
       FieldName = 'Direccion'
       Size = 50
     end
     object mtSucursalesClienteLocalidad: TStringField
+      Tag = 1
       FieldName = 'Localidad'
       Size = 50
     end
     object mtSucursalesClienteCodPostal: TStringField
+      Tag = 1
       FieldName = 'CodPostal'
       Size = 10
     end
     object mtSucursalesClienteoid_Provincia: TIntegerField
+      Tag = 1
       FieldName = 'oid_Provincia'
     end
     object mtSucursalesClienteCodProvincia: TStringField
@@ -897,6 +904,7 @@ inherited FNCli0001: TFNCli0001
       Size = 50
     end
     object mtSucursalesClienteoid_Vendedor: TIntegerField
+      Tag = 1
       FieldName = 'oid_Vendedor'
     end
     object mtSucursalesClienteCodVendedor: TStringField
@@ -908,10 +916,12 @@ inherited FNCli0001: TFNCli0001
       Size = 40
     end
     object mtSucursalesClienteTelefonos: TStringField
+      Tag = 1
       FieldName = 'Telefonos'
       Size = 50
     end
     object mtSucursalesClienteActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -937,31 +947,39 @@ inherited FNCli0001: TFNCli0001
     Left = 104
     Top = 376
     object mtDomiciliosEntregaoid_DomSuc: TIntegerField
+      Tag = 1
       FieldName = 'oid_DomSuc'
     end
     object mtDomiciliosEntregaoid_SucClie: TIntegerField
+      Tag = 1
       FieldName = 'oid_SucClie'
     end
     object mtDomiciliosEntregaNroDomicilio: TSmallintField
+      Tag = 1
       FieldName = 'NroDomicilio'
     end
     object mtDomiciliosEntregaDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 50
     end
     object mtDomiciliosEntregaDireccion: TStringField
+      Tag = 1
       FieldName = 'Direccion'
       Size = 50
     end
     object mtDomiciliosEntregaLocalidad: TStringField
+      Tag = 1
       FieldName = 'Localidad'
       Size = 50
     end
     object mtDomiciliosEntregaCodPostal: TStringField
+      Tag = 1
       FieldName = 'CodPostal'
       Size = 10
     end
     object mtDomiciliosEntregaoid_Provincia: TIntegerField
+      Tag = 1
       FieldName = 'oid_Provincia'
     end
     object mtDomiciliosEntregaCodProvincia: TStringField
@@ -972,14 +990,17 @@ inherited FNCli0001: TFNCli0001
       Size = 50
     end
     object mtDomiciliosEntregaHorariosEntrega: TStringField
+      Tag = 1
       FieldName = 'HorariosEntrega'
       Size = 100
     end
     object mtDomiciliosEntregaTelefonos: TStringField
+      Tag = 1
       FieldName = 'Telefonos'
       Size = 50
     end
     object mtDomiciliosEntregaActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -1043,32 +1064,40 @@ inherited FNCli0001: TFNCli0001
     Left = 208
     Top = 376
     object mtContactosoid_ContSuc: TIntegerField
+      Tag = 1
       FieldName = 'oid_ContSuc'
     end
     object mtContactosoid_SucClie: TIntegerField
+      Tag = 1
       FieldName = 'oid_SucClie'
     end
     object mtContactosApellido: TStringField
+      Tag = 1
       FieldName = 'Apellido'
       Size = 50
     end
     object mtContactosNombres: TStringField
+      Tag = 1
       FieldName = 'Nombres'
       Size = 50
     end
     object mtContactosCargo: TStringField
+      Tag = 1
       FieldName = 'Cargo'
       Size = 50
     end
     object mtContactosTelefonos: TStringField
+      Tag = 1
       FieldName = 'Telefonos'
       Size = 50
     end
     object mtContactosEmail: TStringField
+      Tag = 1
       FieldName = 'Email'
       Size = 50
     end
     object mtContactosActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -1094,9 +1123,11 @@ inherited FNCli0001: TFNCli0001
     Left = 320
     Top = 376
     object mtClasificadoresSucursaloid_ClasifSuc: TIntegerField
+      Tag = 1
       FieldName = 'oid_ClasifSuc'
     end
     object mtClasificadoresSucursaloid_SucClie: TIntegerField
+      Tag = 1
       FieldName = 'oid_SucClie'
     end
     object mtClasificadoresSucursalDescClasif: TStringField
@@ -1104,6 +1135,7 @@ inherited FNCli0001: TFNCli0001
       Size = 30
     end
     object mtClasificadoresSucursaloid_ValorClasif: TIntegerField
+      Tag = 1
       FieldName = 'oid_ValorClasif'
     end
     object mtClasificadoresSucursalCodValorClasif: TStringField
@@ -1114,6 +1146,7 @@ inherited FNCli0001: TFNCli0001
       Size = 30
     end
     object mtClasificadoresSucursalActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -1247,29 +1280,36 @@ inherited FNCli0001: TFNCli0001
     Left = 392
     Top = 184
     object mtClienteoid_Cliente: TIntegerField
+      Tag = 1
       FieldName = 'oid_Cliente'
     end
     object mtClienteCodigo: TStringField
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object mtClienteRazonSocial: TStringField
+      Tag = 1
       FieldName = 'RazonSocial'
       Size = 100
     end
     object mtClienteDireccion: TStringField
+      Tag = 1
       FieldName = 'Direccion'
       Size = 50
     end
     object mtClienteLocalidad: TStringField
+      Tag = 1
       FieldName = 'Localidad'
       Size = 50
     end
     object mtClienteCodPostal: TStringField
+      Tag = 1
       FieldName = 'CodPostal'
       Size = 10
     end
     object mtClienteoid_Provincia: TIntegerField
+      Tag = 1
       FieldName = 'oid_Provincia'
     end
     object mtClienteCodProvincia: TStringField
@@ -1280,6 +1320,7 @@ inherited FNCli0001: TFNCli0001
       Size = 50
     end
     object mtClienteoid_Pais: TIntegerField
+      Tag = 1
       FieldName = 'oid_Pais'
     end
     object mtClienteCodPais: TStringField
@@ -1290,16 +1331,20 @@ inherited FNCli0001: TFNCli0001
       Size = 50
     end
     object mtClienteTelefonos: TStringField
+      Tag = 1
       FieldName = 'Telefonos'
       Size = 50
     end
     object mtClientePersonaJuridica: TBooleanField
+      Tag = 1
       FieldName = 'PersonaJuridica'
     end
     object mtClienteCuit: TStringField
+      Tag = 1
       FieldName = 'Cuit'
     end
     object mtClienteoid_CondPago: TIntegerField
+      Tag = 1
       FieldName = 'oid_CondPago'
     end
     object mtClienteCodCondPago: TStringField
@@ -1311,6 +1356,7 @@ inherited FNCli0001: TFNCli0001
       Size = 100
     end
     object mtClienteActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -1385,12 +1431,15 @@ inherited FNCli0001: TFNCli0001
     Left = 392
     Top = 232
     object mtInscripImpositoid_InscClie: TIntegerField
+      Tag = 1
       FieldName = 'oid_InscClie'
     end
     object mtInscripImpositoid_Cliente: TIntegerField
+      Tag = 1
       FieldName = 'oid_Cliente'
     end
     object mtInscripImpositoid_Impuesto: TIntegerField
+      Tag = 1
       FieldName = 'oid_Impuesto'
     end
     object mtInscripImpositDescImpuesto: TStringField
@@ -1398,9 +1447,11 @@ inherited FNCli0001: TFNCli0001
       Size = 100
     end
     object mtInscripImpositNroInscripcion: TIntegerField
+      Tag = 1
       FieldName = 'NroInscripcion'
     end
     object mtInscripImpositoid_Categoria: TIntegerField
+      Tag = 1
       FieldName = 'oid_Categoria'
     end
     object mtInscripImpositCodCategoria: TStringField
@@ -1412,9 +1463,11 @@ inherited FNCli0001: TFNCli0001
       Size = 100
     end
     object mtInscripImpositVigenciaDesde: TDateField
+      Tag = 1
       FieldName = 'VigenciaDesde'
     end
     object mtInscripImpositActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -1477,9 +1530,11 @@ inherited FNCli0001: TFNCli0001
     Left = 392
     Top = 280
     object mtClasificadoresClienteoid_ClasifClie: TIntegerField
+      Tag = 1
       FieldName = 'oid_ClasifClie'
     end
     object mtClasificadoresClienteoid_Cliente: TIntegerField
+      Tag = 1
       FieldName = 'oid_Cliente'
     end
     object mtClasificadoresClienteDescClasif: TStringField
@@ -1487,6 +1542,7 @@ inherited FNCli0001: TFNCli0001
       Size = 30
     end
     object mtClasificadoresClienteoid_ValorClasif: TIntegerField
+      Tag = 1
       FieldName = 'oid_ValorClasif'
     end
     object mtClasificadoresClienteCodValorClasif: TStringField
@@ -1497,6 +1553,7 @@ inherited FNCli0001: TFNCli0001
       Size = 30
     end
     object mtClasificadoresClienteActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end

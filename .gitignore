@@ -53,3 +53,6 @@ Servers
 
 # Para evitar archivos en estado de merge.
 *xml.orig
+
+#evito este archivo
+desktop.ini

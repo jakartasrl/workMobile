@@ -3,7 +3,7 @@ inherited FNSeg0002: TFNSeg0002
   ClientHeight = 363
   ClientWidth = 785
   ExplicitWidth = 801
-  ExplicitHeight = 402
+  ExplicitHeight = 401
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -373,7 +373,6 @@ inherited FNSeg0002: TFNSeg0002
       FieldName = 'Activo'
     end
     object TUsuariosSinVencimientoPwd: TBooleanField
-      Tag = 1
       FieldName = 'SinVencimientoPwd'
     end
   end

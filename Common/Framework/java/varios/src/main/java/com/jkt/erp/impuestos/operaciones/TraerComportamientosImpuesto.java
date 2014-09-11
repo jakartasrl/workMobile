@@ -18,7 +18,7 @@ public class TraerComportamientosImpuesto extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 1; i < 4; i++) {
 			this.notificarObjecto(Notificacion.getNew("resultado", new Container(String.valueOf(i), "PRUEBA_DESCRIPCION_"+i)));
 		}
 
