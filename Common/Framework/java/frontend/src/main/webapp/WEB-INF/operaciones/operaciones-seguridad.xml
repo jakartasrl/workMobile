@@ -91,6 +91,7 @@
 	</operacion>
 
 
+
 	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructuraABMGenerico">
 		
 		<output name="mtConfigOper" tableName="mtConfigOper">
@@ -381,8 +382,9 @@
 				<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
 				<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
 				<campoEntrada name="Email" clase="String" metodo="setMail" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Password" clase="String" metodo="setPassword" />
+<!-- 				<campoEntrada name="SinVencimientoPwd" clase="Boolean" metodo="setSinVencimientoPwd" /> -->
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />				
 				
 				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
@@ -433,5 +435,5 @@
 		</forms>
 		
 	</operacion>
-	
+		
 </entity>

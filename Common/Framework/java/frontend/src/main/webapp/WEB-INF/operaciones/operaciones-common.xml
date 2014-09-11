@@ -69,15 +69,16 @@
 
 <entity>
 	
+
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
-		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro">
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro" fieldID="PRUEBA">
 		</input>
 		
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Descripcion" target="cadena" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -86,6 +87,7 @@
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
+
 
 
 	<operacion name="FiltroInactivos" clase="com.jkt.operaciones.HelperInactivos">

@@ -164,6 +164,7 @@
 			<campoSalida value="DescImpuesto" target="impuesto.descripcion" />
 			<campoSalida value="NroInscripcion" target="numero" />
 			<campoSalida value="oid_Categoria" target="oidCategoria" />
+<!-- 			<campoSalida value="CodCategoria" target="" /> -->
 			<campoSalida value="DescCategoria" target="descripcionCategoria" />
 			<campoSalida value="VigenciaDesde" target="vigencia" />
 			<campoSalida value="Activo" target="activo" />
@@ -243,16 +244,6 @@
 	</operacion>
 
 
-
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-<!-- ************************************************************************************************************************************************************ -->
-
 	<!-- GUARDAR UN CLIENTE -->
 	<operacion name="GuardarCliente" clase="com.jkt.operaciones.GuardarLista">
 		<input name="mtCliente" keyName="objeto" clase="com.jkt.erp.varios.Cliente" fieldID="oid_Cliente">
@@ -281,20 +272,20 @@
 								
 				<campoEntrada name="mtInscripImposit" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_InscClie">
 					<campoEntrada name="oid_Impuesto" clase="" metodo="" />
-					<campoEntrada name="DescImpuesto" clase="" metodo="" />
+					 ** <campoEntrada name="DescImpuesto" clase="" metodo="" />
 					<campoEntrada name="NroInscripcion" clase="Integer" metodo="" />
 					<campoEntrada name="oid_Categoria" clase="String" metodo="" />
-					<campoEntrada name="CodCategoria" clase="String" metodo="" />
-					<campoEntrada name="DescCategoria" clase="String" metodo="" />
+					** <campoEntrada name="CodCategoria" clase="String" metodo="" />
+					** <campoEntrada name="DescCategoria" clase="String" metodo="" />
 					<campoEntrada name="VigenciaDesde" clase="Date" metodo="" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 
 				<campoEntrada name="mtClasificadoresCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifClie">
-					<campoEntrada name="DescClasif" clase="String" metodo="" />
+					** <campoEntrada name="DescClasif" clase="String" metodo="" />
 					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-					<campoEntrada name="CodValorClasif" clase="String" metodo="" />
-					<campoEntrada name="DescValorClasif" clase="String" metodo="" />
+					** <campoEntrada name="CodValorClasif" clase="String" metodo="" />
+					** <campoEntrada name="DescValorClasif" clase="String" metodo="" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 
@@ -315,20 +306,11 @@
 
 					<campoEntrada name="mtDomiciliosEntrega" metodo="addDomicilioEntrega" clase="com.jkt.erp.varios.DomicilioEntrega" fieldID="oid_DomSuc">
 						<campoEntrada name="NroDomicilio" clase="Integer" metodo="setNumero" />
-						<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
-						
-						<!--  
-						<campoEntrada name="Direccion" clase="String" metodo="" />
-						<campoEntrada name="Localidad" clase="String" metodo="" />
-						<campoEntrada name="CodPostal" clase="String" metodo="" />
-						<campoEntrada name="oid_Provincia" clase="String" metodo="" />
-						<campoEntrada name="Telefonos" clase="String" metodo="" />
-						-->
+						<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />						
 						<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
 						<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
 						<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
 						<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
-
 						<campoEntrada name="HorariosEntrega" clase="String" metodo="setDiasEntrega" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
@@ -344,10 +326,10 @@
 
 <!-- 					
 					<campoEntrada name="mtClasificadoresSucursal" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifSuc">
-						<campoEntrada name="DescClasif" clase="String" metodo="" />
+						** <campoEntrada name="DescClasif" clase="String" metodo="" />
 						<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-						<campoEntrada name="CodValorClasif" clase="String" metodo="" />
-						<campoEntrada name="DescValorClasif" clase="String" metodo="" />
+						** <campoEntrada name="CodValorClasif" clase="String" metodo="" />
+						** <campoEntrada name="DescValorClasif" clase="String" metodo="" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
   -->
