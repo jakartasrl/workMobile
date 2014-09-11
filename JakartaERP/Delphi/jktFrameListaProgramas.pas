@@ -191,7 +191,39 @@ begin
     begin
        NombrePrograma := 'TFNUti0001';
        parametroInicial:= 'CaracProducto' ;
+    end
+  else if Sender.Tag = 14 then
+    // Maestro de Idiomas
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Idioma' ;
+    end
+    else if Sender.Tag = 15 then
+    // Maestro de Paises
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Pais' ;
+    end
+
+    else if Sender.Tag = 16 then
+    // Maestro de Provincia
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Provincia' ;
+    end
+    else if Sender.Tag = 16 then
+    // Maestro de Vendedor
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Vendedor' ;
+    end
+    else if Sender.Tag = 17 then
+    // Maestro de Representante
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Representante' ;
     end;
+
 
   frmMainForm.Show;
   frmMainForm.AbrirPrograma(NombrePrograma, parametroInicial);

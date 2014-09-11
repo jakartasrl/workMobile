@@ -380,4 +380,83 @@
 	</operacion>
 
 
+<!-- GUARDAR Vendedor  -->
+	<operacion name="GuardarVendedor" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.Vendedor" fieldID='oid'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="apellido"  clase="String" metodo="setApellido" />
+				<campoEntrada name="nombres"  clase="String"  metodo="setNombres" />
+				<campoEntrada name="mail"  clase="String" metodo="setMail" />
+				<campoEntrada name="telefono"  clase="String" metodo="setTelefono" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR  Vendedor -->
+	<operacion name="TraerVendedor" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.Vendedor">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid"       target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="apellido"  target="apellido" />
+			<campoSalida value="nombres"   target="nombres" />
+			<campoSalida value="mail"      target="mail" />
+			<campoSalida value="telefono"  target="telefono" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+	
+
+<!-- GUARDAR Representante  -->
+	<operacion name="GuardarRepresentante" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.Representante" fieldID='oid'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="mail"  clase="String" metodo="setMail" />
+				<campoEntrada name="telefono"  clase="String" metodo="setTelefono" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR  Representante -->
+	<operacion name="TraerRepresentante" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.Representante">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid"       target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="mail"      target="mail" />
+			<campoSalida value="telefono"  target="telefono" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+	
+
+
 </entity>
