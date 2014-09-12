@@ -9,24 +9,22 @@ import com.jkt.dominio.Container;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 
+/**
+ * <p>Operacion que se encarga de proveer a los clientes de todas las clases que pueden ser clasificables por algun criterio en particular.</p>
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 @OperacionBean
 public class TraerEntidadesClasificables extends Operation {
 
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		
-		List<String> entidadesClasificables = Arrays.asList(new String[]{"empresa","usuario","vendedor"});
-		for (String valor : entidadesClasificables) {
-			notificarObjecto(Notificacion.getNew("entidades", new Container(valor)));
-		}
 
-		//Recuperar de algun lado todas las clases. Es buena tener un repositorio de clases, es decir, .class para no generar estructuras
-		//Puedo utilizar la factory para esto
-		
-		//voy a recorrer la lista de clases registradas. deberian ser TODAS, y si no esta, loguear que la tiene que registrar!!!
-		
-//		IClasificable.class.isAssignableFrom(Clasificador.class);
+		List<Container> entidades = Arrays.asList(new Container("1", "Empresa"),new Container("2", "Usuario"),new Container("3", "Cliente"),new Container("4", "ClienteSucursal"));
+		for (Container container : entidades) {
+			notificarObjecto(Notificacion.getNew("entidades", container));
+		}
 		
 	}
 

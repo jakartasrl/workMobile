@@ -142,12 +142,8 @@
 	<operacion name="TraerEntidadesClasificables" clase="com.jkt.varios.operaciones.TraerEntidadesClasificables">
 										
 		<output name="entidades" tableName="mtEntidades">		
-<!-- 			<campoSalida value="oid_Entidad" target="" /> -->
-<!-- 			<campoSalida value="Descripcion" target="" /> -->
-<!-- 			Esto creo que está mal, lo que se clasifica es la clase. -->
-			<campoSalida value="Descripcion" target="value" />
-			
-			
+			<campoSalida value="oid_Entidad" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>
 						
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

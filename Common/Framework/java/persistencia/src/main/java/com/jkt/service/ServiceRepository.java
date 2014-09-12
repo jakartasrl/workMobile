@@ -4,9 +4,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+
+
+
 
 
 
@@ -26,6 +32,7 @@ import static org.hibernate.criterion.Restrictions.gt;
 import static org.hibernate.criterion.Restrictions.lt;
 
 import org.hibernate.criterion.SimpleExpression;
+import org.hibernate.validator.util.Contracts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,8 +98,20 @@ public class ServiceRepository implements IServiceRepository {
 
 	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException {
 		ejecutarValidacionDeNegocio(entity);
-		getSession().save(entity);
+		try{
+			getSession().save(entity);
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+			constraintViolations.size();
+			StringBuffer buffer=new StringBuffer();
+			String message = null;
+			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+				buffer.append(constraintViolation.getMessage().concat("\n"));
+			}
+			throw new ValidacionException(buffer.toString());
+		}
 		return entity;
+			
 	}
 
 	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws InstantiationException, IllegalAccessException, ValidacionException {
