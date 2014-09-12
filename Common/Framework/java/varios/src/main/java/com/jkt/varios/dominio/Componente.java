@@ -23,8 +23,26 @@ public class Componente extends Descriptible {
 	private Componente componenteHijo;
 	private List<ComponenteValor> valores=new ArrayList<ComponenteValor>();
 	
+	private int codigoInterno,codigoInternoPadre;
 	
 	
+	
+	public int getCodigoInterno() {
+		return codigoInterno;
+	}
+
+	public void setCodigoInterno(int codigoInterno) {
+		this.codigoInterno = codigoInterno;
+	}
+
+	public int getCodigoInternoPadre() {
+		return codigoInternoPadre;
+	}
+
+	public void setCodigoInternoPadre(int codigoInternoPadre) {
+		this.codigoInternoPadre = codigoInternoPadre;
+	}
+
 	/*
 	 * Metodo para agregar como corresponde el arbol en forma de lista enlazada.
 	 * 

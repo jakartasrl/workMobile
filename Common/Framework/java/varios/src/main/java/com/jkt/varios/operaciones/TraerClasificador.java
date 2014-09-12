@@ -22,7 +22,6 @@ public class TraerClasificador extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		
 		String id=(String) aParams.get("oid".toUpperCase());
 		Clasificador clasificador=(Clasificador) obtener(Clasificador.class, id);
 		
@@ -35,15 +34,8 @@ public class TraerClasificador extends Operation {
 		Componente componente = clasificador.getComponentePadre();
 		int nivel=0;
 		while(componente!=null){
-
-//			if (nivel>0) {
-//				componente.setNivelSuperior(nivel-1);
-//			}
-//			
-			componente.setNivelSuperior(nivel-1);
-			
-			
-			componente.setNivel(nivel++); //Seteo el valor actual y luego es aumentado.
+			componente.setCodigoInternoPadre(nivel-1);
+			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
 			
 			notificarObjecto(Notificacion.getNew("componentes", componente));
 			componente=componente.getComponenteHijo();
