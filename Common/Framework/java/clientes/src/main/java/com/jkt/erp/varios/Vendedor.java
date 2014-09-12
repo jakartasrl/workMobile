@@ -3,6 +3,7 @@ package com.jkt.erp.varios;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -10,7 +11,7 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Vendedor extends PersistentEntity {
+public class Vendedor extends PersistentEntity implements IDescriptible {
 
 	private static final long serialVersionUID = -6026853125242306297L;
 
@@ -66,6 +67,40 @@ public class Vendedor extends PersistentEntity {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getDescripcion() {
+		return apellido + ","  + nombres;
+	}
+
+	public String getCadena() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getCadena2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getEntero() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getEntero2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public float getFloat() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public float getFloat2() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

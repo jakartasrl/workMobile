@@ -19,13 +19,6 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	@NotBlank(message="No puede estar vacio el codigo.")
 	private String codigo;
 	
-	/*
-	 *@NotBlank(message="El nombre de usuario no puede ser vacio.")
-	 *private String userName;
-	 *
-	 *	El username es representado por el atributo codigo, de la clase PersistentEntity
-	 *
-	 */
 	@NotBlank(message="Debe completar el nombre del usuario.")
 	private String nombres;
 	
