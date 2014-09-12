@@ -213,7 +213,7 @@
 		
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
-			<campoSalida value="Descripcion" target="cadena2" />
+			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Cadena" target="cadena" />
 		</output>		
 			
