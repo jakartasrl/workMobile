@@ -13,8 +13,8 @@ import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 
 /**
- * Esta operacion recupera el clasificador con todos sus componentes, y ademas cada componente con sus hijos.
- * 
+ * <p>Esta operacion recupera el clasificador con todos sus componentes, y ademas cada componente con sus hijos.
+ * </p>
  * @author Leonel Suarez - Jakarta SRL
  */
 @OperacionBean
