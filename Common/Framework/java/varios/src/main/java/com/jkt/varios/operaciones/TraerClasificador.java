@@ -39,7 +39,6 @@ public class TraerClasificador extends Operation {
 			
 			notificarObjecto(Notificacion.getNew("componentes", componente));
 			componente=componente.getComponenteHijo();
-			
 		}
 		
 	}
