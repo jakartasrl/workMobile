@@ -138,23 +138,26 @@
 		<output name="cliente" tableName="mtCliente">
 			<campoSalida value="oid_Cliente" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="RazonSocial" target="sujetoImpositivo.razonSocial" />
-			<campoSalida value="Direccion" target="sujetoImpositivo.direccionLegal.direccion" />
-			<campoSalida value="Localidad" target="sujetoImpositivo.direccionLegal.localidad" />
-			<campoSalida value="CodPostal" target="sujetoImpositivo.direccionLegal.codigoPostal" />
-			<campoSalida value="oid_Provincia" target="sujetoImpositivo.direccionLegal.provincia.id" />
-			<campoSalida value="CodProvincia" target="sujetoImpositivo.direccionLegal.provincia.codigo" />
-			<campoSalida value="DescProvincia" target="sujetoImpositivo.direccionLegal.provincia.descripcion" />
-			<campoSalida value="oid_Pais" target="sujetoImpositivo.direccionLegal.pais.id" />
-			<campoSalida value="CodPais" target="sujetoImpositivo.direccionLegal.pais.codigo" />
-			<campoSalida value="DescPais" target="sujetoImpositivo.direccionLegal.pais.descripcion" />
-<!-- 			<campoSalida value="Telefonos" target="" /> -->
-			<campoSalida value="PersonaJuridica" target="sujetoImpositivo.personaJuridica" />
-			<campoSalida value="Cuit" target="sujetoImpositivo.cuit" />
 <!-- 			<campoSalida value="oid_CondPago" target="" /> -->
 <!-- 			<campoSalida value="CodCondPago" target="" /> -->
 <!-- 			<campoSalida value="DescCondPago" target="" /> -->
 			<campoSalida value="Activo" target="isActivo" />
+		</output>
+		
+		<output name="sujetoImpositivo" tableName="mtSujImp">
+			<campoSalida value="RazonSocial" target="razonSocial" />
+			<campoSalida value="Direccion" target="direccionLegal.direccion" />
+			<campoSalida value="Localidad" target="direccionLegal.localidad" />
+			<campoSalida value="CodPostal" target="direccionLegal.codigoPostal" />
+			<campoSalida value="oid_Provincia" target="direccionLegal.provincia.id" />
+			<campoSalida value="CodProvincia" target="direccionLegal.provincia.codigo" />
+			<campoSalida value="DescProvincia" target="direccionLegal.provincia.descripcion" />
+			<campoSalida value="oid_Pais" target="direccionLegal.pais.id" />
+			<campoSalida value="CodPais" target="direccionLegal.pais.codigo" />
+			<campoSalida value="DescPais" target="direccionLegal.pais.descripcion" />
+<!-- 			<campoSalida value="Telefonos" target="" /> -->
+			<campoSalida value="PersonaJuridica" target="personaJuridica" />
+			<campoSalida value="Cuit" target="cuit" />
 		</output>
 
 		<output name="inscripciones" tableName="mtInscripImposit">
@@ -275,8 +278,9 @@
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
+				</campoEntrada>				 
+								
 <!-- 
-	
 					<campoEntrada name="mtClasificadoresCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifClie">
 						** <campoEntrada name="DescClasif" clase="String" metodo="" />
 						<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
@@ -284,10 +288,7 @@
 						** <campoEntrada name="DescValorClasif" clase="String" metodo="" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
-
 		 -->
-				</campoEntrada>				 
-								
 
 				<campoEntrada name="mtSucursalesCliente" metodo="addClienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" fieldID="oid_SucClie">
 					<campoEntrada name="NroSucursal" clase="Integer" metodo="setNumero" />
