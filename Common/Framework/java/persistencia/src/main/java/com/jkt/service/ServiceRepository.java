@@ -117,7 +117,7 @@ public class ServiceRepository implements IServiceRepository {
 		}catch (IllegalArgumentException e) {
 			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (InvocationTargetException e) {
-			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+			throw new ValidacionException(e.getTargetException().getMessage());
 		}
 	}
 
