@@ -76,7 +76,7 @@
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="APartirFechaFactura" target="baseFechaFactura" />
 			<campoSalida value="APartirFechaRecepcion" target="baseFechaRecep" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<output name="detalle" tableName="mtDetalleCondicionDePago">
@@ -154,7 +154,7 @@
 <!-- 			<campoSalida value="oid_CondPago" target="" /> -->
 <!-- 			<campoSalida value="CodCondPago" target="" /> -->
 <!-- 			<campoSalida value="DescCondPago" target="" /> -->
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<output name="inscripciones" tableName="mtInscripImposit">
@@ -167,7 +167,7 @@
 <!-- 			<campoSalida value="CodCategoria" target="" /> -->
 			<campoSalida value="DescCategoria" target="descripcionCategoria" />
 			<campoSalida value="VigenciaDesde" target="vigencia" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<output name="clasificadoresCliente" tableName="mtClasificadoresCliente">
@@ -195,7 +195,7 @@
 			<campoSalida value="CodVendedor" target="vendedorComercial.codigo" />
 			<campoSalida value="DescVendedor" target="vendedorComercial.descripcion" />
 <!-- 			<campoSalida value="Telefonos" target="" /> -->
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<output name="domiciliosEntrega" tableName="mtDomiciliosEntrega">
@@ -211,7 +211,7 @@
 			<campoSalida value="DescProvincia" target="direccion.provincia.descripcion" />
 			<campoSalida value="HorariosEntrega" target="diasEntrega" />
 <!-- 			<campoSalida value="Telefonos" target="" /> -->
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<output name="contactos" tableName="mtContactos">
@@ -222,7 +222,7 @@
 			<campoSalida value="Cargo" target="tratamiento" />
 			<campoSalida value="Telefonos" target="telefono" />
 			<campoSalida value="Email" target="mail" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<output name="clasificadoresSucursales" tableName="mtClasificadoresSucursal">
@@ -232,7 +232,7 @@
 			<campoSalida value="oid_ValorClasif" target="componenteValor.id" />
 			<campoSalida value="CodValorClasif" target="componenteValor.codigo" />
 			<campoSalida value="DescValorClasif" target="componenteValor.descripcion" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -249,47 +249,45 @@
 		<input name="mtCliente" keyName="objeto" clase="com.jkt.erp.varios.Cliente" fieldID="oid_Cliente">
 			<campoEntrada>
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-				
-				
-				<!-- 
-				<campoEntrada name="RazonSocial" clase="String" metodo="" />
-				<campoEntrada name="Direccion" clase="String" metodo="" />
-				<campoEntrada name="Localidad" clase="String" metodo="" />
-				<campoEntrada name="CodPostal" clase="String" metodo="" />
-				<campoEntrada name="oid_Provincia" clase="String" metodo="" />
-				<campoEntrada name="oid_Pais" clase="String" metodo="" />
-				<campoEntrada name="Telefonos" clase="String" metodo="" />
-				<campoEntrada name="PersonaJuridica" clase="Boolean" metodo="" />
-				<campoEntrada name="Cuit" clase="String" metodo="" />
-				<campoEntrada name="oid_CondPago" clase="String" metodo="" />
-				 -->
-				 
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<!-- 
-				
-				FALTA VER COMO SETEAR DATOS DEL SUJETO IMPOSITIVO
+				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.impuestos.dominio.SujetoImpositivo" fieldID="oid_SujImp">
+<!-- 					<campoEntrada name="oid_Cliente" clase="String" metodo="" /> -->
+					<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
+					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
+					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
+					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
+					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
+					<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
+<!-- 					<campoEntrada name="Telefonos" clase="String" metodo="" /> -->
+					<campoEntrada name="PersonaJuridica" clase="Boolean" metodo="setPersonaJuridica" />
+					<campoEntrada name="Cuit" clase="String" metodo="setCuit" />
+					<campoEntrada name="oid_CondPago" clase="String" metodo="" />
+
+					<campoEntrada name="mtInscripImposit" metodo="addInscripcionImpositiva" clase="com.jkt.erp.impuestos.dominio.InscripcionImpositiva" fieldID="oid_InscClie">
+						<campoEntrada name="oid_Impuesto" clase="com.jkt.erp.impuestos.dominio.Impuesto" metodo="setImpuesto" />
+<!-- 						 ** <campoEntrada name="DescImpuesto" clase="" metodo="" /> -->
+						<campoEntrada name="NroInscripcion" clase="Integer" metodo="setNumero" />
+						<campoEntrada name="oid_Categoria" clase="String" metodo="" />
+<!-- 						** <campoEntrada name="CodCategoria" clase="String" metodo="" /> -->
+<!-- 						** <campoEntrada name="DescCategoria" clase="String" metodo="" /> -->
+						<campoEntrada name="VigenciaDesde" clase="Date" metodo="" />
+						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+					</campoEntrada>
+
+<!-- 
+	
+					<campoEntrada name="mtClasificadoresCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifClie">
+						** <campoEntrada name="DescClasif" clase="String" metodo="" />
+						<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
+						** <campoEntrada name="CodValorClasif" clase="String" metodo="" />
+						** <campoEntrada name="DescValorClasif" clase="String" metodo="" />
+						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+					</campoEntrada>
+
+		 -->
+				</campoEntrada>				 
 								
-				<campoEntrada name="mtInscripImposit" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_InscClie">
-					<campoEntrada name="oid_Impuesto" clase="" metodo="" />
-					 ** <campoEntrada name="DescImpuesto" clase="" metodo="" />
-					<campoEntrada name="NroInscripcion" clase="Integer" metodo="" />
-					<campoEntrada name="oid_Categoria" clase="String" metodo="" />
-					** <campoEntrada name="CodCategoria" clase="String" metodo="" />
-					** <campoEntrada name="DescCategoria" clase="String" metodo="" />
-					<campoEntrada name="VigenciaDesde" clase="Date" metodo="" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-				</campoEntrada>
-
-				<campoEntrada name="mtClasificadoresCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifClie">
-					** <campoEntrada name="DescClasif" clase="String" metodo="" />
-					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-					** <campoEntrada name="CodValorClasif" clase="String" metodo="" />
-					** <campoEntrada name="DescValorClasif" clase="String" metodo="" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-				</campoEntrada>
-
-				 -->
 
 				<campoEntrada name="mtSucursalesCliente" metodo="addClienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" fieldID="oid_SucClie">
 					<campoEntrada name="NroSucursal" clase="Integer" metodo="setNumero" />

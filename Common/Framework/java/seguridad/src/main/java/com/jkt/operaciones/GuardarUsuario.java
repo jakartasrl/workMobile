@@ -40,7 +40,7 @@ public class GuardarUsuario extends Operation{
 
 			List<EmpresaHabilitada> empresasHabilitadasPlanas = usuario.getEmpresasHabilitadasPlanas();//Uso los campos planchados para recuperar desde la base
 			for (EmpresaHabilitada empresaHabilitada : empresasHabilitadasPlanas) {
-				Empresa empresa = (Empresa) serviceRepository.getByOid(Empresa.class, Long.valueOf(empresaHabilitada.getOidEmpresa()) );
+				Empresa empresa = (Empresa)obtener(Empresa.class, empresaHabilitada.getOidEmpresa() );
 				
 				if (empresa==null) {
 					throw new JakartaException("Existe una inconsistencia en los datos. La empresa ingresada no existe.");

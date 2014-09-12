@@ -218,6 +218,20 @@ public abstract class Operation extends Observable {
 	protected PersistentEntity obtener(Class<? extends PersistentEntity> className, long id) throws Exception{
 		return serviceRepository.getByOid(className, id);
 	}
+	/**
+	 * <p>Recupera una entidad persistente utilizando el nombre de la clase y el id.</p>
+	 * <p>Metodo sobre cargado que recibe un numero en formto de String.Se intentara pasar a numero y si no es numerico se levanta una excepcion</p>
+	 * 
+	 */
+	protected PersistentEntity obtener(Class<? extends PersistentEntity> className, String id) throws Exception{
+		long identificador = 0;
+		try{
+			identificador=Long.valueOf(id).longValue();
+		}catch(NumberFormatException exception){
+			throw new JakartaException("Por favor, ingrese un identificador numerico.");
+		}
+		return serviceRepository.getByOid(className,identificador);
+	}
 	
 	/**
 	 * Verifica que el mapa de los parametros no venga nulo/vacio y en darse este caso se levanta una excepcion.

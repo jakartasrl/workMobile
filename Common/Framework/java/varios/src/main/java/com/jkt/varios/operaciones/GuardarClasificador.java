@@ -41,10 +41,24 @@ public class GuardarClasificador extends Operation {
 		}
 		
 		Entry<String, Componente> entry;
-		for(Iterator<Entry<String, Componente>> iterator = mapaDesordenado.entrySet().iterator(); iterator.hasNext();){
-			entry = (Entry<String, Componente>) iterator.next();
+		
+		Componente primerComponente;
+		
+//		for(Iterator<Entry<String, Componente>> iterator = mapaDesordenado.entrySet().iterator(); iterator.hasNext();){
+//			entry = (Entry<String, Componente>) iterator.next();
+//			
+//		}
+		
+		for (Componente componente : componentes) {
+			if (componente.getNivelSuperior()==0) {
+				primerComponente=componente;
+			}
+			
+			
+			
 			
 		}
+		
 		
 		
 		/*

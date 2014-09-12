@@ -101,7 +101,7 @@
 			<campoSalida value="oid_tipo" 	target="id" />
 			<campoSalida value="Codigo" 	target="codigo" />
 			<campoSalida value="descr" 		target="descripcion" />
-			<campoSalida value="Activo" 	target="activo" />
+			<campoSalida value="Activo" 	target="isActivo" />
 		</output>
 		
 		<output name="out2" tableName="mtDet">
@@ -111,7 +111,7 @@
 			<campoSalida value="oid_carac" 	target="caracteristica.id" />
 			<campoSalida value="cod_carac" 	target="caracteristica.codigo" />
 			<campoSalida value="des_carac" 	target="caracteristica.descripcion" />
-			<campoSalida value="Activo" 	target="activo" />
+			<campoSalida value="Activo" 	target="isActivo" />
 			<campoSalida value="oblig" 		target="isObligatorio" />
 			<campoSalida value="arma_cod" 	target="isArmaCodigo" />
 			<campoSalida value="arma_desc" 	target="isArmaDescripcion" />
@@ -172,7 +172,7 @@
 			<campoSalida value="oid_tabla" target="id" />
 			<campoSalida value="Codigo"    target="codigo" />
 			<campoSalida value="descr"     target="descripcion" />
-			<campoSalida value="Activo"    target="activo" />
+			<campoSalida value="Activo"    target="isActivo" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

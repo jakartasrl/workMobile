@@ -30,7 +30,7 @@ public class CondPago extends Descriptible implements IDescriptible{
 	@NotNull
 	private boolean baseFechaRecep;
 
-	@NotBlank
+//	@NotBlank
 	private Set<CondPagoDet> detalles = new HashSet<CondPagoDet>();
 	
 	public boolean isBaseFechaFactura() {

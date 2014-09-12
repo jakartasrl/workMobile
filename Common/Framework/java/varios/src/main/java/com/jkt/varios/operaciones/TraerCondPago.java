@@ -21,15 +21,15 @@ public class TraerCondPago extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String oidEntity = (String) aParams.get(KEY_OID);
-		CondPago condicion = (CondPago) serviceRepository.getByOid(CondPago.class, Long.valueOf(oidEntity).longValue());
+		CondPago condicion = (CondPago) obtener(CondPago.class, oidEntity);
 		if (condicion==null) {
 			throw new EntityNotFoundException();
 		}
 		
-		notificarObjecto(Notificacion.getNew("mtCondicionDePago", condicion));
+		notificarObjecto(Notificacion.getNew("condicion", condicion));
 		
 		for (CondPagoDet condPagoDet : condicion.getDetalles()) {
-			notificarObjecto(Notificacion.getNew("mtDetalleCondicionDePago", condPagoDet));
+			notificarObjecto(Notificacion.getNew("detalle", condPagoDet));
 		}
 	}
 

@@ -79,7 +79,7 @@
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="oid_Entidad" target="entidad" />  <!-- se supone que es la clase que representa, y no una instancia. -->
 <!-- 			<campoSalida value="Obligatorio" target="" />	ver esto					 -->
-			<campoSalida value="Activo" target="activo" />	
+			<campoSalida value="Activo" target="isActivo" />	
 		</output>
 				
 		<output name="componentes" tableName="mtComponentesClasificador">		
@@ -89,7 +89,7 @@
 			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Activo" target="activo" />			
+			<campoSalida value="Activo" target="isActivo" />			
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -180,7 +180,7 @@
 			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Activo" target="activo" />			
+			<campoSalida value="Activo" target="isActivo" />			
 		</output>
 
 		<output name="valores" tableName="mtValoresClasificador">					
@@ -191,7 +191,7 @@
 <!-- 			<campoSalida value="oid_ValorPadre" target="" />			 -->
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Activo" target="activo" />			
+			<campoSalida value="Activo" target="isActivo" />			
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -236,7 +236,7 @@
 			<campoSalida value="oid_Comportamiento" target="comportamiento" />
 			<campoSalida value="Codigo" target="codigo" /> 
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Activo" target="activo" />	
+			<campoSalida value="Activo" target="isActivo" />	
 		</output>
 				
 		<output name="categorias" tableName="mtImpuestoCategorias">		
@@ -245,7 +245,7 @@
 			<campoSalida value="oid_Categoria" target="id" />			
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Activa" target="activo" />			
+			<campoSalida value="Activa" target="isActivo" />			
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>

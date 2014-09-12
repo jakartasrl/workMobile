@@ -231,7 +231,7 @@
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida value="oid_usuario" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 			<campoSalida value="Nombre" target="nombres" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Email" target="mail" />
@@ -251,7 +251,7 @@
 		<output name="TUsuarios" tableName="TUsuarios">
 			<campoSalida value="oid_usuario" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 			<campoSalida value="Nombre" target="nombres" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Email" target="mail" />
@@ -281,7 +281,7 @@
 		<output name="TUsuario" tableName="TUsuario">
 			<campoSalida value="oid_usuario" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 			<campoSalida value="Nombre" target="nombres" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Email" target="mail" />
@@ -339,7 +339,7 @@
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="RazonSocial" target="razonSocial" />
 			<campoSalida value="UrlDB" target="urlDB" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

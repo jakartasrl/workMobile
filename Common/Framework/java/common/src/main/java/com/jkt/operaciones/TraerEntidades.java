@@ -37,6 +37,7 @@ public class TraerEntidades extends Operation {
 		}else{
 			allElements = new ArrayList<PersistentEntity>();
 			PersistentEntity entity = serviceRepository.getByOid(Class.forName(nombreClase), Long.valueOf(oidEntity).longValue());
+			
 			if (entity==null) {
 				throw new EntityNotFoundException("No existe la entidad solicitada con el ID recibido.");
 			}

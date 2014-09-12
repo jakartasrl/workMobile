@@ -37,8 +37,10 @@ public class Impuesto extends Descriptible implements IDescriptible{
 	}
 
 	public void agregarCategoria(CategoriaImpuesto categoria) {
-		categoria.setImpuesto(this);
-		getCategorias().add(categoria);
+		if (!categorias.contains(categoria)) {
+			categoria.setImpuesto(this);
+			getCategorias().add(categoria);
+		}
 	}
 
 	public String getCadena() {

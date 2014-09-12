@@ -56,3 +56,8 @@ Servers
 
 #evito este archivo
 desktop.ini
+
+#Para no subir el archivo de conexion a la base y configuracion del esquema de la base de datos.
+#Para que por ERROR, cambien el servidor, y dejen el modo en CREATE.
+#Si cambian el servidor tambien hay que mirar el modo de ejecucion, y que este en NONE!!!
+database.properties
