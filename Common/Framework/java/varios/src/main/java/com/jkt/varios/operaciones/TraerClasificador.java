@@ -20,9 +20,11 @@ import com.jkt.varios.dominio.Componente;
 @OperacionBean
 public class TraerClasificador extends Operation {
 
+	private static final String OID_FIELD = "oid".toUpperCase();
+
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String id=(String) aParams.get("oid".toUpperCase());
+		String id=(String) aParams.get(OID_FIELD);
 		Clasificador clasificador=(Clasificador) obtener(Clasificador.class, id);
 		
 		if (clasificador==null) {
