@@ -140,11 +140,11 @@
 		<campos>
 			<campo fieldName="oid"       tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
 			<campo fieldName="codigo"    tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="apellido"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Apellido"  />
-			<campo fieldName="nombres"   tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Nombres"  />
-			<campo fieldName="mail"      tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Mail"  />
-			<campo fieldName="telefono"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Telefono"  />
-			<campo fieldName="Activo"    tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+			<campo fieldName="apellido"  tipo="String" longitud="40" visible="true" readOnly="false" orden="3" label="Apellido"  />
+			<campo fieldName="nombres"   tipo="String" longitud="40" visible="true" readOnly="false" orden="4" label="Nombres"  />
+			<campo fieldName="mail"      tipo="String" longitud="40" visible="true" readOnly="false" orden="5" label="Mail"  />
+			<campo fieldName="telefono"  tipo="String" longitud="20" visible="true" readOnly="false" orden="6" label="Telefono"  />
+			<campo fieldName="Activo"    tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
 		</campos>
 
 		<validadores>
@@ -163,10 +163,10 @@
 		<campos>
 			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
 			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
-			<campo fieldName="mail"      tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Mail"  />
-			<campo fieldName="telefono"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Telefono"  />
-			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+			<campo fieldName="descr"  tipo="String" longitud="40" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="mail"      tipo="String" longitud="40" visible="true" readOnly="false" orden="4" label="Mail"  />
+			<campo fieldName="telefono"  tipo="String" longitud="20" visible="true" readOnly="false" orden="5" label="Telefono"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="6" label="Activo" />
 		</campos>
 
 		<validadores>
