@@ -73,6 +73,31 @@
 		
 	</entidad>
 
+
+   <entidad nombre="ValorTablaCaracProd">
+
+		<operacion operSave="GuardarValoresTablasCarProd" operTraer="TraerValoresTablasCarProd" />
+		
+		<campos>
+			<campo fieldName="cod_tabla"  tipo="String" longitud="10" visible="true" readOnly="false" orden="1" label="Tabla" tag="0"/>
+			<campo fieldName="des_tabla"  tipo="String" longitud="60" visible="true" readOnly="true" orden="2" label="Descripcion" tag="0" />
+			<campo fieldName="oid_tabla"  tipo="Integer" longitud="0" visible="false" readOnly="false" orden="3" label="oid"  />
+			<campo fieldName="oid_valor" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="4" label="oid_valor" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="5" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="6" label="Descripcion"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="TablaValoresCaracProd" oidName="oid_tabla" descrName="des_tabla" />
+		</validadores>
+		
+	</entidad>
+
+
+
 <entidad nombre="Idioma">
 
 		<operacion operSave="GuardarIdioma" operTraer="TraerIdioma" />

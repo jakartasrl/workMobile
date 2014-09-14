@@ -17,6 +17,7 @@
 		<property name="armaDescripcion" column="arma_descr" type="boolean" />
 		<property name="orden" column="orden" type="integer" />
 		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="nivelAfectado" column="nivel_afec" type="string" length="5" />
 		
 		
 

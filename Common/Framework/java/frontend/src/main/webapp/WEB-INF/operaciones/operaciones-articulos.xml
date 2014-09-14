@@ -83,6 +83,7 @@
 					<campoEntrada name="arma_cod" 	clase="Boolean" metodo="setArmaCodigo" />
 					<campoEntrada name="arma_desc" 	clase="Boolean" metodo="setArmaDescripcion" />
 					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
+					<campoEntrada name="nivel" 		clase="String" metodo="setNivelAfectado" />
 				</campoEntrada>
 			</campoEntrada>
 		</input>
@@ -115,6 +116,7 @@
 			<campoSalida value="oblig" 		target="isObligatorio" />
 			<campoSalida value="arma_cod" 	target="isArmaCodigo" />
 			<campoSalida value="arma_desc" 	target="isArmaDescripcion" />
+			<campoSalida value="nivel" 		target="nivelAfectado" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -196,6 +198,45 @@
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
+
+	<!-- GUARDAR Valores Tablas de Validacion -->
+	<operacion name="GuardarValoresTablasCarProd" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.ValorTablaCaracProd" fieldID='oid_valor'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
+				
+			</campoEntrada>			
+		</input>		
+
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR  Valores Tablas de Validacion -->
+	<operacion name="TraerValoresTablasCarProd" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.ValorTablaCaracProd">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_valor" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="oid_tabla"    target="tabla.id" />
+			<campoSalida value="cod_tabla"    target="tabla.codigo" />
+			<campoSalida value="des_tabla"    target="tabla.descripcion" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>		
+	</operacion>
+	
 
 
 </entity>

@@ -9,11 +9,20 @@ public class TipoProductoDet extends PersistentEntity {
 	private boolean  	 	armaCodigo;
 	private boolean  	 	armaDescripcion;
 	private int			 	orden;
+	private String          nivelAfectado;	
 	
+	
+	public String getNivelAfectado() {
+		return nivelAfectado;
+	}
+	public void setNivelAfectado(String nivelAfectado) {
+		this.nivelAfectado = nivelAfectado;
+	}
 	
 	public TipoProducto getTipoProducto() {
 		return tipoProducto;
 	}
+	
 	public void setTipoProducto(TipoProducto tipoProducto) {
 		this.tipoProducto = tipoProducto;
 	}
