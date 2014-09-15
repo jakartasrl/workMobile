@@ -85,8 +85,8 @@
 		<output name="componentes" tableName="mtComponentesClasificador">		
 			<campoSalida value="oid_CompClasif" target="id" />			
 <!-- 			<campoSalida value="oid_Clasificador" target="" />			 -->
-			<campoSalida value="oid_Nivel" target="nivel" />			
-			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
+			<campoSalida value="codInterno" target="codigoInterno" />			
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Activo" target="isActivo" />			
@@ -199,17 +199,23 @@
 	<!-- GUARDAR LOS VALORES DE UN CLASIFICADOR -->
 	<operacion name="GuardarValoresClasificador" clase="com.jkt.varios.operaciones.GuardarValoresClasificador">
 
-		<input name="mtClasificador" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Clasificador'>
+		<input name="mtClasificador" keyName="objeto" clase="com.jkt.varios.dominio.Componente" fieldID='oid_CompClasif'>
 			<campoEntrada>
 
-				<campoEntrada name="mtValoresClasificador" metodo="" clase="com.jkt.dominio." >
-					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-					<campoEntrada name="oid_Clasificador" clase="String" metodo="" />
-					<campoEntrada name="oid_Valor" clase="String" metodo="" />
-					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" />
-					<campoEntrada name="Codigo" clase="String" metodo="" />
-					<campoEntrada name="Descripcion" clase="String" metodo="" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="" />
+<!-- 				No vienen los datos de componente, pero si sus hijos -->
+				<campoEntrada name="mtValoresClasificador" metodo="agregarValor" clase="com.jkt.varios.dominio.ComponenteValor" fieldID="oid_ValorClasif">
+
+<!-- 					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_Valor" clase="String" metodo="" /> -->
+<!-- 					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" /> -->
+
+					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
+					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
+					
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 				
 			</campoEntrada>

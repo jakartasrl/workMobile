@@ -47,24 +47,26 @@ public class Componente extends Descriptible {
 	 * Metodo para agregar como corresponde el arbol en forma de lista enlazada.
 	 * 
 	 */
-	private boolean flag=false;
+//	private boolean flag=false;
 	public void agregarValor(ComponenteValor valor){
 		
 		//Ejecucion de este metodo como si fuese estatico, ejecutado una sola vez, la primera vez que es ejecutado el metodo agregarValor
 		//SETEA A TODOS EN DESACTIVADOS
-		if(!flag){
-			for (ComponenteValor valorActual : valores) {
-				valorActual.setActivo(false);
-			}
-			flag=true;
-		}
-		
-		if (!valores.contains(valor)) {
-			valores.add(valor);
-			valor.setComponente(this);
-		}else{
-			valor.setActivo(true);
-		}
+//		if(!flag){
+//			for (ComponenteValor valorActual : valores) {
+//				valorActual.setActivo(false);
+//			}
+//			flag=true;
+//		}
+//		
+//		if (!valores.contains(valor)) {
+//			valores.add(valor);
+//			valor.setComponente(this);
+//		}else{
+//			valor.setActivo(true);
+//		}
+		valores.add(valor);
+		valor.setComponente(this);
 	}
 
 	public List<ComponenteValor> getValores() {
