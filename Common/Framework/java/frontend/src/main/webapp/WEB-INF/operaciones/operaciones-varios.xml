@@ -199,21 +199,21 @@
 	<!-- GUARDAR LOS VALORES DE UN CLASIFICADOR -->
 	<operacion name="GuardarValoresClasificador" clase="com.jkt.varios.operaciones.GuardarValoresClasificador">
 
-<!-- 		<input name="mtClasificador" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Clasificador'> -->
-<!-- 			<campoEntrada> -->
+		<input name="mtClasificador" keyName="objeto" clase="com.jkt.dominio." fieldID='oid_Clasificador'>
+			<campoEntrada>
 
-<!-- 				<campoEntrada name="mtValoresClasificador" metodo="" clase="com.jkt.dominio." > -->
-<!-- 					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Valor" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="Codigo" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="Descripcion" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="" /> -->
-<!-- 				</campoEntrada> -->
+				<campoEntrada name="mtValoresClasificador" metodo="" clase="com.jkt.dominio." >
+					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
+					<campoEntrada name="oid_Clasificador" clase="String" metodo="" />
+					<campoEntrada name="oid_Valor" clase="String" metodo="" />
+					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" />
+					<campoEntrada name="Codigo" clase="String" metodo="" />
+					<campoEntrada name="Descripcion" clase="String" metodo="" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="" />
+				</campoEntrada>
 				
-<!-- 			</campoEntrada> -->
-<!-- 		</input> -->
+			</campoEntrada>
+		</input>
 		
 		<forms>
 			<form name="FNCla0002"></form>
