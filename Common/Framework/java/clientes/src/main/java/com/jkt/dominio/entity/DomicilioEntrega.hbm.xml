@@ -13,7 +13,7 @@
 		<property name="diasEntrega" column="DIAS_ENTREGA" />
 
 		<many-to-one name="transporte" class="com.jkt.erp.varios.Transporte" cascade="none" column="TRANSPORTE_ID"/>
-		<many-to-one name="direccion" class="com.jkt.varios.dominio.Direccion" cascade="none" column="DIRECCION_ID"/>
+		<many-to-one name="direccion" class="com.jkt.varios.dominio.Direccion" cascade="all" column="DIRECCION_ID"/>
 		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" cascade="none" column="CLIENTE_SUCURSAL_ID"/>
 						
 	</class>

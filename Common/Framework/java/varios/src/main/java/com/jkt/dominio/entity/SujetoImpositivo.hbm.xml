@@ -13,7 +13,7 @@
 		<property name="cuit" column="CUIT" />
 		<property name="personaJuridica" column="PERSONA_JURIDICA" type="boolean" />
 
-		<many-to-one name="direccionLegal" class="com.jkt.varios.dominio.Direccion" cascade="none" column="DIRECCION_ID"/>
+		<many-to-one name="direccionLegal" class="com.jkt.varios.dominio.Direccion" cascade="all" column="DIRECCION_ID"/>
 		
 		<list name="inscripcionesImpositivas" >
 			<key column="SUJETO_IMPOSITIVO_ID" />

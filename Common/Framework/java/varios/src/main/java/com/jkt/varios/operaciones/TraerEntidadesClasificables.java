@@ -16,7 +16,7 @@ import com.jkt.transformers.Notificacion;
  */
 @OperacionBean
 public class TraerEntidadesClasificables extends Operation {
-
+	
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
