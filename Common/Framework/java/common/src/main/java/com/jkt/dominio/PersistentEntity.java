@@ -1,6 +1,6 @@
 package com.jkt.dominio;
 
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -70,7 +70,7 @@ abstract public class PersistentEntity {
 	 * @param coleccion
 	 * @param objeto
 	 */
-	protected void agregarObjectoAColeccion(java.util.Collection coleccion, Object objeto){
+	protected void agregarObjectoAColeccion(Collection coleccion, Object objeto){
 		if(!coleccion.contains(objeto)){
 			coleccion.add(objeto);
 		}
@@ -82,7 +82,7 @@ abstract public class PersistentEntity {
 	 * @param coleccion
 	 * @param objeto
 	 */
-	protected void borrarObjetoDeColeccion(java.util.Collection coleccion, Object objeto) {
+	protected void borrarObjetoDeColeccion(Collection coleccion, Object objeto) {
 		if(!coleccion.contains(objeto)){
 			coleccion.remove(objeto);
 		}

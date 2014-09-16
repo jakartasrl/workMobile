@@ -3,8 +3,6 @@ package com.jkt.erp.varios;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import com.jkt.dominio.Descriptible;
 import com.jkt.erp.impuestos.dominio.SujetoImpositivo;
 import com.jkt.varios.dominio.ComponenteValor;
@@ -12,7 +10,7 @@ import com.jkt.varios.dominio.Idioma;
 
 /**
  * <p>Representa los Clientes de la empresa</p>
- * <p>Se utilizar· en el ingreso  pedidos, cotizaciones, facturas, etc</p>
+ * <p>Se utilizar√° en el ingreso  pedidos, cotizaciones, facturas, etc</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -40,7 +38,6 @@ public class Cliente extends Descriptible {
 	
 	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();
 	
-//	
 	/*
 	 * Variables de instancia
 	 * ***********************************************************************************************
