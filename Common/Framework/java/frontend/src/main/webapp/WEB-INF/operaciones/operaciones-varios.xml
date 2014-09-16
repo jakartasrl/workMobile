@@ -159,13 +159,14 @@
 	<operacion name="TraerValoresClasificador" clase="com.jkt.varios.operaciones.TraerValoresClasificador">
 										
 		<output name="clasificador" tableName="mtClasificador">
+			<campoSalida value="oid_Clasificador" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
 		</output>
 				
 		<output name="componentes" tableName="mtComponentesClasificador">	
-			<campoSalida value="oid_Nivel" target="nivel" />			
-			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
+			<campoSalida value="oid_Nivel" target="codigoInterno" />			
+			<campoSalida value="oid_NivelPadre" target="codigoInternoPadre" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Activo" target="isActivo" />			
@@ -398,7 +399,6 @@
 				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="oid_pais" clase="com.jkt.varios.dominio.Pais" metodo="setPais" />
-				
 			</campoEntrada>			
 		</input>		
 
