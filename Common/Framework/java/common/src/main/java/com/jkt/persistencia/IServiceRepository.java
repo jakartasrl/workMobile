@@ -28,11 +28,12 @@ import com.jkt.util.IRepositorioClases;
 public interface IServiceRepository {
 
 	/**
-	 * Guarda una entidad
-	 * @param entity
+	 * Guarda una entidad.
+	 * 
+	 * @param entity a guardar
 	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws IllegalAccessException  
+	 * @throws InstantiationException  
 	 * @throws ClassNotFoundException 
 	 */
 	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;
