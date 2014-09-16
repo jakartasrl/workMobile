@@ -172,19 +172,13 @@ public class ServiceRepository implements IServiceRepository {
 
 	public PersistentEntity getUniqueByProperty(Class className,String propertyName, Long value) {
 		Criteria criteria = createCriteria(className);
-		
 		criteria.add(eq(propertyName, value));
-//		criteria.add(getRestrictionForRetrieveActive());
-		
 		return (PersistentEntity) criteria.uniqueResult();
 	}
 
 	public List<PersistentEntity> getByProperty(Class className, String propertyName,String value) {
 		Criteria criteria = createCriteria(className);
-
-//		criteria.add(getRestrictionForRetrieveActive());
 		criteria.add(like(propertyName, value));
-		
 		return criteria.list();
 	}
 
