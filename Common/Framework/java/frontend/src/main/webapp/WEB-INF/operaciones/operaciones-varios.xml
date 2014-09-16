@@ -69,7 +69,6 @@
 
 <entity>
 
-
 	<!-- TRAER UN CLASIFICADOR Y SUS COMPONENTES -->
 	<operacion name="TraerClasificador" clase="com.jkt.varios.operaciones.TraerClasificador">
 										
@@ -78,13 +77,11 @@
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="oid_Entidad" target="entidad" />  <!-- se supone que es la clase que representa, y no una instancia. -->
-<!-- 			<campoSalida value="Obligatorio" target="" />	ver esto					 -->
 			<campoSalida value="Activo" target="isActivo" />	
 		</output>
 				
 		<output name="componentes" tableName="mtComponentesClasificador">		
 			<campoSalida value="oid_CompClasif" target="id" />			
-<!-- 			<campoSalida value="oid_Clasificador" target="" />			 -->
 			<campoSalida value="codInterno" target="codigoInterno" />			
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 			<campoSalida value="Codigo" target="codigo" />
@@ -114,9 +111,6 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
 				<campoEntrada name="mtComponentesClasificador" metodo="agregarComponente" clase="com.jkt.varios.dominio.Componente" fieldID="oid_CompClasif">
-
-<!-- 					<campoEntrada name="oid_CompClasif" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
 
 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
@@ -215,27 +209,6 @@
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 			</campoEntrada>
 
-
-<!-- 		<input name="mtClasificador" keyName="objeto" clase="com.jkt.varios.dominio.Componente" fieldID='oid_CompClasif'> -->
-<!-- 			<campoEntrada> -->
-
-<!-- 				No vienen los datos de componente, pero si sus hijos -->
-<!-- 				<campoEntrada name="mtValoresClasificador" metodo="agregarValor" clase="com.jkt.varios.dominio.ComponenteValor" fieldID="oid_ValorClasif"> -->
-
-<!-- 					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Valor" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" /> -->
-
-<!-- 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" /> -->
-<!-- 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" /> -->
-					
-<!-- 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" /> -->
-<!-- 					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" /> -->
-<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
-<!-- 				</campoEntrada> -->
-				
-<!-- 			</campoEntrada> -->
 		</input>
 		
 		<forms>
@@ -286,9 +259,6 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
 				<campoEntrada name="mtImpuestoCategorias" metodo="agregarCategoria" clase="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" fieldID="oid_Categoria">
-<!-- 					<campoEntrada name="oid_ImpCat" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Impuesto" clase="String" metodo="" /> -->
-<!-- 					<campoEntrada name="oid_Categoria" clase="String" metodo="" /> -->
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
 					<campoEntrada name="Activa" clase="Boolean" metodo="setActivo" />
