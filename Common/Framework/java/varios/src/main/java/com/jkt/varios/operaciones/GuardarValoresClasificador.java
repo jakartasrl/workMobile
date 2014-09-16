@@ -20,8 +20,6 @@ import com.jkt.varios.dominio.ComponenteValor;
  */
 public class GuardarValoresClasificador extends Operation {
 
-//	private static final String KEY_PARA_RECUPERAR_OBJETO = "objeto";
-
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List valores = recuperarObjeto(aParams);
@@ -33,6 +31,8 @@ public class GuardarValoresClasificador extends Operation {
 			
 			componente = (Componente) obtener(Componente.class, (long)componenteValor.getIdComponente());
 			componente.agregarValor(componenteValor);
+			componenteValor.setComponente(componente);
+			
 			guardar(componente);
 			
 		}

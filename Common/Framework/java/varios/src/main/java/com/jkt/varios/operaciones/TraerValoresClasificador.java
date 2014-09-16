@@ -27,18 +27,22 @@ public class TraerValoresClasificador extends Operation {
 		
 		Componente componente = clasificador.getComponentePadre();
 		// ComponenteValor valor;
-		int nivel=0;
+		int nivel=1;
+		int nivelValores=1;
 		while(componente!=null){
 			
 			//2 Notifico el componente
-			componente.setNivelSuperior(nivel-1);
-			componente.setNivel(nivel++);
+			componente.setCodigoInternoPadre(nivel-1);
+			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
+			
 			notificarObjecto(Notificacion.getNew("componentes", componente));
 			
 			//3 notifico el valor del componente
 			// valor = componente.getValor();
 			List<ComponenteValor> valores = componente.getValores();
 			for (ComponenteValor valor : valores) {
+				valor.setCodigoInterno(nivelValores++);
+				valor.setCodigoInternoPadre((int)componente.getId());
 				notificarObjecto(Notificacion.getNew("valores", valor));
 			}
 			

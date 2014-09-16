@@ -28,7 +28,7 @@ public class TraerClasificador extends Operation {
 		Clasificador clasificador=(Clasificador) obtener(Clasificador.class, id);
 		
 		if (clasificador==null) {
-			throw new EntityNotFoundException("No existe el clasificador solicitado");
+			throw new EntityNotFoundException("No existe el clasificador solicitado.");
 		}
 		
 		notificarObjecto(Notificacion.getNew("clasificador", clasificador));

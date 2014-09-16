@@ -159,15 +159,11 @@
 	<operacion name="TraerValoresClasificador" clase="com.jkt.varios.operaciones.TraerValoresClasificador">
 										
 		<output name="clasificador" tableName="mtClasificador">
-			<campoSalida value="oid_Clasificador" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
 		</output>
 				
 		<output name="componentes" tableName="mtComponentesClasificador">	
-		
-			<campoSalida value="oid_CompClasif" target="id" />			
-		
 			<campoSalida value="oid_Nivel" target="nivel" />			
 			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
 			<campoSalida value="Codigo" target="codigo" />
@@ -176,11 +172,15 @@
 		</output>
 
 		<output name="valores" tableName="mtValoresClasificador">					
+			<campoSalida value="oid_ValorClasif" target="id" />			
 			<campoSalida value="oid_CompClasif" target="componente.id" />			
-<!-- 			<campoSalida value="oid_ValorClasif" target="" />			 -->
-<!-- 			<campoSalida value="oid_Clasificador" target="" /> -->
-			<campoSalida value="oid_Valor" target="id" />
-<!-- 			<campoSalida value="oid_ValorPadre" target="" />			 -->
+
+<!-- 			<campoSalida value="oid_ValorPadre" target="componente.id" />			 -->
+<!-- 			<campoSalida value="oid_Valor" target="componente.id" />			 -->
+			
+			<campoSalida value="codInterno" target="codigoInterno" />			
+			<campoSalida value="codInternoPadre" target="componente.id" />
+
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Activo" target="isActivo" />			
