@@ -60,6 +60,10 @@ public class GuardarClasificador extends Operation {
 				//si tiene padres, seteo la relacion padre e hijo
 				componentePadre=mapaDesordenado.get(String.valueOf(nivelSuperior));
 				
+				if (componentePadre==null) {
+					throw new JakartaException("No se encuentra el componente padre en la jerarquia.");
+				}
+				
 				//Tengo componente y componentePadre.Establezco la relacion.
 				componente.setComponentePadre(componentePadre);
 				componentePadre.setComponenteHijo(componente);

@@ -106,7 +106,9 @@ public class ServiceRepository implements IServiceRepository {
 			StringBuffer buffer=new StringBuffer();
 			String message = null;
 			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
-				buffer.append(constraintViolation.getMessage().concat("\n"));
+				buffer.append(constraintViolation.getMessage());
+//				buffer.append(constraintViolation.getMessage().concat("\n"));
+				break;//Solo el primer mensaje es mostrado, por cuestiones del 'enter' en los clientes, no se podia pasar en hexa o \n..
 			}
 			throw new ValidacionException(buffer.toString());
 		}

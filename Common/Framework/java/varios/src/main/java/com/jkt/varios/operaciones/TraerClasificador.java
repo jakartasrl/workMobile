@@ -34,7 +34,7 @@ public class TraerClasificador extends Operation {
 		notificarObjecto(Notificacion.getNew("clasificador", clasificador));
 		
 		Componente componente = clasificador.getComponentePadre();
-		int nivel=0;
+		int nivel=1;
 		while(componente!=null){
 			componente.setCodigoInternoPadre(nivel-1);
 			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.

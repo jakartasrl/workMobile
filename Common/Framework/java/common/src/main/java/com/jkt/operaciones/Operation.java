@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
+import javax.validation.ConstraintViolation;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -174,6 +176,21 @@ public abstract class Operation extends Observable {
 			execute(aParams);//UOW
 			tx.commit();
 			sessionProvider.destroySession();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+			constraintViolations.size();
+			StringBuffer buffer=new StringBuffer();
+			String message = null;
+			
+			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+				buffer.append(constraintViolation.getMessage());
+				break;
+			}
+			
+			tx.rollback();
+			sessionProvider.destroySession();
+			
+			throw new ValidacionException(buffer.toString());
 		}catch(RuntimeException exception){
 			//Hago el rollback y muestro el mensaje critido en frontend.
 			tx.rollback();
