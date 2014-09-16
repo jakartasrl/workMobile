@@ -30,7 +30,7 @@ import com.jkt.excepcion.JakartaException;
 @Scope(value=ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class RepositorioClases implements IRepositorioClases{
 
-	//variable que contiene todas las clases creadas.Esto es para evitar el uso de reflection y creación de clases manualmente
+	//variable que contiene todas las clases creadas.Esto es para evitar el uso de reflection y creaciï¿½n de clases manualmente
 	private Map<String, Class> clases=new HashMap<String, Class>();
 	
 	private Map<String, String> alias = new HashMap<String, String>();
@@ -68,7 +68,7 @@ public class RepositorioClases implements IRepositorioClases{
 	public String getClass(String value) throws JakartaException {
 		String valueRetrieved = alias.get(value);
 		if (valueRetrieved == null || valueRetrieved.isEmpty()) {
-			throw new JakartaException("No existe la clase solicitada. Pruebe indicando la clase con minuscula y respetante la nomenclatura camelCase.");
+			throw new JakartaException(String.format("No existe la clase '%s' . Pruebe indicando la clase con minuscula y respetante la nomenclatura camelCase.",value));
 		}
 		return valueRetrieved;
 	}
