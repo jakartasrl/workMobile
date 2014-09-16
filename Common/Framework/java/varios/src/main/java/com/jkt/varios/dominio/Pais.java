@@ -10,6 +10,4 @@ import com.jkt.dominio.Descriptible;
  */
 public class Pais extends Descriptible {
 
-	private static final long serialVersionUID = 1211656504645512790L;
-
 }

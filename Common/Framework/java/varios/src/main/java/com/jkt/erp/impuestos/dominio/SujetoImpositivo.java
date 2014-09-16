@@ -20,9 +20,6 @@ import com.jkt.varios.dominio.Provincia;
  */
 public class SujetoImpositivo extends PersistentEntity {
 
-	private static final long serialVersionUID = 1647999981281780385L;
-	
-	
 	/*
 	 * ********************************************************************************************
 	 * Variables de instancia

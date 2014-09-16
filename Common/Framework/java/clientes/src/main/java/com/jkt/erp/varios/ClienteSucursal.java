@@ -22,8 +22,6 @@ import com.jkt.varios.dominio.Provincia;
  */
 public class ClienteSucursal extends PersistentEntity {
 
-	private static final long serialVersionUID = 7007220789644015327L;
-
 	@NotNull(message="Esta entidad debe tener un cliente.")
 	private Cliente cliente;
 	

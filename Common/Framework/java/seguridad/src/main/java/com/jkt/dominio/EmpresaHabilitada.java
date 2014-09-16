@@ -9,7 +9,6 @@ package com.jkt.dominio;
  */
 public class EmpresaHabilitada extends PersistentEntity {
 
-	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	private Empresa empresa;
 	

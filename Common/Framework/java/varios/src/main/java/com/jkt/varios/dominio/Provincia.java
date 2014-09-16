@@ -10,7 +10,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class Provincia extends Descriptible {
 
-	private static final long serialVersionUID = -6001953931131171130L;
 	private Pais pais;
 
 	public Pais getPais() {

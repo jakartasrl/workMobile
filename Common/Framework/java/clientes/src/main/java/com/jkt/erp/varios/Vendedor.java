@@ -13,8 +13,6 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Vendedor extends PersistentEntity implements IDescriptible {
 
-	private static final long serialVersionUID = -6026853125242306297L;
-
 	@NotBlank(message="No puede estar vacio el codigo.")
 	private String codigo;
 

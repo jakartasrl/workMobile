@@ -9,7 +9,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class Representante extends Descriptible {
 
-	private static final long serialVersionUID = 4723490718103986955L;
 	private String mail;
 	private String telefono;
 

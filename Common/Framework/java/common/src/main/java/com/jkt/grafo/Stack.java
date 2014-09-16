@@ -10,11 +10,6 @@ import java.util.ArrayList;
  */
 public class Stack extends ArrayList<Object> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public Object pop(){
 		return this.remove(this.size()-1);
 	}

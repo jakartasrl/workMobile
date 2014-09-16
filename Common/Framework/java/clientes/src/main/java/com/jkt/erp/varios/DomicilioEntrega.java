@@ -17,8 +17,6 @@ import com.jkt.varios.dominio.Provincia;
  */
 public class DomicilioEntrega extends PersistentEntity {
 
-	private static final long serialVersionUID = 2094317297861077431L;
-
 	/*
 	 * Inicio de variables de instancia
 	 */

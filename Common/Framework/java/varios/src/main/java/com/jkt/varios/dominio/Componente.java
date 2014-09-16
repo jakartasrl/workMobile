@@ -16,8 +16,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class Componente extends Descriptible {
 
-	private static final long serialVersionUID = 4380535438348190104L;
-
 	private Clasificador clasificador;
 	private Componente componentePadre;
 	private Componente componenteHijo;

@@ -14,8 +14,6 @@ import com.jkt.dominio.IDescriptible;
  */
 public class Impuesto extends Descriptible implements IDescriptible{
 
-	private static final long serialVersionUID = -7825370624771296086L;
-
 	private List<CategoriaImpuesto> categorias = new ArrayList<CategoriaImpuesto>();
 
 	private String comportamiento;

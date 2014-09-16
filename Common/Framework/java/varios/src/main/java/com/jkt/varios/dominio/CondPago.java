@@ -22,8 +22,6 @@ import com.jkt.varios.validadores.ValidadorCondPago;
  */
 public class CondPago extends Descriptible implements IDescriptible{
 
-	private static final long serialVersionUID = -9158567606744309528L;
-	
 	@NotNull
 	private boolean baseFechaFactura;
 

@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class Descriptible extends PersistentEntity {
 
-	private static final long serialVersionUID = -6218376283846355915L;
-	
 	@NotNull(message="El campo codigo no puede ser nulo.")
 	@NotBlank(message="El campo codigo no puede estar vacio.")
 	private String codigo;
