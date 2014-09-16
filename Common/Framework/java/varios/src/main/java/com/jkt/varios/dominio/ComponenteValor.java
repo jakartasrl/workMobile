@@ -18,8 +18,16 @@ public class ComponenteValor extends Descriptible {
 	/*
 	 * Metodos para realizar la logica de seteo de los hijos valores.
 	 */
-	private int codigoInterno,codigoInternoPadre;
+	private int codigoInterno,codigoInternoPadre, idComponente;
 	
+	public int getIdComponente() {
+		return idComponente;
+	}
+
+	public void setIdComponente(int idComponente) {
+		this.idComponente = idComponente;
+	}
+
 	public int getCodigoInterno() {
 		return codigoInterno;
 	}

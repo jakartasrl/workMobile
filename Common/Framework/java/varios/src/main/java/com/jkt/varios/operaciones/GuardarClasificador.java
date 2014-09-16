@@ -63,6 +63,9 @@ public class GuardarClasificador extends Operation {
 				//Tengo componente y componentePadre.Establezco la relacion.
 				componente.setComponentePadre(componentePadre);
 				componentePadre.setComponenteHijo(componente);
+				
+				//Seteo el clasificador, por mas que sea de nivel N, pertenece al mismo clasificador
+				componente.setClasificador(clasificador);
 			}
 			
 		}

@@ -168,7 +168,6 @@
 		
 			<campoSalida value="oid_CompClasif" target="id" />			
 		
-						
 			<campoSalida value="oid_Nivel" target="nivel" />			
 			<campoSalida value="oid_NivelPadre" target="nivelSuperior" />
 			<campoSalida value="Codigo" target="codigo" />
@@ -199,26 +198,43 @@
 	<!-- GUARDAR LOS VALORES DE UN CLASIFICADOR -->
 	<operacion name="GuardarValoresClasificador" clase="com.jkt.varios.operaciones.GuardarValoresClasificador">
 
-		<input name="mtClasificador" keyName="objeto" clase="com.jkt.varios.dominio.Componente" fieldID='oid_CompClasif'>
+
+		<input name="mtValoresClasificador" keyName="objeto" clase="com.jkt.varios.dominio.ComponenteValor" fieldID='oid_ValorClasif'>
 			<campoEntrada>
+<!-- 					Campo transiente para recuperar el componente donde se guardan todos los valores -->
+					<campoEntrada name="oid_componente" clase="String" metodo="setIdComponente" />
+
+<!-- 					Campos transientes para ordenar los nodos -->
+<!-- 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" /> -->
+<!-- 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" /> -->
+					
+<!-- 					Campos propios del componente valor, persistentes -->
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+
+
+<!-- 		<input name="mtClasificador" keyName="objeto" clase="com.jkt.varios.dominio.Componente" fieldID='oid_CompClasif'> -->
+<!-- 			<campoEntrada> -->
 
 <!-- 				No vienen los datos de componente, pero si sus hijos -->
-				<campoEntrada name="mtValoresClasificador" metodo="agregarValor" clase="com.jkt.varios.dominio.ComponenteValor" fieldID="oid_ValorClasif">
+<!-- 				<campoEntrada name="mtValoresClasificador" metodo="agregarValor" clase="com.jkt.varios.dominio.ComponenteValor" fieldID="oid_ValorClasif"> -->
 
 <!-- 					<campoEntrada name="oid_ValorClasif" clase="String" metodo="" /> -->
 <!-- 					<campoEntrada name="oid_Clasificador" clase="String" metodo="" /> -->
 <!-- 					<campoEntrada name="oid_Valor" clase="String" metodo="" /> -->
 <!-- 					<campoEntrada name="oid_ValorPadre" clase="String" metodo="" /> -->
 
-					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
-					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
+<!-- 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" /> -->
+<!-- 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" /> -->
 					
-					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-				</campoEntrada>
+<!-- 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" /> -->
+<!-- 					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" /> -->
+<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+<!-- 				</campoEntrada> -->
 				
-			</campoEntrada>
+<!-- 			</campoEntrada> -->
 		</input>
 		
 		<forms>
