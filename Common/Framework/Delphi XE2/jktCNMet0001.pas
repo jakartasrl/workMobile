@@ -513,8 +513,8 @@ end;
 
 procedure TjktDriver.DoGuardar;
 begin
-  if not Assigned(FOperacionSave)
-     then  raise Exception.Create('No esta asignada la propiedad Operacion Save');
+  if not Assigned(FOperacionSave) then
+    raise Exception.Create('No esta asignada la propiedad Operacion Save');
 
   FOperacionSave.executeGuardar(FDataSetCab);
 end;
@@ -535,7 +535,8 @@ begin
 
       if (not DataSet.Active) then
         DataSet.Open;
-      DataSet.Append;
+
+//      DataSet.Append;
     end;
 end;
 

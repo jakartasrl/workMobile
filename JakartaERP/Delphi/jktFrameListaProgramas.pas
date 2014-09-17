@@ -180,6 +180,12 @@ begin
   else if Sender.Tag = 7 then
     // Maestro de Clientes
     NombrePrograma := 'TFNCli0001'
+  else if Sender.Tag = 14 then
+    // Maestro de Clasificadores
+    NombrePrograma := 'TFNCla0001'
+  else if Sender.Tag = 15 then
+    // Maestro de Valores de Clasificador
+    NombrePrograma := 'TFNCla0002'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
