@@ -174,6 +174,14 @@ inherited FNCla0002: TFNCla0002
       OptionsView.Headers = False
       RootValue = -1
       TabOrder = 0
+      object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
+        DataBinding.FieldName = 'oid_CompClasif'
+        Position.ColIndex = 5
+        Position.RowIndex = 0
+        Position.BandIndex = 0
+        Summary.FooterSummaryItems = <>
+        Summary.GroupFooterSummaryItems = <>
+      end
       object cxDBTreeList2oid_Nivel: TcxDBTreeListColumn
         Visible = False
         DataBinding.FieldName = 'oid_Nivel'
@@ -382,6 +390,7 @@ inherited FNCla0002: TFNCla0002
     Left = 536
     Top = 64
     object mtClasificadoroid_Clasificador: TIntegerField
+      Tag = 1
       FieldName = 'oid_Clasificador'
     end
     object mtClasificadorCodigo: TStringField
@@ -451,9 +460,11 @@ inherited FNCla0002: TFNCla0002
     Left = 80
     Top = 296
     object mtValoresClasificadoroid_ValorClasif: TIntegerField
+      Tag = 1
       FieldName = 'oid_ValorClasif'
     end
     object mtValoresClasificadoroid_CompClasif: TIntegerField
+      Tag = 1
       FieldName = 'oid_CompClasif'
     end
     object mtValoresClasificadorcodInterno: TIntegerField
@@ -465,14 +476,17 @@ inherited FNCla0002: TFNCla0002
       FieldName = 'codInternoPadre'
     end
     object mtValoresClasificadorCodigo: TStringField
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object mtValoresClasificadorDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtValoresClasificadorActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
