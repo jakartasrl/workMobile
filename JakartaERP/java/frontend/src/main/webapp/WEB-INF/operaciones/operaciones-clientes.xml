@@ -138,9 +138,10 @@
 		<output name="cliente" tableName="mtCliente">
 			<campoSalida value="oid_Cliente" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-<!-- 			<campoSalida value="oid_CondPago" target="" /> -->
-<!-- 			<campoSalida value="CodCondPago" target="" /> -->
-<!-- 			<campoSalida value="DescCondPago" target="" /> -->
+			<campoSalida value="Telefonos" target="telefono" />			
+			<campoSalida value="oid_CondPago" target="condPago.id" />
+			<campoSalida value="CodCondPago" target="condPago.codigo" />
+			<campoSalida value="DescCondPago" target="condPago.descripcion" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 		
@@ -155,7 +156,6 @@
 			<campoSalida value="oid_Pais" target="direccionLegal.pais.id" />
 			<campoSalida value="CodPais" target="direccionLegal.pais.codigo" />
 			<campoSalida value="DescPais" target="direccionLegal.pais.descripcion" />
-<!-- 			<campoSalida value="Telefonos" target="" /> -->
 			<campoSalida value="PersonaJuridica" target="personaJuridica" />
 			<campoSalida value="Cuit" target="cuit" />
 		</output>
@@ -197,7 +197,7 @@
 			<campoSalida value="oid_Vendedor" target="vendedorComercial.id" />
 			<campoSalida value="CodVendedor" target="vendedorComercial.codigo" />
 			<campoSalida value="DescVendedor" target="vendedorComercial.descripcion" />
-<!-- 			<campoSalida value="Telefonos" target="" /> -->
+			<campoSalida value="Telefonos" target="telefono" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
@@ -213,7 +213,7 @@
 			<campoSalida value="CodProvincia" target="direccion.provincia.codigo" />
 			<campoSalida value="DescProvincia" target="direccion.provincia.descripcion" />
 			<campoSalida value="HorariosEntrega" target="diasEntrega" />
-<!-- 			<campoSalida value="Telefonos" target="" /> -->
+			<campoSalida value="Telefonos" target="telefono" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 

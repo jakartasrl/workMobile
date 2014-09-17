@@ -73,6 +73,8 @@ type
     cxDBTreeList1Codigo: TcxDBTreeListColumn;
     cxDBTreeList1Descripcion: TcxDBTreeListColumn;
     cxDBTreeList1Activo: TcxDBTreeListColumn;
+    mtComponentesClasificadoroid_CompClasif: TIntegerField;
+    cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn;
     procedure PopupMenuPopup(Sender: TObject);
     procedure menAnadirMismoNivelClick(Sender: TObject);
     procedure menAnadirSubNivelClick(Sender: TObject);
