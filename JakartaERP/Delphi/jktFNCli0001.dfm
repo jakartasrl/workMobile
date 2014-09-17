@@ -16,7 +16,7 @@ inherited FNCli0001: TFNCli0001
     ExplicitHeight = 500
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 67
-      Top = -227
+      Top = -652
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -27,7 +27,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 321
-      Top = -227
+      Top = -652
       DataBinding.DataField = 'RazonSocial'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -38,7 +38,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 101
-      Top = -152
+      Top = -577
       DataBinding.DataField = 'Direccion'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -49,7 +49,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 101
-      Top = -125
+      Top = -550
       DataBinding.DataField = 'Localidad'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -60,7 +60,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 101
-      Top = -98
+      Top = -523
       DataBinding.DataField = 'CodPostal'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -71,7 +71,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 166
-      Top = -71
+      Top = -496
       DataBinding.DataField = 'DescProvincia'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -82,7 +82,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit9: TcxDBTextEdit
       Left = 166
-      Top = -44
+      Top = -469
       DataBinding.DataField = 'DescPais'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -93,7 +93,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 101
-      Top = -71
+      Top = -496
       DataBinding.DataField = 'CodProvincia'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -110,7 +110,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 101
-      Top = -44
+      Top = -469
       DataBinding.DataField = 'CodPais'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -127,7 +127,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 81
-      Top = -5
+      Top = -430
       DataBinding.DataField = 'Telefonos'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -138,7 +138,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 81
-      Top = 22
+      Top = -403
       DataBinding.DataField = 'Cuit'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -149,7 +149,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 112
-      Top = 49
+      Top = -376
       DataBinding.DataField = 'PersonaJuridica'
       DataBinding.DataSource = dsCliente
       Properties.Alignment = taLeftJustify
@@ -161,7 +161,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 34
-      Top = 94
+      Top = -331
       Width = 391
       Height = 200
       TabOrder = 12
@@ -209,7 +209,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = 399
+      Top = -26
       Width = 391
       Height = 200
       TabOrder = 15
@@ -248,7 +248,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxButtonEdit1: TcxDBButtonEdit
       Left = 122
-      Top = 342
+      Top = -83
       DataBinding.DataField = 'CodCondPago'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -265,7 +265,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxTextEdit1: TcxDBTextEdit
       Left = 207
-      Top = 342
+      Top = -83
       DataBinding.DataField = 'DescCondPago'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -276,7 +276,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 635
+      Top = 210
       Width = 491
       Height = 288
       TabOrder = 16
@@ -459,6 +459,7 @@ inherited FNCli0001: TFNCli0001
       object lvSucursales: TcxGridLevel
         Caption = 'Sucursales'
         GridView = tvSucursales
+        MaxDetailHeight = 200
         Options.DetailTabsPosition = dtpTop
         object lvDomiciliosEntrega: TcxGridLevel
           Caption = 'Domicilios de Entrega'
@@ -1594,5 +1595,31 @@ inherited FNCli0001: TFNCli0001
     ServiceCaller = Service
     Left = 640
     Top = 176
+  end
+  object mtSujImp: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 256
+    Top = 232
+  end
+  object dsSujImp: TDataSource
+    DataSet = mtSujImp
+    Left = 296
+    Top = 232
   end
 end

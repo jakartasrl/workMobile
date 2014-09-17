@@ -242,6 +242,8 @@ type
     Help: TjktHelpGenerico;
     OperTraerClasifCliente: TjktOperacion;
     OperTraerClasifSucur: TjktOperacion;
+    mtSujImp: TjktMemTable;
+    dsSujImp: TDataSource;
   private
     { Private declarations }
   public

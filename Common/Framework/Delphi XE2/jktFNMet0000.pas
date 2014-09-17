@@ -311,9 +311,8 @@ begin
 
   f := TfrmChild(fc.Create(Self));
   f.InicializarChild(Self.alActions, paramName);
-  if titulo <> ''
-     then   f.Caption := titulo;
-
+  if titulo <> '' then
+    f.Caption := titulo;
 end;
 
 procedure TfrmMainForm.acCancelExecute(Sender: TObject);

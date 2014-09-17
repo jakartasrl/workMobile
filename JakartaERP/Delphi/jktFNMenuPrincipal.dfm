@@ -129,7 +129,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Width = 31
         Height = 31
         TabOrder = 4
-        OnKeyDown = txtPasswordKeyDown
       end
     end
   end
