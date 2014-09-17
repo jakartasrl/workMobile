@@ -14,8 +14,6 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Direccion extends PersistentEntity {
 	
-	private static final long serialVersionUID = -8514592739178919248L;
-
 	@NotBlank(message="El nombre no puede ser vacio.")
 	private String nombre;
 

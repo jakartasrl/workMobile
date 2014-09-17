@@ -9,7 +9,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class ZonaComercial extends Descriptible {
 
-	private static final long serialVersionUID = 7824980980237749953L;
 	private Vendedor vendedor;
 
 	public Vendedor getVendedor() {

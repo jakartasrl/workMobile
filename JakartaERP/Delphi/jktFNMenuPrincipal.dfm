@@ -156,10 +156,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -332,10 +328,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318
@@ -483,6 +475,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.IsFontAssigned = True
           TabOrder = 5
           Transparent = True
+          OnKeyDown = txtPasswordKeyDown
           Width = 161
         end
         object EHost: TcxTextEdit
@@ -497,6 +490,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.IsFontAssigned = True
           TabOrder = 1
           Text = 'EHost'
+          OnKeyDown = txtPasswordKeyDown
           Width = 147
         end
         object EPort: TcxTextEdit
@@ -511,6 +505,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.IsFontAssigned = True
           TabOrder = 2
           Text = 'EPort'
+          OnKeyDown = txtPasswordKeyDown
           Width = 91
         end
         object EAplicacion: TcxTextEdit
@@ -525,6 +520,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.IsFontAssigned = True
           TabOrder = 3
           Text = 'EAplicacion'
+          OnKeyDown = txtPasswordKeyDown
           Width = 297
         end
         object EServlet: TcxTextEdit
@@ -539,6 +535,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           Style.IsFontAssigned = True
           TabOrder = 4
           Text = 'EServlet'
+          OnKeyDown = txtPasswordKeyDown
           Width = 297
         end
       end

@@ -10,8 +10,6 @@ import com.jkt.varios.dominio.ComponenteValor;
  */
 public class ClienteSucursalClasificador extends PersistentEntity {
 
-	private static final long serialVersionUID = -3091611891807568449L;
-
 	private ClienteSucursal clienteSucursal;
 	private ComponenteValor componenteValor;
 

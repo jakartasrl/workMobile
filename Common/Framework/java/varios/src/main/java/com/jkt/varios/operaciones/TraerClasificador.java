@@ -13,37 +13,31 @@ import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 
 /**
- * Esta operacion recupera el clasificador con todos sus componentes, y ademas cada componente con sus hijos.
- * 
+ * <p>Esta operacion recupera el clasificador con todos sus componentes, y ademas cada componente con sus hijos.
+ * </p>
  * @author Leonel Suarez - Jakarta SRL
  */
 @OperacionBean
 public class TraerClasificador extends Operation {
 
+	private static final String OID_FIELD = "oid".toUpperCase();
+
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		
-		String id=(String) aParams.get("oid".toUpperCase());
-		Clasificador clasificador=(Clasificador) this.serviceRepository.getByOid(Clasificador.class, Long.valueOf(id).longValue());
+		String id=(String) aParams.get(OID_FIELD);
+		Clasificador clasificador=(Clasificador) obtener(Clasificador.class, id);
 		
 		if (clasificador==null) {
-			throw new EntityNotFoundException("No existe el clasificador solicitado");
+			throw new EntityNotFoundException("No existe el clasificador solicitado.");
 		}
 		
 		notificarObjecto(Notificacion.getNew("clasificador", clasificador));
 		
 		Componente componente = clasificador.getComponentePadre();
-		int nivel=0;
+		int nivel=1;
 		while(componente!=null){
-
-//			if (nivel>0) {
-//				componente.setNivelSuperior(nivel-1);
-//			}
-//			
-			componente.setNivelSuperior(nivel-1);
-			
-			
-			componente.setNivel(nivel++); //Seteo el valor actual y luego es aumentado.
+			componente.setCodigoInternoPadre(nivel-1);
+			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
 			
 			notificarObjecto(Notificacion.getNew("componentes", componente));
 			componente=componente.getComponenteHijo();

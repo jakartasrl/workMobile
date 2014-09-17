@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-abstract public class PersistentEntity implements Serializable {
+abstract public class PersistentEntity {
 
 	private long id;
 	private Date creationDate;

@@ -19,6 +19,24 @@ public class CategoriaImpuesto extends Descriptible {
 	public void setImpuesto(Impuesto impuesto) {
 		this.impuesto = impuesto;
 	}
+	
+	public boolean equals(Object o){
+	    if(o == null)                return false;
+	    if(!(o instanceof CategoriaImpuesto)) return false;
 
+	    CategoriaImpuesto catImp=(CategoriaImpuesto) o;
+	    
+	    if (catImp.getId()==0) return false;
+        if ( !(catImp.getId()==getId())) return false;
+	    
+	    return true;
+	}
+	
+	public int hashCode() {
+		int result;
+		result = (int) (29 * getId());
+		return result;
+	}
+	
 }
 

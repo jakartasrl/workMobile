@@ -27,6 +27,7 @@ public class TraerCliente extends Operation {
 	private static final String IDENTIFICADOR = "oid".toUpperCase();
 
 	private static final String WRITER_CLIENTE = "cliente";
+	private static final String WRITER_SUJ_IMP = "sujetoImpositivo";
 	private static final String WRITER_INSCRIPCIONES = "inscripciones";
 	private static final String WRITER_CLASIFICADORES_CLIENTES = "clasificadoresCliente";
 	private static final String WRITER_SUCURSALES_CLIENTE = "sucursalesCliente";
@@ -35,24 +36,25 @@ public class TraerCliente extends Operation {
 	private static final String WRITER_CLASIFICADORES_SUCURSAL = "clasificadoresSucursales";
 
 
+
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		String oid = (String) aParams.get(IDENTIFICADOR);
-		
-		Cliente cliente = (Cliente) obtener(Cliente.class, Long.valueOf(oid).longValue());
+		Cliente cliente = (Cliente) obtener(Cliente.class, (String) aParams.get(IDENTIFICADOR));
 		mostrarCliente(cliente);
 		mostrarClasificadores(cliente);
-		mostrarInscripcions(cliente);
+		mostrarInscripciones(cliente);
 		mostrarSucursales(cliente);
 		
 	}
 	
 	
 	/**
-	 * Muestra un simple cliente en la salida de la operacion.
+	 * <p>Muestra un simple cliente en la salida de la operacion.</p>
+	 * <p>Ademas de mostrar datos de clientes, muestra datos del sujeto impositivo</p>
 	 */
 	private void mostrarCliente(Cliente cliente) {
 		notificarObjecto(Notificacion.getNew(WRITER_CLIENTE, cliente));
+		notificarObjecto(Notificacion.getNew(WRITER_SUJ_IMP, cliente.getSujetoImpositivo()));
 	}
 
 	/**
@@ -111,7 +113,7 @@ public class TraerCliente extends Operation {
 	/**
 	 * Muestra todas las inscripciones de un sujeto impositivo
 	 */
-	private void mostrarInscripcions(Cliente cliente) {
+	private void mostrarInscripciones(Cliente cliente) {
 		SujetoImpositivo sujetoImpositivo = cliente.getSujetoImpositivo();
 		List<InscripcionImpositiva> inscripcionesImpositivas = sujetoImpositivo.getInscripcionesImpositivas();
 		for (InscripcionImpositiva inscripcionImpositiva : inscripcionesImpositivas) {

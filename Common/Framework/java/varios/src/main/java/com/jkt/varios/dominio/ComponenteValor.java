@@ -15,8 +15,39 @@ import com.jkt.dominio.Descriptible;
  */
 public class ComponenteValor extends Descriptible {
 
-	private static final long serialVersionUID = 7388198401142500855L;
+	/*
+	 * Metodos para realizar la logica de seteo de los hijos valores.
+	 */
+	private int codigoInterno,codigoInternoPadre, idComponente;
+	
+	public int getIdComponente() {
+		return idComponente;
+	}
 
+	public void setIdComponente(int idComponente) {
+		this.idComponente = idComponente;
+	}
+
+	public int getCodigoInterno() {
+		return codigoInterno;
+	}
+
+	public void setCodigoInterno(int codigoInterno) {
+		this.codigoInterno = codigoInterno;
+	}
+
+	public int getCodigoInternoPadre() {
+		return codigoInternoPadre;
+	}
+
+	public void setCodigoInternoPadre(int codigoInternoPadre) {
+		this.codigoInternoPadre = codigoInternoPadre;
+	}
+	/*
+	 * Metodos para realizar la logica de seteo de los hijos valores.
+	 */
+	
+	
 //	@NotNull
 	private Componente componente;
 	private ComponenteValor componenteValorPadre;

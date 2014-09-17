@@ -30,27 +30,7 @@
 ]>
 
 <entidades>
-	<entidad nombre="empresa">
-
-		<operacion operSave="GuardarEmpresa" operTraer="TraerEmpresas" />
 		
-		<campos>
-			<campo fieldName="oid_empresa" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_empresa"  />
-			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo" />
-			<campo fieldName="RazonSocial" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Razon Social"  />
-			<campo fieldName="UrlDB" tipo="String" longitud="60" visible="true" readOnly="false" orden="4" label="UrlDB"  />
-			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo"   />
-		</campos>
-
-		<validadores>
-			<validador fieldName="Codigo" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="RazonSocial" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="UrlDB" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-		</validadores>
-		
-	</entidad>
-	
-	
 	
 <entidad nombre="TablaValidacionCaracProducto">
 
@@ -92,6 +72,110 @@
 		</validadores>
 		
 	</entidad>
+
+<entidad nombre="Idioma">
+
+		<operacion operSave="GuardarIdioma" operTraer="TraerIdioma" />
+		
+		<campos>
+			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+
+
+
+<entidad nombre="Pais">
+
+		<operacion operSave="GuardarPais" operTraer="TraerPais" />
+		
+		<campos>
+			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+
+<entidad nombre="Provincia">
+<operacion operSave="GuardarProvincia" operTraer="TraerProvincia" />
+		
+		<campos>
+			<campo fieldName="oid_prov" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="cod_pais"  tipo="String" longitud="10" visible="true" readOnly="false" orden="5" label="Pais" tag="0"/>
+			<campo fieldName="des_pais"  tipo="String" longitud="60" visible="true" readOnly="true" orden="6" label="Descripcion" tag="0" />
+			<campo fieldName="oid_pais"  tipo="Integer" longitud="0" visible="false" readOnly="false" orden="7" label="oid"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="8" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="cod_pais"   tipoValidacion="Existente" entidad="Pais" oidName="oid_pais" descrName="des_pais" />
+		</validadores>
+		
+	</entidad>
+
+
+<entidad nombre="Vendedor">
+
+		<operacion operSave="GuardarVendedor" operTraer="TraerVendedor" />
+		
+		<campos>
+			<campo fieldName="oid"       tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
+			<campo fieldName="codigo"    tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="apellido"  tipo="String" longitud="40" visible="true" readOnly="false" orden="3" label="Apellido"  />
+			<campo fieldName="nombres"   tipo="String" longitud="40" visible="true" readOnly="false" orden="4" label="Nombres"  />
+			<campo fieldName="mail"      tipo="String" longitud="40" visible="true" readOnly="false" orden="5" label="Mail"  />
+			<campo fieldName="telefono"  tipo="String" longitud="20" visible="true" readOnly="false" orden="6" label="Telefono"  />
+			<campo fieldName="Activo"    tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="codigo"       tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="apellido"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="nombres"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+
+
+<entidad nombre="Representante">
+
+		<operacion operSave="GuardarRepresentante" operTraer="TraerRepresentante" />
+		
+		<campos>
+			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="40" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="mail"      tipo="String" longitud="40" visible="true" readOnly="false" orden="4" label="Mail"  />
+			<campo fieldName="telefono"  tipo="String" longitud="20" visible="true" readOnly="false" orden="5" label="Telefono"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="6" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+
 
 	
 </entidades>

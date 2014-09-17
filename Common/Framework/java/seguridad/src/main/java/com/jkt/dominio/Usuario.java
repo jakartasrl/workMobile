@@ -19,9 +19,6 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	@NotBlank(message="No puede estar vacio el codigo.")
 	private String codigo;
 	
-	@NotBlank(message="El nombre de usuario no puede ser vacio.")
-	private String userName;
-	
 	@NotBlank(message="Debe completar el nombre del usuario.")
 	private String nombres;
 	
@@ -94,14 +91,6 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 
 	public void addPassword(HistorialPassword password) {
 		this.historialPassword.add(password);
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public void ingresarNuevaPassword(HistorialPassword h) {

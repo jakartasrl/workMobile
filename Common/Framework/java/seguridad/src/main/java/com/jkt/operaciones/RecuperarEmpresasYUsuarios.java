@@ -33,7 +33,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 				usuarios = serviceRepository.getAll(Usuario.class);
 		}else{
 			usuarios = new ArrayList<PersistentEntity>();
-			Usuario usuario= (Usuario) serviceRepository.getByOid(Usuario.class, Long.valueOf(oidEntity).longValue());
+			Usuario usuario= (Usuario) obtener(Usuario.class, oidEntity);
 			if (usuario==null) {
 				throw new EntityNotFoundException("No existe la entidad solicitada con el ID recibido.");
 			}

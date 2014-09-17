@@ -1,30 +1,22 @@
 package com.jkt.service;
 
+import static org.hibernate.criterion.Restrictions.eq;
+import static org.hibernate.criterion.Restrictions.ge;
+import static org.hibernate.criterion.Restrictions.gt;
+import static org.hibernate.criterion.Restrictions.le;
+import static org.hibernate.criterion.Restrictions.like;
+import static org.hibernate.criterion.Restrictions.lt;
+import static org.hibernate.criterion.Restrictions.ne;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-
-
-
-
-
-
-
-
-
-//import org.hibernate.criterion.Restrictions;
-import static org.hibernate.criterion.Restrictions.like;
-import static org.hibernate.criterion.Restrictions.eq;
-import static org.hibernate.criterion.Restrictions.ne;
-import static org.hibernate.criterion.Restrictions.ge;
-import static org.hibernate.criterion.Restrictions.le;
-import static org.hibernate.criterion.Restrictions.gt;
-import static org.hibernate.criterion.Restrictions.lt;
-
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +29,6 @@ import com.jkt.excepcion.ValidacionException;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.util.IRepositorioClases;
-import com.jkt.util.RepositorioClases;
 
 /**
  * Implementacion del servicio.
@@ -91,7 +82,20 @@ public class ServiceRepository implements IServiceRepository {
 
 	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException {
 		ejecutarValidacionDeNegocio(entity);
-		getSession().save(entity);
+		try{
+			getSession().save(entity);
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+			constraintViolations.size();
+			StringBuffer buffer=new StringBuffer();
+			String message = null;
+			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+				buffer.append(constraintViolation.getMessage());
+//				buffer.append(constraintViolation.getMessage().concat("\n"));
+				break;//Solo el primer mensaje es mostrado, por cuestiones del 'enter' en los clientes, no se podia pasar en hexa o \n..
+			}
+			throw new ValidacionException(buffer.toString());
+		}
 		return entity;
 	}
 
@@ -117,7 +121,7 @@ public class ServiceRepository implements IServiceRepository {
 		}catch (IllegalArgumentException e) {
 			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
 		}catch (InvocationTargetException e) {
-			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+			throw new ValidacionException(e.getTargetException().getMessage());
 		}
 	}
 
@@ -130,7 +134,6 @@ public class ServiceRepository implements IServiceRepository {
 	
 	public List<PersistentEntity> getAll(Class clazz) throws Exception {
 		Criteria criteria = createCriteria(clazz);
-//		criteria.add(getRestrictionForRetrieveActive());
 		return criteria.list();
 	}
 
@@ -144,28 +147,19 @@ public class ServiceRepository implements IServiceRepository {
 	
 	public PersistentEntity getUniqueByProperty(Class className, String propertyName,String value) {
 		Criteria criteria = createCriteria(className);
-
 		criteria.add(eq(propertyName, value));
-//		criteria.add(getRestrictionForRetrieveActive());
-		
 		return (PersistentEntity) criteria.uniqueResult();
 	}
 
 	public PersistentEntity getUniqueByProperty(Class className,String propertyName, Long value) {
 		Criteria criteria = createCriteria(className);
-		
 		criteria.add(eq(propertyName, value));
-//		criteria.add(getRestrictionForRetrieveActive());
-		
 		return (PersistentEntity) criteria.uniqueResult();
 	}
 
 	public List<PersistentEntity> getByProperty(Class className, String propertyName,String value) {
 		Criteria criteria = createCriteria(className);
-
-//		criteria.add(getRestrictionForRetrieveActive());
 		criteria.add(like(propertyName, value));
-		
 		return criteria.list();
 	}
 

@@ -107,6 +107,7 @@
 			<campoSalida value="readOnly" target="readOnly" />
 			<campoSalida value="orden" target="orden" />
 			<campoSalida value="label" target="label" />
+			<campoSalida value="tag" target="tag" />
 		</output>
 		
 		<output name="mtConfigValidador" tableName="mtConfigValidador">
@@ -212,7 +213,7 @@
 		
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
-			<campoSalida value="Descripcion" target="cadena2" />
+			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Cadena" target="cadena" />
 		</output>		
 			
@@ -230,7 +231,7 @@
 		<output name="resultado" tableName="TUsuarios">
 			<campoSalida value="oid_usuario" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 			<campoSalida value="Nombre" target="nombres" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Email" target="mail" />
@@ -250,7 +251,7 @@
 		<output name="TUsuarios" tableName="TUsuarios">
 			<campoSalida value="oid_usuario" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 			<campoSalida value="Nombre" target="nombres" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Email" target="mail" />
@@ -280,7 +281,7 @@
 		<output name="TUsuario" tableName="TUsuario">
 			<campoSalida value="oid_usuario" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 			<campoSalida value="Nombre" target="nombres" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Email" target="mail" />
@@ -338,7 +339,7 @@
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="RazonSocial" target="razonSocial" />
 			<campoSalida value="UrlDB" target="urlDB" />
-			<campoSalida value="Activo" target="activo" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

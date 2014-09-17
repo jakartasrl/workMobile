@@ -16,8 +16,6 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class InscripcionImpositiva extends PersistentEntity {
 
-	private static final long serialVersionUID = -409178696744353678L;
-
 	/*
 	 * ************************************************************************************************************
 	 * Variables de instancia

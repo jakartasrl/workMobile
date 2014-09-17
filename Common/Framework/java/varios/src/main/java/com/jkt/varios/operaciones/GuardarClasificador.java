@@ -1,15 +1,12 @@
 package com.jkt.varios.operaciones;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
@@ -21,69 +18,68 @@ import com.jkt.varios.dominio.Componente;
  */
 public class GuardarClasificador extends Operation {
 
-	private static final String OID_FIELD = "OID";
+	private static final String OID_FIELD = "objeto";
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-//		List objetoRecuperado = recuperarObjeto(aParams);
 		Clasificador clasificador=(Clasificador) aParams.get(OID_FIELD);
 		
 		if (clasificador==null) {
 			throw new EntityNotFoundException("No existe el clasificador buscado.");
 		}
 		
+		/*
+		 * Como primer paso, recibo una lista de componentes, y a los mismos los pongo en un mapa, usando como key su CODIGO_INTERNO,
+		 * que nos servira luego para definir las relaciones de padres e hijos.
+		 */
+		
 		List<Componente> componentes = clasificador.getComponentes();
 
 		Map<String,Componente> mapaDesordenado=new HashMap<String, Componente>();
 		for (Componente componente : componentes) {
-			mapaDesordenado.put(String.valueOf(componente.getNivel()), componente);
-		}
-		
-		Entry<String, Componente> entry;
-		for(Iterator<Entry<String, Componente>> iterator = mapaDesordenado.entrySet().iterator(); iterator.hasNext();){
-			entry = (Entry<String, Componente>) iterator.next();
+			mapaDesordenado.put(String.valueOf(componente.getCodigoInterno()), componente);
+			
+			//Rompo las relaciones antiguas!!, si no las rompo puede quedar inconsistente algo, por ejemplo:
+			//Desde el cliente recibo dos componentes, que ya estan en la base, si el ultimo hijo de estos componentes tenia 50 hijos mas,
+			//esta relacion sigue quedando, y tendria un arbol de un solo hijo, de 52~ elementos...
+			
+			componente.setComponenteHijo(null);
+			componente.setComponentePadre(null);
 			
 		}
 		
-		
-		/*
-		Clasificador clasificador=(Clasificador) objetoRecuperado.get(0);
-
-		List<Componente> componentes = clasificador.getComponentes();
-		
-		if (componentes!= null && !componentes.isEmpty()) {
+		Componente primerComponente=null,componentePadre=null;
+		int nivelSuperior;
+		for (Componente componente : componentes) {
+			nivelSuperior = componente.getCodigoInternoPadre();
 			
-			Collections.sort(componentes, new Comparator() {
-				Componente v1,v2;
-				public int compare(Object o1, Object o2) {
-					v1=(Componente) o1;
-					v2=(Componente) o2;
-					return new Integer(v1.getNivel()).compareTo(new Integer(v2.getNivel()));
+			if (nivelSuperior==0) {
+				//Si no tiene nivel superior, lo seteo como unico hijo del clasificador
+				primerComponente=componente;
+			}else{
+				//si tiene padres, seteo la relacion padre e hijo
+				componentePadre=mapaDesordenado.get(String.valueOf(nivelSuperior));
+				
+				if (componentePadre==null) {
+					throw new JakartaException("No se encuentra el componente padre en la jerarquia.");
 				}
-			});
-			
-			//Llega la lista ordenada.Lo que resta es ir agregando en la lista ordenada los elementos.
-			Componente primerComponente = componentes.get(0);
-			clasificador.setComponentePadre(primerComponente);
-			primerComponente.setClasificador(clasificador);
-	
-			Componente componenteAux=primerComponente;
-			Componente siguienteComponente;
-			for (int i = 1; i < componentes.size(); i++) {
-				siguienteComponente=componentes.get(i);
 				
-				componenteAux.setComponenteHijo(siguienteComponente);
-				siguienteComponente.setComponentePadre(componenteAux);
+				//Tengo componente y componentePadre.Establezco la relacion.
+				componente.setComponentePadre(componentePadre);
+				componentePadre.setComponenteHijo(componente);
 				
-				componenteAux=siguienteComponente;
+				//Seteo el clasificador, por mas que sea de nivel N, pertenece al mismo clasificador
+				componente.setClasificador(clasificador);
 			}
-	
-			//Una vez armado todo el clasificador, lo persisto.
-			serviceRepository.save(clasificador);
+			
 		}
 		
-		*/
+		if (primerComponente==null) {
+			throw new JakartaException("El clasificador debe tener como mínimo un componente.");
+		}
+		
+		clasificador.setComponentePadre(primerComponente);//Seteo la relacion entre clasificador y componente.Este componente a su vez tiene o no un unico hijo, y así sucesivamente.
+		guardar(clasificador);
 	}
 
 }

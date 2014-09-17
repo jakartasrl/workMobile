@@ -1,17 +1,6 @@
 package com.jkt.persistencia;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Map;
-
-
-
-
-
-
-
-
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.ValidacionException;
@@ -28,11 +17,12 @@ import com.jkt.util.IRepositorioClases;
 public interface IServiceRepository {
 
 	/**
-	 * Guarda una entidad
-	 * @param entity
+	 * Guarda una entidad.
+	 * 
+	 * @param entity a guardar
 	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws IllegalAccessException  
+	 * @throws InstantiationException  
 	 * @throws ClassNotFoundException 
 	 */
 	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;

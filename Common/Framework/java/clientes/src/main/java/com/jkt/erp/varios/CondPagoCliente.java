@@ -15,8 +15,6 @@ import com.jkt.varios.dominio.CondPago;
  */
 public class CondPagoCliente extends PersistentEntity {
 
-	private static final long serialVersionUID = 6573920058882410427L;
-
 	private Cliente cliente;
 	private Date fechaVigencia;
 

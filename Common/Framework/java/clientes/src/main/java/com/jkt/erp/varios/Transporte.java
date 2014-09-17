@@ -9,6 +9,4 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Transporte extends PersistentEntity {
 
-	private static final long serialVersionUID = -6005644573459160833L;
-
 }

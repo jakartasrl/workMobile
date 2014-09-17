@@ -157,6 +157,7 @@ procedure TframeListaProgramas.OnButtonClick(Sender: TdxTileControlItem);
 var
   NombrePrograma: string;
   parametroInicial: string;
+  titulo          :string;
 begin
   // aca abrimos los Forms (los Programas)
 
@@ -164,6 +165,7 @@ begin
 
   NombrePrograma   := '';
   parametroInicial := '';
+  titulo := '';
 
   if Sender.Tag = 6 then
     // Maestro de Empresas
@@ -191,16 +193,54 @@ begin
     begin
        NombrePrograma := 'TFNUti0001';
        parametroInicial:= 'TablaValidacionCaracProducto' ;
+       titulo :=  'ABM Tablas de Validacion Caracteristicas de Producto';
     end
   else if Sender.Tag = 11 then
     // Maestro de Caracteristicas
     begin
        NombrePrograma := 'TFNUti0001';
        parametroInicial:= 'CaracProducto' ;
+       titulo :=  'ABM  Caracteristicas de Producto';
+    end
+  else if Sender.Tag = 14 then
+    // Maestro de Idiomas
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Idioma' ;
+       titulo :=  'ABM de Idiomas';
+    end
+    else if Sender.Tag = 15 then
+    // Maestro de Paises
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Pais' ;
+       titulo :=  'ABM de Paises';
+    end
+
+    else if Sender.Tag = 16 then
+    // Maestro de Provincia
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Provincia' ;
+       titulo :=  'ABM de Provincias';
+    end
+    else if Sender.Tag = 17 then
+    // Maestro de Vendedor
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Vendedor' ;
+       titulo :=  'ABM de Vendedores';
+    end
+    else if Sender.Tag = 18 then
+    // Maestro de Representante
+    begin
+       NombrePrograma := 'TFNUti0001';
+       parametroInicial:= 'Representante' ;
+       titulo :=  'ABM de Representantes';
     end;
 
   frmMainForm.Show;
-  frmMainForm.AbrirPrograma(NombrePrograma, parametroInicial);
+  frmMainForm.AbrirPrograma(NombrePrograma, parametroInicial, titulo);
   // Oculto el Menu Principal
   TForm(Owner).Hide;
 end;

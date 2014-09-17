@@ -18,9 +18,16 @@ import com.jkt.dominio.Descriptible;
  */
 public class Clasificador extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
-
 	private String entidad;
+	private boolean obligatorio;
+	
+	public boolean isObligatorio() {
+		return obligatorio;
+	}
+
+	public void setObligatorio(boolean obligatorio) {
+		this.obligatorio = obligatorio;
+	}
 
 	/*
 	 * Es el componente de level cero?

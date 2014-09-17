@@ -6,8 +6,6 @@ import com.jkt.dominio.PersistentEntity;
 
 public class CategorizacionImpositiva extends PersistentEntity {
 
-	private static final long serialVersionUID = 8645783217723017341L;
-
 	/*
 	 * ******************************************************************************
 	 * Variables de instancia

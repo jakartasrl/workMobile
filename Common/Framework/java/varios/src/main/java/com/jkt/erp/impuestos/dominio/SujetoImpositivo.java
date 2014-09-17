@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Pais;
+import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los Sujetos Impositivos (clientes / proveedores y todo aquel que tenga CUIT)</p>
@@ -18,9 +20,6 @@ import com.jkt.varios.dominio.Direccion;
  */
 public class SujetoImpositivo extends PersistentEntity {
 
-	private static final long serialVersionUID = 1647999981281780385L;
-	
-	
 	/*
 	 * ********************************************************************************************
 	 * Variables de instancia
@@ -111,6 +110,45 @@ public class SujetoImpositivo extends PersistentEntity {
 	 * Helper methods
 	 */
 
+	
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
+	
+	public void setearProvincia(Provincia provincia){
+		generarDireccion();
+		this.direccionLegal.setProvincia(provincia);
+	}
+	
+	public void setearPais(Pais pais){
+		generarDireccion();
+		this.direccionLegal.setPais(pais);
+	}
+	
+	public void setearDireccion(String direccion){
+		generarDireccion();
+		this.direccionLegal.setDireccion(direccion);
+	}
+
+	public void setearLocalidad(String localidad){
+		generarDireccion();
+		this.direccionLegal.setLocalidad(localidad);
+	}
+	
+	
+	public void setearCodPostal(String cp){
+		generarDireccion();
+		this.direccionLegal.setCodigoPostal(cp);
+	}
+	
+	private void generarDireccion(){
+		if (this.direccionLegal==null) {
+			this.direccionLegal=new Direccion();
+		}
+	}
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
 	
 	
 }

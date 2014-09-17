@@ -12,8 +12,6 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Contacto extends PersistentEntity {
 
-	private static final long serialVersionUID = -4756046333804262702L;
-
 	@NotBlank
 	private String apellido;
 	

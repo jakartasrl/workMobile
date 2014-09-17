@@ -16,37 +16,55 @@ import com.jkt.dominio.Descriptible;
  */
 public class Componente extends Descriptible {
 
-	private static final long serialVersionUID = 4380535438348190104L;
-
 	private Clasificador clasificador;
 	private Componente componentePadre;
 	private Componente componenteHijo;
 	private List<ComponenteValor> valores=new ArrayList<ComponenteValor>();
 	
+	private int codigoInterno,codigoInternoPadre;
 	
 	
+	
+	public int getCodigoInterno() {
+		return codigoInterno;
+	}
+
+	public void setCodigoInterno(int codigoInterno) {
+		this.codigoInterno = codigoInterno;
+	}
+
+	public int getCodigoInternoPadre() {
+		return codigoInternoPadre;
+	}
+
+	public void setCodigoInternoPadre(int codigoInternoPadre) {
+		this.codigoInternoPadre = codigoInternoPadre;
+	}
+
 	/*
 	 * Metodo para agregar como corresponde el arbol en forma de lista enlazada.
 	 * 
 	 */
-	private boolean flag=false;
+//	private boolean flag=false;
 	public void agregarValor(ComponenteValor valor){
 		
 		//Ejecucion de este metodo como si fuese estatico, ejecutado una sola vez, la primera vez que es ejecutado el metodo agregarValor
 		//SETEA A TODOS EN DESACTIVADOS
-		if(!flag){
-			for (ComponenteValor valorActual : valores) {
-				valorActual.setActivo(false);
-			}
-			flag=true;
-		}
-		
-		if (!valores.contains(valor)) {
-			valores.add(valor);
-			valor.setComponente(this);
-		}else{
-			valor.setActivo(true);
-		}
+//		if(!flag){
+//			for (ComponenteValor valorActual : valores) {
+//				valorActual.setActivo(false);
+//			}
+//			flag=true;
+//		}
+//		
+//		if (!valores.contains(valor)) {
+//			valores.add(valor);
+//			valor.setComponente(this);
+//		}else{
+//			valor.setActivo(true);
+//		}
+		valores.add(valor);
+		valor.setComponente(this);
 	}
 
 	public List<ComponenteValor> getValores() {

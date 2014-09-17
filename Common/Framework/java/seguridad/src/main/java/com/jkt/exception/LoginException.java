@@ -9,7 +9,6 @@ import com.jkt.excepcion.JakartaException;
  */
 public class LoginException extends JakartaException {
 
-	private static final long serialVersionUID = -5786699136209301430L;
 	private static final String MESSAGE = "El acceso no fue garantizado.";
 
 	public LoginException(String string) {

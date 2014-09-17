@@ -257,7 +257,7 @@ type
     procedure SetColorScheme(const AName: string);
 
   public
-    procedure AbrirPrograma(ClassName: string; paramName: string);
+    procedure AbrirPrograma(ClassName: string; paramName: string; titulo: string);
 
     property MenuPrincipal: TForm read FMenuPrincipal write FMenuPrincipal;
     property ActiveChild: TfrmChild read GetActiveChild;
@@ -272,7 +272,7 @@ implementation
 {$R *.dfm}
 
 
-procedure TfrmMainForm.AbrirPrograma(ClassName: string; paramName: string);
+procedure TfrmMainForm.AbrirPrograma(ClassName: string; paramName: string; titulo: string);
 var
   fc : TFormClass;
   f : TfrmChild;
@@ -311,6 +311,8 @@ begin
 
   f := TfrmChild(fc.Create(Self));
   f.InicializarChild(Self.alActions, paramName);
+  if titulo <> '' then
+    f.Caption := titulo;
 end;
 
 procedure TfrmMainForm.acCancelExecute(Sender: TObject);
