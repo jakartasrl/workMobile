@@ -56,6 +56,7 @@ public class GuardarClasificador extends Operation {
 			if (nivelSuperior==0) {
 				//Si no tiene nivel superior, lo seteo como unico hijo del clasificador
 				primerComponente=componente;
+				primerComponente.setClasificador(clasificador);
 			}else{
 				//si tiene padres, seteo la relacion padre e hijo
 				componentePadre=mapaDesordenado.get(String.valueOf(nivelSuperior));
@@ -75,10 +76,10 @@ public class GuardarClasificador extends Operation {
 		}
 		
 		if (primerComponente==null) {
-			throw new JakartaException("El clasificador debe tener como mínimo un componente.");
+			throw new JakartaException("El clasificador debe tener como mï¿½nimo un componente.");
 		}
 		
-		clasificador.setComponentePadre(primerComponente);//Seteo la relacion entre clasificador y componente.Este componente a su vez tiene o no un unico hijo, y así sucesivamente.
+		clasificador.setComponentePadre(primerComponente);//Seteo la relacion entre clasificador y componente.Este componente a su vez tiene o no un unico hijo, y asï¿½ sucesivamente.
 		guardar(clasificador);
 	}
 

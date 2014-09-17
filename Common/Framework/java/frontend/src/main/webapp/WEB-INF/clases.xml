@@ -10,15 +10,15 @@
 ]>
 
 <elementos>
-	<elemento key="clasificador" value="com.jkt.varios.dominio.Clasificador" />
+
 	<elemento key="empresa" value="com.jkt.dominio.Empresa" validador="com.jkt.validadores.ValidadorEmpresa" />
 	<elemento key="usuario" value="com.jkt.dominio.Usuario" validador="com.jkt.validadores.ValidadorUsuario" />
 	<elemento key="condicionPago" value="com.jkt.varios.dominio.CondPago" validador="com.jkt.varios.validadores.ValidadorCondPago" />
 	<elemento key="impuesto" value="com.jkt.erp.impuestos.dominio.Impuesto" />
 	<elemento key="categoriasImpuesto" value="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" />
 	<elemento key="Pais" value="com.jkt.varios.dominio.Pais" />
-
 	<elemento key="clasificadores" value="com.jkt.varios.dominio.Clasificador" />
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
+	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
 
 </elementos>
