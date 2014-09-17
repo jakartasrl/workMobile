@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.erp.articulos.ProductoEquivUniMed" table="PRODUCTO_EQUIV_UNI_MED">
+
+		<id name="id" column="PRODUCTO_EQUIV_UNI_MED_ID">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="factor" column="FACTOR"/>
+
+		<many-to-one name="uniMedOrigen" class="com.jkt.varios.dominio.UnidadMedida" column="UNIDAD_ORIGEN_ID" cascade="none"></many-to-one>		
+		<many-to-one name="uniMedDestino" class="com.jkt.varios.dominio.UnidadMedida" column="UNIDAD_DESTINO_ID" cascade="none"></many-to-one>		
+
+	</class>
+</hibernate-mapping>

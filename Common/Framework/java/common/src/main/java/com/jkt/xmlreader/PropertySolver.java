@@ -7,15 +7,15 @@ import java.util.StringTokenizer;
 import com.jkt.excepcion.ExceptionDS;
 
 /**
- * Comentarios agregador por Leonel Suárez.
- * A falta de una buena documentación, se procede a explicar esta clase rapidamente.
+ * Comentarios agregador por Leonel Suï¿½rez.
+ * A falta de una buena documentaciï¿½n, se procede a explicar esta clase rapidamente.
  * 
  * Esta clase resuelve via reflection, y dado un objeto, un nombre de un metodo.
  * 
  * Puede definir metodos set, get, o complejos.
  * Q quiere decir complejos? que el patron de metodo solititado puede ser "descripcion.mensaje"
  * Esto significa que dado un objeto dado, al ejecutar el metodo {@link #resolveMethodInvocation("descripcion.mensaje", factura)}
- * Se pedira el objeto factura el metodo getDescripcion(), y al resultado de esta operación se le ejecutará el metodo getMensaje().
+ * Se pedira el objeto factura el metodo getDescripcion(), y al resultado de esta operacion se le ejecutar el metodo getMensaje().
  * 
  * 
  * @author Jakarta SRL

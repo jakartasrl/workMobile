@@ -15,7 +15,7 @@ public class Descriptible extends PersistentEntity {
 	@NotBlank(message="El campo codigo no puede estar vacio.")
 	private String codigo;
 	
-	@NotBlank(message="La descripción no debe estar vacia.")
+	@NotBlank(message="La descripcion no debe estar vacia.")
 	private String descripcion;
 
 	public String getCodigo() {

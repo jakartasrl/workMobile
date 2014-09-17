@@ -159,6 +159,7 @@
 		</output>
 				
 		<output name="componentes" tableName="mtComponentesClasificador">	
+			<campoSalida value="oid_CompClasif" target="id" />			
 			<campoSalida value="oid_Nivel" target="codigoInterno" />			
 			<campoSalida value="oid_NivelPadre" target="codigoInternoPadre" />
 			<campoSalida value="Codigo" target="codigo" />

@@ -15,6 +15,7 @@
 		<property name="descripcion" column="descripcion"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
+		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" column="PRODUCTO_ID" cascade="none"></many-to-one>		
 		
 		<!--  OJO SAQUE ESTO PARA PROBAR QUE HACE table="TipoProductoDet"  -->
 		<list name="caracteristicas" lazy="true" cascade="all">

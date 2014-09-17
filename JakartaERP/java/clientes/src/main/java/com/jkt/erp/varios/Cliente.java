@@ -3,9 +3,12 @@ package com.jkt.erp.varios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.dominio.Descriptible;
 import com.jkt.erp.impuestos.dominio.SujetoImpositivo;
 import com.jkt.varios.dominio.ComponenteValor;
+import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.Idioma;
 
 /**
@@ -27,10 +30,10 @@ public class Cliente extends Descriptible {
 //	@NotNull(message="El Sujeto impositivo no debe ser nulo.")
 	private SujetoImpositivo sujetoImpositivo;
 	
+	private String telefono;
+	
 //	@NotNull(message="El idioma no debe ser nulo.")
 	private Idioma idioma;//Idioma en el que se mostraran los productos o servicios en la documentacion del cliente
-	
-	private List<CondPagoCliente> listaCondicionPago=new ArrayList<CondPagoCliente>();//Lista de las condicines de pago vigentes que tuvo el cliente
 	
 	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();
 	
@@ -38,15 +41,32 @@ public class Cliente extends Descriptible {
 	
 	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();
 	
+	@NotNull(message="El cliente debe tener una condicion de pago.")
+	private CondPago condPago;
+	
 	/*
 	 * Variables de instancia
 	 * ***********************************************************************************************
 	 */
 	
-	
-	
 	public SujetoImpositivo getSujetoImpositivo() {
 		return sujetoImpositivo;
+	}
+
+	public List<ClienteClasificador> getListaClasificadores() {
+		return listaClasificadores;
+	}
+
+	public void setListaClasificadores(List<ClienteClasificador> listaClasificadores) {
+		this.listaClasificadores = listaClasificadores;
+	}
+
+	public CondPago getCondPago() {
+		return condPago;
+	}
+
+	public void setCondPago(CondPago condPago) {
+		this.condPago = condPago;
 	}
 
 	public void setSujetoImpositivo(SujetoImpositivo sujetoImpositivo) {
@@ -59,14 +79,6 @@ public class Cliente extends Descriptible {
 
 	public void setIdioma(Idioma idioma) {
 		this.idioma = idioma;
-	}
-
-	public List<CondPagoCliente> getListaCondicionPago() {
-		return listaCondicionPago;
-	}
-
-	public void setListaCondicionPago(List<CondPagoCliente> listaCondicionPago) {
-		this.listaCondicionPago = listaCondicionPago;
 	}
 
 	public List<EsquemaPreciosCliente> getListaEsquemaPrecios() {
@@ -86,12 +98,12 @@ public class Cliente extends Descriptible {
 		this.listaSucursales = listaSucursales;
 	}
 
-	public List<ClienteClasificador> getListaClasificadores() {
-		return listaClasificadores;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setListaClasificadores(List<ClienteClasificador> listaClasificadores) {
-		this.listaClasificadores = listaClasificadores;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	/*
@@ -106,13 +118,6 @@ public class Cliente extends Descriptible {
 	
 	public void addEsquemaPrecios(EsquemaPreciosCliente precioCliente){
 		agregarObjectoAColeccion(listaEsquemaPrecios, precioCliente);
-	}
-	
-	public void addCondPago(CondPagoCliente cpCliente){
-		if(!listaCondicionPago.contains(cpCliente)){
-			listaCondicionPago.add(cpCliente);
-			cpCliente.setCliente(this);
-		}
 	}
 	
 	public void addValorClasificador(ComponenteValor componenteValor){

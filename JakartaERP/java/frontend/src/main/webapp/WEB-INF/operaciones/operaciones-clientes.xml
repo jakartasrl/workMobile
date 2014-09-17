@@ -13,7 +13,7 @@
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
   <!ELEMENT campoSalida   (campoSalida*,output*)>  
   
-  <!ELEMENT dataset       (campo*)>
+  <!ELEMENT dataset       (cassmpo*)>
   <!ELEMENT campo         EMPTY>
   <!ELEMENT tables       (tableDef+)>
   <!ELEMENT tableDef     (campoTable*)>
