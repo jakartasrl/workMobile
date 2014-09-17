@@ -320,6 +320,9 @@ inherited FNCla0002: TFNCla0002
     LocaleID = 0
     Left = 160
     Top = 128
+    object mtComponentesClasificadoroid_CompClasif: TIntegerField
+      FieldName = 'oid_CompClasif'
+    end
     object mtComponentesClasificadoroid_Nivel: TIntegerField
       FieldName = 'oid_Nivel'
     end
