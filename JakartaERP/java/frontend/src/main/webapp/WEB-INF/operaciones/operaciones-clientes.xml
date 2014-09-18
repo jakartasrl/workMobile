@@ -257,7 +257,7 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
 				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.impuestos.dominio.SujetoImpositivo" fieldID="oid_SujImp">
-<!-- 					<campoEntrada name="oid_Cliente" clase="String" metodo="" /> -->
+					<campoEntrada name="oid_Cliente" clase="com.jkt.erp.varios.Cliente" metodo="setCliente" />
 					<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
 					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
 					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />

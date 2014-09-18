@@ -1,4 +1,4 @@
-package com.jkt.erp.impuestos.dominio;
+package com.jkt.erp.varios;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -7,10 +7,11 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.impuestos.dominio.Impuesto;
 
 /**
  * <p>Representa las inscripciones en cada impuesto que tiene el sujeto impositivo</p>
- * <p>Se utilizará para el calculo de impuestos y retenciones en facturas, y pagos</p>
+ * <p>Se utilizarï¿½ para el calculo de impuestos y retenciones en facturas, y pagos</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

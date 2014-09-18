@@ -11,6 +11,8 @@
 		<property name="numero" column="NUMERO" type="integer"/>
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="diasEntrega" column="DIAS_ENTREGA" />
+		<property name="telefono" column="TELEFONO"/>
+
 
 		<many-to-one name="transporte" class="com.jkt.erp.varios.Transporte" cascade="none" column="TRANSPORTE_ID"/>
 		<many-to-one name="direccion" class="com.jkt.varios.dominio.Direccion" cascade="all" column="DIRECCION_ID"/>

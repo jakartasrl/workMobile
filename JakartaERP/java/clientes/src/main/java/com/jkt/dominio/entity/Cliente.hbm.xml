@@ -15,16 +15,13 @@
         </property>
 		
 		<property name="descripcion" column="RAZON_SOCIAL"/>
+		<property name="telefono" column="TELEFONO"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		<many-to-one name="idioma" class="com.jkt.varios.dominio.Idioma" column="IDIOMA_ID"></many-to-one>
-		<many-to-one name="sujetoImpositivo" class="com.jkt.erp.impuestos.dominio.SujetoImpositivo" column="SUJETO_IMPOSITIVO_ID" cascade="all"></many-to-one>
+		<many-to-one name="sujetoImpositivo" class="com.jkt.erp.varios.SujetoImpositivo" column="SUJETO_IMPOSITIVO_ID" cascade="all"></many-to-one>
 		
-		<list name="listaCondicionPago" table="COND_PAGO_CLIENTE" lazy="true" cascade="all">
-			<key column="CLIENTE_ID" />
-			<index column="ORDEN" />
-			<one-to-many class="com.jkt.erp.varios.CondPagoCliente" />
-		</list>
+		<many-to-one name="condPago" column="COND_PAGO_ID" class="com.jkt.varios.dominio.CondPago"></many-to-one>
 
 		<list name="listaEsquemaPrecios" table="ESQUEMA_PRECIOS_CLIENTE" lazy="true" cascade="all">
 			<key column="CLIENTE_ID" />

@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.jkt.erp.impuestos.dominio.SujetoImpositivo;
 import com.jkt.erp.varios.Cliente;
 import com.jkt.erp.varios.ClienteSucursal;
 import com.jkt.erp.varios.DomicilioEntrega;
+import com.jkt.erp.varios.SujetoImpositivo;
 import com.jkt.erp.varios.Vendedor;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Direccion;

@@ -16,7 +16,7 @@ import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los lugares en donde el cliente recibe las compras que ha realizado</p>
- * <p>Se utilizará para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
+ * <p>Se utilizarï¿½ para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -40,6 +40,8 @@ public class ClienteSucursal extends PersistentEntity {
 	private Vendedor vendedorTecnico;
 	
 	private Representante representante;
+	
+	private String telefono;
 	
 //	@NotNull(message="Debe existir la cuenta conrriente relacionada al cliente/sucursal.")
 //	private ClienteCtaCte cuentaCorriente;
@@ -137,12 +139,17 @@ public class ClienteSucursal extends PersistentEntity {
 		this.domiciliosDeEntrega = domiciliosDeEntrega;
 	}
 	
+	public String getTelefono() {
+		return telefono;
+	}
 	
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	/*
 	 * Helper methods
 	 */
-	
-	
 	public void addClasificador(ClienteSucursalClasificador clienteSucursalClasificador){
 		clasificadores.add(clienteSucursalClasificador);
 	}

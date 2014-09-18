@@ -1,17 +1,29 @@
 package com.jkt.erp.articulos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jkt.dominio.Descriptible;
 
 public class Producto extends Descriptible {
-	
-	private String descripcionAbrev;//descripcion abreviada
+
+	private String descripcionAbrev;// descripcion abreviada
 	private boolean comprable;
 	private boolean vendible;
 	private boolean stockeable;
 	private boolean prodPropia;
 	private boolean bien;
-	
+
+	private List<ProductoClasificador> clasificadores = new ArrayList<ProductoClasificador>();
 	private TipoProducto tipoProducto;
+
+	public List<ProductoClasificador> getClasificadores() {
+		return clasificadores;
+	}
+
+	public void setClasificadores(List<ProductoClasificador> clasificadores) {
+		this.clasificadores = clasificadores;
+	}
 
 	public String getDescripcionAbrev() {
 		return descripcionAbrev;
@@ -68,5 +80,5 @@ public class Producto extends Descriptible {
 	public void setTipoProducto(TipoProducto tipoProducto) {
 		this.tipoProducto = tipoProducto;
 	}
-		
+
 }
