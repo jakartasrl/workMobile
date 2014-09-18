@@ -1,0 +1,48 @@
+#########################################################################################################
+#######################         COMO CONFIGURAR EL ACCESO A LA BASE DE DATOS       ######################
+#########################################################################################################
+
+Ya que en el repositorio no se deberá subir el archivo database.properties, se indica como realizar una correcta configuracion.
+
+
+1- Crear en la misma ruta que este archivo, el archivo database.properties.
+
+2- Copiar todo el contenido que sigue en el mismo:
+
+#########################################################################################################
+#########################################################################################################
+db.engine=mysql
+db.className=com.mysql.jdbc.Driver
+
+db.host=localhost
+db.port=3306
+db.jakarta=jakarta
+db.user=root
+db.password=root
+
+#db.host=jk101
+#db.port=3306
+#db.jakarta=jakarta
+#db.user=root
+#db.password=22JKsql
+
+hibernate.show_sql=true
+hibernate.format_sql=true
+#hibernate.hbm2ddl.auto=none
+#hibernate.hbm2ddl.auto=create
+hibernate.hbm2ddl.auto=update
+dialect.class=org.hibernate.dialect.MySQLDialect
+#hibernate.cache.use_second_level_cache=false
+hibernate.cache.use_query_cache=true
+#jadira.usertype.autoRegisterUserTypes=false
+
+
+4- Depende la configuracion deberá customizar los datos.Algunas propiedades pueden ser utiles para el modo debug, por ejemplo:
+
+hibernate.show_sql=true
+hibernate.format_sql=true
+
+Que muestran las consultas a la base de datos realizadas por hibernate.
+#########################################################################################################
+#########################################################################################################
+
