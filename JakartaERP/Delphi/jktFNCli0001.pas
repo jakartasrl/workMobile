@@ -244,6 +244,7 @@ type
     mtSujImpDescPais: TStringField;
     mtSujImpPersonaJuridica: TBooleanField;
     mtSujImpCuit: TStringField;
+    mtSujImpoid_Cliente: TIntegerField;
   private
     { Private declarations }
   public

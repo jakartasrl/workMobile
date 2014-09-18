@@ -13,7 +13,7 @@
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
   <!ELEMENT campoSalida   (campoSalida*,output*)>  
   
-  <!ELEMENT dataset       (cassmpo*)>
+  <!ELEMENT dataset       (campo*)>
   <!ELEMENT campo         EMPTY>
   <!ELEMENT tables       (tableDef+)>
   <!ELEMENT tableDef     (campoTable*)>
@@ -146,6 +146,7 @@
 		</output>
 		
 		<output name="sujetoImpositivo" tableName="mtSujImp">
+			<campoSalida value="oid_Cliente" target="cliente.id" />
 			<campoSalida value="RazonSocial" target="razonSocial" />
 			<campoSalida value="Direccion" target="direccionLegal.direccion" />
 			<campoSalida value="Localidad" target="direccionLegal.localidad" />
@@ -162,13 +163,13 @@
 
 		<output name="inscripciones" tableName="mtInscripImposit">
 			<campoSalida value="oid_InscClie" target="id" />
-<!-- 			<campoSalida value="oid_Cliente" target="" /> FALTA ARMAR LA RELACION DE LA INSCRIPCION IMPOSITIVA CON EL SUJETO IMPOSITIVO, Y Q ESTE CONTENGA AL CLIENTE- OJO XQ SUJETO IMPOSITIVO ESTA EN EL MODULO VARIOS Y NO CONOCE AL CLIENTE.--> 
+			<campoSalida value="oid_Cliente" target="sujetoImpositivo.cliente.id" /> 
 			<campoSalida value="oid_Impuesto" target="impuesto.id" />
 			<campoSalida value="DescImpuesto" target="impuesto.descripcion" />
 			<campoSalida value="NroInscripcion" target="numero" />
-			<campoSalida value="oid_Categoria" target="oidCategoria" />
+<!-- 			<campoSalida value="oid_Categoria" target="oidCategoria" /> -->
 <!-- 			<campoSalida value="CodCategoria" target="" /> -->
-			<campoSalida value="DescCategoria" target="descripcionCategoria" />
+<!-- 			<campoSalida value="DescCategoria" target="descripcionCategoria" /> -->
 			<campoSalida value="VigenciaDesde" target="vigencia" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
@@ -253,6 +254,7 @@
 			<campoEntrada>
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
 				
 				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.impuestos.dominio.SujetoImpositivo" fieldID="oid_SujImp">
 					<campoEntrada name="oid_Cliente" clase="com.jkt.erp.varios.Cliente" metodo="setCliente" />
@@ -262,22 +264,17 @@
 					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
 					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
 					<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
-<!-- 					<campoEntrada name="Telefonos" clase="String" metodo="" /> -->
 					<campoEntrada name="PersonaJuridica" clase="Boolean" metodo="setPersonaJuridica" />
 					<campoEntrada name="Cuit" clase="String" metodo="setCuit" />
 					<campoEntrada name="oid_CondPago" clase="String" metodo="" />
 
 					<campoEntrada name="mtInscripImposit" metodo="addInscripcionImpositiva" clase="com.jkt.erp.impuestos.dominio.InscripcionImpositiva" fieldID="oid_InscClie">
 						<campoEntrada name="oid_Impuesto" clase="com.jkt.erp.impuestos.dominio.Impuesto" metodo="setImpuesto" />
-<!-- 						 ** <campoEntrada name="DescImpuesto" clase="" metodo="" /> -->
 						<campoEntrada name="NroInscripcion" clase="Integer" metodo="setNumero" />
 						<campoEntrada name="oid_Categoria" clase="String" metodo="" />
-<!-- 						** <campoEntrada name="CodCategoria" clase="String" metodo="" /> -->
-<!-- 						** <campoEntrada name="DescCategoria" clase="String" metodo="" /> -->
 						<campoEntrada name="VigenciaDesde" clase="Date" metodo="" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
-
 				</campoEntrada>				 
 								
 <!-- 
@@ -298,12 +295,13 @@
 					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
 					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
 					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
-<!-- 					<campoEntrada name="Telefonos" clase="String" metodo="" /> -->
+					<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
 					 
 					<campoEntrada name="oid_Vendedor" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedorComercial" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
 					<campoEntrada name="mtDomiciliosEntrega" metodo="addDomicilioEntrega" clase="com.jkt.erp.varios.DomicilioEntrega" fieldID="oid_DomSuc">
+						<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
 						<campoEntrada name="NroDomicilio" clase="Integer" metodo="setNumero" />
 						<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />						
 						<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
