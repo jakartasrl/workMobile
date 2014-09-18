@@ -1,5 +1,7 @@
 #Archivo de configuracion de git para ignorar subida de archivos basura
 
+# datasource #
+*.properties
 
 # maven #
 target/
@@ -56,4 +58,3 @@ Servers
 
 #evito este archivo
 desktop.ini
-*database.properties
