@@ -399,6 +399,38 @@
 		</forms>		
 	</operacion>
 	
+	
+	
+	<!-- GUARDAR Unidad de medida  -->
+	<operacion name="GuardarUnidadMedida" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.varios.dominio.UnidadMedida" fieldID='oid'>
+			<campoEntrada>
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>		
 
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+	<!-- RECUPERAR  Unidad de medida -->
+	<operacion name="TraerUnidadMedida" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.varios.dominio.UnidadMedida">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
 
 </entity>

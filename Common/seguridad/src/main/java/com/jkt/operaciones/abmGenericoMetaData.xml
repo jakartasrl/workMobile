@@ -31,8 +31,8 @@
 
 <entidades>
 		
-	
-<entidad nombre="TablaValidacionCaracProducto">
+	<!-- 	Tabla validacion Caracteristicas de Producto -->
+	<entidad nombre="TablaValidacionCaracProducto">
 
 		<operacion operSave="GuardarTablaValCarac" operTraer="TraerTablaValCarac" />
 		
@@ -50,7 +50,10 @@
 		
 	</entidad>
 	
-<entidad nombre="CaracProducto">
+	
+	
+	<!-- 	Caracteristicas de Producto -->
+	<entidad nombre="CaracProducto">
 
 		<operacion operSave="GuardarCaracProducto" operTraer="TraerCaracProducto" />
 		
@@ -73,7 +76,8 @@
 		
 	</entidad>
 
-<entidad nombre="Idioma">
+	<!-- 	Idioma -->
+	<entidad nombre="Idioma">
 
 		<operacion operSave="GuardarIdioma" operTraer="TraerIdioma" />
 		
@@ -93,7 +97,8 @@
 
 
 
-<entidad nombre="Pais">
+	<!-- 	Pais -->
+	<entidad nombre="Pais">
 
 		<operacion operSave="GuardarPais" operTraer="TraerPais" />
 		
@@ -111,8 +116,11 @@
 		
 	</entidad>
 
-<entidad nombre="Provincia">
-<operacion operSave="GuardarProvincia" operTraer="TraerProvincia" />
+
+	<!-- 	Provincia -->
+	<entidad nombre="Provincia">
+	
+		<operacion operSave="GuardarProvincia" operTraer="TraerProvincia" />
 		
 		<campos>
 			<campo fieldName="oid_prov" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
@@ -133,7 +141,8 @@
 	</entidad>
 
 
-<entidad nombre="Vendedor">
+	<!-- 	Vendedor -->
+	<entidad nombre="Vendedor">
 
 		<operacion operSave="GuardarVendedor" operTraer="TraerVendedor" />
 		
@@ -156,7 +165,8 @@
 	</entidad>
 
 
-<entidad nombre="Representante">
+	<!-- 	Representante -->
+	<entidad nombre="Representante">
 
 		<operacion operSave="GuardarRepresentante" operTraer="TraerRepresentante" />
 		
@@ -176,6 +186,24 @@
 		
 	</entidad>
 
+	<!-- 	Unidad de medida -->
+	<entidad nombre="UnidadMedida">
+
+		<operacion operSave="GuardarUnidadMedida" operTraer="TraerUnidadMedida" />
+		
+		<campos>
+			<campo fieldName="oid"       tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_carac" />
+			<campo fieldName="codigo"    tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo"    tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="codigo"       tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
 
 	
 </entidades>
