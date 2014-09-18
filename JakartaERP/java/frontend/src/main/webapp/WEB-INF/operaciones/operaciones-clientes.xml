@@ -219,7 +219,7 @@
 
 		<output name="contactos" tableName="mtContactos">
 			<campoSalida value="oid_ContSuc" target="id" />
-<!-- 			<campoSalida value="oid_SucClie" target="" /> CONTACTO ESTA EN EL MODULO 'VARIOS' Y NO CONOCE A LA SUCURSAL_CLIENTE, PUEDO GUARDAR UN DATO PLANO.-->
+			<campoSalida value="oid_SucClie" target="clienteSucursalId" />
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Nombres" target="nombre" />
 			<campoSalida value="Cargo" target="tratamiento" />
