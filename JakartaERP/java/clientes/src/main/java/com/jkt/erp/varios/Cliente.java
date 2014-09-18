@@ -70,6 +70,7 @@ public class Cliente extends Descriptible {
 
 	public void setSujetoImpositivo(SujetoImpositivo sujetoImpositivo) {
 		this.sujetoImpositivo = sujetoImpositivo;
+		this.sujetoImpositivo.setCliente(this);
 	}
 
 	public Idioma getIdioma() {

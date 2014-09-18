@@ -165,6 +165,7 @@
 			<campoSalida value="oid_InscClie" target="id" />
 			<campoSalida value="oid_Cliente" target="sujetoImpositivo.cliente.id" /> 
 			<campoSalida value="oid_Impuesto" target="impuesto.id" />
+			<campoSalida value="CodImpuesto" target="impuesto.codigo" />
 			<campoSalida value="DescImpuesto" target="impuesto.descripcion" />
 			<campoSalida value="NroInscripcion" target="numero" />
 <!-- 			<campoSalida value="oid_Categoria" target="oidCategoria" /> -->
@@ -256,7 +257,7 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
 				
-				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.impuestos.dominio.SujetoImpositivo" fieldID="oid_SujImp">
+				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.varios.SujetoImpositivo" fieldID="oid_SujImp">
 					<campoEntrada name="oid_Cliente" clase="com.jkt.erp.varios.Cliente" metodo="setCliente" />
 					<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
 					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
@@ -268,7 +269,7 @@
 					<campoEntrada name="Cuit" clase="String" metodo="setCuit" />
 					<campoEntrada name="oid_CondPago" clase="String" metodo="" />
 
-					<campoEntrada name="mtInscripImposit" metodo="addInscripcionImpositiva" clase="com.jkt.erp.impuestos.dominio.InscripcionImpositiva" fieldID="oid_InscClie">
+					<campoEntrada name="mtInscripImposit" metodo="addInscripcionImpositiva" clase="com.jkt.erp.varios.InscripcionImpositiva" fieldID="oid_InscClie">
 						<campoEntrada name="oid_Impuesto" clase="com.jkt.erp.impuestos.dominio.Impuesto" metodo="setImpuesto" />
 						<campoEntrada name="NroInscripcion" clase="Integer" metodo="setNumero" />
 						<campoEntrada name="oid_Categoria" clase="String" metodo="" />

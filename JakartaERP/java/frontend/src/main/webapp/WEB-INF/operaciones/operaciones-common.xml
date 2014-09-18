@@ -78,7 +78,7 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -100,7 +100,7 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -124,7 +124,7 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

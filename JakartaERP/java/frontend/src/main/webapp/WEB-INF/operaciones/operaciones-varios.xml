@@ -195,14 +195,23 @@
 	<operacion name="GuardarValoresClasificador" clase="com.jkt.varios.operaciones.GuardarValoresClasificador">
 
 
+		<input name="mtClasificador" keyName="clasificador" clase="com.jkt.varios.dominio.Clasificador" fieldID="oid_Clasificador">
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+			
+			</campoEntrada>
+		</input>
+
 		<input name="mtValoresClasificador" keyName="objeto" clase="com.jkt.varios.dominio.ComponenteValor" fieldID='oid_ValorClasif'>
 			<campoEntrada>
 <!-- 					Campo transiente para recuperar el componente donde se guardan todos los valores -->
 					<campoEntrada name="oid_componente" clase="String" metodo="setIdComponente" />
 
 <!-- 					Campos transientes para ordenar los nodos -->
-<!-- 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" /> -->
-<!-- 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" /> -->
+					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
+					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
 					
 <!-- 					Campos propios del componente valor, persistentes -->
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />

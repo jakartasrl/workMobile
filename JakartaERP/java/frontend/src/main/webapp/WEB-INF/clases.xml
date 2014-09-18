@@ -16,9 +16,11 @@
 	<elemento key="condicionPago" value="com.jkt.varios.dominio.CondPago" validador="com.jkt.varios.validadores.ValidadorCondPago" />
 	<elemento key="impuesto" value="com.jkt.erp.impuestos.dominio.Impuesto" />
 	<elemento key="categoriasImpuesto" value="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" />
-	<elemento key="Pais" value="com.jkt.varios.dominio.Pais" />
+	<elemento key="pais" value="com.jkt.varios.dominio.Pais" />
+	<elemento key="provincia" value="com.jkt.varios.dominio.Provincia" />
 	<elemento key="clasificadores" value="com.jkt.varios.dominio.Clasificador" />
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
 	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
+	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
 
 </elementos>

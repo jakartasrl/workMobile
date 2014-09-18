@@ -23,16 +23,34 @@ public class GuardarValoresClasificador extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List valores = recuperarObjeto(aParams);
-		
+		Map<String, ComponenteValor> mapa=new HashMap<String, ComponenteValor>();
+			
 		ComponenteValor componenteValor;
+		for (Object currentObject : valores) {
+			componenteValor=(ComponenteValor) currentObject;
+			mapa.put(String.valueOf(componenteValor.getCodigoInterno()), componenteValor);
+		}
+		
+		//Ya tengo el mapa desordenado para poder definir las relaciones entre valores
+		
+		
+//		ComponenteValor componenteValor;
 		Componente componente;
+		int codigoInternoPadre;
+		ComponenteValor valorPadre;
 		for (Object currentObject : valores) {
 			componenteValor=(ComponenteValor) currentObject;
 			
+			//Defino la relacion obligatorio con un componente.No ha de existir un valor sin su componente
 			componente = (Componente) obtener(Componente.class, (long)componenteValor.getIdComponente());
 			componente.agregarValor(componenteValor);
 			componenteValor.setComponente(componente);
 			
+			codigoInternoPadre = componenteValor.getCodigoInternoPadre();
+			if (codigoInternoPadre>0) {
+				valorPadre=mapa.get(String.valueOf(codigoInternoPadre));
+				valorPadre.agregarValor(componenteValor);
+			}
 			guardar(componente);
 			
 		}

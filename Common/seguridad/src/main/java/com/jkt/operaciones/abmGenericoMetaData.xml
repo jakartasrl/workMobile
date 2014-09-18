@@ -25,8 +25,19 @@
   <!ATTLIST validador tipoValidacion CDATA #REQUIRED>
   <!ATTLIST validador entidad CDATA #REQUIRED>
   <!ATTLIST validador oidName CDATA #REQUIRED>
-  <!ATTLIST validador descrName CDATA #REQUIRED>
-  
+  <!ATTLIST validador descrName CDATA #REQUIRED> 
+
+<!--
+	Al momento de validar, si la entidad existe, se trae los datos.
+	fieldName, nombre exacto a validar. El que se recibe desde delphi, ejemplo: cod_uno_dos
+	entidad, alias que se extrae desde clases.xml
+	
+	oidName: nombre de campo que se muestra en la respuesta, el id de la entidad solicitada:
+	ejemplo: se valida empresa, oid_empresa va a volver con el id 1 si la empresa con id 1 existe.
+	
+	descrName: del mismo modo que oid_name, la descripcion
+ -->
+ 
 ]>
 
 <entidades>
@@ -199,7 +210,8 @@
 		</campos>
 
 		<validadores>
-			<validador fieldName="codigo"       tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+<!-- 			<validador fieldName="codigo"       tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" /> -->
+			<validador fieldName="codigo"    tipoValidacion="Existente" entidad="unidadMedida" oidName="oid" descrName="descr" />
 			<validador fieldName="descr"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 		
