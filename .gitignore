@@ -1,7 +1,7 @@
 #Archivo de configuracion de git para ignorar subida de archivos basura
 
 # datasource #
-*.properties
+*database.properties
 
 # maven #
 target/
