@@ -56,3 +56,4 @@ Servers
 
 #evito este archivo
 desktop.ini
+*database.properties

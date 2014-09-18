@@ -1,8 +1,9 @@
-package com.jkt.erp.impuestos.dominio;
+package com.jkt.erp.varios;
 
 import java.util.Date;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.impuestos.dominio.CategoriaImpuesto;
 
 public class CategorizacionImpositiva extends PersistentEntity {
 

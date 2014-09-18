@@ -19,7 +19,7 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		<many-to-one name="idioma" class="com.jkt.varios.dominio.Idioma" column="IDIOMA_ID"></many-to-one>
-		<many-to-one name="sujetoImpositivo" class="com.jkt.erp.impuestos.dominio.SujetoImpositivo" column="SUJETO_IMPOSITIVO_ID" cascade="all"></many-to-one>
+		<many-to-one name="sujetoImpositivo" class="com.jkt.erp.varios.SujetoImpositivo" column="SUJETO_IMPOSITIVO_ID" cascade="all"></many-to-one>
 		
 		<many-to-one name="condPago" column="COND_PAGO_ID" class="com.jkt.varios.dominio.CondPago"></many-to-one>
 

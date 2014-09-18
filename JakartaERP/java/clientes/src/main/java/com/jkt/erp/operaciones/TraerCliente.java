@@ -3,20 +3,20 @@ package com.jkt.erp.operaciones;
 import java.util.List;
 import java.util.Map;
 
-import com.jkt.erp.impuestos.dominio.InscripcionImpositiva;
-import com.jkt.erp.impuestos.dominio.SujetoImpositivo;
 import com.jkt.erp.varios.Cliente;
 import com.jkt.erp.varios.ClienteClasificador;
 import com.jkt.erp.varios.ClienteSucursal;
 import com.jkt.erp.varios.ClienteSucursalClasificador;
 import com.jkt.erp.varios.Contacto;
 import com.jkt.erp.varios.DomicilioEntrega;
+import com.jkt.erp.varios.InscripcionImpositiva;
+import com.jkt.erp.varios.SujetoImpositivo;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Direccion;
 
 /**
- * <p>Operación que recupera un cliente, y todo su contexto de datos, es decir, se recupera un cliente con
+ * <p>Operaciï¿½n que recupera un cliente, y todo su contexto de datos, es decir, se recupera un cliente con
  * el {@link SujetoImpositivo}, {@link InscripcionImpositiva}, {@link Direccion}, {@link ClienteSucursal}, 
  * {@link DomicilioEntrega}, etc...</p>
  * 

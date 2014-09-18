@@ -1,4 +1,4 @@
-package com.jkt.erp.impuestos.dominio;
+package com.jkt.erp.varios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los Sujetos Impositivos (clientes / proveedores y todo aquel que tenga CUIT)</p>
- * <p>Se utilizará para agrupar clientes y proveedores que son realmente la misma empresa desde lo impositivo.</p>
+ * <p>Se utilizarï¿½ para agrupar clientes y proveedores que son realmente la misma empresa desde lo impositivo.</p>
  * @author Leonel Suarez - Jakarta SRL
  */
 public class SujetoImpositivo extends PersistentEntity {
@@ -26,7 +26,10 @@ public class SujetoImpositivo extends PersistentEntity {
 	 * 
 	 */
 	
-	@NotBlank(message="La razon social no puede ser vacia.")
+	@NotNull(message="El sujeto impositivo debe estar relacionado con un cliente.")
+	private Cliente cliente;
+	
+	@NotBlank(message="La razon social del sujeto impositivo no puede ser vacia.")
 	private String razonSocial;
 	
 	/**
@@ -34,7 +37,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	 */
 	private boolean personaJuridica;
 	
-	@NotNull(message="Debe completar la direccion legal.")
+	@NotNull(message="Debe completar la direccion legal del sujeto impositivo.")
 	private Direccion direccionLegal;
 	
 	private boolean local;
@@ -52,12 +55,19 @@ public class SujetoImpositivo extends PersistentEntity {
 		return razonSocial;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public List<InscripcionImpositiva> getInscripcionesImpositivas() {
 		return inscripcionesImpositivas;
 	}
 
-	public void setInscripcionesImpositivas(
-			List<InscripcionImpositiva> inscripcionesImpositivas) {
+	public void setInscripcionesImpositivas(List<InscripcionImpositiva> inscripcionesImpositivas) {
 		this.inscripcionesImpositivas = inscripcionesImpositivas;
 	}
 
@@ -113,6 +123,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	
 	/*
 	 * Metodos para el manejo de la direccion.
+	 * Esto esta hecho asÃ­ por la forma de enviar datos desde el cliente.
 	 */
 	
 	public void setearProvincia(Provincia provincia){

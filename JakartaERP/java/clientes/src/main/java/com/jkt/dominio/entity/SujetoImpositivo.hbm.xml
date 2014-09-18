@@ -4,10 +4,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.erp.impuestos.dominio.SujetoImpositivo" table="SUJETO_IMPOSITIVO" >
+	<class name="com.jkt.erp.varios.SujetoImpositivo" table="SUJETO_IMPOSITIVO" >
 		<id name="id" column="SUJETO_IMPOSITIVO_ID">
 			<generator class="native" />
 		</id>
+
+		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"></many-to-one>
 
 		<property name="razonSocial" column="RAZON_SOCIAL" />
 		<property name="cuit" column="CUIT" />
@@ -18,7 +20,7 @@
 		<list name="inscripcionesImpositivas" >
 			<key column="SUJETO_IMPOSITIVO_ID" />
 			<index column="ORDEN" />
-			<one-to-many class="com.jkt.erp.impuestos.dominio.InscripcionImpositiva" />
+			<one-to-many class="com.jkt.erp.varios.InscripcionImpositiva" />
 		</list>
 		
 		
