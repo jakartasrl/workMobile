@@ -146,6 +146,7 @@
 		</output>
 		
 		<output name="sujetoImpositivo" tableName="mtSujImp">
+			<campoSalida value="oid_Cliente" target="cliente.id" />
 			<campoSalida value="RazonSocial" target="razonSocial" />
 			<campoSalida value="Direccion" target="direccionLegal.direccion" />
 			<campoSalida value="Localidad" target="direccionLegal.localidad" />
@@ -162,12 +163,13 @@
 
 		<output name="inscripciones" tableName="mtInscripImposit">
 			<campoSalida value="oid_InscClie" target="id" />
-<!-- 			<campoSalida value="oid_Cliente" target="" /> FALTA ARMAR LA RELACION DE LA INSCRIPCION IMPOSITIVA CON EL SUJETO IMPOSITIVO, Y Q ESTE CONTENGA AL CLIENTE- OJO XQ SUJETO IMPOSITIVO ESTA EN EL MODULO VARIOS Y NO CONOCE AL CLIENTE.--> 
+			<campoSalida value="oid_Cliente" target="" /> 
+<!-- 			FALTA ARMAR LA RELACION DE LA INSCRIPCION IMPOSITIVA CON EL SUJETO IMPOSITIVO, Y Q ESTE CONTENGA AL CLIENTE- OJO XQ SUJETO IMPOSITIVO ESTA EN EL MODULO VARIOS Y NO CONOCE AL CLIENTE.  -->
 			<campoSalida value="oid_Impuesto" target="impuesto.id" />
 			<campoSalida value="DescImpuesto" target="impuesto.descripcion" />
 			<campoSalida value="NroInscripcion" target="numero" />
 			<campoSalida value="oid_Categoria" target="oidCategoria" />
-<!-- 			<campoSalida value="CodCategoria" target="" /> -->
+			<campoSalida value="CodCategoria" target="" />
 			<campoSalida value="DescCategoria" target="descripcionCategoria" />
 			<campoSalida value="VigenciaDesde" target="vigencia" />
 			<campoSalida value="Activo" target="isActivo" />
@@ -219,7 +221,7 @@
 
 		<output name="contactos" tableName="mtContactos">
 			<campoSalida value="oid_ContSuc" target="id" />
-<!-- 			<campoSalida value="oid_SucClie" target="" /> CONTACTO ESTA EN EL MODULO 'VARIOS' Y NO CONOCE A LA SUCURSAL_CLIENTE, PUEDO GUARDAR UN DATO PLANO.-->
+			<campoSalida value="oid_SucClie" target="clienteSucursalId" /> 
 			<campoSalida value="Apellido" target="apellido" />
 			<campoSalida value="Nombres" target="nombre" />
 			<campoSalida value="Cargo" target="tratamiento" />

@@ -28,7 +28,7 @@ inherited FNCli0001: TFNCli0001
       Left = 321
       Top = 28
       DataBinding.DataField = 'RazonSocial'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -39,7 +39,7 @@ inherited FNCli0001: TFNCli0001
       Left = 101
       Top = 103
       DataBinding.DataField = 'Direccion'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -50,7 +50,7 @@ inherited FNCli0001: TFNCli0001
       Left = 101
       Top = 130
       DataBinding.DataField = 'Localidad'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -61,7 +61,7 @@ inherited FNCli0001: TFNCli0001
       Left = 101
       Top = 157
       DataBinding.DataField = 'CodPostal'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -72,7 +72,7 @@ inherited FNCli0001: TFNCli0001
       Left = 166
       Top = 184
       DataBinding.DataField = 'DescProvincia'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -83,7 +83,7 @@ inherited FNCli0001: TFNCli0001
       Left = 166
       Top = 211
       DataBinding.DataField = 'DescPais'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -94,7 +94,7 @@ inherited FNCli0001: TFNCli0001
       Left = 101
       Top = 184
       DataBinding.DataField = 'CodProvincia'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Properties.Buttons = <
         item
           Default = True
@@ -111,7 +111,7 @@ inherited FNCli0001: TFNCli0001
       Left = 101
       Top = 211
       DataBinding.DataField = 'CodPais'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Properties.Buttons = <
         item
           Default = True
@@ -139,7 +139,7 @@ inherited FNCli0001: TFNCli0001
       Left = 81
       Top = 277
       DataBinding.DataField = 'Cuit'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -150,7 +150,7 @@ inherited FNCli0001: TFNCli0001
       Left = 112
       Top = 304
       DataBinding.DataField = 'PersonaJuridica'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Properties.Alignment = taLeftJustify
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -1185,66 +1185,9 @@ inherited FNCli0001: TFNCli0001
         Size = 15
       end
       item
-        Name = 'RazonSocial'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'Direccion'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'Localidad'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'CodPostal'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'oid_Provincia'
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProvincia'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'DescProvincia'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'oid_Pais'
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodPais'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'DescPais'
-        DataType = ftString
-        Size = 50
-      end
-      item
         Name = 'Telefonos'
         DataType = ftString
         Size = 50
-      end
-      item
-        Name = 'PersonaJuridica'
-        DataType = ftBoolean
-      end
-      item
-        Name = 'Cuit'
-        DataType = ftString
-        Size = 20
       end
       item
         Name = 'oid_CondPago'
@@ -1372,7 +1315,7 @@ inherited FNCli0001: TFNCli0001
     EnableVersioning = True
     FilterOptions = []
     MasterFields = 'oid_Cliente'
-    MasterSource = dsCliente
+    MasterSource = dsSujImp
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -1549,8 +1492,74 @@ inherited FNCli0001: TFNCli0001
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
+    FieldDefs = <
+      item
+        Name = 'oid_Cliente'
+        DataType = ftInteger
+      end
+      item
+        Name = 'RazonSocial'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'Direccion'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'Localidad'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'CodPostal'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'oid_Provincia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodProvincia'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'DescProvincia'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'oid_Pais'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodPais'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'DescPais'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PersonaJuridica'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'Cuit'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexFieldNames = 'oid_Cliente'
+    IndexDefs = <
+      item
+        Name = 'mtSujImpIndex'
+        Fields = 'oid_Cliente'
+      end>
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
@@ -1558,6 +1567,8 @@ inherited FNCli0001: TFNCli0001
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterFields = 'oid_Cliente'
+    MasterSource = dsCliente
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -1565,6 +1576,10 @@ inherited FNCli0001: TFNCli0001
     LocaleID = 0
     Left = 256
     Top = 232
+    object mtSujImpoid_Cliente: TIntegerField
+      Tag = 1
+      FieldName = 'oid_Cliente'
+    end
     object mtSujImpRazonSocial: TStringField
       Tag = 1
       FieldName = 'RazonSocial'
