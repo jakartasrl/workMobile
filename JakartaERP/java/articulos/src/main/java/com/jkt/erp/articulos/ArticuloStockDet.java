@@ -6,12 +6,12 @@ public class ArticuloStockDet extends PersistentEntity {
 
 	private ArticuloStock articuloStock;
 	private CaracteristicaProducto caracProducto;
+	private ValoresTablas valorTabla;
 
 	private String valorString;
 	private int valorEntero;
 	private double valorDoble;
 	private boolean valorBoolean;
-	private ValoresTablas valorTabla;
 
 	/*
 	 * Setters y getters

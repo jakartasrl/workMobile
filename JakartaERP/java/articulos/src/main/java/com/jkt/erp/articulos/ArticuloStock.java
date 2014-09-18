@@ -1,5 +1,8 @@
 package com.jkt.erp.articulos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import com.jkt.dominio.PersistentEntity;
@@ -15,12 +18,22 @@ public class ArticuloStock extends PersistentEntity {
 	
 	private UnidadMedida uniMedSec;
 	private UnidadMedida uniMedTerc;
-
+	private List<ArticuloStockDet> detalles= new ArrayList<ArticuloStockDet>();
+	
 	/*
 	 * Setters y getters
 	 */
+	
 	public Producto getProducto() {
 		return producto;
+	}
+
+	public List<ArticuloStockDet> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<ArticuloStockDet> detalles) {
+		this.detalles = detalles;
 	}
 
 	public void setProducto(Producto producto) {

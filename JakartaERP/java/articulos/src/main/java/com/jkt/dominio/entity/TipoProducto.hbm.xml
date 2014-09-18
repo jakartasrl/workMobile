@@ -3,8 +3,8 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.erp.articulos.TipoProducto" table="TipoProd">
-		<id name="id" column="TipoProd_ID">
+	<class name="com.jkt.erp.articulos.TipoProducto" table="TIPO_PRODUCTO">
+		<id name="id" column="TIPO_PRODUCTO_ID">
 			<generator class="native"></generator>
 		</id>
 		
@@ -17,9 +17,8 @@
 		
 		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" column="PRODUCTO_ID" cascade="none"></many-to-one>		
 		
-		<!--  OJO SAQUE ESTO PARA PROBAR QUE HACE table="TipoProductoDet"  -->
 		<list name="caracteristicas" lazy="true" cascade="all">
-			<key column="TipoProd_ID" />
+			<key column="TIPO_PRODUCTO_ID" />
 			<index column="secu" />
 			<one-to-many class="com.jkt.erp.articulos.TipoProductoDet" />
 		</list>

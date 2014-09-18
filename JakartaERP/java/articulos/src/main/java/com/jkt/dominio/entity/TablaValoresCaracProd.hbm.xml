@@ -3,8 +3,8 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.erp.articulos.TablaValoresCaracProd" table="TABLAS_CARAC_PROD">
-		<id name="id" column="TABLA_ID">
+	<class name="com.jkt.erp.articulos.TablaValoresCaracProd" table="TABLA_VALORES_CARAC_PROD">
+		<id name="id" column="TABLA_VALORES_CARAC_PROD_ID">
 			<generator class="native"></generator>
 		</id>
 		

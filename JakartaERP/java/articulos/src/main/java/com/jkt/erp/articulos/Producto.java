@@ -3,10 +3,17 @@ package com.jkt.erp.articulos;
 import java.util.ArrayList;
 import java.util.List;
 
+import scala.Array;
+
 import com.jkt.dominio.Descriptible;
 
 public class Producto extends Descriptible {
 
+	/*
+	 * **********************************************************************************************
+	 * Variables de instancia
+	 */
+	
 	private String descripcionAbrev;// descripcion abreviada
 	private boolean comprable;
 	private boolean vendible;
@@ -16,6 +23,21 @@ public class Producto extends Descriptible {
 
 	private List<ProductoClasificador> clasificadores = new ArrayList<ProductoClasificador>();
 	private TipoProducto tipoProducto;
+	private List<ArticuloStock> articulosStock=new ArrayList<ArticuloStock>();
+	
+	/*
+	 * Variables de instancia
+	 * **********************************************************************************************
+	 */
+	
+	
+	public List<ArticuloStock> getArticulosStock() {
+		return articulosStock;
+	}
+
+	public void setArticulosStock(List<ArticuloStock> articulosStock) {
+		this.articulosStock = articulosStock;
+	}
 
 	public List<ProductoClasificador> getClasificadores() {
 		return clasificadores;

@@ -3,22 +3,20 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.erp.articulos.CaracteristicaProducto" table="CARACTERISTICA_PRODUCTO">
-
-		<id name="id" column="CARACTERISTICA_PRODUCTO_ID">
+	<class name="com.jkt.erp.articulos.ValoresTablas" table="TABLA_VALORES">
+		<id name="id" column="TABLA_VALORES_ID">
 			<generator class="native"></generator>
 		</id>
-
-		<many-to-one name="tabla" class="com.jkt.erp.articulos.TablaValoresCaracProd" cascade="save-update" unique="true" ></many-to-one>
-	
+		
 		<property name="codigo" type="string">
             <column name="CODIGO" length="15" />
         </property>
 		
 		<property name="descripcion" column="DESCRIPCION"/>
-		<property name="tipoDato" column="TIPO_DATE" type="string"  length="20"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-
+		<many-to-one name="tablaValoresCaract" class="com.jkt.erp.articulos.TablaValoresCaracProd" column="TABLA_VALORES_CARAC_PROD_ID" cascade="none"></many-to-one>
+		
 	</class>
+	
 </hibernate-mapping>

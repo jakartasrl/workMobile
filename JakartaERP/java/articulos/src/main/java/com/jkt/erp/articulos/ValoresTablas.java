@@ -4,14 +4,14 @@ import com.jkt.dominio.Descriptible;
 
 public class ValoresTablas extends Descriptible {
 
-	private String tabla;
+	private TablaValoresCaracProd tablaValoresCaract;
 
-	public String getTabla() {
-		return tabla;
+	public TablaValoresCaracProd getTablaValoresCaract() {
+		return tablaValoresCaract;
 	}
 
-	public void setTabla(String tabla) {
-		this.tabla = tabla;
+	public void setTablaValoresCaract(TablaValoresCaracProd tablaValoresCaract) {
+		this.tablaValoresCaract = tablaValoresCaract;
 	}
-	
+
 }

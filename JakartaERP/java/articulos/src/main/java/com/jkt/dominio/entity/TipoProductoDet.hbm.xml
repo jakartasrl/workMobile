@@ -3,13 +3,13 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.erp.articulos.TipoProductoDet" table="TipoProdDet">
+	<class name="com.jkt.erp.articulos.TipoProductoDet" table="TIPO_PRODUCTO_DET">
 
-		<id name="id" column="tipo_prod_det_ID">
+		<id name="id" column="TIPO_PRODUCTO_DET_ID">
 			<generator class="native"></generator>
 		</id>
 
-		<many-to-one  name="tipoProducto" column="TipoProd_ID" not-null="true" class="com.jkt.erp.articulos.TipoProducto" cascade="" ></many-to-one>
+		<many-to-one  name="tipoProducto" column="TIPO_PRODUCTO_ID" not-null="true" class="com.jkt.erp.articulos.TipoProducto" cascade="" ></many-to-one>
 	    <many-to-one  name="caracteristica" column="carac_ID" class="com.jkt.erp.articulos.CaracteristicaProducto" cascade=""></many-to-one>
 	
 		<property name="obligatorio" column="obligatorio" type="boolean" />

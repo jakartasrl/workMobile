@@ -61,9 +61,9 @@ public class TraerCliente extends Operation {
 	 * Muestra las sucursales y sus relaciones en la salida de la operacion.
 	 */
 	private void mostrarSucursales(Cliente cliente) {
-		List<ClienteSucursal> sucursales = cliente.getListaSucursales();
+//		List<ClienteSucursal> sucursales = ;
 		
-		for (ClienteSucursal clienteSucursal : sucursales) {
+		for (ClienteSucursal clienteSucursal : cliente.getListaSucursales()) {
 
 			mostrarSucursal(clienteSucursal);
 			mostrarDomicilios(clienteSucursal);
@@ -95,7 +95,9 @@ public class TraerCliente extends Operation {
 	 */
 	private void mostrarContactos(ClienteSucursal clienteSucursal) {
 		List<Contacto> contactos=clienteSucursal.getContactos();
+		long id = clienteSucursal.getId();
 		for (Contacto contacto : contactos) {
+			contacto.setClienteSucursal(id);
 			notificarObjecto(Notificacion.getNew(WRITER_CONTACTOS, contacto));
 		}
 	}

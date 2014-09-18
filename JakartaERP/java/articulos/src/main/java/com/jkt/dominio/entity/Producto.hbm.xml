@@ -30,6 +30,12 @@
 			<one-to-many class="com.jkt.erp.articulos.ProductoClasificador" />
 		</list>
 		
+		<list name="articulosStock" table="ARTICULOS_STOCK" lazy="true" cascade="all">
+			<key column="PRODUCTO_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.articulos.ArticuloStock" />
+		</list>
+		
 	</class>
 	
 </hibernate-mapping>
