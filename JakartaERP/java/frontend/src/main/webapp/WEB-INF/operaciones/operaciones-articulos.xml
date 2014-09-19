@@ -197,5 +197,75 @@
 		</forms>
 	</operacion>
 
+	<!-- 	GUARDAR un producto -->
+	<operacion name="GuardarProducto" clase="com.jkt.operaciones.Guardar">
+		<input name="mtProd" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_producto">
+			<campoEntrada >		
+
+<!-- 				Campos simples -->
+				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
+				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				
+				<campoEntrada name=""  clase="String" 	metodo="setDescripcionAbrev" />
+				<campoEntrada name="" clase="Boolean" metodo="setComprable" />
+				<campoEntrada name="" clase="Boolean" metodo="setVendible" />
+				<campoEntrada name="" clase="Boolean" metodo="setStockeable" />
+				<campoEntrada name="" clase="Boolean" metodo="setProdPropia" />
+				<campoEntrada name="" clase="Boolean" metodo="setBien" />
+				
+<!-- 				Campos complejos -->
+				<campoEntrada name="oid_tipo" clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
+				
+				
+				<campoEntrada name="mtArtStock" metodo="addArticulo" clase="com.jkt.erp.articulos.ArticuloStock" fieldID="oid_art_stock"  >
+<!-- 					No hace falta el producto como campo, ya que yo se que es hijo del de arriba.Es un seteo bidireccional en el metodo addArticulo -->
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
+					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
+					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
+					
+					
+					<campoEntrada name="mtArtStockDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ArticuloStockDet" fieldID="oid_art_stock_det"  >
+<!-- 						el articuloStock no es necesario para el server ya que es una relacion bidireccional y la resuelvo en agregar detalle, pero no se si la necesitan desde la vista. -->
+<!-- 						private ArticuloStock articuloStock; -->
+								
+						<campoEntrada name="" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+						<campoEntrada name="" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
+
+						<campoEntrada name=""  clase="String" 	metodo="setValorString" />
+						<campoEntrada name=""  clase="Integer" 	metodo="setValorEnter" />
+						<campoEntrada name=""  clase="Double" 	metodo="setValorDoble" />
+						<campoEntrada name="" clase="Boolean" metodo="setValorBoolean" />
+						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+						
+					</campoEntrada>
+					
+				</campoEntrada>
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="FNVar0001"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- TRAER LOS CLASIFICADORES DE UN PRODUCTO -->
+	<operacion name="TraerClasifProd" clase="com.jkt.erp.articulos.operaciones.TraerClasifProducto">
+
+		<output name="resultado" tableName="mtClasificadoresProducto">
+			<campoSalida value="oid_ClasifProd" target="id" />
+			<campoSalida value="DescClasif" target="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="FNCli0001" />
+		</forms>
+
+	</operacion>
+
 
 </entity>

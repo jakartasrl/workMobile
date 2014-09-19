@@ -47,7 +47,7 @@ public class GuardarValoresClasificador extends Operation {
 			componenteValor.setComponente(componente);
 			
 			codigoInternoPadre = componenteValor.getCodigoInternoPadre();
-			if (codigoInternoPadre>0) {
+			if (codigoInternoPadre!=0) {
 				valorPadre=mapa.get(String.valueOf(codigoInternoPadre));
 				valorPadre.agregarValor(componenteValor);
 			}

@@ -347,9 +347,9 @@
 	<!-- TRAER LOS CLASIFICADORES DEL CLIENTE -->
 	<operacion name="TraerClasifCliente" clase="com.jkt.erp.operaciones.TraerClasifCliente">
 		
-		<output name="" tableName="mtClasificadoresCliente">
+		<output name="resultado" tableName="mtClasificadoresCliente">
 			<campoSalida value="oid_ClasifClie" target="id" />
-			<campoSalida value="DescClasif" target="" />
+			<campoSalida value="DescClasif" target="descripcion" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
@@ -363,10 +363,10 @@
 	<!-- TRAER LOS CLASIFICADORES DE LA SUCURSAL -->
 	<operacion name="TraerClasifSucur" clase="com.jkt.erp.operaciones.TraerClasifSucur">
 
-		<output name="" tableName="mtClasificadoresSucursal">
+		<output name="resultado" tableName="mtClasificadoresSucursal">
 			<campoSalida value="oid_ClasifSuc" target="id" />
-			<campoSalida value="oid_SucClie" target="" />
-			<campoSalida value="DescClasif" target="" />
+<!-- 			<campoSalida value="oid_SucClie" target="clienteSucursal.id" />		Esto para que lo quieren? -->
+			<campoSalida value="DescClasif" target="descripcion" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>

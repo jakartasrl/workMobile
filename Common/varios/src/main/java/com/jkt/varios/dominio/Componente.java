@@ -7,7 +7,7 @@ import com.jkt.dominio.Descriptible;
 
 /**
  * <p>Representa a un componente de un {@link Clasificador}</p>
- * <p>Se utilizará para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
+ * <p>Se utilizarï¿½ para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
  * <p>Un mismo componente puede estar en 2 clasificadores distintos</p>
  * 
  * @see ComponenteValor
@@ -63,8 +63,10 @@ public class Componente extends Descriptible {
 //		}else{
 //			valor.setActivo(true);
 //		}
-		valores.add(valor);
-		valor.setComponente(this);
+		if (valor!=null) {
+			valores.add(valor);
+			valor.setComponente(this);
+		}
 	}
 
 	public List<ComponenteValor> getValores() {

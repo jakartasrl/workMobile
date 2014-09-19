@@ -1,14 +1,13 @@
 package com.jkt.erp.operaciones;
 
-import java.util.Map;
+import com.jkt.varios.operaciones.TraerClasificadores;
 
-import com.jkt.operaciones.Operation;
 
-public class TraerClasifSucur extends Operation {
+public class TraerClasifSucur extends TraerClasificadores {
 
 	@Override
-	public void execute(Map<String, Object> aParams) throws Exception {
-
+	protected String getEntidad() {
+		return "4";
 	}
 
 }

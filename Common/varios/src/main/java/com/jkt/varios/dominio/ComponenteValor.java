@@ -86,6 +86,7 @@ public class ComponenteValor extends Descriptible {
 	public void agregarValor(ComponenteValor componenteValor) {
 		if (!valores.contains(componenteValor)) {
 			valores.add(componenteValor);
+			componenteValor.setComponenteValorPadre(this);
 		}
 	}
 

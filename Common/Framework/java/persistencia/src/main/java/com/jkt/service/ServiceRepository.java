@@ -47,7 +47,7 @@ public class ServiceRepository implements IServiceRepository {
 	private static final String CONDICION_MENOR = "menor";
 	private static final String CONDICION_DISTINTO = "distinto";
 	private static final String CONDICION_IGUAL = "igual";
-	private static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validación de regla de negocio.";
+	private static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validaciï¿½n de regla de negocio.";
 	private static final String CAMPO_ACTIVO = "activo";
 	private static final String WILD_CHAR = "%";
 
@@ -140,7 +140,7 @@ public class ServiceRepository implements IServiceRepository {
 	public PersistentEntity getByOid(Class clazz, long id) throws Exception,EntityNotFoundException {
 		PersistentEntity entityRetrieved = (PersistentEntity) getSession().get(clazz, id);
 		if (entityRetrieved==null) {
-			throw new EntityNotFoundException("No existe la entidad solicitada.");
+			throw new EntityNotFoundException(String.format("No existe la entidad %s con identificador %s.", clazz.getSimpleName(), String.valueOf(id)));
 		}
 		return entityRetrieved;
 	}

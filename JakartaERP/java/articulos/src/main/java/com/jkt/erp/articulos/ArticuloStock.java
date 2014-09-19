@@ -63,5 +63,12 @@ public class ArticuloStock extends PersistentEntity {
 	public void setUniMedTerc(UnidadMedida uniMedTerc) {
 		this.uniMedTerc = uniMedTerc;
 	}
+	
+	public void agregarDetalle(ArticuloStockDet detalle){
+		if (!detalles.contains(detalle)) {
+			detalles.add(detalle);
+			detalle.setArticuloStock(this);
+		}
+	}
 
 }
