@@ -253,7 +253,9 @@
 	
 	<!-- TRAER LOS CLASIFICADORES DE UN PRODUCTO -->
 	<operacion name="TraerClasifProd" clase="com.jkt.erp.articulos.operaciones.TraerClasifProducto">
-
+<!-- 		<listas> -->
+<!-- 			outputName="resultado" nombreLista -->
+<!-- 		</listas> -->
 		<output name="resultado" tableName="mtClasificadoresProducto">
 			<campoSalida value="oid_ClasifProd" target="id" />
 			<campoSalida value="DescClasif" target="descripcion" />

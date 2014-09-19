@@ -22,5 +22,7 @@
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
 	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
 	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
+	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
+	<elemento key="representante" value="com.jkt.erp.varios.Representante" />
 
 </elementos>
