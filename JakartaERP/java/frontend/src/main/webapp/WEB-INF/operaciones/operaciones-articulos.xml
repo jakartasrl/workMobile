@@ -242,6 +242,13 @@
 					</campoEntrada>
 					
 				</campoEntrada>
+				
+				<campoEntrada name="mtEquivalencias" metodo="addEquivalencia" clase="com.jkt.erp.articulos.ProductoEquivUniMed" fieldID="oid_equiv"  >
+					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
+					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
+				
 			</campoEntrada>
 		</input>
 		

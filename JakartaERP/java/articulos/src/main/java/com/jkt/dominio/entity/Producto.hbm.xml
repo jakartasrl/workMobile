@@ -36,6 +36,12 @@
 			<one-to-many class="com.jkt.erp.articulos.ArticuloStock" />
 		</list>
 		
+		<list name="equivalencias" table="PRODUCTO_EQUIV_UNI_MED" lazy="true" cascade="all">
+			<key column="PRODUCTO_EQUIV_UNI_MED_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.articulos.ProductoEquivUniMed" />
+		</list>
+		
 	</class>
 	
 </hibernate-mapping>

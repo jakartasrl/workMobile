@@ -21,6 +21,7 @@ public class Producto extends Descriptible {
 	private boolean prodPropia;
 	private boolean bien;
 
+	private List<ProductoEquivUniMed> equivalencias=new ArrayList<ProductoEquivUniMed>();
 	private List<ProductoClasificador> clasificadores = new ArrayList<ProductoClasificador>();
 	private TipoProducto tipoProducto;
 	private List<ArticuloStock> articulosStock=new ArrayList<ArticuloStock>();
@@ -30,9 +31,16 @@ public class Producto extends Descriptible {
 	 * **********************************************************************************************
 	 */
 	
-	
 	public List<ArticuloStock> getArticulosStock() {
 		return articulosStock;
+	}
+
+	public List<ProductoEquivUniMed> getEquivalencias() {
+		return equivalencias;
+	}
+
+	public void setEquivalencias(List<ProductoEquivUniMed> equivalencias) {
+		this.equivalencias = equivalencias;
 	}
 
 	public void setArticulosStock(List<ArticuloStock> articulosStock) {
