@@ -6,6 +6,7 @@ import java.util.Map;
 import com.jkt.erp.articulos.ArticuloStock;
 import com.jkt.erp.articulos.ArticuloStockDet;
 import com.jkt.erp.articulos.Producto;
+import com.jkt.erp.articulos.ProductoEquivUniMed;
 import com.jkt.erp.articulos.TipoProducto;
 import com.jkt.erp.articulos.TipoProductoDet;
 import com.jkt.operaciones.Operation;
@@ -25,6 +26,7 @@ public class TraerProducto extends Operation {
 	private static final String WRITER_DETALLE_TIPO_PRODUCTO = "detalleTipoProducto";
 	private static final String WRITER_ARTICULO_STOCK = "articulosStock";
 	private static final String WRITER_ARTICULO_STOCK_DET = "detalleArticuloStock";
+	private static final String WRITER_EQUIVALECIAS = "equivalencias";
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -33,7 +35,17 @@ public class TraerProducto extends Operation {
 		mostrarProducto(producto);
 		mostrarTipoProducto(producto.getTipoProducto());
 		mostrarArticulosStock(producto);
-		
+		mostrarEquivalencias(producto);
+	}
+
+	/**
+	 * <p>Muestra todas las equivalencias que tiene un producto, indicando la unidad de medida de origen, la de destino, y el factor.</p>
+	 * @param producto {@link Producto} dueño de las equivalencias
+	 */
+	private void mostrarEquivalencias(Producto producto) {
+		for (ProductoEquivUniMed productoEquivUniMed : producto.getEquivalencias()) {
+			notificarObjecto(Notificacion.getNew(WRITER_EQUIVALECIAS, productoEquivUniMed));
+		}
 	}
 
 	/**
@@ -48,12 +60,10 @@ public class TraerProducto extends Operation {
 
 	private void mostrarArticulosStock(Producto producto) {
 		List<ArticuloStock> articulosStock = producto.getArticulosStock();
-		List<ArticuloStockDet> detalles;
 		for (ArticuloStock articuloStock : articulosStock) {
 			notificarObjecto(Notificacion.getNew(WRITER_ARTICULO_STOCK, articuloStock));
 			
-			detalles = articuloStock.getDetalles();
-			for (ArticuloStockDet articuloStockDet : detalles) {
+			for (ArticuloStockDet articuloStockDet : articuloStock.getDetalles()) {
 				notificarObjecto(Notificacion.getNew(WRITER_ARTICULO_STOCK_DET, articuloStockDet));
 			}
 			
