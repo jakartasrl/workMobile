@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Pais;
 import com.jkt.varios.dominio.Provincia;
 
 /**
@@ -120,6 +121,11 @@ public class DomicilioEntrega extends PersistentEntity {
 	public void setearProvincia(Provincia provincia){
 		generarDireccion();
 		this.direccion.setProvincia(provincia);
+	}
+
+	public void setearPais(Pais pais){
+		generarDireccion();
+		this.direccion.setPais(pais);
 	}
 	
 	public void setearDireccion(String direccion){

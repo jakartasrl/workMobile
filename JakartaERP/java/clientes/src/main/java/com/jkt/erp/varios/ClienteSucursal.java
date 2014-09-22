@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Pais;
 import com.jkt.varios.dominio.Provincia;
 
 /**
@@ -175,6 +176,11 @@ public class ClienteSucursal extends PersistentEntity {
 	/*
 	 * Metodos para el manejo de la direccion.
 	 */
+	
+	public void setearPais(Pais pais){
+		generarDireccion();
+		this.direccion.setPais(pais);
+	}
 	
 	public void setearProvincia(Provincia provincia){
 		generarDireccion();

@@ -146,7 +146,7 @@
 		<validadores>
 			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="cod_pais"   tipoValidacion="Existente" entidad="Pais" oidName="oid_pais" descrName="des_pais" />
+			<validador fieldName="cod_pais"   tipoValidacion="Existente" entidad="pais" oidName="oid_pais" descrName="des_pais" />
 		</validadores>
 		
 	</entidad>

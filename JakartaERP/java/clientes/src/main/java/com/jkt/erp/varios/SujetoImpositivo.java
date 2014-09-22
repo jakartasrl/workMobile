@@ -55,6 +55,10 @@ public class SujetoImpositivo extends PersistentEntity {
 		return razonSocial;
 	}
 
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -62,7 +66,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	public void setCliente(Cliente cliente) {
 		//Modificacion en el setter para cuando este metodo es ejecutado por el framework y desde ahi mismo, se busca un cliente con id=0.
 		//En este caso, la relacion la hace el metodo setSujetoImpositivo.
-		if (this.cliente!=null) {
+		if (this.cliente==null) {
 			this.cliente = cliente;
 		}
 	}
@@ -75,9 +79,6 @@ public class SujetoImpositivo extends PersistentEntity {
 		this.inscripcionesImpositivas = inscripcionesImpositivas;
 	}
 
-	public void setRazonSocial(String razonSocial) {
-		this.razonSocial = razonSocial;
-	}
 
 	public boolean isPersonaJuridica() {
 		return personaJuridica;

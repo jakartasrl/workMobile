@@ -25,7 +25,6 @@
 		
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
-<!-- 		@JKT Falta el cliente -->
 		
 	</class>
 

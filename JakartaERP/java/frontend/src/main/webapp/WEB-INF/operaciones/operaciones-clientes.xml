@@ -123,16 +123,6 @@
 	</operacion>
 
 
-	<operacion name="probandoGuardarCliente"
-		clase="com.jkt.erp.operaciones.EjemploParaGuardarCliente">
-
-		<forms>
-			<form name="FNVar0001"/>
-		</forms>
-
-	</operacion>
-
-
 	<!-- TRAER UN CLIENTE -->
 	<operacion name="TraerCliente" clase="com.jkt.erp.operaciones.TraerCliente">
 		<output name="cliente" tableName="mtCliente">
@@ -256,6 +246,7 @@
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
+				<campoEntrada name="oid_CondPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondPago" />
 				
 				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.varios.SujetoImpositivo" fieldID="oid_SujImp">
 <!-- 					<campoEntrada name="oid_Cliente" clase="com.jkt.erp.varios.Cliente" metodo="setCliente" /> -->
@@ -267,7 +258,6 @@
 					<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
 					<campoEntrada name="PersonaJuridica" clase="Boolean" metodo="setPersonaJuridica" />
 					<campoEntrada name="Cuit" clase="String" metodo="setCuit" />
-					<campoEntrada name="oid_CondPago" clase="String" metodo="" />
 
 					<campoEntrada name="mtInscripImposit" metodo="addInscripcionImpositiva" clase="com.jkt.erp.varios.InscripcionImpositiva" fieldID="oid_InscClie">
 						<campoEntrada name="oid_Impuesto" clase="com.jkt.erp.impuestos.dominio.Impuesto" metodo="setImpuesto" />
@@ -278,15 +268,13 @@
 					</campoEntrada>
 				</campoEntrada>				 
 								
-<!-- 
-					<campoEntrada name="mtClasificadoresCliente" metodo="" clase="com.jkt.varios.dominio." fieldID="oid_ClasifClie">
-						** <campoEntrada name="DescClasif" clase="String" metodo="" />
-						<campoEntrada name="oid_ValorClasif" clase="String" metodo="" />
-						** <campoEntrada name="CodValorClasif" clase="String" metodo="" />
-						** <campoEntrada name="DescValorClasif" clase="String" metodo="" />
-						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-					</campoEntrada>
-		 -->
+				<campoEntrada name="mtClasificadoresCliente" metodo="addValorClasificador" clase="com.jkt.erp.varios.ClienteClasificador" fieldID="oid_ClasifClie">
+<!-- 					** <campoEntrada name="DescClasif" clase="String" metodo="" /> -->
+					<campoEntrada name="oid_ValorClasif" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+<!-- 					** <campoEntrada name="CodValorClasif" clase="String" metodo="" /> -->
+<!-- 					** <campoEntrada name="DescValorClasif" clase="String" metodo="" /> -->
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
 
 				<campoEntrada name="mtSucursalesCliente" metodo="addClienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" fieldID="oid_SucClie">
 					<campoEntrada name="NroSucursal" clase="Integer" metodo="setNumero" />
@@ -296,6 +284,7 @@
 					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
 					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
 					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
+					<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
 					<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
 					 
 					<campoEntrada name="oid_Vendedor" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedorComercial" />
@@ -309,6 +298,7 @@
 						<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
 						<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
 						<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
+						<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
 						<campoEntrada name="HorariosEntrega" clase="String" metodo="setDiasEntrega" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>

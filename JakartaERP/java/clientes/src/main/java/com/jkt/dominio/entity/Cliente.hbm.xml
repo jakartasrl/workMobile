@@ -14,7 +14,7 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="RAZON_SOCIAL"/>
+<!-- 		<property name="descripcion" column="RAZON_SOCIAL"/> -->
 		<property name="telefono" column="TELEFONO"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
