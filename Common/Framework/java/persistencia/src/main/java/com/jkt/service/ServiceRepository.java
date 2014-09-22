@@ -83,7 +83,7 @@ public class ServiceRepository implements IServiceRepository {
 	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException {
 		ejecutarValidacionDeNegocio(entity);
 		try{
-			getSession().save(entity);
+			getSession().saveOrUpdate(entity);
 		}catch(javax.validation.ConstraintViolationException e){
 			Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 			constraintViolations.size();

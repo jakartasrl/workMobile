@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
+
+import javax.validation.ConstraintViolation;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,6 +23,7 @@ import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.service.SessionProvider;
@@ -110,6 +114,21 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				Map map = adaptRequestHook(input, operation);
 				tx.commit();
 				return map;
+			}catch(javax.validation.ConstraintViolationException e){
+				Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+				constraintViolations.size();
+				StringBuffer buffer=new StringBuffer();
+				String message = null;
+				
+				for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+					buffer.append(constraintViolation.getMessage());
+					break;
+				}
+				
+				tx.rollback();
+				sessionProvider.destroySession();
+				
+				throw new ValidacionException(buffer.toString());
 			}catch(Exception e){
 				tx.rollback();
 				sessionProvider.destroySession();

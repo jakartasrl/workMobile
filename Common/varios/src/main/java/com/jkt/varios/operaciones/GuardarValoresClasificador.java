@@ -1,5 +1,6 @@
 package com.jkt.varios.operaciones;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.persistence.EntityNotFoundException;
 
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
+import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 import com.jkt.varios.dominio.ComponenteValor;
 
@@ -24,25 +26,39 @@ public class GuardarValoresClasificador extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List valores = recuperarObjeto(aParams);
 		Map<String, ComponenteValor> mapa=new HashMap<String, ComponenteValor>();
+		Map<String, Componente> mapaComponentes=new HashMap<String, Componente>();
 			
 		ComponenteValor componenteValor;
+		Componente componente;
+		int idDeComponente;
 		for (Object currentObject : valores) {
 			componenteValor=(ComponenteValor) currentObject;
 			mapa.put(String.valueOf(componenteValor.getCodigoInterno()), componenteValor);
+			
+			idDeComponente = componenteValor.getIdComponente();
+			
+			if(!mapaComponentes.containsKey(String.valueOf(idDeComponente))){
+				componente=(Componente) obtener(Componente.class, (long)componenteValor.getIdComponente());
+				if (componente!=null) {
+					mapaComponentes.put(String.valueOf(idDeComponente), componente);
+				}
+			}
 		}
 		
 		//Ya tengo el mapa desordenado para poder definir las relaciones entre valores
 		
 		
 //		ComponenteValor componenteValor;
-		Componente componente;
+//		Componente componente;
 		int codigoInternoPadre;
 		ComponenteValor valorPadre;
 		for (Object currentObject : valores) {
 			componenteValor=(ComponenteValor) currentObject;
 			
 			//Defino la relacion obligatorio con un componente.No ha de existir un valor sin su componente
-			componente = (Componente) obtener(Componente.class, (long)componenteValor.getIdComponente());
+//			componente = (Componente) obtener(Componente.class, (long)componenteValor.getIdComponente());
+			componente = mapaComponentes.get(String.valueOf(componenteValor.getIdComponente()));
+			
 			componente.agregarValor(componenteValor);
 			componenteValor.setComponente(componente);
 			
@@ -51,8 +67,17 @@ public class GuardarValoresClasificador extends Operation {
 				valorPadre=mapa.get(String.valueOf(codigoInternoPadre));
 				valorPadre.agregarValor(componenteValor);
 			}
-			guardar(componente);
+//			guardar(componente);
 			
+		}
+		
+		
+		Collection<Componente> values = mapaComponentes.values();
+		for (Componente componenteListo : values) {
+//			guardar(componenteListo);
+			Clasificador c=componenteListo.getClasificador();
+			guardar(c);
+			break;
 		}
 		
 	}
