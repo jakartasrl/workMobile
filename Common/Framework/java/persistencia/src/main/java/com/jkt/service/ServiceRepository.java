@@ -10,13 +10,18 @@ import static org.hibernate.criterion.Restrictions.ne;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -261,6 +266,22 @@ public class ServiceRepository implements IServiceRepository {
 //			return date;
 		}else{
 			return null;
+		}
+	}
+
+	public PersistentEntity getByProperties(Class className, Map<String, Object> map) throws JakartaException {
+		Criteria criteria = getSession().createCriteria(className);
+		Entry<String,Object> entry=null;
+		
+		for (Iterator<Entry<String, Object>> iterator = map.entrySet().iterator(); iterator.hasNext();) {
+			entry = (Entry<String,Object>) iterator.next();
+			criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+		}
+		
+		try{
+			return (PersistentEntity) criteria.uniqueResult();
+		}catch(org.hibernate.QueryException exp){
+			throw new JakartaException("Ocurrio un error. Al parecer la entidad maestra proporcionada no es correcta.");
 		}
 	}
 }

@@ -25,7 +25,7 @@ public class GuardarValoresClasificador extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List valores = recuperarObjeto(aParams);
-		Map<String, ComponenteValor> mapa=new HashMap<String, ComponenteValor>();
+ 		Map<String, ComponenteValor> mapa=new HashMap<String, ComponenteValor>();
 		Map<String, Componente> mapaComponentes=new HashMap<String, Componente>();
 			
 		ComponenteValor componenteValor;

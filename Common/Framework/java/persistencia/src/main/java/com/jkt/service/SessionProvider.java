@@ -17,8 +17,8 @@ import com.jkt.persistencia.ISessionProvider;
  * <h1>Hibernate Session Provider</h1>
  * 
  * <p>Provee a todos los componentes una sesion que se mantendra durante el request.
- * Esta session será abierta una sola vez, y cerada al terminar la operacion.
- * Si bien podria hacer esto en todos los lugares donde se necesitasé una sesion, es preferible delegar a cada
+ * Esta session serï¿½ abierta una sola vez, y cerada al terminar la operacion.
+ * Si bien podria hacer esto en todos los lugares donde se necesitasï¿½ una sesion, es preferible delegar a cada
  * componente sus responsabilidades
  * </p>
  * 

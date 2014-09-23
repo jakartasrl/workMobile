@@ -149,6 +149,8 @@ public abstract class Operation extends Observable {
 	 * 
 	 */
 	protected void notificarObjecto(Object parameter) {
+		this.
+		
 		setChanged();
 		notifyObservers(parameter);
 	}

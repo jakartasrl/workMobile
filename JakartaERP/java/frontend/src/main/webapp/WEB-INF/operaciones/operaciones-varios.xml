@@ -226,6 +226,27 @@
 		</forms>
 		
 	</operacion>
+	
+	
+<!-- 	Traer valores de clasificadores. -->
+
+	<operacion name="TraerValoresDeClasificadores" clase="com.jkt.varios.operaciones.TraerValoresDeClasificadores">
+		
+		<output name="valores" tableName="mtValores">
+			<campoSalida value="oid_Valor" target="id" />
+			<campoSalida value="Codigo" target="codigo" /> 
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="isActivo" />	
+		</output>
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="---"></form>
+		</forms>
+		
+	</operacion>
+	
 
 	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
 	<operacion name="TraerImpuestos" clase="com.jkt.erp.impuestos.operaciones.TraerImpuestos">

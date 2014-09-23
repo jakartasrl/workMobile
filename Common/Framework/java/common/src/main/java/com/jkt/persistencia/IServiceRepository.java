@@ -1,8 +1,10 @@
 package com.jkt.persistencia;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.util.IRepositorioClases;
 
@@ -16,6 +18,8 @@ import com.jkt.util.IRepositorioClases;
 @SuppressWarnings("rawtypes")
 public interface IServiceRepository {
 
+	PersistentEntity getByProperties(Class className, Map<String,Object> map) throws JakartaException;
+	
 	/**
 	 * Guarda una entidad.
 	 * 

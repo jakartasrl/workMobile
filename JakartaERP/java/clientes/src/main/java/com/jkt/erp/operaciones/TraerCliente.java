@@ -127,8 +127,7 @@ public class TraerCliente extends Operation {
 	 * Muestra los clasificadores que posee un cliente.
 	 */
 	private void mostrarClasificadores(Cliente cliente) {
-		List<ClienteClasificador> listaClasificadores = cliente.getListaClasificadores();
-		for (ClienteClasificador clienteClasificador : listaClasificadores) {
+		for (ClienteClasificador clienteClasificador : cliente.getListaClasificadores()) {
 			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_CLIENTES, clienteClasificador));
 		}
 	}

@@ -100,6 +100,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		String operationName = parameters.getString(key);
 	
+		log.debug("Ejecutando la operacion "+operationName+".");
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {
@@ -157,7 +158,7 @@ public abstract class RequestProcessor extends BaseController{
 //			}
 			sessionProvider.destroySession();
 		}
-		log.debug("Finaliz� la operaci�n...");
+		log.debug("Finalizó la operación...");
 	}
 
 	private Map<String, Object> getObjetosOutput(Operation aOper,	IEventBusiness aEB) {

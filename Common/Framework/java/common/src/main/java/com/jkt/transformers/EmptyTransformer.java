@@ -25,6 +25,7 @@ public class EmptyTransformer extends Transformer {
 	@Override
 	protected void update(Notificacion arg1) {
 		//do nothing
+		throw new RuntimeException("No hay configurado un transformador de salidas. El actual es un transformador vacio.");
 	}
 
 	@Override
