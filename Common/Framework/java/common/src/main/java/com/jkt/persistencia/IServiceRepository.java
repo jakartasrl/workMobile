@@ -54,8 +54,9 @@ public interface IServiceRepository {
 	 * @param className
 	 * @param properties
 	 * @return
+	 * @throws JakartaException 
 	 */
-	List<PersistentEntity> getByProperties(Class className, List properties);
+	List<PersistentEntity> getByProperties(Class className, List properties) throws JakartaException;
 
 	/**
 	 * Recupera filtrando por una propiedad y la clase

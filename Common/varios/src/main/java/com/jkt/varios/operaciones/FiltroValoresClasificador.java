@@ -3,24 +3,21 @@ package com.jkt.varios.operaciones;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 import com.jkt.varios.dominio.ComponenteValor;
 
-/**
- * <p>Esta operacion recibe un id de clasificador, busca un clasificador en la base, y luego busca su componente hoja,
- * el del ultimo nivel, para mostrar sus valores.</p>
- * 
- * @author Leonel Suarez - Jakarta SRL
- */
-public class TraerValoresDeClasificadores extends Operation {
+public class FiltroValoresClasificador extends Operation {
 
-	private static final String OID = "oid".toUpperCase();
+	private static final String OID = "oidentidadmaestra".toUpperCase();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
+		
+		validarEntrada(aParams.get(OID));
 		
 		//Obtengo el clasificador desde la base
 		Clasificador clasificador= (Clasificador) obtener(Clasificador.class, (String)aParams.get(OID));
@@ -50,7 +47,10 @@ public class TraerValoresDeClasificadores extends Operation {
 	private void mostrarValores(Componente componentePadre) {
 		List<ComponenteValor> valores = componentePadre.getValores();
 		for (ComponenteValor componenteValor : valores) {
-			notificarObjecto(Notificacion.getNew("valores", componenteValor));
+			if (componenteValor==null) {
+				continue;
+			}
+			notificarObjecto(Notificacion.getNew("resultado", componenteValor));
 		}
 	}
 

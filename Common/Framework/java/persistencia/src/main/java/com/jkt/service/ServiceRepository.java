@@ -45,22 +45,22 @@ import com.jkt.util.IRepositorioClases;
 @SuppressWarnings("rawtypes")
 public class ServiceRepository implements IServiceRepository {
 
-	private static final String CONDICION_LIKE = "like";
-	private static final String CONDICION_MAYOR_IGUAL = "mayorigual";
-	private static final String CONDICION_MAYOR = "mayor";
-	private static final String CONDICION_MENOR_IGUAL = "menorigual";
-	private static final String CONDICION_MENOR = "menor";
-	private static final String CONDICION_DISTINTO = "distinto";
-	private static final String CONDICION_IGUAL = "igual";
-	private static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validaci�n de regla de negocio.";
-	private static final String CAMPO_ACTIVO = "activo";
-	private static final String WILD_CHAR = "%";
+	public static final String CONDICION_LIKE = "like";
+	public static final String CONDICION_MAYOR_IGUAL = "mayorigual";
+	public static final String CONDICION_MAYOR = "mayor";
+	public static final String CONDICION_MENOR_IGUAL = "menorigual";
+	public static final String CONDICION_MENOR = "menor";
+	public static final String CONDICION_DISTINTO = "distinto";
+	public static final String CONDICION_IGUAL = "igual";
+	public static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validaci�n de regla de negocio.";
+	public static final String CAMPO_ACTIVO = "activo";
+	public static final String WILD_CHAR = "%";
 
 	
-	private static final String INTEGER = "integer";
-	private static final String STRING = "string";
-	private static final String BOOLEAN = "boolean";
-	private static final String DATE = "date";
+	public static final String INTEGER = "integer";
+	public static final String STRING = "string";
+	public static final String BOOLEAN = "boolean";
+	public static final String DATE = "date";
 
 	
 	private ISessionProvider sessionProvider;
@@ -169,7 +169,7 @@ public class ServiceRepository implements IServiceRepository {
 	}
 
 
-	public List<PersistentEntity> getByProperties(Class className, List properties) {
+	public List<PersistentEntity> getByProperties(Class className, List properties) throws JakartaException {
 		Criteria criteria = createCriteria(className);
 
 		Filtro filtro;
@@ -196,7 +196,11 @@ public class ServiceRepository implements IServiceRepository {
 			
 		}
 		
-		return criteria.list();
+		try{
+			return criteria.list();
+		}catch(org.hibernate.QueryException exp){
+			throw new JakartaException("Ocurrio un error. Al parecer el filtro que realiza no coincide con las relaciones establecidas en la entidad.");
+		}
 	}
 
 	/**

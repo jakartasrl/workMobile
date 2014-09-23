@@ -264,4 +264,17 @@ public abstract class Operation extends Observable {
 			throw new JakartaException("La operacion necesita recibir parametros.");
 		}
 	}
+	
+	protected void validarEntrada(Object object) throws JakartaException{
+		String valor=(String) object;
+		String mensaje = "No se encuentra la entrada esperada en la operacion.";
+		
+		if (valor==null) {
+			throw new JakartaException(mensaje);
+		}
+		
+		if (valor.trim().isEmpty()) {
+			throw new JakartaException(mensaje);
+		}
+	}
 }
