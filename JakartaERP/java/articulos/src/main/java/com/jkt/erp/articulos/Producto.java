@@ -3,10 +3,18 @@ package com.jkt.erp.articulos;
 import java.util.ArrayList;
 import java.util.List;
 
-import scala.Array;
+import javax.validation.constraints.NotNull;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.varios.dominio.UnidadMedida;
 
+/**
+ * <p>Un producto esta estrictamente relacionado a un tipo de producto.</p>
+ * <p>Un tipo de producto puede ser una camisa, y el producto puede ser camisa manga larga talle XL</p>
+ * 
+ * @author ssuarez
+ *
+ */
 public class Producto extends Descriptible {
 
 	/*
@@ -21,6 +29,17 @@ public class Producto extends Descriptible {
 	private boolean prodPropia;
 	private boolean bien;
 
+	@NotNull(message="Es necesario que el articulo tenga una unidad de medida principal.")
+	private UnidadMedida uniMedPrin;
+	
+	private UnidadMedida uniMedSec;
+	private UnidadMedida uniMedTerc;
+	
+	
+	private UnidadMedida unidadVenta;
+	private UnidadMedida unidadProduccion;
+	private UnidadMedida unidadCompra;
+	
 	private List<ProductoEquivUniMed> equivalencias=new ArrayList<ProductoEquivUniMed>();
 	private List<ProductoClasificador> clasificadores = new ArrayList<ProductoClasificador>();
 	private TipoProducto tipoProducto;
@@ -109,6 +128,54 @@ public class Producto extends Descriptible {
 
 	public void setTipoProducto(TipoProducto tipoProducto) {
 		this.tipoProducto = tipoProducto;
+	}
+
+	public UnidadMedida getUniMedPrin() {
+		return uniMedPrin;
+	}
+
+	public void setUniMedPrin(UnidadMedida uniMedPrin) {
+		this.uniMedPrin = uniMedPrin;
+	}
+
+	public UnidadMedida getUniMedSec() {
+		return uniMedSec;
+	}
+
+	public void setUniMedSec(UnidadMedida uniMedSec) {
+		this.uniMedSec = uniMedSec;
+	}
+
+	public UnidadMedida getUniMedTerc() {
+		return uniMedTerc;
+	}
+
+	public void setUniMedTerc(UnidadMedida uniMedTerc) {
+		this.uniMedTerc = uniMedTerc;
+	}
+
+	public UnidadMedida getUnidadVenta() {
+		return unidadVenta;
+	}
+
+	public void setUnidadVenta(UnidadMedida unidadVenta) {
+		this.unidadVenta = unidadVenta;
+	}
+
+	public UnidadMedida getUnidadProduccion() {
+		return unidadProduccion;
+	}
+
+	public void setUnidadProduccion(UnidadMedida unidadProduccion) {
+		this.unidadProduccion = unidadProduccion;
+	}
+
+	public UnidadMedida getUnidadCompra() {
+		return unidadCompra;
+	}
+
+	public void setUnidadCompra(UnidadMedida unidadCompra) {
+		this.unidadCompra = unidadCompra;
 	}
 
 }

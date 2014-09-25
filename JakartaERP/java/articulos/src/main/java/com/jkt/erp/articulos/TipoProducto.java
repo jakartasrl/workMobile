@@ -5,6 +5,12 @@ import java.util.List;
 
 import com.jkt.dominio.Descriptible;
 
+/**
+ * <p>Un tipo de producto puede ser una camisa, una puerta.</p>
+ * 
+ * @author ssuarez
+ *
+ */
 public class TipoProducto extends Descriptible {
 
 	private Producto producto;

@@ -516,52 +516,72 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		//creacion de clase e instancia del objeto compuesto.
 		Class<?> childClazz  = null;
 		Object childInstance = null;
-		if (!test){
-			try{
-			   childClazz = Class.forName(parentMetadata.getClase());
-			}
-			catch (ClassNotFoundException e){
-				throw new JakartaException("La clase: " + parentMetadata.getClase() + " es Inexistente");
-			}
-			childInstance = childClazz.newInstance();
-		}
 		
 		
-		Registro primerRegistro=registros.get(0);//es un for esto!
 		
-//		if (registros.size()>1) {
-//			estrategia=new StrategyManyInstances();
-//		}else{
-//			estrategia=new StrategyOneInstance();
-//		}
-		
-		//Obtengo todos los campos que contiene el elemento actual
-		MapDS campos = primerRegistro.getCampos();
-		
-		for (Iterator<Entry<Object, Object>> iteratorR = campos.entrySet().iterator(); iteratorR.hasNext();) {
-			Entry<Object, Object> entryR = (Entry<Object, Object>) iteratorR.next();
-			
-			CampoEntrada childMetadata = parentMetadata.getHijo((String)entryR.getKey());
+		for (Registro registro : registros) {
+
 			
 			
-			if (childMetadata==null) {
-				continue;
-			}
-//			if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
-//				continue;
+			
+//			Registro primerRegistro=registros.get(0);//es un for esto!
+			
+//			if (registros.size()>1) {
+//				estrategia=new StrategyManyInstances();
+//			}else{
+//				estrategia=new StrategyOneInstance();
 //			}
 			
-			if(esTabla(entryR.getValue())){
-				resolverCampoCompuesto(childClazz, childInstance, childMetadata, ((Tabla)entryR.getValue()).getRegitros());
-			}else{
-				resolvePrimitiveObject(childMetadata, childClazz, childInstance, entryR.getValue());
+			//Obtengo todos los campos que contiene el elemento actual
+			MapDS campos = registro.getCampos();
+			String keyParaRecuperarObjeto = parentMetadata.getFieldID();
+			if (keyParaRecuperarObjeto == null || keyParaRecuperarObjeto.isEmpty()){
+				throw new JakartaException("No esta en operaciones.xml el FieldID");
+			}
+			
+			if (!test){
+				try{
+					childClazz = Class.forName(parentMetadata.getClase());
+				}
+				catch (ClassNotFoundException e){
+					throw new JakartaException("La clase: " + parentMetadata.getClase() + " es Inexistente");
+				}
+				
+				if (Long.valueOf((String) campos.get(keyParaRecuperarObjeto))>0) {
+					childInstance=recuperarObjecto(childClazz, Long.valueOf((String) campos.get(keyParaRecuperarObjeto)));
+				}else{
+					childInstance = childClazz.newInstance();
+				}
+			}
+			
+			for (Iterator<Entry<Object, Object>> iteratorR = campos.entrySet().iterator(); iteratorR.hasNext();) {
+				Entry<Object, Object> entryR = (Entry<Object, Object>) iteratorR.next();
+				
+				CampoEntrada childMetadata = parentMetadata.getHijo((String)entryR.getKey());
+				
+				
+				if (childMetadata==null) {
+					continue;
+				}
+//				if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
+//					continue;
+//				}
+				
+				if(esTabla(entryR.getValue())){
+					resolverCampoCompuesto(childClazz, childInstance, childMetadata, ((Tabla)entryR.getValue()).getRegitros());
+				}else{
+					resolvePrimitiveObject(childMetadata, childClazz, childInstance, entryR.getValue());
+				}
+			}
+			if (!test){
+			   Class<?> otraClase = Class.forName(parentMetadata.getClase());
+			   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
+			   method.invoke(parentObject,childInstance);
 			}
 		}
-		if (!test){
-		   Class<?> otraClase = Class.forName(parentMetadata.getClase());
-		   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
-		   method.invoke(parentObject,childInstance);
-		}
+		
+		
+
 	}
 	
 	private boolean esTabla(Object obj){
