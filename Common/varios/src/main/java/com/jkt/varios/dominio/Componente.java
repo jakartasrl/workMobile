@@ -3,6 +3,8 @@ package com.jkt.varios.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -16,7 +18,9 @@ import com.jkt.dominio.Descriptible;
  */
 public class Componente extends Descriptible {
 
+	@NotNull
 	private Clasificador clasificador;
+	
 	private Componente componentePadre;
 	private Componente componenteHijo;
 	private List<ComponenteValor> valores=new ArrayList<ComponenteValor>();

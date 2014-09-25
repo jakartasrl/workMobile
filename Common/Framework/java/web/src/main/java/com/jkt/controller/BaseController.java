@@ -24,7 +24,7 @@ import com.jkt.framework.writers.XMLStreamMaker;
  * <h1>Algunas de las funcionalidades de esta clase</h1>
  * <p>Manejo de excepciones</p>
  * <p>Funcionalidad comun entre todos los controllers</p>
- * <p>Inyecci�n de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
+ * <p>Inyecci�n de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL
@@ -108,6 +108,14 @@ public class BaseController{
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);
 		xmlStreamMaker.writeStartTagException(exception.getMessage());
+	} 
+	
+	@ExceptionHandler(org.hibernate.TransactionException.class)
+	public @ResponseBody void manejarExcepcionDeTransacciones(org.hibernate.TransactionException exception) throws IOException{
+		outputStream.flush();
+		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
+		xmlStreamMaker.setStream(outputStream);
+		xmlStreamMaker.writeStartTagException("Esperé mientras se termina una operación pendiente...Vuelva a intentar en breves segundos.");
 	} 
 	
 }

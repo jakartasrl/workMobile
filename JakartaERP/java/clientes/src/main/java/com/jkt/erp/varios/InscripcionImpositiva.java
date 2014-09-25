@@ -1,17 +1,18 @@
 package com.jkt.erp.varios;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.impuestos.dominio.CategoriaImpuesto;
 import com.jkt.erp.impuestos.dominio.Impuesto;
 
 /**
  * <p>Representa las inscripciones en cada impuesto que tiene el sujeto impositivo</p>
- * <p>Se utilizar� para el calculo de impuestos y retenciones en facturas, y pagos</p>
+ * <p>Se utilizara para el calculo de impuestos y retenciones en facturas, y pagos</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -30,13 +31,40 @@ public class InscripcionImpositiva extends PersistentEntity {
 	
 	private Date fechaInscripcion;
 	
-//	private CategoriaImpuesto categoriaActual;
-	
+	private CategoriaImpuesto categoria;
+	private Date fechaVigencia;
+
 	private List<CategorizacionImpositiva> categorizacionImpositiva=new ArrayList<CategorizacionImpositiva>();
 
 	/*
 	 * Variables de instancia
 	 * ************************************************************************************************************
+	 */
+	
+	
+	/*
+	 * Variables transientes
+	 */
+//	private CategoriaImpuesto categoria;
+//	private Date fechaVigencia;
+//	
+	public CategoriaImpuesto getCategoria() {
+		return categoria;
+	}
+	
+	public void setCategoria(CategoriaImpuesto categoria) {
+		this.categoria = categoria;
+	}
+	
+	public Date getFechaVigencia() {
+		return fechaVigencia;
+	}
+	
+	public void setFechaVigencia(Date fechaVigencia) {
+		this.fechaVigencia = fechaVigencia;
+	}
+	/*
+	 * Variables transientes
 	 */
 	
 	public List<CategorizacionImpositiva> getCategorizacionImpositiva() {

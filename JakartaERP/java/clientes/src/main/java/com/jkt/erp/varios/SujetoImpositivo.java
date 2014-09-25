@@ -26,7 +26,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	 * 
 	 */
 	
-	@NotNull(message="El sujeto impositivo debe estar relacionado con un cliente.")
+//	@NotNull(message="El sujeto impositivo debe estar relacionado con un cliente.")
 	private Cliente cliente;
 	
 	@NotBlank(message="La razon social del sujeto impositivo no puede ser vacia.")
@@ -118,7 +118,13 @@ public class SujetoImpositivo extends PersistentEntity {
 	 */
 
 	public void addInscripcionImpositiva(InscripcionImpositiva inscripcion){
-		agregarObjectoAColeccion(inscripcionesImpositivas, inscripcion);
+		
+		if(!inscripcionesImpositivas.contains(inscripcion)){
+			inscripcionesImpositivas.add(inscripcion);
+			inscripcion.setSujetoImpositivo(this);
+		}
+		
+//		agregarObjectoAColeccion(inscripcionesImpositivas, inscripcion);
 	}
 	
 	/*

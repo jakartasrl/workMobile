@@ -3,6 +3,7 @@ package com.jkt.adapter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -53,6 +54,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String BOOLEAN_TYPE = "Boolean";
 	private static final String INTEGER_TYPE = "Integer";
 	private static final String DOUBLE_TYPE = "Double";
+	private static final String DATE_TYPE = "Date";
 
 	private ISessionProvider sessionProvider;
 	private Session session;
@@ -109,12 +111,17 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		session = sessionProvider.getSession();
-		Transaction tx = session.beginTransaction();
-			try{
-				Map map = adaptRequestHook(input, operation);
-				tx.commit();
-				return map;
-			}catch(javax.validation.ConstraintViolationException e){
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+		}catch(org.hibernate.TransactionException e){
+			throw new JakartaException("Espere unos segundos mientras finaliza una operacion pendiente...Intente nuevamente en breves segundos...");
+		}	
+		try{
+			Map map = adaptRequestHook(input, operation);
+			tx.commit();
+			return map;
+		}catch(javax.validation.ConstraintViolationException e){
 				Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 				constraintViolations.size();
 				StringBuffer buffer=new StringBuffer();
@@ -440,6 +447,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			result=Integer.valueOf((String)value);
 		}else if(DOUBLE_TYPE.equals(nombreClase)){
 			result=Double.valueOf((String)value);
+		}else if(DATE_TYPE.equals(nombreClase)){
+//			result=Date.parse((String)value);//  Double.valueOf((String)value);
 		}else{
 			try {
 				session = sessionProvider.getSession();
@@ -479,6 +488,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			primitiveWrapper=int.class;
 		}else if(DOUBLE_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=double.class;
+		}else if(DATE_TYPE.equals(campoEntrada.getClase())){
+			primitiveWrapper=Date.class;
 		}else{
 			primitiveWrapper=Class.forName(campoEntrada.getClase());
 		}

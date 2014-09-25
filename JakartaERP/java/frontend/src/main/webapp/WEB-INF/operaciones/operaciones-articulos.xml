@@ -35,7 +35,7 @@
   <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
   <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
   <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada fieldID        CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
  
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->

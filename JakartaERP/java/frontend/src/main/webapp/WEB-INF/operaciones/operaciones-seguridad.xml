@@ -224,7 +224,7 @@
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Cadena" target="cadena" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -242,7 +242,7 @@
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Cadena" target="cadena" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
