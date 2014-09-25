@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!DOCTYPE entity [
+  <!ELEMENT entidad     	(campos*)>
+  <!ELEMENT campos   		(campo*)>
+  <!ELEMENT campo 			EMPTY>
+  
+  <!ATTLIST entidad nombre	CDATA #REQUIRED>
+
+  <!ATTLIST campo fieldName CDATA #REQUIRED>
+  <!ATTLIST campo tipo CDATA #REQUIRED>
+  <!ATTLIST campo longitud CDATA #REQUIRED>
+  <!ATTLIST campo readOnly CDATA #REQUIRED>
+  <!ATTLIST campo columnWidth CDATA #IMPLIED>
+  <!ATTLIST campo visible CDATA #REQUIRED>
+  <!ATTLIST campo orden CDATA #REQUIRED>
+  <!ATTLIST campo label CDATA #REQUIRED>
+
+]>
+
+<entidades>
+
+	<entidad nombre="generico">
+
+		<campos>
+			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Codigo" />
+			<campo fieldName="Descripcion" tipo="String" longitud="100" columnWidth="380" visible="true" readOnly="false" orden="3" label="Descripcion" />
+		</campos>
+
+	</entidad>
+	
+<!-- 	<entidad nombre="condicionPago"> -->
+
+<!-- 		<campos> -->
+<!-- 			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" /> -->
+<!-- 			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Codigo" /> -->
+<!-- 			<campo fieldName="Descripcion" tipo="String" longitud="100" columnWidth="380" visible="true" readOnly="false" orden="3" label="Descripcion" /> -->
+<!-- 		</campos> -->
+
+<!-- 	</entidad> -->
+
+
+	
+</entidades>

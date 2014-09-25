@@ -1,19 +1,10 @@
 package com.jkt.persistencia;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-
-
-
-
-
-
-
-
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.util.IRepositorioClases;
 
@@ -27,12 +18,15 @@ import com.jkt.util.IRepositorioClases;
 @SuppressWarnings("rawtypes")
 public interface IServiceRepository {
 
+	PersistentEntity getByProperties(Class className, Map<String,Object> map) throws JakartaException;
+	
 	/**
-	 * Guarda una entidad
-	 * @param entity
+	 * Guarda una entidad.
+	 * 
+	 * @param entity a guardar
 	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws IllegalAccessException  
+	 * @throws InstantiationException  
 	 * @throws ClassNotFoundException 
 	 */
 	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;
@@ -60,8 +54,9 @@ public interface IServiceRepository {
 	 * @param className
 	 * @param properties
 	 * @return
+	 * @throws JakartaException 
 	 */
-	List<PersistentEntity> getByProperties(Class className, List properties);
+	List<PersistentEntity> getByProperties(Class className, List properties) throws JakartaException;
 
 	/**
 	 * Recupera filtrando por una propiedad y la clase

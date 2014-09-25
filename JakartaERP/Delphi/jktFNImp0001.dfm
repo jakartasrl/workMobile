@@ -116,10 +116,6 @@ inherited FNImp0001: TFNImp0001
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.FocusFirstCellOnNewRecord = True
         OptionsView.GroupByBox = False
-        object dbgImpuestoCategoriasDBTableView1oid_ImpCat: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ImpCat'
-          Visible = False
-        end
         object dbgImpuestoCategoriasDBTableView1oid_Impuesto: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Impuesto'
           Visible = False
@@ -208,11 +204,11 @@ inherited FNImp0001: TFNImp0001
     ListaValidaciones = <
       item
         Field = mtImpuestoCategoriasCodigo
-        ValidadorNew = valCodigo1
+        ValidadorGral = valCodigo1
       end
       item
         Field = mtImpuestoCategoriasCodigo
-        ValidadorNew = valCodigo2
+        ValidadorGral = valCodigo2
       end>
     Left = 424
     Top = 264
@@ -315,7 +311,7 @@ inherited FNImp0001: TFNImp0001
     SubLanguageID = 0
     LocaleID = 0
     Left = 320
-    Top = 64
+    Top = 112
     object mtComportamientosoid_Comportamiento: TIntegerField
       FieldName = 'oid_Comportamiento'
     end
@@ -384,10 +380,6 @@ inherited FNImp0001: TFNImp0001
     LocaleID = 0
     Left = 56
     Top = 216
-    object mtImpuestoCategoriasoid_ImpCat: TIntegerField
-      Tag = 1
-      FieldName = 'oid_ImpCat'
-    end
     object mtImpuestoCategoriasoid_Impuesto: TIntegerField
       Tag = 1
       FieldName = 'oid_Impuesto'
@@ -432,6 +424,6 @@ inherited FNImp0001: TFNImp0001
   object dsComportamientos: TDataSource
     DataSet = mtComportamientos
     Left = 320
-    Top = 112
+    Top = 64
   end
 end

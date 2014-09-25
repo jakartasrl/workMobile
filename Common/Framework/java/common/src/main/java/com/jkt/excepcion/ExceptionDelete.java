@@ -8,11 +8,6 @@ package com.jkt.excepcion;
 
 public class ExceptionDelete extends Exception {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -379891801415844311L;
-
 	public ExceptionDelete() {
 	}
 }

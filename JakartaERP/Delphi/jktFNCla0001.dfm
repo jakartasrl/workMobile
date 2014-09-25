@@ -1,9 +1,9 @@
 inherited FNCla0001: TFNCla0001
   Caption = 'ABM de Clasificadores'
   ClientHeight = 398
-  ClientWidth = 704
-  ExplicitWidth = 720
-  ExplicitHeight = 437
+  ClientWidth = 763
+  ExplicitWidth = 779
+  ExplicitHeight = 436
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -15,7 +15,7 @@ inherited FNCla0001: TFNCla0001
     ParentCtl3D = False
     TabOrder = 4
     Height = 97
-    Width = 704
+    Width = 763
     object txtCodigo: TcxDBTextEdit
       Left = 60
       Top = 30
@@ -79,7 +79,12 @@ inherited FNCla0001: TFNCla0001
       Top = 64
       DataBinding.DataField = 'oid_Entidad'
       DataBinding.DataSource = dsClasificador
-      Properties.ListColumns = <>
+      Properties.KeyFieldNames = 'oid_Entidad'
+      Properties.ListColumns = <
+        item
+          FieldName = 'Descripcion'
+        end>
+      Properties.ListSource = dsEntidades
       TabOrder = 2
       Width = 162
     end
@@ -102,26 +107,26 @@ inherited FNCla0001: TFNCla0001
     Caption = 'Componentes'
     TabOrder = 5
     Height = 301
-    Width = 704
+    Width = 763
     object cxDBTreeList1: TcxDBTreeList
       Left = 3
       Top = 15
-      Width = 502
-      Height = 276
-      Align = alLeft
+      Width = 757
+      Height = 250
+      Align = alTop
       Bands = <
         item
         end>
       DataController.DataSource = dsComponentesClasificador
-      DataController.ParentField = 'oid_NivelPadre'
-      DataController.KeyField = 'oid_Nivel'
+      DataController.ParentField = 'codInternoPadre'
+      DataController.KeyField = 'codInterno'
       Navigator.Buttons.CustomButtons = <>
       OptionsBehavior.GoToNextCellOnTab = True
-      OptionsData.AutoCalcKeyValue = True
-      RootValue = -1
+      OptionsData.Deleting = False
+      PopupMenu = PopupMenu
+      RootValue = 0
       TabOrder = 0
       object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
-        Visible = False
         DataBinding.FieldName = 'oid_CompClasif'
         Position.ColIndex = 0
         Position.RowIndex = 0
@@ -130,7 +135,6 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1oid_Clasificador: TcxDBTreeListColumn
-        Visible = False
         DataBinding.FieldName = 'oid_Clasificador'
         Position.ColIndex = 1
         Position.RowIndex = 0
@@ -138,17 +142,25 @@ inherited FNCla0001: TFNCla0001
         Summary.FooterSummaryItems = <>
         Summary.GroupFooterSummaryItems = <>
       end
-      object cxDBTreeList1oid_Nivel: TcxDBTreeListColumn
-        DataBinding.FieldName = 'oid_Nivel'
+      object cxDBTreeList1codInterno: TcxDBTreeListColumn
+        DataBinding.FieldName = 'codInterno'
         Position.ColIndex = 2
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
         Summary.GroupFooterSummaryItems = <>
       end
-      object cxDBTreeList1oid_NivelPadre: TcxDBTreeListColumn
-        DataBinding.FieldName = 'oid_NivelPadre'
+      object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
+        DataBinding.FieldName = 'codInternoPadre'
         Position.ColIndex = 3
+        Position.RowIndex = 0
+        Position.BandIndex = 0
+        Summary.FooterSummaryItems = <>
+        Summary.GroupFooterSummaryItems = <>
+      end
+      object cxDBTreeList1Nivel: TcxDBTreeListColumn
+        DataBinding.FieldName = 'Nivel'
+        Position.ColIndex = 4
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -156,7 +168,7 @@ inherited FNCla0001: TFNCla0001
       end
       object cxDBTreeList1Codigo: TcxDBTreeListColumn
         DataBinding.FieldName = 'Codigo'
-        Position.ColIndex = 4
+        Position.ColIndex = 5
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -164,7 +176,7 @@ inherited FNCla0001: TFNCla0001
       end
       object cxDBTreeList1Descripcion: TcxDBTreeListColumn
         DataBinding.FieldName = 'Descripcion'
-        Position.ColIndex = 5
+        Position.ColIndex = 6
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -172,7 +184,7 @@ inherited FNCla0001: TFNCla0001
       end
       object cxDBTreeList1Activo: TcxDBTreeListColumn
         DataBinding.FieldName = 'Activo'
-        Position.ColIndex = 6
+        Position.ColIndex = 7
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -199,6 +211,7 @@ inherited FNCla0001: TFNCla0001
       item
         Operacion = OperTraerEntidades
       end>
+    OnNuevo = DriverNuevo
     Left = 464
     Top = 176
   end
@@ -217,6 +230,8 @@ inherited FNCla0001: TFNCla0001
         Dataset = mtComponentesClasificador
         Tag = 0
       end>
+    OnBeforeEjecutar = OperacionSaveBeforeEjecutar
+    OnAfterEjecutar = OperacionSaveAfterEjecutar
     Left = 528
     Top = 176
   end
@@ -232,6 +247,7 @@ inherited FNCla0001: TFNCla0001
         Field = mtClasificadoroid_Clasificador
         Tag = 0
       end>
+    OnAfterEjecutar = OperacionTraerAfterEjecutar
     Left = 528
     Top = 240
   end
@@ -239,11 +255,11 @@ inherited FNCla0001: TFNCla0001
     ListaValidaciones = <
       item
         Field = mtComponentesClasificadorCodigo
-        ValidadorNew = valCodigo1
+        ValidadorGral = valCodigo1
       end
       item
         Field = mtComponentesClasificadorCodigo
-        ValidadorNew = valCodigo2
+        ValidadorGral = valCodigo2
       end>
     Left = 360
     Top = 240
@@ -274,8 +290,8 @@ inherited FNCla0001: TFNCla0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 256
-    Top = 112
+    Left = 312
+    Top = 64
     object mtEntidadesoid_Entidad: TIntegerField
       FieldName = 'oid_Entidad'
     end
@@ -330,8 +346,9 @@ inherited FNCla0001: TFNCla0001
     SubLanguageID = 0
     LocaleID = 0
     Left = 536
-    Top = 64
+    Top = 32
     object mtClasificadoroid_Clasificador: TIntegerField
+      Tag = 1
       FieldName = 'oid_Clasificador'
     end
     object mtClasificadorCodigo: TStringField
@@ -340,23 +357,27 @@ inherited FNCla0001: TFNCla0001
       Size = 15
     end
     object mtClasificadorDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtClasificadoroid_Entidad: TIntegerField
+      Tag = 1
       FieldName = 'oid_Entidad'
     end
     object mtClasificadorObligatorio: TBooleanField
+      Tag = 1
       FieldName = 'Obligatorio'
     end
     object mtClasificadorActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
   object dsClasificador: TDataSource
     DataSet = mtClasificador
-    Left = 536
-    Top = 16
+    Left = 576
+    Top = 32
   end
   object Help: TjktHelpGenerico
     ServiceCaller = Service
@@ -384,12 +405,16 @@ inherited FNCla0001: TFNCla0001
         DataType = ftInteger
       end
       item
-        Name = 'oid_Nivel'
+        Name = 'codInterno'
         DataType = ftInteger
       end
       item
-        Name = 'oid_NivelPadre'
+        Name = 'codInternoPadre'
         DataType = ftInteger
+      end
+      item
+        Name = 'Nivel'
+        DataType = ftSmallint
       end
       item
         Name = 'Codigo'
@@ -425,29 +450,39 @@ inherited FNCla0001: TFNCla0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 112
-    Top = 192
+    Left = 72
+    Top = 144
     object mtComponentesClasificadoroid_CompClasif: TIntegerField
+      Tag = 1
       FieldName = 'oid_CompClasif'
     end
     object mtComponentesClasificadoroid_Clasificador: TIntegerField
+      Tag = 1
       FieldName = 'oid_Clasificador'
     end
-    object mtComponentesClasificadoroid_Nivel: TIntegerField
-      FieldName = 'oid_Nivel'
+    object mtComponentesClasificadorcodInterno: TIntegerField
+      Tag = 1
+      FieldName = 'codInterno'
     end
-    object mtComponentesClasificadoroid_NivelPadre: TIntegerField
-      FieldName = 'oid_NivelPadre'
+    object mtComponentesClasificadorcodInternoPadre: TIntegerField
+      Tag = 1
+      FieldName = 'codInternoPadre'
+    end
+    object mtComponentesClasificadorNivel: TSmallintField
+      FieldName = 'Nivel'
     end
     object mtComponentesClasificadorCodigo: TStringField
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object mtComponentesClasificadorDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtComponentesClasificadorActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end
@@ -464,12 +499,21 @@ inherited FNCla0001: TFNCla0001
     Left = 112
     Top = 248
   end
+  object dsEntidades: TDataSource
+    DataSet = mtEntidades
+    Left = 352
+    Top = 64
+  end
   object PopupMenu: TPopupMenu
-    Left = 256
-    Top = 248
+    OnPopup = PopupMenuPopup
+    Left = 176
+    Top = 304
     object menAnadirSubNivel: TMenuItem
       Caption = 'A'#241'adir SubNivel'
       OnClick = menAnadirSubNivelClick
+    end
+    object menEliminar: TMenuItem
+      Caption = 'Eliminar'
     end
   end
 end

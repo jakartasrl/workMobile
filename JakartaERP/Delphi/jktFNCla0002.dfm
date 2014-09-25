@@ -1,8 +1,8 @@
 inherited FNCla0002: TFNCla0002
   Caption = 'ABM de Valores de Clasificador'
   ClientHeight = 404
-  ClientWidth = 633
-  ExplicitWidth = 649
+  ClientWidth = 715
+  ExplicitWidth = 731
   ExplicitHeight = 442
   PixelsPerInch = 96
   TextHeight = 13
@@ -15,7 +15,7 @@ inherited FNCla0002: TFNCla0002
     ParentCtl3D = False
     TabOrder = 4
     Height = 73
-    Width = 633
+    Width = 715
     object txtCodigo: TcxDBTextEdit
       Left = 60
       Top = 30
@@ -56,38 +56,35 @@ inherited FNCla0002: TFNCla0002
   end
   object cxGroupBox3: TcxGroupBox [1]
     Left = 0
-    Top = 178
+    Top = 201
     Align = alClient
     Caption = 'Valores del Clasificador'
     TabOrder = 5
-    ExplicitLeft = 264
-    ExplicitTop = 353
-    Height = 226
-    Width = 633
+    Height = 203
+    Width = 715
     object cxDBTreeList1: TcxDBTreeList
-      Left = 2
-      Top = 18
-      Width = 447
-      Height = 206
+      Left = 3
+      Top = 15
+      Width = 702
+      Height = 178
       Align = alLeft
       Bands = <
         item
         end>
       DataController.DataSource = dsValoresClasificador
-      DataController.ParentField = 'oid_ValorPadre'
-      DataController.KeyField = 'oid_Valor'
+      DataController.ParentField = 'codInternoPadre'
+      DataController.KeyField = 'codInterno'
       Navigator.Buttons.CustomButtons = <>
       OptionsBehavior.GoToNextCellOnTab = True
       OptionsCustomizing.BandCustomizing = False
       OptionsCustomizing.BandHorzSizing = False
       OptionsCustomizing.BandMoving = False
       OptionsCustomizing.BandVertSizing = False
-      OptionsData.AutoCalcKeyValue = True
+      OptionsData.Deleting = False
       PopupMenu = PopupMenu
-      RootValue = -1
+      RootValue = 0
       TabOrder = 0
       object cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn
-        Visible = False
         DataBinding.FieldName = 'oid_ValorClasif'
         Position.ColIndex = 0
         Position.RowIndex = 0
@@ -95,27 +92,24 @@ inherited FNCla0002: TFNCla0002
         Summary.FooterSummaryItems = <>
         Summary.GroupFooterSummaryItems = <>
       end
-      object cxDBTreeList1oid_Clasificador: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_Clasificador'
+      object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
+        DataBinding.FieldName = 'oid_CompClasif'
         Position.ColIndex = 1
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
         Summary.GroupFooterSummaryItems = <>
       end
-      object cxDBTreeList1oid_Valor: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_Valor'
+      object cxDBTreeList1codInterno: TcxDBTreeListColumn
+        DataBinding.FieldName = 'codInterno'
         Position.ColIndex = 2
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
         Summary.GroupFooterSummaryItems = <>
       end
-      object cxDBTreeList1oid_ValorPadre: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_ValorPadre'
+      object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
+        DataBinding.FieldName = 'codInternoPadre'
         Position.ColIndex = 3
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -124,7 +118,6 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1Codigo: TcxDBTreeListColumn
         DataBinding.FieldName = 'Codigo'
-        Width = 67
         Position.ColIndex = 4
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -133,7 +126,6 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1Descripcion: TcxDBTreeListColumn
         DataBinding.FieldName = 'Descripcion'
-        Width = 137
         Position.ColIndex = 5
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -141,9 +133,7 @@ inherited FNCla0002: TFNCla0002
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1Activo: TcxDBTreeListColumn
-        Caption.AlignHorz = taCenter
         DataBinding.FieldName = 'Activo'
-        Width = 61
         Position.ColIndex = 6
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -158,15 +148,13 @@ inherited FNCla0002: TFNCla0002
     Align = alTop
     Caption = 'Jerarqu'#237'a del Clasificador'
     TabOrder = 6
-    ExplicitLeft = 457
-    ExplicitTop = 144
-    Height = 105
-    Width = 633
+    Height = 128
+    Width = 715
     object cxDBTreeList2: TcxDBTreeList
-      Left = 2
-      Top = 18
+      Left = 3
+      Top = 15
       Width = 447
-      Height = 85
+      Height = 103
       Align = alLeft
       Bands = <
         item
@@ -186,7 +174,14 @@ inherited FNCla0002: TFNCla0002
       OptionsView.Headers = False
       RootValue = -1
       TabOrder = 0
-      ExplicitLeft = 0
+      object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
+        DataBinding.FieldName = 'oid_CompClasif'
+        Position.ColIndex = 5
+        Position.RowIndex = 0
+        Position.BandIndex = 0
+        Summary.FooterSummaryItems = <>
+        Summary.GroupFooterSummaryItems = <>
+      end
       object cxDBTreeList2oid_Nivel: TcxDBTreeListColumn
         Visible = False
         DataBinding.FieldName = 'oid_Nivel'
@@ -279,6 +274,7 @@ inherited FNCla0002: TFNCla0002
         Field = mtClasificadoroid_Clasificador
         Tag = 0
       end>
+    OnAfterEjecutar = OperacionTraerAfterEjecutar
     Left = 464
     Top = 312
   end
@@ -296,10 +292,6 @@ inherited FNCla0002: TFNCla0002
         DataType = ftInteger
       end
       item
-        Name = 'oid_Clasificador'
-        DataType = ftInteger
-      end
-      item
         Name = 'oid_Nivel'
         DataType = ftInteger
       end
@@ -308,25 +300,20 @@ inherited FNCla0002: TFNCla0002
         DataType = ftInteger
       end
       item
-        Name = 'Codigo'
-        DataType = ftString
-        Size = 15
-      end
-      item
         Name = 'Descripcion'
         DataType = ftString
         Size = 100
       end
       item
+        Name = 'Codigo'
+        DataType = ftString
+        Size = 15
+      end
+      item
         Name = 'Activo'
         DataType = ftBoolean
       end>
-    IndexFieldNames = 'oid_Clasificador'
-    IndexDefs = <
-      item
-        Name = 'mtComponentesClasificadorIndex'
-        Fields = 'oid_Clasificador'
-      end>
+    IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
@@ -334,7 +321,6 @@ inherited FNCla0002: TFNCla0002
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
-    MasterFields = 'oid_Clasificador'
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -342,6 +328,9 @@ inherited FNCla0002: TFNCla0002
     LocaleID = 0
     Left = 160
     Top = 128
+    object mtComponentesClasificadoroid_CompClasif: TIntegerField
+      FieldName = 'oid_CompClasif'
+    end
     object mtComponentesClasificadoroid_Nivel: TIntegerField
       FieldName = 'oid_Nivel'
     end
@@ -401,6 +390,7 @@ inherited FNCla0002: TFNCla0002
     Left = 536
     Top = 64
     object mtClasificadoroid_Clasificador: TIntegerField
+      Tag = 1
       FieldName = 'oid_Clasificador'
     end
     object mtClasificadorCodigo: TStringField
@@ -429,15 +419,15 @@ inherited FNCla0002: TFNCla0002
         DataType = ftInteger
       end
       item
-        Name = 'oid_Clasificador'
+        Name = 'oid_CompClasif'
         DataType = ftInteger
       end
       item
-        Name = 'oid_Valor'
+        Name = 'codInterno'
         DataType = ftInteger
       end
       item
-        Name = 'oid_ValorPadre'
+        Name = 'codInternoPadre'
         DataType = ftInteger
       end
       item
@@ -454,12 +444,7 @@ inherited FNCla0002: TFNCla0002
         Name = 'Activo'
         DataType = ftBoolean
       end>
-    IndexFieldNames = 'oid_Clasificador'
-    IndexDefs = <
-      item
-        Name = 'mtValoresClasificadorIndex'
-        Fields = 'oid_Clasificador'
-      end>
+    IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
@@ -467,8 +452,6 @@ inherited FNCla0002: TFNCla0002
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
-    MasterFields = 'oid_Clasificador'
-    MasterSource = dsClasificador
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -477,26 +460,33 @@ inherited FNCla0002: TFNCla0002
     Left = 80
     Top = 296
     object mtValoresClasificadoroid_ValorClasif: TIntegerField
+      Tag = 1
       FieldName = 'oid_ValorClasif'
     end
-    object mtValoresClasificadoroid_Clasificador: TIntegerField
-      FieldName = 'oid_Clasificador'
+    object mtValoresClasificadoroid_CompClasif: TIntegerField
+      Tag = 1
+      FieldName = 'oid_CompClasif'
     end
-    object mtValoresClasificadoroid_Valor: TIntegerField
-      FieldName = 'oid_Valor'
+    object mtValoresClasificadorcodInterno: TIntegerField
+      Tag = 1
+      FieldName = 'codInterno'
     end
-    object mtValoresClasificadoroid_ValorPadre: TIntegerField
-      FieldName = 'oid_ValorPadre'
+    object mtValoresClasificadorcodInternoPadre: TIntegerField
+      Tag = 1
+      FieldName = 'codInternoPadre'
     end
     object mtValoresClasificadorCodigo: TStringField
+      Tag = 1
       FieldName = 'Codigo'
       Size = 15
     end
     object mtValoresClasificadorDescripcion: TStringField
+      Tag = 1
       FieldName = 'Descripcion'
       Size = 100
     end
     object mtValoresClasificadorActivo: TBooleanField
+      Tag = 1
       FieldName = 'Activo'
     end
   end

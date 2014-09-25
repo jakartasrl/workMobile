@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
+import javax.validation.ConstraintViolation;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -147,6 +149,8 @@ public abstract class Operation extends Observable {
 	 * 
 	 */
 	protected void notificarObjecto(Object parameter) {
+		this.
+		
 		setChanged();
 		notifyObservers(parameter);
 	}
@@ -174,6 +178,21 @@ public abstract class Operation extends Observable {
 			execute(aParams);//UOW
 			tx.commit();
 			sessionProvider.destroySession();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+			constraintViolations.size();
+			StringBuffer buffer=new StringBuffer();
+			String message = null;
+			
+			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+				buffer.append(constraintViolation.getMessage());
+				break;
+			}
+			
+			tx.rollback();
+			sessionProvider.destroySession();
+			
+			throw new ValidacionException(buffer.toString());
 		}catch(RuntimeException exception){
 			//Hago el rollback y muestro el mensaje critido en frontend.
 			tx.rollback();
@@ -243,6 +262,19 @@ public abstract class Operation extends Observable {
 	protected void verificarMapaVacio(Map<String, Object> aParams) throws JakartaException{
 		if (aParams==null || aParams.isEmpty()) {
 			throw new JakartaException("La operacion necesita recibir parametros.");
+		}
+	}
+	
+	protected void validarEntrada(Object object) throws JakartaException{
+		String valor=(String) object;
+		String mensaje = "No se encuentra la entrada esperada en la operacion.";
+		
+		if (valor==null) {
+			throw new JakartaException(mensaje);
+		}
+		
+		if (valor.trim().isEmpty()) {
+			throw new JakartaException(mensaje);
 		}
 	}
 }

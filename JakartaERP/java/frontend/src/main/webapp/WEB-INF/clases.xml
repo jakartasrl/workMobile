@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!DOCTYPE elementos [
+	<!ELEMENT elementos			(elemento*)>
+	<!ELEMENT elemento			EMPTY>
+
+	<!ATTLIST elemento	key			CDATA 	#REQUIRED> <!-- key se corresponde con la entidad solicitada. es un alias. -->
+	<!ATTLIST elemento	value		CDATA   #REQUIRED> <!-- value es la ruta completa de la clase -->
+	<!ATTLIST elemento	validador	CDATA   #IMPLIED>
+  
+]>
+
+<elementos>
+
+	<elemento key="empresa" value="com.jkt.dominio.Empresa" validador="com.jkt.validadores.ValidadorEmpresa" />
+	<elemento key="usuario" value="com.jkt.dominio.Usuario" validador="com.jkt.validadores.ValidadorUsuario" />
+	<elemento key="condicionPago" value="com.jkt.varios.dominio.CondPago" validador="com.jkt.varios.validadores.ValidadorCondPago" />
+	<elemento key="impuesto" value="com.jkt.erp.impuestos.dominio.Impuesto" />
+	<elemento key="categoriasImpuesto" value="com.jkt.erp.impuestos.dominio.CategoriaImpuesto" />
+<<<<<<< HEAD:Common/Framework/java/frontend/src/main/webapp/WEB-INF/clases.xml
+	<elemento key="Pais" value="com.jkt.varios.dominio.Pais" />
+	<elemento key="TablaValoresCaracProd" value="com.jkt.erp.articulos.TablaValoresCaracProd" />
+	<elemento key="ValorTablaCaracProd" value="com.jkt.erp.articulos.ValorTablaCaracProd" />
+	
+	
+=======
+	<elemento key="pais" value="com.jkt.varios.dominio.Pais" />
+	<elemento key="provincia" value="com.jkt.varios.dominio.Provincia" />
+	<elemento key="clasificadores" value="com.jkt.varios.dominio.Clasificador" />
+	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
+	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
+	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
+	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
+	<elemento key="representante" value="com.jkt.erp.varios.Representante" />
+
+>>>>>>> origin/master:JakartaERP/java/frontend/src/main/webapp/WEB-INF/clases.xml
+</elementos>

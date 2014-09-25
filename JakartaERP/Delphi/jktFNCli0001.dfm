@@ -13,10 +13,9 @@ inherited FNCli0001: TFNCli0001
     Height = 520
     Align = alClient
     TabOrder = 4
-    ExplicitHeight = 500
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 67
-      Top = -227
+      Top = 28
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -27,9 +26,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 321
-      Top = -227
+      Top = 28
       DataBinding.DataField = 'RazonSocial'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -38,9 +37,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 101
-      Top = -152
+      Top = 103
       DataBinding.DataField = 'Direccion'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -49,9 +48,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 101
-      Top = -125
+      Top = 130
       DataBinding.DataField = 'Localidad'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -60,9 +59,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 101
-      Top = -98
+      Top = 157
       DataBinding.DataField = 'CodPostal'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -71,9 +70,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 166
-      Top = -71
+      Top = 184
       DataBinding.DataField = 'DescProvincia'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -82,9 +81,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit9: TcxDBTextEdit
       Left = 166
-      Top = -44
+      Top = 211
       DataBinding.DataField = 'DescPais'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -93,9 +92,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 101
-      Top = -71
+      Top = 184
       DataBinding.DataField = 'CodProvincia'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Properties.Buttons = <
         item
           Default = True
@@ -110,9 +109,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 101
-      Top = -44
+      Top = 211
       DataBinding.DataField = 'CodPais'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Properties.Buttons = <
         item
           Default = True
@@ -127,7 +126,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 81
-      Top = -5
+      Top = 250
       DataBinding.DataField = 'Telefonos'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -138,9 +137,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 81
-      Top = 22
+      Top = 277
       DataBinding.DataField = 'Cuit'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -149,9 +148,9 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 112
-      Top = 49
+      Top = 304
       DataBinding.DataField = 'PersonaJuridica'
-      DataBinding.DataSource = dsCliente
+      DataBinding.DataSource = dsSujImp
       Properties.Alignment = taLeftJustify
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -161,7 +160,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 34
-      Top = 94
+      Top = 349
       Width = 391
       Height = 200
       TabOrder = 12
@@ -209,7 +208,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = 399
+      Top = 654
       Width = 391
       Height = 200
       TabOrder = 15
@@ -248,7 +247,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxButtonEdit1: TcxDBButtonEdit
       Left = 122
-      Top = 342
+      Top = 597
       DataBinding.DataField = 'CodCondPago'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -265,7 +264,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxTextEdit1: TcxDBTextEdit
       Left = 207
-      Top = 342
+      Top = 597
       DataBinding.DataField = 'DescCondPago'
       DataBinding.DataSource = dsCliente
       Style.BorderColor = clWindowFrame
@@ -276,7 +275,7 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 635
+      Top = 890
       Width = 491
       Height = 288
       TabOrder = 16
@@ -459,6 +458,7 @@ inherited FNCli0001: TFNCli0001
       object lvSucursales: TcxGridLevel
         Caption = 'Sucursales'
         GridView = tvSucursales
+        MaxDetailHeight = 200
         Options.DetailTabsPosition = dtpTop
         object lvDomiciliosEntrega: TcxGridLevel
           Caption = 'Domicilios de Entrega'
@@ -1185,66 +1185,9 @@ inherited FNCli0001: TFNCli0001
         Size = 15
       end
       item
-        Name = 'RazonSocial'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'Direccion'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'Localidad'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'CodPostal'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'oid_Provincia'
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProvincia'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'DescProvincia'
-        DataType = ftString
-        Size = 50
-      end
-      item
-        Name = 'oid_Pais'
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodPais'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'DescPais'
-        DataType = ftString
-        Size = 50
-      end
-      item
         Name = 'Telefonos'
         DataType = ftString
         Size = 50
-      end
-      item
-        Name = 'PersonaJuridica'
-        DataType = ftBoolean
-      end
-      item
-        Name = 'Cuit'
-        DataType = ftString
-        Size = 20
       end
       item
         Name = 'oid_CondPago'
@@ -1288,60 +1231,10 @@ inherited FNCli0001: TFNCli0001
       FieldName = 'Codigo'
       Size = 15
     end
-    object mtClienteRazonSocial: TStringField
-      Tag = 1
-      FieldName = 'RazonSocial'
-      Size = 100
-    end
-    object mtClienteDireccion: TStringField
-      Tag = 1
-      FieldName = 'Direccion'
-      Size = 50
-    end
-    object mtClienteLocalidad: TStringField
-      Tag = 1
-      FieldName = 'Localidad'
-      Size = 50
-    end
-    object mtClienteCodPostal: TStringField
-      Tag = 1
-      FieldName = 'CodPostal'
-      Size = 10
-    end
-    object mtClienteoid_Provincia: TIntegerField
-      Tag = 1
-      FieldName = 'oid_Provincia'
-    end
-    object mtClienteCodProvincia: TStringField
-      FieldName = 'CodProvincia'
-    end
-    object mtClienteDescProvincia: TStringField
-      FieldName = 'DescProvincia'
-      Size = 50
-    end
-    object mtClienteoid_Pais: TIntegerField
-      Tag = 1
-      FieldName = 'oid_Pais'
-    end
-    object mtClienteCodPais: TStringField
-      FieldName = 'CodPais'
-    end
-    object mtClienteDescPais: TStringField
-      FieldName = 'DescPais'
-      Size = 50
-    end
     object mtClienteTelefonos: TStringField
       Tag = 1
       FieldName = 'Telefonos'
       Size = 50
-    end
-    object mtClientePersonaJuridica: TBooleanField
-      Tag = 1
-      FieldName = 'PersonaJuridica'
-    end
-    object mtClienteCuit: TStringField
-      Tag = 1
-      FieldName = 'Cuit'
     end
     object mtClienteoid_CondPago: TIntegerField
       Tag = 1
@@ -1422,7 +1315,7 @@ inherited FNCli0001: TFNCli0001
     EnableVersioning = True
     FilterOptions = []
     MasterFields = 'oid_Cliente'
-    MasterSource = dsCliente
+    MasterSource = dsSujImp
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -1594,5 +1487,153 @@ inherited FNCli0001: TFNCli0001
     ServiceCaller = Service
     Left = 640
     Top = 176
+  end
+  object mtSujImp: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'oid_Cliente'
+        DataType = ftInteger
+      end
+      item
+        Name = 'RazonSocial'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'Direccion'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'Localidad'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'CodPostal'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'oid_Provincia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodProvincia'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'DescProvincia'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'oid_Pais'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodPais'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'DescPais'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PersonaJuridica'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'Cuit'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexFieldNames = 'oid_Cliente'
+    IndexDefs = <
+      item
+        Name = 'mtSujImpIndex'
+        Fields = 'oid_Cliente'
+      end>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    MasterFields = 'oid_Cliente'
+    MasterSource = dsCliente
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 256
+    Top = 232
+    object mtSujImpoid_Cliente: TIntegerField
+      Tag = 1
+      FieldName = 'oid_Cliente'
+    end
+    object mtSujImpRazonSocial: TStringField
+      Tag = 1
+      FieldName = 'RazonSocial'
+      Size = 100
+    end
+    object mtSujImpDireccion: TStringField
+      Tag = 1
+      FieldName = 'Direccion'
+      Size = 50
+    end
+    object mtSujImpLocalidad: TStringField
+      Tag = 1
+      FieldName = 'Localidad'
+      Size = 50
+    end
+    object mtSujImpCodPostal: TStringField
+      Tag = 1
+      FieldName = 'CodPostal'
+      Size = 10
+    end
+    object mtSujImpoid_Provincia: TIntegerField
+      Tag = 1
+      FieldName = 'oid_Provincia'
+    end
+    object mtSujImpCodProvincia: TStringField
+      FieldName = 'CodProvincia'
+    end
+    object mtSujImpDescProvincia: TStringField
+      FieldName = 'DescProvincia'
+      Size = 50
+    end
+    object mtSujImpoid_Pais: TIntegerField
+      Tag = 1
+      FieldName = 'oid_Pais'
+    end
+    object mtSujImpCodPais: TStringField
+      FieldName = 'CodPais'
+    end
+    object mtSujImpDescPais: TStringField
+      FieldName = 'DescPais'
+      Size = 50
+    end
+    object mtSujImpPersonaJuridica: TBooleanField
+      Tag = 1
+      FieldName = 'PersonaJuridica'
+    end
+    object mtSujImpCuit: TStringField
+      Tag = 1
+      FieldName = 'Cuit'
+    end
+  end
+  object dsSujImp: TDataSource
+    DataSet = mtSujImp
+    Left = 296
+    Top = 232
   end
 end

@@ -49,35 +49,40 @@ type
     cxDBTreeList2: TcxDBTreeList;
     mtValoresClasificador: TjktMemTable;
     mtValoresClasificadoroid_ValorClasif: TIntegerField;
-    mtValoresClasificadoroid_Valor: TIntegerField;
-    mtValoresClasificadoroid_ValorPadre: TIntegerField;
     mtValoresClasificadorCodigo: TStringField;
     mtValoresClasificadorDescripcion: TStringField;
     mtValoresClasificadorActivo: TBooleanField;
     dsValoresClasificador: TDataSource;
-    mtValoresClasificadoroid_Clasificador: TIntegerField;
     Help: TjktHelpGenerico;
     cxDBTreeList2oid_Nivel: TcxDBTreeListColumn;
     cxDBTreeList2oid_NivelPadre: TcxDBTreeListColumn;
     cxDBTreeList2Descripcion: TcxDBTreeListColumn;
     cxDBTreeList2Codigo: TcxDBTreeListColumn;
     cxDBTreeList2Activo: TcxDBTreeListColumn;
-    cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn;
-    cxDBTreeList1oid_Clasificador: TcxDBTreeListColumn;
-    cxDBTreeList1oid_Valor: TcxDBTreeListColumn;
-    cxDBTreeList1oid_ValorPadre: TcxDBTreeListColumn;
-    cxDBTreeList1Codigo: TcxDBTreeListColumn;
-    cxDBTreeList1Descripcion: TcxDBTreeListColumn;
-    cxDBTreeList1Activo: TcxDBTreeListColumn;
     PopupMenu: TPopupMenu;
     menAnadirMismoNivel: TMenuItem;
     menAnadirSubNivel: TMenuItem;
     menEliminar: TMenuItem;
+    mtValoresClasificadoroid_CompClasif: TIntegerField;
+    mtValoresClasificadorcodInterno: TIntegerField;
+    mtValoresClasificadorcodInternoPadre: TIntegerField;
+    cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn;
+    cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn;
+    cxDBTreeList1codInterno: TcxDBTreeListColumn;
+    cxDBTreeList1codInternoPadre: TcxDBTreeListColumn;
+    cxDBTreeList1Codigo: TcxDBTreeListColumn;
+    cxDBTreeList1Descripcion: TcxDBTreeListColumn;
+    cxDBTreeList1Activo: TcxDBTreeListColumn;
+    mtComponentesClasificadoroid_CompClasif: TIntegerField;
+    cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn;
     procedure PopupMenuPopup(Sender: TObject);
     procedure menAnadirMismoNivelClick(Sender: TObject);
     procedure menAnadirSubNivelClick(Sender: TObject);
+    procedure OperacionTraerAfterEjecutar(Sender: TObject);
   private
-    { Private declarations }
+    FcodInterno: SmallInt;
+    function GetOid_Componente(Nivel: Byte): Integer;
+
   public
     { Public declarations }
   end;
@@ -87,33 +92,80 @@ implementation
 
 {$R *.dfm}
 
+// Obtiene el 'oid_CompClasif' del Componente ubicado en el Nivel pasado por parámetro
+function TFNCla0002.GetOid_Componente(Nivel: Byte): Integer;
+var
+  NodoActual: TcxTreeListNode;
+begin
+  NodoActual := cxDBTreeList2.TopNode;
+  while NodoActual <> nil do
+    begin
+      if NodoActual.Level = Nivel then
+        Break;
+
+      NodoActual := NodoActual.getFirstChild;
+    end;
+
+  Result := NodoActual.Values[0];
+end;
+
 procedure TFNCla0002.menAnadirMismoNivelClick(Sender: TObject);
 var
-  oid_ValorPadre: Integer;
+  codInternoPadre : Integer;
+  oid_CompClasif  : Integer;
 begin
   inherited;
 
   if mtValoresClasificador.IsEmpty then
-    oid_ValorPadre := -1
+    begin
+      // Debo comenzar agregando un Valor para el Componente superior de la jerarquía
+      codInternoPadre := 0;
+      oid_CompClasif := cxDBTreeList2.TopNode.Values[0];
+    end
   else
-    oid_ValorPadre := mtValoresClasificador.FieldByName('oid_ValorPadre').Value;
+    begin
+      // El nuevo registro lo colocamos al mismo Nivel que el seleccionado!
+      codInternoPadre := mtValoresClasificador.FieldByName('codInternoPadre').Value;
+      oid_CompClasif := mtValoresClasificador.FieldByName('oid_CompClasif').Value;
+    end;
+
+  Dec(FcodInterno);
 
   mtValoresClasificador.Append;
-  mtValoresClasificador.FieldByName('oid_ValorPadre').Value := oid_ValorPadre;
-  mtValoresClasificador.FieldByName('Activo').Value := True;
+  mtValoresClasificador.FieldByName('oid_CompClasif').Value  := oid_CompClasif;
+  mtValoresClasificador.FieldByName('codInterno').Value      := FcodInterno;
+  mtValoresClasificador.FieldByName('codInternoPadre').Value := codInternoPadre;
+  mtValoresClasificador.FieldByName('Activo').Value          := True;
 end;
 
 procedure TFNCla0002.menAnadirSubNivelClick(Sender: TObject);
 var
-  oid_ValorPadre: Integer;
+  codInternoPadre : Integer;
+  oid_Componente  : Integer;
 begin
   inherited;
 
-  oid_ValorPadre := mtValoresClasificador.FieldByName('oid_Valor').Value;
+  // El nuevo registro lo colocamos como hijo del seleccionado!
+  codInternoPadre := mtValoresClasificador.FieldByName('codInterno').Value;
+  // Debo buscar el 'oid_CompClasif' que le corresponde según el nivel
+  oid_Componente := GetOid_Componente(cxDBTreeList1.FocusedNode.Level + 1);
+
+  Dec(FcodInterno);
 
   mtValoresClasificador.Append;
-  mtValoresClasificador.FieldByName('oid_ValorPadre').Value := oid_ValorPadre;
-  mtValoresClasificador.FieldByName('Activo').Value := True;
+  mtValoresClasificador.FieldByName('oid_CompClasif').Value  := oid_Componente;
+  mtValoresClasificador.FieldByName('codInterno').Value      := FcodInterno;
+  mtValoresClasificador.FieldByName('codInternoPadre').Value := codInternoPadre;
+  mtValoresClasificador.FieldByName('Activo').Value          := True;
+end;
+
+procedure TFNCla0002.OperacionTraerAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Luego de traer un Clasificador, inicializo el 'codInterno' para manejar
+  // la jerarquía de los nuevos componentes agregados
+  FcodInterno := 0;
 end;
 
 procedure TFNCla0002.PopupMenuPopup(Sender: TObject);
@@ -122,6 +174,10 @@ begin
 
   if mtValoresClasificador.Active then
     begin
+      menAnadirMismoNivel.Visible := True;
+      menAnadirSubNivel.Visible := True;
+      menEliminar.Visible := True;
+
       menAnadirMismoNivel.Enabled := True;
 
       if mtValoresClasificador.IsEmpty then
@@ -131,15 +187,25 @@ begin
         end
       else
         begin
-          menAnadirSubNivel.Enabled := True;
+          // No dejo agregar más SubNiveles que los definidos en la Jerarquía
+          if (cxDBTreeList1.FocusedNode.Level < cxDBTreeList2.LastNode.Level) then
+            //   mtComponentesClasificador.RecordCount
+            begin
+              menAnadirSubNivel.Enabled := True;
+            end
+          else
+            begin
+              menAnadirSubNivel.Enabled := False;
+            end;
+
           menEliminar.Enabled := True;
         end;
     end
   else
     begin
-      menAnadirMismoNivel.Enabled := False;
-      menAnadirSubNivel.Enabled := False;
-      menEliminar.Enabled := False;
+      menAnadirMismoNivel.Visible := False;
+      menAnadirSubNivel.Visible := False;
+      menEliminar.Visible := False;
     end;
 end;
 

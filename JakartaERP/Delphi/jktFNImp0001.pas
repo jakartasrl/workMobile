@@ -52,7 +52,6 @@ type
     dbgImpuestoCategoriasDBTableView1: TcxGridDBTableView;
     dbgImpuestoCategoriasLevel1: TcxGridLevel;
     mtImpuestoCategorias: TjktMemTable;
-    mtImpuestoCategoriasoid_ImpCat: TIntegerField;
     mtImpuestoCategoriasoid_Categoria: TIntegerField;
     mtImpuestoCategoriasCodigo: TStringField;
     mtImpuestoCategoriasActiva: TBooleanField;
@@ -61,7 +60,6 @@ type
     mtImpuestoCategoriasDescripcion: TStringField;
     valCodigo2: TjktValidador;
     valCodigo1: TjktValidador;
-    dbgImpuestoCategoriasDBTableView1oid_ImpCat: TcxGridDBColumn;
     dbgImpuestoCategoriasDBTableView1oid_Impuesto: TcxGridDBColumn;
     dbgImpuestoCategoriasDBTableView1oid_Categoria: TcxGridDBColumn;
     dbgImpuestoCategoriasDBTableView1Codigo: TcxGridDBColumn;

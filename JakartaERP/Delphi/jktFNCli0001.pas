@@ -188,23 +188,11 @@ type
     dsClasificadoresCliente: TDataSource;
     mtClienteoid_Cliente: TIntegerField;
     mtClienteCodigo: TStringField;
-    mtClienteRazonSocial: TStringField;
-    mtClienteDireccion: TStringField;
-    mtClienteLocalidad: TStringField;
-    mtClienteCodPostal: TStringField;
-    mtClienteoid_Provincia: TIntegerField;
-    mtClienteoid_Pais: TIntegerField;
-    mtClienteDescProvincia: TStringField;
-    mtClienteDescPais: TStringField;
     mtClienteActivo: TBooleanField;
-    mtClienteCuit: TStringField;
     mtClienteoid_CondPago: TIntegerField;
     mtClienteCodCondPago: TStringField;
     mtClienteDescCondPago: TStringField;
     mtClienteTelefonos: TStringField;
-    mtClientePersonaJuridica: TBooleanField;
-    mtClienteCodProvincia: TStringField;
-    mtClienteCodPais: TStringField;
     mtClasificadoresClienteoid_ClasifClie: TIntegerField;
     mtClasificadoresClienteDescClasif: TStringField;
     mtClasificadoresClienteoid_ValorClasif: TIntegerField;
@@ -242,6 +230,21 @@ type
     Help: TjktHelpGenerico;
     OperTraerClasifCliente: TjktOperacion;
     OperTraerClasifSucur: TjktOperacion;
+    mtSujImp: TjktMemTable;
+    dsSujImp: TDataSource;
+    mtSujImpRazonSocial: TStringField;
+    mtSujImpDireccion: TStringField;
+    mtSujImpLocalidad: TStringField;
+    mtSujImpCodPostal: TStringField;
+    mtSujImpoid_Provincia: TIntegerField;
+    mtSujImpCodProvincia: TStringField;
+    mtSujImpDescProvincia: TStringField;
+    mtSujImpoid_Pais: TIntegerField;
+    mtSujImpCodPais: TStringField;
+    mtSujImpDescPais: TStringField;
+    mtSujImpPersonaJuridica: TBooleanField;
+    mtSujImpCuit: TStringField;
+    mtSujImpoid_Cliente: TIntegerField;
   private
     { Private declarations }
   public

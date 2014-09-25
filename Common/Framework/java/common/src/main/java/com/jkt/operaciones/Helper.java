@@ -6,8 +6,8 @@ import java.util.Map;
 
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.transformers.Notificacion;
-import com.jkt.util.RepositorioClases;
 
 /**
  * Operacion para recuperar un elemento dado tales filtros.
@@ -20,6 +20,9 @@ public class Helper extends Operation {
 	protected static final String KEY_FILTROS = "filtros".toUpperCase();
 
 	public void execute(Map<String, Object> aParams) throws Exception {
+		
+		validacionesDeEntrada(aParams);
+		
 		String nombreEntidad=(String) aParams.get(KEY_ENTIDAD);
 		String className = this.getRepositorioClases().getClass(nombreEntidad);
 		List objetos = recuperarObjetoUsandoKey(aParams);
@@ -31,7 +34,12 @@ public class Helper extends Operation {
 		}
 	}
 	
-	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) {
+	private void validacionesDeEntrada(Map<String, Object> aParams) throws JakartaException {
+		verificarMapaVacio(aParams);
+		validarEntrada(aParams.get(KEY_ENTIDAD));
+	}
+
+	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) throws JakartaException {
 		List object;
 		if (aParams.get(KEY_FILTROS.toUpperCase())  instanceof List) {
 			object = (List) aParams.get(KEY_FILTROS);

@@ -1,0 +1,468 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE entity [
+
+<!--   <!ENTITY operacionesExternas SYSTEM "file:///operaciones-2.xml"> -->
+	
+  <!ELEMENT entity        (operacion*)>
+  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  
+  <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
+  <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
+  <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
+  <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+
+
+  <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
+  <!ELEMENT campoSalida   (campoSalida*,output*)>  
+  
+  <!ELEMENT dataset       (campo*)>
+  <!ELEMENT campo         EMPTY>
+  <!ELEMENT tables       (tableDef+)>
+  <!ELEMENT tableDef     (campoTable*)>
+  <!ELEMENT campoTable   EMPTY>
+  
+  <!ATTLIST transformer clase           CDATA #REQUIRED>
+  
+  <!ATTLIST form name	CDATA #REQUIRED>
+  
+  <!ATTLIST input name           	 	CDATA    #IMPLIED><!--   Nombre que se corresponde con la entrada de delphi. Si en delphi mandan el valor Name, acá debe exstir en valor Name para obtener los demas datos -->
+  <!ATTLIST input keyName           	CDATA    #IMPLIED><!--   Indica el key del mapa que llega a la operacion. Si el valor es 'leo', se debera recuperar usando la key 'leo' sobre el mapa en la operacion -->
+  <!ATTLIST input clase           	 	CDATA    #IMPLIED><!-- 	define la clase del parmetro recibido -->
+  <!ATTLIST input fieldID           	CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
+  
+  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
+  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada fieldID        CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+ 
+  <!ATTLIST output name					CDATA #REQUIRED> 
+  <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
+
+  <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
+  <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
+  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
+
+  <!ATTLIST operacion name              ID    #REQUIRED>
+  <!ATTLIST operacion clase             CDATA #IMPLIED>
+  <!ATTLIST operacion entidad           CDATA #IMPLIED>
+  <!ATTLIST operacion XMLWriter         CDATA #IMPLIED>
+  <!ATTLIST operacion redirect          CDATA #IMPLIED>
+  <!ATTLIST operacion usaJMS            CDATA #IMPLIED>
+  
+  <!ATTLIST dataset name                CDATA #REQUIRED>
+  <!ATTLIST dataset value               CDATA #IMPLIED>
+  <!ATTLIST dataset tabla               CDATA #IMPLIED>
+  
+  <!ATTLIST campo   name                CDATA #REQUIRED>
+  <!ATTLIST campo   value               CDATA #IMPLIED>
+  
+  <!ATTLIST tableDef    name           	CDATA #REQUIRED>
+
+  <!ATTLIST campoTable	name        	CDATA #REQUIRED>
+  <!ATTLIST campoTable  orden       	CDATA #IMPLIED>
+  <!ATTLIST campoTable  tipo        	CDATA #IMPLIED>
+  <!ATTLIST campoTable  longitud    	CDATA #IMPLIED>
+  
+]>
+
+<entity>
+
+	<operacion name="TraerConfigHelpGenerico" clase="com.jkt.operaciones.RecuperarEstructuraHelpGenerico">
+		
+		<output name="resultado" tableName="mtConfigCampos">
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="longitud" target="longitud" />
+			<campoSalida value="visible" target="visible" />
+			<campoSalida value="readOnly" target="readOnly" />
+			<campoSalida value="orden" target="orden" />
+			<campoSalida value="label" target="label" />
+			<campoSalida value="columnWidth" target="columnWidth" />
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+			
+		<forms>
+			<form name="form"></form>
+		</forms>
+		
+	</operacion>
+
+
+
+	<operacion name="TraerConfigAbmGenerico" clase="com.jkt.operaciones.RecuperarEstructuraABMGenerico">
+		
+		<output name="mtConfigOper" tableName="mtConfigOper">
+			<campoSalida value="operSave" target="operSave" />
+			<campoSalida value="operTraer" target="operTraer" />
+		</output>		
+
+		<output name="mtConfigCampos" tableName="mtConfigCampos">
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="longitud" target="longitud" />
+			<campoSalida value="visible" target="visible" />
+			<campoSalida value="readOnly" target="readOnly" />
+			<campoSalida value="orden" target="orden" />
+			<campoSalida value="label" target="label" />
+			<campoSalida value="tag" target="tag" />
+		</output>
+		
+		<output name="mtConfigValidador" tableName="mtConfigValidador">
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipoValidacion" target="tipoValidacion" />
+			<campoSalida value="entidad" target="entidad" />
+			<campoSalida value="oidName" target="oidName" />
+			<campoSalida value="descrName" target="descrName" />
+		</output>
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+			
+		<forms>
+			<form name="form"></form>
+		</forms>
+		
+	</operacion>
+
+	<!-- GUARDAR O ACTUALIZAR EL MENU -->
+	<operacion name="GenerarMenu" clase="com.jkt.operaciones.CrearMenues">
+		
+		<output name="resultado" tableName="TUsuarios">
+			<campoSalida>
+			</campoSalida>
+		</output>		
+			
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR MENU PARA ERP -->
+	<operacion name="TraerMenuERP" clase="com.jkt.operaciones.erp.RecuperarMenuParaERP">
+		
+		<output name="resultado" tableName="TMenu">
+			<campoSalida value="oid_menu" target="value" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+			
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR EL MENU -->
+	<operacion name="TraerMenu" clase="com.jkt.operaciones.RecuperarMenu">
+		
+		<output name="TCabecera" tableName="TCabecera">
+			<campoSalida value="oid_menu" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Tipo" target="tipoMenu" />
+
+			<campoSalida value="Imagen" target="imagen" />
+			<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
+			<campoSalida value="Orden" target="orden" />
+			<campoSalida value="Argumento" target="argumento" />
+		</output>
+		
+		<output name="TMenues" tableName="TMenues">
+			<campoSalida value="oid_menu" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Tipo" target="tipoMenu" />
+
+			<campoSalida value="Imagen" target="imagen" />
+			<campoSalida value="RutaDeImagen" target="rutaDeImagen" />
+			<campoSalida value="Orden" target="orden" />
+			<campoSalida value="Argumento" target="argumento" />
+		</output>		
+		
+		<output name="TTextosMenues" tableName="TTextosMenues">
+			<campoSalida value="oid_menu" target="oidMenu" />
+			<campoSalida value="texto" target="texto" />
+			<campoSalida value="alineacion" target="alineacion" />
+			<campoSalida value="tamanio" target="tamanio" />
+			<campoSalida value="fuente" target="fuente" />
+		</output>
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+			
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+	<!-- VALIDAR IN EXISTENCIA -->
+	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.ValidarInexistenciaSimple">
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- VALIDAR IN EXISTENCIA CON MAESTRO-->
+	<operacion name="ValidarInexistenteDeMaestro" clase="com.jkt.operaciones.ValidarInexistenciaConMaestro">
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<operacion name="ValidarExistente" clase="com.jkt.operaciones.ValidarExistenciaSimple">
+		
+		<output name="resultado" tableName="NoSeUsa">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Cadena" target="cadena" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<operacion name="ValidarExistenteDeMaestro" clase="com.jkt.operaciones.ValidarExistenciaConMaestro">
+		
+		<output name="resultado" tableName="NoSeUsa">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Cadena" target="cadena" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+	<!-- RECUPERAR USUARIOS -->
+	<operacion name="TraerUsuarios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Usuario">
+		
+		<output name="resultado" tableName="TUsuarios">
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Activo" target="isActivo" />
+			<campoSalida value="Nombre" target="nombres" />
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Email" target="mail" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- TRAE TODAS LAS EMPRESAS Y TODOS LOS USUARIOS -->
+	<operacion name="TraerUsuariosYEmpresas" clase="com.jkt.operaciones.RecuperarEmpresasYUsuarios">
+					
+		<output name="TUsuarios" tableName="TUsuarios">
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Activo" target="isActivo" />
+			<campoSalida value="Nombre" target="nombres" />
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Email" target="mail" />
+		</output>	
+		
+		<output name="TUsuarioEmpresas" tableName="TUsuarioEmpresas">
+			<campoSalida value="oid_usu_emp" target="id" />
+			<campoSalida value="oid_empresa" target="empresa.id" />
+			<campoSalida value="oid_usuario" target="usuario.id" />
+			<campoSalida value="Codigo" target="empresa.codigo" />
+			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+			<campoSalida value="Habilitada" target="habilitada" />
+			<campoSalida value="Default" target="porDefecto" />
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR EMPRESAS DE USUARIO -->
+	<operacion name="TraerEmpresasDeUsuario" clase="com.jkt.operaciones.RecuperarEmpresasDeUsuario">
+					
+		<output name="TUsuario" tableName="TUsuario">
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Activo" target="isActivo" />
+			<campoSalida value="Nombre" target="nombres" />
+			<campoSalida value="Apellido" target="apellido" />
+			<campoSalida value="Email" target="mail" />
+		</output>	
+		
+		<output name="TUsuarioEmpresas" tableName="TEmpresas">
+			<campoSalida value="oid_empresa" target="empresa.id" />
+			<campoSalida value="oid_usuario" target="usuario.id" />
+			<campoSalida value="Codigo" target="empresa.codigo" />
+			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+			<campoSalida value="UrlDB" target="empresa.urlDB" />
+			<campoSalida value="Habilitada" target="habilitada" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR EMPRESAS PARA UN USUARIO -->
+	<operacion name="TraerEmpresasParaUsuarios" clase="com.jkt.operaciones.TraerEmpresasParaUsuarios">
+					
+		<output name="resultado" tableName="TUsuarioEmpresas">
+			<campoSalida value="oid_empresa" target="empresa.id" />
+			<campoSalida value="Codigo" target="empresa.codigo" />
+			<campoSalida value="RazonSocial" target="empresa.razonSocial" />
+			<campoSalida value="Habilitada" target="habilitada" />
+			<campoSalida value="Default" target="porDefecto" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR EMPRESAS -->
+	<operacion name="TraerEmpresas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Empresa">
+		
+		<input name="parametro1" keyName="objeto" clase="com.jkt.dominio.Container" fieldID='oid_empresa'>
+			
+			<campoEntrada>
+				<campoEntrada nombreEntidad="com.jkt.dominio.Empresa" />
+			</campoEntrada>
+			
+		</input>
+					
+		<output name="resultado" tableName="TEmpresas">
+			<campoSalida value="oid_empresa" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="RazonSocial" target="razonSocial" />
+			<campoSalida value="UrlDB" target="urlDB" />
+			<campoSalida value="Activo" target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+
+	
+	
+	<!-- GUARDAR EMPRESA -->
+	<operacion name="GuardarEmpresa" clase="com.jkt.operaciones.GuardarLista">
+		<input name="TEmpresas" keyName="objeto" clase="com.jkt.dominio.Empresa" fieldID='oid_empresa'>
+			<campoEntrada>
+				
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="RazonSocial" clase="String" metodo="setRazonSocial" />
+				<campoEntrada name="UrlDB" clase="String" metodo="setUrlDB" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<!-- <campoEntrada name="unOid" clase="com.jkt.dominio.Empresa" metodo="setEmpresa" /> -->
+			</campoEntrada>
+			
+		</input>
+		
+		<forms>
+			<form name="TUsuario"></form>
+			<form name="TLogin"></form>
+		</forms>
+
+	</operacion>
+
+	<!-- GUARDAR UN USUARIO	 -->
+	<operacion name="GuardarUsuario" clase="com.jkt.operaciones.GuardarUsuario">
+
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID="oid_usuario" >
+			<campoEntrada >
+				
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Nombre" clase="String" metodo="setNombres" />
+				<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
+				<campoEntrada name="Email" clase="String" metodo="setMail" />
+				<campoEntrada name="Password" clase="String" metodo="setPassword" />
+<!-- 				<campoEntrada name="SinVencimientoPwd" clase="Boolean" metodo="setSinVencimientoPwd" /> -->
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />				
+				
+				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
+					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
+					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
+					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	
+	<!-- 	ACTUALIZAR PASSWORD DE USUARIO -->
+	<operacion name="actualizarPassword" clase="com.jkt.operaciones.ActualizarPassword">
+		<input name="TUsuarios" keyName="objeto" clase="com.jkt.dominio.Usuario" fieldID='oid_usuario'>
+			<campoEntrada>
+				<campoEntrada name="password" clase="String" metodo="setPassword" />
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	<!-- LOGIN -->
+	<operacion name="Login" clase="com.jkt.operaciones.Login">
+	
+		<input name="TLogin" keyName="login" />
+		
+		<output name="resultado" tableName="TUsuario">
+			<campoSalida value="oid_usuario" target="id" />
+			<campoSalida value="nombres" target="nombres" />
+			<campoSalida value="apellido" target="apellido" />
+			<campoSalida value="mail" target="mail" />
+			<campoSalida value="codigo" target="userName" />
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+		
+</entity>

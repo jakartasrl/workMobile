@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
+
+import javax.validation.ConstraintViolation;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,6 +23,7 @@ import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.service.SessionProvider;
@@ -55,8 +59,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private boolean test;
 	
 	/*
-	 * Definición de estregias para el guardado de parametros.
-	 * Básicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
+	 * Definiciï¿½n de estregias para el guardado de parametros.
+	 * Bï¿½sicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
 	 * Dependiendo de la cantidad de registros recibidos desde la solicitud, se define una u otra estrategia.
 	 * 
 	 * Si la cantidad de registros es mayor a 1, se usa la estrategia para manejar listas, de lo contrario, se usa la estrategia para manejar un solo parametro.
@@ -99,7 +103,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		
 	}
 	/*
-	 * FIN de definición de las estrategias.
+	 * FIN de definiciï¿½n de las estrategias.
 	 * 
 	 */
 	
@@ -110,6 +114,21 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				Map map = adaptRequestHook(input, operation);
 				tx.commit();
 				return map;
+			}catch(javax.validation.ConstraintViolationException e){
+				Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+				constraintViolations.size();
+				StringBuffer buffer=new StringBuffer();
+				String message = null;
+				
+				for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+					buffer.append(constraintViolation.getMessage());
+					break;
+				}
+				
+				tx.rollback();
+				sessionProvider.destroySession();
+				
+				throw new ValidacionException(buffer.toString());
 			}catch(Exception e){
 				tx.rollback();
 				sessionProvider.destroySession();
@@ -171,7 +190,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				throw new JakartaException("No esta en operaciones.xml el FieldID");
 			}
 			
-			//Se obtiene el tipo de clase de la tabla. Todos los registros de este nivel serán de esta clase
+			//Se obtiene el tipo de clase de la tabla. Todos los registros de este nivel serï¿½n de esta clase
 			Class<?> clazz = null;
 			if (! test){
 			   try{
@@ -190,7 +209,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			}
 			
 
-			//Para cada registro que obtenga, se generará una nueva instancia del objeto
+			//Para cada registro que obtenga, se generarï¿½ una nueva instancia del objeto
 			Object instance = null;
 			MapDS mapaConCampos = null;
 			long oid;
@@ -241,7 +260,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 						}
 						
 						/*
-						 * La generación de cada campo puede ser primitiva o compuesta.
+						 * La generaciï¿½n de cada campo puede ser primitiva o compuesta.
 						 * Compuesta va a ser si el valor del parametro es una tabla. En este caso se usara un metodo recursivo
 						 */
 						if(esTabla(entry.getValue())){
@@ -477,6 +496,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		
 		//Cada vez que se genera esta iteracion, creo una nueva estrategia...
 //		AdapterStrategy estrategia=null;
+		if (registros.size()==0) {
+//			throw new JakartaException("No debe enviar estructuras vacias. Si envÃ­a una tabla, debe tener mÃ­nimamente una fila.");
+			return;
+		}
 		
 		
 		//creacion de clase e instancia del objeto compuesto.
@@ -491,6 +514,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			}
 			childInstance = childClazz.newInstance();
 		}
+		
+		
 		Registro primerRegistro=registros.get(0);//es un for esto!
 		
 //		if (registros.size()>1) {

@@ -59,7 +59,8 @@ type
     DatasetsList   : TList;
       
     {********   Eventos   ********}
-    FOnAfterEjecutar : TNotifyEvent;
+    FOnBeforeEjecutar : TNotifyEvent;
+    FOnAfterEjecutar  : TNotifyEvent;
 
     function  getCountDatasets :integer;
     procedure completarAtributosOperacion();
@@ -85,7 +86,8 @@ type
     property Atributos     :TjktOperAttributeList read FAtributos write FAtributos;
     property ServiceCaller :TjktServiceCaller read FServiceCaller write FServiceCaller;
 
-    property OnAfterEjecutar : TNotifyEvent read FOnAfterEjecutar write FOnAfterEjecutar;
+    property OnBeforeEjecutar : TNotifyEvent read FOnBeforeEjecutar write FOnBeforeEjecutar;
+    property OnAfterEjecutar  : TNotifyEvent read FOnAfterEjecutar  write FOnAfterEjecutar;
     
   end;
 
@@ -252,11 +254,15 @@ begin
   if not Assigned(FServiceCaller) then
     raise Exception.Create('No esta asignada la propiedad ServiceCaller');
 
+  if Assigned(FOnBeforeEjecutar) then
+    FOnBeforeEjecutar(Self);
+
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(FOperName);
   completarAtributosOperacion();
-  
+
   FServiceCaller.execute;
+
   if Assigned(FOnAfterEjecutar) then
     FOnAfterEjecutar(Self);
 end;
@@ -269,12 +275,16 @@ begin
   if not Assigned(aDataSet)
      then  raise Exception.Create('No esta asignada la propiedad DataSetCab del Driver');
 
+  if Assigned(FOnBeforeEjecutar) then
+    FOnBeforeEjecutar(Self);
+
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(FOperName);
   addAtributosOperacion();
   Self.setXMLSave(aDataset);
-  
+
   FServiceCaller.execute;
+
   if Assigned(FOnAfterEjecutar) then
     FOnAfterEjecutar(Self);
 end;
@@ -381,11 +391,11 @@ begin
     end;
 end;
 
-procedure TjktOperacion.recorrerDataSet(aDataset:TDataSet ; aLista :TList; aNivel, aNivelDataSet: integer);
+procedure TjktOperacion.recorrerDataSet(aDataset: TDataSet; aLista: TList; aNivel, aNivelDataSet: Integer);
 var
-  wrkDataSet :TDataset;
-  lista2 : TList;
-  i :integer;
+  wrkDataSet: TDataset;
+  lista2: TList;
+  i: integer;
 begin
   aDataSet.BlockReadSize := 1;
   try
@@ -396,7 +406,7 @@ begin
       FServiceCaller.addElement(aNivel, 'Tabla');
       FServiceCaller.addAtribute('nombre', upperCase(aDataset.name));
 
-      aDataset.first;
+      aDataset.First;
       while not aDataSet.Eof do
         begin
           // Fila
