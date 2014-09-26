@@ -95,8 +95,8 @@
 
 	<!-- RECUPERAR Tipo Producto -->
 	<operacion name="TraerTipoProducto" clase="com.jkt.erp.articulos.operaciones.TraerTipoProducto" >
-		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo">
-		</input>			
+<!-- 		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo"> -->
+<!-- 		</input>			 -->
 		<output name="out1" tableName="mtTipoProd">
 			<campoSalida value="oid_tipo" 	target="id" />
 			<campoSalida value="Codigo" 	target="codigo" />
@@ -159,7 +159,7 @@
 			<campoSalida value="des_tabla"    target="tabla.descripcion" />
 		</output>		
 			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.º"></transformer>
 		
 		<forms>
 			<form name="TEmpresa"></form>
@@ -199,7 +199,7 @@
 
 	<!-- 	GUARDAR un producto -->
 	<operacion name="GuardarProducto" clase="com.jkt.operaciones.Guardar">
-		<input name="mtProd" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_producto">
+		<input name="mtProducto" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_producto">
 			<campoEntrada >		
 
 <!-- 				Campos simples -->
@@ -207,36 +207,53 @@
 				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name=""  clase="String" 	metodo="setDescripcionAbrev" />
-				<campoEntrada name="" clase="Boolean" metodo="setComprable" />
-				<campoEntrada name="" clase="Boolean" metodo="setVendible" />
-				<campoEntrada name="" clase="Boolean" metodo="setStockeable" />
-				<campoEntrada name="" clase="Boolean" metodo="setProdPropia" />
-				<campoEntrada name="" clase="Boolean" metodo="setBien" />
+				<campoEntrada name="descAbreviada"  clase="String" 	metodo="setDescripcionAbrev" />
+				<campoEntrada name="comprable" clase="Boolean" metodo="setComprable" />
+				<campoEntrada name="vendible" clase="Boolean" metodo="setVendible" />
+				<campoEntrada name="stockeable" clase="Boolean" metodo="setStockeable" />
+				<campoEntrada name="prodPropia" clase="Boolean" metodo="setProdPropia" />
+				<campoEntrada name="bien" clase="Boolean" metodo="setBien" />
 				
-<!-- 				Campos complejos -->
-				<campoEntrada name="oid_tipo" clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
+				<campoEntrada name="oid_unidadMedidaPrincipal" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
+				<campoEntrada name="unidadMedidaSec" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
+				<campoEntrada name="unidadMedidaTer" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
 				
+				<campoEntrada name="oid_uni_venta" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadVenta" />
+				<campoEntrada name="oid_uni_prod" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadProduccion" />
+				<campoEntrada name="oid_uni_compra" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadCompra" />
+				
+				<campoEntrada name="oid_tipo_producto" clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
+				
+				<campoEntrada name="mtProdDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ProductoDet" fieldID="oid_producto_det"  >
+								
+						<campoEntrada name="oid_caract_prod" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+						
+						<campoEntrada name="oid_valor_tabla" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
+						<campoEntrada name="string"  clase="String" 	metodo="setValorString" />
+						<campoEntrada name="entero"  clase="Integer" 	metodo="setValorEntero" />
+						<campoEntrada name="doble"  clase="Double" 	metodo="setValorDoble" />
+						<campoEntrada name="boolean" clase="Boolean" metodo="setValorBoolean" />
+						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+						
+				</campoEntrada>
 				
 				<campoEntrada name="mtArtStock" metodo="addArticulo" clase="com.jkt.erp.articulos.ArticuloStock" fieldID="oid_art_stock"  >
 <!-- 					No hace falta el producto como campo, ya que yo se que es hijo del de arriba.Es un seteo bidireccional en el metodo addArticulo -->
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
-					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
-					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
+					<campoEntrada name="a" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
+					<campoEntrada name="b" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
+					<campoEntrada name="c" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
 					
 					
 					<campoEntrada name="mtArtStockDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ArticuloStockDet" fieldID="oid_art_stock_det"  >
-<!-- 						el articuloStock no es necesario para el server ya que es una relacion bidireccional y la resuelvo en agregar detalle, pero no se si la necesitan desde la vista. -->
-<!-- 						private ArticuloStock articuloStock; -->
 								
-						<campoEntrada name="" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
-						<campoEntrada name="" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
+						<campoEntrada name="a" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+						<campoEntrada name="b" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
 
-						<campoEntrada name=""  clase="String" 	metodo="setValorString" />
-						<campoEntrada name=""  clase="Integer" 	metodo="setValorEnter" />
-						<campoEntrada name=""  clase="Double" 	metodo="setValorDoble" />
-						<campoEntrada name="" clase="Boolean" metodo="setValorBoolean" />
+						<campoEntrada name="c"  clase="String" 	metodo="setValorString" />
+						<campoEntrada name="d"  clase="Integer" 	metodo="setValorEnter" />
+						<campoEntrada name="e"  clase="Double" 	metodo="setValorDoble" />
+						<campoEntrada name="f" clase="Boolean" metodo="setValorBoolean" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 						
 					</campoEntrada>
@@ -244,8 +261,9 @@
 				</campoEntrada>
 				
 				<campoEntrada name="mtEquivalencias" metodo="addEquivalencia" clase="com.jkt.erp.articulos.ProductoEquivUniMed" fieldID="oid_equiv"  >
-					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
-					<campoEntrada name="" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
+					<campoEntrada name="oid_unidadOrigen" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
+					<campoEntrada name="oid_unidadDestino" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
+					<campoEntrada name="factor" clase="String" metodo="setFactor" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 				
@@ -260,15 +278,13 @@
 	
 	<!-- TRAER LOS CLASIFICADORES DE UN PRODUCTO -->
 	<operacion name="TraerClasifProd" clase="com.jkt.erp.articulos.operaciones.TraerClasifProducto">
-<!-- 		<listas> -->
-<!-- 			outputName="resultado" nombreLista -->
-<!-- 		</listas> -->
+
 		<output name="resultado" tableName="mtClasificadoresProducto">
 			<campoSalida value="oid_ClasifProd" target="id" />
 			<campoSalida value="DescClasif" target="descripcion" />
 		</output>
 
-		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 
 		<forms>
 			<form name="FNCli0001" />

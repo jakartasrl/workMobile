@@ -10,15 +10,13 @@
 		</id>
 
 		<many-to-one  name="tipoProducto" column="TIPO_PRODUCTO_ID" not-null="true" class="com.jkt.erp.articulos.TipoProducto" cascade="" ></many-to-one>
-	    <many-to-one  name="caracteristica" column="carac_ID" class="com.jkt.erp.articulos.CaracteristicaProducto" cascade=""></many-to-one>
+	    <many-to-one  name="caracteristica" column="CARAC_ID" class="com.jkt.erp.articulos.CaracteristicaProducto" cascade=""></many-to-one>
 	
-		<property name="obligatorio" column="obligatorio" type="boolean" />
-		<property name="armaCodigo" column="arma_codigo" type="boolean" />
-		<property name="armaDescripcion" column="arma_descr" type="boolean" />
-		<property name="orden" column="orden" type="integer" />
+		<property name="obligatorio" column="OBLIGATORIO" type="boolean" />
+		<property name="armaCodigo" column="ARMA_CODIGO" type="boolean" />
+		<property name="armaDescripcion" column="ARMA_DESCR" type="boolean" />
+		<property name="orden" column="ORDEN" type="integer" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-		
-		
 
 	</class>
 </hibernate-mapping>

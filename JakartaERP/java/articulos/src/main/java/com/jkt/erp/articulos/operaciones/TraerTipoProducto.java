@@ -1,6 +1,6 @@
 package com.jkt.erp.articulos.operaciones;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.jkt.erp.articulos.TipoProducto;
@@ -9,21 +9,37 @@ import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 
 /**
- * Recupera todos los tipos de producto existentes, y sus correspondientes detalles
+ * <p>Operacion que recupera un determinado tipo de producto.</p>
  * 
- * @author DHS- Jakarta SRL
+ * <code>
+ * 		<p>Cambios hechos por Leo sobre la clase creada por dani.</p>
+ * 		<p>Le cambie la forma de recorrer, sin usar iteradores.La forma de recuperar el objeto, directamente usando un ID recibido desde el cliente.</p>
+ *		<p>Agregada constante.</p>
+ *		<p>Agregada validacion de entrada.</p>
+ * </code>
+ * 
+ * 
+ * @author DHS - Jakarta SRL
+ * @author Leonel Suarez - Jakarta SRL
+ * 
+ * 
  */
 public class TraerTipoProducto extends Operation {
 
+	private static final String OID_TIPO = "oid_tipo".toUpperCase();
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		TipoProducto tipo = (TipoProducto) aParams.get("objeto");
+		validarEntrada(aParams.get(OID_TIPO));
+		TipoProducto tipo = (TipoProducto) obtener(TipoProducto.class, (String)aParams.get(OID_TIPO));
 		
 		notificarObjecto(Notificacion.getNew("out1", tipo));
-		Iterator it = tipo.getCaracteristicas().iterator();
-		while(it.hasNext()){
-			TipoProductoDet det = (TipoProductoDet) it.next();
-			notificarObjecto(Notificacion.getNew("out2", det));
+		
+		List<TipoProductoDet> caracteristicas = tipo.getCaracteristicas();
+		
+		for (TipoProductoDet tipoProductoDet : caracteristicas) {
+			notificarObjecto(Notificacion.getNew("out2", tipoProductoDet));
+			
 		}
 
 	}

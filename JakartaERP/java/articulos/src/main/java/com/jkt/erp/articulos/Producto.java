@@ -44,6 +44,9 @@ public class Producto extends Descriptible {
 	private List<ProductoClasificador> clasificadores = new ArrayList<ProductoClasificador>();
 	private TipoProducto tipoProducto;
 	private List<ArticuloStock> articulosStock=new ArrayList<ArticuloStock>();
+	private List<ProductoDet> detalles=new ArrayList<ProductoDet>();
+	
+	
 	
 	/*
 	 * Variables de instancia
@@ -52,6 +55,14 @@ public class Producto extends Descriptible {
 	
 	public List<ArticuloStock> getArticulosStock() {
 		return articulosStock;
+	}
+
+	public List<ProductoDet> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<ProductoDet> detalles) {
+		this.detalles = detalles;
 	}
 
 	public List<ProductoEquivUniMed> getEquivalencias() {
@@ -178,4 +189,22 @@ public class Producto extends Descriptible {
 		this.unidadCompra = unidadCompra;
 	}
 
+	
+	/*
+	 * Helper methods
+	 */
+	public void addEquivalencia(ProductoEquivUniMed eq){
+		if (!equivalencias.contains(eq)) {
+			equivalencias.add(eq);
+			eq.setProducto(this);
+		}
+	}
+	
+	public void agregarDetalle(ProductoDet detalle){
+		if(!detalles.contains(detalle)){
+			detalles.add(detalle);
+			detalle.setProducto(this);
+		}
+	}
+	
 }

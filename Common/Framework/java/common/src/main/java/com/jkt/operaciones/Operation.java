@@ -26,7 +26,6 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
-import com.jkt.util.RepositorioClases;
 import com.jkt.xmlreader.ElementTransformer;
 
 /**
@@ -124,9 +123,14 @@ public abstract class Operation extends Observable {
 
 		Transformer transformer = null;
 		if (elementTransformer != null) {
-			Class<?> clazz = Class.forName(elementTransformer.getClase());
-			Object instance = clazz.newInstance();
-			transformer = (Transformer) instance;
+			
+			try{
+				Class<?> clazz = Class.forName(elementTransformer.getClase());
+				Object instance = clazz.newInstance();
+				transformer = (Transformer) instance;
+			}catch(ClassNotFoundException e){
+				throw new JakartaException("No se puede iniciar el transformador indicado.Compruebe el archivo de las operaciones por favor...");
+			}
 		} else {
 			transformer = new EmptyTransformer();
 		}
@@ -156,18 +160,12 @@ public abstract class Operation extends Observable {
 	}
 
 	/**
-	 * <p>
-	 * Metodo principal de la operacion.
-	 * </p>
-	 * <p>
-	 * Es el metodo a implementar en cualquier operacion.
-	 * </p>
+	 * <p>Metodo principal de la operacion.</p>
+	 * <p>Es el metodo a implementar en cualquier operacion.</p>
 	 * 
 	 * 
 	 * @param aParams
-	 * @throws Exception
-	 *             cuando ocurre cualquier error, deberia wrapper la exception y
-	 *             guardarle dentro de {@link Exception}
+	 * @throws Exception cuando ocurre cualquier error, deberia wrapper la exception y guardarle dentro de {@link Exception}
 	 */
 	public void runOperation(Map<String, Object> aParams) throws Exception{
 		session = sessionProvider.getSession();
@@ -194,12 +192,12 @@ public abstract class Operation extends Observable {
 			
 			throw new ValidacionException(buffer.toString());
 		}catch(RuntimeException exception){
-			//Hago el rollback y muestro el mensaje critido en frontend.
+			//Hago el rollback y muestro el mensaje critico en frontend.
 			tx.rollback();
 			sessionProvider.destroySession();
 			throw exception;
 		}catch(Exception exception){
-			//Hago el rollback y muestro el mensaje critido en frontend.
+			//Hago el rollback y muestro el mensaje critico en frontend.
 			tx.rollback();
 			sessionProvider.destroySession();
 			throw exception;

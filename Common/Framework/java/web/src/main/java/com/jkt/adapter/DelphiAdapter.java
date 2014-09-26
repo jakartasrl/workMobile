@@ -350,6 +350,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								 catch(ClassNotFoundException e){
 									throw new JakartaException("La clase " + metaDataOfCurrentField.getClase() + " no existe" );
 								 }
+								 catch(NoSuchMethodException e){
+									 throw new JakartaException("No se puede ejecutar el metodo ".concat(metaDataOfCurrentField.getMetodo()));
+								 }
 								}
 							}
 							/*
@@ -416,10 +419,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		if (oid<1) {//Si el id buscado es 0 o negativo, se retorna una nueva instancia
 			newInstance	= clazz.newInstance();
 		}else{
-			try{
-				newInstance=session.get(clazz, oid);
-			}catch(Exception e){
-				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz, String.valueOf(oid)));
+			newInstance=session.get(clazz, oid);
+			if (newInstance==null) {
+				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz.getSimpleName(), String.valueOf(oid)));
 			}
 		}
 		return (PersistentEntity) newInstance;
@@ -471,7 +473,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 * @throws ClassNotFoundException 
 	 * 
 	 */
-	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException, ClassNotFoundException{
+	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException, ClassNotFoundException{
 		if (test){
 			return;
 		}
@@ -495,15 +497,17 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}
 		
 //		Class primitiveWrapper=STRING_TYPE.equals(campoEntrada.getClase())?String.class:Integer.class;
-		Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
-		Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
-		
-		method.invoke(instance,value);
-		
+		try{
+			Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
+			Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
+			method.invoke(instance,value);
+		}catch(NoSuchMethodException e){
+			throw new JakartaException("No se puede ejecutar el metodo ".concat(campoEntrada.getMetodo()));
+		}
 	}
 	
 	
-	private void resolverCampoCompuesto(Class parentClass, Object parentObject, CampoEntrada parentMetadata, List<Registro> registros ) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException, JakartaException{
+	private void resolverCampoCompuesto(Class parentClass, Object parentObject, CampoEntrada parentMetadata, List<Registro> registros ) throws SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException, JakartaException{
 		
 		//Cada vez que se genera esta iteracion, creo una nueva estrategia...
 //		AdapterStrategy estrategia=null;
@@ -574,9 +578,13 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				}
 			}
 			if (!test){
-			   Class<?> otraClase = Class.forName(parentMetadata.getClase());
-			   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
-			   method.invoke(parentObject,childInstance);
+				try{
+					Class<?> otraClase = Class.forName(parentMetadata.getClase());
+					Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
+					method.invoke(parentObject,childInstance);
+				}catch(NoSuchMethodException e){
+					throw new JakartaException("No se puede ejecutar el metodo ".concat(parentMetadata.getMetodo()));
+				}
 			}
 		}
 		

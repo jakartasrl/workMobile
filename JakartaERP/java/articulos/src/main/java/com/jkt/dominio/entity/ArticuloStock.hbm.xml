@@ -10,10 +10,6 @@
 
 		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" column="PRODUCTO_ID" cascade="none"></many-to-one>
 
-		<many-to-one name="uniMedPrin" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_MED_PRIN_ID" cascade="none"></many-to-one>
-		<many-to-one name="uniMedSec" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_MED_SEC_ID" cascade="none"></many-to-one>
-		<many-to-one name="uniMedTerc" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_MED_TER_ID" cascade="none"></many-to-one>
-	
 		<list name="detalles" table="ARTICULOS_STOCK_DET" lazy="true" cascade="all">
 			<key column="ARTICULOS_STOCK_ID" />
 			<index column="ORDEN" />

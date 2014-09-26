@@ -1,10 +1,16 @@
 package com.jkt.erp.articulos;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.dominio.PersistentEntity;
 
-public class ArticuloStockDet extends PersistentEntity {
+public class ProductoDet extends PersistentEntity {
 
-	private ArticuloStock articuloStock;
+	/*
+	 * Campo casi principal de la clase.
+	 * La caracteristica define el tipo, que son los 5 o 6 atributos restantes.
+	 */
+	@NotNull(message="El detalle del producto debe tener asociada una caracteristica.")
 	private CaracteristicaProducto caracProducto;
 	
 	private ValoresTablas valorTabla;
@@ -12,20 +18,24 @@ public class ArticuloStockDet extends PersistentEntity {
 	private int valorEntero;
 	private double valorDoble;
 	private boolean valorBoolean;
-
+	
+	@NotNull
+	private Producto producto;
+	
 	/*
 	 * Setters y getters
 	 */
-	public ArticuloStock getArticuloStock() {
-		return articuloStock;
-	}
-
-	public void setArticuloStock(ArticuloStock articuloStock) {
-		this.articuloStock = articuloStock;
-	}
 
 	public CaracteristicaProducto getCaracProducto() {
 		return caracProducto;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 	public void setCaracProducto(CaracteristicaProducto caracProducto) {
@@ -71,5 +81,5 @@ public class ArticuloStockDet extends PersistentEntity {
 	public void setValorTabla(ValoresTablas valorTabla) {
 		this.valorTabla = valorTabla;
 	}
-
+	
 }

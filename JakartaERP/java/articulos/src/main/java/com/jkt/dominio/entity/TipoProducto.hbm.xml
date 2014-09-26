@@ -12,10 +12,8 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="descripcion"/>
+		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
-		
-		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" column="PRODUCTO_ID" cascade="none"></many-to-one>		
 		
 		<list name="caracteristicas" lazy="true" cascade="all">
 			<key column="TIPO_PRODUCTO_ID" />

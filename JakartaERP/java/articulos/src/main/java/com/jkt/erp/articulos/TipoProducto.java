@@ -13,7 +13,7 @@ import com.jkt.dominio.Descriptible;
  */
 public class TipoProducto extends Descriptible {
 
-	private Producto producto;
+//	private Producto producto;
 	private List<TipoProductoDet> caracteristicas = new ArrayList<TipoProductoDet>();
 
 	protected void setCaracteristicas(List<TipoProductoDet> caracteristicas) {
@@ -22,14 +22,6 @@ public class TipoProducto extends Descriptible {
 
 	public List<TipoProductoDet> getCaracteristicas() {
 		return caracteristicas;
-	}
-
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
 	}
 
 	/*
