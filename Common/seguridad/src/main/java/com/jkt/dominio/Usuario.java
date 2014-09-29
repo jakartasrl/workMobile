@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class Usuario extends PersistentEntity implements IDescriptible {
 
-	@NotBlank(message="No puede estar vacio el codigo.")
+	@NotBlank(message="No puede estar vacio el codigo de usuario.")
 	private String codigo;
 	
 	@NotBlank(message="Debe completar el nombre del usuario.")
@@ -25,7 +25,7 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	@NotBlank(message="Debe completar el apellido de usuario.")
 	private String apellido;
 	
-	@Email(message="El correo ingresado no parece tener el formato correcto.")
+	@Email(message="El correo ingresado para el usuario no parece tener el formato correcto.")
 	private String mail;
 	
 	private String skin;

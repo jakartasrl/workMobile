@@ -10,6 +10,13 @@ import com.jkt.dominio.Descriptible;
  */
 public class CaracteristicaProducto extends Descriptible {
 
+	public static final String STRING = "String";
+	public static final String ENTERO = "entero";
+	public static final String DOBLE = "doble";
+	public static final String BOOLEAN = "boolean";
+	public static final String TABLA = "tabla";
+
+	
 	private String tipoDato;
 	private TablaValoresCaracProd tabla;
 

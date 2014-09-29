@@ -29,7 +29,7 @@ public class Producto extends Descriptible {
 	private boolean prodPropia;
 	private boolean bien;
 
-	@NotNull(message="Es necesario que el articulo tenga una unidad de medida principal.")
+	@NotNull(message="Es necesario que el producto tenga una unidad de medida principal.")
 	private UnidadMedida uniMedPrin;
 	
 	private UnidadMedida uniMedSec;

@@ -9,10 +9,10 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class Empresa extends PersistentEntity implements IDescriptible {
 
-	@NotBlank(message="El codigo no puede estar vacio.")
+	@NotBlank(message="El codigo de la empresa no puede estar vacio.")
 	private String codigo;
 
-	@NotBlank(message="La razon social no puede estar vacia.")
+	@NotBlank(message="La razon social de la empresa no puede estar vacia.")
 	private String razonSocial;
 
 	private String urlDB;
