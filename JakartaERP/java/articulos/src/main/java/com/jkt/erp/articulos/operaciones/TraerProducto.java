@@ -27,6 +27,7 @@ public class TraerProducto extends Operation {
 	private static final String WRITER_ARTICULO_STOCK = "articulosStock";
 	private static final String WRITER_ARTICULO_STOCK_DET = "detalleArticuloStock";
 	private static final String WRITER_EQUIVALECIAS = "equivalencias";
+	private static final String WRITER_CLASIFICADORES = "clasificadores";
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {

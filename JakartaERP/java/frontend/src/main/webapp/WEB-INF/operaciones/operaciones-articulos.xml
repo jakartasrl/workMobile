@@ -135,7 +135,6 @@
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="tipo_dato" clase="String" metodo="setTipoDato" />
 				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
-				
 			</campoEntrada>			
 		</input>		
 
@@ -233,14 +232,11 @@
 		
 	</operacion>
 
-	
-
 	<!-- 	GUARDAR un producto -->
 	<operacion name="GuardarProducto" clase="com.jkt.operaciones.Guardar">
 		<input name="mtProducto" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_producto">
 			<campoEntrada >		
 
-<!-- 				Campos simples -->
 				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
 				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
@@ -263,25 +259,15 @@
 				<campoEntrada name="oid_tipo_producto" clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
 				
 				<campoEntrada name="mtProdDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ProductoDet" fieldID="oid_producto_det"  >
-								
-						<campoEntrada name="oid_caract_prod" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
-						
-						<campoEntrada name="oid_valor_tabla" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
-						<campoEntrada name="string"  clase="String" 	metodo="setValorString" />
-						<campoEntrada name="entero"  clase="Integer" 	metodo="setValorEntero" />
-						<campoEntrada name="doble"  clase="Double" 	metodo="setValorDoble" />
-						<campoEntrada name="boolean" clase="Boolean" metodo="setValorBoolean" />
-						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-						
+					<campoEntrada name="oid_caract_prod" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+					<campoEntrada name="valor"  clase="String" 	metodo="setCampoTransiente" />
 				</campoEntrada>
 				
 				<campoEntrada name="mtArtStock" metodo="addArticulo" clase="com.jkt.erp.articulos.ArticuloStock" fieldID="oid_art_stock"  >
-<!-- 					No hace falta el producto como campo, ya que yo se que es hijo del de arriba.Es un seteo bidireccional en el metodo addArticulo -->
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					<campoEntrada name="a" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
 					<campoEntrada name="b" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
 					<campoEntrada name="c" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
-					
 					
 					<campoEntrada name="mtArtStockDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ArticuloStockDet" fieldID="oid_art_stock_det"  >
 								
@@ -330,16 +316,12 @@
 
 	</operacion>
 
-
-
-
-<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<!-- VALIDAR TIPOS DE DATOS DE UNA CARACTERISTICA DE PRODUCTO. -->
 	<operacion name="ValidarValores" clase="com.jkt.erp.articulos.operaciones.ValidarValoresDeTablaDeCaracteristicas">
 		
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="descripcion" />
-<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

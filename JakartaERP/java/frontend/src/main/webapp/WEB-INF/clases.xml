@@ -25,4 +25,7 @@
 	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
 	<elemento key="representante" value="com.jkt.erp.varios.Representante" />
 
+	
+
+	
 </elementos>

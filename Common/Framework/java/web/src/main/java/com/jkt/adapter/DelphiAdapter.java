@@ -122,6 +122,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			Map map = adaptRequestHook(input, operation);
 			tx.commit();
 			return map;
+		}catch(JakartaException e){
+			tx.rollback();
+			sessionProvider.destroySession();
+			throw e;
 		}catch(javax.validation.ConstraintViolationException e){
 				Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 				constraintViolations.size();
@@ -137,16 +141,23 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				sessionProvider.destroySession();
 				
 				throw new ValidacionException(buffer.toString());
-			}catch(Exception e){
-				tx.rollback();
-				sessionProvider.destroySession();
+		}catch(Exception e){
+			tx.rollback();
+			sessionProvider.destroySession();
+			
+			if (e.getCause()!=null) {
+				throw new JakartaException(e.getCause().getMessage());
+			}else{
 				throw e;
-			}finally{
+			}
+		}
+		
+//		finally{
 //				if (tx.isActive()) {
 //					tx.commit();
 //				}
 //				sessionProvider.destroySession();
-			}
+//		}
 	}
 	
 	private Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
