@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.jkt.constantes.TiposDeDato;
 import com.jkt.dominio.Container;
 //import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
@@ -49,7 +50,7 @@ import com.jkt.xmlreader.Input;
 @Qualifier("delphiAdapter")
 public class DelphiAdapter implements Adapter<Map, MapDS> {
 
-	private static final String BYTE_ARRAY_TYPE = "ByteArray";
+	private static final String BYTE_ARRAY_TYPE = TiposDeDato.BYTE_ARRAY_TYPE;
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
 	private static final String INTEGER_TYPE = "Integer";

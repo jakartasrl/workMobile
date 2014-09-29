@@ -196,6 +196,44 @@
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
+	
+	
+	
+<!-- 	GUARDAR VALORES DE UNA DETERMINADA TABLA -->
+	<operacion name="GuardarValoresDeTabla" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'>
+			<campoEntrada>			
+
+				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" >
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
+				
+			</campoEntrada>			
+		</input>		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" >
+		<output name="valores" tableName="mtInput">
+			<campoSalida value="oid_valor" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+
+	
 
 	<!-- 	GUARDAR un producto -->
 	<operacion name="GuardarProducto" clase="com.jkt.operaciones.Guardar">
@@ -290,6 +328,26 @@
 			<form name="FNCli0001" />
 		</forms>
 
+	</operacion>
+
+
+
+
+<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<operacion name="ValidarValores" clase="com.jkt.erp.articulos.operaciones.ValidarValoresDeTablaDeCaracteristicas">
+		
+		<output name="resultado" tableName="NoSeUsa">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Descripcion" target="descripcion" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
 	</operacion>
 
 

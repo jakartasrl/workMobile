@@ -61,7 +61,7 @@ public abstract class Validar extends Operation{
 	 * Template method.
 	 * Los diferentes comportamientos ejecutan estos metodos, y llaman a los metodos declarados en esta clase, mas abajo, como protected.
 	 */
-	protected abstract PersistentEntity manejarFiltros(Map<String, Object> aParams) throws ClassNotFoundException, JakartaException;
+	protected abstract PersistentEntity manejarFiltros(Map<String, Object> aParams) throws ClassNotFoundException, JakartaException, Exception;
 	protected abstract void manejoDeExistencia(PersistentEntity entity,String className, String codigo)throws ValidacionException;
 
 	
