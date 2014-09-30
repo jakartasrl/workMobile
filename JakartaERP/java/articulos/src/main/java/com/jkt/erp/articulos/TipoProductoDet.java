@@ -1,11 +1,15 @@
 package com.jkt.erp.articulos;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.dominio.PersistentEntity;
 
 public class TipoProductoDet extends PersistentEntity {
 
 	private TipoProducto tipoProducto;
+	
 	private CaracteristicaProducto caracteristica;
+	
 	private boolean obligatorio;
 	private boolean armaCodigo;
 	private boolean armaDescripcion;

@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import com.jkt.constantes.TiposDeDato;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 public class ProductoDet extends PersistentEntity {
 

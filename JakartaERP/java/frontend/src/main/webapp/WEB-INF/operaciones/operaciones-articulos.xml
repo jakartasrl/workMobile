@@ -112,6 +112,7 @@
 			<campoSalida value="oid_carac" 	target="caracteristica.id" />
 			<campoSalida value="cod_carac" 	target="caracteristica.codigo" />
 			<campoSalida value="des_carac" 	target="caracteristica.descripcion" />
+<!-- 			<campoSalida value="tipoDato" 	target="caracteristica.tipoDato" /> -->
 			<campoSalida value="Activo" 	target="isActivo" />
 			<campoSalida value="oblig" 		target="isObligatorio" />
 			<campoSalida value="arma_cod" 	target="isArmaCodigo" />
@@ -145,7 +146,6 @@
 		
 	</operacion>
 
-
 	<!-- RECUPERAR  Caracteristicas de Producto -->
 	<operacion name="TraerCaracProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.CaracteristicaProducto">
 		<output name="resultado" tableName="mtInput">
@@ -159,7 +159,7 @@
 			<campoSalida value="des_tabla"    target="tabla.descripcion" />
 		</output>		
 			
-		<transformer clase="com.jkt.transformers.º"></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
 			<form name="TEmpresa"></form>
@@ -369,7 +369,7 @@
 			<campoSalida value="Activo"	target="isActivo" />
 		</output>
 
-		<output name="detalleTipoProducto" tableName="mtProd">
+		<output name="caracteristicasDeProducto" tableName="mtCaracteristicasDeProducto">
 		
 <!-- 		Datos de la caracteristica -->
 			<campoSalida value="oid"	target="id" />
@@ -460,4 +460,39 @@
 	</operacion>
 
 
+	<operacion name="TraerCaracteristicasDeProducto" clase="com.jkt.erp.articulos.operaciones.TraerTiposDeProducto">
+
+		<output name="caracteristicas" tableName="mtCaracteristicasDeProducto">
+		
+			<campoSalida value="oid_caracteristica"	target="id" />
+			<campoSalida value="codCaract"	target="codigo" />
+			<campoSalida value="descCaract"	target="descripcion" />
+			<campoSalida value="tipoDatoCaract"	target="tipoDato" />
+			
+		</output>
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR  Tipos de producto para un combo -->
+	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TipoProducto">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_tipo_prod" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>		
+	</operacion>
+	
+	
 </entity>
