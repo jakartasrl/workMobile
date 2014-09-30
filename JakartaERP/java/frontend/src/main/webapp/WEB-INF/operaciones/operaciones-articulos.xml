@@ -233,195 +233,191 @@
 		
 	</operacion>
 
-	<!-- 	GUARDAR un producto -->
-	<operacion name="GuardarProducto" clase="com.jkt.operaciones.Guardar">
-		<input name="mtProducto" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_producto">
+	<!-- GUARDAR UN PRODUCTO -->
+	<operacion name="GuardarArticulo" clase="com.jkt.operaciones.Guardar">
+		<input name="mtArticulo" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_Art">
 			<campoEntrada >		
 
-				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
-				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-				
-				<campoEntrada name="descAbreviada"  clase="String" 	metodo="setDescripcionAbrev" />
-				<campoEntrada name="comprable" clase="Boolean" metodo="setComprable" />
-				<campoEntrada name="vendible" clase="Boolean" metodo="setVendible" />
-				<campoEntrada name="stockeable" clase="Boolean" metodo="setStockeable" />
-				<campoEntrada name="prodPropia" clase="Boolean" metodo="setProdPropia" />
-				<campoEntrada name="bien" clase="Boolean" metodo="setBien" />
-				
-				<campoEntrada name="oid_unidadMedidaPrincipal" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
-				<campoEntrada name="unidadMedidaSec" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
-				<campoEntrada name="unidadMedidaTer" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
-				
-				<campoEntrada name="oid_uni_venta" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadVenta" />
-				<campoEntrada name="oid_uni_prod" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadProduccion" />
-				<campoEntrada name="oid_uni_compra" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadCompra" />
-				
-				<campoEntrada name="oid_tipo_producto" clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
-				
-				<campoEntrada name="mtProdDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ProductoDet" fieldID="oid_producto_det"  >
-					<campoEntrada name="oid_caract_prod" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
-					<campoEntrada name="valor"  clase="String" 	metodo="setCampoTransiente" />
-				</campoEntrada>
-				
-				<campoEntrada name="mtArtStock" metodo="addArticulo" clase="com.jkt.erp.articulos.ArticuloStock" fieldID="oid_art_stock"  >
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-					<campoEntrada name="a" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
-					<campoEntrada name="b" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
-					<campoEntrada name="c" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
-					
-					<campoEntrada name="mtArtStockDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ArticuloStockDet" fieldID="oid_art_stock_det"  >
-								
-						<campoEntrada name="a" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
-						<campoEntrada name="b" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
+				<campoEntrada name="Codigo" 	  clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="DescAbrev"	  clase="String" metodo="setDescripcionAbrev" />
+				<campoEntrada name="oid_TipoArt"  clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
+				<campoEntrada name="EsBien"		  clase="Boolean" metodo="setBien" />
+				<campoEntrada name="EsServicio"	  clase="Boolean" metodo="setServicio" /> AGREGADO !!!!
+				<campoEntrada name="EsStockeable" clase="Boolean" metodo="setStockeable" />
+				<campoEntrada name="EsProdPropia" clase="Boolean" metodo="setProdPropia" />
+				<campoEntrada name="EsComprable"  clase="Boolean" metodo="setComprable" />
+				<campoEntrada name="EsVendible"	  clase="Boolean" metodo="setVendible" />
+				<campoEntrada name="Activo"		  clase="Boolean" metodo="setActivo" />
 
-						<campoEntrada name="c"  clase="String" 	metodo="setValorString" />
-						<campoEntrada name="d"  clase="Integer" 	metodo="setValorEnter" />
-						<campoEntrada name="e"  clase="Double" 	metodo="setValorDoble" />
-						<campoEntrada name="f" clase="Boolean" metodo="setValorBoolean" />
-						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-						
-					</campoEntrada>
+				<campoEntrada name="oid_UnidStockPrinc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
+				<campoEntrada name="oid_UnidStockSecun"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
+				<campoEntrada name="oid_UnidStockTerc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
+
+				<campoEntrada name="oid_UnidVenta"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadVenta" />
+				<campoEntrada name="oid_UnidProd"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadProduccion" />
+				<campoEntrada name="oid_UnidCompra"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadCompra" />
+
+
+				<campoEntrada name="mtValoresCaracProd" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ProductoDet" fieldID="oid_ValorCarac"  >
+<!-- 					<campoEntrada name="oid_Art" -->
+					<campoEntrada name="oid_Carac"		clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+					<campoEntrada name="CodValorCarac"	clase="String" metodo="setCampoTransiente" />
+				</campoEntrada>
+				
+<!-- 				<campoEntrada name="mtArtStock" metodo="addArticulo" clase="com.jkt.erp.articulos.ArticuloStock" fieldID="oid_art_stock"  > -->
+<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+<!-- 					<campoEntrada name="a" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" /> -->
+<!-- 					<campoEntrada name="b" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" /> -->
+<!-- 					<campoEntrada name="c" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" /> -->
 					
-				</campoEntrada>
+<!-- 					<campoEntrada name="mtArtStockDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ArticuloStockDet" fieldID="oid_art_stock_det"  > -->
+								
+<!-- 						<campoEntrada name="a" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" /> -->
+<!-- 						<campoEntrada name="b" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" /> -->
+
+<!-- 						<campoEntrada name="c"  clase="String" 	metodo="setValorString" /> -->
+<!-- 						<campoEntrada name="d"  clase="Integer" 	metodo="setValorEnter" /> -->
+<!-- 						<campoEntrada name="e"  clase="Double" 	metodo="setValorDoble" /> -->
+<!-- 						<campoEntrada name="f" clase="Boolean" metodo="setValorBoolean" /> -->
+<!-- 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+						
+<!-- 					</campoEntrada> -->
+					
+<!-- 				</campoEntrada> -->
 				
-				<campoEntrada name="mtEquivalencias" metodo="addEquivalencia" clase="com.jkt.erp.articulos.ProductoEquivUniMed" fieldID="oid_equiv"  >
-					<campoEntrada name="oid_unidadOrigen" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
-					<campoEntrada name="oid_unidadDestino" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
-					<campoEntrada name="factor" clase="String" metodo="setFactor" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="mtEquivalencias" metodo="addEquivalencia" clase="com.jkt.erp.articulos.ProductoEquivUniMed" fieldID="oid_EquivArt"  >
+					<!-- <campoEntrada name="oid_Art"            VIENE DE ARRIBA! (EN LA TABLA MAESTRA)  -->      
+					<campoEntrada name="oid_UnidMedOrig" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
+					<campoEntrada name="oid_UnidMedDest" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
+					<campoEntrada name="FactConv" 		 clase="Double"	 metodo="setFactor" />
+					<campoEntrada name="Activo"			 clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
-				
+
+
+				<campoEntrada name="mtClasifProd" metodo="" clase="" fieldID="oid_ClasifProd"  >
+					<!-- <campoEntrada name="oid_Art"            VIENE DE ARRIBA! (EN LA TABLA MAESTRA)  -->      
+					<campoEntrada name="oid_Clasif"		 clase="" metodo="" />
+					<campoEntrada name="oid_ValorClasif" clase="" metodo="" />
+					<campoEntrada name="Activo"			 clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
+
+
 			</campoEntrada>
 		</input>
 		
 		<forms>
-			<form name="FNVar0001"></form>
+			<form name="FNArt0001"></form>
 		</forms>
 		
 	</operacion>
-	
-	
-	
+
+
 	<!-- TRAER PRODUCTO Y TODAS SUS RELACIONES -->
-	<operacion name="TraerProducto" clase="com.jkt.erp.articulos.operaciones.TraerProducto" >
+	<operacion name="TraerArticulo" clase="com.jkt.erp.articulos.operaciones.TraerProducto" >
 
-		<output name="producto" tableName="mtProd">
+		<output name="producto" tableName="mtArticulo">
 		
-<!-- 		Datos descriptibles -->
-			<campoSalida value="oid" 	target="id" />
-			<campoSalida value="Codigo" 	target="codigo" />
-			<campoSalida value="descr" 		target="descripcion" />
-			<campoSalida value="Activo" 	target="isActivo" />
-			
-<!-- 			Datos primarios -->
-			<campoSalida value="descripcionAbrev" 		target="descripcionAbrev" />
-			<campoSalida value="comprable" 	target="isComprable" />
-			<campoSalida value="vendible" 	target="isVendible" />
-			<campoSalida value="stockeable" target="isStockeable" />
-			<campoSalida value="prodPropia" target="isProdPropia" />
-			<campoSalida value="bien" 		target="isBien" />
-			
-<!-- 			Unidades principal, secundaria y terciaria -->
-			<campoSalida value="oid_unidad_med_principal" 		target="uniMedPrin.id" />
-			<campoSalida value="codUniPrin" 		target="uniMedPrin.codigo" />
-			<campoSalida value="descUniPrin" 		target="uniMedPrin.descripcion" />
+			<campoSalida value="oid_Art"	  target="id" />
+			<campoSalida value="Codigo" 	  target="codigo" />
+			<campoSalida value="Descripcion"  target="descripcion" />
+			<campoSalida value="DescAbrev"	  target="descripcionAbrev" />
+			<campoSalida value="oid_TipoArt"  target="tipoProducto.id" />
+			<campoSalida value="EsBien"		  target="isBien" />
+			<campoSalida value="EsServicio"	  target="isServicio" />
+			<campoSalida value="EsStockeable" target="isStockeable" />
+			<campoSalida value="EsProdPropia" target="isProdPropia" />
+			<campoSalida value="EsComprable"  target="isComprable" />
+			<campoSalida value="EsVendible"   target="isVendible" />
+			<campoSalida value="Activo" 	  target="isActivo" />
 
-			<campoSalida value="oid_unidad_med_sec" target="uniMedSec.id" />
-			<campoSalida value="codUniSec" 			target="uniMedSec.codigo" />
-			<campoSalida value="descUniSec" 		target="uniMedSec.descripcion" />
+			<campoSalida value="oid_UnidStockPrinc"	target="uniMedPrin.id" />
+			<campoSalida value="CodUnidStockPrinc"	target="uniMedPrin.codigo" />
+			<campoSalida value="DescUnidStockPrinc"	target="uniMedPrin.descripcion" />
 
-			<campoSalida value="oid_unidad_med_ter" target="uniMedTerc.id" />
-			<campoSalida value="codUniTer" 			target="uniMedTerc.codigo" />
-			<campoSalida value="descUniTer" 		target="uniMedTerc.descripcion" />
+			<campoSalida value="oid_UnidStockSecun" target="uniMedSec.id" />
+			<campoSalida value="CodUnidStockSecun"	target="uniMedSec.codigo" />
+			<campoSalida value="DescUnidStockSecun"	target="uniMedSec.descripcion" />
+
+			<campoSalida value="oid_UnidStockTerc"	target="uniMedTerc.id" />
+			<campoSalida value="CodUnidStockTerc"	target="uniMedTerc.codigo" />
+			<campoSalida value="DescUnidStockTerc"	target="uniMedTerc.descripcion" />
 			
 <!-- 			Unidades de venta, compra y prod. -->
-			<campoSalida value="oid_unidad_venta" 	target="unidadVenta.id" />
-			<campoSalida value="codUniVenta" 		target="unidadVenta.codigo" />
-			<campoSalida value="descUniVenta" 		target="unidadVenta.descripcion" />
+			<campoSalida value="oid_UnidVenta"	target="unidadVenta.id" />
+			<campoSalida value="CodUnidVenta"	target="unidadVenta.codigo" />
+			<campoSalida value="DescUnidVenta"	target="unidadVenta.descripcion" />
 
-			<campoSalida value="oid_unidad_venta" 	target="unidadCompra.id" />
-			<campoSalida value="codUniVen" 		target="unidadCompra.codigo" />
-			<campoSalida value="descUniVen" 		target="unidadCompra.descripcion" />
+			<campoSalida value="oid_UnidCompra"	target="unidadCompra.id" />
+			<campoSalida value="CodUnidCompra"	target="unidadCompra.codigo" />
+			<campoSalida value="DescUnidCompra"	target="unidadCompra.descripcion" />
 
-			<campoSalida value="oid_unidad_unidadProduccion" target="unidadProduccion.id" />
-			<campoSalida value="codUniProduccion" 	target="unidadProduccion.codigo" />
-			<campoSalida value="descUniProduccion" 	target="unidadProduccion.descripcion" />
+			<campoSalida value="oid_UnidProd"	target="unidadProduccion.id" />
+			<campoSalida value="CodUnidProd"	target="unidadProduccion.codigo" />
+			<campoSalida value="DescUnidProd"	target="unidadProduccion.descripcion" />
 			
 		</output>
-		
-		
-<!-- 		TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
-<!-- 		TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
-		<output name="articulosStock" tableName="mtArticulosStock">
+
+
+<!--	**************************************************************************	-->
+<!-- 	TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
+
+		<output name="articulosStock" tableName="mtAperturaStock">
 		</output>
+
 
 		<output name="detalleArticuloStock" tableName="mtDetalleArticuloStock">
 		</output>
-<!-- 		TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
-<!-- 		TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
 
-		
-		<output name="tipoProducto" tableName="mtTipoProd">
-			<campoSalida value="oid"	target="id" />
-			<campoSalida value="descripcionTipoProducto"	target="descripcion" />
-			<campoSalida value="codigoTipoProducto"	target="codigo" />
-			<campoSalida value="Activo"	target="isActivo" />
-		</output>
+<!--	**************************************************************************	-->
 
-		<output name="detalleTipoProducto" tableName="mtProd">
-		
-<!-- 		Datos de la caracteristica -->
-			<campoSalida value="oid"	target="id" />
-			<campoSalida value="oid_caracteristica"	target="caracProducto.id" />
-			<campoSalida value="codCaract"	target="caracProducto.codigo" />
-			<campoSalida value="descCaract"	target="caracProducto.descripcion" />
-			<campoSalida value="tipoDatoCaract"	target="caracProducto.tipoDato" />
 
-<!-- Datos de los valores cargados previamente			 -->
-			<campoSalida value="valor"	target="valorDeDato" />
-			<campoSalida value="descripcionValor"	target="descripcionDeDato" />
+		<output name="detalleTipoProducto" tableName="mtValoresCaracProd">
+
+			<campoSalida value="oid_ValorCarac"	target="id" />
+			<campoSalida value="oid_Art"		target="producto.id" />
+			<campoSalida value="oid_Carac"		target="caracProducto.id" />
+			<campoSalida value="DescCarac"		target="caracProducto.descripcion" />
+			<campoSalida value="TipoDeDato"		target="caracProducto.tipoDato" />
+			<campoSalida value="CodValorCarac"	target="valorDeDato" />
+			<campoSalida value="DescValorCarac"	target="descripcionDeDato" />
 			
 		</output>
 		
 		
 		<output name="equivalencias" tableName="mtEquivalencias">
 		
-			<campoSalida value="oid"	target="id" />
-
-			<campoSalida value="oid_unidad_origen" target="uniMedOrigen.id" />
-			<campoSalida value="codUniOrigen" 	target="uniMedOrigen.codigo" />
-			<campoSalida value="descUniOrigen" 	target="uniMedOrigen.descripcion" />
-
-			<campoSalida value="oid_unidad_destino" target="uniMedDestino.id" />
-			<campoSalida value="codUniDestino" 	target="uniMedDestino.codigo" />
-			<campoSalida value="descUniDestino" 	target="uniMedDestino.descripcion" />
-
-			<campoSalida value="factor" 	target="factor" />
+			<campoSalida value="oid_EquivArt"	 target="id" />
+			<campoSalida value="oid_Art"		 target="producto.id" />
+			<campoSalida value="oid_UnidMedOrig" target="uniMedOrigen.id" />
+			<campoSalida value="CodUnidMedOrig"	 target="uniMedOrigen.codigo" />
+			<campoSalida value="DescUnidMedOrig" target="uniMedOrigen.descripcion" />
+			<campoSalida value="oid_UnidMedDest" target="uniMedDestino.id" />
+			<campoSalida value="CodUnidMedDest"	 target="uniMedDestino.codigo" />
+			<campoSalida value="DescUnidMedDest" target="uniMedDestino.descripcion" />
+			<campoSalida value="FactConv"		 target="factor" />
+			<campoSalida value="Activo"			 target="isActivo" />
 
 		</output>
-		
-		
-		
-		<output name="clasificadores" tableName="mtClasificadoresProducto">
-			<campoSalida value="oid_ClasifClie" target="id" />
-			
-			<campoSalida value="oid_Producto" target="producto.id" />
 
-			<campoSalida value="oid_Clasif" target="clasificador.id" />
-			<campoSalida value="DescClasif" target="clasificador.descripcion" />
 
+		<output name="clasificadores" tableName="mtClasifProd">
+
+			<campoSalida value="oid_ClasifProd"	 target="id" />
+			<campoSalida value="oid_Art"		 target="producto.id" />
+			<campoSalida value="oid_Clasif"		 target="clasificador.id" />
+			<campoSalida value="DescClasif"		 target="clasificador.descripcion" />
 			<campoSalida value="oid_ValorClasif" target="componenteValor.id" />
-			<campoSalida value="CodValorClasif" target="componenteValor.codigo" />
+			<campoSalida value="CodValorClasif"	 target="componenteValor.codigo" />
 			<campoSalida value="DescValorClasif" target="componenteValor.descripcion" />
-			
-			<campoSalida value="Activo" target="componenteValor.activo" />
+			<campoSalida value="Activo"			 target="componenteValor.activo" />
+
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 		
 		<forms>
-			<form name="TEmpresa"></form>
+			<form name="FNArt0001"></form>
 		</forms>
 		
 	</operacion>
@@ -430,15 +426,15 @@
 	<!-- TRAER LOS CLASIFICADORES DE UN PRODUCTO -->
 	<operacion name="TraerClasifProd" clase="com.jkt.erp.articulos.operaciones.TraerClasifProducto">
 
-		<output name="resultado" tableName="mtClasificadoresProducto">
-			<campoSalida value="oid_ClasifProd" target="id" />
+		<output name="resultado" tableName="mtClasifProd">
+			<campoSalida value="oid_Clasif" target="id" />
 			<campoSalida value="DescClasif" target="descripcion" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 
 		<forms>
-			<form name="FNCli0001" />
+			<form name="FNArt0001" />
 		</forms>
 
 	</operacion>
