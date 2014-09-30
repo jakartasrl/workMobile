@@ -151,16 +151,26 @@ public class ServiceRepository implements IServiceRepository {
 		return entityRetrieved;
 	}
 	
-	public PersistentEntity getUniqueByProperty(Class className, String propertyName,String value) {
+	public PersistentEntity getUniqueByProperty(Class className, String propertyName,String value) throws JakartaException {
 		Criteria criteria = createCriteria(className);
 		criteria.add(eq(propertyName, value));
-		return (PersistentEntity) criteria.uniqueResult();
+
+		try{
+			return (PersistentEntity) criteria.uniqueResult();
+		}catch(org.hibernate.NonUniqueResultException e){
+			throw new JakartaException(String.format("Existe una inconsistencia con la entidad %s. Existen mas entidades con el mismo valor %s",className.getSimpleName(), value));
+		}
 	}
 
-	public PersistentEntity getUniqueByProperty(Class className,String propertyName, Long value) {
+	public PersistentEntity getUniqueByProperty(Class className,String propertyName, Long value) throws JakartaException {
 		Criteria criteria = createCriteria(className);
 		criteria.add(eq(propertyName, value));
-		return (PersistentEntity) criteria.uniqueResult();
+		
+		try{
+			return (PersistentEntity) criteria.uniqueResult();
+		}catch(org.hibernate.NonUniqueResultException e){
+			throw new JakartaException(String.format("Existe una inconsistencia con la entidad %s. Existen mas entidades con el mismo valor %s",className.getSimpleName(), String.valueOf(value)));
+		}
 	}
 
 	public List<PersistentEntity> getByProperty(Class className, String propertyName,String value) {

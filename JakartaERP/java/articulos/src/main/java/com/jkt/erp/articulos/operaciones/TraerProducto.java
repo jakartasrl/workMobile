@@ -51,6 +51,11 @@ public class TraerProducto extends Operation {
 		mostrarClasificadores(producto);
 	}
 
+	/**
+	 * Muestra los clasificadores seteados para el producto, y los disponibles que tiene para seleccionar.
+	 * 
+	 * @param producto
+	 */
 	private void mostrarClasificadores(Producto producto){//List<ProductoClasificador> clasificadoresDeProducto) {
 		Map<String, Clasificador> clasificadoresSeteados=new HashMap<String, Clasificador>();
 		
@@ -134,6 +139,13 @@ public class TraerProducto extends Operation {
 		notificarObjecto(Notificacion.getNew(WRITER_PRODUCTO, producto));
 	}
 
+	/**
+	 * TODO FIXME
+	 * Es mas complejo que esto solo, se debe tener el mismo compartamiento que en las caracteristicas del producto.
+	 * Mostrar las caracteristicas del detalle de articulo seteado, pero ademas la lista de caracteristicas que todavia no se seleccionaron.
+	 * 
+	 * @param producto
+	 */
 	private void mostrarArticulosStock(Producto producto) {
 		List<ArticuloStock> articulosStock = producto.getArticulosStock();
 		for (ArticuloStock articuloStock : articulosStock) {
@@ -148,15 +160,6 @@ public class TraerProducto extends Operation {
 
 	private void mostrarTipoProducto(TipoProducto tipoProducto) {
 		notificarObjecto(Notificacion.getNew(WRITER_TIPO_PRODUCTO, tipoProducto));
-
-//		for (TipoProductoDet detalleTipoProducto : tipoProducto.getCaracteristicas()) {
-			/*
-			 * Esta linea muestra el detalle del tipo de producto, la caracteristica y el valor de la caracteristica.
-			 * Se recorren las relaciones correspondientes mapeadas en el archivo operaciones-*.xml
-			 */
-//			notificarObjecto(Notificacion.getNew(WRITER_DETALLE_TIPO_PRODUCTO, detalleTipoProducto)); 
-//		}
-		
 	}
 
 
