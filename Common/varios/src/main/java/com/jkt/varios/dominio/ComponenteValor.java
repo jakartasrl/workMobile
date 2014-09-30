@@ -48,8 +48,9 @@ public class ComponenteValor extends Descriptible {
 	 */
 	
 	
-//	@NotNull
+	@NotNull
 	private Componente componente;
+	
 	private ComponenteValor componenteValorPadre;
 	private List<ComponenteValor> valores = new ArrayList<ComponenteValor>();
 
@@ -86,6 +87,7 @@ public class ComponenteValor extends Descriptible {
 	public void agregarValor(ComponenteValor componenteValor) {
 		if (!valores.contains(componenteValor)) {
 			valores.add(componenteValor);
+			componenteValor.setComponenteValorPadre(this);
 		}
 	}
 

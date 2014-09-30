@@ -10,6 +10,7 @@
 			<generator class="native" />
 		</id>
 
+		<many-to-one name="clasificador" class="com.jkt.varios.dominio.Clasificador" column="CLASIFICADOR_ID"></many-to-one>
 		<many-to-one name="componenteValor" class="com.jkt.varios.dominio.ComponenteValor" column="COMPONENTE_VALOR_ID"></many-to-one>
 		<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID"></many-to-one>
 

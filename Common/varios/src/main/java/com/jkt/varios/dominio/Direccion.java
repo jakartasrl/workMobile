@@ -8,14 +8,14 @@ import com.jkt.dominio.PersistentEntity;
 
 /**
  * <p>Representa un tipo de datos "Direccion".</p>
- * <p>Se utilizará para guardar cualquier dirección de cualquier entidad(cliente, proveedor, banco, etc).</p>
+ * <p>Se utilizarï¿½ para guardar cualquier direcciï¿½n de cualquier entidad(cliente, proveedor, banco, etc).</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Direccion extends PersistentEntity {
 	
-	@NotBlank(message="El nombre no puede ser vacio.")
-	private String nombre;
+//	@NotBlank(message="El nombre de la direccion no puede ser vacio.")
+	private String nombre="";
 
 	@NotBlank(message="La direccion no debe estar vacia.")
 	private String direccion;

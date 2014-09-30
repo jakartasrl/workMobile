@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 
 /**
  * Clase que se encarga de retornar una instancia de la clase recibida por parametros, 
@@ -19,7 +20,7 @@ public class Factory {
 
 	private static final String CODIGO = "codigo";
 	
-	public static PersistentEntity getInstance(Class className, String codigo) throws InstantiationException, IllegalAccessException{
+	public static PersistentEntity getInstance(Class className, String codigo) throws InstantiationException, IllegalAccessException, JakartaException{
 		if (codigo==null || codigo.isEmpty()) {
 			return (PersistentEntity) className.newInstance();
 		}

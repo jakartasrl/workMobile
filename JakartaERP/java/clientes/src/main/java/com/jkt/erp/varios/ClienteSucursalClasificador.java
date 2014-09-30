@@ -1,6 +1,7 @@
 package com.jkt.erp.varios;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.ComponenteValor;
 
 /**
@@ -10,8 +11,17 @@ import com.jkt.varios.dominio.ComponenteValor;
  */
 public class ClienteSucursalClasificador extends PersistentEntity {
 
+	private Clasificador clasificador;
 	private ClienteSucursal clienteSucursal;
 	private ComponenteValor componenteValor;
+
+	public Clasificador getClasificador() {
+		return clasificador;
+	}
+
+	public void setClasificador(Clasificador clasificador) {
+		this.clasificador = clasificador;
+	}
 
 	public ClienteSucursal getClienteSucursal() {
 		return clienteSucursal;
@@ -26,7 +36,10 @@ public class ClienteSucursalClasificador extends PersistentEntity {
 	}
 
 	public void setComponenteValor(ComponenteValor componenteValor) {
-		this.componenteValor = componenteValor;
+		if (componenteValor!=null) {
+			this.componenteValor = componenteValor;
+			this.clasificador=componenteValor.getComponente().getClasificador();
+		}
 	}
 
 }

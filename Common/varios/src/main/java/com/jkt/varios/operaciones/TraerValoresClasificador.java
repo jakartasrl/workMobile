@@ -26,6 +26,7 @@ public class TraerValoresClasificador extends Operation {
 		notificarObjecto(Notificacion.getNew("clasificador", clasificador));
 		
 		Componente componente = clasificador.getComponentePadre();
+		ComponenteValor componenteValorPadre;
 		// ComponenteValor valor;
 		int nivel=1;
 		int nivelValores=1;
@@ -39,10 +40,25 @@ public class TraerValoresClasificador extends Operation {
 			
 			//3 notifico el valor del componente
 			// valor = componente.getValor();
+			int valorInternoPadre;
 			List<ComponenteValor> valores = componente.getValores();
 			for (ComponenteValor valor : valores) {
-				valor.setCodigoInterno(nivelValores++);
-				valor.setCodigoInternoPadre((int)componente.getId());
+				
+				//TODO FIXME ver xq llega un valor en null!!
+				if (valor==null) {
+					continue;
+				}
+				
+				valor.setCodigoInterno(Long.valueOf(valor.getId()).intValue());
+				
+				componenteValorPadre=valor.getComponenteValorPadre();
+				if (componenteValorPadre==null) {
+					valorInternoPadre=0;
+				}else{
+					valorInternoPadre=(int)componenteValorPadre.getId();
+				}
+				
+				valor.setCodigoInternoPadre(valorInternoPadre);
 				notificarObjecto(Notificacion.getNew("valores", valor));
 			}
 			

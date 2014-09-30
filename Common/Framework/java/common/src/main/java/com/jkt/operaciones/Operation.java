@@ -26,7 +26,6 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
-import com.jkt.util.RepositorioClases;
 import com.jkt.xmlreader.ElementTransformer;
 
 /**
@@ -124,9 +123,14 @@ public abstract class Operation extends Observable {
 
 		Transformer transformer = null;
 		if (elementTransformer != null) {
-			Class<?> clazz = Class.forName(elementTransformer.getClase());
-			Object instance = clazz.newInstance();
-			transformer = (Transformer) instance;
+			
+			try{
+				Class<?> clazz = Class.forName(elementTransformer.getClase());
+				Object instance = clazz.newInstance();
+				transformer = (Transformer) instance;
+			}catch(ClassNotFoundException e){
+				throw new JakartaException("No se puede iniciar el transformador indicado.Compruebe el archivo de las operaciones por favor...");
+			}
 		} else {
 			transformer = new EmptyTransformer();
 		}
@@ -149,23 +153,17 @@ public abstract class Operation extends Observable {
 	 * 
 	 */
 	protected void notificarObjecto(Object parameter) {
-		setChanged();
+		this.setChanged();
 		notifyObservers(parameter);
 	}
 
 	/**
-	 * <p>
-	 * Metodo principal de la operacion.
-	 * </p>
-	 * <p>
-	 * Es el metodo a implementar en cualquier operacion.
-	 * </p>
+	 * <p>Metodo principal de la operacion.</p>
+	 * <p>Es el metodo a implementar en cualquier operacion.</p>
 	 * 
 	 * 
 	 * @param aParams
-	 * @throws Exception
-	 *             cuando ocurre cualquier error, deberia wrapper la exception y
-	 *             guardarle dentro de {@link Exception}
+	 * @throws Exception cuando ocurre cualquier error, deberia wrapper la exception y guardarle dentro de {@link Exception}
 	 */
 	public void runOperation(Map<String, Object> aParams) throws Exception{
 		session = sessionProvider.getSession();
@@ -192,12 +190,12 @@ public abstract class Operation extends Observable {
 			
 			throw new ValidacionException(buffer.toString());
 		}catch(RuntimeException exception){
-			//Hago el rollback y muestro el mensaje critido en frontend.
+			//Hago el rollback y muestro el mensaje critico en frontend.
 			tx.rollback();
 			sessionProvider.destroySession();
 			throw exception;
 		}catch(Exception exception){
-			//Hago el rollback y muestro el mensaje critido en frontend.
+			//Hago el rollback y muestro el mensaje critico en frontend.
 			tx.rollback();
 			sessionProvider.destroySession();
 			throw exception;
@@ -236,6 +234,13 @@ public abstract class Operation extends Observable {
 		return serviceRepository.getByOid(className, id);
 	}
 	/**
+	 * Recupera todas las entidades persistentes utilizando el nombre de la clase.
+	 * 
+	 */
+	protected List<PersistentEntity> obtenerTodos(Class<? extends PersistentEntity> className) throws Exception{
+		return serviceRepository.getAll(className);
+	}
+	/**
 	 * <p>Recupera una entidad persistente utilizando el nombre de la clase y el id.</p>
 	 * <p>Metodo sobre cargado que recibe un numero en formto de String.Se intentara pasar a numero y si no es numerico se levanta una excepcion</p>
 	 * 
@@ -260,6 +265,28 @@ public abstract class Operation extends Observable {
 	protected void verificarMapaVacio(Map<String, Object> aParams) throws JakartaException{
 		if (aParams==null || aParams.isEmpty()) {
 			throw new JakartaException("La operacion necesita recibir parametros.");
+		}
+	}
+	
+	/**
+	 * <p>Se usa para verificar objetos de entrada de la operacion.</p>
+	 * <p>La entrada siempre es en un mapa, con lo cual esta funcion debe llamarse dle siguiente modo:</p>
+	 * 
+	 * <p><code>validarEntrada(aParams.get("keyDelMapa"))</code></p>
+	 * 
+	 * @param object, generalmente será un objeto del mapa.
+	 * @throws JakartaException Si el objeto no existe en e mapa, o si es un string vacio.
+	 */
+	protected void validarEntrada(Object object) throws JakartaException{
+		String valor=(String) object;
+		String mensaje = "No se encuentra la entrada esperada en la operacion.";
+		
+		if (valor==null) {
+			throw new JakartaException(mensaje);
+		}
+		
+		if (valor.trim().isEmpty()) {
+			throw new JakartaException(mensaje);
 		}
 	}
 }

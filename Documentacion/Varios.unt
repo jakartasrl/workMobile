@@ -639,7 +639,7 @@
 <XPD:ATTR name="#Associations" type="integer">3</XPD:ATTR>
 <XPD:REF name="Associations[0]" pathname="::Modelo de Dominio::Jakarta3000::Clientes::::">k417ffbg8U2E/DdgiFRLtgAA</XPD:REF>
 <XPD:REF name="Associations[1]">Gvs0qXXJOUuDwEGs9C37BwAA</XPD:REF>
-<XPD:REF name="Associations[2]" pathname="::Modelo de Dominio::Jakarta3000::Clientes::::">tCIxy/9mcEeuaEWCYCYx1wAA</XPD:REF>
+<XPD:REF name="Associations[2]" pathname="::Modelo de Dominio::Jakarta3000::Clientes::::">ogtSZYNSF0qv7b1T4ooy9gAA</XPD:REF>
 <XPD:ATTR name="#Attributes" type="integer">4</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="wtr2Xqmgq0iXgKIwlOcYpgAA">
 <XPD:ATTR name="Name" type="string">codigo</XPD:ATTR>
@@ -753,17 +753,18 @@
 <XPD:ATTR name="Name" type="string">UnidadMedida</XPD:ATTR>
 <XPD:REF name="Namespace">H6Rvu5jLw0KhM57JCJX+GAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
-<XPD:REF name="Views[0]">oLaiW7hzTkCPn6jBb+fpCQAA</XPD:REF>
-<XPD:REF name="Views[1]">30MT2fgT60yBSu23uM/O8AAA</XPD:REF>
-<XPD:REF name="Views[2]">2NM/wVJ+BU+abjMSvsKvegAA</XPD:REF>
-<XPD:REF name="Views[3]">SO128dSIu0SVOrvP3iDPGQAA</XPD:REF>
-<XPD:REF name="Views[4]">DfDUIXXi5kmjyIzOHViR2wAA</XPD:REF>
-<XPD:REF name="Views[5]">IQBw8XkpcEy9oOhz5uuJ8gAA</XPD:REF>
-<XPD:REF name="Views[6]">uTWQ4MGCAEqe6bgW6zvb6gAA</XPD:REF>
-<XPD:REF name="Views[7]">zOIhNWLOIUWq2IHikkJgOgAA</XPD:REF>
-<XPD:ATTR name="#Associations" type="integer">2</XPD:ATTR>
-<XPD:REF name="Associations[0]" pathname="::Modelo de Dominio::Jakarta3000::Articulado::::">v3FgjHQtc0S7QRviErK5qwAA</XPD:REF>
-<XPD:REF name="Associations[1]" pathname="::Modelo de Dominio::Jakarta3000::Articulado::::">KjYaQ4wrikSanUI/oeN+BwAA</XPD:REF>
+<XPD:REF name="Views[0]">VpBB8qAdR0uNPVya1vYMWAAA</XPD:REF>
+<XPD:REF name="Views[1]">uA6RoYQ2CkmeSF91EnMSpAAA</XPD:REF>
+<XPD:REF name="Views[2]">fng/55/qnEmhTC7B6EuD0wAA</XPD:REF>
+<XPD:REF name="Views[3]">QajiBfKexU2sowjDbjvoHAAA</XPD:REF>
+<XPD:REF name="Views[4]">oLaiW7hzTkCPn6jBb+fpCQAA</XPD:REF>
+<XPD:REF name="Views[5]">30MT2fgT60yBSu23uM/O8AAA</XPD:REF>
+<XPD:REF name="Views[6]">2NM/wVJ+BU+abjMSvsKvegAA</XPD:REF>
+<XPD:REF name="Views[7]">SO128dSIu0SVOrvP3iDPGQAA</XPD:REF>
+<XPD:ATTR name="#Associations" type="integer">3</XPD:ATTR>
+<XPD:REF name="Associations[0]" pathname="::Modelo de Dominio::Jakarta3000::Articulado::::">KjYaQ4wrikSanUI/oeN+BwAA</XPD:REF>
+<XPD:REF name="Associations[1]" pathname="::Modelo de Dominio::Jakarta3000::Articulado::::">Evc8LqZme0Ge4ThAhoofagAA</XPD:REF>
+<XPD:REF name="Associations[2]" pathname="::Modelo de Dominio::Jakarta3000::Articulado::::">ma06Y5Fy0kuPFrS4gp7ZjAAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:BODY>

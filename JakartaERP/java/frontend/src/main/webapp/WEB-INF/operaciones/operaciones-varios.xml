@@ -69,6 +69,24 @@
 
 <entity>
 
+	<operacion name="FiltroValoresClasificador" clase="com.jkt.varios.operaciones.FiltroValoresClasificador">
+		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro" fieldID="-">
+		</input>
+		
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+
 	<!-- TRAER UN CLASIFICADOR Y SUS COMPONENTES -->
 	<operacion name="TraerClasificador" clase="com.jkt.varios.operaciones.TraerClasificador">
 										
@@ -175,7 +193,7 @@
 <!-- 			<campoSalida value="oid_Valor" target="componente.id" />			 -->
 			
 			<campoSalida value="codInterno" target="codigoInterno" />			
-			<campoSalida value="codInternoPadre" target="componente.id" />
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
@@ -195,14 +213,23 @@
 	<operacion name="GuardarValoresClasificador" clase="com.jkt.varios.operaciones.GuardarValoresClasificador">
 
 
+		<input name="mtClasificador" keyName="clasificador" clase="com.jkt.varios.dominio.Clasificador" fieldID="oid_Clasificador">
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+			
+			</campoEntrada>
+		</input>
+
 		<input name="mtValoresClasificador" keyName="objeto" clase="com.jkt.varios.dominio.ComponenteValor" fieldID='oid_ValorClasif'>
 			<campoEntrada>
 <!-- 					Campo transiente para recuperar el componente donde se guardan todos los valores -->
-					<campoEntrada name="oid_componente" clase="String" metodo="setIdComponente" />
+					<campoEntrada name="oid_CompClasif" clase="Integer" metodo="setIdComponente" />
 
 <!-- 					Campos transientes para ordenar los nodos -->
-<!-- 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" /> -->
-<!-- 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" /> -->
+					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
+					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
 					
 <!-- 					Campos propios del componente valor, persistentes -->
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
@@ -217,6 +244,27 @@
 		</forms>
 		
 	</operacion>
+	
+	
+<!-- 	Traer valores de clasificadores. -->
+
+	<operacion name="TraerValoresDeClasificadores" clase="com.jkt.varios.operaciones.TraerValoresDeClasificadores">
+		
+		<output name="valores" tableName="mtValores">
+			<campoSalida value="oid_Valor" target="id" />
+			<campoSalida value="Codigo" target="codigo" /> 
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="Activo" target="isActivo" />	
+		</output>
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="---"></form>
+		</forms>
+		
+	</operacion>
+	
 
 	<!-- TRAE UN IMPUESTO Y SUS CATEGORIAS DE INSCRIPCION -->
 	<operacion name="TraerImpuestos" clase="com.jkt.erp.impuestos.operaciones.TraerImpuestos">
@@ -399,6 +447,38 @@
 		</forms>		
 	</operacion>
 	
+	
+	
+	<!-- GUARDAR Unidad de medida  -->
+	<operacion name="GuardarUnidadMedida" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.varios.dominio.UnidadMedida" fieldID='oid'>
+			<campoEntrada>
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>		
 
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+	<!-- RECUPERAR  Unidad de medida -->
+	<operacion name="TraerUnidadMedida" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.varios.dominio.UnidadMedida">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
 
 </entity>

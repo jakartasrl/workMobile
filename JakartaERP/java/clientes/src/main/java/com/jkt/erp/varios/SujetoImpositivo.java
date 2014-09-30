@@ -26,7 +26,7 @@ public class SujetoImpositivo extends PersistentEntity {
 	 * 
 	 */
 	
-	@NotNull(message="El sujeto impositivo debe estar relacionado con un cliente.")
+//	@NotNull(message="El sujeto impositivo debe estar relacionado con un cliente.")
 	private Cliente cliente;
 	
 	@NotBlank(message="La razon social del sujeto impositivo no puede ser vacia.")
@@ -55,12 +55,20 @@ public class SujetoImpositivo extends PersistentEntity {
 		return razonSocial;
 	}
 
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+		//Modificacion en el setter para cuando este metodo es ejecutado por el framework y desde ahi mismo, se busca un cliente con id=0.
+		//En este caso, la relacion la hace el metodo setSujetoImpositivo.
+		if (this.cliente==null) {
+			this.cliente = cliente;
+		}
 	}
 
 	public List<InscripcionImpositiva> getInscripcionesImpositivas() {
@@ -71,9 +79,6 @@ public class SujetoImpositivo extends PersistentEntity {
 		this.inscripcionesImpositivas = inscripcionesImpositivas;
 	}
 
-	public void setRazonSocial(String razonSocial) {
-		this.razonSocial = razonSocial;
-	}
 
 	public boolean isPersonaJuridica() {
 		return personaJuridica;
@@ -113,7 +118,13 @@ public class SujetoImpositivo extends PersistentEntity {
 	 */
 
 	public void addInscripcionImpositiva(InscripcionImpositiva inscripcion){
-		agregarObjectoAColeccion(inscripcionesImpositivas, inscripcion);
+		
+		if(!inscripcionesImpositivas.contains(inscripcion)){
+			inscripcionesImpositivas.add(inscripcion);
+			inscripcion.setSujetoImpositivo(this);
+		}
+		
+//		agregarObjectoAColeccion(inscripcionesImpositivas, inscripcion);
 	}
 	
 	/*

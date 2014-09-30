@@ -1,8 +1,10 @@
 package com.jkt.persistencia;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.util.IRepositorioClases;
 
@@ -16,6 +18,8 @@ import com.jkt.util.IRepositorioClases;
 @SuppressWarnings("rawtypes")
 public interface IServiceRepository {
 
+	PersistentEntity getByProperties(Class className, Map<String,Object> map) throws JakartaException;
+	
 	/**
 	 * Guarda una entidad.
 	 * 
@@ -32,8 +36,9 @@ public interface IServiceRepository {
 	 * @param propertyName
 	 * @param value
 	 * @return
+	 * @throws JakartaException 
 	 */
-	PersistentEntity getUniqueByProperty(Class className, String propertyName, String value);
+	PersistentEntity getUniqueByProperty(Class className, String propertyName, String value) throws JakartaException;
 	/**
 	 * Recupera filtrando por una propiedad y la clase
 	 * @param className
@@ -50,8 +55,9 @@ public interface IServiceRepository {
 	 * @param className
 	 * @param properties
 	 * @return
+	 * @throws JakartaException 
 	 */
-	List<PersistentEntity> getByProperties(Class className, List properties);
+	List<PersistentEntity> getByProperties(Class className, List properties) throws JakartaException;
 
 	/**
 	 * Recupera filtrando por una propiedad y la clase
@@ -59,8 +65,9 @@ public interface IServiceRepository {
 	 * @param propertyName
 	 * @param value
 	 * @return
+	 * @throws JakartaException 
 	 */
-	PersistentEntity getUniqueByProperty(Class className, String propertyName, Long value);
+	PersistentEntity getUniqueByProperty(Class className, String propertyName, Long value) throws JakartaException;
 
 	
 	/**

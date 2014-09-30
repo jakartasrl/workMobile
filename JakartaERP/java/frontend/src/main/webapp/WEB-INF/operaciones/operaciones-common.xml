@@ -69,7 +69,25 @@
 
 <entity>
 	
-
+	<operacion name="FiltroActivosCompuesto" clase="com.jkt.operaciones.HelperCompuesto">
+		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
+		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro" fieldID="-">
+		</input>
+		
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+		</output>		
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	
 	<operacion name="FiltroActivos" clase="com.jkt.operaciones.HelperActivos">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
 		<input name="mtFiltros" keyName="filtros" clase="com.jkt.dominio.Filtro" fieldID="-">
@@ -78,7 +96,7 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -100,7 +118,7 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -124,7 +142,7 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="Descripcion" target="cadena" />
+			<campoSalida value="Descripcion" target="descripcion" />
 		</output>		
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

@@ -3,11 +3,15 @@ package com.jkt.adapter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
+
+import javax.validation.ConstraintViolation;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,11 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.jkt.constantes.TiposDeDato;
 import com.jkt.dominio.Container;
 //import com.jkt.dominio.Factura;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionException;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.service.SessionProvider;
@@ -44,19 +50,20 @@ import com.jkt.xmlreader.Input;
 @Qualifier("delphiAdapter")
 public class DelphiAdapter implements Adapter<Map, MapDS> {
 
-	private static final String BYTE_ARRAY_TYPE = "ByteArray";
+	private static final String BYTE_ARRAY_TYPE = TiposDeDato.BYTE_ARRAY_TYPE;
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
 	private static final String INTEGER_TYPE = "Integer";
 	private static final String DOUBLE_TYPE = "Double";
+	private static final String DATE_TYPE = "Date";
 
 	private ISessionProvider sessionProvider;
 	private Session session;
 	private boolean test;
 	
 	/*
-	 * Definición de estregias para el guardado de parametros.
-	 * Básicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
+	 * Definiciï¿½n de estregias para el guardado de parametros.
+	 * Bï¿½sicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
 	 * Dependiendo de la cantidad de registros recibidos desde la solicitud, se define una u otra estrategia.
 	 * 
 	 * Si la cantidad de registros es mayor a 1, se usa la estrategia para manejar listas, de lo contrario, se usa la estrategia para manejar un solo parametro.
@@ -99,27 +106,58 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		
 	}
 	/*
-	 * FIN de definición de las estrategias.
+	 * FIN de definiciï¿½n de las estrategias.
 	 * 
 	 */
 	
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		session = sessionProvider.getSession();
-		Transaction tx = session.beginTransaction();
-			try{
-				Map map = adaptRequestHook(input, operation);
-				tx.commit();
-				return map;
-			}catch(Exception e){
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+		}catch(org.hibernate.TransactionException e){
+			throw new JakartaException("Espere unos segundos mientras finaliza una operacion pendiente...Intente nuevamente en breves segundos...");
+		}	
+		try{
+			Map map = adaptRequestHook(input, operation);
+			tx.commit();
+			return map;
+		}catch(JakartaException e){
+			tx.rollback();
+			sessionProvider.destroySession();
+			throw e;
+		}catch(javax.validation.ConstraintViolationException e){
+				Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+				constraintViolations.size();
+				StringBuffer buffer=new StringBuffer();
+				String message = null;
+				
+				for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+					buffer.append(constraintViolation.getMessage());
+					break;
+				}
+				
 				tx.rollback();
 				sessionProvider.destroySession();
+				
+				throw new ValidacionException(buffer.toString());
+		}catch(Exception e){
+			tx.rollback();
+			sessionProvider.destroySession();
+			
+			if (e.getCause()!=null) {
+				throw new JakartaException(e.getCause().getMessage());
+			}else{
 				throw e;
-			}finally{
+			}
+		}
+		
+//		finally{
 //				if (tx.isActive()) {
 //					tx.commit();
 //				}
 //				sessionProvider.destroySession();
-			}
+//		}
 	}
 	
 	private Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
@@ -171,7 +209,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				throw new JakartaException("No esta en operaciones.xml el FieldID");
 			}
 			
-			//Se obtiene el tipo de clase de la tabla. Todos los registros de este nivel serán de esta clase
+			//Se obtiene el tipo de clase de la tabla. Todos los registros de este nivel serï¿½n de esta clase
 			Class<?> clazz = null;
 			if (! test){
 			   try{
@@ -190,7 +228,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			}
 			
 
-			//Para cada registro que obtenga, se generará una nueva instancia del objeto
+			//Para cada registro que obtenga, se generarï¿½ una nueva instancia del objeto
 			Object instance = null;
 			MapDS mapaConCampos = null;
 			long oid;
@@ -241,7 +279,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 						}
 						
 						/*
-						 * La generación de cada campo puede ser primitiva o compuesta.
+						 * La generaciï¿½n de cada campo puede ser primitiva o compuesta.
 						 * Compuesta va a ser si el valor del parametro es una tabla. En este caso se usara un metodo recursivo
 						 */
 						if(esTabla(entry.getValue())){
@@ -324,6 +362,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								 catch(ClassNotFoundException e){
 									throw new JakartaException("La clase " + metaDataOfCurrentField.getClase() + " no existe" );
 								 }
+								 catch(NoSuchMethodException e){
+									 throw new JakartaException("No se puede ejecutar el metodo ".concat(metaDataOfCurrentField.getMetodo()));
+								 }
 								}
 							}
 							/*
@@ -390,10 +431,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		if (oid<1) {//Si el id buscado es 0 o negativo, se retorna una nueva instancia
 			newInstance	= clazz.newInstance();
 		}else{
-			try{
-				newInstance=session.get(clazz, oid);
-			}catch(Exception e){
-				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz, String.valueOf(oid)));
+			newInstance=session.get(clazz, oid);
+			if (newInstance==null) {
+				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz.getSimpleName(), String.valueOf(oid)));
 			}
 		}
 		return (PersistentEntity) newInstance;
@@ -421,6 +461,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			result=Integer.valueOf((String)value);
 		}else if(DOUBLE_TYPE.equals(nombreClase)){
 			result=Double.valueOf((String)value);
+		}else if(DATE_TYPE.equals(nombreClase)){
+//			result=Date.parse((String)value);//  Double.valueOf((String)value);
 		}else{
 			try {
 				session = sessionProvider.getSession();
@@ -443,7 +485,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	 * @throws ClassNotFoundException 
 	 * 
 	 */
-	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException, ClassNotFoundException{
+	private void resolvePrimitiveObject(CampoEntrada campoEntrada, Class clazz,Object instance,Object valueReceived) throws SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException, ClassNotFoundException{
 		if (test){
 			return;
 		}
@@ -460,72 +502,106 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			primitiveWrapper=int.class;
 		}else if(DOUBLE_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=double.class;
+		}else if(DATE_TYPE.equals(campoEntrada.getClase())){
+			primitiveWrapper=Date.class;
 		}else{
 			primitiveWrapper=Class.forName(campoEntrada.getClase());
 		}
 		
 //		Class primitiveWrapper=STRING_TYPE.equals(campoEntrada.getClase())?String.class:Integer.class;
-		Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
-		Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
-		
-		method.invoke(instance,value);
-		
+		try{
+			Method method = clazz.getMethod(campoEntrada.getMetodo(), primitiveWrapper);
+			Object value=resolvePrimitiveType(valueReceived, campoEntrada.getClase());
+			method.invoke(instance,value);
+		}catch(NoSuchMethodException e){
+			throw new JakartaException("No se puede ejecutar el metodo ".concat(campoEntrada.getMetodo()));
+		}
 	}
 	
 	
-	private void resolverCampoCompuesto(Class parentClass, Object parentObject, CampoEntrada parentMetadata, List<Registro> registros ) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException, JakartaException{
+	private void resolverCampoCompuesto(Class parentClass, Object parentObject, CampoEntrada parentMetadata, List<Registro> registros ) throws SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException, JakartaException{
 		
 		//Cada vez que se genera esta iteracion, creo una nueva estrategia...
 //		AdapterStrategy estrategia=null;
+		if (registros.size()==0) {
+//			throw new JakartaException("No debe enviar estructuras vacias. Si envÃ­a una tabla, debe tener mÃ­nimamente una fila.");
+			return;
+		}
 		
 		
 		//creacion de clase e instancia del objeto compuesto.
 		Class<?> childClazz  = null;
 		Object childInstance = null;
-		if (!test){
-			try{
-			   childClazz = Class.forName(parentMetadata.getClase());
-			}
-			catch (ClassNotFoundException e){
-				throw new JakartaException("La clase: " + parentMetadata.getClase() + " es Inexistente");
-			}
-			childInstance = childClazz.newInstance();
-		}
-		Registro primerRegistro=registros.get(0);//es un for esto!
 		
-//		if (registros.size()>1) {
-//			estrategia=new StrategyManyInstances();
-//		}else{
-//			estrategia=new StrategyOneInstance();
-//		}
 		
-		//Obtengo todos los campos que contiene el elemento actual
-		MapDS campos = primerRegistro.getCampos();
 		
-		for (Iterator<Entry<Object, Object>> iteratorR = campos.entrySet().iterator(); iteratorR.hasNext();) {
-			Entry<Object, Object> entryR = (Entry<Object, Object>) iteratorR.next();
-			
-			CampoEntrada childMetadata = parentMetadata.getHijo((String)entryR.getKey());
+		for (Registro registro : registros) {
+
 			
 			
-			if (childMetadata==null) {
-				continue;
-			}
-//			if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
-//				continue;
+			
+//			Registro primerRegistro=registros.get(0);//es un for esto!
+			
+//			if (registros.size()>1) {
+//				estrategia=new StrategyManyInstances();
+//			}else{
+//				estrategia=new StrategyOneInstance();
 //			}
 			
-			if(esTabla(entryR.getValue())){
-				resolverCampoCompuesto(childClazz, childInstance, childMetadata, ((Tabla)entryR.getValue()).getRegitros());
-			}else{
-				resolvePrimitiveObject(childMetadata, childClazz, childInstance, entryR.getValue());
+			//Obtengo todos los campos que contiene el elemento actual
+			MapDS campos = registro.getCampos();
+			String keyParaRecuperarObjeto = parentMetadata.getFieldID();
+			if (keyParaRecuperarObjeto == null || keyParaRecuperarObjeto.isEmpty()){
+				throw new JakartaException("No esta en operaciones.xml el FieldID");
+			}
+			
+			if (!test){
+				try{
+					childClazz = Class.forName(parentMetadata.getClase());
+				}
+				catch (ClassNotFoundException e){
+					throw new JakartaException("La clase: " + parentMetadata.getClase() + " es Inexistente");
+				}
+				
+				if (Long.valueOf((String) campos.get(keyParaRecuperarObjeto))>0) {
+					childInstance=recuperarObjecto(childClazz, Long.valueOf((String) campos.get(keyParaRecuperarObjeto)));
+				}else{
+					childInstance = childClazz.newInstance();
+				}
+			}
+			
+			for (Iterator<Entry<Object, Object>> iteratorR = campos.entrySet().iterator(); iteratorR.hasNext();) {
+				Entry<Object, Object> entryR = (Entry<Object, Object>) iteratorR.next();
+				
+				CampoEntrada childMetadata = parentMetadata.getHijo((String)entryR.getKey());
+				
+				
+				if (childMetadata==null) {
+					continue;
+				}
+//				if (keyParaRecuperarObjeto.equals(entry.getKey()) || childCampoEntrada==null) {
+//					continue;
+//				}
+				
+				if(esTabla(entryR.getValue())){
+					resolverCampoCompuesto(childClazz, childInstance, childMetadata, ((Tabla)entryR.getValue()).getRegitros());
+				}else{
+					resolvePrimitiveObject(childMetadata, childClazz, childInstance, entryR.getValue());
+				}
+			}
+			if (!test){
+				try{
+					Class<?> otraClase = Class.forName(parentMetadata.getClase());
+					Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
+					method.invoke(parentObject,childInstance);
+				}catch(NoSuchMethodException e){
+					throw new JakartaException("No se puede ejecutar el metodo ".concat(parentMetadata.getMetodo()));
+				}
 			}
 		}
-		if (!test){
-		   Class<?> otraClase = Class.forName(parentMetadata.getClase());
-		   Method method = parentClass.getMethod(parentMetadata.getMetodo(), otraClase); //Generalmente va a ser un metodo addEntidad, agregarAlgo; hacia una coleccion
-		   method.invoke(parentObject,childInstance);
-		}
+		
+		
+
 	}
 	
 	private boolean esTabla(Object obj){

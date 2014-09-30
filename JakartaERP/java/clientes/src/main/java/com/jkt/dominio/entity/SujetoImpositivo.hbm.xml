@@ -17,7 +17,7 @@
 
 		<many-to-one name="direccionLegal" class="com.jkt.varios.dominio.Direccion" cascade="all" column="DIRECCION_ID"/>
 		
-		<list name="inscripcionesImpositivas" >
+		<list name="inscripcionesImpositivas"  cascade="all" >
 			<key column="SUJETO_IMPOSITIVO_ID" />
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.erp.varios.InscripcionImpositiva" />
@@ -25,7 +25,6 @@
 		
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
-<!-- 		@JKT Falta el cliente -->
 		
 	</class>
 

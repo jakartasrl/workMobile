@@ -21,6 +21,7 @@ import org.xml.sax.InputSource;
 
 import com.jkt.adapter.Adapter;
 import com.jkt.excepcion.EntityNotFoundException;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.util.Campos;
@@ -104,7 +105,7 @@ public class RequestProcessorDelphi extends RequestProcessor{
 		return (MapDS) params;
 	}
 
-	private void recorrerNodos(NodeList nodos, IMapRequest mapaPadre) {
+	private void recorrerNodos(NodeList nodos, IMapRequest mapaPadre) throws JakartaException {
 		for (int i = 0; i < nodos.getLength(); i++) {
 			Node nodo = nodos.item(i);
 
@@ -114,6 +115,11 @@ public class RequestProcessorDelphi extends RequestProcessor{
 			NamedNodeMap att = nodo.getAttributes();
 			IMapRequest mapa;
 			if (nodo.getNodeName().equalsIgnoreCase("Tabla")) {
+				
+				if(nodo.getAttributes().getNamedItem("NOMBRE")==null){
+					throw new JakartaException("Ingrese el formato de la tabla correctamente. La tabla debe venir como atributo NOMBRE'");
+				}
+					
 				mapa = new Tabla(nodo.getAttributes().getNamedItem("NOMBRE").getNodeValue());
 			}else if (nodo.getNodeName().equalsIgnoreCase("Campos")) {
 				Campos campos = new Campos();

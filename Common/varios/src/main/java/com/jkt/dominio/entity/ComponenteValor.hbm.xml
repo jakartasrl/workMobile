@@ -14,7 +14,8 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 
 
-		<many-to-one name="componente" column="COMPONENTE_ID" unique="true" class="com.jkt.varios.dominio.Componente" cascade="all" />
+		<many-to-one name="componente" column="COMPONENTE_ID_3333" class="com.jkt.varios.dominio.Componente" cascade="none" />
+<!-- 		<many-to-one name="componente" column="COMPONENTE_ID" unique="true" class="com.jkt.varios.dominio.Componente" cascade="all" /> -->
 		
 
 		<many-to-one name="componenteValorPadre" class="com.jkt.varios.dominio.ComponenteValor" column="COMPONENTE_VALOR_PADRE_ID" not-null="false" />

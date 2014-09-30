@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.Idioma;
@@ -16,7 +16,8 @@ import com.jkt.varios.dominio.Idioma;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Cliente extends Descriptible {
+public class Cliente extends PersistentEntity {
+//	public class Cliente extends Descriptible {
 
 	/*
 	 * ***********************************************************************************************
@@ -26,7 +27,9 @@ public class Cliente extends Descriptible {
 //	String codigo heredado de descriptible
 //	String nombreComercial es la descripcion
 	
-//	@NotNull(message="El Sujeto impositivo no debe ser nulo.")
+	private String codigo;
+
+	@NotNull(message="El Sujeto impositivo no debe estar vacio.")
 	private SujetoImpositivo sujetoImpositivo;
 	
 	private String telefono;
@@ -47,6 +50,24 @@ public class Cliente extends Descriptible {
 	 * Variables de instancia
 	 * ***********************************************************************************************
 	 */
+
+	/*
+	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
+	 */
+	public String getDescripcion(){
+		return sujetoImpositivo.getRazonSocial().concat(" (").concat(sujetoImpositivo.getCuit()).concat(")");
+	}
+	/*
+	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
+	 */
+	
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 	
 	public SujetoImpositivo getSujetoImpositivo() {
 		return sujetoImpositivo;
@@ -69,7 +90,10 @@ public class Cliente extends Descriptible {
 	}
 
 	public void setSujetoImpositivo(SujetoImpositivo sujetoImpositivo) {
-		this.sujetoImpositivo = sujetoImpositivo;
+		if (sujetoImpositivo!=null) {
+			this.sujetoImpositivo = sujetoImpositivo;
+			this.sujetoImpositivo.setCliente(this);
+		}
 	}
 
 	public Idioma getIdioma() {
@@ -119,13 +143,18 @@ public class Cliente extends Descriptible {
 		agregarObjectoAColeccion(listaEsquemaPrecios, precioCliente);
 	}
 	
-	public void addValorClasificador(ComponenteValor componenteValor){
-		agregarObjectoAColeccion(listaClasificadores, componenteValor);
+	public void addValorClasificador(ClienteClasificador clienteClasificador){
+		if (clienteClasificador!=null && clienteClasificador.getComponenteValor()!=null) {
+			if(!listaClasificadores.contains(clienteClasificador)){
+				listaClasificadores.add(clienteClasificador);
+				clienteClasificador.setCliente(this);
+			}
+		}
 	}
 	
-	public void deleteValorClasificador(ComponenteValor componenteValor){
-		borrarObjetoDeColeccion(listaClasificadores, componenteValor);
-	}
+//	public void deleteValorClasificador(ClienteClasificador clienteClasificador){
+//		borrarObjetoDeColeccion(listaClasificadores, clienteClasificador);
+//	}
 
 	/*
 	 * helper methods

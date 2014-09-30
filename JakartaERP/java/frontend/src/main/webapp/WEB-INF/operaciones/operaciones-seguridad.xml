@@ -199,7 +199,7 @@
 	</operacion>
 
 	<!-- VALIDAR IN EXISTENCIA -->
-	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.ValidarInexistencia">
+	<operacion name="ValidarInexistente" clase="com.jkt.operaciones.ValidarInexistenciaSimple">
 		
 		<forms>
 			<form name="TUsuario"></form>
@@ -208,13 +208,41 @@
 	</operacion>
 
 
-	<!-- VALIDAR EXISTENCIA -->
-	<operacion name="ValidarExistente" clase="com.jkt.operaciones.ValidarExistencia">
+	<!-- VALIDAR IN EXISTENCIA CON MAESTRO-->
+	<operacion name="ValidarInexistenteDeMaestro" clase="com.jkt.operaciones.ValidarInexistenciaConMaestro">
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<operacion name="ValidarExistente" clase="com.jkt.operaciones.ValidarExistenciaSimple">
 		
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Cadena" target="cadena" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<operacion name="ValidarExistenteDeMaestro" clase="com.jkt.operaciones.ValidarExistenciaConMaestro">
+		
+		<output name="resultado" tableName="NoSeUsa">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Descripcion" target="descripcion" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -387,7 +415,7 @@
 <!-- 				<campoEntrada name="SinVencimientoPwd" clase="Boolean" metodo="setSinVencimientoPwd" /> -->
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />				
 				
-				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
+				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa_habilitada">
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
 					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
 					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />

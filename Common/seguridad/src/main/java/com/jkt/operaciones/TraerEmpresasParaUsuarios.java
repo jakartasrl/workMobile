@@ -36,7 +36,7 @@ public class TraerEmpresasParaUsuarios extends Operation {
 			EmpresaHabilitada empresaHabilitada = new EmpresaHabilitada();
 			empresaHabilitada.setEmpresa(empresa);
 			empresaHabilitada.setOidEmpresa(String.valueOf(persistentEntity.getId()));
-			notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", empresaHabilitada));
+			notificarObjecto(Notificacion.getNew("resultado", empresaHabilitada));
 		}
 	}
 

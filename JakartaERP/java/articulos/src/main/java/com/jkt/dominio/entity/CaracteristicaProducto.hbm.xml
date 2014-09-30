@@ -3,9 +3,9 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.erp.articulos.CaracteristicaProducto" table="CaracProducto">
+	<class name="com.jkt.erp.articulos.CaracteristicaProducto" table="CARACTERISTICA_PRODUCTO">
 
-		<id name="id" column="car_prod_ID">
+		<id name="id" column="CARACTERISTICA_PRODUCTO_ID">
 			<generator class="native"></generator>
 		</id>
 
@@ -15,8 +15,8 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="descripcion"/>
-		<property name="tipoDato"   column="tipo_dato" type="string"  length="20"/>
+		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="tipoDato" column="TIPO_DATE" type="string"  length="20"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 

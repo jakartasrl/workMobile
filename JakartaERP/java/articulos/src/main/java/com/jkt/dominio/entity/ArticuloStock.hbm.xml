@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.erp.articulos.ArticuloStock" table="ARTICULO_STOCK">
+		<id name="id" column="ARTICULO_STOCK_ID">
+			<generator class="native"></generator>
+		</id>
+
+		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" column="PRODUCTO_ID" cascade="none"></many-to-one>
+
+		<list name="detalles" table="ARTICULOS_STOCK_DET" lazy="true" cascade="all">
+			<key column="ARTICULOS_STOCK_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.articulos.ArticuloStockDet" />
+		</list>
+
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+	</class>
+
+</hibernate-mapping>

@@ -5,10 +5,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.jkt.dominio.Descriptible;
-import com.jkt.dominio.IDescriptible;
 import com.jkt.varios.validadores.ValidadorCondPago;
 
 /**
@@ -20,7 +17,7 @@ import com.jkt.varios.validadores.ValidadorCondPago;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class CondPago extends Descriptible implements IDescriptible{
+public class CondPago extends Descriptible{
 
 	@NotNull
 	private boolean baseFechaFactura;
@@ -81,30 +78,5 @@ public class CondPago extends Descriptible implements IDescriptible{
 		}
 	}
 	
-	
-	public String getCadena() {
-		return this.getDescripcion();
-	}
-
-	public String getCadena2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public int getEntero() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public int getEntero2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public float getFloat() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public float getFloat2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

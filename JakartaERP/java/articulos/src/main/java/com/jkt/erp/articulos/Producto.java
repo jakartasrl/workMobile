@@ -3,10 +3,25 @@ package com.jkt.erp.articulos;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jkt.dominio.Descriptible;
+import javax.validation.constraints.NotNull;
 
+import com.jkt.dominio.Descriptible;
+import com.jkt.varios.dominio.UnidadMedida;
+
+/**
+ * <p>Un producto esta estrictamente relacionado a un tipo de producto.</p>
+ * <p>Un tipo de producto puede ser una camisa, y el producto puede ser camisa manga larga talle XL</p>
+ * 
+ * @author ssuarez
+ *
+ */
 public class Producto extends Descriptible {
 
+	/*
+	 * **********************************************************************************************
+	 * Variables de instancia
+	 */
+	
 	private String descripcionAbrev;// descripcion abreviada
 	private boolean comprable;
 	private boolean vendible;
@@ -14,8 +29,53 @@ public class Producto extends Descriptible {
 	private boolean prodPropia;
 	private boolean bien;
 
+	@NotNull(message="Es necesario que el producto tenga una unidad de medida principal.")
+	private UnidadMedida uniMedPrin;
+	
+	private UnidadMedida uniMedSec;
+	private UnidadMedida uniMedTerc;
+	
+	
+	private UnidadMedida unidadVenta;
+	private UnidadMedida unidadProduccion;
+	private UnidadMedida unidadCompra;
+	
+	private List<ProductoEquivUniMed> equivalencias=new ArrayList<ProductoEquivUniMed>();
 	private List<ProductoClasificador> clasificadores = new ArrayList<ProductoClasificador>();
 	private TipoProducto tipoProducto;
+	private List<ArticuloStock> articulosStock=new ArrayList<ArticuloStock>();
+	private List<ProductoDet> detalles=new ArrayList<ProductoDet>();
+	
+	
+	
+	/*
+	 * Variables de instancia
+	 * **********************************************************************************************
+	 */
+	
+	public List<ArticuloStock> getArticulosStock() {
+		return articulosStock;
+	}
+
+	public List<ProductoDet> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<ProductoDet> detalles) {
+		this.detalles = detalles;
+	}
+
+	public List<ProductoEquivUniMed> getEquivalencias() {
+		return equivalencias;
+	}
+
+	public void setEquivalencias(List<ProductoEquivUniMed> equivalencias) {
+		this.equivalencias = equivalencias;
+	}
+
+	public void setArticulosStock(List<ArticuloStock> articulosStock) {
+		this.articulosStock = articulosStock;
+	}
 
 	public List<ProductoClasificador> getClasificadores() {
 		return clasificadores;
@@ -81,4 +141,70 @@ public class Producto extends Descriptible {
 		this.tipoProducto = tipoProducto;
 	}
 
+	public UnidadMedida getUniMedPrin() {
+		return uniMedPrin;
+	}
+
+	public void setUniMedPrin(UnidadMedida uniMedPrin) {
+		this.uniMedPrin = uniMedPrin;
+	}
+
+	public UnidadMedida getUniMedSec() {
+		return uniMedSec;
+	}
+
+	public void setUniMedSec(UnidadMedida uniMedSec) {
+		this.uniMedSec = uniMedSec;
+	}
+
+	public UnidadMedida getUniMedTerc() {
+		return uniMedTerc;
+	}
+
+	public void setUniMedTerc(UnidadMedida uniMedTerc) {
+		this.uniMedTerc = uniMedTerc;
+	}
+
+	public UnidadMedida getUnidadVenta() {
+		return unidadVenta;
+	}
+
+	public void setUnidadVenta(UnidadMedida unidadVenta) {
+		this.unidadVenta = unidadVenta;
+	}
+
+	public UnidadMedida getUnidadProduccion() {
+		return unidadProduccion;
+	}
+
+	public void setUnidadProduccion(UnidadMedida unidadProduccion) {
+		this.unidadProduccion = unidadProduccion;
+	}
+
+	public UnidadMedida getUnidadCompra() {
+		return unidadCompra;
+	}
+
+	public void setUnidadCompra(UnidadMedida unidadCompra) {
+		this.unidadCompra = unidadCompra;
+	}
+
+	
+	/*
+	 * Helper methods
+	 */
+	public void addEquivalencia(ProductoEquivUniMed eq){
+		if (!equivalencias.contains(eq)) {
+			equivalencias.add(eq);
+			eq.setProducto(this);
+		}
+	}
+	
+	public void agregarDetalle(ProductoDet detalle){
+		if(!detalles.contains(detalle)){
+			detalles.add(detalle);
+			detalle.setProducto(this);
+		}
+	}
+	
 }

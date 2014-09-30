@@ -6,7 +6,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.varios.dominio.CondPagoDet;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Pais;
 import com.jkt.varios.dominio.Provincia;
 
 /**
@@ -29,13 +31,13 @@ public class DomicilioEntrega extends PersistentEntity {
 	/**
 	 * Indica el nro correlativo de domicilio de entrega
 	 */
-	@Min(message="El numero debe ser mayor a cero.", value=1)
+	@Min(message="El numero de domicilio de entrega debe ser mayor a cero.", value=1)
 	private int numero;
 	
 	/**
 	 * Indica el nro correlative de domicilio de entrega
 	 */
-	@NotNull(message="La direccion no puede ser nula.")
+	@NotNull(message="La direccion del domicilio de entrega no puede ser nula.")
 	private Direccion direccion;
 	
 	/**
@@ -47,7 +49,7 @@ public class DomicilioEntrega extends PersistentEntity {
 	private String descripcion;
 	
 	/**
-	 * Los d�as y horarios en que se permite entregar
+	 * Los dias y horarios en que se permite entregar
 	 */
 	private String diasEntrega; 
 	
@@ -121,6 +123,11 @@ public class DomicilioEntrega extends PersistentEntity {
 		generarDireccion();
 		this.direccion.setProvincia(provincia);
 	}
+
+	public void setearPais(Pais pais){
+		generarDireccion();
+		this.direccion.setPais(pais);
+	}
 	
 	public void setearDireccion(String direccion){
 		generarDireccion();
@@ -146,6 +153,25 @@ public class DomicilioEntrega extends PersistentEntity {
 	/*
 	 * Metodos para el manejo de la direccion.
 	 */
-	
+	 public boolean equals(Object other) {
+	        if (this == other) return true;
+	        if ( !(other instanceof CondPagoDet) ) return false;
+
+	        final DomicilioEntrega domicilioEntrega = (DomicilioEntrega) other;
+	        	
+	        if (domicilioEntrega.getId()==0) return false;
+				
+	        if ( !(domicilioEntrega.getId()==getId())) return false;
+
+	        if ( !(domicilioEntrega.getClienteSucursal().getId()==getClienteSucursal().getId())) return false;
+
+	        return true;
+	    }
+
+	    public int hashCode() {
+	        int result;
+	        result = (int) (29 * getId());
+	        return result;
+	    }
 	
 }

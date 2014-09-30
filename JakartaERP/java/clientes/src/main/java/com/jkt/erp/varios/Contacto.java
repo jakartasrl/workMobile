@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.jkt.dominio.PersistentEntity;
 
 /**
- * Entidad que representa la información de contacto
+ * Entidad que representa la informaciï¿½n de contacto
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -27,6 +27,17 @@ public class Contacto extends PersistentEntity {
 
 	@NotBlank
 	private String tratamiento;
+
+	//Transient var for not persist in db
+	private long clienteSucursalId;
+	
+	public long getClienteSucursalId() {
+		return clienteSucursalId;
+	}
+
+	public void setClienteSucursalId(long clienteSucursalId) {
+		this.clienteSucursalId = clienteSucursalId;
+	}
 
 	public String getApellido() {
 		return apellido;
@@ -66,6 +77,10 @@ public class Contacto extends PersistentEntity {
 
 	public void setTratamiento(String tratamiento) {
 		this.tratamiento = tratamiento;
+	}
+
+	public void setClienteSucursal(long id) {
+		this.clienteSucursalId=id;
 	}
 
 }

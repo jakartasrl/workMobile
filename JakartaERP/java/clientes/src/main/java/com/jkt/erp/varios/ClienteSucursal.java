@@ -10,13 +10,13 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.Direccion;
+import com.jkt.varios.dominio.Pais;
 import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los lugares en donde el cliente recibe las compras que ha realizado</p>
- * <p>Se utilizar� para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
+ * <p>Se utilizará para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -42,9 +42,6 @@ public class ClienteSucursal extends PersistentEntity {
 	private Representante representante;
 	
 	private String telefono;
-	
-//	@NotNull(message="Debe existir la cuenta conrriente relacionada al cliente/sucursal.")
-//	private ClienteCtaCte cuentaCorriente;
 	
 	/**
 	 * Contactos en la sucursal
@@ -151,12 +148,19 @@ public class ClienteSucursal extends PersistentEntity {
 	 * Helper methods
 	 */
 	public void addClasificador(ClienteSucursalClasificador clienteSucursalClasificador){
-		clasificadores.add(clienteSucursalClasificador);
+		if (clienteSucursalClasificador!=null && clienteSucursalClasificador.getComponenteValor()!=null) {
+			if(!clasificadores.contains(clienteSucursalClasificador)){
+				clasificadores.add(clienteSucursalClasificador);
+				clienteSucursalClasificador.setClienteSucursal(this);
+			}
+		}
 	}
 	
 	public void addDomicilioEntrega(DomicilioEntrega domicilioEntrega){
-		domiciliosDeEntrega.add(domicilioEntrega);
-		domicilioEntrega.setClienteSucursal(this);
+		if (!domiciliosDeEntrega.contains(domicilioEntrega)) {
+			domiciliosDeEntrega.add(domicilioEntrega);
+			domicilioEntrega.setClienteSucursal(this);
+		}
 	}
 	
 	public void addContacto(Contacto c){
@@ -175,6 +179,11 @@ public class ClienteSucursal extends PersistentEntity {
 	/*
 	 * Metodos para el manejo de la direccion.
 	 */
+	
+	public void setearPais(Pais pais){
+		generarDireccion();
+		this.direccion.setPais(pais);
+	}
 	
 	public void setearProvincia(Provincia provincia){
 		generarDireccion();
