@@ -56,6 +56,9 @@ type
     FNotifyAcepto : TNotifyAcepto;
     FTipoFiltro : TjktTipoFiltro;
     FEntidad : string;
+    FEntidadMaestra : string;
+    FOidEntidadMaestra : TIntegerField;
+
     procedure TraerDataSet();
     function SeleccionarRegistro() : Boolean;
     procedure ArmarOperHelpGenerico();
@@ -84,6 +87,8 @@ type
     { Published declarations }
     property ServiceCaller : TjktServiceCaller read FServiceCaller write FServiceCaller;
     property Entidad : string read FEntidad write FEntidad;
+    property EntidadMaestra : string read FEntidadMaestra write FEntidadMaestra;
+    property OidEntidadMaestra : TIntegerField read FOidEntidadMaestra write FOidEntidadMaestra;
     property TipoFiltro : TjktTipoFiltro read FTipoFiltro write FTipoFiltro default fi_Activos;
     property OidRespuesta : TIntegerField read FOidRespuesta write FOidRespuesta;
     property CodigoRespuesta : TStringField read FCodigoRespuesta write FCodigoRespuesta;
@@ -123,6 +128,7 @@ begin
   FListaValoresParams := TStringList.Create;
 
   FEntidad := '';
+  FEntidadMaestra := '';
 end;
 
 function TjktHelpGenerico.Ejecutar(): Boolean;
@@ -216,7 +222,11 @@ begin
     HelpDialog.Service.Aplicacion := FServiceCaller.Aplicacion;
     HelpDialog.Service.Protocolo  := FServiceCaller.Protocolo;
 
-    HelpDialog.Entidad       := FEntidad;
+    HelpDialog.Entidad := FEntidad;
+    HelpDialog.EntidadMaestra := FEntidadMaestra;
+    if Assigned(FOidEntidadMaestra) then
+      HelpDialog.OidEntidadMaestra := FOidEntidadMaestra.Value;
+
     HelpDialog.TipoFiltro    := FTipoFiltro;
     HelpDialog.SeleccionMultiple := Self.SeleccionMultiple;
 

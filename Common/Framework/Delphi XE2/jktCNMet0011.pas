@@ -7,27 +7,30 @@ uses
   jktCNMet0002, jktCNMet0030, jktFNMet0008, DB, kbmMemTable;
 
 const
-  operExistente       = 'ValidarExistente';
-  operInexistente     = 'ValidarInexistente';
+  operExistente   = 'ValidarExistente'  ;
+  operInexistente = 'ValidarInexistente';
+
+  operExistenteDeMaestro   = 'ValidarExistenteDeMaestro';
+  operInexistenteDeMaestro = 'ValidarInexistenteDeMaestro';
 
 type
-  TjktValidacion   = (tExistente, tInexistente, tEspecial, tMayorCero, tMayorIgualCero, tMenorIgualCien, tDistintoEspacio);
+  TjktValidacion = (tExistente, tInexistente, tEspecial, tMayorCero, tMayorIgualCero, tMenorIgualCien, tDistintoEspacio);
 
 type
   TjktAsignadorField = class(TCollectionItem)
   private
-     FFieldName        :string;
-     FSourceName       :string;
-     FFieldTarget      :TField;
-     FFieldSource      :TField;
+     FFieldName   : string;
+     FSourceName  : string;
+     FFieldTarget : TField;
+     FFieldSource : TField;
   public
      procedure asignarValor;
-     property FieldSource      :TField           read FFieldSource     write FFieldSource;
+     property FieldSource : TField read FFieldSource write FFieldSource;
 
   published
-     property FieldName        :string           read FFieldName       write FFieldName;
-     property SourceName       :string           read FSourceName      write FSourceName;
-     property FieldTarget      :TField           read FFieldTarget     write FFieldTarget;
+     property FieldName   : string read FFieldName   write FFieldName;
+     property SourceName  : string read FSourceName  write FSourceName;
+     property FieldTarget : TField read FFieldTarget write FFieldTarget;
 end;
 
 type
@@ -53,15 +56,17 @@ type
     { Private declarations }
     FTempMemTable       : TkbmMemTable;
     FEntidad            : string;
+    FEntidadMaestra     : string;
+    FOidEntidadMaestra  : TIntegerField;
     FServiceCaller      : TjktServiceCaller;
     FValidacion         : TjktValidacion;
     FListaAsignaciones  : TjktAsignadorFieldList;
     FOperacionEspecial  : TjktOperacion;
     DatasetCreado       : boolean;
-    procedure  crearDatasetResult;
-    procedure  validacionLocal(sender  :TField);
-    procedure  validacionServer(sender :TField);
-    procedure  validacionExistenciaInexistencia(sender :TField);
+    procedure crearDatasetResult;
+    procedure validacionLocal(sender  :TField);
+    procedure validacionServer(sender :TField);
+    procedure validacionExistenciaInexistencia(sender :TField);
 
   protected
     { Protected declarations }
@@ -76,25 +81,27 @@ type
 
   published
     { Published declarations }
-    property Entidad : string read FEntidad write FEntidad;
-    property Validacion         :TjktValidacion    read FValidacion    write FValidacion;
-    property ListaAsignaciones  :TjktAsignadorFieldList read FListaAsignaciones write FListaAsignaciones;
-    property OperacionEspecial  :TjktOperacion    read FOperacionEspecial  write FOperacionEspecial ;
+    property Entidad           : string                 read FEntidad           write FEntidad;
+    property EntidadMaestra    : string                 read FEntidadMaestra    write FEntidadMaestra;
+    property OidEntidadMaestra : TIntegerField          read FOidEntidadMaestra write FOidEntidadMaestra;
+    property Validacion        : TjktValidacion         read FValidacion        write FValidacion;
+    property ListaAsignaciones : TjktAsignadorFieldList read FListaAsignaciones write FListaAsignaciones;
+    property OperacionEspecial : TjktOperacion          read FOperacionEspecial write FOperacionEspecial;
   end;
 
 type
   TjktValidadorField = class(TCollectionItem)
   private
-     FField                :TField;
-     FValidadorNew         :TjktValidador;
-     FValidadorModif       :TjktValidador;
-     FValidadorGral        :TjktValidador;
+    FField          : TField;
+    FValidadorNew   : TjktValidador;
+    FValidadorModif : TjktValidador;
+    FValidadorGral  : TjktValidador;
 
   published
-     property Field                :TField           read FField               write FField;
-     property ValidadorNew         :TjktValidador    read FValidadorNew        write FValidadorNew;
-     property ValidadorModif       :TjktValidador    read FValidadorModif      write FValidadorModif;
-     property ValidadorGral        :TjktValidador    read FValidadorGral       write FValidadorGral;
+    property Field          : TField        read FField          write FField;
+    property ValidadorNew   : TjktValidador read FValidadorNew   write FValidadorNew;
+    property ValidadorModif : TjktValidador read FValidadorModif write FValidadorModif;
+    property ValidadorGral  : TjktValidador read FValidadorGral  write FValidadorGral;
   end;
 
 type
@@ -263,25 +270,41 @@ end;
 
 procedure TjktValidador.validacionExistenciaInexistencia(sender :TField);
 var
-  operName :string;
+  operName: string;
 begin
   if FValidacion = tExistente then
-    operName := operExistente
+    begin
+      if Trim(FEntidadMaestra) = '' then
+        operName := operExistente
+      else
+        operName := operExistenteDeMaestro
+    end
   else if FValidacion = tInexistente then
-    operName := operInexistente;
+    begin
+      if Trim(FEntidadMaestra) = '' then
+        operName := operInexistente
+      else
+        operName := operInexistenteDeMaestro
+    end;
 
-  
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(operName);
-  FServiceCaller.addAtribute('codigo',    trim(sender.AsString));
-  FServiceCaller.addAtribute('entidad',   FEntidad);
+  FServiceCaller.addAtribute('codigo' , Trim(sender.AsString));
+  FServiceCaller.addAtribute('entidad', FEntidad);
+
+  if Trim(FEntidadMaestra) <> '' then
+    begin
+      FServiceCaller.addAtribute('entidadMaestra', FEntidadMaestra);
+      if Assigned(FOidEntidadMaestra) then
+        FServiceCaller.addAtribute('oidEntidadMaestra', FOidEntidadMaestra.Value);
+    end;
 
   if FValidacion = tExistente then
     begin
       if not Self.DatasetCreado then
         crearDatasetResult;
 
-      FServiceCaller.addAtribute('outputDatasetName',   FTempMemTable.Name);
+      FServiceCaller.addAtribute('outputDatasetName', FTempMemTable.Name);
     end;
 
   FServiceCaller.execute;

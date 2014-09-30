@@ -54,7 +54,7 @@ type
     FIgnoreException : boolean;
     FOperaciones     :TDataset;
     currentOper      :string;
-    FListaDataSetsToAssing : TStringList; // nada
+    FListaDataSetsToAssing : TStringList;
     FCSVFormat: TkbmCSVStreamFormat;
     FResponse : AnsiString;
     FCertificado : string;
@@ -174,8 +174,8 @@ begin
   FHTTP := nil;
   FXML.Free;
   FreeAndNil(sfCSV);
-  for i:=0 to FListaDataSetsToAssing.Count-1 do
-    FListaDataSetsToAssing.Objects[i] := Nil;
+  for i := 0 to FListaDataSetsToAssing.Count - 1 do
+    FListaDataSetsToAssing.Objects[i] := nil;
   FListaDataSetsToAssing.Clear;
   FreeAndNil(FListaDataSetsToAssing);
   inherited Destroy;
@@ -619,13 +619,16 @@ end;
 
 function TjktServiceCaller.obtenerDataset(aDatasetName: AnsiString) :TDataset;
 var
- x :integer;
+  x: Integer;
 begin
-  result := TDataset (self.Owner.FindComponent(aDatasetName));
-  if result = nil
-     then   if FListaDataSetsToAssing.Find(aDatasetName, x)  = true
-                then result := TDataset (FListaDataSetsToAssing.Objects[x]);
+  Result := TDataset(Self.Owner.FindComponent(aDatasetName));
 
+  if Result = nil then
+    begin
+      x := FListaDataSetsToAssing.IndexOf(aDatasetName);
+      if x <> -1 then
+        Result := TDataSet(FListaDataSetsToAssing.Objects[x]);
+    end;
 end;
 
 

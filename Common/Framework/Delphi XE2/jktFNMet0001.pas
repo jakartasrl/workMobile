@@ -45,6 +45,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
+    FNewOid: Integer;
     FEstado: TjktEstado;
     FParentActionList: TActionList; // guardamos la referencia al 'ActionList' del padre
     FOnActivateChild: TNotifyEvent;
@@ -61,6 +62,8 @@ type
 
   protected
     FMultipleInstancia: Boolean;
+
+    function GetNewOid(): Integer;
     procedure llamarOperacionConfiguracion; virtual; abstract;
 
   public
@@ -149,6 +152,7 @@ end;
 procedure TfrmChild.FormCreate(Sender: TObject);
 begin
   FMultipleInstancia := False;
+  FNewOid := 0;
 end;
 
 function TfrmChild.GetCanEdit: Boolean;
@@ -159,6 +163,12 @@ end;
 function TfrmChild.GetCanPaste: Boolean;
 begin
   Result := False;
+end;
+
+function TfrmChild.GetNewOid: Integer;
+begin
+  Dec(FNewOid);
+  Result := FNewOid;
 end;
 
 procedure TfrmChild.InicializarChild(ParentActionList: TActionList;
