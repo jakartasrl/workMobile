@@ -187,6 +187,31 @@ type
     Help: TjktHelpGenerico;
     opTraerClasifProd: TjktOperacion;
     opTraerTiposDeProducto: TjktOperacion;
+    jktExpDBGrid1DBTableView1oid_ValorCarac: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1oid_Art: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1oid_Carac: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1DescCarac: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1TipoDeDato: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1CodValorCarac: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1DescValorCarac: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1oid_EquivArt: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1oid_Art: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1oid_UnidMedOrig: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1CodUnidMedOrig: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1DescUnidMedOrig: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1oid_UnidMedDest: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1CodUnidMedDest: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1DescUnidMedDest: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1FactConv: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1Activo: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1oid_ClasifProd: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1oid_Art: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1oid_Clasif: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1DescClasif: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1oid_ValorClasif: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1CodValorClasif: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1DescValorClasif: TcxGridDBColumn;
+    jktExpDBGrid4DBTableView1Activo: TcxGridDBColumn;
   private
     { Private declarations }
   public

@@ -19,7 +19,9 @@ inherited FNArt0001: TFNArt0001
     ExplicitHeight = 250
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 70
-      Top = 28
+      Top = -863
+      DataBinding.DataField = 'Codigo'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -28,7 +30,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 281
-      Top = 79
+      Top = -812
+      DataBinding.DataField = 'DescAbrev'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -37,7 +41,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 64
-      Top = 55
+      Top = -836
+      DataBinding.DataField = 'EsBien'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -46,7 +52,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox2: TcxDBCheckBox
       Left = 64
-      Top = 82
+      Top = -809
+      DataBinding.DataField = 'EsServicio'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -55,7 +63,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox3: TcxDBCheckBox
       Left = 112
-      Top = 121
+      Top = -770
+      DataBinding.DataField = 'EsStockeable'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -64,7 +74,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox4: TcxDBCheckBox
       Left = 112
-      Top = 148
+      Top = -743
+      DataBinding.DataField = 'EsProdPropia'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -73,7 +85,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox5: TcxDBCheckBox
       Left = 226
-      Top = 121
+      Top = -770
+      DataBinding.DataField = 'EsComprable'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -82,7 +96,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox6: TcxDBCheckBox
       Left = 226
-      Top = 148
+      Top = -743
+      DataBinding.DataField = 'EsVendible'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -91,7 +107,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBMemo1: TcxDBMemo
       Left = 281
-      Top = 28
+      Top = -863
+      DataBinding.DataField = 'Descripcion'
+      DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -101,16 +119,39 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 22
-      Top = 232
+      Top = -659
       Width = 250
       Height = 200
       TabOrder = 10
+      DataSource = dsValoresCaracProd
       object jktExpDBGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsValoresCaracProd
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsView.GroupByBox = False
+        object jktExpDBGrid1DBTableView1oid_ValorCarac: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_ValorCarac'
+        end
+        object jktExpDBGrid1DBTableView1oid_Art: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_Art'
+        end
+        object jktExpDBGrid1DBTableView1oid_Carac: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_Carac'
+        end
+        object jktExpDBGrid1DBTableView1DescCarac: TcxGridDBColumn
+          DataBinding.FieldName = 'DescCarac'
+        end
+        object jktExpDBGrid1DBTableView1TipoDeDato: TcxGridDBColumn
+          DataBinding.FieldName = 'TipoDeDato'
+        end
+        object jktExpDBGrid1DBTableView1CodValorCarac: TcxGridDBColumn
+          DataBinding.FieldName = 'CodValorCarac'
+        end
+        object jktExpDBGrid1DBTableView1DescValorCarac: TcxGridDBColumn
+          DataBinding.FieldName = 'DescValorCarac'
+        end
       end
       object jktExpDBGrid1Level1: TcxGridLevel
         GridView = jktExpDBGrid1DBTableView1
@@ -118,12 +159,14 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = 468
+      Top = -423
       Width = 250
       Height = 200
       TabOrder = 11
+      DataSource = dsAperturaStock
       object jktExpDBGrid2DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsAperturaStock
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -135,16 +178,48 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 916
+      Top = 25
       Width = 250
       Height = 200
       TabOrder = 24
+      DataSource = dsEquivalencias
       object jktExpDBGrid3DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsEquivalencias
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsView.GroupByBox = False
+        object jktExpDBGrid3DBTableView1oid_EquivArt: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_EquivArt'
+        end
+        object jktExpDBGrid3DBTableView1oid_Art: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_Art'
+        end
+        object jktExpDBGrid3DBTableView1oid_UnidMedOrig: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_UnidMedOrig'
+        end
+        object jktExpDBGrid3DBTableView1CodUnidMedOrig: TcxGridDBColumn
+          DataBinding.FieldName = 'CodUnidMedOrig'
+        end
+        object jktExpDBGrid3DBTableView1DescUnidMedOrig: TcxGridDBColumn
+          DataBinding.FieldName = 'DescUnidMedOrig'
+        end
+        object jktExpDBGrid3DBTableView1oid_UnidMedDest: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_UnidMedDest'
+        end
+        object jktExpDBGrid3DBTableView1CodUnidMedDest: TcxGridDBColumn
+          DataBinding.FieldName = 'CodUnidMedDest'
+        end
+        object jktExpDBGrid3DBTableView1DescUnidMedDest: TcxGridDBColumn
+          DataBinding.FieldName = 'DescUnidMedDest'
+        end
+        object jktExpDBGrid3DBTableView1FactConv: TcxGridDBColumn
+          DataBinding.FieldName = 'FactConv'
+        end
+        object jktExpDBGrid3DBTableView1Activo: TcxGridDBColumn
+          DataBinding.FieldName = 'Activo'
+        end
       end
       object jktExpDBGrid3Level1: TcxGridLevel
         GridView = jktExpDBGrid3DBTableView1
@@ -152,16 +227,42 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid4: TjktExpDBGrid
       Left = 22
-      Top = 1152
+      Top = 261
       Width = 250
       Height = 200
       TabOrder = 25
+      DataSource = dsClasifProd
       object jktExpDBGrid4DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsClasifProd
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsView.GroupByBox = False
+        object jktExpDBGrid4DBTableView1oid_ClasifProd: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_ClasifProd'
+        end
+        object jktExpDBGrid4DBTableView1oid_Art: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_Art'
+        end
+        object jktExpDBGrid4DBTableView1oid_Clasif: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_Clasif'
+        end
+        object jktExpDBGrid4DBTableView1DescClasif: TcxGridDBColumn
+          DataBinding.FieldName = 'DescClasif'
+        end
+        object jktExpDBGrid4DBTableView1oid_ValorClasif: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_ValorClasif'
+        end
+        object jktExpDBGrid4DBTableView1CodValorClasif: TcxGridDBColumn
+          DataBinding.FieldName = 'CodValorClasif'
+        end
+        object jktExpDBGrid4DBTableView1DescValorClasif: TcxGridDBColumn
+          DataBinding.FieldName = 'DescValorClasif'
+        end
+        object jktExpDBGrid4DBTableView1Activo: TcxGridDBColumn
+          DataBinding.FieldName = 'Activo'
+        end
       end
       object jktExpDBGrid4Level1: TcxGridLevel
         GridView = jktExpDBGrid4DBTableView1
@@ -169,7 +270,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBLookupComboBox1: TcxDBLookupComboBox
       Left = 108
-      Top = 205
+      Top = -686
       DataBinding.DataField = 'oid_TipoArt'
       DataBinding.DataSource = dsArticulo
       Properties.DropDownAutoSize = True
@@ -195,7 +296,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 160
-      Top = 704
+      Top = -187
+      DataBinding.DataField = 'CodUnidStockPrinc'
+      DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
         item
           Default = True
@@ -210,7 +313,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 160
-      Top = 731
+      Top = -160
+      DataBinding.DataField = 'CodUnidStockSecun'
+      DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
         item
           Default = True
@@ -225,7 +330,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit3: TcxDBButtonEdit
       Left = 160
-      Top = 758
+      Top = -133
+      DataBinding.DataField = 'CodUnidStockTerc'
+      DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
         item
           Default = True
@@ -240,7 +347,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit4: TcxDBButtonEdit
       Left = 160
-      Top = 801
+      Top = -90
+      DataBinding.DataField = 'CodUnidVenta'
+      DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
         item
           Default = True
@@ -255,7 +364,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit5: TcxDBButtonEdit
       Left = 160
-      Top = 828
+      Top = -63
+      DataBinding.DataField = 'CodUnidProd'
+      DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
         item
           Default = True
@@ -270,7 +381,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit6: TcxDBButtonEdit
       Left = 160
-      Top = 855
+      Top = -36
+      DataBinding.DataField = 'CodUnidCompra'
+      DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
         item
           Default = True
@@ -285,7 +398,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 236
-      Top = 704
+      Top = -187
+      DataBinding.DataField = 'DescUnidStockPrinc'
+      DataBinding.DataSource = dsArticulo
       Enabled = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -295,7 +410,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 236
-      Top = 731
+      Top = -160
+      DataBinding.DataField = 'DescUnidStockSecun'
+      DataBinding.DataSource = dsArticulo
       Enabled = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -305,7 +422,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 236
-      Top = 758
+      Top = -133
+      DataBinding.DataField = 'DescUnidStockTerc'
+      DataBinding.DataSource = dsArticulo
       Enabled = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -315,7 +434,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 236
-      Top = 801
+      Top = -90
+      DataBinding.DataField = 'DescUnidVenta'
+      DataBinding.DataSource = dsArticulo
       Enabled = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -325,7 +446,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 236
-      Top = 828
+      Top = -63
+      DataBinding.DataField = 'DescUnidProd'
+      DataBinding.DataSource = dsArticulo
       Enabled = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -335,7 +458,9 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 236
-      Top = 855
+      Top = -36
+      DataBinding.DataField = 'DescUnidCompra'
+      DataBinding.DataSource = dsArticulo
       Enabled = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
