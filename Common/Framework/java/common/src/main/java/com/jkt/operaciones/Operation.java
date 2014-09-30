@@ -153,9 +153,7 @@ public abstract class Operation extends Observable {
 	 * 
 	 */
 	protected void notificarObjecto(Object parameter) {
-		this.
-		
-		setChanged();
+		this.setChanged();
 		notifyObservers(parameter);
 	}
 
@@ -236,6 +234,13 @@ public abstract class Operation extends Observable {
 		return serviceRepository.getByOid(className, id);
 	}
 	/**
+	 * Recupera todas las entidades persistentes utilizando el nombre de la clase.
+	 * 
+	 */
+	protected List<PersistentEntity> obtenerTodos(Class<? extends PersistentEntity> className) throws Exception{
+		return serviceRepository.getAll(className);
+	}
+	/**
 	 * <p>Recupera una entidad persistente utilizando el nombre de la clase y el id.</p>
 	 * <p>Metodo sobre cargado que recibe un numero en formto de String.Se intentara pasar a numero y si no es numerico se levanta una excepcion</p>
 	 * 
@@ -263,6 +268,15 @@ public abstract class Operation extends Observable {
 		}
 	}
 	
+	/**
+	 * <p>Se usa para verificar objetos de entrada de la operacion.</p>
+	 * <p>La entrada siempre es en un mapa, con lo cual esta funcion debe llamarse dle siguiente modo:</p>
+	 * 
+	 * <p><code>validarEntrada(aParams.get("keyDelMapa"))</code></p>
+	 * 
+	 * @param object, generalmente será un objeto del mapa.
+	 * @throws JakartaException Si el objeto no existe en e mapa, o si es un string vacio.
+	 */
 	protected void validarEntrada(Object object) throws JakartaException{
 		String valor=(String) object;
 		String mensaje = "No se encuentra la entrada esperada en la operacion.";

@@ -93,8 +93,37 @@ public class ProductoDet extends PersistentEntity {
 				throw new JakartaException("El valor booleano debe ser 'true' o 'false'.");
 			}
 		}
-		
-		
+	}
+
+	
+	/**
+	 * Metodo de ayuda para ser llamado desde el cliente, sin enterarse que tipo de dato debe recuperar. 
+	 * @return
+	 * @throws JakartaException
+	 */
+	public String getValorDeDato() throws JakartaException{
+		String tipoDato = this.getCaracProducto().getTipoDato();
+		if (TiposDeDato.BOOLEAN_TYPE.equals(tipoDato)) {
+			return String.valueOf(valorBoolean);
+		}else if(TiposDeDato.DOUBLE_TYPE.equals(tipoDato)){
+			return String.valueOf(valorDoble);
+		}else if(TiposDeDato.INTEGER_TYPE.equals(tipoDato)){
+			return String.valueOf(valorEntero);
+		}else if(TiposDeDato.STRING_TYPE.equals(tipoDato)){
+			return valorString;
+		}else if(TiposDeDato.TABLA_VALORES_TYPE.equals(tipoDato)){
+			return String.valueOf(valorTabla.getId());
+		}else{
+			throw new JakartaException("El tipo de dato configurado en la caracteristica es inconsistente.");
+		}
+	}
+	
+	public String getDescripcionDeDato(){
+		if (valorTabla!=null) {
+			return valorTabla.getDescripcion();
+		}else{
+			return "";
+		}
 	}
 	
 	/*

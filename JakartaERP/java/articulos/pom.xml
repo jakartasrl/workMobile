@@ -24,5 +24,10 @@
   		<artifactId>seguridad</artifactId>
   		<version>0.0.1</version>
   	</dependency>
+  	<dependency>
+  		<groupId>commons-lang</groupId>
+  		<artifactId>commons-lang</artifactId>
+  		<version>2.4</version>
+  	</dependency>
   </dependencies>
 </project>
