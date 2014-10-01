@@ -227,7 +227,7 @@ object FMet003: TFMet003
     Left = 304
     Top = 160
   end
-  object opFiltrado: TjktOperacion
+  object opFiltroSimple: TjktOperacion
     EnviarTodo = False
     Atributos = <
       item
@@ -241,7 +241,7 @@ object FMet003: TFMet003
       end>
     ServiceCaller = Service
     Left = 304
-    Top = 216
+    Top = 232
   end
   object mtFiltros: TjktMemTable
     DesignActivation = True
@@ -262,7 +262,7 @@ object FMet003: TFMet003
     SubLanguageID = 0
     LocaleID = 0
     Left = 232
-    Top = 216
+    Top = 232
   end
   object mtParametros: TjktMemTable
     DesignActivation = True
@@ -288,6 +288,13 @@ object FMet003: TFMet003
       FieldName = 'Entidad'
       Size = 255
     end
+    object mtParametrosEntidadMaestra: TStringField
+      FieldName = 'EntidadMaestra'
+      Size = 255
+    end
+    object mtParametrosOidEntidadMaestra: TIntegerField
+      FieldName = 'OidEntidadMaestra'
+    end
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
@@ -311,5 +318,31 @@ object FMet003: TFMet003
     HTTPOptions = [hoForceEncodeParams]
     Left = 168
     Top = 64
+  end
+  object opFiltroCompuesto: TjktOperacion
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'entidad'
+        Field = mtParametrosEntidad
+        Tag = 0
+      end
+      item
+        Attribute = 'entidadMaestra'
+        Field = mtParametrosEntidadMaestra
+        Tag = 0
+      end
+      item
+        Attribute = 'oidEntidadMaestra'
+        Field = mtParametrosOidEntidadMaestra
+        Tag = 0
+      end
+      item
+        Dataset = mtFiltros
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    Left = 304
+    Top = 288
   end
 end

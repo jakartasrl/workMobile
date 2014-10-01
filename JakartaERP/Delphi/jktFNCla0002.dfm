@@ -21,6 +21,7 @@ inherited FNCla0002: TFNCla0002
       Top = 30
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsClasificador
+      Enabled = False
       TabOrder = 0
       Width = 121
     end
@@ -29,6 +30,7 @@ inherited FNCla0002: TFNCla0002
       Top = 30
       DataBinding.DataField = 'Descripcion'
       DataBinding.DataSource = dsClasificador
+      Enabled = False
       TabOrder = 1
       Width = 245
     end
@@ -86,7 +88,7 @@ inherited FNCla0002: TFNCla0002
       TabOrder = 0
       object cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn
         DataBinding.FieldName = 'oid_ValorClasif'
-        Position.ColIndex = 0
+        Position.ColIndex = 2
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -94,7 +96,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
         DataBinding.FieldName = 'oid_CompClasif'
-        Position.ColIndex = 1
+        Position.ColIndex = 3
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -102,7 +104,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1codInterno: TcxDBTreeListColumn
         DataBinding.FieldName = 'codInterno'
-        Position.ColIndex = 2
+        Position.ColIndex = 4
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -110,7 +112,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
         DataBinding.FieldName = 'codInternoPadre'
-        Position.ColIndex = 3
+        Position.ColIndex = 5
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -118,7 +120,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1Codigo: TcxDBTreeListColumn
         DataBinding.FieldName = 'Codigo'
-        Position.ColIndex = 4
+        Position.ColIndex = 1
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -126,7 +128,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1Descripcion: TcxDBTreeListColumn
         DataBinding.FieldName = 'Descripcion'
-        Position.ColIndex = 5
+        Position.ColIndex = 0
         Position.RowIndex = 0
         Position.BandIndex = 0
         Summary.FooterSummaryItems = <>
@@ -162,8 +164,8 @@ inherited FNCla0002: TFNCla0002
       DataController.DataSource = dsComponentesClasificador
       DataController.ParentField = 'oid_NivelPadre'
       DataController.KeyField = 'oid_Nivel'
+      Enabled = False
       Navigator.Buttons.CustomButtons = <>
-      OptionsBehavior.GoToNextCellOnTab = True
       OptionsCustomizing.BandCustomizing = False
       OptionsCustomizing.BandHorzSizing = False
       OptionsCustomizing.BandMoving = False
@@ -171,7 +173,9 @@ inherited FNCla0002: TFNCla0002
       OptionsData.Editing = False
       OptionsData.Deleting = False
       OptionsSelection.CellSelect = False
+      OptionsView.FocusRect = False
       OptionsView.Headers = False
+      OptionsView.TreeLineStyle = tllsSolid
       RootValue = -1
       TabOrder = 0
       object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
@@ -238,7 +242,7 @@ inherited FNCla0002: TFNCla0002
       0)
   end
   inherited Driver: TjktDriver
-    DataSetCab = mtClasificador
+    DataSetCab = mtValoresClasificador
     TipoPrograma = tp_abmIndividual
     Filtro = Help
     Left = 400
@@ -259,6 +263,8 @@ inherited FNCla0002: TFNCla0002
         Dataset = mtValoresClasificador
         Tag = 0
       end>
+    OnBeforeEjecutar = OperacionSaveBeforeEjecutar
+    OnAfterEjecutar = OperacionSaveAfterEjecutar
     Left = 464
     Top = 248
   end
@@ -355,6 +361,7 @@ inherited FNCla0002: TFNCla0002
     Top = 80
   end
   object mtClasificador: TjktMemTable
+    Active = True
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1

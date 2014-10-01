@@ -79,6 +79,8 @@ type
     procedure menAnadirMismoNivelClick(Sender: TObject);
     procedure menAnadirSubNivelClick(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
+    procedure OperacionSaveAfterEjecutar(Sender: TObject);
+    procedure OperacionSaveBeforeEjecutar(Sender: TObject);
   private
     FcodInterno: SmallInt;
     function GetOid_Componente(Nivel: Byte): Integer;
@@ -159,6 +161,20 @@ begin
   mtValoresClasificador.FieldByName('Activo').Value          := True;
 end;
 
+procedure TFNCla0002.OperacionSaveAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  cxDBTreeList1.DataController.DataSource := dsValoresClasificador;
+end;
+
+procedure TFNCla0002.OperacionSaveBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  cxDBTreeList1.DataController.DataSource := nil;
+end;
+
 procedure TFNCla0002.OperacionTraerAfterEjecutar(Sender: TObject);
 begin
   inherited;
@@ -166,6 +182,12 @@ begin
   // Luego de traer un Clasificador, inicializo el 'codInterno' para manejar
   // la jerarquía de los nuevos componentes agregados
   FcodInterno := 0;
+
+  if mtValoresClasificador.RecordCount = 0 then
+    begin
+      mtValoresClasificador.Close;
+      mtValoresClasificador.Open;
+    end;
 end;
 
 procedure TFNCla0002.PopupMenuPopup(Sender: TObject);

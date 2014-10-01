@@ -257,14 +257,19 @@ begin
   if Assigned(FOnBeforeEjecutar) then
     FOnBeforeEjecutar(Self);
 
-  FServiceCaller.InicioOperacion;
-  FServiceCaller.setOperacion(FOperName);
-  completarAtributosOperacion();
+  try
+    FServiceCaller.InicioOperacion;
+    FServiceCaller.setOperacion(FOperName);
+    completarAtributosOperacion();
 
-  FServiceCaller.execute;
-
-  if Assigned(FOnAfterEjecutar) then
-    FOnAfterEjecutar(Self);
+    FServiceCaller.execute;
+  finally
+    // Disparo el evento 'OnAfterEjecutar' independientemente de si hubo
+    // una exception o no (se crea una exception ante cualquier mensaje de error
+    // del Servidor)
+    if Assigned(FOnAfterEjecutar) then
+      FOnAfterEjecutar(Self);
+  end;
 end;
 
 procedure TjktOperacion.executeGuardar(aDataSet :TDataSet);
@@ -278,15 +283,20 @@ begin
   if Assigned(FOnBeforeEjecutar) then
     FOnBeforeEjecutar(Self);
 
-  FServiceCaller.InicioOperacion;
-  FServiceCaller.setOperacion(FOperName);
-  addAtributosOperacion();
-  Self.setXMLSave(aDataset);
+  try
+    FServiceCaller.InicioOperacion;
+    FServiceCaller.setOperacion(FOperName);
+    addAtributosOperacion();
+    Self.setXMLSave(aDataset);
 
-  FServiceCaller.execute;
-
-  if Assigned(FOnAfterEjecutar) then
-    FOnAfterEjecutar(Self);
+    FServiceCaller.execute;
+  finally
+    // Disparo el evento 'OnAfterEjecutar' independientemente de si hubo
+    // una exception o no (se crea una exception ante cualquier mensaje de error
+    // del Servidor)
+    if Assigned(FOnAfterEjecutar) then
+      FOnAfterEjecutar(Self);
+  end;
 end;
 
 
