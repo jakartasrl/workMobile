@@ -30,7 +30,7 @@ public class HelperCompuesto extends Helper {
 		
 		Filtro filtroActivo = crearFiltro("activo","true","igual","boolean");
 		
-		//El filtro buscado ser√° del tipo impuesto.categoria.id=55;
+		//El filtro buscado ser· del tipo impuesto.categoria.id=55;
 		Filtro filtroMaestro = crearFiltro(entidadMaestra.concat(".id"),oidEntidadMaestra,"igual","integer");
 		
 		return Arrays.asList(filtroActivo,filtroMaestro);
