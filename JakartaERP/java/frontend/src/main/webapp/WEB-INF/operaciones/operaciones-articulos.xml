@@ -241,7 +241,7 @@
 				<campoEntrada name="DescAbrev"	  clase="String" metodo="setDescripcionAbrev" />
 				<campoEntrada name="oid_TipoArt"  clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
 				<campoEntrada name="EsBien"		  clase="Boolean" metodo="setBien" />
-				<campoEntrada name="EsServicio"	  clase="Boolean" metodo="setServicio" /> 
+<!-- 				<campoEntrada name="EsServicio"	  clase="Boolean" metodo="setServicio" />  ver esto bien despues TODO -->
 				<campoEntrada name="EsStockeable" clase="Boolean" metodo="setStockeable" />
 				<campoEntrada name="EsProdPropia" clase="Boolean" metodo="setProdPropia" />
 				<campoEntrada name="EsComprable"  clase="Boolean" metodo="setComprable" />
@@ -474,17 +474,16 @@
 	
 	<!-- RECUPERAR  Tipos de producto para un combo -->
 	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TipoProducto">
-		<output name="resultado" tableName="mtInput">
-			<campoSalida value="oid_tipo_prod" target="id" />
-			<campoSalida value="Codigo"    target="codigo" />
-			<campoSalida value="descr"     target="descripcion" />
-			<campoSalida value="Activo"    target="isActivo" />
+		<output name="resultado" tableName="mtTiposDeProducto">
+			<campoSalida value="oid_TipoArt"	target="id" />
+			<campoSalida value="CodTipoArt"   	target="codigo" />
+			<campoSalida value="DescTipoArt"  	target="descripcion" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="TEmpresa"></form>
+			<form name="FNArt0001"></form>
 		</forms>		
 	</operacion>
 	
