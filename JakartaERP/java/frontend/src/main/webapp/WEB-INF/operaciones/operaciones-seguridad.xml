@@ -1,8 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE entity [
 
-<!--   <!ENTITY operacionesExternas SYSTEM "file:///operaciones-2.xml"> -->
-	
   <!ELEMENT entity        (operacion*)>
   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
   
