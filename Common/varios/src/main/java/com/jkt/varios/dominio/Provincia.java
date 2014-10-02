@@ -1,6 +1,7 @@
 package com.jkt.varios.dominio;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDetalle;
 
 /**
  * Representa a la entidad provincia.
@@ -8,7 +9,7 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Provincia extends Descriptible {
+public class Provincia extends Descriptible implements IDetalle {
 
 	private Pais pais;
 
@@ -18,6 +19,10 @@ public class Provincia extends Descriptible {
 
 	public void setPais(Pais pais) {
 		this.pais = pais;
+	}
+
+	public String getNombreDeMaestro() {
+		return "pais";
 	}
 
 }

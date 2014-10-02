@@ -43,4 +43,6 @@
 	<elemento key="tablaValoresCaract" value="com.jkt.erp.articulos.TablaValoresCaracProd" />
 	<elemento key="valoresDeTabla" value="com.jkt.erp.articulos.ValoresTablas" />
 	
+	<elemento key="articulos" value="com.jkt.erp.articulos.Producto" />
+<!-- 	<elemento key="articulo" value="com.jkt.erp.articulos.Producto" /> -->
 </elementos>

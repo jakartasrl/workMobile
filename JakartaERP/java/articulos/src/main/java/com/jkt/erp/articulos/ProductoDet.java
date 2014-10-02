@@ -5,10 +5,18 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.jkt.constantes.TiposDeDato;
+import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 
-public class ProductoDet extends PersistentEntity {
+/**
+ * Esta clase representa al detalle de un {@link Producto}
+ * 
+ * @see Producto
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
+public class ProductoDet extends PersistentEntity implements IDetalle{
 
 	/*
 	 * Campo casi principal de la clase.
@@ -48,7 +56,7 @@ public class ProductoDet extends PersistentEntity {
 		
 		
 		if (TiposDeDato.TABLA_VALORES_TYPE.equals(tipoDato)) {
-			List<ValoresTablas> valores = getCaracProducto().getTabla().getValores();
+			List<ValoresTablas> valores = getCaracProducto().getTabla().getValoresDeTabla();
 			boolean existeElValor=false;
 			for (ValoresTablas valorTabla : valores) {
 				if (valorTabla.getCodigo().equals(campoTransiente)) {
@@ -111,7 +119,7 @@ public class ProductoDet extends PersistentEntity {
 		}else if(TiposDeDato.STRING_TYPE.equals(tipoDato)){
 			return valorString;
 		}else if(TiposDeDato.TABLA_VALORES_TYPE.equals(tipoDato)){
-			return String.valueOf(valorTabla.getId());
+			return String.valueOf(valorTabla.getCodigo());
 		}else{
 			throw new JakartaException("El tipo de dato configurado en la caracteristica es inconsistente.");
 		}
@@ -182,6 +190,10 @@ public class ProductoDet extends PersistentEntity {
 
 	public void setValorTabla(ValoresTablas valorTabla) {
 		this.valorTabla = valorTabla;
+	}
+
+	public String getNombreDeMaestro() {
+		return "producto";
 	}
 	
 }

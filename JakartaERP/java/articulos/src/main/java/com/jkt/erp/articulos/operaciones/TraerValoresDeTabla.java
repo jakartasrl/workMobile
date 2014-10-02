@@ -9,6 +9,11 @@ import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 
 /**
+ * 
+ * 
+ * TODO Volar esta clase xq se va a usar el helper compuesto.
+ * 
+ * 
  * <p>Operacion que recibe el identificador de una tabla de valores y retorna todos sus valores.</p>
  * 
  * @see ValoresTablas
@@ -29,7 +34,7 @@ public class TraerValoresDeTabla extends Operation {
 		
 		TablaValoresCaracProd tabla = (TablaValoresCaracProd) obtener(TablaValoresCaracProd.class, (String)aParams.get(OID));
 		
-		for (ValoresTablas valoresTablas : tabla.getValores()) {
+		for (ValoresTablas valoresTablas : tabla.getValoresDeTabla()) {
 			notificarObjecto(Notificacion.getNew(WRITER_VALORES, valoresTablas));
 		}
 	}

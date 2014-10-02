@@ -1,6 +1,7 @@
 package com.jkt.erp.articulos;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDetalle;
 
 /**
  * <p>Representa a los valores de una tabla.</p>
@@ -11,7 +12,7 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class ValoresTablas extends Descriptible {
+public class ValoresTablas extends Descriptible implements IDetalle {
 
 	private TablaValoresCaracProd tablaValoresCaract;
 
@@ -21,6 +22,10 @@ public class ValoresTablas extends Descriptible {
 
 	public void setTablaValoresCaract(TablaValoresCaracProd tablaValoresCaract) {
 		this.tablaValoresCaract = tablaValoresCaract;
+	}
+
+	public String getNombreDeMaestro() {
+		return "tablaValoresCaract";
 	}
 
 }

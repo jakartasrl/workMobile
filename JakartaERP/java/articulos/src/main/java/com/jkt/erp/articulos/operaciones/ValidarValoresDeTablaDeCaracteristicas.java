@@ -39,7 +39,7 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 		
 		String tipoDato = caracteristicaProducto.getTipoDato();
 		if (TiposDeDato.TABLA_VALORES_TYPE.equals(tipoDato)) {
-			List<ValoresTablas> valores = caracteristicaProducto.getTabla().getValores();
+			List<ValoresTablas> valores = caracteristicaProducto.getTabla().getValoresDeTabla();
 			boolean existeElValor=false;
 			for (ValoresTablas valorTabla : valores) {
 				if (valorTabla.getCodigo().equals(valor)) {
@@ -51,7 +51,7 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 				}
 			}
 			if (!existeElValor) {
-				throw new JakartaException(String.format("No existe el valor %s en la tabla de valores de la caracteristica %s(%s).", valor, caracteristicaProducto.getCodigo(), caracteristicaProducto.getDescripcion()));
+				throw new JakartaException(String.format("No existe el valor '%s' en la tabla de valores de la caracteristica %s(%s).", valor, caracteristicaProducto.getCodigo(), caracteristicaProducto.getDescripcion()));
 			}
 		}else if (TiposDeDato.STRING_TYPE.equals(tipoDato)) {
 			if (valor.trim().isEmpty()) {

@@ -1,5 +1,6 @@
 package com.jkt.varios.dominio;
 
+import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -7,7 +8,7 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class CondPagoDet extends PersistentEntity {
+public class CondPagoDet extends PersistentEntity implements IDetalle {
 
 	private int dias;
 	private double porcentaje;
@@ -36,24 +37,32 @@ public class CondPagoDet extends PersistentEntity {
 	public void setPorcentaje(double porcentaje) {
 		this.porcentaje = porcentaje;
 	}
-	
-	 public boolean equals(Object other) {
-	        if (this == other) return true;
-	        if ( !(other instanceof CondPagoDet) ) return false;
 
-	        final CondPagoDet condPagoDet = (CondPagoDet) other;
-	        	
-	        if (condPagoDet.getId()==0) return false;
-				
-	        if ( !(condPagoDet.getId()==getId())) return false;
+	public boolean equals(Object other) {
+		if (this == other)
+			return true;
+		if (!(other instanceof CondPagoDet))
+			return false;
 
-	        return true;
-	    }
+		final CondPagoDet condPagoDet = (CondPagoDet) other;
 
-	    public int hashCode() {
-	        int result;
-	        result = (int) (29 * getId());
-	        return result;
-	    }
+		if (condPagoDet.getId() == 0)
+			return false;
+
+		if (!(condPagoDet.getId() == getId()))
+			return false;
+
+		return true;
+	}
+
+	public int hashCode() {
+		int result;
+		result = (int) (29 * getId());
+		return result;
+	}
+
+	public String getNombreDeMaestro() {
+		return "condicionDePago";
+	}
 
 }

@@ -215,21 +215,21 @@
 		</forms>
 	</operacion>
 	
-	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" >
-		<output name="valores" tableName="mtInput">
-			<campoSalida value="oid_valor" target="id" />
-			<campoSalida value="Codigo"    target="codigo" />
-			<campoSalida value="descr"     target="descripcion" />
-			<campoSalida value="Activo"    target="isActivo" />
-		</output>		
+<!-- 	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" > -->
+<!-- 		<output name="valores" tableName="mtInput"> -->
+<!-- 			<campoSalida value="oid_valor" target="id" /> -->
+<!-- 			<campoSalida value="Codigo"    target="codigo" /> -->
+<!-- 			<campoSalida value="descr"     target="descripcion" /> -->
+<!-- 			<campoSalida value="Activo"    target="isActivo" /> -->
+<!-- 		</output>		 -->
 			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+<!-- 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer> -->
 		
-		<forms>
-			<form name="TEmpresa"></form>
-		</forms>
+<!-- 		<forms> -->
+<!-- 			<form name="TEmpresa"></form> -->
+<!-- 		</forms> -->
 		
-	</operacion>
+<!-- 	</operacion> -->
 
 	<!-- GUARDAR UN PRODUCTO -->
 	<operacion name="GuardarArticulo" clase="com.jkt.operaciones.Guardar">
@@ -241,7 +241,7 @@
 				<campoEntrada name="DescAbrev"	  clase="String" metodo="setDescripcionAbrev" />
 				<campoEntrada name="oid_TipoArt"  clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
 				<campoEntrada name="EsBien"		  clase="Boolean" metodo="setBien" />
-<!-- 				<campoEntrada name="EsServicio"	  clase="Boolean" metodo="setServicio" />  ver esto bien despues TODO -->
+				<campoEntrada name="EsServicio"	  clase="Boolean" metodo="setServicio" />  <!-- ver esto bien despues TODO -->
 				<campoEntrada name="EsStockeable" clase="Boolean" metodo="setStockeable" />
 				<campoEntrada name="EsProdPropia" clase="Boolean" metodo="setProdPropia" />
 				<campoEntrada name="EsComprable"  clase="Boolean" metodo="setComprable" />
@@ -250,7 +250,7 @@
 
 				<campoEntrada name="oid_UnidStockPrinc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
 				<campoEntrada name="oid_UnidStockSecun"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
-				<campoEntrada name="oid_UnidStockTerc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" />
+				<campoEntrada name="oid_UnidStockTerc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTerc" />
 
 				<campoEntrada name="oid_UnidVenta"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadVenta" />
 				<campoEntrada name="oid_UnidProd"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadProduccion" />
@@ -288,19 +288,18 @@
 					<!-- <campoEntrada name="oid_Art"            VIENE DE ARRIBA! (EN LA TABLA MAESTRA)  -->      
 					<campoEntrada name="oid_UnidMedOrig" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
 					<campoEntrada name="oid_UnidMedDest" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
-					<campoEntrada name="FactConv" 		 clase="Double"	 metodo="setFactor" />
+					<campoEntrada name="FactConv" 		 clase="String"	 metodo="setFactor" />
 					<campoEntrada name="Activo"			 clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
 
 
-				<campoEntrada name="mtClasifProd" metodo="" clase="" fieldID="oid_ClasifProd"  >
+				<campoEntrada name="mtClasifProd" metodo="addValorClasificador" clase="com.jkt.erp.articulos.ProductoClasificador" fieldID="oid_ClasifProd"  >
 					<!-- <campoEntrada name="oid_Art"            VIENE DE ARRIBA! (EN LA TABLA MAESTRA)  -->      
-					<campoEntrada name="oid_Clasif"		 clase="" metodo="" />
-					<campoEntrada name="oid_ValorClasif" clase="" metodo="" />
+<!-- 					<campoEntrada name="oid_Clasif"		 clase="" metodo="" /> -->
+					<campoEntrada name="oid_ValorClasif" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
 					<campoEntrada name="Activo"			 clase="Boolean" metodo="setActivo" />
 				</campoEntrada>
-
-
+				
 			</campoEntrada>
 		</input>
 		
@@ -360,12 +359,12 @@
 <!--	**************************************************************************	-->
 <!-- 	TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
 
-		<output name="articulosStock" tableName="mtAperturaStock">
-		</output>
+<!-- 		<output name="articulosStock" tableName="mtAperturaStock"> -->
+<!-- 		</output> -->
 
 
-		<output name="detalleArticuloStock" tableName="mtDetalleArticuloStock">
-		</output>
+<!-- 		<output name="detalleArticuloStock" tableName="mtDetalleArticuloStock"> -->
+<!-- 		</output> -->
 
 <!--	**************************************************************************	-->
 
@@ -379,6 +378,8 @@
 			<campoSalida value="TipoDeDato"		target="caracProducto.tipoDato" />
 			<campoSalida value="CodValorCarac"	target="valorDeDato" />
 			<campoSalida value="DescValorCarac"	target="descripcionDeDato" />
+			<campoSalida value="oid_TablaValores"	target="caracProducto.tabla.id" />
+			
 			
 		</output>
 		
@@ -456,12 +457,12 @@
 
 	<operacion name="TraerCaracteristicasDeProducto" clase="com.jkt.erp.articulos.operaciones.TraerTiposDeProducto">
 
-		<output name="caracteristicas" tableName="mtCaracteristicasDeProducto">
+		<output name="caracteristicas" tableName="mtValoresCaracProd">
 		
-			<campoSalida value="oid_caracteristica"	target="id" />
-			<campoSalida value="codCaract"	target="codigo" />
-			<campoSalida value="descCaract"	target="descripcion" />
-			<campoSalida value="tipoDatoCaract"	target="tipoDato" />
+			<campoSalida value="oid_Carac"	target="id" />
+			<campoSalida value="DescCarac"	target="descripcion" />
+			<campoSalida value="TipoDeDato"	target="tipoDato" />
+			<campoSalida value="oid_TablaValores"	target="tabla.id" />
 			
 		</output>
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -486,6 +487,5 @@
 			<form name="FNArt0001"></form>
 		</forms>		
 	</operacion>
-	
 	
 </entity>

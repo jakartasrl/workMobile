@@ -29,7 +29,7 @@ public class TraerProducto extends Operation {
 
 	private static final String WRITER_PRODUCTO = "producto";
 	private static final String WRITER_TIPO_PRODUCTO = "tipoProducto";
-	private static final String WRITER_CARACTERISTICAS_DE_PRODUCTO = "caracteristicasDeProducto";
+	private static final String WRITER_CARACTERISTICAS_DE_PRODUCTO = "detalleTipoProducto";
 	private static final String WRITER_ARTICULO_STOCK = "articulosStock";
 	private static final String WRITER_ARTICULO_STOCK_DET = "detalleArticuloStock";
 	private static final String WRITER_EQUIVALECIAS = "equivalencias";
@@ -42,7 +42,7 @@ public class TraerProducto extends Operation {
 		Producto producto = (Producto) obtener(Producto.class, (String) aParams.get(IDENTIFICADOR));
 		
 		mostrarProducto(producto);
-		mostrarTipoProducto(producto.getTipoProducto());
+//		mostrarTipoProducto(producto.getTipoProducto());
 		
 		mostrarCaracteristicas(producto);
 		
@@ -102,7 +102,7 @@ public class TraerProducto extends Operation {
 		List<String> idsExistentes=new ArrayList<String>();
 		for (ProductoDet productoDet : detalles) {
 			notificarObjecto(Notificacion.getNew(WRITER_CARACTERISTICAS_DE_PRODUCTO, productoDet));
-			idsExistentes.add(String.valueOf(producto.getId()));//Agrego las caracteristicas que posee a un arrayList para posteriormente hacer un disjunction con el resto
+			idsExistentes.add(String.valueOf(productoDet.getCaracProducto().getId()));//Agrego las caracteristicas que posee a un arrayList para posteriormente hacer un disjunction con el resto
 		}
 		
 		List<PersistentEntity> caracteristicas = obtenerTodos(CaracteristicaProducto.class);

@@ -6,6 +6,13 @@ import java.util.Map;
 import com.jkt.dominio.Container;
 import com.jkt.transformers.Notificacion;
 
+/**
+ * <code>Comentario agregado por Leo.</code>
+ * <p>Esta clase sirve para ejecutar en modo de test a las operaciones.</p>
+ * 
+ * 
+ * @author Daniel Jakarta SRL
+ */
 public class OperacionTest extends Operation {
 
 	@Override

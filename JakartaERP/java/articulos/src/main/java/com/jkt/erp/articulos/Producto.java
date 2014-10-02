@@ -101,6 +101,13 @@ public class Producto extends Descriptible {
 		this.comprable = comprable;
 	}
 
+	/*
+	 * TODO ver bien esto!!
+	 */
+	public void setServicio(boolean servicio) {
+		this.bien = !servicio;
+	}
+	
 	public boolean isVendible() {
 		return vendible;
 	}
@@ -211,13 +218,22 @@ public class Producto extends Descriptible {
 	 */
 	private boolean flag=false;
 	public void agregarDetalle(ProductoDet detalle){
-		if (!flag) {
-			detalles.clear();
-			flag=true;
-		}
+//		if (!flag) {
+//			detalles.clear();
+//			flag=true;
+//		}
 		if(!detalles.contains(detalle)){
 			detalles.add(detalle);
 			detalle.setProducto(this);
+		}
+	}
+	
+	public void addValorClasificador(ProductoClasificador pClasificador){
+		if (pClasificador!=null && pClasificador.getComponenteValor()!=null) {
+			if(!clasificadores.contains(pClasificador)){
+				clasificadores.add(pClasificador);
+				pClasificador.setProducto(this);
+			}
 		}
 	}
 	

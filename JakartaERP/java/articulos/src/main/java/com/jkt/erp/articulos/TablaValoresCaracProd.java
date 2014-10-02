@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDetalle;
 
 /**
  * <p>Representa a una tabla que contiene valores</p>
@@ -13,23 +14,27 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TablaValoresCaracProd extends Descriptible {
+public class TablaValoresCaracProd extends Descriptible implements IDetalle {
 
-	private List<ValoresTablas> valores = new ArrayList<ValoresTablas>();
+	private List<ValoresTablas> valoresDeTabla = new ArrayList<ValoresTablas>();
 
-	public List<ValoresTablas> getValores() {
-		return valores;
+	public List<ValoresTablas> getValoresDeTabla() {
+		return valoresDeTabla;
 	}
 
-	public void setValores(List<ValoresTablas> valores) {
-		this.valores = valores;
+	public void setValoresDeTabla(List<ValoresTablas> valoresDeTabla) {
+		this.valoresDeTabla = valoresDeTabla;
 	}
-	
+
 	public void addValor(ValoresTablas valor){
-		if (!valores.contains(valor)) {
-			valores.add(valor);
+		if (!valoresDeTabla.contains(valor)) {
+			valoresDeTabla.add(valor);
 			valor.setTablaValoresCaract(this);
 		}
+	}
+
+	public String getNombreDeMaestro() {
+		return "valoresDeTabla";
 	}
 	
 }

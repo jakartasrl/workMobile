@@ -15,7 +15,7 @@
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		<list name="valores" table="TABLA_VALORES" lazy="true" cascade="all">
+		<list name="valoresDeTabla" table="TABLA_VALORES" lazy="true" cascade="all">
 			<key column="TABLA_ID" />
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.erp.articulos.ValoresTablas" />
