@@ -18,7 +18,15 @@ public class XMLEntity implements IName {
 	private String keyName, clase, fieldID; // para input y campo de entrada
 	private String tableName; // para output
 	private Forms forms;
+	private Listas listas;
 	
+	public Listas getListas() {
+		return listas;
+	}
+
+	public void setListas(Listas listas) {
+		this.listas = listas;
+	}
 
 	public Forms getForms() {
 		return forms;

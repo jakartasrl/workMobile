@@ -24,6 +24,8 @@ import com.jkt.xmlreader.ElementTransformer;
 import com.jkt.xmlreader.Form;
 import com.jkt.xmlreader.Forms;
 import com.jkt.xmlreader.Input;
+import com.jkt.xmlreader.Lista;
+import com.jkt.xmlreader.Listas;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.TableDef;
 import com.jkt.xmlreader.XMLCampo;
@@ -60,8 +62,6 @@ public class Configuration {
 	
 	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
 		
-		
-
 		List<String> rutas = Arrays.asList(new String[]{
 				"/WEB-INF/operaciones/operaciones-common.xml",
 				"/WEB-INF/operaciones/operaciones-seguridad.xml",
@@ -92,7 +92,6 @@ public class Configuration {
 				this.operaciones.addHijo(xml);
 			}
 		}
-		
 		
 		digester = this.generateReaderEventos();
 		inputStream = servletContext.getResourceAsStream("/WEB-INF/eventos.xml");
@@ -174,6 +173,28 @@ public class Configuration {
 		digester.addSetProperties("entity/operacion/forms/form");
 		digester.addSetNext("entity/operacion/forms/form", "addFormulario", Form.class.getName());
 
+		
+		
+		/*
+		 * CAMPOS LISTAS
+		 * CAMPOS LISTAS
+		 * 
+		 */
+		
+		digester.addObjectCreate("entity/operacion/listas", Listas.class.getName());
+		digester.addSetProperties("entity/operacion/listas");
+		digester.addSetNext("entity/operacion/listas", "setListas", Listas.class.getName());
+		
+		digester.addObjectCreate("entity/operacion/listas/lista", Lista.class.getName());
+		digester.addSetProperties("entity/operacion/listas/lista");
+		digester.addSetNext("entity/operacion/listas/lista", "addLista", Lista.class.getName());
+		/*
+		 * CAMPOS LISTAS
+		 * CAMPOS LISTAS
+		 * 
+		 */
+		
+		
 		/*
 		 * Campos INPUT, para recibir la entrada.
 		 */

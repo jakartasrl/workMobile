@@ -2,12 +2,19 @@
 <!DOCTYPE entity [
 
   <!ELEMENT entity        (operacion*)>
-  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
   
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
   <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
   <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
   <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
   <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+
+
+  <!ELEMENT lista  EMPTY>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
+
 
 
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
@@ -146,6 +153,7 @@
 
 	<!-- RECUPERAR  Caracteristicas de Producto -->
 	<operacion name="TraerCaracProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.CaracteristicaProducto">
+		
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_carac" target="id" />
 			<campoSalida value="Codigo"    target="codigo" />
@@ -156,6 +164,11 @@
 			<campoSalida value="cod_tabla"    target="tabla.codigo" />
 			<campoSalida value="des_tabla"    target="tabla.descripcion" />
 		</output>		
+
+		<listas>
+			<lista nombreWriter="mtEmpresa" nombreLista="empresas"/>
+			<lista nombreWriter="mtUsuario" nombreLista="usuarios"/>
+		</listas>
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		

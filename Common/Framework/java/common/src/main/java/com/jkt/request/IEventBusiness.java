@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.framework.writers.IHeaderDataSet;
+import com.jkt.xmlreader.Lista;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.digester.IName;
 
@@ -29,4 +30,12 @@ public interface IEventBusiness extends IName{
 	public boolean getExecuteGarbageCollection();
 	public IHeaderDataSet getHeaderDataSet(String aTabname);
 	public List<Output> getOutputs();    
+	
+	
+	
+	/**
+	 * Obtiene la informacion de las listas descriptas en la metadata
+	 * @return List de Lista
+	 */
+	public List<Lista> obtenerListas();
 }
