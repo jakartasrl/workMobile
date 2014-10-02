@@ -9,9 +9,9 @@
 			<generator class="native"></generator>
 		</id>
 
-		<many-to-one  name="tipoProducto" column="TIPO_PRODUCTO_ID" not-null="true" class="com.jkt.erp.articulos.TipoProducto" cascade="" ></many-to-one>
-	    <many-to-one  name="caracteristica" column="CARAC_ID" class="com.jkt.erp.articulos.CaracteristicaProducto" cascade=""></many-to-one>
-	
+		<many-to-one name="tipoProducto" column="TIPO_PRODUCTO_ID" not-null="true" class="com.jkt.erp.articulos.TipoProducto" cascade="all"></many-to-one>
+		<many-to-one name="caracteristica" column="CARAC_ID" class="com.jkt.erp.articulos.CaracteristicaProducto" cascade="all"></many-to-one>
+
 		<property name="obligatorio" column="OBLIGATORIO" type="boolean" />
 		<property name="armaCodigo" column="ARMA_CODIGO" type="boolean" />
 		<property name="armaDescripcion" column="ARMA_DESCR" type="boolean" />

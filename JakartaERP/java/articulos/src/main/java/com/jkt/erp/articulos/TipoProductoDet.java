@@ -2,10 +2,18 @@ package com.jkt.erp.articulos;
 
 import com.jkt.dominio.PersistentEntity;
 
+/**
+ * El detalle de un tipo de producto.
+ * El detalle del tipo de producto
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class TipoProductoDet extends PersistentEntity {
 
 	private TipoProducto tipoProducto;
+	
 	private CaracteristicaProducto caracteristica;
+	
 	private boolean obligatorio;
 	private boolean armaCodigo;
 	private boolean armaDescripcion;

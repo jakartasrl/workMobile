@@ -178,7 +178,6 @@ public abstract class Operation extends Observable {
 			Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 			constraintViolations.size();
 			StringBuffer buffer=new StringBuffer();
-			String message = null;
 			
 			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
 				buffer.append(constraintViolation.getMessage());

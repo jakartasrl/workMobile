@@ -14,7 +14,7 @@ public class ProductoClasificador extends PersistentEntity {
 	@NotNull(message="Es primordial que exista un valor en la relacion entre el producto y un clasificador.")
 	private ComponenteValor componenteValor;
 	
-	@NotNull(message="Es primordial que exista una relacion con el clasificador dueño del valor.")
+//	@NotNull(message="Es primordial que exista una relacion con el clasificador dueño del valor.")
 	private Clasificador clasificador;
 
 	public Producto getProducto() {
@@ -30,8 +30,14 @@ public class ProductoClasificador extends PersistentEntity {
 	}
 
 	public void setComponenteValor(ComponenteValor componenteValor) {
-		this.componenteValor = componenteValor;
+//		this.componenteValor = componenteValor;
+		if (componenteValor!=null) {
+			this.componenteValor = componenteValor;
+			this.clasificador=componenteValor.getComponente().getClasificador();
+		}
 	}
+	
+	
 
 	public Clasificador getClasificador() {
 		return clasificador;

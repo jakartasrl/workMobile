@@ -9,7 +9,7 @@ import com.jkt.dominio.Descriptible;
 
 /**
  * <p>Representa a un componente de un {@link Clasificador}</p>
- * <p>Se utilizarï¿½ para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
+ * <p>Se utilizará para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
  * <p>Un mismo componente puede estar en 2 clasificadores distintos</p>
  * 
  * @see ComponenteValor
