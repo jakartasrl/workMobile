@@ -188,6 +188,9 @@ begin
   else if Sender.Tag = 20 then
     // Maestro de Valores de Clasificador
     NombrePrograma := 'TFNCla0002'
+  else if Sender.Tag = 21 then
+    // Maestro de Artículos
+    NombrePrograma := 'TFNArt0001'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin

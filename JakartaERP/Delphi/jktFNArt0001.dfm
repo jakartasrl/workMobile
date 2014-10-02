@@ -1,16 +1,16 @@
 inherited FNArt0001: TFNArt0001
   Caption = 'ABM de Art'#237'culos'
-  ClientHeight = 500
-  ClientWidth = 752
-  ExplicitWidth = 768
-  ExplicitHeight = 538
+  ClientHeight = 522
+  ClientWidth = 799
+  ExplicitWidth = 815
+  ExplicitHeight = 560
   PixelsPerInch = 96
   TextHeight = 13
   object lcMain: TdxLayoutControl [0]
     Left = 0
     Top = 0
-    Width = 752
-    Height = 500
+    Width = 799
+    Height = 522
     Align = alClient
     TabOrder = 4
     ExplicitLeft = 80
@@ -19,7 +19,7 @@ inherited FNArt0001: TFNArt0001
     ExplicitHeight = 250
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 70
-      Top = -863
+      Top = -70
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -30,7 +30,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 281
-      Top = -812
+      Top = -19
       DataBinding.DataField = 'DescAbrev'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -41,9 +41,10 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 64
-      Top = -836
+      Top = -43
       DataBinding.DataField = 'EsBien'
       DataBinding.DataSource = dsArticulo
+      Properties.OnChange = cxDBCheckBox1PropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -51,10 +52,12 @@ inherited FNArt0001: TFNArt0001
       Width = 40
     end
     object cxDBCheckBox2: TcxDBCheckBox
+      Tag = 1
       Left = 64
-      Top = -809
+      Top = -16
       DataBinding.DataField = 'EsServicio'
       DataBinding.DataSource = dsArticulo
+      Properties.OnChange = cxDBCheckBox1PropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -63,7 +66,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox3: TcxDBCheckBox
       Left = 112
-      Top = -770
+      Top = 23
       DataBinding.DataField = 'EsStockeable'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -74,7 +77,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox4: TcxDBCheckBox
       Left = 112
-      Top = -743
+      Top = 50
       DataBinding.DataField = 'EsProdPropia'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -85,7 +88,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox5: TcxDBCheckBox
       Left = 226
-      Top = -770
+      Top = 23
       DataBinding.DataField = 'EsComprable'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -96,7 +99,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBCheckBox6: TcxDBCheckBox
       Left = 226
-      Top = -743
+      Top = 50
       DataBinding.DataField = 'EsVendible'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -107,7 +110,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBMemo1: TcxDBMemo
       Left = 281
-      Top = -863
+      Top = -70
       DataBinding.DataField = 'Descripcion'
       DataBinding.DataSource = dsArticulo
       Style.BorderColor = clWindowFrame
@@ -119,7 +122,7 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 22
-      Top = -659
+      Top = 134
       Width = 250
       Height = 200
       TabOrder = 10
@@ -130,6 +133,9 @@ inherited FNArt0001: TFNArt0001
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsData.Deleting = False
+        OptionsData.Inserting = False
         OptionsView.GroupByBox = False
         object jktExpDBGrid1DBTableView1oid_ValorCarac: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ValorCarac'
@@ -142,15 +148,28 @@ inherited FNArt0001: TFNArt0001
         end
         object jktExpDBGrid1DBTableView1DescCarac: TcxGridDBColumn
           DataBinding.FieldName = 'DescCarac'
+          Options.Editing = False
         end
         object jktExpDBGrid1DBTableView1TipoDeDato: TcxGridDBColumn
           DataBinding.FieldName = 'TipoDeDato'
         end
+        object jktExpDBGrid1DBTableView1oid_TablaValores: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_TablaValores'
+          Width = 98
+        end
         object jktExpDBGrid1DBTableView1CodValorCarac: TcxGridDBColumn
           DataBinding.FieldName = 'CodValorCarac'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick
         end
         object jktExpDBGrid1DBTableView1DescValorCarac: TcxGridDBColumn
           DataBinding.FieldName = 'DescValorCarac'
+          Options.Editing = False
         end
       end
       object jktExpDBGrid1Level1: TcxGridLevel
@@ -159,7 +178,7 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = -423
+      Top = 370
       Width = 250
       Height = 200
       TabOrder = 11
@@ -178,7 +197,7 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 25
+      Top = 818
       Width = 250
       Height = 200
       TabOrder = 24
@@ -189,6 +208,8 @@ inherited FNArt0001: TFNArt0001
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusFirstCellOnNewRecord = True
         OptionsView.GroupByBox = False
         object jktExpDBGrid3DBTableView1oid_EquivArt: TcxGridDBColumn
           DataBinding.FieldName = 'oid_EquivArt'
@@ -204,6 +225,7 @@ inherited FNArt0001: TFNArt0001
         end
         object jktExpDBGrid3DBTableView1DescUnidMedOrig: TcxGridDBColumn
           DataBinding.FieldName = 'DescUnidMedOrig'
+          Options.Editing = False
         end
         object jktExpDBGrid3DBTableView1oid_UnidMedDest: TcxGridDBColumn
           DataBinding.FieldName = 'oid_UnidMedDest'
@@ -213,6 +235,7 @@ inherited FNArt0001: TFNArt0001
         end
         object jktExpDBGrid3DBTableView1DescUnidMedDest: TcxGridDBColumn
           DataBinding.FieldName = 'DescUnidMedDest'
+          Options.Editing = False
         end
         object jktExpDBGrid3DBTableView1FactConv: TcxGridDBColumn
           DataBinding.FieldName = 'FactConv'
@@ -227,7 +250,7 @@ inherited FNArt0001: TFNArt0001
     end
     object jktExpDBGrid4: TjktExpDBGrid
       Left = 22
-      Top = 261
+      Top = 1054
       Width = 250
       Height = 200
       TabOrder = 25
@@ -238,6 +261,10 @@ inherited FNArt0001: TFNArt0001
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusFirstCellOnNewRecord = True
+        OptionsData.Deleting = False
+        OptionsData.Inserting = False
         OptionsView.GroupByBox = False
         object jktExpDBGrid4DBTableView1oid_ClasifProd: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ClasifProd'
@@ -250,15 +277,24 @@ inherited FNArt0001: TFNArt0001
         end
         object jktExpDBGrid4DBTableView1DescClasif: TcxGridDBColumn
           DataBinding.FieldName = 'DescClasif'
+          Options.Editing = False
         end
         object jktExpDBGrid4DBTableView1oid_ValorClasif: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ValorClasif'
         end
         object jktExpDBGrid4DBTableView1CodValorClasif: TcxGridDBColumn
           DataBinding.FieldName = 'CodValorClasif'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.OnButtonClick = jktExpDBGrid4DBTableView1CodValorClasifPropertiesButtonClick
         end
         object jktExpDBGrid4DBTableView1DescValorClasif: TcxGridDBColumn
           DataBinding.FieldName = 'DescValorClasif'
+          Options.Editing = False
         end
         object jktExpDBGrid4DBTableView1Activo: TcxGridDBColumn
           DataBinding.FieldName = 'Activo'
@@ -270,18 +306,19 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBLookupComboBox1: TcxDBLookupComboBox
       Left = 108
-      Top = -686
+      Top = 107
       DataBinding.DataField = 'oid_TipoArt'
       DataBinding.DataSource = dsArticulo
-      Properties.DropDownAutoSize = True
       Properties.KeyFieldNames = 'oid_TipoArt'
       Properties.ListColumns = <
         item
           Caption = 'C'#243'digo'
+          Width = 60
           FieldName = 'CodTipoArt'
         end
         item
           Caption = 'Descripci'#243'n'
+          Width = 220
           FieldName = 'DescTipoArt'
         end>
       Properties.ListFieldIndex = 1
@@ -292,11 +329,11 @@ inherited FNArt0001: TFNArt0001
       Style.ButtonStyle = bts3D
       Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 9
-      Width = 145
+      Width = 280
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 160
-      Top = -187
+      Top = 606
       DataBinding.DataField = 'CodUnidStockPrinc'
       DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
@@ -304,6 +341,7 @@ inherited FNArt0001: TFNArt0001
           Default = True
           Kind = bkEllipsis
         end>
+      Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -313,7 +351,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 160
-      Top = -160
+      Top = 633
       DataBinding.DataField = 'CodUnidStockSecun'
       DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
@@ -321,6 +359,7 @@ inherited FNArt0001: TFNArt0001
           Default = True
           Kind = bkEllipsis
         end>
+      Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -330,7 +369,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit3: TcxDBButtonEdit
       Left = 160
-      Top = -133
+      Top = 660
       DataBinding.DataField = 'CodUnidStockTerc'
       DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
@@ -338,6 +377,7 @@ inherited FNArt0001: TFNArt0001
           Default = True
           Kind = bkEllipsis
         end>
+      Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -347,7 +387,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit4: TcxDBButtonEdit
       Left = 160
-      Top = -90
+      Top = 703
       DataBinding.DataField = 'CodUnidVenta'
       DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
@@ -364,7 +404,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit5: TcxDBButtonEdit
       Left = 160
-      Top = -63
+      Top = 730
       DataBinding.DataField = 'CodUnidProd'
       DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
@@ -381,7 +421,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBButtonEdit6: TcxDBButtonEdit
       Left = 160
-      Top = -36
+      Top = 757
       DataBinding.DataField = 'CodUnidCompra'
       DataBinding.DataSource = dsArticulo
       Properties.Buttons = <
@@ -398,7 +438,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 236
-      Top = -187
+      Top = 606
       DataBinding.DataField = 'DescUnidStockPrinc'
       DataBinding.DataSource = dsArticulo
       Enabled = False
@@ -410,7 +450,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 236
-      Top = -160
+      Top = 633
       DataBinding.DataField = 'DescUnidStockSecun'
       DataBinding.DataSource = dsArticulo
       Enabled = False
@@ -422,7 +462,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 236
-      Top = -133
+      Top = 660
       DataBinding.DataField = 'DescUnidStockTerc'
       DataBinding.DataSource = dsArticulo
       Enabled = False
@@ -434,7 +474,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 236
-      Top = -90
+      Top = 703
       DataBinding.DataField = 'DescUnidVenta'
       DataBinding.DataSource = dsArticulo
       Enabled = False
@@ -446,7 +486,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 236
-      Top = -63
+      Top = 730
       DataBinding.DataField = 'DescUnidProd'
       DataBinding.DataSource = dsArticulo
       Enabled = False
@@ -458,7 +498,7 @@ inherited FNArt0001: TFNArt0001
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 236
-      Top = -36
+      Top = 757
       DataBinding.DataField = 'DescUnidCompra'
       DataBinding.DataSource = dsArticulo
       Enabled = False
@@ -904,7 +944,8 @@ inherited FNArt0001: TFNArt0001
         Dataset = mtClasifProd
         Tag = 0
       end>
-    Left = 552
+    OnBeforeEjecutar = OperacionSaveBeforeEjecutar
+    Left = 536
     Top = 24
   end
   inherited mtParametroInicial: TjktMemTable
@@ -919,11 +960,30 @@ inherited FNArt0001: TFNArt0001
         Field = mtArticulooid_Art
         Tag = 0
       end>
-    Left = 552
+    Left = 536
     Top = 80
   end
   inherited ValidadorForm: TjktValidadorForm
-    Left = 184
+    ListaValidaciones = <
+      item
+        Field = mtArticuloCodUnidStockPrinc
+        ValidadorGral = ValUnidStockPrinc
+      end
+      item
+        Field = mtArticuloCodUnidStockSecun
+        ValidadorGral = ValUnidStockSecun
+      end
+      item
+        Field = mtArticuloCodUnidStockTerc
+        ValidadorGral = ValUnidStockTerc
+      end
+      item
+      end
+      item
+      end
+      item
+      end>
+    Left = 208
     Top = 24
   end
   object mtArticulo: TjktMemTable
@@ -1103,6 +1163,7 @@ inherited FNArt0001: TFNArt0001
     object mtArticulooid_TipoArt: TIntegerField
       Tag = 1
       FieldName = 'oid_TipoArt'
+      OnValidate = mtArticulooid_TipoArtValidate
     end
     object mtArticuloEsBien: TBooleanField
       Tag = 1
@@ -1283,6 +1344,9 @@ inherited FNArt0001: TFNArt0001
     object mtValoresCaracProdTipoDeDato: TStringField
       FieldName = 'TipoDeDato'
       Size = 15
+    end
+    object mtValoresCaracProdoid_TablaValores: TIntegerField
+      FieldName = 'oid_TablaValores'
     end
     object mtValoresCaracProdCodValorCarac: TStringField
       Tag = 1
@@ -1599,7 +1663,7 @@ inherited FNArt0001: TFNArt0001
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 608
+    Left = 576
     Top = 24
   end
   object opTraerTiposDeProducto: TjktOperacion
@@ -1609,5 +1673,106 @@ inherited FNArt0001: TFNArt0001
     ServiceCaller = Service
     Left = 192
     Top = 224
+  end
+  object HelpValorCarac: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'valoresDeTabla'
+    EntidadMaestra = 'tablaValoresCaract'
+    OidEntidadMaestra = mtValoresCaracProdoid_TablaValores
+    CodigoRespuesta = mtValoresCaracProdCodValorCarac
+    Left = 656
+    Top = 160
+  end
+  object HelpValorClasifProd: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'valoresClasificador'
+    OidEntidadMaestra = mtClasifProdoid_Clasif
+    TipoFiltro = fi_ValoresClasificador
+    OidRespuesta = mtClasifProdoid_ValorClasif
+    CodigoRespuesta = mtClasifProdCodValorClasif
+    Left = 696
+    Top = 160
+  end
+  object opTraerCaractProducto: TjktOperacion
+    OperName = 'TraerCaracteristicasDeProducto'
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = mtArticulooid_TipoArt
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    Left = 232
+    Top = 224
+  end
+  object ValUnidStockPrinc: TjktValidador
+    Entidad = 'unidadMedida'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtArticulooid_UnidStockPrinc
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtArticuloDescUnidStockPrinc
+      end>
+    Left = 496
+    Top = 272
+  end
+  object ValUnidStockSecun: TjktValidador
+    Entidad = 'unidadMedida'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtArticulooid_UnidStockSecun
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtArticuloDescUnidStockSecun
+      end>
+    Left = 536
+    Top = 272
+  end
+  object HelpUnidStockPrinc: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'unidadMedida'
+    OidRespuesta = mtArticulooid_UnidStockPrinc
+    CodigoRespuesta = mtArticuloCodUnidStockPrinc
+    Left = 496
+    Top = 216
+  end
+  object HelpUnidStockSecun: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'unidadMedida'
+    OidRespuesta = mtArticulooid_UnidStockSecun
+    CodigoRespuesta = mtArticuloCodUnidStockSecun
+    Left = 536
+    Top = 216
+  end
+  object HelpUnidStockTerc: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'unidadMedida'
+    OidRespuesta = mtArticulooid_UnidStockTerc
+    CodigoRespuesta = mtArticuloCodUnidStockTerc
+    Left = 576
+    Top = 216
+  end
+  object ValUnidStockTerc: TjktValidador
+    Entidad = 'unidadMedida'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtArticulooid_UnidStockTerc
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtArticuloDescUnidStockTerc
+      end>
+    Left = 576
+    Top = 272
   end
 end

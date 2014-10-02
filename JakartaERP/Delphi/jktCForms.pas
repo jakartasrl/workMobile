@@ -11,7 +11,8 @@ uses
   jktFNCla0002,
   jktFNUti0001,
   jktFNCli0001,
-  jktFNArt0001;
+  jktFNArt0001,
+  jktFNArt0002;
 
 implementation
 
