@@ -49,8 +49,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Style.BorderStyle = ebsNone
       Style.Edges = [bLeft, bTop, bRight, bBottom]
       TabOrder = 1
-      ExplicitLeft = -200
-      ExplicitTop = 54
       DesignSize = (
         594
         50)
@@ -330,10 +328,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 771
-      ExplicitHeight = 423
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318
@@ -347,8 +341,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 1
-        ExplicitTop = 316
-        ExplicitWidth = 767
         Height = 103
         Width = 769
         object tc_Novedades: TdxTileControl
@@ -402,10 +394,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet3: TcxTabSheet
       Caption = 'cxTabSheet3'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 771
-      ExplicitHeight = 423
       object cxGroupBox3: TcxGroupBox
         Left = 101
         Top = 36

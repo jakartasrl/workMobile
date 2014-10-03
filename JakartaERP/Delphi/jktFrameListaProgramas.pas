@@ -36,6 +36,7 @@ type
 
     procedure OnButtonClick(Sender: TdxTileControlItem);
     procedure LimpiarVentana;
+    function GetRandomColor: TColor;
 
   public
     constructor Create(AOwner: TComponent); override;
@@ -118,15 +119,17 @@ begin
 }
     AItem.GroupIndex := 0; // Ponemos los items todos en un grupo!
     AItem.Tag := cds_Programas.FieldByName('codItemMenu').AsInteger;
-    AItem.IsLarge := True;
+    AItem.IsLarge := false;
     AItem.OptionsAnimate.AnimateText := True;
     AItem.RowCount := 1;
     AItem.Style.Gradient := gmVertical;
     AItem.Style.BorderColor := clBlack;
-    AItem.Style.GradientBeginColor := $008B8B8B;
-    AItem.Style.GradientEndColor := $00D4D4D4;
+    //AItem.Style.GradientBeginColor := $008B8B8B;
+    AItem.Style.GradientBeginColor := GetRandomColor;
+    //AItem.Style.GradientEndColor := $00D4D4D4;
+    AItem.Style.GradientEndColor   := GetRandomColor;
     AItem.Text1.Align := oaTopLeft;
-    AItem.Text1.Font.Size := 13;
+    AItem.Text1.Font.Size := 12;
     AItem.Text1.IndentHorz := 10;
     AItem.Text1.IndentVert := 10;
     AItem.Text1.TextColor := clDefault;
@@ -138,6 +141,11 @@ begin
     cds_Programas.Next;
   end;
   cds_Programas.Close;
+end;
+
+function TframeListaProgramas.GetRandomColor: TColor;
+begin
+  Result := RGB(Random(255), Random(255), Random(255));
 end;
 
 procedure TframeListaProgramas.LimpiarVentana;

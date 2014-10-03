@@ -9,7 +9,7 @@
 		</id>
 		
 		<property name="codigo" type="string">
-            <column name="CODIGO" length="15" />
+            <column name="CODIGO" length="15" unique="true"/>
         </property>
 		
 		<property name="descripcion" column="DESCRIPCION"/>
