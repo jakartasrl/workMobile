@@ -41,18 +41,20 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Transparent = True
     end
     object gbx_Login: TcxGroupBox
-      Left = 175
-      Top = 5
+      Left = 176
+      Top = 20
       Align = alRight
       Ctl3D = True
       ParentCtl3D = False
       Style.BorderStyle = ebsNone
       Style.Edges = [bLeft, bTop, bRight, bBottom]
       TabOrder = 1
+      ExplicitLeft = -200
+      ExplicitTop = 54
       DesignSize = (
         594
-        66)
-      Height = 66
+        50)
+      Height = 50
       Width = 594
       object cxLabel2: TcxLabel
         Left = 256
@@ -149,14 +151,13 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     Properties.CustomButtons.Buttons = <>
     Properties.HideTabs = True
     Properties.Style = 11
-    ClientRectBottom = 423
-    ClientRectRight = 771
-    ClientRectTop = 0
+    ClientRectBottom = 422
+    ClientRectLeft = 1
+    ClientRectRight = 770
+    ClientRectTop = 1
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -329,8 +330,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 771
+      ExplicitHeight = 423
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318
@@ -344,60 +347,52 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 1
+        ExplicitTop = 316
+        ExplicitWidth = 767
         Height = 103
-        Width = 771
+        Width = 769
         object tc_Novedades: TdxTileControl
-          Left = 2
-          Top = 33
-          Width = 767
-          Height = 68
+          Left = 3
+          Top = 30
+          Width = 763
+          Height = 63
           TabOrder = 0
-          ExplicitLeft = 3
-          ExplicitTop = 30
-          ExplicitWidth = 763
-          ExplicitHeight = 63
         end
       end
       object tc_MenuUsuario: TdxTileControl
         Left = 305
         Top = 0
-        Width = 466
-        Height = 315
+        Width = 464
+        Height = 313
         OptionsBehavior.GroupMoving = True
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
         TabOrder = 0
-        ExplicitWidth = 464
-        ExplicitHeight = 313
       end
       object cxSplitter1: TcxSplitter
         Left = 300
         Top = 0
         Width = 5
-        Height = 315
+        Height = 313
         AllowHotZoneDrag = False
         Control = tc_Favoritos
-        ExplicitHeight = 313
       end
       object cxSplitter2: TcxSplitter
         Left = 0
-        Top = 315
-        Width = 771
+        Top = 313
+        Width = 769
         Height = 5
         AlignSplitter = salBottom
         Control = cxGroupBox2
-        ExplicitTop = 313
-        ExplicitWidth = 769
       end
       object tc_Favoritos: TdxTileControl
         Left = 0
         Top = 0
         Width = 300
-        Height = 315
+        Height = 313
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
-        ExplicitHeight = 313
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0
@@ -407,10 +402,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet3: TcxTabSheet
       Caption = 'cxTabSheet3'
       ImageIndex = 2
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 769
-      ExplicitHeight = 421
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 771
+      ExplicitHeight = 423
       object cxGroupBox3: TcxGroupBox
         Left = 101
         Top = 36
