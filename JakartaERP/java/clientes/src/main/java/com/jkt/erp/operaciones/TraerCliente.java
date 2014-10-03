@@ -1,8 +1,10 @@
 package com.jkt.erp.operaciones;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.varios.Cliente;
 import com.jkt.erp.varios.ClienteClasificador;
 import com.jkt.erp.varios.ClienteSucursal;
@@ -13,6 +15,7 @@ import com.jkt.erp.varios.InscripcionImpositiva;
 import com.jkt.erp.varios.SujetoImpositivo;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
+import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Direccion;
 
 /**
@@ -84,10 +87,49 @@ public class TraerCliente extends Operation {
 	 * Muestra los clasificadores que tiene un {@link ClienteSucursal} en la salida de la operacion.
 	 */
 	private void mostrarClasificadoresSucursal(ClienteSucursal clienteSucursal) {
-		List<ClienteSucursalClasificador> clasificadoresSucursal=clienteSucursal.getClasificadores();
-		for (ClienteSucursalClasificador clasificador : clasificadoresSucursal) {
+
+		Map<String, Clasificador> clasificadoresSeteados=new HashMap<String, Clasificador>();
+		
+		List<ClienteSucursalClasificador> clasificadoresCliente=clienteSucursal.getClasificadores();
+		
+		String identificador;
+		Clasificador clasificadorDelComponente;
+		
+		for (ClienteSucursalClasificador clasificador : clasificadoresCliente) {
+
+			identificador=String.valueOf(clasificador.getClasificador().getId());
+			clasificadorDelComponente=clasificador.getClasificador();
+			//Guardo en un mapa al clasificador que ya ha sido seleccionado
+			if (!clasificadoresSeteados.containsKey(identificador)) {
+				clasificadoresSeteados.put(identificador,clasificadorDelComponente);
+			}
+			
 			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_SUCURSAL, clasificador));
 		}
+		
+		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, "entidad", "4");
+		Clasificador c;
+		ClienteSucursalClasificador clienteClasificador;
+		for (PersistentEntity persistentEntity : clasificadores) {
+			c=(Clasificador) persistentEntity;
+			if (!clasificadoresSeteados.containsKey(String.valueOf(c.getId()))) {
+				clienteClasificador = new ClienteSucursalClasificador();
+				clienteClasificador.setId(0L);
+				clienteClasificador.setClasificador(c);
+				clienteClasificador.setClienteSucursal(clienteSucursal);
+				notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_SUCURSAL, clienteClasificador));
+			}
+		}
+		
+		
+	}
+	
+	private String obtenerIdDelClasificador(ClienteClasificador clasificador){
+		return String.valueOf(clasificador.getClasificador().getId());
+	}
+
+	private Clasificador obtenerClasificador(ClienteClasificador clasificador){
+		return clasificador.getClasificador();
 	}
 
 	/**
@@ -127,8 +169,39 @@ public class TraerCliente extends Operation {
 	 * Muestra los clasificadores que posee un cliente.
 	 */
 	private void mostrarClasificadores(Cliente cliente) {
-		for (ClienteClasificador clienteClasificador : cliente.getListaClasificadores()) {
-			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_CLIENTES, clienteClasificador));
+		
+		Map<String, Clasificador> clasificadoresSeteados=new HashMap<String, Clasificador>();
+		
+		List<ClienteClasificador> clasificadoresCliente=cliente.getListaClasificadores();
+		
+		String identificador;
+		Clasificador clasificadorDelComponente;
+		
+		for (ClienteClasificador clasificador : clasificadoresCliente) {
+
+			identificador=obtenerIdDelClasificador(clasificador);
+			clasificadorDelComponente=obtenerClasificador(clasificador);
+			//Guardo en un mapa al clasificador que ya ha sido seleccionado
+			if (!clasificadoresSeteados.containsKey(identificador)) {
+				clasificadoresSeteados.put(identificador,clasificadorDelComponente);
+			}
+			
+			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_CLIENTES, clasificador));
+		}
+		
+		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, "entidad", "3");
+		Clasificador c;
+		ClienteClasificador clienteClasificador;
+		for (PersistentEntity persistentEntity : clasificadores) {
+			c=(Clasificador) persistentEntity;
+			if (!clasificadoresSeteados.containsKey(String.valueOf(c.getId()))) {
+				clienteClasificador = new ClienteClasificador();
+				clienteClasificador.setId(0L);
+				clienteClasificador.setClasificador(c);
+				clienteClasificador.setCliente(cliente);
+				notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_CLIENTES, clienteClasificador));
+				
+			}
 		}
 	}
 

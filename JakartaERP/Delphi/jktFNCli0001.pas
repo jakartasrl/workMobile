@@ -55,7 +55,6 @@ type
     lcMainGroup7: TdxLayoutGroup;
     cxDBButtonEdit1: TcxDBButtonEdit;
     cxDBButtonEdit2: TcxDBButtonEdit;
-    lcMainGroup10: TdxLayoutGroup;
     cxDBTextEdit5: TcxDBTextEdit;
     lcMainItem10: TdxLayoutItem;
     cxDBTextEdit6: TcxDBTextEdit;
@@ -245,6 +244,60 @@ type
     mtSujImpPersonaJuridica: TBooleanField;
     mtSujImpCuit: TStringField;
     mtSujImpoid_Cliente: TIntegerField;
+    mtInscripImpositCodImpuesto: TStringField;
+    jktExpDBGrid1DBTableView1CodImpuesto: TcxGridDBColumn;
+    cxDBCheckBox2: TcxDBCheckBox;
+    lcMainItem18: TdxLayoutItem;
+    HelpProvincia: TjktHelpGenerico;
+    lcMainGroup11: TdxLayoutGroup;
+    lcMainGroup10: TdxLayoutGroup;
+    lcMainGroup12: TdxLayoutGroup;
+    HelpPais: TjktHelpGenerico;
+    HelpCondPago: TjktHelpGenerico;
+    HelpVendedor: TjktHelpGenerico;
+    HelpImpuesto: TjktHelpGenerico;
+    mtSujImpoid_SujImp: TIntegerField;
+    ValProvincia: TjktValidador;
+    ValPais: TjktValidador;
+    ValCondPago: TjktValidador;
+    ValVendedor: TjktValidador;
+    ValImpuesto: TjktValidador;
+    mtSucursalesClienteoid_Pais: TIntegerField;
+    mtDomiciliosEntregaoid_Pais: TIntegerField;
+    ValCategoriaImp: TjktValidador;
+    HelpValorClasifCliente: TjktHelpGenerico;
+    HelpCategoriaImp: TjktHelpGenerico;
+    ValProvinciaSucursal: TjktValidador;
+    HelpProvinciaSucursal: TjktHelpGenerico;
+    HelpProvinciaDomEnt: TjktHelpGenerico;
+    ValProvinciaDomEnt: TjktValidador;
+    mtClasificadoresClienteoid_Clasif: TIntegerField;
+    mtClasificadoresSucursaloid_Clasif: TIntegerField;
+    tvClasificadoresoid_Clasif: TcxGridDBColumn;
+    cxGridDBTableView1oid_Clasif: TcxGridDBColumn;
+    HelpValorClasifSucursal: TjktHelpGenerico;
+    procedure jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxButtonEdit1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure tvSucursalesCodVendedorPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure mtSucursalesClienteNewRecord(DataSet: TDataSet);
+    procedure jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure OperacionSaveBeforeEjecutar(Sender: TObject);
+    procedure cxGridDBTableView1CodValorClasifPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure tvSucursalesCodProvinciaPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure tvDomiciliosEntregaCodProvinciaPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure tvClasificadoresCodValorClasifPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
   private
     { Private declarations }
   public
@@ -256,6 +309,165 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TFNCli0001.cxButtonEdit1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  // Muestro el Help (o Filtro)
+  if HelpCondPago.Ejecutar then
+    // Seleccionó un registro
+    mtCliente.FieldByName('DescCondPago').AsString := HelpCondPago.GetDescripcion
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  // Muestro el Help (o Filtro)
+  if HelpProvincia.Ejecutar then
+    // Seleccionó un registro
+    mtSujImp.FieldByName('DescProvincia').AsString := HelpProvincia.GetDescripcion
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  // Muestro el Help (o Filtro)
+  if HelpPais.Ejecutar then
+    // Seleccionó un registro
+    mtSujImp.FieldByName('DescPais').AsString := HelpPais.GetDescripcion
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.cxGridDBTableView1CodValorClasifPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpValorClasifCliente.Ejecutar then
+    mtClasificadoresCliente.FieldByName('DescValorClasif').AsString :=
+      HelpValorClasifCliente.GetDescripcion
+  else
+end;
+
+procedure TFNCli0001.jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpCategoriaImp.Ejecutar then
+    // Seleccionó un registro. No asigno por código la 'Descripcion' ya que
+    // se obtiene con el Validador!
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpImpuesto.Ejecutar then
+    // Seleccionó un registro
+    mtInscripImposit.FieldByName('DescImpuesto').AsString := HelpImpuesto.GetDescripcion
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.mtSucursalesClienteNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtSucursalesCliente.FieldByName('oid_SucClie').AsInteger := GetNewOid;
+end;
+
+procedure TFNCli0001.OperacionSaveBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Agrego el 'oid_Pais' a los Domicilios de Entrega y Sucursales del Cliente
+  mtSucursalesCliente.First;
+  while not mtSucursalesCliente.Eof do
+    begin
+      mtSucursalesCliente.Edit;
+
+      mtSucursalesCliente.FieldByName('oid_Pais').AsInteger :=
+        mtSujImp.FieldByName('oid_Pais').AsInteger;
+
+      {******************************}
+      // Modifico todos los Domicilios de Entrega de la Sucursal 'actual'
+      mtDomiciliosEntrega.First;
+      while not mtDomiciliosEntrega.Eof do
+        begin
+          mtDomiciliosEntrega.Edit;
+
+          mtDomiciliosEntrega.FieldByName('oid_Pais').AsInteger :=
+            mtSujImp.FieldByName('oid_Pais').AsInteger;
+
+          mtDomiciliosEntrega.Next;
+        end;
+      {******************************}
+
+      mtSucursalesCliente.Next;
+    end;
+end;
+
+procedure TFNCli0001.tvClasificadoresCodValorClasifPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpValorClasifSucursal.Ejecutar then
+    mtClasificadoresSucursal.FieldByName('DescValorClasif').AsString :=
+      HelpValorClasifSucursal.GetDescripcion
+  else ;
+end;
+
+procedure TFNCli0001.tvDomiciliosEntregaCodProvinciaPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpProvinciaDomEnt.Ejecutar then
+    // Seleccionó un registro. No asigno por código la 'Descripcion' ya que
+    // se obtiene con el Validador!
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.tvSucursalesCodProvinciaPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpProvinciaSucursal.Ejecutar then
+    // Seleccionó un registro. No asigno por código la 'Descripcion' ya que
+    // se obtiene con el Validador!
+  else ;
+    // No seleccionó nada!
+end;
+
+procedure TFNCli0001.tvSucursalesCodVendedorPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpVendedor.Ejecutar then
+    mtSucursalesCliente.FieldByName('DescVendedor').AsString :=
+      HelpVendedor.GetDescripcion
+  else ;
+end;
 
 initialization
   RegisterClass(TFNCli0001);

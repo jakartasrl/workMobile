@@ -36,8 +36,9 @@ public interface IServiceRepository {
 	 * @param propertyName
 	 * @param value
 	 * @return
+	 * @throws JakartaException 
 	 */
-	PersistentEntity getUniqueByProperty(Class className, String propertyName, String value);
+	PersistentEntity getUniqueByProperty(Class className, String propertyName, String value) throws JakartaException;
 	/**
 	 * Recupera filtrando por una propiedad y la clase
 	 * @param className
@@ -64,8 +65,9 @@ public interface IServiceRepository {
 	 * @param propertyName
 	 * @param value
 	 * @return
+	 * @throws JakartaException 
 	 */
-	PersistentEntity getUniqueByProperty(Class className, String propertyName, Long value);
+	PersistentEntity getUniqueByProperty(Class className, String propertyName, Long value) throws JakartaException;
 
 	
 	/**

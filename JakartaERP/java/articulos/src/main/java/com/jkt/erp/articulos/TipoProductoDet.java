@@ -2,30 +2,18 @@ package com.jkt.erp.articulos;
 
 import com.jkt.dominio.PersistentEntity;
 
+/**
+ * El detalle de un tipo de producto.
+ * El detalle del tipo de producto
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class TipoProductoDet extends PersistentEntity {
 
 	private TipoProducto tipoProducto;
+	
 	private CaracteristicaProducto caracteristica;
-<<<<<<< HEAD:Common/Framework/java/articulos/src/main/java/com/jkt/erp/articulos/TipoProductoDet.java
-	private boolean      	obligatorio;
-	private boolean  	 	armaCodigo;
-	private boolean  	 	armaDescripcion;
-	private int			 	orden;
-	private String          nivelAfectado;	
 	
-	
-	public String getNivelAfectado() {
-		return nivelAfectado;
-	}
-	public void setNivelAfectado(String nivelAfectado) {
-		this.nivelAfectado = nivelAfectado;
-	}
-	
-	public TipoProducto getTipoProducto() {
-		return tipoProducto;
-	}
-	
-=======
 	private boolean obligatorio;
 	private boolean armaCodigo;
 	private boolean armaDescripcion;
@@ -35,7 +23,6 @@ public class TipoProductoDet extends PersistentEntity {
 		return tipoProducto;
 	}
 
->>>>>>> origin/master:JakartaERP/java/articulos/src/main/java/com/jkt/erp/articulos/TipoProductoDet.java
 	public void setTipoProducto(TipoProducto tipoProducto) {
 		this.tipoProducto = tipoProducto;
 	}

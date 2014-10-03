@@ -29,7 +29,7 @@ public class Cliente extends PersistentEntity {
 	
 	private String codigo;
 
-	//	@NotNull(message="El Sujeto impositivo no debe ser nulo.")
+	@NotNull(message="El Sujeto impositivo no debe estar vacio.")
 	private SujetoImpositivo sujetoImpositivo;
 	
 	private String telefono;
@@ -90,8 +90,10 @@ public class Cliente extends PersistentEntity {
 	}
 
 	public void setSujetoImpositivo(SujetoImpositivo sujetoImpositivo) {
-		this.sujetoImpositivo = sujetoImpositivo;
-		this.sujetoImpositivo.setCliente(this);
+		if (sujetoImpositivo!=null) {
+			this.sujetoImpositivo = sujetoImpositivo;
+			this.sujetoImpositivo.setCliente(this);
+		}
 	}
 
 	public Idioma getIdioma() {
@@ -142,12 +144,12 @@ public class Cliente extends PersistentEntity {
 	}
 	
 	public void addValorClasificador(ClienteClasificador clienteClasificador){
-//		agregarObjectoAColeccion(listaClasificadores, );
-		if(!listaClasificadores.contains(clienteClasificador)){
-			listaClasificadores.add(clienteClasificador);
-			clienteClasificador.setCliente(this);
+		if (clienteClasificador!=null && clienteClasificador.getComponenteValor()!=null) {
+			if(!listaClasificadores.contains(clienteClasificador)){
+				listaClasificadores.add(clienteClasificador);
+				clienteClasificador.setCliente(this);
+			}
 		}
-		
 	}
 	
 //	public void deleteValorClasificador(ClienteClasificador clienteClasificador){

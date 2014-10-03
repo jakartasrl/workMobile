@@ -7,6 +7,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.UnidadMedida;
 
+/**
+ * <p>Define las relaciones entre dos unidades de medidas para determinado producto</p>
+ *
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class ProductoEquivUniMed extends PersistentEntity {
 
 	@NotNull(message = "La equivalencia entre unidades de medidas debe tener relacionado un producto.")

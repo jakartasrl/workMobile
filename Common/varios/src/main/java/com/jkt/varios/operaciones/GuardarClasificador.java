@@ -76,7 +76,7 @@ public class GuardarClasificador extends Operation {
 		}
 		
 		if (primerComponente==null) {
-			throw new JakartaException("El clasificador debe tener como m�nimo un componente.");
+			throw new JakartaException("El clasificador debe tener como minimo un componente.");
 		}
 		
 		clasificador.setComponentePadre(primerComponente);//Seteo la relacion entre clasificador y componente.Este componente a su vez tiene o no un unico hijo, y as� sucesivamente.

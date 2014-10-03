@@ -72,6 +72,7 @@ public class EmpresaHabilitada extends PersistentEntity {
 	
 	/*
 	 * Nuevamente...parche para que consulte campos booleanos...
+	 * FIXME
 	 * 
 	 */
 

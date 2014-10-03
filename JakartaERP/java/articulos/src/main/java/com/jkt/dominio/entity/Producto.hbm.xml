@@ -22,6 +22,15 @@
 		<property name="prodPropia" column="PRODPROPIA" type="boolean" />
 		<property name="bien" column="BIEN" type="boolean" />
 		
+		<many-to-one name="uniMedPrin" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_MED_PRIN_ID" cascade="none"></many-to-one>
+		<many-to-one name="uniMedSec" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_MED_SEC_ID" cascade="none"></many-to-one>
+		<many-to-one name="uniMedTerc" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_MED_TER_ID" cascade="none"></many-to-one>
+	
+		<many-to-one name="unidadVenta" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_VENTA_ID" cascade="none"></many-to-one>
+		<many-to-one name="unidadProduccion" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_PROD_ID" cascade="none"></many-to-one>
+		<many-to-one name="unidadCompra" class="com.jkt.varios.dominio.UnidadMedida" column="UNI_COMPRA_ID" cascade="none"></many-to-one>
+	
+		
 		<many-to-one name="tipoProducto" class="com.jkt.erp.articulos.TipoProducto" column="TIPO_PRODUCTO_ID" cascade="none"></many-to-one>		
 		
 		<list name="clasificadores" table="PRODUCTO_CLASIFICADOR" lazy="true" cascade="all">
@@ -37,9 +46,15 @@
 		</list>
 		
 		<list name="equivalencias" table="PRODUCTO_EQUIV_UNI_MED" lazy="true" cascade="all">
-			<key column="PRODUCTO_EQUIV_UNI_MED_ID" />
+			<key column="PRODUCTO_ID" />
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.erp.articulos.ProductoEquivUniMed" />
+		</list>
+	
+		<list name="detalles" table="PRODUCTO_DET" lazy="true" cascade="all">
+			<key column="PRODUCTO_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.erp.articulos.ProductoDet" />
 		</list>
 		
 	</class>

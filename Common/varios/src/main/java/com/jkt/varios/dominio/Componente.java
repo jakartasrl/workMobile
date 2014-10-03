@@ -3,11 +3,13 @@ package com.jkt.varios.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.dominio.Descriptible;
 
 /**
  * <p>Representa a un componente de un {@link Clasificador}</p>
- * <p>Se utilizarï¿½ para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
+ * <p>Se utilizará para poder clasificar de distintas aneras a los objetos de las entidades clasificables</p>
  * <p>Un mismo componente puede estar en 2 clasificadores distintos</p>
  * 
  * @see ComponenteValor
@@ -16,7 +18,9 @@ import com.jkt.dominio.Descriptible;
  */
 public class Componente extends Descriptible {
 
+	@NotNull
 	private Clasificador clasificador;
+	
 	private Componente componentePadre;
 	private Componente componenteHijo;
 	private List<ComponenteValor> valores=new ArrayList<ComponenteValor>();

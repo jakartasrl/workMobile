@@ -1,8 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE entity [
 
-<!--   <!ENTITY operacionesExternas SYSTEM "file:///operaciones-2.xml"> -->
-	
   <!ELEMENT entity        (operacion*)>
   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
   
@@ -224,7 +222,7 @@
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Cadena" target="cadena" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -242,7 +240,7 @@
 		<output name="resultado" tableName="NoSeUsa">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="Cadena" target="cadena" />
+<!-- 			<campoSalida value="Cadena" target="cadena" /> -->
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -415,7 +413,7 @@
 <!-- 				<campoEntrada name="SinVencimientoPwd" clase="Boolean" metodo="setSinVencimientoPwd" /> -->
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />				
 				
-				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa">
+				<campoEntrada name="TUsuarioEmpresas" metodo="agregarEmpresaHabilitadaPlana" clase="com.jkt.dominio.EmpresaHabilitada"  fieldID="oid_empresa_habilitada">
 					<campoEntrada name="oid_empresa" clase="String" metodo="setOidEmpresa" />
 					<campoEntrada name="Habilitada" clase="Boolean" metodo="setHabilitada" />
 					<campoEntrada name="Default" clase="Boolean" metodo="setPorDefecto" />

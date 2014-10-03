@@ -50,7 +50,7 @@ type
     mtConfigCamposorden: TSmallintField;
     mtInput: TjktMemTable;
     opConfig: TjktOperacion;
-    opFiltrado: TjktOperacion;
+    opFiltroSimple: TjktOperacion;
     mtFiltros: TjktMemTable;
     mtParametros: TjktMemTable;
     mtParametrosEntidad: TStringField;
@@ -60,6 +60,9 @@ type
     dbgHelpDBTableView: TcxGridDBTableView;
     dbgHelpLevel1: TcxGridLevel;
     mtConfigCamposcolumnWidth: TSmallintField;
+    mtParametrosEntidadMaestra: TStringField;
+    mtParametrosOidEntidadMaestra: TIntegerField;
+    opFiltroCompuesto: TjktOperacion;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -75,6 +78,8 @@ type
   private
     { Private declarations }
     FEntidad           : string;
+    FEntidadMaestra    : string;
+    FOidEntidadMaestra : Integer;
     FTipoFiltro        : TjktTipoFiltro;
     FSeleccionMultiple : Boolean;
 
@@ -89,8 +94,10 @@ type
     function  HaySeleccionados() : Boolean;
   public
     { Public declarations }
-    property Entidad       : string            read FEntidad       write FEntidad;
-    property TipoFiltro    : TjktTipoFiltro    read FTipoFiltro    write FTipoFiltro;
+    property Entidad           : string read FEntidad write FEntidad;
+    property EntidadMaestra    : string read FEntidadMaestra write FEntidadMaestra;
+    property OidEntidadMaestra : Integer read FOidEntidadMaestra write FOidEntidadMaestra;
+    property TipoFiltro        : TjktTipoFiltro read FTipoFiltro write FTipoFiltro;
     property SeleccionMultiple : Boolean read FSeleccionMultiple write FSeleccionMultiple;
 
     property OidFieldName    : String    Read FOidFieldName     Write FOidFieldName;
@@ -113,7 +120,9 @@ implementation
 
 procedure TFMet003.FormCreate(Sender: TObject);
 begin
-  FEntidad         := '';
+  FEntidad           := '';
+  FEntidadMaestra    := '';
+  FOidEntidadMaestra := -1;
 
   FOidFieldName    := '';
   FCodFieldName    := '';
@@ -128,6 +137,9 @@ begin
   mtParametros.Open;
   mtParametros.Append;
   mtParametros.FieldByName('Entidad').Value := FEntidad;
+  if Trim(FEntidadMaestra) <> '' then
+    mtParametros.FieldByName('EntidadMaestra').Value := FEntidadMaestra;
+  mtParametros.FieldByName('OidEntidadMaestra').Value := FOidEntidadMaestra;
 
   opConfig.execute;
 
@@ -139,22 +151,42 @@ begin
     begin
       gbFiltroAvanzado.Visible := False;
       cxSplitter.Visible := False;
-      opFiltrado.OperName := 'FiltroActivos';
-      opFiltrado.execute;
+
+      if Trim(FEntidadMaestra) = '' then
+        begin
+          opFiltroSimple.OperName := 'FiltroActivos';
+          opFiltroSimple.execute;
+        end
+      else
+        begin
+          opFiltroCompuesto.OperName := 'FiltroActivosCompuesto';
+          opFiltroCompuesto.execute;
+        end;
     end
   else if FTipoFiltro = fi_Inactivos then
     begin
       gbFiltroAvanzado.Visible := False;
       cxSplitter.Visible := False;
-      opFiltrado.OperName := 'FiltroInactivos';
-      opFiltrado.execute;
+      opFiltroSimple.OperName := 'FiltroInactivos';
+      opFiltroSimple.execute;
     end
   else if FTipoFiltro = fi_Avanzado then
     begin
       // Acá pido al server la configuración de los Filtros! Debería usar 'opConfig'
       gbFiltroAvanzado.Visible := True;
       cxSplitter.Visible := True;
-      opFiltrado.OperName := 'FiltroAvanzado';
+      opFiltroSimple.OperName := 'FiltroAvanzado';
+    end
+  else if FTipoFiltro = fi_ValoresClasificador then
+    begin
+      // Voy a mostrar los Valores de TODOS los Componentes ubicados en el último
+      // nivel de un Clasificador en particular. Por ahora se decidió hacer esto
+      // para no tener que cambiar la grilla. Lo mejor sería mostrar el árbol
+      // completo con todos los Valores
+      gbFiltroAvanzado.Visible := False;
+      cxSplitter.Visible := False;
+      opFiltroCompuesto.OperName := 'FiltroValoresClasificador';
+      opFiltroCompuesto.execute;
     end;
 
   btnAceptar.Enabled := True;

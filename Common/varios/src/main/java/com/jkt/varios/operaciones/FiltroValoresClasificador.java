@@ -3,24 +3,28 @@ package com.jkt.varios.operaciones;
 import java.util.List;
 import java.util.Map;
 
-import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 import com.jkt.varios.dominio.ComponenteValor;
 
+/**
+ * <p>Retorna una lista de valores de clasificador, pero mostrando solamente los mismos del componente del ultimo nivel.</p>
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class FiltroValoresClasificador extends Operation {
 
-	private static final String OID = "oidentidadmaestra".toUpperCase();
+	private static final String OID_CLASIFICADOR = "oidentidadmaestra".toUpperCase();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		validarEntrada(aParams.get(OID));
+		validarEntrada(aParams.get(OID_CLASIFICADOR));
 		
 		//Obtengo el clasificador desde la base
-		Clasificador clasificador= (Clasificador) obtener(Clasificador.class, (String)aParams.get(OID));
+		Clasificador clasificador= (Clasificador) obtener(Clasificador.class, (String)aParams.get(OID_CLASIFICADOR));
 		
 		//Si el clasificador no tiene componentes se termina la rutina
 		Componente componentePadre = clasificador.getComponentePadre();

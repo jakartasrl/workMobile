@@ -36,7 +36,7 @@ public class GuardarUsuario extends Operation{
 			}
 			
 			usuario.getEmpresasHabilitadas().clear();	//FIXME Cuando tengan el filtro, lo que vamos a hacer es usar el OID,
-														//y no se generarán nuevas instancias, sino que siempre será actualizacion.
+														//y no se generaron nuevas instancias, sino que siempre sera actualizacion.
 
 			List<EmpresaHabilitada> empresasHabilitadasPlanas = usuario.getEmpresasHabilitadasPlanas();//Uso los campos planchados para recuperar desde la base
 			for (EmpresaHabilitada empresaHabilitada : empresasHabilitadasPlanas) {
