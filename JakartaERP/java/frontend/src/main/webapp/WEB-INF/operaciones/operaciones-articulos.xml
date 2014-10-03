@@ -212,37 +212,40 @@
 	
 <!-- 	GUARDAR VALORES DE UNA DETERMINADA TABLA -->
 	<operacion name="GuardarValoresDeTabla" clase="com.jkt.operaciones.GuardarLista">
-		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'>
-			<campoEntrada>			
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.ValoresTablas" fieldID='oid_valor_tabla'>
+<!-- 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'> -->
+<!-- 			<campoEntrada>			 -->
 
-				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" >
+<!-- 				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" > -->
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 					<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+					<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTablaValoresCaract" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-				</campoEntrada>
+<!-- 				</campoEntrada> -->
 				
-			</campoEntrada>			
+<!-- 			</campoEntrada>			 -->
 		</input>		
 		<forms>
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
 	
-<!-- 	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" > -->
-<!-- 		<output name="valores" tableName="mtInput"> -->
-<!-- 			<campoSalida value="oid_valor" target="id" /> -->
-<!-- 			<campoSalida value="Codigo"    target="codigo" /> -->
-<!-- 			<campoSalida value="descr"     target="descripcion" /> -->
-<!-- 			<campoSalida value="Activo"    target="isActivo" /> -->
-<!-- 		</output>		 -->
+	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" >
+		<output name="valores" tableName="mtInput">
+			<campoSalida value="oid_valor" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="oid_tabla"    target="tablaValoresCaract.id" />
+		</output>		
 			
-<!-- 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer> -->
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
-<!-- 		<forms> -->
-<!-- 			<form name="TEmpresa"></form> -->
-<!-- 		</forms> -->
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
 		
-<!-- 	</operacion> -->
+	</operacion>
 
 	<!-- GUARDAR UN PRODUCTO -->
 	<operacion name="GuardarArticulo" clase="com.jkt.operaciones.Guardar">

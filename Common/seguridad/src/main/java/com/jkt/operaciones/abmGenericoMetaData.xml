@@ -216,6 +216,32 @@
 		</validadores>
 		
 	</entidad>
+	
+	
+	<!-- 	Tabla de valores de caracteristica -->
+	<entidad nombre="ValoresDeTablas">
+	
+		<operacion operSave="GuardarValoresDeTabla" operTraer="TraerValoresDeTabla" />
+		
+		<campos>
+			<campo fieldName="oid_valor_tabla" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_valor_tabla" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			
+			<campo fieldName="oid_tabla"  tipo="Integer" longitud="0" visible="false" readOnly="false" orden="4" label="oid_tabla"  />
+			<campo fieldName="cod_tabla"  tipo="String" longitud="10" visible="true" readOnly="false" orden="5" label="Pais" tag="0"/>
+			<campo fieldName="des_tabla"  tipo="String" longitud="60" visible="true" readOnly="true" orden="6" label="Descripcion" tag="0" />
+			
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" 	entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" 	entidad="" oidName="" descrName="" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" 		entidad="tablaValoresCaract" oidName="oid_tabla" descrName="des_tabla" />
+		</validadores>
+		
+	</entidad>
 
 	
 </entidades>

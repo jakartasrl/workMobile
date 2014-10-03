@@ -1,6 +1,5 @@
 package com.jkt.operaciones;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +29,7 @@ public class Guardar extends Operation {
 	}
 
 	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
-		serviceRepository.save((PersistentEntity) object.get(0));//save the first		
+		serviceRepository.save((PersistentEntity) object.get(0));//save the first
 	}
 
 }
