@@ -218,7 +218,6 @@ public class ProductoDet extends PersistentEntity implements IDetalle{
 		int result;
 		result = (int) (29 * getId());
 		return result;
-	}
-	
+	}	
 	
 }
