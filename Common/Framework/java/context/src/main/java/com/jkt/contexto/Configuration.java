@@ -188,6 +188,11 @@ public class Configuration {
 		digester.addObjectCreate("entity/operacion/listas/lista", Lista.class.getName());
 		digester.addSetProperties("entity/operacion/listas/lista");
 		digester.addSetNext("entity/operacion/listas/lista", "addLista", Lista.class.getName());
+		
+		digester.addObjectCreate("entity/operacion/listas/lista/lista", Lista.class.getName());
+		digester.addSetProperties("entity/operacion/listas/lista/lista");
+		digester.addSetNext("entity/operacion/listas/lista/lista", "addLista", Lista.class.getName());
+		
 		/*
 		 * CAMPOS LISTAS
 		 * CAMPOS LISTAS

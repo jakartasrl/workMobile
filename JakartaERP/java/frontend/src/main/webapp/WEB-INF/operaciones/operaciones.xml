@@ -12,7 +12,7 @@
   
   <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
 
-  <!ELEMENT lista  EMPTY>  
+  <!ELEMENT lista  (lista*)>  
   <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
   <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
 
@@ -74,19 +74,27 @@
 
 <entity>
 
-	<operacion name="TraerClasificadoresYValores" clase="com.jkt.operaciones.TrearEntidadesConRelaciones" entidad="com.jkt.varios.dominio.Componente" >
+	<operacion name="TrearClientesSucursalesDomicilios" clase="com.jkt.operaciones.TrearEntidadesConRelaciones" entidad="com.jkt.erp.varios.Cliente" >
 
-		<output name="entidad" tableName="mtComponente">
-			<campoSalida value="oid_componente" 	target="id" />
+		<output name="entidad" tableName="mtCliente">
+			<campoSalida value="oid_cliente" target="id" />
 		</output>
 		
-		<output name="mtValores" tableName="mtComponenteValor">
-			<campoSalida value="oid_componente_valor" 	target="id" />
-			<campoSalida value="oid_componente" 		target="componente.id" />
+		<output name="mtSucursales" tableName="mtSucursales">
+			<campoSalida value="oid_sucursal" target="id" />
+			<campoSalida value="oid_cliente" target="cliente.id" />
+		</output>		
+		
+		<output name="mtDomiciliosEntrega" tableName="mtDomEntrega">
+			<campoSalida value="oid_sucursal" 	target="clienteSucursal.id" />
+			<campoSalida value="oid_domicilio_entrega" 	target="id" />
+			<campoSalida value="oid_direccion" 	target="direccion.id" />
 		</output>		
 			
 		<listas>
-			<lista nombreLista="valores" nombreWriter="mtValores"></lista>
+			<lista nombreLista="listaSucursales" nombreWriter="mtSucursales">
+				<lista nombreLista="domiciliosDeEntrega" nombreWriter="mtDomiciliosEntrega" />
+			</lista>
 		</listas>
 			
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />

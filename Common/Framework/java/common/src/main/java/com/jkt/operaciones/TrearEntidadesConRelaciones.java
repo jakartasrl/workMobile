@@ -1,5 +1,6 @@
 package com.jkt.operaciones;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,6 @@ public class TrearEntidadesConRelaciones extends Operation {
 		
 			String nombreClase = (String)aParams.get(KEY_ENTIDAD);
 			List<Lista> obtenerListas = ev.obtenerListas();
-			Object resultadoMetodo;
-			List resultadoEnListaDeMetodo;
 			
 			Class<?> clase = Class.forName(nombreClase);
 			List<PersistentEntity> elementos = obtenerTodos((Class<? extends PersistentEntity>) clase);
@@ -35,26 +34,11 @@ public class TrearEntidadesConRelaciones extends Operation {
 			for (PersistentEntity persistentEntity : elementos) {
 				notificarObjecto(Notificacion.getNew("entidad", persistentEntity));
 
-				/*
-				 * FIXME Optimizar esto, no puedo usar reflection 50 veces!!
-				 * Poner en un mapa el metodo!
-				 */
 				for (Lista lista : obtenerListas) {
-					Method method = clase.getMethod(armarMetodo(lista.getNombreLista()));
-//					resultadoMetodo = method.invoke(persistentEntity);
-					resultadoEnListaDeMetodo=(List) method.invoke(persistentEntity);
-					for (Object elementoDeLista : resultadoEnListaDeMetodo) {
-						if (elementoDeLista!=null) {
-							notificarObjecto(Notificacion.getNew(lista.getNombreWriter(), elementoDeLista));
-						}
-					}
+					mostrarResultados(clase, persistentEntity, lista);
 				}
 			}
-			
-			
-		
 	}
-
 	
 	/**
 	 * FIXME Este metodo fue copiado desde la clase {@link PropertySolver}
@@ -65,6 +49,25 @@ public class TrearEntidadesConRelaciones extends Operation {
 		String priLetra = "" + aName.charAt(0);
 		String metodo = "get" + priLetra.toUpperCase() + aName.substring(1, aName.length());
 		return metodo;
+	}
+	
+	@SuppressWarnings({"unchecked","rawtypes"})
+	private void mostrarResultados(Class clase, Object objeto, Lista lista) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		
+		Method method = clase.getMethod(armarMetodo(lista.getNombreLista()));
+		List coleccion=(List) method.invoke(objeto);
+		
+		for (Object elementoDeLista : coleccion) {
+			if (elementoDeLista!=null) {
+				notificarObjecto(Notificacion.getNew(lista.getNombreWriter(), elementoDeLista));
+
+				if(lista.tieneHijos()){
+					for (Lista subLista : lista.getListas()) {
+						mostrarResultados(elementoDeLista.getClass(), elementoDeLista, subLista);
+					}
+				}
+			}
+		}
 	}
 	
 	
