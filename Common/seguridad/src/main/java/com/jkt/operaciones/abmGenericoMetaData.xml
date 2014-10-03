@@ -87,8 +87,6 @@
 		
 	</entidad>
 
-<<<<<<< HEAD:Common/Framework/java/seguridad/src/main/java/com/jkt/operaciones/abmGenericoMetaData.xml
-
    <entidad nombre="ValorTablaCaracProd">
 
 		<operacion operSave="GuardarValoresTablasCarProd" operTraer="TraerValoresTablasCarProd" />
@@ -112,7 +110,7 @@
 	</entidad>
 
 
-<entidad nombre="Idioma">
+	<entidad nombre="Idioma">
 
 		<operacion operSave="GuardarIdioma" operTraer="TraerIdioma" />
 		

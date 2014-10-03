@@ -196,4 +196,29 @@ public class ProductoDet extends PersistentEntity implements IDetalle{
 		return "producto";
 	}
 	
+	
+	public boolean equals(Object other) {
+		if (this == other)
+			return true;
+		if (!(other instanceof ProductoDet))
+			return false;
+
+		final ProductoDet det = (ProductoDet) other;
+
+		if (det.getId() == 0)
+			return false;
+
+		if (!(det.getId() == getId()))
+			return false;
+
+		return true;
+	}
+
+	public int hashCode() {
+		int result;
+		result = (int) (29 * getId());
+		return result;
+	}
+	
+	
 }

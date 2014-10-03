@@ -16,7 +16,7 @@ import com.jkt.xmlreader.PropertySolver;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TrearEntidadesConRelaciones extends Operation {
+public class TraerEntidadesConRelaciones extends Operation {
 
 	private static final String KEY_ENTIDAD = "entidad";
 
