@@ -213,6 +213,8 @@ public class Producto extends Descriptible {
 
 	
 	/*
+	 * 
+	 * FIXME 
 	 * Que sucede si tengo un producto con 5 detalles, y al cambiar de tipo de producto se cambian, logicamente, el espectro de caracteristicas?
 	 * Para esto, uso una bandera, con lo cual, elimino la lista de detalles que existia previamente, y genero una nueva...
 	 */
