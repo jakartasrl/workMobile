@@ -144,6 +144,8 @@ type
     procedure CargarNuevosMensajes;
 
     function ValidarLogin: Boolean;
+
+    function GetRandomColor: TColor;
     procedure CrearLogin;
 
   public
@@ -312,7 +314,7 @@ begin
     AGroup := tc_MenuUsuario.Groups.Add;
     AGroup.Caption.Alignment := taLeftJustify;
     AGroup.Caption.Color := clDefault;
-    AGroup.Caption.Font.Size := 16;
+    AGroup.Caption.Font.Size := 14;
     AGroup.Caption.Text := cds_MenuUsuario.FieldByName('descItemMenu').AsString;
     AGroup.Index := cds_MenuUsuario.FieldByName('codItemMenu').AsInteger;
 
@@ -341,14 +343,16 @@ begin
 }
     AItem.GroupIndex := cds_MenuUsuario.FieldByName('codItemPadre').AsInteger;
     AItem.Tag := cds_MenuUsuario.FieldByName('codItemMenu').AsInteger;
-    AItem.IsLarge := True;
+    AItem.IsLarge := true;
     AItem.OptionsAnimate.AnimateText := True;
     AItem.RowCount := 1;
     AItem.Style.Gradient := gmVertical;
-    AItem.Style.GradientBeginColor := $20205EE6;
-    AItem.Style.GradientEndColor := $202774EB;
+    //AItem.Style.GradientBeginColor := $20205EE6;
+    //AItem.Style.GradientEndColor := $202774EB;
+    AItem.Style.GradientBeginColor := GetRandomColor;
+    AItem.Style.GradientEndColor   := GetRandomColor;
     AItem.Text1.Align := oaTopLeft;
-    AItem.Text1.Font.Size := 13;
+    AItem.Text1.Font.Size := 12;
     AItem.Text1.IndentHorz := 10;
     AItem.Text1.IndentVert := 10;
     AItem.Text1.TextColor := clDefault;
@@ -384,6 +388,13 @@ begin
   end;
 
 }
+end;
+
+
+
+function TfrmMenuPrincipal.GetRandomColor: TColor;
+begin
+  Result := RGB(Random(255), Random(255), Random(255));
 end;
 
 procedure TfrmMenuPrincipal.FormCloseQuery(Sender: TObject;
@@ -536,7 +547,7 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 0;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Seguridad';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Configuracion';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := -1;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := True;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
@@ -544,162 +555,191 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 1;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Configuración';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Ventas';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := -1;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := True;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 2;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Contabilidad';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := -1;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := True;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
 
-  // creo los Items de cada grupo
+  // creo los Items de cada grupo  -----------------------------
   cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 3;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Administración';
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 200;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Seguridad';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 4;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Interfaces';
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 201;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Clasificadores';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 5;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Autorizaciones';
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 202;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Varios';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
-  // creo los Programas
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 203;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Articulos';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 300;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Clientes';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 301;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Articulos';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+
+  // creo los Programas -------------------------------------------------------
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 6;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Empresas';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 7;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Clientes';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 8;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Condiciones de Pago';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Empresas';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 200;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 9;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Usuarios';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Usuarios';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 200;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 10;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Tablas de Validacion';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 11;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Caracteristicas de Producto';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 12;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Tipo de Producto';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 13;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Impuestos';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 14;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Idioma';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 15;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Paises';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
-  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 16;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Provincias';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
-  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
-  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
-  cds_MenuUsuario.Post;
-
-  cds_MenuUsuario.Append;
+    cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 17;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Vendedores';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Vendedores';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 18;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Representantes';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Representantes';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 7;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Clientes';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 8;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Condiciones de Pago';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 10;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Tablas de Validacion';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 203;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 11;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Caracteristicas de Producto';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 203;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 12;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Tipo de Producto';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 203;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 13;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Impuestos';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 202;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 14;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Idioma';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 202;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 15;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Paises';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 202;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 16;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Provincias';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 202;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 19;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Clasificadores';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Clasificadores';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 201;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 20;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Maestro de Valores de Clasificador';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 3;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Valores de Clasificador';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 201;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 21;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Artículos';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 301;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;

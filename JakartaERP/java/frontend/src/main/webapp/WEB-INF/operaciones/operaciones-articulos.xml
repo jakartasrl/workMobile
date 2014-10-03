@@ -120,7 +120,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="TEmpresa"></form>
+			<form name="FNArt0002"></form>
 		</forms>
 		
 	</operacion>

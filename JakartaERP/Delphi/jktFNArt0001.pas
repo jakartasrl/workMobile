@@ -212,17 +212,143 @@ type
     jktExpDBGrid4DBTableView1CodValorClasif: TcxGridDBColumn;
     jktExpDBGrid4DBTableView1DescValorClasif: TcxGridDBColumn;
     jktExpDBGrid4DBTableView1Activo: TcxGridDBColumn;
+    HelpValorCarac: TjktHelpGenerico;
+    mtValoresCaracProdoid_TablaValores: TIntegerField;
+    jktExpDBGrid1DBTableView1oid_TablaValores: TcxGridDBColumn;
+    HelpValorClasifProd: TjktHelpGenerico;
+    opTraerCaractProducto: TjktOperacion;
+    ValUnidStockPrinc: TjktValidador;
+    ValUnidStockSecun: TjktValidador;
+    HelpUnidStockPrinc: TjktHelpGenerico;
+    HelpUnidStockSecun: TjktHelpGenerico;
+    HelpUnidStockTerc: TjktHelpGenerico;
+    ValUnidStockTerc: TjktValidador;
+    procedure jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure cxDBCheckBox1PropertiesChange(Sender: TObject);
+    procedure jktExpDBGrid4DBTableView1CodValorClasifPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxDBButtonEdit3PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure mtArticulooid_TipoArtValidate(Sender: TField);
+    procedure OperacionSaveBeforeEjecutar(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
-var
-  FNArt0001: TFNArt0001;
 
 implementation
 
 {$R *.dfm}
+
+
+procedure TFNArt0001.cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  HelpUnidStockPrinc.Ejecutar;
+end;
+
+procedure TFNArt0001.cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  HelpUnidStockSecun.Ejecutar;
+end;
+
+procedure TFNArt0001.cxDBButtonEdit3PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  HelpUnidStockTerc.Ejecutar;
+end;
+
+procedure TFNArt0001.cxDBCheckBox1PropertiesChange(Sender: TObject);
+begin
+  inherited;
+
+  if TcxDBCheckBox(Sender).Tag = 0 then
+    begin
+      // presionó sobre 'Bien'
+      cxDBCheckBox2.Checked := not cxDBCheckBox1.Checked;
+    end
+  else
+    begin
+      // presionó sobre 'Servicio'
+      cxDBCheckBox1.Checked := not cxDBCheckBox2.Checked;
+    end;
+
+  if cxDBCheckBox1.Checked then
+    begin
+      // Si está marcado 'Bien', muestro la sección de 'Especificaciones de Producto',
+      // la de 'Apertura de Stock' y 'Unidades de Medida'
+      lcMainGroup9.Visible  := True;
+      lcMainGroup11.Visible := True;
+      lcMainGroup12.Visible := True;
+    end
+  else
+    begin
+      // Si está marcado 'Servicio', oculto la sección de 'Especificaciones de Producto',
+      // la de 'Apertura de Stock' y 'Unidades de Medida'
+      lcMainGroup9.Visible  := False;
+      lcMainGroup11.Visible := False;
+      lcMainGroup12.Visible := False;
+    end;
+end;
+
+procedure TFNArt0001.jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if mtValoresCaracProd.FieldByName('TipoDeDato').AsString = 'Tabla' then
+    HelpValorCarac.Ejecutar;
+end;
+
+procedure TFNArt0001.jktExpDBGrid4DBTableView1CodValorClasifPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpValorClasifProd.Ejecutar then
+    mtClasifProd.FieldByName('DescValorClasif').AsString :=
+      HelpValorClasifProd.GetDescripcion
+  else ;
+end;
+
+procedure TFNArt0001.mtArticulooid_TipoArtValidate(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    opTraerCaractProducto.execute;
+end;
+
+procedure TFNArt0001.OperacionSaveBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  if cxDBCheckBox2.Checked then
+    begin
+      // Si es un 'Servicio', vacío las tablas no necesarias ('Especificaciones de Producto',
+      // 'Apertura de Stock' y 'Unidades de Medida')
+      mtValoresCaracProd.EmptyTable;
+      mtAperturaStock.EmptyTable;
+      mtEquivalencias.EmptyTable;
+    end;
+end;
+
+initialization
+  RegisterClass(TFNArt0001);
+
 
 end.
