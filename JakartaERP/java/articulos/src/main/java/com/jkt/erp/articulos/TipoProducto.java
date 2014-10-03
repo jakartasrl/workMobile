@@ -13,6 +13,13 @@ import com.jkt.dominio.Descriptible;
  */
 public class TipoProducto extends Descriptible {
 
+	/**
+	 * FIXME borrar esto cuando se limpien
+	 */
+	public TipoProducto() {
+		this.setActivo(true);
+	}
+	
 //	private Producto producto;
 	private List<TipoProductoDet> caracteristicas = new ArrayList<TipoProductoDet>();
 

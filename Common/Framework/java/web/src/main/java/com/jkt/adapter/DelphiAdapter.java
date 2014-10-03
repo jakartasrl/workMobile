@@ -456,7 +456,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}else if(BYTE_ARRAY_TYPE.equals(nombreClase)){
 			result=((String)value).getBytes();
 		}else if (BOOLEAN_TYPE.equals(nombreClase)) {
-			result="true".equals(((String)value).toLowerCase())?true:false;
+			result="false".equals(((String)value).toLowerCase())?false:true;
 		}else if(INTEGER_TYPE.equals(nombreClase)){
 			result=Integer.valueOf((String)value);
 		}else if(DOUBLE_TYPE.equals(nombreClase)){

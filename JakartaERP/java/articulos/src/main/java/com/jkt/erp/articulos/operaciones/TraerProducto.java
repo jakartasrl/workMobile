@@ -109,11 +109,14 @@ public class TraerProducto extends Operation {
 		CaracteristicaProducto caracteristica;
 		ProductoDet detalle;
 		for (PersistentEntity persistentEntity : caracteristicas) {
-			caracteristica=(CaracteristicaProducto) persistentEntity;
-			if (!idsExistentes.contains(String.valueOf(caracteristica.getId()))) {
-				detalle = new ProductoDet();
-				detalle.setCaracProducto(caracteristica);
-				notificarObjecto(Notificacion.getNew(WRITER_CARACTERISTICAS_DE_PRODUCTO, detalle));
+			
+			if (persistentEntity.isActivo()) {
+				caracteristica=(CaracteristicaProducto) persistentEntity;
+				if (!idsExistentes.contains(String.valueOf(caracteristica.getId()))) {
+					detalle = new ProductoDet();
+					detalle.setCaracProducto(caracteristica);
+					notificarObjecto(Notificacion.getNew(WRITER_CARACTERISTICAS_DE_PRODUCTO, detalle));
+				}
 			}
 		}
 	}

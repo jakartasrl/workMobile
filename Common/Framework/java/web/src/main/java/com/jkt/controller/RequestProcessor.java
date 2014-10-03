@@ -195,6 +195,7 @@ public abstract class RequestProcessor extends BaseController{
 		op.setServiceRepository(serviceRepository);
 		op.setSessionProvider(sessionProvider);
 		op.setRepositorioClases(repositorioClases);
+		op.setEventBusiness(eventBusinessOperation);
 		return op;
 	}
 

@@ -16,6 +16,7 @@ import com.jkt.framework.writers.HeaderDataSet;
 import com.jkt.framework.writers.IHeaderDataSet;
 import com.jkt.xmlreader.CampoDef;
 import com.jkt.xmlreader.Input;
+import com.jkt.xmlreader.Lista;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.TableDef;
 import com.jkt.xmlreader.XMLEntity;
@@ -244,5 +245,9 @@ public class EventBusiness extends XMLEntity implements IEventBusiness {
 		}else{
 			throw new JakartaException("Ocurrio un error. El hijo solicitado no es de elemento Output");
 		}
+	}
+
+	public List<Lista> obtenerListas() {
+		return this.getListas().getListas();
 	}
 }
