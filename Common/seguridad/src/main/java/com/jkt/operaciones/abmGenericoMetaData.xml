@@ -112,12 +112,7 @@
 	</entidad>
 
 
-
 <entidad nombre="Idioma">
-=======
-	<!-- 	Idioma -->
-	<entidad nombre="Idioma">
->>>>>>> origin/master:Common/seguridad/src/main/java/com/jkt/operaciones/abmGenericoMetaData.xml
 
 		<operacion operSave="GuardarIdioma" operTraer="TraerIdioma" />
 		
