@@ -49,10 +49,10 @@
 	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
 	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
 	<elemento key="representante" value="com.jkt.erp.varios.Representante" />
-
+	<elemento key="caracteristicaProd" value="com.jkt.erp.articulos.CaracteristicaProducto" />
+	<elemento key="tipoProducto" value="com.jkt.erp.articulos.TipoProducto" />
 	<elemento key="tablaValoresCaract" value="com.jkt.erp.articulos.TablaValoresCaracProd" />
-	<elemento key="valoresDeTabla" value="com.jkt.erp.articulos.ValoresTablas" />
-	
+	<elemento key="valoresDeTabla" value="com.jkt.erp.articulos.ValoresTablas" />	
 	<elemento key="articulos" value="com.jkt.erp.articulos.Producto" />
-<!-- 	<elemento key="articulo" value="com.jkt.erp.articulos.Producto" /> -->
+
 </elementos>

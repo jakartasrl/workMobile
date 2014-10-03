@@ -26,7 +26,7 @@ import com.jkt.transformers.Notificacion;
  */
 public class TraerTipoProducto extends Operation {
 
-	private static final String OID_TIPO = "oid_tipo".toUpperCase();
+	private static final String OID_TIPO = "oid".toUpperCase();
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {

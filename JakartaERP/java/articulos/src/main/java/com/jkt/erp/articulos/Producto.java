@@ -105,7 +105,7 @@ public class Producto extends Descriptible {
 	 * TODO ver bien esto!!
 	 */
 	public void setServicio(boolean servicio) {
-		this.bien = !servicio;
+//		this.bien = !servicio;
 	}
 	
 	public boolean isVendible() {

@@ -67,26 +67,28 @@
 
 <entity>
 
-	<!-- GUARDAR Tipo de Producto	 -->
+	<!-- GUARDAR Tipo de Producto -->
 	<operacion name="GuardarTipoProducto" clase="com.jkt.operaciones.Guardar">
+
 		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo">
 			<campoEntrada >		
 				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
-				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
+				<campoEntrada name="descr"  clase="String" 	metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name="mtDet" metodo="addCaracteristica" clase="com.jkt.erp.articulos.TipoProductoDet" fieldID="oid_tipo_det"  >
+				<campoEntrada name="mtDet" metodo="addCaracteristica" clase="com.jkt.erp.articulos.TipoProductoDet" fieldID="oid_det"  >
+					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
 					<campoEntrada name="oid_carac" 	clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
+					<campoEntrada name="Activo"		clase="Boolean" metodo="setActivo" />				
 					<campoEntrada name="oblig" 		clase="Boolean" metodo="setObligatorio" />
 					<campoEntrada name="arma_cod" 	clase="Boolean" metodo="setArmaCodigo" />
 					<campoEntrada name="arma_desc" 	clase="Boolean" metodo="setArmaDescripcion" />
-					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
 				</campoEntrada>
 			</campoEntrada>
 		</input>
 		
 		<forms>
-			<form name="FNVar0001"></form>
+			<form name="FNArt0002"></form>
 		</forms>
 		
 	</operacion>
@@ -94,8 +96,7 @@
 
 	<!-- RECUPERAR Tipo Producto -->
 	<operacion name="TraerTipoProducto" clase="com.jkt.erp.articulos.operaciones.TraerTipoProducto" >
-<!-- 		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo"> -->
-<!-- 		</input>			 -->
+
 		<output name="out1" tableName="mtTipoProd">
 			<campoSalida value="oid_tipo" 	target="id" />
 			<campoSalida value="Codigo" 	target="codigo" />
