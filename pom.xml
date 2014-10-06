@@ -14,7 +14,6 @@
 	</properties>
 
 	<modules>
-		<module>./JakartaERP/java/clientes</module>
 		<module>./Common/Framework/java/common</module>
 		<module>./Common/Framework/java/context</module>
 		<module>./JakartaERP/java/frontend</module>
@@ -22,7 +21,11 @@
 		<module>./Common/Framework/java/web</module>
 		<module>./Common/Framework/java/persistencia</module>
 		<module>./Common/seguridad</module>
+	
 		<module>./JakartaERP/java/articulos</module>
+		<module>./JakartaERP/java/laboratorio</module>
+		<module>./JakartaERP/java/clientes</module>
+
 	</modules>
 
 	<build>

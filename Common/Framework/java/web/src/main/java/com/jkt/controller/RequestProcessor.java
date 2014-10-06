@@ -136,7 +136,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		
 
-		log.debug("Recuperando un transformer para la operación actual...");
+		log.debug("Recuperando un transformer para la operaciï¿½n actual...");
 		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
 		log.debug("Ejecutando la operaciï¿½n...");
@@ -145,7 +145,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		operation.runOperation(parametersAdapted);
 		
-		log.debug("Enviando resultados de la operación...");
+		log.debug("Enviando resultados de la operaciï¿½n...");
 		transformer.write();
 		
 //		}catch(Exception exception){
@@ -158,7 +158,7 @@ public abstract class RequestProcessor extends BaseController{
 //			}
 			sessionProvider.destroySession();
 		}
-		log.debug("Finalizó la operación...");
+		log.debug("Finalizï¿½ la operaciï¿½n...");
 	}
 
 	private Map<String, Object> getObjetosOutput(Operation aOper,	IEventBusiness aEB) {
@@ -205,8 +205,8 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws JakartaException
 	 */
 	private void finalizar() throws JakartaException {
-		log.debug("No existe la operación solicitada.Se finaliza la petición.");
-		throw new JakartaException("No existe la operación solicitada.Se finaliza la petición.Compruebe el archivo XML y el nombre dado a la operación.");
+		log.debug("No existe la operaciÃ³n solicitada.Se finaliza la peticiÃ³n.");
+		throw new JakartaException("No existe la operaciÃ³n solicitada.Se finaliza la peticiÃ³n.Compruebe el archivo XML y el nombre dado a la operaciÃ³n.");
 	}
 
 	/**
