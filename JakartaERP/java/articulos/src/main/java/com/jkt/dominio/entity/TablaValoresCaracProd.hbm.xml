@@ -16,7 +16,7 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		<list name="valoresDeTabla" table="TABLA_VALORES" lazy="true" cascade="all">
-			<key column="TABLA_ID" />
+			<key column="TABLA_VALORES_CARAC_PROD_ID" />
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.erp.articulos.ValoresTablas" />
 		</list>

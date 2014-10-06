@@ -11,8 +11,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class Analisis extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Tipo de Laboratorio al que pertenece
 	 */

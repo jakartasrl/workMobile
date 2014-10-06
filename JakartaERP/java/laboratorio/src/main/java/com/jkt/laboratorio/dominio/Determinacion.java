@@ -11,8 +11,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class Determinacion extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Análisis al que pertenece.
 	 */

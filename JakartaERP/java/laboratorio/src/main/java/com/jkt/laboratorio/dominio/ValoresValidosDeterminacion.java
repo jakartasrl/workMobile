@@ -11,8 +11,6 @@ import com.jkt.erp.articulos.CaracteristicaProducto;
  */
 public class ValoresValidosDeterminacion extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
-	
 	/**
 	 * Determinación a la que valida.
 	 */

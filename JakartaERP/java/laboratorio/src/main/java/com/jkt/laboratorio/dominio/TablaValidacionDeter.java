@@ -9,6 +9,4 @@ import com.jkt.dominio.Descriptible;
  */
 public class TablaValidacionDeter extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
-
 }

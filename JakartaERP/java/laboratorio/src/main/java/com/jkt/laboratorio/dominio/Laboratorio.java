@@ -9,5 +9,4 @@ import com.jkt.dominio.Descriptible;
  */
 public class Laboratorio extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
 }

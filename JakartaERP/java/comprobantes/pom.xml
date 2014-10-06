@@ -8,4 +8,21 @@
   <artifactId>comprobantes</artifactId>
   <name>comprobantes</name>
   <description>comprobantes</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.jkt</groupId>
+  		<artifactId>common</artifactId>
+  		<version>0.0.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.jkt</groupId>
+  		<artifactId>varios</artifactId>
+  		<version>0.0.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.jkt</groupId>
+  		<artifactId>clientes</artifactId>
+  		<version>0.0.1</version>
+  	</dependency>
+  </dependencies>
 </project>

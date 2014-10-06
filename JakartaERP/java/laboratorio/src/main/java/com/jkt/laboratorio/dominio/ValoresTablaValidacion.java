@@ -9,8 +9,6 @@ import com.jkt.dominio.Descriptible;
  */
 public class ValoresTablaValidacion extends Descriptible {
 
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Tabla para ingresar los valores.
 	 */

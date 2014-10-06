@@ -89,7 +89,7 @@ public class ServiceRepository implements IServiceRepository {
 
 	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException, JakartaException {
 		
-		validarCodigo(entity);
+//		validarCodigo(entity);
 		
 		ejecutarValidacionDeNegocio(entity);
 		try{
@@ -119,9 +119,16 @@ public class ServiceRepository implements IServiceRepository {
 			desc=(Descriptible) entity;
 			String codigo = desc.getCodigo();
 			List<PersistentEntity> entidadesPorCodigo = getByProperty(entity.getClass(), "codigo", codigo);
-			if (!entidadesPorCodigo.isEmpty()) {
-				throw new JakartaException(String.format("No se puede guardar esta entidad de tipo %s ya que existe una con el codigo %s.",entity.getClass().getSimpleName(), codigo));
+			
+			if (entity.getId()!=0) {
+				//es actualizacion!
+			}else{
+				//es nuevo!
+				if (!entidadesPorCodigo.isEmpty()) {
+					throw new JakartaException(String.format("No se puede guardar esta entidad de tipo %s ya que existe una con el codigo %s.",entity.getClass().getSimpleName(), codigo));
+				}
 			}
+			
 		}		
 	}
 

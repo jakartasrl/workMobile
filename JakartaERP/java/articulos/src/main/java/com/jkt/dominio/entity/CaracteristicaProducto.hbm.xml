@@ -9,7 +9,7 @@
 			<generator class="native"></generator>
 		</id>
 
-		<many-to-one name="tabla" class="com.jkt.erp.articulos.TablaValoresCaracProd" column="TABLA_CARACTERISTICAS_ID" cascade="save-update" unique="true" ></many-to-one>
+		<many-to-one name="tabla" class="com.jkt.erp.articulos.TablaValoresCaracProd" column="TABLA_CARACTERISTICAS_ID" cascade="save-update" ></many-to-one>
 	
 		<property name="codigo" type="string">
             <column name="CODIGO" length="15" />
