@@ -1,6 +1,5 @@
 package com.jkt.transformers;
 
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -48,13 +47,14 @@ public abstract class Transformer implements Observer {
 		if (!Operation.class.isAssignableFrom(arg0.getClass())) {
 			throw new RuntimeException("Los transformers solo puede aceptar notificaciones de operaciones.");
 		}
-//		arg1 es instancia de notificacion!
 		
+		
+//		arg1 es instancia de notificacion!
 		if (arg1 instanceof Notificacion) {
 			Notificacion notificacion = (Notificacion) arg1;
-			this.update(notificacion);
+			update(notificacion);
 		}else{
-			throw new RuntimeException("Debe notificar enviando un objeto de tipo "+Notificacion.class);
+			throw new RuntimeException("Debe notificar enviando un objeto de tipo "+Notificacion.class.getSimpleName());
 		}
 		
 	}

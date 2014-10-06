@@ -2,12 +2,19 @@
 <!DOCTYPE entity [
 
   <!ELEMENT entity        (operacion*)>
-  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+<!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
   
   <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
   <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
   <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
   <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+  
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
+
+  <!ELEMENT lista  (lista*)>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
 
 
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
@@ -66,5 +73,69 @@
 ]>
 
 <entity>
+
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+
+	<operacion name="TrearClientesSucursalesDomicilios" clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.erp.varios.Cliente" >
+
+		<output name="entidad" tableName="mtCliente">
+			<campoSalida value="oid_cliente" target="id" />
+		</output>
+		
+		<output name="mtSucursales" tableName="mtSucursales">
+			<campoSalida value="oid_sucursal" target="id" />
+			<campoSalida value="oid_cliente" target="cliente.id" />
+		</output>		
+		
+		<output name="mtDomiciliosEntrega" tableName="mtDomEntrega">
+			<campoSalida value="oid_sucursal" 	target="clienteSucursal.id" />
+			<campoSalida value="oid_domicilio_entrega" 	target="id" />
+			<campoSalida value="oid_direccion" 	target="direccion.id" />
+		</output>		
+			
+		<listas>
+			<lista nombreLista="listaSucursales" nombreWriter="mtSucursales">
+				<lista nombreLista="domiciliosDeEntrega" nombreWriter="mtDomiciliosEntrega" />
+			</lista>
+		</listas>
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+	<operacion name="TraerProductoYDetalles" clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.erp.articulos.TipoProducto" >
+
+		<output name="entidad" tableName="mtTipoProducto">
+			<campoSalida value="oid_TipoProducto" 	target="id" />
+		</output>
+		
+		<output name="mtDetalles" tableName="mtDetallesTipoProducto">
+			<campoSalida value="oid_detalle" 	target="id" />
+			<campoSalida value="oid_tipo_producto" 		target="tipoProducto.id" />
+			<campoSalida value="oid_caracteristica_id" 		target="caracteristica.id" />
+			<campoSalida value="oid_caracteristica_tipo_dato" 		target="caracteristica.tipoDato" />
+		</output>		
+			
+		<listas>
+			<lista nombreLista="caracteristicas" nombreWriter="mtDetalles"></lista>
+		</listas>
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
 
 </entity>

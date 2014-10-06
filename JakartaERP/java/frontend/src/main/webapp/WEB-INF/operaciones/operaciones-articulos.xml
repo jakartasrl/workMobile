@@ -2,12 +2,19 @@
 <!DOCTYPE entity [
 
   <!ELEMENT entity        (operacion*)>
-  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
   
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
   <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
   <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
   <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
   <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+
+
+  <!ELEMENT lista  EMPTY>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
+
 
 
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
@@ -67,26 +74,28 @@
 
 <entity>
 
-	<!-- GUARDAR Tipo de Producto	 -->
+	<!-- GUARDAR Tipo de Producto -->
 	<operacion name="GuardarTipoProducto" clase="com.jkt.operaciones.Guardar">
+
 		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo">
 			<campoEntrada >		
 				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
-				<campoEntrada name="Descr"  clase="String" 	metodo="setDescripcion" />
+				<campoEntrada name="descr"  clase="String" 	metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name="mtDet" metodo="addCaracteristica" clase="com.jkt.erp.articulos.TipoProductoDet" fieldID="oid_tipo_det"  >
+				<campoEntrada name="mtDet" metodo="addCaracteristica" clase="com.jkt.erp.articulos.TipoProductoDet" fieldID="oid_det"  >
+					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
 					<campoEntrada name="oid_carac" 	clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
+					<campoEntrada name="Activo"		clase="Boolean" metodo="setActivo" />				
 					<campoEntrada name="oblig" 		clase="Boolean" metodo="setObligatorio" />
 					<campoEntrada name="arma_cod" 	clase="Boolean" metodo="setArmaCodigo" />
 					<campoEntrada name="arma_desc" 	clase="Boolean" metodo="setArmaDescripcion" />
-					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
 				</campoEntrada>
 			</campoEntrada>
 		</input>
 		
 		<forms>
-			<form name="FNVar0001"></form>
+			<form name="FNArt0002"></form>
 		</forms>
 		
 	</operacion>
@@ -94,8 +103,7 @@
 
 	<!-- RECUPERAR Tipo Producto -->
 	<operacion name="TraerTipoProducto" clase="com.jkt.erp.articulos.operaciones.TraerTipoProducto" >
-<!-- 		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo"> -->
-<!-- 		</input>			 -->
+
 		<output name="out1" tableName="mtTipoProd">
 			<campoSalida value="oid_tipo" 	target="id" />
 			<campoSalida value="Codigo" 	target="codigo" />
@@ -146,6 +154,7 @@
 
 	<!-- RECUPERAR  Caracteristicas de Producto -->
 	<operacion name="TraerCaracProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.CaracteristicaProducto">
+		
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_carac" target="id" />
 			<campoSalida value="Codigo"    target="codigo" />
@@ -156,6 +165,11 @@
 			<campoSalida value="cod_tabla"    target="tabla.codigo" />
 			<campoSalida value="des_tabla"    target="tabla.descripcion" />
 		</output>		
+
+		<listas>
+			<lista nombreWriter="mtEmpresa" nombreLista="empresas"/>
+			<lista nombreWriter="mtUsuario" nombreLista="usuarios"/>
+		</listas>
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
@@ -199,37 +213,40 @@
 	
 <!-- 	GUARDAR VALORES DE UNA DETERMINADA TABLA -->
 	<operacion name="GuardarValoresDeTabla" clase="com.jkt.operaciones.GuardarLista">
-		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'>
-			<campoEntrada>			
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.ValoresTablas" fieldID='oid_valor_tabla'>
+<!-- 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'> -->
+<!-- 			<campoEntrada>			 -->
 
-				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" >
+<!-- 				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" > -->
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 					<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+					<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTablaValoresCaract" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-				</campoEntrada>
+<!-- 				</campoEntrada> -->
 				
-			</campoEntrada>			
+<!-- 			</campoEntrada>			 -->
 		</input>		
 		<forms>
 			<form name="TUsuario"></form>
 		</forms>
 	</operacion>
 	
-<!-- 	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" > -->
-<!-- 		<output name="valores" tableName="mtInput"> -->
-<!-- 			<campoSalida value="oid_valor" target="id" /> -->
-<!-- 			<campoSalida value="Codigo"    target="codigo" /> -->
-<!-- 			<campoSalida value="descr"     target="descripcion" /> -->
-<!-- 			<campoSalida value="Activo"    target="isActivo" /> -->
-<!-- 		</output>		 -->
+	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" >
+		<output name="valores" tableName="mtInput">
+			<campoSalida value="oid_valor" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="oid_tabla"    target="tablaValoresCaract.id" />
+		</output>		
 			
-<!-- 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer> -->
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
-<!-- 		<forms> -->
-<!-- 			<form name="TEmpresa"></form> -->
-<!-- 		</forms> -->
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
 		
-<!-- 	</operacion> -->
+	</operacion>
 
 	<!-- GUARDAR UN PRODUCTO -->
 	<operacion name="GuardarArticulo" clase="com.jkt.operaciones.Guardar">

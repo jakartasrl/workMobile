@@ -50,7 +50,12 @@ public abstract class Operation extends Observable {
 	protected Session session;
 	protected IServiceRepository serviceRepository;
 	protected IEventBusiness ev;
-
+	
+	@Autowired
+	public void setEventBusiness(IEventBusiness e) {
+		this.ev=e;
+	}
+	
 	private IRepositorioClases repositorioClases;
 	
 	public IRepositorioClases getRepositorioClases() {

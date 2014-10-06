@@ -12,7 +12,7 @@ import com.jkt.varios.dominio.UnidadMedida;
  * <p>Un producto esta estrictamente relacionado a un tipo de producto.</p>
  * <p>Un tipo de producto puede ser una camisa, y el producto puede ser camisa manga larga talle XL</p>
  * 
- * @author ssuarez
+ * @author Leonel Suarez - Jakarta SRL
  *
  */
 public class Producto extends Descriptible {
@@ -105,7 +105,7 @@ public class Producto extends Descriptible {
 	 * TODO ver bien esto!!
 	 */
 	public void setServicio(boolean servicio) {
-		this.bien = !servicio;
+//		this.bien = !servicio;
 	}
 	
 	public boolean isVendible() {
@@ -213,15 +213,17 @@ public class Producto extends Descriptible {
 
 	
 	/*
+	 * 
+	 * FIXME 
 	 * Que sucede si tengo un producto con 5 detalles, y al cambiar de tipo de producto se cambian, logicamente, el espectro de caracteristicas?
 	 * Para esto, uso una bandera, con lo cual, elimino la lista de detalles que existia previamente, y genero una nueva...
 	 */
 	private boolean flag=false;
 	public void agregarDetalle(ProductoDet detalle){
-//		if (!flag) {
-//			detalles.clear();
-//			flag=true;
-//		}
+		if (!flag) {
+			detalles.clear();
+			flag=true;
+		}
 		if(!detalles.contains(detalle)){
 			detalles.add(detalle);
 			detalle.setProducto(this);
