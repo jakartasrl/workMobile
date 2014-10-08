@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.cotizador.dominio.ConceptoPresupuesto" table="CONCEPTO_PRESUPUESTO" >
+		
+		<id name="id" column="CONCEPTO_PRESUPUESTO_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="DESCRIPCION"/>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="pideArticulo" column="PIDE_ARTICULO" type="boolean" />
+		
+		<list name="clasificadores" table="CONCEPTO_CLASIFICADOR" lazy="true" cascade="all">
+			<key column="CONCEPTO_PRESUPUESTO_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.cotizador.dominio.ConceptoPresupuestoClasificador" />
+		</list>
+		
+	</class>
+
+</hibernate-mapping>

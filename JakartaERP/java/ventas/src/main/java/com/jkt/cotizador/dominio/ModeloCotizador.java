@@ -1,7 +1,6 @@
 package com.jkt.cotizador.dominio;
 
 import com.jkt.dominio.Descriptible;
-import com.jkt.dominio.PersistentEntity;
 
 /**
  * <p>Un modelo de cotizador será para facilitar la tarea a los empleados que se encargan de cotizar.</p>
@@ -15,4 +14,14 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class ModeloCotizador extends Descriptible {
 
+	private TituloModeloCotizador titulo;
+
+	public TituloModeloCotizador getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(TituloModeloCotizador titulo) {
+		this.titulo = titulo;
+	}
+	
 }

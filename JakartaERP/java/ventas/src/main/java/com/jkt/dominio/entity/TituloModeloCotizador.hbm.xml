@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.cotizador.dominio.TituloModeloCotizador" table="TITULO_MODELO_COTIZADOR" >
+		
+		<id name="id" column="TITULO_MODELO_COTIZADOR_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="DESCRIPCION"/>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<many-to-one name="tituloPadre" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_PADRE_ID" cascade="none"></many-to-one>
+		<many-to-one name="tituloHijo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_HIJO_ID" cascade="none"></many-to-one>
+		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none"></many-to-one>
+	
+	</class>
+
+</hibernate-mapping>
