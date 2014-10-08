@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<joined-subclass name="com.jkt.dominio.ComprobanteCliente" table="COMPROBANTE_CLIENTE" extends="com.jkt.dominio.Comprobante">
+		<key column="COMPROBANTE_ID" />
+
+		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" column="CLIENTE_SUCURSAL_ID"></many-to-one>
+		<many-to-one name="condicionPago" class="com.jkt.varios.dominio.CondPago" column="CONDICION_PAGO_ID"></many-to-one>
+
+	</joined-subclass>
+
+</hibernate-mapping>

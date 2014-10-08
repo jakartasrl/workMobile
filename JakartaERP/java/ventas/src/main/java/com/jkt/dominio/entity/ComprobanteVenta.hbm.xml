@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<joined-subclass name="com.jkt.dominio.ComprobanteVenta" table="COMPROBANTE_VENTA" extends="com.jkt.dominio.ComprobanteCliente">
+		<key column="COMPROBANTE_ID" />
+
+		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_ID"/>
+		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID"/>
+	
+		<list name="detalles" table="COMPROBANTE_VENTA_DET" lazy="true" cascade="all">
+			<key column="COMPROBANTE_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.dominio.ComprobanteVentaDet" />
+		</list>
+
+
+	</joined-subclass>
+
+</hibernate-mapping>

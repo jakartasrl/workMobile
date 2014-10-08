@@ -1,5 +1,7 @@
 package com.jkt.dominio;
 
+import org.omg.CORBA.TCKind;
+
 /**
  * <p>Representa a un comprobante.</p>
  * <p>Esta clase sera super clase de todo tipo de comprobante.</p>
@@ -17,14 +19,20 @@ public abstract class Comprobante extends PersistentEntity {
 	private String lugarEmision;
 	private int nro;
 	private boolean anulado;
+	private TipoComprobante tipoComprobante;
 	/*
 	 * variables de instancia
 	 * ***********************************************
 	 */
 	
-	
 	public String getComportamiento() {
 		return comportamiento;
+	}
+	public TipoComprobante getTipoComprobante() {
+		return tipoComprobante;
+	}
+	public void setTipoComprobante(TipoComprobante tipoComprobante) {
+		this.tipoComprobante = tipoComprobante;
 	}
 	public void setComportamiento(String comportamiento) {
 		this.comportamiento = comportamiento;

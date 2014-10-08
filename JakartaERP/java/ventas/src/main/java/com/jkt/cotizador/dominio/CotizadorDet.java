@@ -1,6 +1,8 @@
 package com.jkt.cotizador.dominio;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.articulos.Producto;
+import com.jkt.varios.dominio.Moneda;
 import com.jkt.varios.dominio.UnidadMedida;
 
 /**
@@ -10,15 +12,31 @@ import com.jkt.varios.dominio.UnidadMedida;
  */
 public class CotizadorDet extends PersistentEntity {
 
+	private Producto producto;
 	private Cotizador cotizador;
 	private int cantidad;
-	private UnidadMedida uniMed;
+	private UnidadMedida unidadMedida;
 	private double precioUnitario;
-	// private Moneda moneda;
+	private Moneda moneda;
 	private double cotizacion;
 	private ConceptoPresupuesto conceptoPresupuesto;
 
-	
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	public Moneda getMoneda() {
+		return moneda;
+	}
+
+	public void setMoneda(Moneda moneda) {
+		this.moneda = moneda;
+	}
+
 	public ConceptoPresupuesto getConceptoPresupuesto() {
 		return conceptoPresupuesto;
 	}
@@ -43,12 +61,12 @@ public class CotizadorDet extends PersistentEntity {
 		this.cantidad = cantidad;
 	}
 
-	public UnidadMedida getUniMed() {
-		return uniMed;
+	public UnidadMedida getUnidadMedida() {
+		return unidadMedida;
 	}
 
-	public void setUniMed(UnidadMedida uniMed) {
-		this.uniMed = uniMed;
+	public void setUnidadMedida(UnidadMedida unidadMedida) {
+		this.unidadMedida = unidadMedida;
 	}
 
 	public double getPrecioUnitario() {
