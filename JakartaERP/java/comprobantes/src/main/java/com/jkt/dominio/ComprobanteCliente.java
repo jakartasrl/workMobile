@@ -3,6 +3,7 @@ package com.jkt.dominio;
 import com.jkt.erp.varios.ClienteSucursal;
 import com.jkt.varios.dominio.CondPago;
 
+
 /**
  * TODO write a little coment.
  * 

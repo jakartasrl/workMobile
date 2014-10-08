@@ -4,6 +4,10 @@
     <groupId>com.jkt</groupId>
     <artifactId>jkt</artifactId>
     <version>0.0.1</version>
+<!--     ..java -->
+<!--     ../..jakartaERP -->
+<!--     ../../..App3000 -->
+    <relativePath>../../../pom.xml</relativePath>
   </parent>
   <artifactId>articulos</artifactId>
   <name>articulos</name>

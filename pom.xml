@@ -28,7 +28,24 @@
 		<module>./JakartaERP/java/clientes</module>
 		<module>./JakartaERP/java/ventas</module>
 		<module>./JakartaERP/java/comprobantes</module>
-
+	
+	<!-- para el nexus 
+		<module>common</module>
+		<module>context</module>
+		<module>frontend</module>
+		<module>varios</module>
+		<module>web</module>
+		<module>persistencia</module>
+		<module>seguridad</module>
+	
+		<module>articulos</module>
+		<module>laboratorio</module>
+		<module>clientes</module>
+		<module>ventas</module>
+		<module>comprobantes</module>
+-->
+	
+	
 	</modules>
 
 	<build>
