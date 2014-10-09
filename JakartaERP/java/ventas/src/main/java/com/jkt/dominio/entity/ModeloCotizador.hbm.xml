@@ -18,7 +18,7 @@
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		<many-to-one name="titulo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_ID" cascade="none"></many-to-one>
+		<many-to-one name="titulo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_ID" cascade="all"></many-to-one>
 	
 	</class>
 

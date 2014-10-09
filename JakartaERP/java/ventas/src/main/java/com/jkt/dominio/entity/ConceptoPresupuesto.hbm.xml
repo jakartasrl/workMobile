@@ -19,11 +19,14 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="pideArticulo" column="PIDE_ARTICULO" type="boolean" />
 		
-		<list name="clasificadores" table="CONCEPTO_CLASIFICADOR" lazy="true" cascade="all">
-			<key column="CONCEPTO_PRESUPUESTO_ID" />
-			<index column="ORDEN" />
-			<one-to-many class="com.jkt.cotizador.dominio.ConceptoPresupuestoClasificador" />
-		</list>
+<!-- 		<list name="clasificadores" table="CONCEPTO_CLASIFICADOR" lazy="true" cascade="all"> -->
+<!-- 			<key column="CONCEPTO_PRESUPUESTO_ID" /> -->
+<!-- 			<index column="ORDEN" /> -->
+<!-- 			<one-to-many class="com.jkt.cotizador.dominio.ConceptoPresupuestoClasificador" /> -->
+<!-- 		</list> -->
+		
+		<many-to-one name="componenteValor" class="com.jkt.varios.dominio.ComponenteValor" column="COMPONENTE_VALOR_ID"></many-to-one>
+		<many-to-one name="titulo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_ID"></many-to-one>
 		
 	</class>
 

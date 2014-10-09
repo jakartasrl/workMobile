@@ -1,5 +1,7 @@
 package com.jkt.erp.varios;
 
+import org.hibernate.validator.constraints.Email;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -9,7 +11,9 @@ import com.jkt.dominio.Descriptible;
  */
 public class Representante extends Descriptible {
 
+	@Email
 	private String mail;
+	
 	private String telefono;
 
 	public String getMail() {

@@ -19,8 +19,15 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		<many-to-one name="tituloPadre" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_PADRE_ID" cascade="none"></many-to-one>
-		<many-to-one name="tituloHijo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_HIJO_ID" cascade="none"></many-to-one>
-		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none"></many-to-one>
+		<many-to-one name="tituloHijo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_HIJO_ID" cascade="all"></many-to-one>
+		
+<!-- 		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none"></many-to-one> -->
+	
+		<list name="conceptos" table="CONCEPTO_PRESUPUESTO" lazy="true" cascade="all">
+			<key column="TITULO_MODELO_COTIZADOR_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.cotizador.dominio.ConceptoPresupuesto" />
+		</list>
 	
 	</class>
 
