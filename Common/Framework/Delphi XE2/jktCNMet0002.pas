@@ -92,6 +92,7 @@ type
     procedure   addAtribute(aAttName, aAttValue :string); overload;
     procedure   addAtribute(aAttName : String; aAttValue : Boolean); overload;
     procedure   addAtribute(aAttName : String; aAttValue : Integer); overload;
+    procedure   addAtribute(aAttName : String; aAttValue : Extended); overload;
     procedure   addDataSet(DataSet : TDataSet ; condicion : variant; aTag : Integer = 0 ; DataSetName : string = '');
     procedure enviarCampos(aDataset: TDataSet; aTag : Integer; aNivel : Integer);
     property Dataset :TDataset read FDataset  write FDataset;
@@ -400,16 +401,27 @@ Detalles:
 *******************************************************************************}
 procedure TjktServiceCaller.tratarResponse(response: AnsiString);
 var
-   fs        : PAnsiChar;// PChar;
-   i , j     : Integer;
-   xmlParser : TXmlParser;
-   fieldName : AnsiString;
-   value, value1: AnsiString;
-   pos: cardinal;
-   listaDataSets: TStringList;
+  fs        : PAnsiChar;// PChar;
+  i , j     : Integer;
+  xmlParser : TXmlParser;
+  fieldName : AnsiString;
+  value, value1: AnsiString;
+  pos: cardinal;
+  listaDataSets: TStringList;
+
+  FDecimalSeparator  : Char;
+  FThousandSeparator : Char;
 begin
-   FormatSettings.DecimalSeparator  := puntoDecimal;
-   FormatSettings.ThousandSeparator := separadorMiles;
+//  FormatSettings.DecimalSeparator  := puntoDecimal;
+//  FormatSettings.ThousandSeparator := separadorMiles;
+
+  FDecimalSeparator  := FormatSettings.DecimalSeparator;
+  FThousandSeparator := FormatSettings.ThousandSeparator;
+
+  // Debo setear la configuración que usa el servidor
+  FormatSettings.DecimalSeparator  := '.';
+  FormatSettings.ThousandSeparator := ',';
+
 
 // Para Debug de datos entre Java -> Delphi
 //   if (FMet005 <> nil)
@@ -428,7 +440,6 @@ begin
              llenarMultiDataSet(response);
              exit;
            end;
-
 
    fs := PAnsiChar(response);
 
@@ -534,14 +545,22 @@ begin
 
                                 end
                            else if (FDataset.fieldByName(fieldName).DataType = ftCurrency) or
-                                   (FDataset.fieldByName(fieldName).DataType = ftFloat)
-                                   then FDataset.fieldByName(fieldName).Value := StrToFloat(XMLParser.CurAttr.Value(i)) // no hay una version AnsiString de StrToFloat ni de StrToInt
-                                   else begin
-                                        if ((FDataset.fieldByName(fieldName).Size >=255) or
-                                            (FDataset.fieldByName(fieldName).DataType = ftMemo))
-                                           then FDataset.fieldByName(fieldName).Value := getTextToRich(XMLParser.CurAttr.Value(i))
-                                           else FDataset.fieldByName(fieldName).Value := XMLParser.CurAttr.Value(i);
-                                        end;
+                                   (FDataset.fieldByName(fieldName).DataType = ftFloat) then
+                             begin
+                               // Antes de llamar a StrToFloat habría que setear el 'DecimalSeparator' y 'ThousandSeparator'
+                               // según el formato que envíe el servidor para que se haga correctamente la conversión.
+                               // Esto es genial ya que nosotros definimos como enviamos el formato y el usuario
+                               // define mediante la Configuración Regional como quiere ver sus datos.
+
+                               FDataset.FieldByName(fieldName).Value := StrToFloat(XMLParser.CurAttr.Value(i)); // no hay una version AnsiString de StrToFloat ni de StrToInt
+                             end
+                           else
+                             begin
+                               if ((FDataset.fieldByName(fieldName).Size >=255) or
+                                   (FDataset.fieldByName(fieldName).DataType = ftMemo))
+                                    then FDataset.fieldByName(fieldName).Value := getTextToRich(XMLParser.CurAttr.Value(i))
+                                    else FDataset.fieldByName(fieldName).Value := XMLParser.CurAttr.Value(i);
+                             end;
                         end;
                end;
          END;
@@ -552,9 +571,12 @@ begin
      end;
 
   finally
-
-   if (FDataset <> nil) and ((FDataset.state = dsEdit) or (FDataset.state = dsInsert))
-       then FDataset.Post;
+    // Dejo todo como estaba!
+    FormatSettings.DecimalSeparator  := FDecimalSeparator;
+    FormatSettings.ThousandSeparator := FThousandSeparator;
+    //
+    if (FDataset <> nil) and ((FDataset.state = dsEdit) or (FDataset.state = dsInsert)) then
+      FDataset.Post;
 
     // La idea es activar el Versioning de todos los datasets para realizar las seguimientos
     for j:=0 to listaDataSets.Count-1 do
@@ -897,29 +919,75 @@ begin
 
   for idx := 0 to aDataset.Fields.Count - 1 do
     begin
-      if ((aDataset.Fields[idx] is TIntegerField) or (aDataset.Fields[idx] is TFloatField) or (aDataset.Fields[idx] is TCurrencyField))
-     and  (aDataset.Fields[idx].IsNull)
-          then if (aTag <> 0)
-                  then begin
-                         if (aDataset.Fields[idx].Tag >= aTag)
-                            then addAtribute(aDataset.Fields[idx].FieldName, '0')
-                       end
-                  else addAtribute(aDataset.Fields[idx].FieldName, '0')
+      if ((aDataset.Fields[idx] is TIntegerField) or (aDataset.Fields[idx] is TFloatField) or
+         (aDataset.Fields[idx] is TCurrencyField)) and  (aDataset.Fields[idx].IsNull) then
+            if (aTag <> 0) then
+              begin
+                if (aDataset.Fields[idx].Tag >= aTag) then
+                  addAtribute(aDataset.Fields[idx].FieldName, '0')
+              end
+            else
+              addAtribute(aDataset.Fields[idx].FieldName, '0')
 
-     else if (aTag <> 0)
-              then begin
-                    if (aDataset.Fields[idx].Tag >= aTag)
-                        then if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size>=255))
-                                    then addAtribute (aDataset.Fields[idx].FieldName, getRichToText(aDataset.Fields[idx].AsString))
-                                    else addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
-                   end
-              else begin
-                    if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size>=255))
-                          then addAtribute (aDataset.Fields[idx].FieldName, getRichToText(aDataset.Fields[idx].AsString))
-                          else addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
-                   end;
+      else if (aTag <> 0) then
+        begin
+          if (aDataset.Fields[idx].Tag >= aTag) then
+            if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size >= 255)) then
+              addAtribute (aDataset.Fields[idx].FieldName, getRichToText(aDataset.Fields[idx].AsString))
+            else
+              begin
+                // OJO, ahora le aplico un formato a los 'TFloatField' y 'TCurrencyField'
+                if ((aDataset.Fields[idx] is TFloatField) or (aDataset.Fields[idx] is TCurrencyField)) then
+                  addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsFloat)
+                else
+                  addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
+              end;
+        end
 
+      else begin
+        if ((aDataset.Fields[idx] is TMemoField) or (aDataset.Fields[idx].Size >= 255)) then
+          addAtribute (aDataset.Fields[idx].FieldName, getRichToText(aDataset.Fields[idx].AsString))
+        else
+          addAtribute (aDataset.Fields[idx].FieldName, aDataset.Fields[idx].AsString);
+      end;
     end;
+end;
+
+procedure TjktServiceCaller.addAtribute(aAttName: String; aAttValue: Extended);
+var
+  FDecimalSeparator  : Char;
+  FThousandSeparator : Char;
+begin
+  aAttName := UpperCase(aAttName);
+
+//  Value := 1200.34;
+//
+//  FloatToStr(Value) = '1200,34'; // Según la Config. Regional
+//
+//  {Cambio Decimal = , Miles = .}
+//  FormatSettings.DecimalSeparator  := ',';
+//  FormatSettings.ThousandSeparator := '.';
+//
+//  FormatFloat('#,###.00', Value) = '1.200,34';
+//
+//  {Cambio Decimal = . Miles = ,}
+//  FormatSettings.DecimalSeparator  := '.';
+//  FormatSettings.ThousandSeparator := ',';
+//
+//  FormatFloat('#,###.00', Value) = '1,200.34';
+
+  FDecimalSeparator  := FormatSettings.DecimalSeparator;
+  FThousandSeparator := FormatSettings.ThousandSeparator;
+
+  // Debo setear la configuración que usa el servidor
+  FormatSettings.DecimalSeparator  := '.';
+  FormatSettings.ThousandSeparator := ',';
+
+  FXML.addAtribute(aAttName, FloatToStr(aAttValue));
+
+  // Dejo todo como estaba!
+  FormatSettings.DecimalSeparator  := FDecimalSeparator;
+  FormatSettings.ThousandSeparator := FThousandSeparator;
 end;
 
 end.
