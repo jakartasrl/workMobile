@@ -12,11 +12,19 @@ public class TituloModeloCotizador extends Descriptible {
 	 */
 	private TituloModeloCotizador tituloPadre, tituloHijo;
 	private List<ConceptoPresupuesto> conceptos=new ArrayList<ConceptoPresupuesto>();
-
+	private ModeloCotizador modeloCotizador;
 	/*
 	 * atributos transientes para el manejo de jerarquia en arbol.
 	 */
 	private int codigoInterno,codigoInternoPadre;
+
+	public ModeloCotizador getModeloCotizador() {
+		return modeloCotizador;
+	}
+
+	public void setModeloCotizador(ModeloCotizador modeloCotizador) {
+		this.modeloCotizador = modeloCotizador;
+	}
 
 	public int getCodigoInterno() {
 		return codigoInterno;

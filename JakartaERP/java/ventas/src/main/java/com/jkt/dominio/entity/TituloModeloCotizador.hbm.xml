@@ -21,7 +21,7 @@
 		<many-to-one name="tituloPadre" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_PADRE_ID" cascade="none"></many-to-one>
 		<many-to-one name="tituloHijo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_HIJO_ID" cascade="all"></many-to-one>
 		
-<!-- 		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none"></many-to-one> -->
+		<many-to-one name="modeloCotizador" class="com.jkt.cotizador.dominio.ModeloCotizador" column="MODELO_COTIZADOR" cascade="none"></many-to-one>
 	
 		<list name="conceptos" table="CONCEPTO_PRESUPUESTO" lazy="true" cascade="all">
 			<key column="TITULO_MODELO_COTIZADOR_ID" />

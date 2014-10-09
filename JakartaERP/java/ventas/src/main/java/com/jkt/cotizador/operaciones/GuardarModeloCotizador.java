@@ -43,7 +43,8 @@ public class GuardarModeloCotizador extends Operation {
 		ultimoTitulo.agregarTodosLosConceptos(modelo.getConceptos());
 		
 		//finalizo la conexion de objetos
-		modelo.setTitulo(primerTitulo);
+//		modelo.setTitulo(primerTitulo);
+		//TODO hay que agregar todos los titulos de level 0
 		
 		//guardo el modelo de cotizador.
 		guardar(modelo);

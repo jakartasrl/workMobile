@@ -20,12 +20,11 @@ public class ModeloCotizador extends Descriptible {
 	/*
 	 * Objetos persistentes
 	 */
-	private TituloModeloCotizador titulo;
+	private List<TituloModeloCotizador> titulos=new ArrayList<TituloModeloCotizador>();
 
 	/*
 	 * Objetos transientes.
 	 */
-	private List<TituloModeloCotizador> titulos=new ArrayList<TituloModeloCotizador>();
 	private List<ConceptoPresupuesto> conceptos=new ArrayList<ConceptoPresupuesto>();
 	
 	
@@ -55,14 +54,6 @@ public class ModeloCotizador extends Descriptible {
 
 	public void setTitulos(List<TituloModeloCotizador> titulos) {
 		this.titulos = titulos;
-	}
-
-	public TituloModeloCotizador getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(TituloModeloCotizador titulo) {
-		this.titulo = titulo;
 	}
 	
 }
