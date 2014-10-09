@@ -9,8 +9,6 @@ public class ConceptoPresupuesto extends Descriptible {
 	private TituloModeloCotizador titulo;
 	private boolean pideArticulo;
 	private ComponenteValor componenteValor;
-//	private List<ConceptoPresupuestoClasificador> clasificadores=new ArrayList<ConceptoPresupuestoClasificador>();
-	
 	
 //	getters and setters
 	public boolean isPideArticulo() {
@@ -31,22 +29,5 @@ public class ConceptoPresupuesto extends Descriptible {
 	public void setComponenteValor(ComponenteValor componenteValor) {
 		this.componenteValor = componenteValor;
 	}
-	
-//	public List<ConceptoPresupuestoClasificador> getClasificadores() {
-//		return clasificadores;
-//	}
-//	public void setClasificadores(
-//			List<ConceptoPresupuestoClasificador> clasificadores) {
-//		this.clasificadores = clasificadores;
-//	}
-
-//	helper methods
-	
-//	public void agregarClasificador(ConceptoPresupuestoClasificador clasificador){
-//		if (!clasificadores.contains(clasificador)) {
-//			clasificadores.add(clasificador);
-//			clasificador.setConceptoPresupuesto(this);
-//		}
-//	}
 	
 }

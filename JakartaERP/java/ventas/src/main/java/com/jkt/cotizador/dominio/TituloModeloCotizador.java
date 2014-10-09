@@ -3,20 +3,57 @@ package com.jkt.cotizador.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.PersistentEntity;
 
-public class TituloModeloCotizador extends Descriptible {
+public class TituloModeloCotizador extends PersistentEntity {
 
-	/*
-	 * Atributos persistentes
-	 */
-	private TituloModeloCotizador tituloPadre, tituloHijo;
-	private List<ConceptoPresupuesto> conceptos=new ArrayList<ConceptoPresupuesto>();
+	private String codigo, descripcion;
+	private TituloModeloCotizador tituloPadre;
+	private List<TituloModeloCotizador> titulosHijos=new ArrayList<TituloModeloCotizador>();
+	private ConceptoPresupuesto concepto;
 	private ModeloCotizador modeloCotizador;
-	/*
-	 * atributos transientes para el manejo de jerarquia en arbol.
-	 */
+	
 	private int codigoInterno,codigoInternoPadre;
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public TituloModeloCotizador getTituloPadre() {
+		return tituloPadre;
+	}
+
+	public void setTituloPadre(TituloModeloCotizador tituloPadre) {
+		this.tituloPadre = tituloPadre;
+	}
+
+	public List<TituloModeloCotizador> getTitulosHijos() {
+		return titulosHijos;
+	}
+
+	public void setTitulosHijos(List<TituloModeloCotizador> titulosHijos) {
+		this.titulosHijos = titulosHijos;
+	}
+
+	public ConceptoPresupuesto getConcepto() {
+		return concepto;
+	}
+
+	public void setConcepto(ConceptoPresupuesto concepto) {
+		this.concepto = concepto;
+	}
 
 	public ModeloCotizador getModeloCotizador() {
 		return modeloCotizador;
@@ -41,38 +78,21 @@ public class TituloModeloCotizador extends Descriptible {
 	public void setCodigoInternoPadre(int codigoInternoPadre) {
 		this.codigoInternoPadre = codigoInternoPadre;
 	}
-
-	public List<ConceptoPresupuesto> getConceptos() {
-		return conceptos;
-	}
-
-	public void setConceptos(List<ConceptoPresupuesto> conceptos) {
-		this.conceptos = conceptos;
-	}
-
-	public TituloModeloCotizador getTituloPadre() {
-		return tituloPadre;
-	}
-
-	public void setTituloPadre(TituloModeloCotizador tituloPadre) {
-		this.tituloPadre = tituloPadre;
-	}
-
-	public TituloModeloCotizador getTituloHijo() {
-		return tituloHijo;
-	}
-
-	public void setTituloHijo(TituloModeloCotizador tituloHijo) {
-		this.tituloHijo = tituloHijo;
-	}
 	
-	public void agregarTodosLosConceptos(List<ConceptoPresupuesto> conceptos){
-		for (ConceptoPresupuesto conceptoPresupuesto : conceptos) {
-			if (!this.conceptos.contains(conceptoPresupuesto)) {
-				this.conceptos.add(conceptoPresupuesto);
-				conceptoPresupuesto.setTitulo(this);
-			}
+	public void agregarHijo(TituloModeloCotizador hijo){
+		if (!titulosHijos.contains(hijo)) {
+			titulosHijos.add(hijo);
+			hijo.setTituloPadre(this);
 		}
 	}
+	
+	//	public void agregarTodosLosConceptos(List<ConceptoPresupuesto> conceptos){
+//		for (ConceptoPresupuesto conceptoPresupuesto : conceptos) {
+//			if (!this.conceptos.contains(conceptoPresupuesto)) {
+//				this.conceptos.add(conceptoPresupuesto);
+//				conceptoPresupuesto.setTitulo(this);
+//			}
+//		}
+//	}
 
 }

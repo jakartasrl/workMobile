@@ -25,26 +25,26 @@ public class ModeloCotizador extends Descriptible {
 	/*
 	 * Objetos transientes.
 	 */
-	private List<ConceptoPresupuesto> conceptos=new ArrayList<ConceptoPresupuesto>();
+	private List<TituloModeloCotizador> titulosTransientes=new ArrayList<TituloModeloCotizador>();
 	
-	
-	public List<ConceptoPresupuesto> getConceptos() {
-		return conceptos;
+
+	public List<TituloModeloCotizador> getTitulosTransientes() {
+		return titulosTransientes;
 	}
 
-	public void setConceptos(List<ConceptoPresupuesto> conceptos) {
-		this.conceptos = conceptos;
+	public void setTitulosTransientes(List<TituloModeloCotizador> titulosTransientes) {
+		this.titulosTransientes = titulosTransientes;
 	}
 
-	public void agregarConcepto(ConceptoPresupuesto conceptoPresupuesto){
-		if (!conceptos.contains(conceptoPresupuesto)) {
-			conceptos.add(conceptoPresupuesto);
-		}
-	}
-	
 	public void agregarTitulo(TituloModeloCotizador titulo){
 		if (!titulos.contains(titulo)) {
 			titulos.add(titulo);
+		}
+	}
+	
+	public void agregarTituloTransiente(TituloModeloCotizador titulo){
+		if (!titulosTransientes.contains(titulo)) {
+			titulosTransientes.add(titulo);
 		}
 	}
 	

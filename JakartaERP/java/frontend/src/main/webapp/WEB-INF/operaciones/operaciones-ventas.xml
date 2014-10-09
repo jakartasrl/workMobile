@@ -83,22 +83,23 @@
 				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name="mtTitulos" metodo="agregarTitulo" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_Titulo_Modelo_Cotizador">
-					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="mtTitulos" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_Titulo_Modelo_Cotizador">
+					
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+					
 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
-				</campoEntrada>
-				
-				<campoEntrada name="mtConceptoPresupuesto" metodo="agregarConcepto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" fieldID="oid_Conceptos_Presupuesto">
+					
+<!-- 					DEPENDIENDO DE QUE ELEMENTO SEA, SE SETEARAN CODIGO&DESCRIPCION O EL CONCEPTO. -->
+<!-- 					SI ES UN TITULO DE ULTIMO NIVEL, SE SETEARA EL CONCEPTO, EN CASO CONTRARIO SE SETEAN EL CODIGO Y LA DESCRIPCION -->
+
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
-					<campoEntrada name="pideArticulo" clase="Boolean" metodo="setPideArticulo" />
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-					<campoEntrada name="oid_ValorClasif" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+
+					<campoEntrada name="oid_Concepto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConcepto" />
+					
 				</campoEntrada>
-	
+				
 			</campoEntrada>
 		</input>
 	
