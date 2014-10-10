@@ -100,7 +100,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		String operationName = parameters.getString(key);
 	
-		log.debug("Ejecutando la operacion "+operationName+".");
+		log.debug("Ejecutando la operación "+operationName+".");
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {

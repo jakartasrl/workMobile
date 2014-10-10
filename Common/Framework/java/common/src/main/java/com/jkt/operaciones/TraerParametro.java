@@ -24,7 +24,7 @@ public class TraerParametro extends Operation {
 
 	private static final String WRITER_CONFIGURACION = "configuracion";
 	
-	private static final String NOMBRE = "nombre".toUpperCase();
+	private static final String NOMBRE = "nombreParametro".toUpperCase();
 //	private static final String FORMULARIO = "formulario".toUpperCase();
 
 	@Override
