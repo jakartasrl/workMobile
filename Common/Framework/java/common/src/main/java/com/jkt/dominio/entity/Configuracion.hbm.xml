@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.dominio.Configuracion" table="CONFIGURACION" >
+		
+		<id name="id" column="CONFIGURACION_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="nombre" type="string">
+            <column name="NOMBRE" length="15" />
+        </property>
+
+		<property name="valorCadena" type="string">
+            <column name="VALOR_CADENA" />
+        </property>
+        
+		<property name="valorBooleano" type="boolean">
+            <column name="VALOR_BOOLEAN" />
+        </property>
+		
+		<property name="valorNumero" type="integer">
+            <column name="VALOR_ENTERO" />
+        </property>
+		
+		<property name="valorDoble" type="double">
+            <column name="VALOR_DOBLE" />
+        </property>
+		
+		<property name="valorFecha" type="date">
+            <column name="VALOR_FECHA" />
+        </property>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+	</class>
+
+</hibernate-mapping>

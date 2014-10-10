@@ -2728,18 +2728,18 @@
 <XPD:ATTR name="Name" type="string">ClienteSucursal</XPD:ATTR>
 <XPD:REF name="Namespace">jKa8HizDEUGdZSZ+ix/CEQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">12</XPD:ATTR>
-<XPD:REF name="Views[0]">41GKzm5aREuwkV3vkhqU7QAA</XPD:REF>
-<XPD:REF name="Views[1]">iOxNZlzlvkmUK/sBQBrIuAAA</XPD:REF>
-<XPD:REF name="Views[2]">WTrvkwRmFkC+e5yoG4gwBAAA</XPD:REF>
-<XPD:REF name="Views[3]">rThTDhClXEOcqULf+RZdYgAA</XPD:REF>
-<XPD:REF name="Views[4]">0RTceKN1H0ee6xnoxqzE9wAA</XPD:REF>
-<XPD:REF name="Views[5]">RO0Bpn2UuEuYI35dpyyyfAAA</XPD:REF>
-<XPD:REF name="Views[6]">zyvlC7JpQUisMHlfVu5YiQAA</XPD:REF>
-<XPD:REF name="Views[7]">kHxbqsnH+UaVVzsziVQgVgAA</XPD:REF>
-<XPD:REF name="Views[8]">mDleh8bBh0mxS5bs4CmpJgAA</XPD:REF>
-<XPD:REF name="Views[9]">YwOxwhQXZUyr9jWJVDqcSAAA</XPD:REF>
-<XPD:REF name="Views[10]">GflEdpYhqEmLlGKuspwZBgAA</XPD:REF>
-<XPD:REF name="Views[11]">yN/xm5b6s0Gj5sQp5QU+pAAA</XPD:REF>
+<XPD:REF name="Views[0]">mDleh8bBh0mxS5bs4CmpJgAA</XPD:REF>
+<XPD:REF name="Views[1]">YwOxwhQXZUyr9jWJVDqcSAAA</XPD:REF>
+<XPD:REF name="Views[2]">GflEdpYhqEmLlGKuspwZBgAA</XPD:REF>
+<XPD:REF name="Views[3]">yN/xm5b6s0Gj5sQp5QU+pAAA</XPD:REF>
+<XPD:REF name="Views[4]">41GKzm5aREuwkV3vkhqU7QAA</XPD:REF>
+<XPD:REF name="Views[5]">iOxNZlzlvkmUK/sBQBrIuAAA</XPD:REF>
+<XPD:REF name="Views[6]">WTrvkwRmFkC+e5yoG4gwBAAA</XPD:REF>
+<XPD:REF name="Views[7]">rThTDhClXEOcqULf+RZdYgAA</XPD:REF>
+<XPD:REF name="Views[8]">0RTceKN1H0ee6xnoxqzE9wAA</XPD:REF>
+<XPD:REF name="Views[9]">RO0Bpn2UuEuYI35dpyyyfAAA</XPD:REF>
+<XPD:REF name="Views[10]">zyvlC7JpQUisMHlfVu5YiQAA</XPD:REF>
+<XPD:REF name="Views[11]">kHxbqsnH+UaVVzsziVQgVgAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">12</XPD:ATTR>
 <XPD:REF name="Associations[0]">bBHWCi5xskOxxq8ySPkaTgAA</XPD:REF>
 <XPD:REF name="Associations[1]">X3LvG1u4s0S53VESedJgpQAA</XPD:REF>
@@ -2844,14 +2844,19 @@
 <XPD:OBJ name="OwnedElements[5]" type="UMLClass" guid="hZTI7DuD+EyTEu+4lWJ6wQAA">
 <XPD:ATTR name="Name" type="string">Vendedor</XPD:ATTR>
 <XPD:REF name="Namespace">jKa8HizDEUGdZSZ+ix/CEQAA</XPD:REF>
-<XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
 <XPD:REF name="Views[0]">8/p87jIXTUmiKL3IIEBPkwAA</XPD:REF>
 <XPD:REF name="Views[1]">PwGvbmvPVkmF7lYveTpFygAA</XPD:REF>
 <XPD:REF name="Views[2]">gELvjBDEZkigJDHjBreajAAA</XPD:REF>
 <XPD:REF name="Views[3]">pQWY9yIlLEC8vnU3Wx+/SwAA</XPD:REF>
-<XPD:ATTR name="#Associations" type="integer">2</XPD:ATTR>
+<XPD:REF name="Views[4]">1bkNoQNS6k+rKNj81OH2sQAA</XPD:REF>
+<XPD:REF name="Views[5]">oJVyAVf2K0yTW490cvLIugAA</XPD:REF>
+<XPD:REF name="Views[6]">DMk6/UoJRkKwDTIVnnJW5wAA</XPD:REF>
+<XPD:REF name="Views[7]">6yDG59xedkaGUd/zFXrSxQAA</XPD:REF>
+<XPD:ATTR name="#Associations" type="integer">3</XPD:ATTR>
 <XPD:REF name="Associations[0]">kgaCw6Nm2EGLX8qMvbWKQAAA</XPD:REF>
 <XPD:REF name="Associations[1]">/Gmotni1V0eUg8Vl158/5gAA</XPD:REF>
+<XPD:REF name="Associations[2]" pathname="::Modelo de Dominio::Jakarta3000::Ventas::Operativo::::">VbC5Z+rbTke0PupjRu9bHAAA</XPD:REF>
 <XPD:ATTR name="#Attributes" type="integer">5</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="bXwYgjiOLECagqaDasHx6QAA">
 <XPD:ATTR name="Name" type="string">codigo</XPD:ATTR>
@@ -2877,13 +2882,18 @@
 <XPD:OBJ name="OwnedElements[6]" type="UMLClass" guid="wfUGdi5Neky8PPL2V5Ry4wAA">
 <XPD:ATTR name="Name" type="string">Representante</XPD:ATTR>
 <XPD:REF name="Namespace">jKa8HizDEUGdZSZ+ix/CEQAA</XPD:REF>
-<XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="#Views" type="integer">8</XPD:ATTR>
 <XPD:REF name="Views[0]">BjbakbqJrUGblCan7B/rXAAA</XPD:REF>
 <XPD:REF name="Views[1]">TMEWRsuLfECZLBkZRQXTcAAA</XPD:REF>
 <XPD:REF name="Views[2]">w4n0FqrICkSjRcfiILC+UgAA</XPD:REF>
 <XPD:REF name="Views[3]">VLYifH514EOwiCVdoFIXlQAA</XPD:REF>
-<XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
+<XPD:REF name="Views[4]">+T0gGrDlZ02+w+pB0CeYTgAA</XPD:REF>
+<XPD:REF name="Views[5]">UfQkWXdb+EWVFNgGzHD1XwAA</XPD:REF>
+<XPD:REF name="Views[6]">gwIeAilZ1UGbR6ljd1HMlgAA</XPD:REF>
+<XPD:REF name="Views[7]">fFw2Kiqe/k6Yyo/1912kzgAA</XPD:REF>
+<XPD:ATTR name="#Associations" type="integer">2</XPD:ATTR>
 <XPD:REF name="Associations[0]">Fy4LolIzi06vwlPYPkvOtgAA</XPD:REF>
+<XPD:REF name="Associations[1]" pathname="::Modelo de Dominio::Jakarta3000::Ventas::Operativo::::">9A1HGwa8hEu5JkuZhHxsEwAA</XPD:REF>
 <XPD:ATTR name="#Attributes" type="integer">4</XPD:ATTR>
 <XPD:OBJ name="Attributes[0]" type="UMLAttribute" guid="CBbmgtSXJUegOFcIEQkCNQAA">
 <XPD:ATTR name="Name" type="string">codigo</XPD:ATTR>

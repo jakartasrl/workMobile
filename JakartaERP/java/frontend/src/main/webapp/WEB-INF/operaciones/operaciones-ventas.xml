@@ -1,0 +1,201 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE entity [
+
+  <!ELEMENT entity        (operacion*)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+<!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
+  
+  <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
+  <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
+  <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
+  <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+  
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
+
+  <!ELEMENT lista  (lista*)>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
+
+
+  <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
+  <!ELEMENT campoSalida   (campoSalida*,output*)>  
+  
+  <!ELEMENT dataset       (campo*)>
+  <!ELEMENT campo         EMPTY>
+  <!ELEMENT tables       (tableDef+)>
+  <!ELEMENT tableDef     (campoTable*)>
+  <!ELEMENT campoTable   EMPTY>
+  
+  <!ATTLIST transformer clase           CDATA #REQUIRED>
+  
+  <!ATTLIST form name	CDATA #REQUIRED>
+  
+  <!ATTLIST input name           	 	CDATA    #IMPLIED><!--   Nombre que se corresponde con la entrada de delphi. Si en delphi mandan el valor Name, acá debe exstir en valor Name para obtener los demas datos -->
+  <!ATTLIST input keyName           	CDATA    #IMPLIED><!--   Indica el key del mapa que llega a la operacion. Si el valor es 'leo', se debera recuperar usando la key 'leo' sobre el mapa en la operacion -->
+  <!ATTLIST input clase           	 	CDATA    #IMPLIED><!-- 	define la clase del parmetro recibido -->
+  <!ATTLIST input fieldID           	CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
+  
+  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
+  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+ 
+  <!ATTLIST output name					CDATA #REQUIRED> 
+  <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
+
+  <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
+  <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
+  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
+
+  <!ATTLIST operacion name              ID    #REQUIRED>
+  <!ATTLIST operacion clase             CDATA #IMPLIED>
+  <!ATTLIST operacion entidad           CDATA #IMPLIED>
+  <!ATTLIST operacion XMLWriter         CDATA #IMPLIED>
+  <!ATTLIST operacion redirect          CDATA #IMPLIED>
+  <!ATTLIST operacion usaJMS            CDATA #IMPLIED>
+  
+  <!ATTLIST dataset name                CDATA #REQUIRED>
+  <!ATTLIST dataset value               CDATA #IMPLIED>
+  <!ATTLIST dataset tabla               CDATA #IMPLIED>
+  
+  <!ATTLIST campo   name                CDATA #REQUIRED>
+  <!ATTLIST campo   value               CDATA #IMPLIED>
+  
+  <!ATTLIST tableDef    name           	CDATA #REQUIRED>
+
+  <!ATTLIST campoTable	name        	CDATA #REQUIRED>
+  <!ATTLIST campoTable  orden       	CDATA #IMPLIED>
+  <!ATTLIST campoTable  tipo        	CDATA #IMPLIED>
+  <!ATTLIST campoTable  longitud    	CDATA #IMPLIED>
+  
+]>
+
+<entity>
+
+	<operacion name="GuardarModeloCotizador" clase="com.jkt.cotizador.operaciones.GuardarModeloCotizador">
+	
+		<input name="mtModeloCotizador" keyName="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" fieldID="oid_Modelo_Cotizador">
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				
+				<campoEntrada name="mtTitulos" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_Titulo_Modelo_Cotizador">
+					
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+					
+					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
+					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
+					
+<!-- 					DEPENDIENDO DE QUE ELEMENTO SEA, SE SETEARAN CODIGO&DESCRIPCION O EL CONCEPTO. -->
+<!-- 					SI ES UN TITULO DE ULTIMO NIVEL, SE SETEARA EL CONCEPTO, EN CASO CONTRARIO SE SETEAN EL CODIGO Y LA DESCRIPCION -->
+
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+
+					<campoEntrada name="oid_Concepto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConcepto" />
+					
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="---"></form>
+		</forms>
+
+	</operacion>
+	
+	
+	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
+	<operacion name="TraerModeloCotizador" clase="com.jkt.cotizador.operaciones.TraerModeloCotizador">
+
+		<output name="modelo" tableName="mtModelo">
+			<campoSalida value="oid_Modelo" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="desc" target="descripcion" />
+		</output>
+
+		<output name="titulos" tableName="mtTitulos">
+			<campoSalida value="oid_Titulo" target="id" />
+
+			<campoSalida value="oid_Modelo" target="modeloCotizador.id" />
+
+			<campoSalida value="codInterno" target="codigoInterno" />
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="desc" target="descripcion" />
+			
+			<campoSalida value="oid_Concepto" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
+			<campoSalida value="descConcepto" target="concepto.codigo" /> 
+			<campoSalida value="CodigoConcepto" target="concepto.descripcion" /> 
+			
+
+		</output>
+
+		<output name="conceptos" tableName="mtConceptosPresupuesto">
+			<campoSalida value="oid_Concepto" target="id" />
+
+			<campoSalida value="oid_Titulo" target="titulo.id" />
+
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="desc" target="descripcion" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="---">
+			</form>
+		</forms>
+
+	</operacion>
+	
+	
+
+<!-- 	Concepto de presupuesto -->
+<!-- RECUPERAR  Caracteristicas de Producto -->
+	<operacion name="TraerConceptoPresupuesto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.cotizador.dominio.ConceptoPresupuesto">
+		
+		<output name="resultado" tableName="mtConc">
+			<campoSalida value="oid_conc" target="id" />
+			<campoSalida value="cod_conc" target="codigo" />
+			<campoSalida value="des_con" target="descripcion" />
+			<campoSalida value="pide_art" target="isPideArticulo" />
+			<campoSalida value="oi_val_cla" target="componenteValor.id" />
+			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
+			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="--"></form>
+		</forms>		
+	</operacion>
+	
+	<operacion name="GuardarConceptoPresupuesto" clase="com.jkt.operaciones.GuardarLista">
+	
+		<input name="mtConc" keyName="objeto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" fieldID="oid_conc">
+			<campoEntrada>
+				<campoEntrada name="cod_conc" clase="String" metodo="setCodigo" />
+				<campoEntrada name="des_conc" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="pide_art" clase="Boolean" metodo="setPideArticulo" />
+				<campoEntrada name="oi_val_cla" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="---"></form>
+		</forms>
+
+	</operacion>
+	
+	
+	
+</entity>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+<!-- 	<class name="com.jkt.dominio.Comprobante" table="COMPROBANTE" > no ingreso el nombre de la tabla ya que cada subclase se encargara de esto-->
+	<class name="com.jkt.dominio.Comprobante" abstract="true" >
+		
+		<id name="id" column="COMPROBANTE_ID">
+			<generator class="native" />
+		</id>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<property name="comportamiento" column="COMPORTAMIENTO" />
+		<property name="lugarEmision" column="LUGAR_EMISION" />
+		<property name="anulado" column="ANULADO" type="boolean" />
+		<property name="nro" column="NUMERO" type="integer" />
+		
+		<property name="letra" type="string">
+            <column name="LETRA" length="1" />
+        </property>
+        
+        <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID"></many-to-one>
+        
+		
+	</class>
+
+</hibernate-mapping>

@@ -773,6 +773,14 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 25;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Modelos de Cotizador';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 204;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
   cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;
 

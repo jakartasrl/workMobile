@@ -6,6 +6,11 @@
     <groupId>com.jkt</groupId>
     <artifactId>jkt</artifactId>
     <version>0.0.1</version>
+<!--     ..java -->
+<!--     ../..framework -->
+<!--     ../../..common -->
+<!--     ../../../..App3000 -->
+    <relativePath>../../../../pom.xml</relativePath>
   </parent>
 	<name>web</name>
 	<description>web description</description>
@@ -217,12 +222,23 @@
 <!-- 		</dependency> -->
 
 
-<!-- Dependencia para la gente externa. -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jkt</groupId> -->
-<!-- 			<artifactId>laboratorio</artifactId> -->
-<!-- 			<version>0.0.1</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.jkt</groupId>
+			<artifactId>laboratorio</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.jkt</groupId>
+			<artifactId>ventas</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.jkt</groupId>
+			<artifactId>comprobantes</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 		
 	</dependencies>
 

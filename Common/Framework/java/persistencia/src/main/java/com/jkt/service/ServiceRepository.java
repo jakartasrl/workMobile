@@ -20,12 +20,12 @@ import javax.validation.ConstraintViolation;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
@@ -52,11 +52,13 @@ public class ServiceRepository implements IServiceRepository {
 	public static final String CONDICION_MENOR = "menor";
 	public static final String CONDICION_DISTINTO = "distinto";
 	public static final String CONDICION_IGUAL = "igual";
-	public static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validaci�n de regla de negocio.";
 	public static final String CAMPO_ACTIVO = "activo";
 	public static final String WILD_CHAR = "%";
 
+	public static final String MENSAJE_ERROR_VALIDACION = "Error al intentar ejecutar la validación de regla de negocio.";
+
 	
+	//FIXME USAR LA CLASE DE CONSTANTES DE TIPO ACA, TIPOSDEDATO
 	public static final String INTEGER = "integer";
 	public static final String STRING = "string";
 	public static final String BOOLEAN = "boolean";
@@ -85,7 +87,10 @@ public class ServiceRepository implements IServiceRepository {
 		return sessionProvider.getSession();
 	}
 
-	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException {
+	public PersistentEntity save(PersistentEntity entity)throws ClassNotFoundException, InstantiationException,IllegalAccessException, ValidacionException, JakartaException {
+		
+//		validarCodigo(entity);
+		
 		ejecutarValidacionDeNegocio(entity);
 		try{
 			getSession().saveOrUpdate(entity);
@@ -96,13 +101,33 @@ public class ServiceRepository implements IServiceRepository {
 			String message = null;
 			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
 				
-				buffer.append(constraintViolation.getPropertyPath()+"->"+constraintViolation.getMessage());
+//				buffer.append(constraintViolation.getPropertyPath()+"->"+constraintViolation.getMessage());
+				buffer.append(constraintViolation.getMessage());
 //				buffer.append(constraintViolation.getMessage().concat("\n"));
 				break;//Solo el primer mensaje es mostrado, por cuestiones del 'enter' en los clientes, no se podia pasar en hexa o \n..
 			}
 			throw new ValidacionException(buffer.toString());
 		}
 		return entity;
+	}
+
+	private void validarCodigo(PersistentEntity entity) throws JakartaException {
+		Descriptible desc;
+		if(Descriptible.class.isAssignableFrom(entity.getClass())){
+			desc=(Descriptible) entity;
+			String codigo = desc.getCodigo();
+			List<PersistentEntity> entidadesPorCodigo = getByProperty(entity.getClass(), "codigo", codigo);
+			
+			if (entity.getId()!=0) {
+				//es actualizacion!
+			}else{
+				//es nuevo!
+				if (!entidadesPorCodigo.isEmpty()) {
+					throw new JakartaException(String.format("No se puede guardar esta entidad de tipo %s ya que existe una con el codigo %s.",entity.getClass().getSimpleName(), codigo));
+				}
+			}
+			
+		}		
 	}
 
 	private void ejecutarValidacionDeNegocio(PersistentEntity entity) throws InstantiationException, IllegalAccessException, ValidacionException {
@@ -131,7 +156,7 @@ public class ServiceRepository implements IServiceRepository {
 		}
 	}
 
-	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
+	public List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException, JakartaException {
 		for (PersistentEntity persistentEntity : aEntities) {
 			save(persistentEntity);
 		}

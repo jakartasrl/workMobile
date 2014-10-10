@@ -82,7 +82,7 @@
 		<validadores>
 			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="TablaValoresCaracProd" oidName="oid_tabla" descrName="des_tabla" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="tablaValoresCaract" oidName="oid_tabla" descrName="des_tabla" />
 		</validadores>
 		
 	</entidad>
@@ -104,7 +104,7 @@
 		<validadores>
 			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="TablaValoresCaracProd" oidName="oid_tabla" descrName="des_tabla" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" entidad="tablaValoresCaract" oidName="oid_tabla" descrName="des_tabla" />
 		</validadores>
 		
 	</entidad>
@@ -264,6 +264,30 @@
 		</validadores>
 		
 	</entidad>
+	
+	
+	<!-- 	Configuracion -->
+	<entidad nombre="Configuracion">
+	
+		<operacion operSave="GuardarConfiguracion" operTraer="TraerConfiguracion" />
+		
+		<campos>
+			<campo fieldName="oid_configuracion" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="oid_configuracion" />
+			
+			<campo fieldName="Nombre" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Nombre"  />
+			<campo fieldName="ValorCadena" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Valor Cadena"  />
+			<campo fieldName="ValorEntero" tipo="Integer" longitud="60" visible="true" readOnly="false" orden="4" label="Valor Entero"  />
+			<campo fieldName="ValorDoble" tipo="Double" longitud="60" visible="true" readOnly="false" orden="5" label="Valor Doble"  />
+			<campo fieldName="ValorBooleano" tipo="Boolean" longitud="60" visible="true" readOnly="false" orden="6" label="Valor Booleano"  />
+			<campo fieldName="ValorFecha" tipo="Date" longitud="60" visible="true" readOnly="false" orden="7" label="Valor Fecha"  />
+			
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="8" label="Activo" />
+		</campos>
 
+		<validadores>
+			<validador fieldName="Nombre" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
 	
 </entidades>

@@ -100,7 +100,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		String operationName = parameters.getString(key);
 	
-		log.debug("Ejecutando la operacion "+operationName+".");
+		log.debug("Ejecutando la operaciÃ³n "+operationName+".");
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {
@@ -124,8 +124,8 @@ public abstract class RequestProcessor extends BaseController{
 		 * 
 		 */
 		
-		log.debug("Adaptando la entrada de parametros de acuerdo a la operaciï¿½n solicitada...");
-		parametersAdapted = this.adaptParameters(parameters, eventBusinessOperation);
+		log.debug("Adaptando la entrada de parametros de acuerdo a la operaciÃ³n solicitada...");
+		parametersAdapted = adaptParameters(parameters, eventBusinessOperation);
 
 		try{
 		String entidad = ((EventBusiness) eventBusinessOperation).getEntidad();
@@ -136,16 +136,16 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		
 
-		log.debug("Recuperando un transformer para la operación actual...");
-		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
+		log.debug("Recuperando un transformer para la operaciÃ³n actual...");
+		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
-		log.debug("Ejecutando la operaciï¿½n...");
+		log.debug("Ejecutando la operaciÃ³n...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
 		operation.runOperation(parametersAdapted);
 		
-		log.debug("Enviando resultados de la operación...");
+		log.debug("Enviando resultados de la operaciÃ³n...");
 		transformer.write();
 		
 //		}catch(Exception exception){
@@ -158,7 +158,7 @@ public abstract class RequestProcessor extends BaseController{
 //			}
 			sessionProvider.destroySession();
 		}
-		log.debug("Finalizó la operación...");
+		log.debug("FinalizÃ³ la operaciÃ³n...");
 	}
 
 	private Map<String, Object> getObjetosOutput(Operation aOper,	IEventBusiness aEB) {
@@ -205,8 +205,8 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws JakartaException
 	 */
 	private void finalizar() throws JakartaException {
-		log.debug("No existe la operación solicitada.Se finaliza la petición.");
-		throw new JakartaException("No existe la operación solicitada.Se finaliza la petición.Compruebe el archivo XML y el nombre dado a la operación.");
+		log.debug("No existe la operaciÃ³n solicitada.Se finaliza la peticiÃ³n.");
+		throw new JakartaException("No existe la operaciÃ³n solicitada.Se finaliza la peticiÃ³n.Compruebe el archivo XML y el nombre dado a la operaciÃ³n.");
 	}
 
 	/**

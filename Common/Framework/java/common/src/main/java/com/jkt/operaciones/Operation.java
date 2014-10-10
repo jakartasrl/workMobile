@@ -225,7 +225,7 @@ public abstract class Operation extends Observable {
 		return object;
 	}
 	
-	protected PersistentEntity guardar(PersistentEntity entityToSave) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException{
+	protected PersistentEntity guardar(PersistentEntity entityToSave) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException, JakartaException{
 		serviceRepository.save(entityToSave);
 		return entityToSave;
 	}
@@ -278,7 +278,7 @@ public abstract class Operation extends Observable {
 	 * 
 	 * <p><code>validarEntrada(aParams.get("keyDelMapa"))</code></p>
 	 * 
-	 * @param object, generalmente será un objeto del mapa.
+	 * @param object, generalmente serï¿½ un objeto del mapa.
 	 * @throws JakartaException Si el objeto no existe en e mapa, o si es un string vacio.
 	 */
 	protected void validarEntrada(Object object) throws JakartaException{

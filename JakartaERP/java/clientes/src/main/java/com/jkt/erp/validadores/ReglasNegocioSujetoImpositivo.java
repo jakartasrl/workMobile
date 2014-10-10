@@ -23,7 +23,7 @@ public class ReglasNegocioSujetoImpositivo implements IValidador {
 	}
 
 	/*
-	 * 1. La property local se setea en true si el país de la dirección asociada
+	 * 1. La property local se setea en true si el paï¿½s de la direcciÃ³n asociada
 	 * es ARGENTINA.
 	 * 
 	 * 2. Si Local es false, se setea el cuit que esta asociado a Pais

@@ -22,7 +22,7 @@ uses
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008,
-  cxGridBandedTableView, cxGridDBBandedTableView;
+  cxGridBandedTableView, cxGridDBBandedTableView, jktCNMet0014, cxButtonEdit;
 
 type
   TFNVen0001 = class(TfrmChild)
@@ -37,14 +37,14 @@ type
     mtConcoid_val_cla: TIntegerField;
     mtConccod_val_cla: TStringField;
     mtConcdes_val_cla: TStringField;
-    jktExpDBGrid1DBBandedTableView1: TcxGridDBBandedTableView;
-    jktExpDBGrid1DBBandedTableView1oid_conc: TcxGridDBBandedColumn;
-    jktExpDBGrid1DBBandedTableView1cod_conc: TcxGridDBBandedColumn;
-    jktExpDBGrid1DBBandedTableView1des_conc: TcxGridDBBandedColumn;
-    jktExpDBGrid1DBBandedTableView1pide_art: TcxGridDBBandedColumn;
-    jktExpDBGrid1DBBandedTableView1oid_val_cla: TcxGridDBBandedColumn;
-    jktExpDBGrid1DBBandedTableView1cod_val_cla: TcxGridDBBandedColumn;
-    jktExpDBGrid1DBBandedTableView1des_val_cla: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1: TcxGridDBBandedTableView;
+    DBGrid1DBBandedTableView1oid_conc: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1cod_conc: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1des_conc: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1pide_art: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1oid_val_cla: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1cod_val_cla: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1des_val_cla: TcxGridDBBandedColumn;
     opTraerParametro: TjktOperacion;
     mtParametroInicialNombreParametro: TStringField;
     mtParametrosFormoid_param: TIntegerField;
@@ -55,11 +55,16 @@ type
     mtParametrosFormvalor_fecha: TStringField;
     mtParametrosFormvalor_decimal: TFloatField;
     mtParametrosFormvalor_boolean: TBooleanField;
+    mtConcoid_cla: TIntegerField;
+    HelpValorClasif: TjktHelpGenerico;
+    ValValorClasif: TjktValidador;
     procedure opTraerParametroBeforeEjecutar(Sender: TObject);
     procedure opTraerParametroAfterEjecutar(Sender: TObject);
     procedure mtConcNewRecord(DataSet: TDataSet);
+    procedure DBGrid1DBBandedTableView1cod_val_claPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
   private
-    { Private declarations }
+    oid_cla: Integer;
   public
     { Public declarations }
   end;
@@ -70,34 +75,43 @@ implementation
 {$R *.dfm}
 
 
+procedure TFNVen0001.DBGrid1DBBandedTableView1cod_val_claPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if (mtConc.FieldByName('pide_art').AsBoolean) and (mtConc.FieldByName('oid_cla').AsInteger <> -1) then
+    if HelpValorClasif.Ejecutar then
+      mtConc.FieldByName('des_val_cla').AsString := HelpValorClasif.GetDescripcion;
+end;
+
 procedure TFNVen0001.mtConcNewRecord(DataSet: TDataSet);
 begin
   inherited;
 
-  if not Service.ModoExecute then
-    begin
-      mtParametrosForm.First;
-      if not mtParametrosForm.Locate('codigo', 'ClasifConceptos', [loCaseInsensitive]) then
-        raise Exception.Create('Código de Parámetro inexistente ' );
-
-      result := TParametrosFormvalor_entero.AsInteger;
-
-    end;
+  // Siempre seteo el 'oid_clasificador', incluso cuando me llena la tabla el Servidor
+  mtConc.FieldByName('oid_cla').AsInteger := oid_cla;
 end;
 
 procedure TFNVen0001.opTraerParametroAfterEjecutar(Sender: TObject);
 begin
   inherited;
 
-  // Como ahora estamos pidiendo UN SOLO parámetro, habrá una sola fila en
-  // la tabla 'mtParametrosForm'
+  // Por ahora estamos pidiendo UN SOLO parámetro, habrá entonces una sola fila en
+  // la tabla 'mtParametrosForm'. De todas maneras lo busco como si hubieran varios
+  mtParametrosForm.First;
+  if not mtParametrosForm.Locate('codigo', 'ClasifConceptos', [loCaseInsensitive]) then
+    // 'Código de Parámetro inexistente'
+    oid_cla := -1
+  else
+    oid_cla := mtParametrosForm.FieldByName('valor_entero').AsInteger;
 end;
 
 procedure TFNVen0001.opTraerParametroBeforeEjecutar(Sender: TObject);
 begin
   inherited;
 
-  // Esto se reemplazará cuando se recuperen TODOS los parametros del Form
+  // Esto se reemplazará cuando se recuperen TODOS los parámetros del Form
   if not mtParametroInicial.Active
     then begin
       mtParametroInicial.Open;

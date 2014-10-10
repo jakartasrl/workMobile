@@ -66,8 +66,10 @@ public class Configuration {
 				"/WEB-INF/operaciones/operaciones-common.xml",
 				"/WEB-INF/operaciones/operaciones-seguridad.xml",
 				"/WEB-INF/operaciones/operaciones-varios.xml",
+				"/WEB-INF/operaciones/operaciones-laboratorio.xml",
 				"/WEB-INF/operaciones/operaciones-articulos.xml",
-				"/WEB-INF/operaciones/operaciones-clientes.xml"
+				"/WEB-INF/operaciones/operaciones-clientes.xml",
+				"/WEB-INF/operaciones/operaciones-ventas.xml"
 			});
 		
 		Digester digester = this.generateReaderOperation();
