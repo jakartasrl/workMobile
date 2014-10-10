@@ -138,4 +138,69 @@
 		
 	</operacion>
 
+
+
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
+
+	<!-- RECUPERAR  Configuracion -->
+	<operacion name="TraerConfiguracion" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Configuracion">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_configuracion" target="id" />
+			<campoSalida value="Formulario" target="formulario" />
+			<campoSalida value="Nombre" target="nombre" />
+			<campoSalida value="Valor" target="valor" />
+			<campoSalida value="Activo" target="isActivo" />
+		</output>
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="---" />
+		</forms>
+	</operacion>
+	
+	<!-- GUARDAR Todas las configuraciones -->
+	<operacion name="GuardarConfiguracion" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.dominio.Configuracion" fieldID='oid_configuracion'>
+			<campoEntrada>			
+				<campoEntrada name="Formulario" clase="String" metodo="setFormulario" />
+				<campoEntrada name="Nombre"  clase="String" metodo="setNombre" />
+				<campoEntrada name="Valor"  clase="String" metodo="setValor" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>
+
+		<forms>
+			<form name="---" />
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR  Configuracion -->
+	<operacion name="TraerConfiguracionEspecifica" clase="com.jkt.operaciones.TraerConfiguracionEspecifica" >
+		<output name="configuracion" tableName="mtInput">
+			<campoSalida value="oid_configuracion" target="id" />
+			<campoSalida value="Formulario" target="formulario" />
+			<campoSalida value="Nombre" target="nombre" />
+			<campoSalida value="Valor" target="valor" />
+			<campoSalida value="Activo" target="isActivo" />
+		</output>
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="---" />
+		</forms>
+	</operacion>
+
+
 </entity>

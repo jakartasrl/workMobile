@@ -108,5 +108,52 @@
 		</forms>
 
 	</operacion>
+	
+	
+	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
+	<operacion name="TraerModeloCotizador" clase="com.jkt.cotizador.operaciones.TraerModeloCotizador">
+
+		<output name="modelo" tableName="mtModelo">
+			<campoSalida value="oid_Modelo" target="id" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="desc" target="descripcion" />
+		</output>
+
+		<output name="titulos" tableName="mtTitulos">
+			<campoSalida value="oid_Titulo" target="id" />
+
+			<campoSalida value="oid_Modelo" target="modeloCotizador.id" />
+
+			<campoSalida value="codInterno" target="codigoInterno" />
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="desc" target="descripcion" />
+			
+			<campoSalida value="oid_Concepto" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
+			<campoSalida value="descConcepto" target="concepto.codigo" /> 
+			<campoSalida value="CodigoConcepto" target="concepto.descripcion" /> 
+			
+
+		</output>
+
+		<output name="conceptos" tableName="mtConceptosPresupuesto">
+			<campoSalida value="oid_Concepto" target="id" />
+
+			<campoSalida value="oid_Titulo" target="titulo.id" />
+
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="desc" target="descripcion" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="---">
+			</form>
+		</forms>
+
+	</operacion>
 
 </entity>

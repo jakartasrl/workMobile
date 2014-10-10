@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.dominio.Configuracion" table="CONFIGURACION" >
+		
+		<id name="id" column="CONFIGURACION_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="formulario" type="string">
+            <column name="FORM" length="15" />
+        </property>
+
+		<property name="nombre" type="string">
+            <column name="NOMBRE" length="15" />
+        </property>
+
+		<property name="valor" type="string">
+            <column name="VALOR" length="60" />
+        </property>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+	</class>
+
+</hibernate-mapping>

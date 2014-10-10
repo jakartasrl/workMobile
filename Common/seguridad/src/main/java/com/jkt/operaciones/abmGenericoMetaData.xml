@@ -265,6 +265,27 @@
 		
 	</entidad>
 	
+	
+	<!-- 	Configuracion -->
+	<entidad nombre="Configuracion">
+	
+		<operacion operSave="GuardarConfiguracion" operTraer="TraerConfiguracion" />
+		
+		<campos>
+			<campo fieldName="oid_configuracion" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="oid_configuracion" />
+			
+			<campo fieldName="Formulario" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Formulario"  />
+			<campo fieldName="Nombre" tipo="String" longitud="15" visible="true" readOnly="false" orden="3" label="Nombre"  />
+			<campo fieldName="Valor" tipo="String" longitud="60" visible="true" readOnly="false" orden="4" label="Valor"  />
+			
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
+		</campos>
 
+		<validadores>
+			<validador fieldName="Nombre" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="Valor" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
 	
 </entidades>

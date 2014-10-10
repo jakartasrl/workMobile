@@ -39,6 +39,13 @@ public class GuardarModeloCotizador extends Operation {
 		guardar(modelo);
 	}
 
+	/**
+	 * Establece la jerarquia entre los titulos y asigna al modelo su titulo principal.
+	 * 
+	 * @param modelo Para setear el primer titulo
+	 * @param mapaDetitulos donde estan depositados todos los titulos desordenados pero con una referencia a su codigo interno
+	 * @param titulos los titulos totalmente desordenados
+	 */
 	private void establecerRelaciones(ModeloCotizador modelo, Map<String, TituloModeloCotizador> mapaDetitulos, List<TituloModeloCotizador> titulos) {
 		int codigoPadre;
 		TituloModeloCotizador tituloEnMapa;
