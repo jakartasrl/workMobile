@@ -233,14 +233,14 @@
 
 		<validadores>
 <!-- 			<validador fieldName="codigo"       tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" /> -->
-			<validador fieldName="codigo"    tipoValidacion="Existente" entidad="unidadMedida" oidName="oid" descrName="descr" />
+			<validador fieldName="codigo"    tipoValidacion="Inexistente" entidad="unidadMedida" oidName="oid" descrName="descr" />
 			<validador fieldName="descr"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 		
 	</entidad>
 	
 	
-		<!-- 	Tabla de valores de caracteristica -->
+	<!-- 	Tabla de valores de caracteristica -->
 	<entidad nombre="ValoresDeTablas">
 	
 		<operacion operSave="GuardarValoresDeTabla" operTraer="TraerValoresDeTablas" />

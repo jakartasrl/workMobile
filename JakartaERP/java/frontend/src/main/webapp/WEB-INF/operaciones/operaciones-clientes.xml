@@ -225,7 +225,7 @@
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
-		<output name="clasificadoresSucursales" tableName="mtClasificadoresSucursal">
+		<output name="clasificadoresSucursales" tableName="mtClasifSucurBackup">
 		
 			<campoSalida value="oid_ClasifSuc" target="id" />
 			
