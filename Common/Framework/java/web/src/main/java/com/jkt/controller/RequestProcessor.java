@@ -124,8 +124,8 @@ public abstract class RequestProcessor extends BaseController{
 		 * 
 		 */
 		
-		log.debug("Adaptando la entrada de parametros de acuerdo a la operaci�n solicitada...");
-		parametersAdapted = this.adaptParameters(parameters, eventBusinessOperation);
+		log.debug("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
+		parametersAdapted = adaptParameters(parameters, eventBusinessOperation);
 
 		try{
 		String entidad = ((EventBusiness) eventBusinessOperation).getEntidad();
@@ -136,16 +136,16 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		
 
-		log.debug("Recuperando un transformer para la operaci�n actual...");
-		Transformer transformer = operation.generateTransformer(this.getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
+		log.debug("Recuperando un transformer para la operación actual...");
+		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
-		log.debug("Ejecutando la operaci�n...");
+		log.debug("Ejecutando la operación...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
 		operation.runOperation(parametersAdapted);
 		
-		log.debug("Enviando resultados de la operaci�n...");
+		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
 //		}catch(Exception exception){
@@ -158,7 +158,7 @@ public abstract class RequestProcessor extends BaseController{
 //			}
 			sessionProvider.destroySession();
 		}
-		log.debug("Finaliz� la operaci�n...");
+		log.debug("Finalizó la operación...");
 	}
 
 	private Map<String, Object> getObjetosOutput(Operation aOper,	IEventBusiness aEB) {
