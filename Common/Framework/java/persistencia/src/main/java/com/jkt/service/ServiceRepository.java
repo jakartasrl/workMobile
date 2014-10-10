@@ -101,8 +101,6 @@ public class ServiceRepository implements IServiceRepository {
 			String message = null;
 			for (ConstraintViolation<?> constraintViolation : constraintViolations) {
 				
-				
-				
 //				buffer.append(constraintViolation.getPropertyPath()+"->"+constraintViolation.getMessage());
 				buffer.append(constraintViolation.getMessage());
 //				buffer.append(constraintViolation.getMessage().concat("\n"));

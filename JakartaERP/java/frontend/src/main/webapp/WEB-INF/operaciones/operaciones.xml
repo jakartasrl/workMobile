@@ -155,9 +155,14 @@
 	<operacion name="TraerConfiguracion" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Configuracion">
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_configuracion" target="id" />
-			<campoSalida value="Formulario" target="formulario" />
 			<campoSalida value="Nombre" target="nombre" />
-			<campoSalida value="Valor" target="valor" />
+			
+			<campoSalida value="ValorCadena" target="valorCadena" />
+			<campoSalida value="ValorEntero" target="valorEntero" />
+			<campoSalida value="ValorDoble" target="valorDoble" />
+			<campoSalida value="ValorFecha" target="valorFecha" />
+			<campoSalida value="ValorBoolean" target="isValorBooleano" />
+			
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 			
@@ -172,9 +177,14 @@
 	<operacion name="GuardarConfiguracion" clase="com.jkt.operaciones.GuardarLista">
 		<input name="mtInput" keyName="objeto" clase="com.jkt.dominio.Configuracion" fieldID='oid_configuracion'>
 			<campoEntrada>			
-				<campoEntrada name="Formulario" clase="String" metodo="setFormulario" />
 				<campoEntrada name="Nombre"  clase="String" metodo="setNombre" />
-				<campoEntrada name="Valor"  clase="String" metodo="setValor" />
+				
+				<campoEntrada name="ValorCadena" clase="String" metodo="setValorCadena" />
+				<campoEntrada name="ValorEntero" clase="Integer" metodo="setValorEntero" />
+				<campoEntrada name="ValorDoble" clase="Double" metodo="setValorDoble" />
+				<campoEntrada name="ValorFecha" clase="Date" metodo="setValorFecha" />
+				<campoEntrada name="ValorBoolean" clase="Boolean" metodo="setValorBooleano" />
+				
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 			</campoEntrada>			
 		</input>
@@ -186,12 +196,17 @@
 	</operacion>
 	
 	<!-- RECUPERAR  Configuracion -->
-	<operacion name="TraerConfiguracionEspecifica" clase="com.jkt.operaciones.TraerConfiguracionEspecifica" >
+	<operacion name="TraerParametro" clase="com.jkt.operaciones.TraerParametro" >
 		<output name="configuracion" tableName="mtInput">
 			<campoSalida value="oid_configuracion" target="id" />
-			<campoSalida value="Formulario" target="formulario" />
 			<campoSalida value="Nombre" target="nombre" />
-			<campoSalida value="Valor" target="valor" />
+			
+			<campoSalida value="ValorCadena" target="valorCadena" />
+			<campoSalida value="ValorEntero" target="valorEntero" />
+			<campoSalida value="ValorDoble" target="valorDoble" />
+			<campoSalida value="ValorFecha" target="valorFecha" />
+			<campoSalida value="ValorBoolean" target="isValorBooleano" />
+			
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 			
