@@ -24,7 +24,7 @@ uses
   cxCheckBox, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxGridDBCardView,
-  cxGridCardView, cxGridCustomLayoutView, jktCNMet0014;
+  cxGridCardView, cxGridCustomLayoutView, jktCNMet0014, dxLayoutLookAndFeels;
 
 type
   TFNCli0001 = class(TfrmChild)
@@ -276,6 +276,11 @@ type
     tvClasificadoresoid_Clasif: TcxGridDBColumn;
     cxGridDBTableView1oid_Clasif: TcxGridDBColumn;
     HelpValorClasifSucursal: TjktHelpGenerico;
+    mtClasifSucurBackup: TjktMemTable;
+    mtClasifSucurBackupoid_Clasif: TIntegerField;
+    mtClasifSucurBackupDescClasif: TStringField;
+    dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList;
+    dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel;
     procedure jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -298,6 +303,11 @@ type
       Sender: TObject; AButtonIndex: Integer);
     procedure tvClasificadoresCodValorClasifPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
+    procedure OperTraerClasifSucurBeforeEjecutar(Sender: TObject);
+    procedure mtContactosNewRecord(DataSet: TDataSet);
+    procedure mtDomiciliosEntregaNewRecord(DataSet: TDataSet);
+    procedure mtClasificadoresSucursalNewRecord(DataSet: TDataSet);
+    procedure OperacionSaveAfterEjecutar(Sender: TObject);
   private
     { Private declarations }
   public
@@ -384,17 +394,77 @@ begin
     // No seleccionó nada!
 end;
 
+procedure TFNCli0001.mtClasificadoresSucursalNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtClasificadoresSucursal.FieldByName('oid_ClasifSuc').AsInteger := GetNewOid;
+end;
+
+procedure TFNCli0001.mtContactosNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtContactos.FieldByName('oid_ContSuc').AsInteger := GetNewOid;
+end;
+
+procedure TFNCli0001.mtDomiciliosEntregaNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtDomiciliosEntrega.FieldByName('oid_DomSuc').AsInteger := GetNewOid;
+end;
+
 procedure TFNCli0001.mtSucursalesClienteNewRecord(DataSet: TDataSet);
 begin
   inherited;
 
   if not Service.ModoExecute then
-    mtSucursalesCliente.FieldByName('oid_SucClie').AsInteger := GetNewOid;
+    begin
+      mtSucursalesCliente.FieldByName('oid_SucClie').AsInteger := GetNewOid;
+
+      // OJO, por cada Sucursal nueva tengo que replicarle todos los Clasificadores
+      // existentes para una Sucursal (así, cada Sucursal tiene sus propios
+      // Valores de Clasificador !). Pero a cada registro NO se le asigna automáticamente
+      // el 'oid_SucClie' nuevo!
+
+      mtClasifSucurBackup.First;
+      while not mtClasifSucurBackup.Eof do
+        begin
+          mtClasificadoresSucursal.Append;
+
+          mtClasificadoresSucursal.FieldByName('oid_SucClie').AsInteger :=
+            mtSucursalesCliente.FieldByName('oid_SucClie').AsInteger;
+          mtClasificadoresSucursal.FieldByName('oid_Clasif').AsInteger :=
+            mtClasifSucurBackup.FieldByName('oid_Clasif').AsInteger;
+          mtClasificadoresSucursal.FieldByName('DescClasif').AsString :=
+            mtClasifSucurBackup.FieldByName('DescClasif').AsString;
+
+          mtClasificadoresSucursal.Post;
+          mtClasifSucurBackup.Next;
+        end;
+    end;
+end;
+
+procedure TFNCli0001.OperacionSaveAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  mtDomiciliosEntrega.MasterSource := nil;
+  mtContactos.MasterSource := nil;
+  mtClasificadoresSucursal.MasterSource := nil;
 end;
 
 procedure TFNCli0001.OperacionSaveBeforeEjecutar(Sender: TObject);
 begin
   inherited;
+
+  mtDomiciliosEntrega.MasterSource := dsSucursalesCliente;
+  mtContactos.MasterSource := dsSucursalesCliente;
+  mtClasificadoresSucursal.MasterSource := dsSucursalesCliente;
 
   // Agrego el 'oid_Pais' a los Domicilios de Entrega y Sucursales del Cliente
   mtSucursalesCliente.First;
@@ -421,6 +491,13 @@ begin
 
       mtSucursalesCliente.Next;
     end;
+end;
+
+procedure TFNCli0001.OperTraerClasifSucurBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  mtClasifSucurBackup.Open;
 end;
 
 procedure TFNCli0001.tvClasificadoresCodValorClasifPropertiesButtonClick(

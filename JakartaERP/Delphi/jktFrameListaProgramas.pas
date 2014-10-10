@@ -119,7 +119,7 @@ begin
 }
     AItem.GroupIndex := 0; // Ponemos los items todos en un grupo!
     AItem.Tag := cds_Programas.FieldByName('codItemMenu').AsInteger;
-    AItem.IsLarge := false;
+    AItem.IsLarge := True;
     AItem.OptionsAnimate.AnimateText := True;
     AItem.RowCount := 1;
     AItem.Style.Gradient := gmVertical;
@@ -129,7 +129,7 @@ begin
     //AItem.Style.GradientEndColor := $00D4D4D4;
     AItem.Style.GradientEndColor   := GetRandomColor;
     AItem.Text1.Align := oaTopLeft;
-    AItem.Text1.Font.Size := 12;
+    AItem.Text1.Font.Size := 11;
     AItem.Text1.IndentHorz := 10;
     AItem.Text1.IndentVert := 10;
     AItem.Text1.TextColor := clDefault;
@@ -164,16 +164,16 @@ end;
 procedure TframeListaProgramas.OnButtonClick(Sender: TdxTileControlItem);
 var
   NombrePrograma: string;
-  parametroInicial: string;
-  titulo          :string;
+  ParametroInicial: string;
+  Titulo: string;
 begin
   // aca abrimos los Forms (los Programas)
 
 //  MessageBox(0, PChar(Sender.Text1.Value), PChar('Programa ' + IntToStr(Sender.Tag)), 0);
 
   NombrePrograma   := '';
-  parametroInicial := '';
-  titulo := '';
+  ParametroInicial := '';
+  Titulo := '';
 
   if Sender.Tag = 6 then
     // Maestro de Empresas
@@ -202,55 +202,68 @@ begin
   else if Sender.Tag = 12 then
     // Maestro de Tipo de Producto
     NombrePrograma := 'TFNArt0002'
+  else if Sender.Tag = 24 then
+    NombrePrograma := 'TFNVen0001'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'TablaValidacionCaracProducto' ;
-       titulo :=  'ABM Tablas de Validacion Caracteristicas de Producto';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'TablaValidacionCaracProducto' ;
+      Titulo :=  'ABM de Tablas de Validacion Caracteristicas de Producto';
     end
   else if Sender.Tag = 11 then
     // Maestro de Caracteristicas
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'CaracProducto' ;
-       titulo :=  'ABM  Caracteristicas de Producto';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'CaracProducto' ;
+      Titulo := 'ABM de Caracteristicas de Producto';
     end
   else if Sender.Tag = 14 then
     // Maestro de Idiomas
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'Idioma' ;
-       titulo :=  'ABM de Idiomas';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Idioma' ;
+      Titulo := 'ABM de Idiomas';
     end
-    else if Sender.Tag = 15 then
+  else if Sender.Tag = 15 then
     // Maestro de Paises
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'Pais' ;
-       titulo :=  'ABM de Paises';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Pais' ;
+      Titulo := 'ABM de Paises';
     end
-
-    else if Sender.Tag = 16 then
+  else if Sender.Tag = 16 then
     // Maestro de Provincia
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'Provincia' ;
-       titulo :=  'ABM de Provincias';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Provincia' ;
+      Titulo := 'ABM de Provincias';
     end
-    else if Sender.Tag = 17 then
+  else if Sender.Tag = 17 then
     // Maestro de Vendedor
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'Vendedor' ;
-       titulo :=  'ABM de Vendedores';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Vendedor' ;
+      Titulo := 'ABM de Vendedores';
     end
-    else if Sender.Tag = 18 then
+  else if Sender.Tag = 18 then
     // Maestro de Representante
     begin
-       NombrePrograma := 'TFNUti0001';
-       parametroInicial:= 'Representante' ;
-       titulo :=  'ABM de Representantes';
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Representante' ;
+      Titulo := 'ABM de Representantes';
+    end
+  else if Sender.Tag = 22 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'UnidadMedida';
+      Titulo := 'ABM de Unidades de Medida';
+    end
+  else if Sender.Tag = 23 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'ValoresDeTablas';
+      Titulo := 'ABM de Valores de Características';
     end;
 
   frmMainForm.Show;

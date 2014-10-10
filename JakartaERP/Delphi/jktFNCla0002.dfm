@@ -67,7 +67,7 @@ inherited FNCla0002: TFNCla0002
     object cxDBTreeList1: TcxDBTreeList
       Left = 3
       Top = 15
-      Width = 702
+      Width = 551
       Height = 178
       Align = alLeft
       Bands = <
@@ -87,6 +87,7 @@ inherited FNCla0002: TFNCla0002
       RootValue = 0
       TabOrder = 0
       object cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'oid_ValorClasif'
         Position.ColIndex = 2
         Position.RowIndex = 0
@@ -95,6 +96,7 @@ inherited FNCla0002: TFNCla0002
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'oid_CompClasif'
         Position.ColIndex = 3
         Position.RowIndex = 0
@@ -103,6 +105,7 @@ inherited FNCla0002: TFNCla0002
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1codInterno: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'codInterno'
         Position.ColIndex = 4
         Position.RowIndex = 0
@@ -111,6 +114,7 @@ inherited FNCla0002: TFNCla0002
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'codInternoPadre'
         Position.ColIndex = 5
         Position.RowIndex = 0
@@ -119,7 +123,9 @@ inherited FNCla0002: TFNCla0002
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1Codigo: TcxDBTreeListColumn
+        Caption.Text = 'C'#243'digo'
         DataBinding.FieldName = 'Codigo'
+        Width = 100
         Position.ColIndex = 1
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -127,7 +133,9 @@ inherited FNCla0002: TFNCla0002
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1Descripcion: TcxDBTreeListColumn
+        Caption.Text = 'Descripci'#243'n'
         DataBinding.FieldName = 'Descripcion'
+        Width = 140
         Position.ColIndex = 0
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -136,6 +144,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList1Activo: TcxDBTreeListColumn
         DataBinding.FieldName = 'Activo'
+        Width = 100
         Position.ColIndex = 6
         Position.RowIndex = 0
         Position.BandIndex = 0
@@ -178,7 +187,10 @@ inherited FNCla0002: TFNCla0002
       OptionsView.TreeLineStyle = tllsSolid
       RootValue = -1
       TabOrder = 0
+      ExplicitLeft = 523
+      ExplicitTop = 87
       object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'oid_CompClasif'
         Position.ColIndex = 5
         Position.RowIndex = 0
@@ -206,6 +218,7 @@ inherited FNCla0002: TFNCla0002
       end
       object cxDBTreeList2Descripcion: TcxDBTreeListColumn
         DataBinding.FieldName = 'Descripcion'
+        Width = 400
         Position.ColIndex = 2
         Position.RowIndex = 0
         Position.BandIndex = 0

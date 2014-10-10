@@ -3,7 +3,7 @@ inherited FNSeg0001: TFNSeg0001
   ClientHeight = 252
   ClientWidth = 748
   ExplicitWidth = 764
-  ExplicitHeight = 291
+  ExplicitHeight = 290
   PixelsPerInch = 96
   TextHeight = 13
   object dbgEmpresas: TjktExpDBGrid [0]
@@ -33,13 +33,16 @@ inherited FNSeg0001: TFNSeg0001
         Options.Editing = False
       end
       object dbgEmpresasDBTableView1Codigo: TcxGridDBColumn
+        Caption = 'C'#243'digo'
         DataBinding.FieldName = 'Codigo'
       end
       object dbgEmpresasDBTableView1RazonSocial: TcxGridDBColumn
+        Caption = 'Raz'#243'n Social'
         DataBinding.FieldName = 'RazonSocial'
         Width = 250
       end
       object dbgEmpresasDBTableView1UrlDB: TcxGridDBColumn
+        Caption = 'Url DB'
         DataBinding.FieldName = 'UrlDB'
         Width = 350
       end

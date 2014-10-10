@@ -215,7 +215,7 @@
 	<operacion name="GuardarValoresDeTabla" clase="com.jkt.operaciones.GuardarLista">
 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.ValoresTablas" fieldID='oid_valor_tabla'>
 <!-- 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'> -->
-<!-- 			<campoEntrada>			 -->
+			<campoEntrada>			
 
 <!-- 				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" > -->
 					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
@@ -224,7 +224,7 @@
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 <!-- 				</campoEntrada> -->
 				
-<!-- 			</campoEntrada>			 -->
+			</campoEntrada>			
 		</input>		
 		<forms>
 			<form name="TUsuario"></form>
@@ -238,6 +238,28 @@
 			<campoSalida value="descr"     target="descripcion" />
 			<campoSalida value="Activo"    target="isActivo" />
 			<campoSalida value="oid_tabla"    target="tablaValoresCaract.id" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+<!-- 	TRAE TODOS LOS VALORES DE LAS TABLAS DE CARACTERISTICAS EN SU TOTALIDAD -->
+	<operacion name="TraerValoresDeTablas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.ValoresTablas">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_tabla"    target="tablaValoresCaract.id" />
+			<campoSalida value="cod_tabla"    target="tablaValoresCaract.codigo" />
+			<campoSalida value="des_tabla"    target="tablaValoresCaract.descripcion" />
+
+			<campoSalida value="oid_valor_tabla" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+
+			<campoSalida value="Activo"    target="isActivo" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

@@ -2,7 +2,6 @@ inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
   ClientHeight = 520
   ClientWidth = 913
-  ExplicitLeft = -164
   ExplicitWidth = 929
   ExplicitHeight = 558
   PixelsPerInch = 96
@@ -14,88 +13,75 @@ inherited FNCli0001: TFNCli0001
     Height = 520
     Align = alClient
     TabOrder = 4
+    LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
     object cxDBTextEdit1: TcxDBTextEdit
       Left = 67
-      Top = -23
+      Top = 28
       DataBinding.DataField = 'Codigo'
       DataBinding.DataSource = dsCliente
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 0
       Width = 150
     end
     object cxDBTextEdit2: TcxDBTextEdit
       Left = 321
-      Top = -23
+      Top = 28
       DataBinding.DataField = 'RazonSocial'
       DataBinding.DataSource = dsSujImp
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 1
       Width = 293
     end
     object cxDBTextEdit3: TcxDBTextEdit
       Left = 93
-      Top = 109
+      Top = 160
       DataBinding.DataField = 'Direccion'
       DataBinding.DataSource = dsSujImp
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 5
       Width = 243
     end
     object cxDBTextEdit4: TcxDBTextEdit
       Left = 398
-      Top = 109
+      Top = 160
       DataBinding.DataField = 'Localidad'
       DataBinding.DataSource = dsSujImp
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 6
       Width = 243
     end
     object cxDBTextEdit7: TcxDBTextEdit
       Left = 714
-      Top = 109
+      Top = 160
       DataBinding.DataField = 'CodPostal'
       DataBinding.DataSource = dsSujImp
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 7
       Width = 87
     end
     object cxDBTextEdit8: TcxDBTextEdit
       Left = 158
-      Top = 136
+      Top = 187
       DataBinding.DataField = 'DescProvincia'
       DataBinding.DataSource = dsSujImp
       Enabled = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 9
       Width = 178
     end
     object cxDBTextEdit9: TcxDBTextEdit
       Left = 463
-      Top = 136
+      Top = 187
       DataBinding.DataField = 'DescPais'
       DataBinding.DataSource = dsSujImp
       Enabled = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 11
       Width = 178
     end
     object cxDBButtonEdit1: TcxDBButtonEdit
       Left = 93
-      Top = 136
+      Top = 187
       DataBinding.DataField = 'CodProvincia'
       DataBinding.DataSource = dsSujImp
       Properties.Buttons = <
@@ -104,16 +90,13 @@ inherited FNCli0001: TFNCli0001
           Kind = bkEllipsis
         end>
       Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
       TabOrder = 8
       Width = 59
     end
     object cxDBButtonEdit2: TcxDBButtonEdit
       Left = 398
-      Top = 136
+      Top = 187
       DataBinding.DataField = 'CodPais'
       DataBinding.DataSource = dsSujImp
       Properties.Buttons = <
@@ -122,51 +105,42 @@ inherited FNCli0001: TFNCli0001
           Kind = bkEllipsis
         end>
       Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
       TabOrder = 10
       Width = 59
     end
     object cxDBTextEdit5: TcxDBTextEdit
       Left = 93
-      Top = 163
+      Top = 214
       DataBinding.DataField = 'Telefonos'
       DataBinding.DataSource = dsCliente
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 12
       Width = 243
     end
     object cxDBTextEdit6: TcxDBTextEdit
       Left = 93
-      Top = 52
+      Top = 103
       DataBinding.DataField = 'Cuit'
       DataBinding.DataSource = dsSujImp
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 3
       Width = 136
     end
     object cxDBCheckBox1: TcxDBCheckBox
       Left = 325
-      Top = 52
+      Top = 103
       DataBinding.DataField = 'PersonaJuridica'
       DataBinding.DataSource = dsSujImp
       Properties.Alignment = taLeftJustify
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 43
     end
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 34
-      Top = 220
-      Width = 391
+      Top = 271
+      Width = 863
       Height = 200
       TabOrder = 13
       DataSource = dsInscripcionesImpositivas
@@ -181,14 +155,18 @@ inherited FNCli0001: TFNCli0001
         OptionsView.GroupByBox = False
         object jktExpDBGrid1DBTableView1oid_InscClie: TcxGridDBColumn
           DataBinding.FieldName = 'oid_InscClie'
+          Visible = False
         end
         object jktExpDBGrid1DBTableView1oid_Cliente: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Cliente'
+          Visible = False
         end
         object jktExpDBGrid1DBTableView1oid_Impuesto: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Impuesto'
+          Visible = False
         end
         object jktExpDBGrid1DBTableView1CodImpuesto: TcxGridDBColumn
+          Caption = 'C'#243'd. Impuesto'
           DataBinding.FieldName = 'CodImpuesto'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -197,21 +175,26 @@ inherited FNCli0001: TFNCli0001
               Kind = bkEllipsis
             end>
           Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick
+          Width = 84
         end
         object jktExpDBGrid1DBTableView1DescImpuesto: TcxGridDBColumn
+          Caption = 'Desc. Impuesto'
           DataBinding.FieldName = 'DescImpuesto'
           Options.Editing = False
-          Width = 230
+          Width = 222
         end
         object jktExpDBGrid1DBTableView1NroInscripcion: TcxGridDBColumn
+          Caption = 'Nro. Inscripci'#243'n'
           DataBinding.FieldName = 'NroInscripcion'
           Width = 86
         end
         object jktExpDBGrid1DBTableView1oid_Categoria: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Categoria'
+          Visible = False
           Width = 73
         end
         object jktExpDBGrid1DBTableView1CodCategoria: TcxGridDBColumn
+          Caption = 'C'#243'd. Categor'#237'a'
           DataBinding.FieldName = 'CodCategoria'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -220,16 +203,18 @@ inherited FNCli0001: TFNCli0001
               Kind = bkEllipsis
             end>
           Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick
-          Width = 72
+          Width = 84
         end
         object jktExpDBGrid1DBTableView1DescCategoria: TcxGridDBColumn
+          Caption = 'Desc. Categor'#237'a'
           DataBinding.FieldName = 'DescCategoria'
           Options.Editing = False
-          Width = 230
+          Width = 217
         end
         object jktExpDBGrid1DBTableView1VigenciaDesde: TcxGridDBColumn
+          Caption = 'Vigencia Desde'
           DataBinding.FieldName = 'VigenciaDesde'
-          Width = 75
+          Width = 87
         end
         object jktExpDBGrid1DBTableView1Activo: TcxGridDBColumn
           DataBinding.FieldName = 'Activo'
@@ -242,8 +227,8 @@ inherited FNCli0001: TFNCli0001
     end
     object jktExpDBGrid2: TjktExpDBGrid
       Left = 22
-      Top = 525
-      Width = 391
+      Top = 576
+      Width = 771
       Height = 200
       TabOrder = 16
       DataSource = dsClasificadoresCliente
@@ -260,21 +245,28 @@ inherited FNCli0001: TFNCli0001
         OptionsView.GroupByBox = False
         object cxGridDBTableView1oid_ClasifClie: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ClasifClie'
+          Visible = False
         end
         object cxGridDBTableView1oid_Cliente: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Cliente'
+          Visible = False
         end
         object cxGridDBTableView1oid_Clasif: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Clasif'
+          Visible = False
         end
         object cxGridDBTableView1DescClasif: TcxGridDBColumn
+          Caption = 'Desc. Clasificador'
           DataBinding.FieldName = 'DescClasif'
           Options.Editing = False
+          Width = 151
         end
         object cxGridDBTableView1oid_ValorClasif: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ValorClasif'
+          Visible = False
         end
         object cxGridDBTableView1CodValorClasif: TcxGridDBColumn
+          Caption = 'C'#243'd. Valor Clasif.'
           DataBinding.FieldName = 'CodValorClasif'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -283,8 +275,10 @@ inherited FNCli0001: TFNCli0001
               Kind = bkEllipsis
             end>
           Properties.OnButtonClick = cxGridDBTableView1CodValorClasifPropertiesButtonClick
+          Width = 102
         end
         object cxGridDBTableView1DescValorClasif: TcxGridDBColumn
+          Caption = 'Desc. Valor Clasif.'
           DataBinding.FieldName = 'DescValorClasif'
           Options.Editing = False
         end
@@ -299,7 +293,7 @@ inherited FNCli0001: TFNCli0001
     end
     object cxButtonEdit1: TcxDBButtonEdit
       Left = 122
-      Top = 468
+      Top = 519
       DataBinding.DataField = 'CodCondPago'
       DataBinding.DataSource = dsCliente
       Properties.Buttons = <
@@ -308,28 +302,23 @@ inherited FNCli0001: TFNCli0001
           Kind = bkEllipsis
         end>
       Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
       TabOrder = 14
       Width = 79
     end
     object cxTextEdit1: TcxDBTextEdit
       Left = 207
-      Top = 468
+      Top = 519
       DataBinding.DataField = 'DescCondPago'
       DataBinding.DataSource = dsCliente
       Enabled = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 15
       Width = 274
     end
     object jktExpDBGrid3: TjktExpDBGrid
       Left = 22
-      Top = 761
+      Top = 812
       Width = 491
       Height = 288
       TabOrder = 17
@@ -346,29 +335,37 @@ inherited FNCli0001: TFNCli0001
         OptionsView.GroupByBox = False
         object tvSucursalesoid_SucClie: TcxGridDBColumn
           DataBinding.FieldName = 'oid_SucClie'
+          Visible = False
         end
         object tvSucursalesoid_Cliente: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Cliente'
+          Visible = False
         end
         object tvSucursalesNroSucursal: TcxGridDBColumn
+          Caption = 'Nro. Sucursal'
           DataBinding.FieldName = 'NroSucursal'
         end
         object tvSucursalesDescripcion: TcxGridDBColumn
+          Caption = 'Descripci'#243'n'
           DataBinding.FieldName = 'Descripcion'
         end
         object tvSucursalesDireccion: TcxGridDBColumn
+          Caption = 'Direcci'#243'n'
           DataBinding.FieldName = 'Direccion'
         end
         object tvSucursalesLocalidad: TcxGridDBColumn
           DataBinding.FieldName = 'Localidad'
         end
         object tvSucursalesCodPostal: TcxGridDBColumn
+          Caption = 'C'#243'd. Postal'
           DataBinding.FieldName = 'CodPostal'
         end
         object tvSucursalesoid_Provincia: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Provincia'
+          Visible = False
         end
         object tvSucursalesCodProvincia: TcxGridDBColumn
+          Caption = 'C'#243'd. Provincia'
           DataBinding.FieldName = 'CodProvincia'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -379,13 +376,16 @@ inherited FNCli0001: TFNCli0001
           Properties.OnButtonClick = tvSucursalesCodProvinciaPropertiesButtonClick
         end
         object tvSucursalesDescProvincia: TcxGridDBColumn
+          Caption = 'Desc. Provincia'
           DataBinding.FieldName = 'DescProvincia'
           Options.Editing = False
         end
         object tvSucursalesoid_Vendedor: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Vendedor'
+          Visible = False
         end
         object tvSucursalesCodVendedor: TcxGridDBColumn
+          Caption = 'C'#243'd. Vendedor'
           DataBinding.FieldName = 'CodVendedor'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -396,10 +396,12 @@ inherited FNCli0001: TFNCli0001
           Properties.OnButtonClick = tvSucursalesCodVendedorPropertiesButtonClick
         end
         object tvSucursalesDescVendedor: TcxGridDBColumn
+          Caption = 'Desc. Vendedor'
           DataBinding.FieldName = 'DescVendedor'
           Options.Editing = False
         end
         object tvSucursalesTelefonos: TcxGridDBColumn
+          Caption = 'Tel'#233'fonos'
           DataBinding.FieldName = 'Telefonos'
         end
         object tvSucursalesActivo: TcxGridDBColumn
@@ -421,29 +423,37 @@ inherited FNCli0001: TFNCli0001
         OptionsView.GroupByBox = False
         object tvDomiciliosEntregaoid_DomSuc: TcxGridDBColumn
           DataBinding.FieldName = 'oid_DomSuc'
+          Visible = False
         end
         object tvDomiciliosEntregaoid_SucClie: TcxGridDBColumn
           DataBinding.FieldName = 'oid_SucClie'
+          Visible = False
         end
         object tvDomiciliosEntregaNroDomicilio: TcxGridDBColumn
+          Caption = 'Nro. Domicilio'
           DataBinding.FieldName = 'NroDomicilio'
         end
         object tvDomiciliosEntregaDescripcion: TcxGridDBColumn
+          Caption = 'Descripci'#243'n'
           DataBinding.FieldName = 'Descripcion'
         end
         object tvDomiciliosEntregaDireccion: TcxGridDBColumn
+          Caption = 'Direcci'#243'n'
           DataBinding.FieldName = 'Direccion'
         end
         object tvDomiciliosEntregaLocalidad: TcxGridDBColumn
           DataBinding.FieldName = 'Localidad'
         end
         object tvDomiciliosEntregaCodPostal: TcxGridDBColumn
+          Caption = 'C'#243'd. Postal'
           DataBinding.FieldName = 'CodPostal'
         end
         object tvDomiciliosEntregaoid_Provincia: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Provincia'
+          Visible = False
         end
         object tvDomiciliosEntregaCodProvincia: TcxGridDBColumn
+          Caption = 'C'#243'd. Provincia'
           DataBinding.FieldName = 'CodProvincia'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -454,13 +464,16 @@ inherited FNCli0001: TFNCli0001
           Properties.OnButtonClick = tvDomiciliosEntregaCodProvinciaPropertiesButtonClick
         end
         object tvDomiciliosEntregaDescProvincia: TcxGridDBColumn
+          Caption = 'Desc. Provincia'
           DataBinding.FieldName = 'DescProvincia'
           Options.Editing = False
         end
         object tvDomiciliosEntregaHorariosEntrega: TcxGridDBColumn
+          Caption = 'Horarios de Entrega'
           DataBinding.FieldName = 'HorariosEntrega'
         end
         object tvDomiciliosEntregaTelefonos: TcxGridDBColumn
+          Caption = 'Tel'#233'fonos'
           DataBinding.FieldName = 'Telefonos'
         end
         object tvDomiciliosEntregaActivo: TcxGridDBColumn
@@ -482,10 +495,12 @@ inherited FNCli0001: TFNCli0001
         OptionsView.CardIndent = 7
         object cvContactosoid_ContSuc: TcxGridDBCardViewRow
           DataBinding.FieldName = 'oid_ContSuc'
+          Visible = False
           Position.BeginsLayer = True
         end
         object cvContactosoid_SucClie: TcxGridDBCardViewRow
           DataBinding.FieldName = 'oid_SucClie'
+          Visible = False
           Position.BeginsLayer = True
         end
         object cvContactosApellido: TcxGridDBCardViewRow
@@ -497,10 +512,12 @@ inherited FNCli0001: TFNCli0001
           Position.BeginsLayer = True
         end
         object cvContactosTelefonos: TcxGridDBCardViewRow
+          Caption = 'Tel'#233'fonos'
           DataBinding.FieldName = 'Telefonos'
           Position.BeginsLayer = True
         end
         object cvContactosEmail: TcxGridDBCardViewRow
+          Caption = 'E-mail'
           DataBinding.FieldName = 'Email'
           Position.BeginsLayer = True
         end
@@ -529,21 +546,27 @@ inherited FNCli0001: TFNCli0001
         OptionsView.GroupByBox = False
         object tvClasificadoresoid_ClasifSuc: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ClasifSuc'
+          Visible = False
         end
         object tvClasificadoresoid_SucClie: TcxGridDBColumn
           DataBinding.FieldName = 'oid_SucClie'
+          Visible = False
         end
         object tvClasificadoresoid_Clasif: TcxGridDBColumn
           DataBinding.FieldName = 'oid_Clasif'
+          Visible = False
         end
         object tvClasificadoresDescClasif: TcxGridDBColumn
+          Caption = 'Desc. Clasificador'
           DataBinding.FieldName = 'DescClasif'
           Options.Editing = False
         end
         object tvClasificadoresoid_ValorClasif: TcxGridDBColumn
           DataBinding.FieldName = 'oid_ValorClasif'
+          Visible = False
         end
         object tvClasificadoresCodValorClasif: TcxGridDBColumn
+          Caption = 'C'#243'd. Valor Clasif.'
           DataBinding.FieldName = 'CodValorClasif'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -554,6 +577,7 @@ inherited FNCli0001: TFNCli0001
           Properties.OnButtonClick = tvClasificadoresCodValorClasifPropertiesButtonClick
         end
         object tvClasificadoresDescValorClasif: TcxGridDBColumn
+          Caption = 'Desc. Valor Clasif.'
           DataBinding.FieldName = 'DescValorClasif'
           Options.Editing = False
         end
@@ -583,12 +607,10 @@ inherited FNCli0001: TFNCli0001
     end
     object cxDBCheckBox2: TcxDBCheckBox
       Left = 662
-      Top = -23
+      Top = 28
       DataBinding.DataField = 'Activo'
       DataBinding.DataSource = dsCliente
       Properties.Alignment = taLeftJustify
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 2
       Width = 43
@@ -846,12 +868,13 @@ inherited FNCli0001: TFNCli0001
     TipoPrograma = tp_abmIndividual
     Filtro = Help
     FocoEnAlta = mtClienteCodigo
+    OperacionesIniciales = <
+      item
+        Operacion = OperTraerClasifSucur
+      end>
     OperacionesDefault = <
       item
         Operacion = OperTraerClasifCliente
-      end
-      item
-        Operacion = OperTraerClasifSucur
       end>
     Left = 480
     Top = 24
@@ -896,6 +919,7 @@ inherited FNCli0001: TFNCli0001
         Tag = 0
       end>
     OnBeforeEjecutar = OperacionSaveBeforeEjecutar
+    OnAfterEjecutar = OperacionSaveAfterEjecutar
     Left = 544
     Top = 24
   end
@@ -1169,6 +1193,10 @@ inherited FNCli0001: TFNCli0001
         Size = 50
       end
       item
+        Name = 'oid_Pais'
+        DataType = ftInteger
+      end
+      item
         Name = 'HorariosEntrega'
         DataType = ftString
         Size = 100
@@ -1196,12 +1224,12 @@ inherited FNCli0001: TFNCli0001
     EnableVersioning = True
     FilterOptions = []
     MasterFields = 'oid_SucClie'
-    MasterSource = dsSucursalesCliente
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = mtDomiciliosEntregaNewRecord
     Left = 104
     Top = 376
     object mtDomiciliosEntregaoid_DomSuc: TIntegerField
@@ -1309,7 +1337,6 @@ inherited FNCli0001: TFNCli0001
         DataType = ftBoolean
       end>
     IndexFieldNames = 'oid_SucClie'
-    IndexName = '__MT__DEFAULT_'
     IndexDefs = <
       item
         Name = 'mtContactosIndex'
@@ -1323,12 +1350,12 @@ inherited FNCli0001: TFNCli0001
     EnableVersioning = True
     FilterOptions = []
     MasterFields = 'oid_SucClie'
-    MasterSource = dsSucursalesCliente
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = mtContactosNewRecord
     Left = 208
     Top = 376
     object mtContactosoid_ContSuc: TIntegerField
@@ -1383,6 +1410,10 @@ inherited FNCli0001: TFNCli0001
         DataType = ftInteger
       end
       item
+        Name = 'oid_Clasif'
+        DataType = ftInteger
+      end
+      item
         Name = 'DescClasif'
         DataType = ftString
         Size = 30
@@ -1419,12 +1450,12 @@ inherited FNCli0001: TFNCli0001
     EnableVersioning = True
     FilterOptions = []
     MasterFields = 'oid_SucClie'
-    MasterSource = dsSucursalesCliente
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = mtClasificadoresSucursalNewRecord
     Left = 320
     Top = 376
     object mtClasificadoresSucursaloid_ClasifSuc: TIntegerField
@@ -1802,6 +1833,7 @@ inherited FNCli0001: TFNCli0001
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
+    OnBeforeEjecutar = OperTraerClasifSucurBeforeEjecutar
     Left = 752
     Top = 80
   end
@@ -2164,5 +2196,39 @@ inherited FNCli0001: TFNCli0001
     CodigoRespuesta = mtClasificadoresSucursalCodValorClasif
     Left = 400
     Top = 168
+  end
+  object mtClasifSucurBackup: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 320
+    Top = 328
+    object mtClasifSucurBackupoid_Clasif: TIntegerField
+      FieldName = 'oid_Clasif'
+    end
+    object mtClasifSucurBackupDescClasif: TStringField
+      FieldName = 'DescClasif'
+      Size = 30
+    end
+  end
+  object dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList
+    Left = 128
+    Top = 24
+    object dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel
+    end
   end
 end

@@ -357,7 +357,7 @@
 	<!-- TRAER LOS CLASIFICADORES DE LA SUCURSAL -->
 	<operacion name="TraerClasifSucur" clase="com.jkt.erp.operaciones.TraerClasifSucur">
 
-		<output name="resultado" tableName="mtClasificadoresSucursal">
+		<output name="resultado" tableName="mtClasifSucurBackup">
 			<campoSalida value="oid_Clasif" target="id" />
 <!-- 			<campoSalida value="oid_SucClie" target="clienteSucursal.id" />		Esto para que lo quieren? -->
 			<campoSalida value="DescClasif" target="descripcion" />

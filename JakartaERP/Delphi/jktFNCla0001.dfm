@@ -2,6 +2,7 @@ inherited FNCla0001: TFNCla0001
   Caption = 'ABM de Clasificadores'
   ClientHeight = 398
   ClientWidth = 763
+  ExplicitLeft = -36
   ExplicitWidth = 779
   ExplicitHeight = 436
   PixelsPerInch = 96
@@ -109,9 +110,9 @@ inherited FNCla0001: TFNCla0001
     Height = 301
     Width = 763
     object cxDBTreeList1: TcxDBTreeList
-      Left = 3
-      Top = 15
-      Width = 757
+      Left = 2
+      Top = 18
+      Width = 759
       Height = 250
       Align = alTop
       Bands = <
@@ -126,7 +127,9 @@ inherited FNCla0001: TFNCla0001
       PopupMenu = PopupMenu
       RootValue = 0
       TabOrder = 0
+      ExplicitWidth = 431
       object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'oid_CompClasif'
         Position.ColIndex = 0
         Position.RowIndex = 0
@@ -135,6 +138,7 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1oid_Clasificador: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'oid_Clasificador'
         Position.ColIndex = 1
         Position.RowIndex = 0
@@ -143,6 +147,7 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1codInterno: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'codInterno'
         Position.ColIndex = 2
         Position.RowIndex = 0
@@ -151,6 +156,7 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'codInternoPadre'
         Position.ColIndex = 3
         Position.RowIndex = 0
@@ -159,6 +165,7 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1Nivel: TcxDBTreeListColumn
+        Visible = False
         DataBinding.FieldName = 'Nivel'
         Position.ColIndex = 4
         Position.RowIndex = 0
@@ -167,6 +174,7 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1Codigo: TcxDBTreeListColumn
+        Caption.Text = 'C'#243'digo'
         DataBinding.FieldName = 'Codigo'
         Position.ColIndex = 5
         Position.RowIndex = 0
@@ -175,6 +183,7 @@ inherited FNCla0001: TFNCla0001
         Summary.GroupFooterSummaryItems = <>
       end
       object cxDBTreeList1Descripcion: TcxDBTreeListColumn
+        Caption.Text = 'Descripci'#243'n'
         DataBinding.FieldName = 'Descripcion'
         Position.ColIndex = 6
         Position.RowIndex = 0

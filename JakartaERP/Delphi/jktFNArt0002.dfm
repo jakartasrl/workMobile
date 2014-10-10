@@ -14,7 +14,7 @@ inherited FNArt0002: TFNArt0002
     Ctl3D = True
     ParentCtl3D = False
     TabOrder = 4
-    Height = 73
+    Height = 67
     Width = 735
     object cxLabel1: TcxLabel
       Left = 12
@@ -47,23 +47,23 @@ inherited FNArt0002: TFNArt0002
   end
   object cxGroupBox2: TcxGroupBox [1]
     Left = 0
-    Top = 73
+    Top = 67
     Align = alClient
     Caption = 'Caracter'#237'sticas'
     TabOrder = 5
-    ExplicitTop = 153
-    ExplicitHeight = 260
-    Height = 306
+    Height = 312
     Width = 735
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 3
       Top = 15
       Width = 630
-      Height = 281
+      Height = 287
       Align = alLeft
       TabOrder = 0
       DataSource = dsDet
-      ExplicitHeight = 226
+      ExplicitLeft = 2
+      ExplicitTop = 18
+      ExplicitHeight = 286
       object jktExpDBGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsDet
@@ -76,17 +76,18 @@ inherited FNArt0002: TFNArt0002
         OptionsView.GroupByBox = False
         object jktExpDBGrid1DBTableView1oid_det: TcxGridDBColumn
           DataBinding.FieldName = 'oid_det'
+          Visible = False
         end
         object jktExpDBGrid1DBTableView1oid_tipo: TcxGridDBColumn
           DataBinding.FieldName = 'oid_tipo'
-        end
-        object jktExpDBGrid1DBTableView1orden: TcxGridDBColumn
-          DataBinding.FieldName = 'orden'
+          Visible = False
         end
         object jktExpDBGrid1DBTableView1oid_carac: TcxGridDBColumn
           DataBinding.FieldName = 'oid_carac'
+          Visible = False
         end
         object jktExpDBGrid1DBTableView1cod_carac: TcxGridDBColumn
+          Caption = 'C'#243'd. Carac.'
           DataBinding.FieldName = 'cod_carac'
           PropertiesClassName = 'TcxButtonEditProperties'
           Properties.Buttons = <
@@ -97,20 +98,33 @@ inherited FNArt0002: TFNArt0002
           Properties.OnButtonClick = jktExpDBGrid1DBTableView1cod_caracPropertiesButtonClick
         end
         object jktExpDBGrid1DBTableView1des_carac: TcxGridDBColumn
+          Caption = 'Desc. Carac.'
           DataBinding.FieldName = 'des_carac'
           Options.Editing = False
+          Width = 239
+        end
+        object jktExpDBGrid1DBTableView1orden: TcxGridDBColumn
+          Caption = 'Orden'
+          DataBinding.FieldName = 'orden'
+        end
+        object jktExpDBGrid1DBTableView1oblig: TcxGridDBColumn
+          Caption = 'Obligatorio'
+          DataBinding.FieldName = 'oblig'
+          Width = 64
+        end
+        object jktExpDBGrid1DBTableView1arma_cod: TcxGridDBColumn
+          Caption = 'Arma C'#243'd.'
+          DataBinding.FieldName = 'arma_cod'
+          Width = 60
+        end
+        object jktExpDBGrid1DBTableView1arma_desc: TcxGridDBColumn
+          Caption = 'Arma Desc.'
+          DataBinding.FieldName = 'arma_desc'
+          Width = 65
         end
         object jktExpDBGrid1DBTableView1Activo: TcxGridDBColumn
           DataBinding.FieldName = 'Activo'
-        end
-        object jktExpDBGrid1DBTableView1oblig: TcxGridDBColumn
-          DataBinding.FieldName = 'oblig'
-        end
-        object jktExpDBGrid1DBTableView1arma_cod: TcxGridDBColumn
-          DataBinding.FieldName = 'arma_cod'
-        end
-        object jktExpDBGrid1DBTableView1arma_desc: TcxGridDBColumn
-          DataBinding.FieldName = 'arma_desc'
+          Width = 42
         end
       end
       object jktExpDBGrid1Level1: TcxGridLevel
@@ -119,8 +133,8 @@ inherited FNArt0002: TFNArt0002
     end
   end
   inherited BarManager: TdxBarManager
-    Left = 288
-    Top = 96
+    Left = 352
+    Top = 128
     DockControlHeights = (
       0
       0
@@ -133,16 +147,16 @@ inherited FNArt0002: TFNArt0002
     Filtro = Help
     FocoEnAlta = mtTipoProdCodigo
     FocoEnModificacion = mtTipoProddescr
-    Left = 472
-    Top = 96
+    Left = 536
+    Top = 128
   end
   inherited IdHTTP: TIdHTTP
-    Left = 408
-    Top = 96
+    Left = 472
+    Top = 128
   end
   inherited Service: TjktServiceCaller
-    Left = 352
-    Top = 96
+    Left = 416
+    Top = 128
   end
   inherited OperacionSave: TjktOperacion
     OperName = 'GuardarTipoProducto'
@@ -151,12 +165,12 @@ inherited FNArt0002: TFNArt0002
         Dataset = mtDet
         Tag = 0
       end>
-    Left = 520
-    Top = 96
+    Left = 584
+    Top = 128
   end
   inherited mtParametroInicial: TjktMemTable
-    Left = 352
-    Top = 152
+    Left = 416
+    Top = 184
   end
   inherited OperacionTraer: TjktOperacion
     OperName = 'TraerTipoProducto'
@@ -166,8 +180,8 @@ inherited FNArt0002: TFNArt0002
         Field = mtTipoProdoid_tipo
         Tag = 0
       end>
-    Left = 520
-    Top = 152
+    Left = 584
+    Top = 184
   end
   inherited ValidadorForm: TjktValidadorForm
     ListaValidaciones = <
@@ -175,14 +189,15 @@ inherited FNArt0002: TFNArt0002
         Field = mtDetcod_carac
         ValidadorGral = ValCarac
       end>
-    Left = 240
+    Left = 304
+    Top = 128
   end
   object Help: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'tipoProducto'
     OidRespuesta = mtTipoProdoid_tipo
-    Left = 472
-    Top = 152
+    Left = 536
+    Top = 184
   end
   object mtTipoProd: TjktMemTable
     DesignActivation = True

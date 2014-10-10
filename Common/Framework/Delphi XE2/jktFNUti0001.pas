@@ -173,7 +173,7 @@ begin
        //columna.Width := 40;
        columna.Caption := etiqueta;
        columna.HeaderAlignmentHorz := taCenter;
-       columna.editing := not readOnly;
+       columna.Options.Editing := not readOnly;
        columna.Visible  := visible;
        columna.DataBinding.FieldName := name;
        mtConfigCampos.Next;

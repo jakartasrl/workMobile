@@ -596,13 +596,20 @@ begin
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 204;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Ventas';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 0;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 300;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Clientes';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 1;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
-
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 301;
@@ -630,7 +637,7 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-    cds_MenuUsuario.Append;
+  cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 17;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Vendedores';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
@@ -645,7 +652,6 @@ begin
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
-
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 7;
@@ -662,7 +668,6 @@ begin
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
-
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 10;
@@ -721,6 +726,14 @@ begin
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 22;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Unidades de Medida';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 203;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 19;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Clasificadores';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 201;
@@ -740,6 +753,22 @@ begin
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 21;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Artículos';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 301;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 23;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Tablas de Valores de Características';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 203;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 24;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Conceptos';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 204;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;

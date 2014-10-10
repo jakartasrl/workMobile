@@ -310,7 +310,10 @@ begin
   // Debemos machear con la property 'DataController.DataSource' de la vista
   // Por defecto se crea un nivel con una vista asociada! Por lo tanto, debería estar.
   if (Levels.Count > 0) then
-    Result := TcxGridDBTableView(Levels.Items[0].GridView).DataController.DataSource
+    if (Levels.Items[0].GridView is TcxGridDBTableView) then
+      Result := TcxGridDBTableView(Levels.Items[0].GridView).DataController.DataSource
+    else
+      Result := nil
   else
     Result := nil;
 end;

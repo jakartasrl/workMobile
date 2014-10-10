@@ -151,10 +151,10 @@ inherited FNSeg0002: TFNSeg0002
     Height = 210
     Width = 785
     object dbgUsuarioEmpresas: TjktExpDBGrid
-      Left = 3
-      Top = 15
-      Width = 525
-      Height = 185
+      Left = 2
+      Top = 18
+      Width = 543
+      Height = 190
       Align = alLeft
       TabOrder = 0
       DataSource = dsUsuarioEmpresas
@@ -180,18 +180,21 @@ inherited FNSeg0002: TFNSeg0002
           Visible = False
         end
         object dbgUsuarioEmpresasDBTableView1Codigo: TcxGridDBColumn
+          Caption = 'C'#243'digo'
           DataBinding.FieldName = 'Codigo'
           Options.Editing = False
         end
         object dbgUsuarioEmpresasDBTableView1RazonSocial: TcxGridDBColumn
+          Caption = 'Raz'#243'n Social'
           DataBinding.FieldName = 'RazonSocial'
           Options.Editing = False
-          Width = 319
+          Width = 315
         end
         object dbgUsuarioEmpresasDBTableView1Default: TcxGridDBColumn
+          Caption = 'Por Defecto'
           DataBinding.FieldName = 'Default'
           HeaderAlignmentHorz = taCenter
-          Width = 55
+          Width = 76
         end
         object dbgUsuarioEmpresasDBTableView1Habilitada: TcxGridDBColumn
           DataBinding.FieldName = 'Habilitada'

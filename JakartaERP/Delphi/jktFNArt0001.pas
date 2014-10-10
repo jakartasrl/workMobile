@@ -24,7 +24,8 @@ uses
   cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, cxDBData,
   cxGridLevel, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, jktCNMet0008, cxMaskEdit, cxDropDownEdit,
-  cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, jktCNMet0014;
+  cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, jktCNMet0014,
+  dxLayoutLookAndFeels;
 
 type
   TFNArt0001 = class(TfrmChild)
@@ -223,6 +224,16 @@ type
     HelpUnidStockSecun: TjktHelpGenerico;
     HelpUnidStockTerc: TjktHelpGenerico;
     ValUnidStockTerc: TjktValidador;
+    HelpUnidVenta: TjktHelpGenerico;
+    HelpUnidProd: TjktHelpGenerico;
+    HelpUnidCompra: TjktHelpGenerico;
+    ValUnidVenta: TjktValidador;
+    ValUnidProd: TjktValidador;
+    ValUnidCompra: TjktValidador;
+    jktHelpGenerico1: TjktHelpGenerico;
+    jktHelpGenerico2: TjktHelpGenerico;
+    dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList;
+    dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel;
     procedure jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
     procedure cxDBCheckBox1PropertiesChange(Sender: TObject);
@@ -236,6 +247,12 @@ type
       AButtonIndex: Integer);
     procedure mtArticulooid_TipoArtValidate(Sender: TField);
     procedure OperacionSaveBeforeEjecutar(Sender: TObject);
+    procedure cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxDBButtonEdit5PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxDBButtonEdit6PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
   public
@@ -270,6 +287,30 @@ begin
   inherited;
 
   HelpUnidStockTerc.Ejecutar;
+end;
+
+procedure TFNArt0001.cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  HelpUnidVenta.Ejecutar;
+end;
+
+procedure TFNArt0001.cxDBButtonEdit5PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  HelpUnidProd.Ejecutar;
+end;
+
+procedure TFNArt0001.cxDBButtonEdit6PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  HelpUnidCompra.Ejecutar;
 end;
 
 procedure TFNArt0001.cxDBCheckBox1PropertiesChange(Sender: TObject);

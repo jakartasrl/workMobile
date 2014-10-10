@@ -3,7 +3,7 @@ inherited FNVar0001: TFNVar0001
   ClientHeight = 306
   ClientWidth = 684
   ExplicitWidth = 700
-  ExplicitHeight = 345
+  ExplicitHeight = 344
   PixelsPerInch = 96
   TextHeight = 13
   object cxGroupBox1: TcxGroupBox [0]
@@ -104,10 +104,10 @@ inherited FNVar0001: TFNVar0001
     Height = 193
     Width = 684
     object dbgDetalleCondicion: TjktExpDBGrid
-      Left = 3
-      Top = 15
+      Left = 2
+      Top = 18
       Width = 367
-      Height = 168
+      Height = 173
       Align = alLeft
       TabOrder = 0
       DataSource = dsDetalleCondicionDePago
@@ -128,6 +128,7 @@ inherited FNVar0001: TFNVar0001
           Visible = False
         end
         object dbgDetalleCondicionDBTableView1Dias: TcxGridDBColumn
+          Caption = 'D'#237'as'
           DataBinding.FieldName = 'Dias'
           Width = 49
         end
