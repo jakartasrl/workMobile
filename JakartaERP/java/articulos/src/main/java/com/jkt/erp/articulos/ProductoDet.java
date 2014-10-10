@@ -36,7 +36,7 @@ public class ProductoDet extends PersistentEntity implements IDetalle{
 
 	/*
 	 * Campo transiente que sera utilizado como objetivo para setear el valor real.
-	 * Sea lo que sea el tipo de la carateristica, se seteará en este campo, y posteriormente se copiará al verdadero atributo.
+	 * Sea lo que sea el tipo de la carateristica, se setearï¿½ en este campo, y posteriormente se copiarï¿½ al verdadero atributo.
 	 * 
 	 */
 	private String campoTransiente;
@@ -56,18 +56,21 @@ public class ProductoDet extends PersistentEntity implements IDetalle{
 		
 		
 		if (TiposDeDato.TABLA_VALORES_TYPE.equals(tipoDato)) {
-			List<ValoresTablas> valores = getCaracProducto().getTabla().getValoresDeTabla();
-			boolean existeElValor=false;
-			for (ValoresTablas valorTabla : valores) {
-				if (valorTabla.getCodigo().equals(campoTransiente)) {
-					this.setValorTabla(valorTabla);
-					existeElValor=true;
-					break;
-				}
-			}
-			if (!existeElValor) {
-				throw new JakartaException(String.format("No existe el valor %s en la tabla de valores de la caracteristica %s(%s).", campoTransiente, getCaracProducto().getCodigo(), getCaracProducto().getDescripcion()));
-			}
+//			List<ValoresTablas> valores = getCaracProducto().getTabla().getValoresDeTabla();
+//			boolean existeElValor=false;
+//			for (ValoresTablas valorTabla : valores) {
+//				if (valorTabla.getCodigo().equals(campoTransiente)) {
+//					this.setValorTabla(valorTabla);
+//					existeElValor=true;
+//					break;
+//				}
+//			}
+//			if (!existeElValor) {
+//				throw new JakartaException(String.format("No existe el valor %s en la tabla de valores de la caracteristica %s(%s).", campoTransiente, getCaracProducto().getCodigo(), getCaracProducto().getDescripcion()));
+//			}
+			
+			//TODO Ver bien esto! Se esta guardando mal la referencia.
+			
 		}else if (TiposDeDato.STRING_TYPE.equals(tipoDato)) {
 			if (campoTransiente.trim().isEmpty()) {
 				throw new JakartaException("El valor no debe ser vacio.");

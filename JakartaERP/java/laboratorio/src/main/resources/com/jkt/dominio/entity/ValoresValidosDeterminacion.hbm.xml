@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.laboratorio.dominio.ValoresValidosDeterminacion"
+		table="VALVALIDDET">
+		<id name="id" column="ID_VALVALIDDET">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="codigo" type="string">
+			<column name="CODIGO" length="15" />
+		</property>
+
+		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="valorDesde" column="VALOR_DESDE" type="double" />
+		<property name="valorHasta" column="VALOR_HASTA" type="double" />
+		<property name="limiteInferior" column="LIMITE_INFERIOR" type="double" />
+		<property name="limiteSuperior" column="LIMITE_SUPERIOR" type="double" />
+		
+		<many-to-one name="determinacion" lazy="proxy" not-null="true" column="ID_DETERMINACION"/>
+<!-- 		<many-to-one name="caracteristica" lazy="proxy" not-null="true" /> -->
+		<many-to-one name="tablaValidacion" lazy="proxy" not-null="true" column="ID_TABLAVALIDACION"/>
+
+	</class>
+
+</hibernate-mapping>

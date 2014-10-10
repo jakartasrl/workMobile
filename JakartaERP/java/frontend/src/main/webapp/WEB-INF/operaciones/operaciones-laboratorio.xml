@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE entity [
+
+  <!ELEMENT entity        (operacion*)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+<!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
+  
+  <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
+  <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
+  <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
+  <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+  
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
+
+  <!ELEMENT lista  (lista*)>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
+
+
+  <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
+  <!ELEMENT campoSalida   (campoSalida*,output*)>  
+  
+  <!ELEMENT dataset       (campo*)>
+  <!ELEMENT campo         EMPTY>
+  <!ELEMENT tables       (tableDef+)>
+  <!ELEMENT tableDef     (campoTable*)>
+  <!ELEMENT campoTable   EMPTY>
+  
+  <!ATTLIST transformer clase           CDATA #REQUIRED>
+  
+  <!ATTLIST form name	CDATA #REQUIRED>
+  
+  <!ATTLIST input name           	 	CDATA    #IMPLIED><!--   Nombre que se corresponde con la entrada de delphi. Si en delphi mandan el valor Name, acá debe exstir en valor Name para obtener los demas datos -->
+  <!ATTLIST input keyName           	CDATA    #IMPLIED><!--   Indica el key del mapa que llega a la operacion. Si el valor es 'leo', se debera recuperar usando la key 'leo' sobre el mapa en la operacion -->
+  <!ATTLIST input clase           	 	CDATA    #IMPLIED><!-- 	define la clase del parmetro recibido -->
+  <!ATTLIST input fieldID           	CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
+  
+  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
+  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+ 
+  <!ATTLIST output name					CDATA #REQUIRED> 
+  <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
+
+  <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
+  <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
+  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
+
+  <!ATTLIST operacion name              ID    #REQUIRED>
+  <!ATTLIST operacion clase             CDATA #IMPLIED>
+  <!ATTLIST operacion entidad           CDATA #IMPLIED>
+  <!ATTLIST operacion XMLWriter         CDATA #IMPLIED>
+  <!ATTLIST operacion redirect          CDATA #IMPLIED>
+  <!ATTLIST operacion usaJMS            CDATA #IMPLIED>
+  
+  <!ATTLIST dataset name                CDATA #REQUIRED>
+  <!ATTLIST dataset value               CDATA #IMPLIED>
+  <!ATTLIST dataset tabla               CDATA #IMPLIED>
+  
+  <!ATTLIST campo   name                CDATA #REQUIRED>
+  <!ATTLIST campo   value               CDATA #IMPLIED>
+  
+  <!ATTLIST tableDef    name           	CDATA #REQUIRED>
+
+  <!ATTLIST campoTable	name        	CDATA #REQUIRED>
+  <!ATTLIST campoTable  orden       	CDATA #IMPLIED>
+  <!ATTLIST campoTable  tipo        	CDATA #IMPLIED>
+  <!ATTLIST campoTable  longitud    	CDATA #IMPLIED>
+  
+]>
+
+<entity>
+
+	<!-- Persistir instancias de LABORATORIO -->
+	<operacion name="SaveLaboratorio" clase="com.jkt.operaciones.GuardarLista">
+		<input name="TLaboratorios" keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio"
+			fieldID='oid_lab'>
+			<campoEntrada>
+				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="TLaboratorio"></form>
+		</forms>
+
+	</operacion>
+
+	<!-- Traer instancias de LABORATORIO -->
+	<operacion name="TraerLaboratorio" clase="com.jkt.operaciones.TraerEntidades"
+		entidad="com.jkt.laboratorio.dominio.Laboratorio">
+		<output name="resultado" tableName="mtLaboratorio">
+			<campoSalida value="oid_lab" target="id" />
+			<campoSalida value="cod_lab" target="codigo" />
+			<campoSalida value="descr_lab" target="descripcion" />
+			<campoSalida value="activo" target="isActivo" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+
+		<forms>
+			<form name="TLaboratorio"></form>
+		</forms>
+	</operacion>
+
+	<!-- Persistir instancias de Tabla de Validación -->
+	<operacion name="SaveTablaValidacion" clase="com.jkt.operaciones.GuardarLista">
+		<input name="TTablas" keyName="objeto" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter"
+			fieldID='oid_tabla'>
+			<campoEntrada>
+				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="TLaboratorio"></form>
+		</forms>
+	</operacion>
+
+	<!-- Traer instancias de Tablas de Validación -->
+	<operacion name="TraerTablaValidacion" clase="com.jkt.operaciones.TraerEntidades"
+		entidad="com.jkt.laboratorio.dominio.TablaValidacionDeter">
+		<output name="resultado" tableName="mtTablaVal">
+			<campoSalida value="oid_tabla" target="id" />
+			<campoSalida value="cod_tabla" target="codigo" />
+			<campoSalida value="descr_tabla" target="descripcion" />
+			<campoSalida value="activo" target="isActivo" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+
+		<forms>
+			<form name="TLaboratorio"></form>
+		</forms>
+	</operacion>
+
+
+	<!-- Persistir instancias de Valores de Tablas de Validación -->
+	<operacion name="SaveValoresTablaValidacion" clase="com.jkt.operaciones.GuardarLista">
+		<input name="TValores" keyName="objeto" clase="com.jkt.laboratorio.dominio.ValoresTablaValidacion"
+			fieldID='oid_valor'>
+			<campoEntrada>
+				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="oid_tabla" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="TLaboratorio"></form>
+		</forms>
+	</operacion>
+
+	<!-- Traer lista de Valores de Tablas de Validación -->
+	<operacion name="TraerValoresTablaValidacion" clase="com.jkt.operaciones.TraerEntidades"
+		entidad="com.jkt.laboratorio.dominio.ValoresTablaValidacion">
+		<output name="resultado" tableName="mtValoresTablaVal">
+			<campoSalida value="oid_valor" target="id" />
+			<campoSalida value="cod_valor" target="codigo" />
+			<campoSalida value="descr_valor" target="descripcion" />
+			<campoSalida value="activo" target="isActivo" />
+<!-- 		</output>
+		
+		<output name="resultado2" tableName="mtTablaVal"> -->
+<!-- 			<campoSalida value="oid_valor" target="id" /> -->
+			<campoSalida value="oid_tabla" target="tablaValidacion.id" />
+			<campoSalida value="cod_tabla" target="tablaValidacion.codigo" />
+			<campoSalida value="desc_tabla" target="tablaValidacion.descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+
+		<forms>
+			<form name="TLaboratorio"></form>
+		</forms>
+	</operacion>
+
+	<!-- Persistir instancias de Análiss y sus Determinaciones -->
+	<operacion name="SaveAnalisis" clase="com.jkt.operaciones.Guardar">
+		<input name="mtAnalisis" keyName="objeto"
+			clase="com.jkt.laboratorio.dominio.Analisis" fieldID="oid_ana">
+			<campoEntrada>
+				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="mtDet" metodo="addDeterminacion"
+					clase="com.jkt.laboratorio.dominio.Determinacion" fieldID="oid_det">
+					<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+					<campoEntrada name="metodo" clase="String" metodo="setMetodo" />
+					<campoEntrada name="tipoResultado" clase="String" metodo="setTipoResultado" />
+					<campoEntrada name="mtValValDet" metodo="addValoresValidos"
+						clase="com.jkt.laboratorio.dominio.ValoresValidosDeterminacion" fieldID="oid_val_val">
+						<campoEntrada name="valorDesde" clase="Double" metodo="setValorDesde" />
+						<campoEntrada name="valorHasta" clase="Double" metodo="setValorHasta" />
+						<campoEntrada name="limiteInferior" clase="Double" metodo="setLimiteInferior" />
+						<campoEntrada name="limiteSuperior" clase="Double" metodo="setLimiteSuperior" />
+<!-- 						<campoEntrada name="caracteristica" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" /> -->
+						<campoEntrada name="oid_tabla" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
+<!-- 						<campoEntrada name="determinacion" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" /> -->
+					</campoEntrada>
+				</campoEntrada>
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="TAnalisis"></form>
+		</forms>
+
+	</operacion>
+
+</entity>

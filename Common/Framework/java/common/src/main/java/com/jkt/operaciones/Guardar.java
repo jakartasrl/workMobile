@@ -28,7 +28,7 @@ public class Guardar extends Operation {
 		guardar(object);
 	}
 
-	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException {
+	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException, JakartaException {
 		serviceRepository.save((PersistentEntity) object.get(0));//save the first
 	}
 

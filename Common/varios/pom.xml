@@ -5,6 +5,8 @@
     <groupId>com.jkt</groupId>
     <artifactId>jkt</artifactId>
     <version>0.0.1</version>
+    <relativePath>../../pom.xml</relativePath>
+
   </parent>
 
   <name>varios</name>

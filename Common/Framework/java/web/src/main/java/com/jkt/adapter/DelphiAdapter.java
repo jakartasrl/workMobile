@@ -304,13 +304,10 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								String keyParaRecuperarObjetoHijo = metaDataOfCurrentField.getFieldID();
 								
 								if (keyParaRecuperarObjetoHijo==null) {
-									//idObject=Long.valueOf(0);
-									  throw new JakartaException(" No esta configurado el campo FieldID");
-										
+									throw new JakartaException(" No esta configurado el campo FieldID");
 								}else{
 									String value = (String) reg.getCampos().get(keyParaRecuperarObjetoHijo);
 									if (value==null || value.isEmpty()) {
-										// idObject = Long.valueOf(0);
 										 throw new JakartaException("El campo: " + keyParaRecuperarObjetoHijo + " no viene en los datos que envia Delphi");
 									}else{
 										idObject = Long.valueOf(value);
@@ -322,8 +319,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 								   if (complexInstance==null) {
 										complexInstance = complexClazz.newInstance();
 									}
-								}
-								else{
+								}else{
 									complexInstance  = new Container("test");
 								}
 								

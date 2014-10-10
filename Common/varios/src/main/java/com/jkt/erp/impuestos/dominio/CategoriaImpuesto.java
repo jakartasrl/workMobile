@@ -1,6 +1,7 @@
 package com.jkt.erp.impuestos.dominio;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDetalle;
 
 /**
  * <p>Representa las categorias de inscripcion existentes para cada tipo de impuesto</p>
@@ -8,7 +9,7 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class CategoriaImpuesto extends Descriptible {
+public class CategoriaImpuesto extends Descriptible implements IDetalle{
 	
 	private Impuesto impuesto;
 	
@@ -36,6 +37,10 @@ public class CategoriaImpuesto extends Descriptible {
 		int result;
 		result = (int) (29 * getId());
 		return result;
+	}
+
+	public String getNombreDeMaestro() {
+		return "impuesto";
 	}
 	
 }

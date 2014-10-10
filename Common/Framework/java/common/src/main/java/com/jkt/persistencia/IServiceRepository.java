@@ -28,8 +28,9 @@ public interface IServiceRepository {
 	 * @throws IllegalAccessException  
 	 * @throws InstantiationException  
 	 * @throws ClassNotFoundException 
+	 * @throws JakartaException 
 	 */
-	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;
+	PersistentEntity save(PersistentEntity entity) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException, JakartaException;
 	/**
 	 * Usando la clase filtra por un nombre de su campo
 	 * @param className
@@ -93,8 +94,9 @@ public interface IServiceRepository {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
+	 * @throws JakartaException 
 	 */
-	List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException;
+	List<PersistentEntity> guardarObjetos(List<PersistentEntity> aEntities) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException, JakartaException;
 	/**
 	 * La clase concreta debe implementar este metodo para recibir un proveedor de sesiones e inyectarlo
 	 * 

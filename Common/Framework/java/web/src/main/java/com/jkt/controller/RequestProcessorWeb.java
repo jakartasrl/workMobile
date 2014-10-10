@@ -16,7 +16,7 @@ import com.jkt.util.MapDS;
 
 /**
  * Controller that will receive all request from clients javascript.
- * Controller que recibir· todas las solicitudes desde clientes javascript
+ * Controller que recibir√° todas las solicitudes desde clientes javascript.
  * 
  * @author Sergio Leonel Suarez
  */
