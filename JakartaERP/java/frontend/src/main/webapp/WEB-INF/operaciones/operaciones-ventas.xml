@@ -121,6 +121,7 @@
 
 		<output name="titulos" tableName="mtTitulos">
 			<campoSalida value="oid_Titulo" target="id" />
+<!-- 			<campoSalida value="oid_titu_conc" target="id" /> -->
 
 			<campoSalida value="oid_Modelo" target="modeloCotizador.id" />
 
@@ -128,7 +129,11 @@
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 
 			<campoSalida value="Codigo" target="codigo" />
+<!-- 			<campoSalida value="cod_titu_conc" target="codigo" /> -->
 			<campoSalida value="desc" target="descripcion" />
+<!-- 			<campoSalida value="des_titu_conc" target="descripcion" /> -->
+			
+<!-- 			TIPO -->
 			
 			<campoSalida value="oid_Concepto" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
 			<campoSalida value="descConcepto" target="concepto.codigo" /> 
@@ -137,15 +142,15 @@
 
 		</output>
 
-		<output name="conceptos" tableName="mtConceptosPresupuesto">
-			<campoSalida value="oid_Concepto" target="id" />
+<!-- 		<output name="conceptos" tableName="mtConceptosPresupuesto"> -->
+<!-- 			<campoSalida value="oid_Concepto" target="id" /> -->
 
-			<campoSalida value="oid_Titulo" target="titulo.id" />
+<!-- 			<campoSalida value="oid_Titulo" target="titulo.id" /> -->
 
-			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="desc" target="descripcion" />
+<!-- 			<campoSalida value="Codigo" target="codigo" /> -->
+<!-- 			<campoSalida value="desc" target="descripcion" /> -->
 			
-		</output>
+<!-- 		</output> -->
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
@@ -166,7 +171,7 @@
 			<campoSalida value="cod_conc" target="codigo" />
 			<campoSalida value="des_conc" target="descripcion" />
 			<campoSalida value="pide_art" target="isPideArticulo" />
-			<campoSalida value="oid_cla" target="componenteValor.clasificador.id" />
+<!-- 			<campoSalida value="oid_cla" target="componenteValor.componente.clasificador.id" /> -->
 			<campoSalida value="oid_val_cla" target="componenteValor.id" />
 			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
 			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />

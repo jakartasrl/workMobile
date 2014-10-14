@@ -44,6 +44,7 @@
 	<elemento key="pais" value="com.jkt.varios.dominio.Pais" />
 	<elemento key="provincia" value="com.jkt.varios.dominio.Provincia" />
 	<elemento key="clasificadores" value="com.jkt.varios.dominio.Clasificador" />
+	<elemento key="valoresClasificador" value="com.jkt.varios.dominio.ComponenteValor" />
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
 	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
 	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />

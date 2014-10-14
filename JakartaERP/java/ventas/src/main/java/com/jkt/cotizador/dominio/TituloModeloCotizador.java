@@ -14,6 +14,18 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private ModeloCotizador modeloCotizador;
 	
 	private int codigoInterno,codigoInternoPadre;
+	private char tipo='T';//para diferenciar entre titulos y conceptos.
+
+	/*
+	 * setters y getters
+	 */
+	public char getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(char tipo) {
+		this.tipo = tipo;
+	}
 
 	public String getCodigo() {
 		return codigo;

@@ -244,10 +244,15 @@ public abstract class Operation extends Observable {
 	protected List<PersistentEntity> obtenerTodos(Class<? extends PersistentEntity> className) throws Exception{
 		return serviceRepository.getAll(className);
 	}
+
 	/**
 	 * <p>Recupera una entidad persistente utilizando el nombre de la clase y el id.</p>
 	 * <p>Metodo sobre cargado que recibe un numero en formto de String.Se intentara pasar a numero y si no es numerico se levanta una excepcion</p>
 	 * 
+	 * @param className que representa a la clase a buscar
+	 * @param id para identificarlo.
+	 * @return una entidad persistente, que se corresponde con la clase y el ID solicitado.
+	 * @throws Exception Si la instancia de la clase con el id proporcionado no existe, se levanta una {@link JakartaException}
 	 */
 	protected PersistentEntity obtener(Class<? extends PersistentEntity> className, String id) throws Exception{
 		long identificador = 0;
