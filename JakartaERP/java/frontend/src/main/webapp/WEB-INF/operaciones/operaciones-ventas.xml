@@ -175,7 +175,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0001"></form>
 		</forms>		
 
 	</operacion>
@@ -193,7 +193,7 @@
 		</input>
 	
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0001"></form>
 		</forms>
 
 	</operacion>

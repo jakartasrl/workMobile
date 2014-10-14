@@ -20,7 +20,6 @@ public class Cotizador extends PersistentEntity {
 	private String usuarioRevision;
 	private Date fechaRevision;
 	private List<CotizadorDet> detalles=new ArrayList<CotizadorDet>();
-	
 
 	public void agregarDetalle(CotizadorDet detalle){
 		if (!detalles.contains(detalle)) {
