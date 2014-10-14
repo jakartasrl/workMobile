@@ -158,16 +158,16 @@
 	
 	
 
-<!-- 	Concepto de presupuesto -->
-<!-- RECUPERAR  Caracteristicas de Producto -->
+	<!-- 	Concepto de presupuesto -->
 	<operacion name="TraerConceptoPresupuesto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.cotizador.dominio.ConceptoPresupuesto">
 		
 		<output name="resultado" tableName="mtConc">
 			<campoSalida value="oid_conc" target="id" />
 			<campoSalida value="cod_conc" target="codigo" />
-			<campoSalida value="des_con" target="descripcion" />
+			<campoSalida value="des_conc" target="descripcion" />
 			<campoSalida value="pide_art" target="isPideArticulo" />
-			<campoSalida value="oi_val_cla" target="componenteValor.id" />
+			<campoSalida value="oid_cla" target="componenteValor.clasificador.id" />
+			<campoSalida value="oid_val_cla" target="componenteValor.id" />
 			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
 			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />
 		</output>		
@@ -175,9 +175,11 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="--"></form>
+			<form name="---"></form>
 		</forms>		
+
 	</operacion>
+	
 	
 	<operacion name="GuardarConceptoPresupuesto" clase="com.jkt.operaciones.GuardarLista">
 	
@@ -186,7 +188,7 @@
 				<campoEntrada name="cod_conc" clase="String" metodo="setCodigo" />
 				<campoEntrada name="des_conc" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="pide_art" clase="Boolean" metodo="setPideArticulo" />
-				<campoEntrada name="oi_val_cla" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+				<campoEntrada name="oid_val_cla" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
 			</campoEntrada>
 		</input>
 	
