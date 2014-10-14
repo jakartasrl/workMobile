@@ -11,20 +11,10 @@ import com.jkt.dominio.Descriptible;
  */
 public class Determinacion extends Descriptible {
 
-	/**
-	 * Análisis al que pertenece.
-	 */
-	private Analisis analisis;
 
-	/**
-	 * Método con el que se realiza la Determinación.
-	 */
 	private String metodo;
-
-	/**
-	 * Indica si el resultado será un número, una descripción, o un valor tabulado.
-	 */
 	private String tipoResultado;
+	private Laboratorio laboratorio;
 
 	/**
 	 * Lista de valores válidos y de referencia de la determinación
@@ -44,13 +34,7 @@ public class Determinacion extends Descriptible {
 	}
 
 	/* -------------------------------------- Getters & Setters -------------------------------------- */
-	public Analisis getAnalisis() {
-		return analisis;
-	}
-
-	public void setAnalisis(Analisis analisis) {
-		this.analisis = analisis;
-	}
+	
 
 	public String getMetodo() {
 		return metodo;
@@ -66,6 +50,14 @@ public class Determinacion extends Descriptible {
 
 	public void setTipoResultado(String tipoResultado) {
 		this.tipoResultado = tipoResultado;
+	}
+	
+	public Laboratorio getLaboratorio() {
+		return laboratorio;
+	}
+
+	public void setLaboratorio(Laboratorio aValue) {
+		this.laboratorio = aValue;
 	}
 
 	public List<ValoresValidosDeterminacion> getListaValoresValidosDeterminacion() {

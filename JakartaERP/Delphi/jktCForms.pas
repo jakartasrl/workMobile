@@ -13,7 +13,10 @@ uses
   jktFNCli0001,
   jktFNArt0001,
   jktFNArt0002,
-  jktFNVen0001;
+  jktFNVen0001,
+  jktFNLab0001,
+  jktFNLab0002
+  ;
 
 implementation
 
