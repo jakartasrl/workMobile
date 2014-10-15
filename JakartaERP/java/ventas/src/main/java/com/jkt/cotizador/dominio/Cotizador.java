@@ -28,7 +28,7 @@ public class Cotizador extends PersistentEntity {
 	public Cotizador() {
 		this.fecha=new Date();
 		this.revisado=false;
-		this.usuarioCreacion="User not assigned yet.";
+		this.usuarioCreacion="User not assigned yet. Value setted ";
 	}
 	
 	public void agregarDetalle(CotizadorDet detalle){

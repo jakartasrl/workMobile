@@ -118,5 +118,21 @@ public class TituloModeloCotizador extends PersistentEntity {
 //			}
 //		}
 //	}
+	
+	public String getCodigoReal(){
+		if (concepto==null) {
+			return this.codigo;
+		}else{
+			return this.concepto.getCodigo();
+		}
+		
+	}
+	public String getDescripcionReal(){
+		if (concepto==null) {
+			return this.descripcion;
+		}else{
+			return this.concepto.getDescripcion();
+		}
+	}
 
 }

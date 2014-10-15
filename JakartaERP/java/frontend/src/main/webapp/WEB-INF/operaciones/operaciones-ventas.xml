@@ -76,14 +76,14 @@
 
 	<operacion name="GuardarModeloCotizador" clase="com.jkt.cotizador.operaciones.GuardarModeloCotizador">
 	
-		<input name="mtModeloCotizador" keyName="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" fieldID="oid_Modelo_Cotizador">
+		<input name="mtModeloCotizador" keyName="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" fieldID="oid_Modelo">
 			<campoEntrada>
 
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name="mtTitulos" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_Titulo_Modelo_Cotizador">
+				<campoEntrada name="mtTitulos" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_titu_conc">
 					
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					
@@ -120,24 +120,21 @@
 		</output>
 
 		<output name="titulos" tableName="mtTitulos">
-			<campoSalida value="oid_Titulo" target="id" />
-<!-- 			<campoSalida value="oid_titu_conc" target="id" /> -->
+			<campoSalida value="oid_titu_conc" target="id" />
 
 			<campoSalida value="oid_Modelo" target="modeloCotizador.id" />
 
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 
-			<campoSalida value="Codigo" target="codigo" />
-<!-- 			<campoSalida value="cod_titu_conc" target="codigo" /> -->
-			<campoSalida value="desc" target="descripcion" />
-<!-- 			<campoSalida value="des_titu_conc" target="descripcion" /> -->
+			<campoSalida value="cod_titu_conc" target="codigoReal" />
+			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			
 			<campoSalida value="tipo" target="tipo" />
 			
 			<campoSalida value="oid_Concepto" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
-			<campoSalida value="descConcepto" target="concepto.codigo" /> 
-			<campoSalida value="CodigoConcepto" target="concepto.descripcion" />
+<!-- 			<campoSalida value="descConcepto" target="concepto.codigo" />  -->
+<!-- 			<campoSalida value="CodigoConcepto" target="concepto.descripcion" /> -->
 			
 
 		</output>
@@ -237,6 +234,36 @@
 
 	</operacion>
 	
+	
+	<!-- CONFIGURACION DEL COTIZADOR. ESTA OPERACION SE EJECUTA AL MOMENTO DE GUARDAR EN EL COTIZADOR LA RELACION CON UN MODELO Y SUS CORRESPONDIENTES RELACIONES. -->
+	<operacion name="ConfigurarCotizador" clase="com.jkt.operaciones.GuardarLista">
+	
+		<input name="mtCotizador" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cot">
+			<campoEntrada>
+				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" />
+				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" />
+				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" />
+				<campoEntrada name="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
+				
+				<campoEntrada name="mtDetalleCotizador" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_detalle">
+					<campoEntrada name="producto" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="cantidad" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="precioUnitario" clase="Double" metodo="setPrecioUnitario" />
+					<campoEntrada name="cotizacion" clase="Double" metodo="setCotizacion" />
+
+					<campoEntrada name="conceptoPresupuesto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
+					<campoEntrada name="unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
+					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
 	
 	
 </entity>
