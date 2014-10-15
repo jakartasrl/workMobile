@@ -24,6 +24,7 @@ import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
+import com.jkt.transformers.Notificacion;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
 import com.jkt.xmlreader.ElementTransformer;
@@ -156,10 +157,23 @@ public abstract class Operation extends Observable {
 	 *            que llegara el transformer.Dependiendo del tipo de transformer
 	 *            se notifica de diferentes maneras.
 	 * 
+	 * @deprecated ahora se debe utilizar el metodo con un writer y el objeto a notificarS
 	 */
 	protected void notificarObjecto(Object parameter) {
 		this.setChanged();
 		notifyObservers(parameter);
+	}
+	
+	/**
+	 * Notifica una objetos en el writer proporcionado
+	 * 
+	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
+	 * @param parametro representa al parametro a mostrar en la salida.
+	 */
+	protected void notificarObjecto(String writer, Object parameter) {
+		Notificacion notificacion = Notificacion.getNew(writer, parameter);
+		this.setChanged();
+		notifyObservers(notificacion);
 	}
 
 	/**
@@ -298,4 +312,18 @@ public abstract class Operation extends Observable {
 			throw new JakartaException(mensaje);
 		}
 	}
+	
+	/**
+	 * Notifica una lista de objetos en el writer proporcionado
+	 * 
+	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
+	 * @param lista Lista de elementos a notificar.
+	 */
+	protected void notificarObjetos(String writer, List<PersistentEntity> lista) {
+		for (PersistentEntity persistentEntity : lista) {
+//			notificarObjecto(Notificacion.getNew(writer, persistentEntity));
+			notificarObjecto(writer, persistentEntity);
+		}
+	}
+
 }

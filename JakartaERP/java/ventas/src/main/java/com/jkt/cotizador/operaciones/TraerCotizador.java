@@ -75,7 +75,9 @@ public class TraerCotizador extends Operation {
 	 * 
 	 * @param tituloModeloCotizador
 	 * @param codigoInternoPadre
-	 * @throws JakartaException 
+	 * @throws JakartaException Si existe alguna inconsistencia con los titulos y conceptos. Alguna inconsistencia puede ser que 
+	 * un titulo no tenga hijos, y si es así, tiene que tener una referencia a un concepto, y ademas 
+	 * (si la var pideArticulo es true) un componenteValor asociado.
 	 */
 	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws JakartaException {
 		
@@ -101,6 +103,19 @@ public class TraerCotizador extends Operation {
 			
 			tituloModeloCotizador.setTipo('C');//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
 		}
+		
+		
+		/*
+		 * IMPORTANTE. El objetivo de este metodo es armar el arbol del modelo, pero en cada concepto, sus datos completos en cuanto 
+		 * al cotizador, es decir:
+		 * 
+		 * si la jerarquia tiene un padre y dos hijos conceptos, estos conceptos tienen datos relacionados cuando se habla de cotizador.
+		 * datos como unidad de medida, cantidad, precio, moneda, estan relacionados a este detalle de cotizador, que esta fuertemente
+		 * relacionado con el concepto.
+		 * 
+		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
+		 */
+		tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);
 		notificarObjecto(Notificacion.getNew(WRITER_TITULO, tituloModeloCotizador));
 
 		//Recursividad, o muestreo de concepto.

@@ -13,14 +13,24 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Cotizador extends PersistentEntity {
 
-	private ModeloCotizador modelo;
+	private String nombre;
+	private String descripcion;
+	
 	private Date fecha;
 	private boolean revisado;
 	private String usuarioCreacion;
+	
 	private String usuarioRevision;
 	private Date fechaRevision;
+	private ModeloCotizador modelo;
 	private List<CotizadorDet> detalles=new ArrayList<CotizadorDet>();
 
+	public Cotizador() {
+		this.fecha=new Date();
+		this.revisado=false;
+		this.usuarioCreacion="User not assigned yet.";
+	}
+	
 	public void agregarDetalle(CotizadorDet detalle){
 		if (!detalles.contains(detalle)) {
 			detalles.add(detalle);
@@ -28,6 +38,26 @@ public class Cotizador extends PersistentEntity {
 		}
 	}
 	
+
+	/*
+	 * setters & getters
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public List<CotizadorDet> getDetalles() {
 		return detalles;
 	}

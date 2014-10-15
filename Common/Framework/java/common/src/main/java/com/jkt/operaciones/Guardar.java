@@ -17,8 +17,6 @@ import com.jkt.excepcion.ValidacionException;
 @OperacionBean
 public class Guardar extends Operation {
 
-	
-	
 	@SuppressWarnings("rawtypes")
 	public void execute(Map<String, Object> aParams) throws Exception {
 		List object = recuperarObjeto(aParams);

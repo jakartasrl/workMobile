@@ -15,12 +15,21 @@ public class TituloModeloCotizador extends PersistentEntity {
 	
 	private int codigoInterno,codigoInternoPadre;
 	private char tipo='T';//para diferenciar entre titulos y conceptos.
-
+	private CotizadorDet detalleDeConcepto;//campo transiente para mostrar la salida en la operacion de mostrar cotizador.
 	/*
 	 * setters y getters
 	 */
+	
 	public char getTipo() {
 		return tipo;
+	}
+
+	public CotizadorDet getDetalleDeConcepto() {
+		return detalleDeConcepto;
+	}
+
+	public void setDetalleDeConcepto(CotizadorDet detalleDeConcepto) {
+		this.detalleDeConcepto = detalleDeConcepto;
 	}
 
 	public void setTipo(char tipo) {
@@ -29,6 +38,9 @@ public class TituloModeloCotizador extends PersistentEntity {
 
 	public String getCodigo() {
 		return codigo;
+		
+		//TODO comprobar si tiene concepto, si tiene mandar el codigo del concepto y la descripcion tambien!
+		
 	}
 
 	public void setCodigo(String codigo) {

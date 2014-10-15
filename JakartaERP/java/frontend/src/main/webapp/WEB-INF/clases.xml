@@ -58,5 +58,6 @@
 	<elemento key="articulos" value="com.jkt.erp.articulos.Producto" />
 	<elemento key="configuracion" value="com.jkt.dominio.Configuracion" />
 	<elemento key="conceptoPresupuesto" value="com.jkt.cotizador.dominio.ConceptoPresupuesto" />
+	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
 
 </elementos>

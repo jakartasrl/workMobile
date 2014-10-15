@@ -6,6 +6,7 @@ import java.util.Map;
 import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 import com.jkt.transformers.Notificacion;
 
@@ -39,25 +40,34 @@ public class TraerModeloCotizador extends Operation {
 		
 	}
 
-	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) {
+	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws JakartaException {
 		
 		tituloModeloCotizador.setCodigoInterno((int)tituloModeloCotizador.getId());
 		tituloModeloCotizador.setCodigoInternoPadre(codigoInternoPadre);
 
-		notificarObjecto(Notificacion.getNew(WRITER_TITULO, tituloModeloCotizador));
 
 		//Recursividad, o muestreo de concepto.
 		List<TituloModeloCotizador> titulosHijos = tituloModeloCotizador.getTitulosHijos();
-		if (titulosHijos.isEmpty()) {
-			//Significa que puede llegar a tener conceptos, xq es de ultimo nivel.Verificamos esto.
-			ConceptoPresupuesto concepto = tituloModeloCotizador.getConcepto();
-			if (concepto!=null) {
-				notificarObjecto(Notificacion.getNew(WRITER_CONCEPTO, concepto));
+		boolean tieneHijos=!titulosHijos.isEmpty();
+
+		if (!tieneHijos) {
+			if(tituloModeloCotizador.getConcepto()==null){
+				throw new JakartaException("El titulo no tiene un concepto relacionado.");
 			}
 			
-		}else{
+			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
+				if (tituloModeloCotizador.getConcepto().getComponenteValor()==null) {
+					throw new JakartaException("Si el concepto relacionado al titulo, pide articulo, debe obligatoriamente tener relacionado un valor de clasificador.");
+				}
+			}
+			
+			tituloModeloCotizador.setTipo('C');//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+		}
+		notificarObjecto(Notificacion.getNew(WRITER_TITULO, tituloModeloCotizador));
+		
+		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {
-				mostrarArbol(subTitulo, tituloModeloCotizador.getCodigoInterno());//se le envia el codigo interno actual (id de base) a cada hijo
+				mostrarArbol(subTitulo, tituloModeloCotizador.getCodigoInterno());//se le envia el codigo interno actual (id de base de datos) a cada hijo
 			}
 		}
 		
