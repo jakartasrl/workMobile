@@ -104,8 +104,8 @@ implementation
 
 procedure TFNLab0001.llamarOperacionConfiguracion;
 begin
-  inherited;
-  valLaboratorio.validar(mtParametroInicial.FieldByName('entidad').asString);
+  //inherited;
+  valLaboratorio.validar(mtParametroInicial.FieldByName('entidad'));
 end;
 
 procedure TFNLab0001.TCabNewRecord(DataSet: TDataSet);
@@ -114,7 +114,7 @@ begin
   if (not Service.ModoExecute)
      then begin
             Dataset.FieldByName('activo').AsBoolean := true;
-            Dataset.FieldByName('oid_lab').AsBoolean := TLabo.FieldByName('oid_lab').AsInteger;
+            Dataset.FieldByName('oid_lab').AsInteger := TLabo.FieldByName('oid_lab').AsInteger;
           end;
 
 end;
@@ -129,5 +129,9 @@ begin
                Dataset.FieldByName('oid_carac').AsInteger := TCarac.FieldByName('oid_carac').AsInteger;
             end;
 end;
+
+
+initialization
+  RegisterClass(TFNLab0001);
 
 end.

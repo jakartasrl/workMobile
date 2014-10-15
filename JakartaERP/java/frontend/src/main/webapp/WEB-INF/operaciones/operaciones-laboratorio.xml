@@ -76,11 +76,11 @@
 
 	<!-- Persistir instancias de LABORATORIO -->
 	<operacion name="SaveLaboratorio" clase="com.jkt.operaciones.GuardarLista">
-		<input name="TLaboratorios" keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio"
-			fieldID='oid_lab'>
+		<input name="mtInput" keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio"
+			fieldID='oid'>
 			<campoEntrada>
 				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
-				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="descr" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 			</campoEntrada>
 		</input>
@@ -94,10 +94,10 @@
 	<!-- Traer instancias de LABORATORIO -->
 	<operacion name="TraerLaboratorio" clase="com.jkt.operaciones.TraerEntidades"
 		entidad="com.jkt.laboratorio.dominio.Laboratorio">
-		<output name="resultado" tableName="mtLaboratorio">
-			<campoSalida value="oid_lab" target="id" />
-			<campoSalida value="cod_lab" target="codigo" />
-			<campoSalida value="descr_lab" target="descripcion" />
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descr" target="descripcion" />
 			<campoSalida value="activo" target="isActivo" />
 		</output>
 
@@ -109,12 +109,12 @@
 	</operacion>
 
 	<!-- Persistir instancias de Tabla de Validación -->
-	<operacion name="SaveTablaValidacion" clase="com.jkt.operaciones.GuardarLista">
-		<input name="TTablas" keyName="objeto" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter"
+	<operacion name="SaveTablaValDeter" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter"
 			fieldID='oid_tabla'>
 			<campoEntrada>
 				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
-				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="descr" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 			</campoEntrada>
 		</input>
@@ -125,12 +125,12 @@
 	</operacion>
 
 	<!-- Traer instancias de Tablas de Validación -->
-	<operacion name="TraerTablaValidacion" clase="com.jkt.operaciones.TraerEntidades"
+	<operacion name="TraerTablaValDeter" clase="com.jkt.operaciones.TraerEntidades"
 		entidad="com.jkt.laboratorio.dominio.TablaValidacionDeter">
-		<output name="resultado" tableName="mtTablaVal">
+		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_tabla" target="id" />
-			<campoSalida value="cod_tabla" target="codigo" />
-			<campoSalida value="descr_tabla" target="descripcion" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descr" target="descripcion" />
 			<campoSalida value="activo" target="isActivo" />
 		</output>
 
@@ -144,11 +144,11 @@
 
 	<!-- Persistir instancias de Valores de Tablas de Validación -->
 	<operacion name="SaveValoresTablaValidacion" clase="com.jkt.operaciones.GuardarLista">
-		<input name="TValores" keyName="objeto" clase="com.jkt.laboratorio.dominio.ValoresTablaValidacion"
-			fieldID='oid_valor'>
+		<input name="mtInput" keyName="objeto" clase="com.jkt.laboratorio.dominio.ValoresTablaValidacion"
+			fieldID='oid_valor_tabla'>
 			<campoEntrada>
 				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
-				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="descr" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="oid_tabla" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
 			</campoEntrada>
@@ -162,20 +162,17 @@
 	<!-- Traer lista de Valores de Tablas de Validación -->
 	<operacion name="TraerValoresTablaValidacion" clase="com.jkt.operaciones.TraerEntidades"
 		entidad="com.jkt.laboratorio.dominio.ValoresTablaValidacion">
-		<output name="resultado" tableName="mtValoresTablaVal">
-			<campoSalida value="oid_valor" target="id" />
-			<campoSalida value="cod_valor" target="codigo" />
-			<campoSalida value="descr_valor" target="descripcion" />
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_valor_tabla" target="id" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descr" target="descripcion" />
 			<campoSalida value="activo" target="isActivo" />
-<!-- 		</output>
-		
-		<output name="resultado2" tableName="mtTablaVal"> -->
-<!-- 			<campoSalida value="oid_valor" target="id" /> -->
 			<campoSalida value="oid_tabla" target="tablaValidacion.id" />
 			<campoSalida value="cod_tabla" target="tablaValidacion.codigo" />
-			<campoSalida value="desc_tabla" target="tablaValidacion.descripcion" />
-		</output>
-
+			<campoSalida value="des_tabla" target="tablaValidacion.descripcion" />
+ 		</output>
+		
+	
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 
 		<forms>
@@ -218,5 +215,43 @@
 		</forms>
 
 	</operacion>
+	
+		
+	<operacion name="TraerDeterminaciones" clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.laboratorio.dominio.Determinacion" >
+
+		<output name="entidad" tableName="TDet">
+  			<campoSalida value="oid_det"   target="id" />
+  			<campoSalida value="cod_det"   target="codigo" />
+  			<campoSalida value="des_det"   target="descripcion" />
+  			<campoSalida value="metodo"    target="metodo" />
+  			<campoSalida value="tipo_res"  target="tipoResultado" />
+  			<campoSalida value="activo"    target="isActivo" />
+  			<campoSalida value="oid_lab"   target="laboratorio.id" />			
+		</output>
+		
+		<output name="validaciones" tableName="TVal">			
+  			<campoSalida value="oid_det"      target="determinacion.id" />
+  			<campoSalida value="oid_carac"    target="caracteristica.id" />
+  			<campoSalida value="valor_desde"  target="valorDesde" />
+  			<campoSalida value="valor_hasta"  target="valorHasta" />
+  			<campoSalida value="cod_tabla"    target="tablaValidacion.codigo" />
+  			<campoSalida value="des_tabla"    target="tablaValidacion.descripcion" />
+  			<campoSalida value="oid_tabla"    target="tablaValidacion.id" />
+  			<campoSalida value="limite_inf"   target="limiteInferior" />
+  			<campoSalida value="limite_sup"   target="limiteSuperior" />
+		</output>		
+		<listas>
+			<lista nombreLista="listaValoresValidosDeterminacion" nombreWriter="validaciones"/>
+		</listas>
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+	
 
 </entity>

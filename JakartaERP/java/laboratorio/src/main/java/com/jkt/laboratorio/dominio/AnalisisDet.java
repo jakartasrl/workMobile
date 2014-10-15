@@ -1,8 +1,6 @@
 ﻿package com.jkt.laboratorio.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.PersistentEntity;
 
 /**
  * Representa las determinaciones que componen un  Análisis que se puede hacer en un Laboratorio.

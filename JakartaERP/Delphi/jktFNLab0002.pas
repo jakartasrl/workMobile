@@ -77,8 +77,12 @@ implementation
 
 procedure TFNLab0002.llamarOperacionConfiguracion;
 begin
-  inherited;
-  valLaboratorio.validar(mtParametroInicial.FieldByName('entidad').asString);
+//  inherited;
+  valLaboratorio.validar(mtParametroInicial.FieldByName('entidad'));
 end;
 
+
+
+initialization
+  RegisterClass(TFNLab0002);
 end.

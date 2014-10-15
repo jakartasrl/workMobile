@@ -13,9 +13,6 @@ inherited FNLab0001: TFNLab0001
     Height = 499
     Align = alClient
     TabOrder = 4
-    ExplicitLeft = 8
-    ExplicitTop = 40
-    ExplicitHeight = 335
     object Splitter1: TSplitter
       Left = 377
       Top = 1
@@ -32,7 +29,6 @@ inherited FNLab0001: TFNLab0001
       Align = alLeft
       BorderStyle = bsSingle
       TabOrder = 0
-      ExplicitHeight = 333
       object cxGrid1: TcxGrid
         Left = 1
         Top = 1
@@ -40,9 +36,6 @@ inherited FNLab0001: TFNLab0001
         Height = 491
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 17
-        ExplicitTop = -2
-        ExplicitHeight = 368
         object cxGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSDet
@@ -90,19 +83,13 @@ inherited FNLab0001: TFNLab0001
       BorderStyle = bsSingle
       Caption = 'Panel3'
       TabOrder = 1
-      ExplicitLeft = 383
-      ExplicitTop = -1
-      ExplicitHeight = 333
       object Panel4: TPanel
         Left = 1
         Top = 1
         Width = 374
         Height = 41
         Align = alTop
-        Caption = 'Panel4'
         TabOrder = 0
-        ExplicitLeft = 4
-        ExplicitTop = 3
         object cxDBTextEdit3: TcxDBTextEdit
           Left = 21
           Top = 12
@@ -120,10 +107,6 @@ inherited FNLab0001: TFNLab0001
         Height = 450
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 126
-        ExplicitTop = 129
-        ExplicitWidth = 250
-        ExplicitHeight = 200
         object cxGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSVal
@@ -178,7 +161,7 @@ inherited FNLab0001: TFNLab0001
       0)
   end
   inherited OperacionSave: TjktOperacion
-    OperName = 'SaveDeterminacion'
+    OperName = 'SaveDeterminaciones'
     Atributos = <
       item
         Tag = 0
@@ -199,7 +182,7 @@ inherited FNLab0001: TFNLab0001
     Top = 208
   end
   inherited OperacionTraer: TjktOperacion
-    OperName = 'TraerAnalisis'
+    OperName = 'TraerDeterminaciones'
     Left = 488
     Top = 24
   end
@@ -211,12 +194,44 @@ inherited FNLab0001: TFNLab0001
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TDetIndex1'
-        Fields = 'oid_ana'
+        Name = 'oid_det'
+        DataType = ftInteger
+      end
+      item
+        Name = 'cod_det'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'des_det'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'metodo'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'tipo_res'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'activo'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'key'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_lab'
+        DataType = ftInteger
       end>
+    IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
@@ -269,7 +284,50 @@ inherited FNLab0001: TFNLab0001
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'oid_det'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_carac'
+        DataType = ftInteger
+      end
+      item
+        Name = 'valor_desde'
+        DataType = ftFloat
+      end
+      item
+        Name = 'valor_hasta'
+        DataType = ftFloat
+      end
+      item
+        Name = 'cod_tabla'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'des_tabla'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'oid_tabla'
+        DataType = ftInteger
+      end
+      item
+        Name = 'limite_inf'
+        DataType = ftFloat
+      end
+      item
+        Name = 'limite_sup'
+        DataType = ftFloat
+      end
+      item
+        Name = 'key'
+        DataType = ftInteger
+      end>
+    IndexFieldNames = 'oid_det'
     IndexDefs = <
       item
         Name = 'TValIndex1'
@@ -278,7 +336,7 @@ inherited FNLab0001: TFNLab0001
     SortOptions = []
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
+    LoadedCompletely = True
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
@@ -362,7 +420,7 @@ inherited FNLab0001: TFNLab0001
     Top = 256
   end
   object valLaboratorio: TjktValidador
-    Entidad = 'Laboratorio'
+    Entidad = 'laboratorio'
     Validacion = tExistente
     ListaAsignaciones = <
       item
