@@ -7,7 +7,6 @@ import com.jkt.dominio.menu.ElementoMenu;
 import com.jkt.dominio.menu.Menu;
 import com.jkt.dominio.menu.TextoMenu;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 /**
  * Recupera el nivel de hijos inmediatos de un menu
@@ -46,12 +45,12 @@ public class RecuperarMenu extends Operation {
 	 * 
 	 * En esta oportunidad, la operacion necesita notificar en dos diferentes tablas.
 	 * La tabla 'tablas' contiene los datos del elemento de menu.
-	 * La tabla 'textos' será utilizada en caso de que sea un sub menu, y el mismo contenga una cantidad de textos
+	 * La tabla 'textos' serï¿½ utilizada en caso de que sea un sub menu, y el mismo contenga una cantidad de textos
 	 * 
 	 * @param Lista de resultados
 	 */
 	private void enviarResultados(ElementoMenu elementoMenu, String nombreDeLaTablaDeSalida) {
-		notificarObjecto(Notificacion.getNew(nombreDeLaTablaDeSalida, elementoMenu));
+		notificarObjeto(nombreDeLaTablaDeSalida, elementoMenu);
 		
 		if (elementoMenu instanceof Menu) {
 			Menu auxMenu=(Menu) elementoMenu;
@@ -59,7 +58,7 @@ public class RecuperarMenu extends Operation {
 			long id=auxMenu.getId();
 			for(TextoMenu textoMenu:auxMenu.getTextos()){
 				textoMenu.setOidMenu(String.valueOf(id));
-				notificarObjecto(Notificacion.getNew(NOMBRE_TABLA_TEXTOS, textoMenu));
+				notificarObjeto(NOMBRE_TABLA_TEXTOS, textoMenu);
 			}
 		}
 	}

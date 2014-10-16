@@ -265,7 +265,37 @@ begin
     begin
       NombrePrograma   := 'TFNUti0001';
       ParametroInicial := 'ValoresDeTablas';
-      Titulo := 'ABM de Valores de Características';
+      Titulo := 'ABM de Valores de Tablas de Características';
+    end
+  else if Sender.Tag = 30 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Laboratorio';
+      Titulo := 'ABM de Laboratorio';
+    end
+  else if Sender.Tag = 31 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'TablaValidacionDeterminacion';
+      Titulo := 'ABM de Tablas de Validacion';
+    end
+  else if Sender.Tag = 32 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'ValoresTablaValidacionDeter';
+      Titulo := 'ABM de Valores Tablas de Validacion';
+    end
+  else if Sender.Tag = 33 then
+    begin
+      NombrePrograma   := 'TFNLab0001';
+      ParametroInicial := 'QUI';
+      Titulo := 'ABM de Determinaciones';
+    end
+  else if Sender.Tag = 34 then
+    begin
+      NombrePrograma   := 'TFNLab0001';
+      ParametroInicial := 'ELE';
+      Titulo := 'ABM de Ensayos';
     end;
 
   frmMainForm.Show;

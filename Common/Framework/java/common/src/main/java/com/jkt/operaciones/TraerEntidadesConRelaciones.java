@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.transformers.Notificacion;
 import com.jkt.xmlreader.Lista;
 import com.jkt.xmlreader.PropertySolver;
 
@@ -32,7 +31,7 @@ public class TraerEntidadesConRelaciones extends Operation {
 			List<PersistentEntity> elementos = obtenerTodos((Class<? extends PersistentEntity>) clase);
 
 			for (PersistentEntity persistentEntity : elementos) {
-				notificarObjecto(Notificacion.getNew("entidad", persistentEntity));
+				notificarObjeto("entidad", persistentEntity);
 
 				for (Lista lista : obtenerListas) {
 					mostrarResultados(clase, persistentEntity, lista);
@@ -59,7 +58,7 @@ public class TraerEntidadesConRelaciones extends Operation {
 		
 		for (Object elementoDeLista : coleccion) {
 			if (elementoDeLista!=null) {
-				notificarObjecto(Notificacion.getNew(lista.getNombreWriter(), elementoDeLista));
+				notificarObjeto(lista.getNombreWriter(), elementoDeLista);
 
 				if(lista.tieneHijos()){
 					for (Lista subLista : lista.getListas()) {

@@ -4,14 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Criteria;
-
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.Empresa;
 import com.jkt.dominio.EmpresaHabilitada;
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.transformers.Notificacion;
 
 @OperacionBean
 public class TraerEmpresasParaUsuarios extends Operation {
@@ -36,7 +33,7 @@ public class TraerEmpresasParaUsuarios extends Operation {
 			EmpresaHabilitada empresaHabilitada = new EmpresaHabilitada();
 			empresaHabilitada.setEmpresa(empresa);
 			empresaHabilitada.setOidEmpresa(String.valueOf(persistentEntity.getId()));
-			notificarObjecto(Notificacion.getNew("resultado", empresaHabilitada));
+			notificarObjeto("resultado", empresaHabilitada);
 		}
 	}
 

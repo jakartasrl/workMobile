@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 import com.jkt.varios.dominio.ComponenteValor;
@@ -54,7 +53,7 @@ public class FiltroValoresClasificador extends Operation {
 			if (componenteValor==null) {
 				continue;
 			}
-			notificarObjecto(Notificacion.getNew("resultado", componenteValor));
+			notificarObjeto("resultado", componenteValor);
 		}
 	}
 

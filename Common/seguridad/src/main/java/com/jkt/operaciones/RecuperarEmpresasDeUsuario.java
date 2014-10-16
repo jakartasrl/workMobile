@@ -10,7 +10,6 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 public class RecuperarEmpresasDeUsuario extends Operation {
 
@@ -32,14 +31,14 @@ public class RecuperarEmpresasDeUsuario extends Operation {
 		}
 		
 		//Luego de encontrar la entidad usuario, debo notificar la misma y tambien la lista de empresas...
-		notificarObjecto(Notificacion.getNew("TUsuario", usuario));
+		notificarObjeto("TUsuario", usuario);
 		
 		List listaDeIds=new ArrayList();
 		for (EmpresaHabilitada empresaHabilitada : usuario.getEmpresasHabilitadas()) {
 			PersistentEntity uniqueByProperty = serviceRepository.getUniqueByProperty(empresaHabilitada.getClass(), "id", empresaHabilitada.getId());
 			Empresa e=((EmpresaHabilitada)uniqueByProperty).getEmpresa();
 			if (e.isActivo()) {
-				notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", uniqueByProperty));
+				notificarObjeto("TUsuarioEmpresas", uniqueByProperty);
 				long id = e.getId();
 				listaDeIds.add(id);
 			}
@@ -58,7 +57,7 @@ public class RecuperarEmpresasDeUsuario extends Operation {
 				empresaHabilitada.setId(0L);
 				empresaHabilitada.setUsuario(usuario);
 				empresaHabilitada.setEmpresa(empresa);
-				notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", empresaHabilitada));
+				notificarObjeto("TUsuarioEmpresas", empresaHabilitada);
 			}
 		}
 		

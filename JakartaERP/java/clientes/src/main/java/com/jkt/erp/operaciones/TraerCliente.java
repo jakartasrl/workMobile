@@ -14,7 +14,6 @@ import com.jkt.erp.varios.DomicilioEntrega;
 import com.jkt.erp.varios.InscripcionImpositiva;
 import com.jkt.erp.varios.SujetoImpositivo;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Direccion;
 
@@ -56,8 +55,8 @@ public class TraerCliente extends Operation {
 	 * <p>Ademas de mostrar datos de clientes, muestra datos del sujeto impositivo</p>
 	 */
 	private void mostrarCliente(Cliente cliente) {
-		notificarObjecto(Notificacion.getNew(WRITER_CLIENTE, cliente));
-		notificarObjecto(Notificacion.getNew(WRITER_SUJ_IMP, cliente.getSujetoImpositivo()));
+		notificarObjeto(WRITER_CLIENTE, cliente);
+		notificarObjeto(WRITER_SUJ_IMP, cliente.getSujetoImpositivo());
 	}
 
 	/**
@@ -80,7 +79,7 @@ public class TraerCliente extends Operation {
 	 * Muestra una simple sucursal del cliente en la salida de la operacion.
 	 */
 	private void mostrarSucursal(ClienteSucursal clienteSucursal) {
-		notificarObjecto(Notificacion.getNew(WRITER_SUCURSALES_CLIENTE, clienteSucursal));
+		notificarObjeto(WRITER_SUCURSALES_CLIENTE, clienteSucursal);
 	}
 
 	/**
@@ -104,7 +103,7 @@ public class TraerCliente extends Operation {
 				clasificadoresSeteados.put(identificador,clasificadorDelComponente);
 			}
 			
-			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_SUCURSAL, clasificador));
+			notificarObjeto(WRITER_CLASIFICADORES_SUCURSAL, clasificador);
 		}
 		
 		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, "entidad", "4");
@@ -117,7 +116,7 @@ public class TraerCliente extends Operation {
 				clienteClasificador.setId(0L);
 				clienteClasificador.setClasificador(c);
 				clienteClasificador.setClienteSucursal(clienteSucursal);
-				notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_SUCURSAL, clienteClasificador));
+				notificarObjeto(WRITER_CLASIFICADORES_SUCURSAL, clienteClasificador);
 			}
 		}
 		
@@ -140,7 +139,7 @@ public class TraerCliente extends Operation {
 		long id = clienteSucursal.getId();
 		for (Contacto contacto : contactos) {
 			contacto.setClienteSucursal(id);
-			notificarObjecto(Notificacion.getNew(WRITER_CONTACTOS, contacto));
+			notificarObjeto(WRITER_CONTACTOS, contacto);
 		}
 	}
 
@@ -150,7 +149,7 @@ public class TraerCliente extends Operation {
 	private void mostrarDomicilios(ClienteSucursal clienteSucursal) {
 		List<DomicilioEntrega> domiciliosEntrega=clienteSucursal.getDomiciliosDeEntrega();
 		for (DomicilioEntrega domicilioEntrega : domiciliosEntrega) {
-			notificarObjecto(Notificacion.getNew(WRITER_DOMICILIOS_ENTREGA, domicilioEntrega));
+			notificarObjeto(WRITER_DOMICILIOS_ENTREGA, domicilioEntrega);
 		}
 	}
 
@@ -161,7 +160,7 @@ public class TraerCliente extends Operation {
 		SujetoImpositivo sujetoImpositivo = cliente.getSujetoImpositivo();
 		List<InscripcionImpositiva> inscripcionesImpositivas = sujetoImpositivo.getInscripcionesImpositivas();
 		for (InscripcionImpositiva inscripcionImpositiva : inscripcionesImpositivas) {
-			notificarObjecto(Notificacion.getNew(WRITER_INSCRIPCIONES, inscripcionImpositiva));
+			notificarObjeto(WRITER_INSCRIPCIONES, inscripcionImpositiva);
 		}
 	}
 
@@ -186,7 +185,7 @@ public class TraerCliente extends Operation {
 				clasificadoresSeteados.put(identificador,clasificadorDelComponente);
 			}
 			
-			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_CLIENTES, clasificador));
+			notificarObjeto(WRITER_CLASIFICADORES_CLIENTES, clasificador);
 		}
 		
 		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, "entidad", "3");
@@ -199,7 +198,7 @@ public class TraerCliente extends Operation {
 				clienteClasificador.setId(0L);
 				clienteClasificador.setClasificador(c);
 				clienteClasificador.setCliente(cliente);
-				notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES_CLIENTES, clienteClasificador));
+				notificarObjeto(WRITER_CLASIFICADORES_CLIENTES, clienteClasificador);
 				
 			}
 		}

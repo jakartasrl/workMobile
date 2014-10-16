@@ -79,8 +79,6 @@
 <!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
 <!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
 <!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
 
 	<operacion name="TrearClientesSucursalesDomicilios" clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.erp.varios.Cliente" >
 
@@ -108,7 +106,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
 		
 		<forms>
-			<form name="TEmpresa"></form>
+			<form name="TEmpresa" />
 		</forms>
 		
 	</operacion>
@@ -127,7 +125,7 @@
 		</output>		
 			
 		<listas>
-			<lista nombreLista="caracteristicas" nombreWriter="mtDetalles"></lista>
+			<lista nombreLista="caracteristicas" nombreWriter="mtDetalles" />
 		</listas>
 			
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
@@ -140,14 +138,6 @@
 
 
 
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
-<!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
 <!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
 <!-- OPERACIONES A NIVEL ZERO. CONFIGURACION, PARAMETRIZACION, ETC. -->
 
@@ -166,7 +156,7 @@
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 		
 		<forms>
 			<form name="---" />
@@ -197,24 +187,27 @@
 	
 	<!-- RECUPERAR  Configuracion -->
 	<operacion name="TraerParametro" clase="com.jkt.operaciones.TraerParametro" >
-		<output name="configuracion" tableName="mtInput">
-			<campoSalida value="oid_configuracion" target="id" />
-			<campoSalida value="Nombre" target="nombre" />
+	
+		<!-- Recibe como entrada el valor 'nombreParametro' -->
+	
+		<output name="configuracion" tableName="mtParametrosForm">
+			<campoSalida value="oid_param" target="id" />
+			<campoSalida value="codigo" target="nombre" />
 			
-			<campoSalida value="ValorCadena" target="valorCadena" />
-			<campoSalida value="ValorEntero" target="valorEntero" />
-			<campoSalida value="ValorDoble" target="valorDoble" />
-			<campoSalida value="ValorFecha" target="valorFecha" />
-			<campoSalida value="ValorBoolean" target="isValorBooleano" />
-			
-			<campoSalida value="Activo" target="isActivo" />
+			<campoSalida value="valor_cadena" target="valorCadena" />
+			<campoSalida value="valor_entero" target="valorNumero" />
+			<campoSalida value="valor_fecha" target="valorFecha" />
+			<campoSalida value="valor_float" target="valorDoble" />
+			<campoSalida value="valor_boolean" target="isValorBooleano" />
+
 		</output>
 			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 		
 		<forms>
-			<form name="---" />
+			<form name="FNVen0001" />
 		</forms>
+
 	</operacion>
 
 

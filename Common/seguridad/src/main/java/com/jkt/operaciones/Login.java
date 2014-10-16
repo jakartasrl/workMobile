@@ -6,7 +6,6 @@ import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.HistorialPassword;
 import com.jkt.dominio.Usuario;
 import com.jkt.exception.LoginException;
-import com.jkt.transformers.Notificacion;
 
 /**
  * Operacion que se encarga de manejar los accesos al sistema.
@@ -17,7 +16,7 @@ import com.jkt.transformers.Notificacion;
 public class Login extends Operation {
 
 	/**
-	 * Es el campo por el cual se filtra al usuario. Por protocolo, el codigo será igual al username, solamente en esta entidad.
+	 * Es el campo por el cual se filtra al usuario. Por protocolo, el codigo serï¿½ igual al username, solamente en esta entidad.
 	 */
 	private static final String CAMPO_USUARIO = "codigo";
 
@@ -46,7 +45,7 @@ public class Login extends Operation {
 		 */
 		
 		log.info(usuario+" "+password);
-		this.notificarObjecto(Notificacion.getNew("resultado", user));
+		notificarObjeto("resultado", user);
 		
 	}
 	

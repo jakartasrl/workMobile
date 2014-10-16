@@ -10,7 +10,6 @@ import com.jkt.erp.articulos.ValoresTablas;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
 import com.jkt.operaciones.Validar;
-import com.jkt.transformers.Notificacion;
 
 /**
  * <p>Esta operacion valida el tipo de dato ingresado para determinada caracteristica.
@@ -44,7 +43,7 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 			for (ValoresTablas valorTabla : valores) {
 				if (valorTabla.getCodigo().equals(valor)) {
 					//notificar a la salida...
-					notificarObjecto(Notificacion.getNew("resultado", valorTabla));
+					notificarObjeto("resultado", valorTabla);
 					existeElValor=true;
 					break;
 					//y finalizar la rutina
@@ -82,13 +81,13 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 
 	@Override
 	protected void manejoDeExistencia(PersistentEntity entity,String className, String codigo) throws ValidacionException {
-		//No hacer nada acá.
+		//No hacer nada acï¿½.
 		
 		/*
-		 * No se hace nada acá, xq el flujo normal de las operaciones de validar son, encontrar la entidad y luego manejarla por existencia o inexistencia.
+		 * No se hace nada acï¿½, xq el flujo normal de las operaciones de validar son, encontrar la entidad y luego manejarla por existencia o inexistencia.
 		 * Como esta operacion tiene un manejo particular (si es primitivo no mostrar, pero si es tabla mostrar en la salida) se decidio pisar el metodo que maneja
 		 * existencia, y notificar en el metodo manejar filtros.
-		 * Si en algun momento se da otro caso particular, se verá la forma de hacer algo mas generico, como algun flag para mostrar o no datos en la salida, sea primitivo o no.
+		 * Si en algun momento se da otro caso particular, se verï¿½ la forma de hacer algo mas generico, como algun flag para mostrar o no datos en la salida, sea primitivo o no.
 		 * Ver la clase Validar para entender mas de xq se pisa este metodo.
 		 * 
 		 * Basicamente el problema es que los metodos de manejarExistencia/Inexistencia notifican objetos si no son nulo.

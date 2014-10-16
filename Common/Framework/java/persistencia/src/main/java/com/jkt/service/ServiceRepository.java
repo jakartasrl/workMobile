@@ -290,7 +290,7 @@ public class ServiceRepository implements IServiceRepository {
 		return eq(CAMPO_ACTIVO, true);
 	}
 	
-	private Object resolveType(String type, String value){
+	private Object resolveType(String type, String value) throws JakartaException{
 		if (BOOLEAN.equals(type)) {
 			return new Boolean(value.toLowerCase());
 		}else if (INTEGER.equals(type)) {
@@ -298,10 +298,10 @@ public class ServiceRepository implements IServiceRepository {
 		}else if (STRING.equals(type)) {
 			return value;
 		}else if (DATE.equals(type)) {
-			throw new RuntimeException("Tipo de dato aun no implementado.");
+			throw new JakartaException("Tipo de dato aun no implementado para enviar consultas.");
 //			Date date = new Date();
 			/*
-			 * 
+			 * parsear el string recibido desde el cliente
 			 */
 //			return date;
 		}else{

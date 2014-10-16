@@ -166,11 +166,6 @@
 			<campoSalida value="des_tabla"    target="tabla.descripcion" />
 		</output>		
 
-		<listas>
-			<lista nombreWriter="mtEmpresa" nombreLista="empresas"/>
-			<lista nombreWriter="mtUsuario" nombreLista="usuarios"/>
-		</listas>
-			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>

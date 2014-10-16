@@ -7,7 +7,6 @@ import com.jkt.erp.impuestos.dominio.CategoriaImpuesto;
 import com.jkt.erp.impuestos.dominio.Impuesto;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 
 /**
  * Recupera todos los impuestos existentes.
@@ -28,12 +27,8 @@ public class TraerImpuestos extends Operation {
 			throw new EntityNotFoundException("No existe el impuesto con identificador "+oid);
 		}
 
-		notificarObjecto(Notificacion.getNew("impuesto", impuesto));
-		
-		List<CategoriaImpuesto> categorias = impuesto.getCategorias();
-		for (CategoriaImpuesto categoriaImpuesto : categorias) {
-			notificarObjecto(Notificacion.getNew("categorias", categoriaImpuesto));
-		}
+		notificarObjeto("impuesto", impuesto);
+		notificarObjetos("categorias", impuesto.getCategorias());
 		
 	}
 

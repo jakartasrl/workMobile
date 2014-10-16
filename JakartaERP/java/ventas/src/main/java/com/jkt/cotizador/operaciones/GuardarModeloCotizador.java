@@ -60,6 +60,8 @@ public class GuardarModeloCotizador extends Operation {
 				
 				titulo.setTituloPadre(tituloEnMapa);
 				tituloEnMapa.agregarHijo(titulo);
+				
+				//TODO FIXME titulo tipo, si titulo tipo es C verifico pedir articulo y si tiene el valor del componente
 			}
 		}
 	}

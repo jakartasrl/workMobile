@@ -290,4 +290,69 @@
 		
 	</entidad>
 	
+		<!-- 	Unidad de medida -->
+	<entidad nombre="Laboratorio">
+
+		<operacion operSave="SaveLaboratorio" operTraer="TraerLaboratorio" />
+		
+		<campos>
+			<campo fieldName="oid"       tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_lab" />
+			<campo fieldName="codigo"    tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo"    tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="codigo"    tipoValidacion="Inexistente" entidad="unidadMedida" oidName="oid" descrName="descr" />
+			<validador fieldName="descr"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+	
+		<entidad nombre="TablaValidacionDeterminacion">
+
+		<operacion operSave="SaveTablaValDeter" operTraer="TraerTablaValDeter" />
+		
+		<campos>
+			<campo fieldName="oid_tabla" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_tabla"  />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo"   />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo" tipoValidacion="Inexistente" entidad="tablaValidacionDeter" oidName="" descrName="" />
+			<validador fieldName="descr" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+	
+		<!-- 	Valores de Tabla de validacion Determinacion -->
+	<entidad nombre="ValoresTablaValidacionDeter">
+	
+		<operacion operSave="SaveValoresTablaValidacion" operTraer="TraerValoresTablaValidacion" />
+		
+		<campos>
+			<campo fieldName="oid_tabla"  tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_tabla"  />
+			<campo fieldName="cod_tabla"  tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Tabla" tag="0"/>
+			<campo fieldName="des_tabla"  tipo="String" longitud="60" visible="true" readOnly="true" orden="3" label="Descripción" tag="0" />
+
+			<campo fieldName="oid_valor_tabla" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="4" label="oid_valor_tabla" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="5" label="Código"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="6" label="Descripción"  />
+
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo"     tipoValidacion="DistintoEspacio" 	entidad="" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" 	entidad="" oidName="" descrName="" />
+			<validador fieldName="cod_tabla"  tipoValidacion="Existente" 		entidad="tablaValidacionDeter" oidName="oid_tabla" descrName="des_tabla" />
+		</validadores>
+		
+	</entidad>
+	
+	
+	
+	
 </entidades>

@@ -84,5 +84,32 @@ public class CotizadorDet extends PersistentEntity {
 	public void setCotizacion(double cotizacion) {
 		this.cotizacion = cotizacion;
 	}
+	
+	/*
+	 * EQUAL & HASHCODE
+	 */
+	
+	public boolean equals(Object other) {
+		if (this == other)
+			return true;
+		if (!(other instanceof CotizadorDet))
+			return false;
+
+		final CotizadorDet detalle = (CotizadorDet) other;
+
+		if (detalle.getId() == 0)
+			return false;
+
+		if (!(detalle.getId() == getId()))
+			return false;
+
+		return true;
+	}
+
+	public int hashCode() {
+		int result;
+		result = (int) (29 * getId());
+		return result;
+	}
 
 }

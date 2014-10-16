@@ -214,14 +214,6 @@
 			<version>0.0.1</version>
 		</dependency>
 		
-		<!-- dependencia del modulo desarrollado adhoc -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jkt</groupId> -->
-<!-- 			<artifactId>clientes-adhoc</artifactId> -->
-<!-- 			<version>0.0.1</version> -->
-<!-- 		</dependency> -->
-
-
 		<dependency>
 			<groupId>com.jkt</groupId>
 			<artifactId>laboratorio</artifactId>

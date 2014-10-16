@@ -6,7 +6,6 @@ import com.jkt.erp.articulos.CaracteristicaProducto;
 import com.jkt.erp.articulos.TablaValoresCaracProd;
 import com.jkt.erp.articulos.ValoresTablas;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 
 /**
  * 
@@ -34,9 +33,11 @@ public class TraerValoresDeTabla extends Operation {
 		
 		TablaValoresCaracProd tabla = (TablaValoresCaracProd) obtener(TablaValoresCaracProd.class, (String)aParams.get(OID));
 		
-		for (ValoresTablas valoresTablas : tabla.getValoresDeTabla()) {
-			notificarObjecto(Notificacion.getNew(WRITER_VALORES, valoresTablas));
-		}
+		notificarObjetos(WRITER_VALORES, tabla.getValoresDeTabla());
+		
+//		for (ValoresTablas valoresTablas : tabla.getValoresDeTabla()) {
+//			notificarObjecto(WRITER_VALORES, valoresTablas);
+//		}
 	}
 
 }

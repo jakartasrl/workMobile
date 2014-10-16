@@ -15,7 +15,6 @@ import com.jkt.dominio.entidades.xml.EntidadContainer;
 import com.jkt.dominio.entidades.xml.Operacion;
 import com.jkt.dominio.entidades.xml.Validador;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 @OperacionBean
 public class RecuperarEstructuraABMGenerico extends Operation {
@@ -46,24 +45,24 @@ public class RecuperarEstructuraABMGenerico extends Operation {
 		}
 
 		//notifica operacion
-		this.notificarObjecto(Notificacion.getNew("mtConfigOper", entidad.getOperacion()));
+		notificarObjeto("mtConfigOper", entidad.getOperacion());
 		
 		//notifica campos
 		List<Campo> campos = entidad.getCampos();
 		for (Campo campo : campos) {
-			this.notificarObjecto(Notificacion.getNew("mtConfigCampos", campo));
+			notificarObjeto("mtConfigCampos", campo);
 		}
 		
 		//notifica validadores
 		List<Validador> validadores = entidad.getValidadores();
 		for (Validador currentValidador: validadores) {
-			this.notificarObjecto(Notificacion.getNew("mtConfigValidador", currentValidador));
+			notificarObjeto("mtConfigValidador", currentValidador);
 		}
 		
 	}
 
 	/**
-	 * Genera las correspondientes reglas para que digester mapeé desde el xml a entidades java
+	 * Genera las correspondientes reglas para que digester mapeï¿½ desde el xml a entidades java
 	 * 
 	 * @return
 	 */

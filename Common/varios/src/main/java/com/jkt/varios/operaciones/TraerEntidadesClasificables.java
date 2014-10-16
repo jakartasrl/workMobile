@@ -7,7 +7,6 @@ import java.util.Map;
 import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.Container;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 
 /**
  * <p>Operacion que se encarga de proveer a los clientes de todas las clases que pueden ser clasificables por algun criterio en particular.</p>
@@ -23,7 +22,7 @@ public class TraerEntidadesClasificables extends Operation {
 
 		List<Container> entidades = Arrays.asList(new Container("1", "Empresa"),new Container("2", "Usuario"),new Container("3", "Cliente"),new Container("4", "ClienteSucursal"),new Container("5", "Producto"),new Container("6", "Domicilio de entrega"));
 		for (Container container : entidades) {
-			notificarObjecto(Notificacion.getNew("entidades", container));
+			notificarObjeto("entidades", container);
 		}
 		
 	}

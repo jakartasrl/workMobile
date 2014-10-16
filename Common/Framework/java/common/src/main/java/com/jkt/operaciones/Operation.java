@@ -24,14 +24,16 @@ import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
 import com.jkt.transformers.EmptyTransformer;
+import com.jkt.transformers.Notificacion;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
 import com.jkt.xmlreader.ElementTransformer;
 
 /**
+ * 
  * Description: Cada evento del lado del cliente que tiene una accion en el
  * servidor, genera una instancia de una operacion.<br>
- * Estas estan configuradas en la aplicacion. Cada operacion que genera la
+ * Estas están configuradas en la aplicacion. Cada operacion que genera la
  * metodologia invoca al metodo execute().<br>
  * Dentro de este metodo (abstracto en esta clase), esta la logica de la
  * resolucion del evento. Copyright: Copyright (c) 2001 Company: JAKARTA SRL
@@ -39,9 +41,8 @@ import com.jkt.xmlreader.ElementTransformer;
  * Modificacion de esta clase para permitir el manejo de un servicio que se
  * encarga del manejo de transacciones.
  * 
- * @see ServiceRepository
+ * @author Leonel Suarez - Jakarta SRL
  */
-
 @Service
 public abstract class Operation extends Observable {
 	protected static final Logger log = Logger.getLogger(Operation.class);
@@ -134,7 +135,7 @@ public abstract class Operation extends Observable {
 				Object instance = clazz.newInstance();
 				transformer = (Transformer) instance;
 			}catch(ClassNotFoundException e){
-				throw new JakartaException("No se puede iniciar el transformador indicado.Compruebe el archivo de las operaciones por favor...");
+				throw new JakartaException("No se puede iniciar el transformador indicado.Compruebe el archivo de las operaciones...");
 			}
 		} else {
 			transformer = new EmptyTransformer();
@@ -156,10 +157,23 @@ public abstract class Operation extends Observable {
 	 *            que llegara el transformer.Dependiendo del tipo de transformer
 	 *            se notifica de diferentes maneras.
 	 * 
+	 * @deprecated ahora se debe utilizar el metodo con un writer y el objeto a notificar.Usar este metodo: {@link #notificarObjeto(String, Object)}
 	 */
 	protected void notificarObjecto(Object parameter) {
 		this.setChanged();
 		notifyObservers(parameter);
+	}
+	
+	/**
+	 * Notifica un objeto en el writer proporcionado
+	 * 
+	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
+	 * @param parametro representa al parametro a mostrar en la salida.
+	 */
+	protected void notificarObjeto(String writer, Object parameter) {
+//		Notificacion notificacion = Notificacion.getNew(writer, parameter);
+		this.setChanged();
+		notifyObservers(Notificacion.getNew(writer, parameter));
 	}
 
 	/**
@@ -244,10 +258,15 @@ public abstract class Operation extends Observable {
 	protected List<PersistentEntity> obtenerTodos(Class<? extends PersistentEntity> className) throws Exception{
 		return serviceRepository.getAll(className);
 	}
+
 	/**
 	 * <p>Recupera una entidad persistente utilizando el nombre de la clase y el id.</p>
 	 * <p>Metodo sobre cargado que recibe un numero en formto de String.Se intentara pasar a numero y si no es numerico se levanta una excepcion</p>
 	 * 
+	 * @param className que representa a la clase a buscar
+	 * @param id para identificarlo.
+	 * @return una entidad persistente, que se corresponde con la clase y el ID solicitado.
+	 * @throws Exception Si la instancia de la clase con el id proporcionado no existe, se levanta una {@link JakartaException}
 	 */
 	protected PersistentEntity obtener(Class<? extends PersistentEntity> className, String id) throws Exception{
 		long identificador = 0;
@@ -293,4 +312,17 @@ public abstract class Operation extends Observable {
 			throw new JakartaException(mensaje);
 		}
 	}
+	
+	/**
+	 * Notifica una lista de objetos en el writer proporcionado
+	 * 
+	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
+	 * @param lista Lista de elementos a notificar.
+	 */
+	protected void notificarObjetos(String writer, List lista) {
+		for (Object persistentEntity : lista) {
+			notificarObjeto(writer, persistentEntity);
+		}
+	}
+
 }
