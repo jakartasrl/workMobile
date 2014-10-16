@@ -10,7 +10,6 @@ import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 
 /**
  * <p><b>Recupera un cotizador previamente dado de alta.</b></p>
@@ -47,7 +46,7 @@ public class TraerCotizador extends Operation {
 		
 		ModeloCotizador modelo = cotizador.getModelo();
 		
-		notificarObjecto(Notificacion.getNew(WRITER_MODELO, modelo));
+		notificarObjecto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
@@ -116,7 +115,7 @@ public class TraerCotizador extends Operation {
 		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
 		 */
 		tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);
-		notificarObjecto(Notificacion.getNew(WRITER_TITULO, tituloModeloCotizador));
+		notificarObjecto(WRITER_TITULO, tituloModeloCotizador);
 
 		//Recursividad, o muestreo de concepto.
 		if (tieneHijos) {

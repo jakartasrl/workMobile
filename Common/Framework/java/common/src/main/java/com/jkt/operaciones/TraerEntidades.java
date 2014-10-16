@@ -8,7 +8,6 @@ import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 /**
  * Esta operación recupera entidades.
@@ -45,7 +44,7 @@ public class TraerEntidades extends Operation {
 		}
 		
 		for (PersistentEntity persistentEntity : allElements) {
-			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
+			notificarObjecto("resultado", persistentEntity);
 		}
 		
 	}

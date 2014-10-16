@@ -7,7 +7,6 @@ import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
-import com.jkt.transformers.Notificacion;
 
 /**
  * <p>Operacion generica para realizar diferentes validaciones.</p>
@@ -117,7 +116,7 @@ public abstract class Validar extends Operation{
 		if (entity==null) {
 			throw new ValidacionException(String.format("El codigo solicitado no existe.", className, codigo));
 		}
-		notificarObjecto(Notificacion.getNew("resultado", entity));
+		notificarObjecto("resultado", entity);
 	}
 	
 	

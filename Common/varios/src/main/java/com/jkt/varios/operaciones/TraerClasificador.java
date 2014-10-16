@@ -1,14 +1,11 @@
 package com.jkt.varios.operaciones;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
 import com.jkt.annotations.OperacionBean;
-import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 
@@ -31,7 +28,7 @@ public class TraerClasificador extends Operation {
 			throw new EntityNotFoundException("No existe el clasificador solicitado.");
 		}
 		
-		notificarObjecto(Notificacion.getNew("clasificador", clasificador));
+		notificarObjecto("clasificador", clasificador);
 		
 		Componente componente = clasificador.getComponentePadre();
 		int nivel=1;
@@ -39,7 +36,7 @@ public class TraerClasificador extends Operation {
 			componente.setCodigoInternoPadre(nivel-1);
 			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
 			
-			notificarObjecto(Notificacion.getNew("componentes", componente));
+			notificarObjecto("componentes", componente);
 			componente=componente.getComponenteHijo();
 		}
 		

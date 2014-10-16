@@ -3,12 +3,10 @@ package com.jkt.cotizador.operaciones;
 import java.util.List;
 import java.util.Map;
 
-import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 
 /**
  * <p>Recupera el modelo de cotizador, sus titulos en forma jerarquica y los conceptos de presupuestos.</p>
@@ -23,7 +21,7 @@ public class TraerModeloCotizador extends Operation {
 	//writers mapeados contra el archivo operaciones-ventas.xml
 	private static final String WRITER_MODELO = "modelo";
 	private static final String WRITER_TITULO = "titulos";
-	private static final String WRITER_CONCEPTO = "conceptos";
+//	private static final String WRITER_CONCEPTO = "conceptos";
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -31,7 +29,7 @@ public class TraerModeloCotizador extends Operation {
 		
 		ModeloCotizador modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
 		
-		notificarObjecto(Notificacion.getNew(WRITER_MODELO, modelo));
+		notificarObjecto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
@@ -63,7 +61,7 @@ public class TraerModeloCotizador extends Operation {
 			
 			tituloModeloCotizador.setTipo('C');//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
 		}
-		notificarObjecto(Notificacion.getNew(WRITER_TITULO, tituloModeloCotizador));
+		notificarObjecto(WRITER_TITULO, tituloModeloCotizador);
 		
 		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {

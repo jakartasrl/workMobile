@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.jkt.dominio.Configuracion;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 ///**
 // * <p>Esta operacion recibe como parametro un nombre de formulario y/o un nombre de propiedad, y retorna los/el resultado al cliente</p>
@@ -111,7 +110,7 @@ public class TraerParametro extends Operation {
 	 * @param config
 	 */
 	private void notificarElemento(Configuracion config){
-		notificarObjecto(Notificacion.getNew(WRITER_CONFIGURACION, config));
+		notificarObjecto(WRITER_CONFIGURACION, config);
 	}
 	
 }

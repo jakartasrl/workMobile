@@ -9,7 +9,6 @@ import com.jkt.dominio.EmpresaHabilitada;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.EntityNotFoundException;
-import com.jkt.transformers.Notificacion;
 
 /**
  * Recupera todos los usuarios y para cada uno, todas las empresas y su relacion, es decir, permitida o no permitida.
@@ -44,7 +43,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 		Empresa empresa;
 		
 		for (PersistentEntity usuario : usuarios) {
-			notificarObjecto(Notificacion.getNew("TUsuarios", usuario));
+			notificarObjecto("TUsuarios", usuario);
 		
 			Usuario auxUsuario=(Usuario) usuario;
 			List listaDeIds=new ArrayList();
@@ -52,7 +51,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 				PersistentEntity uniqueByProperty = serviceRepository.getUniqueByProperty(empresaHabilitada.getClass(), "id", empresaHabilitada.getId());
 				Empresa e=((EmpresaHabilitada)uniqueByProperty).getEmpresa();
 				if (e.isActivo()) {
-					notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", uniqueByProperty));
+					notificarObjecto("TUsuarioEmpresas", uniqueByProperty);
 					long id = e.getId();
 					listaDeIds.add(id);
 				}
@@ -67,7 +66,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 					empresaHabilitada.setId(0L);
 					empresaHabilitada.setUsuario(auxUsuario);
 					empresaHabilitada.setEmpresa(empresa);
-					notificarObjecto(Notificacion.getNew("TUsuarioEmpresas", empresaHabilitada));
+					notificarObjecto("TUsuarioEmpresas", empresaHabilitada);
 				}
 			}
 			
