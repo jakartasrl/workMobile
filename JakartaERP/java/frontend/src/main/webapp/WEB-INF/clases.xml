@@ -32,6 +32,7 @@
 	<elemento key="articulos" value="com.jkt.erp.articulos.Producto" />
 	<elemento key="configuracion" value="com.jkt.dominio.Configuracion" /> <!-- Esta entidad es temporal. La configuracion general va a tener una jerarquia -->
 	<elemento key="conceptoPresupuesto" value="com.jkt.cotizador.dominio.ConceptoPresupuesto" />
-	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
+	<elemento key="tablaValidacionDeter" value="com.jkt.laboratorio.dominio.TablaValidacionDeter" />
+	<elemento key="laboratorio" value="com.jkt.laboratorio.dominio.Laboratorio" />
 
 </elementos>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.laboratorio.dominio.AnalisisDet" table="ANALISIS_DET">
+		<id name="id" column="ID_ANALISIS_DET">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<many-to-one name="analisis" lazy="proxy" not-null="true"                                      column="ID_ANALISIS"/>
+		<many-to-one name="determinacion" lazy="proxy" not-null="true"                                      column="ID_DETERMINACION"/>
+		
+		
+	</class>
+	
+</hibernate-mapping>

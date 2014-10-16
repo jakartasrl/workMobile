@@ -19,19 +19,17 @@ public class Analisis extends Descriptible {
 	/**
 	 * Lista de Ensayos o Determinaciones que incluye el Análisis.
 	 */
-	private List<Determinacion> listaDeterminaciones = new ArrayList<Determinacion>();
+	private List<AnalisisDet> listaDeterminaciones = new ArrayList<AnalisisDet>();
 
-	public void addDeterminacion(Determinacion determinacion) {
-		if (!this.listaDeterminaciones.contains(determinacion)) {
-			listaDeterminaciones.add(determinacion);
-			determinacion.setAnalisis(this);
+	public void addDeterminacion(AnalisisDet detalle) {
+		if (!this.listaDeterminaciones.contains(detalle)) {
+			listaDeterminaciones.add(detalle);
+			detalle.setAnalisis(this);
 		}
 	}
 
-	public void deleteDeterminacion(Determinacion determinacion) {
-		determinacion.setActivo(false);
-		// listaDeterminaciones.remove(determinacion);
-		// determinacion.setAnalisis(null);
+	public void deleteDeterminacion(AnalisisDet detalle) {
+		detalle.setActivo(false);
 	}
 
 	/* -------------------------------------- Getters & Setters -------------------------------------- */
@@ -43,11 +41,11 @@ public class Analisis extends Descriptible {
 		this.laboratorio = laboratorio;
 	}
 
-	public List<Determinacion> getListaDeterminaciones() {
+	public List<AnalisisDet> getListaDeterminaciones() {
 		return listaDeterminaciones;
 	}
 
-	public void setListaDeterminaciones(List<Determinacion> listaDeterminaciones) {
+	public void setListaDeterminaciones(List<AnalisisDet> listaDeterminaciones) {
 		this.listaDeterminaciones = listaDeterminaciones;
 	}
 }

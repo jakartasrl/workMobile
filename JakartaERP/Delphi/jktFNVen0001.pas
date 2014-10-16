@@ -80,7 +80,7 @@ begin
       if not mtParametrosForm.Locate('codigo', 'ClasifConceptos', [loCaseInsensitive]) then
         raise Exception.Create('Código de Parámetro inexistente ' );
 
-      result := TParametrosFormvalor_entero.AsInteger;
+  //    result := TParametrosFormvalor_entero.AsInteger;
 
     end;
 end;

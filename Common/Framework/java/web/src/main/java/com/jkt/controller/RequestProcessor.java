@@ -104,12 +104,12 @@ public abstract class RequestProcessor extends BaseController{
 		IEventBusiness eventBusinessOperation = getOperation(operationName);
 		
 		if (eventBusinessOperation==null) {
-			finalizar();
+			finalizar(operationName);
 		}
 		
 		Operation operation=recuperarOperacion(eventBusinessOperation);
 		if (operation==null) {
-			finalizar();
+			finalizar(operationName);
 		}
 		
 		Map parametersAdapted = null;
@@ -204,9 +204,9 @@ public abstract class RequestProcessor extends BaseController{
 	 * 
 	 * @throws JakartaException
 	 */
-	private void finalizar() throws JakartaException {
-		log.debug("No existe la operación solicitada.Se finaliza la petición.");
-		throw new JakartaException("No existe la operación solicitada.Se finaliza la petición.Compruebe el archivo XML y el nombre dado a la operación.");
+	private void finalizar(String aOperName) throws JakartaException {
+		log.debug("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
+		throw new JakartaException("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
 	}
 
 	/**

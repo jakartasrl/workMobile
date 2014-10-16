@@ -19,7 +19,7 @@
 		<list name="listaDeterminaciones" inverse="true" cascade="save-update, delete">
 			<key column="ID_ANALISIS" />
 			<index column="secu"/>
-			<one-to-many class="com.jkt.laboratorio.dominio.Determinacion"/>
+			<one-to-many class="com.jkt.laboratorio.dominio.AnalisisDet"/>
 		</list>
 
 	</class>
