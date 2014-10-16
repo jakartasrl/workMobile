@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 
 /**
@@ -23,11 +22,8 @@ public abstract class TraerClasificadores extends Operation {
 
 		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, VALUE_ENTIDAD, getEntidad());
 		
-		Clasificador clasificador;
-		for (PersistentEntity persistentEntity : clasificadores) {
-			clasificador=(Clasificador) persistentEntity;
-			notificarObjecto(Notificacion.getNew("resultado", clasificador));
-		}
+		notificarObjetos("resultado", clasificadores);
+		
 	}
 
 	/**

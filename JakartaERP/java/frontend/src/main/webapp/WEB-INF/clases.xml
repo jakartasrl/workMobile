@@ -9,31 +9,6 @@
   
 ]>
 
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-<!-- ESTO ESTA SOLUCIONADO DE LA FORMA QUE SE DEFINIO ABAJO, NO SE SACA EL COMENTARIO XQ ESTA EN ETAPA DE PRUEBA -->
-
-
-<!-- DEFINA BIEN LOS NOMBRES, SIMPLES, SIN EL COMIENZO EN MAYUSCULA EN EL CAMPO KEY. -->
-<!-- ESTOS CAMPOS SI BIEN SON ALIAS, SIRVEN PARA UTILIDADES COMO LOS HELPER COMPUESTOS, LOS CUALES NECESITAN UNA RELACION DE PADRE E HIJO. -->
-<!-- POR EJEMPLO, PAIS Y PROVINCIA, LA ENTIDAD 'PADRE' DE PROVINCIA ES PAIS, Y ESTE HELPER INTENTARA REALIZAR UN FILTRO UTILIZANDO EL ATRIBUTO QUE SE ENCUENTRA COMO ALIAS DE PAIS. -->
-<!-- AL SER UNA REFERENCIA A UNA VARIABLE, NO PUEDE IR CON MAYUSCULA. -->
-
-<!-- SE ENTIENDE QUE ESTO NO ES LA MEJOR MANERA DE SOLUCIONARLO, POSTERIORMENTE SE ENCARGARA CADA CLASE DE DECIR QUIEN ES SU MAESTRO, Y RETORNAR UNA CADENA INDICANDO EL ATRIBUTO. -->
-<!-- MAS QUE NADA XQ ESTE ARCHIVO ESTA CONVIRTIENDOSE EN UN DATA SOURCE PARA DIFERENTES UTILIDADES Y NO ESTA BUENO QUE ESTE TAN ACOPLADO  -->
-
-<!-- YA PARA IR DEFINIENDO ALGO, VOY A CREAR UNA INTERFACE, QUE DECLARE EL METODO OBTENERALIASDEMAESTRO, Y SE ENCARGUE DE RETORNAR EL ATRIBUTO EXACTO DEL MAESTRO, YA QUE SI LA VARIABLE  -->
-<!-- SE LLAMA paisSucursalDelOeste SE COMPLICA PARA DEFINIRLO EN ESTE DOC -->
-
-<!-- LUEGO, EN LA OPERACION DE HELPER COMPUESTO, VERIFICO QUE LA ENTIDAD BUSCADA IMPLEMENTE DICHA INTERFACE. -->
-
-<!-- @author Leonel Suarez -->
-
 <elementos>
 
 	<elemento key="empresa" value="com.jkt.dominio.Empresa" validador="com.jkt.validadores.ValidadorEmpresa" />
@@ -44,6 +19,7 @@
 	<elemento key="pais" value="com.jkt.varios.dominio.Pais" />
 	<elemento key="provincia" value="com.jkt.varios.dominio.Provincia" />
 	<elemento key="clasificadores" value="com.jkt.varios.dominio.Clasificador" />
+	<elemento key="valoresClasificador" value="com.jkt.varios.dominio.ComponenteValor" />
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
 	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
 	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
@@ -54,7 +30,7 @@
 	<elemento key="tablaValoresCaract" value="com.jkt.erp.articulos.TablaValoresCaracProd" />
 	<elemento key="valoresDeTabla" value="com.jkt.erp.articulos.ValoresTablas" />	
 	<elemento key="articulos" value="com.jkt.erp.articulos.Producto" />
-	<elemento key="configuracion" value="com.jkt.dominio.Configuracion" />
+	<elemento key="configuracion" value="com.jkt.dominio.Configuracion" /> <!-- Esta entidad es temporal. La configuracion general va a tener una jerarquia -->
 	<elemento key="conceptoPresupuesto" value="com.jkt.cotizador.dominio.ConceptoPresupuesto" />
 	<elemento key="tablaValidacionDeter" value="com.jkt.laboratorio.dominio.TablaValidacionDeter" />
 	<elemento key="laboratorio" value="com.jkt.laboratorio.dominio.Laboratorio" />

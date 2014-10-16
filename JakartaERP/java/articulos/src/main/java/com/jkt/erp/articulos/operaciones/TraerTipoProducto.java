@@ -6,7 +6,6 @@ import java.util.Map;
 import com.jkt.erp.articulos.TipoProducto;
 import com.jkt.erp.articulos.TipoProductoDet;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 
 /**
  * <p>Operacion que recupera un determinado tipo de producto.</p>
@@ -33,14 +32,8 @@ public class TraerTipoProducto extends Operation {
 		validarEntrada(aParams.get(OID_TIPO));
 		TipoProducto tipo = (TipoProducto) obtener(TipoProducto.class, (String)aParams.get(OID_TIPO));
 		
-		notificarObjecto(Notificacion.getNew("out1", tipo));
-		
-		List<TipoProductoDet> caracteristicas = tipo.getCaracteristicas();
-		
-		for (TipoProductoDet tipoProductoDet : caracteristicas) {
-			notificarObjecto(Notificacion.getNew("out2", tipoProductoDet));
-			
-		}
+		notificarObjeto("out1", tipo);
+		notificarObjetos("out2", tipo.getCaracteristicas());
 
 	}
 

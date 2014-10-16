@@ -187,8 +187,6 @@ inherited FNCla0002: TFNCla0002
       OptionsView.TreeLineStyle = tllsSolid
       RootValue = -1
       TabOrder = 0
-      ExplicitLeft = 523
-      ExplicitTop = 87
       object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
         Visible = False
         DataBinding.FieldName = 'oid_CompClasif'

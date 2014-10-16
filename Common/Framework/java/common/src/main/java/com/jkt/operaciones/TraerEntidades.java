@@ -8,12 +8,11 @@ import com.jkt.annotations.OperacionBean;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 /**
- * Esta operación recupera entidades.
- * Lo mejor sería utilizar dos operaciones separadas pero desde frontend solicitan esta funcionalidad.
- * Recordar que cada clase debe tener su propia y única responsabilidad, y en este caso la clase tiene dos responsabilidades:
+ * Esta operaciÃ³n recupera entidades.
+ * Lo mejor serÃ¡ utilizar dos operaciones separadas pero desde frontend solicitan esta funcionalidad.
+ * Recordar que cada clase debe tener su propia y ï¿½nica responsabilidad, y en este caso la clase tiene dos responsabilidades:
  * 1-recuperar 1 entidad
  * 2-recuperar N entidades.
  * 
@@ -45,7 +44,7 @@ public class TraerEntidades extends Operation {
 		}
 		
 		for (PersistentEntity persistentEntity : allElements) {
-			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
+			notificarObjeto("resultado", persistentEntity);
 		}
 		
 	}

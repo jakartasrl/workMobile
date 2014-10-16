@@ -2,12 +2,10 @@ package com.jkt.operaciones;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.digester3.Digester;
-import org.aspectj.weaver.patterns.IfPointcut.IfFalsePointcut;
 import org.xml.sax.SAXException;
 
 import com.jkt.annotations.OperacionBean;
@@ -15,7 +13,6 @@ import com.jkt.dominio.entidades.xml.Campo;
 import com.jkt.dominio.entidades.xml.Entidad;
 import com.jkt.dominio.entidades.xml.EntidadContainer;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 @OperacionBean
 public class RecuperarEstructuraHelpGenerico extends Operation {
@@ -58,13 +55,13 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 		//notifica campos
 		List<Campo> campos = entidad.getCampos();
 		for (Campo campo : campos) {
-			this.notificarObjecto(Notificacion.getNew("resultado", campo));
+			notificarObjeto("resultado", campo);
 		}
 		
 	}
 
 	/**
-	 * Genera las correspondientes reglas para que digester mapeé desde el xml a entidades java
+	 * Genera las correspondientes reglas para que digester mapeï¿½ desde el xml a entidades java
 	 * 
 	 * @return
 	 */

@@ -50,7 +50,7 @@ public class HelperCompuesto extends Helper {
 		
 		IDetalle detalle=(IDetalle) newInstance;
 		
-		//El filtro buscado ser· del tipo impuesto.categoria.id=55;
+		//El filtro buscado ser√° del tipo impuesto.categoria.id=55;
 		Filtro filtroMaestro = crearFiltro(detalle.getNombreDeMaestro().concat(".id"),oidEntidadMaestra,"igual","integer");
 //		Filtro filtroMaestro = crearFiltro(entidadMaestra.concat(".id"),oidEntidadMaestra,"igual","integer");
 		
@@ -58,7 +58,7 @@ public class HelperCompuesto extends Helper {
 	}
 
 	private void levantarExcepcion() throws JakartaException {
-		throw new JakartaException("OcurriÛ un error al intentar recuperar la clase solicitada.");		
+		throw new JakartaException("Ocurri√≥ un error al intentar recuperar la clase solicitada.");		
 	}
 	
 }

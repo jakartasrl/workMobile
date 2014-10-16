@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
 import com.jkt.varios.dominio.ComponenteValor;
@@ -23,7 +22,7 @@ public class TraerValoresClasificador extends Operation {
 		}
 		
 		//1 notifico el clasificador
-		notificarObjecto(Notificacion.getNew("clasificador", clasificador));
+		notificarObjeto("clasificador", clasificador);
 		
 		Componente componente = clasificador.getComponentePadre();
 		ComponenteValor componenteValorPadre;
@@ -36,7 +35,7 @@ public class TraerValoresClasificador extends Operation {
 			componente.setCodigoInternoPadre(nivel-1);
 			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
 			
-			notificarObjecto(Notificacion.getNew("componentes", componente));
+			notificarObjeto("componentes", componente);
 			
 			//3 notifico el valor del componente
 			// valor = componente.getValor();
@@ -59,7 +58,7 @@ public class TraerValoresClasificador extends Operation {
 				}
 				
 				valor.setCodigoInternoPadre(valorInternoPadre);
-				notificarObjecto(Notificacion.getNew("valores", valor));
+				notificarObjeto("valores", valor);
 			}
 			
 			componente=componente.getComponenteHijo();

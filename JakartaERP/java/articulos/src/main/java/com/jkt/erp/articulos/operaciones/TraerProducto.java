@@ -15,7 +15,6 @@ import com.jkt.erp.articulos.ProductoDet;
 import com.jkt.erp.articulos.ProductoEquivUniMed;
 import com.jkt.erp.articulos.TipoProducto;
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.Clasificador;
 
 /**
@@ -71,7 +70,7 @@ public class TraerProducto extends Operation {
 				clasificadoresSeteados.put(identificador,clasificadorDelComponente);
 			}
 			
-			notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES, clasificador));
+			notificarObjeto(WRITER_CLASIFICADORES, clasificador);
 		}
 		
 		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, "entidad", "5");
@@ -84,7 +83,7 @@ public class TraerProducto extends Operation {
 				productoClasificador.setId(0L);
 				productoClasificador.setClasificador(c);
 				productoClasificador.setProducto(producto);
-				notificarObjecto(Notificacion.getNew(WRITER_CLASIFICADORES, productoClasificador));
+				notificarObjeto(WRITER_CLASIFICADORES, productoClasificador);
 			}
 		}
 	}
@@ -101,7 +100,7 @@ public class TraerProducto extends Operation {
 		
 		List<String> idsExistentes=new ArrayList<String>();
 		for (ProductoDet productoDet : detalles) {
-			notificarObjecto(Notificacion.getNew(WRITER_CARACTERISTICAS_DE_PRODUCTO, productoDet));
+			notificarObjeto(WRITER_CARACTERISTICAS_DE_PRODUCTO, productoDet);
 			idsExistentes.add(String.valueOf(productoDet.getCaracProducto().getId()));//Agrego las caracteristicas que posee a un arrayList para posteriormente hacer un disjunction con el resto
 		}
 		
@@ -115,7 +114,7 @@ public class TraerProducto extends Operation {
 				if (!idsExistentes.contains(String.valueOf(caracteristica.getId()))) {
 					detalle = new ProductoDet();
 					detalle.setCaracProducto(caracteristica);
-					notificarObjecto(Notificacion.getNew(WRITER_CARACTERISTICAS_DE_PRODUCTO, detalle));
+					notificarObjeto(WRITER_CARACTERISTICAS_DE_PRODUCTO, detalle);
 				}
 			}
 		}
@@ -127,7 +126,7 @@ public class TraerProducto extends Operation {
 	 */
 	private void mostrarEquivalencias(List<ProductoEquivUniMed> equivalencias) {
 		for (ProductoEquivUniMed productoEquivUniMed : equivalencias) {
-			notificarObjecto(Notificacion.getNew(WRITER_EQUIVALECIAS, productoEquivUniMed));
+			notificarObjeto(WRITER_EQUIVALECIAS, productoEquivUniMed);
 		}
 	}
 
@@ -139,7 +138,7 @@ public class TraerProducto extends Operation {
 	 * 
 	 */
 	private void mostrarProducto(Producto producto) {
-		notificarObjecto(Notificacion.getNew(WRITER_PRODUCTO, producto));
+		notificarObjeto(WRITER_PRODUCTO, producto);
 	}
 
 	/**
@@ -152,17 +151,17 @@ public class TraerProducto extends Operation {
 	private void mostrarArticulosStock(Producto producto) {
 		List<ArticuloStock> articulosStock = producto.getArticulosStock();
 		for (ArticuloStock articuloStock : articulosStock) {
-			notificarObjecto(Notificacion.getNew(WRITER_ARTICULO_STOCK, articuloStock));
+			notificarObjeto(WRITER_ARTICULO_STOCK, articuloStock);
 			
 			for (ArticuloStockDet articuloStockDet : articuloStock.getDetalles()) {
-				notificarObjecto(Notificacion.getNew(WRITER_ARTICULO_STOCK_DET, articuloStockDet));
+				notificarObjeto(WRITER_ARTICULO_STOCK_DET, articuloStockDet);
 			}
 			
 		}
 	}
 
 	private void mostrarTipoProducto(TipoProducto tipoProducto) {
-		notificarObjecto(Notificacion.getNew(WRITER_TIPO_PRODUCTO, tipoProducto));
+		notificarObjeto(WRITER_TIPO_PRODUCTO, tipoProducto);
 	}
 
 

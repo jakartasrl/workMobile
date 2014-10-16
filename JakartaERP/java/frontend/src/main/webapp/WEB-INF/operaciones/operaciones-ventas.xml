@@ -76,35 +76,31 @@
 
 	<operacion name="GuardarModeloCotizador" clase="com.jkt.cotizador.operaciones.GuardarModeloCotizador">
 	
-		<input name="mtModeloCotizador" keyName="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" fieldID="oid_Modelo_Cotizador">
+		<input name="mtCab" keyName="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" fieldID="oid_mod">
 			<campoEntrada>
 
-				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="cod_mod" clase="String" metodo="setCodigo" />
+				<campoEntrada name="des_mod" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				
-				<campoEntrada name="mtTitulos" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_Titulo_Modelo_Cotizador">
-					
-					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-					
+				<campoEntrada name="mtDet" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_titu_conc">					
 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
 					
 <!-- 					DEPENDIENDO DE QUE ELEMENTO SEA, SE SETEARAN CODIGO&DESCRIPCION O EL CONCEPTO. -->
 <!-- 					SI ES UN TITULO DE ULTIMO NIVEL, SE SETEARA EL CONCEPTO, EN CASO CONTRARIO SE SETEAN EL CODIGO Y LA DESCRIPCION -->
 
-					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
-					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="cod_titu_conc" clase="String" metodo="setCodigo" />
+					<campoEntrada name="des_titu_conc" clase="String" metodo="setDescripcion" />
 
-					<campoEntrada name="oid_Concepto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConcepto" />
-					
+					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConcepto" />					
 				</campoEntrada>
 				
 			</campoEntrada>
 		</input>
 	
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0002"></form>
 		</forms>
 
 	</operacion>
@@ -113,39 +109,41 @@
 	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
 	<operacion name="TraerModeloCotizador" clase="com.jkt.cotizador.operaciones.TraerModeloCotizador">
 
-		<output name="modelo" tableName="mtModelo">
-			<campoSalida value="oid_Modelo" target="id" />
-			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="desc" target="descripcion" />
+		<output name="modelo" tableName="mtCab">
+			<campoSalida value="oid_mod" target="id" />
+			<campoSalida value="cod_mod" target="codigo" />
+			<campoSalida value="des_mod" target="descripcion" />
 		</output>
 
-		<output name="titulos" tableName="mtTitulos">
-			<campoSalida value="oid_Titulo" target="id" />
+		<output name="titulos" tableName="mtDet">
+			<campoSalida value="oid_titu_conc" target="id" />
 
-			<campoSalida value="oid_Modelo" target="modeloCotizador.id" />
+			<campoSalida value="oid_mod" target="modeloCotizador.id" />
 
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 
-			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="desc" target="descripcion" />
+			<campoSalida value="cod_titu_conc" target="codigoReal" />
+			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			
-			<campoSalida value="oid_Concepto" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
-			<campoSalida value="descConcepto" target="concepto.codigo" /> 
-			<campoSalida value="CodigoConcepto" target="concepto.descripcion" /> 
+			<campoSalida value="tipo" target="tipo" />
+			
+			<campoSalida value="oid_conc" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
+<!-- 			<campoSalida value="descConcepto" target="concepto.codigo" />  -->
+<!-- 			<campoSalida value="CodigoConcepto" target="concepto.descripcion" /> -->
 			
 
 		</output>
 
-		<output name="conceptos" tableName="mtConceptosPresupuesto">
-			<campoSalida value="oid_Concepto" target="id" />
+<!-- 		<output name="conceptos" tableName="mtConceptosPresupuesto"> -->
+<!-- 			<campoSalida value="oid_Concepto" target="id" /> -->
 
-			<campoSalida value="oid_Titulo" target="titulo.id" />
+<!-- 			<campoSalida value="oid_Titulo" target="titulo.id" /> -->
 
-			<campoSalida value="Codigo" target="codigo" />
-			<campoSalida value="desc" target="descripcion" />
+<!-- 			<campoSalida value="Codigo" target="codigo" /> -->
+<!-- 			<campoSalida value="desc" target="descripcion" /> -->
 			
-		</output>
+<!-- 		</output> -->
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
@@ -166,7 +164,7 @@
 			<campoSalida value="cod_conc" target="codigo" />
 			<campoSalida value="des_conc" target="descripcion" />
 			<campoSalida value="pide_art" target="isPideArticulo" />
-			<campoSalida value="oid_cla" target="componenteValor.clasificador.id" />
+<!-- 			<campoSalida value="oid_cla" target="componenteValor.componente.clasificador.id" /> -->
 			<campoSalida value="oid_val_cla" target="componenteValor.id" />
 			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
 			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />
@@ -175,7 +173,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0001"></form>
 		</forms>		
 
 	</operacion>
@@ -193,11 +191,75 @@
 		</input>
 	
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0001"></form>
 		</forms>
 
 	</operacion>
 	
+	
+	<!-- 	CREACION DEL COTIZADOR. LA CREACION EN ESTE PUNTO ES BIEN BASICA. -->
+	<operacion name="GuardarCotizador" clase="com.jkt.operaciones.Guardar">
+	
+		<input name="cotizador" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cot">
+			<campoEntrada>
+				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
+	
+	<!-- RECUPERACION DE TODAS LAS ENTIDADES COTIZADOR QUE AUN NO HAN SIDO REVISADAS -->
+	<operacion name="TraerCotizadoresNoVisados" clase="com.jkt.cotizador.operaciones.TraerCotizadoresNoVisados" >
+		
+		<output name="cotizadores" tableName="mtCotizador">
+			<campoSalida value="id" target="id" />
+			<campoSalida value="nombre" target="nombre" />
+			<campoSalida value="descrpcion" target="descripcion" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="---"></form>
+		</forms>		
+
+	</operacion>
+	
+	
+	<!-- CONFIGURACION DEL COTIZADOR. ESTA OPERACION SE EJECUTA AL MOMENTO DE GUARDAR EN EL COTIZADOR LA RELACION CON UN MODELO Y SUS CORRESPONDIENTES RELACIONES. -->
+	<operacion name="ConfigurarCotizador" clase="com.jkt.operaciones.GuardarLista">
+	
+		<input name="mtCotizador" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cot">
+			<campoEntrada>
+				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" />
+				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" />
+				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" />
+				<campoEntrada name="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
+				
+				<campoEntrada name="mtDetalleCotizador" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_detalle">
+					<campoEntrada name="producto" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="cantidad" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="precioUnitario" clase="Double" metodo="setPrecioUnitario" />
+					<campoEntrada name="cotizacion" clase="Double" metodo="setCotizacion" />
+
+					<campoEntrada name="conceptoPresupuesto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
+					<campoEntrada name="unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
+					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
 	
 	
 </entity>

@@ -7,7 +7,6 @@ import java.util.Map;
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.transformers.Notificacion;
 
 /**
  * Operacion para recuperar un elemento dado tales filtros.
@@ -30,7 +29,7 @@ public class Helper extends Operation {
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
 		for (PersistentEntity persistentEntity : list) {
-			this.notificarObjecto(Notificacion.getNew("resultado", persistentEntity));
+			notificarObjeto("resultado", persistentEntity);
 		}
 	}
 	
