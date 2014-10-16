@@ -50,7 +50,7 @@ public class RecuperarMenu extends Operation {
 	 * @param Lista de resultados
 	 */
 	private void enviarResultados(ElementoMenu elementoMenu, String nombreDeLaTablaDeSalida) {
-		notificarObjecto(nombreDeLaTablaDeSalida, elementoMenu);
+		notificarObjeto(nombreDeLaTablaDeSalida, elementoMenu);
 		
 		if (elementoMenu instanceof Menu) {
 			Menu auxMenu=(Menu) elementoMenu;
@@ -58,7 +58,7 @@ public class RecuperarMenu extends Operation {
 			long id=auxMenu.getId();
 			for(TextoMenu textoMenu:auxMenu.getTextos()){
 				textoMenu.setOidMenu(String.valueOf(id));
-				notificarObjecto(NOMBRE_TABLA_TEXTOS, textoMenu);
+				notificarObjeto(NOMBRE_TABLA_TEXTOS, textoMenu);
 			}
 		}
 	}

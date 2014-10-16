@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 
 import com.jkt.operaciones.Operation;
-import com.jkt.transformers.Notificacion;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.CondPagoDet;
 
@@ -26,10 +25,10 @@ public class TraerCondPago extends Operation {
 			throw new EntityNotFoundException();
 		}
 		
-		notificarObjecto("condicion", condicion);
+		notificarObjeto("condicion", condicion);
 		
 		for (CondPagoDet condPagoDet : condicion.getDetalles()) {
-			notificarObjecto("detalle", condPagoDet);
+			notificarObjeto("detalle", condPagoDet);
 		}
 	}
 

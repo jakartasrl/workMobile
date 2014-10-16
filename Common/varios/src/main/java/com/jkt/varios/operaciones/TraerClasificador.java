@@ -28,7 +28,7 @@ public class TraerClasificador extends Operation {
 			throw new EntityNotFoundException("No existe el clasificador solicitado.");
 		}
 		
-		notificarObjecto("clasificador", clasificador);
+		notificarObjeto("clasificador", clasificador);
 		
 		Componente componente = clasificador.getComponentePadre();
 		int nivel=1;
@@ -36,7 +36,7 @@ public class TraerClasificador extends Operation {
 			componente.setCodigoInternoPadre(nivel-1);
 			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
 			
-			notificarObjecto("componentes", componente);
+			notificarObjeto("componentes", componente);
 			componente=componente.getComponenteHijo();
 		}
 		

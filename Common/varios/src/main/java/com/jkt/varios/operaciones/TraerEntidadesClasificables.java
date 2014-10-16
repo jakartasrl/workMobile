@@ -22,7 +22,7 @@ public class TraerEntidadesClasificables extends Operation {
 
 		List<Container> entidades = Arrays.asList(new Container("1", "Empresa"),new Container("2", "Usuario"),new Container("3", "Cliente"),new Container("4", "ClienteSucursal"),new Container("5", "Producto"),new Container("6", "Domicilio de entrega"));
 		for (Container container : entidades) {
-			notificarObjecto("entidades", container);
+			notificarObjeto("entidades", container);
 		}
 		
 	}

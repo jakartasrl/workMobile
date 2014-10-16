@@ -31,14 +31,14 @@ public class RecuperarEmpresasDeUsuario extends Operation {
 		}
 		
 		//Luego de encontrar la entidad usuario, debo notificar la misma y tambien la lista de empresas...
-		notificarObjecto("TUsuario", usuario);
+		notificarObjeto("TUsuario", usuario);
 		
 		List listaDeIds=new ArrayList();
 		for (EmpresaHabilitada empresaHabilitada : usuario.getEmpresasHabilitadas()) {
 			PersistentEntity uniqueByProperty = serviceRepository.getUniqueByProperty(empresaHabilitada.getClass(), "id", empresaHabilitada.getId());
 			Empresa e=((EmpresaHabilitada)uniqueByProperty).getEmpresa();
 			if (e.isActivo()) {
-				notificarObjecto("TUsuarioEmpresas", uniqueByProperty);
+				notificarObjeto("TUsuarioEmpresas", uniqueByProperty);
 				long id = e.getId();
 				listaDeIds.add(id);
 			}
@@ -57,7 +57,7 @@ public class RecuperarEmpresasDeUsuario extends Operation {
 				empresaHabilitada.setId(0L);
 				empresaHabilitada.setUsuario(usuario);
 				empresaHabilitada.setEmpresa(empresa);
-				notificarObjecto("TUsuarioEmpresas", empresaHabilitada);
+				notificarObjeto("TUsuarioEmpresas", empresaHabilitada);
 			}
 		}
 		

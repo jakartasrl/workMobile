@@ -43,7 +43,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 		Empresa empresa;
 		
 		for (PersistentEntity usuario : usuarios) {
-			notificarObjecto("TUsuarios", usuario);
+			notificarObjeto("TUsuarios", usuario);
 		
 			Usuario auxUsuario=(Usuario) usuario;
 			List listaDeIds=new ArrayList();
@@ -51,7 +51,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 				PersistentEntity uniqueByProperty = serviceRepository.getUniqueByProperty(empresaHabilitada.getClass(), "id", empresaHabilitada.getId());
 				Empresa e=((EmpresaHabilitada)uniqueByProperty).getEmpresa();
 				if (e.isActivo()) {
-					notificarObjecto("TUsuarioEmpresas", uniqueByProperty);
+					notificarObjeto("TUsuarioEmpresas", uniqueByProperty);
 					long id = e.getId();
 					listaDeIds.add(id);
 				}
@@ -66,7 +66,7 @@ public class RecuperarEmpresasYUsuarios extends Operation{
 					empresaHabilitada.setId(0L);
 					empresaHabilitada.setUsuario(auxUsuario);
 					empresaHabilitada.setEmpresa(empresa);
-					notificarObjecto("TUsuarioEmpresas", empresaHabilitada);
+					notificarObjeto("TUsuarioEmpresas", empresaHabilitada);
 				}
 			}
 			

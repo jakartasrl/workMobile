@@ -33,7 +33,7 @@ public class TraerEmpresasParaUsuarios extends Operation {
 			EmpresaHabilitada empresaHabilitada = new EmpresaHabilitada();
 			empresaHabilitada.setEmpresa(empresa);
 			empresaHabilitada.setOidEmpresa(String.valueOf(persistentEntity.getId()));
-			notificarObjecto("resultado", empresaHabilitada);
+			notificarObjeto("resultado", empresaHabilitada);
 		}
 	}
 

@@ -53,7 +53,7 @@ public class FiltroValoresClasificador extends Operation {
 			if (componenteValor==null) {
 				continue;
 			}
-			notificarObjecto("resultado", componenteValor);
+			notificarObjeto("resultado", componenteValor);
 		}
 	}
 

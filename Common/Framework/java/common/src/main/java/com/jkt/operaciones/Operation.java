@@ -157,7 +157,7 @@ public abstract class Operation extends Observable {
 	 *            que llegara el transformer.Dependiendo del tipo de transformer
 	 *            se notifica de diferentes maneras.
 	 * 
-	 * @deprecated ahora se debe utilizar el metodo con un writer y el objeto a notificar.Usar este metodo: {@link #notificarObjecto(String, Object)}
+	 * @deprecated ahora se debe utilizar el metodo con un writer y el objeto a notificar.Usar este metodo: {@link #notificarObjeto(String, Object)}
 	 */
 	protected void notificarObjecto(Object parameter) {
 		this.setChanged();
@@ -170,7 +170,7 @@ public abstract class Operation extends Observable {
 	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
 	 * @param parametro representa al parametro a mostrar en la salida.
 	 */
-	protected void notificarObjecto(String writer, Object parameter) {
+	protected void notificarObjeto(String writer, Object parameter) {
 //		Notificacion notificacion = Notificacion.getNew(writer, parameter);
 		this.setChanged();
 		notifyObservers(Notificacion.getNew(writer, parameter));
@@ -319,9 +319,9 @@ public abstract class Operation extends Observable {
 	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
 	 * @param lista Lista de elementos a notificar.
 	 */
-	protected void notificarObjetos(String writer, List<PersistentEntity> lista) {
-		for (PersistentEntity persistentEntity : lista) {
-			notificarObjecto(writer, persistentEntity);
+	protected void notificarObjetos(String writer, List lista) {
+		for (Object persistentEntity : lista) {
+			notificarObjeto(writer, persistentEntity);
 		}
 	}
 

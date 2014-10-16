@@ -29,7 +29,7 @@ public class TraerModeloCotizador extends Operation {
 		
 		ModeloCotizador modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
 		
-		notificarObjecto(WRITER_MODELO, modelo);
+		notificarObjeto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
@@ -61,7 +61,7 @@ public class TraerModeloCotizador extends Operation {
 			
 			tituloModeloCotizador.setTipo('C');//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
 		}
-		notificarObjecto(WRITER_TITULO, tituloModeloCotizador);
+		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 		
 		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {

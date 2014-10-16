@@ -32,14 +32,8 @@ public class TraerTipoProducto extends Operation {
 		validarEntrada(aParams.get(OID_TIPO));
 		TipoProducto tipo = (TipoProducto) obtener(TipoProducto.class, (String)aParams.get(OID_TIPO));
 		
-		notificarObjecto("out1", tipo);
-		
-		List<TipoProductoDet> caracteristicas = tipo.getCaracteristicas();
-		
-		for (TipoProductoDet tipoProductoDet : caracteristicas) {
-			notificarObjecto("out2", tipoProductoDet);
-			
-		}
+		notificarObjeto("out1", tipo);
+		notificarObjetos("out2", tipo.getCaracteristicas());
 
 	}
 

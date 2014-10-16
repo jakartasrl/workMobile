@@ -27,12 +27,8 @@ public class TraerImpuestos extends Operation {
 			throw new EntityNotFoundException("No existe el impuesto con identificador "+oid);
 		}
 
-		notificarObjecto("impuesto", impuesto);
-		
-		List<CategoriaImpuesto> categorias = impuesto.getCategorias();
-		for (CategoriaImpuesto categoriaImpuesto : categorias) {
-			notificarObjecto("categorias", categoriaImpuesto);
-		}
+		notificarObjeto("impuesto", impuesto);
+		notificarObjetos("categorias", impuesto.getCategorias());
 		
 	}
 

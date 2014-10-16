@@ -44,7 +44,7 @@ public class TraerEntidades extends Operation {
 		}
 		
 		for (PersistentEntity persistentEntity : allElements) {
-			notificarObjecto("resultado", persistentEntity);
+			notificarObjeto("resultado", persistentEntity);
 		}
 		
 	}

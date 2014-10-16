@@ -46,7 +46,7 @@ public class TraerCotizador extends Operation {
 		
 		ModeloCotizador modelo = cotizador.getModelo();
 		
-		notificarObjecto(WRITER_MODELO, modelo);
+		notificarObjeto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
@@ -115,7 +115,7 @@ public class TraerCotizador extends Operation {
 		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
 		 */
 		tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);
-		notificarObjecto(WRITER_TITULO, tituloModeloCotizador);
+		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 
 		//Recursividad, o muestreo de concepto.
 		if (tieneHijos) {

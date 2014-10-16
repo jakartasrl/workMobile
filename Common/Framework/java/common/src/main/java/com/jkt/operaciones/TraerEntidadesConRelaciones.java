@@ -31,7 +31,7 @@ public class TraerEntidadesConRelaciones extends Operation {
 			List<PersistentEntity> elementos = obtenerTodos((Class<? extends PersistentEntity>) clase);
 
 			for (PersistentEntity persistentEntity : elementos) {
-				notificarObjecto("entidad", persistentEntity);
+				notificarObjeto("entidad", persistentEntity);
 
 				for (Lista lista : obtenerListas) {
 					mostrarResultados(clase, persistentEntity, lista);
@@ -58,7 +58,7 @@ public class TraerEntidadesConRelaciones extends Operation {
 		
 		for (Object elementoDeLista : coleccion) {
 			if (elementoDeLista!=null) {
-				notificarObjecto(lista.getNombreWriter(), elementoDeLista);
+				notificarObjeto(lista.getNombreWriter(), elementoDeLista);
 
 				if(lista.tieneHijos()){
 					for (Lista subLista : lista.getListas()) {

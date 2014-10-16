@@ -116,7 +116,7 @@ public abstract class Validar extends Operation{
 		if (entity==null) {
 			throw new ValidacionException(String.format("El codigo solicitado no existe.", className, codigo));
 		}
-		notificarObjecto("resultado", entity);
+		notificarObjeto("resultado", entity);
 	}
 	
 	

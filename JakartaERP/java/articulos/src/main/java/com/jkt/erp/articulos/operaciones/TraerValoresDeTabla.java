@@ -33,9 +33,11 @@ public class TraerValoresDeTabla extends Operation {
 		
 		TablaValoresCaracProd tabla = (TablaValoresCaracProd) obtener(TablaValoresCaracProd.class, (String)aParams.get(OID));
 		
-		for (ValoresTablas valoresTablas : tabla.getValoresDeTabla()) {
-			notificarObjecto(WRITER_VALORES, valoresTablas);
-		}
+		notificarObjetos(WRITER_VALORES, tabla.getValoresDeTabla());
+		
+//		for (ValoresTablas valoresTablas : tabla.getValoresDeTabla()) {
+//			notificarObjecto(WRITER_VALORES, valoresTablas);
+//		}
 	}
 
 }

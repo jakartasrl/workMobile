@@ -22,7 +22,7 @@ public class TraerValoresClasificador extends Operation {
 		}
 		
 		//1 notifico el clasificador
-		notificarObjecto("clasificador", clasificador);
+		notificarObjeto("clasificador", clasificador);
 		
 		Componente componente = clasificador.getComponentePadre();
 		ComponenteValor componenteValorPadre;
@@ -35,7 +35,7 @@ public class TraerValoresClasificador extends Operation {
 			componente.setCodigoInternoPadre(nivel-1);
 			componente.setCodigoInterno(nivel++); //Seteo el valor actual y luego es aumentado.
 			
-			notificarObjecto("componentes", componente);
+			notificarObjeto("componentes", componente);
 			
 			//3 notifico el valor del componente
 			// valor = componente.getValor();
@@ -58,7 +58,7 @@ public class TraerValoresClasificador extends Operation {
 				}
 				
 				valor.setCodigoInternoPadre(valorInternoPadre);
-				notificarObjecto("valores", valor);
+				notificarObjeto("valores", valor);
 			}
 			
 			componente=componente.getComponenteHijo();

@@ -55,7 +55,7 @@ public class RecuperarEstructuraHelpGenerico extends Operation {
 		//notifica campos
 		List<Campo> campos = entidad.getCampos();
 		for (Campo campo : campos) {
-			notificarObjecto("resultado", campo);
+			notificarObjeto("resultado", campo);
 		}
 		
 	}

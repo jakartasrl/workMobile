@@ -19,7 +19,7 @@ public class RecuperarMenuParaERP extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		notificarObjecto("resultado", new Container(String.valueOf(VALUE_OF_MENU)));
+		notificarObjeto("resultado", new Container(String.valueOf(VALUE_OF_MENU)));
 	}
 
 }

@@ -43,7 +43,7 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 			for (ValoresTablas valorTabla : valores) {
 				if (valorTabla.getCodigo().equals(valor)) {
 					//notificar a la salida...
-					notificarObjecto("resultado", valorTabla);
+					notificarObjeto("resultado", valorTabla);
 					existeElValor=true;
 					break;
 					//y finalizar la rutina

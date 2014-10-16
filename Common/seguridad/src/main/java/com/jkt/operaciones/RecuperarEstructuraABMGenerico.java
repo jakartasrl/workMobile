@@ -45,18 +45,18 @@ public class RecuperarEstructuraABMGenerico extends Operation {
 		}
 
 		//notifica operacion
-		notificarObjecto("mtConfigOper", entidad.getOperacion());
+		notificarObjeto("mtConfigOper", entidad.getOperacion());
 		
 		//notifica campos
 		List<Campo> campos = entidad.getCampos();
 		for (Campo campo : campos) {
-			notificarObjecto("mtConfigCampos", campo);
+			notificarObjeto("mtConfigCampos", campo);
 		}
 		
 		//notifica validadores
 		List<Validador> validadores = entidad.getValidadores();
 		for (Validador currentValidador: validadores) {
-			notificarObjecto("mtConfigValidador", currentValidador);
+			notificarObjeto("mtConfigValidador", currentValidador);
 		}
 		
 	}

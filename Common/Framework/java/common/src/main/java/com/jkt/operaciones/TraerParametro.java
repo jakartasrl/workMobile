@@ -110,7 +110,7 @@ public class TraerParametro extends Operation {
 	 * @param config
 	 */
 	private void notificarElemento(Configuracion config){
-		notificarObjecto(WRITER_CONFIGURACION, config);
+		notificarObjeto(WRITER_CONFIGURACION, config);
 	}
 	
 }

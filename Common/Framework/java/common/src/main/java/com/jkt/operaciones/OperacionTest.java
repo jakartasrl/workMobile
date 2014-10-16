@@ -20,7 +20,7 @@ public class OperacionTest extends Operation {
 		while (it.hasNext()){
 			String key = (String) it.next();
 			Container obj = (Container) aParams.get(key);
-			notificarObjecto(key, obj);
+			notificarObjeto(key, obj);
 		}
 
 	}

@@ -35,7 +35,7 @@ public class TraerTiposDeProducto extends Operation {
 			detalle=(TipoProductoDet) persistentEntity;
 			caracteristica = detalle.getCaracteristica();
 			if (caracteristica!=null) {
-				notificarObjecto(WRITER_CARACTERISTICAS, caracteristica);
+				notificarObjeto(WRITER_CARACTERISTICAS, caracteristica);
 			}
 		}
 		

@@ -22,11 +22,8 @@ public abstract class TraerClasificadores extends Operation {
 
 		List<PersistentEntity> clasificadores = serviceRepository.getByProperty(Clasificador.class, VALUE_ENTIDAD, getEntidad());
 		
-		Clasificador clasificador;
-		for (PersistentEntity persistentEntity : clasificadores) {
-			clasificador=(Clasificador) persistentEntity;
-			notificarObjecto("resultado", clasificador);
-		}
+		notificarObjetos("resultado", clasificadores);
+		
 	}
 
 	/**
