@@ -2,6 +2,7 @@ inherited FNLab0001: TFNLab0001
   Caption = 'ABM de Determinaciones'
   ClientHeight = 499
   ClientWidth = 1105
+  ExplicitLeft = -319
   ExplicitWidth = 1121
   ExplicitHeight = 538
   PixelsPerInch = 96
@@ -13,7 +14,6 @@ inherited FNLab0001: TFNLab0001
     Height = 499
     Align = alClient
     TabOrder = 4
-    ExplicitWidth = 786
     object Splitter1: TSplitter
       Left = 673
       Top = 1
@@ -44,6 +44,8 @@ inherited FNLab0001: TFNLab0001
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsData.Appending = True
           object cxGrid1DBTableView1cod_det: TcxGridDBColumn
             Caption = 'Codigo'
             DataBinding.FieldName = 'cod_det'
@@ -87,7 +89,6 @@ inherited FNLab0001: TFNLab0001
       BorderStyle = bsSingle
       Caption = 'Panel3'
       TabOrder = 1
-      ExplicitWidth = 109
       object Panel4: TPanel
         Left = 1
         Top = 1
@@ -95,7 +96,6 @@ inherited FNLab0001: TFNLab0001
         Height = 41
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 103
         object cxDBTextEdit3: TcxDBTextEdit
           Left = 21
           Top = 12
@@ -113,7 +113,7 @@ inherited FNLab0001: TFNLab0001
         Height = 450
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 103
+        ExplicitTop = 40
         object cxGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSVal
@@ -121,6 +121,7 @@ inherited FNLab0001: TFNLab0001
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
           object cxGrid2DBTableView1valor_desde: TcxGridDBColumn
             Caption = 'Desde'
             DataBinding.FieldName = 'valor_desde'

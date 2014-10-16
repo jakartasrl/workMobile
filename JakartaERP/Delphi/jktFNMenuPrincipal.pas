@@ -801,6 +801,7 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
+  cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 30;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Laboratorios';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 205;

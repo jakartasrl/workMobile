@@ -136,7 +136,6 @@ begin
   inherited;
     if (not Service.ModoExecute)
        then begin
-               Dataset.FieldByName('activo').AsBoolean    := true;
                Dataset.FieldByName('oid_det').AsInteger   := TDet.FieldByName('oid_det').AsInteger;
                Dataset.FieldByName('oid_carac').AsInteger := mtParametrosForm.FieldByName('valor_entero').AsInteger;
             end;
