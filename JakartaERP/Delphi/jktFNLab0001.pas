@@ -84,6 +84,15 @@ type
     TCaraccod_carac: TStringField;
     TCaracdes_carac: TStringField;
     TDetoid_lab: TIntegerField;
+    operParam: TjktOperacion;
+    mtParametrosFormoid_param: TIntegerField;
+    mtParametrosFormcodigo: TStringField;
+    mtParametrosFormdescripcion: TStringField;
+    mtParametrosFormvalor_cadena: TStringField;
+    mtParametrosFormvalor_entero: TIntegerField;
+    mtParametrosFormvalor_fecha: TStringField;
+    mtParametrosFormvalor_float: TFloatField;
+    mtParametrosFormvalor_boolean: TBooleanField;
     procedure TCabNewRecord(DataSet: TDataSet);
     procedure TValNewRecord(DataSet: TDataSet);
   private
@@ -106,6 +115,9 @@ procedure TFNLab0001.llamarOperacionConfiguracion;
 begin
   //inherited;
   valLaboratorio.validar(mtParametroInicial.FieldByName('entidad'));
+  mtParametroInicial.Append;
+  mtParametroInicial.FieldByName('entidad').AsString := 'CaracProdValDet';
+  operParam.execute;
 end;
 
 procedure TFNLab0001.TCabNewRecord(DataSet: TDataSet);
@@ -126,7 +138,7 @@ begin
        then begin
                Dataset.FieldByName('activo').AsBoolean    := true;
                Dataset.FieldByName('oid_det').AsInteger   := TDet.FieldByName('oid_det').AsInteger;
-               Dataset.FieldByName('oid_carac').AsInteger := TCarac.FieldByName('oid_carac').AsInteger;
+               Dataset.FieldByName('oid_carac').AsInteger := mtParametrosForm.FieldByName('valor_entero').AsInteger;
             end;
 end;
 

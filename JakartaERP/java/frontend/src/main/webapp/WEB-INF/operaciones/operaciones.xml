@@ -158,10 +158,10 @@
 			<campoSalida value="Nombre" target="nombre" />
 			
 			<campoSalida value="ValorCadena" target="valorCadena" />
-			<campoSalida value="ValorEntero" target="valorEntero" />
+			<campoSalida value="ValorEntero" target="valorNumero" />
 			<campoSalida value="ValorDoble" target="valorDoble" />
 			<campoSalida value="ValorFecha" target="valorFecha" />
-			<campoSalida value="ValorBoolean" target="isValorBooleano" />
+			<campoSalida value="ValorBooleano" target="isValorBooleano" />
 			
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
@@ -180,10 +180,10 @@
 				<campoEntrada name="Nombre"  clase="String" metodo="setNombre" />
 				
 				<campoEntrada name="ValorCadena" clase="String" metodo="setValorCadena" />
-				<campoEntrada name="ValorEntero" clase="Integer" metodo="setValorEntero" />
+				<campoEntrada name="ValorEntero" clase="Integer" metodo="setValorNumero" />
 				<campoEntrada name="ValorDoble" clase="Double" metodo="setValorDoble" />
 				<campoEntrada name="ValorFecha" clase="Date" metodo="setValorFecha" />
-				<campoEntrada name="ValorBoolean" clase="Boolean" metodo="setValorBooleano" />
+				<campoEntrada name="ValorBooleano" clase="Boolean" metodo="setValorBooleano" />
 				
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 			</campoEntrada>			
@@ -201,11 +201,11 @@
 			<campoSalida value="oid_param" target="id" />
 			<campoSalida value="codigo" target="nombre" />
 			
-			<campoSalida value="valor_cadena" target="valorCadena" />
-			<campoSalida value="valor_entero" target="valorNumero" />
-			<campoSalida value="valor_fecha" target="valorFecha" />
-			<campoSalida value="valor_float" target="valorDoble" />
-			<campoSalida value="valor_boolean" target="isValorBooleano" />
+			<campoSalida value="Valor_Cadena" target="valorCadena" />
+			<campoSalida value="Valor_Entero" target="valorNumero" />
+			<campoSalida value="Valor_Fecha" target="valorFecha" />
+			<campoSalida value="Valor_float" target="valorDoble" />
+			<campoSalida value="Valor_Boolean" target="isValorBooleano" />
 
 		</output>
 			

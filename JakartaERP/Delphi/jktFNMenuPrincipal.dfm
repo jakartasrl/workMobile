@@ -387,7 +387,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         AlignSplitter = salBottom
         Control = cxGroupBox2
         ExplicitTop = 313
-        ExplicitWidth = 769
       end
       object tc_Favoritos: TdxTileControl
         Left = 0

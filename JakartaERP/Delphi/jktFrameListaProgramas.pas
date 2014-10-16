@@ -265,6 +265,12 @@ begin
       ParametroInicial := 'ValoresDeTablas';
       Titulo := 'ABM de Valores de Tablas de Características';
     end
+  else if Sender.Tag = 29 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Configuracion';
+      Titulo := 'ABM de Parametros';
+    end
   else if Sender.Tag = 30 then
     begin
       NombrePrograma   := 'TFNUti0001';
