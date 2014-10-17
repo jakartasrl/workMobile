@@ -204,6 +204,8 @@ begin
     NombrePrograma := 'TFNArt0002'
   else if Sender.Tag = 24 then
     NombrePrograma := 'TFNVen0001'
+  else if Sender.Tag = 25 then
+    NombrePrograma := 'TFNVen0002'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
@@ -264,6 +266,12 @@ begin
       NombrePrograma   := 'TFNUti0001';
       ParametroInicial := 'ValoresDeTablas';
       Titulo := 'ABM de Valores de Tablas de Características';
+    end
+  else if Sender.Tag = 29 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Configuracion';
+      Titulo := 'ABM de Parametros';
     end
   else if Sender.Tag = 30 then
     begin
