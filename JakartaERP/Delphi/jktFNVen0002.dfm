@@ -24,7 +24,6 @@ inherited FNVen0002: TFNVen0002
     Ctl3D = False
     ParentCtl3D = False
     TabOrder = 4
-    ExplicitWidth = 849
     Height = 73
     Width = 769
     object cxDBTextEdit1: TcxDBTextEdit
@@ -99,7 +98,6 @@ inherited FNVen0002: TFNVen0002
       PopupMenu = PopupMenu
       RootValue = 0
       TabOrder = 0
-      ExplicitWidth = 351
       object cxDBTreeList1oid_titu_conc: TcxDBTreeListColumn
         Visible = False
         DataBinding.FieldName = 'oid_titu_conc'
@@ -184,7 +182,6 @@ inherited FNVen0002: TFNVen0002
     PanelStyle.Active = True
     PanelStyle.BorderWidth = 5
     TabOrder = 6
-    ExplicitWidth = 435
     Height = 339
     Width = 354
     object dxBevel2: TdxBevel
@@ -206,7 +203,6 @@ inherited FNVen0002: TFNVen0002
       Caption = 'Alta de Concepto'
       Enabled = False
       TabOrder = 1
-      ExplicitWidth = 180
       Height = 135
       Width = 340
       object cxLabel5: TcxLabel
@@ -281,9 +277,6 @@ inherited FNVen0002: TFNVen0002
       Caption = 'Alta de T'#237'tulo'
       Enabled = False
       TabOrder = 0
-      ExplicitLeft = 142
-      ExplicitTop = 17
-      ExplicitWidth = 315
       Height = 135
       Width = 340
       object cxLabel3: TcxLabel
@@ -547,6 +540,7 @@ inherited FNVen0002: TFNVen0002
       FieldName = 'oid_conc'
     end
     object mtDettipo: TStringField
+      Tag = 1
       FieldName = 'tipo'
       Size = 1
     end
@@ -576,6 +570,7 @@ inherited FNVen0002: TFNVen0002
     Top = 256
   end
   object PopupMenu: TPopupMenu
+    OnPopup = PopupMenuPopup
     Left = 248
     Top = 200
     object menAnadirMismoNivel: TMenuItem
