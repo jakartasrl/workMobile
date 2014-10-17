@@ -760,6 +760,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -932,6 +936,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318
@@ -980,6 +988,7 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Height = 5
         AlignSplitter = salBottom
         Control = cxGroupBox2
+        ExplicitWidth = 771
       end
       object tc_Favoritos: TdxTileControl
         Left = 0

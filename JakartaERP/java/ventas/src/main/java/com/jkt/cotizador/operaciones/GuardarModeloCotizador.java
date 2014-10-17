@@ -1,11 +1,13 @@
 package com.jkt.cotizador.operaciones;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 
 /**
@@ -19,6 +21,8 @@ public class GuardarModeloCotizador extends Operation {
 
 	private static final String KEY_OBJECT = "modelo";
 
+	private List<TituloModeloCotizador> todosLosTitulos=new ArrayList<TituloModeloCotizador>();
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		ModeloCotizador modelo = (ModeloCotizador) aParams.get(KEY_OBJECT);
@@ -29,14 +33,28 @@ public class GuardarModeloCotizador extends Operation {
 		//Guardo todos los titulos en un mapa para tener una referencia de la jerarquia...
 		for (TituloModeloCotizador titulo : titulos) {
 			mapaDetitulos.put(String.valueOf(titulo.getCodigoInterno()), titulo);
+			
+			if ("T".equals(titulo.getTipo())) {
+				todosLosTitulos.add(titulo);
+			}
 		}
 		
 		//armo la jerarquia retornando el primer elemento, el titulo padre.
 		establecerRelaciones(modelo, mapaDetitulos, titulos);
 
+		validarTitulos();
 		
 		//guardo el modelo de cotizador.
 		guardar(modelo);
+	}
+
+	private void validarTitulos() throws JakartaException {
+		for (TituloModeloCotizador titulo : todosLosTitulos) {
+			if (titulo.getTitulosHijos().isEmpty()) {
+				throw new JakartaException(String.format("El titulo '%s' no tiene un concepto relacionado.",titulo.getDescripcion()));
+			}
+		}
+		
 	}
 
 	/**
@@ -63,6 +81,7 @@ public class GuardarModeloCotizador extends Operation {
 				
 				//TODO FIXME titulo tipo, si titulo tipo es C verifico pedir articulo y si tiene el valor del componente
 			}
+			
 		}
 	}
 

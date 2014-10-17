@@ -100,7 +100,7 @@ public class TraerCotizador extends Operation {
 				}
 			}
 			
-			tituloModeloCotizador.setTipo('C');//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
 		}
 		
 		
@@ -115,7 +115,13 @@ public class TraerCotizador extends Operation {
 		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
 		 */
 		tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);
-		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+		notificarObjeto(WRITER_TITULO, tituloModeloCotizador); //TODO FIXME TODO FIXME esto va a ser un poco mas complejo, es un FOR
+		//por cada concepto, tengo q ver los detalles que tienen este concepto, pueden ser mat1 mat3 mat3 mat4. ademas tmb hay q ver si hay articulos que no estan en la 
+		//lista y agregarlos con datos vacios...
+		
+		//si el concept tiene el VALOR DE CLASIFICADOR 5 y para ese valor d clasificador en la tabla CLASIF_CLIENTE ( la tabla de la relación entre entidad-clasif) tiene 50 elementos
+		//debo mostrar 50 lineas...
+		
 
 		//Recursividad, o muestreo de concepto.
 		if (tieneHijos) {
@@ -126,5 +132,4 @@ public class TraerCotizador extends Operation {
 		
 	}
 	
-
 }

@@ -40,7 +40,7 @@ inherited FNVen0002: TFNVen0002
       DataBinding.DataField = 'des_mod'
       DataBinding.DataSource = dsCab
       TabOrder = 1
-      Width = 323
+      Width = 487
     end
     object cxLabel1: TcxLabel
       Left = 14

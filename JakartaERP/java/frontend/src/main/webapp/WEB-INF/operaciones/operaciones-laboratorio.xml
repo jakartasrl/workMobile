@@ -251,6 +251,44 @@
 		</forms>
 		
 	</operacion>
+
+	<operacion name="SaveDeterminaciones" clase="com.jkt.operaciones.GuardarLista">
+		<input name="TDet" keyName="objeto"
+			clase="com.jkt.laboratorio.dominio.Determinacion" fieldID="oid_det">
+			<campoEntrada>
+				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="cod_det" clase="String" metodo="setCodigo" />
+				<campoEntrada name="des_det" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="metodo" clase="String" metodo="setMetodo" />
+				<campoEntrada name="tipo_res" clase="String" metodo="setTipoResultado" />
+				<campoEntrada name="oid_lab"
+					clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
+				
+				<campoEntrada name="TVal" metodo="addValoresValidos"
+					clase="com.jkt.laboratorio.dominio.ValoresValidosDeterminacion"
+					fieldID="oid_val_val">
+					<campoEntrada name="valor_desde" clase="Double" metodo="setValorDesde" />
+					<campoEntrada name="valor_hasta" clase="Double" metodo="setValorHasta" />
+					<campoEntrada name="limite_inf" clase="Double"
+						metodo="setLimiteInferior" />
+					<campoEntrada name="limite_sup" clase="Double"
+						metodo="setLimiteSuperior" />
+  					<campoEntrada name="oid_tabla"
+						clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
+				</campoEntrada>
+
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="TAnalisis"></form>
+		</forms>
+
+	</operacion>
 	
 	
 

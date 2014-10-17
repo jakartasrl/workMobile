@@ -1,20 +1,21 @@
 inherited FNLab0001: TFNLab0001
   Caption = 'ABM de Determinaciones'
   ClientHeight = 499
-  ClientWidth = 761
-  ExplicitWidth = 777
+  ClientWidth = 1105
+  ExplicitLeft = -319
+  ExplicitWidth = 1121
   ExplicitHeight = 538
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel [0]
     Left = 0
     Top = 0
-    Width = 761
+    Width = 1105
     Height = 499
     Align = alClient
     TabOrder = 4
     object Splitter1: TSplitter
-      Left = 377
+      Left = 673
       Top = 1
       Height = 497
       ExplicitLeft = 520
@@ -24,7 +25,7 @@ inherited FNLab0001: TFNLab0001
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 376
+      Width = 672
       Height = 497
       Align = alLeft
       BorderStyle = bsSingle
@@ -32,7 +33,7 @@ inherited FNLab0001: TFNLab0001
       object cxGrid1: TcxGrid
         Left = 1
         Top = 1
-        Width = 370
+        Width = 666
         Height = 491
         Align = alClient
         TabOrder = 0
@@ -43,6 +44,8 @@ inherited FNLab0001: TFNLab0001
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsData.Appending = True
           object cxGrid1DBTableView1cod_det: TcxGridDBColumn
             Caption = 'Codigo'
             DataBinding.FieldName = 'cod_det'
@@ -52,16 +55,19 @@ inherited FNLab0001: TFNLab0001
             Caption = 'Descripcion'
             DataBinding.FieldName = 'des_det'
             HeaderAlignmentHorz = taCenter
+            Width = 257
           end
           object cxGrid1DBTableView1metodo: TcxGridDBColumn
             Caption = 'Metodo'
             DataBinding.FieldName = 'metodo'
             HeaderAlignmentHorz = taCenter
+            Width = 123
           end
           object cxGrid1DBTableView1tipo_res: TcxGridDBColumn
             Caption = 'Tipo Resultado'
             DataBinding.FieldName = 'tipo_res'
             HeaderAlignmentHorz = taCenter
+            Width = 91
           end
           object cxGrid1DBTableView1activo: TcxGridDBColumn
             Caption = 'Activo'
@@ -75,9 +81,9 @@ inherited FNLab0001: TFNLab0001
       end
     end
     object Panel3: TPanel
-      Left = 380
+      Left = 676
       Top = 1
-      Width = 380
+      Width = 428
       Height = 497
       Align = alClient
       BorderStyle = bsSingle
@@ -86,7 +92,7 @@ inherited FNLab0001: TFNLab0001
       object Panel4: TPanel
         Left = 1
         Top = 1
-        Width = 374
+        Width = 422
         Height = 41
         Align = alTop
         TabOrder = 0
@@ -103,10 +109,11 @@ inherited FNLab0001: TFNLab0001
       object cxGrid2: TcxGrid
         Left = 1
         Top = 42
-        Width = 374
+        Width = 422
         Height = 450
         Align = alClient
         TabOrder = 1
+        ExplicitTop = 40
         object cxGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSVal
@@ -114,6 +121,7 @@ inherited FNLab0001: TFNLab0001
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
           object cxGrid2DBTableView1valor_desde: TcxGridDBColumn
             Caption = 'Desde'
             DataBinding.FieldName = 'valor_desde'
@@ -164,14 +172,14 @@ inherited FNLab0001: TFNLab0001
     OperName = 'SaveDeterminaciones'
     Atributos = <
       item
-        Tag = 0
-      end
-      item
         Dataset = TDet
         Tag = 0
       end
       item
         Dataset = TVal
+        Tag = 0
+      end
+      item
         Tag = 0
       end>
     Left = 320
@@ -184,11 +192,50 @@ inherited FNLab0001: TFNLab0001
   inherited OperacionTraer: TjktOperacion
     OperName = 'TraerDeterminaciones'
     Left = 488
-    Top = 24
+    Top = 65520
+  end
+  inherited ValidadorForm: TjktValidadorForm
+    ListaValidaciones = <
+      item
+        Field = TDetcod_det
+        ValidadorGral = valDeter
+      end
+      item
+        Field = TValcod_tabla
+        ValidadorGral = valTabla
+      end>
   end
   inherited mtParametrosForm: TjktMemTable
-    Left = 320
-    Top = 240
+    Left = 400
+    Top = 168
+    object mtParametrosFormoid_param: TIntegerField
+      FieldName = 'oid_param'
+    end
+    object mtParametrosFormcodigo: TStringField
+      FieldName = 'codigo'
+      Size = 30
+    end
+    object mtParametrosFormdescripcion: TStringField
+      FieldName = 'descripcion'
+      Size = 50
+    end
+    object mtParametrosFormvalor_cadena: TStringField
+      FieldName = 'valor_cadena'
+      Size = 100
+    end
+    object mtParametrosFormvalor_entero: TIntegerField
+      FieldName = 'valor_entero'
+    end
+    object mtParametrosFormvalor_fecha: TStringField
+      FieldName = 'valor_fecha'
+      Size = 10
+    end
+    object mtParametrosFormvalor_float: TFloatField
+      FieldName = 'valor_float'
+    end
+    object mtParametrosFormvalor_boolean: TBooleanField
+      FieldName = 'valor_boolean'
+    end
   end
   object TDet: TjktMemTable
     DesignActivation = True
@@ -407,7 +454,7 @@ inherited FNLab0001: TFNLab0001
     end
   end
   object valDeter: TjktValidador
-    Entidad = 'Determinacion'
+    Entidad = 'determinacion'
     Validacion = tInexistente
     ListaAsignaciones = <>
     Left = 40
@@ -502,5 +549,18 @@ inherited FNLab0001: TFNLab0001
       FieldName = 'des_carac'
       Size = 60
     end
+  end
+  object operParam: TjktOperacion
+    OperName = 'TraerParametro'
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'nombreParametro'
+        Field = mtParametroInicialEntidad
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    Left = 152
+    Top = 376
   end
 end

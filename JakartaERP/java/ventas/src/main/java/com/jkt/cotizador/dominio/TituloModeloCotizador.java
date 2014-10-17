@@ -14,15 +14,15 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private ModeloCotizador modeloCotizador;
 	
 	private int codigoInterno,codigoInternoPadre;
-	private char tipo='T';//para diferenciar entre titulos y conceptos.
+	private String tipo="T";//para diferenciar entre titulos y conceptos.TODO armar el mapeo de un char en DelphiAdapter...
 	private CotizadorDet detalleDeConcepto;//campo transiente para mostrar la salida en la operacion de mostrar cotizador.
 	/*
 	 * setters y getters
 	 */
 	
-	public char getTipo() {
-		return tipo;
-	}
+//	public char getTipo() {
+//		return tipo;
+//	}
 
 	public CotizadorDet getDetalleDeConcepto() {
 		return detalleDeConcepto;
@@ -32,15 +32,24 @@ public class TituloModeloCotizador extends PersistentEntity {
 		this.detalleDeConcepto = detalleDeConcepto;
 	}
 
-	public void setTipo(char tipo) {
-		this.tipo = tipo;
-	}
+//	public void setTipo(char tipo) {
+//		this.tipo = tipo;
+//	}
+	
 
 	public String getCodigo() {
 		return codigo;
 		
 		//TODO comprobar si tiene concepto, si tiene mandar el codigo del concepto y la descripcion tambien!
 		
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public void setCodigo(String codigo) {
