@@ -86,6 +86,7 @@
 				<campoEntrada name="mtDet" metodo="agregarTituloTransiente" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" fieldID="oid_titu_conc">					
 					<campoEntrada name="codInterno" clase="Integer" metodo="setCodigoInterno" />
 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
+					<campoEntrada name="tipo" clase="String" metodo="setTipo" />
 					
 <!-- 					DEPENDIENDO DE QUE ELEMENTO SEA, SE SETEARAN CODIGO&DESCRIPCION O EL CONCEPTO. -->
 <!-- 					SI ES UN TITULO DE ULTIMO NIVEL, SE SETEARA EL CONCEPTO, EN CASO CONTRARIO SE SETEAN EL CODIGO Y LA DESCRIPCION -->
@@ -117,33 +118,15 @@
 
 		<output name="titulos" tableName="mtDet">
 			<campoSalida value="oid_titu_conc" target="id" />
-
 			<campoSalida value="oid_mod" target="modeloCotizador.id" />
-
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
-
 			<campoSalida value="cod_titu_conc" target="codigoReal" />
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
-			
 			<campoSalida value="tipo" target="tipo" />
-			
 			<campoSalida value="oid_conc" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
-<!-- 			<campoSalida value="descConcepto" target="concepto.codigo" />  -->
-<!-- 			<campoSalida value="CodigoConcepto" target="concepto.descripcion" /> -->
-			
 
 		</output>
-
-<!-- 		<output name="conceptos" tableName="mtConceptosPresupuesto"> -->
-<!-- 			<campoSalida value="oid_Concepto" target="id" /> -->
-
-<!-- 			<campoSalida value="oid_Titulo" target="titulo.id" /> -->
-
-<!-- 			<campoSalida value="Codigo" target="codigo" /> -->
-<!-- 			<campoSalida value="desc" target="descripcion" /> -->
-			
-<!-- 		</output> -->
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
@@ -153,8 +136,6 @@
 		</forms>
 
 	</operacion>
-	
-	
 
 	<!-- 	Concepto de presupuesto -->
 	<operacion name="TraerConceptoPresupuesto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.cotizador.dominio.ConceptoPresupuesto">
@@ -203,7 +184,7 @@
 		<input name="cotizador" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cot">
 			<campoEntrada>
 				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
-				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" /> <!-- Segun esta descripcion el usuario X seleccionará un modelo de cotizador -->
 			</campoEntrada>
 		</input>
 	
@@ -222,7 +203,7 @@
 			<campoSalida value="descrpcion" target="descripcion" />
 		</output>		
 
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 		
 		<forms>
 			<form name="---"></form>

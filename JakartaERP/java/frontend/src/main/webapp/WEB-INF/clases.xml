@@ -34,5 +34,6 @@
 	<elemento key="conceptoPresupuesto" value="com.jkt.cotizador.dominio.ConceptoPresupuesto" />
 	<elemento key="tablaValidacionDeter" value="com.jkt.laboratorio.dominio.TablaValidacionDeter" />
 	<elemento key="laboratorio" value="com.jkt.laboratorio.dominio.Laboratorio" />
+	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
 
 </elementos>
