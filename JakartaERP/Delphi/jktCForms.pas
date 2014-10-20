@@ -14,9 +14,9 @@ uses
   jktFNArt0001,
   jktFNArt0002,
   jktFNVen0001,
+  jktFNVen0002,
   jktFNLab0001,
-  jktFNLab0002,
-  jktFNVen0002;
+  jktFNLab0002;
 
 implementation
 

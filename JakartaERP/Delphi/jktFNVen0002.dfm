@@ -3,7 +3,7 @@ inherited FNVen0002: TFNVen0002
   ClientHeight = 412
   ClientWidth = 769
   ExplicitWidth = 785
-  ExplicitHeight = 451
+  ExplicitHeight = 450
   PixelsPerInch = 96
   TextHeight = 13
   object dxBevel1: TdxBevel [0]
@@ -540,6 +540,7 @@ inherited FNVen0002: TFNVen0002
       FieldName = 'oid_conc'
     end
     object mtDettipo: TStringField
+      Tag = 1
       FieldName = 'tipo'
       Size = 1
     end
@@ -569,6 +570,7 @@ inherited FNVen0002: TFNVen0002
     Top = 256
   end
   object PopupMenu: TPopupMenu
+    OnPopup = PopupMenuPopup
     Left = 248
     Top = 200
     object menAnadirMismoNivel: TMenuItem

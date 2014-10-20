@@ -90,6 +90,7 @@ type
     procedure menAnadirConceptoClick(Sender: TObject);
     procedure OperacionSaveBeforeEjecutar(Sender: TObject);
     procedure OperacionSaveAfterEjecutar(Sender: TObject);
+    procedure PopupMenuPopup(Sender: TObject);
   private
     procedure BorrarCampos;
 
@@ -256,6 +257,7 @@ begin
   inherited;
 
   cxDBTreeList1.DataController.DataSource := dsDet;
+  cxDBTreeList1.FullExpand;
 end;
 
 procedure TFNVen0002.OperacionSaveBeforeEjecutar(Sender: TObject);
@@ -265,6 +267,60 @@ begin
   cxDBTreeList1.DataController.DataSource := nil;
 end;
 
+
+procedure TFNVen0002.PopupMenuPopup(Sender: TObject);
+begin
+  inherited;
+
+  if mtDet.Active then
+    begin
+      menAnadirMismoNivel.Visible := True;
+      menAnadirSubTitulo.Visible := True;
+      menAnadirConcepto.Visible := True;
+      menEliminar.Visible := True;
+
+      if mtDet.IsEmpty then
+        begin
+          menAnadirMismoNivel.Enabled := True;
+          menAnadirSubTitulo.Enabled := False;
+          menAnadirConcepto.Enabled := False;
+          menEliminar.Enabled := False;
+        end
+      else
+        begin
+          menAnadirConcepto.Enabled := True;
+
+          if cxDBTreeList1.FocusedNode.HasChildren then
+            begin
+              menEliminar.Enabled := False;
+            end
+          else
+            begin
+              menEliminar.Enabled := True;
+            end;
+
+          // Si está parado sobre un Título/SubTítulo dejo agregar cualquier cosa
+          if (mtDet.FieldByName('tipo').AsString = 'T') then
+            begin
+              menAnadirMismoNivel.Enabled := True;
+              menAnadirSubTitulo.Enabled := True;
+            end
+          else
+            begin
+              // Está parado sobre un Concepto. No dejo agregar Título/SubTítulo.
+              menAnadirMismoNivel.Enabled := False;
+              menAnadirSubTitulo.Enabled := False;
+            end;
+        end;
+    end
+  else
+    begin
+      menAnadirMismoNivel.Visible := False;
+      menAnadirSubTitulo.Visible := False;
+      menAnadirConcepto.Visible := False;
+      menEliminar.Visible := False;
+    end;
+end;
 
 initialization
   RegisterClass(TFNVen0002);
