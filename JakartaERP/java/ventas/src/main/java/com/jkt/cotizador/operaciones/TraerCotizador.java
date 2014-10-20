@@ -1,15 +1,22 @@
 package com.jkt.cotizador.operaciones;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.constantes.TiposDeDato;
 import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
+import com.jkt.dominio.Filtro;
+import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.articulos.Producto;
+import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
+import com.jkt.varios.dominio.ComponenteValor;
 
 /**
  * <p><b>Recupera un cotizador previamente dado de alta.</b></p>
@@ -74,11 +81,9 @@ public class TraerCotizador extends Operation {
 	 * 
 	 * @param tituloModeloCotizador
 	 * @param codigoInternoPadre
-	 * @throws JakartaException Si existe alguna inconsistencia con los titulos y conceptos. Alguna inconsistencia puede ser que 
-	 * un titulo no tenga hijos, y si es así, tiene que tener una referencia a un concepto, y ademas 
-	 * (si la var pideArticulo es true) un componenteValor asociado.
+	 * @throws Exception 
 	 */
-	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws JakartaException {
+	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws Exception {
 		
 		tituloModeloCotizador.setCodigoInterno((int)tituloModeloCotizador.getId());
 		tituloModeloCotizador.setCodigoInternoPadre(codigoInternoPadre);
@@ -114,15 +119,32 @@ public class TraerCotizador extends Operation {
 		 * 
 		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
 		 */
-		tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);
-		notificarObjeto(WRITER_TITULO, tituloModeloCotizador); //TODO FIXME TODO FIXME esto va a ser un poco mas complejo, es un FOR
-		//por cada concepto, tengo q ver los detalles que tienen este concepto, pueden ser mat1 mat3 mat3 mat4. ademas tmb hay q ver si hay articulos que no estan en la 
-		//lista y agregarlos con datos vacios...
 		
-		//si el concept tiene el VALOR DE CLASIFICADOR 5 y para ese valor d clasificador en la tabla CLASIF_CLIENTE ( la tabla de la relación entre entidad-clasif) tiene 50 elementos
-		//debo mostrar 50 lineas...
-		
+		if ("C".equals(tituloModeloCotizador.getTipo())) {
+			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
+				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
+				
+				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
+				List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
+				ProductoClasificador productoClasificador;
+				Producto producto;
 
+				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
+				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
+					productoClasificador=(ProductoClasificador) persistentEntity;
+					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
+					tituloModeloCotizador.setProducto(producto);
+					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+				}
+				
+			}else{
+				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+			}
+		}else{
+			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+		}
+		
 		//Recursividad, o muestreo de concepto.
 		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {

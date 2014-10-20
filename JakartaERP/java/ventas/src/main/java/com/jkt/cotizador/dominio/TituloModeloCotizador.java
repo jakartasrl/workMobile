@@ -6,6 +6,12 @@ import java.util.List;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
 
+/**
+ * <p>Representa un elemento del arbol de modelo de cotizador. Es un nodo, q puede ser titulo o concepto.</p>
+ * <p>En caso de ser concepto, estará como hoja del arbol, y puede o no tener un articulo relacionado.</p>
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class TituloModeloCotizador extends PersistentEntity {
 
 	private String codigo, descripcion;
@@ -20,14 +26,6 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private Producto producto;//campo transiente para mostrar la descripcion y demas datos a completar...
 	
 	
-	/*
-	 * setters y getters
-	 */
-	
-//	public char getTipo() {
-//		return tipo;
-//	}
-
 	public Producto getProducto() {
 		return producto;
 	}
@@ -44,16 +42,8 @@ public class TituloModeloCotizador extends PersistentEntity {
 		this.detalleDeConcepto = detalleDeConcepto;
 	}
 
-//	public void setTipo(char tipo) {
-//		this.tipo = tipo;
-//	}
-	
-
 	public String getCodigo() {
 		return codigo;
-		
-		//TODO comprobar si tiene concepto, si tiene mandar el codigo del concepto y la descripcion tambien!
-		
 	}
 
 	public String getTipo() {
@@ -131,15 +121,13 @@ public class TituloModeloCotizador extends PersistentEntity {
 		}
 	}
 	
-	//	public void agregarTodosLosConceptos(List<ConceptoPresupuesto> conceptos){
-//		for (ConceptoPresupuesto conceptoPresupuesto : conceptos) {
-//			if (!this.conceptos.contains(conceptoPresupuesto)) {
-//				this.conceptos.add(conceptoPresupuesto);
-//				conceptoPresupuesto.setTitulo(this);
-//			}
-//		}
-//	}
-	
+
+	/*
+	 * Estos dos metodos son helpers que solucionan el tema de diferenciar titulos y conceptos.
+	 * Un titulo cuando tiene tipo C, tendra relacionado un concepto si o si.
+	 * Cuando ocurre esto, el codigo y la descripcion se toma del concepto y no de titulo.
+	 * 
+	 */
 	public String getCodigoReal(){
 		if (concepto==null) {
 			return this.codigo;
