@@ -1,19 +1,26 @@
 package com.jkt.cotizador.operaciones;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.constantes.TiposDeDato;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
+import com.jkt.dominio.Filtro;
+import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.articulos.Producto;
+import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
+import com.jkt.varios.dominio.ComponenteValor;
 
 /**
  * <p>Recupera el modelo de cotizador, sus titulos en forma jerarquica y los conceptos de presupuestos.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TraerModeloCotizador extends Operation {
+public class TraerModeloParaCotizar extends Operation {
 
 	//key para recuperar del mapa, desde el cliente enviarán OID=2, por ejemplo.
 	private static final String OID = "OID";
@@ -37,7 +44,7 @@ public class TraerModeloCotizador extends Operation {
 		
 	}
 
-	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws JakartaException {
+	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws Exception {
 		
 		tituloModeloCotizador.setCodigoInterno((int)tituloModeloCotizador.getId());
 		tituloModeloCotizador.setCodigoInternoPadre(codigoInternoPadre);
@@ -59,8 +66,28 @@ public class TraerModeloCotizador extends Operation {
 			}
 			
 			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+		
+		
 		}
-		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+		//Si es un concepto, es un for a mostrar cada uno de los valores segun el concepto y el componente valor...
+		
+		if ("C".equals(tituloModeloCotizador.getTipo())) {
+			ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
+			
+			Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
+			List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
+			ProductoClasificador productoClasificador;
+			Producto producto;
+			for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
+				productoClasificador=(ProductoClasificador) persistentEntity;
+				producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
+				tituloModeloCotizador.setProducto(producto);
+				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+			}
+		}else{
+			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+		}
+		
 		
 		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {

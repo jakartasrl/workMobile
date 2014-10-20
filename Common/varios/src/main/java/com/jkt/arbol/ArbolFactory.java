@@ -38,7 +38,7 @@ public class ArbolFactory {
 				elementoPadre=mapaDesordenado.get(String.valueOf(nivelSuperior));
 				
 				if (elementoPadre==null) {
-					throw new JakartaException("No se encuentra el elemento padre en la jerarquia.");
+					throw new JakartaException("Existe una inconsistencia. No se encuentra el elemento padre en la jerarquia.");
 				}
 				
 				//Tengo componente y componentePadre.Establezco la relacion.

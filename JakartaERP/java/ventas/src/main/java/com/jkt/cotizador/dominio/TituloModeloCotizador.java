@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.articulos.Producto;
 
 public class TituloModeloCotizador extends PersistentEntity {
 
@@ -16,6 +17,9 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private int codigoInterno,codigoInternoPadre;
 	private String tipo="T";//para diferenciar entre titulos y conceptos.TODO armar el mapeo de un char en DelphiAdapter...
 	private CotizadorDet detalleDeConcepto;//campo transiente para mostrar la salida en la operacion de mostrar cotizador.
+	private Producto producto;//campo transiente para mostrar la descripcion y demas datos a completar...
+	
+	
 	/*
 	 * setters y getters
 	 */
@@ -23,6 +27,14 @@ public class TituloModeloCotizador extends PersistentEntity {
 //	public char getTipo() {
 //		return tipo;
 //	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 
 	public CotizadorDet getDetalleDeConcepto() {
 		return detalleDeConcepto;
