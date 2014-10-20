@@ -72,16 +72,23 @@ public class TraerModeloParaCotizar extends Operation {
 		//Si es un concepto, es un for a mostrar cada uno de los valores segun el concepto y el componente valor...
 		
 		if ("C".equals(tituloModeloCotizador.getTipo())) {
-			ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
-			
-			Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
-			List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
-			ProductoClasificador productoClasificador;
-			Producto producto;
-			for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
-				productoClasificador=(ProductoClasificador) persistentEntity;
-				producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
-				tituloModeloCotizador.setProducto(producto);
+			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
+				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
+				
+				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
+				List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
+				ProductoClasificador productoClasificador;
+				Producto producto;
+
+				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
+				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
+					productoClasificador=(ProductoClasificador) persistentEntity;
+					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
+					tituloModeloCotizador.setProducto(producto);
+					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+				}
+				
+			}else{
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			}
 		}else{

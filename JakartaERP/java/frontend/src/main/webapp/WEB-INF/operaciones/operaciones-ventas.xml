@@ -242,5 +242,39 @@
 
 	</operacion>
 	
+	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
+	<operacion name="TraerModeloParaCotizar" clase="com.jkt.cotizador.operaciones.TraerModeloParaCotizar">
+
+		<output name="modelo" tableName="mtCab">
+			<campoSalida value="oid_mod" target="id" />
+			<campoSalida value="cod_mod" target="codigo" />
+			<campoSalida value="des_mod" target="descripcion" />
+		</output>
+
+		<output name="titulos" tableName="mtDet">
+			<campoSalida value="oid_titu_conc" target="id" />
+			<campoSalida value="oid_mod" target="modeloCotizador.id" />
+			<campoSalida value="codInterno" target="codigoInterno" />
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+			<campoSalida value="cod_titu_conc" target="codigoReal" />
+			<campoSalida value="des_titu_conc" target="descripcionReal" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="oid_conc" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
+			
+			<!-- Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
+			<campoSalida value="oid_producto" target="producto.id" />
+			<campoSalida value="des_producto" target="producto.descripcion" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="---">
+			</form>
+		</forms>
+
+	</operacion>
+	
 	
 </entity>
