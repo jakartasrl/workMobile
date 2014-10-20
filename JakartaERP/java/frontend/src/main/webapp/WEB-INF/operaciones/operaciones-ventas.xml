@@ -88,9 +88,6 @@
 					<campoEntrada name="codInternoPadre" clase="Integer" metodo="setCodigoInternoPadre" />
 					<campoEntrada name="tipo" clase="String" metodo="setTipo" />
 					
-<!-- 					DEPENDIENDO DE QUE ELEMENTO SEA, SE SETEARAN CODIGO&DESCRIPCION O EL CONCEPTO. -->
-<!-- 					SI ES UN TITULO DE ULTIMO NIVEL, SE SETEARA EL CONCEPTO, EN CASO CONTRARIO SE SETEAN EL CODIGO Y LA DESCRIPCION -->
-
 					<campoEntrada name="cod_titu_conc" clase="String" metodo="setCodigo" />
 					<campoEntrada name="des_titu_conc" clase="String" metodo="setDescripcion" />
 
@@ -117,6 +114,7 @@
 		</output>
 
 		<output name="titulos" tableName="mtDet">
+
 			<campoSalida value="oid_titu_conc" target="id" />
 			<campoSalida value="oid_mod" target="modeloCotizador.id" />
 			<campoSalida value="codInterno" target="codigoInterno" />
@@ -124,7 +122,7 @@
 			<campoSalida value="cod_titu_conc" target="codigoReal" />
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			<campoSalida value="tipo" target="tipo" />
-			<campoSalida value="oid_conc" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
+			<campoSalida value="oid_conc" target="concepto.id" /> 
 
 		</output>
 
@@ -145,7 +143,6 @@
 			<campoSalida value="cod_conc" target="codigo" />
 			<campoSalida value="des_conc" target="descripcion" />
 			<campoSalida value="pide_art" target="isPideArticulo" />
-<!-- 			<campoSalida value="oid_cla" target="componenteValor.componente.clasificador.id" /> -->
 			<campoSalida value="oid_val_cla" target="componenteValor.id" />
 			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
 			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />

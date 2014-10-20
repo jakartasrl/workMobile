@@ -6,11 +6,35 @@ import java.util.List;
 import com.jkt.erp.varios.Representante;
 import com.jkt.erp.varios.Vendedor;
 
-public class ComprobanteVenta extends ComprobanteCliente {
+/**
+ * Comprobate que representa un evento de cotizacion/pedido
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
+public abstract class ComprobanteVenta extends ComprobanteCliente {
+
+	private String nombre;
+	private String descripcion;
 
 	private Vendedor vendedor;
 	private Representante representante;
 	private List<ComprobanteVentaDet> detalles = new ArrayList<ComprobanteVentaDet>();
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public List<ComprobanteVentaDet> getDetalles() {
 		return detalles;
