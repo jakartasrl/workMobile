@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.laboratorio.dominio.Metodo"
+		table="DETER_METODO">
+		<id name="id" column="ID_METODO">
+			<generator class="native"></generator>
+		</id>
+
+		
+		<property name="metodo"     		column="metodo" 		type="string" />
+		<property name="expresionResultado" column="expresion_res" 	type="string" />
+		
+		<many-to-one name="determinacion" lazy="proxy" not-null="true" column="ID_DETERMINACION"/>
+		
+		<list name="valoresEsperados" inverse="true" cascade="save-update">
+			<key column="ID_METODO" />
+			<index column="secu" />
+			<one-to-many class="com.jkt.laboratorio.dominio.ValorEsperado" />
+		</list>
+		
+		<list name="variables" inverse="true" cascade="save-update">
+			<key column="ID_METODO" />
+			<index column="secu" />
+			<one-to-many class="com.jkt.laboratorio.dominio.Variable" />
+		</list>
+		
+
+	</class>
+
+</hibernate-mapping>

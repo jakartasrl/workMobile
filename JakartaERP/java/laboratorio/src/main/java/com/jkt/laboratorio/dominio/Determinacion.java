@@ -2,6 +2,7 @@ package com.jkt.laboratorio.dominio;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -12,36 +13,48 @@ import com.jkt.dominio.Descriptible;
 public class Determinacion extends Descriptible {
 
 
-	private String metodo;
-	private String tipoResultado;
 	private Laboratorio laboratorio;
+	private String tipoResultado;
+	private String leyendaValorCero;
+	private String formato;
+	private boolean calculaResultado;
+	private List<Metodo> metodos = new ArrayList<Metodo>();
+	
+	
+	
 
-	/**
-	 * Lista de valores válidos y de referencia de la determinación
-	 */
-	private List<ValoresValidosDeterminacion> listaValoresValidosDeterminacion = new ArrayList<ValoresValidosDeterminacion>();
 
-	public void addValoresValidos(ValoresValidosDeterminacion valoresValidosDeterminacion) {
-		if (!listaValoresValidosDeterminacion.contains(valoresValidosDeterminacion)) {
-			listaValoresValidosDeterminacion.add(valoresValidosDeterminacion);
-			valoresValidosDeterminacion.setDeterminacion(this);
+	public void removeMetodo(Metodo aValue) {
+		aValue.setActivo(false);
+	}
+	
+	public void addMetodo(Metodo aValue) {
+		if (!metodos.contains(aValue)) {
+			metodos.add(aValue);
+			aValue.setDeterminacion(this);
 		}
 	}
 
-	public void removeValoresValidos(ValoresValidosDeterminacion valoresValidosDeterminacion) {
-		valoresValidosDeterminacion.setActivo(false);
-		// listaValoresValidosDeterminacion.remove(valoresValidosDeterminacion);
+
+	public List<Metodo> getMetodos() {
+		return metodos;
 	}
+
+	public void setMetodos(List<Metodo> aValue) {
+		this.metodos = aValue;
+	}
+
+
 
 	/* -------------------------------------- Getters & Setters -------------------------------------- */
 	
 
-	public String getMetodo() {
-		return metodo;
+	public String getLeyendaValorCero() {
+		return leyendaValorCero;
 	}
 
-	public void setMetodo(String metodo) {
-		this.metodo = metodo;
+	public void setLeyendaValorCero(String aValue) {
+		this.leyendaValorCero = aValue;
 	}
 
 	public String getTipoResultado() {
@@ -51,6 +64,23 @@ public class Determinacion extends Descriptible {
 	public void setTipoResultado(String tipoResultado) {
 		this.tipoResultado = tipoResultado;
 	}
+
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String aValue) {
+		this.formato = aValue;
+	}
+
+	public boolean getCalculaResultado() {
+		return calculaResultado;
+	}
+
+	public void setCalculaResultado(boolean aValue) {
+		this.calculaResultado = aValue;
+	}
+
 	
 	public Laboratorio getLaboratorio() {
 		return laboratorio;
@@ -58,14 +88,6 @@ public class Determinacion extends Descriptible {
 
 	public void setLaboratorio(Laboratorio aValue) {
 		this.laboratorio = aValue;
-	}
-
-	public List<ValoresValidosDeterminacion> getListaValoresValidosDeterminacion() {
-		return listaValoresValidosDeterminacion;
-	}
-
-	public void setListaValoresValidosDeterminacion(List<ValoresValidosDeterminacion> listaValoresValidosDeterminacion) {
-		this.listaValoresValidosDeterminacion = listaValoresValidosDeterminacion;
 	}
 
 }

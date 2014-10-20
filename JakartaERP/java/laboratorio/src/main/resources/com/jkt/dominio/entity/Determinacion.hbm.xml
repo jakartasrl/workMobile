@@ -12,17 +12,19 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="DESCRIPCION" type="string"/>
-		<property name="activo" column="ACTIVO" type="boolean" />
-		<property name="metodo" column="METODO" type="string"/>
-		<property name="tipoResultado" column="TIPO_RES" type="string"/>
-		
+		<property name="descripcion"    	column="DESCRIPCION"    type="string"/>
+		<property name="activo" 			column="ACTIVO" 		type="boolean" />
+		<property name="tipoResultado" 		column="TIPO_RES" 		type="string"/>
+		<property name="leyendaValorCero"  	column="LEYEN_CERO" 	type="string"/>
+		<property name="formato"   			column="FORMATO" 		type="string"/>
+		<property name="calculaResultado"   column="CALCULA_RES" 	type="boolean"/>
+	
 		<many-to-one name="laboratorio" lazy="proxy" not-null="true" column="ID_LABORATORIO"/>
 		
-		<list name="listaValoresValidosDeterminacion" inverse="true" cascade="save-update">
+		<list name="metodos" inverse="true" cascade="save-update">
 			<key column="ID_DETERMINACION" />
 			<index column="secu" />
-			<one-to-many class="com.jkt.laboratorio.dominio.ValoresValidosDeterminacion" />
+			<one-to-many class="com.jkt.laboratorio.dominio.Metodo" />
 		</list>
 		
 	</class>

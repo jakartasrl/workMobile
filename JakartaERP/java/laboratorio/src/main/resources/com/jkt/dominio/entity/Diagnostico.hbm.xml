@@ -3,8 +3,8 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.laboratorio.dominio.Analisis" table="ANALISIS">
-		<id name="id" column="ID_ANALISIS">
+	<class name="com.jkt.laboratorio.dominio.Diagnostico" table="DIAGNOSTICO">
+		<id name="id" column="ID_DIAGNOSTICO">
 			<generator class="native"></generator>
 		</id>
 
@@ -17,11 +17,7 @@
 		
 		<many-to-one name="laboratorio" lazy="proxy" not-null="true" column="ID_LABORATORIO"/>
 		
-		<list name="listaDeterminaciones" inverse="true" cascade="save-update, delete">
-			<key column="ID_ANALISIS" />
-			<index column="secu"/>
-			<one-to-many class="com.jkt.laboratorio.dominio.AnalisisDet"/>
-		</list>
+		
 
 	</class>
 
