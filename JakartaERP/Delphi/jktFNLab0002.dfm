@@ -6,81 +6,118 @@ inherited FNLab0002: TFNLab0002
   ExplicitHeight = 407
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel [0]
-    Left = 0
-    Top = 0
-    Width = 718
-    Height = 57
-    Align = alTop
-    BevelInner = bvLowered
-    TabOrder = 4
-    object Label1: TLabel
-      Left = 32
-      Top = 16
-      Width = 35
-      Height = 13
-      Caption = 'Analisis'
-    end
-    object cxDBTextEdit1: TcxDBTextEdit
-      Left = 73
-      Top = 13
-      TabOrder = 0
-      Width = 121
-    end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 200
-      Top = 13
-      TabOrder = 1
-      Width = 457
-    end
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitTop = 57
+    ExplicitHeight = 311
+    Height = 368
   end
-  object Panel2: TPanel [1]
-    Left = 0
-    Top = 57
-    Width = 718
-    Height = 311
-    Align = alClient
-    BorderStyle = bsSingle
-    TabOrder = 5
-    ExplicitLeft = 1
-    ExplicitTop = -129
-    ExplicitWidth = 376
-    ExplicitHeight = 497
-    object cxGrid1: TcxGrid
-      Left = 1
-      Top = 1
-      Width = 712
-      Height = 305
-      Align = alClient
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 368
+    ExplicitLeft = 185
+    ExplicitTop = 57
+    ExplicitHeight = 311
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 533
+    TabOrder = 4
+    ExplicitLeft = 533
+    ExplicitTop = 57
+    ExplicitHeight = 311
+    Height = 368
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 525
+    Height = 368
+    ExplicitLeft = 525
+    ExplicitTop = 57
+    ExplicitHeight = 311
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitTop = 57
+    ExplicitWidth = 332
+    ExplicitHeight = 311
+    Height = 368
+    Width = 332
+    object Panel1: TPanel
+      Left = 3
+      Top = 22
+      Width = 326
+      Height = 57
+      Align = alTop
+      BevelInner = bvLowered
       TabOrder = 0
-      ExplicitLeft = -2
-      ExplicitTop = 4
-      object cxGrid1DBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = DSDet
-        DataController.KeyFieldNames = 'key'
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        object cxGrid1DBTableView1cod_det: TcxGridDBColumn
-          Caption = 'Codigo'
-          DataBinding.FieldName = 'cod_det'
-          HeaderAlignmentHorz = taCenter
-        end
-        object cxGrid1DBTableView1des_det: TcxGridDBColumn
-          Caption = 'Descripcion'
-          DataBinding.FieldName = 'des_det'
-          HeaderAlignmentHorz = taCenter
-        end
-        object cxGrid1DBTableView1activo: TcxGridDBColumn
-          Caption = 'Activo'
-          DataBinding.FieldName = 'activo'
-          HeaderAlignmentHorz = taCenter
-          Width = 61
-        end
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 718
+      object Label1: TLabel
+        Left = 32
+        Top = 16
+        Width = 35
+        Height = 13
+        Caption = 'Analisis'
       end
-      object cxGrid1Level1: TcxGridLevel
-        GridView = cxGrid1DBTableView1
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 73
+        Top = 13
+        TabOrder = 0
+        Width = 121
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 200
+        Top = 13
+        TabOrder = 1
+        Width = 457
+      end
+    end
+    object Panel2: TPanel
+      Left = 3
+      Top = 79
+      Width = 326
+      Height = 286
+      Align = alClient
+      BorderStyle = bsSingle
+      TabOrder = 1
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 332
+      ExplicitHeight = 368
+      object cxGrid1: TcxGrid
+        Left = 1
+        Top = 1
+        Width = 320
+        Height = 280
+        Align = alClient
+        TabOrder = 0
+        ExplicitWidth = 326
+        ExplicitHeight = 362
+        object cxGrid1DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = DSDet
+          DataController.KeyFieldNames = 'key'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          object cxGrid1DBTableView1cod_det: TcxGridDBColumn
+            Caption = 'Codigo'
+            DataBinding.FieldName = 'cod_det'
+            HeaderAlignmentHorz = taCenter
+          end
+          object cxGrid1DBTableView1des_det: TcxGridDBColumn
+            Caption = 'Descripcion'
+            DataBinding.FieldName = 'des_det'
+            HeaderAlignmentHorz = taCenter
+          end
+          object cxGrid1DBTableView1activo: TcxGridDBColumn
+            Caption = 'Activo'
+            DataBinding.FieldName = 'activo'
+            HeaderAlignmentHorz = taCenter
+            Width = 61
+          end
+        end
+        object cxGrid1Level1: TcxGridLevel
+          GridView = cxGrid1DBTableView1
+        end
       end
     end
   end

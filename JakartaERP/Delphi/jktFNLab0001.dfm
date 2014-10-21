@@ -2,159 +2,199 @@ inherited FNLab0001: TFNLab0001
   Caption = 'ABM de Determinaciones'
   ClientHeight = 499
   ClientWidth = 1105
-  ExplicitLeft = -319
   ExplicitWidth = 1121
   ExplicitHeight = 538
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel [0]
-    Left = 0
-    Top = 0
-    Width = 1105
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 499
     Height = 499
-    Align = alClient
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 499
+    ExplicitLeft = 185
+    ExplicitTop = 0
+    ExplicitHeight = 499
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 920
     TabOrder = 4
-    object Splitter1: TSplitter
-      Left = 673
-      Top = 1
-      Height = 497
-      ExplicitLeft = 520
-      ExplicitTop = 272
-      ExplicitHeight = 100
-    end
-    object Panel2: TPanel
-      Left = 1
-      Top = 1
-      Width = 672
-      Height = 497
-      Align = alLeft
-      BorderStyle = bsSingle
-      TabOrder = 0
-      object cxGrid1: TcxGrid
-        Left = 1
-        Top = 1
-        Width = 666
-        Height = 491
-        Align = alClient
-        TabOrder = 0
-        object cxGrid1DBTableView1: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          DataController.DataSource = DSDet
-          DataController.KeyFieldNames = 'key'
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsBehavior.FocusCellOnTab = True
-          OptionsData.Appending = True
-          object cxGrid1DBTableView1cod_det: TcxGridDBColumn
-            Caption = 'Codigo'
-            DataBinding.FieldName = 'cod_det'
-            HeaderAlignmentHorz = taCenter
-          end
-          object cxGrid1DBTableView1des_det: TcxGridDBColumn
-            Caption = 'Descripcion'
-            DataBinding.FieldName = 'des_det'
-            HeaderAlignmentHorz = taCenter
-            Width = 257
-          end
-          object cxGrid1DBTableView1metodo: TcxGridDBColumn
-            Caption = 'Metodo'
-            DataBinding.FieldName = 'metodo'
-            HeaderAlignmentHorz = taCenter
-            Width = 123
-          end
-          object cxGrid1DBTableView1tipo_res: TcxGridDBColumn
-            Caption = 'Tipo Resultado'
-            DataBinding.FieldName = 'tipo_res'
-            HeaderAlignmentHorz = taCenter
-            Width = 91
-          end
-          object cxGrid1DBTableView1activo: TcxGridDBColumn
-            Caption = 'Activo'
-            DataBinding.FieldName = 'activo'
-            HeaderAlignmentHorz = taCenter
-          end
-        end
-        object cxGrid1Level1: TcxGridLevel
-          GridView = cxGrid1DBTableView1
-        end
-      end
-    end
-    object Panel3: TPanel
-      Left = 676
-      Top = 1
-      Width = 428
-      Height = 497
+    ExplicitLeft = 920
+    ExplicitHeight = 499
+    Height = 499
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 912
+    Height = 499
+    ExplicitLeft = 912
+    ExplicitTop = 0
+    ExplicitHeight = 499
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitWidth = 719
+    ExplicitHeight = 499
+    Height = 499
+    Width = 719
+    object Panel1: TPanel
+      Left = 3
+      Top = 22
+      Width = 713
+      Height = 474
       Align = alClient
-      BorderStyle = bsSingle
-      Caption = 'Panel3'
-      TabOrder = 1
-      object Panel4: TPanel
+      TabOrder = 0
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 719
+      ExplicitHeight = 499
+      object Splitter1: TSplitter
+        Left = 673
+        Top = 1
+        Height = 472
+        ExplicitLeft = 520
+        ExplicitTop = 272
+        ExplicitHeight = 100
+      end
+      object Panel2: TPanel
         Left = 1
         Top = 1
-        Width = 422
-        Height = 41
-        Align = alTop
+        Width = 672
+        Height = 472
+        Align = alLeft
+        BorderStyle = bsSingle
         TabOrder = 0
-        object cxDBTextEdit3: TcxDBTextEdit
-          Left = 21
-          Top = 12
-          DataBinding.DataField = 'des_det'
-          DataBinding.DataSource = DSDet
-          Properties.ReadOnly = True
+        ExplicitHeight = 497
+        object cxGrid1: TcxGrid
+          Left = 1
+          Top = 1
+          Width = 666
+          Height = 466
+          Align = alClient
           TabOrder = 0
-          Width = 308
+          ExplicitHeight = 491
+          object cxGrid1DBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            DataController.DataSource = DSDet
+            DataController.KeyFieldNames = 'key'
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsBehavior.FocusCellOnTab = True
+            OptionsData.Appending = True
+            object cxGrid1DBTableView1cod_det: TcxGridDBColumn
+              Caption = 'Codigo'
+              DataBinding.FieldName = 'cod_det'
+              HeaderAlignmentHorz = taCenter
+            end
+            object cxGrid1DBTableView1des_det: TcxGridDBColumn
+              Caption = 'Descripcion'
+              DataBinding.FieldName = 'des_det'
+              HeaderAlignmentHorz = taCenter
+              Width = 257
+            end
+            object cxGrid1DBTableView1metodo: TcxGridDBColumn
+              Caption = 'Metodo'
+              DataBinding.FieldName = 'metodo'
+              HeaderAlignmentHorz = taCenter
+              Width = 123
+            end
+            object cxGrid1DBTableView1tipo_res: TcxGridDBColumn
+              Caption = 'Tipo Resultado'
+              DataBinding.FieldName = 'tipo_res'
+              HeaderAlignmentHorz = taCenter
+              Width = 91
+            end
+            object cxGrid1DBTableView1activo: TcxGridDBColumn
+              Caption = 'Activo'
+              DataBinding.FieldName = 'activo'
+              HeaderAlignmentHorz = taCenter
+            end
+          end
+          object cxGrid1Level1: TcxGridLevel
+            GridView = cxGrid1DBTableView1
+          end
         end
       end
-      object cxGrid2: TcxGrid
-        Left = 1
-        Top = 42
-        Width = 422
-        Height = 450
+      object Panel3: TPanel
+        Left = 676
+        Top = 1
+        Width = 36
+        Height = 472
         Align = alClient
+        BorderStyle = bsSingle
+        Caption = 'Panel3'
         TabOrder = 1
-        ExplicitTop = 40
-        object cxGrid2DBTableView1: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          DataController.DataSource = DSVal
-          DataController.KeyFieldNames = 'key'
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsBehavior.FocusCellOnTab = True
-          object cxGrid2DBTableView1valor_desde: TcxGridDBColumn
-            Caption = 'Desde'
-            DataBinding.FieldName = 'valor_desde'
-            HeaderAlignmentHorz = taCenter
-          end
-          object cxGrid2DBTableView1valor_hasta: TcxGridDBColumn
-            Caption = 'Hasta'
-            DataBinding.FieldName = 'valor_hasta'
-            HeaderAlignmentHorz = taCenter
-          end
-          object cxGrid2DBTableView1cod_tabla: TcxGridDBColumn
-            Caption = 'Codigo'
-            DataBinding.FieldName = 'cod_tabla'
-            HeaderAlignmentHorz = taCenter
-          end
-          object cxGrid2DBTableView1des_tabla: TcxGridDBColumn
-            Caption = 'Descripcion'
-            DataBinding.FieldName = 'des_tabla'
-            HeaderAlignmentHorz = taCenter
-          end
-          object cxGrid2DBTableView1limite_inf: TcxGridDBColumn
-            Caption = 'Inferor'
-            DataBinding.FieldName = 'limite_inf'
-            HeaderAlignmentHorz = taCenter
-          end
-          object cxGrid2DBTableView1limite_sup: TcxGridDBColumn
-            Caption = 'Superior'
-            DataBinding.FieldName = 'limite_sup'
-            HeaderAlignmentHorz = taCenter
+        ExplicitWidth = 42
+        ExplicitHeight = 497
+        object Panel4: TPanel
+          Left = 1
+          Top = 1
+          Width = 30
+          Height = 41
+          Align = alTop
+          TabOrder = 0
+          ExplicitWidth = 36
+          object cxDBTextEdit3: TcxDBTextEdit
+            Left = 21
+            Top = 12
+            DataBinding.DataField = 'des_det'
+            DataBinding.DataSource = DSDet
+            Properties.ReadOnly = True
+            TabOrder = 0
+            Width = 308
           end
         end
-        object cxGrid2Level1: TcxGridLevel
-          GridView = cxGrid2DBTableView1
+        object cxGrid2: TcxGrid
+          Left = 1
+          Top = 42
+          Width = 30
+          Height = 425
+          Align = alClient
+          TabOrder = 1
+          ExplicitWidth = 36
+          ExplicitHeight = 450
+          object cxGrid2DBTableView1: TcxGridDBTableView
+            Navigator.Buttons.CustomButtons = <>
+            DataController.DataSource = DSVal
+            DataController.KeyFieldNames = 'key'
+            DataController.Summary.DefaultGroupSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.SummaryGroups = <>
+            OptionsBehavior.FocusCellOnTab = True
+            object cxGrid2DBTableView1valor_desde: TcxGridDBColumn
+              Caption = 'Desde'
+              DataBinding.FieldName = 'valor_desde'
+              HeaderAlignmentHorz = taCenter
+            end
+            object cxGrid2DBTableView1valor_hasta: TcxGridDBColumn
+              Caption = 'Hasta'
+              DataBinding.FieldName = 'valor_hasta'
+              HeaderAlignmentHorz = taCenter
+            end
+            object cxGrid2DBTableView1cod_tabla: TcxGridDBColumn
+              Caption = 'Codigo'
+              DataBinding.FieldName = 'cod_tabla'
+              HeaderAlignmentHorz = taCenter
+            end
+            object cxGrid2DBTableView1des_tabla: TcxGridDBColumn
+              Caption = 'Descripcion'
+              DataBinding.FieldName = 'des_tabla'
+              HeaderAlignmentHorz = taCenter
+            end
+            object cxGrid2DBTableView1limite_inf: TcxGridDBColumn
+              Caption = 'Inferor'
+              DataBinding.FieldName = 'limite_inf'
+              HeaderAlignmentHorz = taCenter
+            end
+            object cxGrid2DBTableView1limite_sup: TcxGridDBColumn
+              Caption = 'Superior'
+              DataBinding.FieldName = 'limite_sup'
+              HeaderAlignmentHorz = taCenter
+            end
+          end
+          object cxGrid2Level1: TcxGridLevel
+            GridView = cxGrid2DBTableView1
+          end
         end
       end
     end

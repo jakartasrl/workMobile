@@ -3,147 +3,196 @@ inherited FNImp0001: TFNImp0001
   ClientHeight = 390
   ClientWidth = 736
   ExplicitWidth = 752
-  ExplicitHeight = 428
+  ExplicitHeight = 429
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGroupBox1: TcxGroupBox [0]
+  inherited cxSplitterLeft: TcxSplitter [0]
     Left = 0
-    Top = 0
-    Align = alTop
-    Caption = 'Datos del Impuesto'
-    Ctl3D = False
-    ParentCtl3D = False
+    Height = 390
+    Control = cxGroupBoxLeft
+    ExplicitLeft = 185
+    ExplicitTop = 113
+    ExplicitHeight = 277
+  end
+  inherited cxGroupBoxRight: TcxGroupBox [1]
+    Left = 551
     TabOrder = 4
-    Height = 113
-    Width = 736
-    object txtCodigo: TcxDBTextEdit
-      Left = 95
-      Top = 30
-      DataBinding.DataField = 'Codigo'
-      DataBinding.DataSource = dsImpuesto
+    ExplicitLeft = 551
+    ExplicitTop = 113
+    ExplicitHeight = 277
+    Height = 390
+  end
+  inherited cxSplitterRight: TcxSplitter [2]
+    Left = 543
+    Height = 390
+    Control = cxGroupBoxRight
+    ExplicitLeft = 543
+    ExplicitTop = 113
+    ExplicitHeight = 277
+  end
+  inherited cxGroupBoxMain: TcxGroupBox [3]
+    TabOrder = 6
+    ExplicitLeft = 193
+    ExplicitTop = 113
+    ExplicitWidth = 350
+    ExplicitHeight = 277
+    Height = 390
+    Width = 350
+    object cxGroupBox1: TcxGroupBox
+      Left = 2
+      Top = 5
+      Align = alTop
+      Caption = 'Datos del Impuesto'
+      Ctl3D = False
+      ParentCtl3D = False
       TabOrder = 0
-      Width = 121
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 736
+      Height = 113
+      Width = 346
+      object txtCodigo: TcxDBTextEdit
+        Left = 95
+        Top = 30
+        DataBinding.DataField = 'Codigo'
+        DataBinding.DataSource = dsImpuesto
+        TabOrder = 0
+        Width = 121
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 290
+        Top = 30
+        DataBinding.DataField = 'Descripcion'
+        DataBinding.DataSource = dsImpuesto
+        TabOrder = 1
+        Width = 223
+      end
+      object cxLabel1: TcxLabel
+        Left = 18
+        Top = 32
+        AutoSize = False
+        Caption = 'C'#243'digo :'
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        Height = 17
+        Width = 77
+        AnchorX = 95
+      end
+      object cxLabel2: TcxLabel
+        Left = 214
+        Top = 32
+        AutoSize = False
+        Caption = 'Descripci'#243'n :'
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        Height = 17
+        Width = 75
+        AnchorX = 289
+      end
+      object cxLabel3: TcxLabel
+        Left = 4
+        Top = 66
+        AutoSize = False
+        Caption = 'Comportamiento :'
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        Height = 17
+        Width = 91
+        AnchorX = 95
+      end
+      object cxDBCheckBox2: TcxDBCheckBox
+        Left = 290
+        Top = 65
+        Caption = 'Activo :'
+        DataBinding.DataField = 'Activo'
+        DataBinding.DataSource = dsImpuesto
+        Properties.Alignment = taRightJustify
+        TabOrder = 3
+        Transparent = True
+        Width = 61
+      end
+      object cxDBLookupComboBox1: TcxDBLookupComboBox
+        Left = 95
+        Top = 64
+        DataBinding.DataField = 'oid_Comportamiento'
+        DataBinding.DataSource = dsImpuesto
+        Properties.KeyFieldNames = 'oid_Comportamiento'
+        Properties.ListColumns = <
+          item
+            FieldName = 'Descripcion'
+          end>
+        Properties.ListSource = dsComportamientos
+        TabOrder = 2
+        Width = 162
+      end
     end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 290
-      Top = 30
-      DataBinding.DataField = 'Descripcion'
-      DataBinding.DataSource = dsImpuesto
+    object cxGroupBox2: TcxGroupBox
+      Left = 2
+      Top = 118
+      Align = alClient
+      Caption = 'Categor'#237'as de Inscripci'#243'n'
       TabOrder = 1
-      Width = 223
-    end
-    object cxLabel1: TcxLabel
-      Left = 18
-      Top = 32
-      AutoSize = False
-      Caption = 'C'#243'digo :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 77
-      AnchorX = 95
-    end
-    object cxLabel2: TcxLabel
-      Left = 214
-      Top = 32
-      AutoSize = False
-      Caption = 'Descripci'#243'n :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 75
-      AnchorX = 289
-    end
-    object cxLabel3: TcxLabel
-      Left = 4
-      Top = 66
-      AutoSize = False
-      Caption = 'Comportamiento :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 91
-      AnchorX = 95
-    end
-    object cxDBCheckBox2: TcxDBCheckBox
-      Left = 290
-      Top = 65
-      Caption = 'Activo :'
-      DataBinding.DataField = 'Activo'
-      DataBinding.DataSource = dsImpuesto
-      Properties.Alignment = taRightJustify
-      TabOrder = 3
-      Transparent = True
-      Width = 61
-    end
-    object cxDBLookupComboBox1: TcxDBLookupComboBox
-      Left = 95
-      Top = 64
-      DataBinding.DataField = 'oid_Comportamiento'
-      DataBinding.DataSource = dsImpuesto
-      Properties.KeyFieldNames = 'oid_Comportamiento'
-      Properties.ListColumns = <
-        item
-          FieldName = 'Descripcion'
-        end>
-      Properties.ListSource = dsComportamientos
-      TabOrder = 2
-      Width = 162
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 350
+      ExplicitHeight = 390
+      Height = 270
+      Width = 346
+      object dbgImpuestoCategorias: TjktExpDBGrid
+        Left = 2
+        Top = 18
+        Width = 422
+        Height = 250
+        Align = alLeft
+        TabOrder = 0
+        DataSource = dsImpuestoCategorias
+        ExplicitHeight = 370
+        object dbgImpuestoCategoriasDBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsImpuestoCategorias
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsView.GroupByBox = False
+          object dbgImpuestoCategoriasDBTableView1oid_Impuesto: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Impuesto'
+            Visible = False
+          end
+          object dbgImpuestoCategoriasDBTableView1oid_Categoria: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Categoria'
+            Visible = False
+          end
+          object dbgImpuestoCategoriasDBTableView1Codigo: TcxGridDBColumn
+            Caption = 'C'#243'digo'
+            DataBinding.FieldName = 'Codigo'
+            Width = 70
+          end
+          object dbgImpuestoCategoriasDBTableView1Descripcion: TcxGridDBColumn
+            Caption = 'Descripci'#243'n'
+            DataBinding.FieldName = 'Descripcion'
+            Width = 300
+          end
+          object dbgImpuestoCategoriasDBTableView1Activa: TcxGridDBColumn
+            DataBinding.FieldName = 'Activa'
+            HeaderAlignmentHorz = taCenter
+            Width = 50
+          end
+        end
+        object dbgImpuestoCategoriasLevel1: TcxGridLevel
+          GridView = dbgImpuestoCategoriasDBTableView1
+        end
+      end
     end
   end
-  object cxGroupBox2: TcxGroupBox [1]
-    Left = 0
-    Top = 113
-    Align = alClient
-    Caption = 'Categor'#237'as de Inscripci'#243'n'
-    TabOrder = 5
-    Height = 277
-    Width = 736
-    object dbgImpuestoCategorias: TjktExpDBGrid
-      Left = 3
-      Top = 15
-      Width = 422
-      Height = 252
-      Align = alLeft
-      TabOrder = 0
-      DataSource = dsImpuestoCategorias
-      object dbgImpuestoCategoriasDBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsImpuestoCategorias
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsView.GroupByBox = False
-        object dbgImpuestoCategoriasDBTableView1oid_Impuesto: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Impuesto'
-          Visible = False
-        end
-        object dbgImpuestoCategoriasDBTableView1oid_Categoria: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Categoria'
-          Visible = False
-        end
-        object dbgImpuestoCategoriasDBTableView1Codigo: TcxGridDBColumn
-          Caption = 'C'#243'digo'
-          DataBinding.FieldName = 'Codigo'
-          Width = 70
-        end
-        object dbgImpuestoCategoriasDBTableView1Descripcion: TcxGridDBColumn
-          Caption = 'Descripci'#243'n'
-          DataBinding.FieldName = 'Descripcion'
-          Width = 300
-        end
-        object dbgImpuestoCategoriasDBTableView1Activa: TcxGridDBColumn
-          DataBinding.FieldName = 'Activa'
-          HeaderAlignmentHorz = taCenter
-          Width = 50
-        end
-      end
-      object dbgImpuestoCategoriasLevel1: TcxGridLevel
-        GridView = dbgImpuestoCategoriasDBTableView1
-      end
-    end
+  inherited cxGroupBoxLeft: TcxGroupBox [4]
+    Left = 8
+    TabOrder = 8
+    ExplicitLeft = 2
+    ExplicitTop = 5
+    ExplicitHeight = 270
+    Height = 390
   end
   inherited BarManager: TdxBarManager
     Left = 296

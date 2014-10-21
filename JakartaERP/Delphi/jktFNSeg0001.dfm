@@ -3,56 +3,96 @@ inherited FNSeg0001: TFNSeg0001
   ClientHeight = 252
   ClientWidth = 748
   ExplicitWidth = 764
-  ExplicitHeight = 290
+  ExplicitHeight = 291
   PixelsPerInch = 96
   TextHeight = 13
-  object dbgEmpresas: TjktExpDBGrid [0]
-    Left = 0
-    Top = 0
-    Width = 748
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitHeight = 252
     Height = 252
-    Align = alClient
-    TabOrder = 4
-    DataSource = dsEmpresas
-    object dbgEmpresasDBTableView1: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      DataController.DataSource = dsEmpresas
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      OptionsBehavior.AlwaysShowEditor = True
-      OptionsBehavior.FocusCellOnTab = True
-      OptionsBehavior.FocusFirstCellOnNewRecord = True
-      OptionsBehavior.FocusCellOnCycle = True
-      OptionsData.Appending = True
-      OptionsData.Deleting = False
-      OptionsView.GroupByBox = False
-      object dbgEmpresasDBTableView1oid_empresa: TcxGridDBColumn
-        DataBinding.FieldName = 'oid_empresa'
-        Visible = False
-        Options.Editing = False
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 252
+    Control = cxGroupBoxLeft
+    ExplicitLeft = 185
+    ExplicitTop = 0
+    ExplicitHeight = 252
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 563
+    ExplicitLeft = 563
+    ExplicitTop = 0
+    ExplicitHeight = 252
+    Height = 252
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 555
+    Height = 252
+    Control = cxGroupBoxRight
+    ExplicitLeft = 555
+    ExplicitTop = 0
+    ExplicitHeight = 252
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    ExplicitLeft = 193
+    ExplicitTop = 0
+    ExplicitWidth = 362
+    ExplicitHeight = 252
+    Height = 252
+    Width = 362
+    object dbgEmpresas: TjktExpDBGrid
+      Left = 2
+      Top = 5
+      Width = 358
+      Height = 245
+      Align = alClient
+      TabOrder = 0
+      DataSource = dsEmpresas
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 362
+      ExplicitHeight = 252
+      object dbgEmpresasDBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsEmpresas
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.AlwaysShowEditor = True
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusFirstCellOnNewRecord = True
+        OptionsBehavior.FocusCellOnCycle = True
+        OptionsData.Appending = True
+        OptionsData.Deleting = False
+        OptionsView.GroupByBox = False
+        object dbgEmpresasDBTableView1oid_empresa: TcxGridDBColumn
+          DataBinding.FieldName = 'oid_empresa'
+          Visible = False
+          Options.Editing = False
+        end
+        object dbgEmpresasDBTableView1Codigo: TcxGridDBColumn
+          Caption = 'C'#243'digo'
+          DataBinding.FieldName = 'Codigo'
+        end
+        object dbgEmpresasDBTableView1RazonSocial: TcxGridDBColumn
+          Caption = 'Raz'#243'n Social'
+          DataBinding.FieldName = 'RazonSocial'
+          Width = 250
+        end
+        object dbgEmpresasDBTableView1UrlDB: TcxGridDBColumn
+          Caption = 'Url DB'
+          DataBinding.FieldName = 'UrlDB'
+          Width = 350
+        end
+        object dbgEmpresasDBTableView1Activo: TcxGridDBColumn
+          DataBinding.FieldName = 'Activo'
+          Width = 52
+        end
       end
-      object dbgEmpresasDBTableView1Codigo: TcxGridDBColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'Codigo'
+      object dbgEmpresasLevel1: TcxGridLevel
+        GridView = dbgEmpresasDBTableView1
       end
-      object dbgEmpresasDBTableView1RazonSocial: TcxGridDBColumn
-        Caption = 'Raz'#243'n Social'
-        DataBinding.FieldName = 'RazonSocial'
-        Width = 250
-      end
-      object dbgEmpresasDBTableView1UrlDB: TcxGridDBColumn
-        Caption = 'Url DB'
-        DataBinding.FieldName = 'UrlDB'
-        Width = 350
-      end
-      object dbgEmpresasDBTableView1Activo: TcxGridDBColumn
-        DataBinding.FieldName = 'Activo'
-        Width = 52
-      end
-    end
-    object dbgEmpresasLevel1: TcxGridLevel
-      GridView = dbgEmpresasDBTableView1
     end
   end
   inherited BarManager: TdxBarManager

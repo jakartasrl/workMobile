@@ -3,99 +3,134 @@ inherited FNVen0001: TFNVen0001
   ClientHeight = 405
   ClientWidth = 717
   ExplicitWidth = 733
-  ExplicitHeight = 443
+  ExplicitHeight = 444
   PixelsPerInch = 96
   TextHeight = 13
-  object jktExpDBGrid1: TjktExpDBGrid [0]
-    Left = 0
-    Top = 0
-    Width = 717
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 405
     Height = 405
-    Align = alClient
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 405
+    ExplicitLeft = 185
+    ExplicitTop = 0
+    ExplicitHeight = 405
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 532
     TabOrder = 4
-    object DBGrid1DBBandedTableView1: TcxGridDBBandedTableView
-      Navigator.Buttons.CustomButtons = <>
-      DataController.DataSource = dsConc
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      OptionsBehavior.FocusCellOnTab = True
-      OptionsBehavior.FocusFirstCellOnNewRecord = True
-      OptionsCustomize.NestedBands = False
-      OptionsView.GroupByBox = False
-      Bands = <
-        item
-          Caption = 'Concepto Presupuestario'
-        end
-        item
-          Caption = 'Valor Clasificador'
-        end>
-      object DBGrid1DBBandedTableView1oid_conc: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'oid_conc'
-        Visible = False
-        Width = 48
-        Position.BandIndex = 0
-        Position.ColIndex = 0
-        Position.RowIndex = 0
-      end
-      object DBGrid1DBBandedTableView1cod_conc: TcxGridDBBandedColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'cod_conc'
-        Width = 70
-        Position.BandIndex = 0
-        Position.ColIndex = 1
-        Position.RowIndex = 0
-      end
-      object DBGrid1DBBandedTableView1des_conc: TcxGridDBBandedColumn
-        Caption = 'Descripci'#243'n'
-        DataBinding.FieldName = 'des_conc'
-        Width = 300
-        Position.BandIndex = 0
-        Position.ColIndex = 2
-        Position.RowIndex = 0
-      end
-      object DBGrid1DBBandedTableView1pide_art: TcxGridDBBandedColumn
-        Caption = 'Pide Art'#237'culo'
-        DataBinding.FieldName = 'pide_art'
-        Width = 70
-        Position.BandIndex = 0
-        Position.ColIndex = 3
-        Position.RowIndex = 0
-      end
-      object DBGrid1DBBandedTableView1oid_val_cla: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'oid_val_cla'
-        Visible = False
-        Position.BandIndex = 1
-        Position.ColIndex = 0
-        Position.RowIndex = 0
-      end
-      object DBGrid1DBBandedTableView1cod_val_cla: TcxGridDBBandedColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'cod_val_cla'
-        PropertiesClassName = 'TcxButtonEditProperties'
-        Properties.Buttons = <
+    ExplicitLeft = 532
+    ExplicitHeight = 405
+    Height = 405
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 524
+    Height = 405
+    ExplicitLeft = 524
+    ExplicitTop = 0
+    ExplicitHeight = 405
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitWidth = 331
+    ExplicitHeight = 405
+    Height = 405
+    Width = 331
+    object jktExpDBGrid1: TjktExpDBGrid
+      Left = 3
+      Top = 22
+      Width = 325
+      Height = 380
+      Align = alClient
+      TabOrder = 0
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 331
+      ExplicitHeight = 405
+      object DBGrid1DBBandedTableView1: TcxGridDBBandedTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsConc
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusFirstCellOnNewRecord = True
+        OptionsCustomize.NestedBands = False
+        OptionsView.GroupByBox = False
+        Bands = <
           item
-            Default = True
-            Kind = bkEllipsis
+            Caption = 'Concepto Presupuestario'
+          end
+          item
+            Caption = 'Valor Clasificador'
           end>
-        Properties.OnButtonClick = DBGrid1DBBandedTableView1cod_val_claPropertiesButtonClick
-        Width = 70
-        Position.BandIndex = 1
-        Position.ColIndex = 1
-        Position.RowIndex = 0
+        object DBGrid1DBBandedTableView1oid_conc: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'oid_conc'
+          Visible = False
+          Width = 48
+          Position.BandIndex = 0
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1cod_conc: TcxGridDBBandedColumn
+          Caption = 'C'#243'digo'
+          DataBinding.FieldName = 'cod_conc'
+          Width = 70
+          Position.BandIndex = 0
+          Position.ColIndex = 1
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1des_conc: TcxGridDBBandedColumn
+          Caption = 'Descripci'#243'n'
+          DataBinding.FieldName = 'des_conc'
+          Width = 300
+          Position.BandIndex = 0
+          Position.ColIndex = 2
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1pide_art: TcxGridDBBandedColumn
+          Caption = 'Pide Art'#237'culo'
+          DataBinding.FieldName = 'pide_art'
+          Width = 70
+          Position.BandIndex = 0
+          Position.ColIndex = 3
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1oid_val_cla: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'oid_val_cla'
+          Visible = False
+          Position.BandIndex = 1
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1cod_val_cla: TcxGridDBBandedColumn
+          Caption = 'C'#243'digo'
+          DataBinding.FieldName = 'cod_val_cla'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.OnButtonClick = DBGrid1DBBandedTableView1cod_val_claPropertiesButtonClick
+          Width = 70
+          Position.BandIndex = 1
+          Position.ColIndex = 1
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1des_val_cla: TcxGridDBBandedColumn
+          Caption = 'Descripci'#243'n'
+          DataBinding.FieldName = 'des_val_cla'
+          Options.Editing = False
+          Width = 300
+          Position.BandIndex = 1
+          Position.ColIndex = 2
+          Position.RowIndex = 0
+        end
       end
-      object DBGrid1DBBandedTableView1des_val_cla: TcxGridDBBandedColumn
-        Caption = 'Descripci'#243'n'
-        DataBinding.FieldName = 'des_val_cla'
-        Options.Editing = False
-        Width = 300
-        Position.BandIndex = 1
-        Position.ColIndex = 2
-        Position.RowIndex = 0
+      object jktExpDBGrid1Level1: TcxGridLevel
+        GridView = DBGrid1DBBandedTableView1
       end
-    end
-    object jktExpDBGrid1Level1: TcxGridLevel
-      GridView = DBGrid1DBBandedTableView1
     end
   end
   inherited BarManager: TdxBarManager

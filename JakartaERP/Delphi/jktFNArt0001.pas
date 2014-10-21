@@ -25,7 +25,7 @@ uses
   cxGridLevel, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, jktCNMet0008, cxMaskEdit, cxDropDownEdit,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, jktCNMet0014,
-  dxLayoutLookAndFeels;
+  dxLayoutLookAndFeels, cxSplitter, cxGroupBox;
 
 type
   TFNArt0001 = class(TfrmChild)

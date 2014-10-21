@@ -21,7 +21,8 @@ uses
   cxLabel, cxTextEdit, cxDBEdit, cxGroupBox, jktCNMet0011, Data.DB, kbmMemTable,
   jktCNMet0012, jktCNMet0030, jktCNMet0002, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, jktCNMet0001, dxBar, cxClasses, dxBevel,
-  jktCNMet0014, cxMaskEdit, cxButtonEdit, Vcl.Menus, Vcl.StdCtrls, cxButtons;
+  jktCNMet0014, cxMaskEdit, cxButtonEdit, Vcl.Menus, Vcl.StdCtrls, cxButtons,
+  cxSplitter;
 
 type
   TFNVen0002 = class(TfrmChild)

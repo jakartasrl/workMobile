@@ -3,855 +3,890 @@ inherited FNCli0001: TFNCli0001
   ClientHeight = 520
   ClientWidth = 913
   ExplicitWidth = 929
-  ExplicitHeight = 558
+  ExplicitHeight = 559
   PixelsPerInch = 96
   TextHeight = 13
-  object lcMain: TdxLayoutControl [0]
-    Left = 0
-    Top = 0
-    Width = 913
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 520
     Height = 520
-    Align = alClient
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 520
+    ExplicitLeft = 185
+    ExplicitTop = 0
+    ExplicitHeight = 520
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 728
     TabOrder = 4
-    LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-    object cxDBTextEdit1: TcxDBTextEdit
-      Left = 67
-      Top = 28
-      DataBinding.DataField = 'Codigo'
-      DataBinding.DataSource = dsCliente
-      Style.HotTrack = False
+    ExplicitLeft = 728
+    ExplicitHeight = 520
+    Height = 520
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 720
+    Height = 520
+    ExplicitLeft = 720
+    ExplicitTop = 0
+    ExplicitHeight = 520
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitWidth = 527
+    ExplicitHeight = 520
+    Height = 520
+    Width = 527
+    object lcMain: TdxLayoutControl
+      Left = 3
+      Top = 22
+      Width = 521
+      Height = 495
+      Align = alClient
       TabOrder = 0
-      Width = 150
-    end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 321
-      Top = 28
-      DataBinding.DataField = 'RazonSocial'
-      DataBinding.DataSource = dsSujImp
-      Style.HotTrack = False
-      TabOrder = 1
-      Width = 293
-    end
-    object cxDBTextEdit3: TcxDBTextEdit
-      Left = 93
-      Top = 160
-      DataBinding.DataField = 'Direccion'
-      DataBinding.DataSource = dsSujImp
-      Style.HotTrack = False
-      TabOrder = 5
-      Width = 243
-    end
-    object cxDBTextEdit4: TcxDBTextEdit
-      Left = 398
-      Top = 160
-      DataBinding.DataField = 'Localidad'
-      DataBinding.DataSource = dsSujImp
-      Style.HotTrack = False
-      TabOrder = 6
-      Width = 243
-    end
-    object cxDBTextEdit7: TcxDBTextEdit
-      Left = 714
-      Top = 160
-      DataBinding.DataField = 'CodPostal'
-      DataBinding.DataSource = dsSujImp
-      Style.HotTrack = False
-      TabOrder = 7
-      Width = 87
-    end
-    object cxDBTextEdit8: TcxDBTextEdit
-      Left = 158
-      Top = 187
-      DataBinding.DataField = 'DescProvincia'
-      DataBinding.DataSource = dsSujImp
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 9
-      Width = 178
-    end
-    object cxDBTextEdit9: TcxDBTextEdit
-      Left = 463
-      Top = 187
-      DataBinding.DataField = 'DescPais'
-      DataBinding.DataSource = dsSujImp
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 11
-      Width = 178
-    end
-    object cxDBButtonEdit1: TcxDBButtonEdit
-      Left = 93
-      Top = 187
-      DataBinding.DataField = 'CodProvincia'
-      DataBinding.DataSource = dsSujImp
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 8
-      Width = 59
-    end
-    object cxDBButtonEdit2: TcxDBButtonEdit
-      Left = 398
-      Top = 187
-      DataBinding.DataField = 'CodPais'
-      DataBinding.DataSource = dsSujImp
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 10
-      Width = 59
-    end
-    object cxDBTextEdit5: TcxDBTextEdit
-      Left = 93
-      Top = 214
-      DataBinding.DataField = 'Telefonos'
-      DataBinding.DataSource = dsCliente
-      Style.HotTrack = False
-      TabOrder = 12
-      Width = 243
-    end
-    object cxDBTextEdit6: TcxDBTextEdit
-      Left = 93
-      Top = 103
-      DataBinding.DataField = 'Cuit'
-      DataBinding.DataSource = dsSujImp
-      Style.HotTrack = False
-      TabOrder = 3
-      Width = 136
-    end
-    object cxDBCheckBox1: TcxDBCheckBox
-      Left = 325
-      Top = 103
-      DataBinding.DataField = 'PersonaJuridica'
-      DataBinding.DataSource = dsSujImp
-      Properties.Alignment = taLeftJustify
-      Style.HotTrack = False
-      TabOrder = 4
-      Width = 43
-    end
-    object jktExpDBGrid1: TjktExpDBGrid
-      Left = 34
-      Top = 271
-      Width = 863
-      Height = 200
-      TabOrder = 13
-      DataSource = dsInscripcionesImpositivas
-      object jktExpDBGrid1DBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsInscripcionesImpositivas
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsView.GroupByBox = False
-        object jktExpDBGrid1DBTableView1oid_InscClie: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_InscClie'
-          Visible = False
+      LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 527
+      ExplicitHeight = 520
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 65
+        Top = 41
+        DataBinding.DataField = 'Codigo'
+        DataBinding.DataSource = dsCliente
+        Style.HotTrack = False
+        TabOrder = 0
+        Width = 150
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 319
+        Top = 41
+        DataBinding.DataField = 'RazonSocial'
+        DataBinding.DataSource = dsSujImp
+        Style.HotTrack = False
+        TabOrder = 1
+        Width = 293
+      end
+      object cxDBTextEdit3: TcxDBTextEdit
+        Left = 89
+        Top = 196
+        DataBinding.DataField = 'Direccion'
+        DataBinding.DataSource = dsSujImp
+        Style.HotTrack = False
+        TabOrder = 5
+        Width = 243
+      end
+      object cxDBTextEdit4: TcxDBTextEdit
+        Left = 394
+        Top = 196
+        DataBinding.DataField = 'Localidad'
+        DataBinding.DataSource = dsSujImp
+        Style.HotTrack = False
+        TabOrder = 6
+        Width = 243
+      end
+      object cxDBTextEdit7: TcxDBTextEdit
+        Left = 710
+        Top = 196
+        DataBinding.DataField = 'CodPostal'
+        DataBinding.DataSource = dsSujImp
+        Style.HotTrack = False
+        TabOrder = 7
+        Width = 87
+      end
+      object cxDBTextEdit8: TcxDBTextEdit
+        Left = 154
+        Top = 223
+        DataBinding.DataField = 'DescProvincia'
+        DataBinding.DataSource = dsSujImp
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 9
+        Width = 178
+      end
+      object cxDBTextEdit9: TcxDBTextEdit
+        Left = 459
+        Top = 223
+        DataBinding.DataField = 'DescPais'
+        DataBinding.DataSource = dsSujImp
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 11
+        Width = 178
+      end
+      object cxDBButtonEdit1: TcxDBButtonEdit
+        Left = 89
+        Top = 223
+        DataBinding.DataField = 'CodProvincia'
+        DataBinding.DataSource = dsSujImp
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 8
+        Width = 59
+      end
+      object cxDBButtonEdit2: TcxDBButtonEdit
+        Left = 394
+        Top = 223
+        DataBinding.DataField = 'CodPais'
+        DataBinding.DataSource = dsSujImp
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 10
+        Width = 59
+      end
+      object cxDBTextEdit5: TcxDBTextEdit
+        Left = 89
+        Top = 250
+        DataBinding.DataField = 'Telefonos'
+        DataBinding.DataSource = dsCliente
+        Style.HotTrack = False
+        TabOrder = 12
+        Width = 243
+      end
+      object cxDBTextEdit6: TcxDBTextEdit
+        Left = 89
+        Top = 125
+        DataBinding.DataField = 'Cuit'
+        DataBinding.DataSource = dsSujImp
+        Style.HotTrack = False
+        TabOrder = 3
+        Width = 136
+      end
+      object cxDBCheckBox1: TcxDBCheckBox
+        Left = 321
+        Top = 125
+        DataBinding.DataField = 'PersonaJuridica'
+        DataBinding.DataSource = dsSujImp
+        Properties.Alignment = taLeftJustify
+        Style.HotTrack = False
+        TabOrder = 4
+        Width = 43
+      end
+      object jktExpDBGrid1: TjktExpDBGrid
+        Left = 30
+        Top = 321
+        Width = 767
+        Height = 200
+        TabOrder = 13
+        DataSource = dsInscripcionesImpositivas
+        object jktExpDBGrid1DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsInscripcionesImpositivas
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsView.GroupByBox = False
+          object jktExpDBGrid1DBTableView1oid_InscClie: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_InscClie'
+            Visible = False
+          end
+          object jktExpDBGrid1DBTableView1oid_Cliente: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Cliente'
+            Visible = False
+          end
+          object jktExpDBGrid1DBTableView1oid_Impuesto: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Impuesto'
+            Visible = False
+          end
+          object jktExpDBGrid1DBTableView1CodImpuesto: TcxGridDBColumn
+            Caption = 'C'#243'd. Impuesto'
+            DataBinding.FieldName = 'CodImpuesto'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick
+            Width = 84
+          end
+          object jktExpDBGrid1DBTableView1DescImpuesto: TcxGridDBColumn
+            Caption = 'Desc. Impuesto'
+            DataBinding.FieldName = 'DescImpuesto'
+            Options.Editing = False
+            Width = 222
+          end
+          object jktExpDBGrid1DBTableView1NroInscripcion: TcxGridDBColumn
+            Caption = 'Nro. Inscripci'#243'n'
+            DataBinding.FieldName = 'NroInscripcion'
+            Width = 86
+          end
+          object jktExpDBGrid1DBTableView1oid_Categoria: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Categoria'
+            Visible = False
+            Width = 73
+          end
+          object jktExpDBGrid1DBTableView1CodCategoria: TcxGridDBColumn
+            Caption = 'C'#243'd. Categor'#237'a'
+            DataBinding.FieldName = 'CodCategoria'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick
+            Width = 84
+          end
+          object jktExpDBGrid1DBTableView1DescCategoria: TcxGridDBColumn
+            Caption = 'Desc. Categor'#237'a'
+            DataBinding.FieldName = 'DescCategoria'
+            Options.Editing = False
+            Width = 217
+          end
+          object jktExpDBGrid1DBTableView1VigenciaDesde: TcxGridDBColumn
+            Caption = 'Vigencia Desde'
+            DataBinding.FieldName = 'VigenciaDesde'
+            Width = 87
+          end
+          object jktExpDBGrid1DBTableView1Activo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+            Width = 40
+          end
         end
-        object jktExpDBGrid1DBTableView1oid_Cliente: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Cliente'
-          Visible = False
-        end
-        object jktExpDBGrid1DBTableView1oid_Impuesto: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Impuesto'
-          Visible = False
-        end
-        object jktExpDBGrid1DBTableView1CodImpuesto: TcxGridDBColumn
-          Caption = 'C'#243'd. Impuesto'
-          DataBinding.FieldName = 'CodImpuesto'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick
-          Width = 84
-        end
-        object jktExpDBGrid1DBTableView1DescImpuesto: TcxGridDBColumn
-          Caption = 'Desc. Impuesto'
-          DataBinding.FieldName = 'DescImpuesto'
-          Options.Editing = False
-          Width = 222
-        end
-        object jktExpDBGrid1DBTableView1NroInscripcion: TcxGridDBColumn
-          Caption = 'Nro. Inscripci'#243'n'
-          DataBinding.FieldName = 'NroInscripcion'
-          Width = 86
-        end
-        object jktExpDBGrid1DBTableView1oid_Categoria: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Categoria'
-          Visible = False
-          Width = 73
-        end
-        object jktExpDBGrid1DBTableView1CodCategoria: TcxGridDBColumn
-          Caption = 'C'#243'd. Categor'#237'a'
-          DataBinding.FieldName = 'CodCategoria'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick
-          Width = 84
-        end
-        object jktExpDBGrid1DBTableView1DescCategoria: TcxGridDBColumn
-          Caption = 'Desc. Categor'#237'a'
-          DataBinding.FieldName = 'DescCategoria'
-          Options.Editing = False
-          Width = 217
-        end
-        object jktExpDBGrid1DBTableView1VigenciaDesde: TcxGridDBColumn
-          Caption = 'Vigencia Desde'
-          DataBinding.FieldName = 'VigenciaDesde'
-          Width = 87
-        end
-        object jktExpDBGrid1DBTableView1Activo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
-          Width = 40
+        object jktExpDBGrid1Level1: TcxGridLevel
+          GridView = jktExpDBGrid1DBTableView1
         end
       end
-      object jktExpDBGrid1Level1: TcxGridLevel
-        GridView = jktExpDBGrid1DBTableView1
-      end
-    end
-    object jktExpDBGrid2: TjktExpDBGrid
-      Left = 22
-      Top = 576
-      Width = 771
-      Height = 200
-      TabOrder = 16
-      DataSource = dsClasificadoresCliente
-      object cxGridDBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsClasificadoresCliente
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsData.Deleting = False
-        OptionsData.Inserting = False
-        OptionsView.GroupByBox = False
-        object cxGridDBTableView1oid_ClasifClie: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ClasifClie'
-          Visible = False
+      object jktExpDBGrid2: TjktExpDBGrid
+        Left = 20
+        Top = 655
+        Width = 787
+        Height = 200
+        TabOrder = 16
+        DataSource = dsClasificadoresCliente
+        object cxGridDBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsClasificadoresCliente
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
+          object cxGridDBTableView1oid_ClasifClie: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ClasifClie'
+            Visible = False
+          end
+          object cxGridDBTableView1oid_Cliente: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Cliente'
+            Visible = False
+          end
+          object cxGridDBTableView1oid_Clasif: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Clasif'
+            Visible = False
+          end
+          object cxGridDBTableView1DescClasif: TcxGridDBColumn
+            Caption = 'Desc. Clasificador'
+            DataBinding.FieldName = 'DescClasif'
+            Options.Editing = False
+            Width = 151
+          end
+          object cxGridDBTableView1oid_ValorClasif: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ValorClasif'
+            Visible = False
+          end
+          object cxGridDBTableView1CodValorClasif: TcxGridDBColumn
+            Caption = 'C'#243'd. Valor Clasif.'
+            DataBinding.FieldName = 'CodValorClasif'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = cxGridDBTableView1CodValorClasifPropertiesButtonClick
+            Width = 102
+          end
+          object cxGridDBTableView1DescValorClasif: TcxGridDBColumn
+            Caption = 'Desc. Valor Clasif.'
+            DataBinding.FieldName = 'DescValorClasif'
+            Options.Editing = False
+          end
+          object cxGridDBTableView1Activo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+            Width = 40
+          end
         end
-        object cxGridDBTableView1oid_Cliente: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Cliente'
-          Visible = False
-        end
-        object cxGridDBTableView1oid_Clasif: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Clasif'
-          Visible = False
-        end
-        object cxGridDBTableView1DescClasif: TcxGridDBColumn
-          Caption = 'Desc. Clasificador'
-          DataBinding.FieldName = 'DescClasif'
-          Options.Editing = False
-          Width = 151
-        end
-        object cxGridDBTableView1oid_ValorClasif: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ValorClasif'
-          Visible = False
-        end
-        object cxGridDBTableView1CodValorClasif: TcxGridDBColumn
-          Caption = 'C'#243'd. Valor Clasif.'
-          DataBinding.FieldName = 'CodValorClasif'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = cxGridDBTableView1CodValorClasifPropertiesButtonClick
-          Width = 102
-        end
-        object cxGridDBTableView1DescValorClasif: TcxGridDBColumn
-          Caption = 'Desc. Valor Clasif.'
-          DataBinding.FieldName = 'DescValorClasif'
-          Options.Editing = False
-        end
-        object cxGridDBTableView1Activo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
-          Width = 40
-        end
-      end
-      object cxGridLevel1: TcxGridLevel
-        GridView = cxGridDBTableView1
-      end
-    end
-    object cxButtonEdit1: TcxDBButtonEdit
-      Left = 122
-      Top = 519
-      DataBinding.DataField = 'CodCondPago'
-      DataBinding.DataSource = dsCliente
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 14
-      Width = 79
-    end
-    object cxTextEdit1: TcxDBTextEdit
-      Left = 207
-      Top = 519
-      DataBinding.DataField = 'DescCondPago'
-      DataBinding.DataSource = dsCliente
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 15
-      Width = 274
-    end
-    object jktExpDBGrid3: TjktExpDBGrid
-      Left = 22
-      Top = 812
-      Width = 491
-      Height = 288
-      TabOrder = 17
-      DataSource = dsSucursalesCliente
-      object tvSucursales: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsSucursalesCliente
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.DragOpening = False
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsView.GroupByBox = False
-        object tvSucursalesoid_SucClie: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_SucClie'
-          Visible = False
-        end
-        object tvSucursalesoid_Cliente: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Cliente'
-          Visible = False
-        end
-        object tvSucursalesNroSucursal: TcxGridDBColumn
-          Caption = 'Nro. Sucursal'
-          DataBinding.FieldName = 'NroSucursal'
-        end
-        object tvSucursalesDescripcion: TcxGridDBColumn
-          Caption = 'Descripci'#243'n'
-          DataBinding.FieldName = 'Descripcion'
-        end
-        object tvSucursalesDireccion: TcxGridDBColumn
-          Caption = 'Direcci'#243'n'
-          DataBinding.FieldName = 'Direccion'
-        end
-        object tvSucursalesLocalidad: TcxGridDBColumn
-          DataBinding.FieldName = 'Localidad'
-        end
-        object tvSucursalesCodPostal: TcxGridDBColumn
-          Caption = 'C'#243'd. Postal'
-          DataBinding.FieldName = 'CodPostal'
-        end
-        object tvSucursalesoid_Provincia: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Provincia'
-          Visible = False
-        end
-        object tvSucursalesCodProvincia: TcxGridDBColumn
-          Caption = 'C'#243'd. Provincia'
-          DataBinding.FieldName = 'CodProvincia'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = tvSucursalesCodProvinciaPropertiesButtonClick
-        end
-        object tvSucursalesDescProvincia: TcxGridDBColumn
-          Caption = 'Desc. Provincia'
-          DataBinding.FieldName = 'DescProvincia'
-          Options.Editing = False
-        end
-        object tvSucursalesoid_Vendedor: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Vendedor'
-          Visible = False
-        end
-        object tvSucursalesCodVendedor: TcxGridDBColumn
-          Caption = 'C'#243'd. Vendedor'
-          DataBinding.FieldName = 'CodVendedor'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = tvSucursalesCodVendedorPropertiesButtonClick
-        end
-        object tvSucursalesDescVendedor: TcxGridDBColumn
-          Caption = 'Desc. Vendedor'
-          DataBinding.FieldName = 'DescVendedor'
-          Options.Editing = False
-        end
-        object tvSucursalesTelefonos: TcxGridDBColumn
-          Caption = 'Tel'#233'fonos'
-          DataBinding.FieldName = 'Telefonos'
-        end
-        object tvSucursalesActivo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
-          Width = 40
+        object cxGridLevel1: TcxGridLevel
+          GridView = cxGridDBTableView1
         end
       end
-      object tvDomiciliosEntrega: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsDomiciliosEntrega
-        DataController.DetailKeyFieldNames = 'oid_SucClie'
-        DataController.KeyFieldNames = 'oid_DomSuc'
-        DataController.MasterKeyFieldNames = 'oid_SucClie'
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsView.GroupByBox = False
-        object tvDomiciliosEntregaoid_DomSuc: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_DomSuc'
-          Visible = False
+      object cxButtonEdit1: TcxDBButtonEdit
+        Left = 120
+        Top = 584
+        DataBinding.DataField = 'CodCondPago'
+        DataBinding.DataSource = dsCliente
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 14
+        Width = 79
+      end
+      object cxTextEdit1: TcxDBTextEdit
+        Left = 205
+        Top = 584
+        DataBinding.DataField = 'DescCondPago'
+        DataBinding.DataSource = dsCliente
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 15
+        Width = 274
+      end
+      object jktExpDBGrid3: TjktExpDBGrid
+        Left = 20
+        Top = 905
+        Width = 787
+        Height = 288
+        TabOrder = 17
+        DataSource = dsSucursalesCliente
+        object tvSucursales: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsSucursalesCliente
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.DragOpening = False
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsView.GroupByBox = False
+          object tvSucursalesoid_SucClie: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_SucClie'
+            Visible = False
+          end
+          object tvSucursalesoid_Cliente: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Cliente'
+            Visible = False
+          end
+          object tvSucursalesNroSucursal: TcxGridDBColumn
+            Caption = 'Nro. Sucursal'
+            DataBinding.FieldName = 'NroSucursal'
+          end
+          object tvSucursalesDescripcion: TcxGridDBColumn
+            Caption = 'Descripci'#243'n'
+            DataBinding.FieldName = 'Descripcion'
+          end
+          object tvSucursalesDireccion: TcxGridDBColumn
+            Caption = 'Direcci'#243'n'
+            DataBinding.FieldName = 'Direccion'
+          end
+          object tvSucursalesLocalidad: TcxGridDBColumn
+            DataBinding.FieldName = 'Localidad'
+          end
+          object tvSucursalesCodPostal: TcxGridDBColumn
+            Caption = 'C'#243'd. Postal'
+            DataBinding.FieldName = 'CodPostal'
+          end
+          object tvSucursalesoid_Provincia: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Provincia'
+            Visible = False
+          end
+          object tvSucursalesCodProvincia: TcxGridDBColumn
+            Caption = 'C'#243'd. Provincia'
+            DataBinding.FieldName = 'CodProvincia'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = tvSucursalesCodProvinciaPropertiesButtonClick
+          end
+          object tvSucursalesDescProvincia: TcxGridDBColumn
+            Caption = 'Desc. Provincia'
+            DataBinding.FieldName = 'DescProvincia'
+            Options.Editing = False
+          end
+          object tvSucursalesoid_Vendedor: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Vendedor'
+            Visible = False
+          end
+          object tvSucursalesCodVendedor: TcxGridDBColumn
+            Caption = 'C'#243'd. Vendedor'
+            DataBinding.FieldName = 'CodVendedor'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = tvSucursalesCodVendedorPropertiesButtonClick
+          end
+          object tvSucursalesDescVendedor: TcxGridDBColumn
+            Caption = 'Desc. Vendedor'
+            DataBinding.FieldName = 'DescVendedor'
+            Options.Editing = False
+          end
+          object tvSucursalesTelefonos: TcxGridDBColumn
+            Caption = 'Tel'#233'fonos'
+            DataBinding.FieldName = 'Telefonos'
+          end
+          object tvSucursalesActivo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+            Width = 40
+          end
         end
-        object tvDomiciliosEntregaoid_SucClie: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_SucClie'
-          Visible = False
+        object tvDomiciliosEntrega: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsDomiciliosEntrega
+          DataController.DetailKeyFieldNames = 'oid_SucClie'
+          DataController.KeyFieldNames = 'oid_DomSuc'
+          DataController.MasterKeyFieldNames = 'oid_SucClie'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsView.GroupByBox = False
+          object tvDomiciliosEntregaoid_DomSuc: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_DomSuc'
+            Visible = False
+          end
+          object tvDomiciliosEntregaoid_SucClie: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_SucClie'
+            Visible = False
+          end
+          object tvDomiciliosEntregaNroDomicilio: TcxGridDBColumn
+            Caption = 'Nro. Domicilio'
+            DataBinding.FieldName = 'NroDomicilio'
+          end
+          object tvDomiciliosEntregaDescripcion: TcxGridDBColumn
+            Caption = 'Descripci'#243'n'
+            DataBinding.FieldName = 'Descripcion'
+          end
+          object tvDomiciliosEntregaDireccion: TcxGridDBColumn
+            Caption = 'Direcci'#243'n'
+            DataBinding.FieldName = 'Direccion'
+          end
+          object tvDomiciliosEntregaLocalidad: TcxGridDBColumn
+            DataBinding.FieldName = 'Localidad'
+          end
+          object tvDomiciliosEntregaCodPostal: TcxGridDBColumn
+            Caption = 'C'#243'd. Postal'
+            DataBinding.FieldName = 'CodPostal'
+          end
+          object tvDomiciliosEntregaoid_Provincia: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Provincia'
+            Visible = False
+          end
+          object tvDomiciliosEntregaCodProvincia: TcxGridDBColumn
+            Caption = 'C'#243'd. Provincia'
+            DataBinding.FieldName = 'CodProvincia'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = tvDomiciliosEntregaCodProvinciaPropertiesButtonClick
+          end
+          object tvDomiciliosEntregaDescProvincia: TcxGridDBColumn
+            Caption = 'Desc. Provincia'
+            DataBinding.FieldName = 'DescProvincia'
+            Options.Editing = False
+          end
+          object tvDomiciliosEntregaHorariosEntrega: TcxGridDBColumn
+            Caption = 'Horarios de Entrega'
+            DataBinding.FieldName = 'HorariosEntrega'
+          end
+          object tvDomiciliosEntregaTelefonos: TcxGridDBColumn
+            Caption = 'Tel'#233'fonos'
+            DataBinding.FieldName = 'Telefonos'
+          end
+          object tvDomiciliosEntregaActivo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+            Width = 40
+          end
         end
-        object tvDomiciliosEntregaNroDomicilio: TcxGridDBColumn
-          Caption = 'Nro. Domicilio'
-          DataBinding.FieldName = 'NroDomicilio'
+        object cvContactos: TcxGridDBCardView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsContactos
+          DataController.DetailKeyFieldNames = 'oid_SucClie'
+          DataController.KeyFieldNames = 'oid_ContSuc'
+          DataController.MasterKeyFieldNames = 'oid_SucClie'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsView.CardIndent = 7
+          object cvContactosoid_ContSuc: TcxGridDBCardViewRow
+            DataBinding.FieldName = 'oid_ContSuc'
+            Visible = False
+            Position.BeginsLayer = True
+          end
+          object cvContactosoid_SucClie: TcxGridDBCardViewRow
+            DataBinding.FieldName = 'oid_SucClie'
+            Visible = False
+            Position.BeginsLayer = True
+          end
+          object cvContactosApellido: TcxGridDBCardViewRow
+            DataBinding.FieldName = 'Apellido'
+            Position.BeginsLayer = True
+          end
+          object cvContactosNombres: TcxGridDBCardViewRow
+            DataBinding.FieldName = 'Nombres'
+            Position.BeginsLayer = True
+          end
+          object cvContactosTelefonos: TcxGridDBCardViewRow
+            Caption = 'Tel'#233'fonos'
+            DataBinding.FieldName = 'Telefonos'
+            Position.BeginsLayer = True
+          end
+          object cvContactosEmail: TcxGridDBCardViewRow
+            Caption = 'E-mail'
+            DataBinding.FieldName = 'Email'
+            Position.BeginsLayer = True
+          end
+          object cvContactosCargo: TcxGridDBCardViewRow
+            DataBinding.FieldName = 'Cargo'
+            Position.BeginsLayer = True
+          end
+          object cvContactosActivo: TcxGridDBCardViewRow
+            DataBinding.FieldName = 'Activo'
+            Position.BeginsLayer = True
+          end
         end
-        object tvDomiciliosEntregaDescripcion: TcxGridDBColumn
-          Caption = 'Descripci'#243'n'
-          DataBinding.FieldName = 'Descripcion'
+        object tvClasificadores: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsClasificadoresSucursal
+          DataController.DetailKeyFieldNames = 'oid_SucClie'
+          DataController.KeyFieldNames = 'oid_ClasifSuc'
+          DataController.MasterKeyFieldNames = 'oid_SucClie'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
+          object tvClasificadoresoid_ClasifSuc: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ClasifSuc'
+            Visible = False
+          end
+          object tvClasificadoresoid_SucClie: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_SucClie'
+            Visible = False
+          end
+          object tvClasificadoresoid_Clasif: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Clasif'
+            Visible = False
+          end
+          object tvClasificadoresDescClasif: TcxGridDBColumn
+            Caption = 'Desc. Clasificador'
+            DataBinding.FieldName = 'DescClasif'
+            Options.Editing = False
+          end
+          object tvClasificadoresoid_ValorClasif: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ValorClasif'
+            Visible = False
+          end
+          object tvClasificadoresCodValorClasif: TcxGridDBColumn
+            Caption = 'C'#243'd. Valor Clasif.'
+            DataBinding.FieldName = 'CodValorClasif'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = tvClasificadoresCodValorClasifPropertiesButtonClick
+          end
+          object tvClasificadoresDescValorClasif: TcxGridDBColumn
+            Caption = 'Desc. Valor Clasif.'
+            DataBinding.FieldName = 'DescValorClasif'
+            Options.Editing = False
+          end
+          object tvClasificadoresActivo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+            Width = 40
+          end
         end
-        object tvDomiciliosEntregaDireccion: TcxGridDBColumn
-          Caption = 'Direcci'#243'n'
-          DataBinding.FieldName = 'Direccion'
-        end
-        object tvDomiciliosEntregaLocalidad: TcxGridDBColumn
-          DataBinding.FieldName = 'Localidad'
-        end
-        object tvDomiciliosEntregaCodPostal: TcxGridDBColumn
-          Caption = 'C'#243'd. Postal'
-          DataBinding.FieldName = 'CodPostal'
-        end
-        object tvDomiciliosEntregaoid_Provincia: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Provincia'
-          Visible = False
-        end
-        object tvDomiciliosEntregaCodProvincia: TcxGridDBColumn
-          Caption = 'C'#243'd. Provincia'
-          DataBinding.FieldName = 'CodProvincia'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = tvDomiciliosEntregaCodProvinciaPropertiesButtonClick
-        end
-        object tvDomiciliosEntregaDescProvincia: TcxGridDBColumn
-          Caption = 'Desc. Provincia'
-          DataBinding.FieldName = 'DescProvincia'
-          Options.Editing = False
-        end
-        object tvDomiciliosEntregaHorariosEntrega: TcxGridDBColumn
-          Caption = 'Horarios de Entrega'
-          DataBinding.FieldName = 'HorariosEntrega'
-        end
-        object tvDomiciliosEntregaTelefonos: TcxGridDBColumn
-          Caption = 'Tel'#233'fonos'
-          DataBinding.FieldName = 'Telefonos'
-        end
-        object tvDomiciliosEntregaActivo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
-          Width = 40
+        object lvSucursales: TcxGridLevel
+          Caption = 'Sucursales'
+          GridView = tvSucursales
+          MaxDetailHeight = 200
+          Options.DetailTabsPosition = dtpTop
+          object lvDomiciliosEntrega: TcxGridLevel
+            Caption = 'Domicilios de Entrega'
+            GridView = tvDomiciliosEntrega
+          end
+          object lvContactos: TcxGridLevel
+            Caption = 'Contactos'
+            GridView = cvContactos
+          end
+          object lvClasificadores: TcxGridLevel
+            Caption = 'Clasificadores'
+            GridView = tvClasificadores
+          end
         end
       end
-      object cvContactos: TcxGridDBCardView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsContactos
-        DataController.DetailKeyFieldNames = 'oid_SucClie'
-        DataController.KeyFieldNames = 'oid_ContSuc'
-        DataController.MasterKeyFieldNames = 'oid_SucClie'
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsView.CardIndent = 7
-        object cvContactosoid_ContSuc: TcxGridDBCardViewRow
-          DataBinding.FieldName = 'oid_ContSuc'
-          Visible = False
-          Position.BeginsLayer = True
-        end
-        object cvContactosoid_SucClie: TcxGridDBCardViewRow
-          DataBinding.FieldName = 'oid_SucClie'
-          Visible = False
-          Position.BeginsLayer = True
-        end
-        object cvContactosApellido: TcxGridDBCardViewRow
-          DataBinding.FieldName = 'Apellido'
-          Position.BeginsLayer = True
-        end
-        object cvContactosNombres: TcxGridDBCardViewRow
-          DataBinding.FieldName = 'Nombres'
-          Position.BeginsLayer = True
-        end
-        object cvContactosTelefonos: TcxGridDBCardViewRow
-          Caption = 'Tel'#233'fonos'
-          DataBinding.FieldName = 'Telefonos'
-          Position.BeginsLayer = True
-        end
-        object cvContactosEmail: TcxGridDBCardViewRow
-          Caption = 'E-mail'
-          DataBinding.FieldName = 'Email'
-          Position.BeginsLayer = True
-        end
-        object cvContactosCargo: TcxGridDBCardViewRow
-          DataBinding.FieldName = 'Cargo'
-          Position.BeginsLayer = True
-        end
-        object cvContactosActivo: TcxGridDBCardViewRow
-          DataBinding.FieldName = 'Activo'
-          Position.BeginsLayer = True
-        end
+      object cxDBCheckBox2: TcxDBCheckBox
+        Left = 660
+        Top = 41
+        DataBinding.DataField = 'Activo'
+        DataBinding.DataSource = dsCliente
+        Properties.Alignment = taLeftJustify
+        Style.HotTrack = False
+        TabOrder = 2
+        Width = 43
       end
-      object tvClasificadores: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsClasificadoresSucursal
-        DataController.DetailKeyFieldNames = 'oid_SucClie'
-        DataController.KeyFieldNames = 'oid_ClasifSuc'
-        DataController.MasterKeyFieldNames = 'oid_SucClie'
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsData.Deleting = False
-        OptionsData.Inserting = False
-        OptionsView.GroupByBox = False
-        object tvClasificadoresoid_ClasifSuc: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ClasifSuc'
-          Visible = False
-        end
-        object tvClasificadoresoid_SucClie: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_SucClie'
-          Visible = False
-        end
-        object tvClasificadoresoid_Clasif: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Clasif'
-          Visible = False
-        end
-        object tvClasificadoresDescClasif: TcxGridDBColumn
-          Caption = 'Desc. Clasificador'
-          DataBinding.FieldName = 'DescClasif'
-          Options.Editing = False
-        end
-        object tvClasificadoresoid_ValorClasif: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ValorClasif'
-          Visible = False
-        end
-        object tvClasificadoresCodValorClasif: TcxGridDBColumn
-          Caption = 'C'#243'd. Valor Clasif.'
-          DataBinding.FieldName = 'CodValorClasif'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = tvClasificadoresCodValorClasifPropertiesButtonClick
-        end
-        object tvClasificadoresDescValorClasif: TcxGridDBColumn
-          Caption = 'Desc. Valor Clasif.'
-          DataBinding.FieldName = 'DescValorClasif'
-          Options.Editing = False
-        end
-        object tvClasificadoresActivo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
-          Width = 40
-        end
+      object lcMainGroup_Root: TdxLayoutGroup
+        AlignHorz = ahClient
+        AlignVert = avTop
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = -1
       end
-      object lvSucursales: TcxGridLevel
-        Caption = 'Sucursales'
-        GridView = tvSucursales
-        MaxDetailHeight = 200
-        Options.DetailTabsPosition = dtpTop
-        object lvDomiciliosEntrega: TcxGridLevel
-          Caption = 'Domicilios de Entrega'
-          GridView = tvDomiciliosEntrega
-        end
-        object lvContactos: TcxGridLevel
-          Caption = 'Contactos'
-          GridView = cvContactos
-        end
-        object lvClasificadores: TcxGridLevel
-          Caption = 'Clasificadores'
-          GridView = tvClasificadores
-        end
+      object lcMainGroup1: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos del Cliente'
+        Parent = lcMainGroup_Root
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldHorizontal
+        Index = 0
       end
-    end
-    object cxDBCheckBox2: TcxDBCheckBox
-      Left = 662
-      Top = 28
-      DataBinding.DataField = 'Activo'
-      DataBinding.DataSource = dsCliente
-      Properties.Alignment = taLeftJustify
-      Style.HotTrack = False
-      TabOrder = 2
-      Width = 43
-    end
-    object lcMainGroup_Root: TdxLayoutGroup
-      AlignHorz = ahClient
-      AlignVert = avTop
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ShowBorder = False
-      Index = -1
-    end
-    object lcMainGroup1: TdxLayoutGroup
-      CaptionOptions.Text = 'Datos del Cliente'
-      Parent = lcMainGroup_Root
-      ButtonOptions.Buttons = <>
-      LayoutDirection = ldHorizontal
-      Index = 0
-    end
-    object lcMainItem1: TdxLayoutItem
-      CaptionOptions.Text = 'Cliente :'
-      Parent = lcMainGroup1
-      Control = cxDBTextEdit1
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.AutoControlAreaAlignment = False
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem2: TdxLayoutItem
-      CaptionOptions.Text = 'Nombre Comercial :'
-      Parent = lcMainGroup1
-      Control = cxDBTextEdit2
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup2: TdxLayoutGroup
-      CaptionOptions.Text = 'New Group'
-      Parent = lcMainGroup_Root
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup3: TdxLayoutGroup
-      CaptionOptions.Text = 'Datos Legales / Impositivos'
-      Parent = lcMainGroup2
-      ButtonOptions.Buttons = <>
-      ItemControlAreaAlignment = catOwn
-      Index = 0
-    end
-    object lcMainGroup4: TdxLayoutGroup
-      CaptionOptions.Text = 'Datos Comerciales'
-      Parent = lcMainGroup2
-      ButtonOptions.Buttons = <>
-      LayoutDirection = ldHorizontal
-      Index = 1
-    end
-    object lcMainGroup5: TdxLayoutGroup
-      CaptionOptions.Text = 'Sucursales'
-      Parent = lcMainGroup2
-      ButtonOptions.Buttons = <>
-      Index = 3
-    end
-    object lcMainGroup6: TdxLayoutGroup
-      CaptionOptions.Text = 'Domicilio'
-      Parent = lcMainGroup3
-      ButtonOptions.Buttons = <>
-      Index = 1
-    end
-    object lcMainItem3: TdxLayoutItem
-      CaptionOptions.Text = 'Direcci'#243'n :'
-      Parent = lcMainGroup11
-      Control = cxDBTextEdit3
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem4: TdxLayoutItem
-      CaptionOptions.Text = 'Localidad :'
-      Parent = lcMainGroup11
-      Control = cxDBTextEdit4
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainItem5: TdxLayoutItem
-      CaptionOptions.Text = 'Provincia :'
-      Parent = lcMainGroup7
-      Control = cxDBButtonEdit1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem6: TdxLayoutItem
-      CaptionOptions.Text = 'Pa'#237's :'
-      Parent = lcMainGroup7
-      Control = cxDBButtonEdit2
-      ControlOptions.ShowBorder = False
-      Index = 2
-    end
-    object lcMainItem7: TdxLayoutItem
-      CaptionOptions.Text = 'Cod. Postal :'
-      Parent = lcMainGroup11
-      Control = cxDBTextEdit7
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.ShowBorder = False
-      Index = 2
-    end
-    object lcMainItem8: TdxLayoutItem
-      CaptionOptions.Text = 'cxDBTextEdit8'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup7
-      Control = cxDBTextEdit8
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem9: TdxLayoutItem
-      CaptionOptions.Text = 'cxDBTextEdit9'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup7
-      Control = cxDBTextEdit9
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 3
-    end
-    object lcMainGroup7: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup6
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 1
-    end
-    object lcMainItem10: TdxLayoutItem
-      CaptionOptions.Text = 'Tel'#233'fonos :'
-      Parent = lcMainGroup12
-      Control = cxDBTextEdit5
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem11: TdxLayoutItem
-      CaptionOptions.Text = 'CUIT :'
-      Parent = lcMainGroup10
-      Control = cxDBTextEdit6
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem12: TdxLayoutItem
-      CaptionOptions.Text = 'Persona Jur'#237'dica :'
-      Parent = lcMainGroup10
-      Control = cxDBCheckBox1
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.AutoControlAreaAlignment = False
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup8: TdxLayoutGroup
-      CaptionOptions.Text = 'Inscripciones Impositivas'
-      Parent = lcMainGroup3
-      ButtonOptions.Buttons = <>
-      Index = 2
-    end
-    object lcMainItem13: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup8
-      Control = jktExpDBGrid1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainGroup9: TdxLayoutGroup
-      CaptionOptions.Text = 'Clasificadores del Cliente'
-      Parent = lcMainGroup2
-      ButtonOptions.Buttons = <>
-      Index = 2
-    end
-    object lcMainItem14: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup9
-      Control = jktExpDBGrid2
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem16: TdxLayoutItem
-      CaptionOptions.Text = 'Condici'#243'n de Pago :'
-      Parent = lcMainGroup4
-      Control = cxButtonEdit1
-      ControlOptions.AlignHorz = ahLeft
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem15: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup4
-      Control = cxTextEdit1
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem17: TdxLayoutItem
-      CaptionOptions.Text = 'jktExpDBGrid3'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup5
-      Control = jktExpDBGrid3
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem18: TdxLayoutItem
-      CaptionOptions.Text = 'Activo :'
-      Parent = lcMainGroup1
-      Control = cxDBCheckBox2
-      ControlOptions.ShowBorder = False
-      Index = 2
-    end
-    object lcMainGroup11: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup6
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 0
-    end
-    object lcMainGroup10: TdxLayoutGroup
-      CaptionOptions.Text = 'New Group'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup3
-      ButtonOptions.Buttons = <>
-      LayoutDirection = ldHorizontal
-      Index = 0
-    end
-    object lcMainGroup12: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup6
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 2
+      object lcMainItem1: TdxLayoutItem
+        CaptionOptions.Text = 'Cliente :'
+        Parent = lcMainGroup1
+        Control = cxDBTextEdit1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.AutoControlAreaAlignment = False
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem2: TdxLayoutItem
+        CaptionOptions.Text = 'Nombre Comercial :'
+        Parent = lcMainGroup1
+        Control = cxDBTextEdit2
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup2: TdxLayoutGroup
+        CaptionOptions.Text = 'New Group'
+        Parent = lcMainGroup_Root
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup3: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos Legales / Impositivos'
+        Parent = lcMainGroup2
+        ButtonOptions.Buttons = <>
+        ItemControlAreaAlignment = catOwn
+        Index = 0
+      end
+      object lcMainGroup4: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos Comerciales'
+        Parent = lcMainGroup2
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldHorizontal
+        Index = 1
+      end
+      object lcMainGroup5: TdxLayoutGroup
+        CaptionOptions.Text = 'Sucursales'
+        Parent = lcMainGroup2
+        ButtonOptions.Buttons = <>
+        Index = 3
+      end
+      object lcMainGroup6: TdxLayoutGroup
+        CaptionOptions.Text = 'Domicilio'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 1
+      end
+      object lcMainItem3: TdxLayoutItem
+        CaptionOptions.Text = 'Direcci'#243'n :'
+        Parent = lcMainGroup11
+        Control = cxDBTextEdit3
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem4: TdxLayoutItem
+        CaptionOptions.Text = 'Localidad :'
+        Parent = lcMainGroup11
+        Control = cxDBTextEdit4
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem5: TdxLayoutItem
+        CaptionOptions.Text = 'Provincia :'
+        Parent = lcMainGroup7
+        Control = cxDBButtonEdit1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem6: TdxLayoutItem
+        CaptionOptions.Text = 'Pa'#237's :'
+        Parent = lcMainGroup7
+        Control = cxDBButtonEdit2
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object lcMainItem7: TdxLayoutItem
+        CaptionOptions.Text = 'Cod. Postal :'
+        Parent = lcMainGroup11
+        Control = cxDBTextEdit7
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object lcMainItem8: TdxLayoutItem
+        CaptionOptions.Text = 'cxDBTextEdit8'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup7
+        Control = cxDBTextEdit8
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem9: TdxLayoutItem
+        CaptionOptions.Text = 'cxDBTextEdit9'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup7
+        Control = cxDBTextEdit9
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 3
+      end
+      object lcMainGroup7: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup6
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem10: TdxLayoutItem
+        CaptionOptions.Text = 'Tel'#233'fonos :'
+        Parent = lcMainGroup12
+        Control = cxDBTextEdit5
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem11: TdxLayoutItem
+        CaptionOptions.Text = 'CUIT :'
+        Parent = lcMainGroup10
+        Control = cxDBTextEdit6
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem12: TdxLayoutItem
+        CaptionOptions.Text = 'Persona Jur'#237'dica :'
+        Parent = lcMainGroup10
+        Control = cxDBCheckBox1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.AutoControlAreaAlignment = False
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup8: TdxLayoutGroup
+        CaptionOptions.Text = 'Inscripciones Impositivas'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 2
+      end
+      object lcMainItem13: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup8
+        Control = jktExpDBGrid1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup9: TdxLayoutGroup
+        CaptionOptions.Text = 'Clasificadores del Cliente'
+        Parent = lcMainGroup2
+        ButtonOptions.Buttons = <>
+        Index = 2
+      end
+      object lcMainItem14: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup9
+        Control = jktExpDBGrid2
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem16: TdxLayoutItem
+        CaptionOptions.Text = 'Condici'#243'n de Pago :'
+        Parent = lcMainGroup4
+        Control = cxButtonEdit1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem15: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup4
+        Control = cxTextEdit1
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem17: TdxLayoutItem
+        CaptionOptions.Text = 'jktExpDBGrid3'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup5
+        Control = jktExpDBGrid3
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem18: TdxLayoutItem
+        CaptionOptions.Text = 'Activo :'
+        Parent = lcMainGroup1
+        Control = cxDBCheckBox2
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object lcMainGroup11: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup6
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup10: TdxLayoutGroup
+        CaptionOptions.Text = 'New Group'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldHorizontal
+        Index = 0
+      end
+      object lcMainGroup12: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup6
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
     end
   end
   inherited BarManager: TdxBarManager

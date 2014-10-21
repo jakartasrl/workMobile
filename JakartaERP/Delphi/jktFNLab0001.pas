@@ -22,7 +22,7 @@ uses
   cxEdit, cxTextEdit, cxDBEdit, Vcl.StdCtrls, Vcl.ExtCtrls, cxStyles,
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGrid;
+  cxGridTableView, cxGridDBTableView, cxGrid, cxSplitter, cxGroupBox;
 
 type
   TFNLab0001 = class(TfrmChild)

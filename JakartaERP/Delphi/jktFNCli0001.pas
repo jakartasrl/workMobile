@@ -24,7 +24,8 @@ uses
   cxCheckBox, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxGridDBCardView,
-  cxGridCardView, cxGridCustomLayoutView, jktCNMet0014, dxLayoutLookAndFeels;
+  cxGridCardView, cxGridCustomLayoutView, jktCNMet0014, dxLayoutLookAndFeels,
+  cxSplitter, cxGroupBox;
 
 type
   TFNCli0001 = class(TfrmChild)

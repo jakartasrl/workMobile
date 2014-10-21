@@ -22,7 +22,8 @@ uses
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, jktCNMet0014,
-  cxContainer, cxGroupBox, cxLabel, cxTextEdit, cxDBEdit, cxButtonEdit;
+  cxContainer, cxGroupBox, cxLabel, cxTextEdit, cxDBEdit, cxButtonEdit,
+  cxSplitter;
 
 type
   TFNArt0002 = class(TfrmChild)

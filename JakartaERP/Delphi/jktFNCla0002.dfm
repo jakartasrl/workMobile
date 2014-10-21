@@ -3,243 +3,283 @@ inherited FNCla0002: TFNCla0002
   ClientHeight = 404
   ClientWidth = 715
   ExplicitWidth = 731
-  ExplicitHeight = 442
+  ExplicitHeight = 443
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGroupBox1: TcxGroupBox [0]
-    Left = 0
-    Top = 0
-    Align = alTop
-    Caption = 'Datos del Clasificador'
-    Ctl3D = False
-    ParentCtl3D = False
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitTop = 201
+    ExplicitHeight = 203
+    Height = 404
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 404
+    ExplicitLeft = 185
+    ExplicitTop = 201
+    ExplicitHeight = 203
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 530
     TabOrder = 4
-    Height = 73
-    Width = 715
-    object txtCodigo: TcxDBTextEdit
-      Left = 60
-      Top = 30
-      DataBinding.DataField = 'Codigo'
-      DataBinding.DataSource = dsClasificador
-      Enabled = False
-      TabOrder = 0
-      Width = 121
-    end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 255
-      Top = 30
-      DataBinding.DataField = 'Descripcion'
-      DataBinding.DataSource = dsClasificador
-      Enabled = False
-      TabOrder = 1
-      Width = 245
-    end
-    object cxLabel1: TcxLabel
-      Left = 14
-      Top = 32
-      AutoSize = False
-      Caption = 'C'#243'digo :'
-      Properties.Alignment.Horz = taLeftJustify
-      Transparent = True
-      Height = 17
-      Width = 46
-    end
-    object cxLabel2: TcxLabel
-      Left = 179
-      Top = 32
-      AutoSize = False
-      Caption = 'Descripci'#243'n :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 75
-      AnchorX = 254
-    end
+    ExplicitLeft = 530
+    ExplicitTop = 201
+    ExplicitHeight = 203
+    Height = 404
   end
-  object cxGroupBox3: TcxGroupBox [1]
-    Left = 0
-    Top = 201
-    Align = alClient
-    Caption = 'Valores del Clasificador'
-    TabOrder = 5
-    Height = 203
-    Width = 715
-    object cxDBTreeList1: TcxDBTreeList
-      Left = 3
-      Top = 15
-      Width = 551
-      Height = 178
-      Align = alLeft
-      Bands = <
-        item
-        end>
-      DataController.DataSource = dsValoresClasificador
-      DataController.ParentField = 'codInternoPadre'
-      DataController.KeyField = 'codInterno'
-      Navigator.Buttons.CustomButtons = <>
-      OptionsBehavior.GoToNextCellOnTab = True
-      OptionsCustomizing.BandCustomizing = False
-      OptionsCustomizing.BandHorzSizing = False
-      OptionsCustomizing.BandMoving = False
-      OptionsCustomizing.BandVertSizing = False
-      OptionsData.Deleting = False
-      PopupMenu = PopupMenu
-      RootValue = 0
-      TabOrder = 0
-      object cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_ValorClasif'
-        Position.ColIndex = 2
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_CompClasif'
-        Position.ColIndex = 3
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1codInterno: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'codInterno'
-        Position.ColIndex = 4
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'codInternoPadre'
-        Position.ColIndex = 5
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1Codigo: TcxDBTreeListColumn
-        Caption.Text = 'C'#243'digo'
-        DataBinding.FieldName = 'Codigo'
-        Width = 100
-        Position.ColIndex = 1
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1Descripcion: TcxDBTreeListColumn
-        Caption.Text = 'Descripci'#243'n'
-        DataBinding.FieldName = 'Descripcion'
-        Width = 140
-        Position.ColIndex = 0
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1Activo: TcxDBTreeListColumn
-        DataBinding.FieldName = 'Activo'
-        Width = 100
-        Position.ColIndex = 6
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-    end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 522
+    Height = 404
+    ExplicitLeft = 522
+    ExplicitTop = 201
+    ExplicitHeight = 203
   end
-  object cxGroupBox2: TcxGroupBox [2]
-    Left = 0
-    Top = 73
-    Align = alTop
-    Caption = 'Jerarqu'#237'a del Clasificador'
+  inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 6
-    Height = 128
-    Width = 715
-    object cxDBTreeList2: TcxDBTreeList
+    ExplicitTop = 201
+    ExplicitWidth = 329
+    ExplicitHeight = 203
+    Height = 404
+    Width = 329
+    object cxGroupBox1: TcxGroupBox
       Left = 3
-      Top = 15
-      Width = 447
-      Height = 103
-      Align = alLeft
-      Bands = <
-        item
-        end>
-      DataController.DataSource = dsComponentesClasificador
-      DataController.ParentField = 'oid_NivelPadre'
-      DataController.KeyField = 'oid_Nivel'
-      Enabled = False
-      Navigator.Buttons.CustomButtons = <>
-      OptionsCustomizing.BandCustomizing = False
-      OptionsCustomizing.BandHorzSizing = False
-      OptionsCustomizing.BandMoving = False
-      OptionsCustomizing.BandVertSizing = False
-      OptionsData.Editing = False
-      OptionsData.Deleting = False
-      OptionsSelection.CellSelect = False
-      OptionsView.FocusRect = False
-      OptionsView.Headers = False
-      OptionsView.TreeLineStyle = tllsSolid
-      RootValue = -1
+      Top = 22
+      Align = alTop
+      Caption = 'Datos del Clasificador'
+      Ctl3D = False
+      ParentCtl3D = False
       TabOrder = 0
-      object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_CompClasif'
-        Position.ColIndex = 5
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
+      Height = 73
+      Width = 323
+      object txtCodigo: TcxDBTextEdit
+        Left = 60
+        Top = 30
+        DataBinding.DataField = 'Codigo'
+        DataBinding.DataSource = dsClasificador
+        Enabled = False
+        TabOrder = 0
+        Width = 121
       end
-      object cxDBTreeList2oid_Nivel: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_Nivel'
-        Position.ColIndex = 0
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 255
+        Top = 30
+        DataBinding.DataField = 'Descripcion'
+        DataBinding.DataSource = dsClasificador
+        Enabled = False
+        TabOrder = 1
+        Width = 245
       end
-      object cxDBTreeList2oid_NivelPadre: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_NivelPadre'
-        Position.ColIndex = 1
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
+      object cxLabel1: TcxLabel
+        Left = 14
+        Top = 32
+        AutoSize = False
+        Caption = 'C'#243'digo :'
+        Properties.Alignment.Horz = taLeftJustify
+        Transparent = True
+        Height = 17
+        Width = 46
       end
-      object cxDBTreeList2Descripcion: TcxDBTreeListColumn
-        DataBinding.FieldName = 'Descripcion'
-        Width = 400
-        Position.ColIndex = 2
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
+      object cxLabel2: TcxLabel
+        Left = 179
+        Top = 32
+        AutoSize = False
+        Caption = 'Descripci'#243'n :'
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        Height = 17
+        Width = 75
+        AnchorX = 254
       end
-      object cxDBTreeList2Codigo: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'Codigo'
-        Position.ColIndex = 3
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
+    end
+    object cxGroupBox3: TcxGroupBox
+      Left = 3
+      Top = 223
+      Align = alClient
+      Caption = 'Valores del Clasificador'
+      TabOrder = 1
+      ExplicitLeft = 450
+      ExplicitTop = 15
+      ExplicitHeight = 103
+      Height = 178
+      Width = 323
+      object cxDBTreeList1: TcxDBTreeList
+        Left = 3
+        Top = 15
+        Width = 551
+        Height = 153
+        Align = alLeft
+        Bands = <
+          item
+          end>
+        DataController.DataSource = dsValoresClasificador
+        DataController.ParentField = 'codInternoPadre'
+        DataController.KeyField = 'codInterno'
+        Navigator.Buttons.CustomButtons = <>
+        OptionsBehavior.GoToNextCellOnTab = True
+        OptionsCustomizing.BandCustomizing = False
+        OptionsCustomizing.BandHorzSizing = False
+        OptionsCustomizing.BandMoving = False
+        OptionsCustomizing.BandVertSizing = False
+        OptionsData.Deleting = False
+        PopupMenu = PopupMenu
+        RootValue = 0
+        TabOrder = 0
+        ExplicitHeight = 78
+        object cxDBTreeList1oid_ValorClasif: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_ValorClasif'
+          Position.ColIndex = 2
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1oid_CompClasif: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_CompClasif'
+          Position.ColIndex = 3
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1codInterno: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'codInterno'
+          Position.ColIndex = 4
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'codInternoPadre'
+          Position.ColIndex = 5
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1Codigo: TcxDBTreeListColumn
+          Caption.Text = 'C'#243'digo'
+          DataBinding.FieldName = 'Codigo'
+          Width = 100
+          Position.ColIndex = 1
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1Descripcion: TcxDBTreeListColumn
+          Caption.Text = 'Descripci'#243'n'
+          DataBinding.FieldName = 'Descripcion'
+          Width = 140
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1Activo: TcxDBTreeListColumn
+          DataBinding.FieldName = 'Activo'
+          Width = 100
+          Position.ColIndex = 6
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
       end
-      object cxDBTreeList2Activo: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'Activo'
-        Position.ColIndex = 4
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
+    end
+    object cxGroupBox2: TcxGroupBox
+      Left = 3
+      Top = 95
+      Align = alTop
+      Caption = 'Jerarqu'#237'a del Clasificador'
+      TabOrder = 2
+      ExplicitTop = 22
+      ExplicitWidth = 179
+      Height = 128
+      Width = 323
+      object cxDBTreeList2: TcxDBTreeList
+        Left = 3
+        Top = 15
+        Width = 447
+        Height = 103
+        Align = alLeft
+        Bands = <
+          item
+          end>
+        DataController.DataSource = dsComponentesClasificador
+        DataController.ParentField = 'oid_NivelPadre'
+        DataController.KeyField = 'oid_Nivel'
+        Enabled = False
+        Navigator.Buttons.CustomButtons = <>
+        OptionsCustomizing.BandCustomizing = False
+        OptionsCustomizing.BandHorzSizing = False
+        OptionsCustomizing.BandMoving = False
+        OptionsCustomizing.BandVertSizing = False
+        OptionsData.Editing = False
+        OptionsData.Deleting = False
+        OptionsSelection.CellSelect = False
+        OptionsView.FocusRect = False
+        OptionsView.Headers = False
+        OptionsView.TreeLineStyle = tllsSolid
+        RootValue = -1
+        TabOrder = 0
+        object cxDBTreeList2oid_CompClasif: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_CompClasif'
+          Position.ColIndex = 5
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList2oid_Nivel: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_Nivel'
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList2oid_NivelPadre: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_NivelPadre'
+          Position.ColIndex = 1
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList2Descripcion: TcxDBTreeListColumn
+          DataBinding.FieldName = 'Descripcion'
+          Width = 400
+          Position.ColIndex = 2
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList2Codigo: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'Codigo'
+          Position.ColIndex = 3
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList2Activo: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'Activo'
+          Position.ColIndex = 4
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
       end
     end
   end

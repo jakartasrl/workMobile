@@ -22,7 +22,8 @@ uses
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008,
-  cxGridBandedTableView, cxGridDBBandedTableView, jktCNMet0014, cxButtonEdit;
+  cxGridBandedTableView, cxGridDBBandedTableView, jktCNMet0014, cxButtonEdit,
+  cxContainer, cxSplitter, cxGroupBox;
 
 type
   TFNVen0001 = class(TfrmChild)

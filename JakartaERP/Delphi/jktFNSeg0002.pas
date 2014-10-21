@@ -23,7 +23,7 @@ uses
   cxData, cxDataStorage, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, dxBevel, jktCNMet0011,
-  jktCNMet0014;
+  jktCNMet0014, cxSplitter;
 
 type
   TFNSeg0002 = class(TfrmChild)

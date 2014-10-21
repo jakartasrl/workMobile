@@ -3,142 +3,188 @@ inherited FNVar0001: TFNVar0001
   ClientHeight = 306
   ClientWidth = 684
   ExplicitWidth = 700
-  ExplicitHeight = 344
+  ExplicitHeight = 345
   PixelsPerInch = 96
   TextHeight = 13
-  object cxGroupBox1: TcxGroupBox [0]
-    Left = 0
-    Top = 0
-    Align = alTop
-    Caption = 'Datos de la Condici'#243'n de Pago'
-    Ctl3D = False
-    ParentCtl3D = False
-    TabOrder = 4
-    Height = 113
-    Width = 684
-    object dxBevel1: TdxBevel
-      Left = 14
-      Top = 63
-      Width = 551
-      Height = 14
-      Shape = dxbsLineTop
-    end
-    object txtCodigo: TcxDBTextEdit
-      Left = 61
-      Top = 30
-      DataBinding.DataField = 'Codigo'
-      DataBinding.DataSource = dsCondicionDePago
-      TabOrder = 0
-      Width = 121
-    end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 256
-      Top = 30
-      DataBinding.DataField = 'Descripcion'
-      DataBinding.DataSource = dsCondicionDePago
-      TabOrder = 1
-      Width = 223
-    end
-    object cxLabel1: TcxLabel
-      Left = 14
-      Top = 32
-      AutoSize = False
-      Caption = 'C'#243'digo :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 46
-      AnchorX = 60
-    end
-    object cxLabel2: TcxLabel
-      Left = 180
-      Top = 32
-      AutoSize = False
-      Caption = 'Descripci'#243'n :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 75
-      AnchorX = 255
-    end
-    object cxDBCheckBox1: TcxDBCheckBox
-      Left = 504
-      Top = 30
-      Caption = 'Activo :'
-      DataBinding.DataField = 'Activo'
-      DataBinding.DataSource = dsCondicionDePago
-      Properties.Alignment = taRightJustify
-      TabOrder = 2
-      Transparent = True
-      Width = 61
-    end
-    object cxDBCheckBox2: TcxDBCheckBox
-      Left = 14
-      Top = 73
-      Caption = 'D'#237'as a partir de Fecha Factura'
-      DataBinding.DataField = 'APartirFechaFactura'
-      DataBinding.DataSource = dsCondicionDePago
-      Properties.Alignment = taLeftJustify
-      TabOrder = 3
-      Transparent = True
-      Width = 175
-    end
-    object cxDBCheckBox3: TcxDBCheckBox
-      Left = 210
-      Top = 73
-      Caption = 'D'#237'as a partir de Fecha Recepci'#243'n'
-      DataBinding.DataField = 'APartirFechaRecepcion'
-      DataBinding.DataSource = dsCondicionDePago
-      Properties.Alignment = taLeftJustify
-      TabOrder = 4
-      Transparent = True
-      Width = 187
-    end
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitLeft = 0
+    ExplicitTop = 113
+    ExplicitHeight = 193
+    Height = 306
   end
-  object cxGroupBox2: TcxGroupBox [1]
-    Left = 0
-    Top = 113
-    Align = alClient
-    Caption = 'Detalle'
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 306
+    Control = cxGroupBoxLeft
+    ExplicitLeft = 185
+    ExplicitTop = 113
+    ExplicitHeight = 193
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 499
     TabOrder = 5
-    Height = 193
-    Width = 684
-    object dbgDetalleCondicion: TjktExpDBGrid
+    ExplicitLeft = 499
+    ExplicitTop = 113
+    ExplicitHeight = 193
+    Height = 306
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 491
+    Height = 306
+    Control = cxGroupBoxRight
+    ExplicitLeft = 491
+    ExplicitTop = 113
+    ExplicitHeight = 193
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitLeft = 195
+    ExplicitTop = 113
+    ExplicitWidth = 298
+    ExplicitHeight = 193
+    Height = 306
+    Width = 298
+    object cxGroupBox1: TcxGroupBox
       Left = 2
-      Top = 18
-      Width = 367
-      Height = 173
-      Align = alLeft
+      Top = 5
+      Align = alTop
+      Caption = 'Datos de la Condici'#243'n de Pago'
+      Ctl3D = False
+      ParentCtl3D = False
       TabOrder = 0
-      DataSource = dsDetalleCondicionDePago
-      object dbgDetalleCondicionDBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsDetalleCondicionDePago
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsView.GroupByBox = False
-        object dbgDetalleCondicionDBTableView1oid_Det_CondPago: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Det_CondPago'
-          Visible = False
-        end
-        object dbgDetalleCondicionDBTableView1oid_CondPago: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_CondPago'
-          Visible = False
-        end
-        object dbgDetalleCondicionDBTableView1Dias: TcxGridDBColumn
-          Caption = 'D'#237'as'
-          DataBinding.FieldName = 'Dias'
-          Width = 49
-        end
-        object dbgDetalleCondicionDBTableView1Porcentaje: TcxGridDBColumn
-          DataBinding.FieldName = 'Porcentaje'
-          Width = 69
-        end
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 684
+      Height = 113
+      Width = 294
+      object dxBevel1: TdxBevel
+        Left = 14
+        Top = 63
+        Width = 551
+        Height = 14
+        Shape = dxbsLineTop
       end
-      object dbgDetalleCondicionLevel1: TcxGridLevel
-        GridView = dbgDetalleCondicionDBTableView1
+      object txtCodigo: TcxDBTextEdit
+        Left = 61
+        Top = 30
+        DataBinding.DataField = 'Codigo'
+        DataBinding.DataSource = dsCondicionDePago
+        TabOrder = 0
+        Width = 121
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 256
+        Top = 30
+        DataBinding.DataField = 'Descripcion'
+        DataBinding.DataSource = dsCondicionDePago
+        TabOrder = 1
+        Width = 223
+      end
+      object cxLabel1: TcxLabel
+        Left = 14
+        Top = 32
+        AutoSize = False
+        Caption = 'C'#243'digo :'
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        Height = 17
+        Width = 46
+        AnchorX = 60
+      end
+      object cxLabel2: TcxLabel
+        Left = 180
+        Top = 32
+        AutoSize = False
+        Caption = 'Descripci'#243'n :'
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        Height = 17
+        Width = 75
+        AnchorX = 255
+      end
+      object cxDBCheckBox1: TcxDBCheckBox
+        Left = 504
+        Top = 30
+        Caption = 'Activo :'
+        DataBinding.DataField = 'Activo'
+        DataBinding.DataSource = dsCondicionDePago
+        Properties.Alignment = taRightJustify
+        TabOrder = 2
+        Transparent = True
+        Width = 61
+      end
+      object cxDBCheckBox2: TcxDBCheckBox
+        Left = 14
+        Top = 73
+        Caption = 'D'#237'as a partir de Fecha Factura'
+        DataBinding.DataField = 'APartirFechaFactura'
+        DataBinding.DataSource = dsCondicionDePago
+        Properties.Alignment = taLeftJustify
+        TabOrder = 3
+        Transparent = True
+        Width = 175
+      end
+      object cxDBCheckBox3: TcxDBCheckBox
+        Left = 210
+        Top = 73
+        Caption = 'D'#237'as a partir de Fecha Recepci'#243'n'
+        DataBinding.DataField = 'APartirFechaRecepcion'
+        DataBinding.DataSource = dsCondicionDePago
+        Properties.Alignment = taLeftJustify
+        TabOrder = 4
+        Transparent = True
+        Width = 187
+      end
+    end
+    object cxGroupBox2: TcxGroupBox
+      Left = 2
+      Top = 118
+      Align = alClient
+      Caption = 'Detalle'
+      TabOrder = 1
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 298
+      ExplicitHeight = 306
+      Height = 186
+      Width = 294
+      object dbgDetalleCondicion: TjktExpDBGrid
+        Left = 2
+        Top = 18
+        Width = 367
+        Height = 166
+        Align = alLeft
+        TabOrder = 0
+        DataSource = dsDetalleCondicionDePago
+        ExplicitHeight = 286
+        object dbgDetalleCondicionDBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsDetalleCondicionDePago
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsView.GroupByBox = False
+          object dbgDetalleCondicionDBTableView1oid_Det_CondPago: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Det_CondPago'
+            Visible = False
+          end
+          object dbgDetalleCondicionDBTableView1oid_CondPago: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_CondPago'
+            Visible = False
+          end
+          object dbgDetalleCondicionDBTableView1Dias: TcxGridDBColumn
+            Caption = 'D'#237'as'
+            DataBinding.FieldName = 'Dias'
+            Width = 49
+          end
+          object dbgDetalleCondicionDBTableView1Porcentaje: TcxGridDBColumn
+            DataBinding.FieldName = 'Porcentaje'
+            Width = 69
+          end
+        end
+        object dbgDetalleCondicionLevel1: TcxGridLevel
+          GridView = dbgDetalleCondicionDBTableView1
+        end
       end
     end
   end

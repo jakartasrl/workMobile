@@ -21,7 +21,7 @@ uses
   dxRibbon, dxSkinsdxBarPainter, dxBar, jktCNMet0002, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, jktCNMet0001, Vcl.ActnList,
   jktCNMet0030, jktCNMet0005, Data.DB, kbmMemTable, jktCNMet0012, jktCNMet0011,
-  IdAntiFreezeBase, Vcl.IdAntiFreeze;
+  IdAntiFreezeBase, Vcl.IdAntiFreeze, cxSplitter, cxGroupBox;
 
 type
   TjktEstado = (esAlta, esEdit, esRehabilita, esNil);
@@ -41,6 +41,11 @@ type
     OperacionTraer: TjktOperacion;
     ValidadorForm: TjktValidadorForm;
     mtParametrosForm: TjktMemTable;
+    cxGroupBoxLeft: TcxGroupBox;
+    cxSplitterLeft: TcxSplitter;
+    cxGroupBoxRight: TcxGroupBox;
+    cxSplitterRight: TcxSplitter;
+    cxGroupBoxMain: TcxGroupBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormActivate(Sender: TObject);
@@ -63,6 +68,7 @@ type
 
   protected
     FMultipleInstancia: Boolean;
+    FPorcWidthMain    : extended;
 
     function GetNewOid(): Integer;
     procedure llamarOperacionConfiguracion; virtual; abstract;
@@ -135,9 +141,15 @@ begin
 end;
 
 procedure TfrmChild.FormActivate(Sender: TObject);
+var
+  ancho :extended;
 begin
   Driver.ActualizarEstadoBotones;
   DoActivateChild;
+  ancho := Screen.Width * FPorcWidthMain;
+  cxGroupBoxLeft.Width := round((Screen.Width - ancho) / 2 ) ;
+  cxGroupBoxRight.Width := round((Screen.Width - ancho) / 2 );
+
 end;
 
 procedure TfrmChild.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -154,6 +166,7 @@ procedure TfrmChild.FormCreate(Sender: TObject);
 begin
   FMultipleInstancia := False;
   FNewOid := 0;
+  FPorcWidthMain := 0.7;
 end;
 
 function TfrmChild.GetCanEdit: Boolean;

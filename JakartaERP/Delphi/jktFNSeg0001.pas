@@ -21,7 +21,8 @@ uses
   cxLookAndFeelPainters, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter,
   cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, jktCNMet0011;
+  cxGrid, jktCNMet0008, kbmMemTable, jktCNMet0012, jktCNMet0011, cxContainer,
+  cxSplitter, cxGroupBox;
 
 type
   TFNSeg0001 = class(TfrmChild)

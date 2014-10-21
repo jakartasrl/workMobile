@@ -3,876 +3,911 @@ inherited FNArt0001: TFNArt0001
   ClientHeight = 522
   ClientWidth = 799
   ExplicitWidth = 815
-  ExplicitHeight = 560
+  ExplicitHeight = 561
   PixelsPerInch = 96
   TextHeight = 13
-  object lcMain: TdxLayoutControl [0]
-    Left = 0
-    Top = 0
-    Width = 799
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 522
     Height = 522
-    Align = alClient
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 522
+    ExplicitLeft = 185
+    ExplicitTop = 0
+    ExplicitHeight = 522
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 614
     TabOrder = 4
-    LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-    object cxDBTextEdit1: TcxDBTextEdit
-      Left = 70
-      Top = 28
-      DataBinding.DataField = 'Codigo'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
+    ExplicitLeft = 614
+    ExplicitHeight = 522
+    Height = 522
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 606
+    Height = 522
+    ExplicitLeft = 606
+    ExplicitTop = 0
+    ExplicitHeight = 522
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitWidth = 413
+    ExplicitHeight = 522
+    Height = 522
+    Width = 413
+    object lcMain: TdxLayoutControl
+      Left = 3
+      Top = 22
+      Width = 407
+      Height = 497
+      Align = alClient
       TabOrder = 0
-      Width = 121
-    end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 281
-      Top = 79
-      DataBinding.DataField = 'DescAbrev'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
-      TabOrder = 4
-      Width = 467
-    end
-    object cxDBCheckBox1: TcxDBCheckBox
-      Left = 64
-      Top = 55
-      DataBinding.DataField = 'EsBien'
-      DataBinding.DataSource = dsArticulo
-      Properties.OnChange = cxDBCheckBox1PropertiesChange
-      Style.HotTrack = False
-      TabOrder = 1
-      Width = 40
-    end
-    object cxDBCheckBox2: TcxDBCheckBox
-      Tag = 1
-      Left = 64
-      Top = 82
-      DataBinding.DataField = 'EsServicio'
-      DataBinding.DataSource = dsArticulo
-      Properties.OnChange = cxDBCheckBox1PropertiesChange
-      Style.HotTrack = False
-      TabOrder = 2
-      Width = 40
-    end
-    object cxDBCheckBox3: TcxDBCheckBox
-      Left = 112
-      Top = 121
-      DataBinding.DataField = 'EsStockeable'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
-      TabOrder = 5
-      Width = 40
-    end
-    object cxDBCheckBox4: TcxDBCheckBox
-      Left = 112
-      Top = 148
-      DataBinding.DataField = 'EsProdPropia'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
-      TabOrder = 6
-      Width = 40
-    end
-    object cxDBCheckBox5: TcxDBCheckBox
-      Left = 226
-      Top = 121
-      DataBinding.DataField = 'EsComprable'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
-      TabOrder = 7
-      Width = 40
-    end
-    object cxDBCheckBox6: TcxDBCheckBox
-      Left = 226
-      Top = 148
-      DataBinding.DataField = 'EsVendible'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
-      TabOrder = 8
-      Width = 40
-    end
-    object cxDBMemo1: TcxDBMemo
-      Left = 281
-      Top = 28
-      DataBinding.DataField = 'Descripcion'
-      DataBinding.DataSource = dsArticulo
-      Style.HotTrack = False
-      TabOrder = 3
-      Height = 45
-      Width = 467
-    end
-    object jktExpDBGrid1: TjktExpDBGrid
-      Left = 22
-      Top = 232
-      Width = 726
-      Height = 200
-      TabOrder = 10
-      DataSource = dsValoresCaracProd
-      object jktExpDBGrid1DBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsValoresCaracProd
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsData.Deleting = False
-        OptionsData.Inserting = False
-        OptionsView.GroupByBox = False
-        object jktExpDBGrid1DBTableView1oid_ValorCarac: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ValorCarac'
-          Visible = False
+      LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 413
+      ExplicitHeight = 522
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 68
+        Top = 41
+        DataBinding.DataField = 'Codigo'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 0
+        Width = 121
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 279
+        Top = 92
+        DataBinding.DataField = 'DescAbrev'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 4
+        Width = 467
+      end
+      object cxDBCheckBox1: TcxDBCheckBox
+        Left = 62
+        Top = 68
+        DataBinding.DataField = 'EsBien'
+        DataBinding.DataSource = dsArticulo
+        Properties.OnChange = cxDBCheckBox1PropertiesChange
+        Style.HotTrack = False
+        TabOrder = 1
+        Width = 40
+      end
+      object cxDBCheckBox2: TcxDBCheckBox
+        Tag = 1
+        Left = 62
+        Top = 93
+        DataBinding.DataField = 'EsServicio'
+        DataBinding.DataSource = dsArticulo
+        Properties.OnChange = cxDBCheckBox1PropertiesChange
+        Style.HotTrack = False
+        TabOrder = 2
+        Width = 40
+      end
+      object cxDBCheckBox3: TcxDBCheckBox
+        Left = 110
+        Top = 131
+        DataBinding.DataField = 'EsStockeable'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 5
+        Width = 40
+      end
+      object cxDBCheckBox4: TcxDBCheckBox
+        Left = 110
+        Top = 156
+        DataBinding.DataField = 'EsProdPropia'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 6
+        Width = 40
+      end
+      object cxDBCheckBox5: TcxDBCheckBox
+        Left = 224
+        Top = 131
+        DataBinding.DataField = 'EsComprable'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 7
+        Width = 40
+      end
+      object cxDBCheckBox6: TcxDBCheckBox
+        Left = 224
+        Top = 156
+        DataBinding.DataField = 'EsVendible'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 8
+        Width = 40
+      end
+      object cxDBMemo1: TcxDBMemo
+        Left = 279
+        Top = 41
+        DataBinding.DataField = 'Descripcion'
+        DataBinding.DataSource = dsArticulo
+        Style.HotTrack = False
+        TabOrder = 3
+        Height = 45
+        Width = 467
+      end
+      object jktExpDBGrid1: TjktExpDBGrid
+        Left = 20
+        Top = 252
+        Width = 726
+        Height = 200
+        TabOrder = 10
+        DataSource = dsValoresCaracProd
+        object jktExpDBGrid1DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsValoresCaracProd
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
+          object jktExpDBGrid1DBTableView1oid_ValorCarac: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ValorCarac'
+            Visible = False
+          end
+          object jktExpDBGrid1DBTableView1oid_Art: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Art'
+            Visible = False
+          end
+          object jktExpDBGrid1DBTableView1oid_Carac: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Carac'
+            Visible = False
+          end
+          object jktExpDBGrid1DBTableView1DescCarac: TcxGridDBColumn
+            Caption = 'Desc. Carac.'
+            DataBinding.FieldName = 'DescCarac'
+            Options.Editing = False
+          end
+          object jktExpDBGrid1DBTableView1TipoDeDato: TcxGridDBColumn
+            Caption = 'Tipo De Dato'
+            DataBinding.FieldName = 'TipoDeDato'
+            Options.Editing = False
+          end
+          object jktExpDBGrid1DBTableView1oid_TablaValores: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_TablaValores'
+            Visible = False
+            Width = 98
+          end
+          object jktExpDBGrid1DBTableView1CodValorCarac: TcxGridDBColumn
+            Caption = 'C'#243'd. Valor Carac.'
+            DataBinding.FieldName = 'CodValorCarac'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick
+          end
+          object jktExpDBGrid1DBTableView1DescValorCarac: TcxGridDBColumn
+            Caption = 'Desc. Valor Carac.'
+            DataBinding.FieldName = 'DescValorCarac'
+            Options.Editing = False
+          end
         end
-        object jktExpDBGrid1DBTableView1oid_Art: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Art'
-          Visible = False
-        end
-        object jktExpDBGrid1DBTableView1oid_Carac: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Carac'
-          Visible = False
-        end
-        object jktExpDBGrid1DBTableView1DescCarac: TcxGridDBColumn
-          Caption = 'Desc. Carac.'
-          DataBinding.FieldName = 'DescCarac'
-          Options.Editing = False
-        end
-        object jktExpDBGrid1DBTableView1TipoDeDato: TcxGridDBColumn
-          Caption = 'Tipo De Dato'
-          DataBinding.FieldName = 'TipoDeDato'
-          Options.Editing = False
-        end
-        object jktExpDBGrid1DBTableView1oid_TablaValores: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_TablaValores'
-          Visible = False
-          Width = 98
-        end
-        object jktExpDBGrid1DBTableView1CodValorCarac: TcxGridDBColumn
-          Caption = 'C'#243'd. Valor Carac.'
-          DataBinding.FieldName = 'CodValorCarac'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick
-        end
-        object jktExpDBGrid1DBTableView1DescValorCarac: TcxGridDBColumn
-          Caption = 'Desc. Valor Carac.'
-          DataBinding.FieldName = 'DescValorCarac'
-          Options.Editing = False
+        object jktExpDBGrid1Level1: TcxGridLevel
+          GridView = jktExpDBGrid1DBTableView1
         end
       end
-      object jktExpDBGrid1Level1: TcxGridLevel
-        GridView = jktExpDBGrid1DBTableView1
-      end
-    end
-    object jktExpDBGrid2: TjktExpDBGrid
-      Left = 22
-      Top = 468
-      Width = 726
-      Height = 200
-      TabOrder = 11
-      DataSource = dsAperturaStock
-      object jktExpDBGrid2DBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsAperturaStock
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsView.GroupByBox = False
-      end
-      object jktExpDBGrid2Level1: TcxGridLevel
-        GridView = jktExpDBGrid2DBTableView1
-      end
-    end
-    object jktExpDBGrid3: TjktExpDBGrid
-      Left = 22
-      Top = 916
-      Width = 726
-      Height = 200
-      TabOrder = 24
-      DataSource = dsEquivalencias
-      object jktExpDBGrid3DBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsEquivalencias
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsView.GroupByBox = False
-        object jktExpDBGrid3DBTableView1oid_EquivArt: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_EquivArt'
-          Visible = False
+      object jktExpDBGrid2: TjktExpDBGrid
+        Left = 20
+        Top = 502
+        Width = 726
+        Height = 200
+        TabOrder = 11
+        DataSource = dsAperturaStock
+        object jktExpDBGrid2DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsAperturaStock
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsView.GroupByBox = False
         end
-        object jktExpDBGrid3DBTableView1oid_Art: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Art'
-          Visible = False
-        end
-        object jktExpDBGrid3DBTableView1oid_UnidMedOrig: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_UnidMedOrig'
-          Visible = False
-        end
-        object jktExpDBGrid3DBTableView1CodUnidMedOrig: TcxGridDBColumn
-          Caption = 'C'#243'd. Unid. Med. Orig.'
-          DataBinding.FieldName = 'CodUnidMedOrig'
-          Width = 118
-        end
-        object jktExpDBGrid3DBTableView1DescUnidMedOrig: TcxGridDBColumn
-          Caption = 'Desc. Unid. Med. Orig'
-          DataBinding.FieldName = 'DescUnidMedOrig'
-          Options.Editing = False
-          Width = 401
-        end
-        object jktExpDBGrid3DBTableView1oid_UnidMedDest: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_UnidMedDest'
-          Visible = False
-        end
-        object jktExpDBGrid3DBTableView1CodUnidMedDest: TcxGridDBColumn
-          Caption = 'C'#243'd. Unid. Med. Dest'
-          DataBinding.FieldName = 'CodUnidMedDest'
-        end
-        object jktExpDBGrid3DBTableView1DescUnidMedDest: TcxGridDBColumn
-          Caption = 'Desc. Unid. Med. Dest.'
-          DataBinding.FieldName = 'DescUnidMedDest'
-          Options.Editing = False
-          Width = 374
-        end
-        object jktExpDBGrid3DBTableView1FactConv: TcxGridDBColumn
-          Caption = 'Factor Conv.'
-          DataBinding.FieldName = 'FactConv'
-          Width = 94
-        end
-        object jktExpDBGrid3DBTableView1Activo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
-          Width = 48
+        object jktExpDBGrid2Level1: TcxGridLevel
+          GridView = jktExpDBGrid2DBTableView1
         end
       end
-      object jktExpDBGrid3Level1: TcxGridLevel
-        GridView = jktExpDBGrid3DBTableView1
+      object jktExpDBGrid3: TjktExpDBGrid
+        Left = 20
+        Top = 964
+        Width = 726
+        Height = 200
+        TabOrder = 24
+        DataSource = dsEquivalencias
+        object jktExpDBGrid3DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsEquivalencias
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsView.GroupByBox = False
+          object jktExpDBGrid3DBTableView1oid_EquivArt: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_EquivArt'
+            Visible = False
+          end
+          object jktExpDBGrid3DBTableView1oid_Art: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Art'
+            Visible = False
+          end
+          object jktExpDBGrid3DBTableView1oid_UnidMedOrig: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_UnidMedOrig'
+            Visible = False
+          end
+          object jktExpDBGrid3DBTableView1CodUnidMedOrig: TcxGridDBColumn
+            Caption = 'C'#243'd. Unid. Med. Orig.'
+            DataBinding.FieldName = 'CodUnidMedOrig'
+            Width = 118
+          end
+          object jktExpDBGrid3DBTableView1DescUnidMedOrig: TcxGridDBColumn
+            Caption = 'Desc. Unid. Med. Orig'
+            DataBinding.FieldName = 'DescUnidMedOrig'
+            Options.Editing = False
+            Width = 401
+          end
+          object jktExpDBGrid3DBTableView1oid_UnidMedDest: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_UnidMedDest'
+            Visible = False
+          end
+          object jktExpDBGrid3DBTableView1CodUnidMedDest: TcxGridDBColumn
+            Caption = 'C'#243'd. Unid. Med. Dest'
+            DataBinding.FieldName = 'CodUnidMedDest'
+          end
+          object jktExpDBGrid3DBTableView1DescUnidMedDest: TcxGridDBColumn
+            Caption = 'Desc. Unid. Med. Dest.'
+            DataBinding.FieldName = 'DescUnidMedDest'
+            Options.Editing = False
+            Width = 374
+          end
+          object jktExpDBGrid3DBTableView1FactConv: TcxGridDBColumn
+            Caption = 'Factor Conv.'
+            DataBinding.FieldName = 'FactConv'
+            Width = 94
+          end
+          object jktExpDBGrid3DBTableView1Activo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+            Width = 48
+          end
+        end
+        object jktExpDBGrid3Level1: TcxGridLevel
+          GridView = jktExpDBGrid3DBTableView1
+        end
       end
-    end
-    object jktExpDBGrid4: TjktExpDBGrid
-      Left = 22
-      Top = 1152
-      Width = 726
-      Height = 200
-      TabOrder = 25
-      DataSource = dsClasifProd
-      object jktExpDBGrid4DBTableView1: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsClasifProd
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.FocusFirstCellOnNewRecord = True
-        OptionsData.Deleting = False
-        OptionsData.Inserting = False
-        OptionsView.GroupByBox = False
-        object jktExpDBGrid4DBTableView1oid_ClasifProd: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ClasifProd'
-          Visible = False
+      object jktExpDBGrid4: TjktExpDBGrid
+        Left = 20
+        Top = 1214
+        Width = 726
+        Height = 200
+        TabOrder = 25
+        DataSource = dsClasifProd
+        object jktExpDBGrid4DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsClasifProd
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
+          object jktExpDBGrid4DBTableView1oid_ClasifProd: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ClasifProd'
+            Visible = False
+          end
+          object jktExpDBGrid4DBTableView1oid_Art: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Art'
+            Visible = False
+          end
+          object jktExpDBGrid4DBTableView1oid_Clasif: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_Clasif'
+            Visible = False
+          end
+          object jktExpDBGrid4DBTableView1DescClasif: TcxGridDBColumn
+            Caption = 'Desc. Clasif.'
+            DataBinding.FieldName = 'DescClasif'
+            Options.Editing = False
+          end
+          object jktExpDBGrid4DBTableView1oid_ValorClasif: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_ValorClasif'
+            Visible = False
+          end
+          object jktExpDBGrid4DBTableView1CodValorClasif: TcxGridDBColumn
+            Caption = 'C'#243'd. Valor Clasif.'
+            DataBinding.FieldName = 'CodValorClasif'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = jktExpDBGrid4DBTableView1CodValorClasifPropertiesButtonClick
+          end
+          object jktExpDBGrid4DBTableView1DescValorClasif: TcxGridDBColumn
+            Caption = 'Desc. Valor Clasif.'
+            DataBinding.FieldName = 'DescValorClasif'
+            Options.Editing = False
+          end
+          object jktExpDBGrid4DBTableView1Activo: TcxGridDBColumn
+            DataBinding.FieldName = 'Activo'
+          end
         end
-        object jktExpDBGrid4DBTableView1oid_Art: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Art'
-          Visible = False
-        end
-        object jktExpDBGrid4DBTableView1oid_Clasif: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_Clasif'
-          Visible = False
-        end
-        object jktExpDBGrid4DBTableView1DescClasif: TcxGridDBColumn
-          Caption = 'Desc. Clasif.'
-          DataBinding.FieldName = 'DescClasif'
-          Options.Editing = False
-        end
-        object jktExpDBGrid4DBTableView1oid_ValorClasif: TcxGridDBColumn
-          DataBinding.FieldName = 'oid_ValorClasif'
-          Visible = False
-        end
-        object jktExpDBGrid4DBTableView1CodValorClasif: TcxGridDBColumn
-          Caption = 'C'#243'd. Valor Clasif.'
-          DataBinding.FieldName = 'CodValorClasif'
-          PropertiesClassName = 'TcxButtonEditProperties'
-          Properties.Buttons = <
-            item
-              Default = True
-              Kind = bkEllipsis
-            end>
-          Properties.OnButtonClick = jktExpDBGrid4DBTableView1CodValorClasifPropertiesButtonClick
-        end
-        object jktExpDBGrid4DBTableView1DescValorClasif: TcxGridDBColumn
-          Caption = 'Desc. Valor Clasif.'
-          DataBinding.FieldName = 'DescValorClasif'
-          Options.Editing = False
-        end
-        object jktExpDBGrid4DBTableView1Activo: TcxGridDBColumn
-          DataBinding.FieldName = 'Activo'
+        object jktExpDBGrid4Level1: TcxGridLevel
+          GridView = jktExpDBGrid4DBTableView1
         end
       end
-      object jktExpDBGrid4Level1: TcxGridLevel
-        GridView = jktExpDBGrid4DBTableView1
+      object cxDBLookupComboBox1: TcxDBLookupComboBox
+        Left = 106
+        Top = 225
+        DataBinding.DataField = 'oid_TipoArt'
+        DataBinding.DataSource = dsArticulo
+        Properties.KeyFieldNames = 'oid_TipoArt'
+        Properties.ListColumns = <
+          item
+            Caption = 'C'#243'digo'
+            Width = 60
+            FieldName = 'CodTipoArt'
+          end
+          item
+            Caption = 'Descripci'#243'n'
+            Width = 220
+            FieldName = 'DescTipoArt'
+          end>
+        Properties.ListFieldIndex = 1
+        Properties.ListSource = dsTiposDeProducto
+        Style.HotTrack = False
+        TabOrder = 9
+        Width = 280
       end
-    end
-    object cxDBLookupComboBox1: TcxDBLookupComboBox
-      Left = 108
-      Top = 205
-      DataBinding.DataField = 'oid_TipoArt'
-      DataBinding.DataSource = dsArticulo
-      Properties.KeyFieldNames = 'oid_TipoArt'
-      Properties.ListColumns = <
-        item
-          Caption = 'C'#243'digo'
-          Width = 60
-          FieldName = 'CodTipoArt'
-        end
-        item
-          Caption = 'Descripci'#243'n'
-          Width = 220
-          FieldName = 'DescTipoArt'
-        end>
-      Properties.ListFieldIndex = 1
-      Properties.ListSource = dsTiposDeProducto
-      Style.HotTrack = False
-      TabOrder = 9
-      Width = 280
-    end
-    object cxDBButtonEdit1: TcxDBButtonEdit
-      Left = 160
-      Top = 704
-      DataBinding.DataField = 'CodUnidStockPrinc'
-      DataBinding.DataSource = dsArticulo
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 12
-      Width = 70
-    end
-    object cxDBButtonEdit2: TcxDBButtonEdit
-      Left = 160
-      Top = 731
-      DataBinding.DataField = 'CodUnidStockSecun'
-      DataBinding.DataSource = dsArticulo
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 14
-      Width = 70
-    end
-    object cxDBButtonEdit3: TcxDBButtonEdit
-      Left = 160
-      Top = 758
-      DataBinding.DataField = 'CodUnidStockTerc'
-      DataBinding.DataSource = dsArticulo
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 16
-      Width = 70
-    end
-    object cxDBButtonEdit4: TcxDBButtonEdit
-      Left = 160
-      Top = 801
-      DataBinding.DataField = 'CodUnidVenta'
-      DataBinding.DataSource = dsArticulo
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 18
-      Width = 70
-    end
-    object cxDBButtonEdit5: TcxDBButtonEdit
-      Left = 160
-      Top = 828
-      DataBinding.DataField = 'CodUnidProd'
-      DataBinding.DataSource = dsArticulo
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit5PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 20
-      Width = 70
-    end
-    object cxDBButtonEdit6: TcxDBButtonEdit
-      Left = 160
-      Top = 855
-      DataBinding.DataField = 'CodUnidCompra'
-      DataBinding.DataSource = dsArticulo
-      Properties.Buttons = <
-        item
-          Default = True
-          Kind = bkEllipsis
-        end>
-      Properties.OnButtonClick = cxDBButtonEdit6PropertiesButtonClick
-      Style.HotTrack = False
-      TabOrder = 22
-      Width = 70
-    end
-    object cxDBTextEdit3: TcxDBTextEdit
-      Left = 236
-      Top = 704
-      DataBinding.DataField = 'DescUnidStockPrinc'
-      DataBinding.DataSource = dsArticulo
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 13
-      Width = 200
-    end
-    object cxDBTextEdit4: TcxDBTextEdit
-      Left = 236
-      Top = 731
-      DataBinding.DataField = 'DescUnidStockSecun'
-      DataBinding.DataSource = dsArticulo
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 15
-      Width = 200
-    end
-    object cxDBTextEdit5: TcxDBTextEdit
-      Left = 236
-      Top = 758
-      DataBinding.DataField = 'DescUnidStockTerc'
-      DataBinding.DataSource = dsArticulo
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 17
-      Width = 200
-    end
-    object cxDBTextEdit6: TcxDBTextEdit
-      Left = 236
-      Top = 801
-      DataBinding.DataField = 'DescUnidVenta'
-      DataBinding.DataSource = dsArticulo
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 19
-      Width = 200
-    end
-    object cxDBTextEdit7: TcxDBTextEdit
-      Left = 236
-      Top = 828
-      DataBinding.DataField = 'DescUnidProd'
-      DataBinding.DataSource = dsArticulo
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 21
-      Width = 200
-    end
-    object cxDBTextEdit8: TcxDBTextEdit
-      Left = 236
-      Top = 855
-      DataBinding.DataField = 'DescUnidCompra'
-      DataBinding.DataSource = dsArticulo
-      Enabled = False
-      Style.HotTrack = False
-      TabOrder = 23
-      Width = 200
-    end
-    object lcMainGroup_Root: TdxLayoutGroup
-      AlignHorz = ahLeft
-      AlignVert = avTop
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ShowBorder = False
-      Index = -1
-    end
-    object lcMainGroup1: TdxLayoutGroup
-      CaptionOptions.Text = 'Datos del Producto'
-      Parent = lcMainGroup_Root
-      ButtonOptions.Buttons = <>
-      Index = 0
-    end
-    object lcMainItem1: TdxLayoutItem
-      CaptionOptions.Text = 'Producto'
-      Parent = lcMainGroup8
-      Control = cxDBTextEdit1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem2: TdxLayoutItem
-      CaptionOptions.AlignVert = tavTop
-      CaptionOptions.Text = 'Descripci'#243'n'
-      Parent = lcMainGroup6
-      Control = cxDBMemo1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem3: TdxLayoutItem
-      CaptionOptions.Text = 'Desc. Abreviada'
-      Parent = lcMainGroup6
-      Control = cxDBTextEdit2
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainItem4: TdxLayoutItem
-      AlignHorz = ahLeft
-      CaptionOptions.Text = 'Bien'
-      Parent = lcMainGroup2
-      Control = cxDBCheckBox1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem5: TdxLayoutItem
-      AlignHorz = ahLeft
-      CaptionOptions.Text = 'Servicio'
-      Parent = lcMainGroup2
-      Control = cxDBCheckBox2
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainItem6: TdxLayoutItem
-      CaptionOptions.Text = 'Stockeable'
-      Parent = lcMainGroup4
-      Control = cxDBCheckBox3
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem7: TdxLayoutItem
-      CaptionOptions.Text = 'Producci'#243'n Propia'
-      Parent = lcMainGroup4
-      Control = cxDBCheckBox4
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainItem8: TdxLayoutItem
-      CaptionOptions.Text = 'Comprable'
-      Parent = lcMainGroup5
-      Control = cxDBCheckBox5
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem9: TdxLayoutItem
-      CaptionOptions.Text = 'Vendible'
-      Parent = lcMainGroup5
-      Control = cxDBCheckBox6
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup2: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup8
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup3: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup1
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 2
-    end
-    object lcMainGroup4: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup3
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ItemControlAreaAlignment = catOwn
-      ShowBorder = False
-      Index = 0
-    end
-    object lcMainGroup5: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup3
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ItemControlAreaAlignment = catOwn
-      ShowBorder = False
-      Index = 2
-    end
-    object lcMainSeparatorItem2: TdxLayoutSeparatorItem
-      CaptionOptions.Text = 'Separator'
-      Parent = lcMainGroup3
-      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
-      SizeOptions.SizableHorz = False
-      SizeOptions.SizableVert = False
-      Index = 1
-    end
-    object lcMainGroup6: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup7
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup7: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup1
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 0
-    end
-    object lcMainSeparatorItem3: TdxLayoutSeparatorItem
-      CaptionOptions.Text = 'Separator'
-      Parent = lcMainGroup1
-      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
-      SizeOptions.SizableHorz = False
-      SizeOptions.SizableVert = False
-      Index = 1
-    end
-    object lcMainGroup8: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup7
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ItemControlAreaAlignment = catNone
-      ShowBorder = False
-      Index = 0
-    end
-    object lcMainGroup9: TdxLayoutGroup
-      CaptionOptions.Text = 'Especificaciones de Producto'
-      Parent = lcMainGroup_Root
-      ButtonOptions.Buttons = <>
-      ItemControlAreaAlignment = catOwn
-      Index = 1
-    end
-    object lcMainGroup10: TdxLayoutGroup
-      CaptionOptions.Text = 'New Group'
-      Parent = lcMainGroup_Root
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      ShowBorder = False
-      Index = 2
-    end
-    object lcMainGroup11: TdxLayoutGroup
-      CaptionOptions.Text = 'Apertura de Stock'
-      Parent = lcMainGroup10
-      ButtonOptions.Buttons = <>
-      Index = 0
-    end
-    object lcMainGroup12: TdxLayoutGroup
-      CaptionOptions.Text = 'Unidades de Medida'
-      Parent = lcMainGroup10
-      ButtonOptions.Buttons = <>
-      Index = 1
-    end
-    object lcMainGroup13: TdxLayoutGroup
-      CaptionOptions.Text = 'Clasificadores'
-      Parent = lcMainGroup10
-      ButtonOptions.Buttons = <>
-      Index = 2
-    end
-    object lcMainItem10: TdxLayoutItem
-      CaptionOptions.Text = 'jktExpDBGrid1'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup9
-      Control = jktExpDBGrid1
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
-    object lcMainItem11: TdxLayoutItem
-      CaptionOptions.Text = 'jktExpDBGrid2'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup11
-      Control = jktExpDBGrid2
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem12: TdxLayoutItem
-      CaptionOptions.Text = 'Equivalencias'
-      CaptionOptions.Layout = clTop
-      Parent = lcMainGroup12
-      Control = jktExpDBGrid3
-      ControlOptions.ShowBorder = False
-      Index = 8
-    end
-    object lcMainItem13: TdxLayoutItem
-      CaptionOptions.Text = 'jktExpDBGrid4'
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup13
-      Control = jktExpDBGrid4
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem14: TdxLayoutItem
-      AlignHorz = ahLeft
-      CaptionOptions.Text = 'Tipo de Producto'
-      Parent = lcMainGroup9
-      Control = cxDBLookupComboBox1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem15: TdxLayoutItem
-      CaptionOptions.Text = 'Unidad de Stock Principal'
-      Parent = lcMainGroup14
-      Control = cxDBButtonEdit1
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem16: TdxLayoutItem
-      CaptionOptions.Text = 'Unidad de Stock Secundaria'
-      Parent = lcMainGroup15
-      Control = cxDBButtonEdit2
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem17: TdxLayoutItem
-      CaptionOptions.Text = 'Unidad de Stock Terciaria'
-      Parent = lcMainGroup16
-      Control = cxDBButtonEdit3
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem18: TdxLayoutItem
-      CaptionOptions.Text = 'Unidad de Venta'
-      Parent = lcMainGroup17
-      Control = cxDBButtonEdit4
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem19: TdxLayoutItem
-      CaptionOptions.Text = 'Unidad de Producci'#243'n'
-      Parent = lcMainGroup18
-      Control = cxDBButtonEdit5
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainItem20: TdxLayoutItem
-      CaptionOptions.Text = 'Unidad de Compra'
-      Parent = lcMainGroup19
-      Control = cxDBButtonEdit6
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object lcMainSpaceItem1: TdxLayoutEmptySpaceItem
-      CaptionOptions.Text = 'Empty Space Item'
-      Parent = lcMainGroup12
-      SizeOptions.Height = 10
-      SizeOptions.Width = 10
-      Index = 3
-    end
-    object lcMainSpaceItem2: TdxLayoutEmptySpaceItem
-      CaptionOptions.Text = 'Empty Space Item'
-      Parent = lcMainGroup12
-      SizeOptions.Height = 10
-      SizeOptions.Width = 10
-      Index = 7
-    end
-    object lcMainItem21: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup14
-      Control = cxDBTextEdit3
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem22: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup15
-      Control = cxDBTextEdit4
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem23: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup16
-      Control = cxDBTextEdit5
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem24: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup17
-      Control = cxDBTextEdit6
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem25: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup18
-      Control = cxDBTextEdit7
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainItem26: TdxLayoutItem
-      CaptionOptions.Visible = False
-      Parent = lcMainGroup19
-      Control = cxDBTextEdit8
-      ControlOptions.ShowBorder = False
-      Enabled = False
-      Index = 1
-    end
-    object lcMainGroup14: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup12
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 0
-    end
-    object lcMainGroup15: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup12
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 1
-    end
-    object lcMainGroup16: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup12
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 2
-    end
-    object lcMainGroup17: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup12
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 4
-    end
-    object lcMainGroup18: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup12
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 5
-    end
-    object lcMainGroup19: TdxLayoutGroup
-      CaptionOptions.Text = 'Hidden Group'
-      Parent = lcMainGroup12
-      ButtonOptions.Buttons = <>
-      Hidden = True
-      LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 6
+      object cxDBButtonEdit1: TcxDBButtonEdit
+        Left = 158
+        Top = 752
+        DataBinding.DataField = 'CodUnidStockPrinc'
+        DataBinding.DataSource = dsArticulo
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 12
+        Width = 70
+      end
+      object cxDBButtonEdit2: TcxDBButtonEdit
+        Left = 158
+        Top = 779
+        DataBinding.DataField = 'CodUnidStockSecun'
+        DataBinding.DataSource = dsArticulo
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 14
+        Width = 70
+      end
+      object cxDBButtonEdit3: TcxDBButtonEdit
+        Left = 158
+        Top = 806
+        DataBinding.DataField = 'CodUnidStockTerc'
+        DataBinding.DataSource = dsArticulo
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 16
+        Width = 70
+      end
+      object cxDBButtonEdit4: TcxDBButtonEdit
+        Left = 158
+        Top = 849
+        DataBinding.DataField = 'CodUnidVenta'
+        DataBinding.DataSource = dsArticulo
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 18
+        Width = 70
+      end
+      object cxDBButtonEdit5: TcxDBButtonEdit
+        Left = 158
+        Top = 876
+        DataBinding.DataField = 'CodUnidProd'
+        DataBinding.DataSource = dsArticulo
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit5PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 20
+        Width = 70
+      end
+      object cxDBButtonEdit6: TcxDBButtonEdit
+        Left = 158
+        Top = 903
+        DataBinding.DataField = 'CodUnidCompra'
+        DataBinding.DataSource = dsArticulo
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit6PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 22
+        Width = 70
+      end
+      object cxDBTextEdit3: TcxDBTextEdit
+        Left = 234
+        Top = 752
+        DataBinding.DataField = 'DescUnidStockPrinc'
+        DataBinding.DataSource = dsArticulo
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 13
+        Width = 200
+      end
+      object cxDBTextEdit4: TcxDBTextEdit
+        Left = 234
+        Top = 779
+        DataBinding.DataField = 'DescUnidStockSecun'
+        DataBinding.DataSource = dsArticulo
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 15
+        Width = 200
+      end
+      object cxDBTextEdit5: TcxDBTextEdit
+        Left = 234
+        Top = 806
+        DataBinding.DataField = 'DescUnidStockTerc'
+        DataBinding.DataSource = dsArticulo
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 17
+        Width = 200
+      end
+      object cxDBTextEdit6: TcxDBTextEdit
+        Left = 234
+        Top = 849
+        DataBinding.DataField = 'DescUnidVenta'
+        DataBinding.DataSource = dsArticulo
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 19
+        Width = 200
+      end
+      object cxDBTextEdit7: TcxDBTextEdit
+        Left = 234
+        Top = 876
+        DataBinding.DataField = 'DescUnidProd'
+        DataBinding.DataSource = dsArticulo
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 21
+        Width = 200
+      end
+      object cxDBTextEdit8: TcxDBTextEdit
+        Left = 234
+        Top = 903
+        DataBinding.DataField = 'DescUnidCompra'
+        DataBinding.DataSource = dsArticulo
+        Enabled = False
+        Style.HotTrack = False
+        TabOrder = 23
+        Width = 200
+      end
+      object lcMainGroup_Root: TdxLayoutGroup
+        AlignHorz = ahLeft
+        AlignVert = avTop
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = -1
+      end
+      object lcMainGroup1: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos del Producto'
+        Parent = lcMainGroup_Root
+        ButtonOptions.Buttons = <>
+        Index = 0
+      end
+      object lcMainItem1: TdxLayoutItem
+        CaptionOptions.Text = 'Producto'
+        Parent = lcMainGroup8
+        Control = cxDBTextEdit1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem2: TdxLayoutItem
+        CaptionOptions.AlignVert = tavTop
+        CaptionOptions.Text = 'Descripci'#243'n'
+        Parent = lcMainGroup6
+        Control = cxDBMemo1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem3: TdxLayoutItem
+        CaptionOptions.Text = 'Desc. Abreviada'
+        Parent = lcMainGroup6
+        Control = cxDBTextEdit2
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem4: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Bien'
+        Parent = lcMainGroup2
+        Control = cxDBCheckBox1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem5: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Servicio'
+        Parent = lcMainGroup2
+        Control = cxDBCheckBox2
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem6: TdxLayoutItem
+        CaptionOptions.Text = 'Stockeable'
+        Parent = lcMainGroup4
+        Control = cxDBCheckBox3
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem7: TdxLayoutItem
+        CaptionOptions.Text = 'Producci'#243'n Propia'
+        Parent = lcMainGroup4
+        Control = cxDBCheckBox4
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem8: TdxLayoutItem
+        CaptionOptions.Text = 'Comprable'
+        Parent = lcMainGroup5
+        Control = cxDBCheckBox5
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem9: TdxLayoutItem
+        CaptionOptions.Text = 'Vendible'
+        Parent = lcMainGroup5
+        Control = cxDBCheckBox6
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup2: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup8
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup3: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup1
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
+      object lcMainGroup4: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemControlAreaAlignment = catOwn
+        ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup5: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemControlAreaAlignment = catOwn
+        ShowBorder = False
+        Index = 2
+      end
+      object lcMainSeparatorItem2: TdxLayoutSeparatorItem
+        CaptionOptions.Text = 'Separator'
+        Parent = lcMainGroup3
+        SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+        SizeOptions.SizableHorz = False
+        SizeOptions.SizableVert = False
+        Index = 1
+      end
+      object lcMainGroup6: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup7
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup7: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup1
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object lcMainSeparatorItem3: TdxLayoutSeparatorItem
+        CaptionOptions.Text = 'Separator'
+        Parent = lcMainGroup1
+        SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+        SizeOptions.SizableHorz = False
+        SizeOptions.SizableVert = False
+        Index = 1
+      end
+      object lcMainGroup8: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup7
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemControlAreaAlignment = catNone
+        ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup9: TdxLayoutGroup
+        CaptionOptions.Text = 'Especificaciones de Producto'
+        Parent = lcMainGroup_Root
+        ButtonOptions.Buttons = <>
+        ItemControlAreaAlignment = catOwn
+        Index = 1
+      end
+      object lcMainGroup10: TdxLayoutGroup
+        CaptionOptions.Text = 'New Group'
+        Parent = lcMainGroup_Root
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = 2
+      end
+      object lcMainGroup11: TdxLayoutGroup
+        CaptionOptions.Text = 'Apertura de Stock'
+        Parent = lcMainGroup10
+        ButtonOptions.Buttons = <>
+        Index = 0
+      end
+      object lcMainGroup12: TdxLayoutGroup
+        CaptionOptions.Text = 'Unidades de Medida'
+        Parent = lcMainGroup10
+        ButtonOptions.Buttons = <>
+        Index = 1
+      end
+      object lcMainGroup13: TdxLayoutGroup
+        CaptionOptions.Text = 'Clasificadores'
+        Parent = lcMainGroup10
+        ButtonOptions.Buttons = <>
+        Index = 2
+      end
+      object lcMainItem10: TdxLayoutItem
+        CaptionOptions.Text = 'jktExpDBGrid1'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup9
+        Control = jktExpDBGrid1
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem11: TdxLayoutItem
+        CaptionOptions.Text = 'jktExpDBGrid2'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup11
+        Control = jktExpDBGrid2
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem12: TdxLayoutItem
+        CaptionOptions.Text = 'Equivalencias'
+        CaptionOptions.Layout = clTop
+        Parent = lcMainGroup12
+        Control = jktExpDBGrid3
+        ControlOptions.ShowBorder = False
+        Index = 8
+      end
+      object lcMainItem13: TdxLayoutItem
+        CaptionOptions.Text = 'jktExpDBGrid4'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup13
+        Control = jktExpDBGrid4
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem14: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Tipo de Producto'
+        Parent = lcMainGroup9
+        Control = cxDBLookupComboBox1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem15: TdxLayoutItem
+        CaptionOptions.Text = 'Unidad de Stock Principal'
+        Parent = lcMainGroup14
+        Control = cxDBButtonEdit1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem16: TdxLayoutItem
+        CaptionOptions.Text = 'Unidad de Stock Secundaria'
+        Parent = lcMainGroup15
+        Control = cxDBButtonEdit2
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem17: TdxLayoutItem
+        CaptionOptions.Text = 'Unidad de Stock Terciaria'
+        Parent = lcMainGroup16
+        Control = cxDBButtonEdit3
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem18: TdxLayoutItem
+        CaptionOptions.Text = 'Unidad de Venta'
+        Parent = lcMainGroup17
+        Control = cxDBButtonEdit4
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem19: TdxLayoutItem
+        CaptionOptions.Text = 'Unidad de Producci'#243'n'
+        Parent = lcMainGroup18
+        Control = cxDBButtonEdit5
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem20: TdxLayoutItem
+        CaptionOptions.Text = 'Unidad de Compra'
+        Parent = lcMainGroup19
+        Control = cxDBButtonEdit6
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainSpaceItem1: TdxLayoutEmptySpaceItem
+        CaptionOptions.Text = 'Empty Space Item'
+        Parent = lcMainGroup12
+        SizeOptions.Height = 10
+        SizeOptions.Width = 10
+        Index = 3
+      end
+      object lcMainSpaceItem2: TdxLayoutEmptySpaceItem
+        CaptionOptions.Text = 'Empty Space Item'
+        Parent = lcMainGroup12
+        SizeOptions.Height = 10
+        SizeOptions.Width = 10
+        Index = 7
+      end
+      object lcMainItem21: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup14
+        Control = cxDBTextEdit3
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem22: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup15
+        Control = cxDBTextEdit4
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem23: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup16
+        Control = cxDBTextEdit5
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem24: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup17
+        Control = cxDBTextEdit6
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem25: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup18
+        Control = cxDBTextEdit7
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainItem26: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup19
+        Control = cxDBTextEdit8
+        ControlOptions.ShowBorder = False
+        Enabled = False
+        Index = 1
+      end
+      object lcMainGroup14: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup12
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup15: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup12
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup16: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup12
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
+      object lcMainGroup17: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup12
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 4
+      end
+      object lcMainGroup18: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup12
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 5
+      end
+      object lcMainGroup19: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup12
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 6
+      end
     end
   end
   inherited BarManager: TdxBarManager

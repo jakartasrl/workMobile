@@ -6,332 +6,379 @@ inherited FNVen0002: TFNVen0002
   ExplicitHeight = 451
   PixelsPerInch = 96
   TextHeight = 13
-  object dxBevel1: TdxBevel [0]
-    Left = 760
-    Top = 73
-    Width = 9
-    Height = 339
-    Align = alRight
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    Shape = dxbsNone
-    ExplicitWidth = 94
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitLeft = 406
+    ExplicitTop = 73
+    ExplicitHeight = 339
+    Height = 412
   end
-  object cxGroupBox1: TcxGroupBox [1]
-    Left = 0
-    Top = 0
-    Align = alTop
-    Caption = 'Datos del Modelo de Cotizador'
-    Ctl3D = False
-    ParentCtl3D = False
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 412
+    ExplicitLeft = 591
+    ExplicitTop = 73
+    ExplicitHeight = 339
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 584
     TabOrder = 4
-    Height = 73
-    Width = 769
-    object cxDBTextEdit1: TcxDBTextEdit
-      Left = 60
-      Top = 30
-      DataBinding.DataField = 'cod_mod'
-      DataBinding.DataSource = dsCab
-      TabOrder = 0
-      Width = 121
-    end
-    object cxDBTextEdit2: TcxDBTextEdit
-      Left = 256
-      Top = 30
-      DataBinding.DataField = 'des_mod'
-      DataBinding.DataSource = dsCab
-      TabOrder = 1
-      Width = 487
-    end
-    object cxLabel1: TcxLabel
-      Left = 14
-      Top = 32
-      AutoSize = False
-      Caption = 'C'#243'digo :'
-      Properties.Alignment.Horz = taLeftJustify
-      Transparent = True
-      Height = 17
-      Width = 46
-    end
-    object cxLabel2: TcxLabel
-      Left = 179
-      Top = 32
-      AutoSize = False
-      Caption = 'Descripci'#243'n :'
-      Properties.Alignment.Horz = taRightJustify
-      Transparent = True
-      Height = 17
-      Width = 75
-      AnchorX = 254
-    end
+    ExplicitLeft = 575
+    ExplicitTop = 73
+    ExplicitHeight = 339
+    Height = 412
   end
-  object cxGroupBox2: TcxGroupBox [2]
-    Left = 0
-    Top = 73
-    Align = alLeft
-    PanelStyle.Active = True
-    TabOrder = 5
-    Height = 339
-    Width = 406
-    object cxDBTreeList1: TcxDBTreeList
-      Left = 2
-      Top = 2
-      Width = 402
-      Height = 335
-      Align = alClient
-      Bands = <
-        item
-          Caption.AlignHorz = taCenter
-          Caption.AlignVert = vaCenter
-          Caption.Text = 'T'#237'tulo/Concepto'
-        end>
-      DataController.DataSource = dsDet
-      DataController.ParentField = 'codInternoPadre'
-      DataController.KeyField = 'codInterno'
-      Navigator.Buttons.CustomButtons = <>
-      OptionsBehavior.GoToNextCellOnTab = True
-      OptionsCustomizing.BandCustomizing = False
-      OptionsCustomizing.BandHorzSizing = False
-      OptionsCustomizing.BandMoving = False
-      OptionsCustomizing.BandVertSizing = False
-      OptionsData.Deleting = False
-      OptionsView.Bands = True
-      PopupMenu = PopupMenu
-      RootValue = 0
-      TabOrder = 0
-      object cxDBTreeList1oid_titu_conc: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_titu_conc'
-        Position.ColIndex = 0
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1oid_mod: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_mod'
-        Position.ColIndex = 1
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1codInterno: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'codInterno'
-        Position.ColIndex = 2
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'codInternoPadre'
-        Position.ColIndex = 3
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1cod_titu_conc: TcxDBTreeListColumn
-        Caption.Text = 'C'#243'digo'
-        DataBinding.FieldName = 'cod_titu_conc'
-        Options.Editing = False
-        Position.ColIndex = 4
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1des_titu_conc: TcxDBTreeListColumn
-        Caption.Text = 'Descripci'#243'n'
-        DataBinding.FieldName = 'des_titu_conc'
-        Options.Editing = False
-        Width = 300
-        Position.ColIndex = 5
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1oid_conc: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'oid_conc'
-        Position.ColIndex = 6
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-      object cxDBTreeList1tipo: TcxDBTreeListColumn
-        Visible = False
-        DataBinding.FieldName = 'tipo'
-        Position.ColIndex = 7
-        Position.RowIndex = 0
-        Position.BandIndex = 0
-        Summary.FooterSummaryItems = <>
-        Summary.GroupFooterSummaryItems = <>
-      end
-    end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 576
+    Height = 412
+    ExplicitLeft = 567
+    ExplicitTop = 73
+    ExplicitHeight = 339
   end
-  object cxGroupBox3: TcxGroupBox [3]
-    Left = 406
-    Top = 73
-    Align = alClient
-    PanelStyle.Active = True
-    PanelStyle.BorderWidth = 5
+  inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 6
-    Height = 339
-    Width = 354
-    object dxBevel2: TdxBevel
-      Left = 7
-      Top = 142
-      Width = 340
-      Height = 10
-      Align = alTop
+    ExplicitLeft = 599
+    ExplicitTop = 73
+    ExplicitHeight = 339
+    Height = 412
+    Width = 383
+    object dxBevel1: TdxBevel
+      Left = 757
+      Top = 95
+      Width = -377
+      Height = 314
+      Align = alRight
+      Anchors = [akLeft, akTop, akRight, akBottom]
       Shape = dxbsNone
-      ExplicitLeft = 23
-      ExplicitTop = 136
-      ExplicitWidth = 370
+      ExplicitLeft = 760
+      ExplicitTop = 73
+      ExplicitWidth = 94
+      ExplicitHeight = 339
     end
-    object cxGroupBox5: TcxGroupBox
-      Left = 7
-      Top = 152
+    object cxGroupBox1: TcxGroupBox
+      Left = 3
+      Top = 22
       Align = alTop
-      Alignment = alTopCenter
-      Caption = 'Alta de Concepto'
-      Enabled = False
-      TabOrder = 1
-      Height = 135
-      Width = 340
-      object cxLabel5: TcxLabel
-        Left = 12
-        Top = 30
-        Caption = 'C'#243'digo :'
-        Transparent = True
-      end
-      object cxLabel6: TcxLabel
-        Left = 12
-        Top = 65
-        Caption = 'Descripci'#243'n :'
-        Transparent = True
-      end
-      object cxButtonEdit3: TcxButtonEdit
-        Left = 80
-        Top = 28
-        Properties.Buttons = <
-          item
-            Default = True
-            Kind = bkEllipsis
-          end>
-        Properties.ReadOnly = True
-        Properties.OnButtonClick = cxButtonEdit3PropertiesButtonClick
-        TabOrder = 2
-        Width = 97
-      end
-      object cxTextEdit4: TcxTextEdit
-        Left = 80
-        Top = 63
-        Enabled = False
-        TabOrder = 3
-        Width = 250
-      end
-      object cxButton3: TcxButton
-        Left = 174
-        Top = 92
-        Width = 75
-        Height = 25
-        Caption = 'Agregar'
-        Enabled = False
-        TabOrder = 4
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = cxButton3Click
-      end
-      object cxButton4: TcxButton
-        Left = 255
-        Top = 92
-        Width = 75
-        Height = 25
-        Caption = 'Cancelar'
-        TabOrder = 5
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = cxButton2Click
-      end
-    end
-    object cxGroupBox4: TcxGroupBox
-      Left = 7
-      Top = 7
-      Align = alTop
-      Alignment = alTopCenter
-      Caption = 'Alta de T'#237'tulo'
-      Enabled = False
+      Caption = 'Datos del Modelo de Cotizador'
+      Ctl3D = False
+      ParentCtl3D = False
       TabOrder = 0
-      Height = 135
-      Width = 340
-      object cxLabel3: TcxLabel
-        Left = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 769
+      Height = 73
+      Width = 377
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 60
         Top = 30
+        DataBinding.DataField = 'cod_mod'
+        DataBinding.DataSource = dsCab
+        TabOrder = 0
+        Width = 121
+      end
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 256
+        Top = 30
+        DataBinding.DataField = 'des_mod'
+        DataBinding.DataSource = dsCab
+        TabOrder = 1
+        Width = 487
+      end
+      object cxLabel1: TcxLabel
+        Left = 14
+        Top = 32
+        AutoSize = False
         Caption = 'C'#243'digo :'
+        Properties.Alignment.Horz = taLeftJustify
         Transparent = True
+        Height = 17
+        Width = 46
       end
-      object cxLabel4: TcxLabel
-        Left = 12
-        Top = 65
+      object cxLabel2: TcxLabel
+        Left = 179
+        Top = 32
+        AutoSize = False
         Caption = 'Descripci'#243'n :'
+        Properties.Alignment.Horz = taRightJustify
         Transparent = True
-      end
-      object cxTextEdit1: TcxTextEdit
-        Left = 80
-        Top = 28
-        TabOrder = 2
-        Width = 97
-      end
-      object cxTextEdit2: TcxTextEdit
-        Left = 80
-        Top = 63
-        TabOrder = 3
-        Width = 250
-      end
-      object cxButton1: TcxButton
-        Left = 174
-        Top = 92
+        Height = 17
         Width = 75
-        Height = 25
-        Caption = 'Agregar'
-        TabOrder = 4
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = cxButton1Click
+        AnchorX = 254
       end
-      object cxButton2: TcxButton
-        Left = 255
-        Top = 92
-        Width = 75
-        Height = 25
-        Caption = 'Cancelar'
-        TabOrder = 5
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        OnClick = cxButton2Click
+    end
+    object cxGroupBox2: TcxGroupBox
+      Left = 3
+      Top = 95
+      Align = alLeft
+      PanelStyle.Active = True
+      TabOrder = 1
+      ExplicitLeft = -32
+      Height = 314
+      Width = 406
+      object cxDBTreeList1: TcxDBTreeList
+        Left = 2
+        Top = 2
+        Width = 402
+        Height = 310
+        Align = alClient
+        Bands = <
+          item
+            Caption.AlignHorz = taCenter
+            Caption.AlignVert = vaCenter
+            Caption.Text = 'T'#237'tulo/Concepto'
+          end>
+        DataController.DataSource = dsDet
+        DataController.ParentField = 'codInternoPadre'
+        DataController.KeyField = 'codInterno'
+        Navigator.Buttons.CustomButtons = <>
+        OptionsBehavior.GoToNextCellOnTab = True
+        OptionsCustomizing.BandCustomizing = False
+        OptionsCustomizing.BandHorzSizing = False
+        OptionsCustomizing.BandMoving = False
+        OptionsCustomizing.BandVertSizing = False
+        OptionsData.Deleting = False
+        OptionsView.Bands = True
+        PopupMenu = PopupMenu
+        RootValue = 0
+        TabOrder = 0
+        ExplicitHeight = 408
+        object cxDBTreeList1oid_titu_conc: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_titu_conc'
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1oid_mod: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_mod'
+          Position.ColIndex = 1
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1codInterno: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'codInterno'
+          Position.ColIndex = 2
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1codInternoPadre: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'codInternoPadre'
+          Position.ColIndex = 3
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1cod_titu_conc: TcxDBTreeListColumn
+          Caption.Text = 'C'#243'digo'
+          DataBinding.FieldName = 'cod_titu_conc'
+          Options.Editing = False
+          Position.ColIndex = 4
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1des_titu_conc: TcxDBTreeListColumn
+          Caption.Text = 'Descripci'#243'n'
+          DataBinding.FieldName = 'des_titu_conc'
+          Options.Editing = False
+          Width = 300
+          Position.ColIndex = 5
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1oid_conc: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'oid_conc'
+          Position.ColIndex = 6
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object cxDBTreeList1tipo: TcxDBTreeListColumn
+          Visible = False
+          DataBinding.FieldName = 'tipo'
+          Position.ColIndex = 7
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+      end
+    end
+    object cxGroupBox3: TcxGroupBox
+      Left = 409
+      Top = 95
+      Align = alClient
+      PanelStyle.Active = True
+      PanelStyle.BorderWidth = 5
+      TabOrder = 2
+      ExplicitLeft = 0
+      ExplicitWidth = 374
+      Height = 314
+      Width = 348
+      object dxBevel2: TdxBevel
+        Left = 7
+        Top = 142
+        Width = 334
+        Height = 10
+        Align = alTop
+        Shape = dxbsNone
+        ExplicitLeft = 23
+        ExplicitTop = 136
+        ExplicitWidth = 370
+      end
+      object cxGroupBox5: TcxGroupBox
+        Left = 7
+        Top = 152
+        Align = alTop
+        Alignment = alTopCenter
+        Caption = 'Alta de Concepto'
+        Enabled = False
+        TabOrder = 1
+        ExplicitWidth = 360
+        Height = 135
+        Width = 334
+        object cxLabel5: TcxLabel
+          Left = 12
+          Top = 30
+          Caption = 'C'#243'digo :'
+          Transparent = True
+        end
+        object cxLabel6: TcxLabel
+          Left = 12
+          Top = 65
+          Caption = 'Descripci'#243'n :'
+          Transparent = True
+        end
+        object cxButtonEdit3: TcxButtonEdit
+          Left = 80
+          Top = 28
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.ReadOnly = True
+          Properties.OnButtonClick = cxButtonEdit3PropertiesButtonClick
+          TabOrder = 2
+          Width = 97
+        end
+        object cxTextEdit4: TcxTextEdit
+          Left = 80
+          Top = 63
+          Enabled = False
+          TabOrder = 3
+          Width = 250
+        end
+        object cxButton3: TcxButton
+          Left = 174
+          Top = 92
+          Width = 75
+          Height = 25
+          Caption = 'Agregar'
+          Enabled = False
+          TabOrder = 4
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          OnClick = cxButton3Click
+        end
+        object cxButton4: TcxButton
+          Left = 255
+          Top = 92
+          Width = 75
+          Height = 25
+          Caption = 'Cancelar'
+          TabOrder = 5
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          OnClick = cxButton2Click
+        end
+      end
+      object cxGroupBox4: TcxGroupBox
+        Left = 7
+        Top = 7
+        Align = alTop
+        Alignment = alTopCenter
+        Caption = 'Alta de T'#237'tulo'
+        Enabled = False
+        TabOrder = 0
+        ExplicitWidth = 360
+        Height = 135
+        Width = 334
+        object cxLabel3: TcxLabel
+          Left = 12
+          Top = 30
+          Caption = 'C'#243'digo :'
+          Transparent = True
+        end
+        object cxLabel4: TcxLabel
+          Left = 12
+          Top = 65
+          Caption = 'Descripci'#243'n :'
+          Transparent = True
+        end
+        object cxTextEdit1: TcxTextEdit
+          Left = 80
+          Top = 28
+          TabOrder = 2
+          Width = 97
+        end
+        object cxTextEdit2: TcxTextEdit
+          Left = 80
+          Top = 63
+          TabOrder = 3
+          Width = 250
+        end
+        object cxButton1: TcxButton
+          Left = 174
+          Top = 92
+          Width = 75
+          Height = 25
+          Caption = 'Agregar'
+          TabOrder = 4
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          OnClick = cxButton1Click
+        end
+        object cxButton2: TcxButton
+          Left = 255
+          Top = 92
+          Width = 75
+          Height = 25
+          Caption = 'Cancelar'
+          TabOrder = 5
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          OnClick = cxButton2Click
+        end
       end
     end
   end

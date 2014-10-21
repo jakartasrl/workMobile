@@ -23,7 +23,8 @@ uses
   cxDBLookupComboBox, cxCheckBox, cxDBEdit, cxLabel, dxBevel, cxGroupBox,
   jktCNMet0014, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
   cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, jktCNMet0008;
+  cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, jktCNMet0008,
+  cxSplitter;
 
 type
   TFNImp0001 = class(TfrmChild)

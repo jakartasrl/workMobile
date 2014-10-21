@@ -22,7 +22,7 @@ uses
   cxEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, cxCheckBox, cxDBEdit, cxLabel, cxTextEdit, cxGroupBox,
   jktCNMet0014, cxCustomData, cxStyles, cxTL, cxTLdxBarBuiltInMenu,
-  cxInplaceContainer, cxTLData, cxDBTL, Vcl.Menus;
+  cxInplaceContainer, cxTLData, cxDBTL, Vcl.Menus, cxSplitter;
 
 type
   TFNCla0001 = class(TfrmChild)

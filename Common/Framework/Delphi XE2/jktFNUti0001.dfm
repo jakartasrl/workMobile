@@ -6,27 +6,63 @@ inherited FNUti0001: TFNUti0001
   ExplicitHeight = 423
   PixelsPerInch = 96
   TextHeight = 13
-  object jktExpDBGrid1: TjktExpDBGrid [0]
-    Left = 0
-    Top = 0
-    Width = 738
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 384
     Height = 384
-    Align = alClient
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 384
+    ExplicitLeft = 185
+    ExplicitTop = 0
+    ExplicitHeight = 384
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 553
     TabOrder = 4
-    DataSource = dsInput
-    object jktExpDBGrid1DBTableView1: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      DataController.DataSource = dsInput
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      OptionsBehavior.FocusCellOnTab = True
-      OptionsData.Appending = True
-      OptionsData.Deleting = False
-      OptionsData.DeletingConfirmation = False
-    end
-    object jktExpDBGrid1Level1: TcxGridLevel
-      GridView = jktExpDBGrid1DBTableView1
+    ExplicitLeft = 553
+    ExplicitHeight = 384
+    Height = 384
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 545
+    Height = 384
+    ExplicitLeft = 545
+    ExplicitTop = 0
+    ExplicitHeight = 384
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    TabOrder = 7
+    ExplicitWidth = 352
+    ExplicitHeight = 384
+    Height = 384
+    Width = 352
+    object jktExpDBGrid1: TjktExpDBGrid
+      Left = 3
+      Top = 22
+      Width = 346
+      Height = 359
+      Align = alClient
+      TabOrder = 0
+      DataSource = dsInput
+      ExplicitLeft = 193
+      ExplicitTop = 0
+      ExplicitWidth = 352
+      ExplicitHeight = 384
+      object jktExpDBGrid1DBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsInput
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsData.Appending = True
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsView.GroupByBox = False
+      end
+      object jktExpDBGrid1Level1: TcxGridLevel
+        GridView = jktExpDBGrid1DBTableView1
+      end
     end
   end
   inherited BarManager: TdxBarManager

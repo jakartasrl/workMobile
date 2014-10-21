@@ -20,6 +20,51 @@ object frmChild: TfrmChild
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object cxGroupBoxLeft: TcxGroupBox
+    Left = 0
+    Top = 0
+    Align = alLeft
+    TabOrder = 2
+    Height = 318
+    Width = 185
+  end
+  object cxSplitterLeft: TcxSplitter
+    Left = 185
+    Top = 0
+    Width = 8
+    Height = 318
+    Control = cxGroupBoxLeft
+    ExplicitLeft = 296
+    ExplicitTop = 184
+    ExplicitHeight = 100
+  end
+  object cxGroupBoxRight: TcxGroupBox
+    Left = 489
+    Top = 0
+    Align = alRight
+    TabOrder = 5
+    Height = 318
+    Width = 185
+  end
+  object cxSplitterRight: TcxSplitter
+    Left = 481
+    Top = 0
+    Width = 8
+    Height = 318
+    AlignSplitter = salRight
+    Control = cxGroupBoxRight
+    ExplicitLeft = 384
+    ExplicitTop = 224
+    ExplicitHeight = 100
+  end
+  object cxGroupBoxMain: TcxGroupBox
+    Left = 193
+    Top = 0
+    Align = alClient
+    TabOrder = 8
+    Height = 318
+    Width = 288
+  end
   object BarManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
