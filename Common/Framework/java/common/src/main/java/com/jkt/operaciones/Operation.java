@@ -31,15 +31,12 @@ import com.jkt.xmlreader.ElementTransformer;
 
 /**
  * 
- * Description: Cada evento del lado del cliente que tiene una accion en el
+ * Cada evento del lado del cliente que tiene una accion en el
  * servidor, genera una instancia de una operacion.<br>
  * Estas están configuradas en la aplicacion. Cada operacion que genera la
  * metodologia invoca al metodo execute().<br>
  * Dentro de este metodo (abstracto en esta clase), esta la logica de la
- * resolucion del evento. Copyright: Copyright (c) 2001 Company: JAKARTA SRL
- * 
- * Modificacion de esta clase para permitir el manejo de un servicio que se
- * encarga del manejo de transacciones.
+ * resolucion del evento. 
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -101,19 +98,10 @@ public abstract class Operation extends Observable {
 	 * Patron Template method. Se define un estructura basica, y se toma la
 	 * implementacion de las subclases.
 	 * 
-	 * 
-	 * @param outputStream
-	 * @param eventBusiness
-	 * @return
-	 * @throws JakartaException
-	 * @throws ClassNotFoundException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
 	 */
-	public Transformer generateTransformer(ServletOutputStream outputStream,
-			EventBusiness eventBusiness, String outputName)
-			throws JakartaException, ClassNotFoundException,
-			InstantiationException, IllegalAccessException {
+	public Transformer generateTransformer(ServletOutputStream outputStream, EventBusiness eventBusiness, String outputName)
+			throws JakartaException, ClassNotFoundException,InstantiationException, IllegalAccessException {
+		
 		ElementTransformer elementTransformer = eventBusiness.getTransformer();
 
 		/*
@@ -171,7 +159,6 @@ public abstract class Operation extends Observable {
 	 * @param parametro representa al parametro a mostrar en la salida.
 	 */
 	protected void notificarObjeto(String writer, Object parameter) {
-//		Notificacion notificacion = Notificacion.getNew(writer, parameter);
 		this.setChanged();
 		notifyObservers(Notificacion.getNew(writer, parameter));
 	}

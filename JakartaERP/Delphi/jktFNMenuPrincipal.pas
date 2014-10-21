@@ -603,7 +603,6 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
-
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 205;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Laboratorio';
@@ -817,7 +816,6 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 32;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Valores de Tablas de Validacion';
@@ -834,7 +832,6 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 34;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Ensayos Lab Electrico';
@@ -842,9 +839,6 @@ begin
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
-
-
-
 
   cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;

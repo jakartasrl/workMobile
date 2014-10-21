@@ -11,6 +11,8 @@
 			<generator class="native" />
 		</id>
 		
+		<discriminator column="TIPO_COMPROBANTE"></discriminator>
+		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		<property name="comportamiento" column="COMPORTAMIENTO" />

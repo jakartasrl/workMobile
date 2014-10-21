@@ -1,6 +1,5 @@
 package com.jkt.dominio;
 
-import org.omg.CORBA.TCKind;
 
 /**
  * <p>Representa a un comprobante.</p>

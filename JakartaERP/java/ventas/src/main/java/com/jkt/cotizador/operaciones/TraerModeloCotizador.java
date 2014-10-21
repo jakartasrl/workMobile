@@ -21,7 +21,6 @@ public class TraerModeloCotizador extends Operation {
 	//writers mapeados contra el archivo operaciones-ventas.xml
 	private static final String WRITER_MODELO = "modelo";
 	private static final String WRITER_TITULO = "titulos";
-//	private static final String WRITER_CONCEPTO = "conceptos";
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -59,7 +58,7 @@ public class TraerModeloCotizador extends Operation {
 				}
 			}
 			
-			tituloModeloCotizador.setTipo('C');//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
 		}
 		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 		

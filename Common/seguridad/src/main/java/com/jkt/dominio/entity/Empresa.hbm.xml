@@ -4,18 +4,36 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.jkt.dominio.Empresa" table="EMPRESA">
+
 		<id name="id" column="EMPRESA_ID">
-			<generator class="native"></generator>
+			<generator class="native" />
 		</id>
-		
+
+
+		<!-- <generator class="org.hibernate.id.TableHiLoGenerator"> -->
+		<!-- <param name="table">uid_table</param> -->
+		<!-- <param name="column">next_hi_value_column</param> -->
+		<!-- </generator> -->
+
+<!-- TableGenerator -->
+
+<!-- 		<id name="id" column="EMPRESA_ID"> -->
+<!-- 			<generator class="org.hibernate.id.enhanced.TableGenerator"> -->
+<!--  			<generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">  -->
+<!-- 				<param name="sequence_name">ev_sequence</param> -->
+<!-- 				<param name="initial_value">2000</param> -->
+<!-- 				<param name="increment_size">1</param> -->
+<!-- 				<param name="value_column">CurrentValue</param> -->
+<!-- 			</generator> -->
+<!-- 		</id> -->
+
 		<property name="codigo" type="string">
-            <column name="CODIGO" length="15" />
-        </property>
-		
-		<property name="razonSocial" column="RAZON_SOCIAL"/>
-		<property name="urlDB" column="URL_DB"/>
+			<column name="CODIGO" length="15" />
+		</property>
+
+		<property name="razonSocial" column="RAZON_SOCIAL" />
+		<property name="urlDB" column="URL_DB" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-		
 	</class>
-	
+
 </hibernate-mapping>

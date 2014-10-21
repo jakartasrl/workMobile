@@ -1,13 +1,10 @@
 package com.jkt.cotizador.operaciones;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.jkt.constantes.TiposDeDato;
-import com.jkt.cotizador.dominio.Cotizador;
-import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.dominio.Filtro;
@@ -19,39 +16,24 @@ import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.ComponenteValor;
 
 /**
- * <p><b>Recupera un cotizador previamente dado de alta.</b></p>
- * <p><b>Los pasos que realiza, en resumen, son los siguientes:</b></p>
- * 
- * <p>1-Recupera el cotizador</p>
- * <p>2-Recupera el modelo de cotizador</p>
- * <p>3-Renderiza modelo de cotizador (dibuja el arbol)</p>
- * <p>4-Mapea cada concepto del modelo con los detalles del cotizador guardado previamente</p>
- * <p>5-Notifica el arbol completo, y en cada nodo, se verán los datos del cotizador.Por presupuesto, un detalle(unidades en cantidad, precios, moneda, unidad de medida, etc)</p>
- * 
- * @see ModeloCotizador
+ * <p>Recupera el modelo de cotizador, sus titulos en forma jerarquica y los conceptos de presupuestos.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TraerCotizador extends Operation {
+public class TraerModeloParaCotizar extends Operation {
 
-	private static final String OID = "oid".toUpperCase();
+	//key para recuperar del mapa, desde el cliente enviarán OID=2, por ejemplo.
+	private static final String OID = "OID";
+
+	//writers mapeados contra el archivo operaciones-ventas.xml
 	private static final String WRITER_MODELO = "modelo";
 	private static final String WRITER_TITULO = "titulos";
 
-	
-	private Map<String, CotizadorDet> detallesDeCotizador=new HashMap<String, CotizadorDet>();
-	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
 		
-		Cotizador cotizador = (Cotizador) obtener(Cotizador.class, (String)aParams.get(OID));
-
-		completarMapaDeDetalles(cotizador);
-		
-		//Mostrar datos de cotizador.
-		
-		ModeloCotizador modelo = cotizador.getModelo();
+		ModeloCotizador modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
 		
 		notificarObjeto(WRITER_MODELO, modelo);
 		
@@ -59,41 +41,19 @@ public class TraerCotizador extends Operation {
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
 		}
-	}
-	
-	/**
-	 * 
-	 * <p>Este metodo tiene la funcion de recibir un cotizador y completar en un mapa sus detalles.</p>
-	 * <p>Esto sirve para posteriormente, a partir de los conceptos, poder recuperar el correspondiente detalle del cotizador.</p>
-	 * 
-	 * @param cotizador para extraer sus detalles
-	 */
-	private void completarMapaDeDetalles(Cotizador cotizador) {
-		List<CotizadorDet> detalles = cotizador.getDetalles();
-		for (CotizadorDet cotizadorDet : detalles) {
-			detallesDeCotizador.put(String.valueOf(cotizadorDet.getConceptoPresupuesto().getId()), cotizadorDet);
-		}
+		
 	}
 
-	/**
-	 * <p>Este metodo recibe un titulo y un numero de nivel padre, y muestra en la salida de la operacion el titulo proporcionado, con su correspondiente nivel, 
-	 * y recursivamente sus hijos.</p>
-	 * 
-	 * @param tituloModeloCotizador
-	 * @param codigoInternoPadre
-	 * @throws Exception 
-	 */
 	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws Exception {
 		
 		tituloModeloCotizador.setCodigoInterno((int)tituloModeloCotizador.getId());
 		tituloModeloCotizador.setCodigoInternoPadre(codigoInternoPadre);
 
+
+		//Recursividad, o muestreo de concepto.
 		List<TituloModeloCotizador> titulosHijos = tituloModeloCotizador.getTitulosHijos();
 		boolean tieneHijos=!titulosHijos.isEmpty();
 
-		
-		CotizadorDet cotizadorDet = detallesDeCotizador.get(String.valueOf(tituloModeloCotizador.getId()));
-		//Si tiene hijos es un titulo, si no tiene hijos es un concepto.
 		if (!tieneHijos) {
 			if(tituloModeloCotizador.getConcepto()==null){
 				throw new JakartaException("El titulo no tiene un concepto relacionado.");
@@ -106,19 +66,10 @@ public class TraerCotizador extends Operation {
 			}
 			
 			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+		
+		
 		}
-		
-		
-		/*
-		 * IMPORTANTE. El objetivo de este metodo es armar el arbol del modelo, pero en cada concepto, sus datos completos en cuanto 
-		 * al cotizador, es decir:
-		 * 
-		 * si la jerarquia tiene un padre y dos hijos conceptos, estos conceptos tienen datos relacionados cuando se habla de cotizador.
-		 * datos como unidad de medida, cantidad, precio, moneda, estan relacionados a este detalle de cotizador, que esta fuertemente
-		 * relacionado con el concepto.
-		 * 
-		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
-		 */
+		//Si es un concepto, es un for a mostrar cada uno de los valores segun el concepto y el componente valor...
 		
 		if ("C".equals(tituloModeloCotizador.getTipo())) {
 			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
@@ -134,7 +85,6 @@ public class TraerCotizador extends Operation {
 					productoClasificador=(ProductoClasificador) persistentEntity;
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
 					tituloModeloCotizador.setProducto(producto);
-					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
 				
@@ -145,13 +95,13 @@ public class TraerCotizador extends Operation {
 			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 		}
 		
-		//Recursividad, o muestreo de concepto.
+		
 		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {
-				mostrarArbol(subTitulo, tituloModeloCotizador.getCodigoInterno());//se le envia el codigo interno actual (id de base) a cada hijo
+				mostrarArbol(subTitulo, tituloModeloCotizador.getCodigoInterno());//se le envia el codigo interno actual (id de base de datos) a cada hijo
 			}
 		}
 		
 	}
-	
+
 }

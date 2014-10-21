@@ -4,12 +4,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<joined-subclass name="com.jkt.dominio.ComprobanteCliente" table="COMPROBANTE_CLIENTE" extends="com.jkt.dominio.Comprobante">
-		<key column="COMPROBANTE_ID" />
+	<subclass name="com.jkt.dominio.ComprobanteCliente"   discriminator-value="COMPROBANTE-CLIENTE" extends="com.jkt.dominio.Comprobante">
+<!-- 		<key column="COMPROBANTE_ID" /> -->
 
 		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" column="CLIENTE_SUCURSAL_ID"></many-to-one>
 		<many-to-one name="condicionPago" class="com.jkt.varios.dominio.CondPago" column="CONDICION_PAGO_ID"></many-to-one>
 
-	</joined-subclass>
+	</subclass>
 
 </hibernate-mapping>

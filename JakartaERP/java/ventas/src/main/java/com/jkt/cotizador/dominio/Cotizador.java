@@ -13,9 +13,6 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Cotizador extends PersistentEntity {
 
-	private String nombre;
-	private String descripcion;
-	
 	private Date fecha;
 	private boolean revisado;
 	private String usuarioCreacion;
@@ -38,26 +35,6 @@ public class Cotizador extends PersistentEntity {
 		}
 	}
 	
-
-	/*
-	 * setters & getters
-	 */
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	public List<CotizadorDet> getDetalles() {
 		return detalles;
 	}
