@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
@@ -56,14 +56,15 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String INTEGER_TYPE = "Integer";
 	private static final String DOUBLE_TYPE = "Double";
 	private static final String DATE_TYPE = "Date";
+	private static final String CHAR_TYPE = "Char";
 
 	private ISessionProvider sessionProvider;
 	private Session session;
 	private boolean test;
 	
 	/*
-	 * Definici�n de estregias para el guardado de parametros.
-	 * B�sicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
+	 * Definición de estregias para el guardado de parametros.
+	 * Básicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
 	 * Dependiendo de la cantidad de registros recibidos desde la solicitud, se define una u otra estrategia.
 	 * 
 	 * Si la cantidad de registros es mayor a 1, se usa la estrategia para manejar listas, de lo contrario, se usa la estrategia para manejar un solo parametro.
@@ -457,6 +458,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			result=Integer.valueOf((String)value);
 		}else if(DOUBLE_TYPE.equals(nombreClase)){
 			result=Double.valueOf((String)value);
+		}else if(CHAR_TYPE.equals(nombreClase)){
+			result=String.valueOf(value).toCharArray()[0];
 		}else if(DATE_TYPE.equals(nombreClase)){
 //			result=Date.parse((String)value);//  Double.valueOf((String)value);
 		}else{
@@ -498,6 +501,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			primitiveWrapper=int.class;
 		}else if(DOUBLE_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=double.class;
+		}else if(CHAR_TYPE.equals(campoEntrada.getClase())){
+			primitiveWrapper=char.class;
 		}else if(DATE_TYPE.equals(campoEntrada.getClase())){
 			primitiveWrapper=Date.class;
 		}else{

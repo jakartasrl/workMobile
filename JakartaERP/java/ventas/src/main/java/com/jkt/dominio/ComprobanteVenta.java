@@ -60,4 +60,12 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 		this.representante = representante;
 	}
 
+	
+	public void agregarDetalle(ComprobanteVentaDet comprobanteVentaDet){
+		if (!detalles.contains(comprobanteVentaDet)) {
+			detalles.add(comprobanteVentaDet);
+			comprobanteVentaDet.setComprobanteVenta(this);
+		}
+	}
+	
 }

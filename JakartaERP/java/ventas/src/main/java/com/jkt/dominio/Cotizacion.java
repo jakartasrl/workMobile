@@ -2,14 +2,17 @@ package com.jkt.dominio;
 
 public class Cotizacion extends ComprobanteVenta {
 
-//	private String campo;
-//
-//	public String getCampo() {
-//		return campo;
-//	}
-//
-//	public void setCampo(String campo) {
-//		this.campo = campo;
-//	}
+	public static final String PENDIENTE = "PENDIENTE";
+	public static final String INICIADA = "INICIADA";
 
+	private String estado;
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 }
