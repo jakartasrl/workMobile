@@ -4,7 +4,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.jkt.laboratorio.dominio.Variable"
-		table="VALVALIDDET">
+		table="DETER_VARIABLE">
 		<id name="id" column="ID_VARIABLE">
 			<generator class="native"></generator>
 		</id>

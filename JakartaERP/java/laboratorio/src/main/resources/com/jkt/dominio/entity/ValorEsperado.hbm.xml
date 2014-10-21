@@ -4,7 +4,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.jkt.laboratorio.dominio.ValorEsperado"
-		table="VALVALIDDET">
+		table="DETER_VALOR_ESP">
 		<id name="id" column="ID_VALOR_ESPE">
 			<generator class="native"></generator>
 		</id>
