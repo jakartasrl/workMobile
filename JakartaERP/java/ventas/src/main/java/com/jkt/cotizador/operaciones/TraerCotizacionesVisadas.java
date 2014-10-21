@@ -1,16 +1,18 @@
 package com.jkt.cotizador.operaciones;
 
+import com.jkt.dominio.Cotizacion;
+
 
 /**
  * Recupera todos los cotizadores que han sido creados y tienen ya un modelo de cotizador asignado
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TraerCotizadoresVisados extends TraerCotizadores {
+public class TraerCotizacionesVisadas extends TraerCotizaciones {
 
 	@Override
-	protected boolean getCondition() {
-		return true;
+	protected String getCondition() {
+		return Cotizacion.INICIADA;
 	}
 
 }

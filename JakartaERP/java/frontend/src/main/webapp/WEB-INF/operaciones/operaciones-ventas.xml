@@ -176,12 +176,37 @@
 	
 	
 	<!-- 	CREACION DEL COTIZADOR. LA CREACION EN ESTE PUNTO ES BIEN BASICA. -->
-	<operacion name="GuardarCotizador" clase="com.jkt.operaciones.Guardar">
+	<operacion name="GuardarCotizacion" clase="com.jkt.operaciones.Guardar">
 	
-		<input name="cotizador" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cot">
+		<input name="cotizacion" keyName="objeto" clase="com.jkt.dominio.Cotizacion" fieldID="oid_cot">
 			<campoEntrada>
 				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
 				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" /> <!-- Segun esta descripcion el usuario X seleccionará un modelo de cotizador -->
+
+				<campoEntrada name="estado" clase="String" metodo="setEstado" />
+
+				<campoEntrada name="oid_vendedor" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
+				<campoEntrada name="oid_representante" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
+
+				<campoEntrada name="oid_clienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
+				<campoEntrada name="oid_condicionPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionPago" />
+				
+				<campoEntrada name="comportamiento" clase="String" metodo="setComportamiento" />
+				<campoEntrada name="lugarEmision" clase="String" metodo="setLugarEmision" />
+				<campoEntrada name="nro" clase="Integer" metodo="setNro" />
+				<campoEntrada name="anulado" clase="Boolean" metodo="setAnulado" />
+				<campoEntrada name="tipoComprobante" clase="com.jkt.dominio.TipoComprobante" metodo="setTipoComprobante" />
+				<campoEntrada name="letra" clase="Char" metodo="setLetra" />
+				
+				<campoEntrada name="mtDetalleComprobanteVenta" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_detalle">
+					<campoEntrada name="oid_producto" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="cantidad" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="oid_unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
+					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
+					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+					<campoEntrada name="oid_cotizador" clase="com.jkt.cotizador.dominio.Cotizador" metodo="setCotizador" />
+				</campoEntrada>
+				
 			</campoEntrada>
 		</input>
 	
@@ -191,13 +216,26 @@
 
 	</operacion>
 	
-	<!-- RECUPERACION DE TODAS LAS ENTIDADES COTIZADOR QUE AUN NO HAN SIDO REVISADAS -->
-	<operacion name="TraerCotizadoresNoVisados" clase="com.jkt.cotizador.operaciones.TraerCotizadoresNoVisados" >
+	<!-- RECUPERACION DE TODAS LAS ENTIDADES COTIZACION QUE AUN NO HAN SIDO REVISADAS -->
+	<operacion name="TraerCotizacionesNoVisadas" clase="com.jkt.cotizador.operaciones.TraerCotizacionesNoVisadas" >
 		
-		<output name="cotizadores" tableName="mtCotizador">
+		<output name="cotizaciones" tableName="mtCotizador">
 			<campoSalida value="id" target="id" />
 			<campoSalida value="nombre" target="nombre" />
-			<campoSalida value="descrpcion" target="descripcion" />
+			<campoSalida value="descripcion" target="descripcion" />
+
+			<campoSalida value="vendedor" target="vendedor.descripcion" />
+			<campoSalida value="representante" target="representante.descripcion" />
+			
+			<campoSalida value="clienteSucursal" target="clienteSucursal.descripcion" />
+			
+			<campoSalida value="comportamiento" target="comportamiento" />
+			<campoSalida value="letra" target="letra" />
+			<campoSalida value="lugarEmision" target="lugarEmision" />
+			<campoSalida value="nro" target="nro" />
+			<campoSalida value="anulado" target="isAnulado" />
+			<campoSalida value="tipoComprobante" target="tipoComprobante.descripcion" />
+			
 		</output>		
 
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
@@ -256,7 +294,7 @@
 			<campoSalida value="cod_titu_conc" target="codigoReal" />
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			<campoSalida value="tipo" target="tipo" />
-			<campoSalida value="oid_conc" target="concepto.id" /> <!-- SI ESTO SIRVE, POR AHI EVITO TENER QUE MANDAR OTRA TABLA, LA TABLA CONCEPTOS VOLARIA -->
+			<campoSalida value="oid_conc" target="concepto.id" />
 			
 			<!-- Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
 			<campoSalida value="oid_producto" target="producto.id" />
