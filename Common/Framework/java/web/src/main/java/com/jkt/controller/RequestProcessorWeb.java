@@ -34,7 +34,7 @@ public class RequestProcessorWeb extends RequestProcessor {
 
 	@Override
 	protected String getAppRequest() {
-		return "HTML";
+		return RequestProcessor.CLIENTE_HTML;
 	}
 
 	@Override
@@ -52,6 +52,7 @@ public class RequestProcessorWeb extends RequestProcessor {
 	
 //	@RequestMapping(value = "/xml", method = RequestMethod.POST)
 
+	/*
 	
 	@Override
 	public void handleXML(HttpServletRequest request, HttpServletResponse response) throws Exception, EntityNotFoundException {
@@ -61,20 +62,22 @@ public class RequestProcessorWeb extends RequestProcessor {
 
 		
 		Provincia provincia = new Provincia();
-//		Provincia provincia = new Provincia();
-//		provincia.setId(1L);
-//		provincia.setActivo(true);
 		provincia.setCodigo("ARG");
 		provincia.setDescripcion("Argentina");
+
+		Provincia provincia2 = new Provincia();
+		provincia2.setCodigo("BRA");
+		provincia2.setDescripcion("Brasil");
 		
 //		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = new ObjectOutputStream(getOutputStream());
-		oos.writeObject(Arrays.asList(provincia));
+		oos.writeObject(Arrays.asList(provincia, provincia2, provincia));
 		oos.close(); // ... preparedStatement.setBytes(i, baos.toByteArray());
 //		
 //		
 //		.write(provincia.toString().getBytes());
 		
 	}
+	*/
 	
 }

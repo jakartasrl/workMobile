@@ -55,12 +55,14 @@ public class Configuration {
 	}
 
 	private XMLEntity operaciones  = new XMLEntity();
+	private XMLEntity operacionesHTML  = new XMLEntity();
 	private XMLEventos eventos=new XMLEventos();
 	
 	@Autowired
 	private ServletContext servletContext;
 	
 	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
+		String rutaOperacionesWeb="/WEB-INF/operaciones/operaciones-html.xml";
 		
 		List<String> rutas = Arrays.asList(new String[]{
 				"/WEB-INF/operaciones/operaciones-common.xml",
@@ -73,10 +75,17 @@ public class Configuration {
 			});
 		
 		Digester digester = this.generateReaderOperation();
+		
+		/*
+		 * Parseo las operaciones para cliente HTML
+		 */
+		InputStream inputStreamHTML = abrirRecurso(rutaOperacionesWeb);
+		this.operacionesHTML = (XMLEntity) digester.parse(inputStreamHTML);
+		
+		/*
+		 * Parseo las operaciones para cliente HTML
+		 */
 		InputStream inputStream = abrirRecurso(OPERACIONES_PATH);
-		
-//		validarInputStream(inputStream);
-		
 		this.operaciones = (XMLEntity) digester.parse(inputStream);
 		
 		/*
@@ -314,5 +323,15 @@ public class Configuration {
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
 	}
+
+	public XMLEntity getOperacionesHTML() {
+		return operacionesHTML;
+	}
+
+	public void setOperacionesHTML(XMLEntity operacionesHTML) {
+		this.operacionesHTML = operacionesHTML;
+	}
+	
+	
 	
 }

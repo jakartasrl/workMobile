@@ -1,5 +1,6 @@
 package com.jkt.dominio;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ import java.util.Date;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-abstract public class PersistentEntity {
+abstract public class PersistentEntity implements Serializable{
 
 	private long id;
 	private Date creationDate;
