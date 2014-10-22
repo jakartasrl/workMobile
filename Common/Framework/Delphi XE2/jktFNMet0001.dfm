@@ -24,7 +24,7 @@ object frmChild: TfrmChild
     Left = 0
     Top = 0
     Align = alLeft
-    TabOrder = 2
+    TabOrder = 1
     Height = 318
     Width = 185
   end
@@ -34,15 +34,12 @@ object frmChild: TfrmChild
     Width = 8
     Height = 318
     Control = cxGroupBoxLeft
-    ExplicitLeft = 296
-    ExplicitTop = 184
-    ExplicitHeight = 100
   end
   object cxGroupBoxRight: TcxGroupBox
     Left = 489
     Top = 0
     Align = alRight
-    TabOrder = 5
+    TabOrder = 4
     Height = 318
     Width = 185
   end
@@ -53,9 +50,6 @@ object frmChild: TfrmChild
     Height = 318
     AlignSplitter = salRight
     Control = cxGroupBoxRight
-    ExplicitLeft = 384
-    ExplicitTop = 224
-    ExplicitHeight = 100
   end
   object cxGroupBoxMain: TcxGroupBox
     Left = 193
@@ -134,8 +128,8 @@ object frmChild: TfrmChild
     TipoPrograma = tp_abmLista
     OperacionesIniciales = <>
     OperacionesDefault = <>
-    Left = 360
-    Top = 32
+    Left = 112
+    Top = 160
   end
   object IdHTTP: TIdHTTP
     AllowCookies = True
@@ -151,21 +145,21 @@ object frmChild: TfrmChild
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 256
-    Top = 32
+    Left = 32
+    Top = 80
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
     IgnoreException = False
-    Left = 200
+    Left = 24
     Top = 32
   end
   object OperacionSave: TjktOperacion
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 424
-    Top = 32
+    Left = 112
+    Top = 224
   end
   object mtParametroInicial: TjktMemTable
     DesignActivation = True
@@ -185,7 +179,7 @@ object frmChild: TfrmChild
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 520
+    Left = 552
     Top = 32
     object mtParametroInicialEntidad: TStringField
       FieldName = 'Entidad'
@@ -196,13 +190,13 @@ object frmChild: TfrmChild
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 424
-    Top = 96
+    Left = 32
+    Top = 224
   end
   object ValidadorForm: TjktValidadorForm
     ListaValidaciones = <>
-    Left = 256
-    Top = 96
+    Left = 32
+    Top = 160
   end
   object mtParametrosForm: TjktMemTable
     DesignActivation = True
@@ -222,7 +216,7 @@ object frmChild: TfrmChild
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 560
-    Top = 32
+    Left = 552
+    Top = 104
   end
 end
