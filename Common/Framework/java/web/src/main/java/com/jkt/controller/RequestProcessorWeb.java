@@ -1,18 +1,26 @@
 package com.jkt.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jkt.adapter.Adapter;
+import com.jkt.dominio.Descriptible;
+import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.request.IEventBusiness;
-import com.jkt.util.MapDS;
+import com.jkt.util.HashtableDS;
+
+import demo.data.Provincia;
 
 /**
  * Controller that will receive all request from clients javascript.
@@ -31,14 +39,42 @@ public class RequestProcessorWeb extends RequestProcessor {
 
 	@Override
 	protected Map retrieveParameters(HttpServletRequest request)throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		HashtableDS hashtable = new HashtableDS();
+		hashtable.put("op", "TraerProvincia");
+		return hashtable;
 	}
 
 	@Override
-	protected Map adaptParameters(Object input, IEventBusiness operation) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Map adaptParameters(Object input, IEventBusiness operation) throws IOException {
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		return hashMap;
 	}
+	
+//	@RequestMapping(value = "/xml", method = RequestMethod.POST)
 
+	
+	@Override
+	public void handleXML(HttpServletRequest request, HttpServletResponse response) throws Exception, EntityNotFoundException {
+
+		
+		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
+
+		
+		Provincia provincia = new Provincia();
+//		Provincia provincia = new Provincia();
+//		provincia.setId(1L);
+//		provincia.setActivo(true);
+		provincia.setCodigo("ARG");
+		provincia.setDescripcion("Argentina");
+		
+//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(getOutputStream());
+		oos.writeObject(Arrays.asList(provincia));
+		oos.close(); // ... preparedStatement.setBytes(i, baos.toByteArray());
+//		
+//		
+//		.write(provincia.toString().getBytes());
+		
+	}
+	
 }

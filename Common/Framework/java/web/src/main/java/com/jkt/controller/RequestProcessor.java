@@ -93,8 +93,7 @@ public abstract class RequestProcessor extends BaseController{
 		if (parameters.containsKey(KEY_NOMBRE_OPERACION)){
 			key = KEY_NOMBRE_OPERACION;
 			test = false;
-		}
-		else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
+		}else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
 			key = KEY_NOMBRE_OPERACION_TEST;
 			test = true;
 		}
@@ -148,14 +147,7 @@ public abstract class RequestProcessor extends BaseController{
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
-//		}catch(Exception exception){
-			//Hago el rollback y muestro el mensaje critico en frontend.
-//			tx.rollback();
-//			throw exception;
 		}finally{
-//			if (tx.isActive()) {
-//				tx.commit();
-//			}
 			sessionProvider.destroySession();
 		}
 		log.debug("Finalizó la operación...");
@@ -172,11 +164,8 @@ public abstract class RequestProcessor extends BaseController{
 	}
 
 	/**
-	 * @param eventBusinessOperation
-	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws ClassNotFoundException 
+	 * Recupera el nombre de la operacion e instancia la operacion propiamente dicha.
+	 * 
 	 */
 	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException, JakartaException {
 		String clase = ((EventBusiness)eventBusinessOperation).getClase();
