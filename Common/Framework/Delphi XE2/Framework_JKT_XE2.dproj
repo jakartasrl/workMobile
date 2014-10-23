@@ -154,6 +154,7 @@
 			<DCCReference Include="jktCNMet0001.pas"/>
 			<DCCReference Include="jktCNMet0002.pas"/>
 			<DCCReference Include="jktCNMet0008.pas"/>
+			<DCCReference Include="jktCNMet0009.pas"/>
 			<DCCReference Include="jktCNMet0011.pas"/>
 			<DCCReference Include="jktCNMet0014.pas"/>
 			<DCCReference Include="jktCNMet0030.pas"/>

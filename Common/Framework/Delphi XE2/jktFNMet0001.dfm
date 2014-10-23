@@ -2,8 +2,8 @@ object frmChild: TfrmChild
   Left = 0
   Top = 0
   Caption = 'frmChild'
-  ClientHeight = 318
-  ClientWidth = 674
+  ClientHeight = 392
+  ClientWidth = 715
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,46 +24,43 @@ object frmChild: TfrmChild
     Left = 0
     Top = 0
     Align = alLeft
-    TabOrder = 2
-    Height = 318
-    Width = 185
+    Style.BorderStyle = ebsNone
+    TabOrder = 1
+    Height = 392
+    Width = 30
   end
   object cxSplitterLeft: TcxSplitter
-    Left = 185
+    Left = 30
     Top = 0
-    Width = 8
-    Height = 318
-    Control = cxGroupBoxLeft
-    ExplicitLeft = 296
-    ExplicitTop = 184
-    ExplicitHeight = 100
+    Width = 4
+    Height = 392
   end
   object cxGroupBoxRight: TcxGroupBox
-    Left = 489
+    Left = 685
     Top = 0
     Align = alRight
-    TabOrder = 5
-    Height = 318
-    Width = 185
+    Style.BorderStyle = ebsNone
+    TabOrder = 3
+    Height = 392
+    Width = 30
   end
   object cxSplitterRight: TcxSplitter
-    Left = 481
+    Left = 681
     Top = 0
-    Width = 8
-    Height = 318
+    Width = 4
+    Height = 392
     AlignSplitter = salRight
     Control = cxGroupBoxRight
-    ExplicitLeft = 384
-    ExplicitTop = 224
-    ExplicitHeight = 100
   end
   object cxGroupBoxMain: TcxGroupBox
-    Left = 193
+    Left = 34
     Top = 0
     Align = alClient
+    PanelStyle.Active = True
+    Style.BorderStyle = ebsNone
     TabOrder = 8
-    Height = 318
-    Width = 288
+    Height = 392
+    Width = 647
   end
   object BarManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
