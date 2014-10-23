@@ -68,7 +68,6 @@ type
 
   protected
     FMultipleInstancia: Boolean;
-    FPorcWidthMain    : extended;
 
     function GetNewOid(): Integer;
     procedure llamarOperacionConfiguracion; virtual; abstract;
@@ -141,15 +140,9 @@ begin
 end;
 
 procedure TfrmChild.FormActivate(Sender: TObject);
-var
-  ancho: Extended;
 begin
   Driver.ActualizarEstadoBotones;
   DoActivateChild;
-
-  ancho := Screen.Width * FPorcWidthMain;
-  cxGroupBoxLeft.Width := round((Screen.Width - ancho) / 2 ) ;
-  cxGroupBoxRight.Width := round((Screen.Width - ancho) / 2 );
 end;
 
 procedure TfrmChild.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -166,7 +159,10 @@ procedure TfrmChild.FormCreate(Sender: TObject);
 begin
   FMultipleInstancia := False;
   FNewOid := 0;
-  FPorcWidthMain := 0.7;
+
+  // Muestro el programa en el centro de la pantalla
+  cxGroupBoxLeft.Width  := (Screen.Width - cxGroupBoxMain.Width - (cxSplitterLeft.Width * 2)) div 2;
+  cxGroupBoxRight.Width := cxGroupBoxLeft.Width;
 end;
 
 function TfrmChild.GetCanEdit: Boolean;

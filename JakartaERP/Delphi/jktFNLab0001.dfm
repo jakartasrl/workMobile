@@ -3,7 +3,7 @@ inherited FNLab0001: TFNLab0001
   ClientHeight = 499
   ClientWidth = 1250
   ExplicitWidth = 1266
-  ExplicitHeight = 538
+  ExplicitHeight = 537
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
@@ -12,6 +12,7 @@ inherited FNLab0001: TFNLab0001
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 499
+    Control = cxGroupBoxLeft
     ExplicitHeight = 499
   end
   inherited cxGroupBoxRight: TcxGroupBox
@@ -23,20 +24,20 @@ inherited FNLab0001: TFNLab0001
     Width = 146
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 1099
+    Left = 1100
     Height = 499
-    ExplicitLeft = 1098
+    ExplicitLeft = 1100
     ExplicitHeight = 499
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 905
+    ExplicitWidth = 1066
     ExplicitHeight = 499
     Height = 499
-    Width = 909
+    Width = 1066
     object cxGroupBox1: TcxGroupBox
       Left = 2
-      Top = 5
+      Top = 2
       Align = alTop
       Caption = 'Determinacion'
       ParentFont = False
@@ -52,7 +53,7 @@ inherited FNLab0001: TFNLab0001
       Style.IsFontAssigned = True
       TabOrder = 0
       Height = 92
-      Width = 905
+      Width = 1062
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 268
         Top = 25
@@ -140,24 +141,21 @@ inherited FNLab0001: TFNLab0001
     end
     object cxGroupBox2: TcxGroupBox
       Left = 2
-      Top = 97
+      Top = 94
       Align = alClient
       Caption = 'M'#233'todos'
       Style.TextStyle = [fsItalic]
       TabOrder = 1
-      Height = 400
-      Width = 905
+      Height = 403
+      Width = 1062
       object jktExpDBGrid1: TjktExpDBGrid
-        Left = 2
-        Top = 18
-        Width = 901
+        Left = 3
+        Top = 15
+        Width = 1056
         Height = 127
         Align = alTop
         TabOrder = 1
         DataSource = DSMet
-        ExplicitLeft = 3
-        ExplicitTop = 15
-        ExplicitWidth = 893
         object jktExpDBGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSMet
@@ -190,37 +188,29 @@ inherited FNLab0001: TFNLab0001
         end
       end
       object cxGroupBox3: TcxGroupBox
-        Left = 2
-        Top = 145
+        Left = 3
+        Top = 142
         Align = alClient
         PanelStyle.Active = True
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitTop = 142
-        ExplicitWidth = 893
-        ExplicitHeight = 230
-        Height = 253
-        Width = 901
+        Height = 251
+        Width = 1056
         object cxGroupBox4: TcxGroupBox
-          Left = 428
+          Left = 583
           Top = 2
           Align = alRight
           Caption = 'Variables / Mediciones '
           Style.TextStyle = [fsItalic]
           TabOrder = 1
-          Height = 249
+          Height = 247
           Width = 471
           object cxGrid1: TcxGrid
-            Left = 2
-            Top = 18
-            Width = 467
-            Height = 229
+            Left = 3
+            Top = 15
+            Width = 465
+            Height = 222
             Align = alClient
             TabOrder = 0
-            ExplicitLeft = 3
-            ExplicitTop = 15
-            ExplicitWidth = 465
-            ExplicitHeight = 201
             object cxGrid1DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = DSVar
@@ -255,9 +245,8 @@ inherited FNLab0001: TFNLab0001
           Left = 2
           Top = 2
           Width = 5
-          Height = 249
+          Height = 247
           Control = cxGroupBox4
-          ExplicitHeight = 226
         end
         object cxGroupBox5: TcxGroupBox
           Left = 7
@@ -266,19 +255,15 @@ inherited FNLab0001: TFNLab0001
           Caption = 'Valores Esperados'
           Style.TextStyle = [fsItalic]
           TabOrder = 2
-          Height = 249
-          Width = 421
+          Height = 247
+          Width = 576
           object cxGrid2: TcxGrid
-            Left = 2
-            Top = 18
-            Width = 417
-            Height = 229
+            Left = 3
+            Top = 15
+            Width = 570
+            Height = 222
             Align = alClient
             TabOrder = 0
-            ExplicitLeft = 3
-            ExplicitTop = 15
-            ExplicitWidth = 404
-            ExplicitHeight = 201
             object cxGrid2DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = DSVal
@@ -596,6 +581,10 @@ inherited FNLab0001: TFNLab0001
       item
         Name = 'oid_met'
         DataType = ftInteger
+      end
+      item
+        Name = 'activo'
+        DataType = ftBoolean
       end>
     IndexFieldNames = 'oid_met'
     IndexDefs = <
@@ -659,11 +648,6 @@ inherited FNLab0001: TFNLab0001
     DataSet = TVal
     Left = 280
     Top = 320
-  end
-  object cxStyleRepository1: TcxStyleRepository
-    PixelsPerInch = 96
-    object cxStyle1: TcxStyle
-    end
   end
   object valDeter: TjktValidador
     Entidad = 'determinacion'
@@ -797,6 +781,10 @@ inherited FNLab0001: TFNLab0001
         Name = 'expresion'
         DataType = ftString
         Size = 60
+      end
+      item
+        Name = 'activo'
+        DataType = ftBoolean
       end>
     IndexFieldNames = 'oid_det'
     IndexDefs = <
@@ -811,6 +799,7 @@ inherited FNLab0001: TFNLab0001
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterFields = 'oid_det'
     MasterSource = DSDet
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
@@ -870,6 +859,10 @@ inherited FNLab0001: TFNLab0001
         Name = 'des_var'
         DataType = ftString
         Size = 30
+      end
+      item
+        Name = 'activo'
+        DataType = ftBoolean
       end>
     IndexFieldNames = 'oid_met'
     IndexDefs = <
