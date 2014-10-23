@@ -13,7 +13,7 @@
 		<property name="metodo"     		column="metodo" 		type="string" />
 		<property name="expresionResultado" column="expresion_res" 	type="string" />
 		
-		<many-to-one name="determinacion" lazy="proxy" not-null="true" column="ID_DETERMINACION"/>
+		<many-to-one name="determinacion" not-null="true" column="ID_DETERMINACION"/>
 		
 		<list name="valoresEsperados" inverse="true" cascade="save-update">
 			<key column="ID_METODO" />

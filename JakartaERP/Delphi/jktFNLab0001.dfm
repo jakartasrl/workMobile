@@ -1,8 +1,8 @@
 inherited FNLab0001: TFNLab0001
   Caption = 'ABM de Determinaciones'
   ClientHeight = 499
-  ClientWidth = 1105
-  ExplicitWidth = 1121
+  ClientWidth = 1250
+  ExplicitWidth = 1266
   ExplicitHeight = 538
   PixelsPerInch = 96
   TextHeight = 13
@@ -12,188 +12,348 @@ inherited FNLab0001: TFNLab0001
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 499
-    ExplicitLeft = 185
-    ExplicitTop = 0
     ExplicitHeight = 499
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 920
-    TabOrder = 4
-    ExplicitLeft = 920
+    Left = 1104
+    ExplicitLeft = 1104
+    ExplicitWidth = 146
     ExplicitHeight = 499
     Height = 499
+    Width = 146
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 912
+    Left = 1099
     Height = 499
-    ExplicitLeft = 912
-    ExplicitTop = 0
+    ExplicitLeft = 1098
     ExplicitHeight = 499
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 719
+    ExplicitWidth = 905
     ExplicitHeight = 499
     Height = 499
-    Width = 719
-    object Panel1: TPanel
-      Left = 3
-      Top = 22
-      Width = 713
-      Height = 474
-      Align = alClient
+    Width = 909
+    object cxGroupBox1: TcxGroupBox
+      Left = 2
+      Top = 5
+      Align = alTop
+      Caption = 'Determinacion'
+      ParentFont = False
+      Style.BorderStyle = ebsOffice11
+      Style.Edges = [bLeft, bTop, bRight, bBottom]
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.Shadow = False
+      Style.TextStyle = [fsItalic]
+      Style.IsFontAssigned = True
       TabOrder = 0
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 719
-      ExplicitHeight = 499
-      object Splitter1: TSplitter
-        Left = 673
-        Top = 1
-        Height = 472
-        ExplicitLeft = 520
-        ExplicitTop = 272
-        ExplicitHeight = 100
-      end
-      object Panel2: TPanel
-        Left = 1
-        Top = 1
-        Width = 672
-        Height = 472
-        Align = alLeft
-        BorderStyle = bsSingle
-        TabOrder = 0
-        ExplicitHeight = 497
-        object cxGrid1: TcxGrid
-          Left = 1
-          Top = 1
-          Width = 666
-          Height = 466
-          Align = alClient
-          TabOrder = 0
-          ExplicitHeight = 491
-          object cxGrid1DBTableView1: TcxGridDBTableView
-            Navigator.Buttons.CustomButtons = <>
-            DataController.DataSource = DSDet
-            DataController.KeyFieldNames = 'key'
-            DataController.Summary.DefaultGroupSummaryItems = <>
-            DataController.Summary.FooterSummaryItems = <>
-            DataController.Summary.SummaryGroups = <>
-            OptionsBehavior.FocusCellOnTab = True
-            OptionsData.Appending = True
-            object cxGrid1DBTableView1cod_det: TcxGridDBColumn
-              Caption = 'Codigo'
-              DataBinding.FieldName = 'cod_det'
-              HeaderAlignmentHorz = taCenter
-            end
-            object cxGrid1DBTableView1des_det: TcxGridDBColumn
-              Caption = 'Descripcion'
-              DataBinding.FieldName = 'des_det'
-              HeaderAlignmentHorz = taCenter
-              Width = 257
-            end
-            object cxGrid1DBTableView1metodo: TcxGridDBColumn
-              Caption = 'Metodo'
-              DataBinding.FieldName = 'metodo'
-              HeaderAlignmentHorz = taCenter
-              Width = 123
-            end
-            object cxGrid1DBTableView1tipo_res: TcxGridDBColumn
-              Caption = 'Tipo Resultado'
-              DataBinding.FieldName = 'tipo_res'
-              HeaderAlignmentHorz = taCenter
-              Width = 91
-            end
-            object cxGrid1DBTableView1activo: TcxGridDBColumn
-              Caption = 'Activo'
-              DataBinding.FieldName = 'activo'
-              HeaderAlignmentHorz = taCenter
-            end
-          end
-          object cxGrid1Level1: TcxGridLevel
-            GridView = cxGrid1DBTableView1
-          end
-        end
-      end
-      object Panel3: TPanel
-        Left = 676
-        Top = 1
-        Width = 36
-        Height = 472
-        Align = alClient
-        BorderStyle = bsSingle
-        Caption = 'Panel3'
+      Height = 92
+      Width = 905
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 268
+        Top = 25
+        DataBinding.DataField = 'des_det'
+        DataBinding.DataSource = DSDet
         TabOrder = 1
-        ExplicitWidth = 42
-        ExplicitHeight = 497
-        object Panel4: TPanel
-          Left = 1
-          Top = 1
-          Width = 30
-          Height = 41
-          Align = alTop
-          TabOrder = 0
-          ExplicitWidth = 36
-          object cxDBTextEdit3: TcxDBTextEdit
-            Left = 21
-            Top = 12
-            DataBinding.DataField = 'des_det'
-            DataBinding.DataSource = DSDet
-            Properties.ReadOnly = True
-            TabOrder = 0
-            Width = 308
+        Width = 571
+      end
+      object cxLabel2: TcxLabel
+        Left = 29
+        Top = 54
+        Caption = 'Tipo Resultado'
+      end
+      object cxLabel3: TcxLabel
+        Left = 413
+        Top = 54
+        Caption = 'Formato'
+      end
+      object cxLabel4: TcxLabel
+        Left = 551
+        Top = 54
+        Caption = 'Leyenda Valor Cero'
+      end
+      object cxDBComboBox2: TcxDBComboBox
+        Left = 463
+        Top = 52
+        DataBinding.DataField = 'formato'
+        DataBinding.DataSource = DSDet
+        Properties.DropDownListStyle = lsFixedList
+        Properties.Items.Strings = (
+          '0'
+          '0.0'
+          '0.00'
+          '0.000'
+          '0.0000'
+          '0E-000')
+        TabOrder = 4
+        Width = 82
+      end
+      object cxDBTextEdit3: TcxDBTextEdit
+        Left = 655
+        Top = 52
+        DataBinding.DataField = 'ley_cero'
+        DataBinding.DataSource = DSDet
+        TabOrder = 5
+        Width = 186
+      end
+      object cxLabel1: TcxLabel
+        Left = 29
+        Top = 26
+        Caption = 'Codigo'
+      end
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 129
+        Top = 25
+        DataBinding.DataField = 'cod_det'
+        DataBinding.DataSource = DSDet
+        TabOrder = 0
+        Width = 121
+      end
+      object cxDBComboBox1: TcxDBComboBox
+        Left = 129
+        Top = 52
+        DataBinding.DataField = 'tipo_res'
+        DataBinding.DataSource = DSDet
+        Properties.DropDownListStyle = lsFixedList
+        Properties.Items.Strings = (
+          'Numero'
+          'Boolean'
+          'Leyenda')
+        TabOrder = 2
+        Width = 121
+      end
+      object cxDBCheckBox1: TcxDBCheckBox
+        Left = 268
+        Top = 52
+        Caption = 'Calcula Resultado'
+        DataBinding.DataField = 'calc_res'
+        DataBinding.DataSource = DSDet
+        Properties.Alignment = taRightJustify
+        Style.BorderStyle = ebsUltraFlat
+        TabOrder = 3
+        Width = 121
+      end
+    end
+    object cxGroupBox2: TcxGroupBox
+      Left = 2
+      Top = 97
+      Align = alClient
+      Caption = 'M'#233'todos'
+      Style.TextStyle = [fsItalic]
+      TabOrder = 1
+      Height = 400
+      Width = 905
+      object jktExpDBGrid1: TjktExpDBGrid
+        Left = 2
+        Top = 18
+        Width = 901
+        Height = 127
+        Align = alTop
+        TabOrder = 1
+        DataSource = DSMet
+        ExplicitLeft = 3
+        ExplicitTop = 15
+        ExplicitWidth = 893
+        object jktExpDBGrid1DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = DSMet
+          DataController.KeyFieldNames = 'oid_met'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.GoToNextCellOnEnter = True
+          OptionsCustomize.ColumnFiltering = False
+          OptionsData.Appending = True
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsView.GroupByBox = False
+          object jktExpDBGrid1DBTableView1metodo: TcxGridDBColumn
+            Caption = 'Metodo'
+            DataBinding.FieldName = 'metodo'
+            HeaderAlignmentHorz = taCenter
+            Width = 206
+          end
+          object jktExpDBGrid1DBTableView1expresion: TcxGridDBColumn
+            Caption = 'Calculo Resultado'
+            DataBinding.FieldName = 'expresion'
+            HeaderAlignmentHorz = taCenter
           end
         end
-        object cxGrid2: TcxGrid
-          Left = 1
-          Top = 42
-          Width = 30
-          Height = 425
-          Align = alClient
+        object jktExpDBGrid1Level1: TcxGridLevel
+          GridView = jktExpDBGrid1DBTableView1
+        end
+      end
+      object cxGroupBox3: TcxGroupBox
+        Left = 2
+        Top = 145
+        Align = alClient
+        PanelStyle.Active = True
+        TabOrder = 0
+        ExplicitLeft = 3
+        ExplicitTop = 142
+        ExplicitWidth = 893
+        ExplicitHeight = 230
+        Height = 253
+        Width = 901
+        object cxGroupBox4: TcxGroupBox
+          Left = 428
+          Top = 2
+          Align = alRight
+          Caption = 'Variables / Mediciones '
+          Style.TextStyle = [fsItalic]
           TabOrder = 1
-          ExplicitWidth = 36
-          ExplicitHeight = 450
-          object cxGrid2DBTableView1: TcxGridDBTableView
-            Navigator.Buttons.CustomButtons = <>
-            DataController.DataSource = DSVal
-            DataController.KeyFieldNames = 'key'
-            DataController.Summary.DefaultGroupSummaryItems = <>
-            DataController.Summary.FooterSummaryItems = <>
-            DataController.Summary.SummaryGroups = <>
-            OptionsBehavior.FocusCellOnTab = True
-            object cxGrid2DBTableView1valor_desde: TcxGridDBColumn
-              Caption = 'Desde'
-              DataBinding.FieldName = 'valor_desde'
-              HeaderAlignmentHorz = taCenter
+          Height = 249
+          Width = 471
+          object cxGrid1: TcxGrid
+            Left = 2
+            Top = 18
+            Width = 467
+            Height = 229
+            Align = alClient
+            TabOrder = 0
+            ExplicitLeft = 3
+            ExplicitTop = 15
+            ExplicitWidth = 465
+            ExplicitHeight = 201
+            object cxGrid1DBTableView1: TcxGridDBTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = DSVar
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsBehavior.FocusCellOnTab = True
+              OptionsBehavior.FocusFirstCellOnNewRecord = True
+              OptionsBehavior.GoToNextCellOnEnter = True
+              OptionsCustomize.ColumnFiltering = False
+              OptionsData.Appending = True
+              OptionsData.Deleting = False
+              OptionsData.DeletingConfirmation = False
+              OptionsView.GroupByBox = False
+              object cxGrid1DBTableView1cod_var: TcxGridDBColumn
+                Caption = 'Codigo'
+                DataBinding.FieldName = 'cod_var'
+                HeaderAlignmentHorz = taCenter
+              end
+              object cxGrid1DBTableView1des_var: TcxGridDBColumn
+                Caption = 'Descripcion'
+                DataBinding.FieldName = 'des_var'
+                HeaderAlignmentHorz = taCenter
+              end
             end
-            object cxGrid2DBTableView1valor_hasta: TcxGridDBColumn
-              Caption = 'Hasta'
-              DataBinding.FieldName = 'valor_hasta'
-              HeaderAlignmentHorz = taCenter
-            end
-            object cxGrid2DBTableView1cod_tabla: TcxGridDBColumn
-              Caption = 'Codigo'
-              DataBinding.FieldName = 'cod_tabla'
-              HeaderAlignmentHorz = taCenter
-            end
-            object cxGrid2DBTableView1des_tabla: TcxGridDBColumn
-              Caption = 'Descripcion'
-              DataBinding.FieldName = 'des_tabla'
-              HeaderAlignmentHorz = taCenter
-            end
-            object cxGrid2DBTableView1limite_inf: TcxGridDBColumn
-              Caption = 'Inferor'
-              DataBinding.FieldName = 'limite_inf'
-              HeaderAlignmentHorz = taCenter
-            end
-            object cxGrid2DBTableView1limite_sup: TcxGridDBColumn
-              Caption = 'Superior'
-              DataBinding.FieldName = 'limite_sup'
-              HeaderAlignmentHorz = taCenter
+            object cxGrid1Level1: TcxGridLevel
+              GridView = cxGrid1DBTableView1
             end
           end
-          object cxGrid2Level1: TcxGridLevel
-            GridView = cxGrid2DBTableView1
+        end
+        object cxSplitter1: TcxSplitter
+          Left = 2
+          Top = 2
+          Width = 5
+          Height = 249
+          Control = cxGroupBox4
+          ExplicitHeight = 226
+        end
+        object cxGroupBox5: TcxGroupBox
+          Left = 7
+          Top = 2
+          Align = alClient
+          Caption = 'Valores Esperados'
+          Style.TextStyle = [fsItalic]
+          TabOrder = 2
+          Height = 249
+          Width = 421
+          object cxGrid2: TcxGrid
+            Left = 2
+            Top = 18
+            Width = 417
+            Height = 229
+            Align = alClient
+            TabOrder = 0
+            ExplicitLeft = 3
+            ExplicitTop = 15
+            ExplicitWidth = 404
+            ExplicitHeight = 201
+            object cxGrid2DBTableView1: TcxGridDBTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = DSVal
+              DataController.KeyFieldNames = 'oid_val'
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.Appending = True
+              OptionsData.Deleting = False
+              OptionsData.DeletingConfirmation = False
+              OptionsView.GroupByBox = False
+              object cxGrid2DBTableView1valor_desde: TcxGridDBColumn
+                DataBinding.FieldName = 'Desde'
+                HeaderAlignmentHorz = taCenter
+              end
+              object cxGrid2DBTableView1valor_hasta: TcxGridDBColumn
+                Caption = 'Hasta'
+                DataBinding.FieldName = 'valor_hasta'
+                HeaderAlignmentHorz = taCenter
+              end
+              object cxGrid2DBTableView1limite: TcxGridDBColumn
+                Caption = 'Valor Esperado'
+                DataBinding.FieldName = 'limite'
+                HeaderAlignmentHorz = taCenter
+              end
+            end
+            object cxGrid2DBBandedTableView1: TcxGridDBBandedTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = DSVal
+              DataController.KeyFieldNames = 'oid_val'
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsBehavior.FocusCellOnTab = True
+              OptionsBehavior.FocusFirstCellOnNewRecord = True
+              OptionsBehavior.GoToNextCellOnEnter = True
+              OptionsCustomize.ColumnFiltering = False
+              OptionsData.Appending = True
+              OptionsView.GroupByBox = False
+              Bands = <
+                item
+                  Caption = 'Cambia al abrir'
+                end
+                item
+                end>
+              object cxGrid2DBBandedTableView1valor_desde: TcxGridDBBandedColumn
+                Caption = 'Desde'
+                DataBinding.FieldName = 'valor_desde'
+                HeaderAlignmentHorz = taCenter
+                Width = 86
+                Position.BandIndex = 0
+                Position.ColIndex = 0
+                Position.RowIndex = 0
+              end
+              object cxGrid2DBBandedTableView1valor_hasta: TcxGridDBBandedColumn
+                Caption = 'Hasta'
+                DataBinding.FieldName = 'valor_hasta'
+                HeaderAlignmentHorz = taCenter
+                Width = 78
+                Position.BandIndex = 0
+                Position.ColIndex = 1
+                Position.RowIndex = 0
+              end
+              object cxGrid2DBBandedTableView1limite: TcxGridDBBandedColumn
+                Caption = 'Valor Esperado'
+                DataBinding.FieldName = 'limite'
+                HeaderAlignmentHorz = taCenter
+                Position.BandIndex = 1
+                Position.ColIndex = 0
+                Position.RowIndex = 0
+              end
+            end
+            object cxGrid2Level1: TcxGridLevel
+              GridView = cxGrid2DBBandedTableView1
+            end
           end
         end
       end
@@ -208,6 +368,23 @@ inherited FNLab0001: TFNLab0001
       0
       0)
   end
+  inherited Driver: TjktDriver
+    DataSetCab = TDet
+    TipoPrograma = tp_abmIndividual
+    Filtro = hlpDeter
+    FocoEnAlta = TDetcod_det
+    FocoEnModificacion = TDetdes_det
+    Left = 120
+    Top = 200
+  end
+  inherited IdHTTP: TIdHTTP
+    Left = 96
+    Top = 248
+  end
+  inherited Service: TjktServiceCaller
+    Left = 160
+    Top = 240
+  end
   inherited OperacionSave: TjktOperacion
     OperName = 'SaveDeterminaciones'
     Atributos = <
@@ -216,38 +393,49 @@ inherited FNLab0001: TFNLab0001
         Tag = 0
       end
       item
+        Dataset = TMet
+        Tag = 0
+      end
+      item
         Dataset = TVal
         Tag = 0
       end
       item
+        Dataset = TVar
         Tag = 0
       end>
-    Left = 320
-    Top = 136
+    Left = 88
+    Top = 344
   end
   inherited mtParametroInicial: TjktMemTable
-    Left = 288
-    Top = 208
+    Left = 1168
+    Top = 192
   end
   inherited OperacionTraer: TjktOperacion
     OperName = 'TraerDeterminaciones'
-    Left = 488
-    Top = 65520
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = TDetoid_det
+        Tag = 0
+      end>
+    Left = 40
+    Top = 368
   end
   inherited ValidadorForm: TjktValidadorForm
     ListaValidaciones = <
       item
         Field = TDetcod_det
-        ValidadorGral = valDeter
+        ValidadorNew = valDeter
       end
       item
-        Field = TValcod_tabla
-        ValidadorGral = valTabla
       end>
+    Left = 144
+    Top = 88
   end
   inherited mtParametrosForm: TjktMemTable
-    Left = 400
-    Top = 168
+    Left = 1152
+    Top = 120
     object mtParametrosFormoid_param: TIntegerField
       FieldName = 'oid_param'
     end
@@ -297,11 +485,6 @@ inherited FNLab0001: TFNLab0001
         Size = 60
       end
       item
-        Name = 'metodo'
-        DataType = ftString
-        Size = 40
-      end
-      item
         Name = 'tipo_res'
         DataType = ftString
         Size = 20
@@ -311,12 +494,22 @@ inherited FNLab0001: TFNLab0001
         DataType = ftBoolean
       end
       item
-        Name = 'key'
+        Name = 'oid_lab'
         DataType = ftInteger
       end
       item
-        Name = 'oid_lab'
-        DataType = ftInteger
+        Name = 'calc_res'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'formato'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'ley_cero'
+        DataType = ftString
+        Size = 30
       end>
     IndexDefs = <>
     SortOptions = []
@@ -331,25 +524,21 @@ inherited FNLab0001: TFNLab0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 576
-    Top = 216
+    OnNewRecord = TDetNewRecord
+    Left = 280
+    Top = 72
     object TDetoid_det: TIntegerField
       Tag = 1
       FieldName = 'oid_det'
     end
     object TDetcod_det: TStringField
-      Tag = 1
+      Tag = 2
       FieldName = 'cod_det'
     end
     object TDetdes_det: TStringField
       Tag = 1
       FieldName = 'des_det'
       Size = 60
-    end
-    object TDetmetodo: TStringField
-      Tag = 1
-      FieldName = 'metodo'
-      Size = 40
     end
     object TDettipo_res: TStringField
       Tag = 1
@@ -359,12 +548,23 @@ inherited FNLab0001: TFNLab0001
       Tag = 1
       FieldName = 'activo'
     end
-    object TDetkey: TIntegerField
-      FieldName = 'key'
-    end
     object TDetoid_lab: TIntegerField
       Tag = 1
       FieldName = 'oid_lab'
+    end
+    object TDetcalc_res: TBooleanField
+      Tag = 1
+      FieldName = 'calc_res'
+    end
+    object TDetformato: TStringField
+      Tag = 1
+      FieldName = 'formato'
+      Size = 10
+    end
+    object TDetley_cero: TStringField
+      Tag = 1
+      FieldName = 'ley_cero'
+      Size = 30
     end
   end
   object TVal: TjktMemTable
@@ -372,10 +572,6 @@ inherited FNLab0001: TFNLab0001
     AttachedAutoRefresh = True
     AttachMaxCount = 1
     FieldDefs = <
-      item
-        Name = 'oid_det'
-        DataType = ftInteger
-      end
       item
         Name = 'oid_carac'
         DataType = ftInteger
@@ -389,36 +585,23 @@ inherited FNLab0001: TFNLab0001
         DataType = ftFloat
       end
       item
-        Name = 'cod_tabla'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'des_tabla'
+        Name = 'limite'
         DataType = ftString
         Size = 30
       end
       item
-        Name = 'oid_tabla'
+        Name = 'oid_val'
         DataType = ftInteger
       end
       item
-        Name = 'limite_inf'
-        DataType = ftFloat
-      end
-      item
-        Name = 'limite_sup'
-        DataType = ftFloat
-      end
-      item
-        Name = 'key'
+        Name = 'oid_met'
         DataType = ftInteger
       end>
-    IndexFieldNames = 'oid_det'
+    IndexFieldNames = 'oid_met'
     IndexDefs = <
       item
         Name = 'TValIndex1'
-        Fields = 'oid_det'
+        Fields = 'oid_met'
       end>
     SortOptions = []
     PersistentBackup = False
@@ -427,19 +610,16 @@ inherited FNLab0001: TFNLab0001
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
-    MasterFields = 'oid_det'
-    MasterSource = DSDet
+    MasterFields = 'oid_met'
+    MasterSource = DSMet
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
     OnNewRecord = TValNewRecord
-    Left = 576
-    Top = 272
-    object TValoid_det: TIntegerField
-      FieldName = 'oid_det'
-    end
+    Left = 240
+    Top = 320
     object TValoid_carac: TIntegerField
       Tag = 1
       FieldName = 'oid_carac'
@@ -452,41 +632,33 @@ inherited FNLab0001: TFNLab0001
       Tag = 1
       FieldName = 'valor_hasta'
     end
-    object TValcod_tabla: TStringField
+    object TVallimite: TStringField
       Tag = 1
-      FieldName = 'cod_tabla'
-      Size = 10
-    end
-    object TValdes_tabla: TStringField
-      Tag = 1
-      FieldName = 'des_tabla'
+      FieldName = 'limite'
       Size = 30
     end
-    object TValoid_tabla: TIntegerField
+    object TValoid_val: TIntegerField
       Tag = 1
-      FieldName = 'oid_tabla'
+      FieldName = 'oid_val'
     end
-    object TVallimite_inf: TFloatField
+    object TValoid_met: TIntegerField
       Tag = 1
-      FieldName = 'limite_inf'
+      FieldName = 'oid_met'
     end
-    object TVallimite_sup: TFloatField
+    object TValactivo: TBooleanField
       Tag = 1
-      FieldName = 'limite_sup'
-    end
-    object TValkey: TIntegerField
-      FieldName = 'key'
+      FieldName = 'activo'
     end
   end
   object DSDet: TDataSource
     DataSet = TDet
-    Left = 624
-    Top = 216
+    Left = 240
+    Top = 72
   end
   object DSVal: TDataSource
     DataSet = TVal
-    Left = 624
-    Top = 272
+    Left = 280
+    Top = 320
   end
   object cxStyleRepository1: TcxStyleRepository
     PixelsPerInch = 96
@@ -497,14 +669,14 @@ inherited FNLab0001: TFNLab0001
     Entidad = 'determinacion'
     Validacion = tInexistente
     ListaAsignaciones = <>
-    Left = 40
-    Top = 200
+    Left = 16
+    Top = 232
   end
   object valTabla: TjktValidador
     Validacion = tExistente
     ListaAsignaciones = <>
-    Left = 40
-    Top = 256
+    Left = 32
+    Top = 320
   end
   object valLaboratorio: TjktValidador
     Entidad = 'laboratorio'
@@ -521,7 +693,7 @@ inherited FNLab0001: TFNLab0001
         FieldTarget = TLabodes_lab
       end>
     Left = 96
-    Top = 128
+    Top = 144
   end
   object TLabo: TjktMemTable
     DesignActivation = True
@@ -600,7 +772,162 @@ inherited FNLab0001: TFNLab0001
         Tag = 0
       end>
     ServiceCaller = Service
-    Left = 152
-    Top = 376
+    Left = 144
+    Top = 408
+  end
+  object TMet: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'oid_det'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_met'
+        DataType = ftInteger
+      end
+      item
+        Name = 'metodo'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'expresion'
+        DataType = ftString
+        Size = 60
+      end>
+    IndexFieldNames = 'oid_det'
+    IndexDefs = <
+      item
+        Name = 'TMetIndex1'
+        Fields = 'oid_det'
+      end>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    MasterSource = DSDet
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    OnNewRecord = TMetNewRecord
+    Left = 512
+    Top = 152
+    object TMetoid_det: TIntegerField
+      Tag = 1
+      FieldName = 'oid_det'
+    end
+    object TMetoid_met: TIntegerField
+      Tag = 1
+      FieldName = 'oid_met'
+    end
+    object TMetmetodo: TStringField
+      Tag = 1
+      FieldName = 'metodo'
+      Size = 30
+    end
+    object TMetexpresion: TStringField
+      Tag = 1
+      FieldName = 'expresion'
+      Size = 60
+    end
+    object TMetactivo: TBooleanField
+      Tag = 1
+      FieldName = 'activo'
+    end
+  end
+  object DSMet: TDataSource
+    DataSet = TMet
+    Left = 480
+    Top = 144
+  end
+  object TVar: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'oid_met'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_var'
+        DataType = ftInteger
+      end
+      item
+        Name = 'cod_var'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'des_var'
+        DataType = ftString
+        Size = 30
+      end>
+    IndexFieldNames = 'oid_met'
+    IndexDefs = <
+      item
+        Name = 'TVarIndex1'
+        Fields = 'oid_met'
+      end>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    MasterFields = 'oid_met'
+    MasterSource = DSMet
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    OnNewRecord = TVarNewRecord
+    Left = 688
+    Top = 320
+    object TVaroid_met: TIntegerField
+      Tag = 1
+      FieldName = 'oid_met'
+    end
+    object TVaroid_var: TIntegerField
+      Tag = 1
+      FieldName = 'oid_var'
+    end
+    object TVarcod_var: TStringField
+      Tag = 1
+      FieldName = 'cod_var'
+      Size = 10
+    end
+    object TVardes_var: TStringField
+      Tag = 1
+      FieldName = 'des_var'
+      Size = 30
+    end
+    object TVaractivo: TBooleanField
+      Tag = 1
+      FieldName = 'activo'
+    end
+  end
+  object DSVar: TDataSource
+    DataSet = TVar
+    Left = 656
+    Top = 320
+  end
+  object hlpDeter: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'determinacion'
+    OidRespuesta = TDetoid_det
+    CodigoRespuesta = TDetcod_det
+    Left = 664
+    Top = 144
   end
 end

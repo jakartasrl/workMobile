@@ -23,7 +23,7 @@
 		
 		<list name="metodos" inverse="true" cascade="save-update">
 			<key column="ID_DETERMINACION" />
-			<index column="secu" />
+			<list-index column="secu" />
 			<one-to-many class="com.jkt.laboratorio.dominio.Metodo" />
 		</list>
 		

@@ -44,7 +44,7 @@ public class Metodo extends PersistentEntity {
 
 
 
-	public void addValoresValidos(ValorEsperado aValue) {
+	public void addValorEsperado(ValorEsperado aValue) {
 		if (!valoresEsperados.contains(aValue)) {
 			valoresEsperados.add(aValue);
 			aValue.setMetodo(this);
@@ -52,11 +52,11 @@ public class Metodo extends PersistentEntity {
 	}
 
 
-	public List<ValorEsperado> getvaloresEsperados() {
+	public List<ValorEsperado> getValoresEsperados() {
 		return valoresEsperados;
 	}
 
-	public void setvaloresEsperados(List<ValorEsperado> aValue) {
+	public void setValoresEsperados(List<ValorEsperado> aValue) {
 		this.valoresEsperados = aValue;
 	}
 
