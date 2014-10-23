@@ -280,7 +280,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 						}
 						
 						/*
-						 * La generaci�n de cada campo puede ser primitiva o compuesta.
+						 * La creación de cada campo puede ser primitiva o compuesta.
 						 * Compuesta va a ser si el valor del parametro es una tabla. En este caso se usara un metodo recursivo
 						 */
 						if(esTabla(entry.getValue())){

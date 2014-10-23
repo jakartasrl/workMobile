@@ -9,14 +9,13 @@ import com.jkt.excepcion.JakartaException;
 
 public class WebTransformer extends Transformer {
 
-	private ServletOutputStream servletOutputStream;
-
+//	private ServletOutputStream servletOutputStream;
+	private ObjectOutputStream oos;
+	
 	@Override
 	protected void update(Notificacion arg1) {
 		try{
-			ObjectOutputStream oos = new ObjectOutputStream(servletOutputStream);
 			oos.writeObject(arg1.getParameter());
-			oos.close();
 		}catch(IOException e){
 			throw new RuntimeException(e);
 		}
@@ -24,13 +23,21 @@ public class WebTransformer extends Transformer {
 
 	@Override
 	public void write() throws JakartaException {
-		//do nothing
+		try {
+			oos.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void setup(ServletOutputStream outputStream, String outputName)throws JakartaException {
-		//outputName no me interesa
-		servletOutputStream=outputStream;
+//		servletOutputStream=outputStream;
+		try {
+			oos = new ObjectOutputStream(outputStream);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
