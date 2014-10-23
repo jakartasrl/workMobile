@@ -42,8 +42,6 @@ import com.jkt.util.Tabla;
 @RequestMapping(value = "/processorDelphi")
 public class RequestProcessorDelphi extends RequestProcessor{
 
-	private static final String TIPO_CLIENTE = "Delphi";
-
 	@PostConstruct
 	public void inyectarSessionEnAdapter(){
 		delphiAdapter.setSession(sessionProvider);
@@ -58,7 +56,7 @@ public class RequestProcessorDelphi extends RequestProcessor{
 	 */
 	@Override
 	protected String getAppRequest() {
-		return TIPO_CLIENTE;
+		return RequestProcessor.CLIENTE_DELPHI;
 	}
 	
 	/* (non-Javadoc)

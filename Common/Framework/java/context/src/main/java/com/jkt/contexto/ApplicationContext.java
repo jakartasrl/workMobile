@@ -23,7 +23,7 @@ import com.jkt.xmlreader.XMLObservador;
  * <p>Clase Principal del modulo.</p>
  * <p>Esta clase se carga como un bean al levantar el contexto de spring.</p>
  * <p>Configuraciones generales en cuanto al modulo, carga de data importante, y todo que sea referente a la configuracion
- * del modulo, van en esta clase de configuración.</p>
+ * del modulo, van en esta clase de configuraciï¿½n.</p>
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL
@@ -56,10 +56,13 @@ public class ApplicationContext {
 	 * 
 	 * @return {@link XMLEntity} with all operations
 	 */
-	public XMLEntity retrieveBusinessObject(){
+	public XMLEntity retrieveBusinessObjectForDelphi(){
 		return configuration.getOperaciones();
 	}
 	
+	public XMLEntity retrieveBusinessObjectForHTMLClient(){
+		return configuration.getOperacionesHTML();
+	}
 	
 	public List<String> retrieveEventosForClass(Class clazz){
 		XMLEvento xmlEvento = configuration.getEventos().getEventos().get(clazz.getName());

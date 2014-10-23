@@ -42,6 +42,9 @@ import com.jkt.xmlreader.XMLEntity;
 @Scope("request")
 public abstract class RequestProcessor extends BaseController{
 	
+	protected static final String CLIENTE_DELPHI= "DELPHI";
+	protected static final String CLIENTE_HTML = "HTML";
+	
 	private static final String KEY_NOMBRE_OPERACION      = "op";
 	private static final String KEY_NOMBRE_OPERACION_TEST = "opTest";
 	
@@ -93,8 +96,7 @@ public abstract class RequestProcessor extends BaseController{
 		if (parameters.containsKey(KEY_NOMBRE_OPERACION)){
 			key = KEY_NOMBRE_OPERACION;
 			test = false;
-		}
-		else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
+		}else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
 			key = KEY_NOMBRE_OPERACION_TEST;
 			test = true;
 		}
@@ -148,14 +150,7 @@ public abstract class RequestProcessor extends BaseController{
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
-//		}catch(Exception exception){
-			//Hago el rollback y muestro el mensaje critico en frontend.
-//			tx.rollback();
-//			throw exception;
 		}finally{
-//			if (tx.isActive()) {
-//				tx.commit();
-//			}
 			sessionProvider.destroySession();
 		}
 		log.debug("Finalizó la operación...");
@@ -172,11 +167,8 @@ public abstract class RequestProcessor extends BaseController{
 	}
 
 	/**
-	 * @param eventBusinessOperation
-	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws ClassNotFoundException 
+	 * Recupera el nombre de la operacion e instancia la operacion propiamente dicha.
+	 * 
 	 */
 	private Operation recuperarOperacion(IEventBusiness eventBusinessOperation) throws InstantiationException, IllegalAccessException, ClassNotFoundException, JakartaException {
 		String clase = ((EventBusiness)eventBusinessOperation).getClase();
@@ -195,14 +187,19 @@ public abstract class RequestProcessor extends BaseController{
 		op.setServiceRepository(serviceRepository);
 		op.setSessionProvider(sessionProvider);
 		op.setRepositorioClases(repositorioClases);
-		op.setEventBusiness(eventBusinessOperation);
+		
+		//Seteo el eventBusiness solamente si es cliente delphi, xq allí se usa informacion como por ejemplo la de las listas <listas><lista/></listas>
+		if (getAppRequest().equals(CLIENTE_DELPHI)) {
+			op.setEventBusiness(eventBusinessOperation);
+		}
+		
 		return op;
 	}
 
 	/**
 	 * Finaliza si la operacion no existe.
 	 * 
-	 * @throws JakartaException
+	 * @throws JakartaException Siempre que se ejecute este metodo se levanta la excepcion.
 	 */
 	private void finalizar(String aOperName) throws JakartaException {
 		log.debug("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
@@ -216,7 +213,19 @@ public abstract class RequestProcessor extends BaseController{
 	 * @return
 	 */
 	protected IEventBusiness getOperation(String operationName){
-		XMLEntity hijo = (XMLEntity) applicationContext.retrieveBusinessObject().getHijo(operationName);
+		
+		/*
+		 * Al momento de querer recuperar la operacion, diferencio entre clientes.
+		 * Consulto de quien viene el request y solicito al context el correspondiente hijo.
+		 * 
+		 */
+		XMLEntity hijo;
+		if (getAppRequest().equals(CLIENTE_DELPHI)) {
+			hijo = (XMLEntity) applicationContext.retrieveBusinessObjectForDelphi().getHijo(operationName);
+		}else{
+			hijo = (XMLEntity) applicationContext.retrieveBusinessObjectForHTMLClient().getHijo(operationName);
+		}
+		
 		return (IEventBusiness) hijo;
 	}
 	
