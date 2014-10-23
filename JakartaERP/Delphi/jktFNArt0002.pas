@@ -70,6 +70,7 @@ type
     procedure jktExpDBGrid1DBTableView1cod_caracPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
     procedure mtTipoProdNewRecord(DataSet: TDataSet);
+    procedure mtDetNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -87,6 +88,14 @@ begin
   inherited;
 
   HelpCarac.Ejecutar;
+end;
+
+procedure TFNArt0002.mtDetNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtDet.FieldByName('oid_det').AsInteger := GetNewOid;
 end;
 
 procedure TFNArt0002.mtTipoProdNewRecord(DataSet: TDataSet);

@@ -67,6 +67,7 @@ type
     dbgImpuestoCategoriasDBTableView1Descripcion: TcxGridDBColumn;
     dbgImpuestoCategoriasDBTableView1Activa: TcxGridDBColumn;
     dsComportamientos: TDataSource;
+    procedure mtImpuestoCategoriasNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -77,6 +78,14 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TFNImp0001.mtImpuestoCategoriasNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtImpuestoCategorias.FieldByName('oid_Categoria').AsInteger := GetNewOid;
+end;
 
 initialization
   RegisterClass(TFNImp0001);

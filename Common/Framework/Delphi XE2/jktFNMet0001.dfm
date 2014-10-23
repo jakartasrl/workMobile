@@ -2,8 +2,8 @@ object frmChild: TfrmChild
   Left = 0
   Top = 0
   Caption = 'frmChild'
-  ClientHeight = 318
-  ClientWidth = 674
+  ClientHeight = 392
+  ClientWidth = 715
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,40 +24,43 @@ object frmChild: TfrmChild
     Left = 0
     Top = 0
     Align = alLeft
+    Style.BorderStyle = ebsNone
     TabOrder = 1
-    Height = 318
-    Width = 185
+    Height = 392
+    Width = 30
   end
   object cxSplitterLeft: TcxSplitter
-    Left = 185
+    Left = 30
     Top = 0
-    Width = 8
-    Height = 318
-    Control = cxGroupBoxLeft
+    Width = 4
+    Height = 392
   end
   object cxGroupBoxRight: TcxGroupBox
-    Left = 489
+    Left = 685
     Top = 0
     Align = alRight
-    TabOrder = 4
-    Height = 318
-    Width = 185
+    Style.BorderStyle = ebsNone
+    TabOrder = 3
+    Height = 392
+    Width = 30
   end
   object cxSplitterRight: TcxSplitter
-    Left = 481
+    Left = 681
     Top = 0
-    Width = 8
-    Height = 318
+    Width = 4
+    Height = 392
     AlignSplitter = salRight
     Control = cxGroupBoxRight
   end
   object cxGroupBoxMain: TcxGroupBox
-    Left = 193
+    Left = 34
     Top = 0
     Align = alClient
+    PanelStyle.Active = True
+    Style.BorderStyle = ebsNone
     TabOrder = 8
-    Height = 318
-    Width = 288
+    Height = 392
+    Width = 647
   end
   object BarManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -128,8 +131,8 @@ object frmChild: TfrmChild
     TipoPrograma = tp_abmLista
     OperacionesIniciales = <>
     OperacionesDefault = <>
-    Left = 112
-    Top = 160
+    Left = 360
+    Top = 32
   end
   object IdHTTP: TIdHTTP
     AllowCookies = True
@@ -145,21 +148,21 @@ object frmChild: TfrmChild
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 32
-    Top = 80
+    Left = 256
+    Top = 32
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
     IgnoreException = False
-    Left = 24
+    Left = 200
     Top = 32
   end
   object OperacionSave: TjktOperacion
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 112
-    Top = 224
+    Left = 424
+    Top = 32
   end
   object mtParametroInicial: TjktMemTable
     DesignActivation = True
@@ -179,7 +182,7 @@ object frmChild: TfrmChild
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 552
+    Left = 520
     Top = 32
     object mtParametroInicialEntidad: TStringField
       FieldName = 'Entidad'
@@ -190,13 +193,13 @@ object frmChild: TfrmChild
     EnviarTodo = False
     Atributos = <>
     ServiceCaller = Service
-    Left = 32
-    Top = 224
+    Left = 424
+    Top = 96
   end
   object ValidadorForm: TjktValidadorForm
     ListaValidaciones = <>
-    Left = 32
-    Top = 160
+    Left = 256
+    Top = 96
   end
   object mtParametrosForm: TjktMemTable
     DesignActivation = True
@@ -216,7 +219,7 @@ object frmChild: TfrmChild
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 552
-    Top = 104
+    Left = 560
+    Top = 32
   end
 end

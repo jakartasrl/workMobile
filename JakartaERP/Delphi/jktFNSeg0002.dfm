@@ -3,7 +3,7 @@ inherited FNSeg0002: TFNSeg0002
   ClientHeight = 363
   ClientWidth = 785
   ExplicitWidth = 801
-  ExplicitHeight = 402
+  ExplicitHeight = 401
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
@@ -12,39 +12,36 @@ inherited FNSeg0002: TFNSeg0002
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 363
-    ExplicitLeft = 185
-    ExplicitTop = 0
     ExplicitHeight = 363
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 600
-    ExplicitLeft = 600
+    Left = 755
+    ExplicitLeft = 755
     ExplicitHeight = 363
     Height = 363
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 592
+    Left = 751
     Height = 363
-    ExplicitLeft = 592
-    ExplicitTop = 0
+    ExplicitLeft = 751
     ExplicitHeight = 363
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 399
+    ExplicitWidth = 717
     ExplicitHeight = 363
     Height = 363
-    Width = 399
+    Width = 717
     object cxGroupBox1: TcxGroupBox
-      Left = 3
-      Top = 22
+      Left = 2
+      Top = 2
       Align = alTop
       Caption = 'Datos del Usuario'
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
       Height = 153
-      Width = 393
+      Width = 713
       object dxBevel1: TdxBevel
         Left = 14
         Top = 96
@@ -172,24 +169,21 @@ inherited FNSeg0002: TFNSeg0002
       end
     end
     object cxGroupBox3: TcxGroupBox
-      Left = 3
-      Top = 175
+      Left = 2
+      Top = 155
       Align = alClient
       Caption = 'Empresas'
       TabOrder = 1
-      Height = 185
-      Width = 393
+      Height = 206
+      Width = 713
       object dbgUsuarioEmpresas: TjktExpDBGrid
         Left = 3
         Top = 15
-        Width = 387
-        Height = 160
+        Width = 707
+        Height = 181
         Align = alClient
         TabOrder = 0
         DataSource = dsUsuarioEmpresas
-        ExplicitLeft = -153
-        ExplicitWidth = 160
-        ExplicitHeight = 543
         object dbgUsuarioEmpresasDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsUsuarioEmpresas
@@ -197,6 +191,7 @@ inherited FNSeg0002: TFNSeg0002
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsBehavior.FocusCellOnTab = True
+          OptionsData.Deleting = False
           OptionsData.Inserting = False
           OptionsView.GroupByBox = False
           object dbgUsuarioEmpresasDBTableView1oid_usu_emp: TcxGridDBColumn

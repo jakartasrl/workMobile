@@ -21,7 +21,7 @@ object frmMainForm: TfrmMainForm
     Left = 0
     Top = 0
     Width = 780
-    Height = 158
+    Height = 159
     ApplicationButton.Glyph.Data = {
       1E210000424D1E21000000000000360000002800000027000000360000000100
       200000000000E820000000000000000000000000000000000000DEDEDEFFDEDE
@@ -292,7 +292,7 @@ object frmMainForm: TfrmMainForm
     ApplicationButton.ScreenTip = stAppMenu
     ApplicationButton.Menu = BackstageView
     BarManager = BarManager
-    ColorSchemeName = 'Whiteprint'
+    ColorSchemeName = 'Office2007Blue'
     PopupMenuItems = [rpmiItems, rpmiQATAddRemoveItem, rpmiMinimizeRibbon]
     QuickAccessToolbar.Toolbar = dxbQAT
     Contexts = <
@@ -410,7 +410,7 @@ object frmMainForm: TfrmMainForm
     Font.Style = []
     ExplicitTop = 477
     object dxRibbonStatusBar1Container1: TdxStatusBarContainerControl
-      Left = 137
+      Left = 135
       Top = 0
       Width = 52
       Height = 23
@@ -443,7 +443,7 @@ object frmMainForm: TfrmMainForm
         Left = 658
         Top = 60
         Width = 42
-        Height = 194
+        Height = 192
         Align = alRight
         Shape = bsSpacer
         ExplicitLeft = 667
@@ -453,14 +453,14 @@ object frmMainForm: TfrmMainForm
         Left = 0
         Top = 60
         Width = 42
-        Height = 194
+        Height = 192
         Align = alLeft
         Shape = bsSpacer
         ExplicitHeight = 314
       end
       object bvSpacer7: TBevel
         Left = 0
-        Top = 254
+        Top = 252
         Width = 700
         Height = 26
         Align = alBottom
@@ -550,7 +550,8 @@ object frmMainForm: TfrmMainForm
         TabOrder = 1
         Transparent = True
         ExplicitWidth = 524
-        Height = 194
+        ExplicitHeight = 194
+        Height = 192
         Width = 616
         object gbLocationsPane: TcxGroupBox
           Left = 0
@@ -565,38 +566,40 @@ object frmMainForm: TfrmMainForm
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
           Transparent = True
-          Height = 194
+          ExplicitHeight = 194
+          Height = 192
           Width = 337
           object bvSpacer5: TBevel
             Left = 305
             Top = 0
             Width = 32
-            Height = 194
+            Height = 192
             Align = alRight
             Shape = bsSpacer
             ExplicitHeight = 314
           end
           object dxBevel1: TdxBevel
-            Left = 304
+            Left = 303
             Top = 0
-            Width = 1
-            Height = 194
+            Width = 2
+            Height = 192
             Align = alRight
             AutoSize = True
             Shape = dxbsLineLeft
-            ExplicitLeft = 303
+            ExplicitLeft = 304
           end
         end
         object gbRecentPathsPane: TcxScrollBox
           Left = 337
           Top = 0
           Width = 279
-          Height = 194
+          Height = 192
           Align = alClient
           BorderStyle = cxcbsNone
           TabOrder = 1
           Transparent = True
           ExplicitWidth = 187
+          ExplicitHeight = 194
           object bvSpacer6: TBevel
             Left = 0
             Top = 28
@@ -676,12 +679,13 @@ object frmMainForm: TfrmMainForm
           Left = 337
           Top = 0
           Width = 279
-          Height = 194
+          Height = 192
           Align = alClient
           BorderStyle = cxcbsNone
           TabOrder = 2
           Transparent = True
           ExplicitWidth = 187
+          ExplicitHeight = 194
           object bvSpacer8: TBevel
             Left = 0
             Top = 28
@@ -719,7 +723,7 @@ object frmMainForm: TfrmMainForm
         Left = 0
         Top = 0
         Width = 42
-        Height = 254
+        Height = 252
         Align = alLeft
         Shape = bsSpacer
         ExplicitHeight = 374
@@ -728,7 +732,7 @@ object frmMainForm: TfrmMainForm
         Left = 658
         Top = 0
         Width = 42
-        Height = 254
+        Height = 252
         Align = alRight
         Shape = bsSpacer
         ExplicitLeft = 667
@@ -736,7 +740,7 @@ object frmMainForm: TfrmMainForm
       end
       object Bevel3: TBevel
         Left = 0
-        Top = 254
+        Top = 252
         Width = 700
         Height = 26
         Align = alBottom
@@ -754,7 +758,7 @@ object frmMainForm: TfrmMainForm
         Left = 0
         Top = 0
         Width = 42
-        Height = 254
+        Height = 252
         Align = alLeft
         Shape = bsSpacer
         ExplicitLeft = 480
@@ -762,10 +766,10 @@ object frmMainForm: TfrmMainForm
         ExplicitHeight = 374
       end
       object Bevel5: TBevel
-        Left = 566
+        Left = 562
         Top = 0
         Width = 42
-        Height = 254
+        Height = 252
         Align = alRight
         Shape = bsSpacer
         ExplicitLeft = 139
@@ -774,8 +778,8 @@ object frmMainForm: TfrmMainForm
       end
       object Bevel6: TBevel
         Left = 0
-        Top = 254
-        Width = 608
+        Top = 252
+        Width = 604
         Height = 26
         Align = alBottom
         Shape = bsSpacer
@@ -792,8 +796,10 @@ object frmMainForm: TfrmMainForm
         StyleFocused.BorderStyle = ebsNone
         StyleHot.BorderStyle = ebsNone
         TabOrder = 0
-        Height = 254
-        Width = 524
+        ExplicitWidth = 524
+        ExplicitHeight = 254
+        Height = 252
+        Width = 520
       end
     end
   end
@@ -12682,7 +12688,7 @@ object frmMainForm: TfrmMainForm
     object dxbClipboard: TdxBar
       Caption = 'Portapapeles'
       CaptionButtons = <>
-      DockedLeft = 456
+      DockedLeft = 460
       DockedTop = 0
       FloatLeft = 390
       FloatTop = 356
@@ -12752,7 +12758,7 @@ object frmMainForm: TfrmMainForm
     object dxbEditing: TdxBar
       Caption = 'Modificaci'#243'n'
       CaptionButtons = <>
-      DockedLeft = 240
+      DockedLeft = 242
       DockedTop = 0
       FloatLeft = 661
       FloatTop = 344
@@ -13462,7 +13468,7 @@ object frmMainForm: TfrmMainForm
     object dxbMenuPrincipal: TdxBar
       Caption = 'Men'#250' Principal'
       CaptionButtons = <>
-      DockedLeft = 594
+      DockedLeft = 600
       DockedTop = 0
       FloatLeft = 407
       FloatTop = 440
@@ -14165,7 +14171,7 @@ object frmMainForm: TfrmMainForm
   end
   object dxSkinController: TdxSkinController
     NativeStyle = False
-    SkinName = 'Whiteprint'
+    SkinName = 'Office2007Blue'
     Left = 624
     Top = 8
   end

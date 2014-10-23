@@ -17,37 +17,35 @@ inherited FNUti0001: TFNUti0001
     ExplicitHeight = 384
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 553
+    Left = 708
     TabOrder = 4
-    ExplicitLeft = 553
+    ExplicitLeft = 708
     ExplicitHeight = 384
     Height = 384
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 545
+    Left = 706
     Height = 384
-    ExplicitLeft = 545
-    ExplicitTop = 0
+    ExplicitLeft = 704
+    ExplicitWidth = 2
     ExplicitHeight = 384
   end
   inherited cxGroupBoxMain: TcxGroupBox
+    Left = 32
     TabOrder = 7
-    ExplicitWidth = 352
+    ExplicitWidth = 670
     ExplicitHeight = 384
     Height = 384
-    Width = 352
+    Width = 674
     object jktExpDBGrid1: TjktExpDBGrid
-      Left = 3
-      Top = 22
-      Width = 346
-      Height = 359
+      Left = 2
+      Top = 2
+      Width = 670
+      Height = 380
       Align = alClient
       TabOrder = 0
       DataSource = dsInput
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 352
-      ExplicitHeight = 384
+      ExplicitWidth = 666
       object jktExpDBGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsInput
@@ -55,6 +53,8 @@ inherited FNUti0001: TFNUti0001
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusFirstCellOnNewRecord = True
+        OptionsBehavior.FocusCellOnCycle = True
         OptionsData.Appending = True
         OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False

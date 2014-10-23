@@ -63,6 +63,7 @@ type
     valPorcentaje: TjktValidador;
     valCodigo1: TjktValidador;
     valCodigo2: TjktValidador;
+    procedure mtDetalleCondicionDePagoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -74,6 +75,14 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TFNVar0001.mtDetalleCondicionDePagoNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    mtDetalleCondicionDePago.FieldByName('oid_Det_CondPago').AsInteger := GetNewOid;
+end;
 
 initialization
   RegisterClass(TFNVar0001);

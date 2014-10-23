@@ -1,53 +1,49 @@
 inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
-  ClientHeight = 520
-  ClientWidth = 913
-  ExplicitWidth = 929
-  ExplicitHeight = 559
+  ClientHeight = 587
+  ClientWidth = 900
+  ExplicitTop = -40
+  ExplicitWidth = 916
+  ExplicitHeight = 625
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitHeight = 520
-    Height = 520
+    ExplicitHeight = 516
+    Height = 587
   end
   inherited cxSplitterLeft: TcxSplitter
-    Height = 520
-    ExplicitLeft = 185
-    ExplicitTop = 0
-    ExplicitHeight = 520
+    Height = 587
+    ExplicitHeight = 516
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 728
+    Left = 870
     TabOrder = 4
-    ExplicitLeft = 728
-    ExplicitHeight = 520
-    Height = 520
+    ExplicitLeft = 883
+    ExplicitHeight = 516
+    Height = 587
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 720
-    Height = 520
-    ExplicitLeft = 720
-    ExplicitTop = 0
-    ExplicitHeight = 520
+    Left = 866
+    Height = 587
+    ExplicitLeft = 879
+    ExplicitHeight = 516
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 527
-    ExplicitHeight = 520
-    Height = 520
-    Width = 527
+    ExplicitWidth = 845
+    ExplicitHeight = 516
+    Height = 587
+    Width = 832
     object lcMain: TdxLayoutControl
-      Left = 3
-      Top = 22
-      Width = 521
-      Height = 495
+      Left = 2
+      Top = 2
+      Width = 828
+      Height = 583
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 527
-      ExplicitHeight = 520
+      ExplicitWidth = 841
+      ExplicitHeight = 512
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 65
         Top = 41
@@ -169,13 +165,14 @@ inherited FNCli0001: TFNCli0001
         Properties.Alignment = taLeftJustify
         Style.HotTrack = False
         TabOrder = 4
+        Transparent = True
         Width = 43
       end
       object jktExpDBGrid1: TjktExpDBGrid
         Left = 30
         Top = 321
         Width = 767
-        Height = 200
+        Height = 145
         TabOrder = 13
         DataSource = dsInscripcionesImpositivas
         object jktExpDBGrid1DBTableView1: TcxGridDBTableView
@@ -260,11 +257,12 @@ inherited FNCli0001: TFNCli0001
         end
       end
       object jktExpDBGrid2: TjktExpDBGrid
-        Left = 20
-        Top = 655
+        Left = 10000
+        Top = 10000
         Width = 787
         Height = 200
         TabOrder = 16
+        Visible = False
         DataSource = dsClasificadoresCliente
         object cxGridDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
@@ -326,8 +324,8 @@ inherited FNCli0001: TFNCli0001
         end
       end
       object cxButtonEdit1: TcxDBButtonEdit
-        Left = 120
-        Top = 584
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodCondPago'
         DataBinding.DataSource = dsCliente
         Properties.Buttons = <
@@ -338,24 +336,27 @@ inherited FNCli0001: TFNCli0001
         Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 14
+        Visible = False
         Width = 79
       end
       object cxTextEdit1: TcxDBTextEdit
-        Left = 205
-        Top = 584
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescCondPago'
         DataBinding.DataSource = dsCliente
         Enabled = False
         Style.HotTrack = False
         TabOrder = 15
+        Visible = False
         Width = 274
       end
       object jktExpDBGrid3: TjktExpDBGrid
-        Left = 20
-        Top = 905
+        Left = 10000
+        Top = 10000
         Width = 787
         Height = 288
         TabOrder = 17
+        Visible = False
         DataSource = dsSucursalesCliente
         object tvSucursales: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
@@ -647,6 +648,7 @@ inherited FNCli0001: TFNCli0001
         Properties.Alignment = taLeftJustify
         Style.HotTrack = False
         TabOrder = 2
+        Transparent = True
         Width = 43
       end
       object lcMainGroup_Root: TdxLayoutGroup
@@ -692,6 +694,7 @@ inherited FNCli0001: TFNCli0001
         CaptionOptions.Text = 'Datos Legales / Impositivos'
         Parent = lcMainGroup2
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
         ItemControlAreaAlignment = catOwn
         Index = 0
       end
@@ -699,6 +702,8 @@ inherited FNCli0001: TFNCli0001
         CaptionOptions.Text = 'Datos Comerciales'
         Parent = lcMainGroup2
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         LayoutDirection = ldHorizontal
         Index = 1
       end
@@ -706,12 +711,15 @@ inherited FNCli0001: TFNCli0001
         CaptionOptions.Text = 'Sucursales'
         Parent = lcMainGroup2
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         Index = 3
       end
       object lcMainGroup6: TdxLayoutGroup
         CaptionOptions.Text = 'Domicilio'
         Parent = lcMainGroup3
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
         Index = 1
       end
       object lcMainItem3: TdxLayoutItem
@@ -808,6 +816,7 @@ inherited FNCli0001: TFNCli0001
         CaptionOptions.Text = 'Inscripciones Impositivas'
         Parent = lcMainGroup3
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
         Index = 2
       end
       object lcMainItem13: TdxLayoutItem
@@ -821,6 +830,8 @@ inherited FNCli0001: TFNCli0001
         CaptionOptions.Text = 'Clasificadores del Cliente'
         Parent = lcMainGroup2
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         Index = 2
       end
       object lcMainItem14: TdxLayoutItem

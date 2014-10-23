@@ -3,55 +3,46 @@ inherited FNArt0002: TFNArt0002
   ClientHeight = 379
   ClientWidth = 735
   ExplicitWidth = 751
-  ExplicitHeight = 418
+  ExplicitHeight = 417
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitTop = 67
-    ExplicitHeight = 312
+    ExplicitHeight = 379
     Height = 379
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 379
-    ExplicitLeft = 185
-    ExplicitTop = 67
-    ExplicitHeight = 312
+    ExplicitHeight = 379
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 550
+    Left = 705
     TabOrder = 4
-    ExplicitLeft = 550
-    ExplicitTop = 67
-    ExplicitHeight = 312
+    ExplicitLeft = 705
+    ExplicitHeight = 379
     Height = 379
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 542
+    Left = 701
     Height = 379
-    ExplicitLeft = 542
-    ExplicitTop = 67
-    ExplicitHeight = 312
+    ExplicitLeft = 701
+    ExplicitHeight = 379
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitTop = 67
-    ExplicitWidth = 349
-    ExplicitHeight = 312
+    ExplicitWidth = 667
+    ExplicitHeight = 379
     Height = 379
-    Width = 349
+    Width = 667
     object cxGroupBox1: TcxGroupBox
-      Left = 3
-      Top = 22
+      Left = 2
+      Top = 2
       Align = alTop
       Caption = 'Datos del Tipo de Producto'
       Ctl3D = True
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 735
       Height = 67
-      Width = 343
+      Width = 663
       object cxLabel1: TcxLabel
         Left = 12
         Top = 27
@@ -82,35 +73,33 @@ inherited FNArt0002: TFNArt0002
       end
     end
     object cxGroupBox2: TcxGroupBox
-      Left = 3
-      Top = 89
+      Left = 2
+      Top = 69
       Align = alClient
       Caption = 'Caracter'#237'sticas'
       TabOrder = 1
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 349
-      ExplicitHeight = 379
-      Height = 287
-      Width = 343
+      Height = 308
+      Width = 663
       object jktExpDBGrid1: TjktExpDBGrid
         Left = 3
         Top = 15
-        Width = 630
-        Height = 262
-        Align = alLeft
+        Width = 657
+        Height = 283
+        Align = alClient
         TabOrder = 0
         DataSource = dsDet
-        ExplicitHeight = 354
+        ExplicitWidth = 630
         object jktExpDBGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsDet
+          DataController.KeyFieldNames = 'oid_det'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsBehavior.FocusCellOnTab = True
           OptionsBehavior.FocusFirstCellOnNewRecord = True
           OptionsBehavior.FocusCellOnCycle = True
+          OptionsData.Appending = True
           OptionsView.GroupByBox = False
           object jktExpDBGrid1DBTableView1oid_det: TcxGridDBColumn
             DataBinding.FieldName = 'oid_det'
@@ -363,6 +352,7 @@ inherited FNArt0002: TFNArt0002
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = mtDetNewRecord
     Left = 80
     Top = 208
     object mtDetoid_det: TIntegerField

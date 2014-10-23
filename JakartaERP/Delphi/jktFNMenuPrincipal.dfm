@@ -21,10 +21,11 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     Left = 0
     Top = 0
     Align = alTop
-    Ctl3D = True
-    ParentCtl3D = False
+    Alignment = alCenterCenter
     Style.Edges = [bBottom]
     TabOrder = 0
+    ExplicitLeft = 1
+    ExplicitTop = -5
     Height = 73
     Width = 771
     object cxLabel1: TcxLabel
@@ -42,21 +43,24 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     end
     object gbx_Login: TcxGroupBox
       Left = 176
-      Top = 20
+      Top = 1
       Align = alRight
       Ctl3D = True
       ParentCtl3D = False
       Style.BorderStyle = ebsNone
       Style.Edges = [bLeft, bTop, bRight, bBottom]
       TabOrder = 1
+      ExplicitLeft = 174
+      ExplicitTop = -12
+      ExplicitHeight = 50
       DesignSize = (
         594
-        50)
-      Height = 50
+        69)
+      Height = 69
       Width = 594
       object cxLabel2: TcxLabel
         Left = 256
-        Top = 3
+        Top = 22
         Anchors = [akRight, akBottom]
         Caption = 'Password'
         ParentFont = False
@@ -69,10 +73,11 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.TransparentBorder = True
         Style.IsFontAssigned = True
         Transparent = True
+        ExplicitTop = 3
       end
       object cxLabel3: TcxLabel
         Left = 8
-        Top = 3
+        Top = 22
         Anchors = [akRight, akBottom]
         Caption = 'Usuario'
         ParentFont = False
@@ -85,10 +90,11 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.TransparentBorder = True
         Style.IsFontAssigned = True
         Transparent = True
+        ExplicitTop = 3
       end
       object txtPassword: TcxDBTextEdit
         Left = 344
-        Top = 1
+        Top = 20
         Anchors = [akRight, akBottom]
         DataBinding.DataField = 'password'
         DataBinding.DataSource = dsLogin
@@ -103,11 +109,12 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.IsFontAssigned = True
         TabOrder = 3
         OnKeyDown = txtPasswordKeyDown
+        ExplicitTop = 1
         Width = 160
       end
       object txtUsuario: TcxDBTextEdit
         Left = 80
-        Top = 1
+        Top = 20
         Anchors = [akRight, akBottom]
         DataBinding.DataField = 'usuario'
         DataBinding.DataSource = dsLogin
@@ -121,13 +128,14 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.IsFontAssigned = True
         TabOrder = 2
         OnKeyDown = txtPasswordKeyDown
+        ExplicitTop = 1
         Width = 160
       end
       object cxButton1: TcxButton
         Left = 522
-        Top = 1
-        Width = 31
-        Height = 31
+        Top = 15
+        Width = 40
+        Height = 40
         OptionsImage.Glyph.Data = {
           364B0000424D364B000000000000360000002800000078000000280000000100
           200000000000004B000000000000000000000000000000000000000000000000
@@ -732,6 +740,9 @@ object frmMenuPrincipal: TfrmMenuPrincipal
           48480F0F0F0F0000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
         OptionsImage.NumGlyphs = 3
+        PaintStyle = bpsGlyph
+        SpeedButtonOptions.CanBeFocused = False
+        SpeedButtonOptions.Transparent = True
         TabOrder = 4
       end
     end
@@ -760,10 +771,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -936,10 +943,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318
@@ -988,7 +991,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Height = 5
         AlignSplitter = salBottom
         Control = cxGroupBox2
-        ExplicitWidth = 771
       end
       object tc_Favoritos: TdxTileControl
         Left = 0

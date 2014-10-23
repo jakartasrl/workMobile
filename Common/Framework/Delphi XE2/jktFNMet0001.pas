@@ -142,14 +142,14 @@ end;
 
 procedure TfrmChild.FormActivate(Sender: TObject);
 var
-  ancho :extended;
+  ancho: Extended;
 begin
   Driver.ActualizarEstadoBotones;
   DoActivateChild;
+
   ancho := Screen.Width * FPorcWidthMain;
   cxGroupBoxLeft.Width := round((Screen.Width - ancho) / 2 ) ;
   cxGroupBoxRight.Width := round((Screen.Width - ancho) / 2 );
-
 end;
 
 procedure TfrmChild.FormClose(Sender: TObject; var Action: TCloseAction);

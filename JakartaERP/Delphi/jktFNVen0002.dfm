@@ -1,71 +1,59 @@
 inherited FNVen0002: TFNVen0002
   Caption = 'ABM de Modelos de Cotizador'
   ClientHeight = 412
-  ClientWidth = 769
-  ExplicitWidth = 785
+  ClientWidth = 848
+  ExplicitWidth = 864
   ExplicitHeight = 450
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitLeft = 406
-    ExplicitTop = 73
-    ExplicitHeight = 339
+    ExplicitHeight = 412
     Height = 412
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 412
-    ExplicitLeft = 591
-    ExplicitTop = 73
-    ExplicitHeight = 339
+    ExplicitHeight = 412
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 584
+    Left = 818
     TabOrder = 4
-    ExplicitLeft = 575
-    ExplicitTop = 73
-    ExplicitHeight = 339
+    ExplicitLeft = 739
+    ExplicitHeight = 412
     Height = 412
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 576
+    Left = 814
     Height = 412
-    ExplicitLeft = 567
-    ExplicitTop = 73
-    ExplicitHeight = 339
+    ExplicitLeft = 735
+    ExplicitHeight = 412
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 6
-    ExplicitLeft = 599
-    ExplicitTop = 73
-    ExplicitHeight = 339
+    ExplicitWidth = 701
+    ExplicitHeight = 412
     Height = 412
-    Width = 383
+    Width = 780
     object dxBevel1: TdxBevel
-      Left = 757
-      Top = 95
-      Width = -377
-      Height = 314
+      Left = 768
+      Top = 75
+      Width = 10
+      Height = 335
       Align = alRight
       Anchors = [akLeft, akTop, akRight, akBottom]
       Shape = dxbsNone
-      ExplicitLeft = 760
-      ExplicitTop = 73
-      ExplicitWidth = 94
-      ExplicitHeight = 339
+      ExplicitWidth = 101
     end
     object cxGroupBox1: TcxGroupBox
-      Left = 3
-      Top = 22
+      Left = 2
+      Top = 2
       Align = alTop
       Caption = 'Datos del Modelo de Cotizador'
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 769
+      ExplicitWidth = 697
       Height = 73
-      Width = 377
+      Width = 776
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 60
         Top = 30
@@ -80,7 +68,7 @@ inherited FNVen0002: TFNVen0002
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCab
         TabOrder = 1
-        Width = 487
+        Width = 505
       end
       object cxLabel1: TcxLabel
         Left = 14
@@ -105,19 +93,18 @@ inherited FNVen0002: TFNVen0002
       end
     end
     object cxGroupBox2: TcxGroupBox
-      Left = 3
-      Top = 95
+      Left = 2
+      Top = 75
       Align = alLeft
       PanelStyle.Active = True
       TabOrder = 1
-      ExplicitLeft = -32
-      Height = 314
+      Height = 335
       Width = 406
       object cxDBTreeList1: TcxDBTreeList
         Left = 2
         Top = 2
         Width = 402
-        Height = 310
+        Height = 331
         Align = alClient
         Bands = <
           item
@@ -139,7 +126,6 @@ inherited FNVen0002: TFNVen0002
         PopupMenu = PopupMenu
         RootValue = 0
         TabOrder = 0
-        ExplicitHeight = 408
         object cxDBTreeList1oid_titu_conc: TcxDBTreeListColumn
           Visible = False
           DataBinding.FieldName = 'oid_titu_conc'
@@ -218,20 +204,20 @@ inherited FNVen0002: TFNVen0002
       end
     end
     object cxGroupBox3: TcxGroupBox
-      Left = 409
-      Top = 95
+      Left = 408
+      Top = 75
       Align = alClient
       PanelStyle.Active = True
       PanelStyle.BorderWidth = 5
+      Style.BorderStyle = ebsNone
       TabOrder = 2
-      ExplicitLeft = 0
-      ExplicitWidth = 374
-      Height = 314
-      Width = 348
+      ExplicitWidth = 668
+      Height = 335
+      Width = 360
       object dxBevel2: TdxBevel
         Left = 7
         Top = 142
-        Width = 334
+        Width = 346
         Height = 10
         Align = alTop
         Shape = dxbsNone
@@ -247,9 +233,9 @@ inherited FNVen0002: TFNVen0002
         Caption = 'Alta de Concepto'
         Enabled = False
         TabOrder = 1
-        ExplicitWidth = 360
+        ExplicitWidth = 654
         Height = 135
-        Width = 334
+        Width = 346
         object cxLabel5: TcxLabel
           Left = 12
           Top = 30
@@ -322,9 +308,9 @@ inherited FNVen0002: TFNVen0002
         Caption = 'Alta de T'#237'tulo'
         Enabled = False
         TabOrder = 0
-        ExplicitWidth = 360
+        ExplicitWidth = 654
         Height = 135
-        Width = 334
+        Width = 346
         object cxLabel3: TcxLabel
           Left = 12
           Top = 30
