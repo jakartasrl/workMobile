@@ -3,59 +3,46 @@ inherited FNVar0001: TFNVar0001
   ClientHeight = 306
   ClientWidth = 684
   ExplicitWidth = 700
-  ExplicitHeight = 345
+  ExplicitHeight = 344
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitLeft = 0
-    ExplicitTop = 113
-    ExplicitHeight = 193
+    ExplicitHeight = 306
     Height = 306
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 306
-    Control = cxGroupBoxLeft
-    ExplicitLeft = 185
-    ExplicitTop = 113
-    ExplicitHeight = 193
+    ExplicitHeight = 306
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 499
+    Left = 654
     TabOrder = 5
-    ExplicitLeft = 499
-    ExplicitTop = 113
-    ExplicitHeight = 193
+    ExplicitLeft = 654
+    ExplicitHeight = 306
     Height = 306
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 491
+    Left = 650
     Height = 306
-    Control = cxGroupBoxRight
-    ExplicitLeft = 491
-    ExplicitTop = 113
-    ExplicitHeight = 193
+    ExplicitLeft = 650
+    ExplicitHeight = 306
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitLeft = 195
-    ExplicitTop = 113
-    ExplicitWidth = 298
-    ExplicitHeight = 193
+    ExplicitWidth = 616
+    ExplicitHeight = 306
     Height = 306
-    Width = 298
+    Width = 616
     object cxGroupBox1: TcxGroupBox
       Left = 2
-      Top = 5
+      Top = 2
       Align = alTop
       Caption = 'Datos de la Condici'#243'n de Pago'
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 684
       Height = 113
-      Width = 294
+      Width = 612
       object dxBevel1: TdxBevel
         Left = 14
         Top = 63
@@ -137,32 +124,32 @@ inherited FNVar0001: TFNVar0001
     end
     object cxGroupBox2: TcxGroupBox
       Left = 2
-      Top = 118
+      Top = 115
       Align = alClient
       Caption = 'Detalle'
       TabOrder = 1
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 298
-      ExplicitHeight = 306
-      Height = 186
-      Width = 294
+      Height = 189
+      Width = 612
       object dbgDetalleCondicion: TjktExpDBGrid
-        Left = 2
-        Top = 18
-        Width = 367
-        Height = 166
-        Align = alLeft
+        Left = 3
+        Top = 15
+        Width = 606
+        Height = 164
+        Align = alClient
         TabOrder = 0
         DataSource = dsDetalleCondicionDePago
-        ExplicitHeight = 286
+        ExplicitWidth = 367
         object dbgDetalleCondicionDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsDetalleCondicionDePago
+          DataController.KeyFieldNames = 'oid_Det_CondPago'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.FocusCellOnCycle = True
+          OptionsData.Appending = True
           OptionsView.GroupByBox = False
           object dbgDetalleCondicionDBTableView1oid_Det_CondPago: TcxGridDBColumn
             DataBinding.FieldName = 'oid_Det_CondPago'
@@ -383,6 +370,7 @@ inherited FNVar0001: TFNVar0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = mtDetalleCondicionDePagoNewRecord
     Left = 224
     Top = 192
     object mtDetalleCondicionDePagooid_Det_CondPago: TIntegerField

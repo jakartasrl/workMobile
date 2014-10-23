@@ -1,61 +1,48 @@
 inherited FNSeg0001: TFNSeg0001
   Caption = 'ABM de Empresas'
-  ClientHeight = 252
+  ClientHeight = 349
   ClientWidth = 748
   ExplicitWidth = 764
-  ExplicitHeight = 291
+  ExplicitHeight = 387
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitLeft = 0
-    ExplicitTop = 0
-    ExplicitHeight = 252
-    Height = 252
+    ExplicitHeight = 349
+    Height = 349
   end
   inherited cxSplitterLeft: TcxSplitter
-    Height = 252
-    Control = cxGroupBoxLeft
-    ExplicitLeft = 185
-    ExplicitTop = 0
-    ExplicitHeight = 252
+    Height = 349
+    ExplicitHeight = 349
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 563
-    ExplicitLeft = 563
-    ExplicitTop = 0
-    ExplicitHeight = 252
-    Height = 252
+    Left = 718
+    ExplicitLeft = 718
+    ExplicitHeight = 349
+    Height = 349
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 555
-    Height = 252
-    Control = cxGroupBoxRight
-    ExplicitLeft = 555
-    ExplicitTop = 0
-    ExplicitHeight = 252
+    Left = 714
+    Height = 349
+    ExplicitLeft = 714
+    ExplicitHeight = 349
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitLeft = 193
-    ExplicitTop = 0
-    ExplicitWidth = 362
-    ExplicitHeight = 252
-    Height = 252
-    Width = 362
+    ExplicitWidth = 680
+    ExplicitHeight = 349
+    Height = 349
+    Width = 680
     object dbgEmpresas: TjktExpDBGrid
       Left = 2
-      Top = 5
-      Width = 358
-      Height = 245
+      Top = 2
+      Width = 676
+      Height = 345
       Align = alClient
       TabOrder = 0
       DataSource = dsEmpresas
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 362
-      ExplicitHeight = 252
       object dbgEmpresasDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsEmpresas
+        DataController.KeyFieldNames = 'oid_empresa'
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -154,7 +141,30 @@ inherited FNSeg0001: TFNSeg0001
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'oid_empresa'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Codigo'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'RazonSocial'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'UrlDB'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'Activo'
+        DataType = ftBoolean
+      end>
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
@@ -168,6 +178,7 @@ inherited FNSeg0001: TFNSeg0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = TEmpresasNewRecord
     Left = 160
     Top = 112
     object TEmpresasoid_empresa: TIntegerField

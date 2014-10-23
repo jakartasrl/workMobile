@@ -92,6 +92,9 @@ begin
 
   // Siempre seteo el 'oid_clasificador', incluso cuando me llena la tabla el Servidor
   mtConc.FieldByName('oid_cla').AsInteger := oid_cla;
+
+  if not Service.ModoExecute then
+    mtConc.FieldByName('oid_conc').AsInteger := GetNewOid;
 end;
 
 procedure TFNVen0001.opTraerParametroAfterEjecutar(Sender: TObject);

@@ -1,9 +1,9 @@
 inherited FNArt0001: TFNArt0001
   Caption = 'ABM de Art'#237'culos'
   ClientHeight = 522
-  ClientWidth = 799
-  ExplicitWidth = 815
-  ExplicitHeight = 561
+  ClientWidth = 839
+  ExplicitWidth = 855
+  ExplicitHeight = 560
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
@@ -12,42 +12,36 @@ inherited FNArt0001: TFNArt0001
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 522
-    ExplicitLeft = 185
-    ExplicitTop = 0
     ExplicitHeight = 522
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 614
+    Left = 809
     TabOrder = 4
-    ExplicitLeft = 614
+    ExplicitLeft = 769
     ExplicitHeight = 522
     Height = 522
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 606
+    Left = 805
     Height = 522
-    ExplicitLeft = 606
-    ExplicitTop = 0
+    ExplicitLeft = 765
     ExplicitHeight = 522
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 413
+    ExplicitWidth = 731
     ExplicitHeight = 522
     Height = 522
-    Width = 413
+    Width = 771
     object lcMain: TdxLayoutControl
-      Left = 3
-      Top = 22
-      Width = 407
-      Height = 497
+      Left = 2
+      Top = 2
+      Width = 767
+      Height = 518
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 413
-      ExplicitHeight = 522
+      ExplicitWidth = 727
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 68
         Top = 41
@@ -74,6 +68,7 @@ inherited FNArt0001: TFNArt0001
         Properties.OnChange = cxDBCheckBox1PropertiesChange
         Style.HotTrack = False
         TabOrder = 1
+        Transparent = True
         Width = 40
       end
       object cxDBCheckBox2: TcxDBCheckBox
@@ -85,42 +80,47 @@ inherited FNArt0001: TFNArt0001
         Properties.OnChange = cxDBCheckBox1PropertiesChange
         Style.HotTrack = False
         TabOrder = 2
+        Transparent = True
         Width = 40
       end
       object cxDBCheckBox3: TcxDBCheckBox
-        Left = 110
+        Left = 77
         Top = 131
         DataBinding.DataField = 'EsStockeable'
         DataBinding.DataSource = dsArticulo
         Style.HotTrack = False
         TabOrder = 5
+        Transparent = True
         Width = 40
       end
       object cxDBCheckBox4: TcxDBCheckBox
-        Left = 110
-        Top = 156
+        Left = 213
+        Top = 131
         DataBinding.DataField = 'EsProdPropia'
         DataBinding.DataSource = dsArticulo
         Style.HotTrack = False
         TabOrder = 6
+        Transparent = True
         Width = 40
       end
       object cxDBCheckBox5: TcxDBCheckBox
-        Left = 224
+        Left = 327
         Top = 131
         DataBinding.DataField = 'EsComprable'
         DataBinding.DataSource = dsArticulo
         Style.HotTrack = False
         TabOrder = 7
+        Transparent = True
         Width = 40
       end
       object cxDBCheckBox6: TcxDBCheckBox
-        Left = 224
-        Top = 156
+        Left = 418
+        Top = 131
         DataBinding.DataField = 'EsVendible'
         DataBinding.DataSource = dsArticulo
         Style.HotTrack = False
         TabOrder = 8
+        Transparent = True
         Width = 40
       end
       object cxDBMemo1: TcxDBMemo
@@ -134,11 +134,12 @@ inherited FNArt0001: TFNArt0001
         Width = 467
       end
       object jktExpDBGrid1: TjktExpDBGrid
-        Left = 20
-        Top = 252
+        Left = 10000
+        Top = 10000
         Width = 726
         Height = 200
         TabOrder = 10
+        Visible = False
         DataSource = dsValoresCaracProd
         object jktExpDBGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
@@ -199,11 +200,12 @@ inherited FNArt0001: TFNArt0001
         end
       end
       object jktExpDBGrid2: TjktExpDBGrid
-        Left = 20
-        Top = 502
+        Left = 10000
+        Top = 10000
         Width = 726
         Height = 200
         TabOrder = 11
+        Visible = False
         DataSource = dsAperturaStock
         object jktExpDBGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
@@ -218,11 +220,12 @@ inherited FNArt0001: TFNArt0001
         end
       end
       object jktExpDBGrid3: TjktExpDBGrid
-        Left = 20
-        Top = 964
+        Left = 10000
+        Top = 10000
         Width = 726
         Height = 200
         TabOrder = 24
+        Visible = False
         DataSource = dsEquivalencias
         object jktExpDBGrid3DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
@@ -285,11 +288,12 @@ inherited FNArt0001: TFNArt0001
         end
       end
       object jktExpDBGrid4: TjktExpDBGrid
-        Left = 20
-        Top = 1214
+        Left = 10000
+        Top = 10000
         Width = 726
         Height = 200
         TabOrder = 25
+        Visible = False
         DataSource = dsClasifProd
         object jktExpDBGrid4DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
@@ -348,8 +352,8 @@ inherited FNArt0001: TFNArt0001
         end
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 106
-        Top = 225
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'oid_TipoArt'
         DataBinding.DataSource = dsArticulo
         Properties.KeyFieldNames = 'oid_TipoArt'
@@ -368,11 +372,12 @@ inherited FNArt0001: TFNArt0001
         Properties.ListSource = dsTiposDeProducto
         Style.HotTrack = False
         TabOrder = 9
+        Visible = False
         Width = 280
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 158
-        Top = 752
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodUnidStockPrinc'
         DataBinding.DataSource = dsArticulo
         Properties.Buttons = <
@@ -383,11 +388,12 @@ inherited FNArt0001: TFNArt0001
         Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 12
+        Visible = False
         Width = 70
       end
       object cxDBButtonEdit2: TcxDBButtonEdit
-        Left = 158
-        Top = 779
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodUnidStockSecun'
         DataBinding.DataSource = dsArticulo
         Properties.Buttons = <
@@ -398,11 +404,12 @@ inherited FNArt0001: TFNArt0001
         Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 14
+        Visible = False
         Width = 70
       end
       object cxDBButtonEdit3: TcxDBButtonEdit
-        Left = 158
-        Top = 806
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodUnidStockTerc'
         DataBinding.DataSource = dsArticulo
         Properties.Buttons = <
@@ -413,11 +420,12 @@ inherited FNArt0001: TFNArt0001
         Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 16
+        Visible = False
         Width = 70
       end
       object cxDBButtonEdit4: TcxDBButtonEdit
-        Left = 158
-        Top = 849
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodUnidVenta'
         DataBinding.DataSource = dsArticulo
         Properties.Buttons = <
@@ -428,11 +436,12 @@ inherited FNArt0001: TFNArt0001
         Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 18
+        Visible = False
         Width = 70
       end
       object cxDBButtonEdit5: TcxDBButtonEdit
-        Left = 158
-        Top = 876
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodUnidProd'
         DataBinding.DataSource = dsArticulo
         Properties.Buttons = <
@@ -443,11 +452,12 @@ inherited FNArt0001: TFNArt0001
         Properties.OnButtonClick = cxDBButtonEdit5PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 20
+        Visible = False
         Width = 70
       end
       object cxDBButtonEdit6: TcxDBButtonEdit
-        Left = 158
-        Top = 903
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'CodUnidCompra'
         DataBinding.DataSource = dsArticulo
         Properties.Buttons = <
@@ -458,66 +468,73 @@ inherited FNArt0001: TFNArt0001
         Properties.OnButtonClick = cxDBButtonEdit6PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 22
+        Visible = False
         Width = 70
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = 234
-        Top = 752
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescUnidStockPrinc'
         DataBinding.DataSource = dsArticulo
         Enabled = False
         Style.HotTrack = False
         TabOrder = 13
+        Visible = False
         Width = 200
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = 234
-        Top = 779
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescUnidStockSecun'
         DataBinding.DataSource = dsArticulo
         Enabled = False
         Style.HotTrack = False
         TabOrder = 15
+        Visible = False
         Width = 200
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 234
-        Top = 806
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescUnidStockTerc'
         DataBinding.DataSource = dsArticulo
         Enabled = False
         Style.HotTrack = False
         TabOrder = 17
+        Visible = False
         Width = 200
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 234
-        Top = 849
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescUnidVenta'
         DataBinding.DataSource = dsArticulo
         Enabled = False
         Style.HotTrack = False
         TabOrder = 19
+        Visible = False
         Width = 200
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 234
-        Top = 876
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescUnidProd'
         DataBinding.DataSource = dsArticulo
         Enabled = False
         Style.HotTrack = False
         TabOrder = 21
+        Visible = False
         Width = 200
       end
       object cxDBTextEdit8: TcxDBTextEdit
-        Left = 234
-        Top = 903
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'DescUnidCompra'
         DataBinding.DataSource = dsArticulo
         Enabled = False
         Style.HotTrack = False
         TabOrder = 23
+        Visible = False
         Width = 200
       end
       object lcMainGroup_Root: TdxLayoutGroup
@@ -525,6 +542,7 @@ inherited FNArt0001: TFNArt0001
         AlignVert = avTop
         ButtonOptions.Buttons = <>
         Hidden = True
+        ItemIndex = 1
         ShowBorder = False
         Index = -1
       end
@@ -623,6 +641,7 @@ inherited FNArt0001: TFNArt0001
         ButtonOptions.Buttons = <>
         Hidden = True
         ItemControlAreaAlignment = catOwn
+        LayoutDirection = ldHorizontal
         ShowBorder = False
         Index = 0
       end
@@ -632,6 +651,7 @@ inherited FNArt0001: TFNArt0001
         ButtonOptions.Buttons = <>
         Hidden = True
         ItemControlAreaAlignment = catOwn
+        LayoutDirection = ldHorizontal
         ShowBorder = False
         Index = 2
       end
@@ -681,6 +701,8 @@ inherited FNArt0001: TFNArt0001
         CaptionOptions.Text = 'Especificaciones de Producto'
         Parent = lcMainGroup_Root
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         ItemControlAreaAlignment = catOwn
         Index = 1
       end
@@ -696,18 +718,24 @@ inherited FNArt0001: TFNArt0001
         CaptionOptions.Text = 'Apertura de Stock'
         Parent = lcMainGroup10
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         Index = 0
       end
       object lcMainGroup12: TdxLayoutGroup
         CaptionOptions.Text = 'Unidades de Medida'
         Parent = lcMainGroup10
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         Index = 1
       end
       object lcMainGroup13: TdxLayoutGroup
         CaptionOptions.Text = 'Clasificadores'
         Parent = lcMainGroup10
         ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        Expanded = False
         Index = 2
       end
       object lcMainItem10: TdxLayoutItem

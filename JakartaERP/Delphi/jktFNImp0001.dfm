@@ -3,54 +3,42 @@ inherited FNImp0001: TFNImp0001
   ClientHeight = 390
   ClientWidth = 736
   ExplicitWidth = 752
-  ExplicitHeight = 429
+  ExplicitHeight = 428
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxSplitterLeft: TcxSplitter [0]
-    Left = 0
     Height = 390
-    Control = cxGroupBoxLeft
-    ExplicitLeft = 185
-    ExplicitTop = 113
-    ExplicitHeight = 277
+    ExplicitHeight = 390
   end
   inherited cxGroupBoxRight: TcxGroupBox [1]
-    Left = 551
-    TabOrder = 4
-    ExplicitLeft = 551
-    ExplicitTop = 113
-    ExplicitHeight = 277
+    Left = 706
+    TabOrder = 2
+    ExplicitLeft = 706
+    ExplicitHeight = 390
     Height = 390
   end
   inherited cxSplitterRight: TcxSplitter [2]
-    Left = 543
+    Left = 702
     Height = 390
-    Control = cxGroupBoxRight
-    ExplicitLeft = 543
-    ExplicitTop = 113
-    ExplicitHeight = 277
+    ExplicitLeft = 702
+    ExplicitHeight = 390
   end
   inherited cxGroupBoxMain: TcxGroupBox [3]
-    TabOrder = 6
-    ExplicitLeft = 193
-    ExplicitTop = 113
-    ExplicitWidth = 350
-    ExplicitHeight = 277
+    TabOrder = 4
+    ExplicitWidth = 668
+    ExplicitHeight = 390
     Height = 390
-    Width = 350
+    Width = 668
     object cxGroupBox1: TcxGroupBox
       Left = 2
-      Top = 5
+      Top = 2
       Align = alTop
       Caption = 'Datos del Impuesto'
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 736
       Height = 113
-      Width = 346
+      Width = 664
       object txtCodigo: TcxDBTextEdit
         Left = 95
         Top = 30
@@ -128,33 +116,31 @@ inherited FNImp0001: TFNImp0001
     end
     object cxGroupBox2: TcxGroupBox
       Left = 2
-      Top = 118
+      Top = 115
       Align = alClient
       Caption = 'Categor'#237'as de Inscripci'#243'n'
       TabOrder = 1
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 350
-      ExplicitHeight = 390
-      Height = 270
-      Width = 346
+      Height = 273
+      Width = 664
       object dbgImpuestoCategorias: TjktExpDBGrid
-        Left = 2
-        Top = 18
-        Width = 422
-        Height = 250
-        Align = alLeft
+        Left = 3
+        Top = 15
+        Width = 658
+        Height = 248
+        Align = alClient
         TabOrder = 0
         DataSource = dsImpuestoCategorias
-        ExplicitHeight = 370
         object dbgImpuestoCategoriasDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsImpuestoCategorias
+          DataController.KeyFieldNames = 'oid_Categoria'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsBehavior.FocusCellOnTab = True
           OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.FocusCellOnCycle = True
+          OptionsData.Appending = True
           OptionsView.GroupByBox = False
           object dbgImpuestoCategoriasDBTableView1oid_Impuesto: TcxGridDBColumn
             DataBinding.FieldName = 'oid_Impuesto'
@@ -187,11 +173,8 @@ inherited FNImp0001: TFNImp0001
     end
   end
   inherited cxGroupBoxLeft: TcxGroupBox [4]
-    Left = 8
     TabOrder = 8
-    ExplicitLeft = 2
-    ExplicitTop = 5
-    ExplicitHeight = 270
+    ExplicitHeight = 390
     Height = 390
   end
   inherited BarManager: TdxBarManager
@@ -427,6 +410,7 @@ inherited FNImp0001: TFNImp0001
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = mtImpuestoCategoriasNewRecord
     Left = 56
     Top = 216
     object mtImpuestoCategoriasoid_Impuesto: TIntegerField

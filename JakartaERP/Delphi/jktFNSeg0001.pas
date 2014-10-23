@@ -43,6 +43,7 @@ type
     dbgEmpresasDBTableView1Activo: TcxGridDBColumn;
     valCodigo1: TjktValidador;
     valCodigo2: TjktValidador;
+    procedure TEmpresasNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -54,6 +55,15 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TFNSeg0001.TEmpresasNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    TEmpresas.FieldByName('oid_empresa').AsInteger := GetNewOid;
+end;
+
 initialization
   RegisterClass(TFNSeg0001);
 

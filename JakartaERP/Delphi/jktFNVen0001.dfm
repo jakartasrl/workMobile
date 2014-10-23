@@ -3,7 +3,7 @@ inherited FNVen0001: TFNVen0001
   ClientHeight = 405
   ClientWidth = 717
   ExplicitWidth = 733
-  ExplicitHeight = 444
+  ExplicitHeight = 443
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
@@ -12,50 +12,46 @@ inherited FNVen0001: TFNVen0001
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 405
-    ExplicitLeft = 185
-    ExplicitTop = 0
     ExplicitHeight = 405
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 532
+    Left = 687
     TabOrder = 4
-    ExplicitLeft = 532
+    ExplicitLeft = 687
     ExplicitHeight = 405
     Height = 405
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 524
+    Left = 683
     Height = 405
-    ExplicitLeft = 524
-    ExplicitTop = 0
+    ExplicitLeft = 683
     ExplicitHeight = 405
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 331
+    ExplicitWidth = 649
     ExplicitHeight = 405
     Height = 405
-    Width = 331
+    Width = 649
     object jktExpDBGrid1: TjktExpDBGrid
-      Left = 3
-      Top = 22
-      Width = 325
-      Height = 380
+      Left = 2
+      Top = 2
+      Width = 645
+      Height = 401
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 331
-      ExplicitHeight = 405
       object DBGrid1DBBandedTableView1: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsConc
+        DataController.KeyFieldNames = 'oid_conc'
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.FocusFirstCellOnNewRecord = True
+        OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.NestedBands = False
+        OptionsData.Appending = True
         OptionsView.GroupByBox = False
         Bands = <
           item

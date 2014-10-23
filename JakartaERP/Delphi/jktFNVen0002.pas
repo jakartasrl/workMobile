@@ -79,8 +79,8 @@ type
     menAnadirSubTitulo: TMenuItem;
     menEliminar: TMenuItem;
     menAnadirConcepto: TMenuItem;
-    dxBevel1: TdxBevel;
     mtCabActivo: TBooleanField;
+    dxBevel1: TdxBevel;
     procedure cxButtonEdit3PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure menAnadirMismoNivelClick(Sender: TObject);
