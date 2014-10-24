@@ -47,6 +47,8 @@ public class RequestProcessorWeb extends RequestProcessor {
 	@Override
 	protected Map adaptParameters(Object input, IEventBusiness operation) throws IOException {
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		
+		
 		return hashMap;
 	}
 	

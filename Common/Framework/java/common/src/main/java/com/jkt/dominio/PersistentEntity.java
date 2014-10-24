@@ -93,6 +93,4 @@ abstract public class PersistentEntity implements Serializable{
 	 * Helper methods for all entities
 	 */
 	
-	
-	
 }

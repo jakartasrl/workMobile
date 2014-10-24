@@ -14,5 +14,5 @@ public class Cotizacion extends ComprobanteVenta {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
+
 }

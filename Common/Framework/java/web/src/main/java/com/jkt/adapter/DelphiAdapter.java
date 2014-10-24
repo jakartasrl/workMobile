@@ -106,11 +106,11 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}
 		
 	}
+	
 	/*
-	 * FIN de definici�n de las estrategias.
+	 * FIN de definición de las estrategias.
 	 * 
 	 */
-	
 	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		session = sessionProvider.getSession();
 		Transaction tx = null;
