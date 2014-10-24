@@ -77,12 +77,8 @@ type
     jktExpDBGrid1Level1: TcxGridLevel;
     jktExpDBGrid1: TjktExpDBGrid;
     cxGroupBox3: TcxGroupBox;
-    cxGroupBox4: TcxGroupBox;
     cxSplitter1: TcxSplitter;
     cxGroupBox5: TcxGroupBox;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1Level1: TcxGridLevel;
-    cxGrid1: TcxGrid;
     cxGrid2DBTableView1: TcxGridDBTableView;
     cxGrid2Level1: TcxGridLevel;
     cxGrid2: TcxGrid;
@@ -108,17 +104,27 @@ type
     cxGrid2DBBandedTableView1limite: TcxGridDBBandedColumn;
     TValoid_met: TIntegerField;
     TVar: TjktMemTable;
-    TVaroid_met: TIntegerField;
     TVaroid_var: TIntegerField;
     TVarcod_var: TStringField;
     TVardes_var: TStringField;
     DSVar: TDataSource;
-    cxGrid1DBTableView1cod_var: TcxGridDBColumn;
-    cxGrid1DBTableView1des_var: TcxGridDBColumn;
     hlpDeter: TjktHelpGenerico;
     TVaractivo: TBooleanField;
     TMetactivo: TBooleanField;
     TValactivo: TBooleanField;
+    TMetkey: TIntegerField;
+    TValkey: TIntegerField;
+    TVarkey: TIntegerField;
+    cxGroupBox6: TcxGroupBox;
+    cxGroupBox7: TcxGroupBox;
+    cxSplitter2: TcxSplitter;
+    cxGroupBox4: TcxGroupBox;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1DBTableView1cod_var: TcxGridDBColumn;
+    cxGrid1DBTableView1des_var: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+    TVaroid_det: TIntegerField;
     procedure TValNewRecord(DataSet: TDataSet);
     procedure TDetNewRecord(DataSet: TDataSet);
     procedure TMetNewRecord(DataSet: TDataSet);
@@ -165,16 +171,19 @@ end;
 procedure TFNLab0001.TMetNewRecord(DataSet: TDataSet);
 begin
   inherited;
+   TMet.fieldByName('key').AsInteger := self.getNewKey();
    if (not Service.ModoExecute)
        then begin
                TMet.fieldByName('oid_met').AsInteger := self.GetNewOid;
                TMet.fieldByName('oid_det').AsInteger := TDet.FieldByName('oid_det').AsInteger;
+
             end;
 end;
 
 procedure TFNLab0001.TValNewRecord(DataSet: TDataSet);
 begin
   inherited;
+    TVal.fieldByName('key').AsInteger := self.getNewKey();
     if (not Service.ModoExecute)
        then begin
                TVal.fieldByName('oid_val').AsInteger := self.GetNewOid;
@@ -187,10 +196,11 @@ end;
 procedure TFNLab0001.TVarNewRecord(DataSet: TDataSet);
 begin
   inherited;
+  TVar.fieldByName('key').AsInteger := self.getNewKey();
   if (not Service.ModoExecute)
        then begin
                TVar.fieldByName('oid_var').AsInteger := self.GetNewOid;
-               TVar.fieldByName('oid_met').AsInteger := TMet.FieldByName('oid_met').AsInteger;
+               TVar.fieldByName('oid_det').AsInteger := TDet.FieldByName('oid_det').AsInteger;
             end;
 end;
 

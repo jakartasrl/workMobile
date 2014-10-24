@@ -15,17 +15,12 @@
 		
 		<many-to-one name="determinacion" not-null="true" column="ID_DETERMINACION"/>
 		
-		<list name="valoresEsperados" inverse="true" cascade="save-update">
+		<list name="valoresEsperados"  cascade="save-update">
 			<key column="ID_METODO" />
-			<index column="secu" />
+			<list-index column="secu" />
 			<one-to-many class="com.jkt.laboratorio.dominio.ValorEsperado" />
 		</list>
 		
-		<list name="variables" inverse="true" cascade="save-update">
-			<key column="ID_METODO" />
-			<index column="secu" />
-			<one-to-many class="com.jkt.laboratorio.dominio.Variable" />
-		</list>
 		
 
 	</class>

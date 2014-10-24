@@ -10,8 +10,7 @@ public class Metodo extends PersistentEntity {
 	private String        		metodo;
 	private String        		expresionResultado;
 	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
-	private List<Variable>      variables = new ArrayList<Variable>();
-
+	
 
 	public Determinacion getDeterminacion() {
 		return determinacion;
@@ -63,20 +62,5 @@ public class Metodo extends PersistentEntity {
 	
 	
 
-	public void addVariable(Variable aValue) {
-		if (!variables.contains(aValue)) {
-			variables.add(aValue);
-			aValue.setMetodo(this);
-		}
-	}
-
-
-	public List<Variable> getVariables() {
-		return variables;
-	}
-
-	public void setVariables(List<Variable> aValue) {
-		this.variables = aValue;
-	}
 
 }

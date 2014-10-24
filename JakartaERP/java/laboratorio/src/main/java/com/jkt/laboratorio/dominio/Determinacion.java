@@ -19,6 +19,8 @@ public class Determinacion extends Descriptible {
 	private String formato;
 	private boolean calculaResultado;
 	private List<Metodo> metodos = new ArrayList<Metodo>();
+	private List<Variable>      variables = new ArrayList<Variable>();
+
 	
 	
 	
@@ -42,6 +44,22 @@ public class Determinacion extends Descriptible {
 
 	public void setMetodos(List<Metodo> aValue) {
 		this.metodos = aValue;
+	}
+
+	public void addVariable(Variable aValue) {
+		if (!variables.contains(aValue)) {
+			variables.add(aValue);
+			aValue.setDeterminacion(this);
+		}
+	}
+
+
+	public List<Variable> getVariables() {
+		return variables;
+	}
+
+	public void setVariables(List<Variable> aValue) {
+		this.variables = aValue;
 	}
 
 

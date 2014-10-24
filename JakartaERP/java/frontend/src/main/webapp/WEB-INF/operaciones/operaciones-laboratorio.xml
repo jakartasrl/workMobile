@@ -261,7 +261,7 @@
 		</output>
 		
 		<output name="variables" tableName="TVar">
-			<campoSalida value="oid_met"     target="metodo.id" />
+			<campoSalida value="oid_det"     target="determinacion.id" />
 			<campoSalida value="oid_var"     target="id" />
 			<campoSalida value="cod_var"     target="codigo" />
 			<campoSalida value="des_var"     target="descripcion" />
@@ -273,8 +273,8 @@
 		<listas>
 			<lista nombreLista="metodos"  nombreWriter="metodo"> 
 				<lista nombreLista="valoresEsperados" nombreWriter="valores" />
-				<lista nombreLista="variables" nombreWriter="variables"  />
 			</lista>	
+			<lista nombreLista="variables" nombreWriter="variables"  />
 		</listas>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
@@ -320,14 +320,15 @@
 							clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
 					</campoEntrada>
 
-					<campoEntrada name="TVar" metodo="addVariable"
+					
+				</campoEntrada>
+				<campoEntrada name="TVar" metodo="addVariable"
 						clase="com.jkt.laboratorio.dominio.Variable" fieldID="oid_var">
 						<campoEntrada name="cod_var" clase="String" metodo="setCodigo" />
 						<campoEntrada name="des_var" clase="String" metodo="setDescripcion" />
 						<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-					</campoEntrada>
-
 				</campoEntrada>
+
 
 			</campoEntrada>
 		</input>
