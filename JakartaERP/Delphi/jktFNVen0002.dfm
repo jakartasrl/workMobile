@@ -1,8 +1,9 @@
 inherited FNVen0002: TFNVen0002
   Caption = 'ABM de Modelos de Cotizador'
   ClientHeight = 412
-  ClientWidth = 848
-  ExplicitWidth = 864
+  ClientWidth = 845
+  ExplicitLeft = -210
+  ExplicitWidth = 861
   ExplicitHeight = 450
   PixelsPerInch = 96
   TextHeight = 13
@@ -15,33 +16,33 @@ inherited FNVen0002: TFNVen0002
     ExplicitHeight = 412
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 818
+    Left = 815
     TabOrder = 4
-    ExplicitLeft = 739
+    ExplicitLeft = 810
     ExplicitHeight = 412
     Height = 412
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 814
+    Left = 811
     Height = 412
-    ExplicitLeft = 735
+    ExplicitLeft = 806
     ExplicitHeight = 412
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 6
-    ExplicitWidth = 701
+    ExplicitWidth = 772
     ExplicitHeight = 412
     Height = 412
-    Width = 780
+    Width = 777
     object dxBevel1: TdxBevel
       Left = 768
       Top = 75
-      Width = 10
+      Width = 7
       Height = 335
       Align = alRight
       Anchors = [akLeft, akTop, akRight, akBottom]
       Shape = dxbsNone
-      ExplicitWidth = 101
+      ExplicitWidth = 102
     end
     object cxGroupBox1: TcxGroupBox
       Left = 2
@@ -51,9 +52,9 @@ inherited FNVen0002: TFNVen0002
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitWidth = 697
+      ExplicitWidth = 768
       Height = 73
-      Width = 776
+      Width = 773
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 60
         Top = 30
@@ -211,7 +212,7 @@ inherited FNVen0002: TFNVen0002
       PanelStyle.BorderWidth = 5
       Style.BorderStyle = ebsNone
       TabOrder = 2
-      ExplicitWidth = 668
+      ExplicitWidth = 352
       Height = 335
       Width = 360
       object dxBevel2: TdxBevel
@@ -233,7 +234,7 @@ inherited FNVen0002: TFNVen0002
         Caption = 'Alta de Concepto'
         Enabled = False
         TabOrder = 1
-        ExplicitWidth = 654
+        ExplicitWidth = 338
         Height = 135
         Width = 346
         object cxLabel5: TcxLabel
@@ -308,7 +309,7 @@ inherited FNVen0002: TFNVen0002
         Caption = 'Alta de T'#237'tulo'
         Enabled = False
         TabOrder = 0
-        ExplicitWidth = 654
+        ExplicitWidth = 338
         Height = 135
         Width = 346
         object cxLabel3: TcxLabel

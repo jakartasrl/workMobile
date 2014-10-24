@@ -1,49 +1,49 @@
 inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
   ClientHeight = 587
-  ClientWidth = 900
-  ExplicitTop = -40
-  ExplicitWidth = 916
+  ClientWidth = 918
+  ExplicitLeft = -155
+  ExplicitTop = -57
+  ExplicitWidth = 934
   ExplicitHeight = 625
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitHeight = 516
+    ExplicitHeight = 587
     Height = 587
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 587
-    ExplicitHeight = 516
+    ExplicitHeight = 587
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 870
+    Left = 888
     TabOrder = 4
-    ExplicitLeft = 883
-    ExplicitHeight = 516
+    ExplicitLeft = 882
+    ExplicitHeight = 587
     Height = 587
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 866
+    Left = 884
     Height = 587
-    ExplicitLeft = 879
-    ExplicitHeight = 516
+    ExplicitLeft = 878
+    ExplicitHeight = 587
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 845
-    ExplicitHeight = 516
+    ExplicitWidth = 844
+    ExplicitHeight = 587
     Height = 587
-    Width = 832
+    Width = 850
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
-      Width = 828
+      Width = 846
       Height = 583
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 841
-      ExplicitHeight = 512
+      ExplicitWidth = 840
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 65
         Top = 41

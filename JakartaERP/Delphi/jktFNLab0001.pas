@@ -40,8 +40,6 @@ type
     TValoid_carac: TIntegerField;
     TValvalor_desde: TFloatField;
     TValvalor_hasta: TFloatField;
-    cxStyleRepository1: TcxStyleRepository;
-    cxStyle1: TcxStyle;
     valDeter: TjktValidador;
     valTabla: TjktValidador;
     valLaboratorio: TjktValidador;
