@@ -9,6 +9,8 @@
 		<id name="id" column="COMPROBANTE_VENTA_DET_ID">
 			<generator class="native" />
 		</id>
+			
+		<property name="descripcion" type="text" column="DESCRIPCION" />
 		
 		<many-to-one name="comprobanteVenta" class="com.jkt.dominio.ComprobanteVenta" cascade="all" column="COMPROBANTE_ID"/>
 		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" cascade="all" column="PRODUCTO_ID"/>
@@ -21,7 +23,7 @@
 		<many-to-one name="cotizador" class="com.jkt.cotizador.dominio.Cotizador" column="COTIZADOR_ID" cascade="none"></many-to-one>		
 
 		<property name="activo" column="ACTIVO" type="boolean" />
-
+		
 	</class>
 	
 </hibernate-mapping>

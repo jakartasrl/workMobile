@@ -8,13 +8,15 @@
 	<packaging>pom</packaging>
 	<name>jkt</name>
 
+	<!--
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+-->
 
 	<modules>
-
+<!--
 		<module>./Common/Framework/java/common</module>
 		<module>./Common/Framework/java/context</module>
 		<module>./JakartaERP/java/frontend</module>
@@ -28,6 +30,8 @@
 		<module>./JakartaERP/java/clientes</module>
 		<module>./JakartaERP/java/ventas</module>
 		<module>./JakartaERP/java/comprobantes</module>
+	
+	-->
 	
 	<!-- para el nexus 
 		<module>common</module>

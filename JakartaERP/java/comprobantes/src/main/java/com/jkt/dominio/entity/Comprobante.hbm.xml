@@ -20,6 +20,8 @@
 		<property name="anulado" column="ANULADO" type="boolean" />
 		<property name="nro" column="NUMERO" type="integer" />
 		
+		<property name="fecha" column="FECHA" type="date" />
+
 		<property name="letra" type="string">
             <column name="LETRA" length="1" />
         </property>

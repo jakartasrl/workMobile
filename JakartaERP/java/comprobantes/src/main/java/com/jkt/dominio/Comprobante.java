@@ -1,5 +1,7 @@
 package com.jkt.dominio;
 
+import java.util.Date;
+
 
 /**
  * <p>Representa a un comprobante.</p>
@@ -19,6 +21,8 @@ public abstract class Comprobante extends PersistentEntity {
 	private int nro;
 	private boolean anulado;
 	private TipoComprobante tipoComprobante;
+	private Date fecha;
+	
 	/*
 	 * variables de instancia
 	 * ***********************************************
@@ -26,6 +30,12 @@ public abstract class Comprobante extends PersistentEntity {
 	
 	public String getComportamiento() {
 		return comportamiento;
+	}
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	public TipoComprobante getTipoComprobante() {
 		return tipoComprobante;

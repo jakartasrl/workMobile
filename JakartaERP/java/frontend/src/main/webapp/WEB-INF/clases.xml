@@ -36,5 +36,6 @@
 	<elemento key="laboratorio" value="com.jkt.laboratorio.dominio.Laboratorio" />
 	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
 	<elemento key="determinacion" value="com.jkt.laboratorio.dominio.Determinacion" />
+	<elemento key="cotizacion" value="com.jkt.dominio.Cotizacion" />
 
 </elementos>

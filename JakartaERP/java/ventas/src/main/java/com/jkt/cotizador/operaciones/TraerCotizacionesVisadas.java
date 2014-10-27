@@ -12,7 +12,8 @@ public class TraerCotizacionesVisadas extends TraerCotizaciones {
 
 	@Override
 	protected String getCondition() {
-		return Cotizacion.INICIADA;
+//		return Cotizacion.INICIADA;
+		return "";
 	}
 
 }
