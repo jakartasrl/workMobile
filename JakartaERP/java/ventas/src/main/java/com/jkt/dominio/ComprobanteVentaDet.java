@@ -7,7 +7,6 @@ import com.jkt.varios.dominio.UnidadMedida;
 
 public class ComprobanteVentaDet extends PersistentEntity {
 
-//	private String nombre;
 	private String descripcion;//Con esta descripcion el usuario selecciona que modelo de cotizador es el mas apropiado.
 	
 	private ComprobanteVenta comprobanteVenta;
@@ -17,6 +16,15 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	private double precio;
 	private Moneda moneda;
 	private Cotizador cotizador;
+	private int tipoVenta;
+	
+	public int getTipoVenta() {
+		return tipoVenta;
+	}
+
+	public void setTipoVenta(int tipoVenta) {
+		this.tipoVenta = tipoVenta;
+	}
 
 	public Cotizador getCotizador() {
 		return cotizador;

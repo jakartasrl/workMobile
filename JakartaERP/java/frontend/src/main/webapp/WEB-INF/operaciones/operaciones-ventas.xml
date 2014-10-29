@@ -270,6 +270,8 @@
 
 			<campoSalida value="cant" target="cantidad" />
 			
+			<campoSalida value="oid_tipo" target="tipoVenta" />
+
 			<campoSalida value="detalle" target="descripcion" />
 		</output>
 
@@ -291,6 +293,22 @@
 			<form name="---"></form>
 		</forms>		
 
+	</operacion>
+	
+	<!-- TRAER LOS TIPOS DE VENTA DISPONIBLES -->
+	<operacion name="TraerTiposDeVenta" clase="com.jkt.cotizador.operaciones.TraerTiposDeVenta">
+										
+		<output name="entidades" tableName="mtEntidades">		
+			<campoSalida value="oid_tipo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+		</output>
+						
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNCla0001"> </form>
+		</forms>
+		
 	</operacion>
 	
 	
