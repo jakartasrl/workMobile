@@ -16,7 +16,7 @@
 -->
 
 	<modules>
-<!--
+
 		<module>./Common/Framework/java/common</module>
 		<module>./Common/Framework/java/context</module>
 		<module>./JakartaERP/java/frontend</module>
@@ -31,7 +31,6 @@
 		<module>./JakartaERP/java/ventas</module>
 		<module>./JakartaERP/java/comprobantes</module>
 	
-	-->
 	
 	<!-- para el nexus 
 		<module>common</module>
