@@ -38,6 +38,14 @@ public abstract class Comprobante extends PersistentEntity {
 		}
 	}
 	
+	public List<Especificacion> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(List<Especificacion> archivos) {
+		this.archivos = archivos;
+	}
+
 	public String getComportamiento() {
 		return comportamiento;
 	}
