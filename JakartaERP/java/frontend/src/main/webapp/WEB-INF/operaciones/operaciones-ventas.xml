@@ -296,9 +296,9 @@
 	<!-- TRAER LOS TIPOS DE VENTA DISPONIBLES -->
 	<operacion name="TraerTiposDeVenta" clase="com.jkt.cotizador.operaciones.TraerTiposDeVenta">
 										
-		<output name="entidades" tableName="mtEntidades">		
+		<output name="entidades" tableName="mtTiposVenta">
 			<campoSalida value="oid_tipo" target="codigo" />
-			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="des_tipo" target="descripcion" />
 		</output>
 						
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
