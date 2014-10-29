@@ -1,6 +1,10 @@
 package com.jkt.dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.jkt.varios.dominio.Especificacion;
 
 
 /**
@@ -22,11 +26,17 @@ public abstract class Comprobante extends PersistentEntity {
 	private boolean anulado;
 	private TipoComprobante tipoComprobante;
 	private Date fecha;
-	
+	private List<Especificacion> archivos=new ArrayList<Especificacion>();	
 	/*
 	 * variables de instancia
 	 * ***********************************************
 	 */
+	
+	public void agregarEspecificacion(Especificacion e){
+		if (!archivos.contains(e)) {
+			archivos.add(e);
+		}
+	}
 	
 	public String getComportamiento() {
 		return comportamiento;

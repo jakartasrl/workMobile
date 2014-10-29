@@ -17,11 +17,11 @@
 		</list>
 		
 		<subclass name="com.jkt.dominio.Cotizacion" extends="com.jkt.dominio.ComprobanteVenta">
-			<property name="estado" column="ESTADO">
-				<type name="org.hibernate.type.EnumType">
-					<param name="enumClass">com.jkt.dominio.Cotizacion.Estado</param>
-				</type>
- 			</property>
+<!-- 			<property name="estado" column="ESTADO"> -->
+<!-- 				<type name="org.hibernate.type.EnumType"> -->
+<!-- 					<param name="enumClass">com.jkt.dominio.Cotizacion.Estado</param> -->
+<!-- 				</type> -->
+<!--  			</property> -->
 		</subclass>		
 
 		<subclass name="com.jkt.dominio.Pedido" extends="com.jkt.dominio.ComprobanteVenta">

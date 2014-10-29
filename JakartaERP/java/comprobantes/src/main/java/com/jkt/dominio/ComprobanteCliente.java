@@ -18,7 +18,27 @@ public class ComprobanteCliente extends Comprobante {
 	private CondPago condicionPago;
 	
 	private boolean cargaACargoDeCliente, transporteACargoDeCliente, descargaACargoDeCliente;
+	private boolean cargaACargoDeEmpresa, transporteACargoDeEmpresa, descargaACargoDeEmpresa;
+
+	//transientmethods
+	public boolean isCargaACargoDeEmpresa() {
+		return !cargaACargoDeCliente;
+	}
+
+	public boolean isTransporteACargoDeEmpresa() {
+		return !transporteACargoDeCliente;
+	}
+
+	public boolean isDescargaACargoDeEmpresa() {
+		return !descargaACargoDeCliente;
+	}
+	//transientmethods
+
 	
+	public void setDescargaACargoDeEmpresa(boolean descargaACargoDeEmpresa) {
+		this.descargaACargoDeEmpresa = descargaACargoDeEmpresa;
+	}
+
 	public boolean isCargaACargoDeCliente() {
 		return cargaACargoDeCliente;
 	}

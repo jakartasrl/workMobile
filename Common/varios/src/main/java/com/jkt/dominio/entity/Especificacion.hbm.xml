@@ -10,15 +10,10 @@
 		
 		<property name="ruta" column="RUTA"/>
 		<property name="nombre" column="NOMBRE"/>
-		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="comentario" column="NOTA" />
 		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="fechaDeSubida" column="FECHA_SUBIDA" type="date" />
 		
-		<property name="tipo" column="TIPO">
-			<type name="org.hibernate.type.EnumType">
-				<param name="enumClass">com.jkt.varios.dominio.Especificacion.TipoEspecificacion</param>
-			</type>
- 		</property>
-
 	</class>
 	
 </hibernate-mapping>
