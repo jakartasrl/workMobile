@@ -12,6 +12,8 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Especificacion extends PersistentEntity {
 	
+	private static final String SEPARADOR = "/";
+
 	public Especificacion() {
 		super();
 		this.fechaDeSubida=new Date();
@@ -88,15 +90,31 @@ public class Especificacion extends PersistentEntity {
 		this.comentario = comentario;
 	}
 	
+	/**
+	 * <p>Devuelve el nombre completo del archivo.Toma la ruta y el nombre y lo retorna con un formato correctamente legible desde el cliente.</p>
+	 * @return String nombre completo (URI) del archivo.
+	 */
 	public String getNombreCompleto(){
 		return ruta.concat(nombre);
 	}
 
+	/**
+	 * <p>Recibe el nombre completo y genera dos textos separados, la ruta completa del archivo, y el nombre con extension.</p>
+	 * FIXME Seguramente existe una mejor forma de hacer esto, al momento de investigar, cambiar por una solución mas elegante.
+	 * 
+	 * @param nombreCompleto para trabajar y separar archivo y ruta.
+	 */
 	public void setArchivo(String nombreCompleto){
-		String[] nameSplitted = nombreCompleto.split("/");
+		String[] nameSplitted = nombreCompleto.split(SEPARADOR);
 		String nombre = nameSplitted[nameSplitted.length-1];
 		this.nombre=nombre;
-		this.ruta=nombreCompleto;//falta esto
+
+		String ruta = nameSplitted[0].concat(SEPARADOR);
+		for(int i=1; i<nameSplitted.length-1; i++){
+			ruta+=nameSplitted[i].concat(SEPARADOR);
+		}
+		
+		this.ruta=ruta;
 	}
 	
 }
