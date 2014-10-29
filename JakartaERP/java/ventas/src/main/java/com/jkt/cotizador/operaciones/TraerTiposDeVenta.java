@@ -1,0 +1,14 @@
+package com.jkt.cotizador.operaciones;
+
+import java.util.Map;
+
+import com.jkt.operaciones.Operation;
+
+public class TraerTiposDeVenta extends Operation {
+
+	@Override
+	public void execute(Map<String, Object> aParams) throws Exception {
+		
+	}
+
+}
