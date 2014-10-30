@@ -179,7 +179,7 @@
 	<operacion name="GuardarSolicitudCotizacion" clase="com.jkt.operaciones.Guardar">
 	
 	
-		<input name="cotizacion" keyName="objeto" clase="com.jkt.dominio.Cotizacion" fieldID="oid_cotiz">
+		<input name="mtCotizacion" keyName="objeto" clase="com.jkt.dominio.Cotizacion" fieldID="oid_cotiz">
 			<campoEntrada>
 				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
 				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
@@ -199,10 +199,11 @@
 				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" />
 
 				
-				<campoEntrada name="mtDetalleComprobanteVenta" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_item">
-					<campoEntrada name="oid_producto" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
-					<campoEntrada name="cantidad" clase="Integer" metodo="setCantidad" />
+				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_item">
+					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
 <!-- 					<campoEntrada name="oid_unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" /> -->
 <!-- 					<campoEntrada name="precio" clase="Double" metodo="setPrecio" /> -->
 <!-- 					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" /> -->
@@ -210,8 +211,8 @@
 				</campoEntrada>
 				
 				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
-					<campoEntrada name="ruta" clase="String" metodo="setRuta" />
-					<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+					<campoEntrada name="archivo" clase="String" metodo="setNombreCompleto" />
+					<campoEntrada name="oid_usu" clase="Integer" metodo="setIdentificadorDeUsuario" />
 					<campoEntrada name="comentario" clase="String" metodo="setComentario" />
 				</campoEntrada>
 				
@@ -224,8 +225,8 @@
 
 	</operacion>
 	
-	<!-- TRAE UNA SOLICITUD QUE AUN NO HA SIDO REVISADA -->
-	<operacion name="TraerSolicitudCotizacion" clase="com.jkt.cotizador.operaciones.TraerCotizacionesNoVisadas" >
+	<!-- TRAE UNA SOLICITUD FILTRANDOLA POR ID -->
+	<operacion name="TraerSolicitudCotizacion" clase="com.jkt.cotizador.operaciones.TraerCotizacion" >
 
 		<output name="cotizaciones" tableName="mtCotizacion">
 

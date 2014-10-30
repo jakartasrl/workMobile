@@ -13,6 +13,7 @@
 		<property name="comentario" column="NOTA" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="fechaDeSubida" column="FECHA_SUBIDA" type="date" />
+		<property name="identificadorDeUsuario" column="IDENTIFICADOR_DE_USUARIO" type="integer" />
 		
 	</class>
 	

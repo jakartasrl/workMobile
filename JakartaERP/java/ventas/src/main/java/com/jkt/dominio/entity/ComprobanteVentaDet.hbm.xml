@@ -12,9 +12,11 @@
 			
 		<property name="descripcion" type="text" column="DESCRIPCION" />
 		
-		<many-to-one name="comprobanteVenta" class="com.jkt.dominio.ComprobanteVenta" cascade="all" column="COMPROBANTE_ID"/>
+		<many-to-one name="comprobanteVenta" class="com.jkt.dominio.ComprobanteVenta" cascade="none" column="COMPROBANTE_ID"/>
 		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" cascade="all" column="PRODUCTO_ID"/>
 		
+		<property name="tipoVenta" column="TIPO" type="integer" />
+
 		<property name="cantidad" column="CANTIDAD" type="integer" />
 		<property name="precio" column="PRECIO" type="double"/>
 		

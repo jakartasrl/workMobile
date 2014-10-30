@@ -12,7 +12,8 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Especificacion extends PersistentEntity {
 	
-	private static final String SEPARADOR = "/";
+	private static final String SEPARADOR = "\\\\";
+	private static final String SEPARADOR_PARA_CREACION = "\\";
 
 	public Especificacion() {
 		super();
@@ -37,7 +38,7 @@ public class Especificacion extends PersistentEntity {
 	
 	private String comentario;
 	
-	private long identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
+	private int identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
 	//No es muy seguro tener una referencia a un usuario desde un archivo cualquiera. Tener en cuenta que de ser así,
 	//se podria ir desde un archivo comun y corriente al usuario, y del usuario navegar por todos los datos, incluso la password.
 	private String nombreUsuario;
@@ -54,11 +55,11 @@ public class Especificacion extends PersistentEntity {
 		return fechaDeSubida;
 	}
 
-	public long getIdentificadorDeUsuario() {
+	public int getIdentificadorDeUsuario() {
 		return identificadorDeUsuario;
 	}
 
-	public void setIdentificadorDeUsuario(long identificadorDeUsuario) {
+	public void setIdentificadorDeUsuario(int identificadorDeUsuario) {
 		this.identificadorDeUsuario = identificadorDeUsuario;
 	}
 
@@ -104,14 +105,17 @@ public class Especificacion extends PersistentEntity {
 	 * 
 	 * @param nombreCompleto para trabajar y separar archivo y ruta.
 	 */
-	public void setArchivo(String nombreCompleto){
+	public void setNombreCompleto(String nombreCompleto){
+//        String replaceAll = nombreCompleto.replaceAll("\\", "/");  
+
+		
 		String[] nameSplitted = nombreCompleto.split(SEPARADOR);
 		String nombre = nameSplitted[nameSplitted.length-1];
 		this.nombre=nombre;
 
-		String ruta = nameSplitted[0].concat(SEPARADOR);
+		String ruta = nameSplitted[0].concat(SEPARADOR_PARA_CREACION);
 		for(int i=1; i<nameSplitted.length-1; i++){
-			ruta+=nameSplitted[i].concat(SEPARADOR);
+			ruta+=nameSplitted[i].concat(SEPARADOR_PARA_CREACION);
 		}
 		
 		this.ruta=ruta;

@@ -15,7 +15,7 @@ public class ReglaParaCotizacion implements IValidador {
 		if (c.getId()>0) {//es una modificacion, solo puedo adjuntar archivos.Es una validacion rara esta, creo que seria antes del adapter...
 			
 		}else{
-			//nueva cotizacion.
+//			nueva cotizacion.
 			Random rnd = new Random();
 			c.setNro(rnd.nextInt());
 			c.setEstado(Cotizacion.Estado.PENDIENTE);

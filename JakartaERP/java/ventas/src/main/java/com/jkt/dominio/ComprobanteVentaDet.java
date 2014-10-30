@@ -16,7 +16,7 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	private double precio;
 	private Moneda moneda;
 	private Cotizador cotizador;
-	private int tipoVenta;
+	private int tipoVenta=0;
 	
 	public int getTipoVenta() {
 		return tipoVenta;
