@@ -175,36 +175,44 @@
 	</operacion>
 	
 	
-	<!-- 	CREACION DEL COTIZADOR. LA CREACION EN ESTE PUNTO ES BIEN BASICA. -->
-	<operacion name="GuardarCotizacion" clase="com.jkt.operaciones.Guardar">
+	<!-- GUARDA UNA SOLICITUD DE COTIZACION NUEVA (SIN REVISAR) -->
+	<operacion name="GuardarSolicitudCotizacion" clase="com.jkt.operaciones.Guardar">
 	
-		<input name="cotizacion" keyName="objeto" clase="com.jkt.dominio.Cotizacion" fieldID="oid_cot">
+	
+		<input name="cotizacion" keyName="objeto" clase="com.jkt.dominio.Cotizacion" fieldID="oid_cotiz">
 			<campoEntrada>
-				<campoEntrada name="nombre" clase="String" metodo="setNombre" />
-				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" /> <!-- Segun esta descripcion el usuario X seleccionará un modelo de cotizador -->
+				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
+				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
+				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
+				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
 
-				<campoEntrada name="estado" clase="String" metodo="setEstado" />
-
-				<campoEntrada name="oid_vendedor" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
-				<campoEntrada name="oid_representante" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
-
-				<campoEntrada name="oid_clienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
-				<campoEntrada name="oid_condicionPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionPago" />
+<!-- 				<campoEntrada name="oid_condicionPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionPago" /> -->
 				
-				<campoEntrada name="comportamiento" clase="String" metodo="setComportamiento" />
-				<campoEntrada name="lugarEmision" clase="String" metodo="setLugarEmision" />
-				<campoEntrada name="nro" clase="Integer" metodo="setNro" />
-				<campoEntrada name="anulado" clase="Boolean" metodo="setAnulado" />
-				<campoEntrada name="tipoComprobante" clase="com.jkt.dominio.TipoComprobante" metodo="setTipoComprobante" />
-				<campoEntrada name="letra" clase="Char" metodo="setLetra" />
+<!-- 				<campoEntrada name="comportamiento" clase="String" metodo="setComportamiento" /> -->
+<!-- 				<campoEntrada name="lugarEmision" clase="String" metodo="setLugarEmision" /> -->
+<!-- 				<campoEntrada name="anulado" clase="Boolean" metodo="setAnulado" /> -->
+<!-- 				<campoEntrada name="tipoComprobante" clase="com.jkt.dominio.TipoComprobante" metodo="setTipoComprobante" /> -->
+<!-- 				<campoEntrada name="letra" clase="Char" metodo="setLetra" /> -->
+
+				<campoEntrada name="respCargaClie" clase="Boolean" metodo="setCargaACargoDeCliente" />
+				<campoEntrada name="respTranspClie" clase="Boolean" metodo="setTransporteACargoDeCliente" />
+				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" />
+
 				
-				<campoEntrada name="mtDetalleComprobanteVenta" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_detalle">
+				<campoEntrada name="mtDetalleComprobanteVenta" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_item">
 					<campoEntrada name="oid_producto" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
 					<campoEntrada name="cantidad" clase="Integer" metodo="setCantidad" />
-					<campoEntrada name="oid_unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
-					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
-					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
-					<campoEntrada name="oid_cotizador" clase="com.jkt.cotizador.dominio.Cotizador" metodo="setCotizador" />
+					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
+<!-- 					<campoEntrada name="oid_unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" /> -->
+<!-- 					<campoEntrada name="precio" clase="Double" metodo="setPrecio" /> -->
+<!-- 					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" /> -->
+<!-- 					<campoEntrada name="oid_cotizador" clase="com.jkt.cotizador.dominio.Cotizador" metodo="setCotizador" /> -->
+				</campoEntrada>
+				
+				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
+					<campoEntrada name="ruta" clase="String" metodo="setRuta" />
+					<campoEntrada name="nombre" clase="String" metodo="setNombre" />
+					<campoEntrada name="comentario" clase="String" metodo="setComentario" />
 				</campoEntrada>
 				
 			</campoEntrada>
@@ -216,34 +224,89 @@
 
 	</operacion>
 	
-	<!-- RECUPERACION DE TODAS LAS ENTIDADES COTIZACION QUE AUN NO HAN SIDO REVISADAS -->
-	<operacion name="TraerCotizacionesNoVisadas" clase="com.jkt.cotizador.operaciones.TraerCotizacionesNoVisadas" >
+	<!-- TRAE UNA SOLICITUD QUE AUN NO HA SIDO REVISADA -->
+	<operacion name="TraerSolicitudCotizacion" clase="com.jkt.cotizador.operaciones.TraerCotizacionesNoVisadas" >
+
+		<output name="cotizaciones" tableName="mtCotizacion">
+
+			<campoSalida value="oid_cotiz" target="id" />
+			<campoSalida value="nro_cotiz" target="nro" />
+			<campoSalida value="fecha" target="fecha" />
+			
+			<campoSalida value="oid_sucu" target="clienteSucursal.id" />
+			<campoSalida value="nro_sucu" target="clienteSucursal.numero"/>
+			<campoSalida value="des_sucu" target="clienteSucursal.descripcion" />
+
+			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
+			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codig" />
+			<campoSalida value="razonSocial" target="clienteSucursal.cliente.sujetoImpositivo.razonSocial" />
+
+			<campoSalida value="oid_vend" target="vendedor.id" />
+			<campoSalida value="cod_vend" target="vendedor.codigo" />
+			<campoSalida value="des_vend" target="vendedor.descripcion" />
+			
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+			
+			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" />
+			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" />
+			
+			<campoSalida value="respTranspEmpr" target="isTransporteACargoDeEmpresa" />
+			<campoSalida value="respTranspClie" target="isTransporteACargoDeCliente" />
+			
+			<campoSalida value="respDescargaEmpr" target="isDescargaACargoDeEmpresa" />
+			<campoSalida value="respDescargaClie" target="isDescargaACargoDeCliente" />
+
+		</output>
 		
-		<output name="cotizaciones" tableName="mtCotizador">
-			<campoSalida value="id" target="id" />
-			<campoSalida value="nombre" target="nombre" />
-			<campoSalida value="descripcion" target="descripcion" />
+		<output name="detalles" tableName="mtItems">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" />
 
-			<campoSalida value="vendedor" target="vendedor.descripcion" />
-			<campoSalida value="representante" target="representante.descripcion" />
-			
-			<campoSalida value="clienteSucursal" target="clienteSucursal.descripcion" />
-			
-			<campoSalida value="comportamiento" target="comportamiento" />
-			<campoSalida value="letra" target="letra" />
-			<campoSalida value="lugarEmision" target="lugarEmision" />
-			<campoSalida value="nro" target="nro" />
-			<campoSalida value="anulado" target="isAnulado" />
-			<campoSalida value="tipoComprobante" target="tipoComprobante.descripcion" />
-			
-		</output>		
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
 
-		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+			<campoSalida value="cant" target="cantidad" />
+			
+			<campoSalida value="oid_tipo" target="tipoVenta" />
+
+			<campoSalida value="detalle" target="descripcion" />
+		</output>
+
+		<output name="archivos" tableName="mtArchivos">
+			<campoSalida value="oid_arch" target="id" />
+			<!-- <campoSalida value="oid_cotiz" target="CAMPOTRANSIENTE" /> -->
+			<campoSalida value="fecha_subida" target="fechaDeSubida" />
+			<campoSalida value="oid_usu" target="identificadorDeUsuario" />
+			<campoSalida value="usuario" target="nombreUsuario" />
+			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="archivo" target="nombreCompleto" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
 		
 		<forms>
 			<form name="---"></form>
 		</forms>		
 
+	</operacion>
+	
+	<!-- TRAER LOS TIPOS DE VENTA DISPONIBLES -->
+	<operacion name="TraerTiposDeVenta" clase="com.jkt.cotizador.operaciones.TraerTiposDeVenta">
+										
+		<output name="entidades" tableName="mtTiposVenta">
+			<campoSalida value="oid_tipo" target="codigo" />
+			<campoSalida value="des_tipo" target="descripcion" />
+		</output>
+						
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNCla0001"> </form>
+		</forms>
+		
 	</operacion>
 	
 	

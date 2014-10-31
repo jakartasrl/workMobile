@@ -24,13 +24,25 @@ import com.jkt.framework.writers.XMLStreamMaker;
  * <h1>Algunas de las funcionalidades de esta clase</h1>
  * <p>Manejo de excepciones</p>
  * <p>Funcionalidad comun entre todos los controllers</p>
- * <p>Inyecciï¿½n de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
+ * <p>Inyección de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class BaseController{
 
+	private String tipoCliente;
+	
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
+	}
+
+	private void write(){
+		if(RequestProcessor.CLIENTE_DELPHI.equals(tipoCliente)){
+			
+		}
+	}
+	
 	private ServletOutputStream outputStream;
 
 	public ServletOutputStream getOutputStream() {

@@ -2,10 +2,12 @@ package com.jkt.operaciones;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.xmlreader.Lista;
 import com.jkt.xmlreader.PropertySolver;
 
@@ -18,18 +20,29 @@ import com.jkt.xmlreader.PropertySolver;
 public class TraerEntidadesConRelaciones extends Operation {
 
 	private static final String KEY_ENTIDAD = "entidad";
+	private static final String OID_ENTIDAD = "oid".toUpperCase();
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public void execute(Map<String, Object> aParams) throws Exception {
 			validarEntrada(aParams.get(KEY_ENTIDAD));
+			String oidEntity = (String) aParams.get(OID_ENTIDAD);
+
 		
 			String nombreClase = (String)aParams.get(KEY_ENTIDAD);
 			List<Lista> obtenerListas = ev.obtenerListas();
 			
 			Class<?> clase = Class.forName(nombreClase);
-			List<PersistentEntity> elementos = obtenerTodos((Class<? extends PersistentEntity>) clase);
-
+			List<PersistentEntity> elementos;
+			
+			if (oidEntity==null) {
+				elementos = obtenerTodos((Class<? extends PersistentEntity>) clase);
+			}else if(oidEntity.isEmpty()){
+				throw new JakartaException("Debe completar el campo ID.");
+			}else{
+				elementos=Arrays.asList(obtener((Class<? extends PersistentEntity>) clase, OID_ENTIDAD));
+			}
+			
 			for (PersistentEntity persistentEntity : elementos) {
 				notificarObjeto("entidad", persistentEntity);
 

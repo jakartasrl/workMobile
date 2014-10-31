@@ -42,8 +42,8 @@ import com.jkt.xmlreader.XMLEntity;
 @Scope("request")
 public abstract class RequestProcessor extends BaseController{
 	
-	protected static final String CLIENTE_DELPHI= "DELPHI";
-	protected static final String CLIENTE_HTML = "HTML";
+	public static final String CLIENTE_DELPHI= "DELPHI";
+	public static final String CLIENTE_HTML = "HTML";
 	
 	private static final String KEY_NOMBRE_OPERACION      = "op";
 	private static final String KEY_NOMBRE_OPERACION_TEST = "opTest";
@@ -82,6 +82,8 @@ public abstract class RequestProcessor extends BaseController{
 
 		String ip = request.getRemoteAddr();// IP del cliente
 		String host = request.getRemoteHost();// Host del cliente
+		
+		
 		log.debug(String.format("Procesando una solicitud desde el cliente %s con direccion IP %s",host, ip));
 		
 		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.

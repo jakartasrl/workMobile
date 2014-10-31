@@ -33,4 +33,9 @@ public class Factory {
 		return instanciaRecuperada;
 	}
 
+	
+	public static PersistentEntity getInstance(Class className) throws InstantiationException, IllegalAccessException {
+		return (PersistentEntity) className.newInstance();
+	}
+
 }
