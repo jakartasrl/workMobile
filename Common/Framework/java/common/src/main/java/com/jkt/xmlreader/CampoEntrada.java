@@ -12,7 +12,8 @@ public class CampoEntrada extends XMLEntity {
 	private String name;
 	private String clase;
 	private String metodo;
-
+	private String propertyOV;
+	
 	public String getName() {
 		return name;
 	}
@@ -61,5 +62,12 @@ public class CampoEntrada extends XMLEntity {
 		});
 		return result;
 	}
-	
+
+	public String getPropertyOV() {
+		return propertyOV;
+	}
+
+	public void setPropertyOV(String propertyOV) {
+		this.propertyOV = propertyOV;
+	}
 }

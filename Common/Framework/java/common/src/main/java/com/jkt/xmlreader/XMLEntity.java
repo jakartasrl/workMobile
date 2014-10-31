@@ -1,9 +1,7 @@
 package com.jkt.xmlreader;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.jkt.xmlreader.digester.IName;
@@ -19,6 +17,8 @@ public class XMLEntity implements IName {
 	private String tableName; // para output
 	private Forms forms;
 	private Listas listas;
+	private String inputClass;
+	private String outputClass;
 	
 	public Listas getListas() {
 		return listas;
@@ -80,12 +80,19 @@ public class XMLEntity implements IName {
 		this.clase = clase;
 	}
 
-	public String getFieldID() {
+	public String getFieldID(boolean isDelphi){
+		if(isDelphi){
+			return getFieldID().toUpperCase();
+		}else{
+			return getFieldID();
+		}
+	}
+	protected String getFieldID() {
 		return fieldID;
 	}
 
 	public void setFieldID(String fieldID) {
-		this.fieldID = fieldID.toUpperCase();
+		this.fieldID = fieldID;
 	}
 
 	public String getName() {
@@ -186,4 +193,19 @@ public class XMLEntity implements IName {
 		this.custom = tab;
 	}
 
+	public String getInputClass() {
+		return inputClass;
+	}
+
+	public void setInputClass(String inputClass) {
+		this.inputClass = inputClass;
+	}
+
+	public String getOutputClass() {
+		return outputClass;
+	}
+
+	public void setOutputClass(String outputClass) {
+		this.outputClass = outputClass;
+	}
 }

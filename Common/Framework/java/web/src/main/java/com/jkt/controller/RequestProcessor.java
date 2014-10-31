@@ -26,7 +26,6 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
-import com.jkt.util.MapDS;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.XMLEntity;
 
@@ -45,9 +44,6 @@ public abstract class RequestProcessor extends BaseController{
 	protected static final String CLIENTE_DELPHI= "DELPHI";
 	protected static final String CLIENTE_HTML = "HTML";
 	
-	private static final String KEY_NOMBRE_OPERACION      = "op";
-	private static final String KEY_NOMBRE_OPERACION_TEST = "opTest";
-	
 	private static final String OUTPUT_DATASET_NAME = "outputDatasetName";
 
 	@Autowired
@@ -65,6 +61,7 @@ public abstract class RequestProcessor extends BaseController{
 	
 	@Autowired
 	private ApplicationContext applicationContext;
+	protected IEventBusiness eventBusinessOperation;
 	
 	public ServletContext getServletContext() {
 		return servletContext;
@@ -82,29 +79,26 @@ public abstract class RequestProcessor extends BaseController{
 
 		String ip = request.getRemoteAddr();// IP del cliente
 		String host = request.getRemoteHost();// Host del cliente
+
+		
 		log.debug(String.format("Procesando una solicitud desde el cliente %s con direccion IP %s",host, ip));
 		
 		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
-
+		
 		log.debug(String.format("Se inicia una solicitud desde un cliente %s.",getAppRequest()));
 		
-		log.debug("Parseando la solicitud a un mapa...");
-		MapDS parameters = (MapDS) retrieveParameters(request);
-		
-		log.debug("Recuperando nombre y objeto de operacion.");
-		String key = "";
-		if (parameters.containsKey(KEY_NOMBRE_OPERACION)){
-			key = KEY_NOMBRE_OPERACION;
-			test = false;
-		}else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
-			key = KEY_NOMBRE_OPERACION_TEST;
-			test = true;
-		}
-		String operationName = parameters.getString(key);
+		String operationName="";
+		Map parameters;
 	
-		log.debug("Ejecutando la operación "+operationName+".");
-		IEventBusiness eventBusinessOperation = getOperation(operationName);
-		
+		try{
+			if(getAppRequest().equals(CLIENTE_HTML)){
+				parameters=getParameters(request, operationName);
+			}else{
+				parameters=getParameters(request, operationName);
+			}
+		}catch(Exception e){
+			throw new JakartaException("Error al querer levantar el map de parametros");
+		}
 		if (eventBusinessOperation==null) {
 			finalizar(operationName);
 		}
@@ -155,6 +149,22 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		log.debug("Finalizó la operación...");
 	}
+
+	protected void getEventBusinessOperation(String operationName) {
+		log.debug("Ejecutando la operación "+operationName+".");
+		eventBusinessOperation = getOperation(operationName);
+	}
+	
+	/**
+	 * Metodo a implementar sobre el cual se obtiene el nombre de la operacion y el mapa con los parametros
+	 * segun corresponda 
+	 * 
+	 * @param request
+	 * @param operationName
+	 * @return
+	 * @throws Exception
+	 */
+	public abstract Map getParameters(HttpServletRequest request,String operationName) throws Exception;
 
 	private Map<String, Object> getObjetosOutput(Operation aOper,	IEventBusiness aEB) {
 		Map<String, Object> res = new HashMap<String, Object>();

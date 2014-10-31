@@ -42,6 +42,9 @@ import com.jkt.util.Tabla;
 @RequestMapping(value = "/processorDelphi")
 public class RequestProcessorDelphi extends RequestProcessor{
 
+	private static final String KEY_NOMBRE_OPERACION      = "op";
+	private static final String KEY_NOMBRE_OPERACION_TEST = "opTest";
+	
 	@PostConstruct
 	public void inyectarSessionEnAdapter(){
 		delphiAdapter.setSession(sessionProvider);
@@ -182,6 +185,24 @@ public class RequestProcessorDelphi extends RequestProcessor{
 		this.delphiAdapter.setTest(test);
 		Map result=(Map)this.delphiAdapter.adaptRequest((MapDS) input, (EventBusiness)operation);																
 		return result;
+	}
+
+	@Override
+	public Map getParameters(HttpServletRequest request,String operationName) throws Exception {
+		log.debug("Parseando la solicitud a un mapa...");
+		Map parameters = retrieveParameters(request);
+		String key = "";
+		if (parameters.containsKey(KEY_NOMBRE_OPERACION)){
+			key = KEY_NOMBRE_OPERACION;
+			test = false;
+		}else if (parameters.containsKey(KEY_NOMBRE_OPERACION_TEST)) {
+			key = KEY_NOMBRE_OPERACION_TEST;
+			test = true;
+		}
+		 operationName = (String) parameters.get(key);
+		
+		getEventBusinessOperation(operationName);
+		return parameters;
 	}
 
 }

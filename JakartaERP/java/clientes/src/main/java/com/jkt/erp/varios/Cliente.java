@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.Idioma;
 

@@ -9,13 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-
-import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -25,10 +20,7 @@ import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
-import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
-import com.jkt.service.SessionProvider;
 import com.jkt.util.Campos;
 import com.jkt.util.MapDS;
 import com.jkt.util.Registro;
@@ -48,7 +40,7 @@ import com.jkt.xmlreader.Input;
  */
 @Component
 @Qualifier("delphiAdapter")
-public class DelphiAdapter implements Adapter<Map, MapDS> {
+public class DelphiAdapter extends Adapter<Map, MapDS> {
 
 	private static final String BYTE_ARRAY_TYPE = TiposDeDato.BYTE_ARRAY_TYPE;
 	private static final String STRING_TYPE = "String";
@@ -57,9 +49,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 	private static final String DOUBLE_TYPE = "Double";
 	private static final String DATE_TYPE = "Date";
 	private static final String CHAR_TYPE = "Char";
+ 
 
-	private ISessionProvider sessionProvider;
-	private Session session;
 	private boolean test;
 	
 	/*
@@ -106,63 +97,9 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		}
 		
 	}
+
 	
-	/*
-	 * FIN de definición de las estrategias.
-	 * 
-	 */
-	public Map adaptRequest(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
-		session = sessionProvider.getSession();
-		Transaction tx = null;
-		try{
-			tx = session.beginTransaction();
-		}catch(org.hibernate.TransactionException e){
-			throw new JakartaException("Espere unos segundos mientras finaliza una operacion pendiente...Intente nuevamente en breves segundos...");
-		}	
-		try{
-			Map map = adaptRequestHook(input, operation);
-			tx.commit();
-			return map;
-		}catch(JakartaException e){
-			tx.rollback();
-			sessionProvider.destroySession();
-			throw e;
-		}catch(javax.validation.ConstraintViolationException e){
-				Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-				constraintViolations.size();
-				StringBuffer buffer=new StringBuffer();
-				String message = null;
-				
-				for (ConstraintViolation<?> constraintViolation : constraintViolations) {
-					buffer.append(constraintViolation.getMessage());
-					break;
-				}
-				
-				tx.rollback();
-				sessionProvider.destroySession();
-				
-				throw new ValidacionException(buffer.toString());
-		}catch(Exception e){
-			tx.rollback();
-			sessionProvider.destroySession();
-			
-			if (e.getCause()!=null) {
-				throw new JakartaException(e.getCause().getMessage());
-			}else{
-				throw e;
-			}
-		}
-		
-//		finally{
-//				if (tx.isActive()) {
-//					tx.commit();
-//				}
-//				sessionProvider.destroySession();
-//		}
-	}
-	
-	private Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
-		
+	protected Map adaptRequestHook(MapDS input, EventBusiness operation) throws Exception,EntityNotFoundException {
 		final HashMap<String, Object> finalResult = new HashMap<String, Object>();
 		String keyName="";
 		
@@ -205,7 +142,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			keyName=inputElement.getKeyName();
 
 			//Recupera el nombre de la variable que contendra el ID que puede servir para recuperar una entidad de la base de datos.
-			final String keyParaRecuperarObjeto = inputElement.getFieldID();
+			final String keyParaRecuperarObjeto = inputElement.getFieldID(true);
 			if (keyParaRecuperarObjeto == null || keyParaRecuperarObjeto.isEmpty()){
 				throw new JakartaException("No esta en operaciones.xml el FieldID");
 			}
@@ -302,7 +239,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 							Long idObject=null;
 							for (Registro reg : registross) {
 								
-								String keyParaRecuperarObjetoHijo = metaDataOfCurrentField.getFieldID();
+								String keyParaRecuperarObjetoHijo = metaDataOfCurrentField.getFieldID(true);
 								
 								if (keyParaRecuperarObjetoHijo==null) {
 									throw new JakartaException(" No esta configurado el campo FieldID");
@@ -415,26 +352,6 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		return finalResult;
 	}
 
-	/**
-	 * @param clazz
-	 * @param oid
-	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws Exception
-	 */
-	public PersistentEntity recuperarObjecto(Class<?> clazz, long oid) throws EntityNotFoundException,InstantiationException, IllegalAccessException{
-		Object newInstance;
-		if (oid<1) {//Si el id buscado es 0 o negativo, se retorna una nueva instancia
-			newInstance	= clazz.newInstance();
-		}else{
-			newInstance=session.get(clazz, oid);
-			if (newInstance==null) {
-				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz.getSimpleName(), String.valueOf(oid)));
-			}
-		}
-		return (PersistentEntity) newInstance;
-	}
 
 	/**
 	 * Creates a String or Integer(Wrapper) for given parameters received
@@ -551,7 +468,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 			
 			//Obtengo todos los campos que contiene el elemento actual
 			MapDS campos = registro.getCampos();
-			String keyParaRecuperarObjeto = parentMetadata.getFieldID();
+			String keyParaRecuperarObjeto = parentMetadata.getFieldID(true);
 			if (keyParaRecuperarObjeto == null || keyParaRecuperarObjeto.isEmpty()){
 				throw new JakartaException("No esta en operaciones.xml el FieldID");
 			}
@@ -609,15 +526,8 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 		return obj instanceof Tabla;
 	}
 
-	@Autowired
-	public void setSession(SessionProvider sessionProvider) {
-		this.sessionProvider=sessionProvider;
-	}
-	
-
 	public void setTest(boolean aTest) {
 		test = aTest;
 		
 	}
-
 }

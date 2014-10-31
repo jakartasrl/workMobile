@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.framework.writers.IHeaderDataSet;
+import com.jkt.xmlreader.Input;
 import com.jkt.xmlreader.Lista;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.digester.IName;
@@ -29,8 +30,9 @@ public interface IEventBusiness extends IName{
 
 	public boolean getExecuteGarbageCollection();
 	public IHeaderDataSet getHeaderDataSet(String aTabname);
-	
-	
+	public String getInputOV();
+	public String getOutputOV();
+	public Input getFirstInput();
 	/**
 	 * Obtiene una lista de outputs, que son los elementos que tienen metadata de la salida de la informacion al cliente.(delphi)
 	 * 

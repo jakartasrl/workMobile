@@ -35,6 +35,8 @@ import com.jkt.xmlreader.XMLEntity;
 public class EventBusiness extends XMLEntity implements IEventBusiness {
 	
 	private String entidad;
+	private String inputOV;
+	private String outputOV;
 	
 	public String getEntidad() {
 		return entidad;
@@ -53,7 +55,7 @@ public class EventBusiness extends XMLEntity implements IEventBusiness {
 	private boolean gc = false;
 	private boolean readOnly = false;
 	private boolean usaJMS = false;
-
+	
 	public void setUsaJMS(boolean aVal) {
 		this.usaJMS = aVal;
 	}
@@ -203,6 +205,11 @@ public class EventBusiness extends XMLEntity implements IEventBusiness {
 		return result;
 	}
 
+	public Input getFirstInput(){
+		List<Input> inputs = getInputs();
+		return inputs.get(0);
+	}
+	
 	public String getOperationClassName() {
 		return this.getClase();
 	}
@@ -249,5 +256,21 @@ public class EventBusiness extends XMLEntity implements IEventBusiness {
 
 	public List<Lista> obtenerListas() {
 		return this.getListas().getListas();
+	}
+
+	public String getInputOV() {
+		return inputOV;
+	}
+
+	public void setInputOV(String inputOV) {
+		this.inputOV = inputOV;
+	}
+
+	public String getOutputOV() {
+		return outputOV;
+	}
+
+	public void setOutputOV(String outputOV) {
+		this.outputOV = outputOV;
 	}
 }
