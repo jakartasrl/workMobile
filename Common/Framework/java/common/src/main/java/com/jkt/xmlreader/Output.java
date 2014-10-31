@@ -18,8 +18,6 @@ import com.jkt.request.EventBusiness;
  */
 public class Output extends EventBusiness{
 	
-	
-	
 	public List<CampoSalida> getCamposDeSalida(){
 		Collection collectionSons = this.getHijos();
 		

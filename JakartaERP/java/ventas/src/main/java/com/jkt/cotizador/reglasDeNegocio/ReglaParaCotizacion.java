@@ -20,7 +20,8 @@ public class ReglaParaCotizacion extends ReglaDeNegocio {
 		}else{
 //			nueva cotizacion.
 			Random rnd = new Random();
-			c.setNro(rnd.nextInt());
+			int nextInt = rnd.nextInt();
+			c.setNro(nextInt<1?nextInt*-1:nextInt);
 			c.setEstado(Cotizacion.Estado.PENDIENTE);
 		}
 	}

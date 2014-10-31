@@ -279,7 +279,7 @@
 		<output name="archivos" tableName="mtArchivos">
 			<campoSalida value="oid_arch" target="id" />
 			<!-- <campoSalida value="oid_cotiz" target="CAMPOTRANSIENTE" /> -->
-			<campoSalida value="fecha_subida" target="fechaDeSubida" />
+			<campoSalida value="fecha_subida" target="fechaDeSubidaPlana" />
 			<campoSalida value="oid_usu" target="identificadorDeUsuario" />
 			<campoSalida value="usuario" target="nombreUsuario" />
 			<campoSalida value="comentario" target="comentario" />

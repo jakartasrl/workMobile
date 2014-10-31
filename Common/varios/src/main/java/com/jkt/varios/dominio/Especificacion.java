@@ -1,6 +1,7 @@
 package com.jkt.varios.dominio;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.jkt.dominio.PersistentEntity;
@@ -18,7 +19,8 @@ public class Especificacion extends PersistentEntity {
 
 	public Especificacion() {
 		super();
-		this.fechaDeSubida=new Date();
+		Calendar calendar = Calendar.getInstance();
+		this.fechaDeSubida= new java.sql.Timestamp(calendar.getTime().getTime());
 	}
 	
 //	public enum TipoEspecificacion { NOTA, ARCHIVO};
@@ -35,18 +37,8 @@ public class Especificacion extends PersistentEntity {
 	private String ruta;
 	private String nombre;
 	
-	private Date fechaDeSubida;//=new Date();
-	private Timestamp fechaDeSubidaConHora;//=new Date();
+	private Timestamp fechaDeSubida;
 	
-	
-	public Timestamp getFechaDeSubidaConHora() {
-		return fechaDeSubidaConHora;
-	}
-
-	public void setFechaDeSubidaConHora(Timestamp fechaDeSubidaConHora) {
-		this.fechaDeSubidaConHora = fechaDeSubidaConHora;
-	}
-
 	private String comentario;
 	
 	private int identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
@@ -62,8 +54,24 @@ public class Especificacion extends PersistentEntity {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public Date getFechaDeSubida() {
+	public Timestamp getFechaDeSubida() {
 		return fechaDeSubida;
+	}
+	
+	public String getFechaDeSubidaPlana(){
+//		return "2014-10-31 15:49:07";//.0"
+		return (this.getFechaDeSubida().toString()).substring(0, (this.getFechaDeSubida().toString()).length()-2);
+//		return this.getFechaDeSubida().toString().split(".")[0];
+
+//		return "31-10-2012 15:55:55";
+//		return "2014-10-31 15:49:07";
+//		return "31/10/2012 15:55:55";
+//		return "31/10/2012 03:55:55 p.m.";
+	}
+	
+
+	public void setFechaDeSubida(Timestamp fechaDeSubida) {
+		this.fechaDeSubida = fechaDeSubida;
 	}
 
 	public int getIdentificadorDeUsuario() {
@@ -72,10 +80,6 @@ public class Especificacion extends PersistentEntity {
 
 	public void setIdentificadorDeUsuario(int identificadorDeUsuario) {
 		this.identificadorDeUsuario = identificadorDeUsuario;
-	}
-
-	public void setFechaDeSubida(Date fechaDeSubida) {
-		this.fechaDeSubida = fechaDeSubida;
 	}
 
 	public String getRuta() {
@@ -114,12 +118,8 @@ public class Especificacion extends PersistentEntity {
 	 * <p>Recibe el nombre completo y genera dos textos separados, la ruta completa del archivo, y el nombre con extension.</p>
 	 * FIXME Seguramente existe una mejor forma de hacer esto, al momento de investigar, cambiar por una solución mas elegante.
 	 * 
-	 * @param nombreCompleto para trabajar y separar archivo y ruta.
 	 */
 	public void setNombreCompleto(String nombreCompleto){
-//        String replaceAll = nombreCompleto.replaceAll("\\", "/");  
-
-		
 		String[] nameSplitted = nombreCompleto.split(SEPARADOR);
 		String nombre = nameSplitted[nameSplitted.length-1];
 		this.nombre=nombre;
