@@ -481,7 +481,7 @@ object frmMainForm: TfrmMainForm
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
         Transparent = True
-        ExplicitWidth = 608
+        ExplicitWidth = 604
         Height = 60
         Width = 700
         object bvSpacer4: TBevel
@@ -515,7 +515,7 @@ object frmMainForm: TfrmMainForm
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
-          ExplicitWidth = 524
+          ExplicitWidth = 520
           Height = 60
           Width = 616
         end
@@ -533,7 +533,7 @@ object frmMainForm: TfrmMainForm
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
-          ExplicitWidth = 524
+          ExplicitWidth = 520
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -549,8 +549,7 @@ object frmMainForm: TfrmMainForm
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 1
         Transparent = True
-        ExplicitWidth = 524
-        ExplicitHeight = 194
+        ExplicitWidth = 520
         Height = 192
         Width = 616
         object gbLocationsPane: TcxGroupBox
@@ -566,7 +565,6 @@ object frmMainForm: TfrmMainForm
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
           Transparent = True
-          ExplicitHeight = 194
           Height = 192
           Width = 337
           object bvSpacer5: TBevel
@@ -598,8 +596,7 @@ object frmMainForm: TfrmMainForm
           BorderStyle = cxcbsNone
           TabOrder = 1
           Transparent = True
-          ExplicitWidth = 187
-          ExplicitHeight = 194
+          ExplicitWidth = 183
           object bvSpacer6: TBevel
             Left = 0
             Top = 28
@@ -622,7 +619,7 @@ object frmMainForm: TfrmMainForm
             StyleHot.LookAndFeel.NativeStyle = True
             TabOrder = 0
             Transparent = True
-            ExplicitWidth = 170
+            ExplicitWidth = 166
             Height = 95
             Width = 262
           end
@@ -639,7 +636,7 @@ object frmMainForm: TfrmMainForm
             StyleHot.LookAndFeel.NativeStyle = True
             TabOrder = 2
             Transparent = True
-            ExplicitWidth = 170
+            ExplicitWidth = 166
             Height = 85
             Width = 262
             object lbCurrentFolder: TcxLabel
@@ -655,7 +652,7 @@ object frmMainForm: TfrmMainForm
               Style.Font.Style = []
               Style.IsFontAssigned = True
               Transparent = True
-              ExplicitWidth = 170
+              ExplicitWidth = 166
             end
           end
           object lbComputer: TcxLabel
@@ -672,7 +669,7 @@ object frmMainForm: TfrmMainForm
             Style.TransparentBorder = True
             Style.IsFontAssigned = True
             Transparent = True
-            ExplicitWidth = 170
+            ExplicitWidth = 166
           end
         end
         object gbRecentDocumentsPane: TcxScrollBox
@@ -684,8 +681,7 @@ object frmMainForm: TfrmMainForm
           BorderStyle = cxcbsNone
           TabOrder = 2
           Transparent = True
-          ExplicitWidth = 187
-          ExplicitHeight = 194
+          ExplicitWidth = 183
           object bvSpacer8: TBevel
             Left = 0
             Top = 28
@@ -709,7 +705,7 @@ object frmMainForm: TfrmMainForm
             Style.TransparentBorder = True
             Style.IsFontAssigned = True
             Transparent = True
-            ExplicitWidth = 187
+            ExplicitWidth = 183
           end
         end
       end
@@ -796,8 +792,6 @@ object frmMainForm: TfrmMainForm
         StyleFocused.BorderStyle = ebsNone
         StyleHot.BorderStyle = ebsNone
         TabOrder = 0
-        ExplicitWidth = 524
-        ExplicitHeight = 254
         Height = 252
         Width = 520
       end
