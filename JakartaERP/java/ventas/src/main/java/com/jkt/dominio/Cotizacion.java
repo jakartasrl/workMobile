@@ -15,7 +15,7 @@ public class Cotizacion extends ComprobanteVenta {
 	}
 	
 	public String getDescripcion(){
-		return String.format("Cotizacion numero %d.",this.getNro());
+		return String.format("%s/%s",this.getFecha().toString(), this.getClienteSucursal().getDescripcion());
 //		return String.format("Cotizacion numero %d para cliente %s, fecha de creacion %s.",this.getNro(),this.getClienteSucursal().getCliente().getDescripcion(),this.getFecha().toString());
 	}
 	

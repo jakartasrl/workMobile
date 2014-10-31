@@ -31,6 +31,7 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionException;
+import com.jkt.operaciones.ReglaDeNegocio;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.util.IRepositorioClases;
@@ -92,6 +93,7 @@ public class ServiceRepository implements IServiceRepository {
 //		validarCodigo(entity);
 		
 		ejecutarValidacionDeNegocio(entity);
+		ejecutarReglasDeNegocio(entity);
 		try{
 			getSession().saveOrUpdate(entity);
 		}catch(javax.validation.ConstraintViolationException e){
@@ -109,6 +111,35 @@ public class ServiceRepository implements IServiceRepository {
 			throw new ValidacionException(buffer.toString());
 		}
 		return entity;
+	}
+
+	private void ejecutarReglasDeNegocio(PersistentEntity entity) throws InstantiationException, IllegalAccessException, ValidacionException {
+		String reglaClassName;
+		try {
+			reglaClassName = repositorioClases.getRegla(entity.getClass().getCanonicalName());
+			if (reglaClassName != null && !reglaClassName.isEmpty()) {
+				Class<?> clase = Class.forName(reglaClassName);
+				Method method;
+//				method = clase.getMethod("ejecutar", PersistentEntity.class);
+				ReglaDeNegocio instance = (ReglaDeNegocio) clase.newInstance();
+				instance.setServiceRepository(this);
+				instance.ejecutar(entity);
+//				method.invoke(instance, entity);
+			}
+		}catch(ClassNotFoundException e){
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+		}catch (JakartaException e) {
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+//		}catch (NoSuchMethodException e) {
+//			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+		}catch (SecurityException e) {
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+		}catch (IllegalArgumentException e) {
+			throw new ValidacionException(MENSAJE_ERROR_VALIDACION);
+//		}catch (InvocationTargetException e) {
+//			throw new ValidacionException(e.getTargetException().getMessage());
+		}
+		
 	}
 
 	private void validarCodigo(PersistentEntity entity) throws JakartaException {

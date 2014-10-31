@@ -12,7 +12,8 @@ public class CampoEntrada extends XMLEntity {
 	private String name;
 	private String clase;
 	private String metodo;
-
+	
+	
 	public String getName() {
 		return name;
 	}

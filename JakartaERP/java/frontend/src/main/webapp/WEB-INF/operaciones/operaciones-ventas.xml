@@ -239,7 +239,7 @@
 			<campoSalida value="des_sucu" target="clienteSucursal.descripcion" />
 
 			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
-			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codig" />
+			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
 			<campoSalida value="razonSocial" target="clienteSucursal.cliente.sujetoImpositivo.razonSocial" />
 
 			<campoSalida value="oid_vend" target="vendedor.id" />

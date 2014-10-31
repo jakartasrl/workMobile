@@ -1,5 +1,6 @@
 package com.jkt.varios.dominio;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import com.jkt.dominio.PersistentEntity;
@@ -35,7 +36,17 @@ public class Especificacion extends PersistentEntity {
 	private String nombre;
 	
 	private Date fechaDeSubida;//=new Date();
+	private Timestamp fechaDeSubidaConHora;//=new Date();
 	
+	
+	public Timestamp getFechaDeSubidaConHora() {
+		return fechaDeSubidaConHora;
+	}
+
+	public void setFechaDeSubidaConHora(Timestamp fechaDeSubidaConHora) {
+		this.fechaDeSubidaConHora = fechaDeSubidaConHora;
+	}
+
 	private String comentario;
 	
 	private int identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
