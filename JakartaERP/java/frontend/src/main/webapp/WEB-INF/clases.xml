@@ -35,6 +35,7 @@
 	<elemento key="tablaValidacionDeter" value="com.jkt.laboratorio.dominio.TablaValidacionDeter" />
 	<elemento key="laboratorio" value="com.jkt.laboratorio.dominio.Laboratorio" />
 	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
-	<elemento key="determinacion" value="com.jkt.laboratorio.dominio.Determinacion" />
+	<elemento key="determinacion" value="com.jkt.laboratorio.dominio.Determinacion" validador="com.jkt.validadores.ValidadorDeterminaciones" />
+	<elemento key="analisis" value="com.jkt.laboratorio.dominio.Analisis"  />
 
 </elementos>

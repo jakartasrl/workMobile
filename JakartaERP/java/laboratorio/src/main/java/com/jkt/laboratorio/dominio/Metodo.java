@@ -8,7 +8,20 @@ import com.jkt.dominio.PersistentEntity;
 public class Metodo extends PersistentEntity {
 	private Determinacion 		determinacion;
 	private String        		metodo;
-	private String        		expresionResultado;
+	private Expresion           expresion;
+	
+	
+	
+	public Expresion getExpresion() {
+		return expresion;
+	}
+
+
+	public void setExpresion(Expresion expresion) {
+		this.expresion = expresion;
+	//	expresion.setMetodo(this);
+	}
+
 	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
 	
 
@@ -33,12 +46,17 @@ public class Metodo extends PersistentEntity {
 
 
 	public String getExpresionResultado() {
-		return expresionResultado;
+		return expresion.getExpresion();
 	}
 
 
-	public void setExpresionResultado(String expresionResultado) {
-		this.expresionResultado = expresionResultado;
+	public void setExpresionResultado(String aValue) {
+		expresion = getExpresion();
+		if (expresion == null){
+			expresion = new Expresion();
+		}
+		expresion.setExpresion(aValue);
+		expresion.setMetodo(this);
 	}
 
 
@@ -57,6 +75,11 @@ public class Metodo extends PersistentEntity {
 
 	public void setValoresEsperados(List<ValorEsperado> aValue) {
 		this.valoresEsperados = aValue;
+	}
+
+
+	public boolean sinExpresion() {
+		return getExpresion() == null || getExpresion().getExpresion().isEmpty();
 	}
 
 	

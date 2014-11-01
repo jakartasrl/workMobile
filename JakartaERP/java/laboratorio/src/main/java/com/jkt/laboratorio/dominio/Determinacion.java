@@ -3,6 +3,8 @@ package com.jkt.laboratorio.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -75,10 +77,12 @@ public class Determinacion extends Descriptible {
 		this.leyendaValorCero = aValue;
 	}
 
+	
 	public String getTipoResultado() {
 		return tipoResultado;
 	}
 
+	@NotBlank(message="El tipo de resultado no debe estar vacio.")
 	public void setTipoResultado(String tipoResultado) {
 		this.tipoResultado = tipoResultado;
 	}
@@ -91,7 +95,7 @@ public class Determinacion extends Descriptible {
 		this.formato = aValue;
 	}
 
-	public boolean getCalculaResultado() {
+	public boolean isCalculaResultado() {
 		return calculaResultado;
 	}
 
@@ -106,6 +110,10 @@ public class Determinacion extends Descriptible {
 
 	public void setLaboratorio(Laboratorio aValue) {
 		this.laboratorio = aValue;
+	}
+
+	public boolean sinMetodos() {
+		return metodos.isEmpty();
 	}
 
 }

@@ -13,7 +13,6 @@ inherited FNUti0001: TFNUti0001
   inherited cxSplitterLeft: TcxSplitter
     Height = 384
     ExplicitLeft = 185
-    ExplicitTop = 0
     ExplicitHeight = 384
   end
   inherited cxGroupBoxRight: TcxGroupBox
@@ -24,28 +23,26 @@ inherited FNUti0001: TFNUti0001
     Height = 384
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 706
+    Left = 704
     Height = 384
     ExplicitLeft = 704
     ExplicitWidth = 2
     ExplicitHeight = 384
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    Left = 32
     TabOrder = 7
     ExplicitWidth = 670
     ExplicitHeight = 384
     Height = 384
-    Width = 674
+    Width = 670
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 2
       Top = 2
-      Width = 670
+      Width = 666
       Height = 380
       Align = alClient
       TabOrder = 0
       DataSource = dsInput
-      ExplicitWidth = 666
       object jktExpDBGrid1DBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsInput

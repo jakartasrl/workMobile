@@ -11,7 +11,8 @@
 
 		
 		<property name="metodo"     		column="metodo" 		type="string" />
-		<property name="expresionResultado" column="expresion_res" 	type="string" />
+		
+		<one-to-one name="expresion" cascade="save-update" class="com.jkt.laboratorio.dominio.Expresion" />
 		
 		<many-to-one name="determinacion" not-null="true" column="ID_DETERMINACION"/>
 		

@@ -24,8 +24,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     Alignment = alCenterCenter
     Style.Edges = [bBottom]
     TabOrder = 0
-    ExplicitLeft = 1
-    ExplicitTop = -5
     Height = 73
     Width = 771
     object cxLabel1: TcxLabel
@@ -50,9 +48,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Style.BorderStyle = ebsNone
       Style.Edges = [bLeft, bTop, bRight, bBottom]
       TabOrder = 1
-      ExplicitLeft = 174
-      ExplicitTop = -12
-      ExplicitHeight = 50
       DesignSize = (
         594
         69)
@@ -73,7 +68,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.TransparentBorder = True
         Style.IsFontAssigned = True
         Transparent = True
-        ExplicitTop = 3
       end
       object cxLabel3: TcxLabel
         Left = 8
@@ -90,7 +84,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.TransparentBorder = True
         Style.IsFontAssigned = True
         Transparent = True
-        ExplicitTop = 3
       end
       object txtPassword: TcxDBTextEdit
         Left = 344
@@ -109,7 +102,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.IsFontAssigned = True
         TabOrder = 3
         OnKeyDown = txtPasswordKeyDown
-        ExplicitTop = 1
         Width = 160
       end
       object txtUsuario: TcxDBTextEdit
@@ -128,7 +120,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.IsFontAssigned = True
         TabOrder = 2
         OnKeyDown = txtPasswordKeyDown
-        ExplicitTop = 1
         Width = 160
       end
       object cxButton1: TcxButton
@@ -771,6 +762,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet1: TcxTabSheet
       Caption = 'cxTabSheet1'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dxTileControl: TdxTileControl
         Left = 0
         Top = 0
@@ -943,6 +938,10 @@ object frmMenuPrincipal: TfrmMenuPrincipal
     object cxTabSheet2: TcxTabSheet
       Caption = 'cxTabSheet2'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGroupBox2: TcxGroupBox
         Left = 0
         Top = 318

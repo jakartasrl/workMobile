@@ -125,10 +125,18 @@ type
     cxGrid1DBTableView1des_var: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
     TVaroid_det: TIntegerField;
+    valExpresion: TjktValidador;
+    jktOperacion1: TjktOperacion;
+    operExpresion: TjktOperacion;
+    jktMemTable1: TjktMemTable;
+    TVariWrk: TjktMemTable;
+    TVariWrkcodigo: TStringField;
     procedure TValNewRecord(DataSet: TDataSet);
     procedure TDetNewRecord(DataSet: TDataSet);
     procedure TMetNewRecord(DataSet: TDataSet);
     procedure TVarNewRecord(DataSet: TDataSet);
+    procedure operExpresionAfterEjecutar(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
 
@@ -145,6 +153,12 @@ implementation
 
 {$R *.dfm}
 
+procedure TFNLab0001.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FMultipleInstancia := True;
+end;
+
 procedure TFNLab0001.llamarOperacionConfiguracion;
 begin
   //inherited;
@@ -155,6 +169,23 @@ begin
   mtParametroInicial.FieldByName('entidad').AsString := 'CaracProdValDet';
   operParam.execute;
   cxGrid2DBBandedTableView1.Bands[0].Caption := mtParametrosForm.FieldByName('valor_cadena').AsString;
+end;
+
+procedure TFNLab0001.operExpresionAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+  TVariWrk.First;
+  while not TVariWrk.eof do
+    begin
+      if  TVar.Locate('cod_var', TVariWrk.FieldByName('codigo').asString, [] )  = false
+          then begin
+                  TVar.Append;
+                  TVar.FieldByName('cod_var').AsString :=  TVariWrk.FieldByName('codigo').asString;
+                  TVar.Post;
+               end;
+
+      TVariWrk.Next;
+    end;
 end;
 
 procedure TFNLab0001.TDetNewRecord(DataSet: TDataSet);

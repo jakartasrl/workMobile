@@ -268,6 +268,7 @@ inherited FNLab0001: TFNLab0001
           Top = 2
           Align = alLeft
           Caption = 'Metodos'
+          Style.TextStyle = [fsItalic]
           TabOrder = 0
           Height = 196
           Width = 631
@@ -414,7 +415,7 @@ inherited FNLab0001: TFNLab0001
         Dataset = TVar
         Tag = 0
       end>
-    Left = 88
+    Left = 104
     Top = 344
   end
   inherited mtParametroInicial: TjktMemTable
@@ -439,9 +440,10 @@ inherited FNLab0001: TFNLab0001
         ValidadorNew = valDeter
       end
       item
+        Field = TMetexpresion
+        ValidadorGral = valExpresion
       end>
-    Left = 144
-    Top = 88
+    Left = 176
   end
   inherited mtParametrosForm: TjktMemTable
     Left = 1152
@@ -960,5 +962,78 @@ inherited FNLab0001: TFNLab0001
     CodigoRespuesta = TDetcod_det
     Left = 664
     Top = 144
+  end
+  object valExpresion: TjktValidador
+    Validacion = tEspecial
+    ListaAsignaciones = <>
+    OperacionEspecial = operExpresion
+    Left = 520
+    Top = 376
+  end
+  object jktOperacion1: TjktOperacion
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 544
+    Top = 80
+  end
+  object operExpresion: TjktOperacion
+    OperName = 'ValidarExpresion'
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'expresion'
+        Field = TMetexpresion
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    OnAfterEjecutar = operExpresionAfterEjecutar
+    Left = 592
+    Top = 376
+  end
+  object jktMemTable1: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 696
+    Top = 64
+  end
+  object TVariWrk: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 712
+    Top = 360
+    object TVariWrkcodigo: TStringField
+      FieldName = 'codigo'
+    end
   end
 end
