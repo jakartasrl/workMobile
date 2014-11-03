@@ -151,7 +151,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="FNVen0001"></form>
+			<form name="FNVen0001" />
 		</forms>		
 
 	</operacion>
@@ -325,6 +325,7 @@
 			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
 			<campoSalida value="nro_item" target="numero" />
 			<campoSalida value="detalle" target="descripcion" />
+			<campoSalida value="cantidad" target="cantidad" />
 			
 		</output>
 		
