@@ -2,7 +2,6 @@ inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
   ClientHeight = 587
   ClientWidth = 918
-  ExplicitLeft = -155
   ExplicitTop = -57
   ExplicitWidth = 934
   ExplicitHeight = 625
@@ -19,7 +18,7 @@ inherited FNCli0001: TFNCli0001
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 888
     TabOrder = 4
-    ExplicitLeft = 882
+    ExplicitLeft = 888
     ExplicitHeight = 587
     Height = 587
   end
@@ -31,7 +30,7 @@ inherited FNCli0001: TFNCli0001
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 844
+    ExplicitWidth = 850
     ExplicitHeight = 587
     Height = 587
     Width = 850
@@ -43,7 +42,6 @@ inherited FNCli0001: TFNCli0001
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 840
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 65
         Top = 41

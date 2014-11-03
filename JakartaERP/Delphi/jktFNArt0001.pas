@@ -230,10 +230,10 @@ type
     ValUnidVenta: TjktValidador;
     ValUnidProd: TjktValidador;
     ValUnidCompra: TjktValidador;
-    jktHelpGenerico1: TjktHelpGenerico;
-    jktHelpGenerico2: TjktHelpGenerico;
+    HelpUnidMedOrig: TjktHelpGenerico;
     dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList;
     dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel;
+    HelpUnidMedDest: TjktHelpGenerico;
     procedure jktExpDBGrid1DBTableView1CodValorCaracPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
     procedure cxDBCheckBox1PropertiesChange(Sender: TObject);
@@ -253,6 +253,10 @@ type
       AButtonIndex: Integer);
     procedure cxDBButtonEdit6PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
+    procedure jktExpDBGrid3DBTableView1CodUnidMedOrigPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure jktExpDBGrid3DBTableView1CodUnidMedDestPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
   private
     { Private declarations }
   public
@@ -353,6 +357,24 @@ begin
 
   if mtValoresCaracProd.FieldByName('TipoDeDato').AsString = 'Tabla' then
     HelpValorCarac.Ejecutar;
+end;
+
+procedure TFNArt0001.jktExpDBGrid3DBTableView1CodUnidMedDestPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpUnidMedDest.Ejecutar then
+    mtEquivalencias.FieldByName('DescUnidMedDest').AsString := HelpUnidMedDest.GetDescripcion;
+end;
+
+procedure TFNArt0001.jktExpDBGrid3DBTableView1CodUnidMedOrigPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if HelpUnidMedOrig.Ejecutar then
+    mtEquivalencias.FieldByName('DescUnidMedOrig').AsString := HelpUnidMedOrig.GetDescripcion;
 end;
 
 procedure TFNArt0001.jktExpDBGrid4DBTableView1CodValorClasifPropertiesButtonClick(

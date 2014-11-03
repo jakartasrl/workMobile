@@ -20,13 +20,20 @@
 		<property name="anulado" column="ANULADO" type="boolean" />
 		<property name="nro" column="NUMERO" type="integer" />
 		
+		<property name="fecha" column="FECHA" type="date" />
+
 		<property name="letra" type="string">
             <column name="LETRA" length="1" />
         </property>
         
         <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID"></many-to-one>
         
-		
+        <list name="archivos" table="ARCHIVO_COMPROBANTES" lazy="true" cascade="all">
+			<key column="COMPROBANTE_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
+		</list>
+        
 	</class>
 
 </hibernate-mapping>

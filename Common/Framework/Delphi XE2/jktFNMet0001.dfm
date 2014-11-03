@@ -47,12 +47,14 @@ object frmChild: TfrmChild
     Width = 30
   end
   object cxSplitterRight: TcxSplitter
-    Left = 672
+    Left = 668
     Top = 0
     Width = 4
     Height = 388
+    HotZoneClassName = 'TcxXPTaskBarStyle'
     AlignSplitter = salRight
     Control = cxGroupBoxRight
+    ExplicitLeft = 672
   end
   object cxGroupBoxMain: TcxGroupBox
     Left = 38
@@ -61,10 +63,9 @@ object frmChild: TfrmChild
     PanelStyle.Active = True
     Style.BorderStyle = ebsNone
     TabOrder = 8
-    ExplicitLeft = 34
-    ExplicitWidth = 638
+    ExplicitWidth = 634
     Height = 388
-    Width = 634
+    Width = 630
   end
   object BarManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET

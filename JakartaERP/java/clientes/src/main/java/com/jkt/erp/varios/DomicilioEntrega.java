@@ -150,28 +150,29 @@ public class DomicilioEntrega extends PersistentEntity {
 			this.direccion=new Direccion();
 		}
 	}
+	
 	/*
 	 * Metodos para el manejo de la direccion.
 	 */
 	 public boolean equals(Object other) {
-	        if (this == other) return true;
-	        if ( !(other instanceof CondPagoDet) ) return false;
+        if (this == other) return true;
+        if ( !(other instanceof CondPagoDet) ) return false;
 
-	        final DomicilioEntrega domicilioEntrega = (DomicilioEntrega) other;
-	        	
-	        if (domicilioEntrega.getId()==0) return false;
-				
-	        if ( !(domicilioEntrega.getId()==getId())) return false;
+        final DomicilioEntrega domicilioEntrega = (DomicilioEntrega) other;
+        	
+        if (domicilioEntrega.getId()==0) return false;
+			
+        if ( !(domicilioEntrega.getId()==getId())) return false;
 
-	        if ( !(domicilioEntrega.getClienteSucursal().getId()==getClienteSucursal().getId())) return false;
+        if ( !(domicilioEntrega.getClienteSucursal().getId()==getClienteSucursal().getId())) return false;
 
-	        return true;
-	    }
+        return true;
+    }
 
-	    public int hashCode() {
-	        int result;
-	        result = (int) (29 * getId());
-	        return result;
-	    }
+    public int hashCode() {
+        int result;
+        result = (int) (29 * getId());
+        return result;
+    }
 	
 }

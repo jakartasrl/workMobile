@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.CondPago;
@@ -39,6 +41,7 @@ public class Cliente extends PersistentEntity {
 	
 	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();
 	
+	@NotEmpty(message="Es necesario que el cliente tenga como minimo una sucursal.")
 	private List<ClienteSucursal> listaSucursales=new ArrayList<ClienteSucursal>();
 	
 	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();

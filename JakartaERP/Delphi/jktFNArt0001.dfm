@@ -17,19 +17,19 @@ inherited FNArt0001: TFNArt0001
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 809
     TabOrder = 4
-    ExplicitLeft = 769
+    ExplicitLeft = 809
     ExplicitHeight = 522
     Height = 522
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 805
     Height = 522
-    ExplicitLeft = 765
+    ExplicitLeft = 805
     ExplicitHeight = 522
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 731
+    ExplicitWidth = 771
     ExplicitHeight = 522
     Height = 522
     Width = 771
@@ -41,7 +41,6 @@ inherited FNArt0001: TFNArt0001
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 727
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 68
         Top = 41
@@ -251,6 +250,13 @@ inherited FNArt0001: TFNArt0001
           object jktExpDBGrid3DBTableView1CodUnidMedOrig: TcxGridDBColumn
             Caption = 'C'#243'd. Unid. Med. Orig.'
             DataBinding.FieldName = 'CodUnidMedOrig'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = jktExpDBGrid3DBTableView1CodUnidMedOrigPropertiesButtonClick
             Width = 118
           end
           object jktExpDBGrid3DBTableView1DescUnidMedOrig: TcxGridDBColumn
@@ -266,6 +272,13 @@ inherited FNArt0001: TFNArt0001
           object jktExpDBGrid3DBTableView1CodUnidMedDest: TcxGridDBColumn
             Caption = 'C'#243'd. Unid. Med. Dest'
             DataBinding.FieldName = 'CodUnidMedDest'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = jktExpDBGrid3DBTableView1CodUnidMedDestPropertiesButtonClick
           end
           object jktExpDBGrid3DBTableView1DescUnidMedDest: TcxGridDBColumn
             Caption = 'Desc. Unid. Med. Dest.'
@@ -1727,7 +1740,7 @@ inherited FNArt0001: TFNArt0001
     EntidadMaestra = 'tablaValoresCaract'
     OidEntidadMaestra = mtValoresCaracProdoid_TablaValores
     CodigoRespuesta = mtValoresCaracProdCodValorCarac
-    Left = 288
+    Left = 400
     Top = 400
   end
   object HelpValorClasifProd: TjktHelpGenerico
@@ -1737,7 +1750,7 @@ inherited FNArt0001: TFNArt0001
     TipoFiltro = fi_ValoresClasificador
     OidRespuesta = mtClasifProdoid_ValorClasif
     CodigoRespuesta = mtClasifProdCodValorClasif
-    Left = 328
+    Left = 440
     Top = 400
   end
   object opTraerCaractProducto: TjktOperacion
@@ -1891,12 +1904,12 @@ inherited FNArt0001: TFNArt0001
     Left = 248
     Top = 456
   end
-  object jktHelpGenerico1: TjktHelpGenerico
-    Left = 368
-    Top = 400
-  end
-  object jktHelpGenerico2: TjktHelpGenerico
-    Left = 408
+  object HelpUnidMedOrig: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'unidadMedida'
+    OidRespuesta = mtEquivalenciasoid_UnidMedOrig
+    CodigoRespuesta = mtEquivalenciasCodUnidMedOrig
+    Left = 288
     Top = 400
   end
   object dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList
@@ -1904,5 +1917,13 @@ inherited FNArt0001: TFNArt0001
     Top = 24
     object dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel
     end
+  end
+  object HelpUnidMedDest: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'unidadMedida'
+    OidRespuesta = mtEquivalenciasoid_UnidMedDest
+    CodigoRespuesta = mtEquivalenciasCodUnidMedDest
+    Left = 328
+    Top = 400
   end
 end
