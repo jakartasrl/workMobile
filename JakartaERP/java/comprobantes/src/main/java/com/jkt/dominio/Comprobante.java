@@ -20,7 +20,7 @@ public abstract class Comprobante extends PersistentEntity {
 	 * ***********************************************
 	 */
 	private String comportamiento;
-	private char letra;
+	private String letra;
 	private String lugarEmision;
 	private int nro;
 	private boolean anulado;
@@ -31,6 +31,11 @@ public abstract class Comprobante extends PersistentEntity {
 	 * variables de instancia
 	 * ***********************************************
 	 */
+	
+	public Comprobante(){
+		super();
+		this.fecha=new Date();
+	}
 	
 	public void agregarEspecificacion(Especificacion e){
 		if (!archivos.contains(e)) {
@@ -64,15 +69,25 @@ public abstract class Comprobante extends PersistentEntity {
 	public void setComportamiento(String comportamiento) {
 		this.comportamiento = comportamiento;
 	}
-	public char getLetra() {
-		return letra;
-	}
-	public void setLetra(char letra) {
-		this.letra = letra;
-	}
+//	public char getLetra() {
+//		return letra;
+//	}
+//	public void setLetra(char letra) {
+//		this.letra = letra;
+//	}
+	
+	
 	public String getLugarEmision() {
 		return lugarEmision;
 	}
+	public String getLetra() {
+		return letra;
+	}
+
+	public void setLetra(String letra) {
+		this.letra = letra;
+	}
+
 	public void setLugarEmision(String lugarEmision) {
 		this.lugarEmision = lugarEmision;
 	}

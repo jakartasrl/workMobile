@@ -18,7 +18,7 @@ public class TraerTiposDeVenta extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		notificarObjetos(WRITER_ENTIDADES, Arrays.asList(new Container("1", "Fabricacion"), new Container("2", "Reparacion")));
+		notificarObjetos(WRITER_ENTIDADES, Arrays.asList(new Container("1", "Fabricacion"), new Container("2", "Reparacion"), new Container("3", "Service")));
 	}
 
 }

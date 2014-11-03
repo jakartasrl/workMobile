@@ -8,10 +8,22 @@ import com.jkt.dominio.PersistentEntity;
 public class Metodo extends PersistentEntity {
 	private Determinacion 		determinacion;
 	private String        		metodo;
-	private String        		expresionResultado;
-	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
-	private List<Variable>      variables = new ArrayList<Variable>();
+	private Expresion           expresion;
+	
+	
+	
+	public Expresion getExpresion() {
+		return expresion;
+	}
 
+
+	public void setExpresion(Expresion expresion) {
+		this.expresion = expresion;
+	//	expresion.setMetodo(this);
+	}
+
+	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
+	
 
 	public Determinacion getDeterminacion() {
 		return determinacion;
@@ -34,12 +46,17 @@ public class Metodo extends PersistentEntity {
 
 
 	public String getExpresionResultado() {
-		return expresionResultado;
+		return expresion.getExpresion();
 	}
 
 
-	public void setExpresionResultado(String expresionResultado) {
-		this.expresionResultado = expresionResultado;
+	public void setExpresionResultado(String aValue) {
+		expresion = getExpresion();
+		if (expresion == null){
+			expresion = new Expresion();
+		}
+		expresion.setExpresion(aValue);
+		expresion.setMetodo(this);
 	}
 
 
@@ -60,23 +77,13 @@ public class Metodo extends PersistentEntity {
 		this.valoresEsperados = aValue;
 	}
 
+
+	public boolean sinExpresion() {
+		return getExpresion() == null || getExpresion().getExpresion().isEmpty();
+	}
+
 	
 	
 
-	public void addVariable(Variable aValue) {
-		if (!variables.contains(aValue)) {
-			variables.add(aValue);
-			aValue.setMetodo(this);
-		}
-	}
-
-
-	public List<Variable> getVariables() {
-		return variables;
-	}
-
-	public void setVariables(List<Variable> aValue) {
-		this.variables = aValue;
-	}
 
 }

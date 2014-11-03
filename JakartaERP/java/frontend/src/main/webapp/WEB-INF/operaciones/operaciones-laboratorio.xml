@@ -183,42 +183,21 @@
 
 	<!-- Persistir instancias de Análiss y sus Determinaciones -->
 	<operacion name="SaveAnalisis" clase="com.jkt.operaciones.Guardar">
-		<input name="mtAnalisis" keyName="objeto"
+		<input name="TCab" keyName="objeto"
 			clase="com.jkt.laboratorio.dominio.Analisis" fieldID="oid_ana">
 			<campoEntrada>
-				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
-				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="cod_ana" clase="String" metodo="setCodigo" />
+				<campoEntrada name="des_ana" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="oid_lab"
+					clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
 
-				<campoEntrada name="mtDet" metodo="addDeterminacion"
-					clase="com.jkt.laboratorio.dominio.Determinacion" fieldID="oid_det">
-					<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
-					<campoEntrada name="descripcion" clase="String"
-						metodo="setDescripcion" />
+				<campoEntrada name="TDet" metodo="addDeterminacion"
+					clase="com.jkt.laboratorio.dominio.AnalisisDet" fieldID="oid_detalle">
+					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" />
 					<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-					<campoEntrada name="metodo" clase="String" metodo="setMetodo" />
-					<campoEntrada name="tipoResultado" clase="String"
-						metodo="setTipoResultado" />
-					<campoEntrada name="mtValValDet" metodo="addValoresValidos"
-						clase="com.jkt.laboratorio.dominio.ValoresValidosDeterminacion"
-						fieldID="oid_val_val">
-						<campoEntrada name="valorDesde" clase="Double"
-							metodo="setValorDesde" />
-						<campoEntrada name="valorHasta" clase="Double"
-							metodo="setValorHasta" />
-						<campoEntrada name="limiteInferior" clase="Double"
-							metodo="setLimiteInferior" />
-						<campoEntrada name="limiteSuperior" clase="Double"
-							metodo="setLimiteSuperior" />
-						<!-- <campoEntrada name="caracteristica" clase="com.jkt.erp.articulos.CaracteristicaProducto" 
-							metodo="setCaracteristica" /> -->
-						<campoEntrada name="oid_tabla"
-							clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
-						<!-- <campoEntrada name="determinacion" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" 
-							metodo="setTablaValidacion" /> -->
 					</campoEntrada>
 				</campoEntrada>
-			</campoEntrada>
 		</input>
 
 		<forms>
@@ -227,20 +206,56 @@
 
 	</operacion>
 
+	<operacion name="TraerAnalisis"
+		clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.laboratorio.dominio.Analisis">
+
+		<output name="entidad" tableName="TCab">
+			<campoSalida value="oid_ana" target="id" />
+			<campoSalida value="cod_ana" target="codigo" />
+			<campoSalida value="des_ana" target="descripcion" />
+			<campoSalida value="oid_lab" target="laboratorio.id" />
+			<campoSalida value="activo"  target="isActivo" />
+		</output>
+
+		<output name="detalle" tableName="TDet">
+			<campoSalida value="oid_detalle"   	target="id" />
+			<campoSalida value="oid_det"   		target="determinacion.id" />
+			<campoSalida value="cod_det"   		target="determinacion.codigo" />
+			<campoSalida value="des_det"   		target="determinacion.descripcion" />
+			<campoSalida value="activo"    		target="isActivo" />		
+			<campoSalida value="oid_ana"   		target="analisis.id" />
+		</output>
+
+		
+		<listas>
+			<lista nombreLista="listaDeterminaciones" nombreWriter="detalle"  />
+		</listas>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+
+	</operacion>
+
+
+
 
 	<operacion name="TraerDeterminaciones"
 		clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.laboratorio.dominio.Determinacion">
 
 		<output name="entidad" tableName="TDet">
-			<campoSalida value="oid_det" target="id" />
-			<campoSalida value="cod_det" target="codigo" />
-			<campoSalida value="des_det" target="descripcion" />
-			<campoSalida value="tipo_res" target="tipoResultado" />
-			<campoSalida value="activo" target="isActivo" />
-			<campoSalida value="oid_lab" target="laboratorio.id" />
-			<campoSalida value="calc_res" target="isCalculaResultado" />
-			<campoSalida value="formato" target="formato" />
-			<campoSalida value="ley_cero" target="leyendaValorCero" />
+			<campoSalida value="oid_det" 	target="id" />
+			<campoSalida value="cod_det" 	target="codigo" />
+			<campoSalida value="des_det" 	target="descripcion" />
+			<campoSalida value="tipo_res" 	target="tipoResultado" />
+			<campoSalida value="activo" 	target="isActivo" />
+			<campoSalida value="oid_lab" 	target="laboratorio.id" />
+			<campoSalida value="calc_res" 	target="isCalculaResultado" />
+			<campoSalida value="formato" 	target="formato" />
+			<campoSalida value="ley_cero" 	target="leyendaValorCero" />
+			<campoSalida value="oid_lab" 	target="laboratorio.id" />
 		</output>
 
 		<output name="metodo" tableName="TMet">
@@ -261,7 +276,7 @@
 		</output>
 		
 		<output name="variables" tableName="TVar">
-			<campoSalida value="oid_met"     target="metodo.id" />
+			<campoSalida value="oid_det"     target="determinacion.id" />
 			<campoSalida value="oid_var"     target="id" />
 			<campoSalida value="cod_var"     target="codigo" />
 			<campoSalida value="des_var"     target="descripcion" />
@@ -273,8 +288,8 @@
 		<listas>
 			<lista nombreLista="metodos"  nombreWriter="metodo"> 
 				<lista nombreLista="valoresEsperados" nombreWriter="valores" />
-				<lista nombreLista="variables" nombreWriter="variables"  />
 			</lista>	
+			<lista nombreLista="variables" nombreWriter="variables"  />
 		</listas>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
@@ -320,14 +335,15 @@
 							clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
 					</campoEntrada>
 
-					<campoEntrada name="TVar" metodo="addVariable"
+					
+				</campoEntrada>
+				<campoEntrada name="TVar" metodo="addVariable"
 						clase="com.jkt.laboratorio.dominio.Variable" fieldID="oid_var">
 						<campoEntrada name="cod_var" clase="String" metodo="setCodigo" />
 						<campoEntrada name="des_var" clase="String" metodo="setDescripcion" />
 						<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-					</campoEntrada>
-
 				</campoEntrada>
+
 
 			</campoEntrada>
 		</input>
@@ -338,6 +354,20 @@
 
 	</operacion>
 
+
+	<operacion name="ValidarExpresion" clase="com.jkt.laboratorio.operaciones.ValidarExpresion">
+		
+		<output name="resultado" tableName="TVariWrk">
+			<campoSalida value="codigo" target="codigo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	
+	</operacion>
 
 
 </entity>

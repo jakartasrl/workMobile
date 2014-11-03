@@ -28,7 +28,12 @@
         
         <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID"></many-to-one>
         
-		
+        <list name="archivos" table="ARCHIVO_COMPROBANTES" lazy="true" cascade="all">
+			<key column="COMPROBANTE_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
+		</list>
+        
 	</class>
 
 </hibernate-mapping>

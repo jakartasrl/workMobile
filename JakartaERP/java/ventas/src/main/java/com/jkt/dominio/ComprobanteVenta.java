@@ -15,7 +15,7 @@ import com.jkt.erp.varios.Vendedor;
  */
 public abstract class ComprobanteVenta extends ComprobanteCliente {
 
-	@NotNull
+	@NotNull(message="Debe ingresar obligatoriamente un vendedor.")
 	private Vendedor vendedor;
 	
 	private Representante representante;

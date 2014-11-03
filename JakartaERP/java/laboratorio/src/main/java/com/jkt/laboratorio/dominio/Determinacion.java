@@ -3,6 +3,8 @@ package com.jkt.laboratorio.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -19,6 +21,8 @@ public class Determinacion extends Descriptible {
 	private String formato;
 	private boolean calculaResultado;
 	private List<Metodo> metodos = new ArrayList<Metodo>();
+	private List<Variable>      variables = new ArrayList<Variable>();
+
 	
 	
 	
@@ -44,6 +48,22 @@ public class Determinacion extends Descriptible {
 		this.metodos = aValue;
 	}
 
+	public void addVariable(Variable aValue) {
+		if (!variables.contains(aValue)) {
+			variables.add(aValue);
+			aValue.setDeterminacion(this);
+		}
+	}
+
+
+	public List<Variable> getVariables() {
+		return variables;
+	}
+
+	public void setVariables(List<Variable> aValue) {
+		this.variables = aValue;
+	}
+
 
 
 	/* -------------------------------------- Getters & Setters -------------------------------------- */
@@ -57,10 +77,12 @@ public class Determinacion extends Descriptible {
 		this.leyendaValorCero = aValue;
 	}
 
+	
 	public String getTipoResultado() {
 		return tipoResultado;
 	}
 
+	@NotBlank(message="El tipo de resultado no debe estar vacio.")
 	public void setTipoResultado(String tipoResultado) {
 		this.tipoResultado = tipoResultado;
 	}
@@ -73,7 +95,7 @@ public class Determinacion extends Descriptible {
 		this.formato = aValue;
 	}
 
-	public boolean getCalculaResultado() {
+	public boolean isCalculaResultado() {
 		return calculaResultado;
 	}
 
@@ -88,6 +110,10 @@ public class Determinacion extends Descriptible {
 
 	public void setLaboratorio(Laboratorio aValue) {
 		this.laboratorio = aValue;
+	}
+
+	public boolean sinMetodos() {
+		return metodos.isEmpty();
 	}
 
 }

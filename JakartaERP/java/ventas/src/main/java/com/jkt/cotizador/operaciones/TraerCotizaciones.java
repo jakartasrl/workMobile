@@ -33,6 +33,7 @@ public abstract class TraerCotizaciones extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Filtro filtro = new Filtro("estado",getCondition(),"igual",TiposDeDato.STRING_TYPE);
 		List<PersistentEntity> cotizaciones = serviceRepository.getByProperties(Cotizacion.class, Arrays.asList(filtro));
+//		List<PersistentEntity> cotizaciones = obtenerTodos(Cotizacion.class);//serviceRepository.getByProperties(Cotizacion.class, Arrays.asList(filtro));
 	
 		Cotizacion cotizacion;
 		long identificadorDeUsuario;
