@@ -6,13 +6,14 @@ import java.util.List;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDetalle;
 
 /**
  * Representa una Determinación, o ensayo, que forma parte de un Análisis.
  * Se utiliza en la carga de los protocolos del Laboratorio.
  * Ejemplo: Contenido de Humedad (ppm).
  */
-public class Determinacion extends Descriptible {
+public class Determinacion extends Descriptible implements IDetalle{
 
 
 	private Laboratorio laboratorio;
@@ -110,6 +111,10 @@ public class Determinacion extends Descriptible {
 
 	public boolean sinMetodos() {
 		return metodos.isEmpty();
+	}
+
+	public String getNombreDeMaestro() {
+		return "laboratorio";
 	}
 
 }
