@@ -153,26 +153,6 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 		return this.getNombres().concat(" ").concat(this.getApellido());
 	}
 
-	public String getCadena2() {
-		return this.getApellido();
-	}
-
-	public int getEntero() {
-		return (int) this.getId();
-	}
-
-	public int getEntero2() {
-		return 0;
-	}
-
-	public float getFloat() {
-		return 0;
-	}
-
-	public float getFloat2() {
-		return 0;
-	}
-	
 	/*
 	 * Metodo utilitario para recibir datos de delphi.TRANSIENT FIELD.
 	 */

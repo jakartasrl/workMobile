@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.Direccion;
@@ -21,7 +22,7 @@ import com.jkt.varios.dominio.Provincia;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class ClienteSucursal extends PersistentEntity implements IDetalle{
+public class ClienteSucursal extends PersistentEntity implements IDetalle, IDescriptible{
 
 	@NotNull(message="Esta entidad debe tener un cliente.")
 	private Cliente cliente;
@@ -218,6 +219,14 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle{
 
 	public String getNombreDeMaestro() {
 		return "cliente";
+	}
+
+	public String getCodigo() {
+		return String.valueOf(this.getNumero());
+	}
+
+	public String getCadena() {
+		return "";
 	}
 
 }

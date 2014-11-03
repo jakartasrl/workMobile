@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDetalle;
 
 /**
- * Representa una Determinaci√≥n, o ensayo, que forma parte de un An√°lisis.
+ * Representa una DeterminaciÛn, o ensayo, que forma parte de un An·lisis.
  * Se utiliza en la carga de los protocolos del Laboratorio.
  * Ejemplo: Contenido de Humedad (ppm).
  */
-public class Determinacion extends Descriptible {
+public class Determinacion extends Descriptible implements IDetalle{
 
 
 	private Laboratorio laboratorio;
@@ -20,10 +21,6 @@ public class Determinacion extends Descriptible {
 	private boolean calculaResultado;
 	private List<Metodo> metodos = new ArrayList<Metodo>();
 	
-	
-	
-
-
 	public void removeMetodo(Metodo aValue) {
 		aValue.setActivo(false);
 	}
@@ -88,6 +85,10 @@ public class Determinacion extends Descriptible {
 
 	public void setLaboratorio(Laboratorio aValue) {
 		this.laboratorio = aValue;
+	}
+
+	public String getNombreDeMaestro() {
+		return "laboratorio";
 	}
 
 }
