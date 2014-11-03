@@ -20,19 +20,19 @@ inherited FNLab0002: TFNLab0002
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 752
     TabOrder = 4
-    ExplicitLeft = 688
+    ExplicitLeft = 752
     ExplicitHeight = 368
     Height = 368
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 748
     Height = 368
-    ExplicitLeft = 684
+    ExplicitLeft = 748
     ExplicitHeight = 368
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 650
+    ExplicitWidth = 714
     ExplicitHeight = 368
     Height = 368
     Width = 714
@@ -43,7 +43,6 @@ inherited FNLab0002: TFNLab0002
       Caption = 'Analisis'
       Style.TextStyle = [fsItalic]
       TabOrder = 0
-      ExplicitWidth = 646
       Height = 55
       Width = 710
       object Label1: TLabel
@@ -78,7 +77,6 @@ inherited FNLab0002: TFNLab0002
       Style.BorderStyle = ebsOffice11
       Style.TextStyle = [fsItalic]
       TabOrder = 1
-      ExplicitWidth = 646
       Height = 309
       Width = 710
       object cxGrid1: TcxGrid
@@ -88,7 +86,6 @@ inherited FNLab0002: TFNLab0002
         Height = 284
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 705
         object cxGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSDet
@@ -335,6 +332,8 @@ inherited FNLab0002: TFNLab0002
   end
   object valDeter: TjktValidador
     Entidad = 'determinacion'
+    EntidadMaestra = 'laboratorio'
+    OidEntidadMaestra = TLabooid_lab
     Validacion = tExistente
     ListaAsignaciones = <
       item
@@ -360,6 +359,8 @@ inherited FNLab0002: TFNLab0002
   object hlpAnalisis: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'analisis'
+    EntidadMaestra = 'laboratorio'
+    OidEntidadMaestra = TLabooid_lab
     OidRespuesta = TCaboid_ana
     Left = 376
     Top = 152
@@ -367,6 +368,8 @@ inherited FNLab0002: TFNLab0002
   object hlpDeter: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'determinacion'
+    EntidadMaestra = 'laboratorio'
+    OidEntidadMaestra = TLabooid_lab
     CodigoRespuesta = TDetcod_det
     Left = 256
     Top = 224
