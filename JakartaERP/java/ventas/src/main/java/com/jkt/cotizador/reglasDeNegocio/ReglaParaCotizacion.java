@@ -22,7 +22,7 @@ public class ReglaParaCotizacion extends ReglaDeNegocio {
 			Random rnd = new Random();
 			int nextInt = rnd.nextInt();
 			c.setNro(nextInt<1?nextInt*-1:nextInt);
-			c.setEstado(Cotizacion.Estado.PENDIENTE);
+			c.setEstado(Cotizacion.Estado.PENDIENTE.toString());
 		}
 	}
 

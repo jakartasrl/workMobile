@@ -22,7 +22,7 @@ import com.jkt.excepcion.JakartaException;
 public class TraerEntidades extends Operation {
 
 	private static final String KEY_ENTIDAD = "entidad";
-	private static final String KEY_OID = "oid";
+	private static final String KEY_OID = "oid".toUpperCase();
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String nombreClase = (String)aParams.get(KEY_ENTIDAD);

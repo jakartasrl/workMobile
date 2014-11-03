@@ -32,7 +32,7 @@ object frmChild: TfrmChild
   object cxSplitterLeft: TcxSplitter
     Left = 30
     Top = 0
-    Width = 8
+    Width = 4
     Height = 388
     HotZoneClassName = 'TcxXPTaskBarStyle'
     Control = cxGroupBoxLeft

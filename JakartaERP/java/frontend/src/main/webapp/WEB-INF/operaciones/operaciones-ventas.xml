@@ -151,7 +151,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="FNVen0001"></form>
+			<form name="FNVen0001" />
 		</forms>		
 
 	</operacion>
@@ -308,6 +308,60 @@
 			<form name="FNCla0001"> </form>
 		</forms>
 		
+	</operacion>
+	
+	
+	
+	<!-- TRAE TODOS LOS ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR-->
+	<operacion name="TraerItemsACotizar" clase="com.jkt.cotizador.operaciones.TraerItemsParaCotizar" >
+
+		<output name="items" tableName="mtItems">
+<!-- 			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" /> -->
+			<campoSalida value="oid_item" target="id" />
+
+			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" />
+			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
+			<campoSalida value="des_sucu" target="comprobanteVenta.clienteSucursal.descripcion" />
+			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
+			<campoSalida value="nro_item" target="numero" />
+			<campoSalida value="detalle" target="descripcion" />
+			<campoSalida value="cantidad" target="cantidad" />
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+		
+		<forms>
+			<form name="---"></form>
+		</forms>		
+
+	</operacion>
+	
+	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DEITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR-->
+	<operacion name="TraerItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet">
+
+		<output name="resultado" tableName="mtItems">
+			<campoSalida value="oid_item" target="id" />
+
+			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" /> <!-- PRESUPUESTO -->
+			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
+			
+			<campoSalida value="cod_clie" target="comprobanteVenta.clienteSucursal.cliente.codigo" />
+			<campoSalida value="razonSocial" target="comprobanteVenta.clienteSucursal.cliente.sujetoImpositivo.razonSocial" />
+			
+			<campoSalida value="detalle" target="descripcion" />
+			
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+		
+		<forms>
+			<form name="---"></form>
+		</forms>
+
 	</operacion>
 	
 	

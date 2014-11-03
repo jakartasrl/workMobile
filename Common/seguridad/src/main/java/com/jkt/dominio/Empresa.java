@@ -76,24 +76,4 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 		return getRazonSocial();
 	}
 
-	public String getCadena2() {
-		return getUrlDB();
-	}
-
-	public int getEntero() {
-		return 0;
-	}
-
-	public int getEntero2() {
-		return 0;
-	}
-
-	public float getFloat() {
-		return 0;
-	}
-
-	public float getFloat2() {
-		return 0;
-	}
-
 }

@@ -58,6 +58,13 @@ public class Especificacion extends PersistentEntity {
 		return fechaDeSubida;
 	}
 	
+	/**
+	 * 
+	 * Metodo para retornar la fecha con tiempo eliminando los milisegundos.
+	 * 
+	 * @return fecha con siguiente formato -> 2014-10-31 15:49:07";//.0"
+	 * 
+	 */
 	public String getFechaDeSubidaPlana(){
 //		return "2014-10-31 15:49:07";//.0"
 		return (this.getFechaDeSubida().toString()).substring(0, (this.getFechaDeSubida().toString()).length()-2);

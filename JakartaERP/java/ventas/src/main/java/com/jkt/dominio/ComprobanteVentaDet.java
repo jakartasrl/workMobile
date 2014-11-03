@@ -18,6 +18,24 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	private Cotizador cotizador;
 	private int tipoVenta=0;
 	
+	/*
+	 * Campo transiente
+	 */
+	private String numero;
+
+	public String getNumero() {
+		return numero;
+	}
+	
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+	/*
+	 * Campo transiente
+	 */
+	
+
+
 	public int getTipoVenta() {
 		return tipoVenta;
 	}

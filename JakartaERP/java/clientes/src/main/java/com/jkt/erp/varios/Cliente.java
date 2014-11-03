@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.CondPago;
@@ -18,7 +19,7 @@ import com.jkt.varios.dominio.Idioma;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Cliente extends PersistentEntity {
+public class Cliente extends PersistentEntity implements IDescriptible{
 //	public class Cliente extends Descriptible {
 
 	/*
@@ -58,7 +59,8 @@ public class Cliente extends PersistentEntity {
 	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
 	 */
 	public String getDescripcion(){
-		return sujetoImpositivo.getRazonSocial().concat(" (").concat(sujetoImpositivo.getCuit()).concat(")");
+		String valorCuit=(" (").concat(sujetoImpositivo.getCuit()==null?"-":sujetoImpositivo.getCuit()).concat(")");
+		return sujetoImpositivo.getRazonSocial().concat(valorCuit);
 	}
 	/*
 	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
@@ -153,6 +155,9 @@ public class Cliente extends PersistentEntity {
 				clienteClasificador.setCliente(this);
 			}
 		}
+	}
+	public String getCadena() {
+		return "";
 	}
 	
 //	public void deleteValorClasificador(ClienteClasificador clienteClasificador){
