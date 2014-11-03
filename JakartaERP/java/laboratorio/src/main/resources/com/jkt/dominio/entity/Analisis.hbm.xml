@@ -17,7 +17,7 @@
 		
 		<many-to-one name="laboratorio" lazy="proxy" not-null="true" column="ID_LABORATORIO"/>
 		
-		<list name="listaDeterminaciones" inverse="true" cascade="save-update, delete">
+		<list name="listaDeterminaciones"  cascade="save-update">
 			<key column="ID_ANALISIS" />
 			<index column="secu"/>
 			<one-to-many class="com.jkt.laboratorio.dominio.AnalisisDet"/>

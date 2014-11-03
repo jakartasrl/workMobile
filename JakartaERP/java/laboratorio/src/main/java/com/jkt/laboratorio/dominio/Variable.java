@@ -3,14 +3,14 @@ package com.jkt.laboratorio.dominio;
 import com.jkt.dominio.Descriptible;
 
 public class Variable extends Descriptible {
-	Metodo metodo;
+	Determinacion determinacion;
 
-	public Metodo getMetodo() {
-		return metodo;
+	public Determinacion getDeterminacion() {
+		return determinacion;
 	}
 
-	public void setMetodo(Metodo aValue) {
-		this.metodo = aValue;
+	public void setDeterminacion(Determinacion aValue) {
+		this.determinacion = aValue;
 	}
 
 }

@@ -21,11 +21,18 @@
 	
 		<many-to-one name="laboratorio" lazy="proxy" not-null="true" column="ID_LABORATORIO"/>
 		
-		<list name="metodos" inverse="true" cascade="save-update">
+		<list name="metodos"  cascade="save-update">
 			<key column="ID_DETERMINACION" />
 			<list-index column="secu" />
 			<one-to-many class="com.jkt.laboratorio.dominio.Metodo" />
 		</list>
+		
+		<list name="variables"  cascade="save-update">
+			<key column="ID_DETERMINACION" />
+			<list-index column="secu" />
+			<one-to-many class="com.jkt.laboratorio.dominio.Variable" />
+		</list>
+		
 		
 	</class>
 	

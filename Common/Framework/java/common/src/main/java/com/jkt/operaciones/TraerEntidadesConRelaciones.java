@@ -40,7 +40,7 @@ public class TraerEntidadesConRelaciones extends Operation {
 			}else if(oidEntity.isEmpty()){
 				throw new JakartaException("Debe completar el campo ID.");
 			}else{
-				elementos=Arrays.asList(obtener((Class<? extends PersistentEntity>) clase, OID_ENTIDAD));
+				elementos=Arrays.asList(obtener((Class<? extends PersistentEntity>) clase, oidEntity));
 			}
 			
 			for (PersistentEntity persistentEntity : elementos) {

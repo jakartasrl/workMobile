@@ -1,96 +1,94 @@
 inherited FNLab0002: TFNLab0002
+  Left = 631
+  Top = 110
   Caption = 'ABM de Analisis'
   ClientHeight = 368
-  ClientWidth = 718
-  ExplicitWidth = 734
+  ClientWidth = 782
+  Position = poDesigned
+  ExplicitWidth = 798
   ExplicitHeight = 407
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitTop = 57
-    ExplicitHeight = 311
+    ExplicitHeight = 368
     Height = 368
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 368
-    ExplicitLeft = 185
-    ExplicitTop = 57
-    ExplicitHeight = 311
+    ExplicitHeight = 368
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 533
+    Left = 752
     TabOrder = 4
-    ExplicitLeft = 533
-    ExplicitTop = 57
-    ExplicitHeight = 311
+    ExplicitLeft = 688
+    ExplicitHeight = 368
     Height = 368
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 525
+    Left = 748
     Height = 368
-    ExplicitLeft = 525
-    ExplicitTop = 57
-    ExplicitHeight = 311
+    ExplicitLeft = 684
+    ExplicitHeight = 368
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitTop = 57
-    ExplicitWidth = 332
-    ExplicitHeight = 311
+    ExplicitWidth = 650
+    ExplicitHeight = 368
     Height = 368
-    Width = 332
-    object Panel1: TPanel
-      Left = 3
-      Top = 22
-      Width = 326
-      Height = 57
+    Width = 714
+    object cxGroupBox1: TcxGroupBox
+      Left = 2
+      Top = 2
       Align = alTop
-      BevelInner = bvLowered
+      Caption = 'Analisis'
+      Style.TextStyle = [fsItalic]
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 718
+      ExplicitWidth = 646
+      Height = 55
+      Width = 710
       object Label1: TLabel
-        Left = 32
-        Top = 16
-        Width = 35
+        Left = 25
+        Top = 24
+        Width = 33
         Height = 13
-        Caption = 'Analisis'
+        Caption = 'Codigo'
       end
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = 73
-        Top = 13
+        Left = 64
+        Top = 21
+        DataBinding.DataField = 'cod_ana'
+        DataBinding.DataSource = DSCab
         TabOrder = 0
-        Width = 121
+        Width = 105
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 200
-        Top = 13
+        Left = 175
+        Top = 21
+        DataBinding.DataField = 'des_ana'
+        DataBinding.DataSource = DSCab
         TabOrder = 1
-        Width = 457
+        Width = 463
       end
     end
-    object Panel2: TPanel
-      Left = 3
-      Top = 79
-      Width = 326
-      Height = 286
+    object cxGroupBox2: TcxGroupBox
+      Left = 2
+      Top = 57
       Align = alClient
-      BorderStyle = bsSingle
+      Caption = 'Determinaciones Incluidas'
+      Style.BorderStyle = ebsOffice11
+      Style.TextStyle = [fsItalic]
       TabOrder = 1
-      ExplicitLeft = 193
-      ExplicitTop = 0
-      ExplicitWidth = 332
-      ExplicitHeight = 368
+      ExplicitWidth = 646
+      Height = 309
+      Width = 710
       object cxGrid1: TcxGrid
-        Left = 1
-        Top = 1
-        Width = 320
-        Height = 280
+        Left = 3
+        Top = 15
+        Width = 704
+        Height = 284
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 326
-        ExplicitHeight = 362
+        ExplicitWidth = 705
         object cxGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = DSDet
@@ -98,9 +96,21 @@ inherited FNLab0002: TFNLab0002
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.GoToNextCellOnEnter = True
+          OptionsData.Appending = True
+          OptionsView.GroupByBox = False
           object cxGrid1DBTableView1cod_det: TcxGridDBColumn
             Caption = 'Codigo'
             DataBinding.FieldName = 'cod_det'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = cxGrid1DBTableView1cod_detPropertiesButtonClick
             HeaderAlignmentHorz = taCenter
           end
           object cxGrid1DBTableView1des_det: TcxGridDBColumn
@@ -122,11 +132,24 @@ inherited FNLab0002: TFNLab0002
     end
   end
   inherited BarManager: TdxBarManager
+    Left = 112
+    Top = 48
     DockControlHeights = (
       0
       0
       0
       0)
+  end
+  inherited Driver: TjktDriver
+    DataSetCab = TCab
+    TipoPrograma = tp_abmIndividual
+    Filtro = hlpAnalisis
+    FocoEnAlta = TCabcod_ana
+    FocoEnModificacion = TCabdes_ana
+  end
+  inherited Service: TjktServiceCaller
+    Left = 192
+    Top = 48
   end
   inherited OperacionSave: TjktOperacion
     OperName = 'SaveAnalisis'
@@ -149,19 +172,25 @@ inherited FNLab0002: TFNLab0002
         Field = TDetcod_det
         ValidadorNew = valDeter
         ValidadorModif = valDeter
+      end
+      item
+        Field = TCabcod_ana
+        ValidadorNew = valAna
       end>
   end
   object valLaboratorio: TjktValidador
-    Entidad = 'Laboratorio'
+    Entidad = 'laboratorio'
     Validacion = tExistente
     ListaAsignaciones = <
       item
         FieldName = 'oid'
         SourceName = 'oid'
+        FieldTarget = TLabooid_lab
       end
       item
         FieldName = 'descripcion'
         SourceName = 'descripcion'
+        FieldTarget = TLabodes_lab
       end>
     Left = 96
     Top = 128
@@ -184,7 +213,7 @@ inherited FNLab0002: TFNLab0002
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 144
+    Left = 152
     Top = 128
     object TLabooid_lab: TIntegerField
       FieldName = 'oid_lab'
@@ -212,23 +241,29 @@ inherited FNLab0002: TFNLab0002
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = TCabNewRecord
     Left = 576
     Top = 168
     object TCaboid_ana: TIntegerField
+      Tag = 1
       FieldName = 'oid_ana'
     end
     object TCabcod_ana: TStringField
+      Tag = 2
       FieldName = 'cod_ana'
       Size = 10
     end
     object TCabdes_ana: TStringField
+      Tag = 1
       FieldName = 'des_ana'
       Size = 60
     end
     object TCaboid_lab: TIntegerField
+      Tag = 1
       FieldName = 'oid_lab'
     end
     object TCabactivo: TBooleanField
+      Tag = 1
       FieldName = 'activo'
     end
   end
@@ -256,6 +291,7 @@ inherited FNLab0002: TFNLab0002
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
+    OnNewRecord = TDetNewRecord
     Left = 576
     Top = 216
     object TDetoid_det: TIntegerField
@@ -279,7 +315,12 @@ inherited FNLab0002: TFNLab0002
       FieldName = 'key'
     end
     object TDetoid_ana: TIntegerField
+      Tag = 1
       FieldName = 'oid_ana'
+    end
+    object TDetoid_detalle: TIntegerField
+      Tag = 1
+      FieldName = 'oid_detalle'
     end
   end
   object DSDet: TDataSource
@@ -293,7 +334,7 @@ inherited FNLab0002: TFNLab0002
     Top = 176
   end
   object valDeter: TjktValidador
-    Entidad = 'Determinacion'
+    Entidad = 'determinacion'
     Validacion = tExistente
     ListaAsignaciones = <
       item
@@ -308,5 +349,26 @@ inherited FNLab0002: TFNLab0002
       end>
     Left = 40
     Top = 200
+  end
+  object valAna: TjktValidador
+    Entidad = 'analisis'
+    Validacion = tInexistente
+    ListaAsignaciones = <>
+    Left = 104
+    Top = 208
+  end
+  object hlpAnalisis: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'analisis'
+    OidRespuesta = TCaboid_ana
+    Left = 376
+    Top = 152
+  end
+  object hlpDeter: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'determinacion'
+    CodigoRespuesta = TDetcod_det
+    Left = 256
+    Top = 224
   end
 end
