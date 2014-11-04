@@ -56,15 +56,14 @@ public class WebAdapter extends Adapter<Map, Map> {
 			
 			Object objetoPersisBD = obtainFromBD(id,classPersistente);
 			
-			Object objetoPersis=getObjectPersistente(objetoPersisBD,objetoOV,inputXml.getCamposDeEntrada());
-			BeanUtils.copyProperties(objetoPersis, objetoPersisBD);
+			getObjectPersistente(objetoPersisBD,objetoOV,inputXml.getCamposDeEntrada());
 			map.put(keyName, objetoPersisBD);
 		}
 		return map;
 	}
 
 
-	public Object getObjectPersistente(Object objetoPersistente, Object ov, List<CampoEntrada> camposDeEntrada) throws JakartaException{
+	public void getObjectPersistente(Object objetoPersistente, Object ov, List<CampoEntrada> camposDeEntrada) throws JakartaException{
 
 		for (CampoEntrada campoEntrada : camposDeEntrada) {
 			String metodo = campoEntrada.getMetodo();
@@ -90,16 +89,13 @@ public class WebAdapter extends Adapter<Map, Map> {
 					
 					//Obtengo la clase de lo que tengo que buscar en BD
 					Object objPersistenteDeLista = obtainFromBD(idObjLista, classSetter);
-					Object result = getObjectPersistente(objPersistenteDeLista, objListOV, campoEntrada.getCamposDeEntrada());
+					getObjectPersistente(objPersistenteDeLista, objListOV, campoEntrada.getCamposDeEntrada());
 					try {
-						persisMethod.invoke(objetoPersistente, result);
+						persisMethod.invoke(objetoPersistente, objPersistenteDeLista);
 					} catch (Exception e) {
-						throw new JakartaException("Error al guardar metodo de lista con metodo"+metodo);
+						throw new JakartaException("Error al guardar metodo de lista con metodo"+metodo,e);
 					}
 				}
-				
-//				getObjectPersistente(objetoLista, nombreCampoOV, camposDeEntrada);
-				
 			}else{
 				//primitivo
 				PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(ov.getClass(), nombreCampoOV);
@@ -128,7 +124,6 @@ public class WebAdapter extends Adapter<Map, Map> {
 				
 			}
 		}
-		return objetoPersistente;
 	}
 	
 	public Object callGetObject(Object obj,String property) throws JakartaException{

@@ -17,4 +17,8 @@ public class JakartaException extends Exception {
 		super(string);
 	}
 
+	public JakartaException(String string,Exception e) {
+		super(string,e);
+	}
+	
 }

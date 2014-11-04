@@ -62,7 +62,7 @@ public abstract class RequestProcessor extends BaseController{
 	@Autowired
 	private ApplicationContext applicationContext;
 	protected IEventBusiness eventBusinessOperation;
-	
+
 	public ServletContext getServletContext() {
 		return servletContext;
 	}
@@ -71,7 +71,6 @@ public abstract class RequestProcessor extends BaseController{
 		this.servletContext = servletContext;
 	}
 
-	protected static final Logger log = Logger.getLogger(RequestProcessor.class);
 		
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/xml", method = RequestMethod.POST)
@@ -83,7 +82,7 @@ public abstract class RequestProcessor extends BaseController{
 		
 		log.debug(String.format("Procesando una solicitud desde el cliente %s con direccion IP %s",host, ip));
 		
-		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
+		setResponse(response);//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
 		
 		log.debug(String.format("Se inicia una solicitud desde un cliente %s.",getAppRequest()));
 		
@@ -248,10 +247,6 @@ public abstract class RequestProcessor extends BaseController{
 		this.applicationContext = applicationContext;
 	}
 	
-	/*
-	 * Methods that must be will implemented.
-	 */
-	abstract protected String getAppRequest();
 	
 	@SuppressWarnings("rawtypes")
 	abstract protected Map retrieveParameters(HttpServletRequest request) throws Exception;

@@ -54,7 +54,6 @@
 			<campoEntrada propertyOV="telefono" metodo="setTelefono"/>
 			<campoEntrada propertyOV="idIdioma" metodo="setIdioma"/>
 			<campoEntrada propertyOV="listaSucursales"  metodo="addClienteSucursal">
-						<campoEntrada propertyOV="id" metodo="setId"/>
 						<campoEntrada propertyOV="numero" metodo="setNumero"/>
 						<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
 			</campoEntrada>
@@ -65,6 +64,11 @@
 			<campoSalida target="id" 		value="id"/>
 			<campoSalida target="codigo" 	value="codigo"/>
 			<campoSalida target="telefono"	value="telefono"/>
+			<campoSalida target="listaSucursales"  value="listaSucursales">
+						<campoSalida target="id" value="id"/>
+						<campoSalida target="numero" value="numero"/>
+						<campoSalida target="descripcion" value="descripcion"/>
+			</campoSalida>
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer"/>
