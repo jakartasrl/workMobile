@@ -238,10 +238,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>objetosVista</groupId>
+			<groupId>com.jkt</groupId>
 			<artifactId>objetosVista</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
