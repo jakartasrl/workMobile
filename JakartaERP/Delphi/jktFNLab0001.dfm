@@ -280,6 +280,7 @@ inherited FNLab0001: TFNLab0001
             Align = alClient
             TabOrder = 0
             DataSource = DSMet
+            ExplicitTop = 14
             object jktExpDBGrid1DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = DSMet
@@ -958,6 +959,8 @@ inherited FNLab0001: TFNLab0001
   object hlpDeter: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'determinacion'
+    EntidadMaestra = 'laboratorio'
+    OidEntidadMaestra = TLabooid_lab
     OidRespuesta = TDetoid_det
     CodigoRespuesta = TDetcod_det
     Left = 664
