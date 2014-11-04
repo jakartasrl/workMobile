@@ -17,14 +17,4 @@ public interface IRepositorioClases {
 	 */
 	public String getValidador(String value) throws JakartaException;
 
-	/**
-	 * 
-	 * 
-	 * @param value
-	 * @return
-	 * @throws JakartaException
-	 */
-	public String getRegla(String value) throws JakartaException;
-
-
 }

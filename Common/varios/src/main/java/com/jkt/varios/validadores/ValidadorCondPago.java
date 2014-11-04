@@ -1,8 +1,8 @@
 package com.jkt.varios.validadores;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.excepcion.ValidacionException;
-import com.jkt.validadores.IValidador;
+import com.jkt.excepcion.ValidacionDeNegocioException;
+import com.jkt.operaciones.ValidacionDeNegocio;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.CondPagoDet;
 
@@ -12,11 +12,11 @@ import com.jkt.varios.dominio.CondPagoDet;
  * @see CondPago
  * @author Leonel Suarez - Jakarta SRL
  */
-public class ValidadorCondPago implements IValidador {
+public class ValidadorCondPago extends ValidacionDeNegocio {
 
 	private final double total=100;
 	
-	public void validar(PersistentEntity entity) throws ValidacionException {
+	public void validar(PersistentEntity entity) throws ValidacionDeNegocioException {
 		CondPago condicionDePago = (CondPago) entity;
 		
 		/*
@@ -28,7 +28,7 @@ public class ValidadorCondPago implements IValidador {
 		}
 		
 		if (total!=acumulado) {
-			throw new ValidacionException("Error en los detalles de condicion de pago. La sumatoria no es 100%.");
+			throw new ValidacionDeNegocioException("Error en los detalles de condicion de pago. La sumatoria no es 100%.");
 		}
 		
 		/*
@@ -42,7 +42,7 @@ public class ValidadorCondPago implements IValidador {
 		if( ( b1 && !b2 ) || ( !b1 && b2 ) ){
 			//passing validation
 		}else{
-			throw new ValidacionException("Solo, y solo uno de los valores base debe ser verdadero.");
+			throw new ValidacionDeNegocioException("Solo, y solo uno de los valores base debe ser verdadero.");
 		}
 		
 		

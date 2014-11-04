@@ -9,7 +9,7 @@ import net.sourceforge.jeval.EvaluationException;
 import net.sourceforge.jeval.Evaluator;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.laboratorio.procesos.NotifyVariableResolver;
 
 public class Expresion extends PersistentEntity  implements Observer  {
@@ -38,7 +38,7 @@ public class Expresion extends PersistentEntity  implements Observer  {
 	}
 	
 	
-	public void validar(String aValue) throws ValidacionException{
+	public void validar(String aValue) throws ValidacionDeNegocioException{
 		Evaluator evaluator = new Evaluator();
 		evaluator.setVariableResolver(new NotifyVariableResolver(this));
 		
@@ -46,7 +46,7 @@ public class Expresion extends PersistentEntity  implements Observer  {
 	 	   evaluator.evaluate(aValue);
 		}
 		catch (EvaluationException e){
-			throw new ValidacionException(e.getMessage());
+			throw new ValidacionDeNegocioException(e.getMessage());
 		}
 	}
 	

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 
 /**
  * <p>Operacion generica para realizar diferentes validaciones.</p>
@@ -61,7 +61,7 @@ public abstract class Validar extends Operation{
 	 * Los diferentes comportamientos ejecutan estos metodos, y llaman a los metodos declarados en esta clase, mas abajo, como protected.
 	 */
 	protected abstract PersistentEntity manejarFiltros(Map<String, Object> aParams) throws ClassNotFoundException, JakartaException, Exception;
-	protected abstract void manejoDeExistencia(PersistentEntity entity,String className, String codigo)throws ValidacionException;
+	protected abstract void manejoDeExistencia(PersistentEntity entity,String className, String codigo)throws ValidacionDeNegocioException;
 
 	
 	/**
@@ -109,12 +109,12 @@ public abstract class Validar extends Operation{
 	 * Cuando se desea manejar la existencia de una entidad, se ejecuta este metodo.
 	 * 
 	 */
-	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws ValidacionException {
+	protected void manejarExistencia(PersistentEntity entity, String className,String codigo) throws ValidacionDeNegocioException {
 		if (codigo.isEmpty() || codigo.trim().equals("")){
 			entity = new Container("vacio");
 		}
 		if (entity==null) {
-			throw new ValidacionException(String.format("El codigo solicitado no existe.", className, codigo));
+			throw new ValidacionDeNegocioException(String.format("El codigo solicitado no existe.", className, codigo));
 		}
 		notificarObjeto("resultado", entity);
 	}
@@ -126,9 +126,9 @@ public abstract class Validar extends Operation{
 	 * Para darle un manejo diferente a la entidad buscada. Si la rutina buscada es la inexistencia, se ejecutará este metodo.
 	 * 
 	 */
-	protected void manejarInexistencia(PersistentEntity entity, String className, String codigo) throws ValidacionException {
+	protected void manejarInexistencia(PersistentEntity entity, String className, String codigo) throws ValidacionDeNegocioException {
 		if (entity!=null) {
-			throw new ValidacionException("Codigo existente.");
+			throw new ValidacionDeNegocioException("Codigo existente.");
 		}
 	}
 	

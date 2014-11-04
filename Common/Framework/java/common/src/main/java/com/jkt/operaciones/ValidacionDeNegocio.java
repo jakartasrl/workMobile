@@ -2,10 +2,8 @@ package com.jkt.operaciones;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jkt.dominio.PersistentEntity;
-import com.jkt.excepcion.ReglaDeNegocioException;
 import com.jkt.persistencia.IServiceRepository;
-import com.jkt.reglas.IReglasDeNegocio;
+import com.jkt.validadores.IValidador;
 
 /**
  * <p>Ejecuta una regla de negocio.</p>
@@ -13,8 +11,8 @@ import com.jkt.reglas.IReglasDeNegocio;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public abstract class ReglaDeNegocio implements IReglasDeNegocio {
-	
+public abstract class ValidacionDeNegocio implements IValidador{
+
 	protected IServiceRepository serviceRepository;
 
 	public IServiceRepository getServiceRepository() {
@@ -25,5 +23,5 @@ public abstract class ReglaDeNegocio implements IReglasDeNegocio {
 	public void setServiceRepository(IServiceRepository serviceRepository) {
 		this.serviceRepository = serviceRepository;
 	}
-
+	
 }

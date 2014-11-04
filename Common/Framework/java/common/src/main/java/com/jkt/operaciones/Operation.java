@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.framework.writers.IHeaderDataSet;
 import com.jkt.persistencia.IServiceRepository;
 import com.jkt.persistencia.ISessionProvider;
@@ -193,7 +193,7 @@ public abstract class Operation extends Observable {
 			tx.rollback();
 			sessionProvider.destroySession();
 			
-			throw new ValidacionException(buffer.toString());
+			throw new ValidacionDeNegocioException(buffer.toString());
 		}catch(RuntimeException exception){
 			//Hago el rollback y muestro el mensaje critico en frontend.
 			tx.rollback();
@@ -226,7 +226,7 @@ public abstract class Operation extends Observable {
 		return object;
 	}
 	
-	protected PersistentEntity guardar(PersistentEntity entityToSave) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionException, JakartaException{
+	protected PersistentEntity guardar(PersistentEntity entityToSave) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionDeNegocioException, JakartaException{
 		serviceRepository.save(entityToSave);
 		return entityToSave;
 	}

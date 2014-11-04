@@ -12,7 +12,6 @@ public class Entry {
 	private String key;
 	private String value;
 	private String validador;
-	private String regla;
 
 	public String getKey() {
 		return key;
@@ -37,14 +36,5 @@ public class Entry {
 	public void setValidador(String validador) {
 		this.validador = validador;
 	}
-
-	public String getRegla() {
-		return regla;
-	}
-
-	public void setRegla(String regla) {
-		this.regla = regla;
-	}
-	
 
 }
