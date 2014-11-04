@@ -28,7 +28,7 @@ import com.jkt.framework.writers.XMLStreamMaker;
  * <h1>Algunas de las funcionalidades de esta clase</h1>
  * <p>Manejo de excepciones</p>
  * <p>Funcionalidad comun entre todos los controllers</p>
- * <p>Inyección de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
+ * <p>Inyecciï¿½n de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL
@@ -90,8 +90,8 @@ public abstract class BaseController{
 		log.error(ExceptionUtils.getFullStackTrace(e));
 	}
 
-	@ExceptionHandler(ValidacionException.class)
-	public void manejarValidacionException(ValidacionException e) throws IOException{
+	@ExceptionHandler(ValidacionDeNegocioException.class)
+	public void manejarValidacionException(ValidacionDeNegocioException e) throws IOException{
 		manejoExcepcionPorOrigen(e.getMessage());
 		log.error(ExceptionUtils.getFullStackTrace(e));
 	}
