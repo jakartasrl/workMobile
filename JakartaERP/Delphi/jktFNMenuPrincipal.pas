@@ -678,6 +678,14 @@ begin
   cds_MenuUsuario.Post;
 
   cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 26;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Solicitud de Cotización';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 10;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Tablas de Validacion';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 203;
@@ -733,7 +741,6 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 29;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Parametros';
@@ -741,8 +748,6 @@ begin
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
-
-
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 22;
@@ -835,6 +840,22 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 34;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Ensayos Lab Electrico';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 205;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 35;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Analisis Lab Quimico';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 205;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 36;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Analisis Lab Electrico';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 205;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;

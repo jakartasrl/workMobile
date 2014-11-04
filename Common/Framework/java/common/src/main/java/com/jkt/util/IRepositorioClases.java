@@ -17,5 +17,4 @@ public interface IRepositorioClases {
 	 */
 	public String getValidador(String value) throws JakartaException;
 
-
 }

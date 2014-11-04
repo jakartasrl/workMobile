@@ -6,9 +6,6 @@
 
 	<subclass  name="com.jkt.dominio.ComprobanteVenta" discriminator-value="COMPROBANTE-VENTA" extends="com.jkt.dominio.ComprobanteCliente">
 
-		<property name="nombre" type="string" column="NOMBRE" />
-		<property name="descripcion" type="text" column="DESCRIPCION" />
-
 		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_ID" />
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID" />
 
@@ -20,6 +17,20 @@
 		</list>
 		
 		<subclass name="com.jkt.dominio.Cotizacion" extends="com.jkt.dominio.ComprobanteVenta">
+			<property name="estado" column="ESTADO">
+<!-- 				<type name="com.jkt.dominio.HibernateVarCharEnum"> -->
+<!-- 					<param name="enumClass">com.jkt.dominio.Cotizacion.Estado</param> -->
+<!-- 					<param name="type">12</param> -->
+<!-- 					<param name="useNamed">true</param> -->
+<!-- 				</type> -->
+				
+<!-- 				<type name="com.jkt.dominio.HibernateVarCharEnum"> -->
+<!--                 	<param name="enumClass">com.jkt.dominio.Cotizacion.Estado</param> -->
+<!-- 					<param name="type">12</param> -->
+<!-- 					<param name="useNamed">true</param> -->
+<!--              	</type> -->
+				
+ 			</property>
 		</subclass>		
 
 		<subclass name="com.jkt.dominio.Pedido" extends="com.jkt.dominio.ComprobanteVenta">

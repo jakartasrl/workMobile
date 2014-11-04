@@ -17,7 +17,7 @@ import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.excepcion.ExceptionValidacion;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.exception.LoginException;
 import com.jkt.framework.writers.XMLStreamMaker;
 
@@ -28,8 +28,8 @@ import com.jkt.framework.writers.XMLStreamMaker;
  * <h1>Algunas de las funcionalidades de esta clase</h1>
  * <p>Manejo de excepciones</p>
  * <p>Funcionalidad comun entre todos los controllers</p>
- * <p>Inyecciï¿½n de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
- * |
+ * <p>Inyección de dependencia de todos los controladores en comun, por ejemplo, el servletContext</p>
+ * 
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

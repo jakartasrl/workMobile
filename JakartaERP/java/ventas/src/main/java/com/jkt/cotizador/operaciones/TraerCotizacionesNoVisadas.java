@@ -12,7 +12,8 @@ public class TraerCotizacionesNoVisadas extends TraerCotizaciones {
 
 	@Override
 	protected String getCondition() {
-		return Cotizacion.PENDIENTE;
+//		return Cotizacion.PENDIENTE;
+		return "Cotizacion.PENDIENTE";
 	}
 
 }

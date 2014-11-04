@@ -46,31 +46,6 @@ public class Impuesto extends Descriptible implements IDescriptible{
 		return getDescripcion();
 	}
 
-	public String getCadena2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getEntero() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getEntero2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public float getFloat() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public float getFloat2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	// abstract List getCategorias();
 
 }

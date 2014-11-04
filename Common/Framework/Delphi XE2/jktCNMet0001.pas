@@ -501,14 +501,14 @@ end;
 
 procedure TjktDriver.DoNuevo;
 begin
-  if Assigned(FOnNuevo) then
-    FOnNuevo(Self);
-
   Self.DoDesInhibirCamposNoModificables;
   Self.abrirDataSets;
   // agregar InhibirControlesXSeguridad
   Self.DoSetDefaults;
   Self.DoSetFocoAlta;
+
+  if Assigned(FOnNuevo) then
+    FOnNuevo(Self);
 end;
 
 procedure TjktDriver.DoGuardar;

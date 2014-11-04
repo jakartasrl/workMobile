@@ -15,7 +15,7 @@
 		<property name="descripcion"    	column="DESCRIPCION"    type="string"/>
 		<property name="activo" 			column="ACTIVO" 		type="boolean" />
 		
-		<many-to-one name="metodo" 		   lazy="proxy" not-null="true" column="ID_METODO"/>
+		<many-to-one name="determinacion" 		   lazy="proxy" not-null="true" column="ID_DETERMINACION"/>
 	
 	</class>
 

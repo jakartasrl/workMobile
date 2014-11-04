@@ -243,6 +243,8 @@ begin
   inherited;
 
   FMultipleInstancia := True;
+  cxGroupBoxLeft.Width  := trunc(Screen.Width * 0.1);
+  cxGroupBoxRight.Width := cxGroupBoxLeft.Width;
 end;
 
 initialization

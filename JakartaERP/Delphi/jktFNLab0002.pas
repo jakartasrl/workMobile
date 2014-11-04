@@ -22,7 +22,8 @@ uses
   cxEdit, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
   cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, cxTextEdit,
-  cxDBEdit, Vcl.StdCtrls, Vcl.ExtCtrls, cxSplitter, cxGroupBox;
+  cxDBEdit, Vcl.StdCtrls, Vcl.ExtCtrls, cxSplitter, cxGroupBox, jktCNMet0014,
+  cxButtonEdit;
 
 type
   TFNLab0002 = class(TfrmChild)
@@ -43,13 +44,10 @@ type
     TDetactivo: TBooleanField;
     TDetkey: TIntegerField;
     DSDet: TDataSource;
-    Panel1: TPanel;
-    Label1: TLabel;
     cxDBTextEdit1: TcxDBTextEdit;
     cxDBTextEdit2: TcxDBTextEdit;
     DSCab: TDataSource;
     TDetoid_ana: TIntegerField;
-    Panel2: TPanel;
     cxGrid1: TcxGrid;
     cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1DBTableView1cod_det: TcxGridDBColumn;
@@ -57,6 +55,18 @@ type
     cxGrid1DBTableView1activo: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
     valDeter: TjktValidador;
+    valAna: TjktValidador;
+    cxGroupBox1: TcxGroupBox;
+    cxGroupBox2: TcxGroupBox;
+    TDetoid_detalle: TIntegerField;
+    Label1: TLabel;
+    hlpAnalisis: TjktHelpGenerico;
+    hlpDeter: TjktHelpGenerico;
+    procedure FormCreate(Sender: TObject);
+    procedure TCabNewRecord(DataSet: TDataSet);
+    procedure TDetNewRecord(DataSet: TDataSet);
+    procedure cxGrid1DBTableView1cod_detPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
 
@@ -75,13 +85,53 @@ implementation
 {$R *.dfm}
 
 
+procedure TFNLab0002.cxGrid1DBTableView1cod_detPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+  hlpDeter.Ejecutar;
+end;
+
+procedure TFNLab0002.FormCreate(Sender: TObject);
+begin
+  inherited;
+  FMultipleInstancia := True;
+end;
+
 procedure TFNLab0002.llamarOperacionConfiguracion;
 begin
 //  inherited;
+  TLabo.Open;
+  TLabo.Append;
   valLaboratorio.validar(mtParametroInicial.FieldByName('entidad'));
 end;
 
 
+
+procedure TFNLab0002.TCabNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  if (not Service.ModoExecute)
+       then begin
+               TCab.fieldByName('oid_ana').AsInteger := self.GetNewOid;
+               TCab.fieldByName('oid_lab').AsInteger := TLabo.FieldByName('oid_lab').AsInteger;
+               TCab.fieldByName('activo').AsBoolean  := true;
+            end;
+
+end;
+
+procedure TFNLab0002.TDetNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  TDet.fieldByName('key').AsInteger := self.getNewKey();
+   if (not Service.ModoExecute)
+       then begin
+               TDet.fieldByName('oid_detalle').AsInteger := self.GetNewOid;
+               TDet.fieldByName('oid_ana').AsInteger := TDet.FieldByName('oid_ana').AsInteger;
+               TDet.fieldByName('activo').AsBoolean  := true;
+
+            end;
+end;
 
 initialization
   RegisterClass(TFNLab0002);

@@ -6,6 +6,7 @@
 	<!ATTLIST elemento	key			CDATA 	#REQUIRED> <!-- key se corresponde con la entidad solicitada. es un alias. -->
 	<!ATTLIST elemento	value		CDATA   #REQUIRED> <!-- value es la ruta completa de la clase -->
 	<!ATTLIST elemento	validador	CDATA   #IMPLIED>
+	<!ATTLIST elemento	regla		CDATA   #IMPLIED>
   
 ]>
 
@@ -22,6 +23,7 @@
 	<elemento key="valoresClasificador" value="com.jkt.varios.dominio.ComponenteValor" />
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
 	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
+	<elemento key="clienteSucursal" value="com.jkt.erp.varios.ClienteSucursal" />
 	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
 	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
 	<elemento key="representante" value="com.jkt.erp.varios.Representante" />
@@ -36,5 +38,7 @@
 	<elemento key="laboratorio" value="com.jkt.laboratorio.dominio.Laboratorio" />
 	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
 	<elemento key="determinacion" value="com.jkt.laboratorio.dominio.Determinacion" />
+	<elemento key="cotizacion" value="com.jkt.dominio.Cotizacion" validador="com.jkt.cotizador.validadores.ValidadorCotizacion"/>
+	<elemento key="analisis" value="com.jkt.laboratorio.dominio.Analisis" />
 
 </elementos>

@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.Idioma;
@@ -15,7 +18,7 @@ import com.jkt.varios.dominio.Idioma;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Cliente extends PersistentEntity {
+public class Cliente extends PersistentEntity implements IDescriptible{
 //	public class Cliente extends Descriptible {
 
 	/*
@@ -38,6 +41,7 @@ public class Cliente extends PersistentEntity {
 	
 	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();
 	
+	@NotEmpty(message="Es necesario que el cliente tenga como minimo una sucursal.")
 	private List<ClienteSucursal> listaSucursales=new ArrayList<ClienteSucursal>();
 	
 	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();
@@ -54,7 +58,8 @@ public class Cliente extends PersistentEntity {
 	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
 	 */
 	public String getDescripcion(){
-		return sujetoImpositivo.getRazonSocial().concat(" (").concat(sujetoImpositivo.getCuit()).concat(")");
+		String valorCuit=(" (").concat(sujetoImpositivo.getCuit()==null?"-":sujetoImpositivo.getCuit()).concat(")");
+		return sujetoImpositivo.getRazonSocial().concat(valorCuit);
 	}
 	/*
 	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
@@ -149,6 +154,9 @@ public class Cliente extends PersistentEntity {
 				clienteClasificador.setCliente(this);
 			}
 		}
+	}
+	public String getCadena() {
+		return "";
 	}
 	
 //	public void deleteValorClasificador(ClienteClasificador clienteClasificador){

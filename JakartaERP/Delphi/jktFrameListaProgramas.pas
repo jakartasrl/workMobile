@@ -206,6 +206,8 @@ begin
     NombrePrograma := 'TFNVen0001'
   else if Sender.Tag = 25 then
     NombrePrograma := 'TFNVen0002'
+  else if Sender.Tag = 26 then
+    NombrePrograma := 'TFNVen0003'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
@@ -302,6 +304,18 @@ begin
       NombrePrograma   := 'TFNLab0001';
       ParametroInicial := 'ELE';
       Titulo := 'ABM de Ensayos';
+    end
+  else if Sender.Tag = 35 then
+    begin
+      NombrePrograma   := 'TFNLab0002';
+      ParametroInicial := 'QUI';
+      Titulo := 'ABM de Analisis Quimicos';
+    end
+  else if Sender.Tag = 36 then
+    begin
+      NombrePrograma   := 'TFNLab0002';
+      ParametroInicial := 'ELE';
+      Titulo := 'ABM de Analisis Electricos';
     end;
 
   frmMainForm.Show;

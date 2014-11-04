@@ -11,7 +11,7 @@ import com.jkt.dominio.Descriptible;
  */
 public class Representante extends Descriptible {
 
-	@Email
+	@Email(message="Compruebe el formato de correo del representante.")
 	private String mail;
 	
 	private String telefono;

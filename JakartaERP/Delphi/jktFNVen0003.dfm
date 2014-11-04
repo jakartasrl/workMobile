@@ -1,0 +1,1305 @@
+inherited FNVen0003: TFNVen0003
+  Caption = 'Solicitud de Cotizaci'#243'n'
+  ClientHeight = 558
+  ClientWidth = 858
+  ExplicitWidth = 874
+  ExplicitHeight = 596
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 558
+    Height = 558
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 558
+    ExplicitHeight = 558
+  end
+  inherited cxGroupBoxRight: TcxGroupBox
+    Left = 828
+    ExplicitLeft = 828
+    ExplicitHeight = 558
+    Height = 558
+  end
+  inherited cxSplitterRight: TcxSplitter
+    Left = 824
+    Height = 558
+    HotZoneClassName = ''
+    HotZone = nil
+    ExplicitLeft = 824
+    ExplicitHeight = 558
+  end
+  inherited cxGroupBoxMain: TcxGroupBox
+    ExplicitWidth = 790
+    ExplicitHeight = 558
+    Height = 558
+    Width = 790
+    object lcMain: TdxLayoutControl
+      Left = 2
+      Top = 2
+      Width = 786
+      Height = 554
+      Align = alClient
+      TabOrder = 0
+      LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
+      object cxDBTextEdit2: TcxDBTextEdit
+        Left = 256
+        Top = 41
+        DataBinding.DataField = 'nro_cotiz'
+        DataBinding.DataSource = dsCotizacion
+        Properties.ReadOnly = True
+        Style.HotTrack = False
+        TabOrder = 1
+        Width = 90
+      end
+      object cxDBDateEdit1: TcxDBDateEdit
+        Left = 61
+        Top = 41
+        DataBinding.DataField = 'fecha'
+        DataBinding.DataSource = dsCotizacion
+        Properties.ReadOnly = True
+        Properties.ShowTime = False
+        Properties.UseLeftAlignmentOnEditing = False
+        Style.HotTrack = False
+        TabOrder = 0
+        Width = 92
+      end
+      object cxDBTextEdit6: TcxDBTextEdit
+        Left = 462
+        Top = 80
+        DataBinding.DataField = 'razonSocial'
+        DataBinding.DataSource = dsCotizacion
+        Properties.ReadOnly = True
+        Style.HotTrack = False
+        TabOrder = 4
+        Width = 283
+      end
+      object cxDBTextEdit7: TcxDBTextEdit
+        Left = 177
+        Top = 187
+        DataBinding.DataField = 'des_vend'
+        DataBinding.DataSource = dsCotizacion
+        Properties.ReadOnly = True
+        Style.HotTrack = False
+        TabOrder = 6
+        Width = 180
+      end
+      object cxDBTextEdit8: TcxDBTextEdit
+        Left = 533
+        Top = 187
+        DataBinding.DataField = 'des_repre'
+        DataBinding.DataSource = dsCotizacion
+        Properties.ReadOnly = True
+        Style.HotTrack = False
+        TabOrder = 8
+        Width = 180
+      end
+      object cxDBButtonEdit1: TcxDBButtonEdit
+        Left = 115
+        Top = 80
+        DataBinding.DataField = 'cod_clie'
+        DataBinding.DataSource = dsCotizacion
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 2
+        Width = 99
+      end
+      object cxRadioButton1: TcxRadioButton
+        Left = 43
+        Top = 289
+        Width = 90
+        Height = 17
+        Caption = 'Los Conce'
+        Checked = True
+        Color = 16775410
+        ParentColor = False
+        TabOrder = 9
+        TabStop = True
+        GroupIndex = 3
+        ParentBackground = False
+        Transparent = True
+      end
+      object cxRadioButton2: TcxRadioButton
+        Left = 139
+        Top = 289
+        Width = 65
+        Height = 17
+        Caption = 'Cliente'
+        Color = 16775410
+        ParentColor = False
+        TabOrder = 10
+        GroupIndex = 3
+        ParentBackground = False
+        Transparent = True
+      end
+      object cxRadioButton3: TcxRadioButton
+        Left = 230
+        Top = 289
+        Width = 90
+        Height = 17
+        Caption = 'Los Conce'
+        Checked = True
+        Color = 16775410
+        ParentColor = False
+        TabOrder = 11
+        TabStop = True
+        GroupIndex = 1
+        ParentBackground = False
+        Transparent = True
+      end
+      object cxRadioButton4: TcxRadioButton
+        Left = 326
+        Top = 289
+        Width = 65
+        Height = 17
+        Caption = 'Cliente'
+        Color = 16775410
+        ParentColor = False
+        TabOrder = 12
+        GroupIndex = 1
+        ParentBackground = False
+        Transparent = True
+      end
+      object cxRadioButton5: TcxRadioButton
+        Left = 417
+        Top = 289
+        Width = 90
+        Height = 17
+        Caption = 'Los Conce'
+        Checked = True
+        Color = 16775410
+        ParentColor = False
+        TabOrder = 13
+        TabStop = True
+        GroupIndex = 2
+        ParentBackground = False
+        Transparent = True
+      end
+      object cxRadioButton6: TcxRadioButton
+        Left = 513
+        Top = 289
+        Width = 65
+        Height = 17
+        Caption = 'Cliente'
+        Color = 16775410
+        ParentColor = False
+        TabOrder = 14
+        GroupIndex = 2
+        ParentBackground = False
+        Transparent = True
+      end
+      object cxDBButtonEdit2: TcxDBButtonEdit
+        Left = 91
+        Top = 187
+        DataBinding.DataField = 'cod_vend'
+        DataBinding.DataSource = dsCotizacion
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 5
+        Width = 80
+      end
+      object jktExpDBGrid5: TjktExpDBGrid
+        Left = 10000
+        Top = 10000
+        Width = 717
+        Height = 365
+        TabOrder = 16
+        Visible = False
+        DataSource = dsArchivos
+        object jktExpDBGrid5DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsArchivos
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.DragHighlighting = False
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusCellOnCycle = True
+          OptionsView.GroupByBox = False
+          object jktExpDBGrid5DBTableView1FechaSubida: TcxGridDBColumn
+            Caption = 'Fecha de subida'
+            DataBinding.FieldName = 'fecha_subida'
+            Options.Editing = False
+            Width = 115
+          end
+          object jktExpDBGrid5DBTableView1Usuario: TcxGridDBColumn
+            Caption = 'Usuario'
+            DataBinding.FieldName = 'usuario'
+            Options.Editing = False
+          end
+          object jktExpDBGrid5DBTableView1Comentario: TcxGridDBColumn
+            Caption = 'Comentario'
+            DataBinding.FieldName = 'comentario'
+            Width = 237
+          end
+          object jktExpDBGrid5DBTableView1Archivo: TcxGridDBColumn
+            Caption = 'Archivo'
+            DataBinding.FieldName = 'archivo'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end
+              item
+                Hint = 'Abrir archivo...'
+              end>
+            Properties.ReadOnly = True
+            Properties.OnButtonClick = jktExpDBGrid5DBTableView1ArchivoPropertiesButtonClick
+            Width = 389
+          end
+        end
+        object jktExpDBGrid5Level1: TcxGridLevel
+          GridView = jktExpDBGrid5DBTableView1
+        end
+      end
+      object cxDBButtonEdit3: TcxDBButtonEdit
+        Left = 220
+        Top = 80
+        DataBinding.DataField = 'des_sucu'
+        DataBinding.DataSource = dsCotizacion
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 3
+        Width = 141
+      end
+      object cxDBButtonEdit4: TcxDBButtonEdit
+        Left = 447
+        Top = 187
+        DataBinding.DataField = 'cod_repre'
+        DataBinding.DataSource = dsCotizacion
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
+        Style.HotTrack = False
+        TabOrder = 7
+        Width = 80
+      end
+      object cxGridItems: TcxGrid
+        Left = 10000
+        Top = 10000
+        Width = 717
+        Height = 365
+        BorderStyle = cxcbsNone
+        TabOrder = 15
+        Visible = False
+        object DBLayoutView: TcxGridDBLayoutView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsItems
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.FocusCellOnTab = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.GoToNextCellOnEnter = True
+          OptionsView.ScrollBars = ssNone
+          OptionsView.RecordCaption.DisplayMask = '[RecordIndex] de [RecordCount]'
+          OptionsView.ViewMode = lvvmSingleRow
+          object DBLayoutViewTipo: TcxGridDBLayoutViewItem
+            Caption = 'Tipo'
+            DataBinding.FieldName = 'oid_tipo'
+            PropertiesClassName = 'TcxLookupComboBoxProperties'
+            Properties.KeyFieldNames = 'oid_tipo'
+            Properties.ListColumns = <
+              item
+                Caption = 'Seleccione...'
+                FieldName = 'des_tipo'
+              end>
+            Properties.ListSource = dsTiposVenta
+            LayoutItem = DBLayoutViewLayoutItem1
+            Options.Filtering = False
+          end
+          object DBLayoutViewCodigo: TcxGridDBLayoutViewItem
+            Caption = 'Art'#237'culo'
+            DataBinding.FieldName = 'cod_art'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = DBLayoutViewCodigoPropertiesButtonClick
+            LayoutItem = DBLayoutViewLayoutItem2
+            Options.Filtering = False
+          end
+          object DBLayoutViewDescripcion: TcxGridDBLayoutViewItem
+            Caption = 'Descripci'#243'n'
+            DataBinding.FieldName = 'des_abrev_art'
+            LayoutItem = DBLayoutViewLayoutItem3
+            Options.Editing = False
+            Options.Filtering = False
+          end
+          object DBLayoutViewCantidad: TcxGridDBLayoutViewItem
+            Caption = 'Cantidad'
+            DataBinding.FieldName = 'cant'
+            LayoutItem = DBLayoutViewLayoutItem4
+            Options.Filtering = False
+          end
+          object DBLayoutViewDetalle: TcxGridDBLayoutViewItem
+            Caption = 'Detalle'
+            DataBinding.FieldName = 'detalle'
+            PropertiesClassName = 'TcxMemoProperties'
+            Properties.VisibleLineCount = 15
+            LayoutItem = DBLayoutViewLayoutItem6
+            Options.Filtering = False
+          end
+          object dxLayoutGroup1: TdxLayoutGroup
+            AlignHorz = ahLeft
+            AlignVert = avTop
+            CaptionOptions.Text = 'Template Card'
+            CaptionOptions.Visible = False
+            ButtonOptions.Buttons = <>
+            Hidden = True
+            LayoutDirection = ldHorizontal
+            ShowBorder = False
+            Index = -1
+          end
+          object DBLayoutViewGroup3: TdxLayoutGroup
+            CaptionOptions.Text = 'Hidden Group'
+            CaptionOptions.Visible = False
+            Parent = dxLayoutGroup1
+            SizeOptions.Width = 433
+            ButtonOptions.Buttons = <>
+            Hidden = True
+            ShowBorder = False
+            Index = 0
+          end
+          object DBLayoutViewLayoutItem2: TcxGridLayoutItem
+            CaptionOptions.AlignHorz = taRightJustify
+            Parent = DBLayoutViewGroup2
+            SizeOptions.Width = 152
+            Index = 0
+          end
+          object DBLayoutViewLayoutItem3: TcxGridLayoutItem
+            CaptionOptions.AlignHorz = taRightJustify
+            Parent = DBLayoutViewGroup2
+            SizeOptions.Width = 349
+            Index = 1
+          end
+          object DBLayoutViewLayoutItem6: TcxGridLayoutItem
+            CaptionOptions.ImageIndex = 0
+            CaptionOptions.Visible = False
+            Parent = dxLayoutGroup2
+            SizeOptions.Height = 90
+            SizeOptions.Width = 453
+            Index = 0
+          end
+          object DBLayoutViewGroup2: TdxLayoutGroup
+            CaptionOptions.Text = 'Hidden Group'
+            CaptionOptions.Visible = False
+            Parent = DBLayoutViewGroup3
+            ButtonOptions.Buttons = <>
+            Hidden = True
+            LayoutDirection = ldHorizontal
+            ShowBorder = False
+            Index = 1
+          end
+          object dxLayoutGroup2: TdxLayoutGroup
+            CaptionOptions.Text = 'New Group'
+            CaptionOptions.Visible = False
+            Parent = DBLayoutViewGroup3
+            SizeOptions.Height = 72
+            ButtonOptions.Buttons = <>
+            LayoutDirection = ldTabbed
+            ShowBorder = False
+            Index = 2
+          end
+          object DBLayoutViewLayoutItem1: TcxGridLayoutItem
+            Parent = DBLayoutViewGroup1
+            SizeOptions.Width = 152
+            Index = 0
+          end
+          object DBLayoutViewLayoutItem4: TcxGridLayoutItem
+            Parent = DBLayoutViewGroup1
+            SizeOptions.Width = 7
+            Index = 1
+          end
+          object DBLayoutViewGroup1: TdxLayoutGroup
+            CaptionOptions.Text = 'Hidden Group'
+            Parent = DBLayoutViewGroup3
+            ButtonOptions.Buttons = <>
+            Hidden = True
+            LayoutDirection = ldHorizontal
+            ShowBorder = False
+            Index = 0
+          end
+        end
+        object cxGridItemsLevel1: TcxGridLevel
+          GridView = DBLayoutView
+        end
+      end
+      object dxLayoutGroup4: TdxLayoutGroup
+        AlignHorz = ahClient
+        AlignVert = avClient
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemIndex = 1
+        ShowBorder = False
+        Index = -1
+      end
+      object lcMainGroup1: TdxLayoutGroup
+        CaptionOptions.Text = 'Identificaci'#243'n'
+        Parent = dxLayoutGroup4
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        Index = 0
+      end
+      object lcMainItem2: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Nro. de Cotizaci'#243'n:'
+        Parent = lcMainGroup2
+        Control = cxDBTextEdit2
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup4: TdxLayoutGroup
+        AlignHorz = ahClient
+        CaptionOptions.Text = 'General'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        Index = 0
+      end
+      object lcMainGroup3: TdxLayoutGroup
+        CaptionOptions.Text = 'New Group'
+        CaptionOptions.Visible = False
+        Parent = dxLayoutGroup4
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldTabbed
+        ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup5: TdxLayoutGroup
+        CaptionOptions.Text = 'Condiciones de Transporte (Responsables)'
+        Parent = lcMainGroup4
+        ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        ItemIndex = 2
+        LayoutDirection = ldHorizontal
+        Index = 1
+      end
+      object lcMainItem1: TdxLayoutItem
+        CaptionOptions.Text = 'Fecha :'
+        Parent = lcMainGroup2
+        Control = cxDBDateEdit1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem7: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Nombre Comercial:'
+        Parent = lcMainGroup9
+        Control = cxDBTextEdit6
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object lcMainItem8: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup11
+        Control = cxDBTextEdit7
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem9: TdxLayoutItem
+        AlignHorz = ahLeft
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup11
+        Control = cxDBTextEdit8
+        ControlOptions.ShowBorder = False
+        Index = 3
+      end
+      object lcMainGroup11: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos Comerciales'
+        Parent = lcMainGroup4
+        ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        Index = 0
+      end
+      object lcMainItem12: TdxLayoutItem
+        CaptionOptions.Text = 'Cliente | Sucursal :'
+        Parent = lcMainGroup9
+        Control = cxDBButtonEdit1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup13: TdxLayoutGroup
+        CaptionOptions.Text = #205'tems'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 1
+      end
+      object lcMainGroup2: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos del Pedido'
+        Parent = lcMainGroup1
+        ButtonOptions.Buttons = <>
+        ItemControlAreaAlignment = catOwn
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup9: TdxLayoutGroup
+        CaptionOptions.Text = 'Datos del Cliente'
+        Parent = lcMainGroup1
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
+      object lcMainItem15: TdxLayoutItem
+        CaptionOptions.Text = 'cxRadioButton1'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup10
+        Control = cxRadioButton1
+        ControlOptions.AutoColor = True
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem16: TdxLayoutItem
+        CaptionOptions.Text = 'cxRadioButton2'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup10
+        Control = cxRadioButton2
+        ControlOptions.AutoColor = True
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup10: TdxLayoutGroup
+        CaptionOptions.Text = 'Carga'
+        Parent = lcMainGroup5
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldHorizontal
+        Index = 0
+      end
+      object lcMainGroup14: TdxLayoutGroup
+        CaptionOptions.Text = 'Transporte'
+        Parent = lcMainGroup5
+        ButtonOptions.Buttons = <>
+        LayoutDirection = ldHorizontal
+        Index = 1
+      end
+      object lcMainGroup15: TdxLayoutGroup
+        CaptionOptions.Text = 'Descarga'
+        Parent = lcMainGroup5
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        Index = 2
+      end
+      object lcMainItem13: TdxLayoutItem
+        CaptionOptions.Text = 'cxRadioButton3'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup14
+        Control = cxRadioButton3
+        ControlOptions.AutoColor = True
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem14: TdxLayoutItem
+        CaptionOptions.Text = 'cxRadioButton4'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup14
+        Control = cxRadioButton4
+        ControlOptions.AutoColor = True
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem17: TdxLayoutItem
+        CaptionOptions.Text = 'cxRadioButton5'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup15
+        Control = cxRadioButton5
+        ControlOptions.AutoColor = True
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem18: TdxLayoutItem
+        CaptionOptions.Text = 'cxRadioButton6'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup15
+        Control = cxRadioButton6
+        ControlOptions.AutoColor = True
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object dxLayoutSeparatorItem2: TdxLayoutSeparatorItem
+        CaptionOptions.Text = 'Separator'
+        Parent = lcMainGroup1
+        SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+        SizeOptions.SizableHorz = False
+        SizeOptions.SizableVert = False
+        Index = 1
+      end
+      object dxLayoutItem1: TdxLayoutItem
+        CaptionOptions.Text = 'Vendedor :'
+        Parent = lcMainGroup11
+        Control = cxDBButtonEdit2
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup16: TdxLayoutGroup
+        CaptionOptions.Text = 'Archivos asociados y Notas'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 2
+      end
+      object lcMainItem20: TdxLayoutItem
+        CaptionOptions.Text = 'jktExpDBGrid5'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup16
+        Control = jktExpDBGrid5
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem3: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup9
+        Control = cxDBButtonEdit3
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem4: TdxLayoutItem
+        CaptionOptions.Text = 'Representante :'
+        Parent = lcMainGroup11
+        Control = cxDBButtonEdit4
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object lcMainItem5: TdxLayoutItem
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup13
+        Control = cxGridItems
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+    end
+  end
+  inherited BarManager: TdxBarManager
+    Left = 304
+    Top = 8
+    DockControlHeights = (
+      0
+      0
+      0
+      0)
+  end
+  inherited Driver: TjktDriver
+    DataSetCab = mtCotizacion
+    TipoPrograma = tp_abmIndividual
+    Filtro = Help
+    OperacionesIniciales = <
+      item
+        Operacion = opTraerTiposDeVenta
+      end>
+    OnNuevo = DriverNuevo
+    Left = 496
+    Top = 8
+  end
+  inherited IdHTTP: TIdHTTP
+    Left = 440
+    Top = 8
+  end
+  inherited Service: TjktServiceCaller
+    Left = 384
+    Top = 8
+  end
+  inherited OperacionSave: TjktOperacion
+    OperName = 'GuardarSolicitudCotizacion'
+    Atributos = <
+      item
+        Dataset = mtItems
+        Tag = 0
+      end
+      item
+        Dataset = mtArchivos
+        Tag = 0
+      end>
+    OnBeforeEjecutar = OperacionSaveBeforeEjecutar
+    Left = 552
+    Top = 8
+  end
+  inherited mtParametroInicial: TjktMemTable
+    Left = 640
+    Top = 8
+  end
+  inherited OperacionTraer: TjktOperacion
+    OperName = 'TraerSolicitudCotizacion'
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = mtCotizacionoid_cotiz
+        Tag = 0
+      end>
+    OnAfterEjecutar = OperacionTraerAfterEjecutar
+    Left = 552
+    Top = 56
+  end
+  inherited ValidadorForm: TjktValidadorForm
+    ListaValidaciones = <
+      item
+        Field = mtCotizacioncod_clie
+        ValidadorGral = valClie
+      end
+      item
+        Field = mtCotizacioncod_vend
+        ValidadorGral = valVend
+      end
+      item
+        Field = mtCotizacioncod_repre
+        ValidadorGral = valRepre
+      end
+      item
+        Field = mtItemscod_art
+        ValidadorGral = valArt
+      end>
+    Top = 56
+  end
+  inherited mtParametrosForm: TjktMemTable
+    Left = 680
+    Top = 8
+  end
+  object dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList
+    Left = 256
+    Top = 8
+    object dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Left = 640
+    Top = 56
+  end
+  object Help: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'cotizacion'
+    OidRespuesta = mtCotizacionoid_cotiz
+    Left = 496
+    Top = 56
+  end
+  object mtItems: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'oid_cotiz'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_tipo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_art'
+        DataType = ftInteger
+      end
+      item
+        Name = 'cod_art'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'des_art_abrev'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'cant'
+        DataType = ftFloat
+      end
+      item
+        Name = 'detalle'
+        DataType = ftMemo
+      end>
+    IndexFieldNames = 'oid_cotiz'
+    IndexDefs = <
+      item
+        Name = 'mtItemsIndex'
+        Fields = 'oid_cotiz'
+      end>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    MasterFields = 'oid_cotiz'
+    MasterSource = dsCotizacion
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    OnNewRecord = mtItemsNewRecord
+    Left = 192
+    Top = 344
+    object mtItemsoid_item: TIntegerField
+      Tag = 1
+      FieldName = 'oid_item'
+    end
+    object mtItemsoid_cotiz: TIntegerField
+      Tag = 1
+      FieldName = 'oid_cotiz'
+    end
+    object mtItemsoid_tipo: TIntegerField
+      Tag = 1
+      FieldName = 'oid_tipo'
+    end
+    object mtItemsoid_art: TIntegerField
+      Tag = 1
+      FieldName = 'oid_art'
+    end
+    object mtItemscod_art: TStringField
+      FieldName = 'cod_art'
+      Size = 50
+    end
+    object mtItemsdes_abrev_art: TStringField
+      FieldName = 'des_abrev_art'
+      Size = 40
+    end
+    object mtItemscant: TFloatField
+      Tag = 1
+      FieldName = 'cant'
+    end
+    object mtItemsdetalle: TMemoField
+      Tag = 1
+      FieldName = 'detalle'
+      BlobType = ftMemo
+    end
+  end
+  object dsItems: TDataSource
+    DataSet = mtItems
+    Left = 232
+    Top = 344
+  end
+  object mtArchivos: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'oid_arch'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_cotiz'
+        DataType = ftInteger
+      end
+      item
+        Name = 'fecha_subida'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'oid_usu'
+        DataType = ftInteger
+      end
+      item
+        Name = 'usuario'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'comentario'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'archivo'
+        DataType = ftString
+        Size = 100
+      end>
+    IndexFieldNames = 'oid_cotiz'
+    IndexDefs = <
+      item
+        Name = 'mtArchivosIndex'
+        Fields = 'oid_cotiz'
+      end>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    MasterFields = 'oid_cotiz'
+    MasterSource = dsCotizacion
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    OnNewRecord = mtArchivosNewRecord
+    Left = 192
+    Top = 392
+    object mtArchivosoid_arch: TIntegerField
+      Tag = 1
+      FieldName = 'oid_arch'
+    end
+    object mtArchivosoid_cotiz: TIntegerField
+      Tag = 1
+      FieldName = 'oid_cotiz'
+    end
+    object mtArchivosfecha_subida: TDateTimeField
+      FieldName = 'fecha_subida'
+    end
+    object mtArchivosoid_usu: TIntegerField
+      Tag = 1
+      FieldName = 'oid_usu'
+    end
+    object mtArchivosusuario: TStringField
+      FieldName = 'usuario'
+    end
+    object mtArchivoscomentario: TStringField
+      Tag = 1
+      FieldName = 'comentario'
+      Size = 50
+    end
+    object mtArchivosarchivo: TStringField
+      Tag = 1
+      FieldName = 'archivo'
+      Size = 100
+    end
+  end
+  object dsArchivos: TDataSource
+    DataSet = mtArchivos
+    Left = 232
+    Top = 392
+  end
+  object mtCotizacion: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'oid_cotiz'
+        DataType = ftInteger
+      end
+      item
+        Name = 'nro_cotiz'
+        DataType = ftInteger
+      end
+      item
+        Name = 'fecha'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'oid_clie'
+        DataType = ftInteger
+      end
+      item
+        Name = 'cod_clie'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'razonSocial'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'oid_sucu'
+        DataType = ftInteger
+      end
+      item
+        Name = 'nro_sucu'
+        DataType = ftSmallint
+      end
+      item
+        Name = 'des_sucu'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'oid_vend'
+        DataType = ftInteger
+      end
+      item
+        Name = 'cod_vend'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'des_vend'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'oid_repre'
+        DataType = ftInteger
+      end
+      item
+        Name = 'cod_repre'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'des_repre'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'respCargaEmpresa'
+        DataType = ftBoolean
+      end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 192
+    Top = 296
+    object mtCotizacionoid_cotiz: TIntegerField
+      Tag = 1
+      FieldName = 'oid_cotiz'
+    end
+    object mtCotizacionnro_cotiz: TIntegerField
+      FieldName = 'nro_cotiz'
+    end
+    object mtCotizacionfecha: TDateTimeField
+      FieldName = 'fecha'
+    end
+    object mtCotizacionoid_clie: TIntegerField
+      FieldName = 'oid_clie'
+    end
+    object mtCotizacioncod_clie: TStringField
+      FieldName = 'cod_clie'
+      Size = 15
+    end
+    object mtCotizacionRazonSocial: TStringField
+      FieldName = 'razonSocial'
+      Size = 100
+    end
+    object mtCotizacionoid_sucu: TIntegerField
+      Tag = 1
+      FieldName = 'oid_sucu'
+    end
+    object mtCotizacionnro_sucu: TSmallintField
+      FieldName = 'nro_sucu'
+    end
+    object mtCotizaciondes_sucu: TStringField
+      FieldName = 'des_sucu'
+      Size = 50
+    end
+    object mtCotizacionoid_vend: TIntegerField
+      Tag = 1
+      FieldName = 'oid_vend'
+    end
+    object mtCotizacioncod_vend: TStringField
+      FieldName = 'cod_vend'
+      Size = 15
+    end
+    object mtCotizaciondes_vend: TStringField
+      FieldName = 'des_vend'
+      Size = 40
+    end
+    object mtCotizacionoid_repre: TIntegerField
+      Tag = 1
+      FieldName = 'oid_repre'
+    end
+    object mtCotizacioncod_repre: TStringField
+      FieldName = 'cod_repre'
+      Size = 15
+    end
+    object mtCotizaciondes_repre: TStringField
+      FieldName = 'des_repre'
+      Size = 40
+    end
+    object mtCotizacionrespCargaEmpr: TBooleanField
+      FieldName = 'respCargaEmpr'
+    end
+    object mtCotizacionrespCargaClie: TBooleanField
+      Tag = 1
+      FieldName = 'respCargaClie'
+    end
+    object mtCotizacionrespTranspEmpr: TBooleanField
+      FieldName = 'respTranspEmpr'
+    end
+    object mtCotizacionrespTranspClie: TBooleanField
+      Tag = 1
+      FieldName = 'respTranspClie'
+    end
+    object mtCotizacionrespDescargaEmpr: TBooleanField
+      FieldName = 'respDescargaEmpr'
+    end
+    object mtCotizacionrespDescargaClie: TBooleanField
+      Tag = 1
+      FieldName = 'respDescargaClie'
+    end
+  end
+  object dsCotizacion: TDataSource
+    DataSet = mtCotizacion
+    Left = 232
+    Top = 296
+  end
+  object hlpVend: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'vendedor'
+    OidRespuesta = mtCotizacionoid_vend
+    CodigoRespuesta = mtCotizacioncod_vend
+    Left = 208
+    Top = 144
+  end
+  object hlpRepre: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'representante'
+    OidRespuesta = mtCotizacionoid_repre
+    CodigoRespuesta = mtCotizacioncod_repre
+    Left = 248
+    Top = 144
+  end
+  object hlpArt: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'articulos'
+    OidRespuesta = mtItemsoid_art
+    CodigoRespuesta = mtItemscod_art
+    Left = 288
+    Top = 144
+  end
+  object hlpClie: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'clientes'
+    OidRespuesta = mtCotizacionoid_clie
+    CodigoRespuesta = mtCotizacioncod_clie
+    Left = 128
+    Top = 144
+  end
+  object hlpSucu: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'clienteSucursal'
+    EntidadMaestra = 'clientes'
+    OidEntidadMaestra = mtCotizacionoid_clie
+    OidRespuesta = mtCotizacionoid_sucu
+    Left = 168
+    Top = 144
+  end
+  object mtTiposVenta: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 392
+    Top = 248
+    object mtTiposVentaoid_tipo: TIntegerField
+      Tag = 1
+      FieldName = 'oid_tipo'
+    end
+    object mtTiposVentades_tipo: TStringField
+      FieldName = 'des_tipo'
+      Size = 30
+    end
+  end
+  object opTraerTiposDeVenta: TjktOperacion
+    OperName = 'TraerTiposDeVenta'
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 352
+    Top = 248
+  end
+  object dsTiposVenta: TDataSource
+    DataSet = mtTiposVenta
+    Left = 432
+    Top = 248
+  end
+  object valClie: TjktValidador
+    Entidad = 'clientes'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtCotizacionoid_clie
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtCotizacionRazonSocial
+      end>
+    Left = 128
+    Top = 200
+  end
+  object valVend: TjktValidador
+    Entidad = 'vendedor'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtCotizacionoid_vend
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtCotizaciondes_vend
+      end>
+    Left = 208
+    Top = 200
+  end
+  object valRepre: TjktValidador
+    Entidad = 'representante'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtCotizacionoid_repre
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtCotizaciondes_repre
+      end>
+    Left = 248
+    Top = 200
+  end
+  object valArt: TjktValidador
+    Entidad = 'articulos'
+    Validacion = tExistente
+    ListaAsignaciones = <
+      item
+        SourceName = 'oid'
+        FieldTarget = mtItemsoid_art
+      end
+      item
+        SourceName = 'Descripcion'
+        FieldTarget = mtItemsdes_abrev_art
+      end>
+    Left = 288
+    Top = 200
+  end
+end

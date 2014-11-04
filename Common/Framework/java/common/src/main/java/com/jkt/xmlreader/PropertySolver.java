@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 import com.jkt.excepcion.ExceptionDS;
 
 /**
- * Comentarios agregador por Leonel Suï¿½rez.
- * A falta de una buena documentaciï¿½n, se procede a explicar esta clase rapidamente.
+ * Comentarios agregador por Leonel Suárez.
+ * A falta de una buena documentación, se procede a explicar esta clase rapidamente.
  * 
  * Esta clase resuelve via reflection, y dado un objeto, un nombre de un metodo.
  * 

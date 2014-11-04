@@ -29,16 +29,14 @@
 
 	</entidad>
 	
-<!-- 	<entidad nombre="condicionPago"> -->
+	<entidad nombre="cotizacion">
 
-<!-- 		<campos> -->
-<!-- 			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" /> -->
-<!-- 			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Codigo" /> -->
-<!-- 			<campo fieldName="Descripcion" tipo="String" longitud="100" columnWidth="380" visible="true" readOnly="false" orden="3" label="Descripcion" /> -->
-<!-- 		</campos> -->
+		<campos>
+			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Número de cotización" />
+			<campo fieldName="Descripcion" tipo="String" longitud="100" columnWidth="380" visible="true" readOnly="false" orden="3" label="Fecha/Vendedor" />
+		</campos>
 
-<!-- 	</entidad> -->
-
-
+	</entidad>
 	
 </entidades>

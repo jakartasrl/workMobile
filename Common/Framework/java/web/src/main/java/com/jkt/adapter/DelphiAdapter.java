@@ -20,6 +20,8 @@ import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
+import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.util.Campos;
 import com.jkt.util.MapDS;
@@ -54,8 +56,8 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 	private boolean test;
 	
 	/*
-	 * Definición de estregias para el guardado de parametros.
-	 * Básicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
+	 * Definicion de estregias para el guardado de parametros.
+	 * Basicamente las estrategias definen funcionalidad para cuando el parametro a trabajar es uno solo, o es una lista de objetos.
 	 * Dependiendo de la cantidad de registros recibidos desde la solicitud, se define una u otra estrategia.
 	 * 
 	 * Si la cantidad de registros es mayor a 1, se usa la estrategia para manejar listas, de lo contrario, se usa la estrategia para manejar un solo parametro.
@@ -268,7 +270,6 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 								for (Iterator<Entry<Object, Object>> iteratorR = campos.entrySet().iterator(); iteratorR.hasNext();) {
 									entryR = (Entry<Object, Object>) iteratorR.next();
 									childCampoEntrada = metaDataOfCurrentField.getHijo((String)entryR.getKey());
-									
 									
 									//TODO ESTA MAL ESTE COMPORTAMIENDO QUE HIZO DANIEL, ESTOY PASANDO EL VALOR CON =0 Y LEVANTA ESTA EXCEPCION
 									/*
