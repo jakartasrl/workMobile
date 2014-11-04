@@ -8,7 +8,7 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.CaracteristicaProducto;
 import com.jkt.erp.articulos.ValoresTablas;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.operaciones.Validar;
 
 /**
@@ -80,7 +80,7 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 	}
 
 	@Override
-	protected void manejoDeExistencia(PersistentEntity entity,String className, String codigo) throws ValidacionException {
+	protected void manejoDeExistencia(PersistentEntity entity,String className, String codigo) throws ValidacionDeNegocioException {
 		//No hacer nada ac�.
 		
 		/*

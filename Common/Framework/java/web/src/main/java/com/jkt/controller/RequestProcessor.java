@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.activemq.filter.function.splitFunction;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -82,7 +83,6 @@ public abstract class RequestProcessor extends BaseController{
 
 		String ip = request.getRemoteAddr();// IP del cliente
 		String host = request.getRemoteHost();// Host del cliente
-		
 		
 		log.debug(String.format("Procesando una solicitud desde el cliente %s con direccion IP %s",host, ip));
 		

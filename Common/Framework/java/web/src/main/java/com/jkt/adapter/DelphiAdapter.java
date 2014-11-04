@@ -25,7 +25,7 @@ import com.jkt.dominio.Container;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.persistencia.ISessionProvider;
 import com.jkt.request.EventBusiness;
 import com.jkt.service.SessionProvider;
@@ -141,7 +141,7 @@ public class DelphiAdapter implements Adapter<Map, MapDS> {
 				tx.rollback();
 				sessionProvider.destroySession();
 				
-				throw new ValidacionException(buffer.toString());
+				throw new ValidacionDeNegocioException(buffer.toString());
 		}catch(Exception e){
 			tx.rollback();
 			sessionProvider.destroySession();

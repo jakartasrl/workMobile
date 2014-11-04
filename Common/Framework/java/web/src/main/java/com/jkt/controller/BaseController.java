@@ -6,6 +6,7 @@ import java.io.PrintStream;
 
 import javax.servlet.ServletOutputStream;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,7 +14,7 @@ import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.excepcion.ExceptionValidacion;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.exception.LoginException;
 import com.jkt.framework.writers.XMLStreamMaker;
 
@@ -71,8 +72,8 @@ public class BaseController{
 		xmlStreamMaker.writeStartTagException(e.getMessage());
 	}
 
-	@ExceptionHandler(ValidacionException.class)
-	public @ResponseBody void manejarValidacionException(ValidacionException e) throws IOException{
+	@ExceptionHandler(ValidacionDeNegocioException.class)
+	public @ResponseBody void manejarValidacionException(ValidacionDeNegocioException e) throws IOException{
 		outputStream.flush();
 		XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 		xmlStreamMaker.setStream(outputStream);

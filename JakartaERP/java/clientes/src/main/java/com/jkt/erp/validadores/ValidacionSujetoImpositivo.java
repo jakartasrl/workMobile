@@ -2,13 +2,13 @@ package com.jkt.erp.validadores;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.varios.SujetoImpositivo;
-import com.jkt.excepcion.ValidacionException;
-import com.jkt.validadores.IValidador;
+import com.jkt.excepcion.ValidacionDeNegocioException;
+import com.jkt.operaciones.ValidacionDeNegocio;
 import com.jkt.varios.dominio.Pais;
 
-public class ReglasNegocioSujetoImpositivo implements IValidador {
+public class ValidacionSujetoImpositivo extends ValidacionDeNegocio {
 
-	public void validar(PersistentEntity entity) throws ValidacionException {
+	public void validar(PersistentEntity entity) throws ValidacionDeNegocioException {
 		SujetoImpositivo sujeto = (SujetoImpositivo) entity;
 
 		Pais pais = sujeto.getDireccionLegal().getPais();

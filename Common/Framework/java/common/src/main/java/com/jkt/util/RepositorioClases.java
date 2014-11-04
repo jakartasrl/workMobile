@@ -35,7 +35,6 @@ public class RepositorioClases implements IRepositorioClases{
 	
 	private Map<String, String> alias = new HashMap<String, String>();
 	private Map<String, String> validadores = new HashMap<String, String>();
-	private Map<String, String> reglas = new HashMap<String, String>();
 
 	@Autowired
 	private ServletContext servletContext;
@@ -52,7 +51,7 @@ public class RepositorioClases implements IRepositorioClases{
 				currentEntry=(Entry) elemento;
 				alias.put(currentEntry.getKey(), currentEntry.getValue());
 				validadores.put(currentEntry.getValue(), currentEntry.getValidador());
-				reglas.put(currentEntry.getValue(), currentEntry.getRegla());
+//				reglas.put(currentEntry.getValue(), currentEntry.getRegla());
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Error de entrada/salida.");
@@ -98,11 +97,6 @@ public class RepositorioClases implements IRepositorioClases{
 		digester.addSetNext("elementos/elemento", "add", Entry.class.getName());
 
 		return digester;
-	}
-
-	public String getRegla(String value) throws JakartaException {
-		String valueRetrieved = reglas.get(value);
-		return valueRetrieved;
 	}
 
 }
