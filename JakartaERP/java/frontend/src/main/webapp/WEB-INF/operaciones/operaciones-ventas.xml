@@ -318,21 +318,19 @@
 		<output name="items" tableName="mtItems">
 <!-- 			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" /> -->
 			<campoSalida value="oid_item" target="id" />
-
 			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" />
 			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
-			<campoSalida value="des_sucu" target="comprobanteVenta.clienteSucursal.descripcion" />
+			<campoSalida value="des_clie_sucu" target="comprobanteVenta.clienteSucursal.descripcion" />
 			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
 			<campoSalida value="nro_item" target="numero" />
+			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="detalle" target="descripcion" />
-			<campoSalida value="cantidad" target="cantidad" />
-			
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 		
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0004"> </form>
 		</forms>		
 
 	</operacion>
