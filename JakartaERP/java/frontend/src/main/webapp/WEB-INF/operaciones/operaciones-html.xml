@@ -2,11 +2,10 @@
 <!DOCTYPE entity [
 
   <!ELEMENT entity        (operacion*)>
-  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+  <!ELEMENT operacion     (input* , output*,transformer)>
 <!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
   
   <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
-  <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
   <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
   <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
   
@@ -20,67 +19,64 @@
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
   <!ELEMENT campoSalida   (campoSalida*,output*)>  
   
-  <!ELEMENT dataset       (campo*)>
-  <!ELEMENT campo         EMPTY>
-  <!ELEMENT tables       (tableDef+)>
-  <!ELEMENT tableDef     (campoTable*)>
-  <!ELEMENT campoTable   EMPTY>
-  
   <!ATTLIST transformer clase           CDATA #REQUIRED>
   
-  <!ATTLIST form name	CDATA #REQUIRED>
-  
-  <!ATTLIST input name           	 	CDATA    #IMPLIED><!--   Nombre que se corresponde con la entrada de delphi. Si en delphi mandan el valor Name, acá debe exstir en valor Name para obtener los demas datos -->
+  <!ATTLIST input nameOV           	 	CDATA    "OV"><!--   Nombre que se corresponde con el name del objectview. -->
   <!ATTLIST input keyName           	CDATA    #IMPLIED><!--   Indica el key del mapa que llega a la operacion. Si el valor es 'leo', se debera recuperar usando la key 'leo' sobre el mapa en la operacion -->
   <!ATTLIST input clase           	 	CDATA    #IMPLIED><!-- 	define la clase del parmetro recibido -->
-  <!ATTLIST input fieldID           	CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST input fieldID           	CDATA    "id"><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base -->
   <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
   
-  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
-  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST campoEntrada metodo			CDATA #REQUIRED>
+  <!ATTLIST campoEntrada propertyOV		CDATA #REQUIRED>
+  <!ATTLIST campoEntrada fieldID        CDATA    "id"><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base -->
  
-  <!ATTLIST output name					CDATA #REQUIRED> 
-
+ 
+  <!ATTLIST output name					CDATA "outputName"> <!-- Para web, nombre del objeto notificado a setear--> 
+  <!ATTLIST output clase				CDATA #IMPLIED> <!-- Clase del tipo OV (vista) a la que se debe convertir el objeto-->
+  
   <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
-  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
+  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la property que contendra el valor de resltado de target -->
 
   <!ATTLIST operacion name              ID    #REQUIRED>
   <!ATTLIST operacion clase             CDATA #IMPLIED>
   <!ATTLIST operacion entidad           CDATA #IMPLIED>
-  <!ATTLIST operacion XMLWriter         CDATA #IMPLIED>
-  <!ATTLIST operacion redirect          CDATA #IMPLIED>
-  <!ATTLIST operacion usaJMS            CDATA #IMPLIED>
-  
-  <!ATTLIST dataset name                CDATA #REQUIRED>
-  <!ATTLIST dataset value               CDATA #IMPLIED>
-  <!ATTLIST dataset tabla               CDATA #IMPLIED>
-  
-  <!ATTLIST campo   name                CDATA #REQUIRED>
-  <!ATTLIST campo   value               CDATA #IMPLIED>
-  
-  <!ATTLIST tableDef    name           	CDATA #REQUIRED>
-
-  <!ATTLIST campoTable	name        	CDATA #REQUIRED>
-  <!ATTLIST campoTable  orden       	CDATA #IMPLIED>
-  <!ATTLIST campoTable  tipo        	CDATA #IMPLIED>
-  <!ATTLIST campoTable  longitud    	CDATA #IMPLIED>
-  
+  <!ATTLIST operacion inputOV            CDATA #REQUIRED>
+  <!ATTLIST operacion outputOV            CDATA #IMPLIED>
 ]>
 
 <entity>
-
 	<!-- RECUPERAR Provincia -->
-	<operacion name="TraerProvincia" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.varios.dominio.Provincia">
-
-		<transformer clase="com.jkt.transformers.WebTransformer"></transformer>
-
-		<forms>
-			<form name=""></form>
-		</forms>
+	<operacion name="TraerProvincia" clase="com.jkt.erp.operaciones.WebOperaciones" inputOV="com.jkt.view.objectsView.ClienteOV"
+				outputOV="com.jkt.view.objectsView.ClienteOV">
+			
+		<input keyName="cliente" clase="com.jkt.erp.varios.Cliente" >
+			<campoEntrada propertyOV="telefono" metodo="setTelefono"/>
+			<campoEntrada propertyOV="idIdioma" metodo="setIdioma"/>
+			<campoEntrada propertyOV="listaSucursales"  metodo="addClienteSucursal">
+						<campoEntrada propertyOV="numero" metodo="setNumero"/>
+						<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+			</campoEntrada>
+		</input>
 		
+		<output >
+			<campoSalida target="idioma.id" value="idIdioma"/>
+			<campoSalida target="id" 		value="id"/>
+			<campoSalida target="codigo" 	value="codigo"/>
+			<campoSalida target="telefono"	value="telefono"/>
+			<campoSalida target="listaSucursales"  value="listaSucursales">
+						<campoSalida target="id" value="id"/>
+						<campoSalida target="numero" value="numero"/>
+						<campoSalida target="descripcion" value="descripcion"/>
+			</campoSalida>
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer"/>
 	</operacion>
 
+	<operacion name="GuardarCliente" clase="com.jkt.operaciones.Guardar" inputOV="com.jkt.vista.objetosVista.ClienteOV">
+			<transformer clase="com.jkt.transformers.WebTransformer"/>
+	</operacion>	
+			
 </entity>
+	

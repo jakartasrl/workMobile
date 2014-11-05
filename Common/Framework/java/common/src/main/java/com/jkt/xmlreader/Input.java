@@ -12,8 +12,7 @@ import com.jkt.request.EventBusiness;
 public class Input extends EventBusiness{
 	
 	private String nombreEntidad;
-	
-	
+	private String nameOV;
 	
 	public String getNombreEntidad() {
 		return nombreEntidad;
@@ -23,8 +22,6 @@ public class Input extends EventBusiness{
 	public void setName(String name) {
 		this.name = name.toUpperCase();
 	}
-
-
 
 	public void setNombreEntidad(String nombreEntidad) {
 		this.nombreEntidad = nombreEntidad;
@@ -52,5 +49,13 @@ public class Input extends EventBusiness{
 		});
 		return result;
 	}
-	
+
+
+	public String getNameOV() {
+		return nameOV;
+	}
+
+	public void setNameOV(String nameOV) {
+		this.nameOV = nameOV;
+	}
 }

@@ -1,37 +1,49 @@
 package com.jkt.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jkt.dominio.Descriptible;
-import com.jkt.excepcion.EntityNotFoundException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.jkt.adapter.Adapter;
+import com.jkt.excepcion.JakartaException;
+import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
-import com.jkt.util.HashtableDS;
-
-import demo.data.Provincia;
+import com.jkt.view.ContainerOV;
 
 /**
- * Controller that will receive all request from clients javascript.
- * Controller que recibirá todas las solicitudes desde clientes javascript.
+ * Controller that will receive all request from clients javascript. Controller
+ * que recibirá todas las solicitudes desde clientes javascript.
  * 
  * @author Sergio Leonel Suarez
  */
 @Controller
-@RequestMapping(value="/processorHTML5")
+@RequestMapping(value = "/processorHTML5")
+@SuppressWarnings("rawtypes")
 public class RequestProcessorWeb extends RequestProcessor {
 
+	@Autowired(required=true)
+	@Qualifier("webAdapter")
+	private Adapter<Map, Map> webAdapter;
+
+	@PostConstruct
+	public void inyectarSessionEnAdapter(){
+		webAdapter.setSession(sessionProvider);
+	}
+	
+	
 	@Override
 	protected String getAppRequest() {
 		return RequestProcessor.CLIENTE_HTML;
@@ -39,47 +51,51 @@ public class RequestProcessorWeb extends RequestProcessor {
 
 	@Override
 	protected Map retrieveParameters(HttpServletRequest request)throws Exception {
-		HashtableDS hashtable = new HashtableDS();
-		hashtable.put("op", "TraerProvincia");
-		return hashtable;
-	}
-
-	@Override
-	protected Map adaptParameters(Object input, IEventBusiness operation) throws IOException {
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
-		
-		
+
+		String type = eventBusinessOperation.getInputOV();
+		Class<?> clazz;
+		try{
+			clazz = Class.forName(type);
+		}catch(Exception e){
+			throw new JakartaException("Error al querer recuperar la clase "+type);
+		}
+	    //aca recupero el class eventBusinessOperation.get();
+	    Gson gson = new GsonBuilder().create();
+	    String json= new String(Base64.decodeBase64( IOUtils.toByteArray(request.getInputStream())));
+	    Object ob= gson.fromJson(json,clazz);
+    	if(ContainerOV.class.isAssignableFrom(clazz)){
+    		ContainerOV container = (ContainerOV) BeanUtils.instantiate(clazz);
+    		for (String keyMap : container.keySet()) {
+				Object objectView = container.get(keyMap);
+				Method readMethod = BeanUtils.getPropertyDescriptor(objectView.getClass(), "nameOV").getReadMethod();
+				String nameOV= (String) readMethod.invoke(objectView, new Object[]{});
+				hashMap.put(nameOV, objectView);
+			}
+    	}else{
+			Method readMethod = BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV").getReadMethod();
+			String keyOV= (String) readMethod.invoke(ob, new Object[]{});
+			if(keyOV != null && keyOV.length()>0)
+				hashMap.put(keyOV, ob);
+			else
+				hashMap.put("OV", ob);
+    	}
 		return hashMap;
 	}
-	
-//	@RequestMapping(value = "/xml", method = RequestMethod.POST)
 
-	/*
-	
 	@Override
-	public void handleXML(HttpServletRequest request, HttpServletResponse response) throws Exception, EntityNotFoundException {
-
-		
-		setOutputStream(response.getOutputStream());//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
-
-		
-		Provincia provincia = new Provincia();
-		provincia.setCodigo("ARG");
-		provincia.setDescripcion("Argentina");
-
-		Provincia provincia2 = new Provincia();
-		provincia2.setCodigo("BRA");
-		provincia2.setDescripcion("Brasil");
-		
-//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ObjectOutputStream oos = new ObjectOutputStream(getOutputStream());
-		oos.writeObject(Arrays.asList(provincia, provincia2, provincia));
-		oos.close(); // ... preparedStatement.setBytes(i, baos.toByteArray());
-//		
-//		
-//		.write(provincia.toString().getBytes());
-		
+	protected Map adaptParameters(Object map, IEventBusiness operation)	throws Exception {
+		Map result=(Map)this.webAdapter.adaptRequest((Map) map, (EventBusiness)operation);																
+		return result;
 	}
-	*/
-	
+
+	@Override
+	public Map getParameters(HttpServletRequest request, String operationName)
+			throws Exception {
+		operationName= request.getHeader("op");
+
+		getEventBusinessOperation(operationName);
+		Map parameters = retrieveParameters(request);
+		return parameters;
+	}
 }

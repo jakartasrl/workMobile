@@ -9,7 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.varios.dominio.ComponenteValor;
 import com.jkt.varios.dominio.CondPago;
 import com.jkt.varios.dominio.Idioma;
 

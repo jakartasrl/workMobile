@@ -16,8 +16,16 @@ public class ValidadorCotizacion extends ValidacionDeNegocio {
 		}else{
 //			nueva cotizacion.
 			Random rnd = new Random();
-			int nextInt = rnd.nextInt();
-			c.setNro(nextInt<1?nextInt*-1:nextInt);
+			
+			Random rn = new Random();
+			int maximum=2000000;
+			int minimum=1;
+			int range = maximum - minimum + 1;
+			int randomNum =  rn.nextInt(range) + minimum;
+			
+//			int nextInt = rnd.nextInt();
+//			c.setNro((nextInt<1?nextInt*-1:nextInt));
+			c.setNro(randomNum);
 			c.setEstado(Cotizacion.Estado.PENDIENTE.toString());
 		}
 	}

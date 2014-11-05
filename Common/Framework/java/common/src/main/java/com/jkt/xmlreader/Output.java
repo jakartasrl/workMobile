@@ -10,7 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import com.jkt.request.EventBusiness;
 
 /**
- * Cada OUTPUT representará a una tabla en la salida de los transformadores.
+ * Cada OUTPUT representarï¿½ a una tabla en la salida de los transformadores.
  * 
  * 
  * 
@@ -33,5 +33,4 @@ public class Output extends EventBusiness{
 		});
 		return result;
 	}
-	
 }
