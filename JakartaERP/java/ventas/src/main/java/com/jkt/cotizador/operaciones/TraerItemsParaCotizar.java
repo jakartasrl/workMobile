@@ -33,7 +33,7 @@ public class TraerItemsParaCotizar extends Operation {
 				
 				comprobanteVentaDet.setNumero(
 						String.valueOf(comprobanteVentaDet.getComprobanteVenta().getNro()).
-						concat("-").
+//						concat("-").
 						concat(String.valueOf(++nroDetalle)));
 				
 				notificarObjeto("items", comprobanteVentaDet);
