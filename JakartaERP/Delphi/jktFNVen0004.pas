@@ -57,11 +57,14 @@ type
     { Public declarations }
   end;
 
-var
-  FNVen0004: TFNVen0004;
+
 
 implementation
 
 {$R *.dfm}
+
+
+initialization
+  RegisterClass(TFNVen0004);
 
 end.

@@ -44,6 +44,8 @@ type
     FOperacionesIniciales : TjktOperacionesList;
     FOperacionesDefault   : TjktOperacionesList;
     FFiltro               : TjktHelpGenerico;
+    FFiltrarAlInicio      : Boolean;
+
     {********   Eventos   ********}
 //    FOnSetDefaults        : TNotifyEvent;
     FOnFiltrar            : TNotifyEvent;
@@ -144,6 +146,7 @@ type
     property Opciones              : TjktOpciones     read FOpciones     write FOpciones;
     property TipoPrograma          : TjktTipoPrograma read FTipoPrograma write FTipoPrograma;
     property Filtro                : TjktHelpGenerico read FFiltro       write FFiltro;
+    property FiltrarAlInicio       : Boolean read FFiltrarAlInicio write FFiltrarAlInicio;
     property FocoEnAlta            : TField read FFocoEnAlta         write FFocoEnAlta;
     property FocoEnModificacion    : TField read FFocoEnModificacion write FFocoEnModificacion;
     property OperacionesIniciales  : TjktOperacionesList read FOperacionesIniciales write FOperacionesIniciales;
@@ -182,6 +185,7 @@ begin
   FOperacionesDefault   := TjktOperacionesList.Create(self);
 
   Self.FEstado := esNil;
+  FFiltrarAlInicio := True;
 end;
 
 destructor TjktDriver.Destroy;
@@ -198,7 +202,8 @@ begin
   if (FTipoPrograma = tp_abmLista) and (Self.FEstado = esNil) then
     begin
       DoBotonesInicio;
-      Filtrar;
+      if FFiltrarAlInicio then
+        Filtrar;
     end
   else
     begin

@@ -7,28 +7,28 @@ inherited FNVen0004: TFNVen0004
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitHeight = 0
+    ExplicitHeight = 508
     Height = 508
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 508
-    ExplicitHeight = 0
+    ExplicitHeight = 508
   end
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 741
-    ExplicitLeft = 86
-    ExplicitHeight = 0
+    ExplicitLeft = 741
+    ExplicitHeight = 508
     Height = 508
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 737
     Height = 508
-    ExplicitLeft = 82
-    ExplicitHeight = 0
+    ExplicitLeft = 737
+    ExplicitHeight = 508
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 48
-    ExplicitHeight = 0
+    ExplicitWidth = 703
+    ExplicitHeight = 508
     Height = 508
     Width = 703
     object cxGroupBox1: TcxGroupBox
@@ -57,9 +57,6 @@ inherited FNVen0004: TFNVen0004
         Align = alClient
         TabOrder = 0
         DataSource = dsItems
-        ExplicitTop = 15
-        ExplicitWidth = 206
-        ExplicitHeight = 122
         object jktExpDBGrid1DBTableView: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsItems
@@ -117,6 +114,10 @@ inherited FNVen0004: TFNVen0004
   end
   inherited Driver: TjktDriver
     DataSetCab = mtItems
+    FiltrarAlInicio = False
+  end
+  inherited OperacionTraer: TjktOperacion
+    OperName = 'TraerItemsACotizar'
   end
   object mtItems: TjktMemTable
     DesignActivation = True
