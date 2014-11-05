@@ -956,7 +956,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.IsFontAssigned = True
         TabOrder = 1
         ExplicitTop = 316
-        ExplicitWidth = 767
         Height = 103
         Width = 769
         object tc_Novedades: TdxTileControl
