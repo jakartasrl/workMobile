@@ -335,29 +335,27 @@
 
 	</operacion>
 	
-	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DEITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR-->
+	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DE ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR -->
 	<operacion name="TraerItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet">
 
-		<output name="resultado" tableName="mtItems">
+		<output name="resultado" tableName="mtItem">
 			<campoSalida value="oid_item" target="id" />
-
 			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" /> <!-- PRESUPUESTO -->
 			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
-			
-			<campoSalida value="cod_clie" target="comprobanteVenta.clienteSucursal.cliente.codigo" />
-			<campoSalida value="razonSocial" target="comprobanteVenta.clienteSucursal.cliente.sujetoImpositivo.razonSocial" />
-			
-			<campoSalida value="detalle" target="descripcion" />
-			
+			<campoSalida value="des_clie_sucu" target="descClieSucu" />			
+<!-- 			<campoSalida value="cod_clie" target="comprobanteVenta.clienteSucursal.cliente.codigo" /> -->
+<!-- 			<campoSalida value="razonSocial" target="comprobanteVenta.clienteSucursal.cliente.sujetoImpositivo.razonSocial" /> -->
+			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
+			<campoSalida value="des_tipo_item" target="descripcionTipoDeVenta" />
+			<campoSalida value="detalle_item" target="descripcion" />
 			<campoSalida value="cod_art" target="producto.codigo" />
-			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
-			
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />			
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 		
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0005"></form>
 		</forms>
 
 	</operacion>

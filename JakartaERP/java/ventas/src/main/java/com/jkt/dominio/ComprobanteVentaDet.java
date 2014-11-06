@@ -1,11 +1,21 @@
 package com.jkt.dominio;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.varios.dominio.Moneda;
 import com.jkt.varios.dominio.UnidadMedida;
 
 public class ComprobanteVentaDet extends PersistentEntity {
+
+	
+	public static List<Container> TIPO_VENTA = Arrays.asList(new Container("1", "Fabricacion"), new Container("2", "Reparacion"), new Container("3", "Service"));
+	
+	
+	private static final String SEPARADOR = " / ";
 
 	private String descripcion;//Con esta descripcion el usuario selecciona que modelo de cotizador es el mas apropiado.
 	
@@ -17,6 +27,26 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	private Moneda moneda;
 	private Cotizador cotizador;
 	private int tipoVenta=0;
+	
+	/*
+	 * Helper methods
+	 */
+	public String getDescripcionTipoDeVenta(){
+		for (Container container : TIPO_VENTA) {
+			if (Integer.valueOf(container.getCodigo())==this.tipoVenta) {
+				return container.getDescripcion();
+			}
+		}
+		return "";
+	}
+	
+	public String getDescClieSucu() {
+		return comprobanteVenta.getClienteSucursal().getCliente().getSujetoImpositivo().getRazonSocial().
+				concat(SEPARADOR).concat(String.valueOf(comprobanteVenta.getClienteSucursal().getNumero()));
+	}
+	/*
+	 * Helper methods
+	 */
 	
 	/*
 	 * Campo transiente
