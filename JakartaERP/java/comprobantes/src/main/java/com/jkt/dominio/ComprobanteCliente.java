@@ -5,7 +5,7 @@ import com.jkt.varios.dominio.CondPago;
 
 
 /**
- * Cuando un comprobante tiene una relación con el cliente, se genera una instancia de esta clase.
+ * Cuando un comprobante tiene una relaciÃ³n con el cliente, se genera una instancia de esta clase.
  * 
  * @see Comprobante
  * 

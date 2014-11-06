@@ -23,7 +23,7 @@ public abstract class Comprobante extends PersistentEntity {
 	private String letra;
 	private String lugarEmision;
 	private int nro;
-	private boolean anulado;
+	private boolean anulado=false;
 	private TipoComprobante tipoComprobante;
 	private Date fecha;
 	private List<Especificacion> archivos=new ArrayList<Especificacion>();	

@@ -7,5 +7,5 @@ package com.jkt.dominio;
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Pedido extends ComprobanteVenta {
-
+	
 }

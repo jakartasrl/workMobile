@@ -74,6 +74,15 @@
 
 <entity>
 
+	<operacion name="GenerarPedidoUsandoCotizacion" clase="com.jkt.cotizador.operaciones.GenerarPedidoUsandoCotizacion">
+	
+		<forms>
+			<form name="FNVen0002"></form>
+		</forms>
+
+	</operacion>
+
+
 	<operacion name="GuardarModeloCotizador" clase="com.jkt.cotizador.operaciones.GuardarModeloCotizador">
 	
 		<input name="mtCab" keyName="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" fieldID="oid_mod">
