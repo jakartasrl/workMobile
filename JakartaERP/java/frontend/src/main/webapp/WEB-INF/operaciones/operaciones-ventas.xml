@@ -73,11 +73,12 @@
 ]>
 
 <entity>
-
+	
+	<!-- GENERA UN PEDIDO A PARTIR DE UNA COTIZACION. SE DEBERIAN REALIZAR VALIDACIONES COMO QUE LA COTIZACION CUMPLA N CODICIONES CON RESPECTO A SUS CAMPOS -->
 	<operacion name="GenerarPedidoUsandoCotizacion" clase="com.jkt.cotizador.operaciones.GenerarPedidoUsandoCotizacion">
 	
 		<forms>
-			<form name="FNVen0002"></form>
+			<form name="---"></form>
 		</forms>
 
 	</operacion>
@@ -144,7 +145,7 @@
 
 	</operacion>
 
-	<!-- 	Concepto de presupuesto -->
+	<!-- 	TRAER CONCEPTO DE PRESUPUESTO -->
 	<operacion name="TraerConceptoPresupuesto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.cotizador.dominio.ConceptoPresupuesto">
 		
 		<output name="resultado" tableName="mtConc">
@@ -165,7 +166,7 @@
 
 	</operacion>
 	
-	
+	<!-- GUARDAR CONCEPTO DE PRESUPUESTO -->
 	<operacion name="GuardarConceptoPresupuesto" clase="com.jkt.operaciones.GuardarLista">
 	
 		<input name="mtConc" keyName="objeto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" fieldID="oid_conc">
