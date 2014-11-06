@@ -7,8 +7,8 @@ import com.jkt.dominio.Container;
 import com.jkt.operaciones.Operation;
 
 /**
- * <p>Esta operación retorna una lista de posibles tipos de venta.</p>
- * <p>Este tipo de venta estará ligado a un detalle de cotización o pedido.</p>
+ * <p>Esta operaciï¿½n retorna una lista de posibles tipos de venta.</p>
+ * <p>Este tipo de venta estarï¿½ ligado a un detalle de cotizaciÃ³n o pedido.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

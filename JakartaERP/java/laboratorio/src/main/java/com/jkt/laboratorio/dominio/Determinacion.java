@@ -9,7 +9,7 @@ import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDetalle;
 
 /**
- * Representa una DeterminaciÛn, o ensayo, que forma parte de un An·lisis.
+ * Representa una Determinaci√≥n, o ensayo, que forma parte de un An√°lisis.
  * Se utiliza en la carga de los protocolos del Laboratorio.
  * Ejemplo: Contenido de Humedad (ppm).
  */

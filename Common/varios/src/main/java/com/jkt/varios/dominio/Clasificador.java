@@ -10,7 +10,7 @@ import com.jkt.dominio.Descriptible;
  * 
  * <p> Trabaja como una metaclase que define a los clasificadores de una entidad </p>
  * 
- * <p> Se utilizar· para poder clasificar de distintas maneras a los objetos de las entidades clasificables </p>
+ * <p> Se utilizar√° para poder clasificar de distintas maneras a los objetos de las entidades clasificables </p>
  * 
  * @see Componente
  * 
