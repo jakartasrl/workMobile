@@ -26,7 +26,7 @@ uses
 
 
 type
-  TFMet003 = class(TForm)
+  TFormHelpGenerico = class(TForm)
     dsInput: TDataSource;
     popSeleccion: TPopupMenu;
     MISeleccionarTodos: TMenuItem;
@@ -108,7 +108,7 @@ type
   end;
 
 var
-  FMet003: TFMet003;
+  FormHelpGenerico: TFormHelpGenerico;
 
 const
   SelecFieldName = 'Selec';
@@ -118,7 +118,7 @@ implementation
 {$R *.DFM}
 
 
-procedure TFMet003.FormCreate(Sender: TObject);
+procedure TFormHelpGenerico.FormCreate(Sender: TObject);
 begin
   FEntidad           := '';
   FEntidadMaestra    := '';
@@ -130,7 +130,7 @@ begin
   FResultFieldName := '';
 end;
 
-procedure TFMet003.FormShow(Sender: TObject);
+procedure TFormHelpGenerico.FormShow(Sender: TObject);
 begin
   Self.Caption := Self.Caption + FEntidad;
 
@@ -193,7 +193,7 @@ begin
 end;
 
 
-procedure TFMet003.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TFormHelpGenerico.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Key = 27) then
@@ -201,7 +201,7 @@ begin
 end;
 
 
-function  TFMet003.HaySeleccionados() : Boolean;
+function  TFormHelpGenerico.HaySeleccionados() : Boolean;
 var
   DataSet : TDataSet;
   Book    : TBookMark;
@@ -231,7 +231,7 @@ begin
 end;
 
 
-procedure TFMet003.btnAceptarClick(Sender: TObject);
+procedure TFormHelpGenerico.btnAceptarClick(Sender: TObject);
 begin
   if not (mtInput.Active) or ((mtInput.Active) and (mtInput.IsEmpty)) then
     Exit;
@@ -244,7 +244,7 @@ begin
 end;
 
 
-procedure TFMet003.CrearColumnasDataSet;
+procedure TFormHelpGenerico.CrearColumnasDataSet;
 var
   name: string;
   tipo: TFieldType;
@@ -309,7 +309,7 @@ begin
   mtInput.Open;
 end;
 
-procedure TFMet003.CrearColumnasGrilla;
+procedure TFormHelpGenerico.CrearColumnasGrilla;
 var
   name     :string;
   etiqueta :string;
@@ -347,21 +347,21 @@ begin
 }
 end;
 
-procedure TFMet003.dbgHelpDblClick(Sender: TObject);
+procedure TFormHelpGenerico.dbgHelpDblClick(Sender: TObject);
 begin
   if SeleccionMultiple then
     Self.MarcarDesmarcaReg();
   btnAceptar.Click;
 end;
 
-procedure TFMet003.dbgHelpKeyDown(Sender: TObject; var Key: Word;
+procedure TFormHelpGenerico.dbgHelpKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Key = 32) and SeleccionMultiple then
     MarcarDesmarcaReg();
 end;
 
-procedure TFMet003.MarcarDesmarcaReg();
+procedure TFormHelpGenerico.MarcarDesmarcaReg();
 var
   valor : Boolean;
 begin
@@ -372,7 +372,7 @@ begin
   dbgHelp.DataSource.DataSet.Post;
 end;
 
-procedure TFMet003.popSeleccionPopup(Sender: TObject);
+procedure TFormHelpGenerico.popSeleccionPopup(Sender: TObject);
 begin
   if (Self.SeleccionMultiple) then
     begin
@@ -388,7 +388,7 @@ begin
     end;
 end;
 
-procedure TFMet003.MISeleccionarClick(Sender: TObject);
+procedure TFormHelpGenerico.MISeleccionarClick(Sender: TObject);
 begin
   if SeleccionMultiple then
     Self.MarcarDesmarcaReg()
@@ -397,7 +397,7 @@ begin
 end;
 
 
-procedure TFMet003.MISeleccionarTodosClick(Sender: TObject);
+procedure TFormHelpGenerico.MISeleccionarTodosClick(Sender: TObject);
 var
   DataSet : TDataSet;
 begin
@@ -419,7 +419,7 @@ begin
 end;
 
 
-procedure TFMet003.MIInvertirSeleccionClick(Sender: TObject);
+procedure TFormHelpGenerico.MIInvertirSeleccionClick(Sender: TObject);
 var
   DataSet : TDataSet;
   valor   : Boolean;
@@ -442,7 +442,7 @@ begin
   dbgHelp.GotoFirst;
 end;
 
-procedure TFMet003.MIAnularSeleccionClick(Sender: TObject);
+procedure TFormHelpGenerico.MIAnularSeleccionClick(Sender: TObject);
 var
   DataSet : TDataSet;
 begin

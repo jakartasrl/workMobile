@@ -1,11 +1,11 @@
-object FormHelpGenerico: TFormHelpGenerico
+object FormHelpCustomizado: TFormHelpCustomizado
   Left = 505
   Top = 133
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Filtro de '
-  ClientHeight = 512
-  ClientWidth = 523
+  Caption = 'Filtro Customizado'
+  ClientHeight = 451
+  ClientWidth = 564
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,6 @@ object FormHelpGenerico: TFormHelpGenerico
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
-  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -28,7 +27,7 @@ object FormHelpGenerico: TFormHelpGenerico
     TabOrder = 0
     Visible = False
     Height = 113
-    Width = 523
+    Width = 564
   end
   object cxGroupBox2: TcxGroupBox
     Left = 0
@@ -36,13 +35,13 @@ object FormHelpGenerico: TFormHelpGenerico
     Align = alClient
     PanelStyle.Active = True
     TabOrder = 1
-    Height = 338
-    Width = 523
+    Height = 277
+    Width = 564
     object dbgHelp: TjktExpDBGrid
       Left = 2
       Top = 2
-      Width = 519
-      Height = 334
+      Width = 560
+      Height = 273
       Align = alClient
       TabOrder = 0
       DataSource = dsInput
@@ -81,16 +80,20 @@ object FormHelpGenerico: TFormHelpGenerico
   end
   object cxGroupBox3: TcxGroupBox
     Left = 0
-    Top = 456
+    Top = 395
     Align = alBottom
     TabOrder = 2
+    DesignSize = (
+      564
+      56)
     Height = 56
-    Width = 523
+    Width = 564
     object btnAceptar: TButton
-      Left = 349
+      Left = 396
       Top = 16
       Width = 75
       Height = 25
+      Anchors = [akRight, akBottom]
       Caption = '&Aceptar'
       Default = True
       Enabled = False
@@ -98,10 +101,11 @@ object FormHelpGenerico: TFormHelpGenerico
       OnClick = btnAceptarClick
     end
     object btnCancelar: TButton
-      Left = 430
+      Left = 477
       Top = 16
       Width = 75
       Height = 25
+      Anchors = [akRight, akBottom]
       Caption = '&Cancelar'
       ModalResult = 2
       TabOrder = 1
@@ -110,7 +114,7 @@ object FormHelpGenerico: TFormHelpGenerico
   object cxSplitter: TcxSplitter
     Left = 0
     Top = 113
-    Width = 523
+    Width = 564
     Height = 5
     AlignSplitter = salTop
     Control = gbFiltroAvanzado
@@ -118,13 +122,13 @@ object FormHelpGenerico: TFormHelpGenerico
   end
   object dsInput: TDataSource
     DataSet = mtInput
-    Left = 392
-    Top = 304
+    Left = 408
+    Top = 232
   end
   object popSeleccion: TPopupMenu
     OnPopup = popSeleccionPopup
-    Left = 88
-    Top = 344
+    Left = 120
+    Top = 200
     object MISeleccionar: TMenuItem
       Caption = 'Seleccionar'
       OnClick = MISeleccionarClick
@@ -145,54 +149,6 @@ object FormHelpGenerico: TFormHelpGenerico
       OnClick = MIAnularSeleccionClick
     end
   end
-  object mtConfigCampos: TjktMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    EnableVersioning = True
-    FilterOptions = []
-    Version = '7.12.10 CodeGear Edition'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 0
-    LocaleID = 0
-    Left = 231
-    Top = 160
-    object mtConfigCamposfieldName: TStringField
-      FieldName = 'fieldName'
-      Size = 40
-    end
-    object mtConfigCampostipo: TStringField
-      FieldName = 'tipo'
-      Size = 40
-    end
-    object mtConfigCamposlongitud: TIntegerField
-      FieldName = 'longitud'
-    end
-    object mtConfigCamposlabel: TStringField
-      FieldName = 'label'
-      Size = 50
-    end
-    object mtConfigCamposvisible: TBooleanField
-      FieldName = 'visible'
-    end
-    object mtConfigCamposreadOnly: TBooleanField
-      FieldName = 'readOnly'
-    end
-    object mtConfigCamposorden: TSmallintField
-      FieldName = 'orden'
-    end
-    object mtConfigCamposcolumnWidth: TSmallintField
-      FieldName = 'columnWidth'
-    end
-  end
   object mtInput: TjktMemTable
     DesignActivation = True
     AttachedAutoRefresh = True
@@ -211,96 +167,35 @@ object FormHelpGenerico: TFormHelpGenerico
     SortID = 0
     SubLanguageID = 0
     LocaleID = 0
-    Left = 440
-    Top = 304
-  end
-  object opConfig: TjktOperacion
-    OperName = 'TraerConfigHelpGenerico'
-    EnviarTodo = False
-    Atributos = <
-      item
-        Attribute = 'entidad'
-        Field = mtParametrosEntidad
-        Tag = 0
-      end>
-    ServiceCaller = Service
-    Left = 304
-    Top = 160
-  end
-  object opFiltroSimple: TjktOperacion
-    EnviarTodo = False
-    Atributos = <
-      item
-        Attribute = 'entidad'
-        Field = mtParametrosEntidad
-        Tag = 0
-      end
-      item
-        Dataset = mtFiltros
-        Tag = 0
-      end>
-    ServiceCaller = Service
-    Left = 304
+    Left = 448
     Top = 232
+    object mtInputoid: TIntegerField
+      FieldName = 'oid'
+    end
+    object mtInputcodigo: TStringField
+      FieldName = 'codigo'
+      Size = 15
+    end
+    object mtInputdescripcion: TStringField
+      FieldName = 'descripcion'
+      Size = 100
+    end
+    object mtInputseleccionado: TBooleanField
+      FieldName = 'seleccionado'
+    end
   end
-  object mtFiltros: TjktMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    EnableVersioning = True
-    FilterOptions = []
-    Version = '7.12.10 CodeGear Edition'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 0
-    LocaleID = 0
-    Left = 232
-    Top = 232
-  end
-  object mtParametros: TjktMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    EnableVersioning = True
-    FilterOptions = []
-    Version = '7.12.10 CodeGear Edition'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 0
-    LocaleID = 0
-    Left = 97
-    Top = 160
-    object mtParametrosEntidad: TStringField
-      FieldName = 'Entidad'
-      Size = 255
-    end
-    object mtParametrosEntidadMaestra: TStringField
-      FieldName = 'EntidadMaestra'
-      Size = 255
-    end
-    object mtParametrosOidEntidadMaestra: TIntegerField
-      FieldName = 'OidEntidadMaestra'
-    end
+  object opFiltro: TjktOperacion
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 120
+    Top = 136
   end
   object Service: TjktServiceCaller
     HTTP = IdHTTP
     IgnoreException = False
     Left = 120
-    Top = 64
+    Top = 40
   end
   object IdHTTP: TIdHTTP
     AllowCookies = True
@@ -317,32 +212,6 @@ object FormHelpGenerico: TFormHelpGenerico
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
     Left = 168
-    Top = 64
-  end
-  object opFiltroCompuesto: TjktOperacion
-    EnviarTodo = False
-    Atributos = <
-      item
-        Attribute = 'entidad'
-        Field = mtParametrosEntidad
-        Tag = 0
-      end
-      item
-        Attribute = 'entidadMaestra'
-        Field = mtParametrosEntidadMaestra
-        Tag = 0
-      end
-      item
-        Attribute = 'oidEntidadMaestra'
-        Field = mtParametrosOidEntidadMaestra
-        Tag = 0
-      end
-      item
-        Dataset = mtFiltros
-        Tag = 0
-      end>
-    ServiceCaller = Service
-    Left = 304
-    Top = 288
+    Top = 40
   end
 end
