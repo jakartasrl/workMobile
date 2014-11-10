@@ -15,26 +15,4 @@ object frameListaProgramas: TframeListaProgramas
       Index = 0
     end
   end
-  object cds_Programas: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 128
-    Top = 80
-    object cds_ProgramascodItemMenu: TIntegerField
-      FieldName = 'codItemMenu'
-    end
-    object cds_ProgramasdescItemMenu: TStringField
-      FieldName = 'descItemMenu'
-      Size = 30
-    end
-    object cds_ProgramascodItemPadre: TIntegerField
-      FieldName = 'codItemPadre'
-    end
-    object cds_ProgramasesGrupo: TBooleanField
-      FieldName = 'esGrupo'
-    end
-    object cds_ProgramasesItemDeGrupo: TBooleanField
-      FieldName = 'esItemDeGrupo'
-    end
-  end
 end

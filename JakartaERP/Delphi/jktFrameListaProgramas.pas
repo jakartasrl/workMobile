@@ -22,12 +22,6 @@ uses
 
 type
   TframeListaProgramas = class(TFrame)
-    cds_Programas: TClientDataSet;
-    cds_ProgramascodItemMenu: TIntegerField;
-    cds_ProgramasdescItemMenu: TStringField;
-    cds_ProgramascodItemPadre: TIntegerField;
-    cds_ProgramasesGrupo: TBooleanField;
-    cds_ProgramasesItemDeGrupo: TBooleanField;
     tc_Programas: TdxTileControl;
     tc_ProgramasGroup1: TdxTileControlGroup;
 
@@ -39,6 +33,8 @@ type
     function GetRandomColor: TColor;
 
   public
+    cds_Programas: TClientDataSet;
+
     constructor Create(AOwner: TComponent); override;
     destructor Destroy(); override;
 
@@ -79,7 +75,8 @@ begin
   // Debo pedirle al servidor la lista de Programas correspondientes al item de
   // grupo pasado por parametro. POR AHORA LO LEO DEL ARCHIVO 'MenuUsuario.xml'
   // En esa lista nos va a venir el nombre de la Clase del Form y sus parametros
-  cds_Programas.LoadFromFile(DataPath + 'MenuUsuario.xml');
+
+//  cds_Programas.LoadFromFile(DataPath + 'MenuUsuario.xml');
 
   // Filtro todos los Programas que tienen como Padre al codItemDeGrupo pasado
   cds_Programas.Filtered := False;
@@ -140,7 +137,8 @@ begin
 
     cds_Programas.Next;
   end;
-  cds_Programas.Close;
+
+//  cds_Programas.Close;
 end;
 
 function TframeListaProgramas.GetRandomColor: TColor;
@@ -210,6 +208,8 @@ begin
     NombrePrograma := 'TFNVen0003'
   else if Sender.Tag = 27 then
     NombrePrograma := 'TFNVen0004'
+  else if Sender.Tag = 28 then
+    NombrePrograma := 'TFNVen0005'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
@@ -321,7 +321,7 @@ begin
     end;
 
   frmMainForm.Show;
-  frmMainForm.AbrirPrograma(NombrePrograma, parametroInicial, titulo);
+  frmMainForm.AbrirPrograma(NombrePrograma, ParametroInicial, Titulo);
   // Oculto el Menu Principal
   TForm(Owner).Hide;
 end;
