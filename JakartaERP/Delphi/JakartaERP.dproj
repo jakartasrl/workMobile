@@ -91,14 +91,15 @@
 			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0001.pas">
 				<Form>frmChild</Form>
 			</DCCReference>
+			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktFNMet0004.pas">
+				<Form>FormHelpCustomizado</Form>
+			</DCCReference>
 			<DCCReference Include="..\..\Common\Framework\Delphi XE2\jktCNMet0005.pas"/>
 			<DCCReference Include="jktFNMenuPrincipal.pas">
 				<Form>frmMenuPrincipal</Form>
-				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="jktFrameListaProgramas.pas">
 				<Form>frameListaProgramas</Form>
-				<FormType>dfm</FormType>
 				<DesignClass>TFrame</DesignClass>
 			</DCCReference>
 			<DCCReference Include="jktUtils.pas"/>

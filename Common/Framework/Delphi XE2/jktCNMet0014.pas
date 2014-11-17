@@ -93,7 +93,7 @@ type
     property Entidad : string read FEntidad write FEntidad;
     property EntidadMaestra : string read FEntidadMaestra write FEntidadMaestra;
     property OidEntidadMaestra : TIntegerField read FOidEntidadMaestra write FOidEntidadMaestra;
-    property TipoFiltro : TjktTipoFiltro read FTipoFiltro write FTipoFiltro default fi_Activos;
+    property TipoFiltro : TjktTipoFiltro read FTipoFiltro write FTipoFiltro;
     property OidRespuesta : TIntegerField read FOidRespuesta write FOidRespuesta;
     property CodigoRespuesta : TStringField read FCodigoRespuesta write FCodigoRespuesta;
 
@@ -136,6 +136,8 @@ begin
 
   FEntidad := '';
   FEntidadMaestra := '';
+
+//  FTipoFiltro := fi_Activos;
 end;
 
 function TjktHelpGenerico.Ejecutar(): Boolean;

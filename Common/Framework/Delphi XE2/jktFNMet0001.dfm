@@ -47,25 +47,23 @@ object frmChild: TfrmChild
     Width = 30
   end
   object cxSplitterRight: TcxSplitter
-    Left = 668
+    Left = 672
     Top = 0
     Width = 4
     Height = 388
     HotZoneClassName = 'TcxXPTaskBarStyle'
     AlignSplitter = salRight
     Control = cxGroupBoxRight
-    ExplicitLeft = 672
   end
   object cxGroupBoxMain: TcxGroupBox
-    Left = 38
+    Left = 34
     Top = 0
     Align = alClient
     PanelStyle.Active = True
     Style.BorderStyle = ebsNone
     TabOrder = 8
-    ExplicitWidth = 634
     Height = 388
-    Width = 630
+    Width = 638
   end
   object BarManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -132,8 +130,8 @@ object frmChild: TfrmChild
     OperacionSave = OperacionSave
     OperacionTraer = OperacionTraer
     ConfirmarCancelacion = True
-    Opciones = []
     TipoPrograma = tp_abmLista
+    FiltrarAlInicio = True
     OperacionesIniciales = <>
     OperacionesDefault = <>
     Left = 360
