@@ -334,7 +334,33 @@
 		</forms>		
 
 	</operacion>
-	
+
+
+	<!-- TRAE TODOS LOS ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR-->
+	<operacion name="HelpTraerItemsACotizar" clase="com.jkt.cotizador.operaciones.TraerItemsParaCotizar" >
+
+		<output name="items" tableName="mtInput">
+<!-- 			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" /> -->
+			<campoSalida value="oid" target="id" />
+<!-- 			<campoSalida value="codigo" target="" /> -->			
+			<campoSalida value="descripcion" target="comprobanteVenta.clienteSucursal.descripcion" />
+			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" />
+			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
+			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
+			<campoSalida value="nro_item" target="numero" />
+			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="detalle" target="descripcion" />
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+		
+		<forms>
+			<form name="FNHlp0001"> </form>
+		</forms>		
+
+	</operacion>
+
+
 	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DE ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR -->
 	<operacion name="TraerItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet">
 
@@ -364,29 +390,30 @@
 	<!-- CONFIGURACION DEL COTIZADOR. ESTA OPERACION SE EJECUTA AL MOMENTO DE GUARDAR EN EL COTIZADOR LA RELACION CON UN MODELO Y SUS CORRESPONDIENTES RELACIONES. -->
 	<operacion name="ConfigurarCotizador" clase="com.jkt.operaciones.GuardarLista">
 	
-		<input name="mtCotizador" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cot">
+		<input name="mtCabCotiz" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cotiz">
 			<campoEntrada>
-				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" />
-				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" />
-				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" />
-				<campoEntrada name="modelo" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
-				
-				<campoEntrada name="mtDetalleCotizador" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_detalle">
-					<campoEntrada name="producto" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
-					<campoEntrada name="cantidad" clase="Integer" metodo="setCantidad" />
-					<campoEntrada name="precioUnitario" clase="Double" metodo="setPrecioUnitario" />
-					<campoEntrada name="cotizacion" clase="Double" metodo="setCotizacion" />
+<!-- 				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" /> -->
+<!-- 				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" /> -->
+<!-- 				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" /> -->
+				<campoEntrada name="oid_mod" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
+				<campoEntrada name="oid_moneda_expresada" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaExpresada" />
 
-					<campoEntrada name="conceptoPresupuesto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
-					<campoEntrada name="unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
-					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
+					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
+					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
+					<campoEntrada name="importe_unit" clase="Double" metodo="setPrecioUnitario" />
+					<campoEntrada name="oid_moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+<!-- 					<campoEntrada name="importe_total" clase="" metodo="" /> -->
+<!-- 					<campoEntrada name="importe_total_2" clase="" metodo="" /> -->
+<!-- 					<campoEntrada name="cotizacion" clase="Double" metodo="setCotizacion" /> -->
 				</campoEntrada>
-				
 			</campoEntrada>
 		</input>
 		
 		<forms>
-			<form name="-"></form>
+			<form name="FNVen0005"></form>
 		</forms>
 
 	</operacion>
@@ -394,14 +421,14 @@
 	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
 	<operacion name="TraerModeloParaCotizar" clase="com.jkt.cotizador.operaciones.TraerModeloParaCotizar">
 
-		<output name="modelo" tableName="mtCab">
-			<campoSalida value="oid_mod" target="id" />
-			<campoSalida value="cod_mod" target="codigo" />
-			<campoSalida value="des_mod" target="descripcion" />
-		</output>
+<!-- 		<output name="modelo" tableName="mtCabCotiz"> -->
+<!-- 			<campoSalida value="oid_mod" target="id" /> -->
+<!-- 			<campoSalida value="cod_mod" target="codigo" /> -->
+<!-- 			<campoSalida value="des_mod" target="descripcion" /> -->
+<!-- 		</output> -->
 
-		<output name="titulos" tableName="mtDet">
-			<campoSalida value="oid_titu_conc" target="id" />
+		<output name="titulos" tableName="mtDetCotiz">
+<!-- 			<campoSalida value="oid_det" target="id" /> -->
 			<campoSalida value="oid_mod" target="modeloCotizador.id" />
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
@@ -411,15 +438,14 @@
 			<campoSalida value="oid_conc" target="concepto.id" />
 			
 			<!-- Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
-			<campoSalida value="oid_producto" target="producto.id" />
-			<campoSalida value="des_producto" target="producto.descripcion" />
-
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="des_art" target="producto.descripcionAbrev" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
 		<forms>
-			<form name="---">
+			<form name="FNVen0005">
 			</form>
 		</forms>
 

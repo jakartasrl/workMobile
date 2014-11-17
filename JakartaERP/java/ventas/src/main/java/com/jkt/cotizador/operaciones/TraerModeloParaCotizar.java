@@ -35,7 +35,7 @@ public class TraerModeloParaCotizar extends Operation {
 		
 		ModeloCotizador modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
 		
-		notificarObjeto(WRITER_MODELO, modelo);
+//		notificarObjeto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
@@ -81,10 +81,13 @@ public class TraerModeloParaCotizar extends Operation {
 				Producto producto;
 
 				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
+				int i = 10000;
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
 					productoClasificador=(ProductoClasificador) persistentEntity;
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
 					tituloModeloCotizador.setProducto(producto);
+					
+					tituloModeloCotizador.setCodigoInterno(tituloModeloCotizador.getCodigoInterno()+(i++));
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
 				
