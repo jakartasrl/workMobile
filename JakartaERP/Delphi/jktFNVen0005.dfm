@@ -1,50 +1,51 @@
 inherited FNVen0005: TFNVen0005
   Anchors = []
   Caption = 'Cotizador'
-  ClientHeight = 477
-  ClientWidth = 1043
-  ExplicitLeft = -284
-  ExplicitWidth = 1059
-  ExplicitHeight = 515
+  ClientHeight = 536
+  ClientWidth = 1071
+  ExplicitTop = -6
+  ExplicitWidth = 1087
+  ExplicitHeight = 574
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
     ExplicitHeight = 477
-    Height = 477
+    Height = 536
   end
   inherited cxSplitterLeft: TcxSplitter
-    Height = 477
+    Height = 536
     ExplicitHeight = 477
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 1013
-    ExplicitLeft = 954
+    Left = 1041
+    ExplicitLeft = 1013
     ExplicitHeight = 477
-    Height = 477
+    Height = 536
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 1009
-    Height = 477
-    ExplicitLeft = 950
+    Left = 1037
+    Height = 536
+    ExplicitLeft = 1009
     ExplicitHeight = 477
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 916
+    ExplicitWidth = 975
     ExplicitHeight = 477
-    Height = 477
-    Width = 975
+    Height = 536
+    Width = 1003
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
-      Width = 971
-      Height = 473
+      Width = 999
+      Height = 532
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 912
+      ExplicitWidth = 971
+      ExplicitHeight = 473
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = 116
-        Top = -333
+        Left = 126
+        Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
@@ -53,8 +54,8 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 256
-        Top = -333
+        Left = 266
+        Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
@@ -63,48 +64,48 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = 116
-        Top = -306
+        Left = 126
+        Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 2
-        Width = 240
+        Width = 291
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = 116
-        Top = -279
+        Left = 126
+        Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 3
-        Width = 240
+        Width = 291
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 116
-        Top = -119
+        Left = 126
+        Top = 247
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 6
-        Width = 101
+        Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 223
-        Top = -119
+        Left = 225
+        Top = 247
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 7
-        Width = 306
+        Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 116
-        Top = -252
+        Left = 126
+        Top = 153
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
         Properties.Alignment.Vert = taVCenter
@@ -112,22 +113,23 @@ inherited FNVen0005: TFNVen0005
         Transparent = True
         Height = 17
         Width = 307
-        AnchorY = -243
+        AnchorY = 162
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 116
-        Top = -229
+        Left = 126
+        Top = 176
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
         Properties.ReadOnly = True
+        Properties.ScrollBars = ssVertical
         Style.HotTrack = False
         TabOrder = 5
-        Height = 104
-        Width = 413
+        Height = 65
+        Width = 291
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 131
-        Top = -48
+        Left = 570
+        Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
         Properties.Buttons = <
@@ -141,17 +143,17 @@ inherited FNVen0005: TFNVen0005
         Width = 134
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 271
-        Top = -48
+        Left = 710
+        Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
         Style.HotTrack = False
         TabOrder = 9
-        Width = 290
+        Width = 241
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 131
-        Top = -21
+        Left = 570
+        Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
         Properties.DropDownAutoSize = True
@@ -175,8 +177,8 @@ inherited FNVen0005: TFNVen0005
         Width = 134
       end
       object jktExpDBGrid1: TjktExpDBGrid
-        Left = 131
-        Top = 6
+        Left = 570
+        Top = 126
         Width = 326
         Height = 120
         BorderStyle = cxcbsNone
@@ -218,9 +220,10 @@ inherited FNVen0005: TFNVen0005
       end
       object cxDBTreeList1: TcxDBTreeList
         Left = 20
-        Top = 176
-        Width = 855
-        Height = 274
+        Top = 331
+        Width = 938
+        Height = 223
+        BorderStyle = cxcbsNone
         Align = alClient
         Bands = <
           item
@@ -452,13 +455,14 @@ inherited FNVen0005: TFNVen0005
       end
       object lcMainGroup1: TdxLayoutGroup
         CaptionOptions.Text = 'Detalles del '#237'tem a cotizar'
-        Parent = lcMainGroup_Root
+        Parent = lcMainGroup7
         ButtonOptions.Buttons = <>
         Index = 0
       end
       object lcMainGroup2: TdxLayoutGroup
+        AlignHorz = ahClient
         CaptionOptions.Text = 'Configuraci'#243'n Cotizador'
-        Parent = lcMainGroup_Root
+        Parent = lcMainGroup7
         ButtonOptions.Buttons = <>
         ItemControlAreaAlignment = catOwn
         Index = 1
@@ -467,7 +471,8 @@ inherited FNVen0005: TFNVen0005
         CaptionOptions.Text = 'Cotizador'
         Parent = lcMainGroup_Root
         ButtonOptions.Buttons = <>
-        Index = 2
+        ButtonOptions.ShowExpandButton = True
+        Index = 1
       end
       object lcMainItem1: TdxLayoutItem
         CaptionOptions.AlignHorz = taRightJustify
@@ -522,6 +527,7 @@ inherited FNVen0005: TFNVen0005
         AlignHorz = ahLeft
         CaptionOptions.Text = 'Hidden Group'
         Parent = lcMainGroup1
+        Visible = False
         ButtonOptions.Buttons = <>
         Hidden = True
         LayoutDirection = ldHorizontal
@@ -602,6 +608,15 @@ inherited FNVen0005: TFNVen0005
         Parent = lcMainGroup3
         Control = cxDBTreeList1
         ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainGroup7: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup_Root
+        ButtonOptions.Buttons = <>
+        ButtonOptions.ShowExpandButton = True
+        LayoutDirection = ldHorizontal
         Index = 0
       end
     end
@@ -1041,6 +1056,7 @@ inherited FNVen0005: TFNVen0005
         Tag = 0
       end>
     ServiceCaller = Service
+    OnAfterEjecutar = opTraerModeloParaCotizarAfterEjecutar
     Left = 384
     Top = 344
   end

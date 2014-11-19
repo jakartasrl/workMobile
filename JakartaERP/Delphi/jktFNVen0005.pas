@@ -141,6 +141,7 @@ type
     cxDBTreeList1importe_total_2: TcxDBTreeListColumn;
     cxStyleRepository: TcxStyleRepository;
     cxStyleDisabled: TcxStyle;
+    lcMainGroup7: TdxLayoutGroup;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -159,6 +160,7 @@ type
       AColumn: TcxTreeListColumn; ANode: TcxTreeListNode; var AStyle: TcxStyle);
     procedure cxDBTreeList1importe_totalGetDisplayText(
       Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
+    procedure opTraerModeloParaCotizarAfterEjecutar(Sender: TObject);
   private
     { Private declarations }
   public
@@ -227,7 +229,7 @@ procedure TFNVen0005.cxDBTreeList1importe_total_2TcxTreeListColumnSummaryFooterS
 begin
   inherited;
 
-  AText := cxDBLookupComboBox1.Text + ' ' + FormatFloat('0.00', AValue);
+//  AText := cxDBLookupComboBox1.Text + ' ' + FormatFloat('0.00', AValue);
 end;
 
 procedure TFNVen0005.cxDBTreeList1StylesGetContentStyle(
@@ -302,6 +304,24 @@ begin
 //  HelpForm := TFNVen0004.Create(Self);
 //  HelpForm.FormStyle := fsNormal;
 //  HelpForm.InicializarChild(nil);
+end;
+
+procedure TFNVen0005.opTraerModeloParaCotizarAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  mtDetCotiz.First;
+  while not mtDetCotiz.Eof do
+    begin
+      if (mtDetCotiz.FieldByName('tipo').AsString = 'C') then
+        begin
+          mtDetCotiz.Edit;
+          mtDetCotiz.FieldByName('oid_moneda').AsInteger := 1;
+          mtDetCotiz.Post;
+        end;
+
+      mtDetCotiz.Next;
+    end;
 end;
 
 initialization

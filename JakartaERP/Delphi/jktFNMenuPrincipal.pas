@@ -628,6 +628,14 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 302;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Cotizaciones';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
 
   // creo los Programas -------------------------------------------------------
   cds_MenuUsuario.Append;
@@ -681,7 +689,7 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 26;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Solicitud de Cotización';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
@@ -689,7 +697,7 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 27;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Presupuestos sin cotizar';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
@@ -697,7 +705,7 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 28;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Cotizador';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;

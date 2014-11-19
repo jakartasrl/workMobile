@@ -485,7 +485,7 @@ object frmMainForm: TfrmMainForm
         Height = 60
         Width = 700
         object bvSpacer4: TBevel
-          Left = 658
+          Left = 562
           Top = 0
           Width = 42
           Height = 60
@@ -515,9 +515,8 @@ object frmMainForm: TfrmMainForm
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           Transparent = True
-          ExplicitWidth = 520
           Height = 60
-          Width = 616
+          Width = 520
         end
         object lbbvTabCaption2013: TcxLabel
           Left = 42
@@ -533,7 +532,6 @@ object frmMainForm: TfrmMainForm
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
           Transparent = True
-          ExplicitWidth = 520
         end
       end
       object gbLocationsMain: TcxGroupBox
@@ -725,7 +723,7 @@ object frmMainForm: TfrmMainForm
         ExplicitHeight = 374
       end
       object Bevel2: TBevel
-        Left = 658
+        Left = 562
         Top = 0
         Width = 42
         Height = 252
@@ -737,7 +735,7 @@ object frmMainForm: TfrmMainForm
       object Bevel3: TBevel
         Left = 0
         Top = 252
-        Width = 700
+        Width = 604
         Height = 26
         Align = alBottom
         Shape = bsSpacer
