@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.varios.dominio.Moneda;
 
 /**
  * <p>Entidad que se encarga de cotizar un presupuestos.</p>
@@ -17,6 +18,7 @@ public class Cotizador extends PersistentEntity {
 	private boolean revisado;
 	private String usuarioCreacion;
 	
+	private Moneda monedaExpresada;
 	private String usuarioRevision;
 	private Date fechaRevision;
 	private ModeloCotizador modelo;
@@ -35,6 +37,14 @@ public class Cotizador extends PersistentEntity {
 		}
 	}
 	
+	public Moneda getMonedaExpresada() {
+		return monedaExpresada;
+	}
+
+	public void setMonedaExpresada(Moneda monedaExpresada) {
+		this.monedaExpresada = monedaExpresada;
+	}
+
 	public List<CotizadorDet> getDetalles() {
 		return detalles;
 	}

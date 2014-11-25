@@ -39,6 +39,7 @@ public class ModeloCotizador extends Descriptible {
 	public void agregarTitulo(TituloModeloCotizador titulo){
 		if (!titulos.contains(titulo)) {
 			titulos.add(titulo);
+			titulo.setModeloCotizador(this);
 		}
 	}
 	

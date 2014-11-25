@@ -3,8 +3,8 @@ unit jktCNMet0014;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs ,
-  jktCNMet0002, DB , kbmMemTable, jktFNMet0003, jktCNTypes;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  jktCNMet0002, DB, kbmMemTable, jktCNTypes;
 
 const
   oid         = 'oid';
@@ -55,6 +55,7 @@ type
     FSeleccionMultiple : boolean;
     FNotifyAcepto : TNotifyAcepto;
     FTipoFiltro : TjktTipoFiltro;
+    FFormClassName : string;
     FEntidad : string;
     FEntidadMaestra : string;
     FOidEntidadMaestra : TIntegerField;
@@ -86,10 +87,13 @@ type
   published
     { Published declarations }
     property ServiceCaller : TjktServiceCaller read FServiceCaller write FServiceCaller;
+    // En 'FormClassName' irá el nombre de la Clase del Form 'customizado',
+    // que se abrirá en vez del Help Generico!
+    property FormClassName : string read FFormClassName write FFormClassName;
     property Entidad : string read FEntidad write FEntidad;
     property EntidadMaestra : string read FEntidadMaestra write FEntidadMaestra;
     property OidEntidadMaestra : TIntegerField read FOidEntidadMaestra write FOidEntidadMaestra;
-    property TipoFiltro : TjktTipoFiltro read FTipoFiltro write FTipoFiltro default fi_Activos;
+    property TipoFiltro : TjktTipoFiltro read FTipoFiltro write FTipoFiltro;
     property OidRespuesta : TIntegerField read FOidRespuesta write FOidRespuesta;
     property CodigoRespuesta : TStringField read FCodigoRespuesta write FCodigoRespuesta;
 
@@ -104,6 +108,9 @@ procedure Register;
 
 
 implementation
+
+uses
+  jktFNMet0003, jktFNMet0004;
 
 
 procedure Register;
@@ -129,6 +136,8 @@ begin
 
   FEntidad := '';
   FEntidadMaestra := '';
+
+//  FTipoFiltro := fi_Activos;
 end;
 
 function TjktHelpGenerico.Ejecutar(): Boolean;
@@ -209,79 +218,158 @@ end;
 
 function TjktHelpGenerico.SeleccionarRegistro(): Boolean;
 var
-  HelpDialog: TFMet003;
-  CodigoMultiple: string;
+  fc : TFormClass;
+  HelpDialog : TFormHelpGenerico;
+  HelpCustomizado : TFormHelpCustomizado;
+  CodigoMultiple : string;
 begin
   Result := False;
 
-  HelpDialog := TFMet003.Create(nil);
-  try
-    HelpDialog.Service.Host       := FServiceCaller.Host;
-    HelpDialog.Service.Port       := FServiceCaller.Port;
-    HelpDialog.Service.Servlet    := FServiceCaller.Servlet;
-    HelpDialog.Service.Aplicacion := FServiceCaller.Aplicacion;
-    HelpDialog.Service.Protocolo  := FServiceCaller.Protocolo;
+  if (FTipoFiltro = fi_Customizado) then
+    begin
+      try
+        // FindClass busca en las clases registradas del sistema.
+        // Si el nombre de la clase pasada no se encuentra, FindClass lanza una exception.
+        fc := TFormClass(FindClass(FFormClassName));
+      except
+        // No registró la clase!
+        MessageDlg(Format('No se encuentra el Form customizado "%s".' + #$0D + #$0A +
+          '¿Registró la clase del Form con "RegisterClass"?', [FFormClassName]), mtError, [mbOK], 0);
+        Exit;
+      end;
 
-    HelpDialog.Entidad := FEntidad;
-    HelpDialog.EntidadMaestra := FEntidadMaestra;
-    if Assigned(FOidEntidadMaestra) then
-      HelpDialog.OidEntidadMaestra := FOidEntidadMaestra.Value;
+      // ATENCION: Lo ideal sería crear un Form Padre 'TFormHelpCustomizado' y que todos
+      // los Helps customizados hereden de ese. De esta manera, tienen la estructura
+      // y el funcionamiento que se necesita!
+      HelpCustomizado := TFormHelpCustomizado(fc.Create(Self.Owner));
+      try
+        HelpCustomizado.Service.Host       := FServiceCaller.Host;
+        HelpCustomizado.Service.Port       := FServiceCaller.Port;
+        HelpCustomizado.Service.Servlet    := FServiceCaller.Servlet;
+        HelpCustomizado.Service.Aplicacion := FServiceCaller.Aplicacion;
+        HelpCustomizado.Service.Protocolo  := FServiceCaller.Protocolo;
 
-    HelpDialog.TipoFiltro    := FTipoFiltro;
-    HelpDialog.SeleccionMultiple := Self.SeleccionMultiple;
+        HelpCustomizado.SeleccionMultiple := Self.SeleccionMultiple;
 
-    HelpDialog.OidFieldName    := oid;
-    HelpDialog.CodFieldName    := codigo;
-    HelpDialog.DescFieldName   := descripcion;
-    HelpDialog.ResultFieldName := 'codigo';
-
-    HelpDialog.ShowModal();
-    if (HelpDialog.ModalResult = mrOk) then
-      begin
-        Result := True;
-
-        FOid         := HelpDialog.mtInput.FieldByName(oid).AsInteger;
-        FCodigo      := HelpDialog.mtInput.FieldByName(codigo).AsString;
-        FDescripcion := HelpDialog.mtInput.FieldByName(descripcion).AsString;
-
-        if not SeleccionMultiple then
+        HelpCustomizado.ShowModal();
+        if (HelpCustomizado.ModalResult = mrOk) then
           begin
-            // Devuelvo los datos donde los quieren
-            if Assigned(CodigoRespuesta) then
+            Result := True;
+
+            FOid         := HelpCustomizado.mtInput.FieldByName(oid).AsInteger;
+            FCodigo      := HelpCustomizado.mtInput.FieldByName(codigo).AsString;
+            FDescripcion := HelpCustomizado.mtInput.FieldByName(descripcion).AsString;
+
+            if not SeleccionMultiple then
               begin
-                if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
-                  CodigoRespuesta.DataSet.Edit();
+                // Devuelvo los datos donde los quieren
+                if Assigned(CodigoRespuesta) then
+                  begin
+                    if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                      CodigoRespuesta.DataSet.Edit();
 
-                CodigoRespuesta.Value := GetCodigo();
-              end;
+                    CodigoRespuesta.Value := GetCodigo();
+                  end;
 
-            if Assigned(OidRespuesta) then
+                if Assigned(OidRespuesta) then
+                  begin
+                    if not (OidRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                      OidRespuesta.DataSet.Edit();
+
+                    OidRespuesta.Value := GetOid();
+                  end;
+              end
+            else
               begin
-                if not (OidRespuesta.DataSet.State in [dsEdit, dsInsert]) then
-                  OidRespuesta.DataSet.Edit();
+                CodigoMultiple := cargarRegistrosMultiSelec(FTempMemTable);
+                FCodigo := CodigoMultiple;
+                // Envio una tabla con los registros seleccionados!
+                if (Assigned(FNotifyAcepto)) then FNotifyAcepto(FSeleccionReg);
 
-                OidRespuesta.Value := GetOid();
-              end;
-          end
-        else
-          begin
-            CodigoMultiple := cargarRegistrosMultiSelec(FTempMemTable);
-            FCodigo := CodigoMultiple;
-            // Envio una tabla con los registros seleccionados!
-            if (Assigned(FNotifyAcepto)) then FNotifyAcepto(FSeleccionReg);
+                if Assigned(CodigoRespuesta) then
+                  begin
+                    if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                      CodigoRespuesta.DataSet.Edit();
 
-            if Assigned(CodigoRespuesta) then
-              begin
-                if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
-                  CodigoRespuesta.DataSet.Edit();
-
-                CodigoRespuesta.Value := CodigoMultiple;
+                    CodigoRespuesta.Value := CodigoMultiple;
+                  end;
               end;
           end;
+      finally
+        HelpCustomizado.Free;
       end;
-  finally
-    HelpDialog.Free();
-  end;
+    end
+  else
+    begin
+      HelpDialog := TFormHelpGenerico.Create(nil);
+      try
+        HelpDialog.Service.Host       := FServiceCaller.Host;
+        HelpDialog.Service.Port       := FServiceCaller.Port;
+        HelpDialog.Service.Servlet    := FServiceCaller.Servlet;
+        HelpDialog.Service.Aplicacion := FServiceCaller.Aplicacion;
+        HelpDialog.Service.Protocolo  := FServiceCaller.Protocolo;
+
+        HelpDialog.Entidad := FEntidad;
+        HelpDialog.EntidadMaestra := FEntidadMaestra;
+        if Assigned(FOidEntidadMaestra) then
+          HelpDialog.OidEntidadMaestra := FOidEntidadMaestra.Value;
+
+        HelpDialog.TipoFiltro    := FTipoFiltro;
+        HelpDialog.SeleccionMultiple := Self.SeleccionMultiple;
+
+        HelpDialog.OidFieldName    := oid;
+        HelpDialog.CodFieldName    := codigo;
+        HelpDialog.DescFieldName   := descripcion;
+        HelpDialog.ResultFieldName := 'codigo';
+
+        HelpDialog.ShowModal();
+        if (HelpDialog.ModalResult = mrOk) then
+          begin
+            Result := True;
+
+            FOid         := HelpDialog.mtInput.FieldByName(oid).AsInteger;
+            FCodigo      := HelpDialog.mtInput.FieldByName(codigo).AsString;
+            FDescripcion := HelpDialog.mtInput.FieldByName(descripcion).AsString;
+
+            if not SeleccionMultiple then
+              begin
+                // Devuelvo los datos donde los quieren
+                if Assigned(CodigoRespuesta) then
+                  begin
+                    if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                      CodigoRespuesta.DataSet.Edit();
+
+                    CodigoRespuesta.Value := GetCodigo();
+                  end;
+
+                if Assigned(OidRespuesta) then
+                  begin
+                    if not (OidRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                      OidRespuesta.DataSet.Edit();
+
+                    OidRespuesta.Value := GetOid();
+                  end;
+              end
+            else
+              begin
+                CodigoMultiple := cargarRegistrosMultiSelec(FTempMemTable);
+                FCodigo := CodigoMultiple;
+                // Envio una tabla con los registros seleccionados!
+                if (Assigned(FNotifyAcepto)) then FNotifyAcepto(FSeleccionReg);
+
+                if Assigned(CodigoRespuesta) then
+                  begin
+                    if not (CodigoRespuesta.DataSet.State in [dsEdit, dsInsert]) then
+                      CodigoRespuesta.DataSet.Edit();
+
+                    CodigoRespuesta.Value := CodigoMultiple;
+                  end;
+              end;
+          end;
+      finally
+        HelpDialog.Free();
+      end;
+    end;
 end;
 
 destructor TjktHelpGenerico.Destroy;
@@ -403,8 +491,12 @@ begin
   if (FServiceCaller = nil) then
     raise Exception.Create('La propiedad ServiceCaller no fue asignada');
 
-  if (FEntidad = '') then
+  if (FTipoFiltro <> fi_Customizado) and (FEntidad = '') then
     raise Exception.Create('La propiedad Entidad no fue asignada');
+
+  if (FTipoFiltro = fi_Customizado) and (Trim(FFormClassName) = '') then
+    raise Exception.Create('Para el filtro Customizado, debe indicarme en la ' +
+      'propiedad ''FormClassName'', el nombre de la clase del Form a mostrar');
 end;
 
 procedure TjktHelpGenerico.LimpiarDataSets();

@@ -3,6 +3,7 @@ package com.jkt.cotizador.operaciones;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.Container;
 import com.jkt.operaciones.Operation;
 
@@ -18,7 +19,7 @@ public class TraerTiposDeVenta extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		notificarObjetos(WRITER_ENTIDADES, Arrays.asList(new Container("1", "Fabricacion"), new Container("2", "Reparacion"), new Container("3", "Service")));
+		notificarObjetos(WRITER_ENTIDADES, ComprobanteVentaDet.TIPO_VENTA);
 	}
 
 }

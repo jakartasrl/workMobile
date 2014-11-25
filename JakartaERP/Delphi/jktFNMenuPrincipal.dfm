@@ -955,7 +955,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Style.Font.Style = []
         Style.IsFontAssigned = True
         TabOrder = 1
-        ExplicitTop = 316
         Height = 103
         Width = 769
         object tc_Novedades: TdxTileControl
@@ -975,9 +974,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         OptionsBehavior.ItemMoving = False
         OptionsBehavior.ScrollMode = smScrollButtons
         TabOrder = 0
-        ExplicitLeft = 305
-        ExplicitWidth = 464
-        ExplicitHeight = 313
       end
       object cxSplitter1: TcxSplitter
         Left = 300
@@ -994,7 +990,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Height = 4
         AlignSplitter = salBottom
         Control = cxGroupBox2
-        ExplicitTop = 313
       end
       object tc_Favoritos: TdxTileControl
         Left = 0
@@ -1004,7 +999,6 @@ object frmMenuPrincipal: TfrmMenuPrincipal
         Align = alLeft
         OptionsBehavior.ItemMoving = False
         TabOrder = 4
-        ExplicitHeight = 313
         object tc_FavoritosGroup1: TdxTileControlGroup
           Caption.Text = 'Favoritos'
           Index = 0

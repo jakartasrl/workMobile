@@ -63,6 +63,7 @@ inherited FNVen0004: TFNVen0004
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsSelection.CellSelect = False
           object jktExpDBGrid1DBTableViewnro_cotiz: TcxGridDBColumn
             Caption = 'Presupuesto'
             DataBinding.FieldName = 'nro_cotiz'

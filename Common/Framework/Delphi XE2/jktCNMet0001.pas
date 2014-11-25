@@ -11,7 +11,7 @@ uses
   jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030, jktCNMet0014;
 
 type
-  TjktOpcion = (opImprimir, opExportar, opImportar);
+  TjktOpcion = (opNuevo, opImprimir, opImportar, opExportar);
                 // Tras agregar property TipoPrograma, ahora se habilitan o
                 // deshabilitan ciertos botones de la Ribbon según el TipoPrograma
                 // seleccionado.
@@ -143,7 +143,7 @@ type
     property ActionList            : TActionList read FActionList write FActionList;
     property ConfirmarCancelacion  : Boolean read FConfirmarCancelacion write FConfirmarCancelacion;
 
-    property Opciones              : TjktOpciones     read FOpciones     write FOpciones;
+    property Opciones              : TjktOpciones     read FOpciones     write FOpciones default [opNuevo];
     property TipoPrograma          : TjktTipoPrograma read FTipoPrograma write FTipoPrograma;
     property Filtro                : TjktHelpGenerico read FFiltro       write FFiltro;
     property FiltrarAlInicio       : Boolean read FFiltrarAlInicio write FFiltrarAlInicio;
@@ -186,6 +186,7 @@ begin
 
   Self.FEstado := esNil;
   FFiltrarAlInicio := True;
+  FOpciones := [opNuevo];
 end;
 
 destructor TjktDriver.Destroy;
@@ -324,28 +325,28 @@ begin
   enabledAction('acSave', true);
   enabledAction('acCancel', true);
 
-  if (opImprimir in FOpciones)
-    then     enabledAction('acPrint', true)
-    else if (opImportar in FOpciones)
-    then     enabledAction('acImport', true)
-    else if (opExportar in FOpciones)
-    then     enabledAction('acExport', true);
+  if (opImprimir in FOpciones) then
+    enabledAction('acPrint', true)
+  else if (opImportar in FOpciones) then
+    enabledAction('acImport', true)
+  else if (opExportar in FOpciones) then
+    enabledAction('acExport', true);
 end;
 
 procedure TjktDriver.DoBotonesFiltrar;
 begin
-  enabledAction('acNew',  false);
-  enabledAction('acFind', false);
-  enabledAction('acFindRemoved', false);
-  enabledAction('acSave', true);
-  enabledAction('acCancel', true);
+  enabledAction('acNew',  False);
+  enabledAction('acFind', False);
+  enabledAction('acFindRemoved', False);
+  enabledAction('acSave', True);
+  enabledAction('acCancel', True);
 
-  if (opImprimir in FOpciones)
-    then     enabledAction('acPrint',  true)
-    else if (opImportar in FOpciones )
-    then     enabledAction('acImport', true)
-    else if (opExportar in FOpciones)
-    then     enabledAction('acExport', true);
+  if (opImprimir in FOpciones) then
+    enabledAction('acPrint', True)
+  else if (opImportar in FOpciones) then
+    enabledAction('acImport', True)
+  else if (opExportar in FOpciones) then
+    enabledAction('acExport', True);
 end;
 
 procedure TjktDriver.DoBotonesInicio;
@@ -357,8 +358,11 @@ begin
   // registros en la grilla (los Activos e Inactivos).
   if FTipoPrograma = tp_abmIndividual then
     begin
-      enabledAction('acNew', True);
-      enabledAction('acFindRemoved', True);
+      if (opNuevo in FOpciones) then
+        begin
+          enabledAction('acNew', True);
+          enabledAction('acFindRemoved', True);
+        end;
     end;
   enabledAction('acFind', True);
 end;
@@ -746,7 +750,7 @@ end;
 
 procedure TjktDriver.FiltrarActivos;
 begin
-  if Assigned(FFiltro) then
+  if Assigned(FFiltro) and (FFiltro.TipoFiltro <> fi_Customizado) then
     FFiltro.TipoFiltro := fi_Activos;
 
   Filtrar;
@@ -754,7 +758,7 @@ end;
 
 procedure TjktDriver.FiltrarInactivos;
 begin
-  if Assigned(FFiltro) then
+  if Assigned(FFiltro) and (FFiltro.TipoFiltro <> fi_Customizado) then
     FFiltro.TipoFiltro := fi_Inactivos;
 
   Filtrar;

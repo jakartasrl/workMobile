@@ -137,7 +137,7 @@ type
     procedure OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
 
     procedure SelectSkin(ABlackSkin: Boolean);
-    procedure GenerarArchivoMenuUsuario;
+    procedure LlenarTablaMenuUsuario;
     procedure GenerarArchivosDeMensajes;
 
     procedure CargarMenuUsuario;
@@ -299,9 +299,9 @@ var
   AItem: TdxTileControlItem;
   AFrame: TdxTileControlItemFrame;
 begin
-  GenerarArchivoMenuUsuario;
+  LlenarTablaMenuUsuario;
 
-  cds_MenuUsuario.LoadFromFile(DataPath + 'MenuUsuario.xml');
+//  cds_MenuUsuario.LoadFromFile(DataPath + 'MenuUsuario.xml');
 
   // primero creo los Grupos
   cds_MenuUsuario.Filtered := False;
@@ -364,7 +364,7 @@ begin
     cds_MenuUsuario.Next;
   end;
 
-  cds_MenuUsuario.Close;
+//  cds_MenuUsuario.Close;
 {
 
   cds_MenuUsuario.First;
@@ -413,6 +413,7 @@ var
   i: Integer;
 begin
   frameListaProgramas := TframeListaProgramas.Create(Self);
+  frameListaProgramas.cds_Programas := cds_MenuUsuario;
 
   // Cargo los datos de conexion al server en la solapa de 'Parámetros de Conexión'
   if FileExists(ApplicationFile.FileName) then begin
@@ -533,7 +534,7 @@ begin
   TframeListaProgramas(Sender.DetailOptions.DetailControl).CargarListaProgramas(Sender.Tag);
 end;
 
-procedure TfrmMenuPrincipal.GenerarArchivoMenuUsuario;
+procedure TfrmMenuPrincipal.LlenarTablaMenuUsuario;
 begin
   // 'codItemMenu' representara el Index del grupo "TdxTileControlGroup" que
   // crearemos (lo necesitaremos para alojar o ubicar los ItemDeGrupo).
@@ -627,6 +628,14 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 302;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Cotizaciones';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
 
   // creo los Programas -------------------------------------------------------
   cds_MenuUsuario.Append;
@@ -680,7 +689,7 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 26;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Solicitud de Cotización';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
@@ -688,7 +697,15 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 27;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Presupuestos sin cotizar';
-  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 300;
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 28;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Cotizador';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
@@ -869,7 +886,7 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
 
-  cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
+//  cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;
 
 procedure TfrmMenuPrincipal.SelectSkin(ABlackSkin: Boolean);

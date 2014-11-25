@@ -39,6 +39,7 @@
 	<elemento key="modeloCotizador" value="com.jkt.cotizador.dominio.ModeloCotizador" />
 	<elemento key="determinacion" value="com.jkt.laboratorio.dominio.Determinacion" />
 	<elemento key="cotizacion" value="com.jkt.dominio.Cotizacion" validador="com.jkt.cotizador.validadores.ValidadorCotizacion"/>
+	<elemento key="analisis" value="com.jkt.laboratorio.dominio.Analisis" />
 	<elemento key="moneda" value="com.jkt.varios.dominio.Moneda" />
 
 </elementos>
