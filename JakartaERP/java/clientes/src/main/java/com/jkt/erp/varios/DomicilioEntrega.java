@@ -13,7 +13,7 @@ import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los lugares en donde el cliente recibe las compras que ha realizado</p>
- * <p>Se utilizarï¿½ para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
+ * <p>Se utilizaría para definir en el pedido el lugar en donde se debe entregar la mercaderia</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -41,7 +41,7 @@ public class DomicilioEntrega extends PersistentEntity {
 	private Direccion direccion;
 	
 	/**
-	 * El transporte con el que se envï¿½a las mercaderï¿½a vendida
+	 * El transporte con el que se envía las mercadería vendida
 	 */
 	private Transporte transporte;
 	

@@ -52,11 +52,11 @@ public class TraerEntidadesConRelaciones extends Operation {
 			}
 	}
 	
-	/**
-	 * FIXME Este metodo fue copiado desde la clase {@link PropertySolver}
-	 * Estaria bueno ver la forma de utilizarlo con esta clase directamente, hacer el metodo estatico
-	 * 
-	 */
+//	/**
+//	 * FIXME Este metodo fue copiado desde la clase {@link PropertySolver}
+//	 * Estaria bueno ver la forma de utilizarlo con esta clase directamente, hacer el metodo estatico
+//	 * 
+//	 */
 	private String armarMetodo(String aName) {
 		String priLetra = "" + aName.charAt(0);
 		String metodo = "get" + priLetra.toUpperCase() + aName.substring(1, aName.length());

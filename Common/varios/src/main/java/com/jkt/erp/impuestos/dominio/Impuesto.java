@@ -42,10 +42,7 @@ public class Impuesto extends Descriptible implements IDescriptible{
 	}
 
 	public String getCadena() {
-		// TODO Auto-generated method stub
 		return getDescripcion();
 	}
-
-	// abstract List getCategorias();
 
 }

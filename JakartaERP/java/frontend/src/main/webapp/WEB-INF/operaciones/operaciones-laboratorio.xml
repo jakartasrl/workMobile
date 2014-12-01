@@ -207,7 +207,7 @@
 	</operacion>
 
 	<operacion name="TraerAnalisis"
-		clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.laboratorio.dominio.Analisis">
+		clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Analisis">
 
 		<output name="entidad" tableName="TCab">
 			<campoSalida value="oid_ana" target="id" />
@@ -243,7 +243,7 @@
 
 
 	<operacion name="TraerDeterminaciones"
-		clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.laboratorio.dominio.Determinacion">
+		clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Determinacion">
 
 		<output name="entidad" tableName="TDet">
 			<campoSalida value="oid_det" 	target="id" />

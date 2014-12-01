@@ -25,7 +25,6 @@ public class CondPago extends Descriptible{
 	@NotNull
 	private boolean baseFechaRecep;
 
-//	@NotBlank
 	private Set<CondPagoDet> detalles = new HashSet<CondPagoDet>();
 	
 	public boolean isBaseFechaFactura() {
@@ -41,14 +40,6 @@ public class CondPago extends Descriptible{
 		this.baseFechaRecep = baseFechaRecep;
 	}
 
-//	public List<CondPagoDet> getDetalles() {
-//		return detalles;
-//	}
-//	public void setDetalles(List<CondPagoDet> detalles) {
-//		this.detalles = detalles;
-//	}
-
-	
 	/*
 	 * Metodos para los booleanos, para ser utilizados desde el core dnd solo se entiende GET o SET.
 	 */
