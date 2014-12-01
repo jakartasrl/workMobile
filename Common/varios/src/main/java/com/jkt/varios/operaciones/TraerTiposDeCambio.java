@@ -59,9 +59,14 @@ public class TraerTiposDeCambio extends Operation {
 			
 		}
 		
-		
 	}
 
+	/**
+	 * <p>Muestra a partir de una moneda, un template de tipo de cambio para que en la 
+	 * vista llegue un tipo de cambio vacio, pero con una referencia a la moneda</p>
+	 * 
+	 * @param monedaActual para notificar el objeto en formato de tipo de cambio.
+	 */
 	protected void notificarNuevoTipoDeCambio(Moneda monedaActual) {
 		TipoDeCambio nuevoTipoDeCambio = new TipoDeCambio();
 		nuevoTipoDeCambio.setCotizacion(0);

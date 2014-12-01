@@ -2,6 +2,7 @@ package com.jkt.contexto;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.xml.sax.SAXException;
 
 import com.jkt.excepcion.JakartaException;
 import com.jkt.request.EventBusiness;
+import com.jkt.util.Entry;
 import com.jkt.xmlreader.CampoDef;
 import com.jkt.xmlreader.CampoEntrada;
 import com.jkt.xmlreader.CampoSalida;
@@ -43,7 +45,6 @@ import com.jkt.xmlreader.XMLObservador;
 public class Configuration {
 	
 	
-	
 	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
 	
 	public XMLEventos getEventos() {
@@ -62,19 +63,23 @@ public class Configuration {
 	private ServletContext servletContext;
 	
 	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
+
 		String rutaOperacionesWeb="/WEB-INF/operaciones/operaciones-html.xml";
+		String rutaOperaciones="/WEB-INF/archivos-operaciones.xml";
 		
-		List<String> rutas = Arrays.asList(new String[]{
-				"/WEB-INF/operaciones/operaciones-common.xml",
-				"/WEB-INF/operaciones/operaciones-seguridad.xml",
-				"/WEB-INF/operaciones/operaciones-varios.xml",
-				"/WEB-INF/operaciones/operaciones-laboratorio.xml",
-				"/WEB-INF/operaciones/operaciones-articulos.xml",
-				"/WEB-INF/operaciones/operaciones-clientes.xml",
-				"/WEB-INF/operaciones/operaciones-ventas.xml"
-			});
-		
+		List<String> rutas = new ArrayList<String>();
 		Digester digester = this.generateReaderOperation();
+		Digester digesterParaNombresDeOperaciones = this.generateReaderOperaciones();
+	
+		
+		
+		List operaciones = (List) digesterParaNombresDeOperaciones.parse(abrirRecurso(rutaOperaciones));
+		NombreOperacion nombreOperacion;
+		for (Object object : operaciones) {
+			nombreOperacion=(NombreOperacion) object;
+			rutas.add(nombreOperacion.getRuta());
+		}
+		
 		
 		/*
 		 * Parseo las operaciones para cliente HTML
@@ -136,6 +141,20 @@ public class Configuration {
 		digester.addSetNext("entidades/entidad/observador", "addObservador", XMLObservador.class.getName());
 		
 		return digester;
+	}
+	
+	private Digester generateReaderOperaciones() {
+		Digester digester = new Digester();
+		digester.setValidating(false);
+		
+		digester.addObjectCreate("operaciones", ArrayList.class.getName());
+
+		digester.addObjectCreate("operaciones/operacion", NombreOperacion.class.getName());
+		digester.addSetProperties("operaciones/operacion");
+		digester.addSetNext("operaciones/operacion", "add", NombreOperacion.class.getName());
+		
+		return digester;
+
 	}
 
 	/**
