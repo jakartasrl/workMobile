@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.dominio.PrecioCosto" table="PRECIO_COSTO" >
+		
+		<id name="id" column="PRECIO_COSTO_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="fecha" column="FECHA" type="date"/>
+
+		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none"></many-to-one>
+		<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
+		
+		<property name="costo" column="COSTO" type="double"/>
+		<property name="precioVenta" column="PRECIO_VENTA" type="double"/>
+		
+	</class>
+
+</hibernate-mapping>

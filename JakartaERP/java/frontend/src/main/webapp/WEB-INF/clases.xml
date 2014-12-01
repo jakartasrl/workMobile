@@ -24,6 +24,7 @@
 	<elemento key="componenteClasificador" value="com.jkt.varios.dominio.Componente" />
 	<elemento key="clientes" value="com.jkt.erp.varios.Cliente" />
 	<elemento key="clienteSucursal" value="com.jkt.erp.varios.ClienteSucursal" />
+	<elemento key="sujetoImpositivo" value="com.jkt.erp.varios.SujetoImpositivo" />
 	<elemento key="unidadMedida" value="com.jkt.varios.dominio.UnidadMedida" />
 	<elemento key="vendedor" value="com.jkt.erp.varios.Vendedor" />
 	<elemento key="representante" value="com.jkt.erp.varios.Representante" />
@@ -41,5 +42,6 @@
 	<elemento key="cotizacion" value="com.jkt.dominio.Cotizacion" validador="com.jkt.cotizador.validadores.ValidadorCotizacion"/>
 	<elemento key="analisis" value="com.jkt.laboratorio.dominio.Analisis" />
 	<elemento key="moneda" value="com.jkt.varios.dominio.Moneda" />
+	<elemento key="plantilla" value="com.jkt.dominio.Plantilla" />
 
 </elementos>

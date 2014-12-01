@@ -462,4 +462,41 @@
 	</operacion>
 	
 	
+<!-- 	OPERACIONES BASICAS DE UNA PLANTILLA DE TEXTO -->
+<!-- 	TRAER CONCEPTO DE PRESUPUESTO -->
+	<operacion name="TraerPlantillas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Plantilla">
+		
+		<output name="resultado" tableName="mtPlan">
+			<campoSalida value="oid_plan" target="id" />
+			<campoSalida value="cod_plan" target="codigo" />
+			<campoSalida value="descr_plan" target="descripcion" />
+			<campoSalida value="plantilla" target="plantilla" />
+			<campoSalida value="Activo" target="isActivo" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="---" />
+		</forms>		
+
+	</operacion>
+	
+	<operacion name="GuardarPlantilla" clase="com.jkt.operaciones.GuardarLista">
+	
+		<input name="mtPlan" keyName="objeto" clase="com.jkt.dominio.Plantilla" fieldID="oid_plan">
+			<campoEntrada>
+				<campoEntrada name="cod_plan" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr_plan" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="plantilla" clase="String" metodo="setPlantilla" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="---"></form>
+		</forms>
+
+	</operacion>
+	
 </entity>

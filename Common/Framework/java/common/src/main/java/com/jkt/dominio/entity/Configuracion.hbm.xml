@@ -11,7 +11,7 @@
 		</id>
 
 		<property name="nombre" type="string">
-            <column name="NOMBRE" length="15" />
+            <column name="NOMBRE" length="30" />
         </property>
 
 		<property name="valorCadena" type="string">

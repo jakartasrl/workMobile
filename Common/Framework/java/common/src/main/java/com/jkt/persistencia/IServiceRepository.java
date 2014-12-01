@@ -3,6 +3,8 @@ package com.jkt.persistencia;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;

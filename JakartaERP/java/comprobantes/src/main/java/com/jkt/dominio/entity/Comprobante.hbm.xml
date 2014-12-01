@@ -15,10 +15,10 @@
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		<property name="comportamiento" column="COMPORTAMIENTO" />
+<!-- 		<property name="comportamiento" column="COMPORTAMIENTO" /> -->
 		<property name="lugarEmision" column="LUGAR_EMISION" />
 		<property name="anulado" column="ANULADO" type="boolean" />
-		<property name="nro" column="NUMERO" type="integer" />
+		<property name="nro" column="NUMERO" type="string" />
 		
 		<property name="fecha" column="FECHA" type="date" />
 

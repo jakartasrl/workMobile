@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.varios.dominio.Especificacion;
 
 
@@ -19,12 +21,15 @@ public abstract class Comprobante extends PersistentEntity {
 	 * variables de instancia
 	 * ***********************************************
 	 */
-	private String comportamiento;
+//	private String comportamiento;
 	private String letra;
 	private String lugarEmision;
-	private int nro;
+	private String nro;
 	private boolean anulado=false;
+	
+	@NotNull(message="Debe ingresar obligatoriamente un tipo de comprobante.")
 	private TipoComprobante tipoComprobante;
+	
 	private Date fecha;
 	private List<Especificacion> archivos=new ArrayList<Especificacion>();	
 	/*
@@ -51,9 +56,6 @@ public abstract class Comprobante extends PersistentEntity {
 		this.archivos = archivos;
 	}
 
-	public String getComportamiento() {
-		return comportamiento;
-	}
 	public Date getFecha() {
 		return fecha;
 	}
@@ -65,9 +67,6 @@ public abstract class Comprobante extends PersistentEntity {
 	}
 	public void setTipoComprobante(TipoComprobante tipoComprobante) {
 		this.tipoComprobante = tipoComprobante;
-	}
-	public void setComportamiento(String comportamiento) {
-		this.comportamiento = comportamiento;
 	}
 //	public char getLetra() {
 //		return letra;
@@ -91,15 +90,24 @@ public abstract class Comprobante extends PersistentEntity {
 	public void setLugarEmision(String lugarEmision) {
 		this.lugarEmision = lugarEmision;
 	}
-	public int getNro() {
-		return nro;
-	}
-	public void setNro(int nro) {
-		this.nro = nro;
-	}
+//	public int getNro() {
+//		return nro;
+//	}
+//	public void setNro(int nro) {
+//		this.nro = nro;
+//	}
+	
 	public boolean isAnulado() {
 		return anulado;
 	}
+	public String getNro() {
+		return nro;
+	}
+
+	public void setNro(String nro) {
+		this.nro = nro;
+	}
+
 	public void setAnulado(boolean anulado) {
 		this.anulado = anulado;
 	}

@@ -15,7 +15,7 @@ import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los Sujetos Impositivos (clientes / proveedores y todo aquel que tenga CUIT)</p>
- * <p>Se utilizarï¿½ para agrupar clientes y proveedores que son realmente la misma empresa desde lo impositivo.</p>
+ * <p>Se utilizará para agrupar clientes y proveedores que son realmente la misma empresa desde lo impositivo.</p>
  * @author Leonel Suarez - Jakarta SRL
  */
 public class SujetoImpositivo extends PersistentEntity {

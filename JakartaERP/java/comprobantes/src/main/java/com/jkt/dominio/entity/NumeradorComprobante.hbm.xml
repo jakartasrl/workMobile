@@ -4,14 +4,14 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.dominio.TipoComprobante" table="TIPO_COMPROBANTE">
+	<class name="com.jkt.dominio.NumeradorComprobantes" table="NUMERADOR_COMPROBANTES">
 		
-		<id name="id" column="TIPO_COMPROBANTE_ID">
+		<id name="id" column="NUMERADOR_COMPROBANTES_ID">
 			<generator class="native" />
 		</id>
 		
-		<property name="descripcion" column="DESCRIPCION" />
-		<property name="comportamiento" column="COMPORTAMIENTO_ID" type="integer" />
+		<property name="argumento" column="ARGUMENTO" />
+		<property name="numero" column="NUMERO" type="integer"/>
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 

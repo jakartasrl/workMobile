@@ -1,5 +1,6 @@
 package com.jkt.erp.impuestos.operaciones;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import com.jkt.dominio.Container;
@@ -15,10 +16,18 @@ public class TraerComportamientosImpuesto extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		for (int i = 1; i < 4; i++) {
-			notificarObjeto("resultado", new Container(String.valueOf(i), "PRUEBA_DESCRIPCION_"+i));
+		for (Container container : Arrays.asList(
+				new Container("1", "Responsable Exento"),
+				new Container("2", "Responsable Inscripto"),
+				new Container("3", "Responsable No Inscripto"),
+				new Container("4", "Responsable Monotributo")
+			)) {
+			
+			
+			notificarObjeto("resultado", container);
+			
 		}
-
+		
 	}
 
 }

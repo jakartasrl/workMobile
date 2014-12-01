@@ -8,7 +8,7 @@ import com.jkt.dominio.PersistentEntity;
 
 /**
  * <p>Representa un tipo de datos "Direccion".</p>
- * <p>Se utilizarï¿½ para guardar cualquier direcciï¿½n de cualquier entidad(cliente, proveedor, banco, etc).</p>
+ * <p>Se utilizaría para guardar cualquier dirección de cualquier entidad(cliente, proveedor, banco, etc).</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

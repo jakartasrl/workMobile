@@ -22,6 +22,10 @@
 		<many-to-one name="componenteValor" class="com.jkt.varios.dominio.ComponenteValor" column="COMPONENTE_VALOR_ID"></many-to-one>
 		<many-to-one name="titulo" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_COTIZADOR_ID"></many-to-one>
 		
+		<many-to-one name="unidadDeMedidaPorDefecto" class="com.jkt.varios.dominio.UnidadMedida" column="UNIDAD_MEDIDA_ID" cascade="none"></many-to-one>		
+		<many-to-one name="monedaPorDefecto" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
+		
+		
 	</class>
 
 </hibernate-mapping>
