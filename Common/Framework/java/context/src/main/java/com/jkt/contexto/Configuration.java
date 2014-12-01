@@ -3,7 +3,6 @@ package com.jkt.contexto;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import org.xml.sax.SAXException;
 
 import com.jkt.excepcion.JakartaException;
 import com.jkt.request.EventBusiness;
-import com.jkt.util.Entry;
 import com.jkt.xmlreader.CampoDef;
 import com.jkt.xmlreader.CampoEntrada;
 import com.jkt.xmlreader.CampoSalida;
@@ -37,7 +35,8 @@ import com.jkt.xmlreader.XMLEventos;
 import com.jkt.xmlreader.XMLObservador;
 
 /**
- * <p>Configuracion general del modulo.</p>
+ * <p>Configuracion general de toda la aplicacion.</p>
+ * <p>Inicia desde archivos xml todas las operaciones, instancia el repositorio de las clases, sus validadores, eventos, etc..</p>
  * 
  */
 @Component
@@ -47,14 +46,6 @@ public class Configuration {
 	
 	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
 	
-	public XMLEventos getEventos() {
-		return eventos;
-	}
-
-	public void setEventos(XMLEventos eventos) {
-		this.eventos = eventos;
-	}
-
 	private XMLEntity operaciones  = new XMLEntity();
 	private XMLEntity operacionesHTML  = new XMLEntity();
 	private XMLEventos eventos=new XMLEventos();
@@ -351,6 +342,13 @@ public class Configuration {
 		this.operacionesHTML = operacionesHTML;
 	}
 	
-	
+	public XMLEventos getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(XMLEventos eventos) {
+		this.eventos = eventos;
+	}
+
 	
 }
