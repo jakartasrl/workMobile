@@ -25,7 +25,7 @@ uses
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxGridDBCardView,
   cxGridCardView, cxGridCustomLayoutView, jktCNMet0014, dxLayoutLookAndFeels,
-  cxSplitter, cxGroupBox;
+  cxSplitter, cxGroupBox, cxDBLookupComboBox;
 
 type
   TFNCli0001 = class(TfrmChild)
@@ -58,7 +58,6 @@ type
     cxDBButtonEdit2: TcxDBButtonEdit;
     cxDBTextEdit5: TcxDBTextEdit;
     lcMainItem10: TdxLayoutItem;
-    cxDBTextEdit6: TcxDBTextEdit;
     lcMainItem11: TdxLayoutItem;
     cxDBCheckBox1: TcxDBCheckBox;
     lcMainItem12: TdxLayoutItem;
@@ -116,12 +115,8 @@ type
     tvSucursalesDireccion: TcxGridDBColumn;
     tvSucursalesLocalidad: TcxGridDBColumn;
     tvSucursalesCodPostal: TcxGridDBColumn;
-    tvSucursalesoid_Provincia: TcxGridDBColumn;
-    tvSucursalesCodProvincia: TcxGridDBColumn;
-    tvSucursalesDescProvincia: TcxGridDBColumn;
-    tvSucursalesoid_Vendedor: TcxGridDBColumn;
-    tvSucursalesCodVendedor: TcxGridDBColumn;
-    tvSucursalesDescVendedor: TcxGridDBColumn;
+    tvSucursalesProvincia: TcxGridDBColumn;
+    tvSucursalesVendedor: TcxGridDBColumn;
     tvSucursalesTelefonos: TcxGridDBColumn;
     tvSucursalesActivo: TcxGridDBColumn;
     mtDomiciliosEntregaoid_SucClie: TIntegerField;
@@ -145,8 +140,7 @@ type
     tvDomiciliosEntregaLocalidad: TcxGridDBColumn;
     tvDomiciliosEntregaCodPostal: TcxGridDBColumn;
     tvDomiciliosEntregaoid_Provincia: TcxGridDBColumn;
-    tvDomiciliosEntregaCodProvincia: TcxGridDBColumn;
-    tvDomiciliosEntregaDescProvincia: TcxGridDBColumn;
+    tvDomiciliosEntregaProvincia: TcxGridDBColumn;
     tvDomiciliosEntregaHorariosEntrega: TcxGridDBColumn;
     tvDomiciliosEntregaTelefonos: TcxGridDBColumn;
     tvDomiciliosEntregaActivo: TcxGridDBColumn;
@@ -209,7 +203,6 @@ type
     mtInscripImpositCodCategoria: TStringField;
     mtInscripImpositDescCategoria: TStringField;
     mtInscripImpositVigenciaDesde: TDateField;
-    mtInscripImpositNroInscripcion: TIntegerField;
     jktExpDBGrid1DBTableView1oid_InscClie: TcxGridDBColumn;
     jktExpDBGrid1DBTableView1oid_Cliente: TcxGridDBColumn;
     jktExpDBGrid1DBTableView1oid_Impuesto: TcxGridDBColumn;
@@ -255,23 +248,15 @@ type
     lcMainGroup12: TdxLayoutGroup;
     HelpPais: TjktHelpGenerico;
     HelpCondPago: TjktHelpGenerico;
-    HelpVendedor: TjktHelpGenerico;
-    HelpImpuesto: TjktHelpGenerico;
     mtSujImpoid_SujImp: TIntegerField;
     ValProvincia: TjktValidador;
     ValPais: TjktValidador;
     ValCondPago: TjktValidador;
-    ValVendedor: TjktValidador;
-    ValImpuesto: TjktValidador;
     mtSucursalesClienteoid_Pais: TIntegerField;
     mtDomiciliosEntregaoid_Pais: TIntegerField;
     ValCategoriaImp: TjktValidador;
     HelpValorClasifCliente: TjktHelpGenerico;
     HelpCategoriaImp: TjktHelpGenerico;
-    ValProvinciaSucursal: TjktValidador;
-    HelpProvinciaSucursal: TjktHelpGenerico;
-    HelpProvinciaDomEnt: TjktHelpGenerico;
-    ValProvinciaDomEnt: TjktValidador;
     mtClasificadoresClienteoid_Clasif: TIntegerField;
     mtClasificadoresSucursaloid_Clasif: TIntegerField;
     tvClasificadoresoid_Clasif: TcxGridDBColumn;
@@ -282,25 +267,81 @@ type
     mtClasifSucurBackupDescClasif: TStringField;
     dxLayoutLookAndFeelList1: TdxLayoutLookAndFeelList;
     dxLayoutSkinLookAndFeel1: TdxLayoutSkinLookAndFeel;
-    procedure jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick(
-      Sender: TObject; AButtonIndex: Integer);
+    cxDBMaskEdit1: TcxDBMaskEdit;
+    mtSucursalesClienteoid_Representante: TIntegerField;
+    mtSucursalesClienteCodRepresentante: TStringField;
+    mtSucursalesClienteDescRepresentante: TStringField;
+    tvSucursalesRepresentante: TcxGridDBColumn;
+    mtProvincias: TjktMemTable;
+    mtVendedores: TjktMemTable;
+    mtRepresentantes: TjktMemTable;
+    dsProvincias: TDataSource;
+    dsVendedores: TDataSource;
+    dsRepresentantes: TDataSource;
+    opTraerEntidades: TjktOperacion;
+    mtParametroInicialOutputDatasetName: TStringField;
+    mtProvinciasoid: TIntegerField;
+    mtProvinciascodigo: TStringField;
+    mtProvinciasdescripcion: TStringField;
+    mtVendedoresoid: TIntegerField;
+    mtVendedorescodigo: TStringField;
+    mtVendedoresdescripcion: TStringField;
+    mtRepresentantesoid: TIntegerField;
+    mtRepresentantescodigo: TStringField;
+    mtRepresentantesdescripcion: TStringField;
+    mtParametroInicialNombreParametro: TStringField;
+    opTraerParametro: TjktOperacion;
+    mtParametrosFormoid_param: TIntegerField;
+    mtParametrosFormcodigo: TStringField;
+    mtParametrosFormdescripcion: TStringField;
+    mtParametrosFormvalor_cadena: TStringField;
+    mtParametrosFormvalor_entero: TIntegerField;
+    mtParametrosFormvalor_fecha: TStringField;
+    mtParametrosFormvalor_float: TFloatField;
+    mtParametrosFormvalor_boolean: TBooleanField;
+    mtClienteFax: TStringField;
+    mtClienteEmail: TStringField;
+    cxDBTextEdit6: TcxDBTextEdit;
+    lcMainItem19: TdxLayoutItem;
+    cxDBTextEdit10: TcxDBTextEdit;
+    lcMainItem20: TdxLayoutItem;
+    mtImpuestos: TjktMemTable;
+    IntegerField1: TIntegerField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    mtInscripImpositNroInscripcion: TStringField;
+    mtContactosoid_TipoContacto: TIntegerField;
+    cvContactosoid_TipoContacto: TcxGridDBCardViewRow;
+    cxDBTextEdit11: TcxDBTextEdit;
+    cxDBButtonEdit3: TcxDBButtonEdit;
+    lcMainItem21: TdxLayoutItem;
+    lcMainItem22: TdxLayoutItem;
+    lcMainGroup13: TdxLayoutGroup;
+    lcMainGroup14: TdxLayoutGroup;
+    cxDBButtonEdit4: TcxDBButtonEdit;
+    cxDBTextEdit12: TcxDBTextEdit;
+    lcMainItem23: TdxLayoutItem;
+    lcMainItem24: TdxLayoutItem;
+    mtClienteoid_vend: TIntegerField;
+    mtClientecod_vend: TStringField;
+    mtClientedes_vend: TStringField;
+    mtClienteoid_repre: TIntegerField;
+    mtClientecod_repre: TStringField;
+    mtClientedes_repre: TStringField;
+    lcMainSeparatorItem1: TdxLayoutSeparatorItem;
+    hlpVend: TjktHelpGenerico;
+    hlpRepre: TjktHelpGenerico;
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure cxButtonEdit1PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
-    procedure tvSucursalesCodVendedorPropertiesButtonClick(Sender: TObject;
-      AButtonIndex: Integer);
     procedure mtSucursalesClienteNewRecord(DataSet: TDataSet);
     procedure jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
     procedure OperacionSaveBeforeEjecutar(Sender: TObject);
     procedure cxGridDBTableView1CodValorClasifPropertiesButtonClick(
-      Sender: TObject; AButtonIndex: Integer);
-    procedure tvSucursalesCodProvinciaPropertiesButtonClick(Sender: TObject;
-      AButtonIndex: Integer);
-    procedure tvDomiciliosEntregaCodProvinciaPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
     procedure tvClasificadoresCodValorClasifPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
@@ -309,8 +350,19 @@ type
     procedure mtDomiciliosEntregaNewRecord(DataSet: TDataSet);
     procedure mtClasificadoresSucursalNewRecord(DataSet: TDataSet);
     procedure OperacionSaveAfterEjecutar(Sender: TObject);
+    procedure OperTraerClasifSucurAfterEjecutar(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DriverNuevo(Sender: TObject);
+    procedure opTraerParametroBeforeEjecutar(Sender: TObject);
+    procedure opTraerParametroAfterEjecutar(Sender: TObject);
+    procedure OperTraerClasifClienteAfterEjecutar(Sender: TObject);
+    procedure cxDBButtonEdit3PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
-    { Private declarations }
+    oid_PaisPorDefecto: Integer;
+
   public
     { Public declarations }
   end;
@@ -360,6 +412,24 @@ begin
     // No seleccionó nada!
 end;
 
+procedure TFNCli0001.cxDBButtonEdit3PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  if hlpVend.Ejecutar then
+    mtCliente.FieldByName('des_vend').AsString := hlpVend.GetDescripcion;
+end;
+
+procedure TFNCli0001.cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  if hlpRepre.Ejecutar then
+    mtCliente.FieldByName('des_repre').AsString := hlpRepre.GetDescripcion;
+end;
+
 procedure TFNCli0001.cxGridDBTableView1CodValorClasifPropertiesButtonClick(
   Sender: TObject; AButtonIndex: Integer);
 begin
@@ -371,6 +441,23 @@ begin
   else
 end;
 
+procedure TFNCli0001.DriverNuevo(Sender: TObject);
+begin
+  inherited;
+
+  mtSujImp.Append;
+  mtSujImp.FieldByName('PersonaJuridica').AsBoolean := True;
+end;
+
+procedure TFNCli0001.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+  // El ancho debe ser el total de la pantalla
+  cxGroupBoxLeft.Width  := 0;
+  cxGroupBoxRight.Width := 0;
+end;
+
 procedure TFNCli0001.jktExpDBGrid1DBTableView1CodCategoriaPropertiesButtonClick(
   Sender: TObject; AButtonIndex: Integer);
 begin
@@ -379,18 +466,6 @@ begin
   if HelpCategoriaImp.Ejecutar then
     // Seleccionó un registro. No asigno por código la 'Descripcion' ya que
     // se obtiene con el Validador!
-  else ;
-    // No seleccionó nada!
-end;
-
-procedure TFNCli0001.jktExpDBGrid1DBTableView1CodImpuestoPropertiesButtonClick(
-  Sender: TObject; AButtonIndex: Integer);
-begin
-  inherited;
-
-  if HelpImpuesto.Ejecutar then
-    // Seleccionó un registro
-    mtInscripImposit.FieldByName('DescImpuesto').AsString := HelpImpuesto.GetDescripcion
   else ;
     // No seleccionó nada!
 end;
@@ -416,7 +491,31 @@ begin
   inherited;
 
   if not Service.ModoExecute then
-    mtDomiciliosEntrega.FieldByName('oid_DomSuc').AsInteger := GetNewOid;
+    begin
+      mtDomiciliosEntrega.FieldByName('oid_DomSuc').AsInteger := GetNewOid;
+
+      if mtDomiciliosEntrega.RecordCount = 0 then
+        begin
+          // Generar y completar por defecto el domicilio de entrega "0" con los
+          // datos de la sucursal
+          mtDomiciliosEntrega.FieldByName('NroDomicilio').AsInteger := 0;
+
+          mtDomiciliosEntrega.FieldByName('Direccion').AsString :=
+            mtSucursalesCliente.FieldByName('Direccion').AsString;
+          mtDomiciliosEntrega.FieldByName('Localidad').AsString :=
+            mtSucursalesCliente.FieldByName('Localidad').AsString;
+          mtDomiciliosEntrega.FieldByName('CodPostal').AsString :=
+            mtSucursalesCliente.FieldByName('CodPostal').AsString;
+          mtDomiciliosEntrega.FieldByName('oid_Provincia').AsInteger :=
+            mtSucursalesCliente.FieldByName('oid_Provincia').AsInteger;
+          mtDomiciliosEntrega.FieldByName('CodProvincia').AsString :=
+            mtSucursalesCliente.FieldByName('CodProvincia').AsString;
+          mtDomiciliosEntrega.FieldByName('DescProvincia').AsString :=
+            mtSucursalesCliente.FieldByName('DescProvincia').AsString;
+          mtDomiciliosEntrega.FieldByName('Telefonos').AsString :=
+            mtSucursalesCliente.FieldByName('Telefonos').AsString;
+        end;
+    end;
 end;
 
 procedure TFNCli0001.mtSucursalesClienteNewRecord(DataSet: TDataSet);
@@ -426,6 +525,28 @@ begin
   if not Service.ModoExecute then
     begin
       mtSucursalesCliente.FieldByName('oid_SucClie').AsInteger := GetNewOid;
+
+      if mtSucursalesCliente.RecordCount = 0 then
+        begin
+          // La sucursal '0' se debe dar de alta por defecto con todos los datos
+          // genericos del cliente
+          mtSucursalesCliente.FieldByName('NroSucursal').AsInteger := 0;
+
+          mtSucursalesCliente.FieldByName('Direccion').AsString :=
+            mtSujImp.FieldByName('Direccion').AsString;
+          mtSucursalesCliente.FieldByName('Localidad').AsString :=
+            mtSujImp.FieldByName('Localidad').AsString;
+          mtSucursalesCliente.FieldByName('CodPostal').AsString :=
+            mtSujImp.FieldByName('CodPostal').AsString;
+          mtSucursalesCliente.FieldByName('oid_Provincia').AsInteger :=
+            mtSujImp.FieldByName('oid_Provincia').AsInteger;
+          mtSucursalesCliente.FieldByName('CodProvincia').AsString :=
+            mtSujImp.FieldByName('CodProvincia').AsString;
+          mtSucursalesCliente.FieldByName('DescProvincia').AsString :=
+            mtSujImp.FieldByName('DescProvincia').AsString;
+          mtSucursalesCliente.FieldByName('Telefonos').AsString :=
+            mtCliente.FieldByName('Telefonos').AsString;
+        end;
 
       // OJO, por cada Sucursal nueva tengo que replicarle todos los Clasificadores
       // existentes para una Sucursal (así, cada Sucursal tiene sus propios
@@ -494,11 +615,83 @@ begin
     end;
 end;
 
+procedure TFNCli0001.OperTraerClasifClienteAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Traigo los Impuestos y los cargo en la grilla de 'Inscripciones Impositivas'
+  mtParametroInicial.FieldByName('Entidad').AsString := 'impuesto';
+  mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtImpuestos.Name;
+  opTraerEntidades.execute;
+
+  mtImpuestos.First;
+  while not mtImpuestos.Eof do
+    begin
+      mtInscripImposit.Append;
+
+      mtInscripImposit.FieldByName('oid_Impuesto').AsInteger :=
+        mtImpuestos.FieldByName('oid').AsInteger;
+      mtInscripImposit.FieldByName('CodImpuesto').AsString :=
+        mtImpuestos.FieldByName('codigo').AsString;
+      mtInscripImposit.FieldByName('DescImpuesto').AsString :=
+        mtImpuestos.FieldByName('descripcion').AsString;
+
+      mtInscripImposit.Post;
+
+      mtImpuestos.Next;
+    end;
+end;
+
+procedure TFNCli0001.OperTraerClasifSucurAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  mtParametroInicial.Open;
+  mtParametroInicial.Append;
+
+  // Traigo las Provincias
+  mtParametroInicial.FieldByName('Entidad').AsString := 'provincia';
+  mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtProvincias.Name;
+  opTraerEntidades.execute;
+
+  // Traigo los Vendedores
+  mtParametroInicial.FieldByName('Entidad').AsString := 'vendedor';
+  mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtVendedores.Name;
+  opTraerEntidades.execute;
+
+  // Traigo los Representantes
+  mtParametroInicial.FieldByName('Entidad').AsString := 'representante';
+  mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtRepresentantes.Name;
+  opTraerEntidades.execute;
+end;
+
 procedure TFNCli0001.OperTraerClasifSucurBeforeEjecutar(Sender: TObject);
 begin
   inherited;
 
   mtClasifSucurBackup.Open;
+end;
+
+procedure TFNCli0001.opTraerParametroAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Por ahora estamos pidiendo UN SOLO parámetro, habrá entonces una sola fila en
+  // la tabla 'mtParametrosForm'. De todas maneras lo busco como si hubieran varios
+  mtParametrosForm.First;
+  if not mtParametrosForm.Locate('codigo', 'PaisPorDefecto', [loCaseInsensitive]) then
+    // 'Código de Parámetro inexistente'
+    oid_PaisPorDefecto := -1
+  else
+    oid_PaisPorDefecto := mtParametrosForm.FieldByName('valor_entero').AsInteger;
+end;
+
+procedure TFNCli0001.opTraerParametroBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Esto se reemplazará cuando se recuperen TODOS los parámetros del Form
+  mtParametroInicial.FieldByName('NombreParametro').AsString := 'PaisPorDefecto';
 end;
 
 procedure TFNCli0001.tvClasificadoresCodValorClasifPropertiesButtonClick(
@@ -509,41 +702,6 @@ begin
   if HelpValorClasifSucursal.Ejecutar then
     mtClasificadoresSucursal.FieldByName('DescValorClasif').AsString :=
       HelpValorClasifSucursal.GetDescripcion
-  else ;
-end;
-
-procedure TFNCli0001.tvDomiciliosEntregaCodProvinciaPropertiesButtonClick(
-  Sender: TObject; AButtonIndex: Integer);
-begin
-  inherited;
-
-  if HelpProvinciaDomEnt.Ejecutar then
-    // Seleccionó un registro. No asigno por código la 'Descripcion' ya que
-    // se obtiene con el Validador!
-  else ;
-    // No seleccionó nada!
-end;
-
-procedure TFNCli0001.tvSucursalesCodProvinciaPropertiesButtonClick(
-  Sender: TObject; AButtonIndex: Integer);
-begin
-  inherited;
-
-  if HelpProvinciaSucursal.Ejecutar then
-    // Seleccionó un registro. No asigno por código la 'Descripcion' ya que
-    // se obtiene con el Validador!
-  else ;
-    // No seleccionó nada!
-end;
-
-procedure TFNCli0001.tvSucursalesCodVendedorPropertiesButtonClick(
-  Sender: TObject; AButtonIndex: Integer);
-begin
-  inherited;
-
-  if HelpVendedor.Ejecutar then
-    mtSucursalesCliente.FieldByName('DescVendedor').AsString :=
-      HelpVendedor.GetDescripcion
   else ;
 end;
 

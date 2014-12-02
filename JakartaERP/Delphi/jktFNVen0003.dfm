@@ -2,6 +2,8 @@ inherited FNVen0003: TFNVen0003
   Caption = 'Solicitud de Cotizaci'#243'n'
   ClientHeight = 558
   ClientWidth = 858
+  ExplicitLeft = -79
+  ExplicitTop = -28
   ExplicitWidth = 874
   ExplicitHeight = 596
   PixelsPerInch = 96
@@ -74,23 +76,25 @@ inherited FNVen0003: TFNVen0003
         Width = 283
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 177
-        Top = 187
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsCotizacion
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 6
+        Visible = False
         Width = 180
       end
       object cxDBTextEdit8: TcxDBTextEdit
-        Left = 533
-        Top = 187
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'des_repre'
         DataBinding.DataSource = dsCotizacion
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 8
+        Visible = False
         Width = 180
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
@@ -108,93 +112,9 @@ inherited FNVen0003: TFNVen0003
         TabOrder = 2
         Width = 99
       end
-      object cxRadioButton1: TcxRadioButton
-        Left = 43
-        Top = 289
-        Width = 90
-        Height = 17
-        Caption = 'Los Conce'
-        Checked = True
-        Color = 16775410
-        ParentColor = False
-        TabOrder = 9
-        TabStop = True
-        GroupIndex = 3
-        ParentBackground = False
-        Transparent = True
-      end
-      object cxRadioButton2: TcxRadioButton
-        Left = 139
-        Top = 289
-        Width = 65
-        Height = 17
-        Caption = 'Cliente'
-        Color = 16775410
-        ParentColor = False
-        TabOrder = 10
-        GroupIndex = 3
-        ParentBackground = False
-        Transparent = True
-      end
-      object cxRadioButton3: TcxRadioButton
-        Left = 230
-        Top = 289
-        Width = 90
-        Height = 17
-        Caption = 'Los Conce'
-        Checked = True
-        Color = 16775410
-        ParentColor = False
-        TabOrder = 11
-        TabStop = True
-        GroupIndex = 1
-        ParentBackground = False
-        Transparent = True
-      end
-      object cxRadioButton4: TcxRadioButton
-        Left = 326
-        Top = 289
-        Width = 65
-        Height = 17
-        Caption = 'Cliente'
-        Color = 16775410
-        ParentColor = False
-        TabOrder = 12
-        GroupIndex = 1
-        ParentBackground = False
-        Transparent = True
-      end
-      object cxRadioButton5: TcxRadioButton
-        Left = 417
-        Top = 289
-        Width = 90
-        Height = 17
-        Caption = 'Los Conce'
-        Checked = True
-        Color = 16775410
-        ParentColor = False
-        TabOrder = 13
-        TabStop = True
-        GroupIndex = 2
-        ParentBackground = False
-        Transparent = True
-      end
-      object cxRadioButton6: TcxRadioButton
-        Left = 513
-        Top = 289
-        Width = 65
-        Height = 17
-        Caption = 'Cliente'
-        Color = 16775410
-        ParentColor = False
-        TabOrder = 14
-        GroupIndex = 2
-        ParentBackground = False
-        Transparent = True
-      end
       object cxDBButtonEdit2: TcxDBButtonEdit
-        Left = 91
-        Top = 187
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'cod_vend'
         DataBinding.DataSource = dsCotizacion
         Properties.Buttons = <
@@ -205,6 +125,7 @@ inherited FNVen0003: TFNVen0003
         Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 5
+        Visible = False
         Width = 80
       end
       object jktExpDBGrid5: TjktExpDBGrid
@@ -212,7 +133,7 @@ inherited FNVen0003: TFNVen0003
         Top = 10000
         Width = 717
         Height = 365
-        TabOrder = 16
+        TabOrder = 10
         Visible = False
         DataSource = dsArchivos
         object jktExpDBGrid5DBTableView1: TcxGridDBTableView
@@ -278,8 +199,8 @@ inherited FNVen0003: TFNVen0003
         Width = 141
       end
       object cxDBButtonEdit4: TcxDBButtonEdit
-        Left = 447
-        Top = 187
+        Left = 10000
+        Top = 10000
         DataBinding.DataField = 'cod_repre'
         DataBinding.DataSource = dsCotizacion
         Properties.Buttons = <
@@ -290,16 +211,16 @@ inherited FNVen0003: TFNVen0003
         Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 7
+        Visible = False
         Width = 80
       end
       object cxGridItems: TcxGrid
-        Left = 10000
-        Top = 10000
+        Left = 23
+        Top = 156
         Width = 717
         Height = 365
         BorderStyle = cxcbsNone
-        TabOrder = 15
-        Visible = False
+        TabOrder = 9
         object DBLayoutView: TcxGridDBLayoutView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsItems
@@ -352,6 +273,23 @@ inherited FNVen0003: TFNVen0003
             LayoutItem = DBLayoutViewLayoutItem4
             Options.Filtering = False
           end
+          object DBLayoutViewReferencia: TcxGridDBLayoutViewItem
+            Caption = 'Referencia'
+            DataBinding.FieldName = 'referencia'
+            LayoutItem = DBLayoutViewLayoutItem5
+            Options.Filtering = False
+          end
+          object DBLayoutViewItem1: TcxGridDBLayoutViewItem
+            Caption = 'Cargar plantilla'
+            PropertiesClassName = 'TcxButtonEditProperties'
+            Properties.Buttons = <
+              item
+                Default = True
+                Kind = bkEllipsis
+              end>
+            Properties.OnButtonClick = DBLayoutViewItem1PropertiesButtonClick
+            LayoutItem = DBLayoutViewLayoutItem7
+          end
           object DBLayoutViewDetalle: TcxGridDBLayoutViewItem
             Caption = 'Detalle'
             DataBinding.FieldName = 'detalle'
@@ -367,22 +305,10 @@ inherited FNVen0003: TFNVen0003
             CaptionOptions.Visible = False
             ButtonOptions.Buttons = <>
             Hidden = True
-            LayoutDirection = ldHorizontal
             ShowBorder = False
             Index = -1
           end
-          object DBLayoutViewGroup3: TdxLayoutGroup
-            CaptionOptions.Text = 'Hidden Group'
-            CaptionOptions.Visible = False
-            Parent = dxLayoutGroup1
-            SizeOptions.Width = 433
-            ButtonOptions.Buttons = <>
-            Hidden = True
-            ShowBorder = False
-            Index = 0
-          end
           object DBLayoutViewLayoutItem2: TcxGridLayoutItem
-            CaptionOptions.AlignHorz = taRightJustify
             Parent = DBLayoutViewGroup2
             SizeOptions.Width = 152
             Index = 0
@@ -397,14 +323,14 @@ inherited FNVen0003: TFNVen0003
             CaptionOptions.ImageIndex = 0
             CaptionOptions.Visible = False
             Parent = dxLayoutGroup2
-            SizeOptions.Height = 90
+            SizeOptions.Height = 80
             SizeOptions.Width = 453
-            Index = 0
+            Index = 1
           end
           object DBLayoutViewGroup2: TdxLayoutGroup
             CaptionOptions.Text = 'Hidden Group'
             CaptionOptions.Visible = False
-            Parent = DBLayoutViewGroup3
+            Parent = DBLayoutViewGroup4
             ButtonOptions.Buttons = <>
             Hidden = True
             LayoutDirection = ldHorizontal
@@ -412,14 +338,13 @@ inherited FNVen0003: TFNVen0003
             Index = 1
           end
           object dxLayoutGroup2: TdxLayoutGroup
-            CaptionOptions.Text = 'New Group'
+            CaptionOptions.Text = 'Detalle'
             CaptionOptions.Visible = False
             Parent = DBLayoutViewGroup3
             SizeOptions.Height = 72
             ButtonOptions.Buttons = <>
-            LayoutDirection = ldTabbed
             ShowBorder = False
-            Index = 2
+            Index = 0
           end
           object DBLayoutViewLayoutItem1: TcxGridLayoutItem
             Parent = DBLayoutViewGroup1
@@ -433,7 +358,49 @@ inherited FNVen0003: TFNVen0003
           end
           object DBLayoutViewGroup1: TdxLayoutGroup
             CaptionOptions.Text = 'Hidden Group'
-            Parent = DBLayoutViewGroup3
+            Parent = DBLayoutViewGroup4
+            ButtonOptions.Buttons = <>
+            Hidden = True
+            LayoutDirection = ldHorizontal
+            ShowBorder = False
+            Index = 0
+          end
+          object DBLayoutViewLayoutItem5: TcxGridLayoutItem
+            Parent = DBLayoutViewGroup4
+            Index = 2
+          end
+          object DBLayoutViewGroup4: TdxLayoutGroup
+            CaptionOptions.Text = 'Hidden Group'
+            Parent = dxLayoutGroup1
+            ButtonOptions.Buttons = <>
+            Hidden = True
+            ItemIndex = 3
+            ShowBorder = False
+            Index = 0
+          end
+          object DBLayoutViewLayoutItem7: TcxGridLayoutItem
+            Parent = DBLayoutViewGroup5
+            SizeOptions.Width = 20
+            Index = 0
+          end
+          object DBLayoutViewGroup3: TdxLayoutGroup
+            CaptionOptions.Text = 'New Group'
+            Parent = DBLayoutViewGroup4
+            ButtonOptions.Buttons = <>
+            LayoutDirection = ldTabbed
+            ShowBorder = False
+            Index = 3
+          end
+          object DBLayoutViewSpaceItem1: TdxLayoutEmptySpaceItem
+            CaptionOptions.Text = 'Empty Space Item'
+            Parent = DBLayoutViewGroup5
+            SizeOptions.Height = 10
+            SizeOptions.Width = 255
+            Index = 1
+          end
+          object DBLayoutViewGroup5: TdxLayoutGroup
+            CaptionOptions.Text = 'Hidden Group'
+            Parent = dxLayoutGroup2
             ButtonOptions.Buttons = <>
             Hidden = True
             LayoutDirection = ldHorizontal
@@ -474,7 +441,6 @@ inherited FNVen0003: TFNVen0003
         CaptionOptions.Text = 'General'
         Parent = lcMainGroup3
         ButtonOptions.Buttons = <>
-        ItemIndex = 1
         Index = 0
       end
       object lcMainGroup3: TdxLayoutGroup
@@ -482,17 +448,9 @@ inherited FNVen0003: TFNVen0003
         CaptionOptions.Visible = False
         Parent = dxLayoutGroup4
         ButtonOptions.Buttons = <>
+        ItemIndex = 1
         LayoutDirection = ldTabbed
         ShowBorder = False
-        Index = 1
-      end
-      object lcMainGroup5: TdxLayoutGroup
-        CaptionOptions.Text = 'Condiciones de Transporte (Responsables)'
-        Parent = lcMainGroup4
-        ButtonOptions.Buttons = <>
-        ButtonOptions.ShowExpandButton = True
-        ItemIndex = 2
-        LayoutDirection = ldHorizontal
         Index = 1
       end
       object lcMainItem1: TdxLayoutItem
@@ -564,82 +522,6 @@ inherited FNVen0003: TFNVen0003
         LayoutDirection = ldHorizontal
         ShowBorder = False
         Index = 2
-      end
-      object lcMainItem15: TdxLayoutItem
-        CaptionOptions.Text = 'cxRadioButton1'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup10
-        Control = cxRadioButton1
-        ControlOptions.AutoColor = True
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object lcMainItem16: TdxLayoutItem
-        CaptionOptions.Text = 'cxRadioButton2'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup10
-        Control = cxRadioButton2
-        ControlOptions.AutoColor = True
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object lcMainGroup10: TdxLayoutGroup
-        CaptionOptions.Text = 'Carga'
-        Parent = lcMainGroup5
-        ButtonOptions.Buttons = <>
-        LayoutDirection = ldHorizontal
-        Index = 0
-      end
-      object lcMainGroup14: TdxLayoutGroup
-        CaptionOptions.Text = 'Transporte'
-        Parent = lcMainGroup5
-        ButtonOptions.Buttons = <>
-        LayoutDirection = ldHorizontal
-        Index = 1
-      end
-      object lcMainGroup15: TdxLayoutGroup
-        CaptionOptions.Text = 'Descarga'
-        Parent = lcMainGroup5
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        Index = 2
-      end
-      object lcMainItem13: TdxLayoutItem
-        CaptionOptions.Text = 'cxRadioButton3'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup14
-        Control = cxRadioButton3
-        ControlOptions.AutoColor = True
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object lcMainItem14: TdxLayoutItem
-        CaptionOptions.Text = 'cxRadioButton4'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup14
-        Control = cxRadioButton4
-        ControlOptions.AutoColor = True
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object lcMainItem17: TdxLayoutItem
-        CaptionOptions.Text = 'cxRadioButton5'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup15
-        Control = cxRadioButton5
-        ControlOptions.AutoColor = True
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object lcMainItem18: TdxLayoutItem
-        CaptionOptions.Text = 'cxRadioButton6'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup15
-        Control = cxRadioButton6
-        ControlOptions.AutoColor = True
-        ControlOptions.ShowBorder = False
-        Index = 1
       end
       object dxLayoutSeparatorItem2: TdxLayoutSeparatorItem
         CaptionOptions.Text = 'Separator'
@@ -734,7 +616,6 @@ inherited FNVen0003: TFNVen0003
         Dataset = mtArchivos
         Tag = 0
       end>
-    OnBeforeEjecutar = OperacionSaveBeforeEjecutar
     Left = 552
     Top = 8
   end
@@ -791,6 +672,7 @@ inherited FNVen0003: TFNVen0003
   object Help: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'cotizacion'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtCotizacionoid_cotiz
     Left = 496
     Top = 56
@@ -880,6 +762,11 @@ inherited FNVen0003: TFNVen0003
     object mtItemscant: TFloatField
       Tag = 1
       FieldName = 'cant'
+    end
+    object mtItemsreferencia: TStringField
+      Tag = 1
+      FieldName = 'referencia'
+      Size = 100
     end
     object mtItemsdetalle: TMemoField
       Tag = 1
@@ -1132,27 +1019,6 @@ inherited FNVen0003: TFNVen0003
       FieldName = 'des_repre'
       Size = 40
     end
-    object mtCotizacionrespCargaEmpr: TBooleanField
-      FieldName = 'respCargaEmpr'
-    end
-    object mtCotizacionrespCargaClie: TBooleanField
-      Tag = 1
-      FieldName = 'respCargaClie'
-    end
-    object mtCotizacionrespTranspEmpr: TBooleanField
-      FieldName = 'respTranspEmpr'
-    end
-    object mtCotizacionrespTranspClie: TBooleanField
-      Tag = 1
-      FieldName = 'respTranspClie'
-    end
-    object mtCotizacionrespDescargaEmpr: TBooleanField
-      FieldName = 'respDescargaEmpr'
-    end
-    object mtCotizacionrespDescargaClie: TBooleanField
-      Tag = 1
-      FieldName = 'respDescargaClie'
-    end
   end
   object dsCotizacion: TDataSource
     DataSet = mtCotizacion
@@ -1162,6 +1028,7 @@ inherited FNVen0003: TFNVen0003
   object hlpVend: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'vendedor'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtCotizacionoid_vend
     CodigoRespuesta = mtCotizacioncod_vend
     Left = 208
@@ -1170,6 +1037,7 @@ inherited FNVen0003: TFNVen0003
   object hlpRepre: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'representante'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtCotizacionoid_repre
     CodigoRespuesta = mtCotizacioncod_repre
     Left = 248
@@ -1178,6 +1046,7 @@ inherited FNVen0003: TFNVen0003
   object hlpArt: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'articulos'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtItemsoid_art
     CodigoRespuesta = mtItemscod_art
     Left = 288
@@ -1186,6 +1055,7 @@ inherited FNVen0003: TFNVen0003
   object hlpClie: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'clientes'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtCotizacionoid_clie
     CodigoRespuesta = mtCotizacioncod_clie
     Left = 128
@@ -1196,6 +1066,7 @@ inherited FNVen0003: TFNVen0003
     Entidad = 'clienteSucursal'
     EntidadMaestra = 'clientes'
     OidEntidadMaestra = mtCotizacionoid_clie
+    TipoFiltro = fi_Activos
     OidRespuesta = mtCotizacionoid_sucu
     Left = 168
     Top = 144
@@ -1301,5 +1172,10 @@ inherited FNVen0003: TFNVen0003
       end>
     Left = 288
     Top = 200
+  end
+  object hlpPlantilla: TjktHelpGenerico
+    TipoFiltro = fi_Activos
+    Left = 328
+    Top = 144
   end
 end

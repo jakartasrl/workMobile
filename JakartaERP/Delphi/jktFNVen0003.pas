@@ -44,12 +44,6 @@ type
     cxDBTextEdit7: TcxDBTextEdit;
     cxDBTextEdit8: TcxDBTextEdit;
     cxDBButtonEdit1: TcxDBButtonEdit;
-    cxRadioButton1: TcxRadioButton;
-    cxRadioButton2: TcxRadioButton;
-    cxRadioButton3: TcxRadioButton;
-    cxRadioButton4: TcxRadioButton;
-    cxRadioButton5: TcxRadioButton;
-    cxRadioButton6: TcxRadioButton;
     cxDBButtonEdit2: TcxDBButtonEdit;
     jktExpDBGrid5: TjktExpDBGrid;
     jktExpDBGrid5DBTableView1: TcxGridDBTableView;
@@ -63,7 +57,6 @@ type
     lcMainItem2: TdxLayoutItem;
     lcMainGroup4: TdxLayoutGroup;
     lcMainGroup3: TdxLayoutGroup;
-    lcMainGroup5: TdxLayoutGroup;
     lcMainItem1: TdxLayoutItem;
     lcMainItem7: TdxLayoutItem;
     lcMainItem8: TdxLayoutItem;
@@ -73,15 +66,6 @@ type
     lcMainGroup13: TdxLayoutGroup;
     lcMainGroup2: TdxLayoutGroup;
     lcMainGroup9: TdxLayoutGroup;
-    lcMainItem15: TdxLayoutItem;
-    lcMainItem16: TdxLayoutItem;
-    lcMainGroup10: TdxLayoutGroup;
-    lcMainGroup14: TdxLayoutGroup;
-    lcMainGroup15: TdxLayoutGroup;
-    lcMainItem13: TdxLayoutItem;
-    lcMainItem14: TdxLayoutItem;
-    lcMainItem17: TdxLayoutItem;
-    lcMainItem18: TdxLayoutItem;
     dxLayoutSeparatorItem2: TdxLayoutSeparatorItem;
     dxLayoutItem1: TdxLayoutItem;
     lcMainGroup16: TdxLayoutGroup;
@@ -99,7 +83,6 @@ type
     DBLayoutViewDescripcion: TcxGridDBLayoutViewItem;
     DBLayoutViewDetalle: TcxGridDBLayoutViewItem;
     dxLayoutGroup1: TdxLayoutGroup;
-    DBLayoutViewGroup3: TdxLayoutGroup;
     DBLayoutViewLayoutItem2: TcxGridLayoutItem;
     DBLayoutViewLayoutItem3: TcxGridLayoutItem;
     DBLayoutViewLayoutItem6: TcxGridLayoutItem;
@@ -138,12 +121,6 @@ type
     mtCotizacionoid_repre: TIntegerField;
     mtCotizacioncod_repre: TStringField;
     mtCotizaciondes_repre: TStringField;
-    mtCotizacionrespCargaEmpr: TBooleanField;
-    mtCotizacionrespCargaClie: TBooleanField;
-    mtCotizacionrespDescargaEmpr: TBooleanField;
-    mtCotizacionrespDescargaClie: TBooleanField;
-    mtCotizacionrespTranspEmpr: TBooleanField;
-    mtCotizacionrespTranspClie: TBooleanField;
     mtItemsoid_art: TIntegerField;
     mtItemscod_art: TStringField;
     mtItemsdes_abrev_art: TStringField;
@@ -169,6 +146,16 @@ type
     valVend: TjktValidador;
     valRepre: TjktValidador;
     valArt: TjktValidador;
+    mtItemsreferencia: TStringField;
+    DBLayoutViewLayoutItem5: TcxGridLayoutItem;
+    DBLayoutViewReferencia: TcxGridDBLayoutViewItem;
+    DBLayoutViewGroup4: TdxLayoutGroup;
+    DBLayoutViewLayoutItem7: TcxGridLayoutItem;
+    DBLayoutViewItem1: TcxGridDBLayoutViewItem;
+    DBLayoutViewGroup3: TdxLayoutGroup;
+    DBLayoutViewSpaceItem1: TdxLayoutEmptySpaceItem;
+    DBLayoutViewGroup5: TdxLayoutGroup;
+    hlpPlantilla: TjktHelpGenerico;
     procedure DriverNuevo(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure DBLayoutViewCodigoPropertiesButtonClick(Sender: TObject;
@@ -185,7 +172,8 @@ type
       AButtonIndex: Integer);
     procedure cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
-    procedure OperacionSaveBeforeEjecutar(Sender: TObject);
+    procedure DBLayoutViewItem1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
   public
@@ -245,6 +233,14 @@ begin
     mtItems.FieldByName('des_abrev_art').AsString := hlpArt.GetDescripcion;
 end;
 
+procedure TFNVen0003.DBLayoutViewItem1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+
+  // llamar a hlpPlantillas
+end;
+
 procedure TFNVen0003.DriverNuevo(Sender: TObject);
 begin
   inherited;
@@ -292,37 +288,11 @@ begin
     mtItems.FieldByName('oid_item').AsInteger := GetNewOid;
 end;
 
-procedure TFNVen0003.OperacionSaveBeforeEjecutar(Sender: TObject);
-begin
-  inherited;
-
-  mtCotizacion.Edit;
-  mtCotizacion.FieldByName('respCargaClie').AsBoolean    := cxRadioButton2.Checked;
-  mtCotizacion.FieldByName('respTranspClie').AsBoolean   := cxRadioButton4.Checked;
-  mtCotizacion.FieldByName('respDescargaClie').AsBoolean := cxRadioButton6.Checked;
-  mtCotizacion.Post;
-end;
-
 procedure TFNVen0003.OperacionTraerAfterEjecutar(Sender: TObject);
 begin
   inherited;
 
   lcMainItem2.Visible := True;
-
-  if mtCotizacion.FieldByName('respCargaClie').AsBoolean then
-    cxRadioButton2.Checked := True
-  else
-    cxRadioButton1.Checked := True;
-
-  if mtCotizacion.FieldByName('respTranspClie').AsBoolean then
-    cxRadioButton4.Checked := True
-  else
-    cxRadioButton3.Checked := True;
-
-  if mtCotizacion.FieldByName('respDescargaClie').AsBoolean then
-    cxRadioButton6.Checked := True
-  else
-    cxRadioButton5.Checked := True;
 end;
 
 

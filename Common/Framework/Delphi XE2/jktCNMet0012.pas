@@ -20,6 +20,8 @@ type
     procedure AutoEditarCabecera();
   protected
     { Protected declarations }
+    procedure DoOnNewRecord; override;
+
     procedure onEventoBeforeEdit(DataSet: TDataSet);
     procedure onEventoBeforeInsert(DataSet: TDataSet);
   public
@@ -150,6 +152,7 @@ end;
 constructor TjktMemTable.Create(AOwner : TComponent);
 begin
   inherited Create(AOWner);
+
   OnPostError           := onPostErrorDataSet;
   BeforeEdit            := onEventoBeforeEdit;
   BeforeInsert          := onEventoBeforeInsert;
@@ -201,36 +204,49 @@ procedure TjktMemTable.BajaLogica();
 begin
   if (not self.Active) then Exit;
 {
-  if (self.State in [dsEdit,dsInsert])
-      then begin
-           self.Cancel;
-           exit;
-           end;
+  if (self.State in [dsEdit, dsInsert]) then
+    begin
+      self.Cancel;
+      exit;
+    end;
 }
   if (self.IsEmpty) then Exit;
 
-  if (self.FieldByName('new').AsBoolean = true)
-     then self.delete
-     else begin
-          if (not (self.State in [dsEdit,dsInsert]))
-             then self.Edit;
-          self.FieldByName('Activo').AsBoolean := False;
-          end;
+  if (self.FieldByName('new').AsBoolean = true) then
+    self.delete
+  else
+    begin
+      if (not (Self.State in [dsEdit, dsInsert])) then
+        Self.Edit;
+
+      Self.FieldByName('Activo').AsBoolean := False;
+    end;
 end;
 
 procedure TjktMemTable.Rehabilitar();
 begin
   if (not self.Active) then Exit;
   if (self.IsEmpty) then Exit;
-  if (not (self.State in [dsEdit,dsInsert]))
-     then self.Edit;
-  self.FieldByName('Activo').AsBoolean := True;
+
+  if (not (self.State in [dsEdit, dsInsert])) then
+    Self.Edit;
+
+  Self.FieldByName('Activo').AsBoolean := True;
 end;
 
 procedure TjktMemTable.onPostErrorDataSet(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 begin
    if (E.ClassName = 'EMemTableDupKey' )
      then E.Message := fMensajeErrorClaveDuplicada;
+end;
+
+procedure TjktMemTable.DoOnNewRecord;
+begin
+  inherited;
+
+  // Asignamos por defecto el campo 'Activo' en True si es que lo crearon
+  if (Self.FindField('Activo') <> nil) then
+    Self.FieldByName('Activo').AsBoolean := True;
 end;
 
 procedure TjktMemTable.onEventoBeforeEdit(DataSet: TDataSet);
@@ -271,10 +287,10 @@ end;
 
 function TjktMemTable.isEditando : Boolean;
 begin
-  result := False;
-  if ( Self.Active )
- and ( Self.State in [dsEdit,dsInsert] )
-     then result := True;
+  Result := False;
+
+  if Self.Active and (Self.State in [dsEdit, dsInsert]) then
+    Result := True;
 end;
 
 procedure TjktMemTable.Postear;
