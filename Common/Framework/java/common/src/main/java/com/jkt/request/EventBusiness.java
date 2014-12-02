@@ -255,7 +255,11 @@ public class EventBusiness extends XMLEntity implements IEventBusiness {
 	}
 
 	public List<Lista> obtenerListas() {
-		return this.getListas().getListas();
+		if(this.getListas()!=null){
+			return this.getListas().getListas();
+		}else{
+			return new ArrayList<Lista>();
+		}
 	}
 
 	public String getInputOV() {

@@ -206,10 +206,9 @@
 
 	</operacion>
 
-	<operacion name="TraerAnalisis"
-		clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Analisis">
+	<operacion name="TraerAnalisis" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Analisis">
 
-		<output name="entidad" tableName="TCab">
+		<output name="resultado" tableName="TCab">
 			<campoSalida value="oid_ana" target="id" />
 			<campoSalida value="cod_ana" target="codigo" />
 			<campoSalida value="des_ana" target="descripcion" />
@@ -245,7 +244,7 @@
 	<operacion name="TraerDeterminaciones"
 		clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Determinacion">
 
-		<output name="entidad" tableName="TDet">
+		<output name="resultado" tableName="TDet">
 			<campoSalida value="oid_det" 	target="id" />
 			<campoSalida value="cod_det" 	target="codigo" />
 			<campoSalida value="des_det" 	target="descripcion" />

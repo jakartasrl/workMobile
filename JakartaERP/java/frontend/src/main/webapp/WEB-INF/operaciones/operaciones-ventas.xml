@@ -204,9 +204,9 @@
 <!-- 				<campoEntrada name="tipoComprobante" clase="com.jkt.dominio.TipoComprobante" metodo="setTipoComprobante" /> -->
 <!-- 				<campoEntrada name="letra" clase="Char" metodo="setLetra" /> -->
 
-				<campoEntrada name="respCargaClie" clase="Boolean" metodo="setCargaACargoDeCliente" />
-				<campoEntrada name="respTranspClie" clase="Boolean" metodo="setTransporteACargoDeCliente" />
-				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" />
+<!-- 				<campoEntrada name="respCargaClie" clase="Boolean" metodo="setCargaACargoDeCliente" /> -->
+<!-- 				<campoEntrada name="respTranspClie" clase="Boolean" metodo="setTransporteACargoDeCliente" /> -->
+<!-- 				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" /> -->
 
 				
 				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_item">
@@ -260,14 +260,14 @@
 			<campoSalida value="cod_repre" target="representante.codigo" />
 			<campoSalida value="des_repre" target="representante.descripcion" />
 			
-			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" />
-			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" />
+<!-- 			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" /> -->
+<!-- 			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" /> -->
 			
-			<campoSalida value="respTranspEmpr" target="isTransporteACargoDeEmpresa" />
-			<campoSalida value="respTranspClie" target="isTransporteACargoDeCliente" />
+<!-- 			<campoSalida value="respTranspEmpr" target="isTransporteACargoDeEmpresa" /> -->
+<!-- 			<campoSalida value="respTranspClie" target="isTransporteACargoDeCliente" /> -->
 			
-			<campoSalida value="respDescargaEmpr" target="isDescargaACargoDeEmpresa" />
-			<campoSalida value="respDescargaClie" target="isDescargaACargoDeCliente" />
+<!-- 			<campoSalida value="respDescargaEmpr" target="isDescargaACargoDeEmpresa" /> -->
+<!-- 			<campoSalida value="respDescargaClie" target="isDescargaACargoDeCliente" /> -->
 
 		</output>
 		

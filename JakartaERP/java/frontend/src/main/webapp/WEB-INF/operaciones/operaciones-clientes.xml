@@ -1,13 +1,20 @@
 <?xml version="1.0" standalone="yes"?>
 <!DOCTYPE entity [
-	
+
   <!ELEMENT entity        (operacion*)>
-  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+<!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
   
   <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
   <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
   <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
   <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+  
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
+
+  <!ELEMENT lista  (lista*)>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
 
 
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
@@ -33,7 +40,7 @@
   <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
   <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
   <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada fieldID        CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
  
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->

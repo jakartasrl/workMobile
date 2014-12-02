@@ -30,7 +30,5 @@
 	<import resource="classpath:seguridad-context.xml" />
 	
 <!-- 	<import resource="classpath*:*context.xml" /> -->
-
-	
 	
 </beans>
