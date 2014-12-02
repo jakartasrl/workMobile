@@ -129,6 +129,17 @@
 			<campoSalida value="oid_Cliente" target="id" />
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Telefonos" target="telefono" />			
+			<campoSalida value="Fax" target="fax" />			
+			<campoSalida value="NroProveedor" target="nroProveedor" />			
+			<campoSalida value="Email" target="mail" />			
+			
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+			<campoSalida value="oid_vend" target="vendedor.id" />
+			<campoSalida value="cod_vend" target="vendedor.codigo" />
+			<campoSalida value="des_vend" target="vendedor.descripcion" />
+				
 			<campoSalida value="oid_CondPago" target="condPago.id" />
 			<campoSalida value="CodCondPago" target="condPago.codigo" />
 			<campoSalida value="DescCondPago" target="condPago.descripcion" />
@@ -195,6 +206,11 @@
 			<campoSalida value="CodVendedor" target="vendedorComercial.codigo" />
 			<campoSalida value="DescVendedor" target="vendedorComercial.descripcion" />
 			<campoSalida value="Telefonos" target="telefono" />
+			
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+			
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
@@ -217,10 +233,11 @@
 		<output name="contactos" tableName="mtContactos">
 			<campoSalida value="oid_ContSuc" target="id" />
 			<campoSalida value="oid_SucClie" target="clienteSucursalId" />
-			<campoSalida value="Apellido" target="apellido" />
-			<campoSalida value="Nombres" target="nombre" />
+			<campoSalida value="ApellidoYNombre" target="apellidoYNombre" />
 			<campoSalida value="Cargo" target="tratamiento" />
 			<campoSalida value="Telefonos" target="telefono" />
+			<campoSalida value="TelefonoAlt" target="telefonoAlternativo" />
+			<campoSalida value="Celular" target="celular" />
 			<campoSalida value="Email" target="mail" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
@@ -257,7 +274,12 @@
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
+				<campoEntrada name="Mail" clase="String" metodo="setMail" />
+				<campoEntrada name="Fax" clase="String" metodo="setFax" />
+				<campoEntrada name="NroProveedor" clase="String" metodo="setNroProveedor" />
 				<campoEntrada name="oid_CondPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondPago" />
+				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
+				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
 				
 				<campoEntrada name="mtSujImp" metodo="setSujetoImpositivo" clase="com.jkt.erp.varios.SujetoImpositivo" fieldID="oid_SujImp">
 <!-- 					<campoEntrada name="oid_Cliente" clase="com.jkt.erp.varios.Cliente" metodo="setCliente" /> -->
@@ -296,6 +318,7 @@
 					<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
 					 
 					<campoEntrada name="oid_Vendedor" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedorComercial" />
+					<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
 					<campoEntrada name="mtDomiciliosEntrega" metodo="addDomicilioEntrega" clase="com.jkt.erp.varios.DomicilioEntrega" fieldID="oid_DomSuc">
@@ -312,12 +335,14 @@
 					</campoEntrada>
 
 					<campoEntrada name="mtContactos" metodo="addContacto" clase="com.jkt.erp.varios.Contacto" fieldID="oid_ContSuc">
-						<campoEntrada name="Apellido" clase="String" metodo="setApellido" />
-						<campoEntrada name="Nombres" clase="String" metodo="setNombre" />
+						<campoEntrada name="ApellidoYNombre" clase="String" metodo="setApellidoYNombre" />
 						<campoEntrada name="Cargo" clase="String" metodo="setTratamiento" />
-						<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
+						<campoEntrada name="Telefono" clase="String" metodo="setTelefono" />
+						<campoEntrada name="TelefonoAlternativo" clase="String" metodo="setTelefonoAlternativo" />
+						<campoEntrada name="Celular" clase="String" metodo="setCelular" />
 						<campoEntrada name="Email" clase="String" metodo="setMail" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+						<campoEntrada name="TipoContacto" clase="com.jkt.erp.varios.TipoContacto" metodo="setTipoContacto" />
 					</campoEntrada>
 
 					<campoEntrada name="mtClasificadoresSucursal" metodo="addClasificador" clase="com.jkt.erp.varios.ClienteSucursalClasificador" fieldID="oid_ClasifSuc">
@@ -448,6 +473,40 @@
 			<form name=""></form>
 		</forms>		
 	</operacion>
+	
+	<!-- GUARDAR tipo contacto  -->
+	<operacion name="GuardarTipoDeContacto" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.TipoContacto" fieldID='oid_tipo_contacto'>
+			<campoEntrada>			
+				<campoEntrada name="Nombre"  clase="String" metodo="setNombre" />
+				<campoEntrada name="Descripcion"  clase="String"  metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+		
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR  tipo de contacto -->
+	<operacion name="TraerTipoDeContacto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.TipoContacto">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_tipo_contacto" 	target="id" />
+			<campoSalida value="Nombre"    			target="nombre" />
+			<campoSalida value="Descripcion"  		target="descripcion" />
+			<campoSalida value="Activo"    			target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+	
 	
 
 

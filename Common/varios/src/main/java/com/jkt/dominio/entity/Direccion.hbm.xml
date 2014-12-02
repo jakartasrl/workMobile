@@ -12,6 +12,8 @@
 		<property name="direccion" column="DIRECCION"/>
 		<property name="codigoPostal" column="CODIGO_POSTAL"/>
 		<property name="localidad" column="LOCALIDAD"/>
+		<property name="fax" column="MAIL"/>
+		<property name="mail" column="FAX"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 		

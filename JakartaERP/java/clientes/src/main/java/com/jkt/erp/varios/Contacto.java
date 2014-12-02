@@ -1,58 +1,61 @@
 package com.jkt.erp.varios;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
 
 /**
- * Entidad que representa la informaciï¿½n de contacto
+ * Entidad que representa la información de contacto
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Contacto extends PersistentEntity {
 
 	@NotBlank
-	private String apellido;
-	
-	@NotBlank
-	private String nombre;
-	
+	private String apellidoYNombre;
+
+	// @NotBlank
+	// private String nombre;
+
 	@NotBlank
 	private String telefono;
-	
+
+	// @NotBlank
+	private String telefonoAlternativo;
+
+	// @NotBlank
+	private String celular;
+
 	@NotBlank
-	@Email(message="El correo ingresado no parece tener el formato correcto.")
+	@Email(message = "El correo ingresado no parece tener el formato correcto.")
 	private String mail;
 
 	@NotBlank
 	private String tratamiento;
 
-	//Transient var for not persist in db
-	private long clienteSucursalId;
+	@NotNull(message="El contacto debe tener obligatoriamente un tipo de contacto.")
+	private TipoContacto tipoContacto;
 	
+	public TipoContacto getTipoContacto() {
+		return tipoContacto;
+	}
+
+	public void setTipoContacto(TipoContacto tipoContacto) {
+		this.tipoContacto = tipoContacto;
+	}
+
+	// Transient var for not persist in db
+	private long clienteSucursalId;
+
 	public long getClienteSucursalId() {
 		return clienteSucursalId;
 	}
 
 	public void setClienteSucursalId(long clienteSucursalId) {
 		this.clienteSucursalId = clienteSucursalId;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getTelefono() {
@@ -80,7 +83,31 @@ public class Contacto extends PersistentEntity {
 	}
 
 	public void setClienteSucursal(long id) {
-		this.clienteSucursalId=id;
+		this.clienteSucursalId = id;
+	}
+
+	public String getApellidoYNombre() {
+		return apellidoYNombre;
+	}
+
+	public void setApellidoYNombre(String apellidoYNombre) {
+		this.apellidoYNombre = apellidoYNombre;
+	}
+
+	public String getTelefonoAlternativo() {
+		return telefonoAlternativo;
+	}
+
+	public void setTelefonoAlternativo(String telefonoAlternativo) {
+		this.telefonoAlternativo = telefonoAlternativo;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 }

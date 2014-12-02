@@ -43,5 +43,6 @@
 	<elemento key="analisis" value="com.jkt.laboratorio.dominio.Analisis" />
 	<elemento key="moneda" value="com.jkt.varios.dominio.Moneda" />
 	<elemento key="plantilla" value="com.jkt.dominio.Plantilla" />
+	<elemento key="tipoContacto" value="com.jkt.erp.varios.TipoContacto" />
 
 </elementos>

@@ -390,5 +390,21 @@
 			<validador fieldName="cotizacion" 		tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 	</entidad>
+	
+	<entidad nombre="TipoDeContacto">
+	
+		<operacion operSave="GuardarTipoDeContacto" operTraer="TraerTipoDeContacto" />
+		
+		<campos>
+			<campo fieldName="oid"      	tipo="Integer" longitud="0"  visible="false" readOnly="true" orden="1" label="oid_tipo_contacto" />
+			<campo fieldName="nombre" 		tipo="String"  longitud="60" visible="true" readOnly="true" orden="2" label="Nombre de Tipo de Contacto" />
+			<campo fieldName="descripcion" 	tipo="String"  longitud="60" visible="true" readOnly="true" orden="3" label="Descripcion" />
+			<campo fieldName="Activo"   	tipo="Boolean" longitud="5"  visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="nombre" 		tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+	</entidad>
 
 </entidades>
