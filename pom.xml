@@ -47,6 +47,17 @@
 	
 	
 	</modules>
+	
+	<distributionManagement>
+		<repository>
+			<id>Nexus</id>
+			<url>http://jk101:8080/nexus/content/repositories/thirdparty/</url>
+		</repository>
+		<snapshotRepository>
+			<id>Nexus</id>
+			<url>http://jk101:8080/nexus/content/repositories/thirdparty/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<plugins>

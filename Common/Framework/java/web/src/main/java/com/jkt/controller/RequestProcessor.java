@@ -9,7 +9,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,7 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
+import com.jkt.xmlreader.ElementTransformer;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.XMLEntity;
 
@@ -132,13 +132,20 @@ public abstract class RequestProcessor extends BaseController{
 		
 
 		log.debug("Recuperando un transformer para la operación actual...");
+		if( ((EventBusiness) eventBusinessOperation).getTransformer()==null &&  getAppRequest().equals(CLIENTE_HTML)){
+			ElementTransformer elemTrans=new ElementTransformer();
+			elemTrans.setClase("com.jkt.transformers.WebTransformer");
+			 ((EventBusiness) eventBusinessOperation).setTransformer(elemTrans);
+		}
 		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
 		log.debug("Ejecutando la operación...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
+
 		operation.runOperation(parametersAdapted);
+
 		
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
