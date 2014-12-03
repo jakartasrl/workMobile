@@ -1,6 +1,5 @@
 package com.jkt.dominio;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +13,6 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	
 	public static List<Container> TIPO_VENTA = Arrays.asList(new Container("1", "Fabricacion"), new Container("2", "Reparacion"), new Container("3", "Service"));
 	
-	
 	private static final String SEPARADOR = " / ";
 
 	private String descripcion;//Con esta descripcion el usuario selecciona que modelo de cotizador es el mas apropiado.
@@ -27,6 +25,8 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	private Moneda moneda;
 	private Cotizador cotizador;
 	private int tipoVenta=0;
+	private String referencia;
+	
 	
 	/*
 	 * Helper methods
@@ -64,7 +64,13 @@ public class ComprobanteVentaDet extends PersistentEntity {
 	 * Campo transiente
 	 */
 	
+	public String getReferencia() {
+		return referencia;
+	}
 
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
 
 	public int getTipoVenta() {
 		return tipoVenta;

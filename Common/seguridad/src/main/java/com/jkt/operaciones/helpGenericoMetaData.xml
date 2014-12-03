@@ -38,5 +38,16 @@
 		</campos>
 
 	</entidad>
+
+
+	<entidad nombre="plantilla">
+
+		<campos>
+			<campo fieldName="oid" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" columnWidth="120" visible="true" readOnly="false" orden="2" label="Código" />
+			<campo fieldName="Descripcion" tipo="String" longitud="1000" columnWidth="380" visible="true" readOnly="false" orden="3" label="Plantilla" />
+		</campos>
+
+	</entidad>
 	
 </entidades>

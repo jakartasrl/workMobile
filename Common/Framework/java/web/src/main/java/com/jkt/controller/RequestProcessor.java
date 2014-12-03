@@ -145,11 +145,11 @@ public abstract class RequestProcessor extends BaseController{
 		}finally{
 			sessionProvider.destroySession();
 		}
-		log.debug("FinalizÃ³ la operaciÃ³n...");
+		log.debug("Finalizó la operación...");
 	}
 
 	protected void getEventBusinessOperation(String operationName) {
-		log.debug("Ejecutando la operaciÃ³n "+operationName+".");
+		log.debug("Ejecutando la operación "+operationName+".");
 		eventBusinessOperation = getOperation(operationName);
 	}
 	

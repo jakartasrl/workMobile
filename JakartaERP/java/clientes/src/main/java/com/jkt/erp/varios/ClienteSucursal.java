@@ -45,6 +45,8 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle, IDesc
 	
 	private String telefono;
 	
+	private String domicilioEntregaDeFactura;
+	
 	/**
 	 * Contactos en la sucursal
 	 */
@@ -64,6 +66,14 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle, IDesc
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public String getDomicilioEntregaDeFactura() {
+		return domicilioEntregaDeFactura;
+	}
+
+	public void setDomicilioEntregaDeFactura(String domicilioEntregaDeFactura) {
+		this.domicilioEntregaDeFactura = domicilioEntregaDeFactura;
 	}
 
 	public int getNumero() {
@@ -227,6 +237,10 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle, IDesc
 
 	public String getCadena() {
 		return "";
+	}
+	
+	public String getDescripcionCompleta(){
+		return this.cliente.getDescripcion().concat("/").concat(this.descripcion);
 	}
 
 }

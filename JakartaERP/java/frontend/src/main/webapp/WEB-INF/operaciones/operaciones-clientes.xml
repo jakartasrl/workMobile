@@ -204,6 +204,7 @@
 			<campoSalida value="NroSucursal" target="numero" />
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Direccion" target="direccion.direccion" />
+			<campoSalida value="dom_entre_fac" target="domicilioEntregaDeFactura" />
 			<campoSalida value="Localidad" target="direccion.localidad" />
 			<campoSalida value="CodPostal" target="direccion.codigoPostal" />
 			<campoSalida value="oid_Provincia" target="direccion.provincia.id" />
@@ -320,6 +321,7 @@
 					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
 					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
 					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
+					<campoEntrada name="dom_entre_fac" clase="String" metodo="domicilioEntregaDeFactura" /> <!--  es un domicilio, una cadena simple de texto -->
 					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
 					<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
 					<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />

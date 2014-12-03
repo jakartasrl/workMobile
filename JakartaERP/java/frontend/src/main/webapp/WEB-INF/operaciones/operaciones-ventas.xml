@@ -196,6 +196,9 @@
 				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
 				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
 
+				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
+				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+
 <!-- 				<campoEntrada name="oid_condicionPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionPago" /> -->
 				
 <!-- 				<campoEntrada name="comportamiento" clase="String" metodo="setComportamiento" /> -->
@@ -214,6 +217,8 @@
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
 					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
+					<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+					
 <!-- 					<campoEntrada name="oid_unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" /> -->
 <!-- 					<campoEntrada name="precio" clase="Double" metodo="setPrecio" /> -->
 <!-- 					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" /> -->
@@ -246,7 +251,7 @@
 			
 			<campoSalida value="oid_sucu" target="clienteSucursal.id" />
 			<campoSalida value="nro_sucu" target="clienteSucursal.numero"/>
-			<campoSalida value="des_sucu" target="clienteSucursal.descripcion" />
+			<campoSalida value="des_sucu" target="clienteSucursal.descripcionCompleta" />
 
 			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
 			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
@@ -259,6 +264,9 @@
 			<campoSalida value="oid_repre" target="representante.id" />
 			<campoSalida value="cod_repre" target="representante.codigo" />
 			<campoSalida value="des_repre" target="representante.descripcion" />
+			
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
 			
 <!-- 			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" /> -->
 <!-- 			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" /> -->
@@ -278,6 +286,8 @@
 			<campoSalida value="oid_art" target="producto.id" />
 			<campoSalida value="cod_art" target="producto.codigo" />
 			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
+
+			<campoSalida value="referencia" target="referencia" />
 
 			<campoSalida value="cant" target="cantidad" />
 			
@@ -496,6 +506,29 @@
 		<forms>
 			<form name="---"></form>
 		</forms>
+
+	</operacion>
+	
+	
+	<!-- RECUPERA TODOS LOS DATOS NECESARIOS PARA OBTENER EL VENDEDOR POR DEFECTO -->
+	<operacion name="TraerVendRepreCliente" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.Cliente">
+		
+		<output name="resultado" tableName="mtTemporal">
+<!-- 			<campoSalida value="oid_cliente" target="id" /> -->
+			<campoSalida value="oid_vend" target="vendedor.id" />
+			<campoSalida value="cod_vend" target="vendedor.codigo" />
+			<campoSalida value="des_vend" target="vendedor.descripcion" />
+
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNVen0001" />
+		</forms>		
 
 	</operacion>
 	
