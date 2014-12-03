@@ -74,15 +74,9 @@
 
 <entity>
 
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
-<!-- 	ESTAS SON OPERACIONES DE PRUEBA PARA VERIFICAR EL COMPORTAMIENTO DE LA NUEVA OPERACION TRAERENTIDADESCONRELACIONES Y A MODO DE EJEMPLO PARA LOS DESARROLLADORES. -->
+	<operacion name="TrearClientesSucursalesDomicilios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.Cliente" >
 
-	<operacion name="TrearClientesSucursalesDomicilios" clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.erp.varios.Cliente" >
-
-		<output name="entidad" tableName="mtCliente">
+		<output name="resultado" tableName="mtCliente">
 			<campoSalida value="oid_cliente" target="id" />
 		</output>
 		
@@ -111,9 +105,9 @@
 		
 	</operacion>
 	
-	<operacion name="TraerProductoYDetalles" clase="com.jkt.operaciones.TraerEntidadesConRelaciones" entidad="com.jkt.erp.articulos.TipoProducto" >
+	<operacion name="TraerProductoYDetalles" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TipoProducto" >
 
-		<output name="entidad" tableName="mtTipoProducto">
+		<output name="resultado" tableName="mtTipoProducto">
 			<campoSalida value="oid_TipoProducto" 	target="id" />
 		</output>
 		

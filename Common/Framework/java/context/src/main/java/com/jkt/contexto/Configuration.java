@@ -44,7 +44,7 @@ import com.jkt.xmlreader.XMLObservador;
 public class Configuration {
 	
 	
-	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
+//	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
 	
 	private XMLEntity operaciones  = new XMLEntity();
 	private XMLEntity operacionesHTML  = new XMLEntity();
@@ -82,12 +82,13 @@ public class Configuration {
 		/*
 		 * Parseo las operaciones para cliente HTML
 		 */
-		InputStream inputStream = abrirRecurso(OPERACIONES_PATH);
-		this.operaciones = (XMLEntity) digester.parse(inputStream);
+//		InputStream inputStream = abrirRecurso(OPERACIONES_PATH);
+//		this.operaciones = (XMLEntity) digester.parse(inputStream);
 		
 		/*
 		 * Para cada una de las rutas indicadas, se agregan las operaciones que contienen...
 		 */
+		InputStream inputStream;
 		XMLEntity operacionesAdicionales;
 		for (String rutaActual : rutas) {
 			inputStream = abrirRecurso(rutaActual);

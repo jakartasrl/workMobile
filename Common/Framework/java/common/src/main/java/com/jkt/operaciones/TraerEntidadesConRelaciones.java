@@ -12,11 +12,15 @@ import com.jkt.xmlreader.Lista;
 import com.jkt.xmlreader.PropertySolver;
 
 /**
+ * @deprecated Hay que usar {@link TraerEntidades}. Ahora esta operacion posee la funcion de mostrar listas, cuando en el mapeo de la misma
+ * existen los tag listas.
+ * 
  * <p>Recupera todas las entidades que se indican por medio del parametro 'entidad' seteado en el archivo de operaciones(xml)</p>
  * <p>Muestra en la salida todas las entidades recuperadas desde la base, y ademas las
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Deprecated
 public class TraerEntidadesConRelaciones extends Operation {
 
 	private static final String KEY_ENTIDAD = "entidad";
