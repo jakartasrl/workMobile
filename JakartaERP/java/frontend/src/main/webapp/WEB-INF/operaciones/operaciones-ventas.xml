@@ -74,6 +74,43 @@
 
 <entity>
 	
+<!-- 	RECUPERAR LOS CONTACTOS DE UNA SUCURSAL -->
+	<operacion name="TraerContactosDeSucursal" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.ClienteSucursal">
+		
+<!-- 		Esta tabla esta vacia para no crear una nueva clase operaciones.xml. -->
+<!-- 		La tabla debe existir en delphi si o si. -->
+		
+		<output name="resultado" tableName="mtClienteSucursal">
+			<campoSalida value="oid_clie_suc" target="id" />
+		</output>
+		
+		<output name="contactos" tableName="mtContactos">
+			<campoSalida value="oid_cont_suc" target="id" />
+			<campoSalida value="tipo_cont" target="tipoContacto.nombre" />
+			<campoSalida value="ape_nom" target="apellidoYNombre" />
+			<campoSalida value="email" target="mail" />
+<!-- 			<campoSalida value="Cargo" target="tratamiento" /> -->
+<!-- 			<campoSalida value="Telefonos" target="telefono" /> -->
+<!-- 			<campoSalida value="TelefonoAlt" target="telefonoAlternativo" /> -->
+<!-- 			<campoSalida value="Celular" target="celular" /> -->
+		</output>
+
+		<listas>
+			<lista nombreLista="contactos" nombreWriter="contactos"  />
+		</listas>
+
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="FNVen0003" />
+		</forms>		
+
+	</operacion>
+	
+	
+	
+	
 	<!-- GENERA UN PEDIDO A PARTIR DE UNA COTIZACION. SE DEBERIAN REALIZAR VALIDACIONES COMO QUE LA COTIZACION CUMPLA N CODICIONES CON RESPECTO A SUS CAMPOS -->
 	<operacion name="GenerarPedidoUsandoCotizacion" clase="com.jkt.cotizador.operaciones.GenerarPedidoUsandoCotizacion">
 	
@@ -510,10 +547,10 @@
 	</operacion>
 	
 	
-	<!-- RECUPERA TODOS LOS DATOS NECESARIOS PARA OBTENER EL VENDEDOR POR DEFECTO -->
+	<!-- RECUPERA TODOS LOS DATOS NECESARIOS PARA OBTENER EL VENDEDOR Y EL REPRESENTANTE POR DEFECTO -->
 	<operacion name="TraerVendRepreCliente" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.Cliente">
 		
-		<output name="resultado" tableName="mtTemporal">
+		<output name="resultado" tableName="mtVendRepre">
 <!-- 			<campoSalida value="oid_cliente" target="id" /> -->
 			<campoSalida value="oid_vend" target="vendedor.id" />
 			<campoSalida value="cod_vend" target="vendedor.codigo" />
@@ -527,7 +564,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="FNVen0001" />
+			<form name="FNVen0003" />
 		</forms>		
 
 	</operacion>

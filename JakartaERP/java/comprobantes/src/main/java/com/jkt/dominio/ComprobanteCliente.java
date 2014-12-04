@@ -1,5 +1,7 @@
 package com.jkt.dominio;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.erp.varios.ClienteSucursal;
 import com.jkt.varios.dominio.CondPago;
 
@@ -14,6 +16,7 @@ import com.jkt.varios.dominio.CondPago;
  */
 public class ComprobanteCliente extends Comprobante {
 
+	@NotNull(message="El comprobante que se esta creando debe tener relacionado un cliente.")
 	private ClienteSucursal clienteSucursal;
 	private CondPago condicionPago;
 	
