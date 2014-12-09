@@ -16,7 +16,8 @@ import com.jkt.varios.dominio.CondPago;
  */
 public class ComprobanteCliente extends Comprobante {
 
-	@NotNull(message="El comprobante que se esta creando debe tener relacionado un cliente.")
+//	@NotNull(message="El comprobante que se esta creando debe tener relacionado un cliente.")
+	@NotNull(message="Debe seleccionar la sucursal del cliente")
 	private ClienteSucursal clienteSucursal;
 	private CondPago condicionPago;
 	

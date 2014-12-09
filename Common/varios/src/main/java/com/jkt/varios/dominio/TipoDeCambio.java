@@ -15,8 +15,6 @@ public class TipoDeCambio extends PersistentEntity {
 	/*
 	 * TODO Ver como es el tipo de cambio por defecto. Seguramente va a estar parametrizado
 	 */
-	
-	
 	private Date fecha;
 	private Moneda moneda;
 	private double cotizacion;

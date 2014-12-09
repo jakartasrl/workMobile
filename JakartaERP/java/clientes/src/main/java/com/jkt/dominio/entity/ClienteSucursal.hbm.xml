@@ -23,10 +23,10 @@
 		<many-to-one name="vendedorTecnico" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_TECNICO_ID"/>
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID"/>
 	
-		<list name="contactos" table="CONTACTO" cascade="all">
+		<list name="contactos" table="CLIENTE_SUCURSAL_CONTACTO" cascade="all">
 			<key column="CLIENTE_SUCURSAL_ID" />
 			<index column="ORDEN" />
-			<one-to-many class="com.jkt.erp.varios.Contacto" />
+			<many-to-many class="com.jkt.varios.dominio.Contacto" column="CONTACTO_ID" unique="true"/>
 		</list>
 		
 		<list name="domiciliosDeEntrega" table="DOMICILIO_ENTREGA" lazy="true" cascade="all">

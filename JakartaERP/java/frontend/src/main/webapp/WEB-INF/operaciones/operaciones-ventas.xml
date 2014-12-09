@@ -235,6 +235,7 @@
 
 				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
 				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+				<campoEntrada name="oid_cont_suc" clase="com.jkt.varios.dominio.Contacto" metodo="setContactoReferencia" />
 
 <!-- 				<campoEntrada name="oid_condicionPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionPago" /> -->
 				
@@ -304,6 +305,8 @@
 			
 			<campoSalida value="referencia" target="referencia" />
 			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
+			<campoSalida value="oid_cont_suc" target="contactoReferencia.id" />
+			
 			
 <!-- 			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" /> -->
 <!-- 			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" /> -->

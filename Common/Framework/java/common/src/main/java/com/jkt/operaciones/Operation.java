@@ -10,6 +10,8 @@ import javax.servlet.ServletOutputStream;
 import javax.validation.ConstraintViolation;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,6 +165,24 @@ public abstract class Operation extends Observable {
 		notifyObservers(Notificacion.getNew(writer, parameter));
 	}
 
+	
+	/**
+	 * Crea una nueva criteria indicando como root entity la clase enviada por parametros.
+	 */
+	protected Criteria crearCriterio(Class rootEntity){
+		Session session = sessionProvider.getSession();
+		return session.createCriteria(rootEntity);
+	}
+	
+	/**
+	 * @param hql
+	 * @return
+	 */
+	protected Query crearHQL(String hql){
+		Session session = sessionProvider.getSession();
+		return session.createQuery(hql);
+	}
+	
 	/**
 	 * <p>Metodo principal de la operacion.</p>
 	 * <p>Es el metodo a implementar en cualquier operacion.</p>

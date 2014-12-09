@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.erp.varios.Contacto" table="CONTACTO">
+	<class name="com.jkt.varios.dominio.Contacto" table="CONTACTO">
 		<id name="id" column="CONTACTO_ID">
 			<generator class="native"></generator>
 		</id>
@@ -16,7 +16,7 @@
 		<property name="tratamiento" column="TRATAMIENTO"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 
-		<many-to-one name="tipoContacto" class="com.jkt.erp.varios.TipoContacto" column="TIPO_CONTACTO_ID" cascade="none"></many-to-one>
+		<many-to-one name="tipoContacto" class="com.jkt.varios.dominio.TipoContacto" column="TIPO_CONTACTO_ID" cascade="none"></many-to-one>
 
 	</class>
 	

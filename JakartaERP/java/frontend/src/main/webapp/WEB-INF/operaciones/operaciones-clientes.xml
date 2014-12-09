@@ -204,7 +204,7 @@
 			<campoSalida value="NroSucursal" target="numero" />
 			<campoSalida value="Descripcion" target="descripcion" />
 			<campoSalida value="Direccion" target="direccion.direccion" />
-			<campoSalida value="dom_entre_fac" target="domicilioEntregaDeFactura" />
+			<campoSalida value="dom_ent_fac" target="domicilioEntregaDeFactura" />
 			<campoSalida value="Localidad" target="direccion.localidad" />
 			<campoSalida value="CodPostal" target="direccion.codigoPostal" />
 			<campoSalida value="oid_Provincia" target="direccion.provincia.id" />
@@ -241,10 +241,11 @@
 		<output name="contactos" tableName="mtContactos">
 			<campoSalida value="oid_ContSuc" target="id" />
 			<campoSalida value="oid_SucClie" target="clienteSucursalId" />
+			<campoSalida value="oid_TipoContacto" target="tipoContacto.id" />
 			<campoSalida value="ApellidoYNombre" target="apellidoYNombre" />
 			<campoSalida value="Cargo" target="tratamiento" />
-			<campoSalida value="Telefonos" target="telefono" />
-			<campoSalida value="TelefonoAlt" target="telefonoAlternativo" />
+			<campoSalida value="Telefono" target="telefono" />
+			<campoSalida value="TelefonoAlternativo" target="telefonoAlternativo" />
 			<campoSalida value="Celular" target="celular" />
 			<campoSalida value="Email" target="mail" />
 			<campoSalida value="Activo" target="isActivo" />
@@ -282,7 +283,7 @@
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
-				<campoEntrada name="Mail" clase="String" metodo="setMail" />
+				<campoEntrada name="Email" clase="String" metodo="setMail" />
 				<campoEntrada name="Fax" clase="String" metodo="setFax" />
 				<campoEntrada name="NroProveedor" clase="String" metodo="setNroProveedor" />
 				<campoEntrada name="oid_CondPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondPago" />
@@ -321,7 +322,7 @@
 					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
 					<campoEntrada name="Localidad" clase="String" metodo="setearLocalidad" />
 					<campoEntrada name="CodPostal" clase="String" metodo="setearCodPostal" />
-					<campoEntrada name="dom_entre_fac" clase="String" metodo="domicilioEntregaDeFactura" /> <!--  es un domicilio, una cadena simple de texto -->
+					<campoEntrada name="dom_ent_fac" clase="String" metodo="setDomicilioEntregaDeFactura" /> <!--  es un domicilio, una cadena simple de texto -->
 					<campoEntrada name="oid_Provincia" clase="com.jkt.varios.dominio.Provincia" metodo="setearProvincia" />
 					<campoEntrada name="oid_Pais" clase="com.jkt.varios.dominio.Pais" metodo="setearPais" />
 					<campoEntrada name="Telefonos" clase="String" metodo="setTelefono" />
@@ -343,7 +344,8 @@
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
-					<campoEntrada name="mtContactos" metodo="addContacto" clase="com.jkt.erp.varios.Contacto" fieldID="oid_ContSuc">
+					<campoEntrada name="mtContactos" metodo="addContacto" clase="com.jkt.varios.dominio.Contacto" fieldID="oid_ContSuc">
+						<campoEntrada name="oid_TipoContacto" clase="com.jkt.varios.dominio.TipoContacto" metodo="setTipoContacto" />
 						<campoEntrada name="ApellidoYNombre" clase="String" metodo="setApellidoYNombre" />
 						<campoEntrada name="Cargo" clase="String" metodo="setTratamiento" />
 						<campoEntrada name="Telefono" clase="String" metodo="setTelefono" />
@@ -351,7 +353,6 @@
 						<campoEntrada name="Celular" clase="String" metodo="setCelular" />
 						<campoEntrada name="Email" clase="String" metodo="setMail" />
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
-						<campoEntrada name="TipoContacto" clase="com.jkt.erp.varios.TipoContacto" metodo="setTipoContacto" />
 					</campoEntrada>
 
 					<campoEntrada name="mtClasificadoresSucursal" metodo="addClasificador" clase="com.jkt.erp.varios.ClienteSucursalClasificador" fieldID="oid_ClasifSuc">
@@ -406,7 +407,7 @@
 	</operacion>
 
 
-<!-- GUARDAR Vendedor  -->
+	<!-- GUARDAR Vendedor  -->
 	<operacion name="GuardarVendedor" clase="com.jkt.operaciones.GuardarLista">
 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.Vendedor" fieldID='oid'>
 			<campoEntrada>			
@@ -446,7 +447,7 @@
 	</operacion>
 	
 
-<!-- GUARDAR Representante  -->
+	<!-- GUARDAR Representante  -->
 	<operacion name="GuardarRepresentante" clase="com.jkt.operaciones.GuardarLista">
 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.Representante" fieldID='oid'>
 			<campoEntrada>			
@@ -485,7 +486,7 @@
 	
 	<!-- GUARDAR tipo contacto  -->
 	<operacion name="GuardarTipoDeContacto" clase="com.jkt.operaciones.GuardarLista">
-		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.TipoContacto" fieldID='oid_tipo_contacto'>
+		<input name="mtInput" keyName="objeto" clase="com.jkt.varios.dominio.TipoContacto" fieldID='oid_tipo_contacto'>
 			<campoEntrada>			
 				<campoEntrada name="Nombre"  clase="String" metodo="setNombre" />
 				<campoEntrada name="Descripcion"  clase="String"  metodo="setDescripcion" />
@@ -501,7 +502,7 @@
 
 
 	<!-- RECUPERAR  tipo de contacto -->
-	<operacion name="TraerTipoDeContacto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.TipoContacto">
+	<operacion name="TraerTipoDeContacto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.varios.dominio.TipoContacto">
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_tipo_contacto" 	target="id" />
 			<campoSalida value="Nombre"    			target="nombre" />

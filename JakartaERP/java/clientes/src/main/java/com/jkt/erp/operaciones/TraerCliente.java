@@ -5,20 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.impuestos.dominio.Impuesto;
 import com.jkt.erp.varios.Cliente;
 import com.jkt.erp.varios.ClienteClasificador;
 import com.jkt.erp.varios.ClienteSucursal;
 import com.jkt.erp.varios.ClienteSucursalClasificador;
-import com.jkt.erp.varios.Contacto;
 import com.jkt.erp.varios.DomicilioEntrega;
 import com.jkt.erp.varios.InscripcionImpositiva;
 import com.jkt.erp.varios.SujetoImpositivo;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Clasificador;
+import com.jkt.varios.dominio.Contacto;
 import com.jkt.varios.dominio.Direccion;
 
 /**
- * <p>Operaciï¿½n que recupera un cliente, y todo su contexto de datos, es decir, se recupera un cliente con
+ * <p>Operación que recupera un cliente, y todo su contexto de datos, es decir, se recupera un cliente con
  * el {@link SujetoImpositivo}, {@link InscripcionImpositiva}, {@link Direccion}, {@link ClienteSucursal}, 
  * {@link DomicilioEntrega}, etc...</p>
  * 
@@ -46,7 +47,6 @@ public class TraerCliente extends Operation {
 		mostrarClasificadores(cliente);
 		mostrarInscripciones(cliente);
 		mostrarSucursales(cliente);
-		
 	}
 	
 	
@@ -63,8 +63,6 @@ public class TraerCliente extends Operation {
 	 * Muestra las sucursales y sus relaciones en la salida de la operacion.
 	 */
 	private void mostrarSucursales(Cliente cliente) {
-//		List<ClienteSucursal> sucursales = ;
-		
 		for (ClienteSucursal clienteSucursal : cliente.getListaSucursales()) {
 
 			mostrarSucursal(clienteSucursal);
@@ -155,13 +153,34 @@ public class TraerCliente extends Operation {
 
 	/**
 	 * Muestra todas las inscripciones de un sujeto impositivo
+	 * @throws Exception 
 	 */
-	private void mostrarInscripciones(Cliente cliente) {
-		SujetoImpositivo sujetoImpositivo = cliente.getSujetoImpositivo();
-		List<InscripcionImpositiva> inscripcionesImpositivas = sujetoImpositivo.getInscripcionesImpositivas();
-		for (InscripcionImpositiva inscripcionImpositiva : inscripcionesImpositivas) {
-			notificarObjeto(WRITER_INSCRIPCIONES, inscripcionImpositiva);
+	private void mostrarInscripciones(Cliente cliente) throws Exception {
+		
+		/*
+		 * Guardo en un mapa todos los elementos.
+		 */
+		Map<String, Impuesto> impuestos=new HashMap<String, Impuesto>();
+		for (PersistentEntity persistentEntity : obtenerTodos(Impuesto.class)) {
+			impuestos.put(String.valueOf(((Impuesto)persistentEntity).getId()), ((Impuesto)persistentEntity));
 		}
+		
+		SujetoImpositivo sujetoImpositivo = cliente.getSujetoImpositivo();
+		for (InscripcionImpositiva inscripcionImpositiva : sujetoImpositivo.getInscripcionesImpositivas()) {
+			notificarObjeto(WRITER_INSCRIPCIONES, inscripcionImpositiva);
+			impuestos.remove(String.valueOf(inscripcionImpositiva.getImpuesto().getId()));
+		}
+		
+		InscripcionImpositiva nuevaInscripcion;
+		for (Impuesto impuesto : impuestos.values()) {
+			nuevaInscripcion=new InscripcionImpositiva();
+			nuevaInscripcion.setActivo(true);
+			nuevaInscripcion.setImpuesto(impuesto);
+			nuevaInscripcion.setSujetoImpositivo(cliente.getSujetoImpositivo());
+			
+			notificarObjeto(WRITER_INSCRIPCIONES, nuevaInscripcion);
+		}
+		
 	}
 
 	/**
@@ -203,5 +222,5 @@ public class TraerCliente extends Operation {
 			}
 		}
 	}
-
+	
 }

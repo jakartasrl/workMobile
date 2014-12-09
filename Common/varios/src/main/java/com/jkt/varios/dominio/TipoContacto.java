@@ -1,4 +1,6 @@
-package com.jkt.erp.varios;
+package com.jkt.varios.dominio;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
 
@@ -10,7 +12,9 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class TipoContacto extends PersistentEntity {
 
-	private String nombre, descripcion;
+	@NotBlank(message="El tipo de contacto debe tener un nombre.")
+	private String nombre;
+	private String descripcion;
 
 	public String getNombre() {
 		return nombre;

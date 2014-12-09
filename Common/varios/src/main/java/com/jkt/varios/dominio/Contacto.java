@@ -1,4 +1,4 @@
-package com.jkt.erp.varios;
+package com.jkt.varios.dominio;
 
 import javax.validation.constraints.NotNull;
 
@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.view.objectsView.ClienteSucursalOV;
 
 /**
  * Entidad que representa la información de contacto
@@ -17,19 +18,14 @@ public class Contacto extends PersistentEntity {
 	@NotBlank
 	private String apellidoYNombre;
 
-	// @NotBlank
-	// private String nombre;
-
 	@NotBlank
 	private String telefono;
 
-	// @NotBlank
 	private String telefonoAlternativo;
 
-	// @NotBlank
 	private String celular;
 
-	@NotBlank
+	@NotBlank(message="Debe ingresar un correo electronico.")
 	@Email(message = "El correo ingresado no parece tener el formato correcto.")
 	private String mail;
 

@@ -2,6 +2,8 @@ package com.jkt.dominio;
 
 import java.util.Date;
 
+import com.jkt.varios.dominio.Contacto;
+
 public class Cotizacion extends ComprobanteVenta {
 
 	public enum Estado { PENDIENTE, INICIADA};
@@ -9,12 +11,21 @@ public class Cotizacion extends ComprobanteVenta {
 	private String estado;
 	private Date fechaVencimiento;
 	private String referencia;
+	private Contacto contactoReferencia;
 	
 	/*
 	 * Setters y getters
 	 */
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
+	}
+
+	public Contacto getContactoReferencia() {
+		return contactoReferencia;
+	}
+
+	public void setContactoReferencia(Contacto contactoReferencia) {
+		this.contactoReferencia = contactoReferencia;
 	}
 
 	public String getReferencia() {
@@ -39,7 +50,6 @@ public class Cotizacion extends ComprobanteVenta {
 
 	public String getDescripcion(){
 		return String.format("%s/%s",this.getFecha().toString(), this.getClienteSucursal().getDescripcion());
-//		return String.format("Cotizacion numero %d para cliente %s, fecha de creacion %s.",this.getNro(),this.getClienteSucursal().getCliente().getDescripcion(),this.getFecha().toString());
 	}
 	
 	public String getCodigo(){

@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.varios.dominio.Contacto;
 import com.jkt.varios.dominio.Direccion;
 import com.jkt.varios.dominio.Pais;
 import com.jkt.varios.dominio.Provincia;
