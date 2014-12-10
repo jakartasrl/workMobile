@@ -1,7 +1,11 @@
 package com.jkt.adapter;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +17,8 @@ import org.springframework.stereotype.Component;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.request.EventBusiness;
+import com.jkt.view.ListOV;
+import com.jkt.view.ObjectView;
 import com.jkt.xmlreader.CampoEntrada;
 import com.jkt.xmlreader.Input;
 
@@ -52,18 +58,21 @@ public class WebAdapter extends Adapter<Map, Map> {
 					throw new JakartaException("La clase persistente "+typePersist+" no se encontro");
 				}
 				
-			
-				
-				//Recupero el objeto persistente
-				PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(objetoOV.getClass(), fieldId);
-				Object id = propertyDescriptor.getReadMethod().invoke(objetoOV, new Object[]{});
-				long idLong=id==null ? -1 : (Long)id;
-				Object objetoPersisBD = recuperarPersistente(idLong,classPersistente);
-				
-				getObjectPersistente(objetoPersisBD,objetoOV,inputXml.getCamposDeEntrada(),map);
-				map.put(keyName, objetoPersisBD);
+				if(ListOV.class.isAssignableFrom(objetoOV.getClass())){
+						ListOV listOV= (ListOV) objetoOV;
+						List result=new ArrayList();
+						for(Object obj : listOV.getList()){
+							Object objetoPersisBD = recuperarPersistente((ObjectView) obj,classPersistente,fieldId);
+							getObjectPersistente(objetoPersisBD,obj,inputXml.getCamposDeEntrada(),map);
+							result.add(objetoPersisBD);
+						}
+						map.put(keyName,result);
+				}else{
+					Object objetoPersisBD = recuperarPersistente((ObjectView) objetoOV,classPersistente,fieldId);
+					getObjectPersistente(objetoPersisBD,objetoOV,inputXml.getCamposDeEntrada(),map);
+					map.put(keyName, objetoPersisBD);
+				}
 			}else{
-				//TODO MUNIN no se probo!!
 				for(CampoEntrada campEntrada : inputXml.getCamposDeEntrada()){
 					if(campEntrada.getName()!=null){
 						//Recupero el value del OV y lo cargo en el map con el nombre seteado en el atributo name del operaciones.xml
@@ -87,33 +96,53 @@ public class WebAdapter extends Adapter<Map, Map> {
 			
 			//Si lo tengo que setear en el metodo del persistente
 			if(metodo!=null){
-				Method persisMethod = BeanUtils.findMethodWithMinimalParameters(objetoPersistente.getClass(), metodo);
-				if(persisMethod==null){
-					throw new JakartaException("Method inexistente para el campo "+nombreCampoOV+" para la clase "+objetoPersistente.getClass());
-				}
-				Class<?>[] parameterTypes = persisMethod.getParameterTypes();
-				if(parameterTypes== null || parameterTypes.length==0){
-					throw new JakartaException("Mal configurado el setter con nombre "+metodo+" para la clase "+objetoPersistente.getClass());
-				}
-				Class<?> classSetter= parameterTypes[0];
-	
 				if(campoEntrada.getCamposDeEntrada()!=null && !campoEntrada.getCamposDeEntrada().isEmpty()){
+					Class<?> classSetter=null;
+					Method method ;
+					try{
+						 method = objetoPersistente.getClass().getMethod(metodo, List.class);
+	
+						Type[] genericParameterTypes = method.getGenericParameterTypes();
+	
+						for(Type genericParameterType : genericParameterTypes){
+						    if(genericParameterType instanceof ParameterizedType){
+						        ParameterizedType aType = (ParameterizedType) genericParameterType;
+						        classSetter= (Class<?>) aType.getActualTypeArguments()[0];
+						    }	
+						}
+					}catch(Exception e){
+						throw new JakartaException("error leyendo setter del metodo "+metodo+" del tipo lista");
+					}
+					if(classSetter==null){
+						throw new JakartaException("Error al obtener la clase de la lista");
+					}
+					
 					Object listOVs = callGetObject(ov,nombreCampoOV);
 					String fieldIDList = campoEntrada.getFieldID(false);
-	
+					List list=new ArrayList();
+					
 					for (Object objListOV : (List)listOVs) {
-						Object idObjLista = callGetObject(objListOV, fieldIDList);
-						long idLong= idObjLista==null ? -1 : (Long)idObjLista;
 						//Obtengo la clase de lo que tengo que buscar en BD
-						Object objPersistenteDeLista = recuperarPersistente(idLong, classSetter);
+						Object objPersistenteDeLista = recuperarPersistente((ObjectView) objListOV, classSetter,fieldIDList);
 						getObjectPersistente(objPersistenteDeLista, objListOV, campoEntrada.getCamposDeEntrada(),map);
-						try {
-							persisMethod.invoke(objetoPersistente, objPersistenteDeLista);
-						} catch (Exception e) {
-							throw new JakartaException("Error al guardar metodo de lista con metodo"+metodo,e);
-						}
+						list.add(objPersistenteDeLista);
+					}
+					try {
+						method.invoke(objetoPersistente, list);
+					} catch (Exception e) {
+						throw new JakartaException("Error al guardar metodo de lista con metodo"+metodo,e);
 					}
 				}else{
+					Method persisMethod = BeanUtils.findMethodWithMinimalParameters(objetoPersistente.getClass(), metodo);
+					if(persisMethod==null){
+						throw new JakartaException("Method inexistente para el campo "+nombreCampoOV+" para la clase "+objetoPersistente.getClass());
+					}
+					Class<?>[] parameterTypes = persisMethod.getParameterTypes();
+					if(parameterTypes== null || parameterTypes.length==0){
+						throw new JakartaException("Mal configurado el setter con nombre "+metodo+" para la clase "+objetoPersistente.getClass());
+					}
+					Class<?> classSetter= parameterTypes[0];
+					
 					//primitivo
 					PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(ov.getClass(), nombreCampoOV);
 					Method readMethod ;
@@ -171,6 +200,25 @@ public class WebAdapter extends Adapter<Map, Map> {
 		return parameterTypes[0];
 	}
 	
+	private Object recuperarPersistente(ObjectView objetoOV, Class<?> classSetter,String fieldId) throws JakartaException {
+		try {
+			//Recupero el objeto persistente
+			PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(objetoOV.getClass(), fieldId);
+			Object id = propertyDescriptor.getReadMethod().invoke(objetoOV, new Object[]{});
+			long idLong= id==null ? -1 : (Long)id;
+
+			if (idLong < 1) {
+				return BeanUtils.instantiate(classSetter);
+			} else {
+				session = sessionProvider.getSession();
+				return session.get(classSetter, (Long) id);
+			}
+		} catch (Exception e) {
+			throw new JakartaException(
+					"Error recuperando persistente");
+		}
+	}
+	
 	private Object recuperarPersistente(long id, Class<?> classSetter) throws JakartaException {
 		try {
 			if (id < 1) {
@@ -179,9 +227,9 @@ public class WebAdapter extends Adapter<Map, Map> {
 				session = sessionProvider.getSession();
 				return session.get(classSetter, (Long) id);
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			throw new JakartaException(
-					"Este valor representa un oid, pero no es numerico.");
+					"Error recuperando persistente");
 		}
 	}
 }

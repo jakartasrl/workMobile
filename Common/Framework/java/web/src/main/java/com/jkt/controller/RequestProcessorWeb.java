@@ -74,8 +74,11 @@ public class RequestProcessorWeb extends RequestProcessor {
 					hashMap.put(nameOV, objectView);
 				}
 	    	}else{
-				Method readMethod = BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV").getReadMethod();
-				String keyOV= (String) readMethod.invoke(ob, new Object[]{});
+	    		String keyOV=null;
+	    		if( BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV")!=null){
+					Method readMethod = BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV").getReadMethod();
+					keyOV= (String) readMethod.invoke(ob, new Object[]{});
+	    		}
 				if(keyOV != null && keyOV.length()>0)
 					hashMap.put(keyOV, ob);
 				else
