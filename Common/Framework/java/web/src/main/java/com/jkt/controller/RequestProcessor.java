@@ -130,14 +130,21 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		
 
-		log.debug("Recuperando un transformer para la operación actual...");
+		log.debug("Recuperando un transformer para la operaciÃ³n actual...");
+		if( ((EventBusiness) eventBusinessOperation).getTransformer()==null &&  getAppRequest().equals(CLIENTE_HTML)){
+			ElementTransformer elemTrans=new ElementTransformer();
+			elemTrans.setClase("com.jkt.transformers.WebTransformer");
+			 ((EventBusiness) eventBusinessOperation).setTransformer(elemTrans);
+		}
 		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
 		log.debug("Ejecutando la operación...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
+
 		operation.runOperation(parametersAdapted);
+
 		
 		log.debug("Enviando resultados de la operación...");
 		transformer.write();
