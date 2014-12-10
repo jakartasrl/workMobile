@@ -139,7 +139,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		operation.runOperation(parametersAdapted);
 		
-		log.debug("Enviando resultados de la operaciÃ³n...");
+		log.debug("Enviando resultados de la operación...");
 		transformer.write();
 		
 		}finally{

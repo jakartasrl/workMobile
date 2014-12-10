@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.hibernate.Query;
 
+import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Moneda;
@@ -19,12 +20,16 @@ import com.jkt.varios.dominio.TipoDeCambio;
  */
 public class TraerUltimosTiposDeCambio extends Operation {
 
+	private static final String MONEDA_POR_DEFECTO = "MonedaPorDefecto";
 	private static final String WRITER_TIPO_CAMBIO = "tipoCambio";
 	private static final String HQL = "from TipoDeCambio as t where t.moneda.id= :moneda order by t.fecha desc";
 	private static final int COTIZACION_DEFAULT = 1;
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
+		
+		Configuracion configuracion = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", MONEDA_POR_DEFECTO);
+		
 		List<PersistentEntity> monedas = obtenerTodos(Moneda.class);
 		
 		List<TipoDeCambio> nuevosTiposDeCambio=new ArrayList<TipoDeCambio>();
@@ -33,6 +38,10 @@ public class TraerUltimosTiposDeCambio extends Operation {
 		TipoDeCambio tipoCambio = null;
 		for (PersistentEntity persistentEntity : monedas) {
 			monedaActual=(Moneda) persistentEntity;
+			
+			if(monedaActual.getId()==configuracion.getValorNumero()){
+				continue;
+			}
 			
 			if (!monedaActual.isActivo()) {
 				continue;

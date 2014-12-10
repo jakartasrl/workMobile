@@ -193,6 +193,10 @@
 			<campoSalida value="oid_val_cla" target="componenteValor.id" />
 			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
 			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />
+			<campoSalida value="oid_mon" target="monedaPorDefecto.id" />
+			<campoSalida value="cod_mon" target="monedaPorDefecto.codigo" />
+			<campoSalida value="oid_unid_med" target="unidadDeMedidaPorDefecto.id" />
+			<campoSalida value="cod_unid_med" target="unidadDeMedidaPorDefecto.codigo" />
 		</output>		
 
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -212,6 +216,8 @@
 				<campoEntrada name="des_conc" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="pide_art" clase="Boolean" metodo="setPideArticulo" />
 				<campoEntrada name="oid_val_cla" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+				<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaPorDefecto" />
+				<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadDeMedidaPorDefecto" />
 			</campoEntrada>
 		</input>
 	
@@ -496,6 +502,13 @@
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			<campoSalida value="tipo" target="tipo" />
 			<campoSalida value="oid_conc" target="concepto.id" />
+		
+		
+		
+			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" />
+			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
+			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
+			
 			
 			<!-- Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
 			<campoSalida value="oid_art" target="producto.id" />
