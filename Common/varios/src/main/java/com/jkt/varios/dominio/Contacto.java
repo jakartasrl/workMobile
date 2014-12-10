@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.view.objectsView.ClienteSucursalOV;
+//import com.jkt.view.objectsView.ClienteSucursalOV;
 
 /**
  * Entidad que representa la información de contacto

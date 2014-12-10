@@ -25,6 +25,7 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
+import com.jkt.xmlreader.ElementTransformer;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.XMLEntity;
 
