@@ -28,8 +28,6 @@ public class TraerTiposDeCambioEnMatriz extends Operation {
 	private static final String NOMBRE_ENTIDAD="TipoDeCambio";
 	private static final String ATRIBUTO="fecha";
 	
-	
-	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
@@ -79,9 +77,26 @@ public class TraerTiposDeCambioEnMatriz extends Operation {
 		 */
 		
 		TipoDeCambio tipoDeCambio;
+		String monedaId, fecha;
+		Map<String, TipoDeCambio> mapaTiposDeCambio;
 		for (PersistentEntity persistentEntity : tiposDeCambio) {
+			tipoDeCambio=(TipoDeCambio) persistentEntity;
 			
+			monedaId= String.valueOf(tipoDeCambio.getMoneda().getId());
+			fecha= tipoDeCambio.getFecha().toString();
+			
+			mapaTiposDeCambio = mapa.get(monedaId);
+			mapaTiposDeCambio.put(fecha, tipoDeCambio);
 		}
+		
+		
+		/*
+		 * Por cada moneda, busco en el mapa las 5 fechas de la lista, y recupero los tipos de cambio.
+		 * 
+		 * 1- recorro las monedas.
+		 * 2- hago un for de las fechas, x cada fecha, recupero del mapa el tipo de cambio.
+		 * 
+		 */
 		
 		System.out.println(fechas.size());
 	}

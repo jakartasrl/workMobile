@@ -5,9 +5,9 @@ import java.util.List;
 import com.jkt.dominio.Descriptible;
 
 /**
- * Representa un An√°lisis que se puede hacer en un Laboratorio.
+ * Representa un An·lisis que se puede hacer en un Laboratorio.
  * Se utiliza en los pedidos de Laboratorio y en los protocolos.
- * Ejemplo: An√°lisis f√≠sico-qu√≠mico de un transformador.
+ * Ejemplo: An·lisis fÌsico-quÌmico de un transformador.
  */
 public class Analisis extends Descriptible {
 
@@ -17,7 +17,7 @@ public class Analisis extends Descriptible {
 	private Laboratorio laboratorio;
 
 	/**
-	 * Lista de Ensayos o Determinaciones que incluye el An√°lisis.
+	 * Lista de Ensayos o Determinaciones que incluye el An·lisis.
 	 */
 	private List<AnalisisDet> listaDeterminaciones = new ArrayList<AnalisisDet>();
 
