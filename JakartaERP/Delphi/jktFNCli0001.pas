@@ -146,17 +146,15 @@ type
     tvDomiciliosEntregaActivo: TcxGridDBColumn;
     mtContactosoid_SucClie: TIntegerField;
     mtContactosoid_ContSuc: TIntegerField;
-    mtContactosApellido: TStringField;
-    mtContactosNombres: TStringField;
-    mtContactosTelefonos: TStringField;
+    mtContactosApellidoYNombre: TStringField;
+    mtContactosTelefono: TStringField;
     mtContactosEmail: TStringField;
     mtContactosCargo: TStringField;
     mtContactosActivo: TBooleanField;
     cvContactosoid_ContSuc: TcxGridDBCardViewRow;
     cvContactosoid_SucClie: TcxGridDBCardViewRow;
-    cvContactosApellido: TcxGridDBCardViewRow;
-    cvContactosNombres: TcxGridDBCardViewRow;
-    cvContactosTelefonos: TcxGridDBCardViewRow;
+    cvContactosApellidoYNombre: TcxGridDBCardViewRow;
+    cvContactosTelefono: TcxGridDBCardViewRow;
     cvContactosEmail: TcxGridDBCardViewRow;
     cvContactosCargo: TcxGridDBCardViewRow;
     cvContactosActivo: TcxGridDBCardViewRow;
@@ -331,6 +329,20 @@ type
     lcMainSeparatorItem1: TdxLayoutSeparatorItem;
     hlpVend: TjktHelpGenerico;
     hlpRepre: TjktHelpGenerico;
+    mtSucursalesClientedom_ent_fac: TStringField;
+    tvSucursalesdom_ent_fac: TcxGridDBColumn;
+    cxDBTextEdit13: TcxDBTextEdit;
+    lcMainItem25: TdxLayoutItem;
+    mtClienteNroProveedor: TStringField;
+    mtTiposContacto: TjktMemTable;
+    dsTiposContacto: TDataSource;
+    mtTiposContactooid: TIntegerField;
+    mtTiposContactocodigo: TStringField;
+    mtTiposContactodescripcion: TStringField;
+    mtContactosTelefonoAlternativo: TStringField;
+    mtContactosCelular: TStringField;
+    cvContactosTelefonoAlternativo: TcxGridDBCardViewRow;
+    cvContactosCelular: TcxGridDBCardViewRow;
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
@@ -662,6 +674,11 @@ begin
   // Traigo los Representantes
   mtParametroInicial.FieldByName('Entidad').AsString := 'representante';
   mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtRepresentantes.Name;
+  opTraerEntidades.execute;
+
+  // Traigo los Tipos de Contacto
+  mtParametroInicial.FieldByName('Entidad').AsString := 'tipoContacto';
+  mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtTiposContacto.Name;
   opTraerEntidades.execute;
 end;
 

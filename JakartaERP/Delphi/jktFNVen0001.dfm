@@ -1,8 +1,8 @@
 inherited FNVen0001: TFNVen0001
   Caption = 'ABM de Conceptos'
   ClientHeight = 405
-  ClientWidth = 717
-  ExplicitWidth = 733
+  ClientWidth = 1042
+  ExplicitWidth = 1058
   ExplicitHeight = 443
   PixelsPerInch = 96
   TextHeight = 13
@@ -15,14 +15,14 @@ inherited FNVen0001: TFNVen0001
     ExplicitHeight = 405
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 687
+    Left = 1012
     TabOrder = 4
     ExplicitLeft = 687
     ExplicitHeight = 405
     Height = 405
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 683
+    Left = 1008
     Height = 405
     ExplicitLeft = 683
     ExplicitHeight = 405
@@ -32,14 +32,15 @@ inherited FNVen0001: TFNVen0001
     ExplicitWidth = 649
     ExplicitHeight = 405
     Height = 405
-    Width = 649
+    Width = 974
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 2
       Top = 2
-      Width = 645
+      Width = 970
       Height = 401
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 645
       object DBGrid1DBBandedTableView1: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsConc
@@ -84,12 +85,42 @@ inherited FNVen0001: TFNVen0001
           Position.ColIndex = 2
           Position.RowIndex = 0
         end
+        object DBGrid1DBBandedTableView1cod_unid_med: TcxGridDBBandedColumn
+          Caption = 'Unid. Med.'
+          DataBinding.FieldName = 'cod_unid_med'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.OnButtonClick = DBGrid1DBBandedTableView1cod_unid_medPropertiesButtonClick
+          Width = 70
+          Position.BandIndex = 0
+          Position.ColIndex = 3
+          Position.RowIndex = 0
+        end
+        object DBGrid1DBBandedTableView1cod_mon: TcxGridDBBandedColumn
+          Caption = 'Moneda'
+          DataBinding.FieldName = 'cod_mon'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.OnButtonClick = DBGrid1DBBandedTableView1cod_monPropertiesButtonClick
+          Width = 70
+          Position.BandIndex = 0
+          Position.ColIndex = 4
+          Position.RowIndex = 0
+        end
         object DBGrid1DBBandedTableView1pide_art: TcxGridDBBandedColumn
           Caption = 'Pide Art'#237'culo'
           DataBinding.FieldName = 'pide_art'
           Width = 70
           Position.BandIndex = 0
-          Position.ColIndex = 3
+          Position.ColIndex = 5
           Position.RowIndex = 0
         end
         object DBGrid1DBBandedTableView1oid_val_cla: TcxGridDBBandedColumn
@@ -283,6 +314,22 @@ inherited FNVen0001: TFNVen0001
       FieldName = 'des_val_cla'
       Size = 100
     end
+    object mtConcoid_unid_med: TIntegerField
+      Tag = 1
+      FieldName = 'oid_unid_med'
+    end
+    object mtConccod_unid_med: TStringField
+      FieldName = 'cod_unid_med'
+      Size = 10
+    end
+    object mtConcoid_mon: TIntegerField
+      Tag = 1
+      FieldName = 'oid_mon'
+    end
+    object mtConccod_mon: TStringField
+      FieldName = 'cod_mon'
+      Size = 15
+    end
   end
   object dsConc: TDataSource
     DataSet = mtConc
@@ -329,5 +376,23 @@ inherited FNVen0001: TFNVen0001
       end>
     Left = 376
     Top = 208
+  end
+  object hlpUnidMed: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'unidadMedida'
+    TipoFiltro = fi_Activos
+    OidRespuesta = mtConcoid_unid_med
+    CodigoRespuesta = mtConccod_unid_med
+    Left = 328
+    Top = 256
+  end
+  object hlpMoneda: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'moneda'
+    TipoFiltro = fi_Activos
+    OidRespuesta = mtConcoid_mon
+    CodigoRespuesta = mtConccod_mon
+    Left = 328
+    Top = 304
   end
 end

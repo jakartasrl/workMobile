@@ -51,6 +51,7 @@ type
     mtConfigValidadordescrName: TStringField;
     mtConfigValidadorestadoForm: TStringField;
     mtConfigCampostag: TIntegerField;
+    mtConfigCamposcolumnWidth: TSmallintField;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -111,9 +112,19 @@ begin
                    tipo := ftString;
                    size := mtConfigCampos.FieldByName('longitud').asInteger;
                  end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Float'
+       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Text' then
+                 begin
+                   tipo := ftMemo;
+                   size := 0;
+                 end
+       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Double'
        then      begin
-                   tipo := ftString;
+                   tipo := ftFloat;
+                   size := 0;
+                 end
+       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Date'
+       then      begin
+                   tipo := ftDate;
                    size := 0;
                  end
        else      if mtConfigCampos.FieldByName('tipo').AsString = 'Currency'
@@ -160,24 +171,26 @@ var
   readOnly :boolean;
   columna  :TcxGridDBColumn;
 begin
-  mtConfigCampos.SortFields:='orden';
+  mtConfigCampos.SortFields := 'orden';
   mtConfigCampos.SortDefault;
   mtConfigCampos.First;
   while not mtConfigCampos.Eof do
     begin
-       name     :=  mtConfigCampos.FieldByName('fieldName').AsString;
-       etiqueta :=  mtConfigCampos.FieldByName('label').AsString;
-       visible  :=  mtConfigCampos.FieldByName('visible').AsBoolean;
-       readOnly :=  mtConfigCampos.FieldByName('readOnly').AsBoolean;
+      name     :=  mtConfigCampos.FieldByName('fieldName').AsString;
+      etiqueta :=  mtConfigCampos.FieldByName('label').AsString;
+      visible  :=  mtConfigCampos.FieldByName('visible').AsBoolean;
+      readOnly :=  mtConfigCampos.FieldByName('readOnly').AsBoolean;
 
-       columna  :=  jktExpDBGrid1DBTableView1.CreateColumn;
-       //columna.Width := 40;
-       columna.Caption := etiqueta;
-       columna.HeaderAlignmentHorz := taCenter;
-       columna.Options.Editing := not readOnly;
-       columna.Visible  := visible;
-       columna.DataBinding.FieldName := name;
-       mtConfigCampos.Next;
+      columna  :=  jktExpDBGrid1DBTableView1.CreateColumn;
+      columna.Caption := etiqueta;
+      columna.HeaderAlignmentHorz := taCenter;
+      columna.Options.Editing := not readOnly;
+      columna.Visible  := visible;
+      columna.DataBinding.FieldName := name;
+      if mtConfigCampos.FieldByName('columnWidth').AsInteger > 0 then
+        columna.Width := mtConfigCampos.FieldByName('columnWidth').AsInteger;
+
+      mtConfigCampos.Next;
     end;
 end;
 

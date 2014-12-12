@@ -25,7 +25,6 @@ uses
 
 type
   TFNHlp0001 = class(TFormHelpCustomizado)
-    mtInputnro_cotiz: TIntegerField;
     mtInputfecha: TDateTimeField;
     mtInputdes_vend: TStringField;
     mtInputnro_item: TIntegerField;
@@ -41,6 +40,9 @@ type
     dbgHelpDBTableViewnro_item: TcxGridDBColumn;
     dbgHelpDBTableViewcant: TcxGridDBColumn;
     dbgHelpDBTableViewdetalle: TcxGridDBColumn;
+    mtInputnro_cotiz: TStringField;
+    cxStyleRepository: TcxStyleRepository;
+    cxStyle1: TcxStyle;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }

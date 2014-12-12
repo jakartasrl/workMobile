@@ -38,7 +38,6 @@ type
     lcMainGroup2: TdxLayoutGroup;
     lcMainGroup3: TdxLayoutGroup;
     mtItem: TjktMemTable;
-    mtItemnro_cotiz: TIntegerField;
     mtItemfecha: TDateTimeField;
     mtItemdes_clie_sucu: TStringField;
     mtItemdes_vend: TStringField;
@@ -78,17 +77,13 @@ type
     jktExpDBGrid1Level1: TcxGridLevel;
     jktExpDBGrid1: TjktExpDBGrid;
     lcMainItem12: TdxLayoutItem;
-    mtInput: TjktMemTable;
-    dsInput: TDataSource;
-    mtInputoid: TIntegerField;
-    mtInputcodigo: TStringField;
-    mtInputdescripcion: TStringField;
-    mtInputimporte: TFloatField;
-    jktExpDBGrid1DBTableView1oid: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1codigo: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1descripcion: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1importe: TcxGridDBColumn;
-    opTraerMonedas: TjktOperacion;
+    mtTiposDeCambio: TjktMemTable;
+    dsTiposDeCambio: TDataSource;
+    mtTiposDeCambiooid_moneda: TIntegerField;
+    mtTiposDeCambiocod_moneda: TStringField;
+    mtTiposDeCambiodes_moneda: TStringField;
+    mtTiposDeCambiocotizacion: TFloatField;
+    opTraerTiposDeCambio: TjktOperacion;
     mtDetCotiz: TjktMemTable;
     hlpModelo: TjktHelpGenerico;
     mtCabCotiz: TjktMemTable;
@@ -142,6 +137,31 @@ type
     cxStyleRepository: TcxStyleRepository;
     cxStyleDisabled: TcxStyle;
     lcMainGroup7: TdxLayoutGroup;
+    jktExpDBGrid1DBTableView1oid_moneda: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1cod_moneda: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1des_moneda: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1cotizacion: TcxGridDBColumn;
+    mtItemnro_cotiz: TStringField;
+    lcMainGroup8: TdxLayoutGroup;
+    lcMainGroup9: TdxLayoutGroup;
+    lcMainSplitterItem1: TdxLayoutSplitterItem;
+    opTraerEntidades: TjktOperacion;
+    dsMonedas: TDataSource;
+    mtMonedas: TjktMemTable;
+    mtMonedasoid: TIntegerField;
+    mtMonedascodigo: TStringField;
+    mtMonedasdescripcion: TStringField;
+    mtParametroInicialOutputDatasetName: TStringField;
+    mtParametroInicialNombreParametro: TStringField;
+    opTraerParametro: TjktOperacion;
+    mtParametrosFormoid_param: TIntegerField;
+    mtParametrosFormcodigo: TStringField;
+    mtParametrosFormdescripcion: TStringField;
+    mtParametrosFormvalor_cadena: TStringField;
+    mtParametrosFormvalor_entero: TIntegerField;
+    mtParametrosFormvalor_fecha: TStringField;
+    mtParametrosFormvalor_float: TFloatField;
+    mtParametrosFormvalor_boolean: TBooleanField;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -160,9 +180,13 @@ type
       AColumn: TcxTreeListColumn; ANode: TcxTreeListNode; var AStyle: TcxStyle);
     procedure cxDBTreeList1importe_totalGetDisplayText(
       Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
-    procedure opTraerModeloParaCotizarAfterEjecutar(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure opTraerEntidadesBeforeEjecutar(Sender: TObject);
+    procedure opTraerParametroBeforeEjecutar(Sender: TObject);
+    procedure opTraerParametroAfterEjecutar(Sender: TObject);
   private
-    { Private declarations }
+    oid_MonedaPorDefecto: Integer;
+
   public
     { Public declarations }
   end;
@@ -242,27 +266,47 @@ begin
     AStyle := cxStyleDisabled;
 end;
 
+procedure TFNVen0005.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+  // El ancho debe ser el total de la pantalla
+  cxGroupBoxLeft.Width  := 0;
+  cxGroupBoxRight.Width := 0;
+end;
+
 procedure TFNVen0005.mtDetCotizCalcFields(DataSet: TDataSet);
 var
-  ImportePesos: Double;
+  ImporteMonedaDefecto: Double;
 begin
   inherited;
 
   DataSet.FieldByName('importe_total').AsFloat :=
     DataSet.FieldByName('cant').AsInteger * DataSet.FieldByName('importe_unit').AsFloat;
 
-  // Primero paso a Pesos el importe del registro actual
-  if mtInput.Locate('oid', DataSet.FieldByName('oid_moneda').AsInteger, []) then
+  ImporteMonedaDefecto := 0;
+  // Primero paso el importe del registro actual a la moneda de curso legal
+  if DataSet.FieldByName('oid_moneda').AsInteger = oid_MonedaPorDefecto then
     begin
-      ImportePesos := DataSet.FieldByName('importe_total').AsFloat *
-        mtInput.FieldByName('importe').AsFloat;
+      ImporteMonedaDefecto := DataSet.FieldByName('importe_total').AsFloat;
+    end
+  else
+    if mtTiposDeCambio.Locate('oid_moneda', DataSet.FieldByName('oid_moneda').AsInteger, []) then
+      begin
+        ImporteMonedaDefecto := DataSet.FieldByName('importe_total').AsFloat *
+          mtTiposDeCambio.FieldByName('cotizacion').AsFloat;
+      end;
 
-      // El importe en Pesos ahora lo expreso en la moneda que quieren!
-      if mtInput.Locate('oid', mtCabCotiz.FieldByName('oid_moneda_expresada').AsInteger, []) then
-        if mtInput.FieldByName('importe').AsFloat <> 0 then
-          DataSet.FieldByName('importe_total_2').AsFloat :=
-            ImportePesos / mtInput.FieldByName('importe').AsFloat;
-    end;
+  if mtCabCotiz.FieldByName('oid_moneda_expresada').AsInteger = oid_MonedaPorDefecto then
+    begin
+      DataSet.FieldByName('importe_total_2').AsFloat := ImporteMonedaDefecto;
+    end
+  else
+    // El importe expresado en la moneda de curso legal, lo expreso en la moneda que quieren!
+    if mtTiposDeCambio.Locate('oid_moneda', mtCabCotiz.FieldByName('oid_moneda_expresada').AsInteger, []) then
+      if mtTiposDeCambio.FieldByName('cotizacion').AsFloat <> 0 then
+        DataSet.FieldByName('importe_total_2').AsFloat :=
+          ImporteMonedaDefecto / mtTiposDeCambio.FieldByName('cotizacion').AsFloat;
 end;
 
 procedure TFNVen0005.OperacionSaveAfterEjecutar(Sender: TObject);
@@ -284,11 +328,7 @@ procedure TFNVen0005.OperacionTraerAfterEjecutar(Sender: TObject);
 begin
   inherited;
 
-  mtParametroInicial.Open;
-  mtParametroInicial.Append;
-  mtParametroInicial.FieldByName('Entidad').AsString := 'moneda';
-
-  opTraerMonedas.execute;
+  opTraerTiposDeCambio.execute;
 end;
 
 procedure TFNVen0005.OperacionTraerBeforeEjecutar(Sender: TObject);
@@ -306,22 +346,38 @@ begin
 //  HelpForm.InicializarChild(nil);
 end;
 
-procedure TFNVen0005.opTraerModeloParaCotizarAfterEjecutar(Sender: TObject);
+procedure TFNVen0005.opTraerEntidadesBeforeEjecutar(Sender: TObject);
 begin
   inherited;
 
-  mtDetCotiz.First;
-  while not mtDetCotiz.Eof do
-    begin
-      if (mtDetCotiz.FieldByName('tipo').AsString = 'C') then
-        begin
-          mtDetCotiz.Edit;
-          mtDetCotiz.FieldByName('oid_moneda').AsInteger := 1;
-          mtDetCotiz.Post;
-        end;
+  mtParametroInicial.Open;
+  mtParametroInicial.Append;
 
-      mtDetCotiz.Next;
-    end;
+  // Traigo las Monedas activas
+  mtParametroInicial.FieldByName('Entidad').AsString := 'moneda';
+  mtParametroInicial.FieldByName('OutputDatasetName').AsString := mtMonedas.Name;
+end;
+
+procedure TFNVen0005.opTraerParametroAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Por ahora estamos pidiendo UN SOLO parámetro, habrá entonces una sola fila en
+  // la tabla 'mtParametrosForm'. De todas maneras lo busco como si hubieran varios
+  mtParametrosForm.First;
+  if not mtParametrosForm.Locate('codigo', 'MonedaPorDefecto', [loCaseInsensitive]) then
+    // 'Código de Parámetro inexistente'
+    oid_MonedaPorDefecto := -1
+  else
+    oid_MonedaPorDefecto := mtParametrosForm.FieldByName('valor_entero').AsInteger;
+end;
+
+procedure TFNVen0005.opTraerParametroBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Esto se reemplazará cuando se recuperen TODOS los parámetros del Form
+  mtParametroInicial.FieldByName('NombreParametro').AsString := 'MonedaPorDefecto';
 end;
 
 initialization

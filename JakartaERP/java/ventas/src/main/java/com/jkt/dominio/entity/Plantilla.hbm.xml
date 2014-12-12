@@ -16,6 +16,7 @@
 		
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="plantilla" column="PLANTILLA" type="text"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
 		
 	</class>
 

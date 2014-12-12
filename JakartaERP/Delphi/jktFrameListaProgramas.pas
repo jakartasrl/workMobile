@@ -318,7 +318,20 @@ begin
       NombrePrograma   := 'TFNLab0002';
       ParametroInicial := 'ELE';
       Titulo := 'ABM de Analisis Electricos';
+    end
+  else if Sender.Tag = 37 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'TipoDeContacto';
+      Titulo := 'ABM de Tipos de Contacto';
+    end
+  else if Sender.Tag = 38 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Plantilla';
+      Titulo := 'ABM de Plantillas';
     end;
+
 
   frmMainForm.Show;
   frmMainForm.AbrirPrograma(NombrePrograma, ParametroInicial, Titulo);

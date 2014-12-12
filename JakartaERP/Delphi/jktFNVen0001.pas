@@ -59,10 +59,22 @@ type
     mtConcoid_cla: TIntegerField;
     HelpValorClasif: TjktHelpGenerico;
     ValValorClasif: TjktValidador;
+    mtConcoid_unid_med: TIntegerField;
+    mtConccod_unid_med: TStringField;
+    mtConcoid_mon: TIntegerField;
+    mtConccod_mon: TStringField;
+    DBGrid1DBBandedTableView1cod_unid_med: TcxGridDBBandedColumn;
+    DBGrid1DBBandedTableView1cod_mon: TcxGridDBBandedColumn;
+    hlpUnidMed: TjktHelpGenerico;
+    hlpMoneda: TjktHelpGenerico;
     procedure opTraerParametroBeforeEjecutar(Sender: TObject);
     procedure opTraerParametroAfterEjecutar(Sender: TObject);
     procedure mtConcNewRecord(DataSet: TDataSet);
     procedure DBGrid1DBBandedTableView1cod_val_claPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure DBGrid1DBBandedTableView1cod_unid_medPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure DBGrid1DBBandedTableView1cod_monPropertiesButtonClick(
       Sender: TObject; AButtonIndex: Integer);
   private
     oid_cla: Integer;
@@ -75,6 +87,22 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TFNVen0001.DBGrid1DBBandedTableView1cod_monPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  hlpMoneda.Ejecutar;
+end;
+
+procedure TFNVen0001.DBGrid1DBBandedTableView1cod_unid_medPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  hlpUnidMed.Ejecutar;
+end;
 
 procedure TFNVen0001.DBGrid1DBBandedTableView1cod_val_claPropertiesButtonClick(
   Sender: TObject; AButtonIndex: Integer);

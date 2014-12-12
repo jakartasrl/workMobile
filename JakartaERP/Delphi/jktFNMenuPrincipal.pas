@@ -133,6 +133,7 @@ type
     procedure txtPasswordKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure cxButton1Click(Sender: TObject);
   private
     procedure OnActivateDetail_ItemDeGrupo(Sender: TdxTileControlItem);
 
@@ -291,6 +292,14 @@ begin
 
 }
 
+end;
+
+procedure TfrmMenuPrincipal.cxButton1Click(Sender: TObject);
+var
+  Key: Word;
+begin
+  Key := 13;
+  txtPasswordKeyDown(Sender, Key, []);
 end;
 
 procedure TfrmMenuPrincipal.CargarMenuUsuario;
@@ -882,6 +891,22 @@ begin
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 36;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Analisis Lab Electrico';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 205;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 37;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Tipos de Contacto';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 202;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 38;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Plantillas';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 204;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;

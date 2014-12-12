@@ -3,7 +3,7 @@ inherited FNUti0001: TFNUti0001
   ClientHeight = 384
   ClientWidth = 738
   ExplicitWidth = 754
-  ExplicitHeight = 423
+  ExplicitHeight = 422
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
@@ -12,7 +12,6 @@ inherited FNUti0001: TFNUti0001
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 384
-    ExplicitLeft = 185
     ExplicitHeight = 384
   end
   inherited cxGroupBoxRight: TcxGroupBox
@@ -23,22 +22,21 @@ inherited FNUti0001: TFNUti0001
     Height = 384
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 704
+    Left = 700
     Height = 384
-    ExplicitLeft = 704
-    ExplicitWidth = 2
+    ExplicitLeft = 700
     ExplicitHeight = 384
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 7
-    ExplicitWidth = 670
+    ExplicitWidth = 662
     ExplicitHeight = 384
     Height = 384
-    Width = 670
+    Width = 662
     object jktExpDBGrid1: TjktExpDBGrid
       Left = 2
       Top = 2
-      Width = 666
+      Width = 658
       Height = 380
       Align = alClient
       TabOrder = 0
@@ -55,6 +53,7 @@ inherited FNUti0001: TFNUti0001
         OptionsData.Appending = True
         OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsView.CellAutoHeight = True
         OptionsView.GroupByBox = False
       end
       object jktExpDBGrid1Level1: TcxGridLevel
@@ -211,6 +210,9 @@ inherited FNUti0001: TFNUti0001
     end
     object mtConfigCampostag: TIntegerField
       FieldName = 'tag'
+    end
+    object mtConfigCamposcolumnWidth: TSmallintField
+      FieldName = 'columnWidth'
     end
   end
   object mtConfigValidador: TjktMemTable
