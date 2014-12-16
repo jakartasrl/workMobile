@@ -275,7 +275,7 @@
 		<campos>
 			<campo fieldName="oid_configuracion" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="oid_configuracion" />
 			
-			<campo fieldName="Nombre" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Nombre"  />
+			<campo fieldName="Nombre" tipo="String" longitud="30" visible="true" readOnly="false" orden="2" label="Nombre"  />
 			<campo fieldName="ValorCadena" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Valor Cadena"  />
 			<campo fieldName="ValorEntero" tipo="Integer" longitud="60" visible="true" readOnly="false" orden="4" label="Valor Entero"  />
 			<campo fieldName="ValorDoble" tipo="Double" longitud="60" visible="true" readOnly="false" orden="5" label="Valor Doble"  />
