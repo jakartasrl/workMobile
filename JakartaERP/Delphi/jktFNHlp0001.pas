@@ -43,6 +43,8 @@ type
     mtInputnro_cotiz: TStringField;
     cxStyleRepository: TcxStyleRepository;
     cxStyle1: TcxStyle;
+    mtInputdes_estado: TStringField;
+    dbgHelpDBTableViewdes_estado: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }

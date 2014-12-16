@@ -1,14 +1,14 @@
 inherited FNHlp0001: TFNHlp0001
-  Caption = #205'tems de presupuesto pendientes de cotizar'
+  Caption = #205'tems de presupuesto'
   ClientHeight = 479
   ClientWidth = 828
-  ExplicitLeft = -66
+  ExplicitLeft = -48
   ExplicitWidth = 834
   ExplicitHeight = 507
   PixelsPerInch = 96
   TextHeight = 13
   inherited gbFiltroAvanzado: TcxGroupBox
-    ExplicitWidth = 932
+    ExplicitWidth = 828
     ExplicitHeight = 89
     Height = 89
     Width = 828
@@ -16,14 +16,14 @@ inherited FNHlp0001: TFNHlp0001
   inherited cxGroupBox2: TcxGroupBox
     Top = 94
     ExplicitTop = 94
-    ExplicitWidth = 932
+    ExplicitWidth = 828
     ExplicitHeight = 329
     Height = 329
     Width = 828
     inherited dbgHelp: TjktExpDBGrid
       Width = 824
       Height = 325
-      ExplicitWidth = 928
+      ExplicitWidth = 824
       ExplicitHeight = 325
       inherited dbgHelpDBTableView: TcxGridDBTableView
         FilterRow.SeparatorWidth = 3
@@ -43,6 +43,12 @@ inherited FNHlp0001: TFNHlp0001
           Visible = False
           GroupIndex = 0
           Width = 70
+        end
+        object dbgHelpDBTableViewdes_estado: TcxGridDBColumn
+          Caption = 'Estado'
+          DataBinding.FieldName = 'des_estado'
+          Visible = False
+          GroupIndex = 1
         end
         object dbgHelpDBTableViewfecha: TcxGridDBColumn
           Caption = 'Fecha'
@@ -90,22 +96,22 @@ inherited FNHlp0001: TFNHlp0001
   inherited cxGroupBox3: TcxGroupBox
     Top = 423
     ExplicitTop = 423
-    ExplicitWidth = 932
+    ExplicitWidth = 828
     Width = 828
     inherited btnAceptar: TButton
       Left = 660
-      ExplicitLeft = 764
+      ExplicitLeft = 660
     end
     inherited btnCancelar: TButton
       Left = 741
-      ExplicitLeft = 845
+      ExplicitLeft = 741
     end
   end
   inherited cxSplitter: TcxSplitter
     Top = 89
     Width = 828
     ExplicitTop = 89
-    ExplicitWidth = 932
+    ExplicitWidth = 828
   end
   inherited popSeleccion: TPopupMenu
     Left = 168
@@ -118,6 +124,10 @@ inherited FNHlp0001: TFNHlp0001
     end
     object mtInputfecha: TDateTimeField
       FieldName = 'fecha'
+    end
+    object mtInputdes_estado: TStringField
+      FieldName = 'des_estado'
+      Size = 40
     end
     object mtInputdes_vend: TStringField
       FieldName = 'des_vend'
@@ -135,7 +145,7 @@ inherited FNHlp0001: TFNHlp0001
     end
   end
   inherited opFiltro: TjktOperacion
-    OperName = 'HelpTraerItemsACotizar'
+    OperName = 'HelpTraerItemsDePresupuesto'
     Left = 168
     Top = 216
   end

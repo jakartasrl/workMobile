@@ -162,6 +162,7 @@ type
     mtParametrosFormvalor_fecha: TStringField;
     mtParametrosFormvalor_float: TFloatField;
     mtParametrosFormvalor_boolean: TBooleanField;
+    mtItemcod_estado: TStringField;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -344,6 +345,10 @@ begin
 //  HelpForm := TFNVen0004.Create(Self);
 //  HelpForm.FormStyle := fsNormal;
 //  HelpForm.InicializarChild(nil);
+
+  // Según el Estado del ítem, voy a llamar a distintas operaciones (cambiando la property 'OperName')
+  if mtItem.FieldByName('cod_estado').AsString = '1' then
+
 end;
 
 procedure TFNVen0005.opTraerEntidadesBeforeEjecutar(Sender: TObject);

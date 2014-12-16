@@ -3,7 +3,6 @@ inherited FNVen0005: TFNVen0005
   Caption = 'Cotizador'
   ClientHeight = 536
   ClientWidth = 1071
-  ExplicitTop = -6
   ExplicitWidth = 1087
   ExplicitHeight = 574
   PixelsPerInch = 96
@@ -42,7 +41,7 @@ inherited FNVen0005: TFNVen0005
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = -44
+        Left = 126
         Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
@@ -52,7 +51,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 96
+        Left = 266
         Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
@@ -62,7 +61,7 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = -44
+        Left = 126
         Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
@@ -72,7 +71,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = -44
+        Left = 126
         Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
@@ -82,7 +81,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 282
+        Left = 452
         Top = 166
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
@@ -92,7 +91,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 381
+        Left = 551
         Top = 166
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
@@ -102,7 +101,7 @@ inherited FNVen0005: TFNVen0005
         Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 282
+        Left = 452
         Top = 72
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
@@ -114,7 +113,7 @@ inherited FNVen0005: TFNVen0005
         AnchorY = 81
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 282
+        Left = 452
         Top = 95
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
@@ -126,7 +125,7 @@ inherited FNVen0005: TFNVen0005
         Width = 307
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 726
+        Left = 896
         Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -141,7 +140,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 827
+        Left = 997
         Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -150,7 +149,7 @@ inherited FNVen0005: TFNVen0005
         Width = 213
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 726
+        Left = 896
         Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
@@ -175,7 +174,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object jktExpDBGrid1: TjktExpDBGrid
-        Left = 726
+        Left = 896
         Top = 126
         Width = 335
         Height = 75
@@ -218,7 +217,7 @@ inherited FNVen0005: TFNVen0005
         end
       end
       object cxDBTreeList1: TcxDBTreeList
-        Left = -150
+        Left = 20
         Top = 274
         Width = 1221
         Height = 218
@@ -801,6 +800,10 @@ inherited FNVen0005: TFNVen0005
       FieldName = 'des_vend'
       Size = 40
     end
+    object mtItemcod_estado: TStringField
+      FieldName = 'cod_estado'
+      Size = 15
+    end
     object mtItemdes_tipo_item: TStringField
       FieldName = 'des_tipo_item'
       Size = 30
@@ -828,6 +831,7 @@ inherited FNVen0005: TFNVen0005
     FormClassName = 'TFNHlp0001'
     TipoFiltro = fi_Customizado
     OidRespuesta = mtItemoid_item
+    CodigoRespuesta = mtItemcod_estado
     Left = 496
     Top = 88
   end
