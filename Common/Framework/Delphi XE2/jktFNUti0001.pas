@@ -101,51 +101,52 @@ begin
   mtConfigCampos.First;
   while not mtConfigCampos.Eof do
     begin
-       name :=  mtConfigCampos.FieldByName('fieldName').AsString;
-       if        mtConfigCampos.FieldByName('tipo').AsString = 'Integer'
-       then      begin
-                   tipo := ftInteger;
-                   size := 0;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'String'
-       then      begin
-                   tipo := ftString;
-                   size := mtConfigCampos.FieldByName('longitud').asInteger;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Text' then
-                 begin
-                   tipo := ftMemo;
-                   size := 0;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Double'
-       then      begin
-                   tipo := ftFloat;
-                   size := 0;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Date'
-       then      begin
-                   tipo := ftDate;
-                   size := 0;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Currency'
-       then      begin
-                   tipo := ftCurrency;
-                   size := 0;
-                 end
+      name :=  mtConfigCampos.FieldByName('fieldName').AsString;
 
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Boolean'
-       then      begin
-                   tipo := ftBoolean;
-                   size := 0;
-                 end;
-       fieldDef := mtInput.FieldDefs.AddFieldDef ;
-       fieldDef.name := name;
-       fieldDef.dataType := tipo;
-       fieldDef.Size := size;
-       fieldDef.Required := false;
+      if mtConfigCampos.FieldByName('tipo').AsString = 'Integer' then
+        begin
+          tipo := ftInteger;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'String' then
+        begin
+          tipo := ftString;
+          size := mtConfigCampos.FieldByName('longitud').asInteger;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Text' then
+        begin
+          tipo := ftMemo;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Double' then
+        begin
+          tipo := ftFloat;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Date' then
+        begin
+          tipo := ftDate;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Currency' then
+        begin
+          tipo := ftCurrency;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Boolean' then
+        begin
+          tipo := ftBoolean;
+          size := 0;
+        end;
 
-       //mtInput.FieldDefs.Add(name, tipo, size,  false);
-       mtConfigCampos.Next;
+      fieldDef := mtInput.FieldDefs.AddFieldDef ;
+      fieldDef.name := name;
+      fieldDef.dataType := tipo;
+      fieldDef.Size := size;
+      fieldDef.Required := false;
+
+      // mtInput.FieldDefs.Add(name, tipo, size,  false);
+      mtConfigCampos.Next;
     end;
 
   mtInput.CreateTable;
