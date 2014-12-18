@@ -16,6 +16,7 @@
   <!ATTLIST campo tipo CDATA #REQUIRED>
   <!ATTLIST campo longitud CDATA #REQUIRED>
   <!ATTLIST campo readOnly CDATA #REQUIRED>
+  <!ATTLIST campo columnWidth CDATA #IMPLIED>
   <!ATTLIST campo visible CDATA #REQUIRED>
   <!ATTLIST campo orden CDATA #REQUIRED>
   <!ATTLIST campo label CDATA #REQUIRED>
@@ -274,7 +275,7 @@
 		<campos>
 			<campo fieldName="oid_configuracion" tipo="Integer" longitud="0" visible="false" readOnly="true" orden="1" label="oid_configuracion" />
 			
-			<campo fieldName="Nombre" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Nombre"  />
+			<campo fieldName="Nombre" tipo="String" longitud="30" visible="true" readOnly="false" orden="2" label="Nombre"  />
 			<campo fieldName="ValorCadena" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Valor Cadena"  />
 			<campo fieldName="ValorEntero" tipo="Integer" longitud="60" visible="true" readOnly="false" orden="4" label="Valor Entero"  />
 			<campo fieldName="ValorDoble" tipo="Double" longitud="60" visible="true" readOnly="false" orden="5" label="Valor Doble"  />
@@ -358,38 +359,38 @@
 		<operacion operSave="GuardarPlantilla" operTraer="TraerPlantillas" />
 		
 		<campos>
-			<campo fieldName="oid_plan"     tipo="Integer" 	longitud="0" 	visible="false" readOnly="false" orden="1" label="oid_plan" />
-			<campo fieldName="cod_plan"		tipo="String" 	longitud="15" 	visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="descr_plan"	tipo="String" 	longitud="60" 	visible="true" readOnly="false" orden="3" label="Descripcion"  />
-			<campo fieldName="plantilla" 	tipo="Text" 	longitud="0" 	visible="true" readOnly="false" orden="4" label="Plantilla"  />
-			<campo fieldName="Activo"   	tipo="Boolean" 	longitud="5" 	visible="true" readOnly="false" orden="5" label="Activo" />
+			<campo fieldName="oid_plan"   tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_plan" />
+			<campo fieldName="cod_plan"   tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr_plan" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="plantilla"  tipo="Text" longitud="0" visible="true" readOnly="false" orden="4" label="Plantilla" columnWidth="500"  />
+			<campo fieldName="Activo"     tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
 		</campos>
 
 		<validadores>
 			<validador fieldName="cod_plan" 	tipoValidacion="Inexistente"	 entidad="plantilla" oidName="oid" descrName="descr_plan" />
-			<validador fieldName="descr_plan" 	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
-			<validador fieldName="plantilla" 	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="descr_plan"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="plantilla"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 	</entidad>
 	
-<!-- 	<entidad nombre="TipoDeCambio"> -->
+	<entidad nombre="TipoDeCambio">
 	
-<!-- 		<operacion operSave="GuardarTipoDeCambio" operTraer="TraerTipoDeCambio" /> -->
+		<operacion operSave="GuardarTipoDeCambio" operTraer="TraerTipoDeCambio" />
 		
-<!-- 		<campos> -->
-<!-- 			<campo fieldName="oid"      	tipo="Integer" longitud="0"  visible="false" readOnly="true" orden="1" label="oid_tipo_cambio" /> -->
-<!-- 			<campo fieldName="oid_moneda"  	tipo="Integer" longitud="15" visible="false" readOnly="true" orden="2" label="oid_noneda"  /> -->
-<!-- 			<campo fieldName="cod_moneda"  	tipo="String"  longitud="15" visible="true" readOnly="true" orden="3" label="Moneda" tag="0" /> -->
-<!-- 			<campo fieldName="descr_moneda" tipo="String"  longitud="60" visible="true" readOnly="true" orden="4" label="Descripcion de Moneda" tag="0" /> -->
-<!-- 			<campo fieldName="cotizacion"  	tipo="Double"  longitud="15" visible="true" readOnly="false" orden="5" label="Cotizacion"  /> -->
-<!-- 			<campo fieldName="Activo"   	tipo="Boolean" longitud="5"  visible="true" readOnly="false" orden="6" label="Activo" /> -->
-<!-- 		</campos> -->
+		<campos>
+			<campo fieldName="oid"      	tipo="Integer" longitud="0"  visible="false" readOnly="true" orden="1" label="oid_tipo_cambio" />
+			<campo fieldName="oid_moneda"  	tipo="Integer" longitud="15" visible="false" readOnly="true" orden="2" label="oid_noneda"  />
+			<campo fieldName="cod_moneda"  	tipo="String"  longitud="15" visible="true" readOnly="true" orden="3" label="Moneda" tag="0" />
+			<campo fieldName="descr_moneda" tipo="String"  longitud="60" visible="true" readOnly="true" orden="4" label="Descripcion de Moneda" tag="0" />
+			<campo fieldName="cotizacion"  	tipo="Double"  longitud="15" visible="true" readOnly="false" orden="5" label="Cotizacion"  />
 
-<!-- 		<validadores> -->
-<!-- 			<validador fieldName="cod_moneda" 		tipoValidacion="Inexistente"	 entidad="moneda" oidName="oid_moneda" descrName="descr_moneda" /> -->
-<!-- 			<validador fieldName="cotizacion" 		tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" /> -->
-<!-- 		</validadores> -->
-<!-- 	</entidad> -->
+		</campos>
+
+		<validadores>
+			<validador fieldName="cod_moneda" 		tipoValidacion="Inexistente"	 entidad="moneda" oidName="oid_moneda" descrName="descr_moneda" />
+			<validador fieldName="cotizacion" 		tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+	</entidad>
 	
 	<entidad nombre="TipoDeContacto">
 	

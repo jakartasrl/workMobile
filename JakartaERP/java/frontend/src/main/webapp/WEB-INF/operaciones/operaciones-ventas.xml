@@ -403,15 +403,19 @@
 
 
 	<!-- TRAE TODOS LOS ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR-->
-	<operacion name="HelpTraerItemsACotizar" clase="com.jkt.cotizador.operaciones.TraerItemsParaCotizar" >
+	<operacion name="HelpTraerItemsDePresupuesto" clase="com.jkt.cotizador.operaciones.TraerItemsParaCotizar" >
 
 		<output name="items" tableName="mtInput">
 <!-- 			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" /> -->
 			<campoSalida value="oid" target="id" />
-<!-- 			<campoSalida value="codigo" target="" /> -->			
+			<campoSalida value="codigo" target="estado.codigo" /> VER ESTO CON SANTI. Este 'codigo' sería el 'oid' del estado. Yo llamo a una operacion o a otra en la vista dependiendo de este valor.			
 			<campoSalida value="descripcion" target="comprobanteVenta.clienteSucursal.descripcion" />
 			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" />
 			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
+			<campoSalida value="des_estado" target="estado.descripcion" /> VER ESTO CON SANTI. ¿Puede ser que el 'item' no tenga Estado pero sí la Cotizacion global???
+																		   Según tengo entendido (quizás esté mal), LOS ITEMS tienen el estado 'Pendiente de Cotizar',
+																		   'Cotizado pero No Autorizado', 'Autorizado', 'Rechazado', etc; Mientras que la Cotizacion, 
+																		   quien tiene una lista de estos items, tendrá otros estados o similares... ¿qué opinás?
 			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
 			<campoSalida value="nro_item" target="numero" />
 			<campoSalida value="cant" target="cantidad" />

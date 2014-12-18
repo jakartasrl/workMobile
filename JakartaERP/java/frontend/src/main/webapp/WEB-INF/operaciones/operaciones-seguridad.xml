@@ -113,6 +113,7 @@
 			<campoSalida value="orden" target="orden" />
 			<campoSalida value="label" target="label" />
 			<campoSalida value="tag" target="tag" />
+			<campoSalida value="columnWidth" target="columnWidth" />
 		</output>
 		
 		<output name="mtConfigValidador" tableName="mtConfigValidador">

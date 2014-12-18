@@ -1,60 +1,59 @@
 inherited FNVen0003: TFNVen0003
   Caption = 'Solicitud de Cotizaci'#243'n'
-  ClientHeight = 558
-  ClientWidth = 858
-  ExplicitLeft = -79
-  ExplicitTop = -28
-  ExplicitWidth = 874
-  ExplicitHeight = 596
+  ClientHeight = 592
+  ClientWidth = 861
+  ExplicitWidth = 877
+  ExplicitHeight = 630
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitHeight = 558
-    Height = 558
+    ExplicitHeight = 592
+    Height = 592
   end
   inherited cxSplitterLeft: TcxSplitter
-    Height = 558
-    ExplicitHeight = 558
+    Height = 592
+    ExplicitHeight = 592
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 828
+    Left = 831
     ExplicitLeft = 828
-    ExplicitHeight = 558
-    Height = 558
+    ExplicitHeight = 592
+    Height = 592
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 824
-    Height = 558
+    Left = 827
+    Height = 592
     HotZoneClassName = ''
     HotZone = nil
     ExplicitLeft = 824
-    ExplicitHeight = 558
+    ExplicitHeight = 592
   end
   inherited cxGroupBoxMain: TcxGroupBox
     ExplicitWidth = 790
-    ExplicitHeight = 558
-    Height = 558
-    Width = 790
+    ExplicitHeight = 592
+    Height = 592
+    Width = 793
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
-      Width = 786
-      Height = 554
+      Width = 789
+      Height = 588
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
+      ExplicitWidth = 786
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 256
+        Left = 120
         Top = 41
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsCotizacion
         Properties.ReadOnly = True
         Style.HotTrack = False
-        TabOrder = 1
+        TabOrder = 0
         Width = 90
       end
       object cxDBDateEdit1: TcxDBDateEdit
-        Left = 61
+        Left = 257
         Top = 41
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsCotizacion
@@ -62,44 +61,42 @@ inherited FNVen0003: TFNVen0003
         Properties.ShowTime = False
         Properties.UseLeftAlignmentOnEditing = False
         Style.HotTrack = False
-        TabOrder = 0
+        TabOrder = 1
         Width = 92
       end
       object cxDBTextEdit6: TcxDBTextEdit
         Left = 462
-        Top = 80
+        Top = 107
         DataBinding.DataField = 'razonSocial'
         DataBinding.DataSource = dsCotizacion
         Properties.ReadOnly = True
         Style.HotTrack = False
-        TabOrder = 4
+        TabOrder = 6
         Width = 283
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 10000
-        Top = 10000
+        Left = 177
+        Top = 241
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsCotizacion
         Properties.ReadOnly = True
         Style.HotTrack = False
-        TabOrder = 6
-        Visible = False
+        TabOrder = 9
         Width = 180
       end
       object cxDBTextEdit8: TcxDBTextEdit
-        Left = 10000
-        Top = 10000
+        Left = 533
+        Top = 241
         DataBinding.DataField = 'des_repre'
         DataBinding.DataSource = dsCotizacion
         Properties.ReadOnly = True
         Style.HotTrack = False
-        TabOrder = 8
-        Visible = False
+        TabOrder = 11
         Width = 180
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
         Left = 115
-        Top = 80
+        Top = 107
         DataBinding.DataField = 'cod_clie'
         DataBinding.DataSource = dsCotizacion
         Properties.Buttons = <
@@ -109,12 +106,12 @@ inherited FNVen0003: TFNVen0003
           end>
         Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
         Style.HotTrack = False
-        TabOrder = 2
+        TabOrder = 4
         Width = 99
       end
       object cxDBButtonEdit2: TcxDBButtonEdit
-        Left = 10000
-        Top = 10000
+        Left = 91
+        Top = 241
         DataBinding.DataField = 'cod_vend'
         DataBinding.DataSource = dsCotizacion
         Properties.Buttons = <
@@ -124,8 +121,7 @@ inherited FNVen0003: TFNVen0003
           end>
         Properties.OnButtonClick = cxDBButtonEdit2PropertiesButtonClick
         Style.HotTrack = False
-        TabOrder = 5
-        Visible = False
+        TabOrder = 8
         Width = 80
       end
       object jktExpDBGrid5: TjktExpDBGrid
@@ -133,7 +129,7 @@ inherited FNVen0003: TFNVen0003
         Top = 10000
         Width = 717
         Height = 365
-        TabOrder = 10
+        TabOrder = 13
         Visible = False
         DataSource = dsArchivos
         object jktExpDBGrid5DBTableView1: TcxGridDBTableView
@@ -185,7 +181,7 @@ inherited FNVen0003: TFNVen0003
       end
       object cxDBButtonEdit3: TcxDBButtonEdit
         Left = 220
-        Top = 80
+        Top = 107
         DataBinding.DataField = 'des_sucu'
         DataBinding.DataSource = dsCotizacion
         Properties.Buttons = <
@@ -195,12 +191,12 @@ inherited FNVen0003: TFNVen0003
           end>
         Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
         Style.HotTrack = False
-        TabOrder = 3
+        TabOrder = 5
         Width = 141
       end
       object cxDBButtonEdit4: TcxDBButtonEdit
-        Left = 10000
-        Top = 10000
+        Left = 447
+        Top = 241
         DataBinding.DataField = 'cod_repre'
         DataBinding.DataSource = dsCotizacion
         Properties.Buttons = <
@@ -210,17 +206,17 @@ inherited FNVen0003: TFNVen0003
           end>
         Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
         Style.HotTrack = False
-        TabOrder = 7
-        Visible = False
+        TabOrder = 10
         Width = 80
       end
       object cxGridItems: TcxGrid
-        Left = 23
-        Top = 156
-        Width = 717
-        Height = 365
+        Left = 10000
+        Top = 10000
+        Width = 737
+        Height = 406
         BorderStyle = cxcbsNone
-        TabOrder = 9
+        TabOrder = 12
+        Visible = False
         object DBLayoutView: TcxGridDBLayoutView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsItems
@@ -287,8 +283,10 @@ inherited FNVen0003: TFNVen0003
                 Default = True
                 Kind = bkEllipsis
               end>
+            Properties.ReadOnly = True
             Properties.OnButtonClick = DBLayoutViewItem1PropertiesButtonClick
             LayoutItem = DBLayoutViewLayoutItem7
+            Options.Filtering = False
           end
           object DBLayoutViewDetalle: TcxGridDBLayoutViewItem
             Caption = 'Detalle'
@@ -412,6 +410,52 @@ inherited FNVen0003: TFNVen0003
           GridView = DBLayoutView
         end
       end
+      object cxDBDateEdit2: TcxDBDateEdit
+        Left = 456
+        Top = 41
+        DataBinding.DataField = 'fecha_vencimiento'
+        DataBinding.DataSource = dsCotizacion
+        Style.HotTrack = False
+        TabOrder = 2
+        Width = 90
+      end
+      object cxDBTextEdit1: TcxDBTextEdit
+        Left = 115
+        Top = 68
+        DataBinding.DataField = 'referencia'
+        DataBinding.DataSource = dsCotizacion
+        Style.HotTrack = False
+        TabOrder = 3
+        Width = 424
+      end
+      object cxDBLookupComboBox1: TcxDBLookupComboBox
+        Left = 115
+        Top = 134
+        DataBinding.DataField = 'oid_cont_suc'
+        DataBinding.DataSource = dsCotizacion
+        Properties.DropDownAutoSize = True
+        Properties.KeyFieldNames = 'oid_cont_suc'
+        Properties.ListColumns = <
+          item
+            Caption = 'Apellido y Nombre'
+            Width = 150
+            FieldName = 'ape_nom'
+          end
+          item
+            Caption = 'Tipo Contacto'
+            Width = 90
+            FieldName = 'tipo_cont'
+          end
+          item
+            Caption = 'E-mail'
+            Width = 200
+            FieldName = 'email'
+          end>
+        Properties.ListSource = dsContactos
+        Style.HotTrack = False
+        TabOrder = 7
+        Width = 246
+      end
       object dxLayoutGroup4: TdxLayoutGroup
         AlignHorz = ahClient
         AlignVert = avClient
@@ -430,11 +474,11 @@ inherited FNVen0003: TFNVen0003
       end
       object lcMainItem2: TdxLayoutItem
         AlignHorz = ahLeft
-        CaptionOptions.Text = 'Nro. de Cotizaci'#243'n:'
+        CaptionOptions.Text = 'Nro. de Cotizaci'#243'n :'
         Parent = lcMainGroup2
         Control = cxDBTextEdit2
         ControlOptions.ShowBorder = False
-        Index = 1
+        Index = 0
       end
       object lcMainGroup4: TdxLayoutGroup
         AlignHorz = ahClient
@@ -448,7 +492,6 @@ inherited FNVen0003: TFNVen0003
         CaptionOptions.Visible = False
         Parent = dxLayoutGroup4
         ButtonOptions.Buttons = <>
-        ItemIndex = 1
         LayoutDirection = ldTabbed
         ShowBorder = False
         Index = 1
@@ -458,7 +501,7 @@ inherited FNVen0003: TFNVen0003
         Parent = lcMainGroup2
         Control = cxDBDateEdit1
         ControlOptions.ShowBorder = False
-        Index = 0
+        Index = 1
       end
       object lcMainItem7: TdxLayoutItem
         AlignHorz = ahLeft
@@ -489,7 +532,7 @@ inherited FNVen0003: TFNVen0003
         Parent = lcMainGroup4
         ButtonOptions.Buttons = <>
         ButtonOptions.ShowExpandButton = True
-        ItemIndex = 1
+        ItemIndex = 3
         LayoutDirection = ldHorizontal
         Index = 0
       end
@@ -521,7 +564,7 @@ inherited FNVen0003: TFNVen0003
         ButtonOptions.Buttons = <>
         LayoutDirection = ldHorizontal
         ShowBorder = False
-        Index = 2
+        Index = 3
       end
       object dxLayoutSeparatorItem2: TdxLayoutSeparatorItem
         CaptionOptions.Text = 'Separator'
@@ -529,7 +572,7 @@ inherited FNVen0003: TFNVen0003
         SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
         SizeOptions.SizableHorz = False
         SizeOptions.SizableVert = False
-        Index = 1
+        Index = 2
       end
       object dxLayoutItem1: TdxLayoutItem
         CaptionOptions.Text = 'Vendedor :'
@@ -573,6 +616,29 @@ inherited FNVen0003: TFNVen0003
         Control = cxGridItems
         ControlOptions.ShowBorder = False
         Index = 0
+      end
+      object lcMainItem6: TdxLayoutItem
+        CaptionOptions.Text = 'Fecha Vencimiento :'
+        Parent = lcMainGroup2
+        Control = cxDBDateEdit2
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object lcMainItem10: TdxLayoutItem
+        CaptionOptions.Text = 'Referencia :'
+        Parent = lcMainGroup1
+        Control = cxDBTextEdit1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainItem11: TdxLayoutItem
+        CaptionOptions.Text = 'Contacto Refer.:'
+        Parent = lcMainGroup1
+        Control = cxDBLookupComboBox1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 4
       end
     end
   end
@@ -675,7 +741,7 @@ inherited FNVen0003: TFNVen0003
     TipoFiltro = fi_Activos
     OidRespuesta = mtCotizacionoid_cotiz
     Left = 496
-    Top = 56
+    Top = 88
   end
   object mtItems: TjktMemTable
     DesignActivation = True
@@ -967,11 +1033,16 @@ inherited FNVen0003: TFNVen0003
       Tag = 1
       FieldName = 'oid_cotiz'
     end
-    object mtCotizacionnro_cotiz: TIntegerField
+    object mtCotizacionnro_cotiz: TStringField
       FieldName = 'nro_cotiz'
+      Size = 30
     end
     object mtCotizacionfecha: TDateTimeField
       FieldName = 'fecha'
+    end
+    object mtCotizacionfecha_vencimiento: TDateTimeField
+      Tag = 1
+      FieldName = 'fecha_vencimiento'
     end
     object mtCotizacionoid_clie: TIntegerField
       FieldName = 'oid_clie'
@@ -994,6 +1065,15 @@ inherited FNVen0003: TFNVen0003
     object mtCotizaciondes_sucu: TStringField
       FieldName = 'des_sucu'
       Size = 50
+    end
+    object mtCotizacionreferencia: TStringField
+      Tag = 1
+      FieldName = 'referencia'
+      Size = 100
+    end
+    object mtCotizacionoid_cont_suc: TIntegerField
+      Tag = 1
+      FieldName = 'oid_cont_suc'
     end
     object mtCotizacionoid_vend: TIntegerField
       Tag = 1
@@ -1174,8 +1254,134 @@ inherited FNVen0003: TFNVen0003
     Top = 200
   end
   object hlpPlantilla: TjktHelpGenerico
+    ServiceCaller = Service
+    Entidad = 'plantilla'
     TipoFiltro = fi_Activos
     Left = 328
     Top = 144
+  end
+  object opTraerVendRepre: TjktOperacion
+    OperName = 'TraerVendRepreCliente'
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 352
+    Top = 304
+  end
+  object mtVendRepre: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 392
+    Top = 304
+    object mtVendRepreoid_vend: TIntegerField
+      FieldName = 'oid_vend'
+    end
+    object mtVendReprecod_vend: TStringField
+      FieldName = 'cod_vend'
+      Size = 15
+    end
+    object mtVendRepredes_vend: TStringField
+      FieldName = 'des_vend'
+      Size = 40
+    end
+    object mtVendRepreoid_repre: TIntegerField
+      FieldName = 'oid_repre'
+    end
+    object mtVendReprecod_repre: TStringField
+      FieldName = 'cod_repre'
+      Size = 15
+    end
+    object mtVendRepredes_repre: TStringField
+      FieldName = 'des_repre'
+      Size = 40
+    end
+  end
+  object opTraerContactosSucu: TjktOperacion
+    OperName = 'TraerContactosDeSucursal'
+    EnviarTodo = False
+    Atributos = <>
+    ServiceCaller = Service
+    Left = 352
+    Top = 360
+  end
+  object mtContactos: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 392
+    Top = 360
+    object mtContactosoid_cont_suc: TIntegerField
+      FieldName = 'oid_cont_suc'
+    end
+    object mtContactostipo_cont: TStringField
+      FieldName = 'tipo_cont'
+      Size = 30
+    end
+    object mtContactosape_nom: TStringField
+      FieldName = 'ape_nom'
+      Size = 60
+    end
+    object mtContactosemail: TStringField
+      FieldName = 'email'
+      Size = 50
+    end
+  end
+  object dsContactos: TDataSource
+    DataSet = mtContactos
+    Left = 432
+    Top = 360
+  end
+  object mtClienteSucursal: TjktMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    EnableVersioning = True
+    FilterOptions = []
+    Version = '7.12.10 CodeGear Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 0
+    LocaleID = 0
+    Left = 392
+    Top = 416
+    object mtClienteSucursaloid_clie_suc: TIntegerField
+      FieldName = 'oid_clie_suc'
+    end
   end
 end

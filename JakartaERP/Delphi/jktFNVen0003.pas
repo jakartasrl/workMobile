@@ -33,7 +33,8 @@ uses
   cxGridCustomView, cxGrid, jktCNMet0008, dxLayoutControl, jktCNMet0011,
   kbmMemTable, jktCNMet0012, jktCNMet0030, jktCNMet0002, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, jktCNMet0001, dxBar,
-  cxSplitter, cxGroupBox, cxDBLookupComboBox, jktCNMet0014;
+  cxSplitter, cxGroupBox, cxDBLookupComboBox, jktCNMet0014, cxLookupEdit,
+  cxDBLookupEdit;
 
 type
   TFNVen0003 = class(TfrmChild)
@@ -107,7 +108,6 @@ type
     mtCotizacion: TjktMemTable;
     dsCotizacion: TDataSource;
     mtCotizacionoid_cotiz: TIntegerField;
-    mtCotizacionnro_cotiz: TIntegerField;
     mtCotizacionoid_clie: TIntegerField;
     mtCotizacioncod_clie: TStringField;
     mtCotizacionRazonSocial: TStringField;
@@ -156,6 +156,33 @@ type
     DBLayoutViewSpaceItem1: TdxLayoutEmptySpaceItem;
     DBLayoutViewGroup5: TdxLayoutGroup;
     hlpPlantilla: TjktHelpGenerico;
+    mtCotizacionnro_cotiz: TStringField;
+    opTraerVendRepre: TjktOperacion;
+    cxDBDateEdit2: TcxDBDateEdit;
+    lcMainItem6: TdxLayoutItem;
+    mtCotizacionfecha_vencimiento: TDateTimeField;
+    cxDBTextEdit1: TcxDBTextEdit;
+    lcMainItem10: TdxLayoutItem;
+    mtCotizacionreferencia: TStringField;
+    mtVendRepre: TjktMemTable;
+    mtVendRepreoid_vend: TIntegerField;
+    mtVendReprecod_vend: TStringField;
+    mtVendRepredes_vend: TStringField;
+    mtVendRepreoid_repre: TIntegerField;
+    mtVendReprecod_repre: TStringField;
+    mtVendRepredes_repre: TStringField;
+    lcMainItem11: TdxLayoutItem;
+    mtCotizacionoid_cont_suc: TIntegerField;
+    opTraerContactosSucu: TjktOperacion;
+    mtContactos: TjktMemTable;
+    mtContactosoid_cont_suc: TIntegerField;
+    mtContactosemail: TStringField;
+    mtContactosape_nom: TStringField;
+    mtContactostipo_cont: TStringField;
+    cxDBLookupComboBox1: TcxDBLookupComboBox;
+    dsContactos: TDataSource;
+    mtClienteSucursal: TjktMemTable;
+    mtClienteSucursaloid_clie_suc: TIntegerField;
     procedure DriverNuevo(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure DBLayoutViewCodigoPropertiesButtonClick(Sender: TObject;
@@ -194,7 +221,25 @@ begin
   inherited;
 
   if hlpClie.Ejecutar then
-    mtCotizacion.FieldByName('razonSocial').AsString := hlpClie.GetDescripcion;
+    begin
+      mtCotizacion.FieldByName('razonSocial').AsString := hlpClie.GetDescripcion;
+
+      // Traigo el Vendedor y el Representante por defecto del Cliente
+      opTraerVendRepre.execute;
+      // Copio los datos a la tabla 'mtCotizacion'
+      mtCotizacion.FieldByName('oid_vend').AsInteger :=
+        mtVendRepre.FieldByName('oid_vend').AsInteger;
+      mtCotizacion.FieldByName('cod_vend').AsString :=
+        mtVendRepre.FieldByName('cod_vend').AsString;
+      mtCotizacion.FieldByName('des_vend').AsString :=
+        mtVendRepre.FieldByName('des_vend').AsString;
+      mtCotizacion.FieldByName('oid_repre').AsInteger :=
+        mtVendRepre.FieldByName('oid_repre').AsInteger;
+      mtCotizacion.FieldByName('cod_repre').AsString :=
+        mtVendRepre.FieldByName('cod_repre').AsString;
+      mtCotizacion.FieldByName('des_repre').AsString :=
+        mtVendRepre.FieldByName('des_repre').AsString;
+    end;
 end;
 
 procedure TFNVen0003.cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
@@ -212,7 +257,11 @@ begin
   inherited;
 
   if hlpSucu.Ejecutar then
-    mtCotizacion.FieldByName('des_sucu').AsString := hlpSucu.GetDescripcion;
+    begin
+      mtCotizacion.FieldByName('des_sucu').AsString := hlpSucu.GetDescripcion;
+
+      opTraerContactosSucu.execute;
+    end;
 end;
 
 procedure TFNVen0003.cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
@@ -238,7 +287,12 @@ procedure TFNVen0003.DBLayoutViewItem1PropertiesButtonClick(Sender: TObject;
 begin
   inherited;
 
-  // llamar a hlpPlantillas
+  if hlpPlantilla.Ejecutar then
+    begin
+      mtItems.Editar;
+      mtItems.FieldByName('detalle').AsString := hlpPlantilla.GetDescripcion;
+      mtItems.Postear;
+    end;
 end;
 
 procedure TFNVen0003.DriverNuevo(Sender: TObject);
@@ -246,6 +300,11 @@ begin
   inherited;
 
   lcMainItem2.Visible := False;
+  cxDBButtonEdit1.Properties.ReadOnly := False;
+  cxDBButtonEdit3.Properties.ReadOnly := False;
+  cxDBButtonEdit1.Properties.Buttons[0].Enabled := True;
+  cxDBButtonEdit3.Properties.Buttons[0].Enabled := True;
+
   mtCotizacion.Append;
   mtCotizacion.FieldByName('fecha').AsDateTime := Now;
 end;
@@ -293,6 +352,10 @@ begin
   inherited;
 
   lcMainItem2.Visible := True;
+  cxDBButtonEdit1.Properties.ReadOnly := True;
+  cxDBButtonEdit3.Properties.ReadOnly := True;
+  cxDBButtonEdit1.Properties.Buttons[0].Enabled := False;
+  cxDBButtonEdit3.Properties.Buttons[0].Enabled := False;
 end;
 
 

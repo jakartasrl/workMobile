@@ -51,6 +51,7 @@ type
     mtConfigValidadordescrName: TStringField;
     mtConfigValidadorestadoForm: TStringField;
     mtConfigCampostag: TIntegerField;
+    mtConfigCamposcolumnWidth: TSmallintField;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -100,41 +101,52 @@ begin
   mtConfigCampos.First;
   while not mtConfigCampos.Eof do
     begin
-       name :=  mtConfigCampos.FieldByName('fieldName').AsString;
-       if        mtConfigCampos.FieldByName('tipo').AsString = 'Integer'
-       then      begin
-                   tipo := ftInteger;
-                   size := 0;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'String'
-       then      begin
-                   tipo := ftString;
-                   size := mtConfigCampos.FieldByName('longitud').asInteger;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Float'
-       then      begin
-                   tipo := ftString;
-                   size := 0;
-                 end
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Currency'
-       then      begin
-                   tipo := ftCurrency;
-                   size := 0;
-                 end
+      name :=  mtConfigCampos.FieldByName('fieldName').AsString;
 
-       else      if mtConfigCampos.FieldByName('tipo').AsString = 'Boolean'
-       then      begin
-                   tipo := ftBoolean;
-                   size := 0;
-                 end;
-       fieldDef := mtInput.FieldDefs.AddFieldDef ;
-       fieldDef.name := name;
-       fieldDef.dataType := tipo;
-       fieldDef.Size := size;
-       fieldDef.Required := false;
+      if mtConfigCampos.FieldByName('tipo').AsString = 'Integer' then
+        begin
+          tipo := ftInteger;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'String' then
+        begin
+          tipo := ftString;
+          size := mtConfigCampos.FieldByName('longitud').asInteger;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Text' then
+        begin
+          tipo := ftMemo;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Double' then
+        begin
+          tipo := ftFloat;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Date' then
+        begin
+          tipo := ftDate;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Currency' then
+        begin
+          tipo := ftCurrency;
+          size := 0;
+        end
+      else if mtConfigCampos.FieldByName('tipo').AsString = 'Boolean' then
+        begin
+          tipo := ftBoolean;
+          size := 0;
+        end;
 
-       //mtInput.FieldDefs.Add(name, tipo, size,  false);
-       mtConfigCampos.Next;
+      fieldDef := mtInput.FieldDefs.AddFieldDef ;
+      fieldDef.name := name;
+      fieldDef.dataType := tipo;
+      fieldDef.Size := size;
+      fieldDef.Required := false;
+
+      // mtInput.FieldDefs.Add(name, tipo, size,  false);
+      mtConfigCampos.Next;
     end;
 
   mtInput.CreateTable;
@@ -160,24 +172,26 @@ var
   readOnly :boolean;
   columna  :TcxGridDBColumn;
 begin
-  mtConfigCampos.SortFields:='orden';
+  mtConfigCampos.SortFields := 'orden';
   mtConfigCampos.SortDefault;
   mtConfigCampos.First;
   while not mtConfigCampos.Eof do
     begin
-       name     :=  mtConfigCampos.FieldByName('fieldName').AsString;
-       etiqueta :=  mtConfigCampos.FieldByName('label').AsString;
-       visible  :=  mtConfigCampos.FieldByName('visible').AsBoolean;
-       readOnly :=  mtConfigCampos.FieldByName('readOnly').AsBoolean;
+      name     :=  mtConfigCampos.FieldByName('fieldName').AsString;
+      etiqueta :=  mtConfigCampos.FieldByName('label').AsString;
+      visible  :=  mtConfigCampos.FieldByName('visible').AsBoolean;
+      readOnly :=  mtConfigCampos.FieldByName('readOnly').AsBoolean;
 
-       columna  :=  jktExpDBGrid1DBTableView1.CreateColumn;
-       //columna.Width := 40;
-       columna.Caption := etiqueta;
-       columna.HeaderAlignmentHorz := taCenter;
-       columna.Options.Editing := not readOnly;
-       columna.Visible  := visible;
-       columna.DataBinding.FieldName := name;
-       mtConfigCampos.Next;
+      columna  :=  jktExpDBGrid1DBTableView1.CreateColumn;
+      columna.Caption := etiqueta;
+      columna.HeaderAlignmentHorz := taCenter;
+      columna.Options.Editing := not readOnly;
+      columna.Visible  := visible;
+      columna.DataBinding.FieldName := name;
+      if mtConfigCampos.FieldByName('columnWidth').AsInteger > 0 then
+        columna.Width := mtConfigCampos.FieldByName('columnWidth').AsInteger;
+
+      mtConfigCampos.Next;
     end;
 end;
 
