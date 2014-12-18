@@ -4,6 +4,11 @@ import java.util.Date;
 
 import com.jkt.varios.dominio.Contacto;
 
+/**
+ * 
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class Cotizacion extends ComprobanteVenta {
 
 	public enum Estado { PENDIENTE, INICIADA};
