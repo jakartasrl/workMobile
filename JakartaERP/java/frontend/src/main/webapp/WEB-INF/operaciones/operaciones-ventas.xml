@@ -482,6 +482,7 @@
 <!-- 				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" /> -->
 				<campoEntrada name="oid_mod" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
 				<campoEntrada name="oid_moneda_expresada" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaExpresada" />
+				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" />
 
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
 					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.Moneda;
 
@@ -16,17 +17,38 @@ public class Cotizador extends PersistentEntity {
 
 	private Date fecha;
 	private boolean revisado;
+	private ComprobanteVentaDet item;
 	private String usuarioCreacion;
 	
 	private Moneda monedaExpresada;
 	private String usuarioRevision;
 	private Date fechaRevision;
 	private ModeloCotizador modelo;
+	
+	private boolean autorizado;
+	
+	public ComprobanteVentaDet getItem() {
+		return item;
+	}
+
+	public void setItem(ComprobanteVentaDet item) {
+		this.item = item;
+	}
+
+	public boolean isAutorizado() {
+		return autorizado;
+	}
+
+	public void setAutorizado(boolean autorizado) {
+		this.autorizado = autorizado;
+	}
+	
 	private List<CotizadorDet> detalles=new ArrayList<CotizadorDet>();
 
 	public Cotizador() {
 		this.fecha=new Date();
 		this.revisado=false;
+		this.autorizado=false;
 		this.usuarioCreacion="User not assigned yet. Value setted ";
 	}
 	
