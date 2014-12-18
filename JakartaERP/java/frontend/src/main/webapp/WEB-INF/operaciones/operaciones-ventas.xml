@@ -477,6 +477,9 @@
 	
 		<input name="mtCabCotiz" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cotiz">
 			<campoEntrada>
+			
+			
+			
 <!-- 				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" /> -->
 <!-- 				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" /> -->
 <!-- 				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" /> -->
