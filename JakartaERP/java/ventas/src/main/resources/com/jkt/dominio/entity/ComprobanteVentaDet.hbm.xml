@@ -17,6 +17,8 @@
 		
 		<property name="tipoVenta" column="TIPO" type="integer" />
 
+		<property name="estadoId" column="ESTADO" type="integer" />
+
 		<property name="referencia" column="REFERENCIA" type="string" />
 
 		<property name="cantidad" column="CANTIDAD" type="integer" />

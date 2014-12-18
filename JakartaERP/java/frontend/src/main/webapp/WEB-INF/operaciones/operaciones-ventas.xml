@@ -408,14 +408,24 @@
 		<output name="items" tableName="mtInput">
 <!-- 			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" /> -->
 			<campoSalida value="oid" target="id" />
-			<campoSalida value="codigo" target="estado.codigo" /> VER ESTO CON SANTI. Este 'codigo' sería el 'oid' del estado. Yo llamo a una operacion o a otra en la vista dependiendo de este valor.			
+
+<!-- 			RETORNA LOS DATOS DEL ESTADO DEL ITEM -->
+			<campoSalida value="codigo" target="estadoId" />
+			<campoSalida value="des_estado" target="descripcionEstado" /> 
+			
+<!-- 			 VER ESTO CON SANTI. Este 'codigo' sería el 'oid' del estado. Yo llamo a una operacion o a otra en la vista dependiendo de este valor.			 -->
+			
+			
 			<campoSalida value="descripcion" target="comprobanteVenta.clienteSucursal.descripcion" />
 			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" />
 			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
-			<campoSalida value="des_estado" target="estado.descripcion" /> VER ESTO CON SANTI. ¿Puede ser que el 'item' no tenga Estado pero sí la Cotizacion global???
-																		   Según tengo entendido (quizás esté mal), LOS ITEMS tienen el estado 'Pendiente de Cotizar',
-																		   'Cotizado pero No Autorizado', 'Autorizado', 'Rechazado', etc; Mientras que la Cotizacion, 
-																		   quien tiene una lista de estos items, tendrá otros estados o similares... ¿qué opinás?
+			
+<!-- 			VER ESTO CON SANTI. ¿Puede ser que el 'item' no tenga Estado pero sí la Cotizacion global??? -->
+<!-- 																		   Según tengo entendido (quizás esté mal), LOS ITEMS tienen el estado 'Pendiente de Cotizar', -->
+<!-- 																		   'Cotizado pero No Autorizado', 'Autorizado', 'Rechazado', etc; Mientras que la Cotizacion,  -->
+<!-- 																		   quien tiene una lista de estos items, tendrá otros estados o similares... ¿qué opinás? -->
+			
+			
 			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
 			<campoSalida value="nro_item" target="numero" />
 			<campoSalida value="cant" target="cantidad" />
@@ -446,6 +456,11 @@
 			<campoSalida value="detalle_item" target="descripcion" />
 			<campoSalida value="cod_art" target="producto.codigo" />
 			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />			
+		
+			<!-- 			RETORNA LOS DATOS DEL ESTADO DEL ITEM -->
+			<campoSalida value="cod_estado" target="estadoId" />
+<!-- 			<campoSalida value="des_estado" target="descripcionEstado" />  -->
+			
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
