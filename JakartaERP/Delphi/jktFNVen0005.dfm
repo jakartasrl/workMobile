@@ -1,47 +1,48 @@
 inherited FNVen0005: TFNVen0005
   Anchors = []
   Caption = 'Cotizador'
-  ClientHeight = 536
+  ClientHeight = 552
   ClientWidth = 1071
+  ExplicitLeft = -318
   ExplicitWidth = 1087
-  ExplicitHeight = 574
+  ExplicitHeight = 590
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitHeight = 536
-    Height = 536
+    ExplicitHeight = 552
+    Height = 552
   end
   inherited cxSplitterLeft: TcxSplitter
-    Height = 536
-    ExplicitHeight = 536
+    Height = 552
+    ExplicitHeight = 552
   end
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 1041
     ExplicitLeft = 1041
-    ExplicitHeight = 536
-    Height = 536
+    ExplicitHeight = 552
+    Height = 552
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 1037
-    Height = 536
+    Height = 552
     ExplicitLeft = 1037
-    ExplicitHeight = 536
+    ExplicitHeight = 552
   end
   inherited cxGroupBoxMain: TcxGroupBox
     ExplicitWidth = 1003
-    ExplicitHeight = 536
-    Height = 536
+    ExplicitHeight = 552
+    Height = 552
     Width = 1003
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
       Width = 999
-      Height = 532
+      Height = 548
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = 126
+        Left = -136
         Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
@@ -51,7 +52,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 266
+        Left = 4
         Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
@@ -61,7 +62,7 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = 126
+        Left = -136
         Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
@@ -71,7 +72,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = 126
+        Left = -136
         Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
@@ -81,7 +82,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 452
+        Left = 190
         Top = 166
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
@@ -91,7 +92,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 551
+        Left = 289
         Top = 166
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
@@ -101,7 +102,7 @@ inherited FNVen0005: TFNVen0005
         Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 452
+        Left = 190
         Top = 72
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
@@ -113,7 +114,7 @@ inherited FNVen0005: TFNVen0005
         AnchorY = 81
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 452
+        Left = 190
         Top = 95
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
@@ -125,7 +126,7 @@ inherited FNVen0005: TFNVen0005
         Width = 307
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 896
+        Left = 634
         Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -140,16 +141,16 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 997
+        Left = 735
         Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
         Style.HotTrack = False
         TabOrder = 9
-        Width = 213
+        Width = 226
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 896
+        Left = 634
         Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
@@ -174,7 +175,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object jktExpDBGrid1: TjktExpDBGrid
-        Left = 896
+        Left = 634
         Top = 126
         Width = 335
         Height = 75
@@ -217,9 +218,9 @@ inherited FNVen0005: TFNVen0005
         end
       end
       object cxDBTreeList1: TcxDBTreeList
-        Left = 20
+        Left = -242
         Top = 274
-        Width = 1221
+        Width = 795
         Height = 218
         BorderStyle = cxcbsNone
         Align = alClient
@@ -447,6 +448,26 @@ inherited FNVen0005: TFNVen0005
           Summary.GroupFooterSummaryItems = <>
         end
       end
+      object cxCheckBox1: TcxCheckBox
+        Left = 571
+        Top = 274
+        Caption = 'AUTORIZAR'
+        Style.HotTrack = False
+        TabOrder = 13
+        Transparent = True
+        OnClick = cxCheckBox1Click
+        Width = 121
+      end
+      object cxCheckBox2: TcxCheckBox
+        Left = 571
+        Top = 299
+        Caption = 'RECHAZAR'
+        Style.HotTrack = False
+        TabOrder = 14
+        Transparent = True
+        OnClick = cxCheckBox2Click
+        Width = 121
+      end
       object lcMainGroup_Root: TdxLayoutGroup
         AlignHorz = ahParentManaged
         AlignVert = avParentManaged
@@ -477,6 +498,7 @@ inherited FNVen0005: TFNVen0005
         Parent = lcMainGroup_Root
         ButtonOptions.Buttons = <>
         ButtonOptions.ShowExpandButton = True
+        LayoutDirection = ldHorizontal
         Index = 2
       end
       object lcMainItem1: TdxLayoutItem
@@ -646,6 +668,40 @@ inherited FNVen0005: TFNVen0005
         SizeOptions.SizableVert = False
         Index = 1
       end
+      object lcMainItem14: TdxLayoutItem
+        CaptionOptions.Text = 'cxCheckBox1'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup10
+        Control = cxCheckBox1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem15: TdxLayoutItem
+        CaptionOptions.Text = 'cxCheckBox2'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup10
+        Control = cxCheckBox2
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object lcMainGroup10: TdxLayoutGroup
+        CaptionOptions.Text = 'Hidden Group'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = 2
+      end
+      object lcMainSeparatorItem1: TdxLayoutSeparatorItem
+        CaptionOptions.Text = 'Separator'
+        Parent = lcMainGroup3
+        SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+        SizeOptions.SizableHorz = False
+        SizeOptions.SizableVert = False
+        Index = 1
+      end
     end
   end
   inherited BarManager: TdxBarManager
@@ -709,7 +765,6 @@ inherited FNVen0005: TFNVen0005
     end
   end
   inherited OperacionTraer: TjktOperacion
-    OperName = 'TraerItem'
     Atributos = <
       item
         Attribute = 'oid'
@@ -983,9 +1038,6 @@ inherited FNVen0005: TFNVen0005
       Tag = 1
       FieldName = 'oid_cotiz'
     end
-    object mtDetCotizoid_mod: TIntegerField
-      FieldName = 'oid_mod'
-    end
     object mtDetCotizcodInterno: TIntegerField
       FieldName = 'codInterno'
     end
@@ -1100,6 +1152,10 @@ inherited FNVen0005: TFNVen0005
       Tag = 1
       FieldName = 'oid_cotiz'
     end
+    object mtCabCotizoid_item: TIntegerField
+      Tag = 1
+      FieldName = 'oid_item'
+    end
     object mtCabCotizoid_mod: TIntegerField
       Tag = 1
       FieldName = 'oid_mod'
@@ -1115,6 +1171,11 @@ inherited FNVen0005: TFNVen0005
     object mtCabCotizoid_moneda_expresada: TIntegerField
       Tag = 1
       FieldName = 'oid_moneda_expresada'
+    end
+    object mtCabCotizcod_estado: TStringField
+      Tag = 1
+      FieldName = 'cod_estado'
+      Size = 15
     end
   end
   object opTraerModeloParaCotizar: TjktOperacion

@@ -1,9 +1,9 @@
 inherited FNHlp0001: TFNHlp0001
   Caption = #205'tems de presupuesto'
   ClientHeight = 479
-  ClientWidth = 828
+  ClientWidth = 835
   ExplicitLeft = -48
-  ExplicitWidth = 834
+  ExplicitWidth = 841
   ExplicitHeight = 507
   PixelsPerInch = 96
   TextHeight = 13
@@ -11,7 +11,7 @@ inherited FNHlp0001: TFNHlp0001
     ExplicitWidth = 828
     ExplicitHeight = 89
     Height = 89
-    Width = 828
+    Width = 835
   end
   inherited cxGroupBox2: TcxGroupBox
     Top = 94
@@ -19,9 +19,9 @@ inherited FNHlp0001: TFNHlp0001
     ExplicitWidth = 828
     ExplicitHeight = 329
     Height = 329
-    Width = 828
+    Width = 835
     inherited dbgHelp: TjktExpDBGrid
-      Width = 824
+      Width = 831
       Height = 325
       ExplicitWidth = 824
       ExplicitHeight = 325
@@ -97,19 +97,19 @@ inherited FNHlp0001: TFNHlp0001
     Top = 423
     ExplicitTop = 423
     ExplicitWidth = 828
-    Width = 828
+    Width = 835
     inherited btnAceptar: TButton
-      Left = 660
+      Left = 667
       ExplicitLeft = 660
     end
     inherited btnCancelar: TButton
-      Left = 741
+      Left = 748
       ExplicitLeft = 741
     end
   end
   inherited cxSplitter: TcxSplitter
     Top = 89
-    Width = 828
+    Width = 835
     ExplicitTop = 89
     ExplicitWidth = 828
   end

@@ -295,9 +295,8 @@ end;
 
 procedure TjktMemTable.Postear;
 begin
-  if ( Self.Active )
- and ( Self.State in [dsEdit,dsInsert] )
-     then Self.Post;
+  if Self.Active and (Self.State in [dsEdit, dsInsert]) then
+    Self.Post;
 end;
 
 

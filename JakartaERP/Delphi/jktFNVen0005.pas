@@ -26,7 +26,8 @@ uses
   cxDBLookupComboBox, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxTL,
-  cxTLdxBarBuiltInMenu, cxInplaceContainer, cxDBTL, cxTLData;
+  cxTLdxBarBuiltInMenu, cxInplaceContainer, cxDBTL, cxTLData, cxCheckBox,
+  dxLayoutControlAdapters, Vcl.StdCtrls, cxRadioGroup;
 
 type
   TFNVen0005 = class(TfrmChild)
@@ -90,7 +91,6 @@ type
     mtCabCotizoid_mod: TIntegerField;
     mtCabCotizcod_mod: TStringField;
     mtCabCotizdes_mod: TStringField;
-    mtDetCotizoid_mod: TIntegerField;
     mtDetCotizcodInterno: TIntegerField;
     mtDetCotizcodInternoPadre: TIntegerField;
     mtDetCotizcod_titu_conc: TStringField;
@@ -163,6 +163,14 @@ type
     mtParametrosFormvalor_float: TFloatField;
     mtParametrosFormvalor_boolean: TBooleanField;
     mtItemcod_estado: TStringField;
+    cxCheckBox1: TcxCheckBox;
+    lcMainItem14: TdxLayoutItem;
+    mtCabCotizoid_item: TIntegerField;
+    mtCabCotizcod_estado: TStringField;
+    cxCheckBox2: TcxCheckBox;
+    lcMainItem15: TdxLayoutItem;
+    lcMainGroup10: TdxLayoutGroup;
+    lcMainSeparatorItem1: TdxLayoutSeparatorItem;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -185,6 +193,8 @@ type
     procedure opTraerEntidadesBeforeEjecutar(Sender: TObject);
     procedure opTraerParametroBeforeEjecutar(Sender: TObject);
     procedure opTraerParametroAfterEjecutar(Sender: TObject);
+    procedure cxCheckBox1Click(Sender: TObject);
+    procedure cxCheckBox2Click(Sender: TObject);
   private
     oid_MonedaPorDefecto: Integer;
 
@@ -198,6 +208,22 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TFNVen0005.cxCheckBox1Click(Sender: TObject);
+begin
+  inherited;
+
+  if cxCheckBox1.Checked then
+    cxCheckBox2.Checked := False;
+end;
+
+procedure TFNVen0005.cxCheckBox2Click(Sender: TObject);
+begin
+  inherited;
+
+  if cxCheckBox2.Checked then
+    cxCheckBox1.Checked := False;
+end;
 
 procedure TFNVen0005.cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
@@ -323,13 +349,72 @@ begin
   inherited;
 
   cxDBTreeList1.DataController.DataSource := nil;
+
+  mtItem.Editar;
+  if cxCheckBox1.Checked then
+    mtItem.FieldByName('cod_estado').AsString := '3'
+  else
+    if cxCheckBox2.Checked then
+      mtItem.FieldByName('cod_estado').AsString := '4'
+    else
+      mtItem.FieldByName('cod_estado').AsString := '2';
+  mtItem.Postear;
+
+  mtCabCotiz.Editar;
+  mtCabCotiz.FieldByName('oid_item').AsInteger :=
+    mtItem.FieldByName('oid_item').AsInteger;
+  // Le paso el 'cod_estado' a la tabla 'mtCabCotiz' para mandar una sola tabla
+  // en la operación de Guardar, ya que el 'com.jkt.operaciones.GuardarLista' en
+  // java, acepta por ahora un solo objeto
+  mtCabCotiz.FieldByName('cod_estado').AsString :=
+    mtItem.FieldByName('cod_estado').AsString;
+  mtCabCotiz.Postear;
 end;
 
 procedure TFNVen0005.OperacionTraerAfterEjecutar(Sender: TObject);
 begin
   inherited;
 
-  opTraerTiposDeCambio.execute;
+  if (mtItem.FieldByName('cod_estado').AsString = '1') or
+     (mtItem.FieldByName('cod_estado').AsString = '2') then
+
+    begin
+      // El ítem está "Pendiente de Cotizar" o bien "Cotizado pero No Autorizado"
+      // Traigo los últimos Tipos de Cambio ya que los puede modificar
+      opTraerTiposDeCambio.execute;
+
+      lcMainGroup2.Enabled := True;
+      lcMainGroup3.Enabled := True;
+
+      cxCheckBox1.Caption := 'AUTORIZAR';
+      cxCheckBox2.Caption := 'RECHAZAR';
+
+      cxCheckBox1.Checked := False;
+      cxCheckBox2.Checked := False;
+    end
+  else
+    begin
+      // Si el item es "Autorizado" se debe deshabilitar el botón 'Guardar'!
+
+      lcMainGroup2.Enabled := False;
+      lcMainGroup3.Enabled := False;
+
+      cxCheckBox1.Caption := 'AUTORIZADO';
+      cxCheckBox2.Caption := 'RECHAZADO';
+
+      if (mtItem.FieldByName('cod_estado').AsString = '3') then
+        begin
+          // 3 = "Autorizado"
+          cxCheckBox1.Checked := True;
+          cxCheckBox2.Checked := False;
+        end
+      else
+        begin
+          // 4 = "Rechazado"
+          cxCheckBox1.Checked := False;
+          cxCheckBox2.Checked := True;
+        end;
+    end;
 end;
 
 procedure TFNVen0005.OperacionTraerBeforeEjecutar(Sender: TObject);
@@ -346,9 +431,20 @@ begin
 //  HelpForm.FormStyle := fsNormal;
 //  HelpForm.InicializarChild(nil);
 
-  // Según el Estado del ítem, voy a llamar a distintas operaciones (cambiando la property 'OperName')
-  if mtItem.FieldByName('cod_estado').AsString = '1' then
 
+
+
+
+//  1 = "Pendiente de Cotizar"
+//  2 = "Cotizado pero No Autorizado"
+//  3 = "Autorizado"
+//  4 = "Rechazado"
+
+  // Según el Estado del ítem, voy a llamar a distintas operaciones
+  if mtItem.FieldByName('cod_estado').AsString = '1' then
+    OperacionTraer.OperName := 'TraerItem'
+  else
+    OperacionTraer.OperName := 'TraerCotizacionDelItem';
 end;
 
 procedure TFNVen0005.opTraerEntidadesBeforeEjecutar(Sender: TObject);

@@ -2,6 +2,7 @@ inherited FNVen0003: TFNVen0003
   Caption = 'Solicitud de Cotizaci'#243'n'
   ClientHeight = 592
   ClientWidth = 861
+  ExplicitLeft = -9
   ExplicitWidth = 877
   ExplicitHeight = 630
   PixelsPerInch = 96
@@ -16,7 +17,7 @@ inherited FNVen0003: TFNVen0003
   end
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 831
-    ExplicitLeft = 828
+    ExplicitLeft = 831
     ExplicitHeight = 592
     Height = 592
   end
@@ -25,11 +26,11 @@ inherited FNVen0003: TFNVen0003
     Height = 592
     HotZoneClassName = ''
     HotZone = nil
-    ExplicitLeft = 824
+    ExplicitLeft = 827
     ExplicitHeight = 592
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 790
+    ExplicitWidth = 793
     ExplicitHeight = 592
     Height = 592
     Width = 793
@@ -41,7 +42,6 @@ inherited FNVen0003: TFNVen0003
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 786
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 120
         Top = 41
@@ -65,7 +65,7 @@ inherited FNVen0003: TFNVen0003
         Width = 92
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 462
+        Left = 467
         Top = 107
         DataBinding.DataField = 'razonSocial'
         DataBinding.DataSource = dsCotizacion
@@ -95,7 +95,7 @@ inherited FNVen0003: TFNVen0003
         Width = 180
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 115
+        Left = 120
         Top = 107
         DataBinding.DataField = 'cod_clie'
         DataBinding.DataSource = dsCotizacion
@@ -180,7 +180,7 @@ inherited FNVen0003: TFNVen0003
         end
       end
       object cxDBButtonEdit3: TcxDBButtonEdit
-        Left = 220
+        Left = 225
         Top = 107
         DataBinding.DataField = 'des_sucu'
         DataBinding.DataSource = dsCotizacion
@@ -420,7 +420,7 @@ inherited FNVen0003: TFNVen0003
         Width = 90
       end
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = 115
+        Left = 120
         Top = 68
         DataBinding.DataField = 'referencia'
         DataBinding.DataSource = dsCotizacion
@@ -429,7 +429,7 @@ inherited FNVen0003: TFNVen0003
         Width = 424
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 115
+        Left = 120
         Top = 134
         DataBinding.DataField = 'oid_cont_suc'
         DataBinding.DataSource = dsCotizacion
@@ -553,7 +553,6 @@ inherited FNVen0003: TFNVen0003
         CaptionOptions.Text = 'Datos del Pedido'
         Parent = lcMainGroup1
         ButtonOptions.Buttons = <>
-        ItemControlAreaAlignment = catOwn
         LayoutDirection = ldHorizontal
         ShowBorder = False
         Index = 0
