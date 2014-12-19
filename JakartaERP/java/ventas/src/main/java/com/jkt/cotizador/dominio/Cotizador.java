@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import scala.xml.PrettyPrinter.Item;
+
 import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.varios.dominio.Moneda;
 
 /**
@@ -17,15 +22,46 @@ public class Cotizador extends PersistentEntity {
 
 	private Date fecha;
 	private boolean revisado;
+	
+	@NotNull(message="La cotización se debe realizar en base a un item existente.")
 	private ComprobanteVentaDet item;
+	
 	private String usuarioCreacion;
 	
 	private Moneda monedaExpresada;
 	private String usuarioRevision;
 	private Date fechaRevision;
 	private ModeloCotizador modelo;
+//	private boolean autorizado;
+	private String codigoEstado;
+	private List<CotizadorDet> detalles=new ArrayList<CotizadorDet>();
 	
-	private boolean autorizado;
+	public String getCodigoEstado(){
+		return this.codigoEstado;
+	}
+	
+	/**
+	 * Como precondicion, debe estar cargado el {@link Item}
+	 * Tener cuidado, ya que el framework debera setearlo en orden, es decir, que se puede dar la siguiente situacion.
+	 * 
+	 * 1-setear item
+	 * 2-setear estado
+	 * 
+	 * 1-setear estado
+	 * 2-setear item
+	 * 
+	 * Entonces se cambia el estado de un item incorrecto.
+	 * 
+	 * @throws JakartaException Cuando el estado no existe.
+	 */
+	public void setCodigoEstado(String codigoEstado) throws JakartaException {
+		Integer idEstado = Integer.valueOf(codigoEstado);
+		ComprobanteVentaDet.Estado.getEstado(idEstado);
+		if (this.item!=null) {
+			this.item.setEstadoId(idEstado);
+		}
+	}
+
 	
 	public ComprobanteVentaDet getItem() {
 		return item;
@@ -33,30 +69,42 @@ public class Cotizador extends PersistentEntity {
 
 	public void setItem(ComprobanteVentaDet item) {
 		this.item = item;
+		item.setCotizador(this);
 	}
 
-	public boolean isAutorizado() {
-		return autorizado;
-	}
-
-	public void setAutorizado(boolean autorizado) {
-		this.autorizado = autorizado;
-	}
+//	public boolean isAutorizado() {
+//		return autorizado;
+//	}
+//
+//	public void setAutorizado(boolean autorizado) {
+//		this.autorizado = autorizado;
+//	}
 	
-	private List<CotizadorDet> detalles=new ArrayList<CotizadorDet>();
 
 	public Cotizador() {
 		this.fecha=new Date();
 		this.revisado=false;
-		this.autorizado=false;
-		this.usuarioCreacion="User not assigned yet. Value setted ";
+//		this.autorizado=false;
+		this.usuarioCreacion="Anonimo";
 	}
 	
 	public void agregarDetalle(CotizadorDet detalle){
-		if (!detalles.contains(detalle)) {
-			detalles.add(detalle);
-			detalle.setCotizador(this);
+		
+		if (detalle.getConceptoPresupuesto()==null) {
+			return;
 		}
+		
+		if (!detalles.contains(detalle)) {
+
+			//Es un detalle que tiene un concepto, en caso contrario es un titulo y no se deberá guardar.
+			if (detalle.getConceptoPresupuesto()!=null) {
+				detalles.add(detalle);
+				detalle.setCotizador(this);
+			}
+			
+		}
+		
+		
 	}
 	
 	public Moneda getMonedaExpresada() {

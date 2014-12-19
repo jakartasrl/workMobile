@@ -1,4 +1,4 @@
-package com.jkt.cotizador.operaciones;
+package com.jkt.operaciones;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,57 +10,51 @@ import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
+import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.ComponenteValor;
 
-/**
- * <p><b>Recupera un cotizador previamente dado de alta.</b></p>
- * <p><b>Los pasos que realiza, en resumen, son los siguientes:</b></p>
- * 
- * <p>1-Recupera el cotizador</p>
- * <p>2-Recupera el modelo de cotizador</p>
- * <p>3-Renderiza modelo de cotizador (dibuja el arbol)</p>
- * <p>4-Mapea cada concepto del modelo con los detalles del cotizador guardado previamente</p>
- * <p>5-Notifica el arbol completo, y en cada nodo, se verán los datos del cotizador.Por presupuesto, un detalle(unidades en cantidad, precios, moneda, unidad de medida, etc)</p>
- * 
- * @see ModeloCotizador
- * 
- * @author Leonel Suarez - Jakarta SRL
- */
-public class TraerCotizador extends Operation {
+public class TraerCotizacionDelItem extends Operation {
 
-	private static final String OID = "oid".toUpperCase();
-	private static final String WRITER_MODELO = "modelo";
+	private static final String COTIZADOR_WRITER = "cotizador";
+	private static final String ITEM_WRITER = "item";
+	private static final String KEY_OID = "oid".toUpperCase();
+//	private static final String WRITER_MODELO = "titulos";
 	private static final String WRITER_TITULO = "titulos";
 
-	
 	private Map<String, CotizadorDet> detallesDeCotizador=new HashMap<String, CotizadorDet>();
-	
+
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		validarEntrada(aParams.get(OID));
+		validarEntrada(aParams.get(KEY_OID));
+	
+		ComprobanteVentaDet item=(ComprobanteVentaDet) obtener(ComprobanteVentaDet.class, (String)aParams.get(KEY_OID));
 		
-		Cotizador cotizador = (Cotizador) obtener(Cotizador.class, (String)aParams.get(OID));
-
+		notificarObjeto(ITEM_WRITER, item);
+		
+		notificarObjeto(COTIZADOR_WRITER, item.getCotizador());
+		
+		Cotizador cotizador = item.getCotizador();
+	
 		completarMapaDeDetalles(cotizador);
 		
 		//Mostrar datos de cotizador.
 		
 		ModeloCotizador modelo = cotizador.getModelo();
 		
-		notificarObjeto(WRITER_MODELO, modelo);
+	//	notificarObjeto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
 		}
+
 	}
-	
+
 	/**
 	 * 
 	 * <p>Este metodo tiene la funcion de recibir un cotizador y completar en un mapa sus detalles.</p>
@@ -71,7 +65,14 @@ public class TraerCotizador extends Operation {
 	private void completarMapaDeDetalles(Cotizador cotizador) {
 		List<CotizadorDet> detalles = cotizador.getDetalles();
 		for (CotizadorDet cotizadorDet : detalles) {
-			detallesDeCotizador.put(String.valueOf(cotizadorDet.getConceptoPresupuesto().getId()), cotizadorDet);
+			
+			if (cotizadorDet==null) {
+				continue;
+			}
+			
+			if (cotizadorDet.getConceptoPresupuesto()!=null) {
+				detallesDeCotizador.put(String.valueOf(cotizadorDet.getConceptoPresupuesto().getId()), cotizadorDet);
+			}
 		}
 	}
 
@@ -87,12 +88,11 @@ public class TraerCotizador extends Operation {
 		
 		tituloModeloCotizador.setCodigoInterno((int)tituloModeloCotizador.getId());
 		tituloModeloCotizador.setCodigoInternoPadre(codigoInternoPadre);
-
+	
 		List<TituloModeloCotizador> titulosHijos = tituloModeloCotizador.getTitulosHijos();
 		boolean tieneHijos=!titulosHijos.isEmpty();
-
+	
 		
-		CotizadorDet cotizadorDet = detallesDeCotizador.get(String.valueOf(tituloModeloCotizador.getId()));
 		//Si tiene hijos es un titulo, si no tiene hijos es un concepto.
 		if (!tieneHijos) {
 			if(tituloModeloCotizador.getConcepto()==null){
@@ -121,6 +121,7 @@ public class TraerCotizador extends Operation {
 		 */
 		
 		if ("C".equals(tituloModeloCotizador.getTipo())) {
+			CotizadorDet cotizadorDet = detallesDeCotizador.get(String.valueOf(tituloModeloCotizador.getConcepto().getId()));
 			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
 				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
 				
@@ -128,16 +129,14 @@ public class TraerCotizador extends Operation {
 				List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
 				ProductoClasificador productoClasificador;
 				Producto producto;
-
+	
 				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
 					productoClasificador=(ProductoClasificador) persistentEntity;
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
 					tituloModeloCotizador.setProducto(producto);
 					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
-					
 					tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
-					
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
 				
@@ -145,6 +144,7 @@ public class TraerCotizador extends Operation {
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			}
 		}else{
+			//Esto es un titulo
 			tituloModeloCotizador.setIdentificadorDetalle(0);
 			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 		}

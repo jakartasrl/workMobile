@@ -14,6 +14,27 @@ import com.jkt.erp.articulos.Producto;
  */
 public class TituloModeloCotizador extends PersistentEntity {
 
+
+	/*
+	 * Variable transiente para mostar informacion
+	 */
+	private int identificadorDetalle=0;
+	
+	public int getIdentificadorDetalle() {
+		return identificadorDetalle;
+	}
+
+	public void setIdentificadorDetalle(int identificadorDetalle) {
+		this.identificadorDetalle = identificadorDetalle;
+	}
+	/*
+	 * Variable transiente para mostar informacion
+	 */
+	
+	
+	
+	
+	
 	private String codigo, descripcion;
 	private TituloModeloCotizador tituloPadre;
 	private List<TituloModeloCotizador> titulosHijos=new ArrayList<TituloModeloCotizador>();

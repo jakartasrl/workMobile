@@ -8,7 +8,7 @@
 			<generator class="native"></generator>
 		</id>
 
-		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" cascade="all" column="PRODUCTO_ID"/>
+		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" cascade="none" column="PRODUCTO_ID"/>
 
 		<property name="cantidad" column="CANTIDAD" type="integer" />
 		<property name="precioUnitario" column="PRECIO_UNITARIO" type="double"/>

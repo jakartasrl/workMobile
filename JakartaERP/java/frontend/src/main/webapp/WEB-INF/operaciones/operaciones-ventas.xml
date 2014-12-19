@@ -442,6 +442,66 @@
 
 
 	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DE ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR -->
+	<operacion name="TraerCotizacionDelItem" clase="com.jkt.operaciones.TraerCotizacionDelItem" >
+<!-- 	<operacion name="TraerCotizacionDelItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet"> -->
+
+		<output name="item" tableName="mtItem">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" /> <!-- PRESUPUESTO -->
+			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
+			<campoSalida value="des_clie_sucu" target="descClieSucu" />			
+			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
+			<campoSalida value="cod_estado" target="estadoId" />
+			<campoSalida value="des_tipo_item" target="descripcionTipoDeVenta" />
+			<campoSalida value="detalle_item" target="descripcion" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />			
+		</output>
+
+		<output name="titulos" tableName="mtDetCotiz">
+			<campoSalida value="oid_det" target="id" />
+<!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
+			<campoSalida value="codInterno" target="codigoInterno" />
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+			<campoSalida value="cod_titu_conc" target="codigoReal" />
+			<campoSalida value="des_titu_conc" target="descripcionReal" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="oid_conc" target="concepto.id" />
+		
+			<campoSalida value="cant" target="detalleDeConcepto.cantidad" />
+			<campoSalida value="importe_unit" target="detalleDeConcepto.precioUnitario" />
+		
+			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" />
+			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
+			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
+			
+<!-- 			Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="des_art" target="producto.descripcionAbrev" />
+		</output>
+		
+		<output name="cotizador" tableName="mtCabCotiz">
+		
+			<campoSalida value="oid_cotiz" target="id" />
+			
+			<campoSalida value="oid_mod" target="modelo.id" />
+			<campoSalida value="cod_mod" target="modelo.codigo" />
+			<campoSalida value="des_mod" target="modelo.descripcion" />
+
+			<campoSalida value="oid_moneda_expresada" target="monedaExpresada.id" />
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="FNVen0005"></form>
+		</forms>
+
+	</operacion>
+
+
+	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DE ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR -->
 	<operacion name="TraerItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet">
 
 		<output name="resultado" tableName="mtItem">
@@ -478,15 +538,20 @@
 		<input name="mtCabCotiz" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cotiz">
 			<campoEntrada>
 			
-			
+<!--         OID_ITEM="26" -->
+<!--         OID_MOD="1" -->
+<!--         OID_MONEDA_EXPRESADA="2" -->
+<!--         COD_ESTADO="2" -->
 			
 <!-- 				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" /> -->
 <!-- 				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" /> -->
 <!-- 				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" /> -->
 				<campoEntrada name="oid_mod" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
 				<campoEntrada name="oid_moneda_expresada" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaExpresada" />
-				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" />
+<!-- 				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" /> -->
 				
+				<!-- ES PRIMORDIAL EL ORDEN DE ESTOS DOS CAMPOS, YA QUE EL CODIGO DE ESTADO NECESITA QUE EXISTA UN ITEM ASIGNADO -->
+				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
 				<campoEntrada name="oid_item" clase="com.jkt.dominio.ComprobanteVentaDet" metodo="setItem" />
 
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
@@ -519,8 +584,8 @@
 <!-- 		</output> -->
 
 		<output name="titulos" tableName="mtDetCotiz">
-<!-- 			<campoSalida value="oid_det" target="id" /> -->
-			<campoSalida value="oid_mod" target="modeloCotizador.id" />
+			<campoSalida value="oid_det" target="identificadorDetalle" />
+<!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 			<campoSalida value="cod_titu_conc" target="codigoReal" />

@@ -17,7 +17,7 @@
 		
 		<property name="revisado" column="REVISADO" type="boolean" />
 		
-		<property name="autorizado" column="AUTORIZADO" type="boolean" />
+<!-- 		<property name="autorizado" column="AUTORIZADO" type="boolean" /> -->
 		
 		<many-to-one name="monedaExpresada" class="com.jkt.varios.dominio.Moneda" column="MONEDA_EXPRESADA_ID" cascade="none" />
 		
