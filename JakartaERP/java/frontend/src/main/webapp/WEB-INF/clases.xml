@@ -45,5 +45,6 @@
 	<elemento key="plantilla" value="com.jkt.dominio.Plantilla" />
 	<elemento key="tipoContacto" value="com.jkt.varios.dominio.TipoContacto" />
 	<elemento key="cotizador" value="com.jkt.cotizador.dominio.Cotizador" validador="com.jkt.cotizador.validadores.ValidadorCotizador" />
+	<elemento key="listaPrecios" value="com.jkt.erp.varios.ListaPrecios" />
 
 </elementos>

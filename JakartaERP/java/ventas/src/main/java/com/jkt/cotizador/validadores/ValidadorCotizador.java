@@ -11,10 +11,17 @@ public class ValidadorCotizador extends ValidacionDeNegocio {
 	public void validar(PersistentEntity entity) throws ValidacionDeNegocioException {
 		
 		Cotizador cotizador=(Cotizador) entity;
-		if (Integer.valueOf(cotizador.getCodigoEstado()).intValue()==ComprobanteVentaDet.Estado.PENDIENTE_A_COTIZAR.getId()) {
-			cotizador.getItem().setEstadoId(ComprobanteVentaDet.Estado.AUTORIZADO.getId());
-		}
 		
+		cotizador.getItem().setEstadoId(ComprobanteVentaDet.Estado.COTIZADO_NO_AUTORIZADO.getId());
+
+		
+//		if (cotizador.getId()==0) {
+//			cotizador.getItem().setEstadoId(ComprobanteVentaDet.Estado.AUTORIZADO.getId());
+//		}
+		
+//		if (Integer.valueOf(cotizador.getCodigoEstado()).intValue()==ComprobanteVentaDet.Estado.PENDIENTE_A_COTIZAR.getId()) {
+//		}
+//		
 		
 	}
 

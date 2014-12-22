@@ -518,6 +518,57 @@
 	</operacion>
 	
 	
+<!-- 	LISTA DE PRECIOS -->
+<!-- 	LISTA DE PRECIOS -->
+<!-- 	LISTA DE PRECIOS -->
+	<operacion name="TraerListaPrecios" clase="com.jkt.operaciones.TraerEntidades">
+
+		<output name="resultado" tableName="mtListaPrecio">
+			<campoSalida value="oid_lista_precio" target="id" />
+			
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="Descripcion" target="descripcion" />
+			<campoSalida value="fec_vig_has" target="baseFechaFactura" />
+			<campoSalida value="fec_vig_des" target="baseFechaRecep" />
+			
+			<campoSalida value="oid_mon" target="moneda.id" />
+			<campoSalida value="cod_mon" target="moneda.codigo" />
+			<campoSalida value="des_mon" target="moneda.descripcion" />
+			
+			<campoSalida value="Activo" target="isActivo" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+
+		<forms>
+			<form name="---">
+			</form>
+		</forms>
+
+	</operacion>
+
+	<operacion name="GuardarListaPrecios" clase="com.jkt.operaciones.GuardarLista">
+
+		<input name="mtListaPrecio" keyName="objeto" clase="com.jkt.erp.varios.ListaPrecios" fieldID="oid_lista_precio">
+			<campoEntrada>
+
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="fec_vig_has" clase="Date" metodo="setFechaVigenciaDesde" />
+				<campoEntrada name="fec_vig_des" clase="Date" metodo="setFechaVigenciaHasta" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="---"/>
+		</forms>
+
+	</operacion>
+	
+	
 
 
 </entity>

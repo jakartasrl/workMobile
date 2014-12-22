@@ -4,9 +4,22 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.jkt.erp.varios.ListaPrecios" table="LISTA_PRECIOS">
+
 		<id name="id" column="LISTA_PRECIOS_ID">
 			<generator class="native"></generator>
 		</id>
+		
+		<property name="codigo" type="string" >
+			<column name="CODIGO" length="15" />
+		</property>
+		
+		<property name="descripcion" column="DESCRIPCION" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<property name="fechaVigenciaDesde" column="FECHA_VIGENCIA_DESDE" type="date" />
+		<property name="fechaVigenciaHasta" column="FECHA_VIGENCIA_HASTA" type="date" />
+		
+		<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID"></many-to-one>
 		
 	</class>
 	

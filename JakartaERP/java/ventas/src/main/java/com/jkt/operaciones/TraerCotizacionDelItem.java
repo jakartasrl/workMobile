@@ -23,7 +23,6 @@ public class TraerCotizacionDelItem extends Operation {
 	private static final String COTIZADOR_WRITER = "cotizador";
 	private static final String ITEM_WRITER = "item";
 	private static final String KEY_OID = "oid".toUpperCase();
-//	private static final String WRITER_MODELO = "titulos";
 	private static final String WRITER_TITULO = "titulos";
 
 	private Map<String, CotizadorDet> detallesDeCotizador=new HashMap<String, CotizadorDet>();
@@ -42,13 +41,7 @@ public class TraerCotizacionDelItem extends Operation {
 	
 		completarMapaDeDetalles(cotizador);
 		
-		//Mostrar datos de cotizador.
-		
-		ModeloCotizador modelo = cotizador.getModelo();
-		
-	//	notificarObjeto(WRITER_MODELO, modelo);
-		
-		List<TituloModeloCotizador> titulos = modelo.getTitulos();
+		List<TituloModeloCotizador> titulos = cotizador.getModelo().getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
 		}
@@ -91,7 +84,6 @@ public class TraerCotizacionDelItem extends Operation {
 	
 		List<TituloModeloCotizador> titulosHijos = tituloModeloCotizador.getTitulosHijos();
 		boolean tieneHijos=!titulosHijos.isEmpty();
-	
 		
 		//Si tiene hijos es un titulo, si no tiene hijos es un concepto.
 		if (!tieneHijos) {
@@ -141,6 +133,8 @@ public class TraerCotizacionDelItem extends Operation {
 				}
 				
 			}else{
+				tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+				tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			}
 		}else{

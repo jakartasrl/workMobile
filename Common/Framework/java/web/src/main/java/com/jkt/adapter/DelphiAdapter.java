@@ -2,6 +2,9 @@ package com.jkt.adapter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -361,9 +364,10 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 	 * @param value
 	 * @param nombreClase
 	 * @return
+	 * @throws ParseException 
 	 * @throws S 
 	 */
-	private Object resolvePrimitiveType(Object value, String nombreClase) throws JakartaException{
+	private Object resolvePrimitiveType(Object value, String nombreClase) throws JakartaException, ParseException{
 		Object result=null;
 		
 		if (STRING_TYPE.equals(nombreClase)) {
@@ -379,7 +383,9 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 		}else if(CHAR_TYPE.equals(nombreClase)){
 			result=String.valueOf(value).toCharArray()[0];
 		}else if(DATE_TYPE.equals(nombreClase)){
-//			result=Date.parse((String)value);//  Double.valueOf((String)value);
+			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = sourceFormat.parse((String)value);
+			result=date;
 		}else{
 			try {
 				session = sessionProvider.getSession();
@@ -434,6 +440,8 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 			method.invoke(instance,value);
 		}catch(NoSuchMethodException e){
 			throw new JakartaException("No se puede ejecutar el metodo ".concat(campoEntrada.getMetodo()));
+		} catch (ParseException e) {
+			throw new JakartaException("Ocurrio un error al intentar transformar una entrada de texto a un tipo determinado.(Puede serla fecha)");
 		}
 	}
 	

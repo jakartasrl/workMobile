@@ -455,11 +455,12 @@
 			<campoSalida value="des_tipo_item" target="descripcionTipoDeVenta" />
 			<campoSalida value="detalle_item" target="descripcion" />
 			<campoSalida value="cod_art" target="producto.codigo" />
-			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />			
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />	
 		</output>
 
 		<output name="titulos" tableName="mtDetCotiz">
-			<campoSalida value="oid_det" target="id" />
+<!-- 			<campoSalida value="oid_det" target="id" /> -->
+			<campoSalida value="oid_det" target="identificadorDetalle" />
 <!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
@@ -537,11 +538,6 @@
 	
 		<input name="mtCabCotiz" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cotiz">
 			<campoEntrada>
-			
-<!--         OID_ITEM="26" -->
-<!--         OID_MOD="1" -->
-<!--         OID_MONEDA_EXPRESADA="2" -->
-<!--         COD_ESTADO="2" -->
 			
 <!-- 				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" /> -->
 <!-- 				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" /> -->
