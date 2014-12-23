@@ -3,7 +3,6 @@ inherited FNVen0005: TFNVen0005
   Caption = 'Cotizador'
   ClientHeight = 552
   ClientWidth = 1071
-  ExplicitLeft = -324
   ExplicitWidth = 1087
   ExplicitHeight = 590
   PixelsPerInch = 96
@@ -681,7 +680,7 @@ inherited FNVen0005: TFNVen0005
   end
   inherited Driver: TjktDriver
     DataSetCab = mtCabCotiz
-    Opciones = [opImportar, opExportar]
+    Opciones = []
     TipoPrograma = tp_abmIndividual
     Filtro = Help
     FiltrarAlInicio = False
