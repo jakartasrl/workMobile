@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.CondPago;
+import com.jkt.varios.dominio.Especificacion;
 import com.jkt.varios.dominio.Idioma;
 
 /**
@@ -21,6 +22,14 @@ import com.jkt.varios.dominio.Idioma;
 public class Cliente extends PersistentEntity implements IDescriptible{
 //	public class Cliente extends Descriptible {
 
+	private List<Especificacion> archivos=new ArrayList<Especificacion>();	
+
+	public void agregarEspecificacion(Especificacion e){
+		if (!archivos.contains(e)) {
+			archivos.add(e);
+		}
+	}
+	
 	/*
 	 * ***********************************************************************************************
 	 * Variables de instancia
@@ -29,6 +38,16 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 //	String codigo heredado de descriptible
 //	String nombreComercial es la descripcion
 	
+	public List<Especificacion> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(List<Especificacion> archivos) {
+		this.archivos = archivos;
+	}
+
+
+
 	private String codigo;
 
 	@NotNull(message="El Sujeto impositivo no debe estar vacio.")

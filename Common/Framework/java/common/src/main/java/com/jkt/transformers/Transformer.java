@@ -13,7 +13,7 @@ import com.jkt.xmlreader.PropertySolver;
 /**
  * Un transformer es una clase que se encarga de tomar la estructura desde un
  * objeto previamente parseado desde un XML, el cual contiene informacion del
- * formato de respuesta. Cada operaciÃ³n puede tener un transformer para ser
+ * formato de respuesta. Cada operación puede tener un transformer para ser
  * notificado desde la misma y escribir (o no) este resultado en la salida de la
  * peticion.
  * 
@@ -42,7 +42,7 @@ public abstract class Transformer implements Observer {
 
 	public void update(Observable arg0, Object arg1) {
 		
-		// ValidaciÃ³n para todos los transformers, la cual indica que se puede
+		// Validación para todos los transformers, la cual indica que se puede
 		// recibir notificaciones solamente desde operaciones.
 		if (!Operation.class.isAssignableFrom(arg0.getClass())) {
 			throw new RuntimeException("Los transformers solo puede aceptar notificaciones de operaciones.");

@@ -543,14 +543,18 @@
 	
 		<!-- RECUPERAR  Tipos de cambio -->
 	<operacion name="TraerTipoDeCambioEnMatriz" clase="com.jkt.varios.operaciones.TraerTiposDeCambioEnMatriz" entidad="com.jkt.varios.dominio.TipoDeCambio">
-		<output name="resultado" tableName="mtInput">
-			<campoSalida value="oid" target="id" />
-			<campoSalida value="Fecha"    	target="fecha" />
-			<campoSalida value="moneda_oid" target="moneda.id" />
-			<campoSalida value="cod_moneda" target="moneda.codigo" />
-			<campoSalida value="descr_moneda" target="moneda.descripcion" />
-			<campoSalida value="Cotizacion" target="cotizacion" />
-			<campoSalida value="Activo"    	target="isActivo" />
+		
+		<output name="columnas" tableName="mtColumns">
+			<campoSalida value="valor" target="value" />
+		</output>		
+			
+		<output name="tiposDeCambio" tableName="mtTiposDeCambio">
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="dato1" target="dato1" />
+			<campoSalida value="dato2" target="dato2" />
+			<campoSalida value="dato3" target="dato3" />
+			<campoSalida value="dato4" target="dato4" />
+			<campoSalida value="dato5" target="dato5" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
