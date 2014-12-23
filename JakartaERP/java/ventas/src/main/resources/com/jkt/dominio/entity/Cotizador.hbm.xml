@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.cotizador.dominio.Cotizador" table="ITEMS_COTIZADOS">
+		
+		<id name="id" column="COTIZADOR_ID">
+			<generator class="native"></generator>
+		</id>
+
+		<many-to-one name="item" class="com.jkt.dominio.ComprobanteVentaDet" column="ITEM_ID" cascade="none" />
+
+		<property name="usuarioCreacion" column="USUARIO_CREACION"/>
+
+		<property name="usuarioRevision" column="USUARIO_REVISION"/>
+		
+		<property name="revisado" column="REVISADO" type="boolean" />
+		
+<!-- 		<property name="autorizado" column="AUTORIZADO" type="boolean" /> -->
+		
+		<many-to-one name="monedaExpresada" class="com.jkt.varios.dominio.Moneda" column="MONEDA_EXPRESADA_ID" cascade="none" />
+		
+		<property name="fecha" column="FECHA" type="date" />
+		<property name="fechaRevision" column="FECHA_REVISION" type="date" />
+		
+		<many-to-one name="modelo" class="com.jkt.cotizador.dominio.ModeloCotizador" column="MODELO_COTIZADOR" cascade="none"></many-to-one>
+		
+		<list name="detalles" table="COTIZADOR_DET" lazy="true" cascade="all">
+			<key column="COTIZADOR_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.cotizador.dominio.CotizadorDet" />
+		</list>
+		
+	</class>
+
+</hibernate-mapping>
+	

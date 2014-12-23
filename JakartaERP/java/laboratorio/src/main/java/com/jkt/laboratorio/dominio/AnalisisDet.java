@@ -1,8 +1,9 @@
 package com.jkt.laboratorio.dominio;
 
+import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
 
-public class AnalisisDet extends PersistentEntity {
+public class AnalisisDet extends PersistentEntity implements IDetalle{
 
 	private Analisis analisis;
 	private Determinacion determinacion;
@@ -21,6 +22,10 @@ public class AnalisisDet extends PersistentEntity {
 
 	public void setDeterminacion(Determinacion determinacion) {
 		this.determinacion = determinacion;
+	}
+
+	public String getNombreDeMaestro() {
+		return "analisis";
 	}
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.dominio.Plantilla" table="PLANTILLA" >
+		
+		<id name="id" column="PLANTILLA_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="DESCRIPCION" type="text"/>
+		<property name="plantilla" column="PLANTILLA" type="text"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+	</class>
+
+</hibernate-mapping>

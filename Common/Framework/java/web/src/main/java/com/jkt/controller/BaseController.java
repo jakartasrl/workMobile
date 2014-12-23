@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.excepcion.ExceptionDS;
 import com.jkt.excepcion.ExceptionValidacion;
@@ -72,8 +74,10 @@ public abstract class BaseController{
 			xmlStreamMaker.setStream(response.getOutputStream());
 			xmlStreamMaker.writeStartTagException(error);
 		}else{
-			response.setStatus(Response.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().write(error);
+			Gson gson = new GsonBuilder().create();
+			//lo paso en formato json para que tome los \n
+			response.addHeader("error", gson.toJson(error));
+		    response.setStatus(Response.SC_INTERNAL_SERVER_ERROR);
 		}
 	}
 	

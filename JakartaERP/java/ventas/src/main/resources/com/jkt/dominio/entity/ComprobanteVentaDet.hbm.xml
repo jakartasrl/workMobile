@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.dominio.ComprobanteVentaDet" table="COMPROBANTE_VENTA_DET" >
+		
+		<id name="id" column="COMPROBANTE_VENTA_DET_ID">
+			<generator class="native" />
+		</id>
+			
+		<property name="descripcion" type="text" column="DESCRIPCION" />
+		
+		<many-to-one name="comprobanteVenta" class="com.jkt.dominio.ComprobanteVenta" cascade="none" column="COMPROBANTE_ID"/>
+		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" cascade="all" column="PRODUCTO_ID"/>
+		
+		<property name="tipoVenta" column="TIPO" type="integer" />
+
+		<property name="estadoId" column="ESTADO" type="integer" />
+
+		<property name="referencia" column="REFERENCIA" type="string" />
+
+		<property name="cantidad" column="CANTIDAD" type="integer" />
+		<property name="precio" column="PRECIO" type="double"/>
+		
+		<many-to-one name="unidadMedida" class="com.jkt.varios.dominio.UnidadMedida" column="UNIDAD_MEDIDA_ID" cascade="none"></many-to-one>		
+		<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
+		<many-to-one name="cotizador" class="com.jkt.cotizador.dominio.Cotizador" column="COTIZADOR_ID" cascade="all"></many-to-one>		
+
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+	</class>
+	
+</hibernate-mapping>

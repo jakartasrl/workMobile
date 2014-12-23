@@ -7,7 +7,6 @@ import java.util.Date;
  * Entidad persistente que hace referenca a una tabla de parametros general.
  * </p>
  * 
- * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Configuracion extends PersistentEntity {

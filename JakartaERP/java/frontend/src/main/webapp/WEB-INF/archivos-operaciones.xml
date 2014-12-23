@@ -10,12 +10,13 @@
 ]>
 
 <operaciones>
-<!-- 	<operacion ruta="/WEB-INF/operaciones/operaciones.xml"></operacion> -->
+	<operacion ruta="/WEB-INF/operaciones/operaciones.xml"></operacion>
 	<operacion ruta="/WEB-INF/operaciones/operaciones-varios.xml"></operacion>
 	<operacion ruta="/WEB-INF/operaciones/operaciones-common.xml"></operacion>
 	<operacion ruta="/WEB-INF/operaciones/operaciones-seguridad.xml"></operacion>
 	<operacion ruta="/WEB-INF/operaciones/operaciones-ventas.xml"></operacion>
 	<operacion ruta="/WEB-INF/operaciones/operaciones-laboratorio.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones/operaciones-articulos.xml"></operacion>
 	<operacion ruta="/WEB-INF/operaciones/operaciones-clientes.xml"></operacion>
 </operaciones>
 

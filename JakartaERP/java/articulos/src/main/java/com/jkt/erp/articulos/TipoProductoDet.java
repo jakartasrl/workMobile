@@ -6,6 +6,8 @@ import com.jkt.dominio.PersistentEntity;
  * El detalle de un tipo de producto.
  * El detalle del tipo de producto
  * 
+ * El detalle tiene metadata de como armar la descripcion del producto, y ademas una lista de caracteristicas.
+ * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class TipoProductoDet extends PersistentEntity {

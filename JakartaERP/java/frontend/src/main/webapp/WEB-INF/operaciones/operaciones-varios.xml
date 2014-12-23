@@ -2,12 +2,19 @@
 <!DOCTYPE entity [
 
   <!ELEMENT entity        (operacion*)>
-  <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+<!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
   
   <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
   <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
   <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
   <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+  
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
+
+  <!ELEMENT lista  (lista*)>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
 
 
   <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
@@ -33,7 +40,7 @@
   <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
   <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
   <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
-  <!ATTLIST campoEntrada fieldID        CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
  
   <!ATTLIST output name					CDATA #REQUIRED> 
   <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
@@ -66,6 +73,24 @@
 ]>
 
 <entity>
+
+
+
+	<operacion name="TraerUltimosTiposDeCambio" clase="com.jkt.varios.operaciones.TraerUltimosTiposDeCambio">
+		
+		<output name="tipoCambio" tableName="mtTiposDeCambio">
+			<campoSalida value="oid_moneda" target="moneda.id" />
+			<campoSalida value="cod_moneda" target="moneda.codigo" />
+			<campoSalida value="des_moneda" target="moneda.descripcion" />
+			<campoSalida value="cotizacion" target="cotizacion" />
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNVen0005"></form>
+		</forms>
+	</operacion>
 
 	<operacion name="FiltroValoresClasificador" clase="com.jkt.varios.operaciones.FiltroValoresClasificador">
 		<!-- 		ESTO NO VA, VER LA FORMA DE ELIMINAR Y PERMITIR TABLAS SIN DATOS, TABLAS VACIAS -->
@@ -507,6 +532,29 @@
 			<campoSalida value="descr_moneda" target="moneda.descripcion" />
 			<campoSalida value="Cotizacion" target="cotizacion" />
 			<campoSalida value="Activo"    	target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+	
+		<!-- RECUPERAR  Tipos de cambio -->
+	<operacion name="TraerTipoDeCambioEnMatriz" clase="com.jkt.varios.operaciones.TraerTiposDeCambioEnMatriz" entidad="com.jkt.varios.dominio.TipoDeCambio">
+		
+		<output name="columnas" tableName="mtColumns">
+			<campoSalida value="valor" target="value" />
+		</output>		
+			
+		<output name="tiposDeCambio" tableName="mtTiposDeCambio">
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="dato1" target="dato1" />
+			<campoSalida value="dato2" target="dato2" />
+			<campoSalida value="dato3" target="dato3" />
+			<campoSalida value="dato4" target="dato4" />
+			<campoSalida value="dato5" target="dato5" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

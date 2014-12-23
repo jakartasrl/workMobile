@@ -74,6 +74,43 @@
 
 <entity>
 	
+<!-- 	RECUPERAR LOS CONTACTOS DE UNA SUCURSAL -->
+	<operacion name="TraerContactosDeSucursal" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.ClienteSucursal">
+		
+<!-- 		Esta tabla esta vacia para no crear una nueva clase operaciones.xml. -->
+<!-- 		La tabla debe existir en delphi si o si. -->
+		
+		<output name="resultado" tableName="mtClienteSucursal">
+			<campoSalida value="oid_clie_suc" target="id" />
+		</output>
+		
+		<output name="contactos" tableName="mtContactos">
+			<campoSalida value="oid_cont_suc" target="id" />
+			<campoSalida value="tipo_cont" target="tipoContacto.nombre" />
+			<campoSalida value="ape_nom" target="apellidoYNombre" />
+			<campoSalida value="email" target="mail" />
+<!-- 			<campoSalida value="Cargo" target="tratamiento" /> -->
+<!-- 			<campoSalida value="Telefonos" target="telefono" /> -->
+<!-- 			<campoSalida value="TelefonoAlt" target="telefonoAlternativo" /> -->
+<!-- 			<campoSalida value="Celular" target="celular" /> -->
+		</output>
+
+		<listas>
+			<lista nombreLista="contactos" nombreWriter="contactos"  />
+		</listas>
+
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="FNVen0003" />
+		</forms>		
+
+	</operacion>
+	
+	
+	
+	
 	<!-- GENERA UN PEDIDO A PARTIR DE UNA COTIZACION. SE DEBERIAN REALIZAR VALIDACIONES COMO QUE LA COTIZACION CUMPLA N CODICIONES CON RESPECTO A SUS CAMPOS -->
 	<operacion name="GenerarPedidoUsandoCotizacion" clase="com.jkt.cotizador.operaciones.GenerarPedidoUsandoCotizacion">
 	
@@ -156,6 +193,10 @@
 			<campoSalida value="oid_val_cla" target="componenteValor.id" />
 			<campoSalida value="cod_val_cla" target="componenteValor.codigo" />
 			<campoSalida value="des_val_cla" target="componenteValor.descripcion" />
+			<campoSalida value="oid_mon" target="monedaPorDefecto.id" />
+			<campoSalida value="cod_mon" target="monedaPorDefecto.codigo" />
+			<campoSalida value="oid_unid_med" target="unidadDeMedidaPorDefecto.id" />
+			<campoSalida value="cod_unid_med" target="unidadDeMedidaPorDefecto.codigo" />
 		</output>		
 
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -175,6 +216,8 @@
 				<campoEntrada name="des_conc" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="pide_art" clase="Boolean" metodo="setPideArticulo" />
 				<campoEntrada name="oid_val_cla" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+				<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaPorDefecto" />
+				<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadDeMedidaPorDefecto" />
 			</campoEntrada>
 		</input>
 	
@@ -196,6 +239,10 @@
 				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
 				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
 
+				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
+				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+				<campoEntrada name="oid_cont_suc" clase="com.jkt.varios.dominio.Contacto" metodo="setContactoReferencia" />
+
 <!-- 				<campoEntrada name="oid_condicionPago" clase="com.jkt.varios.dominio.CondPago" metodo="setCondicionPago" /> -->
 				
 <!-- 				<campoEntrada name="comportamiento" clase="String" metodo="setComportamiento" /> -->
@@ -204,9 +251,9 @@
 <!-- 				<campoEntrada name="tipoComprobante" clase="com.jkt.dominio.TipoComprobante" metodo="setTipoComprobante" /> -->
 <!-- 				<campoEntrada name="letra" clase="Char" metodo="setLetra" /> -->
 
-				<campoEntrada name="respCargaClie" clase="Boolean" metodo="setCargaACargoDeCliente" />
-				<campoEntrada name="respTranspClie" clase="Boolean" metodo="setTransporteACargoDeCliente" />
-				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" />
+<!-- 				<campoEntrada name="respCargaClie" clase="Boolean" metodo="setCargaACargoDeCliente" /> -->
+<!-- 				<campoEntrada name="respTranspClie" clase="Boolean" metodo="setTransporteACargoDeCliente" /> -->
+<!-- 				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" /> -->
 
 				
 				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_item">
@@ -214,6 +261,8 @@
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
 					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
+					<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+					
 <!-- 					<campoEntrada name="oid_unidadMedida" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" /> -->
 <!-- 					<campoEntrada name="precio" clase="Double" metodo="setPrecio" /> -->
 <!-- 					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" /> -->
@@ -246,7 +295,7 @@
 			
 			<campoSalida value="oid_sucu" target="clienteSucursal.id" />
 			<campoSalida value="nro_sucu" target="clienteSucursal.numero"/>
-			<campoSalida value="des_sucu" target="clienteSucursal.descripcion" />
+			<campoSalida value="des_sucu" target="clienteSucursal.descripcionCompleta" />
 
 			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
 			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
@@ -260,14 +309,19 @@
 			<campoSalida value="cod_repre" target="representante.codigo" />
 			<campoSalida value="des_repre" target="representante.descripcion" />
 			
-			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" />
-			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" />
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
+			<campoSalida value="oid_cont_suc" target="contactoReferencia.id" />
 			
-			<campoSalida value="respTranspEmpr" target="isTransporteACargoDeEmpresa" />
-			<campoSalida value="respTranspClie" target="isTransporteACargoDeCliente" />
 			
-			<campoSalida value="respDescargaEmpr" target="isDescargaACargoDeEmpresa" />
-			<campoSalida value="respDescargaClie" target="isDescargaACargoDeCliente" />
+<!-- 			<campoSalida value="respCargaEmpr" target="isCargaACargoDeEmpresa" /> -->
+<!-- 			<campoSalida value="respCargaClie" target="isCargaACargoDeCliente" /> -->
+			
+<!-- 			<campoSalida value="respTranspEmpr" target="isTransporteACargoDeEmpresa" /> -->
+<!-- 			<campoSalida value="respTranspClie" target="isTransporteACargoDeCliente" /> -->
+			
+<!-- 			<campoSalida value="respDescargaEmpr" target="isDescargaACargoDeEmpresa" /> -->
+<!-- 			<campoSalida value="respDescargaClie" target="isDescargaACargoDeCliente" /> -->
 
 		</output>
 		
@@ -278,6 +332,8 @@
 			<campoSalida value="oid_art" target="producto.id" />
 			<campoSalida value="cod_art" target="producto.codigo" />
 			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
+
+			<campoSalida value="referencia" target="referencia" />
 
 			<campoSalida value="cant" target="cantidad" />
 			
@@ -352,14 +408,24 @@
 		<output name="items" tableName="mtInput">
 <!-- 			<campoSalida value="oid_cotiz" target="comprobanteVenta.id" /> -->
 			<campoSalida value="oid" target="id" />
-			<campoSalida value="codigo" target="estado.codigo" /> VER ESTO CON SANTI. Este 'codigo' sería el 'oid' del estado. Yo llamo a una operacion o a otra en la vista dependiendo de este valor.			
+
+<!-- 			RETORNA LOS DATOS DEL ESTADO DEL ITEM -->
+			<campoSalida value="codigo" target="estadoId" />
+			<campoSalida value="des_estado" target="descripcionEstado" /> 
+			
+<!-- 			 VER ESTO CON SANTI. Este 'codigo' sería el 'oid' del estado. Yo llamo a una operacion o a otra en la vista dependiendo de este valor.			 -->
+			
+			
 			<campoSalida value="descripcion" target="comprobanteVenta.clienteSucursal.descripcion" />
 			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" />
 			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
-			<campoSalida value="des_estado" target="estado.descripcion" /> VER ESTO CON SANTI. ¿Puede ser que el 'item' no tenga Estado pero sí la Cotizacion global???
-																		   Según tengo entendido (quizás esté mal), LOS ITEMS tienen el estado 'Pendiente de Cotizar',
-																		   'Cotizado pero No Autorizado', 'Autorizado', 'Rechazado', etc; Mientras que la Cotizacion, 
-																		   quien tiene una lista de estos items, tendrá otros estados o similares... ¿qué opinás?
+			
+<!-- 			VER ESTO CON SANTI. ¿Puede ser que el 'item' no tenga Estado pero sí la Cotizacion global??? -->
+<!-- 																		   Según tengo entendido (quizás esté mal), LOS ITEMS tienen el estado 'Pendiente de Cotizar', -->
+<!-- 																		   'Cotizado pero No Autorizado', 'Autorizado', 'Rechazado', etc; Mientras que la Cotizacion,  -->
+<!-- 																		   quien tiene una lista de estos items, tendrá otros estados o similares... ¿qué opinás? -->
+			
+			
 			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
 			<campoSalida value="nro_item" target="numero" />
 			<campoSalida value="cant" target="cantidad" />
@@ -371,6 +437,67 @@
 		<forms>
 			<form name="FNHlp0001"> </form>
 		</forms>		
+
+	</operacion>
+
+
+	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DE ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR -->
+	<operacion name="TraerCotizacionDelItem" clase="com.jkt.operaciones.TraerCotizacionDelItem" >
+<!-- 	<operacion name="TraerCotizacionDelItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet"> -->
+
+		<output name="item" tableName="mtItem">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="nro_cotiz" target="comprobanteVenta.nro" /> <!-- PRESUPUESTO -->
+			<campoSalida value="fecha" target="comprobanteVenta.fecha" />
+			<campoSalida value="des_clie_sucu" target="descClieSucu" />			
+			<campoSalida value="des_vend" target="comprobanteVenta.vendedor.descripcion" />
+			<campoSalida value="cod_estado" target="estadoId" />
+			<campoSalida value="des_tipo_item" target="descripcionTipoDeVenta" />
+			<campoSalida value="detalle_item" target="descripcion" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />	
+		</output>
+
+		<output name="titulos" tableName="mtDetCotiz">
+<!-- 			<campoSalida value="oid_det" target="id" /> -->
+			<campoSalida value="oid_det" target="identificadorDetalle" />
+<!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
+			<campoSalida value="codInterno" target="codigoInterno" />
+			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+			<campoSalida value="cod_titu_conc" target="codigoReal" />
+			<campoSalida value="des_titu_conc" target="descripcionReal" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="oid_conc" target="concepto.id" />
+		
+			<campoSalida value="cant" target="detalleDeConcepto.cantidad" />
+			<campoSalida value="importe_unit" target="detalleDeConcepto.precioUnitario" />
+		
+			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" />
+			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
+			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
+			
+<!-- 			Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="des_art" target="producto.descripcionAbrev" />
+		</output>
+		
+		<output name="cotizador" tableName="mtCabCotiz">
+		
+			<campoSalida value="oid_cotiz" target="id" />
+			
+			<campoSalida value="oid_mod" target="modelo.id" />
+			<campoSalida value="cod_mod" target="modelo.codigo" />
+			<campoSalida value="des_mod" target="modelo.descripcion" />
+
+			<campoSalida value="oid_moneda_expresada" target="monedaExpresada.id" />
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="FNVen0005"></form>
+		</forms>
 
 	</operacion>
 
@@ -390,6 +517,11 @@
 			<campoSalida value="detalle_item" target="descripcion" />
 			<campoSalida value="cod_art" target="producto.codigo" />
 			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />			
+		
+			<!-- 			RETORNA LOS DATOS DEL ESTADO DEL ITEM -->
+			<campoSalida value="cod_estado" target="estadoId" />
+<!-- 			<campoSalida value="des_estado" target="descripcionEstado" />  -->
+			
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
@@ -406,11 +538,17 @@
 	
 		<input name="mtCabCotiz" keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador" fieldID="oid_cotiz">
 			<campoEntrada>
+			
 <!-- 				<campoEntrada name="revisado" clase="Boolean" metodo="setRevisado" /> -->
 <!-- 				<campoEntrada name="usuarioRevision" clase="String" metodo="setUsuarioRevision" /> -->
 <!-- 				<campoEntrada name="fechaRevision" clase="Date" metodo="setFechaRevision" /> -->
 				<campoEntrada name="oid_mod" clase="com.jkt.cotizador.dominio.ModeloCotizador" metodo="setModelo" />
 				<campoEntrada name="oid_moneda_expresada" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaExpresada" />
+<!-- 				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" /> -->
+				
+				<!-- ES PRIMORDIAL EL ORDEN DE ESTOS DOS CAMPOS, YA QUE EL CODIGO DE ESTADO NECESITA QUE EXISTA UN ITEM ASIGNADO -->
+				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
+				<campoEntrada name="oid_item" clase="com.jkt.dominio.ComprobanteVentaDet" metodo="setItem" />
 
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
 					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
@@ -442,14 +580,21 @@
 <!-- 		</output> -->
 
 		<output name="titulos" tableName="mtDetCotiz">
-<!-- 			<campoSalida value="oid_det" target="id" /> -->
-			<campoSalida value="oid_mod" target="modeloCotizador.id" />
+			<campoSalida value="oid_det" target="identificadorDetalle" />
+<!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
 			<campoSalida value="cod_titu_conc" target="codigoReal" />
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			<campoSalida value="tipo" target="tipo" />
 			<campoSalida value="oid_conc" target="concepto.id" />
+		
+		
+		
+			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" />
+			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
+			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
+			
 			
 			<!-- Si el titulo pide articulo, se mostraran por cada titulo, que seria concepto, un producto separado por cada producto que tenga asignado el valor q se corresponde con el concepto. NO SE ENTIENDE MUCHO, EXPLICAR MEJOR... TODO -->
 			<campoSalida value="oid_art" target="producto.id" />
@@ -500,6 +645,29 @@
 		<forms>
 			<form name="---"></form>
 		</forms>
+
+	</operacion>
+	
+	
+	<!-- RECUPERA TODOS LOS DATOS NECESARIOS PARA OBTENER EL VENDEDOR Y EL REPRESENTANTE POR DEFECTO -->
+	<operacion name="TraerVendRepreCliente" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.Cliente">
+		
+		<output name="resultado" tableName="mtVendRepre">
+<!-- 			<campoSalida value="oid_cliente" target="id" /> -->
+			<campoSalida value="oid_vend" target="vendedor.id" />
+			<campoSalida value="cod_vend" target="vendedor.codigo" />
+			<campoSalida value="des_vend" target="vendedor.descripcion" />
+
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNVen0003" />
+		</forms>		
 
 	</operacion>
 	

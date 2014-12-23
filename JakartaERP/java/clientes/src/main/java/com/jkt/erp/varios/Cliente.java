@@ -10,17 +10,26 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.CondPago;
+import com.jkt.varios.dominio.Especificacion;
 import com.jkt.varios.dominio.Idioma;
 
 /**
  * <p>Representa los Clientes de la empresa</p>
- * <p>Se utilizar√° en el ingreso  pedidos, cotizaciones, facturas, etc</p>
+ * <p>Se utilizar· en el ingreso  pedidos, cotizaciones, facturas, etc</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Cliente extends PersistentEntity implements IDescriptible{
 //	public class Cliente extends Descriptible {
 
+	private List<Especificacion> archivos=new ArrayList<Especificacion>();	
+
+	public void agregarEspecificacion(Especificacion e){
+		if (!archivos.contains(e)) {
+			archivos.add(e);
+		}
+	}
+	
 	/*
 	 * ***********************************************************************************************
 	 * Variables de instancia
@@ -29,6 +38,16 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 //	String codigo heredado de descriptible
 //	String nombreComercial es la descripcion
 	
+	public List<Especificacion> getArchivos() {
+		return archivos;
+	}
+
+	public void setArchivos(List<Especificacion> archivos) {
+		this.archivos = archivos;
+	}
+
+
+
 	private String codigo;
 
 	@NotNull(message="El Sujeto impositivo no debe estar vacio.")
@@ -36,7 +55,52 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 	
 	private String telefono;
 	
-//	@NotNull(message="El idioma no debe ser nulo.")
+	private String fax, mail;
+	private String nroProveedor;
+	
+	private Representante representante;
+	private Vendedor vendedor;
+	
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getNroProveedor() {
+		return nroProveedor;
+	}
+
+	public void setNroProveedor(String nroProveedor) {
+		this.nroProveedor = nroProveedor;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	//	@NotNull(message="El idioma no debe ser nulo.")
 	private Idioma idioma;//Idioma en el que se mostraran los productos o servicios en la documentacion del cliente
 	
 	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();

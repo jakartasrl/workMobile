@@ -9,7 +9,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,7 @@ import com.jkt.request.IEventBusiness;
 import com.jkt.service.SessionProvider;
 import com.jkt.transformers.Transformer;
 import com.jkt.util.IRepositorioClases;
+import com.jkt.xmlreader.ElementTransformer;
 import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.XMLEntity;
 
@@ -132,25 +132,32 @@ public abstract class RequestProcessor extends BaseController{
 		
 
 		log.debug("Recuperando un transformer para la operaci√≥n actual...");
+		if( ((EventBusiness) eventBusinessOperation).getTransformer()==null &&  getAppRequest().equals(CLIENTE_HTML)){
+			ElementTransformer elemTrans=new ElementTransformer();
+			elemTrans.setClase("com.jkt.transformers.WebTransformer");
+			 ((EventBusiness) eventBusinessOperation).setTransformer(elemTrans);
+		}
 		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
-		log.debug("Ejecutando la operaci√≥n...");
+		log.debug("Ejecutando la operaciÛn...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
+
 		operation.runOperation(parametersAdapted);
+
 		
-		log.debug("Enviando resultados de la operaci√≥n...");
+		log.debug("Enviando resultados de la operaciÛn...");
 		transformer.write();
 		
 		}finally{
 			sessionProvider.destroySession();
 		}
-		log.debug("Finaliz√≥ la operaci√≥n...");
+		log.debug("FinalizÛ la operaciÛn...");
 	}
 
 	protected void getEventBusinessOperation(String operationName) {
-		log.debug("Ejecutando la operaci√≥n "+operationName+".");
+		log.debug("Ejecutando la operaciÛn "+operationName+".");
 		eventBusinessOperation = getOperation(operationName);
 	}
 	
@@ -197,7 +204,7 @@ public abstract class RequestProcessor extends BaseController{
 		op.setSessionProvider(sessionProvider);
 		op.setRepositorioClases(repositorioClases);
 		
-		//Seteo el eventBusiness solamente si es cliente delphi, xq all√≠ se usa informacion como por ejemplo la de las listas <listas><lista/></listas>
+		//Seteo el eventBusiness solamente si es cliente delphi, xq all· se usa informacion como por ejemplo la de las listas <listas><lista/></listas>
 		if (getAppRequest().equals(CLIENTE_DELPHI)) {
 			op.setEventBusiness(eventBusinessOperation);
 		}
@@ -211,8 +218,8 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws JakartaException Siempre que se ejecute este metodo se levanta la excepcion.
 	 */
 	private void finalizar(String aOperName) throws JakartaException {
-		log.debug("La operaci√≥n " + aOperName + " no existe en operaciones.xml .Se finaliza la petici√≥n.");
-		throw new JakartaException("La operaci√≥n " + aOperName + " no existe en operaciones.xml .Se finaliza la petici√≥n.");
+		log.debug("La operaciÛn " + aOperName + " no existe en operaciones.xml .Se finaliza la peticiÛn.");
+		throw new JakartaException("La operaciÛn " + aOperName + " no existe en operaciones.xml .Se finaliza la peticiÛn.");
 	}
 
 	/**

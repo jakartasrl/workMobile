@@ -8,7 +8,7 @@ import com.jkt.dominio.PersistentEntity;
 
 /**
  * <p>Hace referencia a un archivo adjunto.</p>
- * <p>Esta clase representa a cualquier archivo, nota, factura, comprobante o demas.</p>
+ * <p>Esta clase representa a cualquier archivo, nota, factura, comprobante, cliente y demas.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

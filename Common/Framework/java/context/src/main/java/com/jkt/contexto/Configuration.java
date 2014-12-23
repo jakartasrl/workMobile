@@ -3,7 +3,6 @@ package com.jkt.contexto;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import org.xml.sax.SAXException;
 
 import com.jkt.excepcion.JakartaException;
 import com.jkt.request.EventBusiness;
-import com.jkt.util.Entry;
 import com.jkt.xmlreader.CampoDef;
 import com.jkt.xmlreader.CampoEntrada;
 import com.jkt.xmlreader.CampoSalida;
@@ -37,7 +35,8 @@ import com.jkt.xmlreader.XMLEventos;
 import com.jkt.xmlreader.XMLObservador;
 
 /**
- * <p>Configuracion general del modulo.</p>
+ * <p>Configuracion general de toda la aplicacion.</p>
+ * <p>Inicia desde archivos xml todas las operaciones, instancia el repositorio de las clases, sus validadores, eventos, etc..</p>
  * 
  */
 @Component
@@ -45,16 +44,8 @@ import com.jkt.xmlreader.XMLObservador;
 public class Configuration {
 	
 	
-	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
+//	private static final String OPERACIONES_PATH = "/WEB-INF/operaciones/operaciones.xml";
 	
-	public XMLEventos getEventos() {
-		return eventos;
-	}
-
-	public void setEventos(XMLEventos eventos) {
-		this.eventos = eventos;
-	}
-
 	private XMLEntity operaciones  = new XMLEntity();
 	private XMLEntity operacionesHTML  = new XMLEntity();
 	private XMLEventos eventos=new XMLEventos();
@@ -65,7 +56,8 @@ public class Configuration {
 	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
 
 		String rutaOperacionesWeb="/WEB-INF/operaciones/operaciones-html.xml";
-		String rutaOperaciones="/WEB-INF/archivos-operaciones.xml";
+		
+		String rutaOperaciones="/WEB-INF/archivos-operaciones.xml"; /* Indica que archivo es el que contiene las referencias a los demas archivos con operaciones */
 		
 		List<String> rutas = new ArrayList<String>();
 		Digester digester = this.generateReaderOperation();
@@ -90,12 +82,13 @@ public class Configuration {
 		/*
 		 * Parseo las operaciones para cliente HTML
 		 */
-		InputStream inputStream = abrirRecurso(OPERACIONES_PATH);
-		this.operaciones = (XMLEntity) digester.parse(inputStream);
+//		InputStream inputStream = abrirRecurso(OPERACIONES_PATH);
+//		this.operaciones = (XMLEntity) digester.parse(inputStream);
 		
 		/*
 		 * Para cada una de las rutas indicadas, se agregan las operaciones que contienen...
 		 */
+		InputStream inputStream;
 		XMLEntity operacionesAdicionales;
 		for (String rutaActual : rutas) {
 			inputStream = abrirRecurso(rutaActual);
@@ -135,7 +128,7 @@ public class Configuration {
 		digester.addObjectCreate("entidades/entidad", XMLEvento.class.getName());
 		digester.addSetProperties("entidades/entidad");
 		digester.addSetNext("entidades/entidad", "addEvento", XMLEvento.class.getName());
-//		
+
 		digester.addObjectCreate("entidades/entidad/observador", XMLObservador.class.getName());
 		digester.addSetProperties("entidades/entidad/observador");
 		digester.addSetNext("entidades/entidad/observador", "addObservador", XMLObservador.class.getName());
@@ -154,7 +147,6 @@ public class Configuration {
 		digester.addSetNext("operaciones/operacion", "add", NombreOperacion.class.getName());
 		
 		return digester;
-
 	}
 
 	/**
@@ -186,7 +178,6 @@ public class Configuration {
 		digester.addSetProperties("entity/operacion/tables");
 		digester.addSetNext("entity/operacion/tables", "addHijo", XMLEntity.class.getName());
 		
-		
 		/*
 		 * FORMS
 		 * 
@@ -203,7 +194,6 @@ public class Configuration {
 		digester.addSetProperties("entity/operacion/forms/form");
 		digester.addSetNext("entity/operacion/forms/form", "addFormulario", Form.class.getName());
 
-		
 		
 		/*
 		 * CAMPOS LISTAS
@@ -228,7 +218,6 @@ public class Configuration {
 		 * CAMPOS LISTAS
 		 * 
 		 */
-		
 		
 		/*
 		 * Campos INPUT, para recibir la entrada.
@@ -269,8 +258,6 @@ public class Configuration {
 		digester.addSetProperties("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada");
 		digester.addSetNext("entity/operacion/input/campoEntrada/campoEntrada/campoEntrada/campoEntrada/campoEntrada", "addHijo", CampoEntrada.class.getName());
 		
-		
-		
 		//de cada un de los elementos INPUT agregados recien, busca x cada uno los tag CAMPOENTRADA y los agrega
 		digester.addObjectCreate("entity/operacion/input/campoEntrada/input/campoEntrada", CampoEntrada.class.getName());
 		digester.addSetProperties("entity/operacion/input/campoEntrada/input/campoEntrada");
@@ -281,7 +268,7 @@ public class Configuration {
 		 * Campos INPUT, para recibir la entrada.
 		 */		
 		
-//		TRANSFORMERS
+//		TRANSFORMERSd
 		digester.addObjectCreate("entity/operacion/transformer", ElementTransformer.class.getName());
 		digester.addSetProperties("entity/operacion/transformer");
 		digester.addSetNext("entity/operacion/transformer", "setTransformer", ElementTransformer.class.getName());
@@ -351,6 +338,12 @@ public class Configuration {
 		this.operacionesHTML = operacionesHTML;
 	}
 	
-	
+	public XMLEventos getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(XMLEventos eventos) {
+		this.eventos = eventos;
+	}
 	
 }

@@ -1,7 +1,38 @@
 package com.jkt.erp.varios;
 
-import com.jkt.dominio.PersistentEntity;
+import java.util.Date;
 
-public class ListaPrecios extends PersistentEntity {
+import com.jkt.dominio.Descriptible;
+import com.jkt.varios.dominio.Moneda;
+
+public class ListaPrecios extends Descriptible {
+
+	private Date fechaVigenciaDesde;
+	private Date fechaVigenciaHasta;
+	private Moneda moneda;
+
+	public Date getFechaVigenciaDesde() {
+		return fechaVigenciaDesde;
+	}
+
+	public void setFechaVigenciaDesde(Date fechaVigenciaDesde) {
+		this.fechaVigenciaDesde = fechaVigenciaDesde;
+	}
+
+	public Date getFechaVigenciaHasta() {
+		return fechaVigenciaHasta;
+	}
+
+	public void setFechaVigenciaHasta(Date fechaVigenciaHasta) {
+		this.fechaVigenciaHasta = fechaVigenciaHasta;
+	}
+
+	public Moneda getMoneda() {
+		return moneda;
+	}
+
+	public void setMoneda(Moneda moneda) {
+		this.moneda = moneda;
+	}
 
 }

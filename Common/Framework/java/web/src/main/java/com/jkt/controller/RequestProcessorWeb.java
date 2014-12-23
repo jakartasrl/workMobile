@@ -53,33 +53,38 @@ public class RequestProcessorWeb extends RequestProcessor {
 	protected Map retrieveParameters(HttpServletRequest request)throws Exception {
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 
-		String type = eventBusinessOperation.getInputOV();
-		Class<?> clazz;
-		try{
-			clazz = Class.forName(type);
-		}catch(Exception e){
-			throw new JakartaException("Error al querer recuperar la clase "+type);
-		}
-	    //aca recupero el class eventBusinessOperation.get();
-	    Gson gson = new GsonBuilder().create();
-	    String json= new String(Base64.decodeBase64( IOUtils.toByteArray(request.getInputStream())));
-	    Object ob= gson.fromJson(json,clazz);
-    	if(ContainerOV.class.isAssignableFrom(clazz)){
-    		ContainerOV container = (ContainerOV) BeanUtils.instantiate(clazz);
-    		for (String keyMap : container.keySet()) {
-				Object objectView = container.get(keyMap);
-				Method readMethod = BeanUtils.getPropertyDescriptor(objectView.getClass(), "nameOV").getReadMethod();
-				String nameOV= (String) readMethod.invoke(objectView, new Object[]{});
-				hashMap.put(nameOV, objectView);
+		if(eventBusinessOperation.getInputOV()!=null){
+			String type = eventBusinessOperation.getInputOV();
+			Class<?> clazz;
+			try{
+				clazz = Class.forName(type);
+			}catch(Exception e){
+				throw new JakartaException("Error al querer recuperar la clase "+type);
 			}
-    	}else{
-			Method readMethod = BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV").getReadMethod();
-			String keyOV= (String) readMethod.invoke(ob, new Object[]{});
-			if(keyOV != null && keyOV.length()>0)
-				hashMap.put(keyOV, ob);
-			else
-				hashMap.put("OV", ob);
-    	}
+		    //aca recupero el class eventBusinessOperation.get();
+		    Gson gson = new GsonBuilder().create();
+		    String json= new String(Base64.decodeBase64( IOUtils.toByteArray(request.getInputStream())));
+		    Object ob= gson.fromJson(json,clazz);
+	    	if(ContainerOV.class.isAssignableFrom(clazz)){
+	    		ContainerOV container = (ContainerOV) BeanUtils.instantiate(clazz);
+	    		for (String keyMap : container.keySet()) {
+					Object objectView = container.get(keyMap);
+					Method readMethod = BeanUtils.getPropertyDescriptor(objectView.getClass(), "nameOV").getReadMethod();
+					String nameOV= (String) readMethod.invoke(objectView, new Object[]{});
+					hashMap.put(nameOV, objectView);
+				}
+	    	}else{
+	    		String keyOV=null;
+	    		if( BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV")!=null){
+					Method readMethod = BeanUtils.getPropertyDescriptor(ob.getClass(), "nameOV").getReadMethod();
+					keyOV= (String) readMethod.invoke(ob, new Object[]{});
+	    		}
+				if(keyOV != null && keyOV.length()>0)
+					hashMap.put(keyOV, ob);
+				else
+					hashMap.put("OV", ob);
+	    	}
+		}
 		return hashMap;
 	}
 

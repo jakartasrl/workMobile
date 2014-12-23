@@ -9,7 +9,7 @@ import com.jkt.erp.articulos.TipoProductoDet;
 import com.jkt.operaciones.Operation;
 
 /**
- * <p>Operaciï¿½n que recupera todas las caracteristicas para dado tipo de producto</p> 
+ * <p>Operación que recupera todas las caracteristicas para dado tipo de producto</p> 
  * <p>Desde el cliente delphi, esta operaciï¿½n es ejecutada cuando se selecciona otro tipo de producto, por ahora, se esta llamando
  * desde el ABM de articulos.</p>
  * 

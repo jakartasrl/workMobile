@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.varios.dominio.Contacto" table="CONTACTO">
+		<id name="id" column="CONTACTO_ID">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="apellidoYNombre" column="APELLIDO_NOMBRE"/>
+		<property name="telefono" column="TELEFONO"/>
+		<property name="telefonoAlternativo" column="TELEFONO_ALT"/>
+		<property name="celular" column="CELULAR"/>
+		<property name="mail" column="MAIL"/>
+		<property name="tratamiento" column="TRATAMIENTO"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<many-to-one name="tipoContacto" class="com.jkt.varios.dominio.TipoContacto" column="TIPO_CONTACTO_ID" cascade="none"></many-to-one>
+
+	</class>
+	
+</hibernate-mapping>

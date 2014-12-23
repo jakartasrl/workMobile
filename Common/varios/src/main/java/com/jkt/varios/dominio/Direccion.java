@@ -31,6 +31,24 @@ public class Direccion extends PersistentEntity {
 
 	@NotNull(message="El pais no puede ser nulo.")
 	private Pais pais;
+	
+	private String fax, mail;
+	
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
 	public String getNombre() {
 		return nombre;

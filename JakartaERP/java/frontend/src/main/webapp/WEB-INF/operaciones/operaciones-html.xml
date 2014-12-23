@@ -59,7 +59,7 @@
 			</campoEntrada>
 		</input>
 		
-		<output >
+		<output>
 			<campoSalida target="idioma.id" value="idIdioma"/>
 			<campoSalida target="id" 		value="id"/>
 			<campoSalida target="codigo" 	value="codigo"/>

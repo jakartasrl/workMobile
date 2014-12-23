@@ -135,6 +135,9 @@ public class TraerCotizador extends Operation {
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
 					tituloModeloCotizador.setProducto(producto);
 					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+					
+					tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
+					
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
 				
@@ -142,6 +145,7 @@ public class TraerCotizador extends Operation {
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			}
 		}else{
+			tituloModeloCotizador.setIdentificadorDetalle(0);
 			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 		}
 		
