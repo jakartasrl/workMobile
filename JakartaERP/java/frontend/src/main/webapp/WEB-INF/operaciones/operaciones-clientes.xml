@@ -521,15 +521,15 @@
 <!-- 	LISTA DE PRECIOS -->
 <!-- 	LISTA DE PRECIOS -->
 <!-- 	LISTA DE PRECIOS -->
-	<operacion name="TraerListaPrecios" clase="com.jkt.operaciones.TraerEntidades">
+	<operacion name="TraerListaPrecios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.ListaPrecios">
 
-		<output name="resultado" tableName="mtListaPrecio">
+		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_lista_precio" target="id" />
 			
 			<campoSalida value="Codigo" target="codigo" />
 			<campoSalida value="Descripcion" target="descripcion" />
-			<campoSalida value="fec_vig_has" target="baseFechaFactura" />
-			<campoSalida value="fec_vig_des" target="baseFechaRecep" />
+			<campoSalida value="fec_vig_des" target="fechaVigenciaDesde" />
+			<campoSalida value="fec_vig_has" target="fechaVigenciaHasta" />
 			
 			<campoSalida value="oid_mon" target="moneda.id" />
 			<campoSalida value="cod_mon" target="moneda.codigo" />
@@ -549,15 +549,15 @@
 
 	<operacion name="GuardarListaPrecios" clase="com.jkt.operaciones.GuardarLista">
 
-		<input name="mtListaPrecio" keyName="objeto" clase="com.jkt.erp.varios.ListaPrecios" fieldID="oid_lista_precio">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.ListaPrecios" fieldID="oid_lista_precio">
 			<campoEntrada>
 
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
-				<campoEntrada name="fec_vig_has" clase="Date" metodo="setFechaVigenciaDesde" />
-				<campoEntrada name="fec_vig_des" clase="Date" metodo="setFechaVigenciaHasta" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="fec_vig_des" clase="Date" metodo="setFechaVigenciaDesde" />
+				<campoEntrada name="fec_vig_has" clase="Date" metodo="setFechaVigenciaHasta" />
 				<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 
 			</campoEntrada>
 		</input>

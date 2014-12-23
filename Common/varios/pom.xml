@@ -31,10 +31,5 @@
   		<artifactId>spring-boot-starter-websocket</artifactId>
   		<version>1.1.4.RELEASE</version>
   	</dependency>
-  	<dependency>
-  		<groupId>com.jkt</groupId>
-  		<artifactId>seguridad</artifactId>
-  		<version>0.0.1</version>
-  	</dependency>
   </dependencies>
 </project>

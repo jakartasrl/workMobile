@@ -417,24 +417,24 @@
 		<operacion operSave="GuardarListaPrecios" operTraer="TraerListaPrecios" />
 		
 		<campos>
-			<campo fieldName="oid_lista"   tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_lista" />
-			<campo fieldName="cod_lista"   tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="descr_lista" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="oid_lista_precio"   tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_lista" />
+			<campo fieldName="Codigo"   tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Código"  />
+			<campo fieldName="Descripcion" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripción"  />
 
-			<campo fieldName="fechaVigenciaDesde" tipo="Date" longitud="20" visible="true" readOnly="false" orden="4" label="Fecha Vigencia Desde"  />
-			<campo fieldName="fechaVigenciaHasta" tipo="Date" longitud="20" visible="true" readOnly="false" orden="5" label="Fecha Vigencia Hasta"  />
+			<campo fieldName="fec_vig_des" tipo="Date" longitud="0" visible="true" readOnly="false" orden="4" label="Vigencia Desde" columnWidth=100" />
+			<campo fieldName="fec_vig_has" tipo="Date" longitud="0" visible="true" readOnly="false" orden="5" label="Vigencia Hasta" columnWidth="100" />
 
-			<campo fieldName="oid_moneda" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="6" label="oid_moneda"  />
-			<campo fieldName="cod_moneda" tipo="String" longitud="20" visible="true" readOnly="false" orden="7" label="Codigo Moneda"  />
-			<campo fieldName="descr_moneda" tipo="String" longitud="60" visible="true" readOnly="false" orden="8" label="Descripcion Moneda"  />
+			<campo fieldName="oid_mon" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="6" label="oid_moneda"  />
+			<campo fieldName="cod_mon" tipo="String" longitud="15" visible="true" readOnly="false" orden="7" label="Cód. Moneda" tag="0" />
+			<campo fieldName="des_mon" tipo="String" longitud="40" visible="true" readOnly="true" orden="8" label="Desc. Moneda" tag="0" />
 
-			<campo fieldName="Activo"     tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="9" label="Activo" />
+			<campo fieldName="Activo"  tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="9" label="Activo" />
 		</campos>
 
 		<validadores>
-			<validador fieldName="cod_lista" 	tipoValidacion="Inexistente"	 entidad="listaPrecios" oidName="oid_lista" descrName="descr_lista" />
-			<validador fieldName="cod_moneda" 	tipoValidacion="Existente"	 	 entidad="moneda" oidName="oid_moneda" descrName="descr_moneda" />
-			<validador fieldName="descr_lista"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="Codigo" 	tipoValidacion="Inexistente"	 entidad="listaPrecios" oidName="oid_lista_precio" descrName="Descripcion" />
+			<validador fieldName="cod_mon" 	tipoValidacion="Existente"	 	 entidad="moneda" oidName="oid_mon" descrName="des_mon" />
+			<validador fieldName="Descripcion"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 	</entidad>
 
