@@ -6,6 +6,9 @@ uses
   // Helps Customizados
   jktFNHlp0001,
 
+  // Forms auxiliares. NO se registran y NO vienen en el Menú de la Aplicación
+  jktFNVen0008, // Tipos de Cambio
+
   // Programas
   jktFNSeg0001,
   jktFNSeg0002,

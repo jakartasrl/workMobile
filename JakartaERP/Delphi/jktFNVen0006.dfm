@@ -1,46 +1,46 @@
 inherited FNVen0006: TFNVen0006
   Caption = 'Ingreso de Presupuesto'
-  ClientHeight = 478
-  ClientWidth = 909
-  ExplicitWidth = 925
-  ExplicitHeight = 516
+  ClientHeight = 592
+  ClientWidth = 861
+  ExplicitWidth = 877
+  ExplicitHeight = 630
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
     ExplicitHeight = 478
-    Height = 478
+    Height = 592
   end
   inherited cxSplitterLeft: TcxSplitter
-    Height = 478
+    Height = 592
     ExplicitHeight = 478
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 879
-    ExplicitLeft = 734
+    Left = 831
+    ExplicitLeft = 879
     ExplicitHeight = 478
-    Height = 478
+    Height = 592
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 875
-    Height = 478
-    ExplicitLeft = 730
+    Left = 827
+    Height = 592
+    ExplicitLeft = 875
     ExplicitHeight = 478
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 696
+    ExplicitWidth = 841
     ExplicitHeight = 478
-    Height = 478
-    Width = 841
+    Height = 592
+    Width = 793
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
-      Width = 837
-      Height = 474
+      Width = 789
+      Height = 588
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 789
-      ExplicitHeight = 588
+      ExplicitWidth = 837
+      ExplicitHeight = 474
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 120
         Top = 41
@@ -62,31 +62,13 @@ inherited FNVen0006: TFNVen0006
         Width = 92
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 467
+        Left = 444
         Top = 107
         DataBinding.DataField = 'razonSocial'
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 6
         Width = 283
-      end
-      object cxDBTextEdit7: TcxDBTextEdit
-        Left = 177
-        Top = 241
-        DataBinding.DataField = 'des_vend'
-        Properties.ReadOnly = True
-        Style.HotTrack = False
-        TabOrder = 9
-        Width = 180
-      end
-      object cxDBTextEdit8: TcxDBTextEdit
-        Left = 533
-        Top = 241
-        DataBinding.DataField = 'des_repre'
-        Properties.ReadOnly = True
-        Style.HotTrack = False
-        TabOrder = 11
-        Width = 180
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
         Left = 120
@@ -101,71 +83,6 @@ inherited FNVen0006: TFNVen0006
         TabOrder = 4
         Width = 99
       end
-      object cxDBButtonEdit2: TcxDBButtonEdit
-        Left = 91
-        Top = 241
-        DataBinding.DataField = 'cod_vend'
-        Properties.Buttons = <
-          item
-            Default = True
-            Kind = bkEllipsis
-          end>
-        Style.HotTrack = False
-        TabOrder = 8
-        Width = 80
-      end
-      object jktExpDBGrid5: TjktExpDBGrid
-        Left = 10000
-        Top = 10000
-        Width = 717
-        Height = 365
-        TabOrder = 13
-        Visible = False
-        object jktExpDBGrid5DBTableView1: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsBehavior.DragHighlighting = False
-          OptionsBehavior.FocusCellOnTab = True
-          OptionsBehavior.FocusCellOnCycle = True
-          OptionsView.GroupByBox = False
-          object jktExpDBGrid5DBTableView1FechaSubida: TcxGridDBColumn
-            Caption = 'Fecha de subida'
-            DataBinding.FieldName = 'fecha_subida'
-            Options.Editing = False
-            Width = 115
-          end
-          object jktExpDBGrid5DBTableView1Usuario: TcxGridDBColumn
-            Caption = 'Usuario'
-            DataBinding.FieldName = 'usuario'
-            Options.Editing = False
-          end
-          object jktExpDBGrid5DBTableView1Comentario: TcxGridDBColumn
-            Caption = 'Comentario'
-            DataBinding.FieldName = 'comentario'
-            Width = 237
-          end
-          object jktExpDBGrid5DBTableView1Archivo: TcxGridDBColumn
-            Caption = 'Archivo'
-            DataBinding.FieldName = 'archivo'
-            PropertiesClassName = 'TcxButtonEditProperties'
-            Properties.Buttons = <
-              item
-                Default = True
-                Kind = bkEllipsis
-              end
-              item
-                Hint = 'Abrir archivo...'
-              end>
-            Properties.ReadOnly = True
-            Width = 389
-          end
-        end
-        object jktExpDBGrid5Level1: TcxGridLevel
-          GridView = jktExpDBGrid5DBTableView1
-        end
-      end
       object cxDBButtonEdit3: TcxDBButtonEdit
         Left = 225
         Top = 107
@@ -179,27 +96,13 @@ inherited FNVen0006: TFNVen0006
         TabOrder = 5
         Width = 141
       end
-      object cxDBButtonEdit4: TcxDBButtonEdit
-        Left = 447
-        Top = 241
-        DataBinding.DataField = 'cod_repre'
-        Properties.Buttons = <
-          item
-            Default = True
-            Kind = bkEllipsis
-          end>
-        Style.HotTrack = False
-        TabOrder = 10
-        Width = 80
-      end
       object cxGridItems: TcxGrid
-        Left = 10000
-        Top = 10000
+        Left = 23
+        Top = 210
         Width = 737
         Height = 406
         BorderStyle = cxcbsNone
-        TabOrder = 12
-        Visible = False
+        TabOrder = 8
         object DBLayoutView: TcxGridDBLayoutView
           Navigator.Buttons.CustomButtons = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -431,6 +334,57 @@ inherited FNVen0006: TFNVen0006
         TabOrder = 7
         Width = 246
       end
+      object jktExpDBGrid1: TjktExpDBGrid
+        Left = 10000
+        Top = 10000
+        Width = 250
+        Height = 200
+        TabOrder = 9
+        Visible = False
+        object jktExpDBGrid1DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+        end
+        object jktExpDBGrid1Level1: TcxGridLevel
+          GridView = jktExpDBGrid1DBTableView1
+        end
+      end
+      object jktExpDBGrid2: TjktExpDBGrid
+        Left = 10000
+        Top = 10000
+        Width = 250
+        Height = 200
+        TabOrder = 10
+        Visible = False
+        object jktExpDBGrid2DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+        end
+        object jktExpDBGrid2Level1: TcxGridLevel
+          GridView = jktExpDBGrid2DBTableView1
+        end
+      end
+      object jktExpDBGrid3: TjktExpDBGrid
+        Left = 10000
+        Top = 10000
+        Width = 546
+        Height = 309
+        TabOrder = 11
+        Visible = False
+        object jktExpDBGrid3DBTableView1: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+        end
+        object jktExpDBGrid3Level1: TcxGridLevel
+          GridView = jktExpDBGrid3DBTableView1
+        end
+      end
       object dxLayoutGroup4: TdxLayoutGroup
         AlignHorz = ahClient
         AlignVert = avClient
@@ -440,7 +394,7 @@ inherited FNVen0006: TFNVen0006
         ShowBorder = False
         Index = -1
       end
-      object dxLayoutGroup5: TdxLayoutGroup
+      object lcMainGroup6: TdxLayoutGroup
         CaptionOptions.Text = 'Identificaci'#243'n'
         Parent = dxLayoutGroup4
         ButtonOptions.Buttons = <>
@@ -453,13 +407,6 @@ inherited FNVen0006: TFNVen0006
         Parent = lcMainGroup2
         Control = cxDBTextEdit2
         ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object lcMainGroup4: TdxLayoutGroup
-        AlignHorz = ahClient
-        CaptionOptions.Text = 'General'
-        Parent = lcMainGroup3
-        ButtonOptions.Buttons = <>
         Index = 0
       end
       object lcMainGroup3: TdxLayoutGroup
@@ -480,36 +427,11 @@ inherited FNVen0006: TFNVen0006
       end
       object lcMainItem7: TdxLayoutItem
         AlignHorz = ahLeft
-        CaptionOptions.Text = 'Nombre Comercial:'
+        CaptionOptions.Text = 'Raz'#243'n Social :'
         Parent = lcMainGroup9
         Control = cxDBTextEdit6
         ControlOptions.ShowBorder = False
         Index = 2
-      end
-      object lcMainItem8: TdxLayoutItem
-        AlignHorz = ahLeft
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup11
-        Control = cxDBTextEdit7
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object lcMainItem9: TdxLayoutItem
-        AlignHorz = ahLeft
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup11
-        Control = cxDBTextEdit8
-        ControlOptions.ShowBorder = False
-        Index = 3
-      end
-      object lcMainGroup11: TdxLayoutGroup
-        CaptionOptions.Text = 'Datos Comerciales'
-        Parent = lcMainGroup4
-        ButtonOptions.Buttons = <>
-        ButtonOptions.ShowExpandButton = True
-        ItemIndex = 3
-        LayoutDirection = ldHorizontal
-        Index = 0
       end
       object lcMainItem12: TdxLayoutItem
         CaptionOptions.Text = 'Cliente | Sucursal :'
@@ -522,11 +444,11 @@ inherited FNVen0006: TFNVen0006
         CaptionOptions.Text = #205'tems'
         Parent = lcMainGroup3
         ButtonOptions.Buttons = <>
-        Index = 1
+        Index = 0
       end
       object lcMainGroup2: TdxLayoutGroup
         CaptionOptions.Text = 'Datos del Pedido'
-        Parent = dxLayoutGroup5
+        Parent = lcMainGroup6
         ButtonOptions.Buttons = <>
         LayoutDirection = ldHorizontal
         ShowBorder = False
@@ -534,7 +456,7 @@ inherited FNVen0006: TFNVen0006
       end
       object lcMainGroup9: TdxLayoutGroup
         CaptionOptions.Text = 'Datos del Cliente'
-        Parent = dxLayoutGroup5
+        Parent = lcMainGroup6
         ButtonOptions.Buttons = <>
         LayoutDirection = ldHorizontal
         ShowBorder = False
@@ -542,32 +464,11 @@ inherited FNVen0006: TFNVen0006
       end
       object dxLayoutSeparatorItem2: TdxLayoutSeparatorItem
         CaptionOptions.Text = 'Separator'
-        Parent = dxLayoutGroup5
+        Parent = lcMainGroup6
         SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
         SizeOptions.SizableHorz = False
         SizeOptions.SizableVert = False
         Index = 2
-      end
-      object dxLayoutItem2: TdxLayoutItem
-        CaptionOptions.Text = 'Vendedor :'
-        Parent = lcMainGroup11
-        Control = cxDBButtonEdit2
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object lcMainGroup16: TdxLayoutGroup
-        CaptionOptions.Text = 'Archivos asociados y Notas'
-        Parent = lcMainGroup3
-        ButtonOptions.Buttons = <>
-        Index = 2
-      end
-      object lcMainItem20: TdxLayoutItem
-        CaptionOptions.Text = 'jktExpDBGrid5'
-        CaptionOptions.Visible = False
-        Parent = lcMainGroup16
-        Control = jktExpDBGrid5
-        ControlOptions.ShowBorder = False
-        Index = 0
       end
       object lcMainItem3: TdxLayoutItem
         CaptionOptions.Visible = False
@@ -575,13 +476,6 @@ inherited FNVen0006: TFNVen0006
         Control = cxDBButtonEdit3
         ControlOptions.ShowBorder = False
         Index = 1
-      end
-      object lcMainItem4: TdxLayoutItem
-        CaptionOptions.Text = 'Representante :'
-        Parent = lcMainGroup11
-        Control = cxDBButtonEdit4
-        ControlOptions.ShowBorder = False
-        Index = 2
       end
       object lcMainItem5: TdxLayoutItem
         CaptionOptions.Text = 'New Item'
@@ -600,7 +494,7 @@ inherited FNVen0006: TFNVen0006
       end
       object lcMainItem10: TdxLayoutItem
         CaptionOptions.Text = 'Referencia :'
-        Parent = dxLayoutGroup5
+        Parent = lcMainGroup6
         Control = cxDBTextEdit1
         ControlOptions.AlignHorz = ahLeft
         ControlOptions.ShowBorder = False
@@ -608,11 +502,52 @@ inherited FNVen0006: TFNVen0006
       end
       object lcMainItem11: TdxLayoutItem
         CaptionOptions.Text = 'Contacto Refer.:'
-        Parent = dxLayoutGroup5
+        Parent = lcMainGroup6
         Control = cxDBLookupComboBox1
         ControlOptions.AlignHorz = ahLeft
         ControlOptions.ShowBorder = False
         Index = 4
+      end
+      object lcMainGroup1: TdxLayoutGroup
+        CaptionOptions.Text = 'Laboratorio Qu'#237'mico'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 1
+      end
+      object lcMainGroup4: TdxLayoutGroup
+        CaptionOptions.Text = 'Laboratorio El'#233'ctrico'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 2
+      end
+      object lcMainGroup5: TdxLayoutGroup
+        CaptionOptions.Text = 'Materiales'
+        Parent = lcMainGroup3
+        ButtonOptions.Buttons = <>
+        Index = 3
+      end
+      object lcMainItem1: TdxLayoutItem
+        CaptionOptions.Text = 'Determinaciones :'
+        CaptionOptions.Layout = clTop
+        Parent = lcMainGroup1
+        Control = jktExpDBGrid1
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem4: TdxLayoutItem
+        CaptionOptions.Text = 'Determinaciones :'
+        CaptionOptions.Layout = clTop
+        Parent = lcMainGroup4
+        Control = jktExpDBGrid2
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object lcMainItem8: TdxLayoutItem
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup5
+        Control = jktExpDBGrid3
+        ControlOptions.ShowBorder = False
+        Index = 0
       end
     end
   end

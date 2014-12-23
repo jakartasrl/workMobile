@@ -25,9 +25,9 @@ uses
   cxMaskEdit, cxButtonEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxTL,
-  cxTLdxBarBuiltInMenu, cxInplaceContainer, cxDBTL, cxTLData, cxCheckBox,
-  dxLayoutControlAdapters, Vcl.StdCtrls, cxRadioGroup;
+  cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxTL, cxDBTL,
+  cxTLdxBarBuiltInMenu, cxInplaceContainer, dxLayoutControlAdapters, Vcl.Menus,
+  Vcl.StdCtrls, cxButtons, cxCheckBox, cxTLData, cxRadioGroup, jktFNVen0008;
 
 type
   TFNVen0005 = class(TfrmChild)
@@ -74,10 +74,6 @@ type
     cxDBLookupComboBox1: TcxDBLookupComboBox;
     lcMainItem11: TdxLayoutItem;
     lcMainGroup6: TdxLayoutGroup;
-    jktExpDBGrid1DBTableView1: TcxGridDBTableView;
-    jktExpDBGrid1Level1: TcxGridLevel;
-    jktExpDBGrid1: TjktExpDBGrid;
-    lcMainItem12: TdxLayoutItem;
     mtTiposDeCambio: TjktMemTable;
     dsTiposDeCambio: TDataSource;
     mtTiposDeCambiooid_moneda: TIntegerField;
@@ -137,10 +133,6 @@ type
     cxStyleRepository: TcxStyleRepository;
     cxStyleDisabled: TcxStyle;
     lcMainGroup7: TdxLayoutGroup;
-    jktExpDBGrid1DBTableView1oid_moneda: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1cod_moneda: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1des_moneda: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1cotizacion: TcxGridDBColumn;
     mtItemnro_cotiz: TStringField;
     lcMainGroup8: TdxLayoutGroup;
     lcMainGroup9: TdxLayoutGroup;
@@ -171,6 +163,8 @@ type
     lcMainItem15: TdxLayoutItem;
     lcMainGroup10: TdxLayoutGroup;
     lcMainSeparatorItem1: TdxLayoutSeparatorItem;
+    cxButton1: TcxButton;
+    lcMainItem16: TdxLayoutItem;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -195,7 +189,11 @@ type
     procedure opTraerParametroAfterEjecutar(Sender: TObject);
     procedure cxCheckBox1Click(Sender: TObject);
     procedure cxCheckBox2Click(Sender: TObject);
+    procedure cxDBTreeList1importe_total_2GetDisplayText(
+      Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
+    FFormTiposCambio: TFNVen0008;
     oid_MonedaPorDefecto: Integer;
 
   public
@@ -275,6 +273,15 @@ begin
     Value := '';
 end;
 
+procedure TFNVen0005.cxDBTreeList1importe_total_2GetDisplayText(
+  Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
+begin
+  inherited;
+
+  if (ANode.Texts[cxDBTreeList1tipo.Position.ColIndex] <> 'C') then
+    Value := '';
+end;
+
 procedure TFNVen0005.cxDBTreeList1importe_total_2TcxTreeListColumnSummaryFooterSummaryItems0GetText(
   Sender: TcxTreeListSummaryItem; const AValue: Variant; var AText: string);
 begin
@@ -293,9 +300,19 @@ begin
     AStyle := cxStyleDisabled;
 end;
 
+procedure TFNVen0005.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+
+  FFormTiposCambio.Free;
+end;
+
 procedure TFNVen0005.FormCreate(Sender: TObject);
 begin
   inherited;
+
+  FFormTiposCambio := TFNVen0008.Create(Self);
+  FFormTiposCambio.Parent := Self;
 
   // El ancho debe ser el total de la pantalla
   cxGroupBoxLeft.Width  := 0;
@@ -384,7 +401,8 @@ begin
       opTraerTiposDeCambio.execute;
 
       lcMainGroup2.Enabled := True;
-      lcMainGroup3.Enabled := True;
+      lcMainGroup10.Enabled := True;
+      cxDBTreeList1.OptionsData.Editing := True;
 
       cxCheckBox1.Caption := 'AUTORIZAR';
       cxCheckBox2.Caption := 'RECHAZAR';
@@ -397,10 +415,13 @@ begin
       // Si el item es "Autorizado" se debe deshabilitar el botón 'Guardar'!
 
       lcMainGroup2.Enabled := False;
-      lcMainGroup3.Enabled := False;
+      lcMainGroup10.Enabled := False;
+      cxDBTreeList1.OptionsData.Editing := False;
 
       cxCheckBox1.Caption := 'AUTORIZADO';
       cxCheckBox2.Caption := 'RECHAZADO';
+
+      Driver.Opciones := Driver.Opciones - [opGuardar];
 
       if (mtItem.FieldByName('cod_estado').AsString = '3') then
         begin

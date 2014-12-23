@@ -3,7 +3,7 @@ inherited FNVen0005: TFNVen0005
   Caption = 'Cotizador'
   ClientHeight = 552
   ClientWidth = 1071
-  ExplicitLeft = -318
+  ExplicitLeft = -324
   ExplicitWidth = 1087
   ExplicitHeight = 590
   PixelsPerInch = 96
@@ -42,7 +42,7 @@ inherited FNVen0005: TFNVen0005
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = -136
+        Left = -128
         Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
@@ -52,7 +52,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 4
+        Left = 12
         Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
@@ -62,7 +62,7 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = -136
+        Left = -128
         Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
@@ -72,7 +72,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = -136
+        Left = -128
         Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
@@ -82,7 +82,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 190
+        Left = 198
         Top = 166
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
@@ -92,7 +92,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 289
+        Left = 297
         Top = 166
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
@@ -102,7 +102,7 @@ inherited FNVen0005: TFNVen0005
         Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 190
+        Left = 198
         Top = 72
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
@@ -114,7 +114,7 @@ inherited FNVen0005: TFNVen0005
         AnchorY = 81
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 190
+        Left = 198
         Top = 95
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
@@ -126,7 +126,7 @@ inherited FNVen0005: TFNVen0005
         Width = 307
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 634
+        Left = 642
         Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -141,7 +141,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 735
+        Left = 743
         Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -150,7 +150,7 @@ inherited FNVen0005: TFNVen0005
         Width = 226
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 634
+        Left = 642
         Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
@@ -174,54 +174,11 @@ inherited FNVen0005: TFNVen0005
         TabOrder = 10
         Width = 95
       end
-      object jktExpDBGrid1: TjktExpDBGrid
-        Left = 634
-        Top = 126
-        Width = 335
-        Height = 75
-        BorderStyle = cxcbsNone
-        TabOrder = 11
-        DataSource = dsTiposDeCambio
-        object jktExpDBGrid1DBTableView1: TcxGridDBTableView
-          Navigator.Buttons.CustomButtons = <>
-          DataController.DataSource = dsTiposDeCambio
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsData.Deleting = False
-          OptionsData.Inserting = False
-          OptionsView.ExpandButtonsForEmptyDetails = False
-          OptionsView.GroupByBox = False
-          object jktExpDBGrid1DBTableView1oid_moneda: TcxGridDBColumn
-            DataBinding.FieldName = 'oid_moneda'
-            Visible = False
-          end
-          object jktExpDBGrid1DBTableView1cod_moneda: TcxGridDBColumn
-            Caption = 'C'#243'digo'
-            DataBinding.FieldName = 'cod_moneda'
-            Options.Editing = False
-            Width = 70
-          end
-          object jktExpDBGrid1DBTableView1des_moneda: TcxGridDBColumn
-            Caption = 'Moneda'
-            DataBinding.FieldName = 'des_moneda'
-            Options.Editing = False
-            Width = 180
-          end
-          object jktExpDBGrid1DBTableView1cotizacion: TcxGridDBColumn
-            Caption = 'Cotizaci'#243'n'
-            DataBinding.FieldName = 'cotizacion'
-          end
-        end
-        object jktExpDBGrid1Level1: TcxGridLevel
-          GridView = jktExpDBGrid1DBTableView1
-        end
-      end
       object cxDBTreeList1: TcxDBTreeList
-        Left = -242
-        Top = 274
+        Left = -234
+        Top = 260
         Width = 795
-        Height = 218
+        Height = 234
         BorderStyle = cxcbsNone
         Align = alClient
         Bands = <
@@ -446,11 +403,12 @@ inherited FNVen0005: TFNVen0005
               AlignHorzAssigned = True
             end>
           Summary.GroupFooterSummaryItems = <>
+          OnGetDisplayText = cxDBTreeList1importe_total_2GetDisplayText
         end
       end
       object cxCheckBox1: TcxCheckBox
-        Left = 571
-        Top = 274
+        Left = 579
+        Top = 260
         Caption = 'AUTORIZAR'
         Style.HotTrack = False
         TabOrder = 13
@@ -459,14 +417,22 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxCheckBox2: TcxCheckBox
-        Left = 571
-        Top = 299
+        Left = 579
+        Top = 285
         Caption = 'RECHAZAR'
         Style.HotTrack = False
         TabOrder = 14
         Transparent = True
         OnClick = cxCheckBox2Click
         Width = 121
+      end
+      object cxButton1: TcxButton
+        Left = 531
+        Top = 126
+        Width = 150
+        Height = 25
+        Caption = 'Tipos de cambio...'
+        TabOrder = 11
       end
       object lcMainGroup_Root: TdxLayoutGroup
         AlignHorz = ahParentManaged
@@ -618,15 +584,6 @@ inherited FNVen0005: TFNVen0005
         ShowBorder = False
         Index = 0
       end
-      object lcMainItem12: TdxLayoutItem
-        CaptionOptions.AlignVert = tavTop
-        CaptionOptions.Text = 'Tipos de cambio :'
-        Parent = lcMainGroup2
-        Control = jktExpDBGrid1
-        ControlOptions.AlignHorz = ahLeft
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
       object lcMainItem13: TdxLayoutItem
         AlignVert = avClient
         CaptionOptions.Visible = False
@@ -702,6 +659,15 @@ inherited FNVen0005: TFNVen0005
         SizeOptions.SizableVert = False
         Index = 1
       end
+      object lcMainItem16: TdxLayoutItem
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Parent = lcMainGroup2
+        Control = cxButton1
+        ControlOptions.AlignHorz = ahLeft
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
     end
   end
   inherited BarManager: TdxBarManager
@@ -715,7 +681,7 @@ inherited FNVen0005: TFNVen0005
   end
   inherited Driver: TjktDriver
     DataSetCab = mtCabCotiz
-    Opciones = []
+    Opciones = [opImportar, opExportar]
     TipoPrograma = tp_abmIndividual
     Filtro = Help
     FiltrarAlInicio = False

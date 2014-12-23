@@ -11,7 +11,7 @@ uses
   jktCNMet0010, jktMisc0001, jktCNMet0012, jktCNMet0030, jktCNMet0014;
 
 type
-  TjktOpcion = (opNuevo, opImprimir, opImportar, opExportar);
+  TjktOpcion = (opNuevo, opGuardar, opImprimir, opImportar, opExportar);
                 // Tras agregar property TipoPrograma, ahora se habilitan o
                 // deshabilitan ciertos botones de la Ribbon según el TipoPrograma
                 // seleccionado.
@@ -90,6 +90,7 @@ type
     procedure cerrarDataSets;
     procedure postDataSets;
     procedure DoImprimir;
+    procedure SetOpciones(Value: TjktOpciones);
     function  verModificados: Boolean;
     procedure TratarMensajeException(excep : Exception);
     procedure enabledAction(actionName :string;  enabled :boolean);
@@ -143,7 +144,7 @@ type
     property ActionList            : TActionList read FActionList write FActionList;
     property ConfirmarCancelacion  : Boolean read FConfirmarCancelacion write FConfirmarCancelacion;
 
-    property Opciones              : TjktOpciones     read FOpciones     write FOpciones default [opNuevo];
+    property Opciones              : TjktOpciones     read FOpciones     write SetOpciones default [opNuevo];
     property TipoPrograma          : TjktTipoPrograma read FTipoPrograma write FTipoPrograma;
     property Filtro                : TjktHelpGenerico read FFiltro       write FFiltro;
     property FiltrarAlInicio       : Boolean read FFiltrarAlInicio write FFiltrarAlInicio;
@@ -408,6 +409,15 @@ begin
   end;
 end;
 
+procedure TjktDriver.SetOpciones(Value: TjktOpciones);
+begin
+  FOpciones := Value;
+
+  if (opGuardar in FOpciones) then
+    enabledAction('acSave', True)
+  else
+    enabledAction('acSave', False)
+end;
 
 function TjktDriver.verModificados :boolean;
 begin
@@ -491,7 +501,7 @@ begin
     begin
       DoBotonesOpenReha;
       DoLineaMensaje('Rehabilitar');
-    end
+    end;
 end;
 
 procedure TjktDriver.AnalizarDataSet;
