@@ -671,4 +671,45 @@
 
 	</operacion>
 	
+	
+<!-- 	OPERACION RECUPERAR LISTA DE PRECIOS -->
+<!-- 	OPERACION RECUPERAR LISTA DE PRECIOS -->
+<!-- 	OPERACION RECUPERAR LISTA DE PRECIOS -->
+
+	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
+	<operacion name="RecuperarDetallesDeListaDePrecio" clase="com.jkt.cotizador.operaciones.RecuperarDetallesDeListaDePrecio">
+
+		<output name="productos" tableName="mtProductos">
+			<campoSalida value="oid_detalle" target="id" />
+			<campoSalida value="oid_pro" target="producto.id" />
+			<campoSalida value="cod_pro" target="producto.codigo" />
+			<campoSalida value="des_pro" target="producto.descripcion" />
+			<campoSalida value="precio" target="precio" />
+		</output>
+		
+		<output name="determinacionesQuimicas" tableName="mtDetQui">
+			<campoSalida value="oid_detalle" target="id" />
+			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
+			<campoSalida value="precio" target="precio" />
+		</output>
+		
+		<output name="determinacionesElectricas" tableName="mtDetEle">
+			<campoSalida value="oid_detalle" target="id" />
+			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
+			<campoSalida value="precio" target="precio" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+
+		<forms>
+			<form name="---">
+			</form>
+		</forms>
+
+	</operacion>
+	
 </entity>

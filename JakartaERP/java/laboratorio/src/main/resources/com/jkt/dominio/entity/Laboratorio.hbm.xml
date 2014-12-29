@@ -15,6 +15,12 @@
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
+		<list name="determinaciones" table="DETERMINACIONES" cascade="all">
+			<key column="ID_LABORATORIO" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.laboratorio.dominio.Determinacion" />
+		</list>
+		
 	</class>
 	
 </hibernate-mapping>
