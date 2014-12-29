@@ -26,6 +26,7 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 	
 	private static final String MENSAJE_ERROR = "Existe una inconsistencia en el detalle de lista de precio. Compruebe que el detalle esta relacionado a un laboratorio quimico, laboratorio electrico o a un producto.";
 	
+	private static final String WRITER_LISTA = "lista";
 	private static final String WRITER_PRODUCTOS = "productos";
 	private static final String WRITER_DETERMINACIONES_ELECTRICAS = "determinacionesElectricas";
 	private static final String WRITER_DETERMINACIONES_QUIMICAS = "determinacionesQuimicas";
@@ -47,14 +48,21 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 		
 		validarEntrada(aParams.get(IDENTIFICADOR));
 		
+		//Recupero los identificadores de las instancias de los labo quimico y electrico
 		Configuracion configuracionLaboratorioElectrico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_ELECTRICO);
 		Configuracion configuracionLaboratorioQuimico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_QUIMICO);
 		
+		//Compruebo la consistencia de los datos parametrizados recuperando los laboratorios correspondientes
 		laboratorioElectrico=(Laboratorio) obtener(Laboratorio.class, Long.valueOf(configuracionLaboratorioElectrico.getValorNumero()));
 		laboratorioQuimico=(Laboratorio) obtener(Laboratorio.class, Long.valueOf(configuracionLaboratorioQuimico.getValorNumero()));
 		
+		//Recupero la lista de precio a mostrar detalles
 		ListaPrecios lista = (ListaPrecios) obtener(ListaPrecios.class,(String) aParams.get(IDENTIFICADOR));
+		notificarObjeto(WRITER_LISTA, lista);
 
+		/*
+		 * Dependiendo del tipo de contenido del detalle se muestra en dada salida
+		 */
 		List<ListaPrecioDetalle> detalles = lista.getDetalles();
 		String writer;
 		for (ListaPrecioDetalle detalle : detalles) {
@@ -73,6 +81,9 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 			notificarObjeto(writer, detalle);
 		}
 		
+		/*
+		 * Luego se muestran los nuevos productos los cuales aun no se les asigno un precio
+		 */
 		mostrarProductosSinPrecio();
 		
 		mostrarDeterminacionesElectricasSinPrecio();

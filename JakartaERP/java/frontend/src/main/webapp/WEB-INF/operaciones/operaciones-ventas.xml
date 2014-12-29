@@ -677,7 +677,20 @@
 <!-- 	OPERACION RECUPERAR LISTA DE PRECIOS -->
 
 	<!-- TRAER UN MODELO DE COTIZADOR, SUS TITULOS Y CONCEPTOS DE PRESUPUESTO -->
-	<operacion name="RecuperarDetallesDeListaDePrecio" clase="com.jkt.cotizador.operaciones.RecuperarDetallesDeListaDePrecio">
+	<operacion name="TraerDetallesDeListaDePrecio" clase="com.jkt.cotizador.operaciones.RecuperarDetallesDeListaDePrecio">
+
+		<output name="lista" tableName="mtListaPrecio">
+			<campoSalida value="oid_lista" target="id" />
+			<campoSalida value="cod_lis" target="codigo" />
+			<campoSalida value="des_lis" target="descripcion" />
+			
+<!-- 			<campoSalida value="oid_mon" target="moneda.id" /> -->
+<!-- 			<campoSalida value="cod_mon" target="moneda.codigo" /> -->
+			<campoSalida value="des_mon" target="moneda.descripcion" />
+
+			<campoSalida value="fec_vig_des" target="fechaVigenciaDesde" />
+			<campoSalida value="fec_vig_has" target="fechaVigenciaHasta" />
+		</output>
 
 		<output name="productos" tableName="mtProductos">
 			<campoSalida value="oid_detalle" target="id" />
@@ -706,8 +719,39 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
 		<forms>
-			<form name="---">
-			</form>
+			<form name="---"></form>
+		</forms>
+
+	</operacion>
+	
+		<operacion name="GuardarDetallesListaPrecio" clase="com.jkt.operaciones.Guardar">
+	
+		<input name="mtInput" keyName="objeto" clase="com.jkt.dominio.ListaPrecios" fieldID="oid_lista">
+			<campoEntrada>
+
+<!-- 				oid_item -> Este campo hace referencia, segun la tabla a un Producto o a una Determinacion. -->
+<!-- 				Lo unico que varia es el metodo que se ejecuta. -->
+				
+				<campoEntrada name="mtDetProducto" metodo="agregarDetalle" clase="com.jkt.dominio.ListaPrecioDetalle" fieldID="oid_det">
+					<campoEntrada name="oid_item" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
+				</campoEntrada>
+
+				<campoEntrada name="mtDetDeterQui" metodo="agregarDetalle" clase="com.jkt.dominio.ListaPrecioDetalle" fieldID="oid_det">
+					<campoEntrada name="oid_item" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" />
+					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
+				</campoEntrada>
+				
+				<campoEntrada name="mtDetDeterEle" metodo="agregarDetalle" clase="com.jkt.dominio.ListaPrecioDetalle" fieldID="oid_det">
+					<campoEntrada name="oid_item" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" />
+					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="---"></form>
 		</forms>
 
 	</operacion>
