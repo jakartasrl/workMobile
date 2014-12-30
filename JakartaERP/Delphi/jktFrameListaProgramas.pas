@@ -210,6 +210,8 @@ begin
     NombrePrograma := 'TFNVen0004'
   else if Sender.Tag = 28 then
     NombrePrograma := 'TFNVen0005'
+  else if Sender.Tag = 40 then
+    NombrePrograma := 'TFNVen0007'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
@@ -330,6 +332,12 @@ begin
       NombrePrograma   := 'TFNUti0001';
       ParametroInicial := 'Plantilla';
       Titulo := 'ABM de Plantillas';
+    end
+  else if Sender.Tag = 39 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'ListaPrecios';
+      Titulo := 'ABM de Listas de Precios';
     end;
 
 

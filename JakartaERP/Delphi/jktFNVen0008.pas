@@ -24,11 +24,11 @@ uses
 type
   TFNVen0008 = class(TForm)
     jktExpDBGrid1: TjktExpDBGrid;
-    jktExpDBGrid1DBTableView1: TcxGridDBTableView;
-    jktExpDBGrid1DBTableView1oid_moneda: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1cod_moneda: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1des_moneda: TcxGridDBColumn;
-    jktExpDBGrid1DBTableView1cotizacion: TcxGridDBColumn;
+    dbgDBTableView: TcxGridDBTableView;
+    dbgDBTableViewoid_moneda: TcxGridDBColumn;
+    dbgDBTableViewcod_moneda: TcxGridDBColumn;
+    dbgDBTableViewdes_moneda: TcxGridDBColumn;
+    dbgDBTableViewcotizacion: TcxGridDBColumn;
     jktExpDBGrid1Level1: TcxGridLevel;
   private
     { Private declarations }

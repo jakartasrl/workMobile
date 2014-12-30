@@ -645,6 +645,14 @@ begin
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
   cds_MenuUsuario.Post;
 
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 303;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Precios';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 1;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := True;
+  cds_MenuUsuario.Post;
+
 
   // creo los Programas -------------------------------------------------------
   cds_MenuUsuario.Append;
@@ -910,6 +918,23 @@ begin
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
   cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 39;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Listas de Precios';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 303;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 40;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Detalle Listas de Precios';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 303;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
 
 //  cds_MenuUsuario.SaveToFile(DataPath + 'MenuUsuario.xml', dfXML); // dfBinary);
 end;
