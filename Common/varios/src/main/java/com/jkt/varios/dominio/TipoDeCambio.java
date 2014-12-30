@@ -2,6 +2,10 @@ package com.jkt.varios.dominio;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -16,7 +20,11 @@ public class TipoDeCambio extends PersistentEntity {
 	 * TODO Ver como es el tipo de cambio por defecto. Seguramente va a estar parametrizado
 	 */
 	private Date fecha;
+
+	@NotEmpty(message="El tipo de cambio debe tener obligatorioamente una moneda relacionada.")
 	private Moneda moneda;
+	
+	@NotEmpty(message="El tipo de cambio debe tener obligatorioamente una cotizacion.")
 	private double cotizacion;
 	
 	public TipoDeCambio() {
