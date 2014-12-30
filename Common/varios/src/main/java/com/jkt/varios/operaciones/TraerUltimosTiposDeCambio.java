@@ -9,6 +9,7 @@ import org.hibernate.Query;
 
 import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Moneda;
 import com.jkt.varios.dominio.TipoDeCambio;
@@ -29,6 +30,10 @@ public class TraerUltimosTiposDeCambio extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
 		Configuracion configuracion = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", MONEDA_POR_DEFECTO);
+		
+		if (configuracion==null) {
+			throw new JakartaException("No existe el parametro de moneda por defecto en la tabla de configuración.");
+		}
 		
 		List<PersistentEntity> monedas = obtenerTodos(Moneda.class);
 		

@@ -1,13 +1,19 @@
 package com.jkt.transformers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.servlet.ServletOutputStream;
 
 import com.jkt.excepcion.JakartaException;
+import com.jkt.framework.writers.XMLTableMaker;
 import com.jkt.operaciones.Operation;
+import com.jkt.request.EventBusiness;
 import com.jkt.request.IEventBusiness;
+import com.jkt.xmlreader.Output;
 import com.jkt.xmlreader.PropertySolver;
 
 /**
@@ -22,6 +28,8 @@ import com.jkt.xmlreader.PropertySolver;
  */
 public abstract class Transformer implements Observer {
 
+	protected ServletOutputStream servletOutputStream;
+	
 	//variable de clase, compartida por todos los CampoSalida
 	protected static PropertySolver solver=new PropertySolver();
 	
@@ -80,4 +88,26 @@ public abstract class Transformer implements Observer {
 	 */
 	public abstract void setup(ServletOutputStream outputStream, String outputName) throws JakartaException;
 	
+	protected void configurarVariosWriters(ServletOutputStream outputStream) {
+		this.servletOutputStream=outputStream;
+		List<Output> outputs = ((EventBusiness)this.getEvent()).getOutputs();
+		String nameOfOutput = "";
+		String nameOfTable  = "";
+		
+		for (Output output : outputs) {
+			nameOfOutput = output.getName();
+			nameOfTable  = output.getTableName();
+			this.addWriter(nameOfOutput, nameOfTable, outputStream);
+		}
+	}
+	
+	/**
+	 * Mapa con writers para poder escribir paralelamente
+	 */
+	protected Map<String, XMLTableMaker> writers=new HashMap<String, XMLTableMaker>();
+
+	protected void addWriter(String nameOfWriter, String nameOfTable, ServletOutputStream outputStream){
+		this.writers.put(nameOfWriter, new XMLTableMaker(nameOfTable, nameOfWriter, outputStream));
+	}
+
 }

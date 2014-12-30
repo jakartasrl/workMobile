@@ -545,19 +545,29 @@
 	<operacion name="TraerTipoDeCambioEnMatriz" clase="com.jkt.varios.operaciones.TraerTiposDeCambioEnMatriz" entidad="com.jkt.varios.dominio.TipoDeCambio">
 		
 		<output name="columnas" tableName="mtColumns">
-			<campoSalida value="valor" target="value" />
+			<campoSalida value="fieldName" target="fieldName" />
+			<campoSalida value="tipo" target="tipo" />
+			<campoSalida value="tag" target="tag" />
+			<campoSalida value="longitud" target="longitud" />
+			<campoSalida value="visible" target="visible" />
+			<campoSalida value="readOnly" target="readOnly" />
+			<campoSalida value="orden" target="orden" />
+			<campoSalida value="label" target="label" />
+			<campoSalida value="columnWidth" target="columnWidth" />
 		</output>		
 			
 		<output name="tiposDeCambio" tableName="mtTiposDeCambio">
 			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="oid_moneda" target="idElemento" />
 			<campoSalida value="dato1" target="dato1" />
 			<campoSalida value="dato2" target="dato2" />
 			<campoSalida value="dato3" target="dato3" />
 			<campoSalida value="dato4" target="dato4" />
 			<campoSalida value="dato5" target="dato5" />
+			<campoSalida value="valor" target="valor" />
 		</output>		
 			
-		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		<transformer clase="com.jkt.transformers.MatrizTransformer"></transformer>
 		
 		<forms>
 			<form name=""></form>
