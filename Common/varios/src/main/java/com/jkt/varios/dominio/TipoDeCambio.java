@@ -18,6 +18,10 @@ public class TipoDeCambio extends PersistentEntity {
 	private Date fecha;
 	private Moneda moneda;
 	private double cotizacion;
+	
+	public TipoDeCambio() {
+		fecha=new Date();
+	}
 
 	public Date getFecha() {
 		return fecha;

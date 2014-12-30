@@ -510,9 +510,8 @@
 	<operacion name="GuardarTipoDeCambio" clase="com.jkt.operaciones.GuardarLista">
 		<input name="mtInput" keyName="objeto" clase="com.jkt.varios.dominio.TipoDeCambio" fieldID='oid'>
 			<campoEntrada>
-				<campoEntrada name="Cotizacion" clase="Double" metodo="setCotizacion" />
 				<campoEntrada name="moneda_oid" clase="" metodo="setMoneda" />
-				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="valor" clase="Double" metodo="setCotizacion" />
 			</campoEntrada>
 		</input>		
 
