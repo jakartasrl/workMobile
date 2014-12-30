@@ -508,9 +508,9 @@
 	<!-- 	TIPOS DE CAMBIO -->
 	<!-- 	Guardar tipo de cambio -->
 	<operacion name="GuardarTipoDeCambio" clase="com.jkt.operaciones.GuardarLista">
-		<input name="mtInput" keyName="objeto" clase="com.jkt.varios.dominio.TipoDeCambio" fieldID='oid'>
+		<input name="mtTiposDeCambio" keyName="objeto" clase="com.jkt.varios.dominio.TipoDeCambio" fieldID='oid'>
 			<campoEntrada>
-				<campoEntrada name="moneda_oid" clase="" metodo="setMoneda" />
+				<campoEntrada name="oid_moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 				<campoEntrada name="valor" clase="Double" metodo="setCotizacion" />
 			</campoEntrada>
 		</input>		
