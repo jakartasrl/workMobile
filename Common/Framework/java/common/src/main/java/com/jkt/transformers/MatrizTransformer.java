@@ -207,7 +207,7 @@ public class MatrizTransformer extends Transformer {
 		Campo campo = new Campo();
 		
 		//Fieldname es el nombre clave de la variable.
-		campo.setFieldName("dato"+i);
+		campo.setFieldName("dato"+(i-1));
 
 		campo.setLabel(label);
 		campo.setColumnWidth(COLUMN_WIDTH);

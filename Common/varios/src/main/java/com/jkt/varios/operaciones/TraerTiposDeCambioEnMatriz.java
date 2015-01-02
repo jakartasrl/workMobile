@@ -5,11 +5,16 @@ import java.util.Map;
 import org.hibernate.Query;
 
 import com.jkt.operaciones.Operation;
+import com.jkt.transformers.MatrizTransformer;
 import com.jkt.varios.dominio.Moneda;
 import com.jkt.varios.dominio.TipoDeCambio;
 
 /**
- * Trae un template de tipo de cambio con todas las monedas para que puedan cargarse sus equivalencias.
+ * <p>Trae un template de tipo de cambio con todas las monedas para que puedan cargarse sus equivalencias.</p>
+ * <p><b>Si bien en esta clase no se puede ver la diferencia a una operacion cualquiera, lo que difiere en cuanto a las demas es el
+ * transformador utilizado, ya que usa uno que se encarga de mostrar los datos en una matriz.</b></p>
+ * 
+ * @see MatrizTransformer
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

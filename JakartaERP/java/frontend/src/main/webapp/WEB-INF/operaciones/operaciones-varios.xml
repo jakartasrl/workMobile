@@ -540,8 +540,8 @@
 		</forms>		
 	</operacion>
 	
-		<!-- RECUPERAR  Tipos de cambio -->
-	<operacion name="TraerTipoDeCambioEnMatriz" clase="com.jkt.varios.operaciones.TraerTiposDeCambioEnMatriz" entidad="com.jkt.varios.dominio.TipoDeCambio">
+	<!-- RECUPERAR  Tipos de cambio en matriz-->
+	<operacion name="TraerTipoDeCambioEnMatriz" clase="com.jkt.varios.operaciones.TraerTiposDeCambioEnMatriz">
 		
 		<output name="columnas" tableName="mtColumns">
 			<campoSalida value="fieldName" target="fieldName" />
@@ -553,7 +553,7 @@
 			<campoSalida value="orden" target="orden" />
 			<campoSalida value="label" target="label" />
 			<campoSalida value="columnWidth" target="columnWidth" />
-		</output>		
+		</output>
 			
 		<output name="tiposDeCambio" tableName="mtTiposDeCambio">
 			<campoSalida value="referencia" target="referencia" />
@@ -564,7 +564,7 @@
 			<campoSalida value="dato4" target="dato4" />
 			<campoSalida value="dato5" target="dato5" />
 			<campoSalida value="valor" target="valor" />
-		</output>		
+		</output>
 			
 		<transformer clase="com.jkt.transformers.MatrizTransformer"></transformer>
 		
