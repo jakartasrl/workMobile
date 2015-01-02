@@ -27,7 +27,8 @@ uses
   jktFNVen0005,
   jktFNVen0006,
   jktFNLab0001,
-  jktFNLab0002;
+  jktFNLab0002,
+  jktFNLab0003;
 
 implementation
 
