@@ -75,11 +75,28 @@ inherited FNVen0007: TFNVen0007
         Width = 250
         Height = 300
         TabOrder = 5
+        DataSource = dsPreciosLaboQuim
         object jktExpDBGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsPreciosLaboQuim
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          object jktExpDBGrid1DBTableView1oid_detalle: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_detalle'
+          end
+          object jktExpDBGrid1DBTableView1oid_det: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_det'
+          end
+          object jktExpDBGrid1DBTableView1cod_det: TcxGridDBColumn
+            DataBinding.FieldName = 'cod_det'
+          end
+          object jktExpDBGrid1DBTableView1des_det: TcxGridDBColumn
+            DataBinding.FieldName = 'des_det'
+          end
+          object jktExpDBGrid1DBTableView1precio: TcxGridDBColumn
+            DataBinding.FieldName = 'precio'
+          end
         end
         object jktExpDBGrid1Level1: TcxGridLevel
           GridView = jktExpDBGrid1DBTableView1
@@ -92,11 +109,28 @@ inherited FNVen0007: TFNVen0007
         Height = 300
         TabOrder = 6
         Visible = False
+        DataSource = dsPreciosLaboElec
         object jktExpDBGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsPreciosLaboElec
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          object jktExpDBGrid2DBTableView1oid_detalle: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_detalle'
+          end
+          object jktExpDBGrid2DBTableView1oid_det: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_det'
+          end
+          object jktExpDBGrid2DBTableView1cod_det: TcxGridDBColumn
+            DataBinding.FieldName = 'cod_det'
+          end
+          object jktExpDBGrid2DBTableView1des_det: TcxGridDBColumn
+            DataBinding.FieldName = 'des_det'
+          end
+          object jktExpDBGrid2DBTableView1precio: TcxGridDBColumn
+            DataBinding.FieldName = 'precio'
+          end
         end
         object jktExpDBGrid2Level1: TcxGridLevel
           GridView = jktExpDBGrid2DBTableView1
@@ -109,11 +143,28 @@ inherited FNVen0007: TFNVen0007
         Height = 300
         TabOrder = 7
         Visible = False
+        DataSource = dsPreciosMateriales
         object jktExpDBGrid3DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsPreciosMateriales
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          object jktExpDBGrid3DBTableView1oid_detalle: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_detalle'
+          end
+          object jktExpDBGrid3DBTableView1oid_pro: TcxGridDBColumn
+            DataBinding.FieldName = 'oid_pro'
+          end
+          object jktExpDBGrid3DBTableView1cod_pro: TcxGridDBColumn
+            DataBinding.FieldName = 'cod_pro'
+          end
+          object jktExpDBGrid3DBTableView1des_pro: TcxGridDBColumn
+            DataBinding.FieldName = 'des_pro'
+          end
+          object jktExpDBGrid3DBTableView1precio: TcxGridDBColumn
+            DataBinding.FieldName = 'precio'
+          end
         end
         object jktExpDBGrid3Level1: TcxGridLevel
           GridView = jktExpDBGrid3DBTableView1
@@ -272,7 +323,9 @@ inherited FNVen0007: TFNVen0007
       0)
   end
   inherited Driver: TjktDriver
+    DataSetCab = mtListaPrecio
     TipoPrograma = tp_abmIndividual
+    Filtro = Help
     Left = 488
     Top = 96
   end
@@ -285,6 +338,20 @@ inherited FNVen0007: TFNVen0007
     Top = 96
   end
   inherited OperacionSave: TjktOperacion
+    OperName = 'GuardarDetallesListaPrecio'
+    Atributos = <
+      item
+        Dataset = mtPreciosLaboQuim
+        Tag = 0
+      end
+      item
+        Dataset = mtPreciosLaboElec
+        Tag = 0
+      end
+      item
+        Dataset = mtPreciosMateriales
+        Tag = 0
+      end>
     Left = 552
     Top = 96
   end
@@ -293,7 +360,7 @@ inherited FNVen0007: TFNVen0007
     Top = 96
   end
   inherited OperacionTraer: TjktOperacion
-    OperName = 'TraerDetallesDeListaDePrecio'
+    OperName = 'TraerDetallesListaPrecio'
     Atributos = <
       item
         Attribute = 'oid'
@@ -346,6 +413,7 @@ inherited FNVen0007: TFNVen0007
     Left = 104
     Top = 48
     object mtListaPreciooid: TIntegerField
+      Tag = 1
       FieldName = 'oid'
     end
     object mtListaPreciocodigo: TStringField
@@ -388,7 +456,24 @@ inherited FNVen0007: TFNVen0007
     Left = 112
     Top = 232
     object mtPreciosLaboQuimoid_detalle: TIntegerField
+      Tag = 1
       FieldName = 'oid_detalle'
+    end
+    object mtPreciosLaboQuimoid_det: TIntegerField
+      Tag = 1
+      FieldName = 'oid_det'
+    end
+    object mtPreciosLaboQuimcod_det: TStringField
+      FieldName = 'cod_det'
+      Size = 15
+    end
+    object mtPreciosLaboQuimdes_det: TStringField
+      FieldName = 'des_det'
+      Size = 100
+    end
+    object mtPreciosLaboQuimprecio: TFloatField
+      Tag = 1
+      FieldName = 'precio'
     end
   end
   object mtPreciosLaboElec: TjktMemTable
@@ -411,6 +496,26 @@ inherited FNVen0007: TFNVen0007
     LocaleID = 0
     Left = 112
     Top = 280
+    object mtPreciosLaboElecoid_detalle: TIntegerField
+      Tag = 1
+      FieldName = 'oid_detalle'
+    end
+    object mtPreciosLaboElecoid_det: TIntegerField
+      Tag = 1
+      FieldName = 'oid_det'
+    end
+    object mtPreciosLaboEleccod_det: TStringField
+      FieldName = 'cod_det'
+      Size = 15
+    end
+    object mtPreciosLaboElecdes_det: TStringField
+      FieldName = 'des_det'
+      Size = 100
+    end
+    object mtPreciosLaboElecprecio: TFloatField
+      Tag = 1
+      FieldName = 'precio'
+    end
   end
   object mtPreciosMateriales: TjktMemTable
     DesignActivation = True
@@ -432,21 +537,44 @@ inherited FNVen0007: TFNVen0007
     LocaleID = 0
     Left = 112
     Top = 328
+    object mtPreciosMaterialesoid_detalle: TIntegerField
+      Tag = 1
+      FieldName = 'oid_detalle'
+    end
+    object mtPreciosMaterialesoid_pro: TIntegerField
+      Tag = 1
+      FieldName = 'oid_pro'
+    end
+    object mtPreciosMaterialescod_pro: TStringField
+      FieldName = 'cod_pro'
+      Size = 15
+    end
+    object mtPreciosMaterialesdes_pro: TStringField
+      FieldName = 'des_pro'
+      Size = 100
+    end
+    object mtPreciosMaterialesprecio: TFloatField
+      Tag = 1
+      FieldName = 'precio'
+    end
   end
   object dsListaPrecio: TDataSource
     DataSet = mtListaPrecio
     Left = 144
     Top = 48
   end
-  object DataSource2: TDataSource
+  object dsPreciosLaboQuim: TDataSource
+    DataSet = mtPreciosLaboQuim
     Left = 152
     Top = 232
   end
-  object DataSource3: TDataSource
+  object dsPreciosLaboElec: TDataSource
+    DataSet = mtPreciosLaboElec
     Left = 152
     Top = 280
   end
-  object DataSource4: TDataSource
+  object dsPreciosMateriales: TDataSource
+    DataSet = mtPreciosMateriales
     Left = 152
     Top = 328
   end
