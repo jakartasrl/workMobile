@@ -75,10 +75,39 @@ type
     mtListaPreciovig_has: TDateField;
     mtListaPreciodes_mon: TStringField;
     dsListaPrecio: TDataSource;
-    DataSource2: TDataSource;
-    DataSource3: TDataSource;
-    DataSource4: TDataSource;
+    dsPreciosLaboQuim: TDataSource;
+    dsPreciosLaboElec: TDataSource;
+    dsPreciosMateriales: TDataSource;
     mtPreciosLaboQuimoid_detalle: TIntegerField;
+    mtPreciosLaboQuimoid_det: TIntegerField;
+    mtPreciosLaboQuimcod_det: TStringField;
+    mtPreciosLaboQuimdes_det: TStringField;
+    mtPreciosLaboQuimprecio: TFloatField;
+    mtPreciosLaboElecoid_detalle: TIntegerField;
+    mtPreciosLaboElecoid_det: TIntegerField;
+    mtPreciosLaboEleccod_det: TStringField;
+    mtPreciosLaboElecdes_det: TStringField;
+    mtPreciosLaboElecprecio: TFloatField;
+    mtPreciosMaterialesoid_detalle: TIntegerField;
+    mtPreciosMaterialesoid_pro: TIntegerField;
+    mtPreciosMaterialescod_pro: TStringField;
+    mtPreciosMaterialesdes_pro: TStringField;
+    mtPreciosMaterialesprecio: TFloatField;
+    jktExpDBGrid1DBTableView1oid_detalle: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1oid_det: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1cod_det: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1des_det: TcxGridDBColumn;
+    jktExpDBGrid1DBTableView1precio: TcxGridDBColumn;
+    jktExpDBGrid2DBTableView1oid_detalle: TcxGridDBColumn;
+    jktExpDBGrid2DBTableView1oid_det: TcxGridDBColumn;
+    jktExpDBGrid2DBTableView1cod_det: TcxGridDBColumn;
+    jktExpDBGrid2DBTableView1des_det: TcxGridDBColumn;
+    jktExpDBGrid2DBTableView1precio: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1oid_detalle: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1oid_pro: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1cod_pro: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1des_pro: TcxGridDBColumn;
+    jktExpDBGrid3DBTableView1precio: TcxGridDBColumn;
   private
     { Private declarations }
   public
