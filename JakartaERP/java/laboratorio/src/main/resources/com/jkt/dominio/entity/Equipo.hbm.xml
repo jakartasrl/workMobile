@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.laboratorio.dominio.Equipo" table="EQUIPO">
+		<id name="id" column="EQUIPO_ID">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<property name="nroSerie" column="NRO_SERIE" />
+
+		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"></many-to-one>
+		<many-to-one name="marca" class="com.jkt.erp.articulos.ValoresTablas" column="MARCA_ID" cascade="none"></many-to-one>
+<!-- 		<many-to-one name="tipoProducto" class="com.jkt.erp.articulos.TipoProducto" column="TIPO_PRODUCTO_ID" cascade="none"></many-to-one>		 -->
+
+		<list name="caracteristicas" table="EQUIPO_CARACTERISTICA" lazy="true" cascade="all">
+			<key column="EQUIPO_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.laboratorio.dominio.EquipoCaracteristica" />
+		</list>
+		
+	</class>
+
+</hibernate-mapping>

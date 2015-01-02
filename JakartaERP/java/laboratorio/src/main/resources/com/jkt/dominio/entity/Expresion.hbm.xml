@@ -11,7 +11,6 @@
 			</generator>
         </id>
         
-       
         
         <one-to-one name="metodo" class="com.jkt.laboratorio.dominio.Metodo"
 			constrained="true"></one-to-one>

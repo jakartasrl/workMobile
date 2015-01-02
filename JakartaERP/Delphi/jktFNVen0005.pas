@@ -192,6 +192,7 @@ type
     procedure cxDBTreeList1importe_total_2GetDisplayText(
       Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxButton1Click(Sender: TObject);
   private
     FFormTiposCambio: TFNVen0008;
     oid_MonedaPorDefecto: Integer;
@@ -206,6 +207,16 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TFNVen0005.cxButton1Click(Sender: TObject);
+begin
+  inherited;
+
+  FFormTiposCambio.Top := cxButton1.Top;
+  FFormTiposCambio.Left := cxButton1.Left + cxButton1.Width + 30;
+
+  FFormTiposCambio.Show;
+end;
 
 procedure TFNVen0005.cxCheckBox1Click(Sender: TObject);
 begin
@@ -313,6 +324,7 @@ begin
 
   FFormTiposCambio := TFNVen0008.Create(Self);
   FFormTiposCambio.Parent := Self;
+  FFormTiposCambio.dbgDBTableView.DataController.DataSource := dsTiposDeCambio;
 
   // El ancho debe ser el total de la pantalla
   cxGroupBoxLeft.Width  := 0;

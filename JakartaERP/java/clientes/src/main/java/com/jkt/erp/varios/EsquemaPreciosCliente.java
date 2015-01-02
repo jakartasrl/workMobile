@@ -2,13 +2,14 @@ package com.jkt.erp.varios;
 
 import java.util.Date;
 
+//import com.jkt.dominio.ListaPrecios;
 import com.jkt.dominio.PersistentEntity;
 
 public class EsquemaPreciosCliente extends PersistentEntity {
 
 	private Cliente cliente;
 	private Date fechaVigencia;
-	private ListaPrecios listaPrecios;
+//	private ListaPrecios listaPrecios;
 	private EsquemaBonificacion esquemaBonificacion;
 
 	public Cliente getCliente() {
@@ -19,13 +20,13 @@ public class EsquemaPreciosCliente extends PersistentEntity {
 		this.cliente = cliente;
 	}
 
-	public ListaPrecios getListaPrecios() {
-		return listaPrecios;
-	}
-
-	public void setListaPrecios(ListaPrecios listaPrecios) {
-		this.listaPrecios = listaPrecios;
-	}
+//	public ListaPrecios getListaPrecios() {
+//		return listaPrecios;
+//	}
+//
+//	public void setListaPrecios(ListaPrecios listaPrecios) {
+//		this.listaPrecios = listaPrecios;
+//	}
 
 	public EsquemaBonificacion getEsquemaBonificacion() {
 		return esquemaBonificacion;

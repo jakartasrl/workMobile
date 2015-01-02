@@ -19,7 +19,7 @@
 		<property name="formato"   			column="FORMATO" 		type="string"/>
 		<property name="calculaResultado"   column="CALCULA_RES" 	type="boolean"/>
 	
-		<many-to-one name="laboratorio" lazy="proxy" not-null="true" column="ID_LABORATORIO"/>
+		<many-to-one name="laboratorio" column="ID_LABORATORIO"/>
 		
 		<list name="metodos"  cascade="save-update">
 			<key column="ID_DETERMINACION" />

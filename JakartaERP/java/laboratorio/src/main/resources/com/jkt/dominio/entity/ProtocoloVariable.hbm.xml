@@ -3,16 +3,16 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.laboratorio.dominio.AnalisisDet" table="ANALISIS_DET">
-		<id name="id" column="ID_ANALISIS_DET">
+	<class name="com.jkt.laboratorio.dominio.ProtocoloVariable" table="PROTOCOLO_VARIABLE">
+		<id name="id" column="PROTOCOLO_VARIABLE_ID">
 			<generator class="native"></generator>
 		</id>
 
+		<property name="variable" column="VARIABLE" />
+		<property name="valor" column="VALOR" />
+		
 		<property name="activo" column="ACTIVO" type="boolean" />
-
-		<many-to-one name="analisis" column="ID_ANALISIS" />
-		<many-to-one name="determinacion" column="ID_DETERMINACION" />
-
+		
 	</class>
 
 </hibernate-mapping>

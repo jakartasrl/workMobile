@@ -421,7 +421,7 @@
 			<campo fieldName="Codigo"   tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Código"  />
 			<campo fieldName="Descripcion" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripción"  />
 
-			<campo fieldName="fec_vig_des" tipo="Date" longitud="0" visible="true" readOnly="false" orden="4" label="Vigencia Desde" columnWidth=100" />
+			<campo fieldName="fec_vig_des" tipo="Date" longitud="0" visible="true" readOnly="false" orden="4" label="Vigencia Desde" columnWidth="100" />
 			<campo fieldName="fec_vig_has" tipo="Date" longitud="0" visible="true" readOnly="false" orden="5" label="Vigencia Hasta" columnWidth="100" />
 
 			<campo fieldName="oid_mon" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="6" label="oid_moneda"  />

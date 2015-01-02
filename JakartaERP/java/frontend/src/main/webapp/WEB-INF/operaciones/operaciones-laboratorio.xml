@@ -110,8 +110,7 @@
 
 	<!-- Persistir instancias de Tabla de Validación -->
 	<operacion name="SaveTablaValDeter" clase="com.jkt.operaciones.GuardarLista">
-		<input name="mtInput" keyName="objeto"
-			clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" fieldID='oid_tabla'>
+		<input name="mtInput" keyName="objeto" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" fieldID='oid_tabla'>
 			<campoEntrada>
 				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="descr" clase="String" metodo="setDescripcion" />
@@ -125,8 +124,7 @@
 	</operacion>
 
 	<!-- Traer instancias de Tablas de Validación -->
-	<operacion name="TraerTablaValDeter" clase="com.jkt.operaciones.TraerEntidades"
-		entidad="com.jkt.laboratorio.dominio.TablaValidacionDeter">
+	<operacion name="TraerTablaValDeter" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.TablaValidacionDeter">
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_tabla" target="id" />
 			<campoSalida value="codigo" target="codigo" />
@@ -144,14 +142,12 @@
 
 	<!-- Persistir instancias de Valores de Tablas de Validación -->
 	<operacion name="SaveValoresTablaValidacion" clase="com.jkt.operaciones.GuardarLista">
-		<input name="mtInput" keyName="objeto"
-			clase="com.jkt.laboratorio.dominio.ValoresTablaValidacion" fieldID='oid_valor_tabla'>
+		<input name="mtInput" keyName="objeto" clase="com.jkt.laboratorio.dominio.ValoresTablaValidacion" fieldID='oid_valor_tabla'>
 			<campoEntrada>
 				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="descr" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-				<campoEntrada name="oid_tabla"
-					clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
+				<campoEntrada name="oid_tabla" clase="com.jkt.laboratorio.dominio.TablaValidacionDeter" metodo="setTablaValidacion" />
 			</campoEntrada>
 		</input>
 
@@ -161,8 +157,7 @@
 	</operacion>
 
 	<!-- Traer lista de Valores de Tablas de Validación -->
-	<operacion name="TraerValoresTablaValidacion" clase="com.jkt.operaciones.TraerEntidades"
-		entidad="com.jkt.laboratorio.dominio.ValoresTablaValidacion">
+	<operacion name="TraerValoresTablaValidacion" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.ValoresTablaValidacion">
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_valor_tabla" target="id" />
 			<campoSalida value="codigo" target="codigo" />
@@ -183,21 +178,18 @@
 
 	<!-- Persistir instancias de Análiss y sus Determinaciones -->
 	<operacion name="SaveAnalisis" clase="com.jkt.operaciones.Guardar">
-		<input name="TCab" keyName="objeto"
-			clase="com.jkt.laboratorio.dominio.Analisis" fieldID="oid_ana">
+		<input name="TCab" keyName="objeto" clase="com.jkt.laboratorio.dominio.Analisis" fieldID="oid_ana">
 			<campoEntrada>
 				<campoEntrada name="cod_ana" clase="String" metodo="setCodigo" />
 				<campoEntrada name="des_ana" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-				<campoEntrada name="oid_lab"
-					clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
+				<campoEntrada name="oid_lab" clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
 
-				<campoEntrada name="TDet" metodo="addDeterminacion"
-					clase="com.jkt.laboratorio.dominio.AnalisisDet" fieldID="oid_detalle">
+				<campoEntrada name="TDet" metodo="addDeterminacion" clase="com.jkt.laboratorio.dominio.AnalisisDet" fieldID="oid_detalle">
 					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" />
 					<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-					</campoEntrada>
 				</campoEntrada>
+			</campoEntrada>
 		</input>
 
 		<forms>
@@ -307,37 +299,27 @@
 				<campoEntrada name="des_det" clase="String" metodo="setDescripcion" />
 				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 				<campoEntrada name="tipo_res" clase="String" metodo="setTipoResultado" />
-				<campoEntrada name="oid_lab"
-					clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
-				<campoEntrada name="calc_res" clase="Boolean"
-					metodo="setCalculaResultado" />
+				<campoEntrada name="oid_lab" clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
+				<campoEntrada name="calc_res" clase="Boolean" metodo="setCalculaResultado" />
 				<campoEntrada name="formato" clase="String" metodo="setFormato" />
-				<campoEntrada name="ley_cero" clase="String"
-					metodo="setLeyendaValorCero" />
+				<campoEntrada name="ley_cero" clase="String" metodo="setLeyendaValorCero" />
 
-				<campoEntrada name="TMet" metodo="addMetodo"
-					clase="com.jkt.laboratorio.dominio.Metodo" fieldID="oid_met">
+				<campoEntrada name="TMet" metodo="addMetodo" clase="com.jkt.laboratorio.dominio.Metodo" fieldID="oid_met">
 					<campoEntrada name="metodo" clase="String" metodo="setMetodo" />
-					<campoEntrada name="expresion" clase="String"
-						metodo="setExpresionResultado" />
+					<campoEntrada name="expresion" clase="String" metodo="setExpresionResultado" />
 					<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
 
-					<campoEntrada name="TVal" metodo="addValorEsperado"
-						clase="com.jkt.laboratorio.dominio.ValorEsperado" fieldID="oid_val">
-						<campoEntrada name="valor_desde" clase="Double"
-							metodo="setValorDesde" />
-						<campoEntrada name="valor_hasta" clase="Double"
-							metodo="setValorHasta" />
+					<campoEntrada name="TVal" metodo="addValorEsperado" clase="com.jkt.laboratorio.dominio.ValorEsperado" fieldID="oid_val">
+						<campoEntrada name="valor_desde" clase="Double" metodo="setValorDesde" />
+						<campoEntrada name="valor_hasta" clase="Double" metodo="setValorHasta" />
 						<campoEntrada name="limite" clase="String" metodo="setLimite" />
 						<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
-						<campoEntrada name="oid_carac"
-							clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
+						<campoEntrada name="oid_carac" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
 					</campoEntrada>
 
 					
 				</campoEntrada>
-				<campoEntrada name="TVar" metodo="addVariable"
-						clase="com.jkt.laboratorio.dominio.Variable" fieldID="oid_var">
+				<campoEntrada name="TVar" metodo="addVariable" clase="com.jkt.laboratorio.dominio.Variable" fieldID="oid_var">
 						<campoEntrada name="cod_var" clase="String" metodo="setCodigo" />
 						<campoEntrada name="des_var" clase="String" metodo="setDescripcion" />
 						<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
@@ -367,6 +349,256 @@
 		</forms>
 	
 	</operacion>
+
+
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+<!-- 	NUEVAS OPERACIONES DEL MODULO DE LABORATORIO. -->
+
+	<operacion name="GuardarEquipo" clase="com.jkt.operaciones.Guardar">
+		<input name="tablaEquipo" keyName="objeto" clase="com.jkt.laboratorio.dominio.Equipo" fieldID="oid_equipo">
+			<campoEntrada>
+				<campoEntrada name="codigoEquipo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descripcionEquipo" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="nroSerie" clase="String" metodo="setNroSerie" />
+				<campoEntrada name="oid_cliente" clase="com.jkt.erp.varios.Cliente" metodo="setCliente" />
+				<campoEntrada name="oid_valor_tabla" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setMarca" />
+				<campoEntrada name="oid_tipo_producto" clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoDeProducto" />
+
+				<campoEntrada name="tablaCaracteristicas" metodo="agregarCaracteristicas" clase="com.jkt.laboratorio.dominio.EquipoCaracteristica" fieldID="oid_caracteristica">
+
+					<campoEntrada name="oid_caracteristica_producto" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+					<campoEntrada name="oid_valor_tabla" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" />
+
+					<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+					
+					<campoEntrada name="valorString" clase="String" metodo="setValorString" />
+					<campoEntrada name="valorEntero" clase="Integer" metodo="setValorEntero" />
+					<campoEntrada name="valorDoble" clase="Double" metodo="setValorDoble" />
+					<campoEntrada name="valorBoolean" clase="Boolean" metodo="setValorBoolean" />
+
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="FormEquipo"></form>
+		</forms>
+
+	</operacion>
+	
+	<!-- Recuperar todos los equipos del sistema -->
+	<operacion name="TraerEquipo" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Equipo">
+		
+		<output name="resultado" tableName="tablaEquipo">
+			<campoSalida value="oid_equipo" target="id" />
+			
+			<campoSalida value="codigo_equipo" target="codigo" />
+			<campoSalida value="descripcion_equipo" target="codigo" />
+			<campoSalida value="nro_serie" target="nroSerie" />
+
+			<campoSalida value="oid_marca" target="marca.id" />
+			<campoSalida value="codigo_marca" target="marca.codigo" />
+			<campoSalida value="descripcion_marca" target="marca.descripcion" />
+
+			<campoSalida value="oid_cliente" target="marca.id" />
+			<campoSalida value="codigo_cliente" target="cliente.codigo" />
+			<campoSalida value="descripcion_cliente" target="cliente.descripcion" />
+
+			<campoSalida value="oid_tipo_producto" target="tipoProducto.id" />
+			<campoSalida value="codigo_tipo_producto" target="tipoProducto.codigo" />
+			<campoSalida value="descripcion_tipo_producto" target="tipoProducto.descripcion" />
+
+		</output>	
+		
+		<output name="tablaCaracteristicas" tableName="tablaCaracteristicas">
+			<campoSalida value="oid_caracteristica" target="id" />
+			
+			<campoSalida value="oid_valor_tabla" target="valorTabla.id" />
+			<campoSalida value="codigo_valor_tabla" target="valorTabla.codigo" />
+			<campoSalida value="descripcion_valor_tabla" target="valorTabla.descripcion" />
+
+			<campoSalida value="valor_string" target="valorString" />
+			<campoSalida value="valor_entero" target="valorEntero" />
+			<campoSalida value="valor_doble" target="valorDoble" />
+			<campoSalida value="valor_boolean" target="valorBoolean" />
+			
+			<campoSalida value="oid_caracteristica_producto" target="caracProducto.id" />
+			<campoSalida value="codigo_caracteristica_producto" target="caracProducto.codigo" />
+			<campoSalida value="descripcion_caracteristica_producto" target="caracProducto.descripcion" />
+			<campoSalida value="oid_tabla_caracteristica_producto" target="caracProducto.tabla.id" />
+			<campoSalida value="codigo_tabla_caracteristica_producto" target="caracProducto.tabla.codigo" />
+
+		</output>		
+			
+		<listas>
+			<lista nombreLista="caracteristicas" nombreWriter="tablaCaracteristicas"  />
+		</listas>	
+			
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="FormEquipo"></form>
+		</forms>
+	
+	</operacion>
+
+
+	<!-- DIAGNOSTICO -->
+	<!-- Persistir instancias de diagnostico -->
+	<operacion name="GuardarDiagnostico" clase="com.jkt.operaciones.GuardarLista">
+		<input name="tablaDiagnostico" keyName="objeto" clase="com.jkt.laboratorio.dominio.Diagnostico" fieldID='oid_diagnostico'>
+			<campoEntrada>
+				<campoEntrada name="codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="oid_laboratorio" clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
+				<campoEntrada name="descripcion" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="FormDiagnostico"></form>
+		</forms>
+
+	</operacion>
+
+	<!-- Traer diagnosticos -->
+	<operacion name="TraerDiagnosticos" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.laboratorio.dominio.Diagnostico">
+		<output name="resultado" tableName="tablaDiagnostico">
+			<campoSalida value="oid_diagnostico" target="id" />
+			<campoSalida value="codigo__diagnostico" target="codigo" />
+			<campoSalida value="descripcion_diagnostico" target="descripcion" />
+			<campoSalida value="activo" target="isActivo" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer" />
+
+		<forms>
+			<form name="FormLaboratorio"></form>
+		</forms>
+	</operacion>
+	
+	
+<!-- CREACION DE UN PROTOCOLO -->
+<!-- CREACION DE UN PROTOCOLO -->
+<!-- CREACION DE UN PROTOCOLO -->
+<!-- CREACION DE UN PROTOCOLO -->
+<!-- CREACION DE UN PROTOCOLO -->
+	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.GuardarLista">
+		<input name="tablaProtocolo" keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo" fieldID='oid_protocolo'>
+			<campoEntrada>
+
+				<campoEntrada name="oid_tipo_comprobante" clase="com.jkt.dominio.TipoComprobante" metodo="setTipoComprobante" />
+				<campoEntrada name="oid_cliente_sucursal" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
+				<campoEntrada name="oid_equipo" clase="com.jkt.laboratorio.dominio.Equipo" metodo="setEquipo" />
+				<campoEntrada name="oid_laboratorio" clase="com.jkt.laboratorio.dominio.Laboratorio" metodo="setLaboratorio" />
+				<campoEntrada name="comentario" clase="String" metodo="setComentario" />
+				<campoEntrada name="oid_estado" clase="Integer" metodo="setEstado" /> 
+
+				<campoEntrada name="impreso" clase="Boolean" metodo="setImpreso" /> 
+				<campoEntrada name="enviado" clase="Boolean" metodo="setEnviado" /> 
+				<campoEntrada name="activo" clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="fechaHoraMuestra" clase="Date" metodo="setFechaHoraMuestra" /> <!-- aun no se soporta el datetime --> 
+				
+				<campoEntrada name="tablaDetalles" metodo="agregarDetalle" clase="com.jkt.laboratorio.dominio.ProtocoloDetalle" fieldID="oid_detalle">
+
+					<campoEntrada name="oid_determinacion" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setResultado" />
+
+				</campoEntrada>
+	
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="FormProtocolo"></form>
+		</forms>
+
+	</operacion>
+	
+	
+	
+<!-- 	INGRESAR RESULTADOS DE ENSAYOS -->
+<!-- 	INGRESAR RESULTADOS DE ENSAYOS -->
+<!-- 	INGRESAR RESULTADOS DE ENSAYOS -->
+<!-- 	INGRESAR RESULTADOS DE ENSAYOS -->
+<!-- 	INGRESAR RESULTADOS DE ENSAYOS -->
+	<operacion name="IngresarResultadosDeEnsayo" clase="com.jkt.operaciones.GuardarLista">
+		<input name="tablaProtocolo" keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo" fieldID='oid_protocolo'>
+			<campoEntrada>
+			
+				<campoEntrada name="usuarioResultados" clase="com.jkt.dominio.Usuario" metodo="setUsuarioIngresoAprobacion" />
+				<campoEntrada name="fechaHoraResultados" clase="Date" metodo="setFechaHoraResultado" />
+				<campoEntrada name="oid_estado" clase="Integer" metodo="setEstado" /> <!-- pendiente de aprobacion -->
+				<campoEntrada name="oid_diagnostico" clase="com.jkt.laboratorio.dominio.Diagnostico" metodo="setDiagnostico" />
+				<campoEntrada name="comentarioDiagnostico" clase="String" metodo="setComentarioDiagnostico" />
+			
+				<campoEntrada name="tablaDetalles" metodo="agregarDetalle" clase="com.jkt.laboratorio.dominio.ProtocoloDetalle" fieldID="oid_detalle">
+
+<!-- 					<campoEntrada name="oid_resultado" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setResultado" /> -->
+					<campoEntrada name="comentario" clase="String" metodo="setComentario" />
+
+					<campoEntrada name="tablaVariables" metodo="agregarVariable" clase="com.jkt.laboratorio.dominio.ProtocoloVariable" fieldID="oid_variable">
+	
+						<campoEntrada name="variable" clase="String" metodo="setVariable" />
+						<campoEntrada name="valor" clase="String" metodo="setValor" />
+	
+					</campoEntrada>
+					
+				</campoEntrada>
+
+	
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="FormProtocolo"></form>
+		</forms>
+
+	</operacion>
+
+<!-- 	APROBAR RESULTADOS DE PROTOCOLO -->
+<!-- 	APROBAR RESULTADOS DE PROTOCOLO -->
+<!-- 	APROBAR RESULTADOS DE PROTOCOLO -->
+<!-- 	APROBAR RESULTADOS DE PROTOCOLO -->
+<!-- 	APROBAR RESULTADOS DE PROTOCOLO -->
+	<operacion name="AprobarResultados" clase="com.jkt.operaciones.GuardarLista">
+		<input name="tablaProtocolo" keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo" fieldID='oid_protocolo'>
+			<campoEntrada>
+				<campoEntrada name="usuarioAprobacion" clase="com.jkt.dominio.Usuario" metodo="setUsuarioIngresoAprobacion" />
+				<campoEntrada name="fechaHoraAprobacion" clase="Date" metodo="setFechaHoraAprobacion" />
+				<campoEntrada name="oid_estado" clase="Integer" metodo="setEstado" /> <!--  Deberia ir terminado -->
+			</campoEntrada>
+		</input>
+
+		<forms>
+			<form name="FormProtocolo"></form>
+		</forms>
+
+	</operacion>
+	
+	
+	
+<!-- 	INSTANCIAR REPORTE -->
+	<operacion name="CrearReporte" clase="com.jkt.laboratorio.operaciones.CrearDoc">
+		<forms>
+			<form name="FormProtocolo"></form>
+		</forms>
+	</operacion>
+	
 
 
 </entity>

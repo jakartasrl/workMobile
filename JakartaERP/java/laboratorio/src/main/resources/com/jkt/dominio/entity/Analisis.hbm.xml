@@ -15,7 +15,7 @@
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		<many-to-one name="laboratorio" lazy="proxy" not-null="true" column="ID_LABORATORIO"/>
+		<many-to-one name="laboratorio" column="ID_LABORATORIO"/>
 		
 		<list name="listaDeterminaciones"  cascade="save-update">
 			<key column="ID_ANALISIS" />

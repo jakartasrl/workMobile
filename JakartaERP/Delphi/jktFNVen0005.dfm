@@ -3,6 +3,7 @@ inherited FNVen0005: TFNVen0005
   Caption = 'Cotizador'
   ClientHeight = 552
   ClientWidth = 1071
+  ExplicitLeft = -331
   ExplicitWidth = 1087
   ExplicitHeight = 590
   PixelsPerInch = 96
@@ -41,7 +42,7 @@ inherited FNVen0005: TFNVen0005
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = -128
+        Left = -36
         Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
@@ -51,7 +52,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 12
+        Left = 104
         Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
@@ -61,7 +62,7 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = -128
+        Left = -36
         Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
@@ -71,7 +72,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = -128
+        Left = -36
         Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
@@ -81,7 +82,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 198
+        Left = 290
         Top = 166
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
@@ -91,7 +92,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 297
+        Left = 389
         Top = 166
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
@@ -101,7 +102,7 @@ inherited FNVen0005: TFNVen0005
         Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 198
+        Left = 290
         Top = 72
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
@@ -113,7 +114,7 @@ inherited FNVen0005: TFNVen0005
         AnchorY = 81
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 198
+        Left = 290
         Top = 95
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
@@ -125,7 +126,7 @@ inherited FNVen0005: TFNVen0005
         Width = 307
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 642
+        Left = 734
         Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -140,7 +141,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 743
+        Left = 835
         Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -149,7 +150,7 @@ inherited FNVen0005: TFNVen0005
         Width = 226
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 642
+        Left = 734
         Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
@@ -174,10 +175,10 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTreeList1: TcxDBTreeList
-        Left = -234
+        Left = -142
         Top = 260
         Width = 795
-        Height = 234
+        Height = 248
         BorderStyle = cxcbsNone
         Align = alClient
         Bands = <
@@ -406,7 +407,7 @@ inherited FNVen0005: TFNVen0005
         end
       end
       object cxCheckBox1: TcxCheckBox
-        Left = 579
+        Left = 671
         Top = 260
         Caption = 'AUTORIZAR'
         Style.HotTrack = False
@@ -416,7 +417,7 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxCheckBox2: TcxCheckBox
-        Left = 579
+        Left = 671
         Top = 285
         Caption = 'RECHAZAR'
         Style.HotTrack = False
@@ -426,12 +427,13 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxButton1: TcxButton
-        Left = 531
+        Left = 623
         Top = 126
         Width = 150
         Height = 25
         Caption = 'Tipos de cambio...'
         TabOrder = 11
+        OnClick = cxButton1Click
       end
       object lcMainGroup_Root: TdxLayoutGroup
         AlignHorz = ahParentManaged
@@ -637,6 +639,7 @@ inherited FNVen0005: TFNVen0005
         CaptionOptions.Text = 'cxCheckBox2'
         CaptionOptions.Visible = False
         Parent = lcMainGroup10
+        Visible = False
         Control = cxCheckBox2
         ControlOptions.AlignHorz = ahLeft
         ControlOptions.ShowBorder = False
