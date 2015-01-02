@@ -7,7 +7,7 @@ import java.util.List;
 import com.jkt.varios.dominio.Moneda;
 
 /**
- * <p>Una lista de precio es una lista propiamente dicha que contiene detalles las cuales brindan informacion sobre productos y sus costos.</p>
+ * <p>Una lista de precio es una lista que contiene detalles las cuales brindan informacion sobre productos y sus costos.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

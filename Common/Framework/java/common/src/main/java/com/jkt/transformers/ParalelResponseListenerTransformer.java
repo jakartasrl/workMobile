@@ -29,6 +29,15 @@ public class ParalelResponseListenerTransformer extends Transformer {
 	
 	private ServletOutputStream servletOutputStream;
 	
+	/**
+	 * Mapa con writers para poder escribir paralelamente
+	 */
+	private Map<String, XMLTableMaker> writers=new HashMap<String, XMLTableMaker>();
+
+	public void addWriter(String nameOfWriter, String nameOfTable, ServletOutputStream outputStream){
+		this.writers.put(nameOfWriter, new XMLTableMaker(nameOfTable, nameOfWriter, outputStream));
+	}
+
 	@Override
 	protected void update(Notificacion currentEntry) {
 		XMLTableMaker writer = this.writers.get(currentEntry.getWriterKey());
@@ -92,7 +101,17 @@ public class ParalelResponseListenerTransformer extends Transformer {
 
 	@Override
 	public void setup(ServletOutputStream outputStream, String outputName) throws JakartaException {
-		configurarVariosWriters(outputStream);
+		this.servletOutputStream=outputStream;
+		List<Output> outputs = ((EventBusiness)this.getEvent()).getOutputs();
+		String nameOfOutput = "";
+		String nameOfTable  = "";
+		
+		for (Output output : outputs) {
+//			nameOfOutput = output.getTableName();
+			nameOfOutput = output.getName();
+			nameOfTable  = output.getTableName();
+			this.addWriter(nameOfOutput, nameOfTable, outputStream);
+		}
 	}
 
 }

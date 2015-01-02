@@ -82,6 +82,8 @@ inherited FNVen0007: TFNVen0007
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
           object jktExpDBGrid1DBTableView1oid_detalle: TcxGridDBColumn
             DataBinding.FieldName = 'oid_detalle'
           end
@@ -89,12 +91,18 @@ inherited FNVen0007: TFNVen0007
             DataBinding.FieldName = 'oid_det'
           end
           object jktExpDBGrid1DBTableView1cod_det: TcxGridDBColumn
+            Caption = 'C'#243'digo'
             DataBinding.FieldName = 'cod_det'
+            Options.Editing = False
           end
           object jktExpDBGrid1DBTableView1des_det: TcxGridDBColumn
+            Caption = 'Descripci'#243'n'
             DataBinding.FieldName = 'des_det'
+            Options.Editing = False
+            Width = 300
           end
           object jktExpDBGrid1DBTableView1precio: TcxGridDBColumn
+            Caption = 'Precio'
             DataBinding.FieldName = 'precio'
           end
         end
@@ -116,6 +124,8 @@ inherited FNVen0007: TFNVen0007
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
           object jktExpDBGrid2DBTableView1oid_detalle: TcxGridDBColumn
             DataBinding.FieldName = 'oid_detalle'
           end
@@ -123,12 +133,18 @@ inherited FNVen0007: TFNVen0007
             DataBinding.FieldName = 'oid_det'
           end
           object jktExpDBGrid2DBTableView1cod_det: TcxGridDBColumn
+            Caption = 'C'#243'digo'
             DataBinding.FieldName = 'cod_det'
+            Options.Editing = False
           end
           object jktExpDBGrid2DBTableView1des_det: TcxGridDBColumn
+            Caption = 'Descripci'#243'n'
             DataBinding.FieldName = 'des_det'
+            Options.Editing = False
+            Width = 300
           end
           object jktExpDBGrid2DBTableView1precio: TcxGridDBColumn
+            Caption = 'Precio'
             DataBinding.FieldName = 'precio'
           end
         end
@@ -150,6 +166,8 @@ inherited FNVen0007: TFNVen0007
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          OptionsData.Deleting = False
+          OptionsData.Inserting = False
           object jktExpDBGrid3DBTableView1oid_detalle: TcxGridDBColumn
             DataBinding.FieldName = 'oid_detalle'
           end
@@ -157,12 +175,18 @@ inherited FNVen0007: TFNVen0007
             DataBinding.FieldName = 'oid_pro'
           end
           object jktExpDBGrid3DBTableView1cod_pro: TcxGridDBColumn
+            Caption = 'C'#243'digo'
             DataBinding.FieldName = 'cod_pro'
+            Options.Editing = False
           end
           object jktExpDBGrid3DBTableView1des_pro: TcxGridDBColumn
+            Caption = 'Descripci'#243'n'
             DataBinding.FieldName = 'des_pro'
+            Options.Editing = False
+            Width = 300
           end
           object jktExpDBGrid3DBTableView1precio: TcxGridDBColumn
+            Caption = 'Precio'
             DataBinding.FieldName = 'precio'
           end
         end
@@ -324,6 +348,7 @@ inherited FNVen0007: TFNVen0007
   end
   inherited Driver: TjktDriver
     DataSetCab = mtListaPrecio
+    Opciones = []
     TipoPrograma = tp_abmIndividual
     Filtro = Help
     Left = 488
@@ -448,6 +473,7 @@ inherited FNVen0007: TFNVen0007
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterSource = dsListaPrecio
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -489,6 +515,7 @@ inherited FNVen0007: TFNVen0007
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterSource = dsListaPrecio
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
@@ -530,6 +557,7 @@ inherited FNVen0007: TFNVen0007
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
+    MasterSource = dsListaPrecio
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0
     SortID = 0
