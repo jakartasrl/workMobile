@@ -15,8 +15,8 @@
 
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-		
-		<many-to-one name="tablaValidacion" lazy="proxy" not-null="true" column="ID_TABLAVALDETER"/>
+
+		<many-to-one name="tablaValidacion" not-null="true" column="ID_TABLAVALDETER" />
 
 	</class>
 

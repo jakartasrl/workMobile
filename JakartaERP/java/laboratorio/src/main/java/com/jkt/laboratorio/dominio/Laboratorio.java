@@ -12,6 +12,7 @@ import com.jkt.dominio.Descriptible;
  */
 public class Laboratorio extends Descriptible {
 
+	
 	private List<Determinacion> determinaciones=new ArrayList<Determinacion>();
 
 	public List<Determinacion> getDeterminaciones() {

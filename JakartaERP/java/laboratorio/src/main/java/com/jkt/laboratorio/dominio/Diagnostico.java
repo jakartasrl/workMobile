@@ -3,9 +3,9 @@ package com.jkt.laboratorio.dominio;
 import com.jkt.dominio.Descriptible;
 
 /**
- * Representa un An√°lisis que se puede hacer en un Laboratorio.
+ * Representa un An·lisis que se puede hacer en un Laboratorio.
  * Se utiliza en los pedidos de Laboratorio y en los protocolos.
- * Ejemplo: An√°lisis f√≠sico-qu√≠mico de un transformador.
+ * Ejemplo: An·lisis fÌsico-quÌmico de un transformador.
  */
 public class Diagnostico extends Descriptible {
 

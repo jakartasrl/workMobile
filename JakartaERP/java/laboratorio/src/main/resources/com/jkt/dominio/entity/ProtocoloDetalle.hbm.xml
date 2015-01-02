@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.laboratorio.dominio.ProtocoloDetalle" table="PROTOCOLO_DETALLE">
+		<id name="id" column="PROTOCOLO_DETALLE_ID">
+			<generator class="native"></generator>
+		</id>
+
+		<many-to-one name="protocolo" column="PROTOCOLO_ID" class="com.jkt.laboratorio.dominio.Protocolo" />
+		<many-to-one name="resultado" column="RESULTADO_DETERMINACION_ID" class="com.jkt.laboratorio.dominio.Determinacion" />
+
+		<property name="comentario" column="COMENTARIO" />
+
+		<list name="variables" table="PROTOCOLO_VARIABLE" cascade="all">
+			<key column="PROTOCOLO_DETALLE_ID" />
+			<index column="ORDEN" />
+			<one-to-many class="com.jkt.laboratorio.dominio.ProtocoloVariable" />
+		</list>
+
+	</class>
+
+</hibernate-mapping>
