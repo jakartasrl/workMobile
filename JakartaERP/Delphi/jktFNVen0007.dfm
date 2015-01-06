@@ -84,11 +84,14 @@ inherited FNVen0007: TFNVen0007
           DataController.Summary.SummaryGroups = <>
           OptionsData.Deleting = False
           OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
           object jktExpDBGrid1DBTableView1oid_detalle: TcxGridDBColumn
             DataBinding.FieldName = 'oid_detalle'
+            Visible = False
           end
           object jktExpDBGrid1DBTableView1oid_det: TcxGridDBColumn
             DataBinding.FieldName = 'oid_det'
+            Visible = False
           end
           object jktExpDBGrid1DBTableView1cod_det: TcxGridDBColumn
             Caption = 'C'#243'digo'
@@ -126,11 +129,14 @@ inherited FNVen0007: TFNVen0007
           DataController.Summary.SummaryGroups = <>
           OptionsData.Deleting = False
           OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
           object jktExpDBGrid2DBTableView1oid_detalle: TcxGridDBColumn
             DataBinding.FieldName = 'oid_detalle'
+            Visible = False
           end
           object jktExpDBGrid2DBTableView1oid_det: TcxGridDBColumn
             DataBinding.FieldName = 'oid_det'
+            Visible = False
           end
           object jktExpDBGrid2DBTableView1cod_det: TcxGridDBColumn
             Caption = 'C'#243'digo'
@@ -168,11 +174,14 @@ inherited FNVen0007: TFNVen0007
           DataController.Summary.SummaryGroups = <>
           OptionsData.Deleting = False
           OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
           object jktExpDBGrid3DBTableView1oid_detalle: TcxGridDBColumn
             DataBinding.FieldName = 'oid_detalle'
+            Visible = False
           end
           object jktExpDBGrid3DBTableView1oid_pro: TcxGridDBColumn
             DataBinding.FieldName = 'oid_pro'
+            Visible = False
           end
           object jktExpDBGrid3DBTableView1cod_pro: TcxGridDBColumn
             Caption = 'C'#243'digo'
