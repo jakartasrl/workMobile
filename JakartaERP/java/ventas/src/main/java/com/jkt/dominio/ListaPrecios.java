@@ -19,7 +19,7 @@ public class ListaPrecios extends Descriptible {
 	private List<ListaPrecioDetalle> detalles=new ArrayList<ListaPrecioDetalle>();
 	
 	public void agregarDetalle(ListaPrecioDetalle detalle){
-		if (this.detalles.contains(detalle)) {
+		if (!this.detalles.contains(detalle)) {
 			this.detalles.add(detalle);
 			detalle.setListaPrecios(this);
 		}

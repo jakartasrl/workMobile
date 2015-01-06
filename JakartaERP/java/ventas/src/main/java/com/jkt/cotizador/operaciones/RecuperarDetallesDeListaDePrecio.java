@@ -69,12 +69,17 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 			if (detalle.getProducto()!=null) {
 				writer=WRITER_PRODUCTOS;
 				idsProductos.add(detalle.getProducto().getId());
+				
 			}else if (detalle.getDeterminacion().getLaboratorio().getId()==laboratorioElectrico.getId()) {
+				
 				writer=WRITER_DETERMINACIONES_ELECTRICAS;
-				idsDeterminacionesQuimicas.add(detalle.getDeterminacion().getId());
-			}else if (detalle.getDeterminacion().getLaboratorio().getId()==laboratorioQuimico.getId()) {
-				writer=WRITER_DETERMINACIONES_QUIMICAS;
 				idsDeterminacionesElectricas.add(detalle.getDeterminacion().getId());
+				
+			}else if (detalle.getDeterminacion().getLaboratorio().getId()==laboratorioQuimico.getId()) {
+				
+				writer=WRITER_DETERMINACIONES_QUIMICAS;
+				idsDeterminacionesQuimicas.add(detalle.getDeterminacion().getId());
+				
 			}else{
 				throw new JakartaException(MENSAJE_ERROR);
 			}
