@@ -212,6 +212,8 @@ begin
     NombrePrograma := 'TFNVen0005'
   else if Sender.Tag = 40 then
     NombrePrograma := 'TFNVen0007'
+  else if Sender.Tag = 41 then
+    NombrePrograma := 'TFNVen0009'
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
