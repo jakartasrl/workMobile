@@ -1,5 +1,7 @@
 package com.jkt.varios.operaciones;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
@@ -27,11 +29,14 @@ public class TraerTiposDeCambioEnMatriz extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		String queryHql=String.format("select distinct entity.%s from %s as entity order by entity.%s asc",ATRIBUTO, NOMBRE_ENTIDAD, ATRIBUTO);
+		String queryHql=String.format("select distinct entity.%s from %s as entity order by entity.%s desc",ATRIBUTO, NOMBRE_ENTIDAD, ATRIBUTO);
 		Query query = crearHQL(queryHql);
 		query.setMaxResults(MAX_RESULTS);
 		
-		notificarObjeto("columnas", query.list());
+		List result = query.list();
+		Collections.reverse(result); // la ordeno al revés para que muestre la fecha más reciente a la derecha (también se puede hacer con la consulta SQL) 
+		 
+		notificarObjeto("columnas", result);
 		
 		notificarObjeto("monedas", obtenerTodos(Moneda.class));
 		notificarObjeto("tiposDeCambio", obtenerTodos(TipoDeCambio.class));
