@@ -547,8 +547,8 @@
 <!-- 				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" /> -->
 				
 				<!-- ES PRIMORDIAL EL ORDEN DE ESTOS DOS CAMPOS, YA QUE EL CODIGO DE ESTADO NECESITA QUE EXISTA UN ITEM ASIGNADO -->
-				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
 				<campoEntrada name="oid_item" clase="com.jkt.dominio.ComprobanteVentaDet" metodo="setItem" />
+				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
 
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
 					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />

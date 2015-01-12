@@ -165,7 +165,7 @@
 			<campoSalida value="oid_Pais" target="direccionLegal.pais.id" />
 			<campoSalida value="CodPais" target="direccionLegal.pais.codigo" />
 			<campoSalida value="DescPais" target="direccionLegal.pais.descripcion" />
-			<campoSalida value="PersonaJuridica" target="personaJuridica" />
+			<campoSalida value="PersonaJuridica" target="isPersonaJuridica" />
 			<campoSalida value="Cuit" target="cuit" />
 		</output>
 
@@ -179,7 +179,7 @@
 			<campoSalida value="oid_Categoria" target="categoria.id" />
 			<campoSalida value="CodCategoria" target="categoria.codigo" />
 			<campoSalida value="DescCategoria" target="categoria.descripcion" />
-			<campoSalida value="VigenciaDesde" target="vigencia" />
+			<campoSalida value="VigenciaDesde" target="fechaVigencia" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
