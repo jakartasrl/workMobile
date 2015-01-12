@@ -31,7 +31,7 @@ public class DomicilioEntrega extends PersistentEntity {
 	/**
 	 * Indica el nro correlativo de domicilio de entrega
 	 */
-	@Min(message="El numero de domicilio de entrega debe ser mayor a cero.", value=1)
+	@Min(message="El número de domicilio de entrega debe ser mayor o igual a cero.", value=0)
 	private int numero;
 	
 	/**
