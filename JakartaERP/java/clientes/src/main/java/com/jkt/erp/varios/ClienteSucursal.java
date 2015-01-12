@@ -28,7 +28,7 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle, IDesc
 	@NotNull(message="Esta entidad debe tener un cliente.")
 	private Cliente cliente;
 	
-	@Min(message="El numero debe ser mayor a cero.",value=1)
+	@Min(message="El Nro. Sucursal debe ser mayor o igual a cero.", value=0)
 	private int numero;
 	
 	@NotBlank(message="La descripcion debe no estar vacia.")
