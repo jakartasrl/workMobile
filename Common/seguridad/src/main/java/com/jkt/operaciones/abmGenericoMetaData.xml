@@ -360,14 +360,14 @@
 		
 		<campos>
 			<campo fieldName="oid_plan"   tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_plan" />
-			<campo fieldName="cod_plan"   tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="descr_plan" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="cod_plan"   tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Código"  />
+			<campo fieldName="descr_plan" tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripción"  />
 			<campo fieldName="plantilla"  tipo="Text" longitud="0" visible="true" readOnly="false" orden="4" label="Plantilla" columnWidth="500"  />
 			<campo fieldName="Activo"     tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
 		</campos>
 
 		<validadores>
-			<validador fieldName="cod_plan" 	tipoValidacion="Inexistente"	 entidad="plantilla" oidName="oid" descrName="descr_plan" />
+			<validador fieldName="cod_plan" 	tipoValidacion="Inexistente"	 entidad="plantilla" oidName="" descrName="" />
 			<validador fieldName="descr_plan"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 			<validador fieldName="plantilla"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
