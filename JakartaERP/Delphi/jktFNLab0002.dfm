@@ -6,7 +6,7 @@ inherited FNLab0002: TFNLab0002
   ClientWidth = 782
   Position = poDesigned
   ExplicitWidth = 798
-  ExplicitHeight = 407
+  ExplicitHeight = 406
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
@@ -359,8 +359,8 @@ inherited FNLab0002: TFNLab0002
   object hlpAnalisis: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'analisis'
-    EntidadMaestra = 'laboratorio'
     OidEntidadMaestra = TLabooid_lab
+    TipoFiltro = fi_Activos
     OidRespuesta = TCaboid_ana
     Left = 376
     Top = 152
@@ -370,6 +370,7 @@ inherited FNLab0002: TFNLab0002
     Entidad = 'determinacion'
     EntidadMaestra = 'laboratorio'
     OidEntidadMaestra = TLabooid_lab
+    TipoFiltro = fi_Activos
     CodigoRespuesta = TDetcod_det
     Left = 256
     Top = 224

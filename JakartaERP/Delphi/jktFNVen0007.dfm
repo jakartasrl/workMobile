@@ -509,6 +509,7 @@ inherited FNVen0007: TFNVen0007
     object mtPreciosLaboQuimprecio: TFloatField
       Tag = 1
       FieldName = 'precio'
+      DisplayFormat = '0.00'
     end
   end
   object mtPreciosLaboElec: TjktMemTable
@@ -551,6 +552,7 @@ inherited FNVen0007: TFNVen0007
     object mtPreciosLaboElecprecio: TFloatField
       Tag = 1
       FieldName = 'precio'
+      DisplayFormat = '0.00'
     end
   end
   object mtPreciosMateriales: TjktMemTable
@@ -593,6 +595,7 @@ inherited FNVen0007: TFNVen0007
     object mtPreciosMaterialesprecio: TFloatField
       Tag = 1
       FieldName = 'precio'
+      DisplayFormat = '0.00'
     end
   end
   object dsListaPrecio: TDataSource

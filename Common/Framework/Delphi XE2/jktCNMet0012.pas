@@ -246,7 +246,10 @@ begin
 
   // Asignamos por defecto el campo 'Activo' en True si es que lo crearon
   if (Self.FindField('Activo') <> nil) then
-    Self.FieldByName('Activo').AsBoolean := True;
+    begin
+      Self.Editar;
+      Self.FieldByName('Activo').AsBoolean := True;
+    end;
 end;
 
 procedure TjktMemTable.onEventoBeforeEdit(DataSet: TDataSet);
@@ -281,8 +284,8 @@ end;
 
 procedure TjktMemTable.Editar;
 begin
-  if (not (self.State in [dsEdit,dsInsert]))
-     then self.Edit;
+  if (not (Self.State in [dsEdit, dsInsert])) then
+    Self.Edit;
 end;
 
 function TjktMemTable.isEditando : Boolean;

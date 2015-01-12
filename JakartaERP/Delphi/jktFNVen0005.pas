@@ -165,6 +165,7 @@ type
     lcMainSeparatorItem1: TdxLayoutSeparatorItem;
     cxButton1: TcxButton;
     lcMainItem16: TdxLayoutItem;
+    cxStyleNormal: TcxStyle;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -307,8 +308,11 @@ procedure TFNVen0005.cxDBTreeList1StylesGetContentStyle(
 begin
   inherited;
 
-  if (ANode.Texts[cxDBTreeList1tipo.Position.ColIndex] <> 'C') then
-    AStyle := cxStyleDisabled;
+//  if (ANode.Texts[cxDBTreeList1tipo.Position.ColIndex] <> 'C') then
+  if ANode.IsGroupNode then
+    AStyle := cxStyleDisabled
+  else
+    AStyle := cxStyleNormal;
 end;
 
 procedure TFNVen0005.FormClose(Sender: TObject; var Action: TCloseAction);
