@@ -48,6 +48,8 @@ public class TraerModeloCotizador extends Operation {
 		boolean tieneHijos=!titulosHijos.isEmpty();
 
 		if (!tieneHijos) {
+		/*
+
 			if(tituloModeloCotizador.getConcepto()==null){
 				throw new JakartaException("El titulo no tiene un concepto relacionado.");
 			}
@@ -57,9 +59,13 @@ public class TraerModeloCotizador extends Operation {
 					throw new JakartaException("Si el concepto relacionado al titulo, pide articulo, debe obligatoriamente tener relacionado un valor de clasificador.");
 				}
 			}
-			
-			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+
+		*/
+			if (tituloModeloCotizador.getConcepto() != null){
+			  tituloModeloCotizador.setTipo("C");// Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+			}
 		}
+
 		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 		
 		if (tieneHijos) {
