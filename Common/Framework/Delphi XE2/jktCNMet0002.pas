@@ -552,7 +552,8 @@ begin
                                // Esto es genial ya que nosotros definimos como enviamos el formato y el usuario
                                // define mediante la Configuración Regional como quiere ver sus datos.
 
-                               FDataset.FieldByName(fieldName).Value := StrToFloat(XMLParser.CurAttr.Value(i)); // no hay una version AnsiString de StrToFloat ni de StrToInt
+                               if (XMLParser.CurAttr.Value(i) <> '') then
+                                  FDataset.FieldByName(fieldName).Value := StrToFloat(XMLParser.CurAttr.Value(i)); // no hay una version AnsiString de StrToFloat ni de StrToInt
                              end
                            else
                              begin

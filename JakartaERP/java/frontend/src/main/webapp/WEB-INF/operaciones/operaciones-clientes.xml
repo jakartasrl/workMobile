@@ -165,7 +165,7 @@
 			<campoSalida value="oid_Pais" target="direccionLegal.pais.id" />
 			<campoSalida value="CodPais" target="direccionLegal.pais.codigo" />
 			<campoSalida value="DescPais" target="direccionLegal.pais.descripcion" />
-			<campoSalida value="PersonaJuridica" target="personaJuridica" />
+			<campoSalida value="PersonaJuridica" target="isPersonaJuridica" />
 			<campoSalida value="Cuit" target="cuit" />
 		</output>
 
@@ -179,7 +179,7 @@
 			<campoSalida value="oid_Categoria" target="categoria.id" />
 			<campoSalida value="CodCategoria" target="categoria.codigo" />
 			<campoSalida value="DescCategoria" target="categoria.descripcion" />
-			<campoSalida value="VigenciaDesde" target="vigencia" />
+			<campoSalida value="VigenciaDesde" target="fechaVigencia" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 
@@ -521,7 +521,7 @@
 <!-- 	LISTA DE PRECIOS -->
 <!-- 	LISTA DE PRECIOS -->
 <!-- 	LISTA DE PRECIOS -->
-	<operacion name="TraerListaPrecios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.ListaPrecios">
+	<operacion name="TraerListaPrecios" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ListaPrecios">
 
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_lista_precio" target="id" />
@@ -549,7 +549,7 @@
 
 	<operacion name="GuardarListaPrecios" clase="com.jkt.operaciones.GuardarLista">
 
-		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.varios.ListaPrecios" fieldID="oid_lista_precio">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.dominio.ListaPrecios" fieldID="oid_lista_precio">
 			<campoEntrada>
 
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />

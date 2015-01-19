@@ -1,46 +1,45 @@
 inherited FNVen0006: TFNVen0006
   Caption = 'Ingreso de Presupuesto'
   ClientHeight = 592
-  ClientWidth = 861
-  ExplicitWidth = 877
+  ClientWidth = 946
+  ExplicitWidth = 962
   ExplicitHeight = 630
   PixelsPerInch = 96
   TextHeight = 13
   inherited cxGroupBoxLeft: TcxGroupBox
-    ExplicitHeight = 478
+    ExplicitHeight = 592
     Height = 592
   end
   inherited cxSplitterLeft: TcxSplitter
     Height = 592
-    ExplicitHeight = 478
+    ExplicitHeight = 592
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 831
-    ExplicitLeft = 879
-    ExplicitHeight = 478
+    Left = 916
+    ExplicitLeft = 831
+    ExplicitHeight = 592
     Height = 592
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 827
+    Left = 912
     Height = 592
-    ExplicitLeft = 875
-    ExplicitHeight = 478
+    ExplicitLeft = 827
+    ExplicitHeight = 592
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 841
-    ExplicitHeight = 478
+    ExplicitWidth = 793
+    ExplicitHeight = 592
     Height = 592
-    Width = 793
+    Width = 878
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
-      Width = 789
+      Width = 874
       Height = 588
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 837
-      ExplicitHeight = 474
+      ExplicitWidth = 789
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 120
         Top = 41

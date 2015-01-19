@@ -547,8 +547,8 @@
 <!-- 				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" /> -->
 				
 				<!-- ES PRIMORDIAL EL ORDEN DE ESTOS DOS CAMPOS, YA QUE EL CODIGO DE ESTADO NECESITA QUE EXISTA UN ITEM ASIGNADO -->
-				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
 				<campoEntrada name="oid_item" clase="com.jkt.dominio.ComprobanteVentaDet" metodo="setItem" />
+				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
 
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
 					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
@@ -618,8 +618,8 @@
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid_plan" target="id" />
 			<campoSalida value="cod_plan" target="codigo" />
-			<campoSalida value="descr_plan" target="descripcion" />
-			<campoSalida value="plantilla" target="plantilla" />
+			<campoSalida value="plantilla" target="descripcion" />
+			<campoSalida value="descr_plan" target="plantilla" />
 			<campoSalida value="Activo" target="isActivo" />
 		</output>		
 
@@ -636,8 +636,8 @@
 		<input name="mtInput" keyName="objeto" clase="com.jkt.dominio.Plantilla" fieldID="oid_plan">
 			<campoEntrada>
 				<campoEntrada name="cod_plan" clase="String" metodo="setCodigo" />
-				<campoEntrada name="descr_plan" clase="String" metodo="setDescripcion" />
-				<campoEntrada name="plantilla" clase="String" metodo="setPlantilla" />
+				<campoEntrada name="plantilla" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="descr_plan" clase="String" metodo="setPlantilla" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 			</campoEntrada>
 		</input>

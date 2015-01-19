@@ -7,7 +7,7 @@ import java.util.List;
 import com.jkt.varios.dominio.Moneda;
 
 /**
- * <p>Una lista de precio es una lista propiamente dicha que contiene detalles las cuales brindan informacion sobre productos y sus costos.</p>
+ * <p>Una lista de precio es una lista que contiene detalles las cuales brindan informacion sobre productos y sus costos.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -19,7 +19,7 @@ public class ListaPrecios extends Descriptible {
 	private List<ListaPrecioDetalle> detalles=new ArrayList<ListaPrecioDetalle>();
 	
 	public void agregarDetalle(ListaPrecioDetalle detalle){
-		if (this.detalles.contains(detalle)) {
+		if (!this.detalles.contains(detalle)) {
 			this.detalles.add(detalle);
 			detalle.setListaPrecios(this);
 		}

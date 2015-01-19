@@ -3,7 +3,6 @@ inherited FNVen0005: TFNVen0005
   Caption = 'Cotizador'
   ClientHeight = 552
   ClientWidth = 1071
-  ExplicitLeft = -331
   ExplicitWidth = 1087
   ExplicitHeight = 590
   PixelsPerInch = 96
@@ -42,7 +41,7 @@ inherited FNVen0005: TFNVen0005
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = -36
+        Left = 126
         Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
@@ -52,7 +51,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 104
+        Left = 266
         Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
@@ -62,7 +61,7 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = -36
+        Left = 126
         Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
@@ -72,7 +71,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = -36
+        Left = 126
         Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
@@ -82,7 +81,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 290
+        Left = 452
         Top = 166
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
@@ -92,7 +91,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 389
+        Left = 551
         Top = 166
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
@@ -102,7 +101,7 @@ inherited FNVen0005: TFNVen0005
         Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 290
+        Left = 452
         Top = 72
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
@@ -114,7 +113,7 @@ inherited FNVen0005: TFNVen0005
         AnchorY = 81
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 290
+        Left = 452
         Top = 95
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
@@ -126,7 +125,7 @@ inherited FNVen0005: TFNVen0005
         Width = 307
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 734
+        Left = 896
         Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -141,7 +140,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 835
+        Left = 997
         Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -150,7 +149,7 @@ inherited FNVen0005: TFNVen0005
         Width = 226
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 734
+        Left = 896
         Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
@@ -175,7 +174,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTreeList1: TcxDBTreeList
-        Left = -142
+        Left = 20
         Top = 260
         Width = 795
         Height = 248
@@ -407,7 +406,7 @@ inherited FNVen0005: TFNVen0005
         end
       end
       object cxCheckBox1: TcxCheckBox
-        Left = 671
+        Left = 833
         Top = 260
         Caption = 'AUTORIZAR'
         Style.HotTrack = False
@@ -417,7 +416,7 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxCheckBox2: TcxCheckBox
-        Left = 671
+        Left = 833
         Top = 285
         Caption = 'RECHAZAR'
         Style.HotTrack = False
@@ -427,7 +426,7 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxButton1: TcxButton
-        Left = 623
+        Left = 785
         Top = 126
         Width = 150
         Height = 25
@@ -1051,6 +1050,7 @@ inherited FNVen0005: TFNVen0005
     object mtDetCotizimporte_unit: TFloatField
       Tag = 1
       FieldName = 'importe_unit'
+      DisplayFormat = '0.00'
     end
     object mtDetCotizoid_moneda: TIntegerField
       Tag = 1
@@ -1191,6 +1191,8 @@ inherited FNVen0005: TFNVen0005
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       TextColor = clGrayText
+    end
+    object cxStyleNormal: TcxStyle
     end
   end
   object opTraerEntidades: TjktOperacion

@@ -18,18 +18,18 @@ public class Contacto extends PersistentEntity {
 	@NotBlank
 	private String apellidoYNombre;
 
-	@NotBlank
+	@NotBlank(message="Falta completar teléfono de Contacto")
 	private String telefono;
 
 	private String telefonoAlternativo;
 
 	private String celular;
 
-	@NotBlank(message="Debe ingresar un correo electronico.")
+//	@NotBlank(message="Debe ingresar un correo electronico.")
 	@Email(message = "El correo ingresado no parece tener el formato correcto.")
 	private String mail;
 
-	@NotBlank
+	@NotBlank(message="Falta completar el Cargo del Contacto")
 	private String tratamiento;
 
 	@NotNull(message="El contacto debe tener obligatoriamente un tipo de contacto.")

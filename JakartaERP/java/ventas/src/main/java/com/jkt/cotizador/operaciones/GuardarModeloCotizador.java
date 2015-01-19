@@ -42,7 +42,7 @@ public class GuardarModeloCotizador extends Operation {
 		//armo la jerarquia retornando el primer elemento, el titulo padre.
 		establecerRelaciones(modelo, mapaDetitulos, titulos);
 
-		validarTitulos();
+//		validarTitulos();
 		
 		//guardo el modelo de cotizador.
 		guardar(modelo);

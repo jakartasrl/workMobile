@@ -22,7 +22,7 @@ import com.jkt.varios.dominio.ComponenteValor;
  */
 public class TraerModeloParaCotizar extends Operation {
 
-	//key para recuperar del mapa, desde el cliente enviarÃ¡n OID=2, por ejemplo.
+	//key para recuperar del mapa, desde el cliente enviarán OID=2, por ejemplo.
 	private static final String OID = "OID";
 
 	//writers mapeados contra el archivo operaciones-ventas.xml
@@ -56,12 +56,14 @@ public class TraerModeloParaCotizar extends Operation {
 
 		if (!tieneHijos) {
 			if(tituloModeloCotizador.getConcepto()==null){
-				throw new JakartaException("El titulo no tiene un concepto relacionado.");
+				throw new JakartaException("Este modelo no se puede utilizar hasta que todos los "
+						+ "títulos de nivel más bajo tengan un concepto relacionado. Título: " + tituloModeloCotizador.getCodigo());
 			}
 			
 			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
 				if (tituloModeloCotizador.getConcepto().getComponenteValor()==null) {
-					throw new JakartaException("Si el concepto relacionado al titulo, pide articulo, debe obligatoriamente tener relacionado un valor de clasificador.");
+					throw new JakartaException("El concepto '" + tituloModeloCotizador.getConcepto().getCodigo() + " - " + tituloModeloCotizador.getConcepto().getDescripcion() +
+							"' asociado a este modelo pide artículo, y por lo tanto, debe tener relacionado un valor de clasificador de artículo.");
 				}
 			}
 			

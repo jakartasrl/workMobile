@@ -364,7 +364,6 @@ type
     procedure OperacionSaveAfterEjecutar(Sender: TObject);
     procedure OperTraerClasifSucurAfterEjecutar(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DriverNuevo(Sender: TObject);
     procedure opTraerParametroBeforeEjecutar(Sender: TObject);
     procedure opTraerParametroAfterEjecutar(Sender: TObject);
     procedure OperTraerClasifClienteAfterEjecutar(Sender: TObject);
@@ -372,8 +371,10 @@ type
       AButtonIndex: Integer);
     procedure cxDBButtonEdit4PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
+    procedure cxDBMaskEdit1Exit(Sender: TObject);
+    procedure mtSujImpNewRecord(DataSet: TDataSet);
   private
-    oid_PaisPorDefecto: Integer;
+    cod_PaisPorDefecto: string;
 
   public
     { Public declarations }
@@ -442,6 +443,20 @@ begin
     mtCliente.FieldByName('des_repre').AsString := hlpRepre.GetDescripcion;
 end;
 
+procedure TFNCli0001.cxDBMaskEdit1Exit(Sender: TObject);
+begin
+  inherited;
+
+  // Busco el impuesto IVA y le pongo como 'NroInscripcion' el CUIT
+  if mtInscripImposit.Locate('CodImpuesto', 'IVA', [loCaseInsensitive]) then
+    begin
+      mtInscripImposit.Edit;
+      mtInscripImposit.FieldByName('NroInscripcion').AsString :=
+        mtSujImp.FieldByName('Cuit').AsString;
+      mtInscripImposit.Post;
+    end;
+end;
+
 procedure TFNCli0001.cxGridDBTableView1CodValorClasifPropertiesButtonClick(
   Sender: TObject; AButtonIndex: Integer);
 begin
@@ -451,14 +466,6 @@ begin
     mtClasificadoresCliente.FieldByName('DescValorClasif').AsString :=
       HelpValorClasifCliente.GetDescripcion
   else
-end;
-
-procedure TFNCli0001.DriverNuevo(Sender: TObject);
-begin
-  inherited;
-
-  mtSujImp.Append;
-  mtSujImp.FieldByName('PersonaJuridica').AsBoolean := True;
 end;
 
 procedure TFNCli0001.FormCreate(Sender: TObject);
@@ -508,9 +515,10 @@ begin
 
       if mtDomiciliosEntrega.RecordCount = 0 then
         begin
-          // Generar y completar por defecto el domicilio de entrega "0" con los
+          // Generar y completar por defecto el domicilio de entrega '0' con los
           // datos de la sucursal
           mtDomiciliosEntrega.FieldByName('NroDomicilio').AsInteger := 0;
+          mtDomiciliosEntrega.FieldByName('Descripcion').AsString := 'Casa Matriz';
 
           mtDomiciliosEntrega.FieldByName('Direccion').AsString :=
             mtSucursalesCliente.FieldByName('Direccion').AsString;
@@ -526,6 +534,8 @@ begin
             mtSucursalesCliente.FieldByName('DescProvincia').AsString;
           mtDomiciliosEntrega.FieldByName('Telefonos').AsString :=
             mtSucursalesCliente.FieldByName('Telefonos').AsString;
+
+//          mtDomiciliosEntrega.Post;
         end;
     end;
 end;
@@ -543,6 +553,7 @@ begin
           // La sucursal '0' se debe dar de alta por defecto con todos los datos
           // genericos del cliente
           mtSucursalesCliente.FieldByName('NroSucursal').AsInteger := 0;
+          mtSucursalesCliente.FieldByName('Descripcion').AsString := 'Casa Matriz';
 
           mtSucursalesCliente.FieldByName('Direccion').AsString :=
             mtSujImp.FieldByName('Direccion').AsString;
@@ -558,6 +569,8 @@ begin
             mtSujImp.FieldByName('DescProvincia').AsString;
           mtSucursalesCliente.FieldByName('Telefonos').AsString :=
             mtCliente.FieldByName('Telefonos').AsString;
+
+//          mtSucursalesCliente.Post;
         end;
 
       // OJO, por cada Sucursal nueva tengo que replicarle todos los Clasificadores
@@ -580,6 +593,18 @@ begin
           mtClasificadoresSucursal.Post;
           mtClasifSucurBackup.Next;
         end;
+    end;
+end;
+
+procedure TFNCli0001.mtSujImpNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    begin
+      mtSujImp.FieldByName('PersonaJuridica').AsBoolean := True;
+      if cod_PaisPorDefecto <> '' then
+        mtSujImp.FieldByName('CodPais').AsString := cod_PaisPorDefecto;
     end;
 end;
 
@@ -647,6 +672,8 @@ begin
         mtImpuestos.FieldByName('codigo').AsString;
       mtInscripImposit.FieldByName('DescImpuesto').AsString :=
         mtImpuestos.FieldByName('descripcion').AsString;
+      mtInscripImposit.FieldByName('VigenciaDesde').AsDateTime :=
+        StrToDate('01/01/2014');
 
       mtInscripImposit.Post;
 
@@ -698,9 +725,9 @@ begin
   mtParametrosForm.First;
   if not mtParametrosForm.Locate('codigo', 'PaisPorDefecto', [loCaseInsensitive]) then
     // 'Código de Parámetro inexistente'
-    oid_PaisPorDefecto := -1
+    cod_PaisPorDefecto := ''
   else
-    oid_PaisPorDefecto := mtParametrosForm.FieldByName('valor_entero').AsInteger;
+    cod_PaisPorDefecto := mtParametrosForm.FieldByName('valor_cadena').AsString;
 end;
 
 procedure TFNCli0001.opTraerParametroBeforeEjecutar(Sender: TObject);

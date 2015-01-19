@@ -1,17 +1,35 @@
 inherited FNLab0003: TFNLab0003
   Caption = 'Ingreso de Muestras'
+  ClientHeight = 542
   ClientWidth = 1196
   ExplicitWidth = 1212
-  ExplicitHeight = 427
+  ExplicitHeight = 581
   PixelsPerInch = 96
   TextHeight = 13
+  inherited cxGroupBoxLeft: TcxGroupBox
+    ExplicitHeight = 0
+    Height = 542
+  end
+  inherited cxSplitterLeft: TcxSplitter
+    Height = 542
+    ExplicitHeight = 0
+  end
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 1166
+    ExplicitLeft = 1166
+    ExplicitHeight = 0
+    Height = 542
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 1162
+    Height = 542
+    ExplicitLeft = 1162
+    ExplicitHeight = 0
   end
   inherited cxGroupBoxMain: TcxGroupBox
+    ExplicitWidth = 1128
+    ExplicitHeight = 0
+    Height = 542
     Width = 1128
     object cxGroupBox1: TcxGroupBox
       Left = 2
@@ -19,8 +37,6 @@ inherited FNLab0003: TFNLab0003
       Align = alTop
       Caption = 'Datos de la Muestra'
       TabOrder = 0
-      ExplicitTop = 3
-      ExplicitWidth = 983
       Height = 105
       Width = 1124
       object cxLabel2: TcxLabel
@@ -109,11 +125,8 @@ inherited FNLab0003: TFNLab0003
       Align = alClient
       Caption = 'Determinaciones a Realizar'
       TabOrder = 1
-      ExplicitLeft = 664
-      ExplicitTop = 208
-      ExplicitWidth = 185
-      ExplicitHeight = 105
-      Height = 279
+      ExplicitHeight = 279
+      Height = 433
       Width = 1124
     end
   end

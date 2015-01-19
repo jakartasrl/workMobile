@@ -441,7 +441,7 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 		}catch(NoSuchMethodException e){
 			throw new JakartaException("No se puede ejecutar el metodo ".concat(campoEntrada.getMetodo()));
 		} catch (ParseException e) {
-			throw new JakartaException("Ocurrio un error al intentar transformar una entrada de texto a un tipo determinado.(Puede serla fecha)");
+			throw new JakartaException("Ocurrio un error al intentar transformar una entrada de texto a un tipo determinado (puede ser una fecha).");
 		}
 	}
 	
