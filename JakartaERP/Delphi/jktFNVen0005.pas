@@ -162,10 +162,10 @@ type
     cxCheckBox2: TcxCheckBox;
     lcMainItem15: TdxLayoutItem;
     lcMainGroup10: TdxLayoutGroup;
-    lcMainSeparatorItem1: TdxLayoutSeparatorItem;
     cxButton1: TcxButton;
     lcMainItem16: TdxLayoutItem;
     cxStyleNormal: TcxStyle;
+    lcMainSplitterItem2: TdxLayoutSplitterItem;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;

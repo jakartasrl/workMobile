@@ -36,7 +36,6 @@ type
     cxGroupBox3: TcxGroupBox;
     cxGroupBox5: TcxGroupBox;
     cxGroupBox4: TcxGroupBox;
-    dxBevel2: TdxBevel;
     mtCab: TjktMemTable;
     mtDet: TjktMemTable;
     dsCab: TDataSource;
@@ -81,6 +80,8 @@ type
     menAnadirConcepto: TMenuItem;
     mtCabActivo: TBooleanField;
     dxBevel1: TdxBevel;
+    menModificar: TMenuItem;
+    opEliminarTituloConcepto: TjktOperacion;
     procedure cxButtonEdit3PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure menAnadirMismoNivelClick(Sender: TObject);
@@ -92,6 +93,8 @@ type
     procedure OperacionSaveBeforeEjecutar(Sender: TObject);
     procedure OperacionSaveAfterEjecutar(Sender: TObject);
     procedure PopupMenuPopup(Sender: TObject);
+    procedure menModificarClick(Sender: TObject);
+    procedure menEliminarClick(Sender: TObject);
   private
     procedure BorrarCampos;
 
@@ -111,8 +114,8 @@ begin
   cxButtonEdit3.Clear;
   cxTextEdit4.Clear;
 
-  cxGroupBox4.Enabled := False;
-  cxGroupBox5.Enabled := False;
+  cxGroupBox4.Visible := False;
+  cxGroupBox5.Visible := False;
   cxButton3.Enabled := False;
 
   cxDBTreeList1.Enabled := True;
@@ -187,9 +190,9 @@ begin
   mtDet.FieldByName('oid_conc').Value        := -1;
   mtDet.FieldByName('tipo').Value            := 'C';
 
-  // Habilito el panel de 'Alta de Concepto' y deshabilito el panel de 'Alta de Título'
-  cxGroupBox4.Enabled := False;
-  cxGroupBox5.Enabled := True;
+  // Muestro el panel de 'Alta de Concepto' y oculto el panel de 'Alta de Título'
+  cxGroupBox4.Visible := False;
+  cxGroupBox5.Visible := True;
   cxButtonEdit3.SetFocus;
   // No dejo tocar el árbol
   cxDBTreeList1.Enabled := False;
@@ -219,9 +222,9 @@ begin
   mtDet.FieldByName('oid_conc').Value        := -1;
   mtDet.FieldByName('tipo').Value            := 'T';
 
-  // Habilito el panel de 'Alta de Título' y deshabilito el panel de 'Alta de Concepto'
-  cxGroupBox4.Enabled := True;
-  cxGroupBox5.Enabled := False;
+  // Muestro el panel de 'Alta de Título' y oculto el panel de 'Alta de Concepto'
+  cxGroupBox4.Visible := True;
+  cxGroupBox5.Visible := False;
   cxTextEdit1.SetFocus;
   // No dejo tocar el árbol
   cxDBTreeList1.Enabled := False;
@@ -244,14 +247,64 @@ begin
   mtDet.FieldByName('oid_conc').Value        := -1;
   mtDet.FieldByName('tipo').Value            := 'T';
 
-  // Habilito el panel de 'Alta de Título' y deshabilito el panel de 'Alta de Concepto'
-  cxGroupBox4.Enabled := True;
-  cxGroupBox5.Enabled := False;
+  // Muestro el panel de 'Alta de Título' y oculto el panel de 'Alta de Concepto'
+  cxGroupBox4.Visible := True;
+  cxGroupBox5.Visible := False;
   cxTextEdit1.SetFocus;
   // No dejo tocar el árbol
   cxDBTreeList1.Enabled := False;
 end;
 
+
+procedure TFNVen0002.menEliminarClick(Sender: TObject);
+begin
+  inherited;
+
+  // Está eliminando un Titulo o Concepto (pero no tiene hijos)
+
+  if mtDet.FieldByName('oid_titu_conc').AsInteger = 0 then
+    // No lo había guardado nunca
+    mtDet.Delete
+  else
+    begin
+      // Ya tiene un 'oid' asignado por el servidor, es decir, ya existe el
+      // item en la BD. Entonces llamo a la Operación!
+      opEliminarTituloConcepto.execute;
+      mtDet.Delete;
+    end;
+end;
+
+procedure TFNVen0002.menModificarClick(Sender: TObject);
+begin
+  inherited;
+
+  // Presionó en 'Modificar'
+
+  mtDet.Edit;
+
+  if mtDet.FieldByName('tipo').Value = 'T' then
+    begin
+      // Muestro el panel de 'Alta de Título' y oculto el panel de 'Alta de Concepto'
+      cxGroupBox4.Visible := True;
+      cxGroupBox5.Visible := False;
+
+      cxTextEdit1.Text := mtDet.FieldByName('cod_titu_conc').AsString;
+      cxTextEdit2.Text := mtDet.FieldByName('des_titu_conc').AsString;
+
+      cxTextEdit1.SetFocus;
+      // No dejo tocar el árbol
+      cxDBTreeList1.Enabled := False;
+    end
+  else
+    begin
+      // Muestro el panel de 'Alta de Concepto' y oculto el panel de 'Alta de Título'
+      cxGroupBox4.Visible := False;
+      cxGroupBox5.Visible := True;
+      cxButtonEdit3.SetFocus;
+      // No dejo tocar el árbol
+      cxDBTreeList1.Enabled := False;
+    end;
+end;
 
 procedure TFNVen0002.OperacionSaveAfterEjecutar(Sender: TObject);
 begin
@@ -278,6 +331,7 @@ begin
       menAnadirMismoNivel.Visible := True;
       menAnadirSubTitulo.Visible := True;
       menAnadirConcepto.Visible := True;
+      menModificar.Visible := True;
       menEliminar.Visible := True;
 
       if mtDet.IsEmpty then
@@ -285,11 +339,13 @@ begin
           menAnadirMismoNivel.Enabled := True;
           menAnadirSubTitulo.Enabled := False;
           menAnadirConcepto.Enabled := False;
+          menModificar.Enabled := False;
           menEliminar.Enabled := False;
         end
       else
         begin
           menAnadirConcepto.Enabled := True;
+          menModificar.Enabled := True;
 
           if cxDBTreeList1.FocusedNode.HasChildren then
             begin
@@ -319,6 +375,7 @@ begin
       menAnadirMismoNivel.Visible := False;
       menAnadirSubTitulo.Visible := False;
       menAnadirConcepto.Visible := False;
+      menModificar.Visible := False;
       menEliminar.Visible := False;
     end;
 end;
