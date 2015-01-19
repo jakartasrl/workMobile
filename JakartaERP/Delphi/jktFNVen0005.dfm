@@ -4,7 +4,7 @@ inherited FNVen0005: TFNVen0005
   ClientHeight = 552
   ClientWidth = 1071
   ExplicitLeft = -301
-  ExplicitTop = -19
+  ExplicitTop = -22
   ExplicitWidth = 1087
   ExplicitHeight = 590
   PixelsPerInch = 96
@@ -1015,6 +1015,10 @@ inherited FNVen0005: TFNVen0005
     end
     object mtDetCotizcodInternoPadre: TIntegerField
       FieldName = 'codInternoPadre'
+    end
+    object mtDetCotizoid_titu_conc: TIntegerField
+      Tag = 1
+      FieldName = 'oid_titu_conc'
     end
     object mtDetCotizcod_titu_conc: TStringField
       FieldName = 'cod_titu_conc'

@@ -166,6 +166,7 @@ type
     lcMainItem16: TdxLayoutItem;
     cxStyleNormal: TcxStyle;
     lcMainSplitterItem2: TdxLayoutSplitterItem;
+    mtDetCotizoid_titu_conc: TIntegerField;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
