@@ -21,6 +21,8 @@
 
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
+		<many-to-one name="tituloModeloCotizador" class="com.jkt.cotizador.dominio.TituloModeloCotizador" column="TITULO_MODELO_ID" cascade="none" />
+		
 	</class>
 
 </hibernate-mapping>

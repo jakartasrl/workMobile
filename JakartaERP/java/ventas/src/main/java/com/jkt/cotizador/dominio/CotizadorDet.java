@@ -20,6 +20,15 @@ public class CotizadorDet extends PersistentEntity {
 	private Moneda moneda;
 	private double cotizacion;
 	private ConceptoPresupuesto conceptoPresupuesto;
+	private TituloModeloCotizador tituloModeloCotizador;
+	
+	public TituloModeloCotizador getTituloModeloCotizador() {
+		return tituloModeloCotizador;
+	}
+
+	public void setTituloModeloCotizador(TituloModeloCotizador tituloModeloCotizador) {
+		this.tituloModeloCotizador = tituloModeloCotizador;
+	}
 
 	public Producto getProducto() {
 		return producto;

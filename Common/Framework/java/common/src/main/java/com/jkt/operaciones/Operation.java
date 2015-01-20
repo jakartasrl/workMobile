@@ -183,6 +183,8 @@ public abstract class Operation extends Observable {
 		return session.createQuery(hql);
 	}
 	
+	
+	
 	/**
 	 * <p>Metodo principal de la operacion.</p>
 	 * <p>Es el metodo a implementar en cualquier operacion.</p>

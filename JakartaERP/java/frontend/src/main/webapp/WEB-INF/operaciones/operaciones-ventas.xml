@@ -73,7 +73,7 @@
 ]>
 
 <entity>
-	
+
 <!-- 	RECUPERAR LOS CONTACTOS DE UNA SUCURSAL -->
 	<operacion name="TraerContactosDeSucursal" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.varios.ClienteSucursal">
 		
@@ -464,6 +464,8 @@
 <!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+			
+			<campoSalida value="oid_titu_conc" target="id" />
 			<campoSalida value="cod_titu_conc" target="codigoReal" />
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			<campoSalida value="tipo" target="tipo" />
@@ -557,6 +559,7 @@
 					<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
 					<campoEntrada name="importe_unit" clase="Double" metodo="setPrecioUnitario" />
 					<campoEntrada name="oid_moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+					<campoEntrada name="oid_titu_conc" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" metodo="setTituloModeloCotizador" />
 <!-- 					<campoEntrada name="importe_total" clase="" metodo="" /> -->
 <!-- 					<campoEntrada name="importe_total_2" clase="" metodo="" /> -->
 <!-- 					<campoEntrada name="cotizacion" clase="Double" metodo="setCotizacion" /> -->
@@ -584,6 +587,9 @@
 <!-- 			<campoSalida value="oid_mod" target="modeloCotizador.id" /> -->
 			<campoSalida value="codInterno" target="codigoInterno" />
 			<campoSalida value="codInternoPadre" target="codigoInternoPadre" />
+			
+			
+			<campoSalida value="oid_titu_conc" target="id" />
 			<campoSalida value="cod_titu_conc" target="codigoReal" />
 			<campoSalida value="des_titu_conc" target="descripcionReal" />
 			<campoSalida value="tipo" target="tipo" />
@@ -750,5 +756,16 @@
 		</forms>
 
 	</operacion>
+	
+	<operacion name="EliminarTituloConcepto" clase="com.jkt.cotizador.operaciones.EliminarTituloConcepto">
+	
+		<forms>
+			<form name="FNVen0007"></form>
+		</forms>
+
+	</operacion>
+	
+	
+	
 	
 </entity>
