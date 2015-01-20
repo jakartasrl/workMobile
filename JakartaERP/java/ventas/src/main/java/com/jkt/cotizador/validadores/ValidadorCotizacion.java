@@ -55,6 +55,11 @@ public class ValidadorCotizacion extends ValidacionDeNegocio {
 		throw new ValidacionDeNegocioException("Error en la validacion de negocio:".concat(e.getMessage()));
 	}
 
+	/**
+	 * <p>A partir del tipo de comprobante, se genera el numero de comprobante.</p>
+	 * <p>Al mismo tiempo se genera una nueva instancia de numerador, aumentando en uno la cantidad de los mismos.</p>
+	 * 
+	 */
 	private NumeradorComprobantes obtenerNumerador(TipoComprobante tipoComprobante) throws JakartaException{
 		long id = tipoComprobante.getId();
 		int comportamiento = tipoComprobante.getComportamiento();

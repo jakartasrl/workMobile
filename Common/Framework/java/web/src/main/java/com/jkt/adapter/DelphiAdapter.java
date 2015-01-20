@@ -47,6 +47,7 @@ import com.jkt.xmlreader.Input;
 @Qualifier("delphiAdapter")
 public class DelphiAdapter extends Adapter<Map, MapDS> {
 
+	private static final String DATE_FORMAT = "dd/MM/yyyy";
 	private static final String BYTE_ARRAY_TYPE = TiposDeDato.BYTE_ARRAY_TYPE;
 	private static final String STRING_TYPE = "String";
 	private static final String BOOLEAN_TYPE = "Boolean";
@@ -383,8 +384,12 @@ public class DelphiAdapter extends Adapter<Map, MapDS> {
 		}else if(CHAR_TYPE.equals(nombreClase)){
 			result=String.valueOf(value).toCharArray()[0];
 		}else if(DATE_TYPE.equals(nombreClase)){
-			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
-			Date date = sourceFormat.parse((String)value);
+			String valorCadena=(String) value;
+			Date date =null;
+			if (!valorCadena.isEmpty()) {
+				DateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT);
+				date = sourceFormat.parse(valorCadena);
+			}
 			result=date;
 		}else{
 			try {

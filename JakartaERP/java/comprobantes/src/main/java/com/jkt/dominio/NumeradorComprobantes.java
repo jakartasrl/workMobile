@@ -1,8 +1,13 @@
 package com.jkt.dominio;
 
+/**
+ * <p>Un numerador tiene como objetivo el llevar un contador de numeros segun el tipo de comprobante que posee determinado comprobante.</p>
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class NumeradorComprobantes extends PersistentEntity {
 
-	private String argumento; // TS-OTRO-VALOR
+	private String argumento; // TS-IDCOMPROBANTE-VALOR
 	private int numero;
 
 	public String getArgumento() {
