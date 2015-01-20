@@ -2,7 +2,6 @@ inherited FNCli0001: TFNCli0001
   Caption = 'ABM de Clientes'
   ClientHeight = 557
   ClientWidth = 984
-  ExplicitLeft = -212
   ExplicitTop = -27
   ExplicitWidth = 1000
   ExplicitHeight = 595
@@ -45,7 +44,7 @@ inherited FNCli0001: TFNCli0001
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 65
-        Top = -6
+        Top = -89
         DataBinding.DataField = 'Codigo'
         DataBinding.DataSource = dsCliente
         Style.HotTrack = False
@@ -54,7 +53,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 293
-        Top = -6
+        Top = -89
         DataBinding.DataField = 'RazonSocial'
         DataBinding.DataSource = dsSujImp
         Style.HotTrack = False
@@ -63,7 +62,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit3: TcxDBTextEdit
         Left = 89
-        Top = 149
+        Top = 66
         DataBinding.DataField = 'Direccion'
         DataBinding.DataSource = dsSujImp
         Style.HotTrack = False
@@ -72,7 +71,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit4: TcxDBTextEdit
         Left = 394
-        Top = 149
+        Top = 66
         DataBinding.DataField = 'Localidad'
         DataBinding.DataSource = dsSujImp
         Style.HotTrack = False
@@ -81,7 +80,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit7: TcxDBTextEdit
         Left = 710
-        Top = 149
+        Top = 66
         DataBinding.DataField = 'CodPostal'
         DataBinding.DataSource = dsSujImp
         Style.HotTrack = False
@@ -90,7 +89,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit8: TcxDBTextEdit
         Left = 154
-        Top = 176
+        Top = 93
         DataBinding.DataField = 'DescProvincia'
         DataBinding.DataSource = dsSujImp
         Enabled = False
@@ -100,7 +99,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit9: TcxDBTextEdit
         Left = 459
-        Top = 176
+        Top = 93
         DataBinding.DataField = 'DescPais'
         DataBinding.DataSource = dsSujImp
         Enabled = False
@@ -110,7 +109,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
         Left = 89
-        Top = 176
+        Top = 93
         DataBinding.DataField = 'CodProvincia'
         DataBinding.DataSource = dsSujImp
         Properties.Buttons = <
@@ -125,7 +124,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBButtonEdit2: TcxDBButtonEdit
         Left = 394
-        Top = 176
+        Top = 93
         DataBinding.DataField = 'CodPais'
         DataBinding.DataSource = dsSujImp
         Properties.Buttons = <
@@ -140,7 +139,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit5: TcxDBTextEdit
         Left = 89
-        Top = 203
+        Top = 120
         DataBinding.DataField = 'Telefonos'
         DataBinding.DataSource = dsCliente
         Style.HotTrack = False
@@ -149,7 +148,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBCheckBox1: TcxDBCheckBox
         Left = 281
-        Top = 78
+        Top = -5
         DataBinding.DataField = 'PersonaJuridica'
         DataBinding.DataSource = dsSujImp
         Properties.Alignment = taLeftJustify
@@ -160,7 +159,7 @@ inherited FNCli0001: TFNCli0001
       end
       object jktExpDBGrid1: TjktExpDBGrid
         Left = 30
-        Top = 274
+        Top = 191
         Width = 767
         Height = 145
         TabOrder = 15
@@ -316,8 +315,8 @@ inherited FNCli0001: TFNCli0001
         end
       end
       object cxButtonEdit1: TcxDBButtonEdit
-        Left = 10000
-        Top = 10000
+        Left = 120
+        Top = 399
         DataBinding.DataField = 'CodCondPago'
         DataBinding.DataSource = dsCliente
         Properties.Buttons = <
@@ -328,18 +327,16 @@ inherited FNCli0001: TFNCli0001
         Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 16
-        Visible = False
         Width = 105
       end
       object cxTextEdit1: TcxDBTextEdit
-        Left = 10000
-        Top = 10000
+        Left = 231
+        Top = 399
         DataBinding.DataField = 'DescCondPago'
         DataBinding.DataSource = dsCliente
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 17
-        Visible = False
         Width = 260
       end
       object jktExpDBGrid3: TjktExpDBGrid
@@ -697,7 +694,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBCheckBox2: TcxDBCheckBox
         Left = 634
-        Top = -6
+        Top = -89
         DataBinding.DataField = 'Activo'
         DataBinding.DataSource = dsCliente
         Properties.Alignment = taLeftJustify
@@ -708,7 +705,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBMaskEdit1: TcxDBMaskEdit
         Left = 89
-        Top = 78
+        Top = -5
         DataBinding.DataField = 'Cuit'
         DataBinding.DataSource = dsSujImp
         Style.HotTrack = False
@@ -718,7 +715,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit6: TcxDBTextEdit
         Left = 394
-        Top = 203
+        Top = 120
         DataBinding.DataField = 'Fax'
         DataBinding.DataSource = dsCliente
         Style.HotTrack = False
@@ -727,7 +724,7 @@ inherited FNCli0001: TFNCli0001
       end
       object cxDBTextEdit10: TcxDBTextEdit
         Left = 710
-        Top = 203
+        Top = 120
         DataBinding.DataField = 'Email'
         DataBinding.DataSource = dsCliente
         Style.HotTrack = False
@@ -735,8 +732,8 @@ inherited FNCli0001: TFNCli0001
         Width = 243
       end
       object cxDBButtonEdit3: TcxDBButtonEdit
-        Left = 10000
-        Top = 10000
+        Left = 120
+        Top = 438
         DataBinding.DataField = 'cod_vend'
         DataBinding.DataSource = dsCliente
         Properties.Buttons = <
@@ -747,23 +744,21 @@ inherited FNCli0001: TFNCli0001
         Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 18
-        Visible = False
         Width = 105
       end
       object cxDBTextEdit11: TcxDBTextEdit
-        Left = 10000
-        Top = 10000
+        Left = 231
+        Top = 438
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsCliente
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 19
-        Visible = False
         Width = 260
       end
       object cxDBButtonEdit4: TcxDBButtonEdit
-        Left = 10000
-        Top = 10000
+        Left = 581
+        Top = 438
         DataBinding.DataField = 'cod_repre'
         DataBinding.DataSource = dsCliente
         Properties.Buttons = <
@@ -774,28 +769,25 @@ inherited FNCli0001: TFNCli0001
         Properties.OnButtonClick = cxDBButtonEdit4PropertiesButtonClick
         Style.HotTrack = False
         TabOrder = 20
-        Visible = False
         Width = 105
       end
       object cxDBTextEdit12: TcxDBTextEdit
-        Left = 10000
-        Top = 10000
+        Left = 692
+        Top = 438
         DataBinding.DataField = 'des_repre'
         DataBinding.DataSource = dsCliente
         Properties.ReadOnly = True
         Style.HotTrack = False
         TabOrder = 21
-        Visible = False
         Width = 260
       end
       object cxDBTextEdit13: TcxDBTextEdit
-        Left = 10000
-        Top = 10000
+        Left = 1044
+        Top = 438
         DataBinding.DataField = 'NroProveedor'
         DataBinding.DataSource = dsCliente
         Style.HotTrack = False
         TabOrder = 22
-        Visible = False
         Width = 105
       end
       object lcMainGroup_Root: TdxLayoutGroup
@@ -852,7 +844,6 @@ inherited FNCli0001: TFNCli0001
         Parent = lcMainGroup2
         ButtonOptions.Buttons = <>
         ButtonOptions.ShowExpandButton = True
-        Expanded = False
         Index = 1
       end
       object lcMainGroup5: TdxLayoutGroup
@@ -1148,6 +1139,7 @@ inherited FNCli0001: TFNCli0001
       item
         Operacion = OperTraerClasifCliente
       end>
+    OnNuevo = DriverNuevo
     Left = 480
     Top = 24
   end
@@ -1905,10 +1897,6 @@ inherited FNCli0001: TFNCli0001
         Size = 100
       end
       item
-        Name = 'Activo'
-        DataType = ftBoolean
-      end
-      item
         Name = 'oid_vend'
         DataType = ftInteger
       end
@@ -1935,6 +1923,15 @@ inherited FNCli0001: TFNCli0001
         Name = 'des_repre'
         DataType = ftString
         Size = 40
+      end
+      item
+        Name = 'NroProveedor'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'Activo'
+        DataType = ftBoolean
       end>
     IndexDefs = <>
     SortOptions = []
@@ -1963,6 +1960,7 @@ inherited FNCli0001: TFNCli0001
     object mtClienteTelefonos: TStringField
       Tag = 1
       FieldName = 'Telefonos'
+      OnChange = mtClienteTelefonosChange
       Size = 50
     end
     object mtClienteFax: TStringField
@@ -1997,6 +1995,7 @@ inherited FNCli0001: TFNCli0001
     end
     object mtClientedes_vend: TStringField
       FieldName = 'des_vend'
+      OnChange = mtClientedes_vendChange
       Size = 40
     end
     object mtClienteoid_repre: TIntegerField
@@ -2383,16 +2382,19 @@ inherited FNCli0001: TFNCli0001
     object mtSujImpDireccion: TStringField
       Tag = 1
       FieldName = 'Direccion'
+      OnChange = mtSujImpDireccionChange
       Size = 50
     end
     object mtSujImpLocalidad: TStringField
       Tag = 1
       FieldName = 'Localidad'
+      OnChange = mtSujImpLocalidadChange
       Size = 50
     end
     object mtSujImpCodPostal: TStringField
       Tag = 1
       FieldName = 'CodPostal'
+      OnChange = mtSujImpCodPostalChange
       Size = 10
     end
     object mtSujImpoid_Provincia: TIntegerField
@@ -2401,6 +2403,7 @@ inherited FNCli0001: TFNCli0001
     end
     object mtSujImpCodProvincia: TStringField
       FieldName = 'CodProvincia'
+      OnChange = mtSujImpCodProvinciaChange
     end
     object mtSujImpDescProvincia: TStringField
       FieldName = 'DescProvincia'

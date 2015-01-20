@@ -162,7 +162,7 @@ begin
     end;
 
   FListaAsignaciones   := TjktAsignadorFieldList.Create(self);
-  datasetCreado := false;
+  datasetCreado := False;
 end;
 
 destructor  TjktValidador.destroy;
@@ -173,55 +173,66 @@ end;
 
 procedure TjktValidador.crearDatasetResult;
 var
-  x :integer;
-  name :string;
-  tipo :TFieldType;
-  size :integer;
-  campo :TField;
+  x : Integer;
+  name  : string;
+  tipo  : TFieldType;
+  size  : Integer;
+  campo : TField;
+  NewField : TFieldDef;
 begin
   FTempMemTable := TkbmMemTable.Create(self);
   FTempMemTable.Name := 'TMemVal' + IntToStr(random(100000));
-  for x := 0 to FListaAsignaciones.Count -1 do
+  for x := 0 to FListaAsignaciones.Count - 1 do
     begin
-       name :=  FListaAsignaciones.Items[x].SourceName;
-       if        FListaAsignaciones.Items[x].FieldTarget is TIntegerField
-       then      begin
-                   tipo := ftInteger;
-                   size := 0;
-                 end
-       else      if FListaAsignaciones.Items[x].FieldTarget is TStringField
-       then      begin
-                   tipo := ftString;
-                   size := 255;
-                 end
-       else      if FListaAsignaciones.Items[x].FieldTarget is TFloatField
-       then      begin
-                   tipo := ftString;
-                   size := 0;
-                 end
-       else      if FListaAsignaciones.Items[x].FieldTarget is TCurrencyField
-       then      begin
-                   tipo := ftCurrency;
-                   size := 0;
-                 end
+      name := FListaAsignaciones.Items[x].SourceName;
 
-       else      if FListaAsignaciones.Items[x].FieldTarget is TBooleanField
-       then      begin
-                   tipo := ftBoolean;
-                   size := 0;
-                 end;
-       FTempMemTable.FieldDefs.Add(name, tipo, size,  false);
+      if FListaAsignaciones.Items[x].FieldTarget is TIntegerField then
+        begin
+          tipo := ftInteger;
+          size := 0;
+        end
+      else if FListaAsignaciones.Items[x].FieldTarget is TStringField then
+        begin
+          tipo := ftString;
+          size := 255;
+        end
+      else if FListaAsignaciones.Items[x].FieldTarget is TFloatField then
+        begin
+          tipo := ftFloat;
+          size := 0;
+        end
+      else if FListaAsignaciones.Items[x].FieldTarget is TCurrencyField then
+        begin
+          tipo := ftCurrency;
+          size := 0;
+        end
+      else if FListaAsignaciones.Items[x].FieldTarget is TBooleanField then
+        begin
+          tipo := ftBoolean;
+          size := 0;
+        end;
+
+//       FTempMemTable.FieldDefs.Add(name, tipo, size, false);
+
+       NewField := FTempMemTable.FieldDefs.AddFieldDef;
+       NewField.Name     := name;
+       NewField.DataType := tipo;
+       NewField.Size     := size;
+       NewField.Required := False;
     end;
 
-  DatasetCreado := true;
+  FTempMemTable.CreateTable;
+
   FTempMemTable.Close;
   FTempMemTable.Open;
 
-  for x := 0 to FListaAsignaciones.Count -1 do
+  DatasetCreado := True;
+
+  for x := 0 to FListaAsignaciones.Count - 1 do
     begin
-       name :=  FListaAsignaciones.Items[x].SourceName;
-       campo := FTempMemTable.FieldByName(name);
-       FListaAsignaciones.Items[x].FieldSource   := campo;
+      name :=  FListaAsignaciones.Items[x].SourceName;
+      campo := FTempMemTable.FieldByName(name);
+      FListaAsignaciones.Items[x].FieldSource := campo;
     end;
 
   FServiceCaller.asignarDataSet(FTempMemTable.Name, FTempMemTable);
@@ -237,7 +248,7 @@ begin
   if FTempMemTable.IsEmpty then
     Exit;
 
-  for x:= 0 to FListaAsignaciones.Count -1 do
+  for x := 0 to FListaAsignaciones.Count - 1 do
     begin
        FListaAsignaciones.Items[x].asignarValor;
     end;
@@ -261,9 +272,10 @@ begin
   if (FServiceCaller.ModoExecute)
      then Exit;
 
-  if FValidacion = tEspecial
-      then FOperacionEspecial.execute
-      else validacionExistenciaInexistencia(sender);
+  if FValidacion = tEspecial then
+    FOperacionEspecial.execute
+  else
+    validacionExistenciaInexistencia(sender);
 
   procesarResultado;
 end;
@@ -499,8 +511,8 @@ end;
 //----------------------------------------------------------------------
 procedure TjktAsignadorField.asignarValor;
 begin
-   if assigned(FFieldTarget) and assigned(FFieldSource)
-      then   FFieldTarget.Value  := FFieldSource.Value;
+  if Assigned(FFieldTarget) and Assigned(FFieldSource) then
+    FFieldTarget.Value  := FFieldSource.Value;
 end;
 
 end.

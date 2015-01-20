@@ -2,7 +2,6 @@ inherited FNVen0002: TFNVen0002
   Caption = 'ABM de Modelos de Cotizador'
   ClientHeight = 412
   ClientWidth = 845
-  ExplicitLeft = -210
   ExplicitWidth = 861
   ExplicitHeight = 450
   PixelsPerInch = 96
@@ -18,19 +17,19 @@ inherited FNVen0002: TFNVen0002
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 815
     TabOrder = 4
-    ExplicitLeft = 810
+    ExplicitLeft = 815
     ExplicitHeight = 412
     Height = 412
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 811
     Height = 412
-    ExplicitLeft = 806
+    ExplicitLeft = 811
     ExplicitHeight = 412
   end
   inherited cxGroupBoxMain: TcxGroupBox
     TabOrder = 6
-    ExplicitWidth = 772
+    ExplicitWidth = 777
     ExplicitHeight = 412
     Height = 412
     Width = 777
@@ -52,7 +51,6 @@ inherited FNVen0002: TFNVen0002
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitWidth = 768
       Height = 73
       Width = 773
       object cxDBTextEdit1: TcxDBTextEdit
@@ -212,29 +210,16 @@ inherited FNVen0002: TFNVen0002
       PanelStyle.BorderWidth = 5
       Style.BorderStyle = ebsNone
       TabOrder = 2
-      ExplicitWidth = 352
       Height = 335
       Width = 360
-      object dxBevel2: TdxBevel
-        Left = 7
-        Top = 142
-        Width = 346
-        Height = 10
-        Align = alTop
-        Shape = dxbsNone
-        ExplicitLeft = 23
-        ExplicitTop = 136
-        ExplicitWidth = 370
-      end
       object cxGroupBox5: TcxGroupBox
         Left = 7
-        Top = 152
+        Top = 142
         Align = alTop
         Alignment = alTopCenter
         Caption = 'Alta de Concepto'
-        Enabled = False
         TabOrder = 1
-        ExplicitWidth = 338
+        Visible = False
         Height = 135
         Width = 346
         object cxLabel5: TcxLabel
@@ -265,7 +250,7 @@ inherited FNVen0002: TFNVen0002
         object cxTextEdit4: TcxTextEdit
           Left = 80
           Top = 63
-          Enabled = False
+          Properties.ReadOnly = True
           TabOrder = 3
           Width = 250
         end
@@ -307,9 +292,8 @@ inherited FNVen0002: TFNVen0002
         Align = alTop
         Alignment = alTopCenter
         Caption = 'Alta de T'#237'tulo'
-        Enabled = False
         TabOrder = 0
-        ExplicitWidth = 338
+        Visible = False
         Height = 135
         Width = 346
         object cxLabel3: TcxLabel
@@ -592,6 +576,7 @@ inherited FNVen0002: TFNVen0002
   object Help: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'modeloCotizador'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtCaboid_mod
     Left = 440
     Top = 120
@@ -599,6 +584,7 @@ inherited FNVen0002: TFNVen0002
   object HelpConcepto: TjktHelpGenerico
     ServiceCaller = Service
     Entidad = 'conceptoPresupuesto'
+    TipoFiltro = fi_Activos
     OidRespuesta = mtDetoid_conc
     Left = 688
     Top = 256
@@ -619,8 +605,27 @@ inherited FNVen0002: TFNVen0002
       Caption = 'A'#241'adir Concepto'
       OnClick = menAnadirConceptoClick
     end
+    object menModificar: TMenuItem
+      Caption = 'Modificar'
+      OnClick = menModificarClick
+    end
     object menEliminar: TMenuItem
       Caption = 'Eliminar'
+      Enabled = False
+      OnClick = menEliminarClick
     end
+  end
+  object opEliminarTituloConcepto: TjktOperacion
+    OperName = 'EliminarTituloConcepto'
+    EnviarTodo = False
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = mtDetoid_titu_conc
+        Tag = 0
+      end>
+    ServiceCaller = Service
+    Left = 328
+    Top = 200
   end
 end

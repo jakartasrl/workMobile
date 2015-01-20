@@ -16,18 +16,18 @@ inherited FNVen0006: TFNVen0006
   end
   inherited cxGroupBoxRight: TcxGroupBox
     Left = 916
-    ExplicitLeft = 831
+    ExplicitLeft = 916
     ExplicitHeight = 592
     Height = 592
   end
   inherited cxSplitterRight: TcxSplitter
     Left = 912
     Height = 592
-    ExplicitLeft = 827
+    ExplicitLeft = 912
     ExplicitHeight = 592
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 793
+    ExplicitWidth = 878
     ExplicitHeight = 592
     Height = 592
     Width = 878
@@ -39,7 +39,6 @@ inherited FNVen0006: TFNVen0006
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
-      ExplicitWidth = 789
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 120
         Top = 41
@@ -96,12 +95,13 @@ inherited FNVen0006: TFNVen0006
         Width = 141
       end
       object cxGridItems: TcxGrid
-        Left = 23
-        Top = 210
+        Left = 10000
+        Top = 10000
         Width = 737
         Height = 406
         BorderStyle = cxcbsNone
         TabOrder = 8
+        Visible = False
         object DBLayoutView: TcxGridDBLayoutView
           Navigator.Buttons.CustomButtons = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -334,12 +334,11 @@ inherited FNVen0006: TFNVen0006
         Width = 246
       end
       object jktExpDBGrid1: TjktExpDBGrid
-        Left = 10000
-        Top = 10000
+        Left = 23
+        Top = 228
         Width = 250
         Height = 200
         TabOrder = 9
-        Visible = False
         object jktExpDBGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -413,6 +412,7 @@ inherited FNVen0006: TFNVen0006
         CaptionOptions.Visible = False
         Parent = dxLayoutGroup4
         ButtonOptions.Buttons = <>
+        ItemIndex = 1
         LayoutDirection = ldTabbed
         ShowBorder = False
         Index = 1

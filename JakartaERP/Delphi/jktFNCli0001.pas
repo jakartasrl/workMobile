@@ -373,6 +373,13 @@ type
       AButtonIndex: Integer);
     procedure cxDBMaskEdit1Exit(Sender: TObject);
     procedure mtSujImpNewRecord(DataSet: TDataSet);
+    procedure mtSujImpDireccionChange(Sender: TField);
+    procedure mtSujImpLocalidadChange(Sender: TField);
+    procedure mtSujImpCodPostalChange(Sender: TField);
+    procedure mtSujImpCodProvinciaChange(Sender: TField);
+    procedure mtClienteTelefonosChange(Sender: TField);
+    procedure DriverNuevo(Sender: TObject);
+    procedure mtClientedes_vendChange(Sender: TField);
   private
     cod_PaisPorDefecto: string;
 
@@ -468,6 +475,18 @@ begin
   else
 end;
 
+procedure TFNCli0001.DriverNuevo(Sender: TObject);
+begin
+  inherited;
+
+  // Hago el Append para que llame al OnNewRecord
+  mtSucursalesCliente.Append;
+  mtDomiciliosEntrega.Append;
+  // Hago el Post para que quede el registro visible en la grilla!
+  mtSucursalesCliente.Post;
+  mtDomiciliosEntrega.Post;
+end;
+
 procedure TFNCli0001.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -497,6 +516,42 @@ begin
     mtClasificadoresSucursal.FieldByName('oid_ClasifSuc').AsInteger := GetNewOid;
 end;
 
+procedure TFNCli0001.mtClientedes_vendChange(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    if Driver.esNuevo and (mtSucursalesCliente.RecordCount = 1) then
+      begin
+        mtSucursalesCliente.Edit;
+        mtSucursalesCliente.FieldByName('oid_Vendedor').AsInteger :=
+          mtCliente.FieldByName('oid_vend').AsInteger;
+        mtSucursalesCliente.Post;
+      end;
+end;
+
+procedure TFNCli0001.mtClienteTelefonosChange(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    if Driver.esNuevo and (mtSucursalesCliente.RecordCount = 1) then
+      begin
+        mtSucursalesCliente.Edit;
+        mtSucursalesCliente.FieldByName('Telefonos').AsString :=
+          mtCliente.FieldByName('Telefonos').AsString;
+        mtSucursalesCliente.Post;
+
+        if (mtDomiciliosEntrega.RecordCount = 1) then
+          begin
+            mtDomiciliosEntrega.Edit;
+            mtDomiciliosEntrega.FieldByName('Telefonos').AsString :=
+              mtSucursalesCliente.FieldByName('Telefonos').AsString;
+            mtDomiciliosEntrega.Post;
+          end;
+      end;
+end;
+
 procedure TFNCli0001.mtContactosNewRecord(DataSet: TDataSet);
 begin
   inherited;
@@ -512,6 +567,8 @@ begin
   if not Service.ModoExecute then
     begin
       mtDomiciliosEntrega.FieldByName('oid_DomSuc').AsInteger := GetNewOid;
+      mtDomiciliosEntrega.FieldByName('oid_SucClie').AsInteger :=
+        mtSucursalesCliente.FieldByName('oid_SucClie').AsInteger;
 
       if mtDomiciliosEntrega.RecordCount = 0 then
         begin
@@ -519,23 +576,6 @@ begin
           // datos de la sucursal
           mtDomiciliosEntrega.FieldByName('NroDomicilio').AsInteger := 0;
           mtDomiciliosEntrega.FieldByName('Descripcion').AsString := 'Casa Matriz';
-
-          mtDomiciliosEntrega.FieldByName('Direccion').AsString :=
-            mtSucursalesCliente.FieldByName('Direccion').AsString;
-          mtDomiciliosEntrega.FieldByName('Localidad').AsString :=
-            mtSucursalesCliente.FieldByName('Localidad').AsString;
-          mtDomiciliosEntrega.FieldByName('CodPostal').AsString :=
-            mtSucursalesCliente.FieldByName('CodPostal').AsString;
-          mtDomiciliosEntrega.FieldByName('oid_Provincia').AsInteger :=
-            mtSucursalesCliente.FieldByName('oid_Provincia').AsInteger;
-          mtDomiciliosEntrega.FieldByName('CodProvincia').AsString :=
-            mtSucursalesCliente.FieldByName('CodProvincia').AsString;
-          mtDomiciliosEntrega.FieldByName('DescProvincia').AsString :=
-            mtSucursalesCliente.FieldByName('DescProvincia').AsString;
-          mtDomiciliosEntrega.FieldByName('Telefonos').AsString :=
-            mtSucursalesCliente.FieldByName('Telefonos').AsString;
-
-//          mtDomiciliosEntrega.Post;
         end;
     end;
 end;
@@ -554,23 +594,6 @@ begin
           // genericos del cliente
           mtSucursalesCliente.FieldByName('NroSucursal').AsInteger := 0;
           mtSucursalesCliente.FieldByName('Descripcion').AsString := 'Casa Matriz';
-
-          mtSucursalesCliente.FieldByName('Direccion').AsString :=
-            mtSujImp.FieldByName('Direccion').AsString;
-          mtSucursalesCliente.FieldByName('Localidad').AsString :=
-            mtSujImp.FieldByName('Localidad').AsString;
-          mtSucursalesCliente.FieldByName('CodPostal').AsString :=
-            mtSujImp.FieldByName('CodPostal').AsString;
-          mtSucursalesCliente.FieldByName('oid_Provincia').AsInteger :=
-            mtSujImp.FieldByName('oid_Provincia').AsInteger;
-          mtSucursalesCliente.FieldByName('CodProvincia').AsString :=
-            mtSujImp.FieldByName('CodProvincia').AsString;
-          mtSucursalesCliente.FieldByName('DescProvincia').AsString :=
-            mtSujImp.FieldByName('DescProvincia').AsString;
-          mtSucursalesCliente.FieldByName('Telefonos').AsString :=
-            mtCliente.FieldByName('Telefonos').AsString;
-
-//          mtSucursalesCliente.Post;
         end;
 
       // OJO, por cada Sucursal nueva tengo que replicarle todos los Clasificadores
@@ -596,6 +619,102 @@ begin
     end;
 end;
 
+procedure TFNCli0001.mtSujImpCodPostalChange(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    if Driver.esNuevo and (mtSucursalesCliente.RecordCount = 1) then
+      begin
+        mtSucursalesCliente.Edit;
+        mtSucursalesCliente.FieldByName('CodPostal').AsString :=
+          mtSujImp.FieldByName('CodPostal').AsString;
+        mtSucursalesCliente.Post;
+
+        if (mtDomiciliosEntrega.RecordCount = 1) then
+          begin
+            mtDomiciliosEntrega.Edit;
+            mtDomiciliosEntrega.FieldByName('CodPostal').AsString :=
+              mtSucursalesCliente.FieldByName('CodPostal').AsString;
+            mtDomiciliosEntrega.Post;
+          end;
+      end;
+end;
+
+procedure TFNCli0001.mtSujImpCodProvinciaChange(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    if Driver.esNuevo and (mtSucursalesCliente.RecordCount = 1) then
+      begin
+        mtSucursalesCliente.Edit;
+        mtSucursalesCliente.FieldByName('oid_Provincia').AsInteger :=
+          mtSujImp.FieldByName('oid_Provincia').AsInteger;
+        mtSucursalesCliente.FieldByName('CodProvincia').AsString :=
+          mtSujImp.FieldByName('CodProvincia').AsString;
+        mtSucursalesCliente.FieldByName('DescProvincia').AsString :=
+          mtSujImp.FieldByName('DescProvincia').AsString;
+        mtSucursalesCliente.Post;
+
+        if (mtDomiciliosEntrega.RecordCount = 1) then
+          begin
+            mtDomiciliosEntrega.Edit;
+            mtDomiciliosEntrega.FieldByName('oid_Provincia').AsInteger :=
+              mtSucursalesCliente.FieldByName('oid_Provincia').AsInteger;
+            mtDomiciliosEntrega.FieldByName('CodProvincia').AsString :=
+              mtSucursalesCliente.FieldByName('CodProvincia').AsString;
+            mtDomiciliosEntrega.FieldByName('DescProvincia').AsString :=
+              mtSucursalesCliente.FieldByName('DescProvincia').AsString;
+            mtDomiciliosEntrega.Post;
+          end;
+      end;
+end;
+
+procedure TFNCli0001.mtSujImpDireccionChange(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    if Driver.esNuevo and (mtSucursalesCliente.RecordCount = 1) then
+      begin
+        mtSucursalesCliente.Edit;
+        mtSucursalesCliente.FieldByName('Direccion').AsString :=
+          mtSujImp.FieldByName('Direccion').AsString;
+        mtSucursalesCliente.Post;
+
+        if (mtDomiciliosEntrega.RecordCount = 1) then
+          begin
+            mtDomiciliosEntrega.Edit;
+            mtDomiciliosEntrega.FieldByName('Direccion').AsString :=
+              mtSucursalesCliente.FieldByName('Direccion').AsString;
+            mtDomiciliosEntrega.Post;
+          end;
+      end;
+end;
+
+procedure TFNCli0001.mtSujImpLocalidadChange(Sender: TField);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    if Driver.esNuevo and (mtSucursalesCliente.RecordCount = 1) then
+      begin
+        mtSucursalesCliente.Edit;
+        mtSucursalesCliente.FieldByName('Localidad').AsString :=
+          mtSujImp.FieldByName('Localidad').AsString;
+        mtSucursalesCliente.Post;
+
+        if (mtDomiciliosEntrega.RecordCount = 1) then
+          begin
+            mtDomiciliosEntrega.Edit;
+            mtDomiciliosEntrega.FieldByName('Localidad').AsString :=
+              mtSucursalesCliente.FieldByName('Localidad').AsString;
+            mtDomiciliosEntrega.Post;
+          end;
+      end;
+end;
+
 procedure TFNCli0001.mtSujImpNewRecord(DataSet: TDataSet);
 begin
   inherited;
@@ -603,6 +722,7 @@ begin
   if not Service.ModoExecute then
     begin
       mtSujImp.FieldByName('PersonaJuridica').AsBoolean := True;
+
       if cod_PaisPorDefecto <> '' then
         mtSujImp.FieldByName('CodPais').AsString := cod_PaisPorDefecto;
     end;
