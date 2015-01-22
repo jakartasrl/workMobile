@@ -765,48 +765,46 @@
 
 	</operacion>
 	
-	<operacion name="GuardarCostoPrecio" clase="com.jkt.operaciones.GuardarCostosDePrecio">
+	<operacion name="GuardarPreciosCostos" clase="com.jkt.operaciones.GuardarCostosDePrecio">
 	
-<!-- 		Esta operacion recien un campo que representa el tipo de elemento. -->
+<!-- 		Esta operacion recibe un campo que representa el tipo de elemento. -->
 		
-		<input name="mtPrecioCosto" keyName="objeto" clase="com.jkt.dominio.PrecioCosto" fieldID="oid">
+		<input name="mtPrecios" keyName="objeto" clase="com.jkt.dominio.PrecioCosto" fieldID="oid_det">
 			<campoEntrada>
 
-				<campoEntrada name="oid_ele" clase="String" metodo="setOidElemento" />
+				<campoEntrada name="oid" clase="String" metodo="setOidElemento" />
+				<campoEntrada name="precio" clase="Double" metodo="setCosto" />
 				<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
-				<campoEntrada name="costo" clase="Double" metodo="setCosto" />
 
 			</campoEntrada>
 		</input>
 	
 		<forms>
-			<form name="-"></form>
+			<form name="FNVen0010"></form>
 		</forms>
 
 	</operacion>
 	
-	<operacion name="RecuperarCostosDePrecio" clase="com.jkt.operaciones.RecuperarCostosDePrecio">
+	<operacion name="TraerPreciosCostos" clase="com.jkt.operaciones.RecuperarCostosDePrecio">
 	
-		<output name="costos" tableName="mtPreciosCosto">
-			<campoSalida value="oid" target="id" />
-			
+		<output name="costos" tableName="mtPrecios">
+			<campoSalida value="oid_det" target="id" />
+			<campoSalida value="oid" target="identificadorElemento" />
+			<campoSalida value="codigo" target="codigoElemento" />
+			<campoSalida value="descripcion" target="descripcionElemento" />
+			<campoSalida value="precio" target="costo" />
 			<campoSalida value="oid_mon" target="moneda.id" />
-			<campoSalida value="cod_mon" target="moneda.codigo" />
-			<campoSalida value="des_mon" target="moneda.descripcion" />
-			
-			<campoSalida value="oid_ele" target="identificadorElemento" />
-			<campoSalida value="cod_ele" target="codigoElemento" />
-			<campoSalida value="des_ele" target="descripcionElemento" />
-
 			<campoSalida value="fecha" target="fecha" />
-			<campoSalida value="costo" target="costo" />
+
+<!-- 			<campoSalida value="cod_mon" target="moneda.codigo" /> -->
+<!-- 			<campoSalida value="des_mon" target="moneda.descripcion" /> -->
 		</output>
 		
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 		
 		<forms>
-			<form name="-"></form>
+			<form name="FNVen0010"></form>
 		</forms>
 
 	</operacion>	
