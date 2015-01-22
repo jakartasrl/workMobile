@@ -3,7 +3,7 @@ package com.jkt.persistencia;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Criteria;
+import org.hibernate.Query;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
@@ -20,6 +20,14 @@ import com.jkt.util.IRepositorioClases;
 @SuppressWarnings("rawtypes")
 public interface IServiceRepository {
 
+	/**
+	 * <p>Crea una Query HQL para una cadena determinada que representa la consulta en sí.</p>
+	 * 
+	 * @param hql
+	 * @return Query HQL
+	 */
+	Query crearHQL(String hql);
+	
 	PersistentEntity getByProperties(Class className, Map<String,Object> map) throws JakartaException;
 	
 	/**

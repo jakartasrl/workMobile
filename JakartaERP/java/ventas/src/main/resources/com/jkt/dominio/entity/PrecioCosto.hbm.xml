@@ -10,13 +10,13 @@
 			<generator class="native" />
 		</id>
 
-		<property name="fecha" column="FECHA" type="date"/>
-
-		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none"></many-to-one>
-		<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
+		<many-to-one name="conceptoPresupuesto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="none" />
+		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" column="PRODUCTO_ID" cascade="none" />
+		<many-to-one name="determinacion" class="com.jkt.laboratorio.dominio.Determinacion" column="DETERMINACION_ID" cascade="none" />		
 		
+		<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
+		<property name="fecha" column="FECHA" type="date"/>
 		<property name="costo" column="COSTO" type="double"/>
-		<property name="precioVenta" column="PRECIO_VENTA" type="double"/>
 		
 	</class>
 

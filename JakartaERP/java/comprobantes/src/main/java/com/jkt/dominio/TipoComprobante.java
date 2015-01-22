@@ -49,7 +49,7 @@ public class TipoComprobante extends PersistentEntity {
 
 			@Override
 			public String argumento() {
-				return "ND-";
+				return "ND";
 			}
 		}, 
 		
@@ -62,7 +62,7 @@ public class TipoComprobante extends PersistentEntity {
 
 			@Override
 			public String argumento() {
-				return "NC-";
+				return "NC";
 			}
 		},
 		
@@ -74,7 +74,7 @@ public class TipoComprobante extends PersistentEntity {
 
 			@Override
 			public String argumento() {
-				return "OR-";
+				return "OR";
 			}
 		},
 		
@@ -86,7 +86,7 @@ public class TipoComprobante extends PersistentEntity {
 
 			@Override
 			public String argumento() {
-				return "PD-";
+				return "PD";
 			}
 		};
 		
@@ -112,7 +112,7 @@ public class TipoComprobante extends PersistentEntity {
 			for (Comportamiento comportamiento : values) {
 				if(comportamiento.getValue()==value){
 					c=comportamiento;
-					break; 
+					break;
 				}
 			}
 			if (c==null) {

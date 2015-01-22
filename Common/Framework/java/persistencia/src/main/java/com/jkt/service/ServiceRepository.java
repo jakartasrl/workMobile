@@ -17,6 +17,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
@@ -319,5 +320,12 @@ public class ServiceRepository implements IServiceRepository {
 			throw new JakartaException("Ocurrio un error. Al parecer la entidad maestra proporcionada no es correcta.");
 		}
 	}
+
+	public Query crearHQL(String hql) {
+		Session session = sessionProvider.getSession();
+		return session.createQuery(hql);
+	}
+	
+	
 
 }

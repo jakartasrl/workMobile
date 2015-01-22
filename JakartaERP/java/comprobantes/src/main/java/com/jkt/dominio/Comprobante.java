@@ -21,12 +21,27 @@ public abstract class Comprobante extends PersistentEntity {
 	 * variables de instancia
 	 * ***********************************************
 	 */
+	
+	/*
+	 * Un Pedido puede estar relacionado a un presupuesto.
+	 * Un Presupuesto puede estar relacionado a una cotizacion
+	 */
+	private Comprobante comprobanteRelacionado;
+	
 //	private String comportamiento;
 	private String letra;
 	private String lugarEmision;
 	private String nro;
 	private boolean anulado=false;
 	
+	public Comprobante getComprobanteRelacionado() {
+		return comprobanteRelacionado;
+	}
+
+	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
+		this.comprobanteRelacionado = comprobanteRelacionado;
+	}
+
 	@NotNull(message="Debe ingresar obligatoriamente un tipo de comprobante.")
 	private TipoComprobante tipoComprobante;
 	

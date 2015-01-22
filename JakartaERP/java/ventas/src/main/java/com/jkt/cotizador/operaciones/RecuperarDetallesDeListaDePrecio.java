@@ -21,6 +21,7 @@ import com.jkt.operaciones.Operation;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@SuppressWarnings("rawtypes")
 public class RecuperarDetallesDeListaDePrecio extends Operation {
 
 	
@@ -51,6 +52,10 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 		//Recupero los identificadores de las instancias de los labo quimico y electrico
 		Configuracion configuracionLaboratorioElectrico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_ELECTRICO);
 		Configuracion configuracionLaboratorioQuimico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_QUIMICO);
+		
+		if (configuracionLaboratorioElectrico==null || configuracionLaboratorioQuimico==null) {
+			throw new JakartaException("Compruebe la parametrizacion de los laboratorios quimico y electrico.");
+		}
 		
 		//Compruebo la consistencia de los datos parametrizados recuperando los laboratorios correspondientes
 		laboratorioElectrico=(Laboratorio) obtener(Laboratorio.class, Long.valueOf(configuracionLaboratorioElectrico.getValorNumero()));
@@ -127,7 +132,6 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 		List<PersistentEntity> productos = obtenerTodos(Producto.class);
 		for (PersistentEntity producto : productos) {
 			if (!idsProductos.contains(producto.getId())) {
-//				Factory f;
 				ListaPrecioDetalle detalle = new ListaPrecioDetalle();
 				detalle.setProducto((Producto)producto);
 				notificarObjeto(writer, detalle);

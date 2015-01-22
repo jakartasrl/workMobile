@@ -10,10 +10,10 @@
 			<generator class="native" />
 		</id>
 		
-		<property name="argumento" column="ARGUMENTO" />
+<!-- 		<property name="argumento" column="ARGUMENTO" /> -->
 		<property name="numero" column="NUMERO" type="integer"/>
 		
-		<property name="activo" column="ACTIVO" type="boolean" />
+<!-- 		<property name="activo" column="ACTIVO" type="boolean" /> -->
 
 	</class>
 
