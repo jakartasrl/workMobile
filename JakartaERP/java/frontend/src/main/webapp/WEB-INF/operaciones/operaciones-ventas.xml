@@ -790,7 +790,7 @@
 	<operacion name="TraerPreciosCostos" clase="com.jkt.operaciones.RecuperarPreciosDeCosto">
 	
 		<output name="costos" tableName="mtPrecios">
-			<campoSalida value="oid_det" target="id" />
+<!-- 			<campoSalida value="oid_det" target="id" /> -->
 			<campoSalida value="oid" target="identificadorElemento" />
 			<campoSalida value="codigo" target="codigoElemento" />
 			<campoSalida value="descripcion" target="descripcionElemento" />
