@@ -2,6 +2,8 @@ package com.jkt.dominio;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.excepcion.JakartaException;
@@ -69,7 +71,10 @@ public class PrecioCosto extends PersistentEntity {
 	}
 	
 	private Moneda moneda;
+	
+	@NotNull(message="Debe ingresar una fecha de activación del precio")
 	private Date fecha;
+	
 	private double costo;
 //	private double precioVenta;
 	
