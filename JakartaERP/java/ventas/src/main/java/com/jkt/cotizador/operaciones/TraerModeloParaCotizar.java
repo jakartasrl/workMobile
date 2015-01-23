@@ -103,6 +103,7 @@ public class TraerModeloParaCotizar extends Operation {
 				}
 				
 			}else{
+				asignarMonedaPrecioFecha(tituloModeloCotizador, null);
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			}
 		}else{
