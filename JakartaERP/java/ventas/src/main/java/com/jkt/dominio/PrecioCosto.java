@@ -27,7 +27,7 @@ public class PrecioCosto extends PersistentEntity {
 	}
 
 	public long getIdentificadorElemento() throws JakartaException{
-		
+	
 		if (defineCostoConcepto()) {
 			return conceptoPresupuesto.getId();
 		}
@@ -53,6 +53,7 @@ public class PrecioCosto extends PersistentEntity {
 		}
 		throw new JakartaException(MENSAJE_ERROR);
 	}
+
 	
 	public String getDescripcionElemento() throws JakartaException{
 		if (defineCostoConcepto()) {
