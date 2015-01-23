@@ -601,8 +601,14 @@
 			<campoSalida value="oid_conc" target="concepto.id" />
 		
 		
-		
-			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" />
+<!-- 			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" /> -->
+			<campoSalida value="oid_moneda" target="moneda.id" />
+			
+			<campoSalida value="fecha_costo" target="fechaPrecioCosto" />
+			<campoSalida value="importe_unit" target="precio" />
+			
+			
+			
 			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
 			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
 			
