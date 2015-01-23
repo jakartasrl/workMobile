@@ -787,7 +787,7 @@
 
 	</operacion>
 	
-	<operacion name="TraerPreciosCostos" clase="com.jkt.operaciones.RecuperarCostosDePrecio">
+	<operacion name="TraerPreciosCostos" clase="com.jkt.operaciones.RecuperarPreciosDeCosto">
 	
 		<output name="costos" tableName="mtPrecios">
 			<campoSalida value="oid_det" target="id" />
