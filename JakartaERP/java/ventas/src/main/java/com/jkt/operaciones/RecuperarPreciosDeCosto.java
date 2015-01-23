@@ -173,7 +173,11 @@ public class RecuperarPreciosDeCosto extends Operation {
 		}
 		String consultaNuevosElementos="from "+CLASE_DETERMINACION+" e "+condicion;
 		Query qNuevosElementos = crearHQL(consultaNuevosElementos);
-		qNuevosElementos.setParameterList("ids", ids);
+		
+		if (!ids.isEmpty()) {
+			qNuevosElementos.setParameterList("ids", ids);
+		}
+		
 		qNuevosElementos.setParameter("lab", idLaboratorio);
 		return qNuevosElementos.list();
 	}

@@ -1,5 +1,7 @@
 package com.jkt.cotizador.dominio;
 
+import org.hibernate.validator.constraints.Range;
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.varios.dominio.Moneda;
@@ -18,6 +20,10 @@ public class CotizadorDet extends PersistentEntity {
 	private UnidadMedida unidadMedida;
 	private double precioUnitario;
 	private Moneda moneda;
+	
+	@Range(min=1,max=500, message="El mark up  debe estar entre 1 y 500")
+	private int markUp;
+	
 	private double cotizacion;
 	private ConceptoPresupuesto conceptoPresupuesto;
 	private TituloModeloCotizador tituloModeloCotizador;
@@ -28,6 +34,14 @@ public class CotizadorDet extends PersistentEntity {
 
 	public void setTituloModeloCotizador(TituloModeloCotizador tituloModeloCotizador) {
 		this.tituloModeloCotizador = tituloModeloCotizador;
+	}
+
+	public int getMarkUp() {
+		return markUp;
+	}
+
+	public void setMarkUp(int markUp) {
+		this.markUp = markUp;
 	}
 
 	public Producto getProducto() {

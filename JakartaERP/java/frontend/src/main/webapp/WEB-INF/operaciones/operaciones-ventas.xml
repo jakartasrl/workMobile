@@ -475,6 +475,9 @@
 			
 			<campoSalida value="importe_unit" target="precio" />
 			<campoSalida value="oid_moneda" target="moneda.id" />
+			<campoSalida value="fecha_costo" target="fechaPrecioCosto" />
+			
+			<campoSalida value="markup" target="detalleDeConcepto.markUp" />
 
 			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
 			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
@@ -559,6 +562,7 @@
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
 					<campoEntrada name="importe_unit" clase="Double" metodo="setPrecioUnitario" />
+					<campoEntrada name="markup" clase="Integer" metodo="setMarkUp" />
 					<campoEntrada name="oid_moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 					<campoEntrada name="oid_titu_conc" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" metodo="setTituloModeloCotizador" />
 <!-- 					<campoEntrada name="importe_total" clase="" metodo="" /> -->

@@ -134,16 +134,24 @@ public class TraerCotizacionDelItem extends Operation {
 					productoClasificador=(ProductoClasificador) persistentEntity;
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
 					tituloModeloCotizador.setProducto(producto);
-					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
-					tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
-					asignarMonedaYPrecio(tituloModeloCotizador, producto);
+					
+					if (cotizadorDet!=null) {
+						tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+						tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
+					}
+
+					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
 				
 			}else{
-				tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
-				tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
-				asignarMonedaYPrecio(tituloModeloCotizador, null);
+
+				if (cotizadorDet!=null) {
+					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+					tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
+				}
+				
+				asignarMonedaPrecioFecha(tituloModeloCotizador, null);
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			}
 		}else{
@@ -161,7 +169,7 @@ public class TraerCotizacionDelItem extends Operation {
 		
 	}
 
-	private void asignarMonedaYPrecio(TituloModeloCotizador tituloModeloCotizador, Producto producto) {
+	private void asignarMonedaPrecioFecha(TituloModeloCotizador tituloModeloCotizador, Producto producto) {
 		if (tituloModeloCotizador.getDetalleDeConcepto()!=null) {
 			//setear los del detalle
 			tituloModeloCotizador.setMoneda(tituloModeloCotizador.getDetalleDeConcepto().getMoneda());
@@ -194,9 +202,8 @@ public class TraerCotizacionDelItem extends Operation {
 				//setea los datos de la lista de precios de costo.
 				tituloModeloCotizador.setMoneda(costoRecuperado.getMoneda());
 				tituloModeloCotizador.setPrecio(costoRecuperado.getCosto());
+				tituloModeloCotizador.setFechaPrecioCosto(costoRecuperado.getFecha());
 			}
-			
-			
 			
 		}
 	}

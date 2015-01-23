@@ -90,10 +90,19 @@ public class Cotizador extends PersistentEntity {
 	
 	public void agregarDetalle(CotizadorDet detalle){
 
+		/*
+		 * Si es titulo no se guarda
+		 */
 		if (detalle.getConceptoPresupuesto()==null) {
 			return;
 		}
 
+		/*
+		 * Si el detalle no tiene cantidad, no se guarda
+		 */
+		if (detalle.getCantidad()==0) {
+			return;
+		}
 		
 		if (!detalles.contains(detalle)) {
 

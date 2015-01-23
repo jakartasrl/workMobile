@@ -15,6 +15,7 @@ import com.jkt.varios.dominio.Moneda;
  */
 public class PrecioCosto extends PersistentEntity {
 
+	private static final String MENSAJE_ERROR = "Existe una inconsistencia con el costo de precio. El costo no define el precio de ningun elemento.";
 	private String oidElemento;
 	
 	public String getOidElemento() {
@@ -26,7 +27,7 @@ public class PrecioCosto extends PersistentEntity {
 	}
 
 	public long getIdentificadorElemento() throws JakartaException{
-	
+		
 		if (defineCostoConcepto()) {
 			return conceptoPresupuesto.getId();
 		}
@@ -36,7 +37,21 @@ public class PrecioCosto extends PersistentEntity {
 		if (defineCostoProducto()) {
 			return producto.getId();
 		}
-		throw new JakartaException("Existe una inconsistencia con el costo de precio. El costo no define el precio de ningun elemento.");
+		throw new JakartaException(MENSAJE_ERROR);
+	}
+	
+	public String getCodigoElemento() throws JakartaException{
+		
+		if (defineCostoConcepto()) {
+			return conceptoPresupuesto.getCodigo();
+		}
+		if (defineCostoDeterminacion()) {
+			return determinacion.getCodigo();
+		}
+		if (defineCostoProducto()) {
+			return producto.getCodigo();
+		}
+		throw new JakartaException(MENSAJE_ERROR);
 	}
 	
 	public String getDescripcionElemento() throws JakartaException{
@@ -49,7 +64,7 @@ public class PrecioCosto extends PersistentEntity {
 		if (defineCostoProducto()) {
 			return producto.getDescripcion();
 		}
-		throw new JakartaException("Existe una inconsistencia con el costo de precio. El costo no define el precio de ningun elemento.");
+		throw new JakartaException(MENSAJE_ERROR);
 	}
 	
 	private Moneda moneda;

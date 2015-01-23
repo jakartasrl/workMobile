@@ -1,6 +1,7 @@
 package com.jkt.cotizador.dominio;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.jkt.dominio.PersistentEntity;
@@ -172,6 +173,15 @@ public class TituloModeloCotizador extends PersistentEntity {
 	 */
 	private Moneda moneda;
 	private double precio;
+	private Date fechaPrecioCosto;
+	
+	public Date getFechaPrecioCosto() {
+		return fechaPrecioCosto;
+	}
+
+	public void setFechaPrecioCosto(Date fechaPrecioCosto) {
+		this.fechaPrecioCosto = fechaPrecioCosto;
+	}
 
 	public Moneda getMoneda() {
 		return moneda;
