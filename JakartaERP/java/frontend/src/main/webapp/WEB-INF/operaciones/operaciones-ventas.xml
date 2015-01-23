@@ -472,9 +472,10 @@
 			<campoSalida value="oid_conc" target="concepto.id" />
 		
 			<campoSalida value="cant" target="detalleDeConcepto.cantidad" />
-			<campoSalida value="importe_unit" target="detalleDeConcepto.precioUnitario" />
-		
-			<campoSalida value="oid_moneda" target="concepto.monedaPorDefecto.id" />
+			
+			<campoSalida value="importe_unit" target="precio" />
+			<campoSalida value="oid_moneda" target="moneda.id" />
+
 			<campoSalida value="oid_unid_med" target="concepto.unidadDeMedidaPorDefecto.id" />
 			<campoSalida value="cod_unid_med" target="concepto.unidadDeMedidaPorDefecto.codigo" />
 			
@@ -765,7 +766,7 @@
 
 	</operacion>
 	
-	<operacion name="GuardarCostoPrecio" clase="com.jkt.operaciones.GuardarCostosDePrecio">
+	<operacion name="GuardarPrecioCosto" clase="com.jkt.operaciones.GuardarPreciosDeCosto">
 	
 <!-- 		Esta operacion recien un campo que representa el tipo de elemento. -->
 		
@@ -786,10 +787,10 @@
 
 	</operacion>
 	
-	<operacion name="RecuperarCostosDePrecio" clase="com.jkt.operaciones.RecuperarCostosDePrecio">
+	<operacion name="RecuperarPreciosDeCosto" clase="com.jkt.operaciones.RecuperarPreciosDeCosto">
 	
 		<output name="costos" tableName="mtPreciosCosto">
-			<campoSalida value="oid" target="id" />
+<!-- 			<campoSalida value="oid" target="id" /> -->
 			
 			<campoSalida value="oid_mon" target="moneda.id" />
 			<campoSalida value="cod_mon" target="moneda.codigo" />

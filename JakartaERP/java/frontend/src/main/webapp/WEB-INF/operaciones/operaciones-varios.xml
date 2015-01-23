@@ -563,7 +563,7 @@
 
 
 	<!-- Guardar tipo de cambio -->
-	<operacion name="GuardarTipoDeCambio" clase="com.jkt.operaciones.GuardarLista">
+	<operacion name="GuardarTipoDeCambio" clase="com.jkt.varios.operaciones.GuardarTipoDeCambio">
 
 		<input name="mtTipoCambio" keyName="objeto" clase="com.jkt.varios.dominio.TipoDeCambio" fieldID='oid'>
 			<campoEntrada>

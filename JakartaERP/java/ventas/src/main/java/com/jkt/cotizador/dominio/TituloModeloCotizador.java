@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
+import com.jkt.varios.dominio.Moneda;
 
 /**
  * <p>Representa un elemento del arbol de modelo de cotizador. Es un nodo, q puede ser titulo o concepto.</p>
@@ -164,5 +165,32 @@ public class TituloModeloCotizador extends PersistentEntity {
 			return this.concepto.getDescripcion();
 		}
 	}
+	
+	/*
+	 * Campos transientes que sirven para depositar el precio y la moneda.
+	 * 
+	 */
+	private Moneda moneda;
+	private double precio;
+
+	public Moneda getMoneda() {
+		return moneda;
+	}
+
+	public void setMoneda(Moneda moneda) {
+		this.moneda = moneda;
+	}
+
+	public double getPrecio() {
+		if(precio==0){
+			return (Double) null;
+		}
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+	
 
 }
