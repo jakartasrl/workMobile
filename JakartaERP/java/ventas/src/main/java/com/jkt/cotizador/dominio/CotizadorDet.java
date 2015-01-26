@@ -25,6 +25,7 @@ public class CotizadorDet extends PersistentEntity {
 	private int markUp;
 	
 	private double cotizacion;
+	private double importeVenta;
 	private ConceptoPresupuesto conceptoPresupuesto;
 	private TituloModeloCotizador tituloModeloCotizador;
 	
@@ -36,6 +37,14 @@ public class CotizadorDet extends PersistentEntity {
 		this.tituloModeloCotizador = tituloModeloCotizador;
 	}
 
+	public double getImporteVenta() {
+		return importeVenta;
+	}
+
+	public void setImporteVenta(double importeVenta) {
+		this.importeVenta = importeVenta;
+	}
+	
 	public int getMarkUp() {
 		return markUp;
 	}

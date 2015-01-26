@@ -12,6 +12,7 @@ import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.PrecioCosto;
 import com.jkt.erp.articulos.Producto;
+import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.varios.dominio.Moneda;
@@ -24,10 +25,16 @@ import com.jkt.varios.dominio.Moneda;
  */
 public class RecuperarPreciosDeCosto extends Operation {
 	
-	private static final String PARAMETRO_MONEDA_POR_DEFECTO = "monedaPorDefecto";
+	private static final String SPACE = " ";
+	private static final String SEPARADOR_CLASES_HQL = ",";
+	private static final String FILTRO_CLASIFICADOR = "clasificador".toUpperCase();
+	private static final String CODIGO_HASTA = "cod_art_has".toUpperCase();
+	private static final String CODIGO_DESDE = "cod_art_des".toUpperCase();
+	
+	private static final String CLASE_CONCEPTO_PRESUPUESTO = "ConceptoPresupuesto";
 	private static final String CLASE_PRODUCTO = "Producto";
-	private static final String CLASE_CONCEPTO = "ConceptoPresupuesto";
 	private static final String CLASE_DETERMINACION = "Determinacion";
+	private static final String PARAMETRO_MONEDA_POR_DEFECTO = "monedaPorDefecto";
 
 	//Contantes para utilizar en HQL. Cada una representa un atributo del costo de precio.
 	private static final String PRODUCTO_ATRIBUTO = "producto";
@@ -48,6 +55,7 @@ public class RecuperarPreciosDeCosto extends Operation {
 	private Configuracion configuracionLaboratorioQuimico;
 	
 	private String tipo;
+	private String filtroCodigoDesde, filtroCodigoHasta, filtroClasificador;
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -56,6 +64,10 @@ public class RecuperarPreciosDeCosto extends Operation {
 		
 		validarEntrada(aParams.get(TIPO_ELEMENTO));
 		tipo=(String) aParams.get(TIPO_ELEMENTO);
+
+		filtroCodigoDesde=(String) aParams.get(CODIGO_DESDE);
+		filtroCodigoHasta=(String) aParams.get(CODIGO_HASTA);
+		filtroClasificador=(String) aParams.get(FILTRO_CLASIFICADOR);
 
 		List<PrecioCosto> costos=recuperarCostos();
 		List ids=new ArrayList();
@@ -87,7 +99,7 @@ public class RecuperarPreciosDeCosto extends Operation {
 		List elementosNuevos;
 		switch (tipoNumerico) {
 		case TIPO_ARTICULO:
-			elementosNuevos=obtenerElementosSimplesNuevos(CLASE_PRODUCTO, ids);
+			elementosNuevos=obtenerProductosNuevos(ids);
 			break;
 		case TIPO_LABORATORIO_QUIMICO:
 			elementosNuevos=obtenerDeterminacionesNuevas(ids, configuracionLaboratorioQuimico.getValorNumero());
@@ -96,7 +108,7 @@ public class RecuperarPreciosDeCosto extends Operation {
 			elementosNuevos=obtenerDeterminacionesNuevas(ids, configuracionLaboratorioElectrico.getValorNumero());
 			break;
 		case TIPO_CONCEPTO:
-			elementosNuevos=obtenerElementosSimplesNuevos(CLASE_CONCEPTO, ids);
+			elementosNuevos=obtenerConceptosNuevos(ids);
 			break;
 		default:
 			throw new JakartaException("El tipo de elemento recibido no se corresponde con los tipos disponibles.");
@@ -141,17 +153,62 @@ public class RecuperarPreciosDeCosto extends Operation {
 		
 	}
 	
+	private List obtenerProductosNuevos(List ids) {
+		String condicionLista=StringUtils.EMPTY;
+		if (!ids.isEmpty()) {
+			condicionLista="where e.id not in (:ids)";
+		}
+		
+		Query qNuevosElementos;
+		String basicQuery=String.format("from %s e", CLASE_PRODUCTO);
+
+		String filtros=StringUtils.EMPTY;
+		if (filtroClasificador!=null) {
+			//Filtrar por clasificador
+			filtros=SEPARADOR_CLASES_HQL + " ProductoClasificador clasificacion where clasificacion.producto.id=e.id and clasificacion.componenteValor.id = :clasificador";
+			
+			if (!ids.isEmpty()) {
+				condicionLista="and e.id not in (:ids)";
+			}
+			
+			String select="select e";
+			qNuevosElementos=crearHQL(select.concat(SPACE).concat(basicQuery).concat(filtros).concat(SPACE).concat(condicionLista));
+			qNuevosElementos.setParameter("clasificador", Long.valueOf(filtroClasificador));
+		}else if(filtroCodigoDesde!=null && filtroCodigoHasta!=null){
+			//filtro por codigos
+			filtros=SPACE.concat("where e.codigo >= :codigoDesde and e.codigo <= :codigoHasta");
+			
+			if (!ids.isEmpty()) {
+				condicionLista=SPACE.concat("and e.id not in (:ids)");
+			}
+			
+			qNuevosElementos=crearHQL(basicQuery.concat(filtros).concat(condicionLista));
+			qNuevosElementos.setParameter("codigoDesde", filtroCodigoDesde);
+			qNuevosElementos.setParameter("codigoHasta", filtroCodigoHasta);
+		}else{
+			//without filters
+			qNuevosElementos=crearHQL(basicQuery.concat(SPACE).concat(condicionLista));
+		}
+		
+		if (!ids.isEmpty()) {
+			qNuevosElementos.setParameterList("ids", ids);
+		}
+		
+		return qNuevosElementos.list();
+	
+	}
+
 	/**
 	 * 
-	 * Obtiene Conceptos o Productos, dependiendo la clase enviada, y retorna una lista de precios de costos nuevos.
+	 * Obtiene Conceptos y retorna una lista de precios de costos nuevos.
 	 */
-	private List obtenerElementosSimplesNuevos(String clase, List ids){
+	private List obtenerConceptosNuevos(List ids){
 		String condicion=StringUtils.EMPTY;
 		if (!ids.isEmpty()) {
 			condicion="where e.id not in (:ids)";
 		}
 		
-		String consultaNuevosElementos="from "+clase+" e "+condicion;
+		String consultaNuevosElementos="from " + CLASE_CONCEPTO_PRESUPUESTO + " e "+condicion;
 		Query qNuevosElementos = crearHQL(consultaNuevosElementos);
 		
 		if (!ids.isEmpty()) {
@@ -243,16 +300,52 @@ public class RecuperarPreciosDeCosto extends Operation {
 		
 		switch (tipoNumerico) {
 		case TIPO_ARTICULO:
-			return obtenerElementos(PRODUCTO_ATRIBUTO);
+			return obtenerProductos();
 		case TIPO_LABORATORIO_QUIMICO:
 			return recuperarDeterminacion(configuracionLaboratorioQuimico);
 		case TIPO_LABORATORIO_ELECTRICO:
 			return recuperarDeterminacion(configuracionLaboratorioElectrico);
 		case TIPO_CONCEPTO:
-			return obtenerElementos(CONCEPTO_PRESUPUESTO_ATRIBUTO);
+			return obtenerConceptos();
 		default:
 			throw new JakartaException("El tipo de elemento recibido no se corresponde con los tipos disponibles.");
 		}
+	}
+
+	private List<PrecioCosto> obtenerProductos() {
+		//Ver el filtro
+		Query qIds;
+		
+		if (filtroCodigoDesde!=null && filtroCodigoHasta!=null) {
+			String basicQuery="select distinct (costo.producto.id) from PrecioCosto costo where costo.producto is not null";
+			String filterQuery="and costo.producto.codigo >= :codigoDesde and costo.producto.codigo <= :codigoHasta"; 
+			qIds = crearHQL(basicQuery.concat(SPACE).concat(filterQuery));
+			qIds.setParameter("codigoDesde", filtroCodigoDesde);
+			qIds.setParameter("codigoHasta", filtroCodigoHasta);
+			
+		}else if(filtroClasificador!=null){
+			String query="select distinct (costo.producto.id) from PrecioCosto costo, ProductoClasificador clasificacion";
+			String filterQuery="where costo.producto is not null and costo.producto.id = clasificacion.producto.id and clasificacion.componenteValor.id = :clasificador";
+			qIds = crearHQL(query.concat(SPACE).concat(filterQuery));
+			qIds.setParameter("clasificador", Long.valueOf(filtroClasificador));
+	
+		}else{
+			qIds = crearHQL("select distinct (costo.producto.id) from PrecioCosto costo where costo.producto is not null");
+		}
+		
+		Query qCostos;
+		List list = qIds.list();
+		List<PrecioCosto> costos=new ArrayList<PrecioCosto>();
+		long id;
+		for (Object object : list) {
+			id=(Long) object;
+			qCostos=crearHQL("from PrecioCosto costo where costo.producto.id=:id order by costo.fecha desc");
+			qCostos.setMaxResults(1);
+			qCostos.setParameter("id", id);
+			PrecioCosto precioCosto = (PrecioCosto) qCostos.uniqueResult();
+			costos.add(precioCosto);
+		}
+		return costos;
 	}
 
 	/**
@@ -260,15 +353,15 @@ public class RecuperarPreciosDeCosto extends Operation {
 	 * Este metodo es ejecutado para filtrar elementos 'simples', los cuales son conceptoPresupuesto y producto.
 	 * 
 	 */
-	private List<PrecioCosto> obtenerElementos(String elementoAFiltrar) {
-		Query qIds = crearHQL("select distinct (costo."+elementoAFiltrar+".id) from PrecioCosto costo where costo."+elementoAFiltrar+" is not null");
+	private List<PrecioCosto> obtenerConceptos() {
+		Query qIds = crearHQL("select distinct (costo.conceptoPresupuesto.id) from PrecioCosto costo where costo.conceptoPresupuesto is not null");
 		Query qElemento;
 		List list = qIds.list();
 		List<PrecioCosto> costos=new ArrayList<PrecioCosto>();
 		long id;
 		for (Object object : list) {
 			id=(Long) object;
-			qElemento=crearHQL("from PrecioCosto costo where costo."+elementoAFiltrar+".id=:id order by costo.fecha desc");
+			qElemento=crearHQL("from PrecioCosto costo where costo.conceptoPresupuesto.id=:id order by costo.fecha desc");
 			qElemento.setMaxResults(1);
 			qElemento.setParameter("id", id);
 			PrecioCosto precioCosto = (PrecioCosto) qElemento.uniqueResult();

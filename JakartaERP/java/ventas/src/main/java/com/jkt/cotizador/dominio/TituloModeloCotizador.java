@@ -35,8 +35,6 @@ public class TituloModeloCotizador extends PersistentEntity {
 	
 	
 	
-	
-	
 	private String codigo, descripcion;
 	private TituloModeloCotizador tituloPadre;
 	private List<TituloModeloCotizador> titulosHijos=new ArrayList<TituloModeloCotizador>();
