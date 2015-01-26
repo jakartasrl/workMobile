@@ -25,14 +25,7 @@ import com.jkt.varios.dominio.ComponenteValor;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TraerModeloParaCotizar extends Operation {
-
-	//key para recuperar del mapa, desde el cliente enviarán OID=2, por ejemplo.
-	private static final String OID = "OID";
-
-	//writers mapeados contra el archivo operaciones-ventas.xml
-	private static final String WRITER_MODELO = "modelo";
-	private static final String WRITER_TITULO = "titulos";
+public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -97,7 +90,6 @@ public class TraerModeloParaCotizar extends Operation {
 					tituloModeloCotizador.setCodigoInterno(tituloModeloCotizador.getCodigoInterno()+(i++));
 					
 					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
-
 					
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
@@ -119,56 +111,5 @@ public class TraerModeloParaCotizar extends Operation {
 		
 	}
 	
-	/**
-	 * 
-	 * FIXME
-	 * TODO
-	 * FIXME
-	 * TODO
-	 * @throws JakartaException 
-	 * 
-	 */
-	private void asignarMonedaPrecioFecha(TituloModeloCotizador tituloModeloCotizador, Producto producto) throws JakartaException {
-		if (tituloModeloCotizador.getDetalleDeConcepto()!=null) {
-			//setear los del detalle
-			tituloModeloCotizador.setMoneda(tituloModeloCotizador.getDetalleDeConcepto().getMoneda());
-			tituloModeloCotizador.setPrecio(tituloModeloCotizador.getDetalleDeConcepto().getPrecioUnitario());
-		}else{
-			//buscamos en la lista de precios de costo del concepto
-			ConceptoPresupuesto concepto = tituloModeloCotizador.getConcepto();
-			Query q;
-			PrecioCosto costoRecuperado;
-			if (concepto.isPideArticulo()) {
-				
-				if (producto==null) {
-					throw new JakartaException("Error en la logica de asignar moneda, precio y fecha de costos.Si el concepto pide articulo, debe tener un produto asociado.");
-				}
-				//recupero de la lista de precios de costo el articulo.
-				String hql="from PrecioCosto p where p.producto.id =:id order by p.fecha desc";
-				q=crearHQL(hql);
-				q.setMaxResults(1);
-				q.setParameter("id", producto.getId());
-				costoRecuperado = (PrecioCosto) q.uniqueResult();
-			}else{
-				//recupero de la lista de precios de costo el articulo.
-				String hql="from PrecioCosto p where p.conceptoPresupuesto.id =:id order by p.fecha desc";
-				q=crearHQL(hql);
-				q.setMaxResults(1);
-				q.setParameter("id", concepto.getId());
-				costoRecuperado = (PrecioCosto) q.uniqueResult();
-			}
-			
-			if (costoRecuperado==null) {
-				//Recupera la moneda solamente del concepto.
-				tituloModeloCotizador.setMoneda(concepto.getMonedaPorDefecto());
-			}else{
-				//setea los datos de la lista de precios de costo.
-				tituloModeloCotizador.setMoneda(costoRecuperado.getMoneda());
-				tituloModeloCotizador.setPrecio(costoRecuperado.getCosto());
-				tituloModeloCotizador.setFechaPrecioCosto(costoRecuperado.getFecha());
-			}
-			
-		}
-	}
 }
 		
