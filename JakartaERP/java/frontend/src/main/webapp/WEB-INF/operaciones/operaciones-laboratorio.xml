@@ -590,15 +590,11 @@
 
 	</operacion>
 	
-	
-	
-<!-- 	INSTANCIAR REPORTE -->
+	<!-- INSTANCIAR REPORTE -->
 	<operacion name="CrearReporte" clase="com.jkt.laboratorio.operaciones.CrearDoc">
 		<forms>
 			<form name="FormProtocolo"></form>
 		</forms>
 	</operacion>
-	
-
 
 </entity>

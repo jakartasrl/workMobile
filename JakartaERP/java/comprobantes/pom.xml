@@ -26,12 +26,6 @@
   	</dependency>
   	
   	<dependency>
-		<groupId>jasperreports</groupId>
-		<artifactId>jasperreports</artifactId>
-		<version>3.5.3</version>
-	</dependency>
-  	
-  	<dependency>
   		<groupId>com.jkt</groupId>
   		<artifactId>seguridad</artifactId>
   		<version>0.0.1</version>

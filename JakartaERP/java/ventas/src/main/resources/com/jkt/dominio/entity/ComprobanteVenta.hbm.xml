@@ -35,6 +35,15 @@
        		</join>
         
 		</subclass>
+
+	    <subclass name="com.jkt.dominio.Presupuesto" discriminator-value="PRESUPUESTO">
+        	<join table="PRESUPUESTO">
+            	<key column="COMPROBANTE_ID"/>
+					<property name="formasDePago" column="FORMAS_PAGO" type="string" />
+					<property name="notas" column="NOTAS" type="string" />
+       		</join>
+		</subclass>
+
 	</subclass>
 
 </hibernate-mapping>

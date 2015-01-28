@@ -4,20 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.core.IField;
-import org.hibernate.Query;
-
 import com.jkt.constantes.TiposDeDato;
-import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.dominio.PrecioCosto;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.ComponenteValor;
 
 /**
