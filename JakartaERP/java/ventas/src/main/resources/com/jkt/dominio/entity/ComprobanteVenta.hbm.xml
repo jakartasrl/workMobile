@@ -4,42 +4,37 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<subclass  name="com.jkt.dominio.ComprobanteVenta" discriminator-value="COMPROBANTE-VENTA" extends="com.jkt.dominio.ComprobanteCliente">
+	<subclass name="com.jkt.dominio.ComprobanteVenta" discriminator-value="COMPROBANTE-VENTA" extends="com.jkt.dominio.Comprobante">
+
+		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" column="CLIENTE_SUCURSAL_ID"></many-to-one>
+		<many-to-one name="condicionPago" class="com.jkt.varios.dominio.CondPago" column="CONDICION_PAGO_ID"></many-to-one>
 
 		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_ID" />
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID" />
 
-		<list name="detalles" table="COMPROBANTE_VENTA_DET" lazy="true"
-			cascade="all">
+		<list name="detalles" table="COMPROBANTE_VENTA_DET" lazy="true" cascade="all">
 			<key column="COMPROBANTE_ID" />
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.dominio.ComprobanteVentaDet" />
 		</list>
-		
-		<subclass name="com.jkt.dominio.Cotizacion" extends="com.jkt.dominio.ComprobanteVenta">
-			<property name="estado" column="ESTADO" />
-			<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
-			<property name="referencia" column="REFERENCIA" type="string" />
-			
-			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
-			
-<!-- 				<type name="com.jkt.dominio.HibernateVarCharEnum"> -->
-<!-- 					<param name="enumClass">com.jkt.dominio.Cotizacion.Estado</param> -->
-<!-- 					<param name="type">12</param> -->
-<!-- 					<param name="useNamed">true</param> -->
-<!-- 				</type> -->
-				
-<!-- 				<type name="com.jkt.dominio.HibernateVarCharEnum"> -->
-<!--                 	<param name="enumClass">com.jkt.dominio.Cotizacion.Estado</param> -->
-<!-- 					<param name="type">12</param> -->
-<!-- 					<param name="useNamed">true</param> -->
-<!--              	</type> -->
-				
-		</subclass>		
 
-		<subclass name="com.jkt.dominio.Pedido" extends="com.jkt.dominio.ComprobanteVenta">
+	    <subclass name="com.jkt.dominio.Pedido" discriminator-value="PEDIDO">
+        	<join table="PEDIDO">
+            <key column="COMPROBANTE_ID"/>
+				<property name="numeroPedido" column="NUMEROPEDIDO" />
+        	</join>
 		</subclass>
-
+        
+	    <subclass name="com.jkt.dominio.Cotizacion" discriminator-value="COTIZACION">
+        	<join table="COTIZACION">
+            	<key column="COMPROBANTE_ID"/>
+					<property name="estado" column="ESTADO" />
+					<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
+					<property name="referencia" column="REFERENCIA" type="string" />
+					<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
+       		</join>
+        
+		</subclass>
 	</subclass>
 
 </hibernate-mapping>

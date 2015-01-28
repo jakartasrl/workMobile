@@ -22,6 +22,14 @@ import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.varios.dominio.ComponenteValor;
 
+/**
+ * Esta operacion es una de las mas importantes en cuanto a la cotizacion.
+ * Recupera la cotizacin de un item determinado en forma de arbol, utilizando su modelo de cotizacion asignado.
+ * Muestra cada uno de los detalles, y en cada detalle, tiene logicas de recupero de precio desde diferentes fuentes, monedas desde diferentes fuentas, y demas.
+ * TODO armar un documento con esta informacion por favor.
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 
 	private static final String COTIZADOR_WRITER = "cotizador";
@@ -65,8 +73,12 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				continue;
 			}
 			
+			String key;
 			if (cotizadorDet.getConceptoPresupuesto()!=null) {
-				detallesDeCotizador.put(String.valueOf(cotizadorDet.getConceptoPresupuesto().getId()), cotizadorDet);
+				key=String.valueOf(cotizadorDet.getConceptoPresupuesto().getId());
+				key=key+"-";
+				key=key+String.valueOf(cotizadorDet.getTituloModeloCotizador().getId());
+				detallesDeCotizador.put(key, cotizadorDet);
 			}
 		}
 	}
@@ -81,6 +93,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 	 */
 	private void mostrarArbol(TituloModeloCotizador tituloModeloCotizador, int codigoInternoPadre) throws Exception {
 		
+		//Para delphi
 		tituloModeloCotizador.setCodigoInterno((int)tituloModeloCotizador.getId());
 		tituloModeloCotizador.setCodigoInternoPadre(codigoInternoPadre);
 	
@@ -99,7 +112,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				}
 			}
 			
-			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo para que sea mas simple desde el cliente la lectura.
 		}
 		
 		
@@ -112,15 +125,17 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 		 * relacionado con el concepto.
 		 * 
 		 * Es por eso que decidi usar una variable transiente para poder mostrar a partir del concepto, los detalles del cotizador cargado.
+		 * (Esta variable es el atributo detalleDeConcepto, en la clase TituloModeloCotizador)
 		 */
 		
-		if ("C".equals(tituloModeloCotizador.getTipo())) {
-			CotizadorDet cotizadorDet = detallesDeCotizador.get(String.valueOf(tituloModeloCotizador.getConcepto().getId()));
+		if ("C".equals(tituloModeloCotizador.getTipo())) {//Si es concepto realizar una logica mas avanzada q para el titulo
 			
-			//cotizador det es null cuando se agrega un nuevo titulo al modelo de cotizador.
-			//Si se agrega uno debe mostrarse de todos modos este elemento nuevo.
+			//Logica para recuperar el detalle correspondiente, recuperando con una clave ID1-ID2, donde id1 es el concepto y ids2 es el titulo (sus ids)
+			String key=String.valueOf(tituloModeloCotizador.getConcepto().getId())+"-"+String.valueOf(tituloModeloCotizador.getId());
+			CotizadorDet cotizadorDet = detallesDeCotizador.get(key);
 			
-			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
+			
+			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {//Mostrar para cada concepto la lista de articulos que se corresponden con el valor de clasificador del concepto
 				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
 				
 				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
@@ -134,6 +149,8 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
 					tituloModeloCotizador.setProducto(producto);
 					
+					//cotizador det es null cuando se agrega un nuevo titulo al modelo de cotizador.
+					//Si se agrega uno debe mostrarse de todos modos este elemento nuevo.
 					if (cotizadorDet!=null) {
 						tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
 						tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
@@ -143,7 +160,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 				}
 				
-			}else{
+			}else{//Si no pide articulo se muestra una linea sola por concepto
 
 				if (cotizadorDet!=null) {
 					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...

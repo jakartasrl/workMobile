@@ -16,13 +16,13 @@ public class CotizadorDet extends PersistentEntity {
 
 	private Producto producto;
 	private Cotizador cotizador;
-	private int cantidad;
+	private double cantidad;
 	private UnidadMedida unidadMedida;
 	private double precioUnitario;
 	private Moneda moneda;
 	
-	@Range(min=1,max=500, message="El mark up  debe estar entre 1 y 500")
-	private int markUp;
+	@Range(min=0,max=500, message="El mark up  debe estar entre 1 y 500")
+	private double markUp;
 	
 	private double cotizacion;
 	private double importeVenta;
@@ -45,14 +45,6 @@ public class CotizadorDet extends PersistentEntity {
 		this.importeVenta = importeVenta;
 	}
 	
-	public int getMarkUp() {
-		return markUp;
-	}
-
-	public void setMarkUp(int markUp) {
-		this.markUp = markUp;
-	}
-
 	public Producto getProducto() {
 		return producto;
 	}
@@ -85,12 +77,20 @@ public class CotizadorDet extends PersistentEntity {
 		this.cotizador = cotizador;
 	}
 
-	public int getCantidad() {
+	public double getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public double getMarkUp() {
+		return markUp;
+	}
+
+	public void setMarkUp(double markUp) {
+		this.markUp = markUp;
 	}
 
 	public UnidadMedida getUnidadMedida() {

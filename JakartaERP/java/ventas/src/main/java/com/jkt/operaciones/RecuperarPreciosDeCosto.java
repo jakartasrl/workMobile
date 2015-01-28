@@ -312,11 +312,25 @@ public class RecuperarPreciosDeCosto extends Operation {
 		}
 	}
 
+	/**
+	 * Valida que los filtros no sea vacios.
+	 */
+	private boolean filtrosCodigoValidos(){
+		if(filtroCodigoDesde!=null && filtroCodigoHasta!=null){
+			if (filtroCodigoDesde.isEmpty() || filtroCodigoHasta.isEmpty()) {
+				return false;
+			}
+		}else{
+			return false;
+		}
+		return true;
+	}
+	
 	private List<PrecioCosto> obtenerProductos() {
 		//Ver el filtro
 		Query qIds;
 		
-		if (filtroCodigoDesde!=null && filtroCodigoHasta!=null) {
+		if (filtrosCodigoValidos()) {
 			String basicQuery="select distinct (costo.producto.id) from PrecioCosto costo where costo.producto is not null";
 			String filterQuery="and costo.producto.codigo >= :codigoDesde and costo.producto.codigo <= :codigoHasta"; 
 			qIds = crearHQL(basicQuery.concat(SPACE).concat(filterQuery));

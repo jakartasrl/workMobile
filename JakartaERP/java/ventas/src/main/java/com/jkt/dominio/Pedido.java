@@ -7,5 +7,16 @@ package com.jkt.dominio;
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Pedido extends ComprobanteVenta {
+
+	private String numeroPedido;
+
+	public String getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(String numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+	
 	
 }

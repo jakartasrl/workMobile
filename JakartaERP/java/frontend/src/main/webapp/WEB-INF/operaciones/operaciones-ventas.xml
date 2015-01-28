@@ -560,11 +560,11 @@
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
 					<campoEntrada name="oid_conc" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" metodo="setConceptoPresupuesto" />
 					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
-					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="cant" clase="Double" metodo="setCantidad" />
 					<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadMedida" />
 					<campoEntrada name="importe_unit" clase="Double" metodo="setPrecioUnitario" />
 					<campoEntrada name="importe_total_3" clase="Double" metodo="setImporteVenta" />
-					<campoEntrada name="markup" clase="Integer" metodo="setMarkUp" />
+					<campoEntrada name="markup" clase="Double" metodo="setMarkUp" />
 					<campoEntrada name="oid_moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 					<campoEntrada name="oid_titu_conc" clase="com.jkt.cotizador.dominio.TituloModeloCotizador" metodo="setTituloModeloCotizador" />
 					
