@@ -821,7 +821,62 @@
 			<form name="FNVen0010"></form>
 		</forms>
 
-	</operacion>	
-	
-	
+	</operacion>
+
+
+	<!-- TRAE LOS DATOS DE UNA SOLICITUD DE COTIZACION Y LOS ITEMS DE LA MISMA QUE FUERON COTIZADOS Y AUTORIZADOS -->
+	<operacion name="TraerCotizacionParaPresupuesto" clase="com.jkt.cotizador.operaciones." >
+
+		<output name="cotizaciones" tableName="mtPresupuesto">
+
+<!-- 			<campoSalida value="oid_presu" target="id" /> -->
+			<campoSalida value="nro_presu" target="nro" /> <!-- ¿ SE PUEDE ENVIAR EL NUEVO NUMERO AUNQUE NO ESTE GENERADO EN LA BASE? SI 'nro_cotiz' es 'ND-1-1' entonces se puede enviar 'PR-1-1' ?? -->
+			<campoSalida value="nro_cotiz" target="nroCotiz" />
+			<campoSalida value="fecha" target="fecha" />
+			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
+
+			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
+			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
+			<campoSalida value="razonSocial" target="clienteSucursal.cliente.sujetoImpositivo.razonSocial" />
+			
+			<campoSalida value="oid_sucu" target="clienteSucursal.id" />
+			<campoSalida value="nro_sucu" target="clienteSucursal.numero"/>
+			<campoSalida value="des_sucu" target="clienteSucursal.descripcionCompleta" />
+
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="oid_cont_suc" target="contactoReferencia.id" />
+
+			<campoSalida value="oid_vend" target="vendedor.id" />
+			<campoSalida value="cod_vend" target="vendedor.codigo" />
+			<campoSalida value="des_vend" target="vendedor.descripcion" />
+			
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+			
+		</output>
+		
+		<output name="detalles" tableName="mtItems">
+			<campoSalida value="oid_item" target="id" />
+<!-- 			<campoSalida value="oid_presu" target="comprobanteVenta.id" /> -->
+			<campoSalida value="oid_tipo" target="tipoVenta" />
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
+			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="detalle" target="descripcion" />
+			<campoSalida value="importe" target="" />
+			<campoSalida value="oid_mon" target="" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="FNVen0006"></form>
+		</forms>		
+
+	</operacion>
+
+
 </entity>
