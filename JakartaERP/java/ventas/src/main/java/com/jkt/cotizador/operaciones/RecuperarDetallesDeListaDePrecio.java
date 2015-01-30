@@ -53,10 +53,6 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 		Configuracion configuracionLaboratorioElectrico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_ELECTRICO);
 		Configuracion configuracionLaboratorioQuimico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_QUIMICO);
 		
-		if (configuracionLaboratorioElectrico==null || configuracionLaboratorioQuimico==null) {
-			throw new JakartaException("Compruebe la parametrizacion de los laboratorios quimico y electrico.");
-		}
-		
 		//Compruebo la consistencia de los datos parametrizados recuperando los laboratorios correspondientes
 		laboratorioElectrico=(Laboratorio) obtener(Laboratorio.class, Long.valueOf(configuracionLaboratorioElectrico.getValorNumero()));
 		laboratorioQuimico=(Laboratorio) obtener(Laboratorio.class, Long.valueOf(configuracionLaboratorioQuimico.getValorNumero()));
@@ -137,10 +133,6 @@ public class RecuperarDetallesDeListaDePrecio extends Operation {
 				notificarObjeto(writer, detalle);
 			}
 		}
-	}
-
-	private Configuracion obtenerConfiguracion(String nombre) throws JakartaException {
-		return (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", nombre);
 	}
 
 }

@@ -14,7 +14,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.varios.dominio.Moneda;
 
 /**
- * <p>Entidad que se encarga de cotizar un presupuestos.</p>
+ * <p>Entidad que se encarga de cotizar un item de una solititud de cotizacion.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

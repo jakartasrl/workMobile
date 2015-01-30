@@ -4,46 +4,64 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<subclass name="com.jkt.dominio.ComprobanteVenta" discriminator-value="COMPROBANTE-VENTA" extends="com.jkt.dominio.Comprobante">
+<!-- 	<subclass name="com.jkt.dominio.ComprobanteVenta" discriminator-value="COMPROBANTE-VENTA" extends="com.jkt.dominio.Comprobante"> -->
+	<class name="com.jkt.dominio.ComprobanteVenta" table="COMPROBANTE_VENTA" abstract="true">
 
+		<id name="id" column="COMPROBANTE_VENTA_ID">
+			<generator class="hilo" />
+		</id>
+		
+<!-- 		<discriminator column="DISCRIMINADOR"></discriminator> -->
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+<!-- 		<property name="comportamiento" column="COMPORTAMIENTO" /> -->
+		<property name="lugarEmision" column="LUGAR_EMISION" />
+		<property name="anulado" column="ANULADO" type="boolean" />
+		<property name="nro" column="NUMERO" type="string" />
+		
+		<property name="fecha" column="FECHA" type="date" />
+
+		<property name="letra" type="string">
+            <column name="LETRA" length="1" />
+        </property>
+        
+        <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID"></many-to-one>
+        
+        <list name="archivos" table="ARCHIVO_COMPROBANTES" lazy="true" cascade="all">
+			<key column="COMPROBANTE_VENTA_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
+		</list>
+		
 		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" column="CLIENTE_SUCURSAL_ID"></many-to-one>
 		<many-to-one name="condicionPago" class="com.jkt.varios.dominio.CondPago" column="CONDICION_PAGO_ID"></many-to-one>
 
 		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_ID" />
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID" />
 
-		<list name="detalles" table="COMPROBANTE_VENTA_DET" lazy="true" cascade="all">
-			<key column="COMPROBANTE_ID" />
-			<index column="ORDEN" />
-			<one-to-many class="com.jkt.dominio.ComprobanteVentaDet" />
-		</list>
+		<union-subclass name="com.jkt.pedido.dominio.Pedido" table="PEDIDO">
+		</union-subclass>
+		
+	    <union-subclass name="com.jkt.dominio.Cotizacion" table="COTIZACION">
+			<property name="estado" column="ESTADO" />
+			<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
+			<property name="referencia" column="REFERENCIA" type="string" />
+			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
 
-	    <subclass name="com.jkt.dominio.Pedido" discriminator-value="PEDIDO">
-        	<join table="PEDIDO">
-            <key column="COMPROBANTE_ID"/>
-				<property name="numeroPedido" column="NUMEROPEDIDO" />
-        	</join>
-		</subclass>
-        
-	    <subclass name="com.jkt.dominio.Cotizacion" discriminator-value="COTIZACION">
-        	<join table="COTIZACION">
-            	<key column="COMPROBANTE_ID"/>
-					<property name="estado" column="ESTADO" />
-					<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
-					<property name="referencia" column="REFERENCIA" type="string" />
-					<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
-       		</join>
-        
-		</subclass>
+			<list name="detalles" table="DETALLES_COTIZACION" lazy="true" cascade="all">
+				<key column="COMPROBANTE_VENTA_ID" />
+				<index column="ORDEN" />
+				<one-to-many class="com.jkt.dominio.ComprobanteVentaDet" />
+			</list>
 
-	    <subclass name="com.jkt.dominio.Presupuesto" discriminator-value="PRESUPUESTO">
-        	<join table="PRESUPUESTO">
-            	<key column="COMPROBANTE_ID"/>
-					<property name="formasDePago" column="FORMAS_PAGO" type="string" />
-					<property name="notas" column="NOTAS" type="string" />
-       		</join>
-		</subclass>
+		</union-subclass>
 
-	</subclass>
+	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO">
+			<property name="formasDePago" column="FORMAS_PAGO" type="string" />
+			<property name="notas" column="NOTAS" type="string" />
+		</union-subclass>
+
+	</class>
 
 </hibernate-mapping>

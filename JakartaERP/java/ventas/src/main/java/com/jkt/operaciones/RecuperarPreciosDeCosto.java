@@ -25,7 +25,6 @@ import com.jkt.varios.dominio.Moneda;
  */
 public class RecuperarPreciosDeCosto extends Operation {
 	
-	private static final String SPACE = " ";
 	private static final String SEPARADOR_CLASES_HQL = ",";
 	private static final String FILTRO_CLASIFICADOR = "clasificador".toUpperCase();
 	private static final String CODIGO_HASTA = "cod_art_has".toUpperCase();
@@ -172,14 +171,14 @@ public class RecuperarPreciosDeCosto extends Operation {
 			}
 			
 			String select="select e";
-			qNuevosElementos=crearHQL(select.concat(SPACE).concat(basicQuery).concat(filtros).concat(SPACE).concat(condicionLista));
+			qNuevosElementos=crearHQL(select.concat(QUERY_UTILS_SPACE).concat(basicQuery).concat(filtros).concat(QUERY_UTILS_SPACE).concat(condicionLista));
 			qNuevosElementos.setParameter("clasificador", Long.valueOf(filtroClasificador));
 		}else if(filtroCodigoDesde!=null && filtroCodigoHasta!=null){
 			//filtro por codigos
-			filtros=SPACE.concat("where e.codigo >= :codigoDesde and e.codigo <= :codigoHasta");
+			filtros=QUERY_UTILS_SPACE.concat("where e.codigo >= :codigoDesde and e.codigo <= :codigoHasta");
 			
 			if (!ids.isEmpty()) {
-				condicionLista=SPACE.concat("and e.id not in (:ids)");
+				condicionLista=QUERY_UTILS_SPACE.concat("and e.id not in (:ids)");
 			}
 			
 			qNuevosElementos=crearHQL(basicQuery.concat(filtros).concat(condicionLista));
@@ -187,7 +186,7 @@ public class RecuperarPreciosDeCosto extends Operation {
 			qNuevosElementos.setParameter("codigoHasta", filtroCodigoHasta);
 		}else{
 			//without filters
-			qNuevosElementos=crearHQL(basicQuery.concat(SPACE).concat(condicionLista));
+			qNuevosElementos=crearHQL(basicQuery.concat(QUERY_UTILS_SPACE).concat(condicionLista));
 		}
 		
 		if (!ids.isEmpty()) {
@@ -244,8 +243,8 @@ public class RecuperarPreciosDeCosto extends Operation {
 	 * 
 	 */
 	private void obtenerConfiguraciones() throws JakartaException {
-		configuracionLaboratorioElectrico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_ELECTRICO);
-		configuracionLaboratorioQuimico = obtenerConfiguracion(NOMBRE_PARAMETRO_LABORATORIO_QUIMICO);
+		configuracionLaboratorioElectrico = obtenerConfiguracionDeLaboratorio(NOMBRE_PARAMETRO_LABORATORIO_ELECTRICO);
+		configuracionLaboratorioQuimico = obtenerConfiguracionDeLaboratorio(NOMBRE_PARAMETRO_LABORATORIO_QUIMICO);
 		
 		if (configuracionLaboratorioElectrico==null || configuracionLaboratorioQuimico==null) {
 			throw new JakartaException("Compruebe la parametrizacion de los laboratorios quimico y electrico.");
@@ -255,7 +254,7 @@ public class RecuperarPreciosDeCosto extends Operation {
 	/**
 	 * Helper method
 	 */
-	private Configuracion obtenerConfiguracion(String nombre) throws JakartaException {
+	private Configuracion obtenerConfiguracionDeLaboratorio(String nombre) throws JakartaException {
 		return (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", nombre);
 	}
 
@@ -333,14 +332,14 @@ public class RecuperarPreciosDeCosto extends Operation {
 		if (filtrosCodigoValidos()) {
 			String basicQuery="select distinct (costo.producto.id) from PrecioCosto costo where costo.producto is not null";
 			String filterQuery="and costo.producto.codigo >= :codigoDesde and costo.producto.codigo <= :codigoHasta"; 
-			qIds = crearHQL(basicQuery.concat(SPACE).concat(filterQuery));
+			qIds = crearHQL(basicQuery.concat(QUERY_UTILS_SPACE).concat(filterQuery));
 			qIds.setParameter("codigoDesde", filtroCodigoDesde);
 			qIds.setParameter("codigoHasta", filtroCodigoHasta);
 			
 		}else if(filtroClasificador!=null){
 			String query="select distinct (costo.producto.id) from PrecioCosto costo, ProductoClasificador clasificacion";
 			String filterQuery="where costo.producto is not null and costo.producto.id = clasificacion.producto.id and clasificacion.componenteValor.id = :clasificador";
-			qIds = crearHQL(query.concat(SPACE).concat(filterQuery));
+			qIds = crearHQL(query.concat(QUERY_UTILS_SPACE).concat(filterQuery));
 			qIds.setParameter("clasificador", Long.valueOf(filtroClasificador));
 	
 		}else{

@@ -17,6 +17,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
@@ -46,6 +47,7 @@ import com.jkt.xmlreader.ElementTransformer;
 public abstract class Operation extends Observable {
 	protected static final Logger log = Logger.getLogger(Operation.class);
 
+	protected static final String QUERY_UTILS_SPACE = " ";
 	private ISessionProvider sessionProvider;
 	protected Session session;
 	protected IServiceRepository serviceRepository;
@@ -334,4 +336,19 @@ public abstract class Operation extends Observable {
 		}
 	}
 
+
+	/**
+	 * Helper method para recuperar la parametrizacion de un atributo dado.
+	 * 
+	 */
+	protected Configuracion obtenerConfiguracion(String nombre) throws JakartaException {
+		Configuracion configuracion = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", nombre);
+		
+		if (configuracion==null) {
+			throw new JakartaException("Compruebe la parametrizacion del sistema. No es posible encontrar una configuración para el campo '"+nombre+"'");
+		}
+		return configuracion;
+		
+	}
+	
 }
