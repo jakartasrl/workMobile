@@ -343,6 +343,26 @@
 		
 	</operacion>
 
+	
+	<!-- 	Filtra los productos recibiendo una serie de filtros -->
+	<!-- estos filtros son COD_ART_DES COD_ART_HAS CLASIFICACION -->
+	<operacion name="FiltrarProductos" clase="com.jkt.erp.articulos.operaciones.FiltrarProductos" >
+
+		<output name="producto" tableName="mtArticulo">
+		
+			<campoSalida value="oid_Art"	  target="id" />
+			<campoSalida value="Codigo" 	  target="codigo" />
+			<campoSalida value="Descripcion"  target="descripcion" />
+
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNArt0001"></form>
+		</forms>
+		
+	</operacion>
 
 	<!-- TRAER PRODUCTO Y TODAS SUS RELACIONES -->
 	<operacion name="TraerArticulo" clase="com.jkt.erp.articulos.operaciones.TraerProducto" >

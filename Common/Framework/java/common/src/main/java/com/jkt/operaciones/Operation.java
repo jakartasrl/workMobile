@@ -142,21 +142,6 @@ public abstract class Operation extends Observable {
 	}
 
 	/**
-	 * 
-	 * Notifica al transformer un objeto para que lo procese.
-	 * 
-	 * @param parameter
-	 *            que llegara el transformer.Dependiendo del tipo de transformer
-	 *            se notifica de diferentes maneras.
-	 * 
-	 * @deprecated ahora se debe utilizar el metodo con un writer y el objeto a notificar.Usar este metodo: {@link #notificarObjeto(String, Object)}
-	 */
-	protected void notificarObjecto(Object parameter) {
-		this.setChanged();
-		notifyObservers(parameter);
-	}
-	
-	/**
 	 * Notifica un objeto en el writer proporcionado
 	 * 
 	 * @param writer nombre del writer donde se escribe la salida. Generalmente vendra de una constante propia de la operacion.
