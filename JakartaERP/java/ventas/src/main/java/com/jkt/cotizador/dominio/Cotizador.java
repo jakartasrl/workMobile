@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import scala.xml.PrettyPrinter.Item;
 
 import com.jkt.dominio.ComprobanteVentaDet;
+import com.jkt.dominio.CotizacionDet;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.varios.dominio.Moneda;
@@ -24,7 +25,7 @@ public class Cotizador extends PersistentEntity {
 	private boolean revisado;
 	
 	@NotNull(message="La cotización se debe realizar en base a un item existente.")
-	private ComprobanteVentaDet item;
+	private CotizacionDet item;
 	
 	private String usuarioCreacion;
 	
@@ -56,35 +57,25 @@ public class Cotizador extends PersistentEntity {
 	 */
 	public void setCodigoEstado(String codigoEstado) throws JakartaException {
 		Integer idEstado = Integer.valueOf(codigoEstado);
-		ComprobanteVentaDet.Estado.getEstado(idEstado);
+		CotizacionDet.Estado.getEstado(idEstado);
 		if (this.item!=null) {
 			this.item.setEstadoId(idEstado);
 		}
 	}
 
 	
-	public ComprobanteVentaDet getItem() {
+	public CotizacionDet getItem() {
 		return item;
 	}
 
-	public void setItem(ComprobanteVentaDet item) {
+	public void setItem(CotizacionDet item) {
 		this.item = item;
 		item.setCotizador(this);
 	}
 
-//	public boolean isAutorizado() {
-//		return autorizado;
-//	}
-//
-//	public void setAutorizado(boolean autorizado) {
-//		this.autorizado = autorizado;
-//	}
-	
-
 	public Cotizador() {
 		this.fecha=new Date();
 		this.revisado=false;
-//		this.autorizado=false;
 		this.usuarioCreacion="Anonimo";
 	}
 	

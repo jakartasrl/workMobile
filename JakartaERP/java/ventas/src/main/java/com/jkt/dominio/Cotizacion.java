@@ -1,6 +1,8 @@
 package com.jkt.dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.jkt.varios.dominio.Contacto;
 
@@ -17,6 +19,16 @@ public class Cotizacion extends ComprobanteVenta {
 	private Date fechaVencimiento;
 	private String referencia;
 	private Contacto contactoReferencia;
+	
+	private List<CotizacionDet> detalles = new ArrayList<CotizacionDet>();
+
+	public List<CotizacionDet> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<CotizacionDet> detalles) {
+		this.detalles = detalles;
+	}
 	
 	/*
 	 * Setters y getters
@@ -60,5 +72,13 @@ public class Cotizacion extends ComprobanteVenta {
 	public String getCodigo(){
 		return String.valueOf(this.getNro());
 	}
+	
+	public void agregarDetalle(CotizacionDet cotizacionDet){
+		if (!detalles.contains(cotizacionDet)) {
+			detalles.add(cotizacionDet);
+			cotizacionDet.setComprobanteVenta(this);
+		}
+	}
+	
 	
 }

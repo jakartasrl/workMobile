@@ -40,9 +40,35 @@
 		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_ID" />
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID" />
 
+
+
+
+
+
+
+
+
+<!-- 		PEDIDO MAPPING -->
+<!-- 		PEDIDO MAPPING -->
+<!-- 		PEDIDO MAPPING -->
+<!-- 		PEDIDO MAPPING -->
 		<union-subclass name="com.jkt.pedido.dominio.Pedido" table="PEDIDO">
 		</union-subclass>
 		
+
+
+
+
+
+
+
+
+
+
+<!-- 		COTIZACION MAPPING -->
+<!-- 		COTIZACION MAPPING -->
+<!-- 		COTIZACION MAPPING -->
+<!-- 		COTIZACION MAPPING -->
 	    <union-subclass name="com.jkt.dominio.Cotizacion" table="COTIZACION">
 			<property name="estado" column="ESTADO" />
 			<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
@@ -50,18 +76,53 @@
 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
 
 			<list name="detalles" table="DETALLES_COTIZACION" lazy="true" cascade="all">
-				<key column="COMPROBANTE_VENTA_ID" />
+				<key column="COTIZACION_ID" />
 				<index column="ORDEN" />
-				<one-to-many class="com.jkt.dominio.ComprobanteVentaDet" />
+				<one-to-many class="com.jkt.dominio.CotizacionDet" />
 			</list>
 
 		</union-subclass>
+		
 
+
+
+
+
+
+
+
+
+
+<!-- 		PRESUPUESTO MAPPING -->
+<!-- 		PRESUPUESTO MAPPING -->
+<!-- 		PRESUPUESTO MAPPING -->
 	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO">
-			<property name="formasDePago" column="FORMAS_PAGO" type="string" />
-			<property name="notas" column="NOTAS" type="string" />
-		</union-subclass>
 
+			<list name="notas" cascade="none" table="PRESUPUESTO_NOTAS">
+				<key column="PRESUPUESTO_ID" />
+				<index column="ORDEN" />
+				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota" unique="true"/>
+			</list>
+			
+			<list name="condicionesComerciales" cascade="none" table="PRESUPUESTO_CONDICIONES_COMERCIALES">
+				<key column="PRESUPUESTO_ID" />
+				<index column="ORDEN" />
+				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial" unique="true"/>
+			</list>
+
+			<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
+			<property name="nombreListaPrecio" column="DESCRIPCION_LISTA_PRECIO" type="string" />
+
+			<list name="detalles" table="DETALLES_PRESUPUESTO" lazy="true" cascade="all">
+				<key column="PRESUPUESTO_ID" />
+				<index column="ORDEN" />
+				<one-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />
+			</list>
+
+		</union-subclass>
+		
+		
+		
 	</class>
 
 </hibernate-mapping>

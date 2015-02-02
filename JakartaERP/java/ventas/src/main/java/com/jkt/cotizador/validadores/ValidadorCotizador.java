@@ -2,6 +2,7 @@ package com.jkt.cotizador.validadores;
 
 import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.dominio.ComprobanteVentaDet;
+import com.jkt.dominio.CotizacionDet;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.operaciones.ValidacionDeNegocio;
@@ -12,7 +13,7 @@ public class ValidadorCotizador extends ValidacionDeNegocio {
 		
 		Cotizador cotizador=(Cotizador) entity;
 		
-		cotizador.getItem().setEstadoId(ComprobanteVentaDet.Estado.COTIZADO_NO_AUTORIZADO.getId());
+		cotizador.getItem().setEstadoId(CotizacionDet.Estado.COTIZADO_NO_AUTORIZADO.getId());
 
 		
 //		if (cotizador.getId()==0) {

@@ -47,5 +47,7 @@
 	<elemento key="cotizador" value="com.jkt.cotizador.dominio.Cotizador" validador="com.jkt.cotizador.validadores.ValidadorCotizador" />
 	<elemento key="listaPrecios" value="com.jkt.dominio.ListaPrecios" />
 	<elemento key="presupuesto" value="com.jkt.presupuesto.dominio.Presupuesto" />
+	<elemento key="nota" value="com.jkt.presupuesto.dominio.Nota" />
+	<elemento key="condicionComercial" value="com.jkt.presupuesto.dominio.CondicionComercial" />
 
 </elementos>

@@ -4,10 +4,18 @@ import java.util.Map;
 
 import org.hibernate.Query;
 
+import com.jkt.dominio.ListaPrecioDetalle;
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 
+/**
+ * Usando el id de un producto y el id de una lista de precios, se muestra un producto con su precio correspondiente a dada lista si existe.
+ * Si no existe, se retornar un producto con precio 0.
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class TraerProductoConPrecio extends Operation {
 
 	private static final String WRITER_PRODUCTO = "precio";
@@ -28,18 +36,21 @@ public class TraerProductoConPrecio extends Operation {
 			throw new JakartaException("Los parametros que identifican a la lista de precio y a un articulo deben ser numéricos.");
 		}
 		
-		String consulta="select p from ListaPrecioDetalle detalleLista where detalleLista.listaPrecios.id= :idLista and detalleLista.producto.id = :idProducto";
+		String consulta="select detalleLista from ListaPrecioDetalle detalleLista where detalleLista.listaPrecios.id= :idLista and detalleLista.producto.id = :idProducto";
 		Query query = crearHQL(consulta);
 		query.setParameter("idLista", idListaPrecio);
 		query.setParameter("idProducto", idProducto);
-		Producto producto = (Producto) query.uniqueResult();
-		if (producto==null) {
-			//Retornar el producto en formato de detalle de lista de precio vacio
-			notificarObjeto(WRITER_PRODUCTO, producto);
-		}else{
-			//Notificar el producto ya que no se encuentra en la lista de precio pasada por parametro.
-			notificarObjeto(WRITER_PRODUCTO, obtener(Producto.class, idProducto));
+		ListaPrecioDetalle precio = (ListaPrecioDetalle) query.uniqueResult();
+
+		if (precio==null) { //Si no existe en la lista de precios, muestro el producto con precio 0.
+			Producto producto = (Producto) obtener(Producto.class, idProducto);
+			precio = new ListaPrecioDetalle();
+			precio.setPrecio(0);
+			precio.setProducto(producto);
 		}
+
+		//A la notificacion llega un detalle de lista de precio, este o no en la tabla de ListaPrecioDetalle.
+		notificarObjeto(WRITER_PRODUCTO, precio);
 		
 	}
 

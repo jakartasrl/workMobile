@@ -19,15 +19,6 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 	private Vendedor vendedor;
 	
 	private Representante representante;
-	private List<ComprobanteVentaDet> detalles = new ArrayList<ComprobanteVentaDet>();
-
-	public List<ComprobanteVentaDet> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<ComprobanteVentaDet> detalles) {
-		this.detalles = detalles;
-	}
 
 	public Vendedor getVendedor() {
 		return vendedor;
@@ -45,12 +36,5 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 		this.representante = representante;
 	}
 
-	
-	public void agregarDetalle(ComprobanteVentaDet comprobanteVentaDet){
-		if (!detalles.contains(comprobanteVentaDet)) {
-			detalles.add(comprobanteVentaDet);
-			comprobanteVentaDet.setComprobanteVenta(this);
-		}
-	}
 	
 }

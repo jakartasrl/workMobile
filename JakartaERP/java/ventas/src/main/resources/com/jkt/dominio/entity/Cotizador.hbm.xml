@@ -9,7 +9,7 @@
 			<generator class="native"></generator>
 		</id>
 
-		<many-to-one name="item" class="com.jkt.dominio.ComprobanteVentaDet" column="ITEM_ID" cascade="none" />
+		<many-to-one name="item" class="com.jkt.dominio.CotizacionDet" column="ITEM_ID" cascade="none" />
 
 		<property name="usuarioCreacion" column="USUARIO_CREACION"/>
 

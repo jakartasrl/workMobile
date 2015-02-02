@@ -438,4 +438,43 @@
 		</validadores>
 	</entidad>
 
+	<!-- 	Nota -->
+	<entidad nombre="Nota">
+
+		<operacion operSave="GuardarNotas" operTraer="TraerNotas" />
+		
+		<campos>
+			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo" tipoValidacion="Inexistente" entidad="nota" oidName="" descrName="" />
+			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+	
+	<!-- 	Condiciones comerciales -->
+	<entidad nombre="CondicionComercial">
+
+		<operacion operSave="GuardarCondicionesComerciales" operTraer="TraerCondicionesComerciales" />
+		
+		<campos>
+			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
+			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="Codigo" tipoValidacion="Inexistente" entidad="condicionComercial" oidName="" descrName="" />
+			<validador fieldName="descr" tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
+
+
 </entidades>

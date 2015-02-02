@@ -5,18 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
-
 import com.jkt.constantes.TiposDeDato;
-import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.cotizador.operaciones.AbstractRecuperarModelo;
-import com.jkt.dominio.ComprobanteVentaDet;
+import com.jkt.dominio.CotizacionDet;
 import com.jkt.dominio.Filtro;
 import com.jkt.dominio.PersistentEntity;
-import com.jkt.dominio.PrecioCosto;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.erp.articulos.ProductoClasificador;
 import com.jkt.excepcion.JakartaException;
@@ -41,7 +37,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
 	
-		ComprobanteVentaDet item=(ComprobanteVentaDet) obtener(ComprobanteVentaDet.class, (String)aParams.get(OID));
+		CotizacionDet item=(CotizacionDet) obtener(CotizacionDet.class, (String)aParams.get(OID));
 		
 		notificarObjeto(ITEM_WRITER, item);
 		

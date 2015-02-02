@@ -256,7 +256,7 @@
 <!-- 				<campoEntrada name="respDescargaClie" clase="Boolean" metodo="setDescargaACargoDeCliente" /> -->
 
 				
-				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.dominio.ComprobanteVentaDet" fieldID="oid_item">
+				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.dominio.CotizacionDet" fieldID="oid_item">
 					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
@@ -510,7 +510,7 @@
 
 
 	<!-- TRAE UN ITEM SELECCIONADO DESDE LA LISTA DE ITEMS DE COTIZACIONES CON ESTADO PENDIENTE DE COTIZAR -->
-	<operacion name="TraerItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.ComprobanteVentaDet">
+	<operacion name="TraerItem" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.CotizacionDet">
 
 		<output name="resultado" tableName="mtItem">
 			<campoSalida value="oid_item" target="id" />
@@ -554,7 +554,7 @@
 <!-- 				<campoEntrada name="autorizado" clase="boolean" metodo="setAutorizado" /> -->
 				
 				<!-- ES PRIMORDIAL EL ORDEN DE ESTOS DOS CAMPOS, YA QUE EL CODIGO DE ESTADO NECESITA QUE EXISTA UN ITEM ASIGNADO -->
-				<campoEntrada name="oid_item" clase="com.jkt.dominio.ComprobanteVentaDet" metodo="setItem" />
+				<campoEntrada name="oid_item" clase="com.jkt.dominio.CotizacionDet" metodo="setItem" />
 				<campoEntrada name="cod_estado" clase="String" metodo="setCodigoEstado" />
 
 				<campoEntrada name="mtDetCotiz" metodo="agregarDetalle" clase="com.jkt.cotizador.dominio.CotizadorDet" fieldID="oid_det">
@@ -825,13 +825,24 @@
 
 
 	<!-- TRAE LOS DATOS DE UNA SOLICITUD DE COTIZACION Y LOS ITEMS DE LA MISMA QUE FUERON COTIZADOS Y AUTORIZADOS -->
-	<operacion name="TraerCotizacionParaPresupuesto" clase="com.jkt.cotizador.operaciones." >
+	<operacion name="TraerCotizacionParaPresupuesto" clase="com.jkt.presupuesto.operaciones.TraerCotizacionParaPresupuesto" >
 
-		<output name="cotizaciones" tableName="mtPresupuesto">
+		<!-- 		ES OBLIGATORIO QUE SE ENVIA UN ID DE COTIZACION -->
+		<!-- 		ES OBLIGATORIO QUE SE ENVIA UN ID DE COTIZACION -->
+		<!-- 		ES OBLIGATORIO QUE SE ENVIA UN ID DE COTIZACION -->
+
+		<output name="cotizacion" tableName="mtPresupuesto">
 
 <!-- 			<campoSalida value="oid_presu" target="id" /> -->
-			<campoSalida value="nro_presu" target="nro" /> <!-- ¿ SE PUEDE ENVIAR EL NUEVO NUMERO AUNQUE NO ESTE GENERADO EN LA BASE? SI 'nro_cotiz' es 'ND-1-1' entonces se puede enviar 'PR-1-1' ?? -->
-			<campoSalida value="nro_cotiz" target="nroCotiz" />
+			
+<!-- 			DEBERIAMOS NO TOCAR EL METODO NRO QUE ES EL QUE VA A BUSCAR A LA BASE, EN VEZ DE HACER ESTO, TENEMOS QUE PEDIRLE A UN METODO HELPER... -->
+<!-- 			DEBERIAMOS NO TOCAR EL METODO NRO QUE ES EL QUE VA A BUSCAR A LA BASE, EN VEZ DE HACER ESTO, TENEMOS QUE PEDIRLE A UN METODO HELPER... -->
+<!-- 			DEBERIAMOS NO TOCAR EL METODO NRO QUE ES EL QUE VA A BUSCAR A LA BASE, EN VEZ DE HACER ESTO, TENEMOS QUE PEDIRLE A UN METODO HELPER... -->
+			
+			
+			<!-- <campoSalida value="nro_presu" target="nro" /> --> <!-- ¿ SE PUEDE ENVIAR EL NUEVO NUMERO AUNQUE NO ESTE GENERADO EN LA BASE? SI 'nro_cotiz' es 'ND-1-1' entonces se puede enviar 'PR-1-1' ?? -->
+			<!-- <campoSalida value="nro_cotiz" target="nroCotiz" /> -->
+			
 			<campoSalida value="fecha" target="fecha" />
 			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
 
@@ -859,15 +870,17 @@
 		<output name="detalles" tableName="mtItems">
 			<campoSalida value="oid_item" target="id" />
 <!-- 			<campoSalida value="oid_presu" target="comprobanteVenta.id" /> -->
-			<campoSalida value="oid_tipo" target="tipoVenta" />
-			<campoSalida value="oid_art" target="producto.id" />
-			<campoSalida value="cod_art" target="producto.codigo" />
-			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
-			<campoSalida value="cant" target="cantidad" />
-			<campoSalida value="referencia" target="referencia" />
-			<campoSalida value="detalle" target="descripcion" />
-			<campoSalida value="importe" target="" />
-			<campoSalida value="oid_mon" target="" />
+			<campoSalida value="oid_tipo" target="cotizador.item.tipoVenta" />
+			<campoSalida value="oid_art" target="cotizador.item.producto.id" />
+			<campoSalida value="cod_art" target="cotizador.item.producto.codigo" />
+			<campoSalida value="des_abrev_art" target="cotizador.item.producto.descripcionAbrev" />
+			
+			<campoSalida value="cant" target="cotizador.item.cantidad" />
+			<campoSalida value="referencia" target="cotizador.item.referencia" />
+			<campoSalida value="detalle" target="cotizador.item.descripcion" />
+			
+			<campoSalida value="importe" target="totalCotizado" />
+			 <campoSalida value="oid_mon" target="cotizador.monedaExpresada.id" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
@@ -879,26 +892,114 @@
 	</operacion>
 	
 	
+	<operacion name="TraerProductoConPrecio" clase="com.jkt.presupuesto.operaciones.TraerProductoConPrecio">
 	
-	
-
-	<!-- 	RECUPERACION DE PRODUCTOS Y DE DETERMINACIONES DESDE LA LISTA DE PRECIOS	 -->
-<!-- 	<operacion name="TraerPreciosCostos" clase=""> -->
-	
-<!-- 		<output name="costos" tableName="mtPrecios"> -->
-<!-- 			<campoSalida value="oid" target="identificadorElemento" /> -->
-<!-- 			<campoSalida value="codigo" target="codigoElemento" /> -->
-<!-- 			<campoSalida value="descripcion" target="descripcionElemento" /> -->
-<!-- 			<campoSalida value="precio" target="costo" /> -->
-<!-- 		</output> -->
+		<output name="precio" tableName="mtPrecios">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_art" target="producto.descripcion" />
+			<campoSalida value="precio" target="precio" />
+		</output>
 		
-<!-- 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer> -->
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
-<!-- 		<forms> -->
-<!-- 			<form name="-"></form> -->
-<!-- 		</forms> -->
+		<forms>
+			<form name="-"></form>
+		</forms>
 
-<!-- 	</operacion> -->
+	</operacion>
+	
+		<operacion name="TraerDeterminacionesConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
+	
+		<output name="precio" tableName="mtPrecios">
+			<campoSalida value="oid" target="id" />
+			
+			<!-- det es determinacion, no un detalle  -->
+			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
+			
+			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
+
+			<campoSalida value="precio" target="precio" />
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
+
+	<!-- GUARDAR Notas  -->
+	<operacion name="GuardarNotas" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.presupuesto.dominio.Nota" fieldID='oid'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR  Notas -->
+	<operacion name="TraerNotas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.presupuesto.dominio.Nota">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+	
+	<!-- GUARDAR condiciones comerciales  -->
+	<operacion name="GuardarCondicionesComerciales" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID='oid'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR  Condiciones comerciales -->
+	<operacion name="TraerCondicionesComerciales" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.presupuesto.dominio.CondicionComercial">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+
+
 
 
 </entity>
