@@ -877,6 +877,28 @@
 		</forms>		
 
 	</operacion>
+	
+	
+	
+	
+
+	<!-- 	RECUPERACION DE PRODUCTOS Y DE DETERMINACIONES DESDE LA LISTA DE PRECIOS	 -->
+<!-- 	<operacion name="TraerPreciosCostos" clase=""> -->
+	
+<!-- 		<output name="costos" tableName="mtPrecios"> -->
+<!-- 			<campoSalida value="oid" target="identificadorElemento" /> -->
+<!-- 			<campoSalida value="codigo" target="codigoElemento" /> -->
+<!-- 			<campoSalida value="descripcion" target="descripcionElemento" /> -->
+<!-- 			<campoSalida value="precio" target="costo" /> -->
+<!-- 		</output> -->
+		
+<!-- 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer> -->
+		
+<!-- 		<forms> -->
+<!-- 			<form name="-"></form> -->
+<!-- 		</forms> -->
+
+<!-- 	</operacion> -->
 
 
 </entity>
