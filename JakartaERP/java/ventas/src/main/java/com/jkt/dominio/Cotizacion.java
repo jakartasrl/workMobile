@@ -20,6 +20,17 @@ public class Cotizacion extends ComprobanteVenta {
 	private String referencia;
 	private Contacto contactoReferencia;
 	
+	private String potencialNroPresupuesto;
+	
+	public String getPotencialNroPresupuesto() {
+		return potencialNroPresupuesto;
+	}
+
+	public void setPotencialNroPresupuesto(String potencialNroPresupuesto) {
+		this.potencialNroPresupuesto = potencialNroPresupuesto;
+	}
+
+	
 	private List<CotizacionDet> detalles = new ArrayList<CotizacionDet>();
 
 	public List<CotizacionDet> getDetalles() {

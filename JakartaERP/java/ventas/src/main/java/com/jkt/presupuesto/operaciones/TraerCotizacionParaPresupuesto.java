@@ -9,6 +9,7 @@ import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.CotizacionDet;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.TipoComprobante;
+import com.jkt.dominio.TipoComprobante.Comportamiento;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 
@@ -59,6 +60,24 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 		Configuracion parametroCompCotizacion = obtenerConfiguracion(COMPORTAMIENTO_PRESUPUESTO);
 		TipoComprobante tComprobante = (TipoComprobante) obtener(TipoComprobante.class, Long.valueOf(parametroCompCotizacion.getValorNumero()));
 		
+		/*
+		 * Obtener el numero final
+		 */
+		String[] numeroCortado = cotizacion.getNro().split("-");
+		int length = numeroCortado.length;
+		if (length!=3) {
+			throw new JakartaException("Existe una inconsistencia con el numero del comprobante relacionado.");
+		}
+		String numeroRelacion = numeroCortado[length-1];
+		
+		/*
+		 * Obtener los primeros valores de nuevo numero tomando del tipo de comprobante y su comportamiento
+		 */
+		int comportamiento = cotizacion.getTipoComprobante().getComportamiento();
+		Comportamiento objetoComportamiento = TipoComprobante.Comportamiento.getComportamiento(comportamiento);
+
+		String numeroComprobante=String.format("%s-%s-%s", objetoComportamiento.argumento(), String.valueOf(tComprobante.getId()), numeroRelacion);
+		cotizacion.setPotencialNroPresupuesto(numeroComprobante);
 	}
 
 

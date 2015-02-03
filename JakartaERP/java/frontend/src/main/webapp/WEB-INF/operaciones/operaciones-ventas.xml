@@ -835,13 +835,8 @@
 
 <!-- 			<campoSalida value="oid_presu" target="id" /> -->
 			
-<!-- 			DEBERIAMOS NO TOCAR EL METODO NRO QUE ES EL QUE VA A BUSCAR A LA BASE, EN VEZ DE HACER ESTO, TENEMOS QUE PEDIRLE A UN METODO HELPER... -->
-<!-- 			DEBERIAMOS NO TOCAR EL METODO NRO QUE ES EL QUE VA A BUSCAR A LA BASE, EN VEZ DE HACER ESTO, TENEMOS QUE PEDIRLE A UN METODO HELPER... -->
-<!-- 			DEBERIAMOS NO TOCAR EL METODO NRO QUE ES EL QUE VA A BUSCAR A LA BASE, EN VEZ DE HACER ESTO, TENEMOS QUE PEDIRLE A UN METODO HELPER... -->
-			
-			
-			<!-- <campoSalida value="nro_presu" target="nro" /> --> <!-- ¿ SE PUEDE ENVIAR EL NUEVO NUMERO AUNQUE NO ESTE GENERADO EN LA BASE? SI 'nro_cotiz' es 'ND-1-1' entonces se puede enviar 'PR-1-1' ?? -->
-			<!-- <campoSalida value="nro_cotiz" target="nroCotiz" /> -->
+			<campoSalida value="nro_presu" target="potencialNroPresupuesto" />
+			<campoSalida value="nro_cotiz" target="nro" />
 			
 			<campoSalida value="fecha" target="fecha" />
 			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
