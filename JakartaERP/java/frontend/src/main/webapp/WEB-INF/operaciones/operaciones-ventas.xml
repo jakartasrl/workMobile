@@ -1001,7 +1001,7 @@
 	
 	<!-- Validar por numero una cotizacion -->
 	<!-- Operation temporal que se tiene que borrar cuado se desarrolle el filtro por campo personalizado TODO TODO TODO-->
-	<operacion name="ValidarNumeroCotizacion" clase="com.jkt.operaciones.ValidarNumeroCotizacion" >
+	<operacion name="ValidarNumeroCotizacion" clase="com.jkt.presupuesto.operaciones.ValidarNumeroCotizacion" >
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="value" />
 		</output>		

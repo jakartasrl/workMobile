@@ -8,6 +8,14 @@ import com.jkt.dominio.Container;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 
+/**
+ * esta operacion debe ser borrada una vez implementado el validador de campos custom.
+ * FIXME TODO
+ * 
+ * 
+ * @author leonel
+ *
+ */
 public class ValidarNumeroCotizacion extends Operation {
 
 	private static final String WRITER = "resultado";
