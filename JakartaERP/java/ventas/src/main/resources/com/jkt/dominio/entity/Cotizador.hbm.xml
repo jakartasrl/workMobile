@@ -17,14 +17,12 @@
 		
 		<property name="revisado" column="REVISADO" type="boolean" />
 		
-<!-- 		<property name="autorizado" column="AUTORIZADO" type="boolean" /> -->
-		
 		<many-to-one name="monedaExpresada" class="com.jkt.varios.dominio.Moneda" column="MONEDA_EXPRESADA_ID" cascade="none" />
 		
 		<property name="fecha" column="FECHA" type="date" />
 		<property name="fechaRevision" column="FECHA_REVISION" type="date" />
 		
-		<many-to-one name="modelo" class="com.jkt.cotizador.dominio.ModeloCotizador" column="MODELO_COTIZADOR" cascade="none"></many-to-one>
+		<many-to-one name="modelo" class="com.jkt.cotizador.dominio.ModeloCotizador" column="MODELO_COTIZADOR" cascade="none" />
 		
 		<list name="detalles" table="COTIZADOR_DET" lazy="true" cascade="all">
 			<key column="COTIZADOR_ID" />

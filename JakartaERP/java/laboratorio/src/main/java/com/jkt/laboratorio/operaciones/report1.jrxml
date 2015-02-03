@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="30649ef3-a1f3-48ef-b7cf-efadd365c5fe"/>
+	<subDataset name="dataset2" uuid="c9a4ee86-219e-443b-8098-2508c036bc8b"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="91" height="79" uuid="e9b6de8e-dfaf-44ce-8d11-3d28440b2331"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\saracco\\Tomar Foto.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="0" width="332" height="79" uuid="0e0cecba-9d10-4649-a150-b61f497f533d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="48"/>
+				</textElement>
+				<text><![CDATA[Los conce Papá]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="472" y="0" width="100" height="20" uuid="42474ad4-ddb5-4d8a-a648-95bdcd1cad4c"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="572" height="125" uuid="18fbaa54-3b08-46b7-a896-779113ccdcf2"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset2" uuid="d43fa2ef-2f97-48e6-a386-d164cc37363d">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="125" width="572"/>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="503" y="2" width="37" height="20" uuid="69a77c4c-0257-49bd-8494-83da56ebca9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}/]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="540" y="2" width="32" height="20" uuid="feb7a6c5-fc66-4f06-95cf-5b213373e20e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
