@@ -998,6 +998,20 @@
 			<form name=""></form>
 		</forms>		
 	</operacion>
+	
+	<!-- Validar por numero una cotizacion -->
+	<!-- Operation temporal que se tiene que borrar cuado se desarrolle el filtro por campo personalizado TODO TODO TODO-->
+	<operacion name="ValidarNumeroCotizacion" clase="com.jkt.operaciones.ValidarNumeroCotizacion" >
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid" target="value" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
 
 
 

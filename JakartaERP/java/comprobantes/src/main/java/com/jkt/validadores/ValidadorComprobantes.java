@@ -3,7 +3,9 @@ package com.jkt.validadores;
 import org.hibernate.Query;
 
 import com.jkt.dominio.Comprobante;
+import com.jkt.dominio.ComprobanteCliente;
 import com.jkt.dominio.NumeradorComprobantes;
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.TipoComprobante;
 import com.jkt.dominio.TipoComprobante.Comportamiento;
 import com.jkt.excepcion.JakartaException;
@@ -45,7 +47,7 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 																								);
 			
 			if (objetoComportamiento==comportamientoRelacionado) {
-				//Inconsistencia! se puede dejar en una estado inconsistente si se continua, ya que se generarían cincuente ND-1-22 por ejemplo.
+				//Inconsistencia! se puede dejar en una estado inconsistente si se continua, ya que se generarÃ­an cincuente ND-1-22 por ejemplo.
 				throw new JakartaException("Un comprobante no puede estar relacionado con otro comprobante que tenga el mismo comportamiento.");
 			}
 			
@@ -57,7 +59,22 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 			String numeroRelacion = numeroCortado[length-1];
 			
 			numeroComprobante=String.format("%s-%s-%s", objetoComportamiento.argumento(), String.valueOf(id), numeroRelacion);
-			comprobante.setNro(numeroComprobante);
+			
+			//Busca por si existe ya algun comprobante para el mismo comprobante objetivo, s decis, por ejemplo, dos presupuesto para la misma cotizacion
+			String hql="from ComprobanteVentaDet comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
+			Query query = this.getServiceRepository().crearHQL(hql);
+			query.setParameter("numero", numeroComprobante);
+			query.setMaxResults(1);
+			Comprobante comprobanteExistente = (Comprobante) query.uniqueResult();
+			
+			if (comprobanteExistente!=null) {
+				String[] split = comprobanteExistente.getNro().split("/");
+				int valor=Integer.valueOf(split[split.length-1]);
+				comprobante.setNro(numeroComprobante.concat("/"+valor++));
+			}else{
+				//Es el primer elemento.
+				comprobante.setNro(numeroComprobante.concat("/1"));
+			}
 			
 		}
 		

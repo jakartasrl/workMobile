@@ -36,7 +36,7 @@ import com.jkt.xmlreader.ElementTransformer;
  * 
  * Cada evento del lado del cliente que tiene una accion en el
  * servidor, genera una instancia de una operacion.<br>
- * Estas están configuradas en la aplicacion. Cada operacion que genera la
+ * Estas estï¿½n configuradas en la aplicacion. Cada operacion que genera la
  * metodologia invoca al metodo execute().<br>
  * Dentro de este metodo (abstracto en esta clase), esta la logica de la
  * resolucion del evento. 
@@ -293,7 +293,7 @@ public abstract class Operation extends Observable {
 	 * 
 	 * <p><code>validarEntrada(aParams.get("keyDelMapa"))</code></p>
 	 * 
-	 * @param object, generalmente será un objeto del mapa.
+	 * @param object, generalmente serÃ¡ un objeto del mapa.
 	 * @throws JakartaException Si el objeto no existe en e mapa, o si es un string vacio.
 	 */
 	protected void validarEntrada(Object object) throws JakartaException{
@@ -330,7 +330,7 @@ public abstract class Operation extends Observable {
 		Configuracion configuracion = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", nombre);
 		
 		if (configuracion==null) {
-			throw new JakartaException("Compruebe la parametrizacion del sistema. No es posible encontrar una configuración para el campo '"+nombre+"'");
+			throw new JakartaException("Compruebe la parametrizacion del sistema. No es posible encontrar una configuraciÃ³n para el campo '"+nombre+"'");
 		}
 		return configuracion;
 		

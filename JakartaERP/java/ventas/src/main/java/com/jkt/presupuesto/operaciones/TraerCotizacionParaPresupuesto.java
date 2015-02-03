@@ -3,12 +3,12 @@ package com.jkt.presupuesto.operaciones;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
-
 import com.jkt.cotizador.dominio.CotizadorDet;
-import com.jkt.dominio.ComprobanteVentaDet;
+import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.CotizacionDet;
+import com.jkt.dominio.PersistentEntity;
+import com.jkt.dominio.TipoComprobante;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 
@@ -19,21 +19,28 @@ import com.jkt.operaciones.Operation;
  */
 public class TraerCotizacionParaPresupuesto extends Operation {
 
+	private static final String COMPORTAMIENTO_PRESUPUESTO = "comportamientoPresupuesto";
 	private static final String WRITER_DETALLES = "detalles";
 	private static final String WRITER_COTIZACION = "cotizacion";
-	private static final String OID_COTICAZION = "oid_cotizacion".toUpperCase();
+	private static final String OID_COTIZACION = "oid_cotizacion".toUpperCase();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
-		validarEntrada(aParams.get(OID_COTICAZION));
+		validarEntrada(aParams.get(OID_COTIZACION));
 		
-		Cotizacion cotizacion = (Cotizacion) obtener(Cotizacion.class, (String)aParams.get(OID_COTICAZION));
+		Cotizacion cotizacion = (Cotizacion) obtener(Cotizacion.class, (String)aParams.get(OID_COTIZACION));
 		
 		/*
 		 * Validar todos los items
 		 */
 		validarEstadoDeItems(cotizacion);
+		
+		
+		/*
+		 * Asignar el numero que tendra el presupuesto.
+		 */
+		asignarNumeroParaPresupuesto(cotizacion);
 		
 		notificarObjeto(WRITER_COTIZACION, cotizacion);
 		
@@ -43,7 +50,20 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 
 
 	/**
-	 * Muestra los items de la cotización uno por uno, retornando los detalles generados por el cotizador
+	 * Asigna a partir de una cotizacion, un numero de presupuesto.
+	 * @throws Exception Cuando no existe la entidad tipo de comprobante
+	 * @throws Exception Cuando no existe la configuracion del comportamiento para la cotizacion
+	 * 
+	 */
+	private void asignarNumeroParaPresupuesto(Cotizacion cotizacion) throws Exception {
+		Configuracion parametroCompCotizacion = obtenerConfiguracion(COMPORTAMIENTO_PRESUPUESTO);
+		TipoComprobante tComprobante = (TipoComprobante) obtener(TipoComprobante.class, Long.valueOf(parametroCompCotizacion.getValorNumero()));
+		
+	}
+
+
+	/**
+	 * Muestra los items de la cotizaciÃ³n uno por uno, retornando los detalles generados por el cotizador
 	 * 
 	 */
 	private void mostrarItems(List<CotizacionDet> detalles) {
@@ -82,7 +102,7 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 	private void validarEstadoDeItems(Cotizacion cotizacion) throws JakartaException {
 		for (CotizacionDet cotizacionDetalle : cotizacion.getDetalles()) {
 			if (CotizacionDet.Estado.AUTORIZADO.getId()!=cotizacionDetalle.getEstadoId()) {
-				throw new JakartaException("Uno de los items de la cotización seleccionada no posee el estado necesario para generar un presupuesto a partir de la misma.");
+				throw new JakartaException("Uno de los items de la cotizaciÃ³n seleccionada no posee el estado necesario para generar un presupuesto a partir de la misma.");
 			}
 		}
 	}
