@@ -4,6 +4,7 @@ import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.CotizacionDet;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.operaciones.ValidacionDeNegocio;
 
@@ -13,7 +14,17 @@ public class ValidadorCotizador extends ValidacionDeNegocio {
 		
 		Cotizador cotizador=(Cotizador) entity;
 		
-		cotizador.getItem().setEstadoId(CotizacionDet.Estado.COTIZADO_NO_AUTORIZADO.getId());
+		String codigoEstado = cotizador.getCodigoEstado();
+		int estadoId;
+		try {
+			estadoId = CotizacionDet.Estado.getEstado(Integer.valueOf(codigoEstado)).getId();
+		} catch (NumberFormatException e) {
+			throw new ValidacionDeNegocioException("El estado de la cotización no es consistente. Compruebe el tipo de datos enviado por favor.");
+		} catch (JakartaException e) {
+			throw new ValidacionDeNegocioException("El estado de la cotización no es consistente.");
+		}
+		
+		cotizador.getItem().setEstadoId(estadoId);
 
 		
 //		if (cotizador.getId()==0) {

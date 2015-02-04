@@ -56,11 +56,14 @@ public class Cotizador extends PersistentEntity {
 	 * @throws JakartaException Cuando el estado no existe.
 	 */
 	public void setCodigoEstado(String codigoEstado) throws JakartaException {
-		Integer idEstado = Integer.valueOf(codigoEstado);
-		CotizacionDet.Estado.getEstado(idEstado);
-		if (this.item!=null) {
-			this.item.setEstadoId(idEstado);
-		}
+		this.codigoEstado=codigoEstado;
+		
+		
+//		Integer idEstado = Integer.valueOf(codigoEstado);
+//		CotizacionDet.Estado.getEstado(idEstado);
+//		if (this.item!=null) {
+//			this.item.setEstadoId(idEstado);
+//		}
 	}
 
 	
@@ -68,9 +71,17 @@ public class Cotizador extends PersistentEntity {
 		return item;
 	}
 
-	public void setItem(CotizacionDet item) {
+	public void setItem(CotizacionDet item) throws JakartaException {
 		this.item = item;
 		item.setCotizador(this);
+		
+//		if (!codigoEstado.isEmpty()) {
+//			Integer idEstado = Integer.valueOf(codigoEstado);
+//			CotizacionDet.Estado.getEstado(idEstado);
+//			if (this.item!=null) {
+//				this.item.setEstadoId(idEstado);
+//			}
+//		}
 	}
 
 	public Cotizador() {

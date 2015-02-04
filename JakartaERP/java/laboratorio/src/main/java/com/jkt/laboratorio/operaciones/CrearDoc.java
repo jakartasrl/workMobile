@@ -35,21 +35,24 @@ public class CrearDoc extends Operation implements CrearReporte {
 
 	public void crearDesdeTemplate() throws IOException {
 //		InputStream is = new FileInputStream("C:\\decode2\\empty.jrxml");
-		InputStream is = CrearDoc.class.getResourceAsStream("simple.jrxml");
+		InputStream is = CrearDoc.class.getResourceAsStream("presupuesto1.jrxml");
 		
 		try {
 			
 			JasperReportBuilder report = DynamicReports.report();
 			report.setTemplateDesign(is);
-			report.setTemplate(Templates.reportTemplate);
+//			report.setTemplate(Templates.reportTemplate);
 			
-			report.columns(
-						Columns.column("Item", "uno", DataTypes.stringType()),
-						Columns.column("Item2", "dos", DataTypes.stringType()),
-						Columns.column("Item66", "tres", DataTypes.stringType())
-					);
+
+			
+			//			report.columns(
+//						Columns.column("Item", "uno", DataTypes.stringType()),
+//						Columns.column("Item2", "dos", DataTypes.stringType()),
+//						Columns.column("Item66", "tres", DataTypes.stringType())
+//					);
 //			
-			report.setDataSource(createDataSource());
+//			report.setDataSource(createDataSource());
+			report.setDataSource(new JREmptyDataSource(10));
 			
 			String nombreArchivo = generarNombreDeArchivo();
 

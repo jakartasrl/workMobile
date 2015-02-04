@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.1.final using JasperReports Library version 6.0.0  -->
+<!-- 2015-02-03T17:02:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoContacto" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="97056da8-fd84-4da7-a619-8837e9e2a882">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<field name="cargo_nombre" class="java.lang.String"/>
+	<field name="localidad_nombre" class="java.lang.String"/>
+	<field name="organizacion_razonSocial" class="java.lang.String"/>
+	<field name="persona_apellido" class="java.lang.String"/>
+	<field name="persona_email" class="java.lang.String"/>
+	<field name="persona_nombre" class="java.lang.String"/>
+	<field name="persona_telefono" class="java.lang.String"/>
+	<group name="cargo_nombre">
+		<groupExpression><![CDATA[$F{cargo_nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement mode="Opaque" x="-21" y="4" width="597" height="24" forecolor="#B89F7D" backcolor="#CCCCFF" uuid="4cc217fe-b2b8-4fa0-9429-1cb935cccdd7"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#005B70" uuid="3fdeac13-a4df-4cb9-a190-8fe47a1826b9"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement style="SubTitle" x="68" y="0" width="413" height="24" forecolor="#005B70" uuid="55eaf0aa-b5e1-4f34-9bb1-b74152157167"/>
+						<textElement>
+							<font size="15" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{cargo_nombre}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="4"/>
+		</groupFooter>
+	</group>
+	<group name="organizacion_razonSocial">
+		<groupExpression><![CDATA[$F{organizacion_razonSocial}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="4" width="460" height="20" forecolor="#005B70" uuid="b39763a8-b485-4cd8-bec0-bf59739ffe2d"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{organizacion_razonSocial}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="134" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="170" y="0" width="319" height="62" uuid="5ed0670f-3114-4d44-8f67-14b821971b7b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="36" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Listado de Contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="219" y="62" width="196" height="22" forecolor="#005B70" uuid="8236b137-2308-4dff-97a0-2eb714c657c1"/>
+				<textElement>
+					<font fontName="Times New Roman" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Por Cargo y Organización]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="19" width="148" height="43" uuid="8aeea0ca-34c1-46b0-917a-9e2390164d4f"/>
+				<imageExpression><![CDATA["C:\\proyecto\\ctrl-n\\src\\main\\resources\\logo_nodosud2.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="12" y="62" width="148" height="65" uuid="10dd7fe8-7c90-491f-af2b-82e516ed98d9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[NODOSUD S.A.
+9 de Julio 681 - Telefax (03534) 431111
+Teléfono (03534) 431118 / 431318
+X2553ADM - Justiniano Posse (Cba.)
+E-mail: adm_posse@nodosud.com.ar]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="177e6a5d-0126-48e8-8586-54ddedb3772d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="111" height="15" forecolor="#005B70" uuid="a4d7ae19-3765-46d4-aa38-3addcee6ae25"/>
+				<text><![CDATA[Apellido y Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="160" y="1" width="111" height="15" forecolor="#005B70" uuid="ddd4e699-06f2-4ae9-bb57-0c6ea4468463"/>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="283" y="1" width="111" height="15" forecolor="#005B70" uuid="c6cbccd4-09bd-4f37-a823-90908716f754"/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="0" width="111" height="15" forecolor="#005B70" uuid="64ed6270-3009-4b74-95ef-83c0890c1291"/>
+				<text><![CDATA[Localidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="08b198d1-2dc9-4c57-b42b-25436e936198"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="160" y="0" width="111" height="15" uuid="2dbf4060-d8c7-4264-bd97-cf15db1aa1aa"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{localidad_nombre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="2" y="0" width="126" height="15" uuid="38bb3720-3387-4a45-bc5f-1faf00d9b655"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{persona_apellido} + ' ' + $F{persona_nombre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="283" y="0" width="149" height="15" uuid="124f88f4-dc0d-416b-8ce7-0e0ad38a38bb"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{persona_email}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="444" y="0" width="111" height="15" uuid="e284435a-4427-499b-8e31-c62c51cba402"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{persona_telefono}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="2327017b-93d0-4a53-8632-d24e329034da"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#CCCCFF" uuid="e201e10f-4ca8-4512-a588-a9ab785a8e22"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#005B70" uuid="a3cfc9df-a09d-494c-8b1d-df1193131cce"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#005B70" uuid="01c36d9c-5f03-43ed-8073-f735f9ebac45"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#005B70" uuid="84ab7d4b-29c5-45ed-9140-e16319211a24"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
