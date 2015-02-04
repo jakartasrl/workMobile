@@ -7,9 +7,9 @@ import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDetalle;
 
 /**
- * Representa un Análisis que se puede hacer en un Laboratorio.
+ * Representa un AnÃ¡lisis que se puede hacer en un Laboratorio.
  * Se utiliza en los pedidos de Laboratorio y en los protocolos.
- * Ejemplo: Análisis físico-químico de un transformador.
+ * Ejemplo: AnÃ¡lisis fÃ¡sico-quÃ¡mico de un transformador.
  */
 public class Analisis extends Descriptible  implements IDetalle{
 
@@ -19,7 +19,7 @@ public class Analisis extends Descriptible  implements IDetalle{
 	private Laboratorio laboratorio;
 
 	/**
-	 * Lista de Ensayos o Determinaciones que incluye el Análisis.
+	 * Lista de Ensayos o Determinaciones que incluye el AnÃ¡lisis.
 	 */
 	private List<AnalisisDet> listaDeterminaciones = new ArrayList<AnalisisDet>();
 

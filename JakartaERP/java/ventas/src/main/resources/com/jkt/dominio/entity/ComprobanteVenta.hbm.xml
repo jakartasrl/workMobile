@@ -110,8 +110,7 @@
 				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial" unique="true"/>
 			</list>
 
-			<many-to-one name="moneda" class="com.jkt.varios.dominio.Moneda" column="MONEDA_ID" cascade="none"></many-to-one>		
-			<property name="nombreListaPrecio" column="DESCRIPCION_LISTA_PRECIO" type="string" />
+			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID"></many-to-one>
 
 			<list name="detalles" table="DETALLES_PRESUPUESTO" lazy="true" cascade="all">
 				<key column="PRESUPUESTO_ID" />

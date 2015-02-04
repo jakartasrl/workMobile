@@ -994,20 +994,52 @@
 		</forms>		
 	</operacion>
 	
+	<operacion name="GuardarPresupuesto" clase="com.jkt.operaciones.Guardar">
+	
+		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
+			<campoEntrada>
+				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
+				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
 
-	<!-- Validar por numero una cotizacion -->
-	<!-- Operation temporal que se tiene que borrar cuado se desarrolle el filtro por campo personalizado TODO TODO TODO-->
-<!-- 	<operacion name="ValidarNumeroCotizacion" clase="com.jkt.presupuesto.operaciones.ValidarNumeroCotizacion" > -->
-<!-- 		<output name="resultado" tableName="mtPresupuesto"> -->
-<!-- 			<campoSalida value="oid_cotiz" target="value" /> -->
-<!-- 		</output>		 -->
-			
-<!-- 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer> -->
-		
-<!-- 		<forms> -->
-<!-- 			<form name=""></form> -->
-<!-- 		</forms>		 -->
-<!-- 	</operacion> -->
+				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
+				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
+				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
 
+				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+				<campoEntrada name="oid_cont_suc" clase="com.jkt.varios.dominio.Contacto" metodo="setContactoReferencia" />
 
+				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+					
+					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" /> <!-- oid_det es el identificador de una determinacion -->
+					
+					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
+					<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+					
+					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
+					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+					
+					<campoEntrada name="oid_item" clase="com.jkt.dominio.CotizacionDet" metodo="setItemCotizado" />
+				</campoEntrada>
+	
+				<!-- 
+				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
+					<campoEntrada name="archivo" clase="String" metodo="setNombreCompleto" />
+					<campoEntrada name="oid_usu" clase="Integer" metodo="setIdentificadorDeUsuario" />
+					<campoEntrada name="comentario" clase="String" metodo="setComentario" />
+				</campoEntrada>
+				 -->				
+				
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
+	
+	
 </entity>

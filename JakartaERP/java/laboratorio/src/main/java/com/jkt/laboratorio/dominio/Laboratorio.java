@@ -7,8 +7,8 @@ import com.jkt.dominio.Descriptible;
 
 /**
  * Representa un Laboratorio existente en la Empresa. 
- * Se utiliza para clasificar los An·lisis que se realizan. 
- * Ejemplo: Laboratorio QuÌmico. Laboratorio FÌsico.
+ * Se utiliza para clasificar los An√°lisis que se realizan. 
+ * Ejemplo: Laboratorio Qu√≠mico. Laboratorio F√≠sico.
  */
 public class Laboratorio extends Descriptible {
 

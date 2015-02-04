@@ -10,16 +10,23 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.varios.dominio.Moneda;
 import com.jkt.varios.dominio.UnidadMedida;
 
+/**
+ * <p>Es un detalle de un comprobante de venta.</p>
+ * <p>El comprobante de venta puede ser una cotizacion, un presupuesto, un pedido.</p>
+ * <p>Cada tipo de comprobante definido aquí arriba, tiene sus propios detalles mapeados en diferentes tablas.</p>
+ * <p>Cada detalle tendra sus atributos particulares, y obviamente al extender de la misma clase, atritutos en comun.</p>
+ * <p>Los datos que se persisten dependiendo del detalle que sea, es decir, si es detalle de cotizacion o de presupuesto,
+ * esta definido por el mapeo de la entidad a la base, obviamente, si en el mapeo, solamente tengo un campo mapeado, esto se refleja en la base.</p> 
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public class ComprobanteVentaDet extends PersistentEntity {
 
-	
 	public static List<Container> TIPO_VENTA = Arrays.asList(new Container("1", "Fabricacion"), new Container("2", "Reparacion"), new Container("3", "Service"));
-	
 	private static final String SEPARADOR = " / ";
 
-	private String descripcion;//Con esta descripcion el usuario selecciona que modelo de cotizador es el mas apropiado.
-	
 	private ComprobanteVenta comprobanteVenta;
+	private String descripcion;//Con esta descripcion el usuario selecciona que modelo de cotizador es el mas apropiado.
 	private Producto producto;
 	private int cantidad=1;
 	private double precio;

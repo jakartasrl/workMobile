@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.ComprobanteVenta;
+import com.jkt.dominio.ListaPrecios;
 import com.jkt.varios.dominio.Moneda;
 
 /**
@@ -20,23 +21,14 @@ public class Presupuesto extends ComprobanteVenta {
 	private List<CondicionComercial> condicionesComerciales = new ArrayList<CondicionComercial>();
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
-	private Moneda moneda;//De la lista de precio, o en su defecto, parametrizada como moneda por defecto del sistema.
-	private String nombreListaPrecio; //Como referencia solamente
+	private ListaPrecios listaPrecios;
 	
-	public Moneda getMoneda() {
-		return moneda;
+	public ListaPrecios getListaPrecios() {
+		return listaPrecios;
 	}
 
-	public void setMoneda(Moneda moneda) {
-		this.moneda = moneda;
-	}
-
-	public String getNombreListaPrecio() {
-		return nombreListaPrecio;
-	}
-
-	public void setNombreListaPrecio(String nombreListaPrecio) {
-		this.nombreListaPrecio = nombreListaPrecio;
+	public void setListaPrecios(ListaPrecios listaPrecios) {
+		this.listaPrecios = listaPrecios;
 	}
 
 	public List<CondicionComercial> getCondicionesComerciales() {
