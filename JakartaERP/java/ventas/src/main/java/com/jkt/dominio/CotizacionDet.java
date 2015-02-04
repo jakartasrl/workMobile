@@ -15,25 +15,6 @@ import com.jkt.varios.dominio.UnidadMedida;
 public class CotizacionDet extends ComprobanteVentaDet {
 
 	private Cotizador cotizador;
-//	private UnidadMedida unidadMedida;
-//	private Moneda moneda;
-
-//	public UnidadMedida getUnidadMedida() {
-//		return unidadMedida;
-//	}
-//
-//	public void setUnidadMedida(UnidadMedida unidadMedida) {
-//		this.unidadMedida = unidadMedida;
-//	}
-//
-//	public Moneda getMoneda() {
-//		return moneda;
-//	}
-//
-//	public void setMoneda(Moneda moneda) {
-//		this.moneda = moneda;
-//	}
-
 
 	private int estadoId;
 	

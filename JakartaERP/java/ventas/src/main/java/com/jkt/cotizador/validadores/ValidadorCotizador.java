@@ -19,9 +19,9 @@ public class ValidadorCotizador extends ValidacionDeNegocio {
 		try {
 			estadoId = CotizacionDet.Estado.getEstado(Integer.valueOf(codigoEstado)).getId();
 		} catch (NumberFormatException e) {
-			throw new ValidacionDeNegocioException("El estado de la cotización no es consistente. Compruebe el tipo de datos enviado por favor.");
+			throw new ValidacionDeNegocioException("El estado de la cotizaciÃ³n no es consistente. Compruebe el tipo de datos enviado por favor.");
 		} catch (JakartaException e) {
-			throw new ValidacionDeNegocioException("El estado de la cotización no es consistente.");
+			throw new ValidacionDeNegocioException("El estado de la cotizaciÃ³n no es consistente.");
 		}
 		
 		cotizador.getItem().setEstadoId(estadoId);
