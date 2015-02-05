@@ -833,7 +833,7 @@
 
 		<output name="cotizacion" tableName="mtPresupuesto">
 
-<!-- 			<campoSalida value="oid_presu" target="id" /> -->
+			<campoSalida value="oid_cotiz" target="id" />
 			
 			<campoSalida value="nro_presu" target="potencialNroPresupuesto" />
 			<campoSalida value="nro_cotiz" target="nro" />
@@ -1001,6 +1001,8 @@
 	
 		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
 			<campoEntrada>
+			
+<!-- 			MISMA CABECERA QUE UNA COTIZACION -->
 				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
 				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
 
@@ -1009,7 +1011,12 @@
 				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
 				<campoEntrada name="oid_cont_suc" clase="com.jkt.varios.dominio.Contacto" metodo="setContactoReferencia" />
 				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+				
+<!-- 				SI EL PRESUPUESTO ESTA RELACIONADO A UNA COTIZACION, ESTE ATRIBUTO ESTARÁ NULO -->
 				<campoEntrada name="oid_lis_pre" clase="com.jkt.dominio.ListaPrecios" metodo="setListaPrecios" />
+
+<!-- 				IMPORTANTE PARA GENERAR EL NUMERO DE COMPROBANTE -->
+				<campoEntrada name="oid_cotiz" clase="com.jkt.dominio.Cotizacion" metodo="setComprobanteRelacionado" />
 
 				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
 					

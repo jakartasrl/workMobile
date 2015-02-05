@@ -13,12 +13,9 @@ import com.jkt.varios.dominio.Contacto;
  */
 public class Cotizacion extends ComprobanteVenta {
 
-	public enum Estado { PENDIENTE, INICIADA};
+	public enum Estado { PENDIENTE, INICIADA };
 	
 	private String estado;
-	private Date fechaVencimiento;
-	private String referencia;
-	private Contacto contactoReferencia;
 	
 	private String potencialNroPresupuesto;
 	
@@ -44,30 +41,6 @@ public class Cotizacion extends ComprobanteVenta {
 	/*
 	 * Setters y getters
 	 */
-	public Date getFechaVencimiento() {
-		return fechaVencimiento;
-	}
-
-	public Contacto getContactoReferencia() {
-		return contactoReferencia;
-	}
-
-	public void setContactoReferencia(Contacto contactoReferencia) {
-		this.contactoReferencia = contactoReferencia;
-	}
-
-	public String getReferencia() {
-		return referencia;
-	}
-
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
-	}
-
-	public void setFechaVencimiento(Date fechaVencimiento) {
-		this.fechaVencimiento = fechaVencimiento;
-	}
-
 	public String getEstado() {
 		return estado;
 	}

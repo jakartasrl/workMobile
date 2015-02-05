@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 /**
  * Entidad base para las entidades de negocio.
  * 
@@ -11,6 +13,8 @@ import java.util.Date;
  */
 abstract public class PersistentEntity implements Serializable{
 
+	protected static final Logger log = Logger.getLogger(PersistentEntity.class);
+	
 	private long id;
 	private Date creationDate;
 	private Date modificationDate;

@@ -19,6 +19,7 @@ public class Guardar extends Operation {
 
 	@SuppressWarnings("rawtypes")
 	public void execute(Map<String, Object> aParams) throws Exception {
+		
 		List object = recuperarObjeto(aParams);
 		if (object==null){ 
 			throw new JakartaException("Error en el archivo operaciones.xml. Dentro del tag INPUT, el atributo 'keyName' debe llamarse 'objeto'.");
