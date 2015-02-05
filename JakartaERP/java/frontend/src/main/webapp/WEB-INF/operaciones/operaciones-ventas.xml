@@ -918,6 +918,7 @@
 			<campoSalida value="des_det" target="determinacion.descripcion" />
 
 			<campoSalida value="precio" target="precio" />
+			
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>

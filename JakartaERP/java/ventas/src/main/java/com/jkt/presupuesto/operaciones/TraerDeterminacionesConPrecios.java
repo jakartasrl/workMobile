@@ -10,6 +10,7 @@ import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.ListaPrecioDetalle;
 import com.jkt.dominio.ListaPrecios;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.laboratorio.dominio.AnalisisDet;
 import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.operaciones.Operation;
 
@@ -39,13 +40,27 @@ public class TraerDeterminacionesConPrecios extends Operation {
 			throw new JakartaException("Se encontro una inconsistencia con el valor numerico de la configuración del laboratorio '"+aParams.get(LABORATORIO)+"'");
 		}
 
-		List determinacionesConPrecio= obtenerDeterminacionesConPrecios(lista.getId(), idLaboratorio);
+		//Recupera las determinaciones a partir de los analisis,y buscando en la lista de precios su existencia.
+		List analisisDeterminacionConPrecio= obtenerDeterminacionesConPrecios(lista.getId(), idLaboratorio);
 		List ids=new ArrayList<Long>();
 		
 		//Muestra en la salida las determinaciones con sus correspondientes precios
 		ListaPrecioDetalle detalle;
-		for (Object object : determinacionesConPrecio) {
-			detalle=(ListaPrecioDetalle) object;
+		AnalisisDet relacionAnalisisDeterminacion;
+		Query qFindUnique;
+		String hqlFindUnique="from ListaPrecioDetalle precio where precio.determinacion.laboratorio.id= :idLaboratorio and precio.listaPrecios.id= :idLista and precio.determinacion.id=:idDeterminacion";
+		for (Object object : analisisDeterminacionConPrecio) {
+			relacionAnalisisDeterminacion=(AnalisisDet) object;
+			qFindUnique = crearHQL(hqlFindUnique);
+			qFindUnique.setParameter("idLista", lista.getId());
+			qFindUnique.setParameter("idLaboratorio", relacionAnalisisDeterminacion.getAnalisis().getLaboratorio().getId()); //el labo se lo pido o al analisis o lo tengo desde la configuracion de parametros de entrada
+			qFindUnique.setParameter("idDeterminacion", relacionAnalisisDeterminacion.getDeterminacion().getId());
+			detalle=(ListaPrecioDetalle) qFindUnique.uniqueResult(); //Es seguro que existe ya qe consulto antes, en el metodo #obtenerDeterminacionesConPrecios
+			
+			//Datos para ordenar por analisis. Todos estos analisis pertenecen al mismo laboratorio
+			detalle.getDeterminacion().setDescripcionAnalisis(relacionAnalisisDeterminacion.getAnalisis().getDescripcion());
+			detalle.getDeterminacion().setCodigoAnalisis(relacionAnalisisDeterminacion.getAnalisis().getCodigo());
+
 			notificarObjeto(PRECIO_WRITER, detalle);
 			//Guarda el id para luego poder utilizarlo para mostrar las nuevos determinaciones
 			ids.add(detalle.getDeterminacion().getId());
@@ -62,9 +77,12 @@ public class TraerDeterminacionesConPrecios extends Operation {
 	 */
 	private void mostrarNuevosElementos(long idLaboratorio, List ids) throws Exception {
 		ListaPrecioDetalle detalle;
-		String hqlDeterminacionesSinPrecio="from Determinacion d where d.laboratorio.id= :idLaboratorio";
+		
+		String hqlDeterminacionesSinPrecio="select d.determinacion from AnalisisDet d where d.analisis.laboratorio.id= :idLaboratorio";
+//		String hqlDeterminacionesSinPrecio="from Determinacion d where d.laboratorio.id= :idLaboratorio";
+
 		if (!ids.isEmpty()) {
-			hqlDeterminacionesSinPrecio+=QUERY_UTILS_SPACE + "and d.id not in (:ids)";
+			hqlDeterminacionesSinPrecio+=QUERY_UTILS_SPACE + "and d.determinacion.id not in (:ids)";
 		}
 		Query qDeterminacionesSinPrecio = crearHQL(hqlDeterminacionesSinPrecio);
 		qDeterminacionesSinPrecio.setParameter("idLaboratorio", idLaboratorio);
@@ -95,9 +113,26 @@ public class TraerDeterminacionesConPrecios extends Operation {
 	 * 
 	 */
 	private List obtenerDeterminacionesConPrecios(long idLista, long idLaboratorio){
+		
+		String hqlDeterminaciones="select relacion from "
+
+				//tabla relacion
+				+ "AnalisisDet relacion" 
+				
+				//tabla lPrecios
+				+ " where relacion.analisis.laboratorio.id =:idLaboratorio and relacion.determinacion.id in (select precios.determinacion.id as idsDeterminacion from ListaPrecioDetalle precios where precios.listaPrecios.id= :idLista and precios.determinacion.laboratorio.id= :idLaboratorio )";
+		
+		
+		/*
+		 * Consulta anterior a ver el requerimiento de agrupar por analisis.
+		 * Al no tener en claro las relaciones, se tuve que generar una hql mas compleja
+		 */
+		/*
 		String hqlDeterminaciones="from ListaPrecioDetalle precios where precios.listaPrecios.id= :idLista"
 				+ QUERY_UTILS_SPACE
 				+ "and precios.determinacion.laboratorio.id = :idLaboratorio";
+		*/
+		
 		Query qDeterminaciones = crearHQL(hqlDeterminaciones);
 		qDeterminaciones.setParameter("idLista", idLista);
 		qDeterminaciones.setParameter("idLaboratorio", idLaboratorio);

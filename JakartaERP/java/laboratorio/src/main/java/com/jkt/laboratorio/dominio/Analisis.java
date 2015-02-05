@@ -9,7 +9,7 @@ import com.jkt.dominio.IDetalle;
 /**
  * Representa un Análisis que se puede hacer en un Laboratorio.
  * Se utiliza en los pedidos de Laboratorio y en los protocolos.
- * Ejemplo: Análisis fásico-quámico de un transformador.
+ * Ejemplo: Análisis físico-químico de un transformador.
  */
 public class Analisis extends Descriptible  implements IDetalle{
 

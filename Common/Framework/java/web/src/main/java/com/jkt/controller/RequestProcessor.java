@@ -139,7 +139,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
-		log.debug("Ejecutando la operación...");
+		log.debug("Ejecutando la operaciÃ³n...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
@@ -147,17 +147,17 @@ public abstract class RequestProcessor extends BaseController{
 		operation.runOperation(parametersAdapted);
 
 		
-		log.debug("Enviando resultados de la operación...");
+		log.debug("Enviando resultados de la operaciÃ³n...");
 		transformer.write();
 		
 		}finally{
 			sessionProvider.destroySession();
 		}
-		log.debug("Finalizó la operación...");
+		log.debug("FinalizÃ³ la operaciÃ³n...");
 	}
 
 	protected void getEventBusinessOperation(String operationName) {
-		log.debug("Ejecutando la operación "+operationName+".");
+		log.debug("Ejecutando la operaciÃ³n "+operationName+".");
 		eventBusinessOperation = getOperation(operationName);
 	}
 	
@@ -204,7 +204,7 @@ public abstract class RequestProcessor extends BaseController{
 		op.setSessionProvider(sessionProvider);
 		op.setRepositorioClases(repositorioClases);
 		
-		//Seteo el eventBusiness solamente si es cliente delphi, xq allá se usa informacion como por ejemplo la de las listas <listas><lista/></listas>
+		//Seteo el eventBusiness solamente si es cliente delphi, xq allï¿½ se usa informacion como por ejemplo la de las listas <listas><lista/></listas>
 		if (getAppRequest().equals(CLIENTE_DELPHI)) {
 			op.setEventBusiness(eventBusinessOperation);
 		}
@@ -218,8 +218,8 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws JakartaException Siempre que se ejecute este metodo se levanta la excepcion.
 	 */
 	private void finalizar(String aOperName) throws JakartaException {
-		log.debug("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
-		throw new JakartaException("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
+		log.debug("La operaciÃ³n " + aOperName + " no existe en operaciones.xml .Se finaliza la peticiÃ³n.");
+		throw new JakartaException("La operaciÃ³n " + aOperName + " no existe en operaciones.xml .Se finaliza la peticiÃ³n.");
 	}
 
 	/**

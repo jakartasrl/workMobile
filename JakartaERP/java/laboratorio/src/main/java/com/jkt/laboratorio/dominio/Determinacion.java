@@ -105,5 +105,37 @@ public class Determinacion extends Descriptible implements IDetalle {
 	public String getNombreDeMaestro() {
 		return "laboratorio";
 	}
+	
+	/*
+	 * Campos trasientes.
+	 */
 
+	private double precio;
+	private String codigoAnalisis;
+	private String descripcionAnalisis;
+
+	public String getCodigoAnalisis() {
+		return codigoAnalisis;
+	}
+
+	public void setCodigoAnalisis(String codigoAnalisis) {
+		this.codigoAnalisis = codigoAnalisis;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public String getDescripcionAnalisis() {
+		return descripcionAnalisis;
+	}
+
+	public void setDescripcionAnalisis(String descripcionAnalisis) {
+		this.descripcionAnalisis = descripcionAnalisis;
+	}
+	
 }
