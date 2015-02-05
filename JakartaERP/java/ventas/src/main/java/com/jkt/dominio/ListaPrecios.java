@@ -25,19 +25,13 @@ public class ListaPrecios extends Descriptible {
 		}
 	}
 	
-	
-	
 	public List<ListaPrecioDetalle> getDetalles() {
 		return detalles;
 	}
 
-
-
 	public void setDetalles(List<ListaPrecioDetalle> detalles) {
 		this.detalles = detalles;
 	}
-
-
 
 	public Date getFechaVigenciaDesde() {
 		return fechaVigenciaDesde;

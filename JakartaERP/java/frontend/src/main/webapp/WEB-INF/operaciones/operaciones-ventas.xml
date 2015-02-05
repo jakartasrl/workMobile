@@ -994,6 +994,8 @@
 		</forms>		
 	</operacion>
 	
+	
+	<!-- 	GUARDAR PRESUPUESTO -->
 	<operacion name="GuardarPresupuesto" clase="com.jkt.operaciones.Guardar">
 	
 		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
@@ -1004,9 +1006,9 @@
 				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
 				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
 				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
-
-				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
 				<campoEntrada name="oid_cont_suc" clase="com.jkt.varios.dominio.Contacto" metodo="setContactoReferencia" />
+				<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
+				<campoEntrada name="oid_lis_pre" clase="com.jkt.dominio.ListaPrecios" metodo="setListaPrecios" />
 
 				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
 					
@@ -1023,6 +1025,19 @@
 					
 					<campoEntrada name="oid_item" clase="com.jkt.dominio.CotizacionDet" metodo="setItemCotizado" />
 				</campoEntrada>
+	
+				<campoEntrada name="mtCondicionesComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid_con_com">
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+				</campoEntrada>
+
+				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid_not">
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+				</campoEntrada>
+
 	
 				<!-- 
 				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">

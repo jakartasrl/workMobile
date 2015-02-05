@@ -36,7 +36,7 @@ public class TraerDeterminacionesConPrecios extends Operation {
 		Configuracion configuracionLaboratorio = obtenerConfiguracion((String)aParams.get(LABORATORIO));
 		long idLaboratorio=configuracionLaboratorio.getValorNumero();
 		if (idLaboratorio<1) {
-			throw new JakartaException("Se encontro una inconsistencia con el valor numerico de la configuraci�n del laboratorio '"+aParams.get(LABORATORIO)+"'");
+			throw new JakartaException("Se encontro una inconsistencia con el valor numerico de la configuración del laboratorio '"+aParams.get(LABORATORIO)+"'");
 		}
 
 		List determinacionesConPrecio= obtenerDeterminacionesConPrecios(lista.getId(), idLaboratorio);
