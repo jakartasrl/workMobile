@@ -1064,5 +1064,89 @@
 
 	</operacion>
 	
+	<!-- TRAE UN PRESUPUESTO -->
+	<operacion name="TraerPresupuesto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.presupuesto.dominio.Presupuesto" >
+
+		<output name="resultado" tableName="mtPresupuesto">
+
+			<campoSalida value="oid_presu" target="id" />
+			
+			<campoSalida value="nro_presu" target="nro" />
+			<campoSalida value="nro_cotiz" target="comprobanteRelacionado.id" />
+
+			<campoSalida value="fecha" target="fecha" />
+			
+			<campoSalida value="oid_sucu" target="clienteSucursal.id" />
+			<campoSalida value="nro_sucu" target="clienteSucursal.numero"/>
+			<campoSalida value="des_sucu" target="clienteSucursal.descripcionCompleta" />
+
+			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
+			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
+			<campoSalida value="razonSocial" target="clienteSucursal.cliente.sujetoImpositivo.razonSocial" />
+
+			<campoSalida value="oid_vend" target="vendedor.id" />
+			<campoSalida value="cod_vend" target="vendedor.codigo" />
+			<campoSalida value="des_vend" target="vendedor.descripcion" />
+			
+			<campoSalida value="oid_repre" target="representante.id" />
+			<campoSalida value="cod_repre" target="representante.codigo" />
+			<campoSalida value="des_repre" target="representante.descripcion" />
+			
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
+			<campoSalida value="oid_cont_suc" target="contactoReferencia.id" />
+
+		</output>
+		
+		<output name="detalles" tableName="mtItems">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_presu" target="presupuesto.id" />
+			<campoSalida value="oid_art" target="producto.id" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
+			<campoSalida value="referencia" target="referencia" />
+			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="oid_tipo" target="tipoVenta" />
+			<campoSalida value="detalle" target="descripcion" />
+			<campoSalida value="oid_moneda" target="moneda.id" />
+		</output>
+		
+		<output name="notas" tableName="mtNotas">
+			<campoSalida value="oid_not" target="id" />
+			<campoSalida value="cod_not" target="codigo" />
+			<campoSalida value="des_not" target="descripcion" />
+		</output>
+		
+		<output name="condicionesComerciales" tableName="mtCondicionesComerciales">
+			<campoSalida value="oid_con_com" target="id" />
+			<campoSalida value="cod_con_com" target="codigo" />
+			<campoSalida value="des_con_com" target="descripcion" />
+		</output>
+
+<!-- 		<output name="archivos" tableName="mtArchivos"> -->
+<!-- 			<campoSalida value="oid_arch" target="id" /> -->
+		<!-- <campoSalida value="oid_cotiz" target="CAMPOTRANSIENTE" /> --> 
+<!-- 			<campoSalida value="fecha_subida" target="fechaDeSubidaPlana" /> -->
+<!-- 			<campoSalida value="oid_usu" target="identificadorDeUsuario" /> -->
+<!-- 			<campoSalida value="usuario" target="nombreUsuario" /> -->
+<!-- 			<campoSalida value="comentario" target="comentario" /> -->
+<!-- 			<campoSalida value="archivo" target="nombreCompleto" /> -->
+<!-- 		</output> -->
+
+		<listas>
+			<lista nombreLista="detalles" nombreWriter="detalles" />
+			<lista nombreLista="condicionesComerciales" nombreWriter="condicionesComerciales" />
+			<lista nombreLista="notas" nombreWriter="notas"  />
+		</listas>
+		
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+		
+		<forms>
+			<form name="---"></form>
+		</forms>		
+
+	</operacion>
+	
 	
 </entity>
