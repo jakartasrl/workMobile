@@ -3,9 +3,10 @@ package com.jkt.presupuesto.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jkt.dominio.Comprobante;
 import com.jkt.dominio.ComprobanteVenta;
+import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.ListaPrecios;
-import com.jkt.varios.dominio.Moneda;
 
 /**
  * <p>Representa a un presupuesto. El presupuesto contendra una determinada
@@ -22,6 +23,10 @@ public class Presupuesto extends ComprobanteVenta {
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
+	
+	public void setComprobanteRelacionado(Cotizacion comprobanteRelacionado) {
+		this.comprobanteRelacionado = comprobanteRelacionado;
+	}
 	
 	public ListaPrecios getListaPrecios() {
 		return listaPrecios;
@@ -69,7 +74,21 @@ public class Presupuesto extends ComprobanteVenta {
 			condicionesComerciales.add(condicion);
 		}
 	}
+	
+	
+	/**
+	 * <p>Agrega un detalle al presupuesto.</p>
+	 * <p>Si el detalle tiene cantidad 0, no se persistira.</p>
+	 * 
+	 */
 	public void agregarDetalle(PresupuestoDet det){
+		
+		if (det.getCantidad()<1) {
+			//No guardar el detalle
+			log.warn(String.format("No se agrego el detalle %s ya que no se le asigno una cantida mayor a cero.", det.getDescripcion()));
+			return;
+		}
+		
 		if (!detalles.contains(det)) {
 			detalles.add(det);
 			det.setPresupuesto(this);

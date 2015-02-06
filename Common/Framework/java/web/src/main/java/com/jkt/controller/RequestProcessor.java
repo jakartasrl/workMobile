@@ -80,11 +80,11 @@ public abstract class RequestProcessor extends BaseController{
 		String host = request.getRemoteHost();// Host del cliente
 
 		
-		log.debug(String.format("Procesando una solicitud desde el cliente %s con direccion IP %s",host, ip));
+		log.info(String.format("Procesando una solicitud desde el cliente %s con direccion IP %s",host, ip));
 		
 		setResponse(response);//setea el writer para cuando el controller sea notificado sepa donde escribir la respuesta.
 		
-		log.debug(String.format("Se inicia una solicitud desde un cliente %s.",getAppRequest()));
+		log.info(String.format("Se inicia una solicitud desde un cliente %s.",getAppRequest()));
 		
 		String operationName="";
 		Map parameters;
@@ -119,19 +119,19 @@ public abstract class RequestProcessor extends BaseController{
 		 * 
 		 */
 		
-		log.debug("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
+		log.info("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
 		parametersAdapted = adaptParameters(parameters, eventBusinessOperation);
 
 		try{
 		String entidad = ((EventBusiness) eventBusinessOperation).getEntidad();
 		if (entidad!=null && !entidad.isEmpty()) {
-			log.debug("No existen parametros de entrada. Se toma como filtro una entidad...");
+			log.info("No existen parametros de entrada. Se toma como filtro una entidad...");
 //			parametersAdapted = new HashMap<String, String>();
 			parametersAdapted.put("entidad", entidad);
 		}
 		
 
-		log.debug("Recuperando un transformer para la operación actual...");
+		log.info("Recuperando un transformer para la operación actual...");
 		if( ((EventBusiness) eventBusinessOperation).getTransformer()==null &&  getAppRequest().equals(CLIENTE_HTML)){
 			ElementTransformer elemTrans=new ElementTransformer();
 			elemTrans.setClase("com.jkt.transformers.WebTransformer");
@@ -139,7 +139,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
-		log.debug("Ejecutando la operación...");
+		log.info("Ejecutando la operación...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
@@ -147,17 +147,17 @@ public abstract class RequestProcessor extends BaseController{
 		operation.runOperation(parametersAdapted);
 
 		
-		log.debug("Enviando resultados de la operación...");
+		log.info("Enviando resultados de la operación...");
 		transformer.write();
 		
 		}finally{
 			sessionProvider.destroySession();
 		}
-		log.debug("Finalizó la operación...");
+		log.info("Finalizó la operación...");
 	}
 
 	protected void getEventBusinessOperation(String operationName) {
-		log.debug("Ejecutando la operación "+operationName+".");
+		log.info("Ejecutando la operación "+operationName+".");
 		eventBusinessOperation = getOperation(operationName);
 	}
 	
@@ -218,7 +218,7 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws JakartaException Siempre que se ejecute este metodo se levanta la excepcion.
 	 */
 	private void finalizar(String aOperName) throws JakartaException {
-		log.debug("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
+		log.info("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
 		throw new JakartaException("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
 	}
 

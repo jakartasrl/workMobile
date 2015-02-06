@@ -26,7 +26,7 @@ public abstract class Comprobante extends PersistentEntity {
 	 * Un Pedido puede estar relacionado a un presupuesto.
 	 * Un Presupuesto puede estar relacionado a una cotizacion
 	 */
-	private Comprobante comprobanteRelacionado;
+	protected Comprobante comprobanteRelacionado;
 	
 //	private String comportamiento;
 	private String letra;
@@ -38,9 +38,9 @@ public abstract class Comprobante extends PersistentEntity {
 		return comprobanteRelacionado;
 	}
 
-	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
-		this.comprobanteRelacionado = comprobanteRelacionado;
-	}
+//	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
+//		this.comprobanteRelacionado = comprobanteRelacionado;
+//	}
 
 	@NotNull(message="Debe ingresar obligatoriamente un tipo de comprobante.")
 	private TipoComprobante tipoComprobante;
