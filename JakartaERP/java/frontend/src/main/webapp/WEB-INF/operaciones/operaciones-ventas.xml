@@ -905,10 +905,10 @@
 
 	</operacion>
 	
-		<operacion name="TraerDeterminacionesConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
+	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
 	
-		<output name="precio" tableName="mtPrecios">
-			<campoSalida value="oid" target="id" />
+		<output name="precio" tableName="mtDeterLaboQuim">
+			<campoSalida value="oid_item" target="id" />
 			
 			<!-- det es determinacion, no un detalle  -->
 			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
@@ -920,7 +920,35 @@
 			<campoSalida value="cod_ana" target="determinacion.codigoAnalisis" />
 			<campoSalida value="des_ana" target="determinacion.descripcionAnalisis" />
 
-			<campoSalida value="precio" target="precio" />
+			<campoSalida value="importe" target="precio" />
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
+	
+	<!-- ESTA OPERACION ES IGUAL A LA DE ARRIBA DEL LADO DE JAVA. AUNQUE SE DEVUELVEN LOS DATOS EN TABLAS DIFERENTES -->
+	<operacion name="TraerDeterElecConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
+	
+		<output name="precio" tableName="mtDeterLaboElec">
+			<campoSalida value="oid_item" target="id" />
+			
+			<!-- det es determinacion, no un detalle  -->
+			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
+			
+			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
+			
+			<campoSalida value="cod_ana" target="determinacion.codigoAnalisis" />
+			<campoSalida value="des_ana" target="determinacion.descripcionAnalisis" />
+
+			<campoSalida value="importe" target="precio" />
 			
 		</output>
 		
