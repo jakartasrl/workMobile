@@ -863,7 +863,7 @@
 		</output>
 		
 		<output name="detalles" tableName="mtItems">
-			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_item_cotiz" target="id" />
 <!-- 			<campoSalida value="oid_presu" target="comprobanteVenta.id" /> -->
 			<campoSalida value="oid_tipo" target="cotizador.item.tipoVenta" />
 			<campoSalida value="oid_art" target="cotizador.item.producto.id" />
@@ -1006,7 +1006,6 @@
 			<campoEntrada>
 			
 <!-- 				MISMA CABECERA QUE UNA COTIZACION -->
-				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
 				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
 
 				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
