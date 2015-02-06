@@ -5,24 +5,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.component.Components;
-import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.Comprobante;
 import com.jkt.dominio.ComprobanteCliente;
@@ -31,24 +31,17 @@ import com.jkt.operaciones.Operation;
 
 public class CrearDoc extends Operation implements CrearReporte {
 
-	public void crear() throws FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		
+	@Value("#{properties.value}")
+	private String texto;
+	
+	public String getTexto() {
+		return texto;
 	}
 
-	@Override
-	public void execute(Map<String, Object> aParams) throws Exception {
-		
-		
-		
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
-	
-	
-	
-	
-	
-	/*
-	
+
 	ComprobanteCliente c = new ComprobanteCliente();
 
 	List<PersistentEntity> comprobantes = new ArrayList<PersistentEntity>();
@@ -56,6 +49,8 @@ public class CrearDoc extends Operation implements CrearReporte {
 	public void crearDesdeTemplate() throws IOException {
 //		InputStream is = new FileInputStream("C:\\decode2\\empty.jrxml");
 		InputStream is = CrearDoc.class.getResourceAsStream("presupuesto1.jrxml");
+		
+		System.out.println(this.texto);
 		
 		try {
 			
@@ -137,5 +132,4 @@ public class CrearDoc extends Operation implements CrearReporte {
 		return dataSource;
 	}
 
-*/
 }

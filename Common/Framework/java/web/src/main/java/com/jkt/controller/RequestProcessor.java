@@ -119,7 +119,7 @@ public abstract class RequestProcessor extends BaseController{
 		 * 
 		 */
 		
-		log.info("Adaptando la entrada de parametros de acuerdo a la operaciÃ³n solicitada...");
+		log.info("Adaptando la entrada de parametros de acuerdo a la operación solicitada...");
 		parametersAdapted = adaptParameters(parameters, eventBusinessOperation);
 
 		try{
@@ -131,7 +131,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		
 
-		log.info("Recuperando un transformer para la operaciÃ³n actual...");
+		log.info("Recuperando un transformer para la operación actual...");
 		if( ((EventBusiness) eventBusinessOperation).getTransformer()==null &&  getAppRequest().equals(CLIENTE_HTML)){
 			ElementTransformer elemTrans=new ElementTransformer();
 			elemTrans.setClase("com.jkt.transformers.WebTransformer");
@@ -139,7 +139,7 @@ public abstract class RequestProcessor extends BaseController{
 		}
 		Transformer transformer = operation.generateTransformer(getOutputStream(), (EventBusiness) eventBusinessOperation, (String)parametersAdapted.get(OUTPUT_DATASET_NAME.toUpperCase()));
 		transformer.setTest(test);
-		log.info("Ejecutando la operaciÃ³n...");
+		log.info("Ejecutando la operación...");
 		if (test){
 			parametersAdapted = getObjetosOutput(operation, eventBusinessOperation );
 		}
@@ -147,17 +147,17 @@ public abstract class RequestProcessor extends BaseController{
 		operation.runOperation(parametersAdapted);
 
 		
-		log.info("Enviando resultados de la operaciÃ³n...");
+		log.info("Enviando resultados de la operación...");
 		transformer.write();
 		
 		}finally{
 			sessionProvider.destroySession();
 		}
-		log.info("FinalizÃ³ la operaciÃ³n...");
+		log.info("Finalizó la operación...");
 	}
 
 	protected void getEventBusinessOperation(String operationName) {
-		log.info("Ejecutando la operaciÃ³n "+operationName+".");
+		log.info("Ejecutando la operación "+operationName+".");
 		eventBusinessOperation = getOperation(operationName);
 	}
 	
@@ -218,8 +218,8 @@ public abstract class RequestProcessor extends BaseController{
 	 * @throws JakartaException Siempre que se ejecute este metodo se levanta la excepcion.
 	 */
 	private void finalizar(String aOperName) throws JakartaException {
-		log.info("La operaciÃ³n " + aOperName + " no existe en operaciones.xml .Se finaliza la peticiÃ³n.");
-		throw new JakartaException("La operaciÃ³n " + aOperName + " no existe en operaciones.xml .Se finaliza la peticiÃ³n.");
+		log.info("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
+		throw new JakartaException("La operación " + aOperName + " no existe en operaciones.xml .Se finaliza la petición.");
 	}
 
 	/**

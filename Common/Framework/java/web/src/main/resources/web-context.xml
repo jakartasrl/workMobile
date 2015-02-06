@@ -13,6 +13,7 @@
 
 
 	<import resource="classpath:persistencia-context.xml" />
+
 <!-- 	<tx:annotation-driven proxy-target-class="true" />  -->
 
 
