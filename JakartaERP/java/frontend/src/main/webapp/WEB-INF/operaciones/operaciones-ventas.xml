@@ -916,6 +916,9 @@
 			<campoSalida value="oid_det" target="determinacion.id" />
 			<campoSalida value="cod_det" target="determinacion.codigo" />
 			<campoSalida value="des_det" target="determinacion.descripcion" />
+			
+			<campoSalida value="cod_ana" target="determinacion.codigoAnalisis" />
+			<campoSalida value="des_ana" target="determinacion.descripcionAnalisis" />
 
 			<campoSalida value="precio" target="precio" />
 			
@@ -1018,7 +1021,7 @@
 <!-- 				IMPORTANTE PARA GENERAR EL NUMERO DE COMPROBANTE -->
 				<campoEntrada name="oid_cotiz" clase="com.jkt.dominio.Cotizacion" metodo="setComprobanteRelacionado" />
 
-				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+				<campoEntrada name="mtItems" metodo="agregarItem" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
 					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
@@ -1029,23 +1032,21 @@
 					<campoEntrada name="oid_item_cotiz" clase="com.jkt.dominio.CotizacionDet" metodo="setItemCotizado" />
 				</campoEntrada>
 				
-				<campoEntrada name="mtMateriales" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+				<campoEntrada name="mtMateriales" metodo="agregarMaterial" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
 					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
-					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
-					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
 					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
 					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 				</campoEntrada>
 
-				<campoEntrada name="mtDeterLaboQuim" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+				<campoEntrada name="mtDeterLaboQuim" metodo="agregarDeterminacionQuimica" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
 					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" /> <!-- 					oid_det es el identificador de una determinacion -->
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
 					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 				</campoEntrada>
 
-				<campoEntrada name="mtDeterLaboElec" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+				<campoEntrada name="mtDeterLaboElec" metodo="agregarDeterminacionElectrica" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
 					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" />
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
@@ -1075,9 +1076,9 @@
 	</operacion>
 	
 	<!-- TRAE UN PRESUPUESTO -->
-	<operacion name="TraerPresupuesto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.presupuesto.dominio.Presupuesto" >
+	<operacion name="TraerPresupuesto" clase="com.jkt.presupuesto.operaciones.TraerPresupuesto" entidad="com.jkt.presupuesto.dominio.Presupuesto" >
 
-		<output name="resultado" tableName="mtPresupuesto">
+		<output name="presupuesto" tableName="mtPresupuesto">
 
 			<campoSalida value="oid_presu" target="id" />
 			
@@ -1108,17 +1109,47 @@
 
 		</output>
 		
-		<output name="detalles" tableName="mtItems">
+		<output name="items" tableName="mtItems">
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
-			<campoSalida value="oid_art" target="producto.id" />
+<!-- 			<campoSalida value="oid_art" target="producto.id" /> -->
 			<campoSalida value="cod_art" target="producto.codigo" />
-			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
+<!-- 			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" /> -->
 			<campoSalida value="referencia" target="referencia" />
 			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="importe" target="precio" />
 			<campoSalida value="oid_tipo" target="tipoVenta" />
 			<campoSalida value="detalle" target="descripcion" />
-			<campoSalida value="oid_moneda" target="moneda.id" />
+			<campoSalida value="oid_mon" target="moneda.id" />
+			<campoSalida value="oid_item_cotiz" target="itemCotizado.id" />
+		</output>
+		
+		<output name="materiales" tableName="mtMateriales">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_presu" target="presupuesto.id" />
+			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="importe" target="precio" />
+			<campoSalida value="oid_mon" target="moneda.id" />
+		</output>
+		
+		<output name="determinacionQuimica" tableName="mtDeterLaboQuim">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_presu" target="presupuesto.id" />
+			<campoSalida value="oid_det" target="determinacion.codigo" />
+			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="importe" target="precio" />
+			<campoSalida value="oid_mon" target="moneda.id" />
+		</output>
+		
+				
+		<output name="determinacionElectrica" tableName="mtDeterLaboElect">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_presu" target="presupuesto.id" />
+			<campoSalida value="oid_det" target="determinacion.codigo" />
+			<campoSalida value="cant" target="cantidad" />
+			<campoSalida value="importe" target="precio" />
+			<campoSalida value="oid_mon" target="moneda.id" />
 		</output>
 		
 		<output name="notas" tableName="mtNotas">
@@ -1143,11 +1174,11 @@
 <!-- 			<campoSalida value="archivo" target="nombreCompleto" /> -->
 <!-- 		</output> -->
 
-		<listas>
-			<lista nombreLista="detalles" nombreWriter="detalles" />
-			<lista nombreLista="condicionesComerciales" nombreWriter="condicionesComerciales" />
-			<lista nombreLista="notas" nombreWriter="notas"  />
-		</listas>
+<!-- 		<listas> -->
+<!-- 			<lista nombreLista="detalles" nombreWriter="detalles" /> -->
+<!-- 			<lista nombreLista="condicionesComerciales" nombreWriter="condicionesComerciales" /> -->
+<!-- 			<lista nombreLista="notas" nombreWriter="notas"  /> -->
+<!-- 		</listas> -->
 		
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />

@@ -78,7 +78,7 @@ public class TraerDeterminacionesConPrecios extends Operation {
 	private void mostrarNuevosElementos(long idLaboratorio, List ids) throws Exception {
 		ListaPrecioDetalle detalle;
 		
-		String hqlDeterminacionesSinPrecio="select d.determinacion from AnalisisDet d where d.analisis.laboratorio.id= :idLaboratorio";
+		String hqlDeterminacionesSinPrecio="select d from AnalisisDet d where d.analisis.laboratorio.id= :idLaboratorio";
 //		String hqlDeterminacionesSinPrecio="from Determinacion d where d.laboratorio.id= :idLaboratorio";
 
 		if (!ids.isEmpty()) {
@@ -91,14 +91,24 @@ public class TraerDeterminacionesConPrecios extends Operation {
 			qDeterminacionesSinPrecio.setParameterList("ids", ids);			
 		}
 		
-		List<Determinacion> determinaciones= qDeterminacionesSinPrecio.list();
+		List<AnalisisDet> analisisDeterminaciones= qDeterminacionesSinPrecio.list();
+//		List<Determinacion> determinaciones= qDeterminacionesSinPrecio.list();
 		
-		if (!determinaciones.isEmpty()) {
+		if (!analisisDeterminaciones.isEmpty()) {
 			
-			for (Determinacion determinacion : determinaciones) {
-				if (!ids.contains(determinacion.getId())) {
+			Determinacion determinacion;
+			for (AnalisisDet relacion : analisisDeterminaciones) {
+				if (!ids.contains(relacion.getDeterminacion().getId())) {
 					detalle = new ListaPrecioDetalle();
 					detalle.setPrecio(0);
+					
+					/*
+					 * Seteo datos del analisis para poder mostrarlos con precio 0, pero con un analisis valido.
+					 */
+					determinacion=relacion.getDeterminacion();
+					determinacion.setCodigoAnalisis(relacion.getAnalisis().getCodigo());
+					determinacion.setDescripcionAnalisis(relacion.getAnalisis().getDescripcion());
+					
 					detalle.setDeterminacion(determinacion);
 					notificarObjeto(PRECIO_WRITER, detalle);
 				}

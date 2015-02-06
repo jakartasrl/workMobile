@@ -12,6 +12,10 @@ import com.jkt.varios.dominio.Moneda;
  */
 public class PresupuestoDet extends ComprobanteVentaDet{
 
+	public static final char CHAR_ITEM = 'I';
+	public static final char CHAR_MATERIAL = 'M';
+	public static final char CHAR_ELECTRICO = 'E';
+	public static final char CHAR_QUIMICO = 'Q';
 	/*
 	 * El detalle da informacion de un item, este item puede ser un producto (esta en la super clase declarado) o una determinacion.
 	 * precio, moneda, cantidad, producto, en la super clase
@@ -20,7 +24,16 @@ public class PresupuestoDet extends ComprobanteVentaDet{
 	private Determinacion determinacion;
 	private Presupuesto presupuesto;
 	private Moneda moneda;
+	private char tipoDetalle;
 	
+	public char getTipoDetalle() {
+		return tipoDetalle;
+	}
+
+	public void setTipoDetalle(char tipoDetalle) {
+		this.tipoDetalle = tipoDetalle;
+	}
+
 	public CotizacionDet getItemCotizado() {
 		return itemCotizado;
 	}
@@ -52,5 +65,25 @@ public class PresupuestoDet extends ComprobanteVentaDet{
 	public void setDeterminacion(Determinacion determinacion) {
 		this.determinacion = determinacion;
 	}
+	
+	/*
+	 * Helper methods
+	 */
+	public boolean isItem(){
+		return CHAR_ITEM==this.tipoDetalle;
+	}
+
+	public boolean isMaterial(){
+		return CHAR_MATERIAL==this.tipoDetalle;
+	}
+
+	public boolean isLaboratorioQuimico(){
+		return CHAR_QUIMICO==this.tipoDetalle;
+	}
+
+	public boolean isLaboratorioElectrico(){
+		return CHAR_ELECTRICO==this.tipoDetalle;
+	}
+
 	
 }

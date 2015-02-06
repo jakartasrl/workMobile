@@ -95,4 +95,24 @@ public class Presupuesto extends ComprobanteVenta {
 		}
 	}
 	
+	public void agregarItem(PresupuestoDet det){
+		det.setTipoDetalle(PresupuestoDet.CHAR_ITEM);
+		this.agregarDetalle(det);
+	}
+	
+	public void agregarDeterminacionElectrica(PresupuestoDet det){
+		det.setTipoDetalle(PresupuestoDet.CHAR_ELECTRICO);
+		this.agregarDetalle(det);
+	}
+	
+	public void agregarDeterminacionQuimica(PresupuestoDet det){
+		det.setTipoDetalle(PresupuestoDet.CHAR_QUIMICO);
+		this.agregarDetalle(det);
+	}
+	
+	public void agregarMaterial(PresupuestoDet det){
+		det.setTipoDetalle(PresupuestoDet.CHAR_MATERIAL);
+		this.agregarDetalle(det);
+	}
+	
 }
