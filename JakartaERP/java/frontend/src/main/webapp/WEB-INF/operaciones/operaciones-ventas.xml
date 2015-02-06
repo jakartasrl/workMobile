@@ -863,7 +863,7 @@
 		</output>
 		
 		<output name="detalles" tableName="mtItems">
-			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_item_cotiz" target="id" />
 <!-- 			<campoSalida value="oid_presu" target="comprobanteVenta.id" /> -->
 			<campoSalida value="oid_tipo" target="cotizador.item.tipoVenta" />
 			<campoSalida value="oid_art" target="cotizador.item.producto.id" />
@@ -1188,6 +1188,23 @@
 		</forms>		
 
 	</operacion>
+	
+	
+<!-- 	Operacion que recibe un OID de un presupuesto, y genera un reporte, retornando en dos campos separados, la ruta compartida 
+de su ubicacion, y su nombre (ruta y nombre de comprobante) -->
+	<operacion name="GenerarComprobantePresupuesto" clase="com.jkt.presupuesto.operaciones.GenerarComprobantePresupuesto">
+		<output name="comprobante" tableName="mtComprobante">
+			<campoSalida value="ruta" target="ruta" />
+			<campoSalida value="archivo" target="nombre" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name=""></form>
+		</forms>		
+	</operacion>
+	
 	
 	
 </entity>
