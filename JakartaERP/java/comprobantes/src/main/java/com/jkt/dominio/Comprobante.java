@@ -28,7 +28,6 @@ public abstract class Comprobante extends PersistentEntity {
 	 */
 	protected Comprobante comprobanteRelacionado;
 	
-//	private String comportamiento;
 	private String letra;
 	private String lugarEmision;
 	private String nro;
@@ -37,10 +36,6 @@ public abstract class Comprobante extends PersistentEntity {
 	public Comprobante getComprobanteRelacionado() {
 		return comprobanteRelacionado;
 	}
-
-//	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
-//		this.comprobanteRelacionado = comprobanteRelacionado;
-//	}
 
 	@NotNull(message="Debe ingresar obligatoriamente un tipo de comprobante.")
 	private TipoComprobante tipoComprobante;
@@ -83,13 +78,6 @@ public abstract class Comprobante extends PersistentEntity {
 	public void setTipoComprobante(TipoComprobante tipoComprobante) {
 		this.tipoComprobante = tipoComprobante;
 	}
-//	public char getLetra() {
-//		return letra;
-//	}
-//	public void setLetra(char letra) {
-//		this.letra = letra;
-//	}
-	
 	
 	public String getLugarEmision() {
 		return lugarEmision;
@@ -105,12 +93,6 @@ public abstract class Comprobante extends PersistentEntity {
 	public void setLugarEmision(String lugarEmision) {
 		this.lugarEmision = lugarEmision;
 	}
-//	public int getNro() {
-//		return nro;
-//	}
-//	public void setNro(int nro) {
-//		this.nro = nro;
-//	}
 	
 	public boolean isAnulado() {
 		return anulado;

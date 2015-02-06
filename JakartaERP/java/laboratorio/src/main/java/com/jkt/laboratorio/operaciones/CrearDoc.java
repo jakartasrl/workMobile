@@ -16,6 +16,7 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.component.Components;
+import net.sf.dynamicreports.report.builder.crosstab.CrosstabBuilder;
 import net.sf.dynamicreports.report.builder.datatype.DataTypes;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
@@ -29,6 +30,25 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
 
 public class CrearDoc extends Operation implements CrearReporte {
+
+	public void crear() throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void execute(Map<String, Object> aParams) throws Exception {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	/*
+	
 	ComprobanteCliente c = new ComprobanteCliente();
 
 	List<PersistentEntity> comprobantes = new ArrayList<PersistentEntity>();
@@ -117,5 +137,5 @@ public class CrearDoc extends Operation implements CrearReporte {
 		return dataSource;
 	}
 
-
+*/
 }

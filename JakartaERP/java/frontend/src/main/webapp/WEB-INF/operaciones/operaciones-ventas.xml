@@ -983,9 +983,9 @@
 	<operacion name="TraerCondicionesComerciales" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.presupuesto.dominio.CondicionComercial">
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
-			<campoSalida value="Codigo"    target="codigo" />
-			<campoSalida value="descr"     target="descripcion" />
-			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="Codigo" target="codigo" />
+			<campoSalida value="descr" target="descripcion" />
+			<campoSalida value="Activo" target="isActivo" />
 		</output>		
 			
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
@@ -1002,7 +1002,7 @@
 		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
 			<campoEntrada>
 			
-<!-- 			MISMA CABECERA QUE UNA COTIZACION -->
+<!-- 				MISMA CABECERA QUE UNA COTIZACION -->
 				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
 				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
 
@@ -1019,25 +1019,43 @@
 				<campoEntrada name="oid_cotiz" clase="com.jkt.dominio.Cotizacion" metodo="setComprobanteRelacionado" />
 
 				<campoEntrada name="mtItems" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
-					
 					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
-					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" /> <!-- oid_det es el identificador de una determinacion -->
-					
 					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
 					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
 					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
 					<campoEntrada name="referencia" clase="String" metodo="setReferencia" />
-					
-					<campoEntrada name="precio" clase="Double" metodo="setPrecio" />
-					<campoEntrada name="moneda" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
-					
-					<campoEntrada name="oid_item" clase="com.jkt.dominio.CotizacionDet" metodo="setItemCotizado" />
+					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
+					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+					<campoEntrada name="oid_item_cotiz" clase="com.jkt.dominio.CotizacionDet" metodo="setItemCotizado" />
 				</campoEntrada>
+				
+				<campoEntrada name="mtMateriales" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+					<campoEntrada name="oid_art" clase="com.jkt.erp.articulos.Producto" metodo="setProducto" />
+					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="detalle" clase="String" metodo="setDescripcion" />
+					<campoEntrada name="oid_tipo" clase="Integer" metodo="setTipoVenta" />
+					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
+					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				</campoEntrada>
+
+				<campoEntrada name="mtDeterLaboQuim" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" /> <!-- 					oid_det es el identificador de una determinacion -->
+					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
+					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				</campoEntrada>
+
+				<campoEntrada name="mtDeterLaboElec" metodo="agregarDetalle" clase="com.jkt.presupuesto.dominio.PresupuestoDet" fieldID="oid_item">
+					<campoEntrada name="oid_det" clase="com.jkt.laboratorio.dominio.Determinacion" metodo="setDeterminacion" />
+					<campoEntrada name="cant" clase="Integer" metodo="setCantidad" />
+					<campoEntrada name="importe" clase="Double" metodo="setPrecio" />
+					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
+				</campoEntrada>
+
 	
 				<campoEntrada name="mtCondComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid"/>
 
 				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid"/>
-
 	
 				<!-- 
 				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
