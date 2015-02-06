@@ -330,7 +330,7 @@ public abstract class Operation extends Observable {
 		Configuracion configuracion = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", nombre);
 		
 		if (configuracion==null) {
-			throw new JakartaException("Compruebe la parametrizacion del sistema. No es posible encontrar una configuraciÃ³n para el campo '"+nombre+"'");
+			throw new JakartaException("Compruebe la parametrizacion del sistema. No es posible encontrar una configuración para el campo '"+nombre+"'");
 		}
 		return configuracion;
 		
