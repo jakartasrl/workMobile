@@ -1006,7 +1006,6 @@
 			<campoEntrada>
 			
 <!-- 				MISMA CABECERA QUE UNA COTIZACION -->
-				<campoEntrada name="fecha" clase="Date" metodo="setFecha" />
 				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
 
 				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
