@@ -839,7 +839,6 @@
 			<campoSalida value="nro_cotiz" target="nro" />
 			
 			<campoSalida value="fecha" target="fecha" />
-			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
 
 			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
 			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
@@ -1034,8 +1033,6 @@
 			<campoEntrada>
 			
 <!-- 				MISMA CABECERA QUE UNA COTIZACION -->
-				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
-
 				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
 				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
 				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
@@ -1131,7 +1128,6 @@
 			<campoSalida value="des_repre" target="representante.descripcion" />
 			
 			<campoSalida value="referencia" target="referencia" />
-			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
 			<campoSalida value="oid_cont_suc" target="contactoReferencia.id" />
 
 		</output>
