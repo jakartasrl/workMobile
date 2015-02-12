@@ -1,5 +1,9 @@
 package com.jkt.presupuesto.dominio;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.CotizacionDet;
 import com.jkt.laboratorio.dominio.Determinacion;
@@ -23,7 +27,11 @@ public class PresupuestoDet extends ComprobanteVentaDet{
 	private CotizacionDet itemCotizado;
 	private Determinacion determinacion;
 	private Presupuesto presupuesto;
+	
+	@NotNull(message="El detalle de presupuesto tiene que tener una moneda obligatoriamente.")
 	private Moneda moneda;
+	
+	@NotEmpty(message="El detalle de presupuesto debe ser de un tipo permitido por el sistema.")
 	private char tipoDetalle;
 	
 	public char getTipoDetalle() {

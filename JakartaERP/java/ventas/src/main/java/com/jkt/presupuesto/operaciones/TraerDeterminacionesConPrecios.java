@@ -30,15 +30,21 @@ public class TraerDeterminacionesConPrecios extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(LABORATORIO));
-		validarEntrada(aParams.get(OID_LISTA_PRECIO));
 
-		ListaPrecios lista = (ListaPrecios) obtener(ListaPrecios.class, (String)aParams.get(OID_LISTA_PRECIO));
-		
 		Configuracion configuracionLaboratorio = obtenerConfiguracion((String)aParams.get(LABORATORIO));
 		long idLaboratorio=configuracionLaboratorio.getValorNumero();
 		if (idLaboratorio<1) {
 			throw new JakartaException("Se encontro una inconsistencia con el valor numerico de la configuración del laboratorio '"+aParams.get(LABORATORIO)+"'");
 		}
+
+		//		validarEntrada(aParams.get(OID_LISTA_PRECIO));
+		if(aParams.get(OID_LISTA_PRECIO)==null){
+			mostrarNuevosElementos(idLaboratorio, new ArrayList<Long>());
+			return;
+		}
+		
+		ListaPrecios lista = (ListaPrecios) obtener(ListaPrecios.class, (String)aParams.get(OID_LISTA_PRECIO));
+		
 
 		//Recupera las determinaciones a partir de los analisis,y buscando en la lista de precios su existencia.
 		List analisisDeterminacionConPrecio= obtenerDeterminacionesConPrecios(lista.getId(), idLaboratorio);
