@@ -3,7 +3,9 @@ package com.jkt.presupuesto.operaciones;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
+import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
 
@@ -31,7 +33,28 @@ public class TraerPresupuesto extends Operation {
 		Presupuesto presupuesto=(Presupuesto) obtener(Presupuesto.class, (String)aParams.get(OID));
 		notificarObjeto(WRITER_PRESUPUESTO, presupuesto);
 		
-		notificarObjetos(WRITER_NOTAS, presupuesto.getNotas());
+		// Obtengo todas las Notas...
+		List<PersistentEntity> notas = serviceRepository.getAll(Nota.class);
+		// Notas que tiene el presupuesto guardadas
+		List<Nota> notasDelPresupuesto = presupuesto.getNotas();
+		
+		Nota nota;
+		for (PersistentEntity currentObject : notas) {
+			nota = (Nota) currentObject;
+			// Si la Nota esta activa la notifico
+			if (nota.isActivo()) {
+				Nota nuevaNota = new Nota();
+				nuevaNota.setId(nota.getId());
+				nuevaNota.setCodigo(nota.getCodigo());
+				nuevaNota.setDescripcion(nota.getDescripcion());
+				// Ahora, si ya estaba guardada en el presupuesto actual, entonces la mando 'chequeada'
+				if (notasDelPresupuesto.contains(nota)) {
+					nuevaNota.setIncluidaEnPresupuesto(true);
+				}
+				notificarObjeto(WRITER_NOTAS, nuevaNota);
+			}
+		}
+		
 		notificarObjetos(WRITER_COND_COMERCIAL, presupuesto.getCondicionesComerciales());
 		
 		notificarDetalles(presupuesto);

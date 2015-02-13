@@ -888,18 +888,20 @@
 	
 	<operacion name="TraerProductoConPrecio" clase="com.jkt.presupuesto.operaciones.TraerProductoConPrecio">
 	
-		<output name="precio" tableName="mtPrecios">
-			<campoSalida value="oid" target="id" />
-			<campoSalida value="oid_art" target="producto.id" />
-			<campoSalida value="cod_art" target="producto.codigo" />
-			<campoSalida value="des_art" target="producto.descripcion" />
-			<campoSalida value="precio" target="precio" />
+		<output name="precio" tableName="mtPrecioMaterial">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_mon" target="" />
+			<campoSalida value="importe" target="precio" />
+
+<!-- 			<campoSalida value="oid_art" target="producto.id" /> -->
+<!-- 			<campoSalida value="cod_art" target="producto.codigo" /> -->
+<!-- 			<campoSalida value="des_art" target="producto.descripcion" /> -->
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="-"></form>
+			<form name="FNVen0006"></form>
 		</forms>
 
 	</operacion>
@@ -1026,7 +1028,7 @@
 	</operacion>
 	
 	
-	<!-- 	GUARDAR PRESUPUESTO -->
+	<!-- GUARDAR PRESUPUESTO -->
 	<operacion name="GuardarPresupuesto" clase="com.jkt.operaciones.Guardar">
 	
 		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
@@ -1077,10 +1079,13 @@
 					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 				</campoEntrada>
 
+				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid">
+					<campoEntrada name="selec" clase="Boolean" metodo="setIncluidaEnPresupuesto" />
+				</campoEntrada>
 	
-				<campoEntrada name="mtCondComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid"/>
-
-				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid"/>
+				<campoEntrada name="mtCondComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid">
+					<campoEntrada name="selec" clase="Boolean" metodo="setIncluidaEnPresupuesto" />
+				</campoEntrada>
 	
 				<!-- 
 				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
@@ -1176,15 +1181,17 @@
 		</output>
 		
 		<output name="notas" tableName="mtNotas">
-			<campoSalida value="oid_not" target="id" />
-			<campoSalida value="cod_not" target="codigo" />
-			<campoSalida value="des_not" target="descripcion" />
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descripcion" target="descripcion" />
+			<campoSalida value="selec" target="incluidaEnPresupuesto" />
 		</output>
 		
-		<output name="condicionesComerciales" tableName="mtCondicionesComerciales">
-			<campoSalida value="oid_con_com" target="id" />
-			<campoSalida value="cod_con_com" target="codigo" />
-			<campoSalida value="des_con_com" target="descripcion" />
+		<output name="condicionesComerciales" tableName="mtCondComerciales">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descripcion" target="descripcion" />
+			<campoSalida value="selec" target="incluidaEnPresupuesto" />
 		</output>
 
 <!-- 		<output name="archivos" tableName="mtArchivos"> -->
@@ -1207,7 +1214,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
 		
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0006"></form>
 		</forms>		
 
 	</operacion>
@@ -1224,7 +1231,7 @@ de su ubicacion, y su nombre (ruta y nombre de comprobante) -->
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name=""></form>
+			<form name="FNVen0006"></form>
 		</forms>		
 	</operacion>
 	
