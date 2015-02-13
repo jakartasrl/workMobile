@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,19 +13,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
+
+import org.apache.commons.digester3.Digester;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.xml.sax.SAXException;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 
 import com.jkt.dominio.Configuracion;
+import com.jkt.dominio.menu.Menu;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
+import com.jkt.presupuesto.dominio.CondicionComercial;
+import com.jkt.presupuesto.dominio.DatosEmpresa;
 import com.jkt.presupuesto.dominio.ItemResumen;
+import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
+import com.jkt.request.EventBusiness;
+import com.jkt.util.Entry;
 import com.jkt.varios.dominio.Especificacion;
+import com.jkt.xmlreader.XMLCampo;
+import com.jkt.xmlreader.XMLEntity;
 
 /**
  * Operacion que genera un comprobante en PDF para un presupuesto dado.
@@ -37,6 +51,9 @@ import com.jkt.varios.dominio.Especificacion;
  */
 public class GenerarComprobantePresupuesto extends Operation {
 
+	private static final String MENSAJE_ERROR_CREACION_COMPROBANTE = "No fue posible crear el comprobante.";
+	private static final String MENSAJE_CONDICIONES_VACIAS = "No existen condiciones comerciales para el presupuesto.";
+	private static final String MENSAJE_NOTAS_VACIAS = "No existen notas para el presupuesto.";
 	private static final String WRITER_ARCHIVO = "comprobante";
 	private static final String KEY_RUTA_COMPARTIDA = "rutaCompartida";
 	private static final String EXTENSION = ".pdf";
@@ -45,6 +62,8 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private String rutaCompartida;
 	private Presupuesto p;
 	
+	private DatosEmpresa datosEmpresa;
+
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
@@ -63,6 +82,9 @@ public class GenerarComprobantePresupuesto extends Operation {
 		rutaCompartida = configuracionRuta.getValorCadena();
 		
 		if (rutaCompartida.endsWith("/")) {
+			
+			obtenerDatosEmpresa();
+			
 			Especificacion e = generarComprobante(p);
 			notificarObjeto(WRITER_ARCHIVO, e);
 		}else{
@@ -72,6 +94,48 @@ public class GenerarComprobantePresupuesto extends Operation {
 		
 		
 	}
+	
+	/**
+	 * 
+	 * Asigna los datos de la empresa.
+	 * 
+	 * @throws JakartaException cuando el archivo de datos de empresa es inconsistete, 
+	 * no contiene elementos o la cantidad de elementos que retornan información son mas de uno.
+	 */
+	public void obtenerDatosEmpresa() throws JakartaException {
+		try {
+			Digester digester = generarReglas();
+			InputStream in = Presupuesto.class.getResourceAsStream("datosEmpresa.xml");
+			
+			List elementos=(List)digester.parse(in);
+			if (elementos.size()!=1) {
+				throw new JakartaException("Existen inconsistencias en el archivo de datos de la empresa.");
+			}
+			datosEmpresa=(DatosEmpresa) elementos.get(0);//Hay que obtener el primero.
+		} catch (IOException e) {
+			throw new RuntimeException("Error de entrada/salida.");
+		} catch (SAXException e) {
+			throw new RuntimeException("Error de parseo en el archivo de datos de la empresa.");
+		}
+	}
+	
+	/**
+	 * Genera las reglas 
+	 * 
+	 */
+	private Digester generarReglas() {
+		Digester digester = new Digester();
+		digester.setValidating(false);
+		
+		digester.addObjectCreate("elementos", ArrayList.class);
+		
+		digester.addObjectCreate("elementos/elemento", DatosEmpresa.class.getName());
+		digester.addSetProperties("elementos/elemento");
+		digester.addSetNext("elementos/elemento", "add", DatosEmpresa.class.getName());
+
+		return digester;
+	}
+
 
 	/**
 	 * Genera el comprobante y retorna datos para mostrar a la vista
@@ -85,11 +149,14 @@ public class GenerarComprobantePresupuesto extends Operation {
 			JasperReportBuilder report = DynamicReports.report();
 			report.setTemplateDesign(is);
 			
-			report.setDataSource(this.createDataSource());
+			report.setDataSource(createDataSource());
 			
 			Map<String, Object> parameters=new HashMap<String, Object>();
 			
-			parameters.put("lugarFecha", String.format("%s, %s",p.getClienteSucursal().getDireccion().getProvincia().getDescripcion(), obtenerFechaActual()));			
+			String referenciaPresupuesto="Sobre un (1) Transformador TTE de 15/15/10 MVA - 132/33/12,2 kV (año 1975)";
+			parameters.put("descripcionPresupuesto", "-----------------------------");
+			
+			parameters.put("lugarFecha", String.format("%s, %s",datosEmpresa.getProvincia(), obtenerFechaActual()));			
 			parameters.put("cliente", p.getClienteSucursal().getCliente().getSujetoImpositivo().getRazonSocial());
 			
 			parameters.put("calle", p.getClienteSucursal().getDireccion().getDireccion());
@@ -108,17 +175,25 @@ public class GenerarComprobantePresupuesto extends Operation {
 
 			parameters.put("nroPresupuesto", p.getNro());
 			
-			//Ver el tema del tipo de clase y demas.Si mando Arrays.asList no recuerdo si funcionaba.
-			List<String> notas=new ArrayList<String>();
-			notas.add("Nota de venta 1");
-			notas.add("River Plate");
-			notas.add("Campeon ReCopa Sudamericana");
-			notas.add("Plate Plate Plate Plate Plate");
+			parameters.put("items", obtenerDetalles());
+			parameters.put("notas", obtenerNotas());
+			parameters.put("condiciones", obtenerCondiciones());
+
+			/*
+			 * Datos de la empresa
+			 */
+			validarDatosEmpresa();
+			parameters.put("nombreEmpresa", datosEmpresa.getNombre());
+			parameters.put("direccionEmpresa", datosEmpresa.getDireccion());
+			parameters.put("provinciaEmpresa", datosEmpresa.getProvincia());
+			parameters.put("telEmpresa", datosEmpresa.getTelefono());
+			parameters.put("faxEmpresa", datosEmpresa.getFax());
+			parameters.put("webEmpresa", datosEmpresa.getPaginaWeb());
+			parameters.put("emailEmpresa", datosEmpresa.getEmail());
 			
-			List<ItemResumen> lista = obtenerDetalles();
-			
-			parameters.put("items", lista);
-			parameters.put("notas", notas);
+			parameters.put("usuario", "Daniel Bokhdjalian");
+			parameters.put("titulo", "Gerente Comercial");
+			parameters.put("saludos", "Sin otro particular saludamos atentamente.");
 
 			report.setParameters(parameters);
 			nombreArchivo = generarNombreDeArchivo();
@@ -135,10 +210,76 @@ public class GenerarComprobantePresupuesto extends Operation {
 		
 		} catch (DRException e) {
 			e.printStackTrace();
-			throw new JakartaException("No fue posible crear el comprobante.");
+			throw new JakartaException(MENSAJE_ERROR_CREACION_COMPROBANTE);
 		}
 	}
 
+	private void validarDatosEmpresa() throws JakartaException {
+		if (datosEmpresa.getNombre().isEmpty()) {
+			throw new JakartaException("Debe ingresar el nombre de la empresa");
+		}
+		if (datosEmpresa.getTelefono().isEmpty()) {
+			throw new JakartaException("Debe ingresar el telefono de la empresa");
+		}
+		if (datosEmpresa.getFax().isEmpty()) {
+			throw new JakartaException("Debe ingresar el fax de la empresa");
+		}
+		if (datosEmpresa.getPaginaWeb().isEmpty()) {
+			throw new JakartaException("Debe ingresar el sitio web de la empresa");
+		}
+		if (datosEmpresa.getEmail().isEmpty()) {
+			throw new JakartaException("Debe ingresar el email de la empresa");
+		}
+		if (datosEmpresa.getProvincia().isEmpty()) {
+			throw new JakartaException("Debe ingresar la provincia de la empresa");
+		}
+		if (datosEmpresa.getDireccion().isEmpty()) {
+			throw new JakartaException("Debe ingresar la dirección de la empresa");
+		}
+		
+	}
+
+	/**
+	 * Retorna una lista de cadenas, que representa las condiciones comerciales
+	 * 
+	 */
+	private  List<String> obtenerCondiciones() {
+		//Ver el tema del tipo de clase y demas.Si mando Arrays.asList no recuerdo si funcionaba.
+		List<String> condiciones=new ArrayList<String>();
+		
+		for (CondicionComercial condicion: p.getCondicionesComerciales()) {
+			condiciones.add(condicion.getDescripcion());
+		}
+		
+		if (condiciones.isEmpty()) {
+			condiciones.add(MENSAJE_CONDICIONES_VACIAS);
+		}
+		
+		return condiciones;
+	}
+
+	/**
+	 * Retorna una lista de cadenas que representan las notas de presupuesto
+	 * 
+	 */
+	private List<String> obtenerNotas() {
+		//Ver el tema del tipo de clase y demas.Si mando Arrays.asList no recuerdo si funcionaba.
+		List<String> notas=new ArrayList<String>();
+		
+		for (Nota nota : p.getNotas()) {
+			notas.add(nota.getDescripcion());
+		}
+		
+		if (notas.isEmpty()) {
+			notas.add(MENSAJE_NOTAS_VACIAS);
+		}
+		
+		return notas;
+	}
+
+	/**
+	 * Retorna todos los detalles del presupuesto en un formato acorde para mostrar en el presupuesto
+	 */
 	private List<ItemResumen> obtenerDetalles() throws JakartaException {
 		List<ItemResumen> data = new ArrayList<ItemResumen>();
 		
@@ -153,7 +294,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 
 			cantidad=detalle.getCantidad();
 			precio= "Precio: "+ String.valueOf(detalle.getPrecio()) + " - Moneda: "+detalle.getMoneda().getDescripcion();
-//					String.format("Precio: %1$,.2f  - Moneda: %s", detalle.getPrecio(), detalle.getMoneda().getDescripcion());
+			//	String.format("Precio: %1$,.2f  - Moneda: %s", detalle.getPrecio(), detalle.getMoneda().getDescripcion());
 			referencia=detalle.getReferencia();
 			cantidad=detalle.getCantidad();
 			
@@ -165,10 +306,10 @@ public class GenerarComprobantePresupuesto extends Operation {
 				descripcion=String.format("Determinación Laboratorio Quimico - Cantidad: %d - Determinacion: %s - Analisis: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
 				break;
 			case PresupuestoDet.CHAR_MATERIAL:
-				descripcion=String.format("Tipo de venta: %s - Cantidad: %d - Producto: %s", String.valueOf(detalle.getTipoVenta()), cantidad, detalle.getProducto().getDescripcionAbrev());
+				descripcion=String.format("%s de %d Producto: %s", detalle.getDescripcion() , cantidad, detalle.getProducto().getDescripcionAbrev());
 				break;
 			case PresupuestoDet.CHAR_ITEM:
-				descripcion="items";
+				descripcion=detalle.getDescripcion();
 				break;
 			default:
 				throw new JakartaException("No se generará el comprobante debido a que los detalles del presupuesto son inconsistentes en cuanto a su tipo.");
@@ -181,32 +322,22 @@ public class GenerarComprobantePresupuesto extends Operation {
 		return data;
 	}
 
+	/**
+	 * Retorna la fecha actual en un formato especificado.
+	 */
 	private String obtenerFechaActual() {
         Calendar c1 = GregorianCalendar.getInstance();
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMMM-yyyy");
-	    return sdf.format(c1.getTime());
+	    String fechaConGuiones = sdf.format(c1.getTime());
+	    String[] arregloFecha = fechaConGuiones.split("-");
+	    return arregloFecha[0]+" de "+ arregloFecha[1]+" de "+arregloFecha[2];
 	}
 
+	/**
+	 * Retorna el data source para enviar al reporte
+	 */
 	private JRDataSource createDataSource() {
-		List<ItemResumen> data = new ArrayList<ItemResumen>();
-		
-		List<PresupuestoDet> detalles = p.getDetalles();
-
-		int nroItem=1;
-		for (PresupuestoDet presupuestoDet : detalles) {
-			data.add(new ItemResumen());
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-//			data.add(new ItemResumen("Item "+nroItem,presupuestoDet.getDescripcion(), "uutgut", String.valueOf(presupuestoDet.getPrecio())));
-		}
-
-		return new JRBeanCollectionDataSource(data);
-
+		return new JREmptyDataSource(1);
 	}
 
 

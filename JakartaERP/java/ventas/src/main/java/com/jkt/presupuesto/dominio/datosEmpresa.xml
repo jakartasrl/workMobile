@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!DOCTYPE elementos [
+	<!ELEMENT elementos			(elemento*)>
+	<!ELEMENT elemento			EMPTY>
+
+	<!ATTLIST elemento	nombre		CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	provincia	CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	direccion	CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	email		CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	paginaWeb	CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	fax			CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	telefono	CDATA 	#REQUIRED> 
+  
+]>
+
+<elementos>
+
+	<elemento 
+		nombre="LOS CONCE SA" 
+		provincia="Buenos Aires" 
+		direccion="El Paternón 2399 (B1830DIM) - 9 de Abril - E. Echeverría. Buenos Aires - Argentina"
+		email="info@losconce.com.ar" 
+		paginaWeb="www.losconce.com.ar" 
+		fax="(54-11) 4693-2525" 
+		telefono="(54-11) 4693-2220"
+	/>
+
+</elementos>
