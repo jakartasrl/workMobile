@@ -9,7 +9,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 
 /**
- * <p>Operacion generica para realizar diferentes validaciones.</p>
+ * <p>Operación generica para realizar diferentes validaciones.</p>
  * 
  * @see ValidarExistencia
  * @see ValidarExistenciaConMaestro
@@ -23,24 +23,36 @@ public abstract class Validar extends Operation{
 	
 	/**
 	 * <p>Campo por el cual es filtrada la entidad recibida.</p>
-	 * <p>El campo principal de filtro en esta operaciÃ³n serÃ¡ el cÃ³digo.</p>
+	 * <p>El campo principal de filtro en esta operación será el código.</p>
 	 */
-	protected static final String CAMPO_DE_FILTRO = "codigo";
 
 	protected static final String ENTIDAD_FIELD = "entidad".toUpperCase();
-	protected static final String CODIGO_FIELD = "codigo".toUpperCase();
+	protected static final String CAMPO_VALIDADO_FIELD = "campoValidado".toUpperCase();
 	protected static final Object OID_MAESTRO_FIELD = "oidentidadmaestra".toUpperCase();
 	protected static final Object ENTIDAD_MAESTRO_FIELD = "entidadmaestra".toUpperCase();
 
-
+	protected String campoAFiltrar;
+	protected String valorAFiltrar;
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		
+
 		validacionesDeEntrada(aParams);
+
+		recuperarValor(aParams);
 		
 		PersistentEntity objectRetrieved = manejarFiltros(aParams);
-		manejoDeExistencia(objectRetrieved,(String) aParams.get(ENTIDAD_FIELD), (String) aParams.get(CODIGO_FIELD));
+		manejoDeExistencia(objectRetrieved,(String) aParams.get(ENTIDAD_FIELD), valorAFiltrar);
 		
+	}
+
+	/**
+	 * Recupera de los parametros en formato mapa, los datos necesarios para el filtro
+	 * 
+	 */
+	private void recuperarValor(Map<String, Object> aParams) {
+		campoAFiltrar = (String) aParams.get(CAMPO_VALIDADO_FIELD);
+		valorAFiltrar = (String) aParams.get(campoAFiltrar.toUpperCase());
 	}
 
 	/**
@@ -53,7 +65,7 @@ public abstract class Validar extends Operation{
 	private void validacionesDeEntrada(Map<String, Object> aParams)throws JakartaException {
 		verificarMapaVacio(aParams);
 		validarEntrada(aParams.get(ENTIDAD_FIELD));
-		validarEntrada(aParams.get(CODIGO_FIELD));
+		validarEntrada(aParams.get(CAMPO_VALIDADO_FIELD));
 	}
 	
 	/*
@@ -65,19 +77,18 @@ public abstract class Validar extends Operation{
 
 	
 	/**
-	 * <p>Maneja un filtro avanzado, filtrando una entidad por codigo, y por el identificador de su dueÃ±o en la relacion.</p>
-	 * <p>(El dueÃ±o de una provincia es Pais, el dueÃ±o de un detalle de condicion de pago, es su correspondiente condicon de pago)</p>
+	 * <p>Maneja un filtro avanzado, filtrando una entidad por codigo, y por el identificador de su dueño en la relacion.</p>
+	 * <p>(El dueño de una provincia es Pais, el dueño de un detalle de condicion de pago, es su correspondiente condición de pago)</p>
 	 * 
 	 */
 	protected PersistentEntity manejarFiltrosComplejos(Map<String, Object> aParams) throws ClassNotFoundException, JakartaException {
-		String codigo=(String) aParams.get(CODIGO_FIELD);
 		String className=(String) aParams.get(ENTIDAD_FIELD);
 		String oidMaestro=(String) aParams.get(OID_MAESTRO_FIELD);
 		String classNameMaestro=(String) aParams.get(ENTIDAD_MAESTRO_FIELD);
 		
 		
 		Map<String, Object> filtros = new HashMap<String, Object>();
-		filtros.put("codigo", codigo);
+		filtros.put(campoAFiltrar, valorAFiltrar);
 		filtros.put(classNameMaestro.concat(".id"), Long.valueOf(oidMaestro));
 		
 		PersistentEntity objectRetrieved = serviceRepository.getByProperties(Class.forName(this.getRepositorioClases().getClass(className)), filtros);
@@ -94,11 +105,10 @@ public abstract class Validar extends Operation{
 		/*
 		 * Recupera de los parametros el codigo y el nombre de la entidad
 		 */
-		String codigo=(String) aParams.get(CODIGO_FIELD);
 		String className=(String) aParams.get(ENTIDAD_FIELD);
 		
 		//Realiza la consulta a la base
-		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(this.getRepositorioClases().getClass(className)), CAMPO_DE_FILTRO, codigo);
+		PersistentEntity objectRetrieved = serviceRepository.getUniqueByProperty(Class.forName(this.getRepositorioClases().getClass(className)), campoAFiltrar, valorAFiltrar);
 		return objectRetrieved;
 	}
 	
@@ -123,7 +133,7 @@ public abstract class Validar extends Operation{
 	
 	/**
 	 * 
-	 * Para darle un manejo diferente a la entidad buscada. Si la rutina buscada es la inexistencia, se ejecutarÃ¡ este metodo.
+	 * Para darle un manejo diferente a la entidad buscada. Si la rutina buscada es la inexistencia, se ejecutará este metodo.
 	 * 
 	 */
 	protected void manejarInexistencia(PersistentEntity entity, String className, String codigo) throws ValidacionDeNegocioException {

@@ -29,7 +29,6 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 	@Override
 	protected PersistentEntity manejarFiltros(Map<String, Object> aParams) throws Exception {
 		
-		String valor=(String) aParams.get(CODIGO_FIELD);
 		String identificadorDeCaracteristica=(String) aParams.get(OID_MAESTRO_FIELD);
 
 		PersistentEntity objectRetrieved = obtener(CaracteristicaProducto.class, identificadorDeCaracteristica);
@@ -41,7 +40,7 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 			List<ValoresTablas> valores = caracteristicaProducto.getTabla().getValoresDeTabla();
 			boolean existeElValor=false;
 			for (ValoresTablas valorTabla : valores) {
-				if (valorTabla.getCodigo().equals(valor)) {
+				if (valorTabla.getCodigo().equals(valorAFiltrar)) {
 					//notificar a la salida...
 					notificarObjeto("resultado", valorTabla);
 					existeElValor=true;
@@ -50,26 +49,26 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 				}
 			}
 			if (!existeElValor) {
-				throw new JakartaException(String.format("No existe el valor '%s' en la tabla de valores de la caracteristica %s(%s).", valor, caracteristicaProducto.getCodigo(), caracteristicaProducto.getDescripcion()));
+				throw new JakartaException(String.format("No existe el valor '%s' en la tabla de valores de la caracteristica %s(%s).", valorAFiltrar, caracteristicaProducto.getCodigo(), caracteristicaProducto.getDescripcion()));
 			}
 		}else if (TiposDeDato.STRING_TYPE.equals(tipoDato)) {
-			if (valor.trim().isEmpty()) {
+			if (valorAFiltrar.trim().isEmpty()) {
 				throw new JakartaException("El valor no debe ser vacio.");
 			}
 		}else if (TiposDeDato.INTEGER_TYPE.equals(tipoDato)) {
 			try{
-				Integer.valueOf(valor);
+				Integer.valueOf(valorAFiltrar);
 			}catch(NumberFormatException e){
 				throw new JakartaException("El valor debe ser un entero.");
 			}
 		}else if (TiposDeDato.DOUBLE_TYPE.equals(tipoDato)) {
 			try{
-				Double.valueOf(valor);
+				Double.valueOf(valorAFiltrar);
 			}catch(NumberFormatException e){
 				throw new JakartaException("El valor debe ser de tipo 'double'.");
 			}
 		}else if (TiposDeDato.BOOLEAN_TYPE.equals(tipoDato)) {
-			if (valor.toLowerCase().equals("true") || valor.toLowerCase().equals("false")) {
+			if (valorAFiltrar.toLowerCase().equals("true") || valorAFiltrar.toLowerCase().equals("false")) {
 				//ok
 			}else{
 				throw new JakartaException("El valor booleano debe ser 'true' o 'false'.");
@@ -81,13 +80,13 @@ public class ValidarValoresDeTablaDeCaracteristicas extends Validar {
 
 	@Override
 	protected void manejoDeExistencia(PersistentEntity entity,String className, String codigo) throws ValidacionDeNegocioException {
-		//No hacer nada acï¿½.
+		//No hacer nada aquí
 		
 		/*
-		 * No se hace nada acï¿½, xq el flujo normal de las operaciones de validar son, encontrar la entidad y luego manejarla por existencia o inexistencia.
+		 * No se hace nada acá, xq el flujo normal de las operaciones de validar son, encontrar la entidad y luego manejarla por existencia o inexistencia.
 		 * Como esta operacion tiene un manejo particular (si es primitivo no mostrar, pero si es tabla mostrar en la salida) se decidio pisar el metodo que maneja
 		 * existencia, y notificar en el metodo manejar filtros.
-		 * Si en algun momento se da otro caso particular, se verï¿½ la forma de hacer algo mas generico, como algun flag para mostrar o no datos en la salida, sea primitivo o no.
+		 * Si en algun momento se da otro caso particular, se verá la forma de hacer algo mas generico, como algun flag para mostrar o no datos en la salida, sea primitivo o no.
 		 * Ver la clase Validar para entender mas de xq se pisa este metodo.
 		 * 
 		 * Basicamente el problema es que los metodos de manejarExistencia/Inexistencia notifican objetos si no son nulo.
