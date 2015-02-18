@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.1.final using JasperReports Library version 6.0.0  -->
-<!-- 2015-02-13T17:38:26 -->
+<!-- 2015-02-18T09:24:12 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -88,11 +88,11 @@
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{items})]]></dataSourceExpression>
 					</datasetRun>
 					<jr:listContents height="104" width="573">
-						<rectangle>
-							<reportElement x="18" y="8" width="541" height="91" backcolor="#EDEBEB" uuid="a3d59b64-f071-4ff1-a788-4c1dec9cfe6b"/>
-						</rectangle>
 						<textField>
 							<reportElement x="20" y="70" width="540" height="30" uuid="0d1885a8-a274-47f4-a0b4-0daaff62319b"/>
+							<box>
+								<bottomPen lineWidth="0.2"/>
+							</box>
 							<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 						</textField>
 						<textField>
@@ -101,6 +101,12 @@
 						</textField>
 						<textField>
 							<reportElement x="19" y="10" width="131" height="30" uuid="c0456409-7ef3-45a3-9ecd-d24296f31ca2"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+							</box>
 							<textElement>
 								<font isBold="true" isUnderline="true"/>
 							</textElement>
@@ -108,6 +114,12 @@
 						</textField>
 						<textField>
 							<reportElement x="150" y="10" width="410" height="30" uuid="16a8d9fd-0860-4175-9ca2-9984b64163bc"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
 							<textElement>
 								<font isBold="true" isUnderline="true"/>
 							</textElement>

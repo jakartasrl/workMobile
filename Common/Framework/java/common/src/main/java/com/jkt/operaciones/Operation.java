@@ -36,7 +36,7 @@ import com.jkt.xmlreader.ElementTransformer;
  * 
  * Cada evento del lado del cliente que tiene una accion en el
  * servidor, genera una instancia de una operacion.<br>
- * Estas est√°n configuradas en la aplicacion. Cada operacion que genera la
+ * Estas est·n configuradas en la aplicacion. Cada operacion que genera la
  * metodologia invoca al metodo execute().<br>
  * Dentro de este metodo (abstracto en esta clase), esta la logica de la
  * resolucion del evento. 
