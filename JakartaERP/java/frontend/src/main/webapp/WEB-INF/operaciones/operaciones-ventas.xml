@@ -839,7 +839,6 @@
 			<campoSalida value="nro_cotiz" target="nro" />
 			
 			<campoSalida value="fecha" target="fecha" />
-			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
 
 			<campoSalida value="oid_clie" target="clienteSucursal.cliente.id" />
 			<campoSalida value="cod_clie" target="clienteSucursal.cliente.codigo" />
@@ -889,26 +888,28 @@
 	
 	<operacion name="TraerProductoConPrecio" clase="com.jkt.presupuesto.operaciones.TraerProductoConPrecio">
 	
-		<output name="precio" tableName="mtPrecios">
-			<campoSalida value="oid" target="id" />
-			<campoSalida value="oid_art" target="producto.id" />
-			<campoSalida value="cod_art" target="producto.codigo" />
-			<campoSalida value="des_art" target="producto.descripcion" />
-			<campoSalida value="precio" target="precio" />
+		<output name="precio" tableName="mtPrecioMaterial">
+			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_mon" target="" />
+			<campoSalida value="importe" target="precio" />
+
+<!-- 			<campoSalida value="oid_art" target="producto.id" /> -->
+<!-- 			<campoSalida value="cod_art" target="producto.codigo" /> -->
+<!-- 			<campoSalida value="des_art" target="producto.descripcion" /> -->
 		</output>
 		
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="-"></form>
+			<form name="FNVen0006"></form>
 		</forms>
 
 	</operacion>
 	
-		<operacion name="TraerDeterminacionesConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
+	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
 	
-		<output name="precio" tableName="mtPrecios">
-			<campoSalida value="oid" target="id" />
+		<output name="precio" tableName="mtDeterLaboQuim">
+			<campoSalida value="oid_item" target="id" />
 			
 			<!-- det es determinacion, no un detalle  -->
 			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
@@ -920,7 +921,35 @@
 			<campoSalida value="cod_ana" target="determinacion.codigoAnalisis" />
 			<campoSalida value="des_ana" target="determinacion.descripcionAnalisis" />
 
-			<campoSalida value="precio" target="precio" />
+			<campoSalida value="importe" target="precio" />
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="-"></form>
+		</forms>
+
+	</operacion>
+	
+	<!-- ESTA OPERACION ES IGUAL A LA DE ARRIBA DEL LADO DE JAVA. AUNQUE SE DEVUELVEN LOS DATOS EN TABLAS DIFERENTES -->
+	<operacion name="TraerDeterElecConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
+	
+		<output name="precio" tableName="mtDeterLaboElec">
+			<campoSalida value="oid_item" target="id" />
+			
+			<!-- det es determinacion, no un detalle  -->
+			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
+			
+			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
+			
+			<campoSalida value="cod_ana" target="determinacion.codigoAnalisis" />
+			<campoSalida value="des_ana" target="determinacion.descripcionAnalisis" />
+
+			<campoSalida value="importe" target="precio" />
 			
 		</output>
 		
@@ -999,15 +1028,13 @@
 	</operacion>
 	
 	
-	<!-- 	GUARDAR PRESUPUESTO -->
+	<!-- GUARDAR PRESUPUESTO -->
 	<operacion name="GuardarPresupuesto" clase="com.jkt.operaciones.Guardar">
 	
 		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
 			<campoEntrada>
 			
 <!-- 				MISMA CABECERA QUE UNA COTIZACION -->
-				<campoEntrada name="fecha_vencimiento" clase="Date" metodo="setFechaVencimiento" />
-
 				<campoEntrada name="oid_sucu" clase="com.jkt.erp.varios.ClienteSucursal" metodo="setClienteSucursal" />
 				<campoEntrada name="oid_vend" clase="com.jkt.erp.varios.Vendedor" metodo="setVendedor" />
 				<campoEntrada name="oid_repre" clase="com.jkt.erp.varios.Representante" metodo="setRepresentante" />
@@ -1052,10 +1079,13 @@
 					<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMoneda" />
 				</campoEntrada>
 
+				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid">
+					<campoEntrada name="selec" clase="Boolean" metodo="setIncluidaEnPresupuesto" />
+				</campoEntrada>
 	
-				<campoEntrada name="mtCondComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid"/>
-
-				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid"/>
+				<campoEntrada name="mtCondComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid">
+					<campoEntrada name="selec" clase="Boolean" metodo="setIncluidaEnPresupuesto" />
+				</campoEntrada>
 	
 				<!-- 
 				<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
@@ -1103,7 +1133,6 @@
 			<campoSalida value="des_repre" target="representante.descripcion" />
 			
 			<campoSalida value="referencia" target="referencia" />
-			<campoSalida value="fecha_vencimiento" target="fechaVencimiento" />
 			<campoSalida value="oid_cont_suc" target="contactoReferencia.id" />
 
 		</output>
@@ -1152,15 +1181,17 @@
 		</output>
 		
 		<output name="notas" tableName="mtNotas">
-			<campoSalida value="oid_not" target="id" />
-			<campoSalida value="cod_not" target="codigo" />
-			<campoSalida value="des_not" target="descripcion" />
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descripcion" target="descripcion" />
+			<campoSalida value="selec" target="incluidaEnPresupuesto" />
 		</output>
 		
-		<output name="condicionesComerciales" tableName="mtCondicionesComerciales">
-			<campoSalida value="oid_con_com" target="id" />
-			<campoSalida value="cod_con_com" target="codigo" />
-			<campoSalida value="des_con_com" target="descripcion" />
+		<output name="condicionesComerciales" tableName="mtCondComerciales">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="codigo" target="codigo" />
+			<campoSalida value="descripcion" target="descripcion" />
+			<campoSalida value="selec" target="incluidaEnPresupuesto" />
 		</output>
 
 <!-- 		<output name="archivos" tableName="mtArchivos"> -->
@@ -1183,7 +1214,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
 		
 		<forms>
-			<form name="---"></form>
+			<form name="FNVen0006"></form>
 		</forms>		
 
 	</operacion>
@@ -1200,7 +1231,7 @@ de su ubicacion, y su nombre (ruta y nombre de comprobante) -->
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name=""></form>
+			<form name="FNVen0006"></form>
 		</forms>		
 	</operacion>
 	
