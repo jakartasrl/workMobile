@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.1.final using JasperReports Library version 6.0.0  -->
-<!-- 2015-02-18T09:24:12 -->
+<!-- 2015-02-18T12:15:20 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -55,6 +55,9 @@
 	<parameter name="usuario" class="java.lang.String"/>
 	<parameter name="titulo" class="java.lang.String"/>
 	<parameter name="descripcionPresupuesto" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="iso" class="java.lang.String"/>
+	<parameter name="firma" class="java.lang.String"/>
 	<title>
 		<band height="11" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
@@ -64,7 +67,7 @@
 		<band height="50" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="130" height="40" uuid="e4b4430b-9859-4197-89b7-cf6107299df4"/>
-				<imageExpression><![CDATA["C:/Users/ssuarez.JAKARTA/Downloads/logo-los-conce.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="340" y="0" width="232" height="20" uuid="4b7fdd27-2681-41f7-b564-b1171ef9b5b2"/>
@@ -93,10 +96,16 @@
 							<box>
 								<bottomPen lineWidth="0.2"/>
 							</box>
+							<textElement>
+								<font fontName="Verdana" isItalic="true"/>
+							</textElement>
 							<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 						</textField>
 						<textField>
 							<reportElement x="20" y="40" width="540" height="30" uuid="17e20dc1-274c-4e60-adfd-420762e064cd"/>
+							<textElement>
+								<font fontName="Verdana" isItalic="true"/>
+							</textElement>
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<textField>
@@ -104,11 +113,11 @@
 							<box>
 								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
-								<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement>
-								<font isBold="true" isUnderline="true"/>
+								<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA["# Item "+$F{numero}]]></textFieldExpression>
 						</textField>
@@ -117,11 +126,11 @@
 							<box>
 								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement>
-								<font isBold="true" isUnderline="true"/>
+								<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{referencia}]]></textFieldExpression>
 						</textField>
@@ -212,7 +221,7 @@
 			</textField>
 			<image>
 				<reportElement x="20" y="803" width="156" height="50" uuid="bef9496b-5f0e-45cc-945e-d952072be404"/>
-				<imageExpression><![CDATA["C:/Users/ssuarez.JAKARTA/Desktop/firma.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{firma}]]></imageExpression>
 			</image>
 			<line>
 				<reportElement x="20" y="674" width="541" height="1" uuid="63531b2b-98e4-43a8-a2d6-5b2a98e23a99"/>
@@ -304,7 +313,7 @@
 			</rectangle>
 			<image>
 				<reportElement x="490" y="0" width="80" height="92" uuid="c500282f-9408-4637-bc9a-5ffb96e19f69"/>
-				<imageExpression><![CDATA["C:/Users/ssuarez.JAKARTA/Downloads/ISO_ABS_no.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{iso}]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="20" y="4" width="100" height="20" uuid="3e81c68c-bd4f-45b6-b0cf-ea53e2a191b3">

@@ -1,5 +1,6 @@
 package com.jkt.presupuesto.operaciones;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,21 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.ServletContext;
-
-import org.apache.commons.digester3.Digester;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.xml.sax.SAXException;
-
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 
+import org.apache.commons.digester3.Digester;
+import org.xml.sax.SAXException;
+
 import com.jkt.dominio.Configuracion;
-import com.jkt.dominio.menu.Menu;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.operaciones.Operation;
 import com.jkt.presupuesto.dominio.CondicionComercial;
@@ -36,11 +32,7 @@ import com.jkt.presupuesto.dominio.ItemResumen;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
-import com.jkt.request.EventBusiness;
-import com.jkt.util.Entry;
 import com.jkt.varios.dominio.Especificacion;
-import com.jkt.xmlreader.XMLCampo;
-import com.jkt.xmlreader.XMLEntity;
 
 /**
  * Operacion que genera un comprobante en PDF para un presupuesto dado.
@@ -56,6 +48,8 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private static final String MENSAJE_NOTAS_VACIAS = "No existen notas para el presupuesto.";
 	private static final String WRITER_ARCHIVO = "comprobante";
 	private static final String KEY_RUTA_COMPARTIDA = "rutaCompartida";
+	private static final String RUTA_IMAGENES = "imagenes/";
+	private static final String RUTA_PRESUPUESTO = "presupuestos/";
 	private static final String EXTENSION = ".pdf";
 	private static final String OID_PRESUPUESTO = "oid".toUpperCase();
 
@@ -64,6 +58,24 @@ public class GenerarComprobantePresupuesto extends Operation {
 	
 	private DatosEmpresa datosEmpresa;
 
+	
+	/**
+	 * Valida que el directorio indicado por parametro exista.
+	 * <p>Si el directorio no existe, se levanta una excepcion.</p>
+	 * 
+	 */
+	protected void validarDirectorio(String nombreDirectorio) throws JakartaException{
+		String sFichero = rutaCompartida.concat(nombreDirectorio);
+		File fichero = new File(sFichero);
+		if (!fichero.exists()){
+			throw new JakartaException("Directorio necesario: "+sFichero);
+		}
+		
+		if (!fichero.isDirectory()) {
+			throw new JakartaException("Directorio necesario: "+sFichero);
+		}
+	}
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
@@ -74,6 +86,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 		validarEntrada(aParams.get(OID_PRESUPUESTO));
 		p = (Presupuesto) obtener(Presupuesto.class, (String)aParams.get(OID_PRESUPUESTO));
 
+		
 		/*
 		 * Recupero la ruta compartida para guardar el archivo
 		 */
@@ -82,6 +95,9 @@ public class GenerarComprobantePresupuesto extends Operation {
 		rutaCompartida = configuracionRuta.getValorCadena();
 		
 		if (rutaCompartida.endsWith("/")) {
+
+			validarDirectorio(RUTA_PRESUPUESTO);
+			validarDirectorio(RUTA_IMAGENES);
 			
 			obtenerDatosEmpresa();
 			
@@ -166,8 +182,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			parameters.put("pais", p.getClienteSucursal().getDireccion().getPais().getDescripcion());
 
-			String presentacion = "De Nuestra Consideracion.\nDe acuerdo con lo solicitado por Ustedes, tenemos el agrado de cotizarles las siguientes tareas a realizar en nuestro establecimiento:";
-			parameters.put("presentacion", presentacion);
+			parameters.put("presentacion", datosEmpresa.getPresentacion());
 
 			parameters.put("contactoRef", p.getContactoReferencia().getApellidoYNombre());
 			
@@ -193,25 +208,47 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			parameters.put("usuario", "Daniel Bokhdjalian");
 			parameters.put("titulo", "Gerente Comercial");
-			parameters.put("saludos", "Sin otro particular saludamos atentamente.");
+			parameters.put("saludos", datosEmpresa.getSaludo());
+
+			
+			asignarImagenes(parameters);
+			asignarImageneFirma(parameters);
+			
 
 			report.setParameters(parameters);
 			nombreArchivo = generarNombreDeArchivo();
 
-			OutputStream outputStream = new FileOutputStream(rutaCompartida.concat(nombreArchivo).concat(EXTENSION));
+			OutputStream outputStream = new FileOutputStream(rutaCompartida.concat(RUTA_PRESUPUESTO).concat(nombreArchivo).concat(EXTENSION));
 
 			report.toPdf(outputStream);
 			outputStream.close();
 
 			Especificacion especificacion = new Especificacion();
 			especificacion.setNombre(nombreArchivo.concat(EXTENSION));
-			especificacion.setRuta(rutaCompartida);
+			especificacion.setRuta(rutaCompartida.concat(RUTA_PRESUPUESTO));
 			return especificacion;
 		
 		} catch (DRException e) {
 			e.printStackTrace();
 			throw new JakartaException(MENSAJE_ERROR_CREACION_COMPROBANTE);
 		}
+	}
+
+	/**
+	 * Asigna una firma customizada.
+	 */
+	private void asignarImageneFirma(Map<String, Object> parameters) {
+//		parameters.put("firma", rutaCompartida.concat(RUTA_IMAGENES).concat(datosEmpresa.getFirma()));
+	}
+
+	/**
+	 * Asigna los parametros para las imagenes.
+	 * 
+	 */
+	private void asignarImagenes(Map<String, Object> parameters) {
+		parameters.put("logo", rutaCompartida.concat(RUTA_IMAGENES).concat(datosEmpresa.getLogo()));
+		parameters.put("iso", rutaCompartida.concat(RUTA_IMAGENES).concat(datosEmpresa.getIso()));
+		parameters.put("firma", rutaCompartida.concat(RUTA_IMAGENES).concat(datosEmpresa.getFirma()));
 	}
 
 	private void validarDatosEmpresa() throws JakartaException {
