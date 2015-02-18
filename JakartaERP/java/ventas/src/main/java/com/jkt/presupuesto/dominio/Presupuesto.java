@@ -65,6 +65,8 @@ public class Presupuesto extends ComprobanteVenta {
 	 * Helper methods.
 	 */
 	public void agregarNota(Nota n){
+
+		// Aca se resuelve cuáles notas se actualizan o se insertan 
 		if (!notas.contains(n)) {
 			notas.add(n);
 		}

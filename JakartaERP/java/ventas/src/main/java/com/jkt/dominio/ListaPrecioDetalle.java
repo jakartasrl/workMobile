@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import com.jkt.erp.articulos.Producto;
 import com.jkt.laboratorio.dominio.Determinacion;
+import com.jkt.varios.dominio.Moneda;
 
 /**
  * <p>Detalle de la lista de precio.</p>
@@ -15,6 +16,9 @@ public class ListaPrecioDetalle extends PersistentEntity {
 
 	@NotNull(message="No puede existir un detalle de lista de precio sin la lista de precio propiamente dicha.")
 	private ListaPrecios listaPrecios;
+	
+	// campo transiente
+	private Moneda moneda;
 	
 	private double precio;
 	
