@@ -58,24 +58,6 @@ public class GenerarComprobantePresupuesto extends Operation {
 	
 	private DatosEmpresa datosEmpresa;
 
-	
-	/**
-	 * Valida que el directorio indicado por parametro exista.
-	 * <p>Si el directorio no existe, se levanta una excepcion.</p>
-	 * 
-	 */
-	protected void validarDirectorio(String nombreDirectorio) throws JakartaException{
-		String sFichero = rutaCompartida.concat(nombreDirectorio);
-		File fichero = new File(sFichero);
-		if (!fichero.exists()){
-			throw new JakartaException("Directorio necesario: "+sFichero);
-		}
-		
-		if (!fichero.isDirectory()) {
-			throw new JakartaException("Directorio necesario: "+sFichero);
-		}
-	}
-	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
@@ -110,6 +92,25 @@ public class GenerarComprobantePresupuesto extends Operation {
 		
 		
 	}
+	
+	
+	/**
+	 * Valida que el directorio indicado por parametro exista.
+	 * <p>Si el directorio no existe, se levanta una excepcion.</p>
+	 * 
+	 */
+	protected void validarDirectorio(String nombreDirectorio) throws JakartaException{
+		String sFichero = rutaCompartida.concat(nombreDirectorio);
+		File fichero = new File(sFichero);
+		if (!fichero.exists()){
+			throw new JakartaException("Directorio necesario: "+sFichero);
+		}
+		
+		if (!fichero.isDirectory()) {
+			throw new JakartaException("Directorio necesario: "+sFichero);
+		}
+	}
+	
 	
 	/**
 	 * 
