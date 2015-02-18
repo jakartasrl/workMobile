@@ -64,12 +64,28 @@ public class Presupuesto extends ComprobanteVenta {
 	/*
 	 * Helper methods.
 	 */
+	/**
+	 * Resuelve cuáles notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
+	 * 
+	 */
 	public void agregarNota(Nota n){
 
-		// Aca se resuelve cuáles notas se actualizan o se insertan 
-		if (!notas.contains(n)) {
-			notas.add(n);
+		if (n.isIncluida()) {
+			if (!notas.contains(n)) {
+				//Ya no existe en la lista y debe ser incluida, se agrega
+				notas.add(n);
+			}else{
+				//Ya existia,no se hace nada.
+			}
+		}else{
+			if (!notas.contains(n)) {
+				//Si no esta incluida y estaba en la lista, se elimina.
+				notas.remove(n);
+			}else{
+				//Ya no existia,no se hace nada.
+			}
 		}
+		
 	}
 	public void agregarCondicionComercial(CondicionComercial condicion){
 		if (!condicionesComerciales.contains(condicion)) {

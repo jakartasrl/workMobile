@@ -3,6 +3,8 @@ package com.jkt.presupuesto.operaciones;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
 import com.jkt.presupuesto.dominio.Nota;
@@ -13,6 +15,8 @@ import com.jkt.presupuesto.dominio.PresupuestoDet;
  * Recupera un presupuesto y todas sus relaciones.
  * 
  * @author Leonel Suarez - Jakarta SRL
+ * @author Santiago Braceras - Jakarta SRL
+ * 
  */
 public class TraerPresupuesto extends Operation {
 
@@ -44,12 +48,18 @@ public class TraerPresupuesto extends Operation {
 			// Si la Nota esta activa la notifico
 			if (nota.isActivo()) {
 				Nota nuevaNota = new Nota();
-				nuevaNota.setId(nota.getId());
-				nuevaNota.setCodigo(nota.getCodigo());
-				nuevaNota.setDescripcion(nota.getDescripcion());
+				
+				BeanUtils.copyProperties(nuevaNota, nota); //Limpieza de codigo, en este caso no llama la atencion setear mano a mano 3 campos, pero si son 10 resulta molesto.
+				
+//				nuevaNota.setId(nota.getId());
+//				nuevaNota.setCodigo(nota.getCodigo());
+//				nuevaNota.setDescripcion(nota.getDescripcion());
+	
 				// Ahora, si ya estaba guardada en el presupuesto actual, entonces la mando 'chequeada'
 				if (notasDelPresupuesto.contains(nota)) {
-					nuevaNota.setIncluidaEnPresupuesto(true);
+					//cambio de nombre de variables!
+//					nuevaNota.setIncluidaEnPresupuesto(true); 
+					nuevaNota.setIncluida(true);
 				}
 				notificarObjeto(WRITER_NOTAS, nuevaNota);
 			}
