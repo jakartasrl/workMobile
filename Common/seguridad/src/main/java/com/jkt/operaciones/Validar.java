@@ -1,9 +1,12 @@
 package com.jkt.operaciones;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.jkt.dominio.Container;
+import com.jkt.dominio.Filtro;
+import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
@@ -75,24 +78,56 @@ public abstract class Validar extends Operation{
 	protected abstract PersistentEntity manejarFiltros(Map<String, Object> aParams) throws ClassNotFoundException, JakartaException, Exception;
 	protected abstract void manejoDeExistencia(PersistentEntity entity,String className, String codigo)throws ValidacionDeNegocioException;
 
-	
 	/**
 	 * <p>Maneja un filtro avanzado, filtrando una entidad por codigo, y por el identificador de su dueño en la relacion.</p>
 	 * <p>(El dueño de una provincia es Pais, el dueño de un detalle de condicion de pago, es su correspondiente condición de pago)</p>
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	protected PersistentEntity manejarFiltrosComplejos(Map<String, Object> aParams) throws ClassNotFoundException, JakartaException {
-		String className=(String) aParams.get(ENTIDAD_FIELD);
+		String nombreEntidad=(String) aParams.get(ENTIDAD_FIELD);
 		String oidMaestro=(String) aParams.get(OID_MAESTRO_FIELD);
-		String classNameMaestro=(String) aParams.get(ENTIDAD_MAESTRO_FIELD);
+		
+		Class<?> clazz = null;
+		Object newInstance = null;
+		
+		try {
+			clazz = Class.forName(getRepositorioClases().getClass(nombreEntidad));
+			newInstance = clazz.newInstance();
+			
+			if (!IDetalle.class.isAssignableFrom(clazz)) {
+				throw new JakartaException(String.format("La entidad %s no es un detalle de la relacion maestro-detalle.", clazz.getSimpleName()));
+			}
+			
+		} catch (InstantiationException e) {
+			levantarExcepcion();
+		} catch (IllegalAccessException e) {
+			levantarExcepcion();
+		} catch (ClassNotFoundException e) {
+			levantarExcepcion();
+		}
 		
 		
-		Map<String, Object> filtros = new HashMap<String, Object>();
-		filtros.put(campoAFiltrar, valorAFiltrar);
-		filtros.put(classNameMaestro.concat(".id"), Long.valueOf(oidMaestro));
+		Filtro filtroActivo = crearFiltro("activo","true","igual","boolean");
+		Filtro filtroEntidad = crearFiltro(campoAFiltrar,valorAFiltrar,"igual","string");
+
+		IDetalle detalle=(IDetalle) newInstance;
+		Filtro filtroMaestro = crearFiltro(detalle.getNombreDeMaestro().concat(".id"),oidMaestro,"igual","integer");
 		
-		PersistentEntity objectRetrieved = serviceRepository.getByProperties(Class.forName(this.getRepositorioClases().getClass(className)), filtros);
-		return objectRetrieved;
+
+		/*
+		 * Por ahora esto servirá, pero es primordial un refactor cuando se pueda TODO FIXME
+		 */
+		List<PersistentEntity> results = serviceRepository.getByProperties(clazz, Arrays.asList(filtroActivo,filtroMaestro, filtroEntidad));
+		if (results.size()>1) {
+			throw new JakartaException("Existe mas de una entidad para el filtro solicitado, esto es una inconsistencia.");
+		}
+		
+		if (results.isEmpty()) {
+			return null;
+		}else{
+			return results.get(0);
+		}
 		
 	}
 	
@@ -141,5 +176,29 @@ public abstract class Validar extends Operation{
 			throw new ValidacionDeNegocioException("Codigo existente.");
 		}
 	}
+	
+	
+	/*
+	 * Helper methods para levantar excepciones y para crear filtros rapidamente.
+	 * 
+	 */
+	
+	
+	
+	private void levantarExcepcion() throws JakartaException {
+		throw new JakartaException("Ocurrió un error al intentar recuperar la clase solicitada.");		
+	}
+	
+	protected Filtro crearFiltro(String nombre, String valor, String condicion,String tipo) {
+		Filtro filtro = new Filtro();
+		
+		filtro.setCondicion(condicion);
+		filtro.setNombre(nombre);
+		filtro.setValor(valor);
+		filtro.setTipoDeDato(tipo);
+		
+		return filtro;
+	}
+
 	
 }

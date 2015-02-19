@@ -1185,14 +1185,14 @@
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="codigo" target="codigo" />
 			<campoSalida value="descripcion" target="descripcion" />
-			<campoSalida value="selec" target="incluidaEnPresupuesto" />
+			<campoSalida value="selec" target="isIncluida" />
 		</output>
 		
 		<output name="condicionesComerciales" tableName="mtCondComerciales">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="codigo" target="codigo" />
 			<campoSalida value="descripcion" target="descripcion" />
-			<campoSalida value="selec" target="incluidaEnPresupuesto" />
+			<campoSalida value="selec" target="isIncluida" />
 		</output>
 
 <!-- 		<output name="archivos" tableName="mtArchivos"> -->

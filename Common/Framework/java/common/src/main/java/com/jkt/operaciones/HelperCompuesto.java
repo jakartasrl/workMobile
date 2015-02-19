@@ -58,7 +58,7 @@ public class HelperCompuesto extends Helper {
 	}
 
 	private void levantarExcepcion() throws JakartaException {
-		throw new JakartaException("OcurriÃ³ un error al intentar recuperar la clase solicitada.");		
+		throw new JakartaException("Ocurrió un error al intentar recuperar la clase solicitada.");		
 	}
 	
 }

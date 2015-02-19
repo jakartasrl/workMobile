@@ -338,10 +338,10 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			switch (detalle.getTipoDetalle()) {
 			case PresupuestoDet.CHAR_ELECTRICO:
-				descripcion=String.format("Determinación Laboratorio Eléctrico - Cantidad: %d - Determinacion: %s - Analisis: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
+				descripcion=String.format("Determinación Laboratorio Eléctrico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
 				break;
 			case PresupuestoDet.CHAR_QUIMICO:
-				descripcion=String.format("Determinación Laboratorio Quimico - Cantidad: %d - Determinacion: %s - Analisis: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
+				descripcion=String.format("Determinación Laboratorio Quimico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
 				break;
 			case PresupuestoDet.CHAR_MATERIAL:
 				descripcion=String.format("%s de %d Producto: %s", detalle.getDescripcion() , cantidad, detalle.getProducto().getDescripcionAbrev());
