@@ -1030,7 +1030,8 @@
 	
 	
 	<!-- GUARDAR PRESUPUESTO -->
-	<operacion name="GuardarPresupuesto" clase="com.jkt.operaciones.Guardar">
+<!-- 	<operacion name="GuardarPresupuesto" clase="com.jkt.operaciones.Guardar"> -->
+	<operacion name="GuardarPresupuesto" clase="com.jkt.presupuesto.operaciones.GuardarPresupuesto">
 	
 		<input name="mtPresupuesto" keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto" fieldID="oid_presu">
 			<campoEntrada>
@@ -1098,6 +1099,13 @@
 				
 			</campoEntrada>
 		</input>
+		
+		<output name="presupuesto" tableName="mtResultado">
+			<campoSalida value="oid_presu" target="id" />
+		</output>
+	
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
+	
 	
 		<forms>
 			<form name="-"></form>
