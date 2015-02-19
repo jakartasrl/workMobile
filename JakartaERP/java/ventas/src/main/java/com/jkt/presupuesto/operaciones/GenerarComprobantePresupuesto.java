@@ -43,6 +43,8 @@ import com.jkt.varios.dominio.Especificacion;
  */
 public class GenerarComprobantePresupuesto extends Operation {
 
+	private static final String LAST_CHARACTER = "/";
+//	private static final String LAST_CARACTER = "\\";
 	private static final String MENSAJE_ERROR_CREACION_COMPROBANTE = "No fue posible crear el comprobante.";
 	private static final String MENSAJE_CONDICIONES_VACIAS = "No existen condiciones comerciales para el presupuesto.";
 	private static final String MENSAJE_NOTAS_VACIAS = "No existen notas para el presupuesto.";
@@ -51,7 +53,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private static final String RUTA_IMAGENES = "imagenes/";
 	private static final String RUTA_PRESUPUESTO = "presupuestos/";
 	private static final String EXTENSION = ".pdf";
-	private static final String OID_PRESUPUESTO = "oid".toUpperCase();
+	private static final String OID_PRESUPUESTO = "oid_presu".toUpperCase();
 
 	private String rutaCompartida;
 	private Presupuesto p;
@@ -76,7 +78,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 		Configuracion configuracionRuta = obtenerConfiguracion(KEY_RUTA_COMPARTIDA);
 		rutaCompartida = configuracionRuta.getValorCadena();
 		
-		if (rutaCompartida.endsWith("/")) {
+		if (rutaCompartida.endsWith(LAST_CHARACTER)) {
 
 			validarDirectorio(RUTA_PRESUPUESTO);
 			validarDirectorio(RUTA_IMAGENES);
@@ -286,7 +288,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 		List<String> condiciones=new ArrayList<String>();
 		
 		for (CondicionComercial condicion: p.getCondicionesComerciales()) {
-			condiciones.add(condicion.getDescripcion());
+			condiciones.add(formatLineFeed(condicion.getDescripcion()));
 		}
 		
 		if (condiciones.isEmpty()) {
@@ -305,7 +307,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 		List<String> notas=new ArrayList<String>();
 		
 		for (Nota nota : p.getNotas()) {
-			notas.add(nota.getDescripcion());
+			notas.add(formatLineFeed(nota.getDescripcion()));
 		}
 		
 		if (notas.isEmpty()) {
@@ -347,7 +349,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 				descripcion=String.format("%s de %d Producto: %s", detalle.getDescripcion() , cantidad, detalle.getProducto().getDescripcionAbrev());
 				break;
 			case PresupuestoDet.CHAR_ITEM:
-				descripcion=detalle.getDescripcion();
+				descripcion=formatLineFeed(detalle.getDescripcion());
 				break;
 			default:
 				throw new JakartaException("No se generará el comprobante debido a que los detalles del presupuesto son inconsistentes en cuanto a su tipo.");
@@ -398,6 +400,10 @@ public class GenerarComprobantePresupuesto extends Operation {
 		String nombreArchivo = Presupuesto.class.getSimpleName().concat("_").concat(date.toString());
 		nombreArchivo = nombreArchivo.replace(" ", "_").replace(":", "_");
 		return nombreArchivo;
+	}
+	
+	private String formatLineFeed(String target){
+		return target.replaceAll("<#e#>","<br/>");
 	}
 
 }

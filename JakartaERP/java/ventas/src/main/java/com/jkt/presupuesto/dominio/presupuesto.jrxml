@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.1.final using JasperReports Library version 6.0.0  -->
-<!-- 2015-02-19T16:24:07 -->
+<!-- 2015-02-19T17:44:20 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -91,7 +91,7 @@
 					<datasetRun subDataset="dataset2" uuid="51526475-ada6-4cdd-939f-6b1fb80dbd77">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{items})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="104" width="573">
+					<jr:listContents height="115" width="573">
 						<textField isStretchWithOverflow="true" pattern="">
 							<reportElement x="20" y="39" width="540" height="28" uuid="0d1885a8-a274-47f4-a0b4-0daaff62319b"/>
 							<box>
@@ -103,19 +103,19 @@
 							<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 						</textField>
 						<textField isStretchWithOverflow="true" pattern="">
-							<reportElement x="20" y="67" width="540" height="31" uuid="17e20dc1-274c-4e60-adfd-420762e064cd">
+							<reportElement x="20" y="67" width="540" height="37" uuid="17e20dc1-274c-4e60-adfd-420762e064cd">
 								<property name="local_mesure_unitheight" value="pixel"/>
 							</reportElement>
 							<box>
 								<bottomPen lineWidth="0.3" lineStyle="Double"/>
 							</box>
-							<textElement>
+							<textElement markup="html">
 								<font fontName="Verdana" isItalic="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<textField>
-							<reportElement x="19" y="10" width="131" height="30" uuid="c0456409-7ef3-45a3-9ecd-d24296f31ca2"/>
+							<reportElement x="19" y="10" width="141" height="30" uuid="c0456409-7ef3-45a3-9ecd-d24296f31ca2"/>
 							<box>
 								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -123,12 +123,12 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement>
-								<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
+								<font fontName="Arial" size="12" isBold="true" isUnderline="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA["# Item "+$F{numero}]]></textFieldExpression>
 						</textField>
 						<textField isBlankWhenNull="true">
-							<reportElement x="150" y="10" width="410" height="30" uuid="16a8d9fd-0860-4175-9ca2-9984b64163bc"/>
+							<reportElement x="160" y="10" width="410" height="30" uuid="16a8d9fd-0860-4175-9ca2-9984b64163bc"/>
 							<box>
 								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -136,7 +136,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement>
-								<font fontName="Arial" size="11" isBold="true" isUnderline="true"/>
+								<font fontName="Arial" size="12" isBold="true" isUnderline="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{referencia}]]></textFieldExpression>
 						</textField>
@@ -144,7 +144,7 @@
 				</jr:list>
 			</componentElement>
 			<break>
-				<reportElement key="" x="0" y="393" width="565" height="1" uuid="9c03bd57-a92c-458b-9574-20ce5363964d"/>
+				<reportElement key="" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="393" width="565" height="1" uuid="9c03bd57-a92c-458b-9574-20ce5363964d"/>
 			</break>
 			<componentElement>
 				<reportElement x="20" y="445" width="540" height="50" uuid="86e5fbbb-df29-419b-930b-e7e4d2be4429"/>
@@ -155,7 +155,7 @@
 					<jr:listContents height="50" width="540">
 						<textField pattern="">
 							<reportElement x="9" y="6" width="520" height="20" uuid="8e0099ab-78f7-4d3d-9ec6-1fdfc8403635"/>
-							<textElement>
+							<textElement markup="html">
 								<font fontName="Georgia" size="9" isItalic="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA["-"+ $F{_THIS}]]></textFieldExpression>
@@ -189,7 +189,7 @@
 					<jr:listContents height="33" width="540">
 						<textField>
 							<reportElement x="11" y="3" width="491" height="30" uuid="038e10a2-b025-4ada-851a-edc8877dc10d"/>
-							<textElement>
+							<textElement markup="html">
 								<font fontName="Georgia" size="9" isItalic="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA["- "+$F{_THIS}]]></textFieldExpression>
