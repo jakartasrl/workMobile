@@ -150,4 +150,16 @@ public class Presupuesto extends ComprobanteVenta {
 	public boolean isPresupuesto(){
 		return true;
 	}
+	
+	
+	/*
+	 * Helper methods for show data into windows of generic help.
+	 */
+	public String getCodigo(){
+		return this.getNro();
+	}
+	
+	public String getDescripcion(){
+		return this.getReferencia();
+	}
 }

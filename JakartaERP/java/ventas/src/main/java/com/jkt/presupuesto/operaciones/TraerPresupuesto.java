@@ -26,7 +26,7 @@ public class TraerPresupuesto extends Operation {
 	private static final String WRITER_ITEMS = "items";
 	private static final String WRITER_MATERIALES = "materiales";
 	private static final String WRITER_DET_ELEC= "determinacionElectrica";
-	private static final String WRITER_DET_QUIMI= "presupdeterminacionQuimica";
+	private static final String WRITER_DET_QUIMI= "determinacionQuimica";
 	private static final String WRITER_NOTAS= "notas";
 	private static final String WRITER_COND_COMERCIAL= "condicionesComerciales";
 

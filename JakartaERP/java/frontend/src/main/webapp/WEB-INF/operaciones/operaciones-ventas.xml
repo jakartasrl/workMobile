@@ -1165,7 +1165,7 @@
 		<output name="determinacionQuimica" tableName="mtDeterLaboQuim">
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
-			<campoSalida value="oid_det" target="determinacion.codigo" />
+			<campoSalida value="oid_det" target="determinacion.id" />
 			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="importe" target="precio" />
 			<campoSalida value="oid_mon" target="moneda.id" />
@@ -1175,7 +1175,7 @@
 		<output name="determinacionElectrica" tableName="mtDeterLaboElec">
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
-			<campoSalida value="oid_det" target="determinacion.codigo" />
+			<campoSalida value="oid_det" target="determinacion.id" />
 			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="importe" target="precio" />
 			<campoSalida value="oid_mon" target="moneda.id" />
