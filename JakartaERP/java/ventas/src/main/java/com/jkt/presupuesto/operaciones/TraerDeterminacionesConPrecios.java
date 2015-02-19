@@ -67,6 +67,7 @@ public class TraerDeterminacionesConPrecios extends Operation {
 			detalle.getDeterminacion().setDescripcionAnalisis(relacionAnalisisDeterminacion.getAnalisis().getDescripcion());
 			detalle.getDeterminacion().setCodigoAnalisis(relacionAnalisisDeterminacion.getAnalisis().getCodigo());
 
+//			detalle.setId(0L);
 			notificarObjeto(PRECIO_WRITER, detalle);
 			//Guarda el id para luego poder utilizarlo para mostrar las nuevos determinaciones
 			ids.add(detalle.getDeterminacion().getId());
@@ -116,6 +117,7 @@ public class TraerDeterminacionesConPrecios extends Operation {
 					determinacion.setDescripcionAnalisis(relacion.getAnalisis().getDescripcion());
 					
 					detalle.setDeterminacion(determinacion);
+//					detalle.setId(0L);
 					notificarObjeto(PRECIO_WRITER, detalle);
 				}
 			}

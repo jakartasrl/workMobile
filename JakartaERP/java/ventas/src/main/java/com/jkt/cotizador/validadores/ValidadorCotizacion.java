@@ -31,7 +31,7 @@ public class ValidadorCotizacion extends ValidadorComprobantes {
 		try {
 			parametroTipoComportamiento = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", "comportamientoCotizacion");
 			if (parametroTipoComportamiento.getValorNumero()==0) {
-				throw new RuntimeException("El valor del parametro del comportamiento de una cotizaciÃ³n no puede estar vacio.");
+				throw new RuntimeException("El valor del parametro del comportamiento de una cotización no puede estar vacio.");
 			}
 		} catch (JakartaException e) {
 			MostrarError(e);
@@ -108,7 +108,7 @@ public class ValidadorCotizacion extends ValidadorComprobantes {
 	*/
 
 	protected void MostrarError(Exception e)throws ValidacionDeNegocioException {
-		throw new ValidacionDeNegocioException("Error en la validacion de negocio:".concat(e.getMessage()));
+		throw new ValidacionDeNegocioException("Error en la validación de negocio:".concat(e.getMessage()));
 	}
 
 	/*

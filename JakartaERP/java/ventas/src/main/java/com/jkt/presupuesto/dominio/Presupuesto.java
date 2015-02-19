@@ -78,7 +78,7 @@ public class Presupuesto extends ComprobanteVenta {
 				//Ya existia,no se hace nada.
 			}
 		}else{
-			if (!notas.contains(n)) {
+			if (notas.contains(n)) {
 				//Si no esta incluida y estaba en la lista, se elimina.
 				notas.remove(n);
 			}else{
@@ -87,10 +87,24 @@ public class Presupuesto extends ComprobanteVenta {
 		}
 		
 	}
-	public void agregarCondicionComercial(CondicionComercial condicion){
-		if (!condicionesComerciales.contains(condicion)) {
-			condicionesComerciales.add(condicion);
+	public void agregarCondicionComercial(CondicionComercial n){
+		
+		if (n.isIncluida()) {
+			if (!condicionesComerciales.contains(n)) {
+				//Ya no existe en la lista y debe ser incluida, se agrega
+				condicionesComerciales.add(n);
+			}else{
+				//Ya existia,no se hace nada.
+			}
+		}else{
+			if (condicionesComerciales.contains(n)) {
+				//Si no esta incluida y estaba en la lista, se elimina.
+				condicionesComerciales.remove(n);
+			}else{
+				//Ya no existia,no se hace nada.
+			}
 		}
+		
 	}
 	
 	
@@ -133,4 +147,7 @@ public class Presupuesto extends ComprobanteVenta {
 		this.agregarDetalle(det);
 	}
 	
+	public boolean isPresupuesto(){
+		return true;
+	}
 }

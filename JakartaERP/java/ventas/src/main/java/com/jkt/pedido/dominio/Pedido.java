@@ -10,6 +10,9 @@ import com.jkt.dominio.ComprobanteVenta;
  */
 public class Pedido extends ComprobanteVenta {
 	
+	public boolean isPedido(){
+		return true;
+	}
 	
 	
 }

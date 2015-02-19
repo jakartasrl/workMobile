@@ -28,8 +28,8 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle, IDesc
 	@NotNull(message="Esta entidad debe tener un cliente.")
 	private Cliente cliente;
 	
-	@Min(message="El Nro. Sucursal debe ser mayor o igual a cero.", value=0)
-	private int numero;
+//	@Min(message="El Nro. Sucursal debe ser mayor o igual a cero.", value=0)
+	private String numero;
 	
 	@NotBlank(message="La descripcion debe no estar vacia.")
 	private String descripcion;
@@ -77,16 +77,24 @@ public class ClienteSucursal extends PersistentEntity implements IDetalle, IDesc
 		this.domicilioEntregaDeFactura = domicilioEntregaDeFactura;
 	}
 
-	public int getNumero() {
+//	public int getNumero() {
+//		return numero;
+//	}
+//
+//	public void setNumero(int numero) {
+//		this.numero = numero;
+//	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {

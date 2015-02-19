@@ -31,7 +31,7 @@ public class PresupuestoDet extends ComprobanteVentaDet{
 	@NotNull(message="El detalle de presupuesto tiene que tener una moneda obligatoriamente.")
 	private Moneda moneda;
 	
-	@NotEmpty(message="El detalle de presupuesto debe ser de un tipo permitido por el sistema.")
+//	@NotEmpty(message="El detalle de presupuesto debe ser de un tipo permitido por el sistema.")
 	private char tipoDetalle;
 	
 	public char getTipoDetalle() {

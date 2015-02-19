@@ -61,7 +61,23 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 			numeroComprobante=String.format("%s-%s-%s", objetoComportamiento.argumento(), String.valueOf(id), numeroRelacion);
 			
 			//Busca por si existe ya algun comprobante para el mismo comprobante objetivo, s decis, por ejemplo, dos presupuesto para la misma cotizacion
-			String hql="from ComprobanteVentaDet comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
+			String hql="";//="from ComprobanteVentaDet comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
+			
+			if (comprobante.isPresupuesto()) {
+				hql="from Presupuesto comprobante where comprobante.nro like :numero order by comprobante.nro desc";
+			}
+			
+			if (comprobante.isCotizacion()) {
+				hql="from Cotizacion comprobante where comprobante.nro like :numero order by comprobante.nro desc";
+			}
+			
+//			String hql="from Presupuesto comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
+//			String hql="from Cotizacion comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
+
+			if (hql.isEmpty()) {
+				throw new JakartaException("No es posible determinar el tipo de comprobante.");
+			}
+			
 			Query query = this.getServiceRepository().crearHQL(hql);
 			query.setParameter("numero", numeroComprobante);
 			query.setMaxResults(1);

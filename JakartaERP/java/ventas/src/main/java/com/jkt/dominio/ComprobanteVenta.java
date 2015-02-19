@@ -66,5 +66,4 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 		this.representante = representante;
 	}
 
-	
 }

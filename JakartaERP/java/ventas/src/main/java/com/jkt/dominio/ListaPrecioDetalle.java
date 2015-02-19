@@ -14,6 +14,31 @@ import com.jkt.varios.dominio.Moneda;
  */
 public class ListaPrecioDetalle extends PersistentEntity {
 
+
+//	Transiente!!!
+	
+	/**
+	 * Sirve para enviar como item vacio, ya que hay ocaciones en que debe ir en cero para guardar como nueva relacion, por ejemplo, en los items de un presupuesto.
+	 * Si le mando el id de la entidad, se toma como una actualización de la entidad Precio, con lo cual es incorrecto!
+	 */
+	private String fakeId="0";
+	
+	public String getFakeId() {
+		return fakeId;
+	}
+
+	public void setFakeId(String fakeId) {
+		this.fakeId = fakeId;
+	}
+
+	public Moneda getMoneda() {
+		return moneda;
+	}
+
+	public void setMoneda(Moneda moneda) {
+		this.moneda = moneda;
+	}
+
 	@NotNull(message="No puede existir un detalle de lista de precio sin la lista de precio propiamente dicha.")
 	private ListaPrecios listaPrecios;
 	

@@ -12,7 +12,8 @@
 		
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="domicilioEntregaDeFactura" column="DOM_ENTREGA_FACTURA"/>
-		<property name="numero" column="NUMERO" type="integer" />
+		<property name="numero" column="NUMERO" type="string" />
+<!-- 		<property name="numero" column="NUMERO" type="integer" /> -->
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="telefono" column="TELEFONO"/>
 		

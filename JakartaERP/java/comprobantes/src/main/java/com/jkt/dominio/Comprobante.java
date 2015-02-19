@@ -109,4 +109,18 @@ public abstract class Comprobante extends PersistentEntity {
 		this.anulado = anulado;
 	}
 	
+	/*
+	 * Helper methods! estos seran implementados, o pisados mejor dicho en cada hijo que corresponda
+	 */
+	public boolean isPedido(){
+		return false;
+	}
+	public boolean isCotizacion(){
+		return false;
+	}
+	public boolean isPresupuesto(){
+		return false;
+	}
+	
+	
 }

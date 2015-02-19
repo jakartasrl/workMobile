@@ -64,5 +64,7 @@ public class Cotizacion extends ComprobanteVenta {
 		}
 	}
 	
-	
+	public boolean isCotizacion(){
+		return true;
+	}
 }

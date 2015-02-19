@@ -1,6 +1,8 @@
 package com.jkt.presupuesto.dominio;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.erp.varios.DomicilioEntrega;
+import com.jkt.varios.dominio.CondPagoDet;
 
 /**
  * Esta clase representa una nota que puede ser adjunta a un presupuesto, un pedido, en definitiva a un comprobante, o entidades que así lo precisen.
@@ -46,5 +48,30 @@ public class Nota extends Descriptible {
 //	public void setIncluidaEnPresupuesto(boolean incluidaEnPresupuesto) {
 //		this.incluidaEnPresupuesto = incluidaEnPresupuesto;
 //	}
+	
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
+	 public boolean equals(Object other) {
+        if (this == other) return true;
+        if ( !(other instanceof Nota) ) return false;
+
+        final Nota nota = (Nota) other;
+        	
+        if (nota.getId()==0) return false;
+			
+        if ( !(nota.getId()==getId())) return false;
+
+        if ( !(nota.getCodigo().equals(getCodigo()))) return false;
+        if ( !(nota.getDescripcion().equals(getDescripcion()))) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        int result;
+        result = (int) (29 * getId());
+        return result;
+    }
 
 }

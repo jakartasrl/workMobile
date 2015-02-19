@@ -909,7 +909,8 @@
 	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
 	
 		<output name="precio" tableName="mtDeterLaboQuim">
-			<campoSalida value="oid_item" target="id" />
+<!-- 			<campoSalida value="oid_item" target="id" /> -->
+			<campoSalida value="oid_item" target="fakeId" />
 			
 			<!-- det es determinacion, no un detalle  -->
 			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
@@ -1080,11 +1081,11 @@
 				</campoEntrada>
 
 				<campoEntrada name="mtNotas" metodo="agregarNota" clase="com.jkt.presupuesto.dominio.Nota" fieldID="oid">
-					<campoEntrada name="selec" clase="Boolean" metodo="setIncluidaEnPresupuesto" />
+					<campoEntrada name="selec" clase="Boolean" metodo="setIncluida" />
 				</campoEntrada>
 	
 				<campoEntrada name="mtCondComerciales" metodo="agregarCondicionComercial" clase="com.jkt.presupuesto.dominio.CondicionComercial" fieldID="oid">
-					<campoEntrada name="selec" clase="Boolean" metodo="setIncluidaEnPresupuesto" />
+					<campoEntrada name="selec" clase="Boolean" metodo="setIncluida" />
 				</campoEntrada>
 	
 				<!-- 
@@ -1171,7 +1172,7 @@
 		</output>
 		
 				
-		<output name="determinacionElectrica" tableName="mtDeterLaboElect">
+		<output name="determinacionElectrica" tableName="mtDeterLaboElec">
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
 			<campoSalida value="oid_det" target="determinacion.codigo" />

@@ -465,7 +465,7 @@
 		<campos>
 			<campo fieldName="oid"    tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid" />
 			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="descr"  tipo="Text" longitud="0" visible="true" readOnly="false" orden="3" label="Descripcion" columnWidth="500" />
 			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
 		</campos>
 

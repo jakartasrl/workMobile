@@ -316,7 +316,8 @@
 				</campoEntrada>
 
 				<campoEntrada name="mtSucursalesCliente" metodo="addClienteSucursal" clase="com.jkt.erp.varios.ClienteSucursal" fieldID="oid_SucClie">
-					<campoEntrada name="NroSucursal" clase="Integer" metodo="setNumero" />
+					<campoEntrada name="NroSucursal" clase="String" metodo="setNumero" />
+<!-- 					<campoEntrada name="NroSucursal" clase="Integer" metodo="setNumero" /> -->
 					<campoEntrada name="Descripcion" clase="String" metodo="setDescripcion" />
 					
 					<campoEntrada name="Direccion" clase="String" metodo="setearDireccion" />
