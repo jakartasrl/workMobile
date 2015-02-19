@@ -242,7 +242,7 @@
 	</operacion>
 
 
-	<!-- VALIDAR EXISTENCIA SIMPLE-->
+	<!-- VALIDAR EXISTENCIA COMPUESTA -->
 	<operacion name="ValidarExistenteDeMaestro" clase="com.jkt.operaciones.ValidarExistenciaConMaestro">
 		
 		<output name="resultado" tableName="NoSeUsa">
