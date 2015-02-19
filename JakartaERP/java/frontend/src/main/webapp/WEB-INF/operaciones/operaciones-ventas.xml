@@ -834,9 +834,9 @@
 		<output name="cotizacion" tableName="mtPresupuesto">
 
 			<campoSalida value="oid_cotiz" target="id" />
+			<campoSalida value="nro_cotiz" target="nro" />
 			
 			<campoSalida value="nro_presu" target="potencialNroPresupuesto" />
-			<campoSalida value="nro_cotiz" target="nro" />
 			
 			<campoSalida value="fecha" target="fecha" />
 
@@ -1111,9 +1111,10 @@
 		<output name="presupuesto" tableName="mtPresupuesto">
 
 			<campoSalida value="oid_presu" target="id" />
-			
 			<campoSalida value="nro_presu" target="nro" />
-			<campoSalida value="nro_cotiz" target="comprobanteRelacionado.id" />
+
+			<campoSalida value="oid_cotiz" target="comprobanteRelacionado.id" />
+			<campoSalida value="nro_cotiz" target="comprobanteRelacionado.nro" />
 
 			<campoSalida value="fecha" target="fecha" />
 			
