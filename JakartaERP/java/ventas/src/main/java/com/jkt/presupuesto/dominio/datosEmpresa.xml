@@ -32,7 +32,7 @@
 		logo="logo-los-conce.jpg"
 		iso="ISO_ABS_no.jpg"
 		firma="firma.png"
-		presentacion="De Nuestra Consideracion. De acuerdo con lo solicitado por Ustedes, tenemos el agrado de cotizarles las siguientes tareas a realizar en nuestro establecimiento:"
+		presentacion="De Nuestra Consideracion.&lt;br&gt;De acuerdo con lo solicitado por Ustedes, tenemos el agrado de cotizarles las siguientes tareas a realizar en nuestro establecimiento:"
 		saludo="Sin otro particular saludamos atentamente."
 	/>
 
