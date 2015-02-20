@@ -889,8 +889,8 @@
 	<operacion name="TraerProductoConPrecio" clase="com.jkt.presupuesto.operaciones.TraerProductoConPrecio">
 	
 		<output name="precio" tableName="mtPrecioMaterial">
-			<campoSalida value="oid_item" target="id" />
-			<campoSalida value="oid_mon" target="" />
+			<campoSalida value="oid_item" target="fakeId" />
+			<campoSalida value="oid_mon" target="moneda.id" />
 			<campoSalida value="importe" target="precio" />
 
 <!-- 			<campoSalida value="oid_art" target="producto.id" /> -->
@@ -938,7 +938,7 @@
 	<operacion name="TraerDeterElecConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios">
 	
 		<output name="precio" tableName="mtDeterLaboElec">
-			<campoSalida value="oid_item" target="id" />
+			<campoSalida value="oid_item" target="fakeId" />
 			
 			<!-- det es determinacion, no un detalle  -->
 			<!-- ESTO ES UN ANTIPATRON, hay que estar adivinando que significa cada cosa con estos nombres tan mal armados -->
@@ -1100,7 +1100,7 @@
 			</campoEntrada>
 		</input>
 		
-		<output name="presupuesto" tableName="mtResultado">
+		<output name="presupuesto" tableName="mtComprobante">
 			<campoSalida value="oid_presu" target="id" />
 		</output>
 	
@@ -1124,6 +1124,10 @@
 			<campoSalida value="oid_cotiz" target="comprobanteRelacionado.id" />
 			<campoSalida value="nro_cotiz" target="comprobanteRelacionado.nro" />
 
+			<campoSalida value="oid_lis_pre" target="" />
+			<campoSalida value="cod_lis_pre" target="" />
+			<campoSalida value="des_lis_pre" target="" />
+			
 			<campoSalida value="fecha" target="fecha" />
 			
 			<campoSalida value="oid_sucu" target="clienteSucursal.id" />
@@ -1150,9 +1154,9 @@
 		<output name="items" tableName="mtItems">
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
-<!-- 			<campoSalida value="oid_art" target="producto.id" /> -->
+			<campoSalida value="oid_art" target="producto.id" />
 			<campoSalida value="cod_art" target="producto.codigo" />
-<!-- 			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" /> -->
+			<campoSalida value="des_abrev_art" target="producto.descripcionAbrev" />
 			<campoSalida value="referencia" target="referencia" />
 			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="importe" target="precio" />
@@ -1165,7 +1169,9 @@
 		<output name="materiales" tableName="mtMateriales">
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
+			<campoSalida value="oid_art" target="producto.id" />
 			<campoSalida value="cod_art" target="producto.codigo" />
+			<campoSalida value="des_art" target="producto.descripcion" />
 			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="importe" target="precio" />
 			<campoSalida value="oid_mon" target="moneda.id" />
@@ -1175,6 +1181,8 @@
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
 			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
 			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="importe" target="precio" />
 			<campoSalida value="oid_mon" target="moneda.id" />
@@ -1185,6 +1193,8 @@
 			<campoSalida value="oid_item" target="id" />
 			<campoSalida value="oid_presu" target="presupuesto.id" />
 			<campoSalida value="oid_det" target="determinacion.id" />
+			<campoSalida value="cod_det" target="determinacion.codigo" />
+			<campoSalida value="des_det" target="determinacion.descripcion" />
 			<campoSalida value="cant" target="cantidad" />
 			<campoSalida value="importe" target="precio" />
 			<campoSalida value="oid_mon" target="moneda.id" />
