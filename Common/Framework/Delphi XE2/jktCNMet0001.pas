@@ -393,20 +393,20 @@ begin
   Result := True;
 
   if (ConfirmarCancelacion) and (FDataSetCab <> nil) and (FDataSetCab.State <> dsInactive)
-    and (Self.verModificados) then begin
+    and (Self.verModificados) then
       if MessageDlg('Perderá los datos editados, ¿Confirma Cancelar?', mtConfirmation,
-        [mbYes, mbNo], 0) = mrYes then begin
-          Self.DoCancel;
-          Self.DoCloseDataSet;
-          Self.Inicio;
-      end else begin
-        Result := False;
-      end
-  end else begin
-    Self.DoCancel;
-    Self.DoCloseDataSet;
-    Self.Inicio;
-  end;
+        [mbYes, mbNo], 0) = mrNo then
+          begin
+            Result := False;
+            Exit;
+          end;
+
+  Self.DoCancel;
+  Self.DoCloseDataSet;
+  Self.Inicio;
+
+  if Assigned(FOnCancel) then
+    FOnCancel(Self);
 end;
 
 procedure TjktDriver.SetOpciones(Value: TjktOpciones);
@@ -451,6 +451,9 @@ begin
   try
     DoGuardar;
 
+    if Assigned(FOnGuardar) then
+      FOnGuardar(Self);
+
     if (FTipoPrograma = tp_abmIndividual) then
       begin
         Self.DoCloseDataSet;
@@ -464,6 +467,7 @@ begin
     else if (FTipoPrograma = tp_abmLista) then
       begin
         Self.DoOperacionTraer;
+
         if FDatasetCab <> nil then begin
           FDataSetCab.First;
           FDataSetCab.Edit;
