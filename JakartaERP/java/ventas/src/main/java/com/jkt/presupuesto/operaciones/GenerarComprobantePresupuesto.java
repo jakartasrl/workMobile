@@ -43,6 +43,7 @@ import com.jkt.varios.dominio.Especificacion;
  */
 public class GenerarComprobantePresupuesto extends Operation {
 
+private static final String VINIETA = "- ";
 //	private static final String LAST_CHARACTER = "/";
 	private static final String LAST_CHARACTER = "\\";
 	private static final String MENSAJE_ERROR_CREACION_COMPROBANTE = "No fue posible crear el comprobante.";
@@ -50,8 +51,8 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private static final String MENSAJE_NOTAS_VACIAS = "No existen notas para el presupuesto.";
 	private static final String WRITER_ARCHIVO = "comprobante";
 	private static final String KEY_RUTA_COMPARTIDA = "rutaCompartida";
-	private static final String RUTA_IMAGENES = "imagenes/";
-	private static final String RUTA_PRESUPUESTO = "presupuestos/";
+	private static final String RUTA_IMAGENES = "imagenes\\";
+	private static final String RUTA_PRESUPUESTO = "presupuestos\\";
 	private static final String EXTENSION = ".pdf";
 	private static final String OID_PRESUPUESTO = "oid_presu".toUpperCase();
 
@@ -193,10 +194,11 @@ public class GenerarComprobantePresupuesto extends Operation {
 
 			parameters.put("nroPresupuesto", p.getNro());
 			
-			parameters.put("items", obtenerDetalles());
-			parameters.put("notas", obtenerNotas());
-			parameters.put("condiciones", obtenerCondiciones());
-
+			List<ItemResumen> items = obtenerDetalles();
+			obtenerNotas(items);
+			obtenerCondiciones(items);
+			parameters.put("items", items);
+			
 			/*
 			 * Datos de la empresa
 			 */
@@ -235,6 +237,52 @@ public class GenerarComprobantePresupuesto extends Operation {
 			e.printStackTrace();
 			throw new JakartaException(MENSAJE_ERROR_CREACION_COMPROBANTE);
 		}
+	}
+
+	private void obtenerCondiciones(List<ItemResumen> items) {
+		int cantidadCondiciones=0;
+		
+		ItemResumen titulo = new ItemResumen();
+		titulo.setTitulo("<font size= \"4\" /><b>CONDICIONES COMERCIALES</b>");
+		items.add(titulo);
+		
+		ItemResumen nuevaCondicion;
+		for (CondicionComercial condicion : p.getCondicionesComerciales()) {
+			cantidadCondiciones++;
+			nuevaCondicion=new ItemResumen();
+			nuevaCondicion.setDescripcion(VINIETA+formatLineFeed(condicion.getDescripcion()));
+			items.add(nuevaCondicion);
+		}
+
+		if (cantidadCondiciones==0) {
+			nuevaCondicion=new ItemResumen();
+			nuevaCondicion.setDescripcion(MENSAJE_CONDICIONES_VACIAS);
+			items.add(nuevaCondicion);
+		}		
+	}
+
+
+	private void obtenerNotas(List<ItemResumen> obtenerDetalles) {
+		int cantidadNota=0;
+		
+		ItemResumen titulo = new ItemResumen();
+		titulo.setTitulo("<font size= \"4\" /><b>NOTAS</b>");
+		obtenerDetalles.add(titulo);
+		
+		ItemResumen nuevaNota;
+		for (Nota nota : p.getNotas()) {
+			cantidadNota++;
+			nuevaNota=new ItemResumen();
+			nuevaNota.setDescripcion(VINIETA+formatLineFeed(nota.getDescripcion()));
+			obtenerDetalles.add(nuevaNota);
+		}
+
+		if (cantidadNota==0) {
+			nuevaNota=new ItemResumen();
+			nuevaNota.setDescripcion(MENSAJE_NOTAS_VACIAS);
+			obtenerDetalles.add(nuevaNota);
+		}
+
 	}
 
 	/**
@@ -355,8 +403,18 @@ public class GenerarComprobantePresupuesto extends Operation {
 				throw new JakartaException("No se generará el comprobante debido a que los detalles del presupuesto son inconsistentes en cuanto a su tipo.");
 			}
 			
-			data.add(new ItemResumen(String.valueOf(nroItem++), referencia, descripcion, precio));
+//			ItemResumen itemResumen = new ItemResumen("Titulo Item:"+detalle.getReferencia(),"", "", "");
 			
+			if (!descripcion.isEmpty()) {
+				descripcion=descripcion.concat("<br><br>").concat(precio);
+			}else{
+				descripcion=precio;
+			}
+			
+			ItemResumen itemResumen2 = new ItemResumen("","", descripcion , "");
+			
+			itemResumen2.setTitulo("<font size= \"3\" /><b> Item : ".concat(String.valueOf(nroItem++)).concat(" ").concat(referencia));
+			data.add(itemResumen2);
 		}
 		
 		return data;

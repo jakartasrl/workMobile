@@ -12,6 +12,17 @@ public class ItemResumen {
 	private String referencia;
 	private String descripcion;
 	private String precio;
+	private String titulo;
+	
+	
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public ItemResumen(){}
 	
