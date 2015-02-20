@@ -43,15 +43,15 @@ import com.jkt.varios.dominio.Especificacion;
  */
 public class GenerarComprobantePresupuesto extends Operation {
 
-	private static final String LAST_CHARACTER = "/";
+	private static final String LAST_CHARACTER = "\\";
 //	private static final String LAST_CARACTER = "\\";
 	private static final String MENSAJE_ERROR_CREACION_COMPROBANTE = "No fue posible crear el comprobante.";
 	private static final String MENSAJE_CONDICIONES_VACIAS = "No existen condiciones comerciales para el presupuesto.";
 	private static final String MENSAJE_NOTAS_VACIAS = "No existen notas para el presupuesto.";
 	private static final String WRITER_ARCHIVO = "comprobante";
 	private static final String KEY_RUTA_COMPARTIDA = "rutaCompartida";
-	private static final String RUTA_IMAGENES = "imagenes/";
-	private static final String RUTA_PRESUPUESTO = "presupuestos/";
+	private static final String RUTA_IMAGENES = "imagenes\\";
+	private static final String RUTA_PRESUPUESTO = "presupuestos\\";
 	private static final String EXTENSION = ".pdf";
 	private static final String OID_PRESUPUESTO = "oid".toUpperCase();
 
