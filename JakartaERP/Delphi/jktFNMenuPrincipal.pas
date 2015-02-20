@@ -921,7 +921,7 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 39;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Listas de Precios';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Listas de Precios de Venta';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 303;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
@@ -929,7 +929,7 @@ begin
 
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 40;
-  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Detalle Listas de Precios';
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Detalle Precios de Venta';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 303;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
@@ -938,6 +938,38 @@ begin
   cds_MenuUsuario.Append;
   cds_MenuUsuario.FieldByName('codItemMenu').Value   := 41;
   cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Tipos de Cambio';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 42;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Precios de Costos de Reposición';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 303;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 43;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Notas';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 204;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 44;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Condiciones Comerciales';
+  cds_MenuUsuario.FieldByName('codItemPadre').Value  := 204;
+  cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
+  cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;
+  cds_MenuUsuario.Post;
+
+  cds_MenuUsuario.Append;
+  cds_MenuUsuario.FieldByName('codItemMenu').Value   := 45;
+  cds_MenuUsuario.FieldByName('descItemMenu').Value  := 'Ingreso de Presupuesto';
   cds_MenuUsuario.FieldByName('codItemPadre').Value  := 302;
   cds_MenuUsuario.FieldByName('esGrupo').Value       := False;
   cds_MenuUsuario.FieldByName('esItemDeGrupo').Value := False;

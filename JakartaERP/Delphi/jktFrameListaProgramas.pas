@@ -214,6 +214,12 @@ begin
     NombrePrograma := 'TFNVen0007'
   else if Sender.Tag = 41 then
     NombrePrograma := 'TFNVen0009'
+  else if Sender.Tag = 42 then
+    NombrePrograma := 'TFNVen0010'
+  else if Sender.Tag = 45 then
+    NombrePrograma := 'TFNVen0006'
+
+  // *********** ABMs Genéricos *********** //
   else if Sender.Tag = 10 then
     // Maestro de Tablas de Validacion
     begin
@@ -339,7 +345,19 @@ begin
     begin
       NombrePrograma   := 'TFNUti0001';
       ParametroInicial := 'ListaPrecios';
-      Titulo := 'ABM de Listas de Precios';
+      Titulo := 'ABM de Listas de Precios de Venta';
+    end
+  else if Sender.Tag = 43 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'Nota';
+      Titulo := 'ABM de Notas';
+    end
+  else if Sender.Tag = 44 then
+    begin
+      NombrePrograma   := 'TFNUti0001';
+      ParametroInicial := 'CondicionComercial';
+      Titulo := 'ABM de Condiciones Comerciales';
     end;
 
 

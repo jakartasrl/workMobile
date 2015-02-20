@@ -165,6 +165,7 @@ inherited FNVen0002: TFNVen0002
           Caption.Text = 'C'#243'digo'
           DataBinding.FieldName = 'cod_titu_conc'
           Options.Editing = False
+          Width = 160
           Position.ColIndex = 4
           Position.RowIndex = 0
           Position.BandIndex = 0
@@ -175,7 +176,7 @@ inherited FNVen0002: TFNVen0002
           Caption.Text = 'Descripci'#243'n'
           DataBinding.FieldName = 'des_titu_conc'
           Options.Editing = False
-          Width = 300
+          Width = 240
           Position.ColIndex = 5
           Position.RowIndex = 0
           Position.BandIndex = 0
@@ -430,6 +431,10 @@ inherited FNVen0002: TFNVen0002
         Name = 'des_mod'
         DataType = ftString
         Size = 100
+      end
+      item
+        Name = 'Activo'
+        DataType = ftBoolean
       end>
     IndexDefs = <>
     SortOptions = []
@@ -505,11 +510,12 @@ inherited FNVen0002: TFNVen0002
         DataType = ftString
         Size = 1
       end>
-    IndexFieldNames = 'oid_mod'
+    IndexFieldNames = 'codInterno'
     IndexDefs = <
       item
         Name = 'mtDetIndex'
-        Fields = 'oid_mod'
+        Fields = 'codInterno'
+        Options = [ixDescending]
       end>
     SortOptions = []
     PersistentBackup = False
@@ -518,7 +524,6 @@ inherited FNVen0002: TFNVen0002
     SavedCompletely = False
     EnableVersioning = True
     FilterOptions = []
-    MasterFields = 'oid_mod'
     MasterSource = dsCab
     Version = '7.12.10 CodeGear Edition'
     LanguageID = 0

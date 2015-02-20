@@ -2,7 +2,6 @@ inherited FNVen0003: TFNVen0003
   Caption = 'Solicitud de Cotizaci'#243'n'
   ClientHeight = 592
   ClientWidth = 861
-  ExplicitLeft = -9
   ExplicitWidth = 877
   ExplicitHeight = 630
   PixelsPerInch = 96
@@ -1313,7 +1312,12 @@ inherited FNVen0003: TFNVen0003
   object opTraerContactosSucu: TjktOperacion
     OperName = 'TraerContactosDeSucursal'
     EnviarTodo = False
-    Atributos = <>
+    Atributos = <
+      item
+        Attribute = 'oid'
+        Field = mtCotizacionoid_sucu
+        Tag = 0
+      end>
     ServiceCaller = Service
     Left = 352
     Top = 360

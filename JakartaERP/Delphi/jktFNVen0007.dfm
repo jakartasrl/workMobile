@@ -1,5 +1,5 @@
 inherited FNVen0007: TFNVen0007
-  Caption = 'ABM de Listas de Precios Detalle'
+  Caption = 'ABM de Precios de Venta'
   ClientHeight = 492
   ClientWidth = 828
   ExplicitWidth = 844
