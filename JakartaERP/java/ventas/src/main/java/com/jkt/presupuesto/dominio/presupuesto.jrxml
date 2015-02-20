@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.1.final using JasperReports Library version 6.0.0  -->
-<!-- 2015-02-19T17:44:20 -->
+<!-- 2015-02-20T09:42:09 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -144,7 +144,7 @@
 				</jr:list>
 			</componentElement>
 			<break>
-				<reportElement key="" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="393" width="565" height="1" uuid="9c03bd57-a92c-458b-9574-20ce5363964d"/>
+				<reportElement key="" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="393" width="565" height="1" isRemoveLineWhenBlank="true" uuid="9c03bd57-a92c-458b-9574-20ce5363964d"/>
 			</break>
 			<componentElement>
 				<reportElement x="20" y="445" width="540" height="50" uuid="86e5fbbb-df29-419b-930b-e7e4d2be4429"/>
@@ -170,18 +170,15 @@
 				</textElement>
 				<text><![CDATA[NOTAS:]]></text>
 			</staticText>
-			<break>
-				<reportElement x="0" y="505" width="565" height="1" uuid="bbebd154-c242-4b84-a87a-06c6bcd8cc2b"/>
-			</break>
 			<staticText>
-				<reportElement x="20" y="586" width="544" height="20" uuid="9de591c3-f12c-4e07-9d47-c300d50465b1"/>
+				<reportElement x="20" y="512" width="544" height="20" uuid="9de591c3-f12c-4e07-9d47-c300d50465b1"/>
 				<textElement>
 					<font size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[CONDICIONES COMERCIALES:]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="20" y="617" width="540" height="33" uuid="84621e92-c225-4d82-af99-cc62629f0075"/>
+				<reportElement x="20" y="543" width="540" height="33" uuid="84621e92-c225-4d82-af99-cc62629f0075"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="condiciones" uuid="f5a13389-5bbb-444d-bd4d-f210c983f5c9">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{condiciones})]]></dataSourceExpression>
@@ -205,32 +202,32 @@
 				<textFieldExpression><![CDATA[$P{descripcionPresupuesto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="20" y="689" width="540" height="30" uuid="ae5c9f10-f9b4-436f-910d-fc765a895f9c"/>
+				<reportElement x="20" y="643" width="540" height="30" uuid="ae5c9f10-f9b4-436f-910d-fc765a895f9c"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{saludos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="20" y="743" width="156" height="30" uuid="603e9804-3e80-408c-b264-e37ecec9bb92"/>
+				<reportElement x="20" y="697" width="156" height="30" uuid="603e9804-3e80-408c-b264-e37ecec9bb92"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="19" y="726" width="541" height="1" uuid="4cb2de11-9359-4817-9b26-1e97bb7c1b31"/>
+				<reportElement x="19" y="680" width="541" height="1" uuid="4cb2de11-9359-4817-9b26-1e97bb7c1b31"/>
 			</line>
 			<textField>
-				<reportElement x="20" y="773" width="156" height="30" uuid="79d2248e-1fe2-484e-879c-5b7d8a145400"/>
+				<reportElement x="20" y="727" width="156" height="30" uuid="79d2248e-1fe2-484e-879c-5b7d8a145400"/>
 				<textFieldExpression><![CDATA[$P{titulo}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="20" y="803" width="156" height="50" uuid="bef9496b-5f0e-45cc-945e-d952072be404"/>
+				<reportElement x="20" y="757" width="156" height="50" uuid="bef9496b-5f0e-45cc-945e-d952072be404"/>
 				<imageExpression><![CDATA[$P{firma}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="20" y="674" width="541" height="1" uuid="63531b2b-98e4-43a8-a2d6-5b2a98e23a99"/>
+				<reportElement x="20" y="628" width="541" height="1" uuid="63531b2b-98e4-43a8-a2d6-5b2a98e23a99"/>
 			</line>
 			<textField>
 				<reportElement x="20" y="190" width="540" height="50" uuid="b139c3e0-fecc-4802-ae67-c4b41cf6d817"/>
@@ -243,7 +240,7 @@
 				<textFieldExpression><![CDATA[$P{presentacion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="23" y="36" width="547" height="20" uuid="3b080450-1294-405e-b34f-8c3f21a3221e"/>
+				<reportElement x="23" y="28" width="547" height="20" uuid="3b080450-1294-405e-b34f-8c3f21a3221e"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -254,29 +251,29 @@
 				<text><![CDATA[Señores]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="23" y="56" width="157" height="20" uuid="7acf0699-8c76-48aa-81ea-2cea97121910"/>
+				<reportElement x="23" y="43" width="157" height="20" uuid="7acf0699-8c76-48aa-81ea-2cea97121910"/>
 				<textFieldExpression><![CDATA[$P{calle}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="23" y="76" width="157" height="20" uuid="f3d71170-46eb-4176-a445-f3a1e1ed75da"/>
+				<reportElement x="23" y="57" width="157" height="20" uuid="f3d71170-46eb-4176-a445-f3a1e1ed75da"/>
 				<textFieldExpression><![CDATA[$P{direccion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="23" y="96" width="157" height="20" uuid="e9365595-40e8-4ec9-a68f-6506f4c32b1e"/>
+				<reportElement x="23" y="70" width="157" height="20" uuid="e9365595-40e8-4ec9-a68f-6506f4c32b1e"/>
 				<textElement>
 					<font isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pais}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="341" y="140" width="69" height="20" uuid="6cc81157-cbfa-4a72-8467-489f18e5a90b"/>
+				<reportElement x="341" y="133" width="69" height="20" uuid="6cc81157-cbfa-4a72-8467-489f18e5a90b"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[V/Ref]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="160" width="70" height="20" uuid="133621b9-8706-437c-a3c0-844a07b25a74"/>
+				<reportElement x="340" y="146" width="70" height="20" uuid="133621b9-8706-437c-a3c0-844a07b25a74"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font isBold="true"/>
 				</textElement>
@@ -297,18 +294,21 @@
 				<textFieldExpression><![CDATA[$P{contactoRef}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="410" y="140" width="140" height="20" uuid="efe691ef-9cfd-4ca4-a81c-a4bd8795eba4"/>
+				<reportElement x="410" y="133" width="140" height="20" uuid="efe691ef-9cfd-4ca4-a81c-a4bd8795eba4"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{referencia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="409" y="160" width="141" height="20" uuid="ec43c3d0-203d-41d0-90b5-80703eabb0b9"/>
+				<reportElement x="409" y="146" width="141" height="20" uuid="ec43c3d0-203d-41d0-90b5-80703eabb0b9"/>
 				<textFieldExpression><![CDATA[$P{nroPresupuesto}]]></textFieldExpression>
 			</textField>
 			<break>
-				<reportElement x="0" y="664" width="100" height="1" uuid="beb0482f-eb02-431e-8b3f-baae90e9dc8a"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="600" width="100" height="1" isRemoveLineWhenBlank="true" uuid="beb0482f-eb02-431e-8b3f-baae90e9dc8a"/>
+			</break>
+			<break>
+				<reportElement x="0" y="501" width="100" height="1" uuid="119e344e-8f01-4bf8-b042-6f06457ff5b7"/>
 			</break>
 		</band>
 	</detail>
