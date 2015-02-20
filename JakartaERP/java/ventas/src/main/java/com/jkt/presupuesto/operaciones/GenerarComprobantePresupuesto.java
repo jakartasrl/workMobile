@@ -53,7 +53,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private static final String RUTA_IMAGENES = "imagenes/";
 	private static final String RUTA_PRESUPUESTO = "presupuestos/";
 	private static final String EXTENSION = ".pdf";
-	private static final String OID_PRESUPUESTO = "oid_presu".toUpperCase();
+	private static final String OID_PRESUPUESTO = "oid".toUpperCase();
 
 	private String rutaCompartida;
 	private Presupuesto p;

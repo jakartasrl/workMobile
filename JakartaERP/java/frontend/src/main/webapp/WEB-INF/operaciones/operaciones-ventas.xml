@@ -1100,7 +1100,7 @@
 			</campoEntrada>
 		</input>
 		
-		<output name="presupuesto" tableName="mtResultado">
+		<output name="presupuesto" tableName="mtComprobante">
 			<campoSalida value="oid_presu" target="id" />
 		</output>
 	
