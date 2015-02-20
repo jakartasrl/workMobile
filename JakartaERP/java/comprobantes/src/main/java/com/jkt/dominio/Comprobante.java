@@ -33,6 +33,10 @@ public abstract class Comprobante extends PersistentEntity {
 	private String nro;
 	private boolean anulado=false;
 	
+	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
+		this.comprobanteRelacionado = comprobanteRelacionado;
+	}
+
 	public Comprobante getComprobanteRelacionado() {
 		return comprobanteRelacionado;
 	}
