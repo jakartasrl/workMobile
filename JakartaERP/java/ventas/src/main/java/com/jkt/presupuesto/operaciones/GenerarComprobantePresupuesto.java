@@ -43,8 +43,8 @@ import com.jkt.varios.dominio.Especificacion;
  */
 public class GenerarComprobantePresupuesto extends Operation {
 
-	private static final String LAST_CHARACTER = "/";
-//	private static final String LAST_CARACTER = "\\";
+//	private static final String LAST_CHARACTER = "/";
+	private static final String LAST_CHARACTER = "\\";
 	private static final String MENSAJE_ERROR_CREACION_COMPROBANTE = "No fue posible crear el comprobante.";
 	private static final String MENSAJE_CONDICIONES_VACIAS = "No existen condiciones comerciales para el presupuesto.";
 	private static final String MENSAJE_NOTAS_VACIAS = "No existen notas para el presupuesto.";
@@ -208,7 +208,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 			parameters.put("faxEmpresa", datosEmpresa.getFax());
 			parameters.put("webEmpresa", datosEmpresa.getPaginaWeb());
 			parameters.put("emailEmpresa", datosEmpresa.getEmail());
-			
+						
 			parameters.put("usuario", "Daniel Bokhdjalian");
 			parameters.put("titulo", "Gerente Comercial");
 			parameters.put("saludos", datosEmpresa.getSaludo());
