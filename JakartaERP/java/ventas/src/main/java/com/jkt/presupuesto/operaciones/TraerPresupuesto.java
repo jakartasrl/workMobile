@@ -1,12 +1,14 @@
 package com.jkt.presupuesto.operaciones;
 
+import static org.apache.commons.beanutils.BeanUtils.copyProperties;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
+import com.jkt.presupuesto.dominio.CondicionComercial;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
@@ -37,10 +39,43 @@ public class TraerPresupuesto extends Operation {
 		Presupuesto presupuesto=(Presupuesto) obtener(Presupuesto.class, (String)aParams.get(OID));
 		notificarObjeto(WRITER_PRESUPUESTO, presupuesto);
 		
+		notificarNotas(presupuesto);
+		
+		notificarCondiciones(presupuesto);
+
+		notificarDetalles(presupuesto);
+		
+	}
+
+	private void notificarCondiciones(Presupuesto presupuesto) throws Exception, IllegalAccessException, InvocationTargetException {
+		// Obtengo todas las Condiciones...
+		List<PersistentEntity> condiciones = serviceRepository.getAll(CondicionComercial.class);
+		// Condiciones que tiene el presupuesto guardadas
+		List<CondicionComercial> condicionesDelPresupuesto = presupuesto.getCondicionesComerciales();
+		CondicionComercial condicion;
+		for (PersistentEntity currentObject : condiciones) {
+			condicion = (CondicionComercial) currentObject;
+			// Si la Nota esta activa la notifico
+			if (condicion.isActivo()) {
+				CondicionComercial nuevaCondicion = new CondicionComercial();
+				
+				copyProperties(nuevaCondicion, condicion);
+				
+				// Ahora, si ya estaba guardada en el presupuesto actual, entonces la mando 'chequeada'
+				if (condicionesDelPresupuesto.contains(condicion)) {
+					nuevaCondicion.setIncluida(true);
+				}
+				notificarObjeto(WRITER_COND_COMERCIAL, nuevaCondicion);
+			}
+		}
+	}
+
+	private void notificarNotas(Presupuesto presupuesto) throws Exception, IllegalAccessException, InvocationTargetException {
 		// Obtengo todas las Notas...
 		List<PersistentEntity> notas = serviceRepository.getAll(Nota.class);
 		// Notas que tiene el presupuesto guardadas
 		List<Nota> notasDelPresupuesto = presupuesto.getNotas();
+
 		
 		Nota nota;
 		for (PersistentEntity currentObject : notas) {
@@ -49,26 +84,15 @@ public class TraerPresupuesto extends Operation {
 			if (nota.isActivo()) {
 				Nota nuevaNota = new Nota();
 				
-				BeanUtils.copyProperties(nuevaNota, nota); //Limpieza de codigo, en este caso no llama la atencion setear mano a mano 3 campos, pero si son 10 resulta molesto.
+				copyProperties(nuevaNota, nota);
 				
-//				nuevaNota.setId(nota.getId());
-//				nuevaNota.setCodigo(nota.getCodigo());
-//				nuevaNota.setDescripcion(nota.getDescripcion());
-	
 				// Ahora, si ya estaba guardada en el presupuesto actual, entonces la mando 'chequeada'
 				if (notasDelPresupuesto.contains(nota)) {
-					//cambio de nombre de variables!
-//					nuevaNota.setIncluidaEnPresupuesto(true); 
 					nuevaNota.setIncluida(true);
 				}
 				notificarObjeto(WRITER_NOTAS, nuevaNota);
 			}
 		}
-		
-		notificarObjetos(WRITER_COND_COMERCIAL, presupuesto.getCondicionesComerciales());
-		
-		notificarDetalles(presupuesto);
-		
 	}
 
 	/**
