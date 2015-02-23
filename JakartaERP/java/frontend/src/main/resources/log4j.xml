@@ -7,7 +7,7 @@
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
 <!-- 			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %-5p: %c - %m%n" /> -->
-			<param name="ConversionPattern" value="%c ->>>> %m%n" />
+			<param name="ConversionPattern" value="%c ######################################### %m%n" />
 
 		</layout>
 	</appender>
@@ -27,7 +27,18 @@
 		<level value="OFF" />
 	</logger>
 
+	<logger name="log4j.logger.org.springframework.web.servlet.DispatcherServlet">
+		<level value="OFF" />
+	</logger>
+	
 	<logger name="o.s.web.servlet.DispatcherServlet">
+		<level value="OFF" />
+	</logger>
+	<logger name="o.s.web.servlet.DispatcherServlet">
+		<level value="OFF" />
+	</logger>
+	
+	<logger name="log4j.logger.org.springframework.web.servlet.mvc">
 		<level value="OFF" />
 	</logger>
 	

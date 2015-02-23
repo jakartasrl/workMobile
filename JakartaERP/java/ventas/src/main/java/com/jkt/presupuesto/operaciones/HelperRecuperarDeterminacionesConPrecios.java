@@ -13,6 +13,11 @@ import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Moneda;
 
+/**
+ * Clase d ayuda que reune metodos genericos para poder recupera determinaciones, ordenadas por analisis, para determinado laboratorio, lista de precio, etc.
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 public abstract class HelperRecuperarDeterminacionesConPrecios extends Operation {
 
 	protected static final String PRECIO_WRITER = "precio";
@@ -20,6 +25,11 @@ public abstract class HelperRecuperarDeterminacionesConPrecios extends Operation
 	protected static final String LABORATORIO = "laboratorio".toUpperCase();
 	protected static final String NOMBRE_PARAMETRO_MONEDA_POR_DEFECTO = "MonedaPorDefecto";
 	
+	/**
+	 * <p>Aquí un closure, que ejecuta sentencias de codigo sobre un detalle.</p>
+	 * Cada subclase de esta, debe implementar la funcionalidad apropiada sobre el detalle, por ejemplo, solo notificar, agregar el detalle a una lista, modificar datos, etc.
+	 * 
+	 */
 	protected abstract void realizarAccionSobreDetalle(ListaPrecioDetalle detalle);
 	
 	protected List mostrarDeterminaciones(long idLaboratorio, ListaPrecios lista) {

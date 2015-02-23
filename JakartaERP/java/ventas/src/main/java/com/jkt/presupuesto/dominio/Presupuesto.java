@@ -121,6 +121,12 @@ public class Presupuesto extends ComprobanteVenta {
 			return;
 		}
 		
+		if (det.getPrecio()==0) {
+			//No guardar el detalle
+			log.warn(String.format("No se agrego el detalle %s ya que no se le asigno una cantida mayor a cero.", det.getDescripcion()));
+			return;
+		}
+		
 		if (!detalles.contains(det)) {
 			detalles.add(det);
 			det.setPresupuesto(this);

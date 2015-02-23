@@ -36,7 +36,10 @@ public class TraerDeterminacionesConPrecios extends HelperRecuperarDeterminacion
 		
 		ListaPrecios lista = (ListaPrecios) obtener(ListaPrecios.class, (String)aParams.get(OID_LISTA_PRECIO));
 		
-		List ids = mostrarDeterminaciones(idLaboratorio, lista);
+		List  ids = new ArrayList();
+		if (lista!=null) {
+			ids= mostrarDeterminaciones(idLaboratorio, lista);
+		}
 
 		//Mostrar nuevos elementos
 		mostrarNuevosElementos(idLaboratorio, ids);
