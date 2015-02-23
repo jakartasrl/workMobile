@@ -35,8 +35,9 @@ public class TraerProductoConPrecio extends Operation {
 		String idListaPrecioStr = (String) aParams.get(OID_LISTA_PRECIO);
 		
 		try{
-			if (idListaPrecioStr!=null && (!idListaPrecioStr.trim().isEmpty()))
+			if (idListaPrecioStr!=null && (!idListaPrecioStr.trim().isEmpty())){
 				idListaPrecio=Long.valueOf((String)idListaPrecioStr);
+			}
 			idProducto=Long.valueOf((String)aParams.get(OID_ART));
 		}catch(NumberFormatException e){
 			throw new JakartaException("Los parametros que identifican a la lista de precio y a un articulo deben ser numéricos.");

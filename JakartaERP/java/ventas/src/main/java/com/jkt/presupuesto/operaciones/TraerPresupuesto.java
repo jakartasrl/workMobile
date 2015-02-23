@@ -3,9 +3,11 @@ package com.jkt.presupuesto.operaciones;
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.dominio.ListaPrecioDetalle;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.operaciones.Operation;
 import com.jkt.presupuesto.dominio.CondicionComercial;
@@ -20,7 +22,7 @@ import com.jkt.presupuesto.dominio.PresupuestoDet;
  * @author Santiago Braceras - Jakarta SRL
  * 
  */
-public class TraerPresupuesto extends Operation {
+public class TraerPresupuesto extends HelperRecuperarDeterminacionesConPrecios {
 
 	private static final String OID = "oid".toUpperCase();
 
@@ -100,6 +102,9 @@ public class TraerPresupuesto extends Operation {
 	 */
 	private void notificarDetalles(Presupuesto presupuesto) {
 
+		List idDeterLaboQuimico=new ArrayList();
+		List idDeterLaboElect=new ArrayList();
+		
 		for (PresupuestoDet presupuestoDet : presupuesto.getDetalles()) {
 			if (presupuestoDet.isItem()) {
 				notificarObjeto(WRITER_ITEMS, presupuestoDet);
@@ -107,13 +112,43 @@ public class TraerPresupuesto extends Operation {
 				notificarObjeto(WRITER_MATERIALES, presupuestoDet);
 			}else if (presupuestoDet.isLaboratorioElectrico()) {
 				notificarObjeto(WRITER_DET_ELEC, presupuestoDet);
+				idDeterLaboElect.add(presupuestoDet.getDeterminacion().getId());
 			}else if (presupuestoDet.isLaboratorioQuimico()) {
 				notificarObjeto(WRITER_DET_QUIMI, presupuestoDet);
+				idDeterLaboQuimico.add(presupuestoDet.getDeterminacion().getId());
 			}else{
 				log.warn(String.format("No se muestra el detalle de presupuesto con id %s por que no tiene un tipo permitido. Tipo %c no existente.",presupuestoDet.getId(), presupuestoDet.getTipoDetalle()));
 			}
 		}
 		
+		/*
+		 * A partir de este momento, hay que recuperar las determinaciones que no fueron dadas de alta, o las nuevas determinaciones cargadas.
+		 * Es algo conflictivo ya que muestro una lista de detalles solamente, con lo cual, tengo q guardar esos ids de determinaciones en listas,
+		 * y posteriormente buscar todas las determinaciones con la misma consulta que en la operacion TraerDeterminacionesConPrecios.
+		 * 
+		 * Estas determinaciones son las nuevas que estan en la lista de precios, y las nuevas que no estan en la lista de precios pero ademas no estan en el presupuesto.
+		 * 
+		 * Esta Logica esta en HelperRecuperarDeterminaciones,  para la cual necesito implementar dos metodos...
+		 */
+		
+		mostrarDeterminacionesNuevas(idDeterLaboElect);
+		
+	}
+
+	
+	private void mostrarDeterminacionesNuevas(List idDeterLaboElect) {
+		
+	}
+
+
+	/*
+	 * En este caso no necesito notificar nada, sino que debo mostrar las que no fueron ya mostradas, es decir, las que si se guardaron en el presupuesto.
+	 */
+	private List determinacionesIds=new ArrayList();
+	
+	@Override
+	protected void realizarAccionSobreDetalle(ListaPrecioDetalle detalle) {
+		determinacionesIds.add(detalle.getDeterminacion().getId());
 	}
 
 }

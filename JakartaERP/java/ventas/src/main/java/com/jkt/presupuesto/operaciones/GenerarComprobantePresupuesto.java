@@ -210,7 +210,8 @@ public class GenerarComprobantePresupuesto extends Operation {
 			parameters.put("webEmpresa", datosEmpresa.getPaginaWeb());
 			parameters.put("emailEmpresa", datosEmpresa.getEmail());
 						
-			parameters.put("usuario", "Daniel Bokhdjalian");
+			parameters.put("usuario", p.getVendedor().getNombres().concat(" ").concat(p.getVendedor().getApellido()));
+//			parameters.put("usuario", "Daniel Bokhdjalian");
 			parameters.put("titulo", "Gerente Comercial");
 			parameters.put("saludos", datosEmpresa.getSaludo());
 
@@ -241,6 +242,10 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private void obtenerCondiciones(List<ItemResumen> items) {
 		int cantidadCondiciones=0;
 		
+		ItemResumen espacio=new ItemResumen();
+		espacio.setTitulo("<br>");
+		items.add(espacio);
+		
 		ItemResumen titulo = new ItemResumen();
 		titulo.setTitulo("<font size= \"4\" /><b>CONDICIONES COMERCIALES</b>");
 		items.add(titulo);
@@ -264,6 +269,10 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private void obtenerNotas(List<ItemResumen> obtenerDetalles) {
 		int cantidadNota=0;
 		
+		ItemResumen espacio=new ItemResumen();
+		espacio.setTitulo("<br>");
+		obtenerDetalles.add(espacio);
+
 		ItemResumen titulo = new ItemResumen();
 		titulo.setTitulo("<font size= \"4\" /><b>NOTAS</b>");
 		obtenerDetalles.add(titulo);
@@ -393,7 +402,11 @@ public class GenerarComprobantePresupuesto extends Operation {
 				descripcion=String.format("Determinación Laboratorio Quimico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
 				break;
 			case PresupuestoDet.CHAR_MATERIAL:
-				descripcion=String.format("%s de %d Producto: %s", detalle.getDescripcion() , cantidad, detalle.getProducto().getDescripcionAbrev());
+				if (detalle.getDescripcion()==null || detalle.getDescripcion().isEmpty()) {
+					descripcion=String.format("%d Producto/s: %s", cantidad, detalle.getProducto().getDescripcionAbrev());
+				}else{
+					descripcion=String.format("%s de %d Producto/s: %s", detalle.getDescripcion() , cantidad, detalle.getProducto().getDescripcionAbrev());
+				}
 				break;
 			case PresupuestoDet.CHAR_ITEM:
 				descripcion=formatLineFeed(detalle.getDescripcion());
@@ -412,7 +425,13 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			ItemResumen itemResumen2 = new ItemResumen("","", descripcion , "");
 			
-			itemResumen2.setTitulo("<font size= \"3\" /><b> Item : ".concat(String.valueOf(nroItem++)).concat(" ").concat(referencia));
+			
+			if (referencia==null || referencia.isEmpty()) {
+				itemResumen2.setTitulo("<font size= \"3\" /><b> Item ".concat(String.valueOf(nroItem++)));
+			}else{
+				itemResumen2.setTitulo("<font size= \"3\" /><b> Item ".concat(String.valueOf(nroItem++)).concat(" : ").concat(referencia));
+			}
+			
 			data.add(itemResumen2);
 		}
 		
