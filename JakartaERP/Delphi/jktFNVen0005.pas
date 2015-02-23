@@ -27,7 +27,8 @@ uses
   cxNavigator, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, jktCNMet0008, cxTL, cxDBTL,
   cxTLdxBarBuiltInMenu, cxInplaceContainer, dxLayoutControlAdapters, Vcl.Menus,
-  Vcl.StdCtrls, cxButtons, cxCheckBox, cxTLData, cxRadioGroup, jktFNVen0008;
+  Vcl.StdCtrls, cxButtons, cxCheckBox, cxTLData, cxRadioGroup, jktFNVen0008,
+  cxCalendar;
 
 type
   TFNVen0005 = class(TfrmChild)
@@ -167,6 +168,12 @@ type
     cxStyleNormal: TcxStyle;
     lcMainSplitterItem2: TdxLayoutSplitterItem;
     mtDetCotizoid_titu_conc: TIntegerField;
+    mtDetCotizfecha_costo: TDateField;
+    mtDetCotizmarkup: TIntegerField;
+    mtDetCotizimporte_total_3: TFloatField;
+    cxDBTreeList1importe_total_3: TcxDBTreeListColumn;
+    cxDBTreeList1markup: TcxDBTreeListColumn;
+    cxDBTreeList1fecha_costo: TcxDBTreeListColumn;
     procedure OperacionTraerBeforeEjecutar(Sender: TObject);
     procedure OperacionTraerAfterEjecutar(Sender: TObject);
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
@@ -195,6 +202,8 @@ type
       Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxButton1Click(Sender: TObject);
+    procedure cxDBTreeList1importe_total_3GetDisplayText(
+      Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
   private
     FFormTiposCambio: TFNVen0008;
     oid_MonedaPorDefecto: Integer;
@@ -256,7 +265,7 @@ begin
 
   // Le cambio el Caption a la última columna
   cxDBTreeList1importe_total_2.Caption.Text :=
-    'Importe en ' + cxDBLookupComboBox1.Text;
+    'Costo en ' + cxDBLookupComboBox1.Text;
 end;
 
 procedure TFNVen0005.cxDBTreeList1cod_unid_medPropertiesButtonClick(
@@ -301,6 +310,15 @@ begin
   inherited;
 
 //  AText := cxDBLookupComboBox1.Text + ' ' + FormatFloat('0.00', AValue);
+end;
+
+procedure TFNVen0005.cxDBTreeList1importe_total_3GetDisplayText(
+  Sender: TcxTreeListColumn; ANode: TcxTreeListNode; var Value: string);
+begin
+  inherited;
+
+  if (ANode.Texts[cxDBTreeList1tipo.Position.ColIndex] <> 'C') then
+    Value := '';
 end;
 
 procedure TFNVen0005.cxDBTreeList1StylesGetContentStyle(
@@ -368,6 +386,12 @@ begin
       if mtTiposDeCambio.FieldByName('cotizacion').AsFloat <> 0 then
         DataSet.FieldByName('importe_total_2').AsFloat :=
           ImporteMonedaDefecto / mtTiposDeCambio.FieldByName('cotizacion').AsFloat;
+
+  // Calculated fields in a client dataset that are calculated in an OnCalcFields
+  // event handler but stored in the dataset also have a FieldKind of
+  // fkInternalCalc instead of fkCalculated
+  DataSet.FieldByName('importe_total_3').AsFloat :=
+    DataSet.FieldByName('importe_total_2').AsFloat * (1 + (DataSet.FieldByName('markup').AsInteger / 100));
 end;
 
 procedure TFNVen0005.OperacionSaveAfterEjecutar(Sender: TObject);

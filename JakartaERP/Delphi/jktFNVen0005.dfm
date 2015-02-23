@@ -2,10 +2,9 @@ inherited FNVen0005: TFNVen0005
   Anchors = []
   Caption = 'Cotizador'
   ClientHeight = 552
-  ClientWidth = 1071
-  ExplicitLeft = -301
-  ExplicitTop = -22
-  ExplicitWidth = 1087
+  ClientWidth = 1234
+  ExplicitLeft = -312
+  ExplicitWidth = 1250
   ExplicitHeight = 590
   PixelsPerInch = 96
   TextHeight = 13
@@ -18,32 +17,33 @@ inherited FNVen0005: TFNVen0005
     ExplicitHeight = 552
   end
   inherited cxGroupBoxRight: TcxGroupBox
-    Left = 1041
-    ExplicitLeft = 1041
+    Left = 1204
+    ExplicitLeft = 1181
     ExplicitHeight = 552
     Height = 552
   end
   inherited cxSplitterRight: TcxSplitter
-    Left = 1037
+    Left = 1200
     Height = 552
-    ExplicitLeft = 1037
+    ExplicitLeft = 1177
     ExplicitHeight = 552
   end
   inherited cxGroupBoxMain: TcxGroupBox
-    ExplicitWidth = 1003
+    ExplicitWidth = 1143
     ExplicitHeight = 552
     Height = 552
-    Width = 1003
+    Width = 1166
     object lcMain: TdxLayoutControl
       Left = 2
       Top = 2
-      Width = 999
+      Width = 1162
       Height = 548
       Align = alClient
       TabOrder = 0
       LayoutLookAndFeel = dxLayoutSkinLookAndFeel1
+      ExplicitWidth = 1139
       object cxDBTextEdit1: TcxDBTextEdit
-        Left = -128
+        Left = 126
         Top = 72
         DataBinding.DataField = 'nro_cotiz'
         DataBinding.DataSource = dsItem
@@ -53,7 +53,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit2: TcxDBTextEdit
-        Left = 12
+        Left = 266
         Top = 72
         DataBinding.DataField = 'fecha'
         DataBinding.DataSource = dsItem
@@ -63,7 +63,7 @@ inherited FNVen0005: TFNVen0005
         Width = 100
       end
       object cxDBTextEdit3: TcxDBTextEdit
-        Left = -128
+        Left = 126
         Top = 99
         DataBinding.DataField = 'des_clie_sucu'
         DataBinding.DataSource = dsItem
@@ -73,7 +73,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit4: TcxDBTextEdit
-        Left = -128
+        Left = 126
         Top = 126
         DataBinding.DataField = 'des_vend'
         DataBinding.DataSource = dsItem
@@ -83,7 +83,7 @@ inherited FNVen0005: TFNVen0005
         Width = 240
       end
       object cxDBTextEdit6: TcxDBTextEdit
-        Left = 198
+        Left = 452
         Top = 166
         DataBinding.DataField = 'cod_art'
         DataBinding.DataSource = dsItem
@@ -93,7 +93,7 @@ inherited FNVen0005: TFNVen0005
         Width = 93
       end
       object cxDBTextEdit7: TcxDBTextEdit
-        Left = 297
+        Left = 551
         Top = 166
         DataBinding.DataField = 'des_abrev_art'
         DataBinding.DataSource = dsItem
@@ -103,7 +103,7 @@ inherited FNVen0005: TFNVen0005
         Width = 192
       end
       object cxDBLabel1: TcxDBLabel
-        Left = 198
+        Left = 452
         Top = 72
         DataBinding.DataField = 'des_tipo_item'
         DataBinding.DataSource = dsItem
@@ -115,7 +115,7 @@ inherited FNVen0005: TFNVen0005
         AnchorY = 81
       end
       object cxDBMemo1: TcxDBMemo
-        Left = 198
+        Left = 452
         Top = 95
         DataBinding.DataField = 'detalle_item'
         DataBinding.DataSource = dsItem
@@ -127,7 +127,7 @@ inherited FNVen0005: TFNVen0005
         Width = 307
       end
       object cxDBButtonEdit1: TcxDBButtonEdit
-        Left = 642
+        Left = 896
         Top = 72
         DataBinding.DataField = 'cod_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -142,7 +142,7 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTextEdit5: TcxDBTextEdit
-        Left = 743
+        Left = 997
         Top = 72
         DataBinding.DataField = 'des_mod'
         DataBinding.DataSource = dsCabCotiz
@@ -152,7 +152,7 @@ inherited FNVen0005: TFNVen0005
         Width = 226
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
-        Left = 642
+        Left = 896
         Top = 99
         DataBinding.DataField = 'oid_moneda_expresada'
         DataBinding.DataSource = dsCabCotiz
@@ -169,7 +169,6 @@ inherited FNVen0005: TFNVen0005
             Width = 130
             FieldName = 'descripcion'
           end>
-        Properties.ListFieldIndex = 1
         Properties.ListSource = dsMonedas
         Properties.OnChange = cxDBLookupComboBox1PropertiesChange
         Style.HotTrack = False
@@ -177,9 +176,9 @@ inherited FNVen0005: TFNVen0005
         Width = 95
       end
       object cxDBTreeList1: TcxDBTreeList
-        Left = -234
+        Left = 20
         Top = 260
-        Width = 795
+        Width = 951
         Height = 248
         BorderStyle = cxcbsNone
         Align = alClient
@@ -298,6 +297,7 @@ inherited FNVen0005: TFNVen0005
           Caption.Text = 'Art'#237'culo'
           DataBinding.FieldName = 'des_art'
           Options.Editing = False
+          Width = 100
           Position.ColIndex = 10
           Position.RowIndex = 0
           Position.BandIndex = 0
@@ -305,6 +305,7 @@ inherited FNVen0005: TFNVen0005
           Summary.GroupFooterSummaryItems = <>
         end
         object cxDBTreeList1cant: TcxDBTreeListColumn
+          Caption.AlignHorz = taRightJustify
           Caption.Text = 'Cantidad'
           DataBinding.FieldName = 'cant'
           Width = 70
@@ -333,7 +334,7 @@ inherited FNVen0005: TFNVen0005
           Properties.OnButtonClick = cxDBTreeList1cod_unid_medPropertiesButtonClick
           Caption.Text = 'Unid. Med.'
           DataBinding.FieldName = 'cod_unid_med'
-          Width = 70
+          Width = 62
           Position.ColIndex = 13
           Position.RowIndex = 0
           Position.BandIndex = 0
@@ -341,9 +342,10 @@ inherited FNVen0005: TFNVen0005
           Summary.GroupFooterSummaryItems = <>
         end
         object cxDBTreeList1importe_unit: TcxDBTreeListColumn
-          Caption.Text = 'Importe Unitario'
+          Caption.AlignHorz = taRightJustify
+          Caption.Text = 'Costo Unitario'
           DataBinding.FieldName = 'importe_unit'
-          Width = 100
+          Width = 85
           Position.ColIndex = 14
           Position.RowIndex = 0
           Position.BandIndex = 0
@@ -369,31 +371,55 @@ inherited FNVen0005: TFNVen0005
           Properties.ListSource = dsMonedas
           Caption.Text = 'Moneda'
           DataBinding.FieldName = 'oid_moneda'
-          Width = 70
+          Width = 55
           Position.ColIndex = 15
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
           Summary.GroupFooterSummaryItems = <>
         end
+        object cxDBTreeList1fecha_costo: TcxDBTreeListColumn
+          Caption.Text = 'Fecha Costo'
+          DataBinding.FieldName = 'fecha_costo'
+          Options.Editing = False
+          Width = 70
+          Position.ColIndex = 16
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
         object cxDBTreeList1importe_total: TcxDBTreeListColumn
-          Caption.Text = 'Importe Total'
+          Caption.AlignHorz = taRightJustify
+          Caption.Text = 'Costo'
           DataBinding.FieldName = 'importe_total'
           Options.Editing = False
-          Width = 100
-          Position.ColIndex = 16
+          Width = 70
+          Position.ColIndex = 17
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
           Summary.GroupFooterSummaryItems = <>
           OnGetDisplayText = cxDBTreeList1importe_totalGetDisplayText
         end
+        object cxDBTreeList1markup: TcxDBTreeListColumn
+          Caption.AlignHorz = taRightJustify
+          Caption.Text = 'Markup (%)'
+          DataBinding.FieldName = 'markup'
+          Width = 70
+          Position.ColIndex = 18
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
         object cxDBTreeList1importe_total_2: TcxDBTreeListColumn
-          Caption.Text = 'Importe en '
+          Caption.AlignHorz = taRightJustify
+          Caption.Text = 'Costo en '
           DataBinding.FieldName = 'importe_total_2'
           Options.Editing = False
-          Width = 100
-          Position.ColIndex = 17
+          Width = 95
+          Position.ColIndex = 19
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <
@@ -407,9 +433,28 @@ inherited FNVen0005: TFNVen0005
           Summary.GroupFooterSummaryItems = <>
           OnGetDisplayText = cxDBTreeList1importe_total_2GetDisplayText
         end
+        object cxDBTreeList1importe_total_3: TcxDBTreeListColumn
+          Caption.AlignHorz = taRightJustify
+          Caption.Text = 'Importe de Venta'
+          DataBinding.FieldName = 'importe_total_3'
+          Width = 95
+          Position.ColIndex = 20
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <
+            item
+              AlignHorz = taRightJustify
+              AlignVert = vaTop
+              Kind = skSum
+              AlignHorzAssigned = True
+              AlignVertAssigned = True
+            end>
+          Summary.GroupFooterSummaryItems = <>
+          OnGetDisplayText = cxDBTreeList1importe_total_3GetDisplayText
+        end
       end
       object cxCheckBox1: TcxCheckBox
-        Left = 577
+        Left = 987
         Top = 260
         Caption = 'AUTORIZAR'
         Style.HotTrack = False
@@ -419,7 +464,7 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxCheckBox2: TcxCheckBox
-        Left = 577
+        Left = 987
         Top = 285
         Caption = 'RECHAZAR'
         Style.HotTrack = False
@@ -429,7 +474,7 @@ inherited FNVen0005: TFNVen0005
         Width = 121
       end
       object cxButton1: TcxButton
-        Left = 531
+        Left = 785
         Top = 126
         Width = 150
         Height = 25
@@ -916,15 +961,11 @@ inherited FNVen0005: TFNVen0005
     AttachMaxCount = 1
     FieldDefs = <
       item
-        Name = 'oid_titu_conc'
+        Name = 'oid_det'
         DataType = ftInteger
       end
       item
         Name = 'oid_cotiz'
-        DataType = ftInteger
-      end
-      item
-        Name = 'oid_mod'
         DataType = ftInteger
       end
       item
@@ -933,6 +974,10 @@ inherited FNVen0005: TFNVen0005
       end
       item
         Name = 'codInternoPadre'
+        DataType = ftInteger
+      end
+      item
+        Name = 'oid_titu_conc'
         DataType = ftInteger
       end
       item
@@ -972,7 +1017,12 @@ inherited FNVen0005: TFNVen0005
         DataType = ftInteger
       end
       item
-        Name = 'precio_unit'
+        Name = 'cod_unid_med'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'importe_unit'
         DataType = ftFloat
       end
       item
@@ -1072,10 +1122,22 @@ inherited FNVen0005: TFNVen0005
       Calculated = True
     end
     object mtDetCotizimporte_total_2: TFloatField
-      FieldKind = fkCalculated
+      FieldKind = fkInternalCalc
       FieldName = 'importe_total_2'
       DisplayFormat = '0.00'
-      Calculated = True
+    end
+    object mtDetCotizimporte_total_3: TFloatField
+      Tag = 1
+      FieldKind = fkInternalCalc
+      FieldName = 'importe_total_3'
+      DisplayFormat = '0.00'
+    end
+    object mtDetCotizfecha_costo: TDateField
+      FieldName = 'fecha_costo'
+    end
+    object mtDetCotizmarkup: TIntegerField
+      Tag = 1
+      FieldName = 'markup'
     end
   end
   object hlpModelo: TjktHelpGenerico

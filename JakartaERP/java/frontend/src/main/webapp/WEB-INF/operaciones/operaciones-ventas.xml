@@ -1124,9 +1124,9 @@
 			<campoSalida value="oid_cotiz" target="comprobanteRelacionado.id" />
 			<campoSalida value="nro_cotiz" target="comprobanteRelacionado.nro" />
 
-			<campoSalida value="oid_lis_pre" target="" />
-			<campoSalida value="cod_lis_pre" target="" />
-			<campoSalida value="des_lis_pre" target="" />
+			<campoSalida value="oid_lis_pre" target="listaPrecios.id" />
+			<campoSalida value="cod_lis_pre" target="listaPrecios.codigo" />
+			<campoSalida value="des_lis_pre" target="listaPrecios.descripcion" />
 			
 			<campoSalida value="fecha" target="fecha" />
 			

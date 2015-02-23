@@ -49,8 +49,8 @@ type
 end;
 
 
-
 type
+
   TjktValidador = class(TComponent)
   private
     { Private declarations }
@@ -62,11 +62,13 @@ type
     FValidacion         : TjktValidacion;
     FListaAsignaciones  : TjktAsignadorFieldList;
     FOperacionEspecial  : TjktOperacion;
-    DatasetCreado       : boolean;
+    FCampoValidado      : string;
+    DataSetCreado       : Boolean;
+
     procedure crearDatasetResult;
-    procedure validacionLocal(sender  :TField);
-    procedure validacionServer(sender :TField);
-    procedure validacionExistenciaInexistencia(sender :TField);
+    procedure validacionLocal(Sender: TField);
+    procedure validacionServer(Sender: TField);
+    procedure validacionExistenciaInexistencia(Sender: TField);
 
   protected
     { Protected declarations }
@@ -74,7 +76,7 @@ type
   public
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
-    destructor  Destroy; override;
+    destructor Destroy; override;
     procedure validar(sender : TField);
     procedure procesarResultado;
     property ServiceCaller: TjktServiceCaller read FServiceCaller write FServiceCaller;
@@ -87,6 +89,8 @@ type
     property Validacion        : TjktValidacion         read FValidacion        write FValidacion;
     property ListaAsignaciones : TjktAsignadorFieldList read FListaAsignaciones write FListaAsignaciones;
     property OperacionEspecial : TjktOperacion          read FOperacionEspecial write FOperacionEspecial;
+    property CampoValidado     : string                 read FCampoValidado     write FCampoValidado;
+
   end;
 
 type
@@ -152,23 +156,27 @@ end;
 
 
 constructor TjktValidador.Create(AOwner : TComponent);
-var x:integer;
+var
+  x : Integer;
 begin
   inherited Create(AOwner);
-  for x := 0 to aOwner.ComponentCount -1 do
+
+  for x := 0 to aOwner.ComponentCount - 1 do
     begin
        if aOwner.Components[x] is TjktServiceCaller
           then FServiceCaller := TjktServiceCaller (aOwner.Components[x]);
     end;
 
-  FListaAsignaciones   := TjktAsignadorFieldList.Create(self);
-  datasetCreado := False;
+  FListaAsignaciones := TjktAsignadorFieldList.Create(Self);
+  DataSetCreado := False;
+  FCampoValidado := '';
 end;
 
-destructor  TjktValidador.destroy;
+destructor TjktValidador.Destroy;
 begin
   FListaAsignaciones.Free;
-  inherited destroy;
+
+  inherited Destroy;
 end;
 
 procedure TjktValidador.crearDatasetResult;
@@ -226,7 +234,7 @@ begin
   FTempMemTable.Close;
   FTempMemTable.Open;
 
-  DatasetCreado := True;
+  DataSetCreado := True;
 
   for x := 0 to FListaAsignaciones.Count - 1 do
     begin
@@ -254,7 +262,7 @@ begin
     end;
 end;
 
-procedure TjktValidador.validar(sender :TField);
+procedure TjktValidador.validar(Sender: TField);
 begin
   if (FValidacion =  tMayorCero)
   or (FValidacion =  tMayorIgualCero)
@@ -264,7 +272,7 @@ begin
       else validacionServer(sender);
 end;
 
-procedure TjktValidador.validacionServer(sender:TField);
+procedure TjktValidador.validacionServer(Sender: TField);
 begin
   if not Assigned(FServiceCaller)
      then raise Exception.Create('Falta Asignar la propiedad "ServiceCaller" al Validador ' + Self.Name);
@@ -275,12 +283,12 @@ begin
   if FValidacion = tEspecial then
     FOperacionEspecial.execute
   else
-    validacionExistenciaInexistencia(sender);
+    validacionExistenciaInexistencia(Sender);
 
   procesarResultado;
 end;
 
-procedure TjktValidador.validacionExistenciaInexistencia(sender :TField);
+procedure TjktValidador.validacionExistenciaInexistencia(Sender: TField);
 var
   operName: string;
 begin
@@ -301,8 +309,21 @@ begin
 
   FServiceCaller.InicioOperacion;
   FServiceCaller.setOperacion(operName);
-  FServiceCaller.addAtribute('codigo' , Trim(sender.AsString));
+  // Envío los parámetros...
+  // Si el usuario no nos especificó el campo a validar en 'CampoValidado'
+  // entonces enviamos por defecto 'codigo'
   FServiceCaller.addAtribute('entidad', FEntidad);
+
+  if Trim(FCampoValidado) = '' then
+    begin
+      FServiceCaller.addAtribute('CampoValidado', 'codigo');
+      FServiceCaller.addAtribute('codigo', Trim(Sender.AsString))
+    end
+  else
+    begin
+      FServiceCaller.addAtribute('CampoValidado', FCampoValidado);
+      FServiceCaller.addAtribute(FCampoValidado, Trim(Sender.AsString));
+    end;
 
   if Trim(FEntidadMaestra) <> '' then
     begin
@@ -372,7 +393,7 @@ var
   x: integer;
   validadorField :TjktValidadorField;
 begin
-   for x:=0 to FListaValidaciones.Count -1 do
+   for x := 0 to FListaValidaciones.Count - 1 do
      begin
         validadorField := TjktValidadorField (FListaValidaciones.Items[x]);
         agregarValidacion(validadorField);
@@ -385,13 +406,13 @@ var
   x: integer;
   campo :TField;
 begin
- for x:= 0 to self.Owner.ComponentCount - 1 do
+ for x := 0 to self.Owner.ComponentCount - 1 do
     begin
       if self.Owner.Components[x] is TField
          then begin
                 campo := TField (self.Owner.Components[x]);
                 if validadorField.Field = campo
-                    then  campo.OnValidate := validar;
+                    then  campo.OnValidate := Validar;
               end;
     end;
 end;
