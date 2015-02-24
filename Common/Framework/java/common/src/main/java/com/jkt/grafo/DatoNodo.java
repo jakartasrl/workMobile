@@ -3,7 +3,7 @@ package com.jkt.grafo;
 import com.jkt.dominio.PersistentEntity;
 
 /**
- * Nodeable es una clase que debe ser implementada con el fin de ser utilizada
+ * DatoNodo es una clase que debe ser implementada con el fin de ser utilizada
  * para completar el dato crudo de un grafo.
  * 
  * Esta entidad contendra logica para pasar a finalizado el estado, validar si
@@ -14,7 +14,7 @@ import com.jkt.dominio.PersistentEntity;
 abstract public class DatoNodo extends PersistentEntity{
 
 	public enum Estado {
-		NO_INICIADO, EN_CURSO, FINALIZADO;
+		NO_INICIADO, EN_EJECUCION, FINALIZADO;
 	}
 	
 	private Estado estado=Estado.NO_INICIADO;
@@ -26,10 +26,20 @@ abstract public class DatoNodo extends PersistentEntity{
 	 * 
 	 * @return true o false si se puede completar
 	 */
-	abstract protected boolean sePuedeCompletar();
+	abstract protected boolean sePuedeFinalizar();
+
+	/**
+	 * Logica interna para ver si se puede completar la 'tarea'.
+	 * Depende mucho de la logica de negocio
+	 * 
+	 * @return true o false si se puede completar
+	 */
+	abstract protected boolean sePuedeIniciar();
+
 	
 	public void completar(){
-		if(sePuedeCompletar()){
+		
+		if(sePuedeFinalizar()){
 			estado=Estado.FINALIZADO;
 		}
 	}

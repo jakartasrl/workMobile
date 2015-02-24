@@ -63,7 +63,8 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
 			return false;
 		}
 
-		return getDato().sePuedeCompletar();
+		return true;
+//		return getDato().sePuedeCompletar();
 	}
 
 	public void agregarPrecedente(NodoGenerico<T> nodo) {
@@ -146,6 +147,7 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
 			public void execute(Object input) {
 				NodoGenerico<T> nodo=(NodoGenerico<T>) input;
 				System.out.println(nodo.getDescripcion());
+				log.warn(nodo.getDescripcion());
 			}
 		});
 	}

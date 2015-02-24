@@ -44,7 +44,13 @@ public class NodoGenericoTest {
 			}
 
 			@Override
-			protected boolean sePuedeCompletar() {
+			protected boolean sePuedeIniciar() {
+				return false;
+			}
+
+			@Override
+			protected boolean sePuedeFinalizar() {
+				// TODO Auto-generated method stub
 				return false;
 			}
 			
