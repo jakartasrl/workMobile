@@ -17,8 +17,6 @@ abstract public class DatoNodo extends PersistentEntity{
 		NO_INICIADO, EN_CURSO, FINALIZADO;
 	}
 	
-	//	@Enumerated(EnumType.STRING)
-	//  @Column(name = "type")
 	private Estado estado=Estado.NO_INICIADO;
 	
 	

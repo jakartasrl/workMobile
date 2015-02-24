@@ -7,7 +7,9 @@ import java.util.List;
 import com.jkt.varios.dominio.Contacto;
 
 /**
- * 
+ * Esta clase genera una cotización con items a cotizar independientes.
+ * <p>Una cotización puede pasarse a presupuestar, y generar una instancia de un Presupuesto, siempre y cuando todos los items de la cotización estén
+ * cotizados y autorizador.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -17,6 +19,9 @@ public class Cotizacion extends ComprobanteVenta {
 	
 	private String estado;
 	
+	/*
+	 * Campo transiente para mostrar en el alta de presupuesto basado en una cotizacion
+	 */
 	private String potencialNroPresupuesto;
 	
 	public String getPotencialNroPresupuesto() {
@@ -26,6 +31,9 @@ public class Cotizacion extends ComprobanteVenta {
 	public void setPotencialNroPresupuesto(String potencialNroPresupuesto) {
 		this.potencialNroPresupuesto = potencialNroPresupuesto;
 	}
+	/*
+	 * Campo transiente para mostrar en el alta de presupuesto basado en una cotizacion
+	 */
 
 	
 	private List<CotizacionDet> detalles = new ArrayList<CotizacionDet>();
