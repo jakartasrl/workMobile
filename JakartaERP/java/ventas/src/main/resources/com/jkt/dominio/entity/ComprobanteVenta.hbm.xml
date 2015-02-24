@@ -76,7 +76,6 @@
 	    <union-subclass name="com.jkt.dominio.Cotizacion" table="COTIZACION">
 			<property name="estado" column="ESTADO" />
 
-
 			<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
 			<property name="referencia" column="REFERENCIA" type="string" />
 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
@@ -104,7 +103,7 @@
 <!-- 		PRESUPUESTO MAPPING -->
 	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO">
 
-<!--         <many-to-one name="comprobanteRelacionado" class="com.jkt.dominio.Cotizacion" column="COMPROBANTE_RELACIONADO_ID"></many-to-one> -->
+        <many-to-one name="comprobanteRelacionado" class="com.jkt.dominio.Cotizacion" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
 
 <!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
 			<property name="referencia" column="REFERENCIA" type="string" />

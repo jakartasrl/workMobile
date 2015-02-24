@@ -79,14 +79,14 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 			}
 			
 			Query query = this.getServiceRepository().crearHQL(hql);
-			query.setParameter("numero", numeroComprobante);
+			query.setParameter("numero", numeroComprobante  + "/%");
 			query.setMaxResults(1);
 			Comprobante comprobanteExistente = (Comprobante) query.uniqueResult();
 			
 			if (comprobanteExistente!=null) {
 				String[] split = comprobanteExistente.getNro().split("/");
 				int valor=Integer.valueOf(split[split.length-1]);
-				comprobante.setNro(numeroComprobante.concat("/"+valor++));
+				comprobante.setNro(numeroComprobante.concat("/"+(valor+1)));
 			}else{
 				//Es el primer elemento.
 				comprobante.setNro(numeroComprobante.concat("/1"));
