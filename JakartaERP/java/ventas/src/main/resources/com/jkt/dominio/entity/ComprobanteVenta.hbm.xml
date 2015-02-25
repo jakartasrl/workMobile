@@ -48,11 +48,26 @@
 <!-- 		PEDIDO MAPPING -->
 <!-- 		PEDIDO MAPPING -->
 		<union-subclass name="com.jkt.pedido.dominio.Pedido" table="PEDIDO">
+			<many-to-one name="comprobanteRelacionado" class="com.jkt.presupuesto.dominio.Presupuesto" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
+
+<!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
+			<property name="referencia" column="REFERENCIA" type="string" />
+			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
+			
+			<list name="notas" cascade="all" table="PRESUPUESTO_NOTAS">
+				<key column="PRESUPUESTO_ID" />
+				<index column="ORDEN" />
+				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
+			</list>
+			
+			
+			<property name="cargaACargoDeCliente" column="CARGA_A_CARGO_DE_CLIENTE" type="boolean" />
+			<property name="transporteACargoDeCliente" column="TRANSPORTE_A_CARGO_DE_CLIENTE" type="boolean" />
+			<property name="descargaACargoDeCliente" column="DESCARGA_A_CARGO_DE_CLIENTE" type="boolean" />
+			
+			
 		</union-subclass>
 		
-
-
-
 
 
 
