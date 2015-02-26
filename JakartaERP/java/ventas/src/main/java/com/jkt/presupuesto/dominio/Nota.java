@@ -1,5 +1,7 @@
 package com.jkt.presupuesto.dominio;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.jkt.dominio.Descriptible;
 import com.jkt.erp.varios.DomicilioEntrega;
 import com.jkt.varios.dominio.CondPagoDet;
@@ -12,7 +14,24 @@ import com.jkt.varios.dominio.CondPagoDet;
  */
 public class Nota extends Descriptible {
 	
+	private String adicional=StringUtils.EMPTY;
+
+	public String getDescripcion(){
+		if (!adicional.isEmpty()) {
+			return this.getDescripcion().concat(" ").concat(adicional);
+		}
+		return this.getDescripcion();
+	}
 	
+	public String getAdicional() {
+		return adicional;
+	}
+
+	public void setAdicional(String adicional) {
+		this.adicional = adicional;
+	}
+
+
 	/*
 	 * La variable transiente 'incluida' hacer referencia a si ya esta incluida en una lista existente en la base de datos.
 	 * 
@@ -33,21 +52,6 @@ public class Nota extends Descriptible {
 		this.incluida = incluida;
 	}
 
-	
-	/*
-	 * Se le cambia el nombre ya que no siempre una nota estará relacionada a un presupuesto, con lo cuál el nombre mas generico adecuado seria 'incluida'
-	 * Luego de leer este comentario por favor borrar las lineas a continuacion (este comentario tambien.)
-	 */
-	
-//	private boolean incluidaEnPresupuesto;
-//
-//	public boolean isIncluidaEnPresupuesto() {
-//		return incluidaEnPresupuesto;
-//	}
-//
-//	public void setIncluidaEnPresupuesto(boolean incluidaEnPresupuesto) {
-//		this.incluidaEnPresupuesto = incluidaEnPresupuesto;
-//	}
 	
 	/*
 	 * Metodos para el manejo de la direccion.

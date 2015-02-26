@@ -985,6 +985,7 @@
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo"    target="codigo" />
 			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="adicional"     target="adicional" />
 			<campoSalida value="Activo"    target="isActivo" />
 		</output>		
 			

@@ -13,6 +13,7 @@
         </property>
 		
 		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="adicional" column="ADICIONAL"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 
 
