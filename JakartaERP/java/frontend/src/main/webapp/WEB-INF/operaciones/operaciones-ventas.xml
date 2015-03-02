@@ -968,7 +968,9 @@
 			<campoEntrada>			
 				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
 				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="adicional"  clase="String" metodo="setAdicional" />
 				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="oid_act" clase="com.jkt.dominio.Actividad" metodo="setActividad" />
 			</campoEntrada>			
 		</input>		
 
@@ -986,6 +988,9 @@
 			<campoSalida value="Codigo"    target="codigo" />
 			<campoSalida value="descr"     target="descripcion" />
 			<campoSalida value="adicional"     target="adicional" />
+			<campoSalida value="oid_act"     target="actividad.id" />
+			<campoSalida value="cod_act"     target="actividad.codigo" />
+			<campoSalida value="des_act"     target="actividad.descripcion" />
 			<campoSalida value="Activo"    target="isActivo" />
 		</output>		
 			
@@ -1257,5 +1262,39 @@ de su ubicacion, y su nombre (ruta y nombre de comprobante) -->
 	</operacion>
 	
 	
+	
+<!-- 	ABM AGRUPACION DE NOTAS -->
+	<operacion name="TraerAgrupacionNotas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.dominio.Actividad">
+		
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_act" target="id" />
+			<campoSalida value="cod_act" target="codigo" />
+			<campoSalida value="des_act" target="descripcion" />
+			<campoSalida value="Activo" target="isActivo" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="---" />
+		</forms>
+
+	</operacion>
+	
+	<operacion name="GuardarAgrupacionNotas" clase="com.jkt.operaciones.GuardarLista">
+	
+		<input name="mtInput" keyName="objeto" clase="com.jkt.dominio.Actividad" fieldID="oid_act">
+			<campoEntrada>
+				<campoEntrada name="cod_act" clase="String" metodo="setCodigo" />
+				<campoEntrada name="des_act" clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>
+		</input>
+	
+		<forms>
+			<form name="---"></form>
+		</forms>
+
+	</operacion>
 	
 </entity>

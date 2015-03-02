@@ -266,6 +266,15 @@
 			
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
+		
+		<output name="archivos" tableName="mtArchivos">
+			<campoSalida value="oid_arch" target="id" />
+			<campoSalida value="fecha_subida" target="fechaDeSubidaPlana" />
+			<campoSalida value="oid_usu" target="identificadorDeUsuario" />
+			<campoSalida value="usuario" target="nombreUsuario" />
+			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="archivo" target="nombreCompleto" />
+		</output>
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 
@@ -361,6 +370,12 @@
 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
 					</campoEntrada>
 
+					<campoEntrada name="mtArchivos" metodo="agregarEspecificacion" clase="com.jkt.varios.dominio.Especificacion" fieldID="oid_arch">
+						<campoEntrada name="archivo" clase="String" metodo="setNombreCompleto" />
+						<campoEntrada name="oid_usu" clase="Integer" metodo="setIdentificadorDeUsuario" />
+						<campoEntrada name="comentario" clase="String" metodo="setComentario" />
+					</campoEntrada>
+				
 				</campoEntrada>
 			</campoEntrada>
 

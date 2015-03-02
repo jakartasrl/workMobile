@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.pedido.dominio.FormaFacturacion" table="FORMA_FACTURACION" >
+		
+		<id name="id" column="FORMA_FACTURACION_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="nombre" column="NOMBRE" type="string"/>
+		<property name="porcentaje" column="PORCENTAJE" type="integer"/>
+		<property name="costo" column="COSTO" type="double"/>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+	</class>
+
+</hibernate-mapping>

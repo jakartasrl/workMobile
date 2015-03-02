@@ -85,13 +85,18 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			obtenerDatosEmpresa();
 			
+			
+			/*
+			 * Metodo principal
+			 * A partir de un comprobante, se genera un reporte en PDF y retorna la ruta, que deberia ser compartida, en una instancia de la clase Especificación
+			 * 
+			 */
 			Especificacion e = generarComprobante(p);
+			
 			notificarObjeto(WRITER_ARCHIVO, e);
 		}else{
 			throw new JakartaException("La ruta compartida debe terminar con el caracter 'barra' // ");
 		}
-		
-		
 		
 	}
 	
@@ -217,7 +222,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 
 			
 			asignarImagenes(parameters);
-			asignarImageneFirma(parameters);
+			asignarImagenesDeFirma(parameters);
 			
 
 			report.setParameters(parameters);
@@ -296,7 +301,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 	/**
 	 * Asigna una firma customizada.
 	 */
-	private void asignarImageneFirma(Map<String, Object> parameters) {
+	private void asignarImagenesDeFirma(Map<String, Object> parameters) {
 //		parameters.put("firma", rutaCompartida.concat(RUTA_IMAGENES).concat(datosEmpresa.getFirma()));
 	}
 

@@ -48,6 +48,8 @@
 	<elemento key="listaPrecios" value="com.jkt.dominio.ListaPrecios" />
 	<elemento key="presupuesto" value="com.jkt.presupuesto.dominio.Presupuesto" validador="com.jkt.presupuesto.validadores.ValidadorPresupuesto"/>
 	<elemento key="nota" value="com.jkt.presupuesto.dominio.Nota" />
+	<elemento key="actividad" value="com.jkt.dominio.Actividad" />
 	<elemento key="condicionComercial" value="com.jkt.presupuesto.dominio.CondicionComercial" />
+	<elemento key="pedido" value="com.jkt.pedido.dominio.Pedido" validador="com.jkt.pedido.validadores.ValidadorPedido"/>
 
 </elementos>

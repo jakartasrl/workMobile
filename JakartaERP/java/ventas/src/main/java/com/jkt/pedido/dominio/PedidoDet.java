@@ -23,7 +23,8 @@ public class PedidoDet extends ComprobanteVentaDet {
 	public static final char CHAR_MATERIAL = 'M';
 	public static final char CHAR_ELECTRICO = 'E';
 	public static final char CHAR_QUIMICO = 'Q';
-	@NotNull(message="El detalle de presupuesto tiene que tener una moneda obligatoriamente.")
+	
+	@NotNull(message="El item de pedido tiene que tener una moneda obligatoriamente.")
 	private Moneda moneda;
 	private char tipoDetalle;
 
@@ -32,7 +33,6 @@ public class PedidoDet extends ComprobanteVentaDet {
 	private List<String> plazosEntrega=new ArrayList<String>();
 	private List<FormaFacturacion> formasFacturacion=new ArrayList<FormaFacturacion>();
 	
-
 	/*
 	 * Getter y setters
 	 */

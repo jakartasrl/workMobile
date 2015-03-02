@@ -109,7 +109,7 @@ public class TipoComprobante extends PersistentEntity {
 
 			@Override
 			public String argumento() {
-				return "CZ";
+				return "COT";
 			}
 		};
 		

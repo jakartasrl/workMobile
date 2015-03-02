@@ -2,6 +2,7 @@ package com.jkt.presupuesto.dominio;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.jkt.dominio.Actividad;
 import com.jkt.dominio.Descriptible;
 import com.jkt.erp.varios.DomicilioEntrega;
 import com.jkt.varios.dominio.CondPagoDet;
@@ -14,15 +15,27 @@ import com.jkt.varios.dominio.CondPagoDet;
  */
 public class Nota extends Descriptible {
 	
+	private Actividad actividad;
+	
 	private String adicional=StringUtils.EMPTY;
 
 	public String getDescripcion(){
-		if (!adicional.isEmpty()) {
-			return this.getDescripcion().concat(" ").concat(adicional);
+		if (adicional!=null && !adicional.isEmpty()) {
+			return super.getDescripcion().concat(" ").concat(adicional);
 		}
-		return this.getDescripcion();
+		return super.getDescripcion();
 	}
 	
+	public Actividad getActividad() {
+		return actividad;
+	}
+
+
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
+	}
+
+
 	public String getAdicional() {
 		return adicional;
 	}

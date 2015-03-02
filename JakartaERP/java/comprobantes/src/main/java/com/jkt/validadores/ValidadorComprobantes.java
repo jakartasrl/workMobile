@@ -71,9 +71,10 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 				hql="from Cotizacion comprobante where comprobante.nro like :numero order by comprobante.nro desc";
 			}
 			
-//			String hql="from Presupuesto comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
-//			String hql="from Cotizacion comprobante where comprobante.numero like ':numero/%' order by comprobante.numero desc";
-
+			if (comprobante.isPedido()) {
+				hql="from Pedido comprobante where comprobante.nro like :numero order by comprobante.nro desc";
+			}
+			
 			if (hql.isEmpty()) {
 				throw new JakartaException("No es posible determinar el tipo de comprobante.");
 			}

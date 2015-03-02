@@ -4,18 +4,16 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.presupuesto.dominio.PresupuestoDet" table="PRESUPUESTO_DET" >
+	<class name="com.jkt.pedido.dominio.PedidoDet" table="PEDIDO_DET" >
 		
-		<id name="id" column="PRESUPUESTO_DET_ID">
+		<id name="id" column="PEDIDO_DET_ID">
 			<generator class="native" />
 		</id>
 			
 		<property name="descripcion" type="text" column="DESCRIPCION" />
 		
-		<many-to-one name="itemCotizado" class="com.jkt.dominio.CotizacionDet" cascade="none" column="ITEM_COTIZADO_ID"/>
-
 		<many-to-one name="comprobanteVenta" class="com.jkt.dominio.ComprobanteVenta" cascade="none" column="COMPROBANTE_VENTA_ID"/>
-		<many-to-one name="presupuesto" class="com.jkt.presupuesto.dominio.Presupuesto" cascade="none" column="PRESUPUESTO_ID"/>
+		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" cascade="none" column="PEDIDO_ID"/>
 		
 		<many-to-one name="producto" class="com.jkt.erp.articulos.Producto" cascade="all" column="PRODUCTO_ID"/>
 		<many-to-one name="determinacion" class="com.jkt.laboratorio.dominio.Determinacion" cascade="all" column="DETERMINACION_ID"/>
@@ -33,7 +31,23 @@
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
+		<list name="plazosEntrega" table="PLAZOS_ENTREGA_PEDIDO" cascade="all">
+			<key column="PEDIDO_DET_ID" />
+			<index column="ORDEN" />
+			<element column="PLAZO" type="string"></element>
+		</list>
+		
+		
+<!-- 	IMPORTANTE!!!!! -->
+<!-- 		Es una coleccion de un pedido a muchas formas de facturacion, cada pedido tendra sus propias formas de facturacion que son dadas de alta al momento de guardar -->
+<!-- 		un pedido. -->
+<!-- 		Cada N formas de facturacion esta relacionadas con slamente un pedido, por eso el flag unique -->
+		<list name="formasFacturacion" table="FORMAS_FACTURACION_PEDIDO" cascade="save-update"> <!--  cacade true indica que al guardar un pedido tambien se guarda la coleccion de formas -->
+			<key column="PEDIDO_DET_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.pedido.dominio.FormaFacturacion" column="FORMA_FACTURACION_ID" unique="true" />
+		</list>
+		
 	</class>
 	
 </hibernate-mapping>
-

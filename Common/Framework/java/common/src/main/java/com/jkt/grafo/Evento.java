@@ -8,7 +8,7 @@ package com.jkt.grafo;
 public class Evento extends DatoNodo {
 
 	/*
-	 * El atributo objetivo representa a una tarea, un pedido, un ensayo de alboratorio, cualquier elemento que pueda ser representado como tarea dentro de una agenda
+	 * El atributo objetivo representa a una tarea, un pedido, un ensayo de laboratorio, cualquier elemento que pueda ser representado como tarea dentro de una agenda
 	 */
 	private IAgendable objetivo;
 

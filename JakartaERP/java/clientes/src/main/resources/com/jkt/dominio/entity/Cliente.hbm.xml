@@ -47,6 +47,11 @@
 			<one-to-many class="com.jkt.erp.varios.ClienteClasificador" />
 		</list>
 		
+        <list name="archivos" table="ARCHIVOS_CLIENTE" lazy="true" cascade="all">
+			<key column="CLEINTE_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
+		</list>
 		
 	</class>
 

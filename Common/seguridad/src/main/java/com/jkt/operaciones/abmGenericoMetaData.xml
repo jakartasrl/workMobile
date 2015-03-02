@@ -291,7 +291,7 @@
 		
 	</entidad>
 	
-<!-- 	Unidad de medida -->
+<!-- 	Laboratorio -->
 	<entidad nombre="Laboratorio">
 
 		<operacion operSave="SaveLaboratorio" operTraer="TraerLaboratorio" />
@@ -448,12 +448,18 @@
 			<campo fieldName="Codigo" tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
 			<campo fieldName="descr"  tipo="Text" longitud="0" visible="true" readOnly="false" orden="3" label="Descripcion" columnWidth="500" />
 			<campo fieldName="adicional"  tipo="Text" longitud="0" visible="true" readOnly="false" orden="4" label="Adicional" columnWidth="200" />
-			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="5" label="Activo" />
+			
+			<campo fieldName="oid_act" tipo="Integer" longitud="0" visible="false" readOnly="false" orden="5" label="oid_actividad"  />
+			<campo fieldName="cod_act" tipo="String" longitud="15" visible="true" readOnly="false" orden="6" label="Cód. Actividad" tag="0" />
+			<campo fieldName="des_act" tipo="String" longitud="40" visible="true" readOnly="true" orden="7" label="Desc. Actividad" tag="0" />
+			
+			<campo fieldName="Activo" tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="8" label="Activo" />
 		</campos>
 
 		<validadores>
-			<validador fieldName="Codigo" tipoValidacion="Inexistente" entidad="nota" oidName="" descrName="" />
-			<validador fieldName="descr"      tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+			<validador fieldName="Codigo" 	tipoValidacion="Inexistente" entidad="nota" oidName="" descrName="" />
+			<validador fieldName="cod_act" 	tipoValidacion="Existente" entidad="actividad" oidName="oid_act" descrName="des_act" />
+			<validador fieldName="descr"	tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 		
 	</entidad>
@@ -477,5 +483,24 @@
 		
 	</entidad>
 
+
+<!-- 	Actividad de la nota, para agrupar -->
+	<entidad nombre="Actividad">
+
+		<operacion operSave="GuardarAgrupacionNotas" operTraer="TraerAgrupacionNotas" />
+		
+		<campos>
+			<campo fieldName="oid"		tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_act" />
+			<campo fieldName="codigo"	tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
+			<campo fieldName="descr"  	tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="Activo"	tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="4" label="Activo" />
+		</campos>
+
+		<validadores>
+			<validador fieldName="codigo"    tipoValidacion="Inexistente" entidad="actividad" oidName="oid" descrName="descr" />
+			<validador fieldName="descr"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
+		</validadores>
+		
+	</entidad>
 
 </entidades>
