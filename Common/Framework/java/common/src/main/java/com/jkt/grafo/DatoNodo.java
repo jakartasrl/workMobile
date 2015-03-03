@@ -1,6 +1,7 @@
 package com.jkt.grafo;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 
 /**
  * DatoNodo es una clase que debe ser implementada con el fin de ser utilizada
@@ -25,19 +26,21 @@ abstract public class DatoNodo extends PersistentEntity{
 	 * Depende mucho de la logica de negocio
 	 * 
 	 * @return true o false si se puede completar
+	 * @throws JakartaException 
 	 */
-	abstract protected boolean sePuedeFinalizar();
+	abstract protected boolean sePuedeFinalizar() throws JakartaException;
 
 	/**
 	 * Logica interna para ver si se puede completar la 'tarea'.
 	 * Depende mucho de la logica de negocio
 	 * 
 	 * @return true o false si se puede completar
+	 * @throws JakartaException 
 	 */
-	abstract protected boolean sePuedeIniciar();
+	abstract protected boolean sePuedeIniciar() throws JakartaException;
 
 	
-	public void completar(){
+	public void completar() throws JakartaException{
 		
 		if(sePuedeFinalizar()){
 			estado=Estado.FINALIZADO;

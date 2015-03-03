@@ -577,6 +577,15 @@
 		</forms>
 
 	</operacion>
+	
+	
+	<operacion name="test" clase="com.jkt.operaciones.OperacionEjemploJMETER">
+
+		<forms>
+			<form name="FNVen0009"> </form>
+		</forms>
+
+	</operacion>
 
 
 </entity>

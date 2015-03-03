@@ -69,10 +69,12 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
 
 	public void agregarPrecedente(NodoGenerico<T> nodo) {
 		this.precedentes.add(nodo);
+		nodo.getPosteriores().add(this);
 	}
 
 	public void agregarPosterior(NodoGenerico<T> nodo) {
 		this.posteriores.add(nodo);
+		nodo.getPrecedentes().add(this);
 	}
 	
 	
@@ -185,6 +187,20 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
             }
         }
     }
+	public List<NodoGenerico<T>> getPrecedentes() {
+		return precedentes;
+	}
+	public void setPrecedentes(List<NodoGenerico<T>> precedentes) {
+		this.precedentes = precedentes;
+	}
+	public List<NodoGenerico<T>> getPosteriores() {
+		return posteriores;
+	}
+	public void setPosteriores(List<NodoGenerico<T>> posteriores) {
+		this.posteriores = posteriores;
+	}
+	
+	
 	
 
 }

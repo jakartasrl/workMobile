@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.agenda.EventoAgenda" table="AGENDA" >
+		
+		<id name="id" column="AGENDA_ID">
+			<generator class="native" />
+		</id>
+
+<!-- 		parent properties -->
+		<property name="descripcion" type="string" column="DESCRIPCION"></property>
+		<property name="completo" column="COMPLETO" type="boolean" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+			
+		<many-to-one name="dato" class="com.jkt.agenda.Evento" column="EVENTO_ID" cascade="all"></many-to-one>
+	
+		<list name="precedentes" table="EVENTOS_PRECEDENTES" lazy="true" cascade="all">
+			<key column="EVENTO_PRECEDENTE_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.agenda.EventoAgenda" column="EVENTO_ID" />
+		</list>
+
+		<list name="posteriores" table="EVENTOS_POSTERIORES" lazy="true" cascade="all">
+			<key column="EVENTO_POSTERIOR_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.agenda.EventoAgenda" column="EVENTO_ID" />
+		</list>
+
+<!-- 		my own properties -->
+	    <property not-null="false" name="fechaInicio" column="FECHA_INICIO" type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate"/>
+	    <property not-null="false" name="fechaFin" column="FECHA_FIN" type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate"/>
+				
+		<property name="diasDuracion" type="integer" column="DURACION_EN_DIAS"></property>
+		<property name="diasAtrasados" type="integer" column="DIAS_ATRASADOS"></property>
+		<property name="sector" type="string" column="SECTOR"></property>
+		<property name="usuario" type="string" column="USUARIO"></property>
+		
+		
+	</class>
+
+</hibernate-mapping>
+
