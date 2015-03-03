@@ -343,6 +343,26 @@ type
     mtContactosCelular: TStringField;
     cvContactosTelefonoAlternativo: TcxGridDBCardViewRow;
     cvContactosCelular: TcxGridDBCardViewRow;
+    mtArchivos: TjktMemTable;
+    mtArchivosoid_arch: TIntegerField;
+    mtArchivosfecha_subida: TDateTimeField;
+    mtArchivosoid_usu: TIntegerField;
+    mtArchivosusuario: TStringField;
+    mtArchivoscomentario: TStringField;
+    mtArchivosarchivo: TStringField;
+    dsArchivos: TDataSource;
+    mtArchivosoid_Cliente: TIntegerField;
+    lcMainGroup15: TdxLayoutGroup;
+    lcMainItem26: TdxLayoutItem;
+    jktExpDBGrid5: TjktExpDBGrid;
+    jktExpDBGrid5DBTableView1: TcxGridDBTableView;
+    jktExpDBGrid5DBTableView1FechaSubida: TcxGridDBColumn;
+    jktExpDBGrid5DBTableView1Usuario: TcxGridDBColumn;
+    jktExpDBGrid5DBTableView1Comentario: TcxGridDBColumn;
+    jktExpDBGrid5DBTableView1Archivo: TcxGridDBColumn;
+    jktExpDBGrid5Level1: TcxGridLevel;
+    OpenDialog: TOpenDialog;
+    opTraerRutaCompartida: TjktOperacion;
     procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure cxDBButtonEdit2PropertiesButtonClick(Sender: TObject;
@@ -380,8 +400,14 @@ type
     procedure mtClienteTelefonosChange(Sender: TField);
     procedure DriverNuevo(Sender: TObject);
     procedure mtClientedes_vendChange(Sender: TField);
+    procedure mtArchivosNewRecord(DataSet: TDataSet);
+    procedure jktExpDBGrid5DBTableView1ArchivoPropertiesButtonClick(
+      Sender: TObject; AButtonIndex: Integer);
+    procedure opTraerRutaCompartidaBeforeEjecutar(Sender: TObject);
+    procedure opTraerRutaCompartidaAfterEjecutar(Sender: TObject);
   private
     cod_PaisPorDefecto: string;
+    rutaCompartida: string;
 
   public
     { Public declarations }
@@ -392,6 +418,8 @@ implementation
 
 {$R *.dfm}
 
+uses
+  jktCNMet0005, ShellAPI;
 
 procedure TFNCli0001.cxButtonEdit1PropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
@@ -506,6 +534,36 @@ begin
     // se obtiene con el Validador!
   else ;
     // No seleccionó nada!
+end;
+
+procedure TFNCli0001.jktExpDBGrid5DBTableView1ArchivoPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+  inherited;
+
+  if AButtonIndex = 0 then begin
+    if OpenDialog.Execute then
+      mtArchivos.Edit;
+      mtArchivosarchivo.AsString := OpenDialog.FileName
+  end else if AButtonIndex = 1 then begin
+    // Abro el archivo
+    if (mtArchivos.FieldByName('archivo').AsString <> '') then
+      ShellExecute(Self.Handle, 'open',
+        PChar(mtArchivos.FieldByName('archivo').AsString), nil, nil, SW_SHOWNORMAL);
+  end;
+end;
+
+procedure TFNCli0001.mtArchivosNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+
+  if not Service.ModoExecute then
+    begin
+      mtArchivos.FieldByName('oid_arch').AsInteger := GetNewOid;
+      mtArchivos.FieldByName('fecha_subida').AsDateTime := Now();
+      mtArchivos.FieldByName('oid_usu').AsInteger := Login.Usuario;
+      mtArchivos.FieldByName('usuario').AsString := Login.ApeNom;
+    end;
 end;
 
 procedure TFNCli0001.mtClasificadoresSucursalNewRecord(DataSet: TDataSet);
@@ -738,6 +796,9 @@ begin
 end;
 
 procedure TFNCli0001.OperacionSaveBeforeEjecutar(Sender: TObject);
+var
+  CarpetaCliente: string;
+  RutaCompleta: string;
 begin
   inherited;
 
@@ -769,6 +830,32 @@ begin
       {******************************}
 
       mtSucursalesCliente.Next;
+    end;
+
+  // Copio los archivos del Cliente en el Recurso Compartido. Antes de esto,
+  // verifico si ya existe una carpeta para este Cliente en particular
+  if not DirectoryExists(rutaCompartida) then
+    MessageDlg(Format('No se encuentra el recurso compartido "%s". Por favor, asegúrese que esté ' +
+      'configurada la ruta correctamente y que tiene acceso a la misma. No se guardarán los archivos cargados.', 
+      [rutaCompartida]), mtError, [mbOK], 0)
+  else
+    begin
+      CarpetaCliente := Trim(mtCliente.FieldByName('Codigo').AsString);
+      if (CarpetaCliente <> '') then
+        begin
+          RutaCompleta := rutaCompartida + 'clientes' + '\' + CarpetaCliente + '\'; 
+          
+          if not DirectoryExists(RutaCompleta) then
+            ForceDirectories(RutaCompleta);
+
+          mtArchivos.First;
+          while not mtArchivos.Eof do
+            begin
+              CopyFile(PChar(mtArchivos.FieldByName('archivo').AsString),
+                       PChar(RutaCompleta + ExtractFileName(mtArchivos.FieldByName('archivo').AsString)),
+                       False);
+            end;
+        end;
     end;
 end;
 
@@ -856,6 +943,26 @@ begin
 
   // Esto se reemplazará cuando se recuperen TODOS los parámetros del Form
   mtParametroInicial.FieldByName('NombreParametro').AsString := 'PaisPorDefecto';
+end;
+
+procedure TFNCli0001.opTraerRutaCompartidaAfterEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  mtParametrosForm.First;
+  if not mtParametrosForm.Locate('codigo', 'rutaCompartida', [loCaseInsensitive]) then
+    // 'Código de Parámetro inexistente'
+    rutaCompartida := ''
+  else
+    rutaCompartida := mtParametrosForm.FieldByName('valor_cadena').AsString;
+end;
+
+procedure TFNCli0001.opTraerRutaCompartidaBeforeEjecutar(Sender: TObject);
+begin
+  inherited;
+
+  // Esto se reemplazará cuando se recuperen TODOS los parámetros del Form
+  mtParametroInicial.FieldByName('NombreParametro').AsString := 'rutaCompartida';
 end;
 
 procedure TFNCli0001.tvClasificadoresCodValorClasifPropertiesButtonClick(
