@@ -19,6 +19,9 @@ import com.jkt.presupuesto.dominio.PresupuestoDet;
 
 /**
  * Recupera un presupuesto y todas sus relaciones.
+ * <p>Recupera las notas del presupuesto, y las notas totales sin chequear.</p>
+ * <p>De la misma forma que con las notas, las condiciones comerciales.</p>
+ * <p>Recupera todos los items, sean del sector de taller, de labo electrico, labo quimico o service.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  * @author Santiago Braceras - Jakarta SRL

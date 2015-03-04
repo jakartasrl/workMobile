@@ -12,7 +12,7 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="descripcion" type="text" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 
 
