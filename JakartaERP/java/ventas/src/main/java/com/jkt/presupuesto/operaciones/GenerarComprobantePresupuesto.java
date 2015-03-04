@@ -286,7 +286,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 		for (Nota nota : p.getNotas()) {
 			cantidadNota++;
 			nuevaNota=new ItemResumen();
-			nuevaNota.setDescripcion(VINIETA+formatLineFeed(nota.getDescripcion()));
+			nuevaNota.setDescripcion(VINIETA+formatLineFeed(nota.getDescripcionConAdicional()));
 			obtenerDetalles.add(nuevaNota);
 		}
 

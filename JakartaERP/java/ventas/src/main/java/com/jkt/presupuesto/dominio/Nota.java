@@ -19,7 +19,7 @@ public class Nota extends Descriptible {
 	
 	private String adicional=StringUtils.EMPTY;
 
-	public String getDescripcion(){
+	public String getDescripcionConAdicional(){
 		if (adicional!=null && !adicional.isEmpty()) {
 			return super.getDescripcion().concat(" ").concat(adicional);
 		}
