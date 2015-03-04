@@ -24,6 +24,8 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 	
 	private Date fechaVencimiento;
 	private String referencia;
+	
+	@NotNull(message="El comprobante debe tener obligatoriamente un contacto de referencia.")
 	private Contacto contactoReferencia;
 
 	public Date getFechaVencimiento() {

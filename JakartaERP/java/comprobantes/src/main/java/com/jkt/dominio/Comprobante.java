@@ -33,13 +33,6 @@ public abstract class Comprobante extends PersistentEntity {
 	private String nro;
 	private boolean anulado=false;
 	
-	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
-		this.comprobanteRelacionado = comprobanteRelacionado;
-	}
-
-	public Comprobante getComprobanteRelacionado() {
-		return comprobanteRelacionado;
-	}
 
 	@NotNull(message="Debe ingresar obligatoriamente un tipo de comprobante.")
 	private TipoComprobante tipoComprobante;
@@ -50,6 +43,14 @@ public abstract class Comprobante extends PersistentEntity {
 	 * variables de instancia
 	 * ***********************************************
 	 */
+
+	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
+		this.comprobanteRelacionado = comprobanteRelacionado;
+	}
+	
+	public Comprobante getComprobanteRelacionado() {
+		return comprobanteRelacionado;
+	}
 	
 	public Comprobante(){
 		super();
@@ -125,6 +126,10 @@ public abstract class Comprobante extends PersistentEntity {
 	public boolean isPresupuesto(){
 		return false;
 	}
+	public boolean isOrdenFabricacion(){
+		return false;
+	}
+	
 	
 	
 }

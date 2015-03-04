@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.pedido.dominio.OrdenFabricacion" table="ORDEN_FABRICACION" >
+		
+		<id name="id" column="ORDEN_FABRICACION_ID">
+			<generator class="native" />
+		</id>
+
+		<!-- persistent entity -->
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<!-- comprobante -->
+		<property name="lugarEmision" column="LUGAR_EMISION" />
+		<property name="anulado" column="ANULADO" type="boolean" />
+		<property name="nro" column="NUMERO" type="string" />
+		
+		<property name="fecha" column="FECHA" type="date" />
+
+		<property name="letra" type="string">
+            <column name="LETRA" length="1" />
+        </property>
+
+        <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID" />
+        
+        <list name="archivos" table="ARCHIVO_COMPROBANTES" lazy="true" cascade="all">
+			<key column="COMPROBANTE_VENTA_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
+		</list>
+
+		<!-- my properties -->
+		<property name="descripcion" column="DESCRIPCION" type="string" />
+		<property name="sector" column="SECTOR" type="string" />
+		
+		<many-to-one name="comprobanteRelacionado" class="com.jkt.pedido.dominio.Pedido" column="PEDIDO_RELACIONADO_ID"></many-to-one>
+		<many-to-one name="ordenAsociada" class="com.jkt.pedido.dominio.OrdenFabricacion" column="ORDEN_RELACIONADA_ID"></many-to-one>
+		
+		<property name="estadoId" type="integer" column="ESTADO"></property>
+		
+	</class>
+	
+</hibernate-mapping>
