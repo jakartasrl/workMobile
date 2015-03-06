@@ -10,13 +10,15 @@
 ]>
 
 <operaciones>
-	<operacion ruta="/WEB-INF/operaciones/operaciones.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-varios.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-common.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-seguridad.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-ventas.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-laboratorio.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-articulos.xml"></operacion>
-	<operacion ruta="/WEB-INF/operaciones/operaciones-clientes.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-varios.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-common.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-seguridad.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-ventas.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-laboratorio.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-articulos.xml"></operacion>
+	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-clientes.xml"></operacion>
+	
+<!-- 	<operacion ruta="/WEB-INF/operaciones-web/operaciones-html.xml"></operacion> -->
 </operaciones>
 

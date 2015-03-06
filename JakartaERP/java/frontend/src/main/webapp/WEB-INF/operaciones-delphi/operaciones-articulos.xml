@@ -1,0 +1,545 @@
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE entity [
+
+  <!ELEMENT entity        (operacion*)>
+  <!ELEMENT operacion     (input* , output* , listas? , dataset* , tables*, transformer?, forms)>
+<!--   <!ELEMENT operacion     (input* , output* , dataset* , tables*, transformer?, forms)> -->
+  
+  <!ELEMENT input		  (campoEntrada*)>	<!--   Es la entrada de la operacion. Lo definido aquí llegará en un mapa a la operacion -->
+  <!ELEMENT forms		  (form*)>		  	<!--   Para definir una restriccion y conocer que clients utilizan esta operacion. Es a modo de mantenimiento, por ejemplo: al cambiar una operacion, se debe saber quienes suelen llamar a la operacion para realizar los debidos cambios -->
+  <!ELEMENT output		  (campoSalida*)> 	<!--   Define el formato de salida -->
+  <!ELEMENT transformer	  EMPTY>			<!--   Define una clase que es la encargada de mostrar los resultados en la salida de la operacion. (Muchas tablas, una sola, en paralelo) -->
+  
+  <!ELEMENT listas		  (lista*)>			<!--   Son las listas para mostrar en la salida-->
+
+  <!ELEMENT lista  (lista*)>  
+  <!ATTLIST lista nombreWriter		CDATA    #REQUIRED>
+  <!ATTLIST lista nombreLista       CDATA    #REQUIRED>
+
+
+  <!ELEMENT campoEntrada  (input*|campoEntrada*)>  
+  <!ELEMENT campoSalida   (campoSalida*,output*)>  
+  
+  <!ELEMENT dataset       (campo*)>
+  <!ELEMENT campo         EMPTY>
+  <!ELEMENT tables       (tableDef+)>
+  <!ELEMENT tableDef     (campoTable*)>
+  <!ELEMENT campoTable   EMPTY>
+  
+  <!ATTLIST transformer clase           CDATA #REQUIRED>
+  
+  <!ATTLIST form name	CDATA #REQUIRED>
+  
+  <!ATTLIST input name           	 	CDATA    #IMPLIED><!--   Nombre que se corresponde con la entrada de delphi. Si en delphi mandan el valor Name, acá debe exstir en valor Name para obtener los demas datos -->
+  <!ATTLIST input keyName           	CDATA    #IMPLIED><!--   Indica el key del mapa que llega a la operacion. Si el valor es 'leo', se debera recuperar usando la key 'leo' sobre el mapa en la operacion -->
+  <!ATTLIST input clase           	 	CDATA    #IMPLIED><!-- 	define la clase del parmetro recibido -->
+  <!ATTLIST input fieldID           	CDATA    #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+  <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
+  
+  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada clase			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada nombreEntidad	CDATA #IMPLIED>
+  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada fieldID        CDATA #IMPLIED><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base, si acá el valor es UN_ID, en delphi deberian mandar el valor UN_ID -->
+ 
+  <!ATTLIST output name					CDATA #REQUIRED> 
+  <!ATTLIST output tableName           	CDATA #REQUIRED><!-- va a representar el nombre de la tabla -->
+
+  <!ATTLIST campoSalida tableName		CDATA #IMPLIED> <!-- en caso de ser hijo de otro campoSalida, es una tabla, y este campo tendra el nombre de la tabla -->
+  <!ATTLIST campoSalida target			CDATA #IMPLIED> <!-- El nombre del metodo para recuperar los datos -->
+  <!ATTLIST campoSalida value			CDATA #IMPLIED> <!-- el valor de la columna que contendra el valor de resltado de target -->
+
+  <!ATTLIST operacion name              ID    #REQUIRED>
+  <!ATTLIST operacion clase             CDATA #IMPLIED>
+  <!ATTLIST operacion entidad           CDATA #IMPLIED>
+  <!ATTLIST operacion XMLWriter         CDATA #IMPLIED>
+  <!ATTLIST operacion redirect          CDATA #IMPLIED>
+  <!ATTLIST operacion usaJMS            CDATA #IMPLIED>
+  
+  <!ATTLIST dataset name                CDATA #REQUIRED>
+  <!ATTLIST dataset value               CDATA #IMPLIED>
+  <!ATTLIST dataset tabla               CDATA #IMPLIED>
+  
+  <!ATTLIST campo   name                CDATA #REQUIRED>
+  <!ATTLIST campo   value               CDATA #IMPLIED>
+  
+  <!ATTLIST tableDef    name           	CDATA #REQUIRED>
+
+  <!ATTLIST campoTable	name        	CDATA #REQUIRED>
+  <!ATTLIST campoTable  orden       	CDATA #IMPLIED>
+  <!ATTLIST campoTable  tipo        	CDATA #IMPLIED>
+  <!ATTLIST campoTable  longitud    	CDATA #IMPLIED>
+  
+]>
+
+<entity>
+
+	<!-- GUARDAR Tipo de Producto -->
+	<operacion name="GuardarTipoProducto" clase="com.jkt.operaciones.Guardar">
+
+		<input name="mtTipoProd" keyName="objeto" clase="com.jkt.erp.articulos.TipoProducto" fieldID="oid_tipo">
+			<campoEntrada >		
+				<campoEntrada name="Codigo" clase="String"  metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" 	metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				
+				<campoEntrada name="mtDet" metodo="addCaracteristica" clase="com.jkt.erp.articulos.TipoProductoDet" fieldID="oid_det"  >
+					<campoEntrada name="orden" 		clase="Integer" metodo="setOrden" />
+					<campoEntrada name="oid_carac" 	clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracteristica" />
+					<campoEntrada name="Activo"		clase="Boolean" metodo="setActivo" />				
+					<campoEntrada name="oblig" 		clase="Boolean" metodo="setObligatorio" />
+					<campoEntrada name="arma_cod" 	clase="Boolean" metodo="setArmaCodigo" />
+					<campoEntrada name="arma_desc" 	clase="Boolean" metodo="setArmaDescripcion" />
+				</campoEntrada>
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="FNArt0002"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- RECUPERAR Tipo Producto -->
+	<operacion name="TraerTipoProducto" clase="com.jkt.erp.articulos.operaciones.TraerTipoProducto" >
+
+		<output name="out1" tableName="mtTipoProd">
+			<campoSalida value="oid_tipo" 	target="id" />
+			<campoSalida value="Codigo" 	target="codigo" />
+			<campoSalida value="descr" 		target="descripcion" />
+			<campoSalida value="Activo" 	target="isActivo" />
+		</output>
+		
+		<output name="out2" tableName="mtDet">
+			<campoSalida value="oid_det" 	target="id" />
+			<campoSalida value="oid_tipo" 	target="tipoProducto.id" />
+			<campoSalida value="orden" 	    target="orden" />
+			<campoSalida value="oid_carac" 	target="caracteristica.id" />
+			<campoSalida value="cod_carac" 	target="caracteristica.codigo" />
+			<campoSalida value="des_carac" 	target="caracteristica.descripcion" />
+<!-- 			<campoSalida value="tipoDato" 	target="caracteristica.tipoDato" /> -->
+			<campoSalida value="Activo" 	target="isActivo" />
+			<campoSalida value="oblig" 		target="isObligatorio" />
+			<campoSalida value="arma_cod" 	target="isArmaCodigo" />
+			<campoSalida value="arma_desc" 	target="isArmaDescripcion" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNArt0002"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<!-- GUARDAR Caracteristicas de Producto  -->
+	<operacion name="GuardarCaracProducto" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.CaracteristicaProducto" fieldID='oid_carac'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+				<campoEntrada name="tipo_dato" clase="String" metodo="setTipoDato" />
+				<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTabla" />
+			</campoEntrada>			
+		</input>		
+
+		<forms>
+			<form name=""> </form>
+		</forms>
+		
+	</operacion>
+
+	<!-- RECUPERAR  Caracteristicas de Producto -->
+	<operacion name="TraerCaracProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.CaracteristicaProducto">
+		
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_carac" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="tipo_dato"    target="tipoDato" />
+			<campoSalida value="oid_tabla"    target="tabla.id" />
+			<campoSalida value="cod_tabla"    target="tabla.codigo" />
+			<campoSalida value="des_tabla"    target="tabla.descripcion" />
+		</output>		
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>		
+	</operacion>
+	
+	
+	<operacion name="TraerTablaValCarac" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TablaValoresCaracProd">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_tabla" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- GUARDAR Tablas Validaciones Caracteristicas de Producto  -->
+	<operacion name="GuardarTablaValCarac" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'>
+			<campoEntrada>			
+				<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+				<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+			</campoEntrada>			
+		</input>		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	
+	
+<!-- 	GUARDAR VALORES DE UNA DETERMINADA TABLA -->
+	<operacion name="GuardarValoresDeTabla" clase="com.jkt.operaciones.GuardarLista">
+		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.ValoresTablas" fieldID='oid_valor_tabla'>
+<!-- 		<input name="mtInput" keyName="objeto" clase="com.jkt.erp.articulos.TablaValoresCaracProd" fieldID='oid_tabla'> -->
+			<campoEntrada>			
+
+<!-- 				<campoEntrada name="mtValores" metodo="addValor" clase="com.jkt.erp.articulos.ValoresTablas" fieldID="oid_valor_tabla" > -->
+					<campoEntrada name="Codigo" clase="String" metodo="setCodigo" />
+					<campoEntrada name="descr"  clase="String" metodo="setDescripcion" />
+					<campoEntrada name="oid_tabla" clase="com.jkt.erp.articulos.TablaValoresCaracProd" metodo="setTablaValoresCaract" />
+					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" />
+<!-- 				</campoEntrada> -->
+				
+			</campoEntrada>			
+		</input>		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+	</operacion>
+	
+	<operacion name="TraerValoresDeTabla" clase="com.jkt.erp.articulos.operaciones.TraerValoresDeTabla" >
+		<output name="valores" tableName="mtInput">
+			<campoSalida value="oid_valor" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+			<campoSalida value="Activo"    target="isActivo" />
+			<campoSalida value="oid_tabla"    target="tablaValoresCaract.id" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+	
+<!-- 	TRAE TODOS LOS VALORES DE LAS TABLAS DE CARACTERISTICAS EN SU TOTALIDAD -->
+	<operacion name="TraerValoresDeTablas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.ValoresTablas">
+		<output name="resultado" tableName="mtInput">
+			<campoSalida value="oid_tabla"    target="tablaValoresCaract.id" />
+			<campoSalida value="cod_tabla"    target="tablaValoresCaract.codigo" />
+			<campoSalida value="des_tabla"    target="tablaValoresCaract.descripcion" />
+
+			<campoSalida value="oid_valor_tabla" target="id" />
+			<campoSalida value="Codigo"    target="codigo" />
+			<campoSalida value="descr"     target="descripcion" />
+
+			<campoSalida value="Activo"    target="isActivo" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TEmpresa"></form>
+		</forms>
+		
+	</operacion>
+
+	<!-- GUARDAR UN PRODUCTO -->
+	<operacion name="GuardarArticulo" clase="com.jkt.operaciones.Guardar">
+		<input name="mtArticulo" keyName="objeto" clase="com.jkt.erp.articulos.Producto" fieldID="oid_Art">
+			<campoEntrada >		
+
+				<campoEntrada name="Codigo" 	  clase="String" metodo="setCodigo" />
+				<campoEntrada name="Descripcion"  clase="String" metodo="setDescripcion" />
+				<campoEntrada name="DescAbrev"	  clase="String" metodo="setDescripcionAbrev" />
+				<campoEntrada name="oid_TipoArt"  clase="com.jkt.erp.articulos.TipoProducto" metodo="setTipoProducto" />
+				<campoEntrada name="EsBien"		  clase="Boolean" metodo="setBien" />
+				<campoEntrada name="EsServicio"	  clase="Boolean" metodo="setServicio" />  <!-- ver esto bien despues TODO -->
+				<campoEntrada name="EsStockeable" clase="Boolean" metodo="setStockeable" />
+				<campoEntrada name="EsProdPropia" clase="Boolean" metodo="setProdPropia" />
+				<campoEntrada name="EsComprable"  clase="Boolean" metodo="setComprable" />
+				<campoEntrada name="EsVendible"	  clase="Boolean" metodo="setVendible" />
+				<campoEntrada name="Activo"		  clase="Boolean" metodo="setActivo" />
+
+				<campoEntrada name="oid_UnidStockPrinc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" />
+				<campoEntrada name="oid_UnidStockSecun"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" />
+				<campoEntrada name="oid_UnidStockTerc"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTerc" />
+
+				<campoEntrada name="oid_UnidVenta"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadVenta" />
+				<campoEntrada name="oid_UnidProd"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadProduccion" />
+				<campoEntrada name="oid_UnidCompra"	clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadCompra" />
+
+
+				<campoEntrada name="mtValoresCaracProd" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ProductoDet" fieldID="oid_ValorCarac"  >
+<!-- 					<campoEntrada name="oid_Art" -->
+					<campoEntrada name="oid_Carac"		clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" />
+					<campoEntrada name="CodValorCarac"	clase="String" metodo="setCampoTransiente" />
+				</campoEntrada>
+				
+<!-- 				<campoEntrada name="mtArtStock" metodo="addArticulo" clase="com.jkt.erp.articulos.ArticuloStock" fieldID="oid_art_stock"  > -->
+<!-- 					<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+<!-- 					<campoEntrada name="a" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedPrin" /> -->
+<!-- 					<campoEntrada name="b" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedSec" /> -->
+<!-- 					<campoEntrada name="c" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedTer" /> -->
+					
+<!-- 					<campoEntrada name="mtArtStockDet" metodo="agregarDetalle" clase="com.jkt.erp.articulos.ArticuloStockDet" fieldID="oid_art_stock_det"  > -->
+								
+<!-- 						<campoEntrada name="a" clase="com.jkt.erp.articulos.CaracteristicaProducto" metodo="setCaracProducto" /> -->
+<!-- 						<campoEntrada name="b" clase="com.jkt.erp.articulos.ValoresTablas" metodo="setValorTabla" /> -->
+
+<!-- 						<campoEntrada name="c"  clase="String" 	metodo="setValorString" /> -->
+<!-- 						<campoEntrada name="d"  clase="Integer" 	metodo="setValorEnter" /> -->
+<!-- 						<campoEntrada name="e"  clase="Double" 	metodo="setValorDoble" /> -->
+<!-- 						<campoEntrada name="f" clase="Boolean" metodo="setValorBoolean" /> -->
+<!-- 						<campoEntrada name="Activo" clase="Boolean" metodo="setActivo" /> -->
+						
+<!-- 					</campoEntrada> -->
+					
+<!-- 				</campoEntrada> -->
+				
+				<campoEntrada name="mtEquivalencias" metodo="addEquivalencia" clase="com.jkt.erp.articulos.ProductoEquivUniMed" fieldID="oid_EquivArt"  >
+					<!-- <campoEntrada name="oid_Art"            VIENE DE ARRIBA! (EN LA TABLA MAESTRA)  -->      
+					<campoEntrada name="oid_UnidMedOrig" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedOrigen" />
+					<campoEntrada name="oid_UnidMedDest" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUniMedDestino" />
+					<campoEntrada name="FactConv" 		 clase="String"	 metodo="setFactor" />
+					<campoEntrada name="Activo"			 clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
+
+
+				<campoEntrada name="mtClasifProd" metodo="addValorClasificador" clase="com.jkt.erp.articulos.ProductoClasificador" fieldID="oid_ClasifProd"  >
+					<!-- <campoEntrada name="oid_Art"            VIENE DE ARRIBA! (EN LA TABLA MAESTRA)  -->      
+<!-- 					<campoEntrada name="oid_Clasif"		 clase="" metodo="" /> -->
+					<campoEntrada name="oid_ValorClasif" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" />
+					<campoEntrada name="Activo"			 clase="Boolean" metodo="setActivo" />
+				</campoEntrada>
+				
+			</campoEntrada>
+		</input>
+		
+		<forms>
+			<form name="FNArt0001"></form>
+		</forms>
+		
+	</operacion>
+
+	
+	<!-- 	Filtra los productos recibiendo una serie de filtros -->
+	<!-- estos filtros son COD_ART_DES COD_ART_HAS CLASIFICACION -->
+	<operacion name="FiltrarProductos" clase="com.jkt.erp.articulos.operaciones.FiltrarProductos" >
+
+		<output name="producto" tableName="mtArticulo">
+		
+			<campoSalida value="oid_Art"	  target="id" />
+			<campoSalida value="Codigo" 	  target="codigo" />
+			<campoSalida value="Descripcion"  target="descripcion" />
+
+		</output>
+		
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNArt0001"></form>
+		</forms>
+		
+	</operacion>
+
+	<!-- TRAER PRODUCTO Y TODAS SUS RELACIONES -->
+	<operacion name="TraerArticulo" clase="com.jkt.erp.articulos.operaciones.TraerProducto" >
+
+		<output name="producto" tableName="mtArticulo">
+		
+			<campoSalida value="oid_Art"	  target="id" />
+			<campoSalida value="Codigo" 	  target="codigo" />
+			<campoSalida value="Descripcion"  target="descripcion" />
+			<campoSalida value="DescAbrev"	  target="descripcionAbrev" />
+			<campoSalida value="oid_TipoArt"  target="tipoProducto.id" />
+			<campoSalida value="EsBien"		  target="isBien" />
+			<campoSalida value="EsServicio"	  target="isServicio" />
+			<campoSalida value="EsStockeable" target="isStockeable" />
+			<campoSalida value="EsProdPropia" target="isProdPropia" />
+			<campoSalida value="EsComprable"  target="isComprable" />
+			<campoSalida value="EsVendible"   target="isVendible" />
+			<campoSalida value="Activo" 	  target="isActivo" />
+
+			<campoSalida value="oid_UnidStockPrinc"	target="uniMedPrin.id" />
+			<campoSalida value="CodUnidStockPrinc"	target="uniMedPrin.codigo" />
+			<campoSalida value="DescUnidStockPrinc"	target="uniMedPrin.descripcion" />
+
+			<campoSalida value="oid_UnidStockSecun" target="uniMedSec.id" />
+			<campoSalida value="CodUnidStockSecun"	target="uniMedSec.codigo" />
+			<campoSalida value="DescUnidStockSecun"	target="uniMedSec.descripcion" />
+
+			<campoSalida value="oid_UnidStockTerc"	target="uniMedTerc.id" />
+			<campoSalida value="CodUnidStockTerc"	target="uniMedTerc.codigo" />
+			<campoSalida value="DescUnidStockTerc"	target="uniMedTerc.descripcion" />
+			
+<!-- 			Unidades de venta, compra y prod. -->
+			<campoSalida value="oid_UnidVenta"	target="unidadVenta.id" />
+			<campoSalida value="CodUnidVenta"	target="unidadVenta.codigo" />
+			<campoSalida value="DescUnidVenta"	target="unidadVenta.descripcion" />
+
+			<campoSalida value="oid_UnidCompra"	target="unidadCompra.id" />
+			<campoSalida value="CodUnidCompra"	target="unidadCompra.codigo" />
+			<campoSalida value="DescUnidCompra"	target="unidadCompra.descripcion" />
+
+			<campoSalida value="oid_UnidProd"	target="unidadProduccion.id" />
+			<campoSalida value="CodUnidProd"	target="unidadProduccion.codigo" />
+			<campoSalida value="DescUnidProd"	target="unidadProduccion.descripcion" />
+			
+		</output>
+
+
+<!--	**************************************************************************	-->
+<!-- 	TABLAS PARA POSTERIORMENTE MOSTRAR LISTA DE ARTICULOS DE STOCK POR PRODUCTO -->
+
+<!-- 		<output name="articulosStock" tableName="mtAperturaStock"> -->
+<!-- 		</output> -->
+
+
+<!-- 		<output name="detalleArticuloStock" tableName="mtDetalleArticuloStock"> -->
+<!-- 		</output> -->
+
+<!--	**************************************************************************	-->
+
+
+		<output name="detalleTipoProducto" tableName="mtValoresCaracProd">
+
+			<campoSalida value="oid_ValorCarac"	target="id" />
+			<campoSalida value="oid_Art"		target="producto.id" />
+			<campoSalida value="oid_Carac"		target="caracProducto.id" />
+			<campoSalida value="DescCarac"		target="caracProducto.descripcion" />
+			<campoSalida value="TipoDeDato"		target="caracProducto.tipoDato" />
+			<campoSalida value="CodValorCarac"	target="valorDeDato" />
+			<campoSalida value="DescValorCarac"	target="descripcionDeDato" />
+			<campoSalida value="oid_TablaValores"	target="caracProducto.tabla.id" />
+			
+			
+		</output>
+		
+		
+		<output name="equivalencias" tableName="mtEquivalencias">
+		
+			<campoSalida value="oid_EquivArt"	 target="id" />
+			<campoSalida value="oid_Art"		 target="producto.id" />
+			<campoSalida value="oid_UnidMedOrig" target="uniMedOrigen.id" />
+			<campoSalida value="CodUnidMedOrig"	 target="uniMedOrigen.codigo" />
+			<campoSalida value="DescUnidMedOrig" target="uniMedOrigen.descripcion" />
+			<campoSalida value="oid_UnidMedDest" target="uniMedDestino.id" />
+			<campoSalida value="CodUnidMedDest"	 target="uniMedDestino.codigo" />
+			<campoSalida value="DescUnidMedDest" target="uniMedDestino.descripcion" />
+			<campoSalida value="FactConv"		 target="factor" />
+			<campoSalida value="Activo"			 target="isActivo" />
+
+		</output>
+
+
+		<output name="clasificadores" tableName="mtClasifProd">
+
+			<campoSalida value="oid_ClasifProd"	 target="id" />
+			<campoSalida value="oid_Art"		 target="producto.id" />
+			<campoSalida value="oid_Clasif"		 target="clasificador.id" />
+			<campoSalida value="DescClasif"		 target="clasificador.descripcion" />
+			<campoSalida value="oid_ValorClasif" target="componenteValor.id" />
+			<campoSalida value="CodValorClasif"	 target="componenteValor.codigo" />
+			<campoSalida value="DescValorClasif" target="componenteValor.descripcion" />
+			<campoSalida value="Activo"			 target="componenteValor.activo" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
+		
+		<forms>
+			<form name="FNArt0001"></form>
+		</forms>
+		
+	</operacion>
+	
+	
+	<!-- TRAER LOS CLASIFICADORES DE UN PRODUCTO -->
+	<operacion name="TraerClasifProd" clase="com.jkt.erp.articulos.operaciones.TraerClasifProducto">
+
+		<output name="resultado" tableName="mtClasifProd">
+			<campoSalida value="oid_Clasif" target="id" />
+			<campoSalida value="DescClasif" target="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+
+		<forms>
+			<form name="FNArt0001" />
+		</forms>
+
+	</operacion>
+
+	<!-- VALIDAR TIPOS DE DATOS DE UNA CARACTERISTICA DE PRODUCTO. -->
+	<operacion name="ValidarValores" clase="com.jkt.erp.articulos.operaciones.ValidarValoresDeTablaDeCaracteristicas">
+		
+		<output name="resultado" tableName="NoSeUsa">
+			<campoSalida value="oid" target="id" />
+			<campoSalida value="Descripcion" target="descripcion" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+
+
+	<operacion name="TraerCaracteristicasDeProducto" clase="com.jkt.erp.articulos.operaciones.TraerTiposDeProducto">
+
+		<output name="caracteristicas" tableName="mtValoresCaracProd">
+		
+			<campoSalida value="oid_Carac"	target="id" />
+			<campoSalida value="DescCarac"	target="descripcion" />
+			<campoSalida value="TipoDeDato"	target="tipoDato" />
+			<campoSalida value="oid_TablaValores"	target="tabla.id" />
+			
+		</output>
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="TUsuario"></form>
+		</forms>
+		
+	</operacion>
+	
+	<!-- RECUPERAR  Tipos de producto para un combo -->
+	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.erp.articulos.TipoProducto">
+		<output name="resultado" tableName="mtTiposDeProducto">
+			<campoSalida value="oid_TipoArt"	target="id" />
+			<campoSalida value="CodTipoArt"   	target="codigo" />
+			<campoSalida value="DescTipoArt"  	target="descripcion" />
+		</output>		
+			
+		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
+		
+		<forms>
+			<form name="FNArt0001"></form>
+		</forms>		
+	</operacion>
+	
+</entity>

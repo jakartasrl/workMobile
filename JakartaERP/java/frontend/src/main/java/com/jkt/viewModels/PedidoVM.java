@@ -2,7 +2,8 @@ package com.jkt.viewModels;
 
 import org.zkoss.bind.annotation.Command;
 
-import com.jkt.conciliacion.Operaciones;
+import com.jkt.common.Operaciones;
+import com.jkt.ov.PedidoOV;
 import com.jkt.pedido.dominio.Pedido;
 
 /**
@@ -38,7 +39,12 @@ public class PedidoVM implements IBasicOperations{
 	@Override
 	@Command
 	public void buscar() {
-		Operaciones.ejecutar("TraerProvincia");
+		
+		PedidoOV pedidoOV = new PedidoOV();
+		pedidoOV.setNro("PEDIDO-55-45");
+		pedidoOV.setLetra("A");
+		
+		Operaciones.ejecutar("GuardarPedido",pedidoOV);
 	}
 
 	@Override

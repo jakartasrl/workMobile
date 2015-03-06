@@ -1,0 +1,65 @@
+<zk>
+
+	<panel style="padding:3px;" title="Identificación" border="normal" height="40%" width="100%">
+		<panelchildren>
+			<div style="padding:5px;">
+
+                <hlayout style="margin-top:10px">
+					
+					<label style="vertical-align: bottom;" value="En Base a Cotización ... " width="150px" />
+					<textbox value="" width="150px" tabindex="1" />
+					<button label="..." width="10px" height="10px" orient="vertical" style="text-align:center" />
+					
+					<space  bar="true" style="vertical-align: middle; line-height: 20px;" />
+
+					<label value="Nro. de Presupuesto : " width="150px" />
+					<textbox value="" width="150px" tabindex="1" />
+
+					<space  bar="false" style="vertical-align: middle; line-height: 0px;" />
+
+					<label value="Fecha :" />
+					<datebox id="fecha" width="150px" />
+					
+				</hlayout >
+				
+				<separator />
+
+                <hlayout style="margin-top:10px">
+					
+					<label style="vertical-align: bottom;" value="Cliente | Sucursal : " width="150px" />
+					<textbox value="" width="150px" tabindex="1" />
+					<button label="..." width="10px" height="10px" orient="vertical" style="text-align:center" />
+
+					<textbox value="" width="150px" tabindex="1" />
+					<button label="..." width="10px" height="10px" orient="vertical" style="text-align:center" />
+					
+					<textbox value="" width="300px" tabindex="1" />
+					
+				</hlayout >
+
+                
+		    </div>
+		</panelchildren>
+	</panel>
+	<panel style="padding:3px;" title="Identificación" border="normal" height="60%" width="100%">
+		<panelchildren>
+		
+			<html>
+				
+				<![CDATA[ 
+				        <ul>
+							<li>Server+client Fusion</li>
+							<li>Ajax-as-a-Service</li>
+							<li>The Event Queue</li>
+							<li>jQuery Based</li>
+							<li>SEO Friendly</li>
+							<li>Auto Testing</li>
+						</ul>
+				]]>
+				
+			</html>
+			
+		</panelchildren>
+	</panel>
+
+</zk>

@@ -55,7 +55,7 @@ public class Configuration {
 	
 	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
 
-		String rutaOperacionesWeb="/WEB-INF/operaciones/operaciones-html.xml";
+		String rutaOperacionesWeb="/WEB-INF/operaciones-web/operaciones-html.xml";
 		
 		String rutaOperaciones="/WEB-INF/archivos-operaciones.xml"; /* Indica que archivo es el que contiene las referencias a los demas archivos con operaciones */
 		
