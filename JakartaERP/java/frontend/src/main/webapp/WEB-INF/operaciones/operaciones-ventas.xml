@@ -983,6 +983,7 @@
 
 	<!-- RECUPERAR  Notas -->
 	<operacion name="TraerNotas" clase="com.jkt.operaciones.TraerEntidades" entidad="com.jkt.presupuesto.dominio.Nota">
+	
 		<output name="resultado" tableName="mtInput">
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="Codigo"    target="codigo" />
@@ -1210,6 +1211,8 @@
 			<campoSalida value="oid" target="id" />
 			<campoSalida value="codigo" target="codigo" />
 			<campoSalida value="descripcion" target="descripcion" />
+			<campoSalida value="cod_act" target="actividad.codigo" />
+			<campoSalida value="des_act" target="actividad.descripcion" />
 			<campoSalida value="selec" target="isIncluida" />
 		</output>
 		
