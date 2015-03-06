@@ -1,0 +1,82 @@
+#idWindow .z-window-content{
+	background-color:red
+}
+.z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover {
+	background-color: transparent;
+	border: 0 none;
+	height: 100%;
+}
+
+td.z-hbox-sep {
+	width: 0;
+}
+
+.hboxToolBar .z-toolbar {
+	border: 0 none;
+	background: inherit;
+}
+
+.z-toolbar {
+	background: inherit;
+}
+
+.mainWindow .z-window-content {
+	background: #e7e6dd;
+}
+
+body {
+	background: #e7e6dd;
+	min-height: 500px;
+}
+
+.fontTitle {
+	font-family: Arial, Sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.tabPrincipal .z-tab-text {
+	background: darkslategrey;
+	color: white;
+}
+
+.fontListConciliacion .z-listheader-content, .z-listcell-content,
+	.z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
+	font-size: 11px
+
+}
+
+.z-datebox-disabled, .z-textbox[disabled], .z-combobox-disabled *,
+	.z-bandbox-disabled *, .z-datebox-disabled *, .z-timebox-disabled *,
+	.z-spinner-disabled *, .z-doublespinner-disabled * {
+	color: black !important;
+	font-weight: bold;
+}
+
+.fontGrid .z-label,.z-column-content{
+	font-size: 11px	!important;
+}
+
+
+.lastChildTree .z-icon-caret-down:before,.lastChildTree .z-icon-caret-right:before{
+	content: "-";
+	
+}
+
+.z-notification-content {
+	min-height:20px;
+	
+}
+
+.z-loading{
+	height: 100%;
+	width: 100%;
+	z-index: 9999;
+	background: rgba(227,227,227,0.5);
+}
+
+.z-loading-indicator{
+	width: 120px !important;
+	margin: auto !important;
+}
+

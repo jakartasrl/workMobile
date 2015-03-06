@@ -1,0 +1,13 @@
+<?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
+<zk>
+		<style src="/style/template.css" />
+		<vlayout vflex="1" style="background: #e7e6dd;min-width: 900px;">
+			<div vflex="1"  hflex="1" sclass="hboxToolBar">
+				<include id="incToolBar" hflex="1" src="/pantallas/menues/toolBar.zul" />
+			</div>
+			<div vflex="22" hflex="1" style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
+				Main content.
+			</div>
+			
+		</vlayout>
+</zk>
