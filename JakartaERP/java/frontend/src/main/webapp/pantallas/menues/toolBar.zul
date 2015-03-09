@@ -1,9 +1,9 @@
 <zk>
 <toolbar vflex="1" hflex="1" id="gralToolBar" align="start" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.jkt.viewModels.PedidoVM')">
+		viewModel="@id('vm') @init('com.jkt.viewModels.ToolBarVM')">
 	<hlayout style="width:100%" id="idLayout">
 		<div hflex="1" id="idDiv">
-			<toolbarbutton   id="idNew" image="/pantallas/icons/new.png" onClick="@command('showInputConciliacion')" tooltiptext="Abrir Conciliación" />
+			<toolbarbutton   id="idNew" image="/pantallas/icons/new.png" onClick="@command('showInputConciliacion')" tooltiptext="Abrir @load('vm.elemento')" />
 			<toolbarbutton   image="/pantallas/icons/candado.png"	onClick="@command('buscar')" tooltiptext="Buscar" />
 			<toolbarbutton   onClick="@command('showImport')"   image="/pantallas/icons/import.png" tooltiptext="Importar Resumen" />
 			<toolbarbutton  onClick="@command('importarSistema')"   image="/pantallas/icons/refreshSistema.png" tooltiptext="Importar Movimientos"  />

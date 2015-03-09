@@ -1,65 +1,102 @@
 <zk>
 
-	<panel style="padding:3px;" title="Identificación" border="normal" height="40%" width="100%">
+	<panel style="padding:5px;" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.PedidoVM')" title="Identificación" border="normal" height="auto" width="90%">
 		<panelchildren>
-			<div style="padding:5px;">
 
-                <hlayout style="margin-top:10px">
-					
-					<label style="vertical-align: bottom;" value="En Base a Cotización ... " width="150px" />
-					<textbox value="" width="150px" tabindex="1" />
-					<button label="..." width="10px" height="10px" orient="vertical" style="text-align:center" />
-					
-					<space  bar="true" style="vertical-align: middle; line-height: 20px;" />
+			<grid style="border-style:none;">
 
-					<label value="Nro. de Presupuesto : " width="150px" />
-					<textbox value="" width="150px" tabindex="1" />
-
-					<space  bar="false" style="vertical-align: middle; line-height: 0px;" />
-
-					<label value="Fecha :" />
-					<datebox id="fecha" width="150px" />
-					
-				</hlayout >
-				
-				<separator />
-
-                <hlayout style="margin-top:10px">
-					
-					<label style="vertical-align: bottom;" value="Cliente | Sucursal : " width="150px" />
-					<textbox value="" width="150px" tabindex="1" />
-					<button label="..." width="10px" height="10px" orient="vertical" style="text-align:center" />
-
-					<textbox value="" width="150px" tabindex="1" />
-					<button label="..." width="10px" height="10px" orient="vertical" style="text-align:center" />
-					
-					<textbox value="" width="300px" tabindex="1" />
-					
-				</hlayout >
-
-                
-		    </div>
-		</panelchildren>
-	</panel>
-	<panel style="padding:3px;" title="Identificación" border="normal" height="60%" width="100%">
-		<panelchildren>
-		
-			<html>
-				
-				<![CDATA[ 
-				        <ul>
-							<li>Server+client Fusion</li>
-							<li>Ajax-as-a-Service</li>
-							<li>The Event Queue</li>
-							<li>jQuery Based</li>
-							<li>SEO Friendly</li>
-							<li>Auto Testing</li>
-						</ul>
-				]]>
-				
-			</html>
+				<columns>
+					<column width="150px" />
+					<column width="220px"></column>
+					<column width="220px"></column>
+					<column width="220px"></column>
+					<column width="100px" />
+					<column width="150px"></column>
+				</columns>
 			
+				<rows>
+			    	<row>
+			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
+			    		
+			    		<hlayout>
+							<textbox value="" />
+							<button label="..." onClick="@command('recuperarClientes')" />
+			    		</hlayout>
+
+						<label class="name" value="Nro. de Presupuesto : " />
+						<textbox value="" />
+	
+						<label class="name" value="Fecha : " />
+						<datebox id="fecha" />
+					</row>
+					
+			    	<row>
+						<label class="name" value="Cliente | Sucursal : " />
+						<hlayout>
+							<textbox value="" />
+							<button label="..." onClick="@command('helperPresupuestos')" />
+						</hlayout>
+	
+						<hlayout>
+							<textbox value="" />
+							<button label="..." onClick="@command('helperPresupuestos')" />
+						</hlayout>
+						
+						<textbox value="" />
+						
+						<separator/>
+						<separator/>
+					</row>
+					
+					<row>
+						<label value="Contacto Ref : " />
+						<combobox id="cmbColor" >
+						</combobox>
+					</row>
+
+					<row>
+						<label value="Lista de Precios : " />
+			    		<hlayout>
+							<textbox value="" />
+							<button label="..." onClick="@command('recuperarListasPrecio')" />
+			    		</hlayout>
+
+						<textbox value="" />
+
+					</row>
+										
+				</rows>
+			</grid>
+
 		</panelchildren>
 	</panel>
-
+	
+	<panel border="none" height="auto" width="90%">
+		<panelchildren>
+			<tabbox id="contenidoTabs" >
+			    <tabs id="tabs">
+			        <tab id="A" label="Items" />
+			        <tab id="B" label="Laboratorio Quimico" />
+			        <tab id="C" label="Laboratorio Electrico" />
+			        <tab id="D" label="Materiales" />
+			        <tab id="E" label="Notas" />
+			        <tab id="F" label="Condiciones Comerciales" />
+			    </tabs>
+			    <tabpanels>
+			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel>
+			        	<label value="Contacto Ref : " />
+						<combobox id="cmbColorExample" >
+						</combobox>
+					</tabpanel>
+			    </tabpanels>
+			</tabbox>
+		</panelchildren>
+	</panel>
+	
+	
 </zk>

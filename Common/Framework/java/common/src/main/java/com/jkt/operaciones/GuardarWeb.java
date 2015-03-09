@@ -10,6 +10,7 @@ public class GuardarWeb extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Object object = aParams.get("objPersistente");
 		guardar((PersistentEntity) object);
+		notificarObjeto("", object);
 	}
 
 }

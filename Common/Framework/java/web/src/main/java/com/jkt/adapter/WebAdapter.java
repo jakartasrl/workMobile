@@ -7,9 +7,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -99,9 +102,15 @@ public class WebAdapter extends Adapter<Map, Map> {
 				if(campoEntrada.getCamposDeEntrada()!=null && !campoEntrada.getCamposDeEntrada().isEmpty()){
 					Class<?> classSetter=null;
 					Method method ;
+					Object listOVs = callGetObject(ov,nombreCampoOV);
 					try{
-						 method = objetoPersistente.getClass().getMethod(metodo, List.class);
-	
+				
+						if(Set.class.isAssignableFrom(listOVs.getClass())){
+							method = objetoPersistente.getClass().getMethod(metodo, Set.class);
+						}else{
+							method = objetoPersistente.getClass().getMethod(metodo, List.class);
+						}
+						
 						Type[] genericParameterTypes = method.getGenericParameterTypes();
 	
 						for(Type genericParameterType : genericParameterTypes){
@@ -117,21 +126,37 @@ public class WebAdapter extends Adapter<Map, Map> {
 						throw new JakartaException("Error al obtener la clase de la lista");
 					}
 					
-					Object listOVs = callGetObject(ov,nombreCampoOV);
 					String fieldIDList = campoEntrada.getFieldID(false);
-					List list=new ArrayList();
 					
-					for (Object objListOV : (List)listOVs) {
-						//Obtengo la clase de lo que tengo que buscar en BD
-						Object objPersistenteDeLista = recuperarPersistente((ObjectView) objListOV, classSetter,fieldIDList);
-						getObjectPersistente(objPersistenteDeLista, objListOV, campoEntrada.getCamposDeEntrada(),map);
-						list.add(objPersistenteDeLista);
+					Object value=null;
+					if(List.class.isAssignableFrom(listOVs.getClass())){
+						List list=new ArrayList();
+						for (Object objListOV : (List)listOVs) {
+							//Obtengo la clase de lo que tengo que buscar en BD
+							Object objPersistenteDeLista = recuperarPersistente((ObjectView) objListOV, classSetter,fieldIDList);
+							getObjectPersistente(objPersistenteDeLista, objListOV, campoEntrada.getCamposDeEntrada(),map);
+							list.add(objPersistenteDeLista);
+						}
+						value=list;
+					}else{
+						if(Set.class.isAssignableFrom(listOVs.getClass())){
+							Set set=new HashSet();
+							for (Object objListOV : (Set)listOVs) {
+								//Obtengo la clase de lo que tengo que buscar en BD
+								Object objPersistenteDeLista = recuperarPersistente((ObjectView) objListOV, classSetter,fieldIDList);
+								getObjectPersistente(objPersistenteDeLista, objListOV, campoEntrada.getCamposDeEntrada(),map);
+								set.add(objPersistenteDeLista);
+							}
+							value=set;
+						}
 					}
+					
 					try {
-						method.invoke(objetoPersistente, list);
+						method.invoke(objetoPersistente, value);
 					} catch (Exception e) {
 						throw new JakartaException("Error al guardar metodo de lista con metodo"+metodo,e);
 					}
+				
 				}else{
 					Method persisMethod = BeanUtils.findMethodWithMinimalParameters(objetoPersistente.getClass(), metodo);
 					if(persisMethod==null){
@@ -200,7 +225,7 @@ public class WebAdapter extends Adapter<Map, Map> {
 		return parameterTypes[0];
 	}
 	
-	private Object recuperarPersistente(ObjectView objetoOV, Class<?> classSetter,String fieldId) throws JakartaException {
+	private Object recuperarPersistente(ObjectView objetoOV, Class<?> persistClass,String fieldId) throws JakartaException {
 		try {
 			//Recupero el objeto persistente
 			PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(objetoOV.getClass(), fieldId);
@@ -208,14 +233,14 @@ public class WebAdapter extends Adapter<Map, Map> {
 			long idLong= id==null ? -1 : (Long)id;
 
 			if (idLong < 1) {
-				return BeanUtils.instantiate(classSetter);
+				return BeanUtils.instantiate(persistClass);
 			} else {
 				session = sessionProvider.getSession();
-				return session.get(classSetter, (Long) id);
+				return session.get(persistClass, (Long) id);
 			}
 		} catch (Exception e) {
-			throw new JakartaException(
-					"Error recuperando persistente");
+			throw new RuntimeException(
+					"Error recuperando persistente",e);
 		}
 	}
 	

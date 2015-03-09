@@ -1,5 +1,7 @@
 package com.jkt.viewModels;
 
+import org.zkoss.bind.BindUtils;
+
 public interface IBasicOperations {
 
 	void guardar();
@@ -9,5 +11,7 @@ public interface IBasicOperations {
 	void buscar();
 	void buscarEliminados();
 	void imprimir();
+	
+	
 
 }
