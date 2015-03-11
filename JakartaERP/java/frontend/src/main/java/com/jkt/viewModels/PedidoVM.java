@@ -16,8 +16,13 @@ import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.ov.ClienteOV;
+import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.HelperOV;
 import com.jkt.ov.ListClienteOV;
+import com.jkt.ov.ListDescriptibleOV;
+import com.jkt.ov.ListSucursalesOV;
 import com.jkt.ov.PedidoOV;
+import com.jkt.ov.SucursalOV;
 import com.jkt.pedido.dominio.Pedido;
 
 /**
@@ -27,20 +32,15 @@ import com.jkt.pedido.dominio.Pedido;
  */
 public class PedidoVM implements IBasicOperations{
 	
-	private String campo="ejemplo";
 	private List<ClienteOV> clientes=new ArrayList<ClienteOV>();
+	private List<SucursalOV> sucursales=new ArrayList<SucursalOV>();
 	
-	@Init
-	public void init(@ExecutionArgParam("list") List<ClienteOV> clientes){
-		this.clientes=clientes;
-	}
-	
-	public String getCampo() {
-		return campo;
+	public List<SucursalOV> getSucursales() {
+		return sucursales;
 	}
 
-	public void setCampo(String campo) {
-		this.campo = campo;
+	public void setSucursales(List<SucursalOV> sucursales) {
+		this.sucursales = sucursales;
 	}
 
 	public List<ClienteOV> getClientes() {
@@ -93,26 +93,14 @@ public class PedidoVM implements IBasicOperations{
 	}
 	
 	@Command
-	@NotifyChange("clientes")
-	public void recuperarClientes(){
-		ListClienteOV lista = (ListClienteOV) Operaciones.ejecutar("RecuperarClientes", ListClienteOV.class);
-		clientes= lista.getList();
-		
-		if (clientes.isEmpty()) {
-			Messagebox.show("No existen presupuestos disponibles.");
-			return;
-		}
+	public void openHelper(@BindingParam("clase") String clase) {
+		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV(clase), ListDescriptibleOV.class);
+
 		Map map=new HashMap();
-		map.put("list",clientes);
-		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpPresupuesto.zul", null, map);
+		map.put("coleccion",listDescriptible.getList());
+		map.put("codigo", "INDND");
+		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
 		window.doModal();
 	}
-	
-	
-	@Command
-	public void cerrarModal(@BindingParam("window")  Window x){
-		x.detach();
-	}
-	
-	
+
 }

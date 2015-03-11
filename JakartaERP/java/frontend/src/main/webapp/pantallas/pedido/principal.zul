@@ -18,9 +18,9 @@
 			    	<row>
 			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
 			    		
-			    		<hlayout>
+			    		<hlayout >
 							<textbox value="" />
-							<button label="..." onClick="@command('recuperarClientes')" />
+							<button label="..." onClick="@command('openHelper', clase='pais')" />
 			    		</hlayout>
 
 						<label class="name" value="Nro. de Presupuesto : " />
@@ -34,12 +34,12 @@
 						<label class="name" value="Cliente | Sucursal : " />
 						<hlayout>
 							<textbox value="" />
-							<button label="..." onClick="@command('helperPresupuestos')" />
+							<button label="clientes" onClick="@command('openHelper', clase='clientes')" />
 						</hlayout>
 	
 						<hlayout>
 							<textbox value="" />
-							<button label="..." onClick="@command('helperPresupuestos')" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal')" />
 						</hlayout>
 						
 						<textbox value="" />
@@ -58,7 +58,7 @@
 						<label value="Lista de Precios : " />
 			    		<hlayout>
 							<textbox value="" />
-							<button label="..." onClick="@command('recuperarListasPrecio')" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios')" />
 			    		</hlayout>
 
 						<textbox value="" />

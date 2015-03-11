@@ -27,7 +27,8 @@
   <!ATTLIST input fieldID           	CDATA    "id"><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base -->
   <!ATTLIST input nombreEntidad        	CDATA    #IMPLIED>
   
-  <!ATTLIST campoEntrada metodo			CDATA #REQUIRED>
+  <!ATTLIST campoEntrada metodo			CDATA #IMPLIED>
+  <!ATTLIST campoEntrada name			CDATA #IMPLIED>
   <!ATTLIST campoEntrada propertyOV		CDATA #REQUIRED>
   <!ATTLIST campoEntrada fieldID        CDATA    "id"><!--   Define que atributo sera utilizado como id de la entida, esto es para recuperarlo de la base -->
  
@@ -99,8 +100,32 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="RecuperarSucursales" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.erp.varios.ClienteSucursal" outputOV="com.jkt.ov.ListSucursalesOV">
+		
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="direccion" value="direccion" />
+		</output>
 
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="Helper" clase="com.jkt.operaciones.HelperActivos" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
 
+		<input>
+			<campoEntrada propertyOV="clase" name="ENTIDAD"/>
+		</input>
+
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 
 
 </entity>
