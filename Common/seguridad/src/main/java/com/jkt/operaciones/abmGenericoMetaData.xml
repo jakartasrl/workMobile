@@ -299,12 +299,12 @@
 		<campos>
 			<campo fieldName="oid"       tipo="Integer" longitud="0" visible="false" readOnly="false" orden="1" label="oid_lab" />
 			<campo fieldName="codigo"    tipo="String" longitud="15" visible="true" readOnly="false" orden="2" label="Codigo"  />
-			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion"  />
+			<campo fieldName="descr"  tipo="String" longitud="60" visible="true" readOnly="false" orden="3" label="Descripcion de laboratorio"  />
 			<campo fieldName="Activo"    tipo="Boolean" longitud="5" visible="true" readOnly="false" orden="7" label="Activo" />
 		</campos>
 
 		<validadores>
-			<validador fieldName="codigo"    tipoValidacion="Inexistente" entidad="unidadMedida" oidName="oid" descrName="descr" />
+			<validador fieldName="codigo"    tipoValidacion="Inexistente" entidad="laboratorio" oidName="oid" descrName="descr" />
 			<validador fieldName="descr"     tipoValidacion="DistintoEspacio" entidad="" oidName="" descrName="" />
 		</validadores>
 		
