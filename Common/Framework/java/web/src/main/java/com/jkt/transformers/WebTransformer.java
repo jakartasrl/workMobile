@@ -4,15 +4,14 @@ package com.jkt.transformers;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.codec.binary.Base64;
-import org.hibernate.mapping.Map;
 import org.springframework.beans.BeanUtils;
 
 import com.google.gson.Gson;
@@ -63,8 +62,7 @@ public class WebTransformer extends Transformer {
 		// Obtengo la clase OV a la cual lo tengo que setear
 		String targetProperty;
 		try {
-			Method getListMethod = BeanUtils.findDeclaredMethod(objectOV.getClass(), "getListProperty", new Class[] {});
-			targetProperty = (String) getListMethod.invoke(objectOV, new Object[] {});
+			targetProperty =  "list";
 			PropertyDescriptor propertyDescriptor2 = BeanUtils
 					.getPropertyDescriptor(objectOV.getClass(), targetProperty);
 			listObjectOV = propertyDescriptor2.getReadMethod().invoke(
@@ -82,9 +80,11 @@ public class WebTransformer extends Transformer {
 
 		for (Object objPersis : (List) objNotificado) {
 			Object objOV = BeanUtils.instantiate(ovListClass);
-			// Obtengo la clase de lo que tengo que buscar en BD
-			getObjectOV(objPersis, objOV,camposSalida);
-			((List) listObjectOV).add(objOV);
+			if(objPersis!=null){
+				// Obtengo la clase de lo que tengo que buscar en BD
+				getObjectOV(objPersis, objOV,camposSalida);
+				((List) listObjectOV).add(objOV);
+			}
 		}
 	}
 
@@ -131,11 +131,26 @@ public class WebTransformer extends Transformer {
 									+ target);
 				}
 
-				for (Object objPersis : (List) listPers) {
-					Object objOV = BeanUtils.instantiate(ovListClass);
-					// Obtengo la clase de lo que tengo que buscar en BD
-					getObjectOV(objPersis, objOV,campoSalida.getCamposDeSalida());
-					((List) listObjectOV).add(objOV);
+				if(List.class.isAssignableFrom(listPers.getClass())){
+					for (Object objPersis : (List) listPers) {
+						Object objOV = BeanUtils.instantiate(ovListClass);
+						if(objPersis!=null){
+							// Obtengo la clase de lo que tengo que buscar en BD
+							getObjectOV(objPersis, objOV,campoSalida.getCamposDeSalida());
+							((List) listObjectOV).add(objOV);
+						}
+					}
+				}else{
+					if(Set.class.isAssignableFrom(listPers.getClass())){
+						for (Object objPersis : (Set) listPers) {
+							Object objOV = BeanUtils.instantiate(ovListClass);
+							if(objPersis!=null){
+								// Obtengo la clase de lo que tengo que buscar en BD
+								getObjectOV(objPersis, objOV,campoSalida.getCamposDeSalida());
+								((Set) listObjectOV).add(objOV);
+							}
+						}
+					}
 				}
 				objectValue = listObjectOV;
 			} else {
@@ -212,7 +227,7 @@ public class WebTransformer extends Transformer {
 			return BeanUtils.instantiate(clazz);
 		} catch (Exception e) {
 			throw new JakartaException(
-					"Error creando el objetoOV de retorno para la clase "
+					"Error instanciando el objetoOV de retorno para la clase "
 							+ type);
 		}
 	}

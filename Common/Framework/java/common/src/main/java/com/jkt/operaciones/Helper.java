@@ -28,9 +28,13 @@ public class Helper extends Operation {
 		
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
-		for (PersistentEntity persistentEntity : list) {
-			notificarObjeto("resultado", persistentEntity);
-		}
+		
+		notificarObjeto("", list);
+		
+//		for (PersistentEntity persistentEntity : list) {
+//			notificarObjeto("", persistentEntity);
+//			notificarObjeto("resultado", persistentEntity);
+//		}
 	}
 	
 	private void validacionesDeEntrada(Map<String, Object> aParams) throws JakartaException {
