@@ -33,7 +33,7 @@
 			    	<row>
 						<label class="name" value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox value="" />
+							<textbox value="@bind(vm.descripcionCliente)" />
 							<button label="clientes" onClick="@command('openHelper', clase='clientes')" />
 						</hlayout>
 	

@@ -1,24 +1,17 @@
 package com.jkt.viewModels;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Window;
 
-import com.jkt.common.Operaciones;
-import com.jkt.ov.ClienteOV;
+import com.jkt.common.Closure;
+import com.jkt.dominio.Descriptible;
 import com.jkt.ov.DescriptibleOV;
-import com.jkt.ov.HelperOV;
-import com.jkt.ov.ListDescriptibleOV;
-import com.jkt.ov.SucursalOV;
 
 /**
  * ViewModel para los helpers, en este caso solamente de los Presupuestos.
@@ -32,7 +25,24 @@ public class HelperVM {
 	private String codigo = "Codigo";
 	private String descripcion = "Descripción";
 
+	private Closure c;
+	
+	@Command
+	public void obtenerElemento(@BindingParam("objeto") DescriptibleOV d){
+		System.out.println("daleeee");
+		this.c.ejecutarAcciones();
+	}
+	
 	private List<DescriptibleOV> coleccion = new ArrayList<DescriptibleOV>();
+	private PedidoVM vm;
+
+	public PedidoVM getVm() {
+		return vm;
+	}
+
+	public void setVm(PedidoVM vm) {
+		this.vm = vm;
+	}
 
 	public String getTitulo() {
 		return titulo;
@@ -73,17 +83,28 @@ public class HelperVM {
 	public void setColeccion(List<DescriptibleOV> coleccion) {
 		this.coleccion = coleccion;
 	}
+	
+	public Closure getC() {
+		return c;
+	}
+
+	public void setC(Closure c) {
+		this.c = c;
+	}
 
 	@Init
-	public void init(@ExecutionArgParam("coleccion") List<DescriptibleOV> coleccion,@ExecutionArgParam("codigo") String codigo){
-		this.coleccion=coleccion;
-		this.codigo=codigo;
+	public void init(@ExecutionArgParam("vm") PedidoVM vm,
+			@ExecutionArgParam("coleccion") List<DescriptibleOV> coleccion, @ExecutionArgParam("codigo") String codigo, @ExecutionArgParam("closure") Closure c) {
+		this.coleccion = coleccion;
+		this.codigo = codigo;
+		this.vm = vm;
+		this.c=c;
+		this.c.setVM(this);
 	}
-	
+
 	@Command
-	public void cerrarModal(@BindingParam("window")  Window x){
+	public void cerrarModal(@BindingParam("window") Window x) {
 		x.detach();
 	}
 
-	
 }
