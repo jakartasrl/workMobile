@@ -6,10 +6,10 @@
 				<include id="barraMenu" hflex="1" src="/pantallas/menues/toolBar.zul" />
 			</div>
 				<div vflex="1"  hflex="1" >
-					<include id="titulo" hflex="1" src="/pantallas/menues/titulo.zul" />
+					<label id="title" sclass="header-text" style="font: 24px bold; font-family:verdana; color:black;">Ingreso de Laboratorio</label>
 				</div>
 			<div vflex="15" hflex="1" style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-				<include id="main" hflex="1" src="/pantallas/pedido/principal.zul" />
+				<include id="main" hflex="1" src="/pantallas/pedido/laboratorio.zul" />
 			</div>
 		</vlayout>
 </zk>

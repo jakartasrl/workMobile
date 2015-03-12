@@ -30,7 +30,7 @@ public class HelperVM {
 	private String titulo = "";
 	private String id = "ID";
 	private String codigo = "Codigo";
-	private String descripcion = "Descripción";
+	private String descripcion = "DescripciÃ³n";
 
 	private List<DescriptibleOV> coleccion = new ArrayList<DescriptibleOV>();
 

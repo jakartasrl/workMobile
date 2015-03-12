@@ -128,5 +128,16 @@
 	</operacion>
 
 
+	<operacion name="GuardarLaboratorio" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Laboratorio" inputOV="com.jkt.ov.LaboratorioOV">
+		
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio">
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
 </entity>
 	

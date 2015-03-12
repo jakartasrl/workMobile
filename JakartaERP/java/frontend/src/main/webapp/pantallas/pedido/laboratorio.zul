@@ -1,0 +1,59 @@
+<zk>
+
+	<panel style="padding:5px;" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.LaboratorioVM')"
+		title="Laboratorio" border="normal" height="auto" width="90%">
+		<panelchildren>
+
+			<grid width="50%">
+
+				<columns>
+					<column></column>
+					<column></column>
+				</columns>
+
+				<rows>
+					<row>
+						<label>Codigo</label>
+						<textbox value="@bind(vm.ov.codigo)" />
+					</row>
+					<row>
+						<label>Descripcion</label>
+						<textbox value="@bind(vm.ov.descripcion)" />
+					</row>
+					<row>
+						<label>Activo</label>
+						<checkbox />
+					</row>
+
+					<row>
+						<button onClick="@command('guardar')">Guardar</button>
+						<button onClick="@command('init')">Cargar laboratorios</button>
+					</row>
+
+				</rows>
+
+			</grid>
+
+		</panelchildren>
+	</panel>
+
+
+	<grid model="@load(vm.coleccion)">
+		<columns>
+			<column label="Codigo" width="120px" />
+			<column label="Descripcion" />
+			<column label="Activo" width="200px" />
+		</columns>
+		<rows>
+			<template name="model">
+				<row>
+					<label value="@load(each.codigo)" />
+					<label value="@load(each.descripcion)" />
+					<label value="true" />
+				</row>
+			</template>
+		</rows>
+	</grid>
+
+
+</zk>
