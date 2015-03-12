@@ -33,13 +33,13 @@
 			    	<row>
 						<label class="name" value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox value="@bind(vm.descripcionCliente)" />
-							<button label="clientes" onClick="@command('openHelper', clase='clientes')" />
+							<textbox value="@bind(vm.clienteOV.codigo)" />
+							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV)" />
 						</hlayout>
 	
 						<hlayout>
 							<textbox value="" />
-							<button label="..." onClick="@command('openHelper', clase='clienteSucursal')" />
+							<button label=".-." onClick="@command('openHelper', clase='clienteSucursal')" />
 						</hlayout>
 						
 						<textbox value="" />
@@ -57,8 +57,12 @@
 					<row>
 						<label value="Lista de Precios : " />
 			    		<hlayout>
-							<textbox value="" />
-							<button label="..." onClick="@command('openHelper', clase='listaPrecios')" />
+							<textbox value="@bind(vm.lPreciosOV.codigo)" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV)" />
+			    		</hlayout>
+			    		
+			    		<hlayout>
+							<textbox value="@bind(vm.lPreciosOV.descripcion)" />
 			    		</hlayout>
 
 						<textbox value="" />
