@@ -122,7 +122,7 @@
 			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
 			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
-			<campoEntrada propertyOV="activo" metodo="setActivo" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
 		</input>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -135,7 +135,7 @@
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
-			<campoSalida target="activo" value="isActivo" />
+			<campoSalida target="activo" value="activo" />
 			
 		</output>
 

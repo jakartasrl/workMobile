@@ -18,10 +18,14 @@ abstract public class PersistentEntity implements Serializable{
 	private long id;
 	private Date creationDate;
 	private Date modificationDate;
-	
+	private boolean activo;
 	private int version;
-	private boolean activo = true;
 
+	
+	public boolean getActivo(){
+		return activo;
+	}
+	
 	public boolean isActivo() {
 		return activo;
 	}
