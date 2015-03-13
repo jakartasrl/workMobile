@@ -48,6 +48,74 @@
 
 <entity>
 
+
+	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar"
+		inputOV="com.jkt.ov.PedidoOV">
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
+			<campoEntrada propertyOV="nro" metodo="setNro" />
+			<campoEntrada propertyOV="letra" metodo="setLetra" />
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
+
+	<operacion name="RecuperarClientes" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.erp.varios.Cliente" outputOV="com.jkt.ov.ListClienteOV">
+		
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="telefono" value="telefono" />
+			<campoSalida target="fax" value="fax" />
+			<campoSalida target="mail" value="mail" />
+			<campoSalida target="nroProveedor" value="nroProveedor" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="Helper" clase="com.jkt.operaciones.HelperActivos" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
+
+		<input>
+			<campoEntrada propertyOV="clase" name="ENTIDAD"/>
+		</input>
+
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+
+	</operacion>
+
+	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="LABORATORIO"/>
+			<campoEntrada propertyOV="string2" name="OID_LISTA_PRECIO"/>
+		</input>
+
+		<output>
+			<campoSalida value="idItem" target="descripcion" />
+
+			<campoSalida value="id" target="determinacion.id" />
+			<campoSalida value="codigo" target="determinacion.codigo" />
+			<campoSalida value="descripcion" target="determinacion.descripcion" />
+
+			<campoSalida value="codAnalisis" target="determinacion.codigoAnalisis" />
+			<campoSalida value="desAnalisis" target="determinacion.descripcionAnalisis" />
+
+			<campoSalida value="importe" target="precio" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
 	<operacion name="saveLabo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Laboratorio" inputOV="com.jkt.ov.LaboratorioOV">
 		
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio">
@@ -75,4 +143,4 @@
 	</operacion>
 
 </entity>
-	
+

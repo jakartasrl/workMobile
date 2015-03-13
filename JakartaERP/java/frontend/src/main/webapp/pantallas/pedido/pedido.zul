@@ -20,7 +20,7 @@
 			    		
 			    		<hlayout >
 							<textbox value="" />
-							<button label="..." onClick="@command('openHelper', clase='pais')" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='pais')" />
 			    		</hlayout>
 
 						<label class="name" value="Nro. de Presupuesto : " />
@@ -39,7 +39,7 @@
 	
 						<hlayout>
 							<textbox value="" />
-							<button label=".-." onClick="@command('openHelper', clase='clienteSucursal')" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal')" />
 						</hlayout>
 						
 						<textbox value="" />
@@ -56,17 +56,15 @@
 
 					<row>
 						<label value="Lista de Precios : " />
+
 			    		<hlayout>
+							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
 							<textbox value="@bind(vm.lPreciosOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV)" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
+
+						<textbox value="@bind(vm.lPreciosOV.descripcion)" />
 			    		
-			    		<hlayout>
-							<textbox value="@bind(vm.lPreciosOV.descripcion)" />
-			    		</hlayout>
-
-						<textbox value="" />
-
 					</row>
 										
 				</rows>
@@ -79,24 +77,30 @@
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
-			        <tab id="A" label="Items" />
-			        <tab id="B" label="Laboratorio Quimico" />
-			        <tab id="C" label="Laboratorio Electrico" />
-			        <tab id="D" label="Materiales" />
-			        <tab id="E" label="Notas" />
-			        <tab id="F" label="Condiciones Comerciales" />
+			        <tab id="items" label="Items" />
+			        <tab id="labQuim" label="Laboratorio Quimico" />
+			        <tab id="labElec" label="Laboratorio Electrico" />
+			        <tab id="mat" label="Materiales" />
+			        <tab id="notas" label="Notas" />
+			        
+			        <tab id="documentacion" label="Documentacion" />
 			    </tabs>
 			    <tabpanels>
-			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
-			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
-			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
-			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel></tabpanel>
 			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
 			        <tabpanel>
-			        	<label value="Contacto Ref : " />
-						<combobox id="cmbColorExample" >
-						</combobox>
+						<include id="deterQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" />
 					</tabpanel>
+			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        
+			        <tabpanel>
+						<include id="notasContent" hflex="1" src="/pantallas/pedido/notas.zul" />
+					</tabpanel>
+			        
+			        <tabpanel>
+						<include id="documentacionContent" hflex="1" src="/pantallas/pedido/documentacion.zul" />
+					</tabpanel>
+					
 			    </tabpanels>
 			</tabbox>
 		</panelchildren>

@@ -1,5 +1,7 @@
 package com.jkt.ov;
 
+import org.neo4j.cypher.internal.helpers.Converge.iterateUntilConverged;
+
 import com.jkt.erp.varios.Cliente;
 import com.jkt.view.ObjectView;
 
@@ -10,6 +12,7 @@ import com.jkt.view.ObjectView;
  */
 public class ClienteOV extends ObjectView {
 
+	
 	private String codigo;
 	private String telefono;
 	private String fax;

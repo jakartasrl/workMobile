@@ -55,9 +55,9 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	 * 
 	 * @return
 	 */
-	public boolean getActivo() {
-		return isActivo();
-	}
+//	public boolean getActivo() {
+//		return isActivo();
+//	}
 
 	public boolean isActivo() {
 		return activo;
