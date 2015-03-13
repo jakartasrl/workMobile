@@ -1,59 +1,62 @@
-<zk>
+<window id="modalDialog" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.jkt.viewModels.LaboratorioVM')"
+	title="Laboratorios" border="normal">
+	<vlayout>
+		<panel>
 
-	<panel style="padding:5px;" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.LaboratorioVM')"
-		title="Laboratorio" border="normal" height="auto" width="90%">
-		<panelchildren>
+			<panelchildren>
 
-			<grid width="50%">
+				<grid width="50%">
 
-				<columns>
-					<column></column>
-					<column></column>
-				</columns>
+					<columns>
+						<column></column>
+					</columns>
 
-				<rows>
+					<rows>
+						<row>
+							<label>Codigo</label>
+							<textbox value="@bind(vm.ov.codigo)" />
+						</row>
+						<row>
+							<label>Descripcion</label>
+							<textbox value="@bind(vm.ov.descripcion)" />
+						</row>
+						<row>
+							<button onClick="@command('guardar')">
+								Guardar
+							</button>
+						</row>
+
+					</rows>
+
+				</grid>
+
+			</panelchildren>
+		</panel>
+
+		<separator></separator>
+
+		<button id="traerBtn" hflex="1" onClick="@command('traer')" >
+			Cargar laboratorios
+		</button>
+
+		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="5">
+			<columns>
+				<column hflex="1" label="codigo" />
+				<column hflex="1" label="descripcion" />
+				<column hflex="1" label="activo" />
+			</columns>
+			<rows>
+				<template name="model">
 					<row>
-						<label>Codigo</label>
-						<textbox value="@bind(vm.ov.codigo)" />
+						<textbox value="@bind(each.codigo)" />
+						<textbox value="@bind(each.descripcion)" />
+						<checkbox checked="@bind(each.activo)" />
 					</row>
-					<row>
-						<label>Descripcion</label>
-						<textbox value="@bind(vm.ov.descripcion)" />
-					</row>
-					<row>
-						<label>Activo</label>
-						<checkbox />
-					</row>
+				</template>
+			</rows>
+		</grid>
+		<button id="updateBtn" hflex="1" label="Actualizar" onClick="@command('update')" />
+	</vlayout>
 
-					<row>
-						<button onClick="@command('guardar')">Guardar</button>
-						<button onClick="@command('init')">Cargar laboratorios</button>
-					</row>
-
-				</rows>
-
-			</grid>
-
-		</panelchildren>
-	</panel>
-
-
-	<grid model="@load(vm.coleccion)">
-		<columns>
-			<column label="Codigo" width="120px" />
-			<column label="Descripcion" />
-			<column label="Activo" width="200px" />
-		</columns>
-		<rows>
-			<template name="model">
-				<row>
-					<label value="@load(each.codigo)" />
-					<label value="@load(each.descripcion)" />
-					<label value="true" />
-				</row>
-			</template>
-		</rows>
-	</grid>
-
-
-</zk>
+</window>

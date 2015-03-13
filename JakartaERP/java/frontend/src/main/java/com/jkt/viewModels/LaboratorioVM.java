@@ -1,15 +1,18 @@
 package com.jkt.viewModels;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.laboratorio.dominio.Laboratorio;
 import com.jkt.ov.LaboratorioOV;
+import com.jkt.ov.ListLaboratorioOV;
 
 /**
  * ViewModel de la entidad {@link Laboratorio} que se encarga de procesar las diferentes peticiones.
@@ -18,17 +21,7 @@ import com.jkt.ov.LaboratorioOV;
 public class LaboratorioVM {
 	
 	private LaboratorioOV ov = new LaboratorioOV();
-	private List coleccion = new ArrayList();
 	
-	
-	public List getColeccion() {
-		return coleccion;
-	}
-
-	public void setColeccion(List coleccion) {
-		this.coleccion = coleccion;
-	}
-
 	public LaboratorioOV getOv() {
 		return ov;
 	}
@@ -37,28 +30,44 @@ public class LaboratorioVM {
 		this.ov = ov;
 	}
 
-	@Command
-	@NotifyChange("coleccion")
+	@Init
+	@NotifyChange("ov")
 	public void init(){
-		LaboratorioOV l1 = new LaboratorioOV();
-		LaboratorioOV l2 = new LaboratorioOV();
-		LaboratorioOV l3 = new LaboratorioOV();
+		this.traer();
+	}
+	
+	@Command("guardar")
+	@NotifyChange("ov")
+	public void guardar(){
+		Operaciones.ejecutar("saveLabo", this.ov);
+		Messagebox.show("Laboratorio Guardado correctamente.");
+		this.traer();
+	}
+
+	@Command("update")
+	public void update(){
+		@SuppressWarnings("rawtypes")
+		List laboratorios = this.ov.getLaboratorios();
 		
-		l1.setCodigo("cod");
-		l1.setDescripcion("desc");
-		l2.setCodigo("cod");
-		l2.setDescripcion("desc");
-		l3.setCodigo("cod");
-		l3.setDescripcion("desc");
-		
-		coleccion.add(l1);
-		coleccion.add(l2);
-		coleccion.add(l3);
+		LaboratorioOV l;
+		for (Object laboratorio : laboratorios ) {
+			l=(LaboratorioOV) laboratorio;
+			Operaciones.ejecutar("saveLabo", l);
+		}
+	
+	}
+	
+	
+	@Command("traer")
+	@NotifyChange("ov")
+	public void traer(){
+		ListLaboratorioOV list = (ListLaboratorioOV) Operaciones.ejecutar("TraerLabo", ListLaboratorioOV.class);
+		this.ov.setLaboratorios(list.getList());
 	}
 	
 	@Command
-	public void guardar(){
-		Operaciones.ejecutar("GuardarLaboratorio", this.ov);
+	public void cerrarModal(@BindingParam("window") Window win){
+		win.detach();
 	}
-		
+
 }
