@@ -34,9 +34,9 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	 * 
 	 * @return
 	 */
-	public boolean getActivo() {
-		return isActivo();
-	}
+//	public boolean getActivo() {
+//		return isActivo();
+//	}
 
 	public String getCodigo() {
 		return codigo;

@@ -47,33 +47,7 @@
 ]>
 
 <entity>
-	<!-- RECUPERAR Provincia -->
-	<operacion name="TraerProvincia" clase="com.jkt.erp.operaciones.WebOperaciones"
-		inputOV="com.jkt.view.objectsView.ClienteOV" outputOV="com.jkt.view.objectsView.ClienteOV">
 
-		<input keyName="cliente" clase="com.jkt.erp.varios.Cliente">
-			<campoEntrada propertyOV="telefono" metodo="setTelefono" />
-			<campoEntrada propertyOV="idIdioma" metodo="setIdioma" />
-			<campoEntrada propertyOV="listaSucursales" metodo="addClienteSucursal">
-				<campoEntrada propertyOV="numero" metodo="setNumero" />
-				<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
-			</campoEntrada>
-		</input>
-
-		<output>
-			<campoSalida target="idioma.id" value="idIdioma" />
-			<campoSalida target="id" value="id" />
-			<campoSalida target="codigo" value="codigo" />
-			<campoSalida target="telefono" value="telefono" />
-			<campoSalida target="listaSucursales" value="listaSucursales">
-				<campoSalida target="id" value="id" />
-				<campoSalida target="numero" value="numero" />
-				<campoSalida target="descripcion" value="descripcion" />
-			</campoSalida>
-		</output>
-
-		<transformer clase="com.jkt.transformers.WebTransformer" />
-	</operacion>
 
 	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar"
 		inputOV="com.jkt.ov.PedidoOV">
@@ -100,18 +74,6 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
-	
-	<operacion name="RecuperarSucursales" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.erp.varios.ClienteSucursal" outputOV="com.jkt.ov.ListSucursalesOV">
-		
-		<output>
-			<campoSalida target="id" value="id" />
-			<campoSalida target="codigo" value="codigo" />
-			<campoSalida target="direccion" value="direccion" />
-		</output>
-
-		<transformer clase="com.jkt.transformers.WebTransformer" />
-	</operacion>
-	
 	
 	<operacion name="Helper" clase="com.jkt.operaciones.HelperActivos" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
 
@@ -153,6 +115,32 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 
+
+	<operacion name="saveLabo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Laboratorio" inputOV="com.jkt.ov.LaboratorioOV">
+		
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+			<campoEntrada propertyOV="activo" metodo="setActivo" />
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="TraerLabo" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.laboratorio.dominio.Laboratorio" outputOV="com.jkt.ov.ListLaboratorioOV">
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="activo" value="isActivo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 
 </entity>
 

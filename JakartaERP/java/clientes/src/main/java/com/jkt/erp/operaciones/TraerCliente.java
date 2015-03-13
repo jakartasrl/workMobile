@@ -19,7 +19,7 @@ import com.jkt.varios.dominio.Contacto;
 import com.jkt.varios.dominio.Direccion;
 
 /**
- * <p>Operación que recupera un cliente, y todo su contexto de datos, es decir, se recupera un cliente con
+ * <p>OperaciÃ³n que recupera un cliente, y todo su contexto de datos, es decir, se recupera un cliente con
  * el {@link SujetoImpositivo}, {@link InscripcionImpositiva}, {@link Direccion}, {@link ClienteSucursal}, 
  * {@link DomicilioEntrega}, etc...</p>
  * 
@@ -37,8 +37,7 @@ public class TraerCliente extends Operation {
 	private static final String WRITER_DOMICILIOS_ENTREGA = "domiciliosEntrega";
 	private static final String WRITER_CONTACTOS = "contactos";
 	private static final String WRITER_CLASIFICADORES_SUCURSAL = "clasificadoresSucursales";
-
-
+	private static final String WRITER_ARCHIVOS = "archivos";
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -47,6 +46,8 @@ public class TraerCliente extends Operation {
 		mostrarClasificadores(cliente);
 		mostrarInscripciones(cliente);
 		mostrarSucursales(cliente);
+		
+		notificarObjetos(WRITER_ARCHIVOS, cliente.getArchivos());
 	}
 	
 	
