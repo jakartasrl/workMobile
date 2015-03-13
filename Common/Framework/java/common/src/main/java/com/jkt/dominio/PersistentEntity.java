@@ -20,15 +20,6 @@ abstract public class PersistentEntity implements Serializable{
 	private Date modificationDate;
 	
 	private int version;
-	private boolean activo = true;
-
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
 
 	public int getVersion() {
 		return version;
