@@ -24,7 +24,5 @@ public class HelperOV extends ObjectView {
 		super();
 		this.clase = clase;
 	}
-	
-	
 
 }

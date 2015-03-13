@@ -112,6 +112,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	
 	<operacion name="Helper" clase="com.jkt.operaciones.HelperActivos" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
 
 		<input>
@@ -125,8 +126,33 @@
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
+
+	</operacion>
+
+	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="LABORATORIO"/>
+			<campoEntrada propertyOV="string2" name="OID_LISTA_PRECIO"/>
+		</input>
+
+		<output>
+			<campoSalida value="idItem" target="descripcion" />
+
+			<campoSalida value="id" target="determinacion.id" />
+			<campoSalida value="codigo" target="determinacion.codigo" />
+			<campoSalida value="descripcion" target="determinacion.descripcion" />
+
+			<campoSalida value="codAnalisis" target="determinacion.codigoAnalisis" />
+			<campoSalida value="desAnalisis" target="determinacion.descripcionAnalisis" />
+
+			<campoSalida value="importe" target="precio" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 
 
 </entity>
-	
+

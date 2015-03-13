@@ -1,0 +1,27 @@
+<div>
+
+	<listbox multiple="true" hflex="1" vflex="1" checkmark="true">
+		<listhead>
+			<listheader width="5%" />
+			<listheader width="35%" label="Codigo" />
+			<listheader width="60%" label="Descripcion" />
+		</listhead>
+		
+		<listitem>
+			<listcell />
+			<listcell label="cod" />
+			<listcell label="desc" />
+		</listitem>
+		<listitem>
+			<listcell />
+			<listcell label="cod" />
+			<listcell label="desc" />
+		</listitem>
+		<listitem>
+			<listcell />
+			<listcell label="cod" />
+			<listcell label="desc" />
+		</listitem>
+	</listbox>
+
+</div>

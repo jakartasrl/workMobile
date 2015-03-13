@@ -1,5 +1,7 @@
 package com.jkt.viewModels;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import org.zkoss.zul.Window;
 
 import com.jkt.common.Closure;
 import com.jkt.dominio.Descriptible;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.HeaderHelpGenericoOV;
 import com.jkt.view.ObjectView;
@@ -36,7 +39,32 @@ public class HelperVM {
 	private List<DescriptibleOV> coleccion = new ArrayList<DescriptibleOV>();
 	private ObjectView ov;
 	private String refresh;
+	private String invoke;
+	private Object vm;
 	
+	public String getRefresh() {
+		return refresh;
+	}
+
+	public void setRefresh(String refresh) {
+		this.refresh = refresh;
+	}
+
+	public String getInvoke() {
+		return invoke;
+	}
+
+	public void setInvoke(String invoke) {
+		this.invoke = invoke;
+	}
+
+	public Object getVm() {
+		return vm;
+	}
+
+	public void setVm(Object vm) {
+		this.vm = vm;
+	}
 
 	public ObjectView getOv() {
 		return ov;
@@ -87,7 +115,7 @@ public class HelperVM {
 	}
 
 	@Command
-	public void obtenerElemento(@BindingParam("objeto") DescriptibleOV d, @BindingParam("window") Window x) {
+	public void obtenerElemento(@BindingParam("objeto") DescriptibleOV d, @BindingParam("window") Window x) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		if (ov==null) {
 			log.warn("No está disponible la funcionalidad para el evento de click sobre una fila, ya que no existe un destino donde depositar los datos.");
@@ -95,14 +123,35 @@ public class HelperVM {
 			BeanUtils.copyProperties(d, ov);
 			x.detach();
 			BindUtils.postGlobalCommand(null, null,this.refresh, null);
+			
+			//Execute post actions.
+			if (invoke!=null && !invoke.isEmpty()) {
+				log.info("Ejecutando acciones post select del help generico.");
+				try {
+					Method method = vm.getClass().getMethod(invoke);
+					method.invoke(vm);
+				} catch (NoSuchMethodException e) {
+					String msg = "No es posible ejecutar la acción especificada:".concat(invoke);
+					msg.concat(String.format("Clase: %s - Metodo %s.", this.vm.getClass().getSimpleName(), this.invoke));
+					log.warn(msg);
+				} catch (SecurityException e) {
+					throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(invoke));
+				}
+			}else{
+				log.info("No se ejecutan post acciones adicionales luego de la selección del help generico.");
+			}
+			
 		}
+		
 	}
 
 	@Init
 	public void init(	@ExecutionArgParam("coleccion") List<DescriptibleOV> coleccion,
 						@ExecutionArgParam("columnasOV") HeaderHelpGenericoOV headerOV, 
 						@ExecutionArgParam("result") ObjectView resultOV,
-						@ExecutionArgParam("refresh") String refresh 
+						@ExecutionArgParam("refresh") String refresh,
+						@ExecutionArgParam("invoke") String metodo,
+						@ExecutionArgParam("vm") Object vm
 			) {
 		this.coleccion = coleccion;
 		
@@ -112,7 +161,8 @@ public class HelperVM {
 			this.descripcion=headerOV.getColumnaDescripcion();
 			this.titulo=headerOV.getTitulo();
 		}
-		
+		this.vm=vm;
+		this.invoke=metodo;
 		this.ov=resultOV;
 		this.refresh=refresh;
 	}
