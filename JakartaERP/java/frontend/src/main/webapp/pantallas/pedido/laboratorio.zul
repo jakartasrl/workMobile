@@ -44,7 +44,7 @@
 			<columns>
 				<column hflex="1" label="codigo" />
 				<column hflex="1" label="descripcion" />
-				<column hflex="1" label="activo" />
+				<column hflex="1" label="activo" /> 
 			</columns>
 			<rows>
 				<template name="model">

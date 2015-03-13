@@ -22,6 +22,10 @@ abstract public class PersistentEntity implements Serializable{
 	private int version;
 
 	
+	public boolean getActivo(){
+		return activo;
+	}
+	
 	public boolean isActivo() {
 		return activo;
 	}
