@@ -38,8 +38,16 @@ public class PedidoVM extends ViewModel {
 	private ListDeterminacionOV lDeterminacionesQuimicas=new ListDeterminacionOV();
 	private ListDeterminacionOV lDeterminacionesElectricas=new ListDeterminacionOV();
 	private ListNotasOV lNotas=new ListNotasOV();
+	private ListDescriptibleOV lDocumentacion=new ListDescriptibleOV();
 	
-	
+	public ListDescriptibleOV getlDocumentacion() {
+		return lDocumentacion;
+	}
+
+	public void setlDocumentacion(ListDescriptibleOV lDocumentacion) {
+		this.lDocumentacion = lDocumentacion;
+	}
+
 	public ListNotasOV getlNotas() {
 		return lNotas;
 	}
@@ -99,6 +107,7 @@ public class PedidoVM extends ViewModel {
 		pedidoOV.setLetra("A");
 		
 		Operaciones.ejecutar("GuardarPedido",pedidoOV);
+		
 	}
 
 	@Init
@@ -108,22 +117,32 @@ public class PedidoVM extends ViewModel {
 		log.info("Recuperando notas...");
 		this.lNotas = (ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class);
 		
+		log.info("Recuperando documentos...");
+		this.lDocumentacion = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class);
 		
 	}
 	
 	@Command
-	public void openHelper(@BindingParam("clase") String clase,@BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public void openHelper(@BindingParam("clase") String clase, @BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,@BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		if (ov==null) {
 			log.warn("No se ha indicado un objeto vista de destino. Por favor indique uno, de modo contrario, solamente la ventana es de una simple consulta de ayuda.");
 		}
 		
-		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV(clase), ListDescriptibleOV.class);
+		ListDescriptibleOV listDescriptible;
+		if (oidEntidadMaestra==null || oidEntidadMaestra.isEmpty()) {
+			listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV(clase), ListDescriptibleOV.class);
+		}else{
+			HelperOV helperOV = new HelperOV();
+			helperOV.setClase(clase);
+			helperOV.setOidEntidadMaestra(oidEntidadMaestra);
+			listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperCompuesto",helperOV , ListDescriptibleOV.class);
+		}
 
 		Map map=new HashMap();
 		
 		map.put("coleccion",listDescriptible.getList());
-		map.put("refresh", this.retrieveMethod());
+		map.put("refresh", retrieveMethod());
 		map.put("result", ov);
 		map.put("invoke", metodo);
 		map.put("vm", this);

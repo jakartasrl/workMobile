@@ -12,7 +12,7 @@ public class NotaOV extends DescriptibleOV {
 
 	private String adicional;
 	private String codigoActividad;
-	private Boolean activo;
+//	private Boolean activo;
 
 	public String getAdicional() {
 		return adicional;
@@ -28,14 +28,6 @@ public class NotaOV extends DescriptibleOV {
 
 	public void setCodigoActividad(String codigoActividad) {
 		this.codigoActividad = codigoActividad;
-	}
-
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
 	}
 
 }

@@ -39,7 +39,7 @@
 	
 						<hlayout>
 							<textbox value="" />
-							<button label="..." onClick="@command('openHelper', clase='clienteSucursal')" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal', oidEntidadMaestra= vm.clienteOV.id )" />
 						</hlayout>
 						
 						<textbox value="" />
@@ -93,7 +93,8 @@
 					</tabpanel>
 
 			        <tabpanel>
-						<include id="deterQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
+						<include id="deterQuimContent"  if="{vm.lPreciosOV.id == 1 }"  hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
+						<include id="deterQuimContent"   hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
 					</tabpanel>
 
 			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
@@ -103,7 +104,7 @@
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="documentacionContent" hflex="1" src="/pantallas/pedido/documentacion.zul" />
+						<include id="documentacionContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
 					</tabpanel>
 					
 			    </tabpanels>
