@@ -1,5 +1,6 @@
 package com.jkt.operaciones;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,9 @@ public class Guardar extends Operation {
 	}
 
 	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionDeNegocioException, JakartaException {
-		serviceRepository.save((PersistentEntity) object.get(0));//save the first
+		PersistentEntity objToSave = (PersistentEntity) object.get(0);
+		objToSave.setModificationDate(new Date());
+		serviceRepository.save(objToSave);//save the first
 	}
 
 }
