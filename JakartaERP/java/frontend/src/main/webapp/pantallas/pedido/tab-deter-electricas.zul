@@ -1,20 +1,20 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
-	<grid width="100%" vflex="true" model="@bind(vm.lDeterminacionesQuimicas.list)" emptyMessage="No existen determinaciones disponibles" mold="paging" pageSize="10">
+	<grid width="100%" vflex="true" model="@bind(vm.lDeterminacionesElectricas.list)" emptyMessage="No existen determinaciones disponibles" mold="paging" pageSize="10">
 		<auxhead>
 			<auxheader colspan="7" class="topic">
-				Determinaciones Químicas
+				Determinaciones Electricas
 			</auxheader>
 		</auxhead>
 
 		<columns>
-			<column label="Cód analisis" align="center" sort="auto(auto)" />
-			<column label="Cód determinacion" align="center" />
-			<column label="Determinación" align="center" />
-			<column label="Cantidad" align="center" />
-			<column label="Moneda" align="center" />
-			<column label="Precio Unitario" align="center" />
-			<column label="Total" align="center" />
+			<column label="Cód analisis" align="center" sort="auto(Title)" />
+			<column label="Cód determinacion" align="center" sort="auto(firstName)" />
+			<column label="Determinación" align="center" sort="auto(extension)" />
+			<column label="Cantidad" align="center" sort="auto(extension)" />
+			<column label="Moneda" align="center" sort="auto(extension)" />
+			<column label="Precio Unitario" align="center" sort="auto(extension)" />
+			<column label="Total" align="center" sort="auto(extension)" />
 		</columns>
 
 		<rows>

@@ -91,7 +91,7 @@
 
 	</operacion>
 
-	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
+	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
 
 		<input>
 			<campoEntrada propertyOV="string1" name="LABORATORIO"/>
@@ -99,7 +99,7 @@
 		</input>
 
 		<output>
-			<campoSalida value="idItem" target="descripcion" />
+<!-- 			<campoSalida value="idItem" target="descripcion" /> -->
 
 			<campoSalida value="id" target="determinacion.id" />
 			<campoSalida value="codigo" target="determinacion.codigo" />
@@ -137,6 +137,21 @@
 			<campoSalida target="descripcion" value="descripcion" />
 			<campoSalida target="activo" value="activo" />
 			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerNotas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.presupuesto.dominio.Nota" outputOV="com.jkt.ov.ListNotasOV">
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="adicional" value="adicional" />
+			<campoSalida target="actividad.codigo" value="codigoActividad" />
+	
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

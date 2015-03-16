@@ -43,11 +43,20 @@ public class TraerDeterminacionesConPrecios extends HelperRecuperarDeterminacion
 
 		//Mostrar nuevos elementos
 		mostrarNuevosElementos(idLaboratorio, ids);
+	
+	
+		//Notificar todos los objetos.
+		notificarObjeto("", detalles);
+	
 	}
 
+	private List<ListaPrecioDetalle> detalles=new ArrayList<ListaPrecioDetalle>();
+	
 	@Override
 	protected void realizarAccionSobreDetalle(ListaPrecioDetalle detalle) {
-		notificarObjeto(PRECIO_WRITER, detalle);
+//		notificarObjeto("", detalle);
+		detalles.add(detalle);
+//		notificarObjeto(PRECIO_WRITER, detalle);
 	}
 
 }

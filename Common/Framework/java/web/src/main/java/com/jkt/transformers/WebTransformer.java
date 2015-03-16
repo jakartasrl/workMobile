@@ -36,7 +36,7 @@ public class WebTransformer extends Transformer {
 						output.getCamposDeSalida());
 			} catch (JakartaException e1) {
 				throw new RuntimeException(
-						"Error al cargar objeto OV para ser retornado ", e1);
+						"Error al cargar objeto OV para ser retornado: "+e1.getMessage(), e1);
 			}
 		}
 

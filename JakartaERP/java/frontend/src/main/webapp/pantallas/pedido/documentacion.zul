@@ -2,9 +2,9 @@
 
 	<listbox multiple="true" hflex="1" vflex="1" checkmark="true">
 		<listhead>
-			<listheader width="5%" 	style="text-align:center" label="Entregado" />
-			<listheader width="35%" label="Codigo" />
-			<listheader width="60%" label="Descripcion Documento" />
+			<listheader width="15%" label="Entregado" />
+			<listheader width="30%" label="Codigo" />
+			<listheader width="55%" label="Descripcion Documento" />
 		</listhead>
 		
 		<listitem>

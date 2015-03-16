@@ -1,27 +1,20 @@
-<div>
+<zk viewModel="@id('vm') @load(viewModel)"  >
 
-	<listbox multiple="true" hflex="1" vflex="1" checkmark="true">
+	<listbox model="@bind(vm.lNotas.list)" multiple="true" hflex="1" vflex="1" checkmark="true">
 		<listhead>
 			<listheader width="5%" />
 			<listheader width="35%" label="Codigo" />
 			<listheader width="60%" label="Descripcion" />
 		</listhead>
 		
-		<listitem>
-			<listcell />
-			<listcell label="cod" />
-			<listcell label="desc" />
-		</listitem>
-		<listitem>
-			<listcell />
-			<listcell label="cod" />
-			<listcell label="desc" />
-		</listitem>
-		<listitem>
-			<listcell />
-			<listcell label="cod" />
-			<listcell label="desc" />
-		</listitem>
+
+		<template name="model">
+			<listitem>
+				<listcell />
+				<listcell label="@bind(each.codigo)" />
+				<listcell label="@bind(each.descripcion)" />
+			</listitem>
+		</template>
 	</listbox>
 
-</div>
+</zk>
