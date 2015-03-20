@@ -4,7 +4,6 @@ import com.jkt.constantes.TiposDeDato;
 import com.jkt.dominio.Descriptible;
 
 /**
- * 
  * <p>Una caracteristica de producto puede ser una longitud, un color, un tipo de tela, un tipo de metal, ancho, largo, peso.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL

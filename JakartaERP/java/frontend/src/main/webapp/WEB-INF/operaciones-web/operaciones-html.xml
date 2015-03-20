@@ -48,19 +48,6 @@
 
 <entity>
 
-
-	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar"
-		inputOV="com.jkt.ov.PedidoOV">
-		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
-			<campoEntrada propertyOV="nro" metodo="setNro" />
-			<campoEntrada propertyOV="letra" metodo="setLetra" />
-		</input>
-
-		<transformer clase="com.jkt.transformers.WebTransformer" />
-	</operacion>
-
-
-
 	<operacion name="RecuperarClientes" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.erp.varios.Cliente" outputOV="com.jkt.ov.ListClienteOV">
 		
 		<output>
@@ -183,6 +170,22 @@
 			<campoSalida target="descripcion" value="descripcion" />
 	
 		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Pedido" inputOV="com.jkt.ov.PedidoOV">
+		
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
+			<campoEntrada propertyOV="nro" metodo="setNro" />
+			<campoEntrada propertyOV="letra" metodo="setLetra" />
+<!-- 			<campoEntrada propertyOV="idCliente" metodo="setCliente" /> -->
+			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
+			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
+			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
+			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
+			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setCargaACargoDeCliente" />
+		</input>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>

@@ -3,15 +3,15 @@
 	<panel style="padding:5px;"  title="Identificación" border="normal" height="auto" width="90%">
 		<panelchildren>
 
-			<grid style="border-style:none;">
+			<grid style="border-style:none;" sizedByContent="true">
 
 				<columns>
-					<column width="150px" />
-					<column width="220px"></column>
-					<column width="220px"></column>
-					<column width="220px"></column>
-					<column width="100px" />
-					<column width="150px"></column>
+					<column width="150px"/>
+					<column width="120px"/>
+					<column width="220px"/>
+					<column width="220px"/>
+					<column width="100px"/>
+					<column width="150px"/>
 				</columns>
 			
 				<rows>
@@ -19,12 +19,12 @@
 			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
 			    		
 			    		<hlayout >
-							<textbox value="" />
-							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='pais')" />
+							<textbox class="campoCodigo" value="" readonly="true"/>
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto')" />
 			    		</hlayout>
 
-						<label class="name" value="Nro. de Presupuesto : " />
-						<textbox value="" />
+						<label class="name" value="Nro. de Pedido : " />
+						<textbox class="campoCodigo" value="" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
 						<datebox id="fecha" />
@@ -33,40 +33,34 @@
 			    	<row>
 						<label class="name" value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox value="@bind(vm.clienteOV.codigo)" />
+							<textbox class="campoCodigo" value="@bind(vm.clienteOV.codigo)" />
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV)" />
 						</hlayout>
 	
 						<hlayout>
-							<textbox value="" />
-							<button label="..." onClick="@command('openHelper', clase='clienteSucursal', oidEntidadMaestra= vm.clienteOV.id )" />
+							<textbox class="campoCodigo" value="@bind(vm.sucursalOV.codigo)" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id )" />
 						</hlayout>
 						
-						<textbox value="" />
+						<textbox value="" readonly="true"/>
 						
 						<separator/>
 						<separator/>
 					</row>
 					
 					<row>
-						<label value="Contacto Ref : " />
-						<combobox id="cmbColor" >
-						</combobox>
-					</row>
-
-					<row>
 						<label value="Lista de Precios : " />
 
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
-							<textbox value="@bind(vm.lPreciosOV.codigo)" />
+							<textbox class="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
 							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
-						<textbox value="@bind(vm.lPreciosOV.descripcion)" />
+						<textbox value="@bind(vm.lPreciosOV.descripcion)" readonly="true"/>
 			    		
 					</row>
-										
+					
 				</rows>
 			</grid>
 
@@ -81,36 +75,51 @@
 			        <tab id="labElec" label="Laboratorio Electrico" />
 			        <tab id="labQuim" label="Laboratorio Quimico" />
 			        <tab id="mat" label="Materiales" />
+			        <tab id="dComerciales" label="Datos Comerciales" />
+			        <tab width="10px" style="background-color:black;" id="separador" label="" disabled="true" />
 			        <tab id="notas" label="Notas" />
-			        
-			        <tab id="documentacion" label="Documentacion" />
+			        <tab id="doc" label="Documentacion" />
 			    </tabs>
 			    <tabpanels>
-			        <tabpanel></tabpanel>
+			        <tabpanel>
+						<include id="itemsContent" hflex="1" src="/pantallas/pedido/tab-items.zul" viewModel="${vm}"/>
+			        </tabpanel>
 
 			        <tabpanel>
-						<include id="deterElecContent" hflex="1" src="/pantallas/pedido/tab-deter-electricas.zul" viewModel="${vm}"/>
+						<include id="dElecContent" hflex="1" src="/pantallas/pedido/tab-deter-electricas.zul" viewModel="${vm}"/>
 					</tabpanel>
 
 			        <tabpanel>
-						<include id="deterQuimContent"  if="{vm.lPreciosOV.id == 1 }"  hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
-						<include id="deterQuimContent"   hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
+						<include id="dQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
 					</tabpanel>
 
-			        <tabpanel><label style="font-size:12px;"></label></tabpanel>
+			        <tabpanel><label style="font-size:12px;" /></tabpanel>
 			        
+			        <tabpanel>
+						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />
+					</tabpanel>
+
+			        <tabpanel  >
+						<label value="Empty Tab"></label>
+					</tabpanel>
+					
 			        <tabpanel>
 						<include id="notasContent" hflex="1" src="/pantallas/pedido/notas.zul" viewModel="${vm}" />
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="documentacionContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
+						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
 					</tabpanel>
+
+
 					
 			    </tabpanels>
 			</tabbox>
 		</panelchildren>
 	</panel>
+	
+	<button label="Guardar" onClick="@command('guardar')" />
+	
 	
 </div>
 	

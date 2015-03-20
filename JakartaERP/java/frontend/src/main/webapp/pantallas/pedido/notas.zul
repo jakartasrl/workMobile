@@ -1,9 +1,9 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
-	<listbox model="@load(vm.lNotas.list)" multiple="true" hflex="1" vflex="1" checkmark="true">
+	<listbox model="@load(vm.lNotas.list)" multiple="true" hflex="1" vflex="1" checkmark="true" emptyMessage="No existen notas disponibles.">
 		<listhead>
-			<listheader width="5%" />
-			<listheader width="35%" label="Codigo" />
+			<listheader width="3%" />
+			<listheader width="37%" label="Codigo" />
 			<listheader width="60%" label="Descripcion" />
 		</listhead>
 		

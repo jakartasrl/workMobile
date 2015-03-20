@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.ComprobanteVenta;
+import com.jkt.dominio.ListaPrecios;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 
@@ -15,11 +16,20 @@ import com.jkt.presupuesto.dominio.Presupuesto;
  */
 public class Pedido extends ComprobanteVenta {
 
+	private ListaPrecios listaPrecios;
 	private boolean cargaACargoDeCliente, transporteACargoDeCliente, descargaACargoDeCliente;
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PedidoDet> detalles=new ArrayList<PedidoDet>();
 	private List<PedidoDocumentacion> documentacion=new ArrayList<PedidoDocumentacion>();
-	
+
+	public ListaPrecios getListaPrecios() {
+		return listaPrecios;
+	}
+
+	public void setListaPrecios(ListaPrecios listaPrecios) {
+		this.listaPrecios = listaPrecios;
+	}
+
 	public void agregarDocumentacion(PedidoDocumentacion documento){
 		
 		if (documento.getDocumentacion()==null) {

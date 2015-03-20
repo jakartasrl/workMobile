@@ -1,17 +1,19 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 <zk>
-<!-- 		<style src="/style/template.css" /> -->
-		<vlayout vflex="1" style="background: #e7e6dd;min-width: 900px;">
+		<style src="/style/template.css" />
+		<vlayout vflex="1" style="background: #e7e6dd;min-width: 900px;width:auto;overflow:auto" >
 			<div vflex="1"  hflex="1" sclass="hboxToolBar">
 				<include id="barraMenu" hflex="1" src="/pantallas/menues/toolBar.zul" />
 			</div>
-				<div vflex="1"  hflex="1" >
-					<include id="titulo" hflex="1" src="/pantallas/menues/titulo.zul" />
-				</div>
+
+			<div vflex="1"  hflex="1" >
+				<include id="titulo" hflex="1" src="/pantallas/menues/titulo.zul" />
+			</div>
 			
 			<div vflex="15" hflex="1" style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-				<include id="laboratorioId" hflex="1" src="/pantallas/pedido/pedido.zul" />
+				<include id="pedidoId" hflex="1" src="/pantallas/pedido/pedido.zul" />
 			</div>
 			
 		</vlayout>
 </zk>
+

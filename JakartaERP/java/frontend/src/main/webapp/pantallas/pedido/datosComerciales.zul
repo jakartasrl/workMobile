@@ -1,0 +1,42 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<grid>
+		<columns>
+			<column></column>
+			<column></column>
+			<column></column>
+		</columns>
+
+		<rows>
+			<row>
+
+				<hlayout>
+					<checkbox label="Carga a cargo de cliente" checked="@bind(vm.pedidoOV.cargaACargoDeCliente)" />
+				</hlayout>
+
+				<hlayout>
+					<checkbox label="Transporte a cargo de cliente" checked="@bind(vm.pedidoOV.transporteACargoDeCliente)" />
+				</hlayout>
+
+				<hlayout>
+					<checkbox label="Descarga a cargo de cliente" checked="@bind(vm.pedidoOV.descargaACargoDeCliente)" />
+				</hlayout>
+
+			</row>
+
+			<row>
+				<hlayout hflex="1">
+					<label value="Contacto Ref : " />
+					<combobox id="cmbColor">
+						<comboitem label="Contacto1" />
+						<comboitem label="Contacto2" />
+						<comboitem label="Contacto3" />
+					</combobox>
+				</hlayout>
+			</row>
+
+		</rows>
+
+	</grid>
+
+</zk>

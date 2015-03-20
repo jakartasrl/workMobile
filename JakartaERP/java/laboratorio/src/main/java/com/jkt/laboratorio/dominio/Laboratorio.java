@@ -3,6 +3,8 @@ package com.jkt.laboratorio.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import com.jkt.dominio.Descriptible;
 
 /**

@@ -1,33 +1,3 @@
-#idWindow .z-window-content{
-	background-color:red
-}
-.z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover {
-	background-color: transparent;
-	border: 0 none;
-	height: 100%;
-}
-
-td.z-hbox-sep {
-	width: 0;
-}
-
-.hboxToolBar .z-toolbar {
-	border: 0 none;
-	background: inherit;
-}
-
-.z-toolbar {
-	background: inherit;
-}
-
-.mainWindow .z-window-content {
-	background: #e7e6dd;
-}
-
-body {
-	background: #eee6dd;
-	min-height: 500px;
-}
 
 .fontTitle {
 	font-family: Arial, Sans-serif;
@@ -78,5 +48,15 @@ body {
 .z-loading-indicator{
 	width: 120px !important;
 	margin: auto !important;
+}
+
+.campoCodigo{
+	text-align: center;
+	padding: 0px;	
+	width: 50px;
+}
+
+.z-listcell-content{
+	background-color: white;
 }
 

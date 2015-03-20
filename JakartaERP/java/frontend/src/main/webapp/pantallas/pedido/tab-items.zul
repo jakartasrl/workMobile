@@ -1,0 +1,73 @@
+<zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
+
+	<button label="Agregar Item" onClick="@command('agregarElemento')" />
+
+	<grid model="@bind(vm.items)" mold="paging" pageSize="10" emptyMessage="No existen items aun.">
+
+		<columns>
+			<column width="160px;"/>
+			<column width="200px;" />
+			<column width="120px;"/>
+			<column width="150px;"/>
+			<column width="120px;"/>
+			<column width="140px;"/>
+			<column />
+		</columns>
+
+		<rows>
+			<template name="model">
+				<row>
+
+					<hlayout>
+						<label value="Tipo" />
+						<combobox width="120px;" >
+							<comboitem label="Service" />
+							<comboitem label="Fabricación" />
+							<comboitem label="Mantenimiento" />
+						</combobox>
+					</hlayout>
+					
+					<hlayout>
+						<label value="Referencia:" />
+						<textbox width="120px" value="@bind(each.referencia)" />
+					</hlayout>
+
+					<hlayout>
+						<label value="Cantidad:"></label>
+						<textbox width="40px;" value="@bind(each.cantidad)" />
+					</hlayout>
+
+					<hlayout>
+						<label value="Moneda:" />
+						<combobox width="80px;">
+							<comboitem label="Peso" />
+							<comboitem label="Dolar" />
+							<comboitem label="Euro" />
+						</combobox>
+					</hlayout>
+
+					<hlayout>
+						<label value="Importe:"></label>
+						<textbox width="50px;" value="@bind(each.importe)" />
+					</hlayout>
+					
+					<hlayout>
+						<label value="Importe Total:" />
+						<textbox width="50px;" value="@bind(each.importeTotal)" />
+					</hlayout>
+					
+					<hlayout>
+						<label value="Cargar Plantilla:" />
+						<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
+						<textbox value="@bind(each.plantilla.descripcion)" onClick="@command('editarPlantilla', ov=each)" />
+					</hlayout>
+
+				</row>
+			</template>
+
+		</rows>
+
+
+	</grid>
+
+</zk>
