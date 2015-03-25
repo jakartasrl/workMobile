@@ -54,9 +54,16 @@
 	text-align: center;
 	padding: 0px;	
 	width: 50px;
+	height: 2px;
 }
 
 .z-listcell-content{
 	background-color: white;
 }
 
+.z-row-content, .z-row-content:hover , .z-row-inner, .z-row-inner:hover , .z-row, .z-row:hover{
+	background-color: white !important;
+	height: 29px !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}
