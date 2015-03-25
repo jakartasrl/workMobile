@@ -3,8 +3,8 @@
 	<listbox model="@load(vm.lNotas.list)" multiple="true" hflex="1" vflex="1" checkmark="true" emptyMessage="No existen notas disponibles.">
 		<listhead>
 			<listheader width="3%" />
-			<listheader width="37%" label="Codigo" />
-			<listheader width="60%" label="Descripcion" />
+			<listheader width="5%" label="Codigo" />
+			<listheader width="72%" label="Descripcion" />
 		</listhead>
 		
 

@@ -1,9 +1,8 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<button label="Agregar Item" onClick="@command('agregarElemento')" />
+	<button style="margin-bottom:2px;" label="Agregar Item" onClick="@command('agregarElemento')" />
 
-	<grid model="@bind(vm.items)" mold="paging" pageSize="10" emptyMessage="No existen items aun.">
-
+	<grid sclass="grilla-items" model="@bind(vm.items)" mold="paging" pageSize="10" emptyMessage="No existen items aun.">
 		<columns>
 			<column width="160px;"/>
 			<column width="200px;" />
@@ -59,7 +58,7 @@
 					<hlayout>
 						<label value="Cargar Plantilla:" />
 						<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
-						<textbox value="@bind(each.plantilla.descripcion)" onClick="@command('editarPlantilla', ov=each)" />
+						<textbox style="vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="1" value="@bind(each.plantilla.descripcion)" onClick="@command('editarPlantilla', ov=each)" readonly="true" />
 					</hlayout>
 
 				</row>

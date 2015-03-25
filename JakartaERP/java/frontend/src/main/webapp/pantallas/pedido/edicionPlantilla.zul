@@ -1,7 +1,7 @@
 <window id="edicionPlantilla" sizable="true" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.EdicionPlantillaVM')" title="Edición de plantilla." width="600px" position="center,center" closable="true">
 
 	<vlayout>
-		<textbox multiline="true" rows="5" value="@bind(vm.item.plantilla.descripcion)" style="font-size:12px; font-family:arial;margin-left:5%;margin-rigth:5%; width:90%;" />
+		<textbox multiline="true" rows="15" value="@bind(vm.item.plantilla.descripcion)" style="font-size:12px; font-family:arial; margin-left:5%; margin-rigth:1%; width:94%;" />
 	</vlayout>
 	
 	<hlayout style="margin-top:15px; text-align: center;">

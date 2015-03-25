@@ -8,24 +8,24 @@
 		</auxhead>
 
 		<columns>
-			<column label="Cód analisis" align="center" sort="auto(auto)" />
-			<column label="Cód determinacion" align="center" />
-			<column label="Determinación" align="center" />
-			<column label="Cantidad" align="center" />
-			<column label="Moneda" align="center" />
-			<column label="Precio Unitario" align="center" />
-			<column label="Total" align="center" />
+			<column width="7%" label="Cód.Analisis" align="center" sort="auto(auto)" />
+			<column width="7%" label="Cód Det." tooltip="Código de Determinación"  align="center" />
+			<column width="53%" label="Determinación" align="center" />
+			<column width="7%" label="Cantidad" align="center" />
+			<column width="12%" label="Moneda" align="center" />
+			<column width="7%" label="Precio Unit." tooltip="Precio Unitario" align="center" />
+			<column width="7%" label="Total" align="center" />
 		</columns>
 
 		<rows>
 			<template name="model">
-				<row>
-					<label value="@bind(each.codAnalisis)" />
-					<label value="@bind(each.codigo)" />
-					<label value="@bind(each.descripcion)" />
+				<row sclass="fila-maestro">
+					<label width="100%" value="@bind(each.codAnalisis)" />
+					<label width="100%" value="@bind(each.codigo)" />
+					<label width="90%" value="@bind(each.descripcion)" />
 
 					<cell>
-						<intbox value="0" />
+						<intbox width="80%" value="0" />
 					</cell>
 
 					<combobox width="80%" >
@@ -37,12 +37,12 @@
 					
 					<cell>
 						$
-						<intbox value="@bind(each.importe)" />
+						<intbox width="80%" value="@bind(each.importe)" />
 					</cell>
 
 					<cell>
 						$
-						<intbox value="000" />
+						<intbox width="80%" value="000" />
 					</cell>
 
 				</row>

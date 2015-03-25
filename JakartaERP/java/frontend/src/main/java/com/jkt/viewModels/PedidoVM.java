@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.jkt.viewModels;
 
 import java.util.ArrayList;
@@ -8,13 +11,18 @@ import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
+
+import scala.collection.script.Message;
 
 import com.jkt.common.Operaciones;
 import com.jkt.ov.ClienteOV;
@@ -79,11 +87,19 @@ public class PedidoVM extends ViewModel {
 		
 		log.info("Inicializando items...");
 		this.items.add(new ItemsOV());
+		
 	}
 	
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento(){
+		
+//		ItemsOV itemsOV = this.items.get(0);
+//		if (itemsOV.getCantidad()==0 || itemsOV.getImporte()==0 || itemsOV.getImporteTotal()==0 || itemsOV.getTipo().isEmpty() || itemsOV.getReferencia().isEmpty()) {
+//			Messagebox.show("Debe completar el item anterior.", "Cargar datos.", Messagebox.OK, Messagebox.EXCLAMATION);
+//			return;
+//		}
+		
 		this.items.add(0, new ItemsOV());
 	}
 	
