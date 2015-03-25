@@ -1,6 +1,6 @@
 <window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.HelperVM')" title="" width="500px" position="center,center" closable="true" >
     <vlayout>
-        <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" >
+        <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
         
 	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 	            <auxheader label="@load(vm.titulo)" colspan="2" />

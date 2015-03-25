@@ -1,7 +1,7 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 <zk>
 		<style src="/style/template.css" />
-		<vlayout vflex="1" hflex="1" style="background: #e7e6dd;min-width: 900px;width:auto;overflow:auto" >
+		<vlayout vflex="1" hflex="1" style="background: #e7e6dd;min-width: 900px;width:100%;overflow:hidden" >
 		
 			<div vflex="1" hflex="1" sclass="hboxToolBar" >
 				<include id="barraMenu" hflex="1" src="/pantallas/menues/toolBar.zul" />
