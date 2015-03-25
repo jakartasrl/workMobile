@@ -4,7 +4,7 @@
 		<textbox multiline="true" rows="15" value="@bind(vm.item.plantilla.descripcion)" style="font-size:12px; font-family:arial; margin-left:5%; margin-rigth:1%; width:94%;" />
 	</vlayout>
 	
-	<hlayout style="margin-top:15px; text-align: center;">
+	<hlayout style="margin-top:10px; text-align: center;">
 		<button width="180px;" label="Finalizar" onClick="@command('cerrarModal',window=edicionPlantilla)" />
 	</hlayout>
 

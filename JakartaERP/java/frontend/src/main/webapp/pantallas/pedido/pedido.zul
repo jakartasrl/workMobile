@@ -43,11 +43,11 @@
 							<textbox sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" />
 							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id )" />
 						</hlayout>
+
+						<cell colspan="3">
+							<textbox value="" width="100%" readonly="true"/>
+						</cell>						
 						
-						<textbox value="" readonly="true"/>
-						
-						<separator/>
-						<separator/>
 					</row>
 					
 					<row sclass="fila-maestro">
@@ -56,10 +56,12 @@
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
 							<textbox sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max=true, ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
-						<textbox value="@bind(vm.lPreciosOV.descripcion)" readonly="true"/>
+						<cell colspan="4">
+							<textbox width="100%" value="@bind(vm.lPreciosOV.descripcion)" readonly="true"/>
+						</cell>
 			    		
 					</row>
 					

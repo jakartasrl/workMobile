@@ -11,13 +11,9 @@ import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
-import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Window;
 
-import com.jkt.common.Closure;
-import com.jkt.dominio.Descriptible;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.HeaderHelpGenericoOV;
@@ -41,7 +37,7 @@ public class HelperVM {
 	private String refresh;
 	private String invoke;
 	private Object vm;
-	
+
 	public String getRefresh() {
 		return refresh;
 	}
@@ -147,7 +143,7 @@ public class HelperVM {
 
 	@Init
 	public void init(	@ExecutionArgParam("coleccion") List<DescriptibleOV> coleccion,
-						@ExecutionArgParam("columnasOV") HeaderHelpGenericoOV headerOV, 
+						@ExecutionArgParam("metaDatos") HeaderHelpGenericoOV headerOV, 
 						@ExecutionArgParam("result") ObjectView resultOV,
 						@ExecutionArgParam("refresh") String refresh,
 						@ExecutionArgParam("invoke") String metodo,

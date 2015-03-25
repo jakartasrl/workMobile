@@ -35,7 +35,7 @@
 /* header */
 /* header */
 
-.z-row-content, .z-row-content:hover , .z-row-inner, .z-row-inner:hover , .z-row, .z-row:hover{
+.z-row-content, .z-row-content:hover , .z-row-inner, .z-row-inner:hover , .z-row, .z-row:hover, .z-cell, .z-cell:hover {
 /* 	background-color: white !important; */
 	padding: 0px !important;
 	margin: 0px !important;
