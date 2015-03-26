@@ -14,7 +14,7 @@
 
             <rows>
 	            <template name="model">
-	                <row onClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto;" >
+	                <row onClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;" >
 <!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
 	                    <label hflex="2" value="@load(each.descripcion)" />

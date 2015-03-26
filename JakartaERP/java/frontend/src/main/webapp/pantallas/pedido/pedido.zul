@@ -1,7 +1,7 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<div>
-	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="90%">
+	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%">
 
 		<panelchildren>
 
@@ -71,7 +71,7 @@
 		</panelchildren>
 	</panel>
 	
-	<panel style="margin-top:15px;" border="none" height="auto" width="90%">
+	<panel style="margin-top:15px;" border="none" height="auto" width="100%">
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
@@ -120,9 +120,6 @@
 			</tabbox>
 		</panelchildren>
 	</panel>
-	
-	<button label="Guardar" onClick="@command('guardar')" />
-	
 	
 </div>
 	

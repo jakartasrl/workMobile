@@ -1,8 +1,11 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
+	
+	<vlayout width="100%" style="text-align:center;"> 
+		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item." />
+	</vlayout>
+	
 
-	<button style="margin-bottom:2px;" label="Agregar Item" onClick="@command('agregarElemento')" />
-
-	<grid sclass="grilla-items" model="@bind(vm.items)" mold="paging" pageSize="10" emptyMessage="No existen items aun.">
+	<grid sclass="grilla-items" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
 		<columns>
 			<column width="160px;"/>
 			<column width="200px;" />

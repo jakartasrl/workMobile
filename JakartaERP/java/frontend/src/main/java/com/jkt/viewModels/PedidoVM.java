@@ -51,6 +51,7 @@ import com.jkt.pedido.dominio.Pedido;
 @EqualsAndHashCode(callSuper=false)
 public class PedidoVM extends ViewModel {
 	
+	private String titulo="Ingreso de Pedido";
 	private ClienteOV clienteOV=new ClienteOV();
 	private SucursalOV sucursalOV=new SucursalOV();
 	private ListaPrecioOV lPreciosOV=new ListaPrecioOV();
