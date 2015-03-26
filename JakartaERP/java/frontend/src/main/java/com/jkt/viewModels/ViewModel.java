@@ -32,12 +32,10 @@ public abstract class ViewModel {
 	public void openHelper(	@BindingParam("clase") String clase, 
 							@BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,
 							@BindingParam("ov") ObjectView ov,
-							@BindingParam("post") String metodo
-//							,
-//							@BindingParam("titulo") String titulo,
-//							@BindingParam("codHeader") String codHeader,
-//							@BindingParam("descHeader") String descHeader,
-//							@BindingParam("max") boolean max
+							@BindingParam("post") String metodo,
+							@BindingParam("titulo") String titulo,
+							@BindingParam("codHeader") String codHeader,
+							@BindingParam("descHeader") String descHeader
 			) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		if (ov==null) {
@@ -63,27 +61,22 @@ public abstract class ViewModel {
 		map.put("vm", this);
 
 		
-//		HeaderHelpGenericoOV metaDatos=new HeaderHelpGenericoOV();
-//		if (campoValido(titulo)) {
-//			metaDatos.setTitulo(titulo);
-//		}
-//		if (campoValido(codHeader)) {
-//			metaDatos.setColumnaCodigo(codHeader);
-//		}
-//		if (campoValido(descHeader)) {
-//			metaDatos.setColumnaDescripcion(descHeader);
-//		}
+		HeaderHelpGenericoOV metaDatos=new HeaderHelpGenericoOV();
+		if (campoValido(titulo)) {
+			metaDatos.setTitulo(titulo);
+		}
+		if (campoValido(codHeader)) {
+			metaDatos.setColumnaCodigo(codHeader);
+		}
+		if (campoValido(descHeader)) {
+			metaDatos.setColumnaDescripcion(descHeader);
+		}
 		
-//		map.put("metaDatos", metaDatos);
+		map.put("metaDatos", metaDatos);
 		
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
 		
-//		if (max) {
-//			window.setMaximized(max);
-//		}
-		
 		window.doModal();
-		
 	}
 	
 	/**

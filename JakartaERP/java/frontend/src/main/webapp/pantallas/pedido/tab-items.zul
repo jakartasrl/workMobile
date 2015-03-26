@@ -60,7 +60,7 @@
 						<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
 						<textbox style="vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="1" value="@bind(each.plantilla.descripcion)" onClick="@command('editarPlantilla', ov=each)" readonly="true" />
 					</hlayout>
-
+					
 				</row>
 			</template>
 

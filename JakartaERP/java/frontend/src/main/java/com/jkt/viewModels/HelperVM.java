@@ -20,7 +20,7 @@ import com.jkt.ov.HeaderHelpGenericoOV;
 import com.jkt.view.ObjectView;
 
 /**
- * ViewModel para los helpers, en este caso solamente de los Presupuestos.
+ * ViewModel para los helpers.
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -28,10 +28,9 @@ public class HelperVM {
 
 	protected static final Logger log = Logger.getLogger(HelperVM.class);
 
-	private String titulo = "Consulta generica";
-	private String id = "ID";
-	private String codigo = "Codigo";
-	private String descripcion = "Descripción";
+	private String titulo;
+	private String codigo;
+	private String descripcion;
 	private List<DescriptibleOV> coleccion = new ArrayList<DescriptibleOV>();
 	private ObjectView ov;
 	private String refresh;
@@ -76,14 +75,6 @@ public class HelperVM {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getCodigo() {
@@ -151,12 +142,14 @@ public class HelperVM {
 			) {
 		this.coleccion = coleccion;
 		
-		if(headerOV!=null){
-			this.id=headerOV.getColumnaId();
-			this.codigo=headerOV.getColumnaCodigo();
-			this.descripcion=headerOV.getColumnaDescripcion();
-			this.titulo=headerOV.getTitulo();
+		if(headerOV==null){//asigna los datos correspondientes.
+			headerOV = new HeaderHelpGenericoOV();
 		}
+		
+		this.codigo=headerOV.getColumnaCodigo();
+		this.descripcion=headerOV.getColumnaDescripcion();
+		this.titulo=headerOV.getTitulo();
+
 		this.vm=vm;
 		this.invoke=metodo;
 		this.ov=resultOV;

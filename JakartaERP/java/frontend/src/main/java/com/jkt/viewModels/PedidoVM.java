@@ -19,7 +19,9 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import scala.collection.script.Message;
@@ -35,6 +37,7 @@ import com.jkt.ov.ListDeterminacionOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.ListaPrecioOV;
 import com.jkt.ov.PedidoOV;
+import com.jkt.ov.SucursalOV;
 import com.jkt.pedido.dominio.Pedido;
 
 /**
@@ -47,14 +50,13 @@ import com.jkt.pedido.dominio.Pedido;
 public class PedidoVM extends ViewModel {
 	
 	private ClienteOV clienteOV=new ClienteOV();
-	private DescriptibleOV sucursalOV=new DescriptibleOV();
+	private SucursalOV sucursalOV=new SucursalOV();
 	private ListaPrecioOV lPreciosOV=new ListaPrecioOV();
 	private ListDeterminacionOV lDeterminacionesQuimicas=new ListDeterminacionOV();
 	private ListDeterminacionOV lDeterminacionesElectricas=new ListDeterminacionOV();
 	private ListNotasOV lNotas=new ListNotasOV();
 	private ListDescriptibleOV lDocumentacion=new ListDescriptibleOV();
 	private List<ItemsOV> items = new ArrayList<ItemsOV>();
-	
 	
 	/**
 	 * Para abrir el pop up.
@@ -136,6 +138,7 @@ public class PedidoVM extends ViewModel {
 		return "actualizarOVs";
 	}
 	
+	
 	@Command
 	public void editarPlantilla(@BindingParam("ov") ItemsOV item){
 		this.itemActual=item;
@@ -148,6 +151,22 @@ public class PedidoVM extends ViewModel {
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/edicionPlantilla.zul", null, map);
 		window.doModal();
 		
+	}
+	
+	/**
+	 * Solamente actualiza el campo que representa la descripcion completa de la sucursal.
+	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que está en cada ViewModel.</p>
+	 */
+	public void actualizarCampoSucursal(){
+		String text= this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
+		this.sucursalOV.setDescripcionCompleta(text);
+	}
+	
+	/**
+	 * Limpia ovs al momento de seleccionar un cliente.
+	 */
+	public void actualizarCamposDependientesDeCliente(){
+		this.sucursalOV=new SucursalOV();
 	}
 
 	public ListaPrecioOV getlPreciosOV() {

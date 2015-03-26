@@ -21,7 +21,7 @@
 			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
 			    		
 			    		<hlayout >
-							<textbox sclass="campoCodigo" value="" readonly="true"/>
+							<textbox id="codigoPresupuesto" sclass="campoCodigo" value="" readonly="true"/>
 							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto')" />
 			    		</hlayout>
 
@@ -36,16 +36,16 @@
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
 							<textbox sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV)" />
+							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	
 						<hlayout>
 							<textbox sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id )" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
 
 						<cell colspan="3">
-							<textbox value="" width="100%" readonly="true"/>
+							<textbox value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" readonly="true"/>
 						</cell>						
 						
 					</row>
@@ -56,7 +56,7 @@
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
 							<textbox sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max=true, ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
 						<cell colspan="4">
@@ -71,7 +71,7 @@
 		</panelchildren>
 	</panel>
 	
-	<panel border="none" height="auto" width="90%">
+	<panel style="margin-top:15px;" border="none" height="auto" width="90%">
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
@@ -85,6 +85,7 @@
 			        <tab id="doc" label="Documentacion" />
 			    </tabs>
 			    <tabpanels>
+			    
 			        <tabpanel>
 						<include id="itemsContent" hflex="1" src="/pantallas/pedido/tab-items.zul" viewModel="${vm}"/>
 			        </tabpanel>
@@ -103,7 +104,7 @@
 						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />
 					</tabpanel>
 
-			        <tabpanel  >
+			        <tabpanel>
 						<label value="Empty Tab"></label>
 					</tabpanel>
 					
@@ -114,8 +115,6 @@
 			        <tabpanel>
 						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
 					</tabpanel>
-
-
 					
 			    </tabpanels>
 			</tabbox>

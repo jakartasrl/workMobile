@@ -11,12 +11,6 @@ import com.jkt.view.ObjectView;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-public class ClienteOV extends ObjectView {
-
-	private String codigo;
-	private String telefono;
-	private String fax;
-	private String mail;
-	private String nroProveedor;
+public class ClienteOV extends DescriptibleOV {
 
 }
