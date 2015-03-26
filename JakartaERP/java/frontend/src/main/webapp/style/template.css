@@ -21,6 +21,11 @@
 	background: rgba(227,227,227,0.5);
 }
 
+.z-loading-indicator{
+	width: 120px !important;
+	margin: auto !important;
+}
+
 .campoCodigo{
 	text-align: center;
 	padding: 0px;	

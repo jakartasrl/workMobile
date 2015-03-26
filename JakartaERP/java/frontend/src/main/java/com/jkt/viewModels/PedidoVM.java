@@ -3,6 +3,7 @@
  */
 package com.jkt.viewModels;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.zkoss.zul.Window;
 import scala.collection.script.Message;
 
 import com.jkt.common.Operaciones;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ClienteOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -65,11 +67,41 @@ public class PedidoVM extends ViewModel {
 	
 	private PedidoOV pedidoOV=new PedidoOV();
 	
+	/**
+	 * Guarda un objeto
+	 */
 	@Command
 	public void guardar(){
 		completarOV();
 		Operaciones.ejecutar("GuardarPedido", pedidoOV);
 	}
+
+	/**
+	 * 
+	 */
+	@Command
+	@NotifyChange({"lNotas","items","lDocumentacion"})
+	public void nuevo(){
+		this.pedidoOV= new PedidoOV();
+		this.init();
+	}
+	
+	/**
+	 * Abre un help generico
+	 */
+	@Command
+	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
+		this.openHelper("pais", "", sucursalOV, "", "Probando Helper desde Java", "COdigoooOO", "datos");
+	}
+	
+	/**
+	 * Muestra un mensaje solamente
+	 */
+	@Command
+	public void salir(){
+		Messagebox.show("Saliendo de la aplicación.");
+	}
+	
 	
 	private void completarOV() {
 		pedidoOV.setIdCliente(clienteOV.getId());
@@ -88,8 +120,8 @@ public class PedidoVM extends ViewModel {
 		this.lDocumentacion = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class);
 		
 		log.info("Inicializando items...");
+		this.items=new ArrayList<ItemsOV>();
 		this.items.add(new ItemsOV());
-		
 	}
 	
 	@Command
