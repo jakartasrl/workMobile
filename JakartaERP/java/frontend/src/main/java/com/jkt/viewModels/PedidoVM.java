@@ -100,7 +100,7 @@ public class PedidoVM extends ViewModel {
 	 */
 	@Command
 	public void salir(){
-		Messagebox.show("Saliendo de la aplicación.");
+		Messagebox.show("Saliendo de la aplicaciÃ³n.");
 	}
 	
 	
@@ -188,7 +188,7 @@ public class PedidoVM extends ViewModel {
 	
 	/**
 	 * Solamente actualiza el campo que representa la descripcion completa de la sucursal.
-	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que está en cada ViewModel.</p>
+	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que estï¿½ en cada ViewModel.</p>
 	 */
 	public void actualizarCampoSucursal(){
 		String text= this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());

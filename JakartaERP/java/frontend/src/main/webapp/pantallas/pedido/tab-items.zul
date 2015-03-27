@@ -26,7 +26,6 @@
 				<listcell>
 
 					<groupbox width="100%" style="border-style:none; cursor: default">
-<!-- 					<groupbox id="gb3-${each} " mold="3d" width="100%"> -->
 					
 							<hlayout>
 							
@@ -38,7 +37,7 @@
 								</combobox>
 							
 								<label value="Referencia:" />
-								<textbox width="120px" value="@bind(each.referencia)" />
+								<textbox width="250px" value="@bind(each.referencia)" />
 		
 								<label value="Cantidad:" />
 								<textbox width="40px;" value="@bind(each.cantidad)" />
@@ -72,5 +71,4 @@
 		</template>
 
 	</listbox>
-
 </zk>

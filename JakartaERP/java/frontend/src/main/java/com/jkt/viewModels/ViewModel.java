@@ -5,14 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.ov.ContainerOV;
+import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.HeaderHelpGenericoOV;
 import com.jkt.ov.HelperOV;
 import com.jkt.ov.ListDescriptibleOV;
@@ -38,6 +43,27 @@ public abstract class ViewModel {
 		this.titulo = titulo;
 	}
 
+	@Command
+	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") Textbox campo, @BindingParam("ov") ObjectView ov){
+		
+		/*
+		 * Campos de entrada
+		 */
+		ContainerOV container= new ContainerOV();
+		container.setString1(clase);
+		container.setString2(campo.getValue());
+		container.setString3("codigo");
+		
+		//Asigna el resultado.
+		DescriptibleOV resultado= (DescriptibleOV) Operaciones.ejecutar("ValidarEntidad", container, DescriptibleOV.class);
+
+		//Copio los valores simples, no se hace x referencias xq se pierden.
+		BeanUtils.copyProperties(resultado, ov);
+		
+		//Actualiza todo el vm hijo
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
 	@Command
 	public void openHelper(	@BindingParam("clase") String clase, 
 							@BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,
@@ -107,7 +133,7 @@ public abstract class ViewModel {
 	}
 	
 	/**
-	 * Este metodo no debe realizar nada, salvo que así lo desee.
+	 * Este metodo no debe realizar nada, salvo que asï¿½ lo desee.
 	 * <p>El fin de este metodo es solamente actualizar todos los OV, declarando annotations sobre el metodo de tipo {@link NotifyChange}<p>
 	 * <p>
 	 * Define en el identificador, el nombre que se le asigna al comando global. Esta misma cadena que en el ejemplo es <b>actualizarOVs</b> debe ser la misma cadena

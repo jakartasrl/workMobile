@@ -204,6 +204,24 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 
 	</operacion>
+	
+	<operacion name="ValidarEntidad" clase="com.jkt.operaciones.ValidarExistenciaSimple" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.DescriptibleOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="ENTIDAD"/>
+			<campoEntrada propertyOV="string2" name="CODIGO"/>
+			<campoEntrada propertyOV="string3" name="CAMPOVALIDADO"/>
+		</input>
+
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+
+	</operacion>
 
 	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
 

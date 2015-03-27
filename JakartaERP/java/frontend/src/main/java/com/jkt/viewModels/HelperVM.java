@@ -105,7 +105,7 @@ public class HelperVM {
 	public void obtenerElemento(@BindingParam("objeto") DescriptibleOV d, @BindingParam("window") Window x) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		if (ov==null) {
-			log.warn("No está disponible la funcionalidad para el evento de click sobre una fila, ya que no existe un destino donde depositar los datos.");
+			log.warn("No estï¿½ disponible la funcionalidad para el evento de click sobre una fila, ya que no existe un destino donde depositar los datos.");
 		}else{
 			BeanUtils.copyProperties(d, ov);
 			x.detach();
@@ -118,14 +118,14 @@ public class HelperVM {
 					Method method = vm.getClass().getMethod(invoke);
 					method.invoke(vm);
 				} catch (NoSuchMethodException e) {
-					String msg = "No es posible ejecutar la acción especificada:".concat(invoke);
+					String msg = "No es posible ejecutar la acciÃ³n especificada:".concat(invoke);
 					msg.concat(String.format("Clase: %s - Metodo %s.", this.vm.getClass().getSimpleName(), this.invoke));
 					log.warn(msg);
 				} catch (SecurityException e) {
 					throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(invoke));
 				}
 			}else{
-				log.info("No se ejecutan post acciones adicionales luego de la selección del help generico.");
+				log.info("No se ejecutan post acciones adicionales luego de la selecciï¿½n del help generico.");
 			}
 			
 		}
