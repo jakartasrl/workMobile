@@ -28,6 +28,16 @@ public abstract class ViewModel {
 
 	protected static final Logger log = Logger.getLogger(ViewModel.class);
 
+	private String titulo="-";
+	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	@Command
 	public void openHelper(	@BindingParam("clase") String clase, 
 							@BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,
