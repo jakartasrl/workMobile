@@ -1,6 +1,8 @@
-<zk>
-<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.PedidoVM')">
-	<panel style="padding:5px;"  title="Identificación" border="normal" height="auto" width="90%">
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
+	<div>
+	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%">
+
 		<panelchildren>
 
 			<grid style="border-style:none;" sizedByContent="true">
@@ -8,56 +10,58 @@
 				<columns>
 					<column width="150px"/>
 					<column width="120px"/>
-					<column width="220px"/>
-					<column width="220px"/>
+					<column width="100px"/>
+					<column width="100px"/>
 					<column width="100px"/>
 					<column width="150px"/>
 				</columns>
 			
 				<rows>
-			    	<row>
+			    	<row sclass="fila-maestro" >
 			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
 			    		
 			    		<hlayout >
-							<textbox class="campoCodigo" value="" readonly="true"/>
+							<textbox id="codigoPresupuesto" sclass="campoCodigo" value="" readonly="true"/>
 							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto')" />
 			    		</hlayout>
 
-						<label class="name" value="Nro. de Pedido : " />
+						<label value="Nro. de Pedido : " />
 						<textbox class="campoCodigo" value="" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
 						<datebox id="fecha" />
 					</row>
 					
-			    	<row>
-						<label class="name" value="Cliente | Sucursal : " />
+			    	<row sclass="fila-maestro">
+						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox class="campoCodigo" value="@bind(vm.clienteOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV)" />
+							<textbox sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" />
+							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	
 						<hlayout>
-							<textbox class="campoCodigo" value="@bind(vm.sucursalOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id )" />
+							<textbox sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
+
+						<cell colspan="3">
+							<textbox value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" readonly="true"/>
+						</cell>						
 						
-						<textbox value="" readonly="true"/>
-						
-						<separator/>
-						<separator/>
 					</row>
 					
-					<row>
+					<row sclass="fila-maestro">
 						<label value="Lista de Precios : " />
 
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
-							<textbox class="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
-							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
+							<textbox sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
-						<textbox value="@bind(vm.lPreciosOV.descripcion)" readonly="true"/>
+						<cell colspan="4">
+							<textbox width="100%" value="@bind(vm.lPreciosOV.descripcion)" readonly="true"/>
+						</cell>
 			    		
 					</row>
 					
@@ -67,7 +71,7 @@
 		</panelchildren>
 	</panel>
 	
-	<panel border="none" height="auto" width="90%">
+	<panel style="margin-top:15px;" border="none" height="auto" width="100%">
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
@@ -81,6 +85,7 @@
 			        <tab id="doc" label="Documentacion" />
 			    </tabs>
 			    <tabpanels>
+			    
 			        <tabpanel>
 						<include id="itemsContent" hflex="1" src="/pantallas/pedido/tab-items.zul" viewModel="${vm}"/>
 			        </tabpanel>
@@ -99,7 +104,7 @@
 						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />
 					</tabpanel>
 
-			        <tabpanel  >
+			        <tabpanel>
 						<label value="Empty Tab"></label>
 					</tabpanel>
 					
@@ -110,16 +115,11 @@
 			        <tabpanel>
 						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
 					</tabpanel>
-
-
 					
 			    </tabpanels>
 			</tabbox>
 		</panelchildren>
 	</panel>
-	
-	<button label="Guardar" onClick="@command('guardar')" />
-	
 	
 </div>
 	

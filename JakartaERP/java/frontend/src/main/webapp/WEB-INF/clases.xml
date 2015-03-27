@@ -31,8 +31,8 @@
 	<elemento key="caracteristicaProd" value="com.jkt.erp.articulos.CaracteristicaProducto" />
 	<elemento key="tipoProducto" value="com.jkt.erp.articulos.TipoProducto" />
 	<elemento key="tablaValoresCaract" value="com.jkt.erp.articulos.TablaValoresCaracProd" />
-	<elemento key="valoresDeTabla" value="com.jkt.erp.articulos.ValoresTablas" />	
 	<elemento key="articulos" value="com.jkt.erp.articulos.Producto" />
+	<elemento key="valoresDeTabla" value="com.jkt.erp.articulos.ValoresTablas" />	
 	<elemento key="configuracion" value="com.jkt.dominio.Configuracion" /> <!-- Esta entidad es temporal. La configuracion general va a tener una jerarquia -->
 	<elemento key="conceptoPresupuesto" value="com.jkt.cotizador.dominio.ConceptoPresupuesto" />
 	<elemento key="tablaValidacionDeter" value="com.jkt.laboratorio.dominio.TablaValidacionDeter" />
@@ -51,6 +51,7 @@
 	<elemento key="actividad" value="com.jkt.dominio.Actividad" />
 	<elemento key="condicionComercial" value="com.jkt.presupuesto.dominio.CondicionComercial" />
 	<elemento key="pedido" value="com.jkt.pedido.dominio.Pedido" validador="com.jkt.pedido.validadores.ValidadorPedido"/>
+	<elemento key="equipo" value="com.jkt.laboratorio.dominio.Equipo" />
 	<elemento key="documentacion" value="com.jkt.pedido.dominio.Documentacion"/>
 
 </elementos>

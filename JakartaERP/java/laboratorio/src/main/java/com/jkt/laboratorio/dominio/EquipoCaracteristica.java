@@ -14,7 +14,7 @@ import com.jkt.erp.articulos.ValoresTablas;
  */
 public class EquipoCaracteristica extends PersistentEntity {
 
-	@NotNull
+//	@NotNull(message="Debe asignarse un equipo a esta caracteristica.")
 	private Equipo equipo;
 	
 	private CaracteristicaProducto caracProducto;

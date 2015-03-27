@@ -13,6 +13,7 @@ import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.ov.HeaderHelpGenericoOV;
 import com.jkt.ov.HelperOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.view.ObjectView;
@@ -27,8 +28,25 @@ public abstract class ViewModel {
 
 	protected static final Logger log = Logger.getLogger(ViewModel.class);
 
+	private String titulo="-";
+	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	@Command
-	public void openHelper(@BindingParam("clase") String clase, @BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,@BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public void openHelper(	@BindingParam("clase") String clase, 
+							@BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,
+							@BindingParam("ov") ObjectView ov,
+							@BindingParam("post") String metodo,
+							@BindingParam("titulo") String titulo,
+							@BindingParam("codHeader") String codHeader,
+							@BindingParam("descHeader") String descHeader
+			) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		if (ov==null) {
 			log.warn("No se ha indicado un objeto vista de destino. Por favor indique uno, de modo contrario, solamente la ventana es de una simple consulta de ayuda.");
@@ -52,9 +70,36 @@ public abstract class ViewModel {
 		map.put("invoke", metodo);
 		map.put("vm", this);
 
-		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
-		window.doModal();
 		
+		HeaderHelpGenericoOV metaDatos=new HeaderHelpGenericoOV();
+		if (campoValido(titulo)) {
+			metaDatos.setTitulo(titulo);
+		}
+		if (campoValido(codHeader)) {
+			metaDatos.setColumnaCodigo(codHeader);
+		}
+		if (campoValido(descHeader)) {
+			metaDatos.setColumnaDescripcion(descHeader);
+		}
+		
+		map.put("metaDatos", metaDatos);
+		
+		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
+		
+		window.doModal();
+	}
+	
+	/**
+	 * Valida que un campo cadena no sea nulo o vacio.
+	 */
+	private boolean campoValido(String valor){
+		if (valor==null) {
+			return false;
+		}
+		if (valor.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 	
 	public ViewModel() {

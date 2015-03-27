@@ -9,11 +9,11 @@ import com.jkt.view.ObjectView;
  */
 public class HeaderHelpGenericoOV extends ObjectView {
 
-	private String titulo;
+	private String titulo="Consulta generica";
 	private String columnaId;
-	private String columnaCodigo;
-	private String columnaDescripcion;
-
+	private String columnaCodigo = "Código";
+	private String columnaDescripcion = "Descripción";
+	
 	public String getTitulo() {
 		return titulo;
 	}

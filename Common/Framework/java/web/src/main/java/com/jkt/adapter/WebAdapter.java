@@ -246,10 +246,9 @@ public class WebAdapter extends Adapter<Map, Map> {
 	
 	private Object recuperarPersistente(long id, Class<?> classSetter) throws JakartaException {
 		try {
-			
 			if (id == 0) {
 				return BeanUtils.instantiate(classSetter);
-			} else if (id < 1) {
+			} else if(id < 1){
 				return null;
 			} else {
 				session = sessionProvider.getSession();

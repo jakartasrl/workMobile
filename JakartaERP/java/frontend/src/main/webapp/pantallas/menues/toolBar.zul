@@ -1,12 +1,13 @@
-<zk>
-<toolbar vflex="1" hflex="1" id="gralToolBar" align="start" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.jkt.viewModels.ToolBarVM')">
+<zk viewModel="@id('vm') @load(viewModel)"  >
+<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar" align="start">
 	<hlayout style="width:100%" id="idLayout">
+
 		<div hflex="1" id="idDiv">
-			<toolbarbutton   id="idNew" image="/pantallas/icons/new.png" onClick="@command('showInputConciliacion')" tooltiptext="Abrir @load('vm.elemento')" />
+			<toolbarbutton   id="idNew" image="/pantallas/icons/new.png" onClick="@command('nuevo')" tooltiptext="Nuevo" />
 			<toolbarbutton   image="/pantallas/icons/candado.png"	onClick="@command('buscar')" tooltiptext="Buscar" />
-			<toolbarbutton   onClick="@command('showImport')"   image="/pantallas/icons/import.png" tooltiptext="Importar Resumen" />
+			<toolbarbutton   onClick="@command('guardar')" image="/pantallas/icons/import.png" tooltiptext="Guardar" />
 			<toolbarbutton  onClick="@command('importarSistema')"   image="/pantallas/icons/refreshSistema.png" tooltiptext="Importar Movimientos"  />
+
 			<space  bar="true" style="vertical-align: middle; line-height: 20px;" />
 			<toolbarbutton  onClick="@command('startConcAutomatica')"   image="/pantallas/icons/play.png" tooltiptext="Conciliar Aut." />
 			<toolbarbutton  onClick="@command('conciliarManual')"  image="/pantallas/icons/conciliar.png" tooltiptext="Conciliar" />
@@ -15,12 +16,16 @@
 			<space bar="true" style="vertical-align: middle; line-height:20px;" />
 			<toolbarbutton   onClick="@command('print')"  image="/pantallas/icons/print.png" tooltiptext="Imprimir" />
 		</div>
-		<div hflex="1" droppable="true"		style="text-align: right;">
-			<toolbarbutton  image="/pantallas/icons/help.png" 
-			onClick="@command('showManual')" tooltiptext="Manual" />
-			<toolbarbutton  image="/pantallas/icons/config.png" 
-			onClick="@command('showConfiguracion')" tooltiptext="Configuración" />
+
+		<div hflex="1" droppable="true" style="text-align: center;">
+			<label value="@load(vm.titulo)" style="vertical-align:middle; font-size:25px; color:grey;"/> 
 		</div>
+
+		<div hflex="1" droppable="true" style="text-align: right;">
+			<toolbarbutton  image="/pantallas/icons/help.png" onClick="@command('salir')" tooltiptext="Manual" />
+			<toolbarbutton  image="/pantallas/icons/config.png" onClick='alert("not found yet");' tooltiptext="Configuración" />
+		</div>
+
 	</hlayout>
 </toolbar>
 </zk>

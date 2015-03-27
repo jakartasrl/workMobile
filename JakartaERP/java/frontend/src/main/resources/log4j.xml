@@ -28,30 +28,30 @@
 	</logger>
 
 	<logger name="log4j.logger.org.springframework.web.servlet.DispatcherServlet">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="o.s.web.servlet.DispatcherServlet">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	<logger name="o.s.web.servlet.DispatcherServlet">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="log4j.logger.org.springframework.web.servlet.mvc">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 

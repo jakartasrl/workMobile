@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.IDescriptible;
+import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.TipoProducto;
 import com.jkt.erp.articulos.ValoresTablas;
 import com.jkt.erp.varios.Cliente;
@@ -15,16 +17,20 @@ import com.jkt.erp.varios.Cliente;
  *	<p>Sobre este transformador (Equipo) se realizan los estudios, de por ejemplo aceites.</p>
  *
  */
-public class Equipo extends Descriptible {
+public class Equipo  extends Descriptible {
 
+	public Equipo() {
+		this.setActivo(true);
+	}
+	
 	/**
-	 * Esta marca estará en una tabla de valores. La tabla de valores será Marca,y los valores Czerweny, INDUSUL
+	 * Esta marca estarï¿½ en una tabla de valores. La tabla de valores serï¿½ Marca,y los valores Czerweny, INDUSUL
 	 * 
 	 */
 	@NotNull(message="El equipo necesita tener asignada una marca.")
 	private ValoresTablas marca;
 	
-	@NotNull(message="El equipo debe tener un número de serie.")
+	@NotNull(message="El equipo debe tener un nï¿½mero de serie.")
 	private String nroSerie;
 	
 	@NotNull(message="El equipo tiene que tener asignado un cliente.")

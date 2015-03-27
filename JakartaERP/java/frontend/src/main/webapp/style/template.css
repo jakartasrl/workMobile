@@ -1,4 +1,8 @@
 
+.z-vlayout{
+	width: 100%
+}
+
 .fontTitle {
 	font-family: Arial, Sans-serif;
 	font-size: 15px;
@@ -8,34 +12,6 @@
 .tabPrincipal .z-tab-text {
 	background: darkslategrey;
 	color: white;
-}
-
-.fontListConciliacion .z-listheader-content, .z-listcell-content,
-	.z-listgroup-content, .z-listgroupfoot-content, .z-listfooter-content {
-	font-size: 11px
-
-}
-
-.z-datebox-disabled, .z-textbox[disabled], .z-combobox-disabled *,
-	.z-bandbox-disabled *, .z-datebox-disabled *, .z-timebox-disabled *,
-	.z-spinner-disabled *, .z-doublespinner-disabled * {
-	color: black !important;
-	font-weight: bold;
-}
-
-.fontGrid .z-label,.z-column-content{
-	font-size: 11px	!important;
-}
-
-
-.lastChildTree .z-icon-caret-down:before,.lastChildTree .z-icon-caret-right:before{
-	content: "-";
-	
-}
-
-.z-notification-content {
-	min-height:20px;
-	
 }
 
 .z-loading{
@@ -54,9 +30,32 @@
 	text-align: center;
 	padding: 0px;	
 	width: 50px;
+	height: 2px;
 }
 
 .z-listcell-content{
 	background-color: white;
 }
 
+/* header */
+/* header */
+
+.z-row-content, .z-row-content:hover , .z-row-inner, .z-row-inner:hover , .z-row, .z-row:hover, .z-cell, .z-cell:hover {
+/* 	background-color: white !important; */
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.z-row-content .fila-maestro{
+	height: 29px !important;
+}
+
+.z-panel-header .panel-maestro{
+	height: 29px;
+}
+
+.grilla-items .z-grid-body{
+	margin-top: 2px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}

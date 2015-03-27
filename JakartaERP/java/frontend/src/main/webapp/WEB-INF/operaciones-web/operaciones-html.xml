@@ -77,25 +77,8 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 
 	</operacion>
-	
-	<operacion name="HelperCompuesto" clase="com.jkt.operaciones.HelperCompuesto" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
 
-		<input>
-			<campoEntrada propertyOV="clase" name="ENTIDAD"/>
-			<campoEntrada propertyOV="oidEntidadMaestra" name="OIDENTIDADMAESTRA"/>
-		</input>
-
-		<output>
-			<campoSalida target="id" value="id" />
-			<campoSalida target="codigo" value="codigo" />
-			<campoSalida target="descripcion" value="descripcion" />
-		</output>
-
-		<transformer clase="com.jkt.transformers.WebTransformer" />
-
-	</operacion>
-
-	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
+	<operacion name="TraerDeterQuimConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
 
 		<input>
 			<campoEntrada propertyOV="string1" name="LABORATORIO"/>
@@ -103,7 +86,7 @@
 		</input>
 
 		<output>
-<!-- 			<campoSalida value="idItem" target="descripcion" /> -->
+			<campoSalida value="idItem" target="descripcion" />
 
 			<campoSalida value="id" target="determinacion.id" />
 			<campoSalida value="codigo" target="determinacion.codigo" />
@@ -146,29 +129,99 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="TraerNotas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.presupuesto.dominio.Nota" outputOV="com.jkt.ov.ListNotasOV">
+	<operacion name="TraerMarca" clase="com.jkt.laboratorio.operaciones.TraerMarcasParaEquipo" outputOV="com.jkt.ov.ListMarcaOV">
 		
 		<output>
 
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
-			<campoSalida target="adicional" value="adicional" />
-			<campoSalida target="actividad.codigo" value="codigoActividad" />
-	
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="TraerDocumentacion" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.pedido.dominio.Documentacion" outputOV="com.jkt.ov.ListDocumentacionOV">
-		
+	<operacion name="TraerCaracteristicasDeProducto" clase="com.jkt.erp.articulos.operaciones.TraerTiposDeProducto" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListCaracteristicaProductoOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+
 		<output>
 
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="tipoDato" value="tipoDato" />
+			<campoSalida target="tabla.id" value="idTabla" />
 	
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
+	<operacion name="saveEquipo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Equipo" inputOV="com.jkt.ov.EquipoOV">
+		
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Equipo">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+			<campoEntrada propertyOV="idMarca" metodo="setMarca" />
+			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
+			<campoEntrada propertyOV="idTipoProducto" metodo="setTipoDeProducto" />
+			<campoEntrada propertyOV="nroSerie" metodo="setNroSerie" />
+			<campoEntrada propertyOV="caracteristicasEquipo" metodo="setCaracteristicas" >
+				<campoEntrada propertyOV="idCaracteristica" metodo="setCaracProducto" />
+				<campoEntrada propertyOV="valorEntero" metodo="setValorEntero" />
+				<campoEntrada propertyOV="valorBoolean" metodo="setValorBoolean" />
+				<campoEntrada propertyOV="valorString" metodo="setValorString" />
+				<campoEntrada propertyOV="valorDouble" metodo="setValorDoble" />
+				<campoEntrada propertyOV="idValor" metodo="setValorTabla" />
+				
+			</campoEntrada>
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerEquipo" clase="com.jkt.laboratorio.operaciones.TraerEquipo" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.EquipoOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+			<campoEntrada propertyOV="string2" name="EQUIPO"/>
+		</input>
+	
+		<output>
+			<campoSalida target="id" 						value="id" />
+			<campoSalida target="descripcion" 				value="descripcion" />
+			<campoSalida target="nroSerie" 					value="nroSerie" />
+			<campoSalida target="marca.id" 					value="idMarca" />
+			<campoSalida target="marca.descripcion" 		value="descMarca" />
+			<campoSalida target="cliente.id" 				value="idCliente" />
+			<campoSalida target="cliente.codigo" 			value="codCliente" />
+			<campoSalida target="cliente.descripcion" 		value="descCliente" />
+			<campoSalida target="tipoDeProducto.id" 		value="idTipoProducto" />
+			<campoSalida target="tipoDeProducto.codigo" 	value="codTipoProducto" />
+			
+			<campoSalida target="caracteristicas" value="caracteristicas">
+				<campoSalida target="id" value="id"/>
+				<campoSalida target="caracProducto.descripcion" value="descripcion"/>
+				<campoSalida target="caracProducto.tipoDato" value="tipoDato"/>
+				<campoSalida target="caracProducto.tabla.id" value="idTabla"/>
+				
+				<campoSalida target="valorEntero" value="valorEntero"/>
+				<campoSalida target="valorString" value="valorString"/>
+				<campoSalida target="valorBoolean" value="valorBoolean"/>
+				<campoSalida target="valorDoble" value="valorDouble"/>
+			
+				<campoSalida target="valorTabla.id" value="idValorTabla"/>
+				<campoSalida target="valorTabla.codigo" value="codigoValorTabla"/>
+				<campoSalida target="valorTabla.descripcion" value="descValorTabla"/>
+				
+			</campoSalida>
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

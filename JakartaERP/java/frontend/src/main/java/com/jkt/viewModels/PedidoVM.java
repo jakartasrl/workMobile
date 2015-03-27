@@ -1,5 +1,9 @@
+/*
+ * 
+ */
 package com.jkt.viewModels;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,15 +12,23 @@ import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import scala.collection.script.Message;
+
 import com.jkt.common.Operaciones;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ClienteOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -27,6 +39,7 @@ import com.jkt.ov.ListDeterminacionOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.ListaPrecioOV;
 import com.jkt.ov.PedidoOV;
+import com.jkt.ov.SucursalOV;
 import com.jkt.pedido.dominio.Pedido;
 
 /**
@@ -38,15 +51,15 @@ import com.jkt.pedido.dominio.Pedido;
 @EqualsAndHashCode(callSuper=false)
 public class PedidoVM extends ViewModel {
 	
+	private String titulo="Ingreso de Pedido";
 	private ClienteOV clienteOV=new ClienteOV();
-	private DescriptibleOV sucursalOV=new DescriptibleOV();
+	private SucursalOV sucursalOV=new SucursalOV();
 	private ListaPrecioOV lPreciosOV=new ListaPrecioOV();
 	private ListDeterminacionOV lDeterminacionesQuimicas=new ListDeterminacionOV();
 	private ListDeterminacionOV lDeterminacionesElectricas=new ListDeterminacionOV();
 	private ListNotasOV lNotas=new ListNotasOV();
 	private ListDescriptibleOV lDocumentacion=new ListDescriptibleOV();
 	private List<ItemsOV> items = new ArrayList<ItemsOV>();
-	
 	
 	/**
 	 * Para abrir el pop up.
@@ -55,11 +68,41 @@ public class PedidoVM extends ViewModel {
 	
 	private PedidoOV pedidoOV=new PedidoOV();
 	
+	/**
+	 * Guarda un objeto
+	 */
 	@Command
 	public void guardar(){
 		completarOV();
 		Operaciones.ejecutar("GuardarPedido", pedidoOV);
 	}
+
+	/**
+	 * 
+	 */
+	@Command
+	@NotifyChange({"lNotas","items","lDocumentacion"})
+	public void nuevo(){
+		this.pedidoOV= new PedidoOV();
+		this.init();
+	}
+	
+	/**
+	 * Abre un help generico
+	 */
+	@Command
+	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
+		this.openHelper("pais", "", sucursalOV, "", "Probando Helper desde Java", "COdigoooOO", "datos");
+	}
+	
+	/**
+	 * Muestra un mensaje solamente
+	 */
+	@Command
+	public void salir(){
+		Messagebox.show("Saliendo de la aplicación.");
+	}
+	
 	
 	private void completarOV() {
 		pedidoOV.setIdCliente(clienteOV.getId());
@@ -78,12 +121,20 @@ public class PedidoVM extends ViewModel {
 		this.lDocumentacion = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class);
 		
 		log.info("Inicializando items...");
+		this.items=new ArrayList<ItemsOV>();
 		this.items.add(new ItemsOV());
 	}
 	
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento(){
+		
+//		ItemsOV itemsOV = this.items.get(0);
+//		if (itemsOV.getCantidad()==0 || itemsOV.getImporte()==0 || itemsOV.getImporteTotal()==0 || itemsOV.getTipo().isEmpty() || itemsOV.getReferencia().isEmpty()) {
+//			Messagebox.show("Debe completar el item anterior.", "Cargar datos.", Messagebox.OK, Messagebox.EXCLAMATION);
+//			return;
+//		}
+		
 		this.items.add(0, new ItemsOV());
 	}
 	
@@ -120,6 +171,7 @@ public class PedidoVM extends ViewModel {
 		return "actualizarOVs";
 	}
 	
+	
 	@Command
 	public void editarPlantilla(@BindingParam("ov") ItemsOV item){
 		this.itemActual=item;
@@ -132,6 +184,22 @@ public class PedidoVM extends ViewModel {
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/edicionPlantilla.zul", null, map);
 		window.doModal();
 		
+	}
+	
+	/**
+	 * Solamente actualiza el campo que representa la descripcion completa de la sucursal.
+	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que está en cada ViewModel.</p>
+	 */
+	public void actualizarCampoSucursal(){
+		String text= this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
+		this.sucursalOV.setDescripcionCompleta(text);
+	}
+	
+	/**
+	 * Limpia ovs al momento de seleccionar un cliente.
+	 */
+	public void actualizarCamposDependientesDeCliente(){
+		this.sucursalOV=new SucursalOV();
 	}
 
 	public ListaPrecioOV getlPreciosOV() {

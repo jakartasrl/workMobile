@@ -1,6 +1,6 @@
 <window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.HelperVM')" title="" width="500px" position="center,center" closable="true" >
     <vlayout>
-        <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" >
+        <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
         
 	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 	            <auxheader label="@load(vm.titulo)" colspan="2" />
@@ -14,7 +14,7 @@
 
             <rows>
 	            <template name="model">
-	                <row onClick="@command('obtenerElemento', objeto=each , window=modalDialog)" >
+	                <row onClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;" >
 <!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
 	                    <label hflex="2" value="@load(each.descripcion)" />
