@@ -14,7 +14,7 @@
 	
 <!-- 	Application Loggers -->
 	<logger name="com.jkt.controller">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="com.jkt.operaciones">
@@ -24,34 +24,34 @@
 	
 <!-- 	3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 
 	<logger name="log4j.logger.org.springframework.web.servlet.DispatcherServlet">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="o.s.web.servlet.DispatcherServlet">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	<logger name="o.s.web.servlet.DispatcherServlet">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="log4j.logger.org.springframework.web.servlet.mvc">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="OFF" />
+		<level value="info" />
 	</logger>
 	
 
@@ -61,9 +61,9 @@
 	</logger>
 
 <!-- 	Root Logger -->
-<!-- 	<root> -->
-<!-- 		<priority value="OFF" /> -->
-<!-- 		<appender-ref ref="console" /> -->
-<!-- 	</root> -->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="console" />
+	</root>
 	
 </log4j:configuration>

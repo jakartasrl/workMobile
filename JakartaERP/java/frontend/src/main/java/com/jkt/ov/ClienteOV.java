@@ -18,6 +18,16 @@ public class ClienteOV extends ObjectView {
 	private String fax;
 	private String mail;
 	private String nroProveedor;
+	
+	private String descripcion;
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public String getCodigo() {
 		return codigo;

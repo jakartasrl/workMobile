@@ -1,0 +1,107 @@
+<window id="modalDialog" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.jkt.viewModels.EquipoVM')"
+	title="Equipo" border="normal">
+	<vlayout>
+		<panel>
+
+			<panelchildren>
+
+				<grid>
+					<columns>
+						<column></column>
+						<column></column>
+						<column></column>
+					</columns>
+					
+					<rows>	
+						<row>
+							
+								<label>Marca</label>
+									<combobox id="cmbMarca" model="@load(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
+										<template name="model">
+											<comboitem label="@load(each.descripcion)" />
+										</template>
+									</combobox>
+								
+							
+								<label>Nro Serie</label>
+								<textbox value="@bind(vm.ov.nroSerie)" />
+						
+								<label>Descripcion</label>
+								<textbox value="@bind(vm.ov.descripcion)" />
+							
+						</row>
+						<row>
+							
+								<label>Cliente Actual</label>
+								<textbox value="@bind(vm.clienteOV.codigo)" />
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV,titulo='Clientes')" />
+								<textbox value="@bind(vm.clienteOV.descripcion)" />
+															
+						</row>
+						<row>
+							
+								<label>Tipo Producto</label>
+								<textbox value="@bind(vm.tipoProductoOV.codigo)" />
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
+														
+						</row>
+					</rows>
+				
+			</grid>
+						
+				<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" >
+					<columns>
+<!-- 						<column hflex="1" label="id" /> -->
+<!-- 						<column hflex="1" label="codigo" /> -->
+						<column hflex="1" label="descripcion" /> 
+<!-- 						<column hflex="1" label="tipoDato" />	 -->
+						<column hflex="1" label="valor" />
+					</columns>
+					
+					<rows>
+						<template name="model">
+							<row>
+<!-- 								<textbox value="@bind(each.id)" /> -->
+<!-- 								<textbox value="@bind(each.codigo)" /> -->
+								<textbox value="@bind(each.descripcion)" />
+<!-- 								<textbox value="@bind(each.tipoDato)" /> -->
+								<hlayout>
+									<zk switch="${each.tipoDato}" >
+										<zk case='Tabla' >
+											<textbox value="@bind(each.valorTabla.descripcion)" />
+											<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla', ov=each.valorTabla , titulo='Tablas disponibles')"/>
+										</zk>
+										<zk case='Numero'>
+											<textbox value="@bind(each.valorEntero)" />
+										</zk>
+										<zk case='Booleano'>
+											<combobox selectedItem="@bind(each.valorBoolean)">
+													<comboitem label="Verdadero" value="true"></comboitem>												
+													<comboitem label="Falso" value="false"></comboitem>										
+											</combobox>
+										</zk>
+										<zk case='String'>
+											<textbox value="@bind(each.valorString)" />
+										</zk>
+										<zk case='Double'>
+											<textbox value="@bind(each.valorDouble)" />
+										</zk>							
+									</zk>								
+								</hlayout>								
+							</row>
+						</template>
+					</rows>
+				
+				</grid>
+				
+				
+				<button onClick="@command('guardar')">
+					Guardar
+				</button>
+				<button label="Abrir" onClick="@command('openHelper', clase='equipo', ov=vm.ov, titulo='Equipos', post='traerEquipo')" />
+			</panelchildren>
+		</panel>
+
+</vlayout>
+</window>

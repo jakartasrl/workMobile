@@ -17,9 +17,9 @@
 
 		<property name="nroSerie" column="NRO_SERIE" />
 
-		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"></many-to-one>
-		<many-to-one name="marca" class="com.jkt.erp.articulos.ValoresTablas" column="MARCA_ID" cascade="none"></many-to-one>
-<!-- 		<many-to-one name="tipoProducto" class="com.jkt.erp.articulos.TipoProducto" column="TIPO_PRODUCTO_ID" cascade="none"></many-to-one>		 -->
+		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"/>
+		<many-to-one name="marca" class="com.jkt.erp.articulos.ValoresTablas" column="MARCA_ID" cascade="none"/>
+		<many-to-one name="tipoDeProducto" class="com.jkt.erp.articulos.TipoProducto" column="TIPO_PRODUCTO_ID" cascade="none" />		
 
 		<list name="caracteristicas" table="EQUIPO_CARACTERISTICA" lazy="true" cascade="all">
 			<key column="EQUIPO_ID" />

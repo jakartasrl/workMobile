@@ -57,7 +57,6 @@ public class LaboratorioVM {
 	
 	}
 	
-	
 	@Command("traer")
 	@NotifyChange("ov")
 	public void traer(){
