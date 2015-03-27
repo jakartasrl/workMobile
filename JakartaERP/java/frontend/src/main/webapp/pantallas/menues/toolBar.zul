@@ -3,18 +3,18 @@
 	<hlayout style="width:100%" id="idLayout">
 
 		<div hflex="1" id="idDiv">
-			<toolbarbutton   id="idNew" image="/pantallas/icons/new.png" onClick="@command('nuevo')" tooltiptext="Nuevo" />
-			<toolbarbutton   image="/pantallas/icons/candado.png"	onClick="@command('buscar')" tooltiptext="Buscar" />
-			<toolbarbutton   onClick="@command('guardar')" image="/pantallas/icons/import.png" tooltiptext="Guardar" />
-			<toolbarbutton  onClick="@command('importarSistema')"   image="/pantallas/icons/refreshSistema.png" tooltiptext="Importar Movimientos"  />
+			<toolbarbutton   id="idNew" image="/pantallas/icons/new.png" label="Nuevo" onClick="@command('nuevo')" tooltiptext="Nuevo" />
+			<toolbarbutton   image="/pantallas/icons/candado.png"	label="Abrir" onClick="@command('buscar')" tooltiptext="Buscar" />
+			<toolbarbutton   onClick="@command('guardar')" label="Guardar" image="/pantallas/icons/import.png" tooltiptext="Guardar" />
+<!-- 			<toolbarbutton  onClick="@command('importarSistema')"   image="/pantallas/icons/refreshSistema.png" tooltiptext="Importar Movimientos"  /> -->
 
 			<space  bar="true" style="vertical-align: middle; line-height: 20px;" />
-			<toolbarbutton  onClick="@command('startConcAutomatica')"   image="/pantallas/icons/play.png" tooltiptext="Conciliar Aut." />
-			<toolbarbutton  onClick="@command('conciliarManual')"  image="/pantallas/icons/conciliar.png" tooltiptext="Conciliar" />
-			<toolbarbutton  onClick="@command('sumaGastosMenores')"   image="/pantallas/icons/sum.png"	tooltiptext="Sumarizar gastos menores" />
-			<toolbarbutton  onClick="@command('desconciliar')"   image="/pantallas/icons/desconciliar.png"	tooltiptext="Desconciliar" />
-			<space bar="true" style="vertical-align: middle; line-height:20px;" />
-			<toolbarbutton   onClick="@command('print')"  image="/pantallas/icons/print.png" tooltiptext="Imprimir" />
+<!-- 			<toolbarbutton  onClick="@command('startConcAutomatica')"   image="/pantallas/icons/play.png" tooltiptext="Conciliar Aut." /> -->
+<!-- 			<toolbarbutton  onClick="@command('conciliarManual')"  image="/pantallas/icons/conciliar.png" tooltiptext="Conciliar" /> -->
+<!-- 			<toolbarbutton  onClick="@command('sumaGastosMenores')"   image="/pantallas/icons/sum.png"	tooltiptext="Sumarizar gastos menores" /> -->
+<!-- 			<toolbarbutton  onClick="@command('desconciliar')"   image="/pantallas/icons/desconciliar.png"	tooltiptext="Desconciliar" /> -->
+<!-- 			<space bar="true" style="vertical-align: middle; line-height:20px;" /> -->
+<!-- 			<toolbarbutton   onClick="@command('print')"  image="/pantallas/icons/print.png" tooltiptext="Imprimir" /> -->
 		</div>
 
 		<div hflex="1" droppable="true" style="text-align: center;">

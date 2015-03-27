@@ -190,7 +190,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	@Init
 	@NotifyChange("ov")
 	public void init() {
-		this.setTitulo("Titulo de equipos, blabla");
+		this.setTitulo("Administracion de Equipos");
 		this.traer();
 	}
 
