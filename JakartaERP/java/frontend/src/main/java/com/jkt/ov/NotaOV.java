@@ -1,5 +1,7 @@
 package com.jkt.ov;
 
+import lombok.Data;
+
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.view.ObjectView;
 
@@ -8,26 +10,10 @@ import com.jkt.view.ObjectView;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class NotaOV extends DescriptibleOV {
 
 	private String adicional;
 	private String codigoActividad;
-//	private Boolean activo;
-
-	public String getAdicional() {
-		return adicional;
-	}
-
-	public void setAdicional(String adicional) {
-		this.adicional = adicional;
-	}
-
-	public String getCodigoActividad() {
-		return codigoActividad;
-	}
-
-	public void setCodigoActividad(String codigoActividad) {
-		this.codigoActividad = codigoActividad;
-	}
 
 }

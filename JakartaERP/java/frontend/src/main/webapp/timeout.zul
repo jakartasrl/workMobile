@@ -1,19 +1,30 @@
 <?page id="sessionTimeout" title="Conciliaciones" cacheable="false"
     language="xul/html" zscriptLanguage="Java"?>
 
-    <zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:w="http://www.zkoss.org/2005/zk/client"
-      xmlns:n="http://www.zkoss.org/2005/zk/native" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+<script type="text/javascript">
+	window.location.href = "http://example.com"
+</script>
 
-      <style>
-        .body { padding: 0 0; /* 0 padding on top and bottom and 0 padding on right and left */
-      </style>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:w="http://www.zkoss.org/2005/zk/client"
+	xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-      <!-- outer window with vertical scrollbar -->
-      <window width="100%" height="100%" border="none" sclass="outerwin" contentStyle="overflow:auto;">
+	<style>
+		.body { padding: 0 0; /* 0 padding on top and bottom and 0
+		padding on right and left */
+	</style>
 
-		  La sesion ha expirado. Debera loguearse nuevamente.
-          <n:br />
-          <n:br />
-      </window>
+	<!-- outer window with vertical scrollbar -->
+	<window width="100%" height="100%" border="none" sclass="outerwin"
+		contentStyle="overflow:auto;">
 
-    </zk>
+		La sesion ha expirado. Debera loguearse nuevamente.
+
+		<n:br />
+		<n:br />
+	</window>
+
+</zk>

@@ -28,7 +28,6 @@ public class TraerDeterminacionesConPrecios extends HelperRecuperarDeterminacion
 			throw new JakartaException("Se encontro una inconsistencia con el valor numerico de la configuración del laboratorio '"+aParams.get(LABORATORIO)+"'");
 		}
 
-		//		validarEntrada(aParams.get(OID_LISTA_PRECIO));
 		if(aParams.get(OID_LISTA_PRECIO)==null){
 			mostrarNuevosElementos(idLaboratorio, new ArrayList<Long>());
 			return;

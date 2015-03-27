@@ -1,0 +1,76 @@
+<zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
+
+	<vlayout width="100%" style="text-align:center;">
+		<button style="margin-bottom:2px;"
+			image="/pantallas/icons/new.png" label=""
+			onClick="@command('agregarElemento')"
+			tooltiptext="Agregar un nuevo item." />
+			<label value="Agregar un item"></label>
+	</vlayout>
+
+
+	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
+
+	<attribute name="onPaging">
+		<![CDATA[
+			this.pagingChild.mold = "os";
+        ]]>	
+	</attribute>
+
+		<listhead>
+			<listheader />
+		</listhead>
+
+		<template name="model">
+			<listitem>
+				<listcell>
+
+					<groupbox width="100%" style="border-style:none; cursor: default">
+<!-- 					<groupbox id="gb3-${each} " mold="3d" width="100%"> -->
+					
+							<hlayout>
+							
+								<label value="Tipo" />
+								<combobox width="120px;" >
+									<comboitem label="Service" />
+									<comboitem label="Fabricación" />
+									<comboitem label="Mantenimiento" />
+								</combobox>
+							
+								<label value="Referencia:" />
+								<textbox width="120px" value="@bind(each.referencia)" />
+		
+								<label value="Cantidad:" />
+								<textbox width="40px;" value="@bind(each.cantidad)" />
+		
+								<label value="Moneda:" />
+								<combobox width="80px;">
+									<comboitem label="Peso" />
+									<comboitem label="Dolar" />
+									<comboitem label="Euro" />
+								</combobox>
+		
+								<label value="Importe:" />
+								<textbox width="50px;" value="@bind(each.importe)" />
+							
+								<label value="Importe Total:" />
+								<textbox width="50px;" value="@bind(each.importeTotal)" />
+								
+							</hlayout>
+							
+							<hlayout style="margin:10px;">
+								<label value="Cargar Plantilla:" />
+								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
+							</hlayout>
+							
+							<textbox style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" readonly="false" />
+
+					</groupbox>
+
+				</listcell>
+			</listitem>
+		</template>
+
+	</listbox>
+
+</zk>
