@@ -39,7 +39,7 @@ import com.jkt.view.ObjectView;
  * 
  */
 
-public class EquipoVM extends ViewModel {
+public class EquipoVM extends ViewModel implements IBasicOperations{
 	
 	private EquipoOV ov = new EquipoOV();
 	private ClienteOV clienteOV = new ClienteOV();
@@ -190,6 +190,7 @@ public class EquipoVM extends ViewModel {
 	@Init
 	@NotifyChange("ov")
 	public void init() {
+		this.setTitulo("Titulo de equipos, blabla");
 		this.traer();
 	}
 
@@ -257,4 +258,30 @@ public class EquipoVM extends ViewModel {
 		Messagebox.show("Equipo Guardado correctamente.");
 	}
 
+	@Override
+	@Command
+	public void nuevo() throws JakartaException {
+		//borrar topdos los ovs, asignando una nueva isntancia... ov= new ovm
+		
+	}
+
+	@Override
+	@Command
+	public void buscar() throws JakartaException {
+		try {
+			this.openHelper("equipo", "", this.ov, "traerEquipo", "Equipos", "Código", "Descripción de equipos");
+		} catch (IllegalAccessException e) {
+			levantarExcepcion(e);
+		} catch (IllegalArgumentException e) {
+			levantarExcepcion(e);
+		} catch (InvocationTargetException e) {
+			levantarExcepcion(e);
+		}
+		
+	}
+
+	private void levantarExcepcion(Exception e) throws JakartaException{
+		throw new JakartaException("Ocurrio un error al llamar al helper generico");
+	}
+	
 }

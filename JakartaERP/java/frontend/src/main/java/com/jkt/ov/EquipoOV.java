@@ -15,7 +15,7 @@ public class EquipoOV extends ObjectView {
 
 	private String codigo;
 	private String descripcion;
-	private Boolean activo=Boolean.FALSE;
+//	private Boolean activo=Boolean.FALSE;
 	private List<ValoresTablaOV> marcas = new ArrayList();
 	private ValoresTablaOV marca= new ValoresTablaOV();
 	private ClienteOV clienteOV;
@@ -100,13 +100,13 @@ public class EquipoOV extends ObjectView {
 		this.idMarca = idMarca;
 	}
 
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
-	}
+//	public Boolean getActivo() {
+//		return activo;
+//	}
+//
+//	public void setActivo(Boolean activo) {
+//		this.activo = activo;
+//	}
 
 	public String getCodigo() {
 		return codigo;

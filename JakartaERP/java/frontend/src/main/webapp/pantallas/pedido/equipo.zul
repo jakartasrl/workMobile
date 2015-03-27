@@ -93,12 +93,6 @@
 					</rows>
 				
 				</grid>
-				
-				
-				<button onClick="@command('guardar')">
-					Guardar
-				</button>
-				<button label="Abrir" onClick="@command('openHelper', clase='equipo', ov=vm.ov, titulo='Equipos', post='traerEquipo')" />
 			</panelchildren>
 		</panel>
 
