@@ -15,5 +15,6 @@ public class NotaOV extends DescriptibleOV {
 
 	private String adicional;
 	private String codigoActividad;
-
+	
+	
 }

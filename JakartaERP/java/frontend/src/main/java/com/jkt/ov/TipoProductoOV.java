@@ -1,23 +1,13 @@
 package com.jkt.ov;
 
+import lombok.Data;
+
 import com.jkt.view.ObjectView;
 
+@Data
 public class TipoProductoOV extends ObjectView {
 	
 	private String codigo;
 	private String descripcion;
-	
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 	
 }

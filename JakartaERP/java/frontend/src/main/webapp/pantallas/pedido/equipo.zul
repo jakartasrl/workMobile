@@ -1,6 +1,5 @@
-<window id="modalDialog" apply="org.zkoss.bind.BindComposer"
-	viewModel="@id('vm') @init('com.jkt.viewModels.EquipoVM')"
-	title="Equipo" border="normal">
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
 	<vlayout>
 		<panel>
 
@@ -104,4 +103,5 @@
 		</panel>
 
 </vlayout>
-</window>
+
+</zk>
