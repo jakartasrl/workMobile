@@ -255,7 +255,7 @@ public class WebAdapter extends Adapter<Map, Map> {
 				return session.get(classSetter, (Long) id);
 			}
 		} catch (Exception e) {
-			throw new JakartaException(
+			throw new RuntimeException(
 					"Error recuperando persistente");
 		}
 	}

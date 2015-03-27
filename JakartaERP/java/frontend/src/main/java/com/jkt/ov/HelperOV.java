@@ -10,7 +10,18 @@ import com.jkt.view.ObjectView;
  */
 public class HelperOV extends ObjectView {
 
+	public HelperOV() {}
+
 	private String clase;
+	private String oidEntidadMaestra;
+	
+	public String getOidEntidadMaestra() {
+		return oidEntidadMaestra;
+	}
+
+	public void setOidEntidadMaestra(String oidEntidadMaestra) {
+		this.oidEntidadMaestra = oidEntidadMaestra;
+	}
 
 	public String getClase() {
 		return clase;

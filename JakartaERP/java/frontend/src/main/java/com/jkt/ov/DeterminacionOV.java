@@ -12,18 +12,18 @@ import com.jkt.view.ObjectView;
  */
 public class DeterminacionOV extends ObjectView {
 
-	private Long idItem;
+	private String idItem;
 	private String codigo;
 	private String descripcion;
 	private String codAnalisis;
 	private String desAnalisis;
 	private double importe;
 
-	public Long getIdItem() {
+	public String getIdItem() {
 		return idItem;
 	}
 
-	public void setIdItem(Long idItem) {
+	public void setIdItem(String idItem) {
 		this.idItem = idItem;
 	}
 

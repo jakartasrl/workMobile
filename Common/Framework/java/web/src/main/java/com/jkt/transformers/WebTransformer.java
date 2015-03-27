@@ -16,7 +16,6 @@ import org.springframework.beans.BeanUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jkt.excepcion.JakartaException;
 import com.jkt.view.ListOV;
 import com.jkt.xmlreader.CampoSalida;
 import com.jkt.xmlreader.Output;
@@ -34,9 +33,9 @@ public class WebTransformer extends Transformer {
 			try {
 				getObjectOV(objNotificado, returnObj,
 						output.getCamposDeSalida());
-			} catch (JakartaException e1) {
+			} catch (RuntimeException e1) {
 				throw new RuntimeException(
-						"Error al cargar objeto OV para ser retornado ", e1);
+						"Error al cargar objeto OV para ser retornado: "+e1.getMessage(), e1);
 			}
 		}
 
@@ -44,7 +43,7 @@ public class WebTransformer extends Transformer {
 
 	@SuppressWarnings({ "rawtypes"})
 	public void getObjectOV(Object objNotificado, Object objectOV,
-			List<CampoSalida> camposSalida) throws JakartaException {
+			List<CampoSalida> camposSalida) throws RuntimeException {
 		if(ListOV.class.isAssignableFrom(objectOV.getClass())){
 			if(List.class.isAssignableFrom(objNotificado.getClass())){
 				updateListObjectView((List)objNotificado, (ListOV)objectOV, camposSalida);
@@ -56,7 +55,7 @@ public class WebTransformer extends Transformer {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void updateListObjectView(List objNotificado, ListOV objectOV,List<CampoSalida> camposSalida) throws JakartaException {
+	private void updateListObjectView(List objNotificado, ListOV objectOV,List<CampoSalida> camposSalida) throws RuntimeException {
 		Object listObjectOV;
 		Class<?> ovListClass;
 		// Obtengo la clase OV a la cual lo tengo que setear
@@ -75,7 +74,7 @@ public class WebTransformer extends Transformer {
 			ovListClass = (Class<?>) obListType
 					.getActualTypeArguments()[0];
 		} catch (Exception e) {
-			throw new JakartaException("Error obteniendo los objetos lista y sus clases para el target ");
+			throw new RuntimeException("Error obteniendo los objetos lista y sus clases para el target ");
 		}
 
 		for (Object objPersis : (List) objNotificado) {
@@ -89,7 +88,7 @@ public class WebTransformer extends Transformer {
 	}
 
 	private void updateObjectView(Object objNotificado, Object objectOV,
-			List<CampoSalida> camposSalida) throws JakartaException {
+			List<CampoSalida> camposSalida) throws RuntimeException {
 		Boolean isMap=false;
 		HashMap    mapNotificado=new HashMap();
 		if(HashMap.class.isAssignableFrom(objNotificado.getClass())){
@@ -126,7 +125,7 @@ public class WebTransformer extends Transformer {
 						listPers=mapNotificado.get(target);
 					}
 				} catch (Exception e) {
-					throw new JakartaException(
+					throw new RuntimeException(
 							"Error obteniendo los objetos lista y sus clases para el target "
 									+ target);
 				}
@@ -159,7 +158,7 @@ public class WebTransformer extends Transformer {
 						objectValue = solver.resolveMethodInvocation(target,
 								objNotificado);
 					} catch (Exception e) {
-						throw new JakartaException(
+						throw new RuntimeException(
 								"Error al resolver valores de output " + value,
 								e);
 					}
@@ -175,7 +174,7 @@ public class WebTransformer extends Transformer {
 							objectValue = mapNotificado.get(target);
 						}
 					} catch (Exception e) {
-						throw new JakartaException(
+						throw new RuntimeException(
 								"Error al resolver valores de output " + value,
 								e);
 					}
@@ -193,7 +192,7 @@ public class WebTransformer extends Transformer {
 	}
 
 	@Override
-	public void write() throws JakartaException {
+	public void write() throws RuntimeException {
 		try {
 			if (returnObj != null) {
 				Gson gson = new GsonBuilder().create();
@@ -201,14 +200,14 @@ public class WebTransformer extends Transformer {
 				oos.close();
 			}
 		} catch (IOException e) {
-			throw new JakartaException(
+			throw new RuntimeException(
 					"Error al escribir en el writer de rta html");
 		}
 	}
 
 	@Override
 	public void setup(ServletOutputStream outputStream, String outputName)
-			throws JakartaException {
+			throws RuntimeException {
 		// Cargo un map con todos los outputs para despues no tener que
 		// recorrerlos
 		List<Output> outputs = getEvent().getOutputs();
@@ -220,13 +219,13 @@ public class WebTransformer extends Transformer {
 		oos = outputStream;
 	}
 
-	public Object getObjectFromClass(String type) throws JakartaException {
+	public Object getObjectFromClass(String type) throws RuntimeException {
 		try {
 			Class<?> clazz;
 			clazz = Class.forName(type);
 			return BeanUtils.instantiate(clazz);
 		} catch (Exception e) {
-			throw new JakartaException(
+			throw new RuntimeException(
 					"Error instanciando el objetoOV de retorno para la clase "
 							+ type);
 		}

@@ -52,5 +52,6 @@
 	<elemento key="condicionComercial" value="com.jkt.presupuesto.dominio.CondicionComercial" />
 	<elemento key="pedido" value="com.jkt.pedido.dominio.Pedido" validador="com.jkt.pedido.validadores.ValidadorPedido"/>
 	<elemento key="equipo" value="com.jkt.laboratorio.dominio.Equipo" />
+	<elemento key="documentacion" value="com.jkt.pedido.dominio.Documentacion"/>
 
 </elementos>

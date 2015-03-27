@@ -1,27 +1,21 @@
-<div>
+<zk viewModel="@id('vm') @load(viewModel)">
 
-	<listbox multiple="true" hflex="1" vflex="1" checkmark="true">
+	<listbox model="@load(vm.lDocumentacion.list)" multiple="true"
+		hflex="1" vflex="1" checkmark="true">
 		<listhead>
-			<listheader width="5%" 	style="text-align:center" label="Entregado" />
-			<listheader width="35%" label="Codigo" />
-			<listheader width="60%" label="Descripcion Documento" />
+			<listheader width="15%" label="Entregado" />
+			<listheader width="30%" label="Codigo" />
+			<listheader width="55%" label="Descripcion Documento" />
 		</listhead>
-		
-		<listitem>
-			<listcell />
-			<listcell label="ART" />
-			<listcell label="Documentación para el seguro del empleado en caso de accidentes" />
-		</listitem>
-		<listitem>
-			<listcell />
-			<listcell label="FirmaGRT" />
-			<listcell label="Firma del gerente.!" />
-		</listitem>
-		<listitem>
-			<listcell />
-			<listcell label="cod" />
-			<listcell label="desc" />
-		</listitem>
-	</listbox>
 
-</div>
+		<template name="model">
+			<listitem>
+				<listcell />
+				<listcell label="@load(each.codigo)" />
+				<listcell label="@load(each.descripcion)" />
+			</listitem>
+		</template>
+
+	</listbox>
+	
+</zk>

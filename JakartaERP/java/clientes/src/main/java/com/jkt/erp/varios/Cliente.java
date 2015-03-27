@@ -1,6 +1,7 @@
 package com.jkt.erp.varios;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,10 @@ import com.jkt.varios.dominio.Idioma;
 public class Cliente extends PersistentEntity implements IDescriptible{
 //	public class Cliente extends Descriptible {
 
+	public Cliente() {
+		this.setCreationDate(new Date());
+	}
+	
 	private List<Especificacion> archivos=new ArrayList<Especificacion>();	
 
 	public void agregarEspecificacion(Especificacion e){
