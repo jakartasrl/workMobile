@@ -21,6 +21,8 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -61,10 +63,11 @@ public class PedidoVM extends ViewModel {
 	private ListDescriptibleOV lDocumentacion=new ListDescriptibleOV();
 	private List<ItemsOV> items = new ArrayList<ItemsOV>();
 	
-	/**
-	 * Para abrir el pop up.
-	 */
-	private ItemsOV itemActual;
+	private DescriptibleOV vendedorOV=new DescriptibleOV();
+	private DescriptibleOV representanteOV=new DescriptibleOV();
+	
+	private ListDescriptibleOV contactos=new ListDescriptibleOV();
+	private DescriptibleOV contactoSeleccionado= new DescriptibleOV();
 	
 	private PedidoOV pedidoOV=new PedidoOV();
 	
@@ -81,10 +84,25 @@ public class PedidoVM extends ViewModel {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"lNotas","items","lDocumentacion"})
+	@NotifyChange({"contactos","lNotas","items","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
+		
+		this.clienteOV=new ClienteOV();
+		this.sucursalOV=new SucursalOV();
+		this.lPreciosOV=new ListaPrecioOV();
+		this.lDeterminacionesQuimicas=new ListDeterminacionOV();
+		this.lDeterminacionesElectricas=new ListDeterminacionOV();
+		this.lNotas=new ListNotasOV();
+		this.lDocumentacion=new ListDescriptibleOV();
+		this.items = new ArrayList<ItemsOV>();
+
+		this.contactos=new ListDescriptibleOV();
+
+		this.vendedorOV=new DescriptibleOV();
+		this.representanteOV=new DescriptibleOV();
+		
 		this.pedidoOV= new PedidoOV();
-		this.init();
+		init();
 	}
 	
 	/**
@@ -92,7 +110,7 @@ public class PedidoVM extends ViewModel {
 	 */
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		this.openHelper("pais", "", sucursalOV, "", "Probando Helper desde Java", "COdigoooOO", "datos");
+		openHelper("pedido", "", this.pedidoOV, "", "Pedidos Disponibles", "Nro Pedido", "Descripción");
 	}
 	
 	/**
@@ -108,6 +126,9 @@ public class PedidoVM extends ViewModel {
 		pedidoOV.setIdCliente(clienteOV.getId());
 		pedidoOV.setIdSucursal(sucursalOV.getId());
 		pedidoOV.setIdListaPrecio(lPreciosOV.getId());
+		pedidoOV.setIdVendedor(vendedorOV.getId());
+		pedidoOV.setIdRepresentante(representanteOV.getId());
+		pedidoOV.setIdContactoReferencia(contactoSeleccionado.getId());
 	}
 
 	@Init
@@ -128,13 +149,6 @@ public class PedidoVM extends ViewModel {
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento(){
-		
-//		ItemsOV itemsOV = this.items.get(0);
-//		if (itemsOV.getCantidad()==0 || itemsOV.getImporte()==0 || itemsOV.getImporteTotal()==0 || itemsOV.getTipo().isEmpty() || itemsOV.getReferencia().isEmpty()) {
-//			Messagebox.show("Debe completar el item anterior.", "Cargar datos.", Messagebox.OK, Messagebox.EXCLAMATION);
-//			return;
-//		}
-		
 		this.items.add(0, new ItemsOV());
 	}
 	
@@ -164,7 +178,7 @@ public class PedidoVM extends ViewModel {
 	}
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items"})
+	@NotifyChange({"contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","vendedorOV","representanteOV"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
@@ -172,27 +186,22 @@ public class PedidoVM extends ViewModel {
 	}
 	
 	
-	@Command
-	public void editarPlantilla(@BindingParam("ov") ItemsOV item){
-		this.itemActual=item;
-		
-		Map<String,Object> map=new HashMap<String,Object>();
-		
-		map.put("item",this.itemActual);
-		map.put("vm", this);
-
-		Window window = (Window) Executions.createComponents("/pantallas/pedido/edicionPlantilla.zul", null, map);
-		window.doModal();
-		
-	}
-	
 	/**
 	 * Solamente actualiza el campo que representa la descripcion completa de la sucursal.
-	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que est� en cada ViewModel.</p>
+	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que está en cada ViewModel.</p>
 	 */
 	public void actualizarCampoSucursal(){
 		String text= this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
 		this.sucursalOV.setDescripcionCompleta(text);
+		
+		/*
+		 * Actualiza los contactos de referencia
+		 */
+		ContainerOV containerOV = new ContainerOV();
+		containerOV.setString1(String.valueOf(this.sucursalOV.getId()));
+		
+		this.contactos = (ListDescriptibleOV) Operaciones.ejecutar("RecuperarContactosDeSucursal", containerOV, ListDescriptibleOV.class);
+		this.contactoSeleccionado=new DescriptibleOV();
 	}
 	
 	/**
@@ -200,6 +209,8 @@ public class PedidoVM extends ViewModel {
 	 */
 	public void actualizarCamposDependientesDeCliente(){
 		this.sucursalOV=new SucursalOV();
+		this.contactos=new ListDescriptibleOV();
+		this.contactoSeleccionado=new DescriptibleOV();
 	}
 
 	public ListaPrecioOV getlPreciosOV() {

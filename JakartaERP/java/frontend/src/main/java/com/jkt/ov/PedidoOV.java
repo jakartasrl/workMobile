@@ -8,7 +8,7 @@ import com.jkt.view.ObjectView;
 
 /**
  * <p>ObjectView correspondiente a la entidad {@link Pedido}</p>
- * <p>Mapea los atributos que se envian y generarán o actualizarán un {@link Pedido}</p>
+ * <p>Mapea los atributos que se envian y generarï¿½n o actualizarï¿½n un {@link Pedido}</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -28,5 +28,8 @@ public class PedidoOV extends ObjectView {
 	private Boolean cargaACargoDeCliente=Boolean.FALSE;
 	private Boolean transporteACargoDeCliente=Boolean.FALSE;
 	private Boolean descargaACargoDeCliente=Boolean.FALSE;
+	private Long idVendedor;
+	private Long idRepresentante;
+	private Long idContactoReferencia;
 	
 }

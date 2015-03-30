@@ -59,3 +59,26 @@
 	padding-bottom: 2px;
 	padding-top: 2px;
 }
+
+.z-textbox, .z-decimalbox, .z-intbox, .z-longbox, .z-doublebox{
+	padding:0px;
+	min-height: 18px;
+}
+
+.z-combobox-input, .z-bandbox-input, .z-datebox-input, .z-timebox-input, .z-spinner-input, .z-doublespinner-input{
+	padding:0px;
+	min-height: 18px;
+}
+
+.z-combobox, .z-bandbox, .z-datebox, .z-timebox, .z-spinner, .z-doublespinner {
+	padding:0px;
+	min-height: 18px;
+}
+
+.z-button{
+	min-height: 18px;
+	height: 18px;
+	padding: 5px;
+	padding-top: 0px;
+	margin-left: -5px;
+}
