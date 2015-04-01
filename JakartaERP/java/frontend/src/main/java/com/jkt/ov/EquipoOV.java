@@ -31,10 +31,19 @@ public class EquipoOV extends ObjectView {
 	
 	private Long idTipoProducto;
 	private String codTipoProducto;
+	private String descTipoProducto;
 	
 	private List<CaracteristicaProductoOV> caracteristicas = new ArrayList();
 	private List<EquipoCaracteristicaOV> caracteristicasEquipo = new ArrayList();
 	
+	public String getDescTipoProducto() {
+		return descTipoProducto;
+	}
+
+	public void setDescTipoProducto(String descTipoProducto) {
+		this.descTipoProducto = descTipoProducto;
+	}
+
 	public String getCodTipoProducto() {
 		return codTipoProducto;
 	}

@@ -139,19 +139,28 @@
 		</input>
 	
 		<output>
-			<campoSalida target="id" 						value="id" />
-			<campoSalida target="descripcion" 				value="descripcion" />
-			<campoSalida target="nroSerie" 					value="nroSerie" />
-			<campoSalida target="marca.id" 					value="idMarca" />
-			<campoSalida target="marca.descripcion" 		value="descMarca" />
-			<campoSalida target="cliente.id" 				value="idCliente" />
-			<campoSalida target="cliente.codigo" 			value="codCliente" />
-			<campoSalida target="cliente.descripcion" 		value="descCliente" />
-			<campoSalida target="tipoDeProducto.id" 		value="idTipoProducto" />
-			<campoSalida target="tipoDeProducto.codigo" 	value="codTipoProducto" />
+			<campoSalida target="id" 							value="id" />
+			<campoSalida target="descripcion" 					value="descripcion" />
+			<campoSalida target="nroSerie" 						value="nroSerie" />
+			<campoSalida target="marca.id" 						value="idMarca" />
+			<campoSalida target="marca.descripcion" 			value="descMarca" />
+			
+<!-- 			<campoSalida target="marcas" 						value="marcas"> -->
+<!-- 				<campoSalida target="id" 						value="id"/> -->
+<!-- 				<campoSalida target="valorTabla.codigo"			value="codigo"/> -->
+<!-- 				<campoSalida target="valorTabla.descripcion" 	value="descripcion"/> -->
+<!-- 			</campoSalida> -->
+			
+			<campoSalida target="cliente.id" 					value="idCliente" />
+			<campoSalida target="cliente.codigo" 				value="codCliente" />
+			<campoSalida target="cliente.descripcion" 			value="descCliente" />
+			<campoSalida target="tipoDeProducto.id" 			value="idTipoProducto" />
+			<campoSalida target="tipoDeProducto.codigo" 		value="codTipoProducto" />
+			<campoSalida target="tipoDeProducto.descripcion" 	value="descTipoProducto" />
 			
 			<campoSalida target="caracteristicas" value="caracteristicas">
-				<campoSalida target="id" value="id"/>
+				<campoSalida target="id" value="idEquipoCaracteristica"/>
+				<campoSalida target="caracProducto.id" value="id"/>
 				<campoSalida target="caracProducto.descripcion" value="descripcion"/>
 				<campoSalida target="caracProducto.tipoDato" value="tipoDato"/>
 				<campoSalida target="caracProducto.tabla.id" value="idTabla"/>

@@ -16,9 +16,9 @@
 						<row>
 							
 								<label>Marca</label>
-									<combobox id="cmbMarca" model="@load(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
+									<combobox id="cmbMarca" model="@bind(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
 										<template name="model">
-											<comboitem label="@load(each.descripcion)" />
+											<comboitem label="@bind(each.descripcion)" value="@bind(each.id)" />
 										</template>
 									</combobox>
 								
@@ -43,13 +43,13 @@
 								<label>Tipo Producto</label>
 								<textbox value="@bind(vm.tipoProductoOV.codigo)" />
 								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
-														
+								<textbox value="@bind(vm.tipoProductoOV.descripcion)" />					
 						</row>
 					</rows>
 				
 			</grid>
 						
-				<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" >
+				<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" width="60%">
 					<columns>
 <!-- 						<column hflex="1" label="id" /> -->
 <!-- 						<column hflex="1" label="codigo" /> -->
@@ -69,15 +69,15 @@
 									<zk switch="${each.tipoDato}" >
 										<zk case='Tabla' >
 											<textbox value="@bind(each.valorTabla.descripcion)" />
-											<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla', ov=each.valorTabla , titulo='Tablas disponibles')"/>
+											<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla',oidEntidadMaestra=each.idTabla, ov=each.valorTabla , titulo='Tablas disponibles')"/>
 										</zk>
 										<zk case='Numero'>
 											<textbox value="@bind(each.valorEntero)" />
 										</zk>
 										<zk case='Booleano'>
 											<combobox selectedItem="@bind(each.valorBoolean)">
-													<comboitem label="Verdadero" value="true"></comboitem>												
-													<comboitem label="Falso" value="false"></comboitem>										
+													<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
+													<comboitem label="Falso" value="@bind(false)"></comboitem>										
 											</combobox>
 										</zk>
 										<zk case='String'>
