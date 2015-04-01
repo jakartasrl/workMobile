@@ -40,10 +40,10 @@
 								<textbox width="40px;" value="@bind(each.cantidad)" />
 		
 								<label value="Moneda:" />
-								<combobox width="80px;">
-									<comboitem label="Peso" />
-									<comboitem label="Dolar" />
-									<comboitem label="Euro" />
+								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)">
+									<template name="model" var="moneda">
+										<comboitem label="@bind(moneda.descripcion)" />
+									</template>
 								</combobox>
 		
 								<label value="Importe:" />

@@ -13,16 +13,16 @@ import com.jkt.dominio.PersistentEntity;
  */
 public class Vendedor extends PersistentEntity implements IDescriptible {
 
-	@NotBlank(message="No puede estar vacio el codigo.")
+	@NotBlank(message="No puede estar vacio el codigo de vendedor.")
 	private String codigo;
 
-	@NotBlank(message="Debe completar el nombre del usuario.")
+	@NotBlank(message="Debe completar el nombre del vendedor.")
 	private String nombres;
 
-	@NotBlank(message="Debe completar el apellido de usuario.")
+	@NotBlank(message="Debe completar el apellido de vendedor.")
 	private String apellido;
 	
-	@Email(message="El correo ingresado no parece tener el formato correcto.")
+	@Email(message="El correo ingresado para el vendedor no parece tener el formato correcto.")
 	private String mail;
 
 	private String telefono;

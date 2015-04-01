@@ -37,7 +37,7 @@
 						<label visible="false" value="@load(vm.representanteOV.id)"/>
 						<textbox sclass="campoCodigo" value="@bind(vm.representanteOV.codigo)" />
 						<button label="..." onClick="@command('openHelper', clase='representante', ov=vm.representanteOV)" />
-						<textbox width="300px" value="@bind(vm.representanteOV.descripcion)" readonly="true"/>
+						<textbox width="300px" value="@bind(vm.representanteOV.descripcion)" />
 		    		</hlayout>
 				</cell>
 
@@ -51,7 +51,7 @@
 				
 				<cell colspan="2" >
 					<hlayout>
-						<combobox  model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)">
+						<combobox  model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)" readonly=  "true">
 							<template name="model">
 								<comboitem label="@bind(each.codigo)" />
 							</template>

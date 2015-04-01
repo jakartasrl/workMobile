@@ -1,6 +1,7 @@
 package com.jkt.ov;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.view.ObjectView;
@@ -11,10 +12,11 @@ import com.jkt.view.ObjectView;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class NotaOV extends DescriptibleOV {
 
 	private String adicional;
 	private String codigoActividad;
-	
+	private Boolean checked;
 	
 }

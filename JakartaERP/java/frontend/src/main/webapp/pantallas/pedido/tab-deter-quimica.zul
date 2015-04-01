@@ -28,13 +28,13 @@
 						<intbox width="80%" value="0" />
 					</cell>
 
-					<combobox width="80%" >
-						<comboitem label="Moneda1" />
-						<comboitem label="Moneda2" />
-						<comboitem label="Moneda4" />
-						<comboitem label="Moneda3" />
+
+					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)">
+						<template name="model" var="moneda">
+							<comboitem label="@bind(moneda.descripcion)" />
+						</template>
 					</combobox>
-					
+
 					<cell>
 						$
 						<intbox width="80%" value="@bind(each.importe)" />

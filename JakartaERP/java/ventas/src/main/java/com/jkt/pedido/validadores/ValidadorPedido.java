@@ -19,7 +19,7 @@ public class ValidadorPedido extends ValidadorComprobantes {
 		try {
 			parametroTipoComportamiento = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", "comportamientoPedido");
 			if (parametroTipoComportamiento.getValorNumero()==0) {
-				throw new RuntimeException("El valor del par·metro del comportamiento de un pedido no puede estar vacio.");
+				throw new RuntimeException("El valor del par√©metro del comportamiento de un pedido no puede estar vacio.");
 			}
 		} catch (JakartaException e) {
 			MostrarError(e);

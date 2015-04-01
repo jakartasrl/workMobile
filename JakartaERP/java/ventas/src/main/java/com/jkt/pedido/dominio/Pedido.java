@@ -10,7 +10,7 @@ import com.jkt.presupuesto.dominio.Presupuesto;
 
 /**
  * <p>Un pedido es una orden de compra que se basa en un presupuesto previamente generado.</p>
- * <p>Este pedido tendr� detalles relacionados.</p>
+ * <p>Este pedido tendrá detalles relacionados.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

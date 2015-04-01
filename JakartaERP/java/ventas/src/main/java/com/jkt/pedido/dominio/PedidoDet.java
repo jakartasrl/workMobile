@@ -11,7 +11,7 @@ import com.jkt.varios.dominio.Moneda;
 
 /**
  * Representa a un item de un pedido.
- * <p>El item puede ser de una fabricación de un nuevo producto, con lo cuál sera tipo taller.</p>
+ * <p>El item puede ser de una fabricaciï¿½n de un nuevo producto, con lo cuï¿½l sera tipo taller.</p>
  * <p>El item puede ser un service, es decir, se envia al cliente un grupo de trabajo.</p>
  * <p>El item puede ser una determinacion de un sector de laboratorio, laboratorio quimico o electrico.</p>
  * 
@@ -26,6 +26,7 @@ public class PedidoDet extends ComprobanteVentaDet {
 	
 	@NotNull(message="El item de pedido tiene que tener una moneda obligatoriamente.")
 	private Moneda moneda;
+	
 	private char tipoDetalle;
 
 	private Determinacion determinacion;
