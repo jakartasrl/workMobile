@@ -62,7 +62,9 @@ public abstract class ViewModel {
 		//Copio los valores simples, no se hace x referencias xq se pierden.
 		BeanUtils.copyProperties(resultado, ov);
 		
-		ejecutarMetodoPostAccion(metodo);
+		if (metodo!=null && !metodo.isEmpty()) {
+			ejecutarMetodoPostAccion(metodo);
+		}
 		
 		//Actualiza todo el vm hijo
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);

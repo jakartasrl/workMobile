@@ -35,12 +35,12 @@
 			    	<row sclass="fila-maestro">
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox id="codigoCliente" sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV)" />
+							<textbox id="codigoCliente" sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	
 						<hlayout>
-							<textbox id="codigoSucursal" sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=codigoSucursal, ov=vm.sucursalOV)" />
+							<textbox id="codigoSucursal" sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=codigoSucursal, ov=vm.sucursalOV, post='actualizarCampoSucursal')" />
 							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
 
@@ -55,7 +55,7 @@
 
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
-							<textbox sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
+							<textbox id="codigoLista" sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" onBlur="@command('validarCampo', clase='listaPrecios', codigo=codigoLista, ov=vm.lPreciosOV, post='actualizarDeterminaciones')"/>
 							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 

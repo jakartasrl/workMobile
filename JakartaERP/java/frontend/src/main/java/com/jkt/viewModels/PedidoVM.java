@@ -9,6 +9,8 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.apache.commons.collections.Closure;
+import org.apache.commons.collections.CollectionUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
@@ -122,7 +124,14 @@ public class PedidoVM extends ViewModel {
 		pedidoOV.setIdRepresentante(representanteOV.getId());
 		pedidoOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		
-		pedidoOV.completarListaDocumentos(this.lDocumentacion.getList(), this.docEntregados);
+		pedidoOV.completarListaDocumentos(lDocumentacion.getList(), docEntregados);
+		
+		for (ItemsOV itemsOV : items) {
+			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
+		}
+		
+		pedidoOV.setItems(items);
 	}
 
 	@Init

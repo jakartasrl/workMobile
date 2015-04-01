@@ -27,7 +27,7 @@
 							<hlayout>
 							
 								<label value="Tipo" />
-								<combobox width="120px;" >
+								<combobox width="120px;" selectedItem="@bind(each.tipo)">
 									<comboitem label="Service" />
 									<comboitem label="Fabricación" />
 									<comboitem label="Mantenimiento" />

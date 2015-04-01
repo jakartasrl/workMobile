@@ -1,0 +1,5 @@
+Instanciar un helper
+onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+
+Instanciar un validador:
+onBlur="@command('validarCampo', clase='claseAValidar', codigo=idTextBox, ov=instanciaOV, post='metodo')"
