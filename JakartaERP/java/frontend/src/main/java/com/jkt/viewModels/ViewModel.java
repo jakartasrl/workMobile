@@ -1,6 +1,7 @@
 package com.jkt.viewModels;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public abstract class ViewModel {
 	}
 
 	@Command
-	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") Textbox campo, @BindingParam("ov") ObjectView ov){
+	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") Textbox campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
 		
 		/*
 		 * Campos de entrada
@@ -61,8 +62,29 @@ public abstract class ViewModel {
 		//Copio los valores simples, no se hace x referencias xq se pierden.
 		BeanUtils.copyProperties(resultado, ov);
 		
+		ejecutarMetodoPostAccion(metodo);
+		
 		//Actualiza todo el vm hijo
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+
+	private void ejecutarMetodoPostAccion(String metodo)throws JakartaException {
+		try {
+			Method method =  getClass().getMethod(metodo);
+			method.invoke(this);
+		} catch (NoSuchMethodException e) {
+			String msg = "No es posible ejecutar la acción especificada:".concat(metodo);
+			msg.concat(String.format("Clase: %s - Metodo %s.", this.getClass().getSimpleName(), metodo));
+			log.warn(msg);
+		} catch (SecurityException e) {
+			throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(metodo));
+		} catch (IllegalAccessException e) {
+			throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(metodo));
+		} catch (IllegalArgumentException e) {
+			throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(metodo));
+		} catch (InvocationTargetException e) {
+			throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(metodo));
+		}
 	}
 	
 	@Command
