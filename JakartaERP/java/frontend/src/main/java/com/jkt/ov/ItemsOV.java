@@ -9,7 +9,10 @@ public class ItemsOV extends ObjectView {
 
 	private DescriptibleOV plantilla=new DescriptibleOV();
 	private String descripcion;
-	private DescriptibleOV producto=new DescriptibleOV();
+	
+	private DescriptibleOV productoOV=new DescriptibleOV();
+	private Long idProducto;
+	
 	private String tipo;
 	private String referencia;
 	private int cantidad;
@@ -17,5 +20,10 @@ public class ItemsOV extends ObjectView {
 	private Long idMoneda;
 	private double importe;
 	private double importeTotal;
-
+	
+	private Long idDeterminacion;
+	private String codigo;
+	private String codAnalisis;
+	private String desAnalisis;
+	
 }

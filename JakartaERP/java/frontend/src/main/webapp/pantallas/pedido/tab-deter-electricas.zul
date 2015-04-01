@@ -1,6 +1,6 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
-	<grid width="100%" vflex="true" model="@bind(vm.lDeterminacionesElectricas.list)" emptyMessage="No existen determinaciones disponibles" mold="paging" pageSize="10">
+	<grid width="100%" vflex="true" model="@bind(vm.lDeterminacionesElectricas)" emptyMessage="No existen determinaciones disponibles" mold="paging" pageSize="10">
 		<auxhead>
 			<auxheader colspan="7" class="topic">
 				Determinaciones Electricas

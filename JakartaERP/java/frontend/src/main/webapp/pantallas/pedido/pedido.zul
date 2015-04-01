@@ -97,8 +97,12 @@
 			        <tabpanel>
 						<include id="dQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
 					</tabpanel>
+					
+					
 
-			        <tabpanel><label style="font-size:12px;" /></tabpanel>
+			        <tabpanel>
+						<include id="productosContent" hflex="1" src="/pantallas/pedido/tab-productos.zul" viewModel="${vm}"/>
+					</tabpanel>
 			        
 			        <tabpanel>
 						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />
