@@ -10,7 +10,7 @@ import com.jkt.presupuesto.dominio.Presupuesto;
 
 /**
  * <p>Un pedido es una orden de compra que se basa en un presupuesto previamente generado.</p>
- * <p>Este pedido tendrá detalles relacionados.</p>
+ * <p>Este pedido tendrÃ¡ detalles relacionados.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -33,7 +33,7 @@ public class Pedido extends ComprobanteVenta {
 	public void agregarDocumentacion(PedidoDocumentacion documento){
 		
 		if (documento.getDocumentacion()==null) {
-			log.warn("La relación de pedido-documentación debe estar asociado a un documento. No se generá dicha relación por que no se relaciono ningún documento.");
+			log.warn("La relaciï¿½n de pedido-documentaciï¿½n debe estar asociado a un documento. No se generï¿½ dicha relaciï¿½n por que no se relaciono ningï¿½n documento.");
 			return;
 		}
 		
@@ -155,22 +155,37 @@ public class Pedido extends ComprobanteVenta {
 	
 	public void agregarItem(PedidoDet det){
 		det.setTipoDetalle(PedidoDet.CHAR_ITEM);
-		this.agregarDetalle(det);
+		agregarDetalle(det);
 	}
 	
 	public void agregarDeterminacionElectrica(PedidoDet det){
 		det.setTipoDetalle(PedidoDet.CHAR_ELECTRICO);
-		this.agregarDetalle(det);
+		agregarDetalle(det);
 	}
 	
 	public void agregarDeterminacionQuimica(PedidoDet det){
 		det.setTipoDetalle(PedidoDet.CHAR_QUIMICO);
-		this.agregarDetalle(det);
+		agregarDetalle(det);
 	}
 	
 	public void agregarMaterial(PedidoDet det){
 		det.setTipoDetalle(PedidoDet.CHAR_MATERIAL);
-		this.agregarDetalle(det);
+		agregarDetalle(det);
+	}
+	
+	/*
+	 * Metodos para que se puedan mostrar los pedidos como entidades descriptibles
+	 */
+	/*
+	 * Helper methods for show data into windows of generic help.
+	 */
+	public String getCodigo(){
+		return this.getNro();
+	}
+	
+	public String getDescripcion(){
+		return this.getReferencia();
 	}
 	
 }
+	

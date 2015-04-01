@@ -214,6 +214,41 @@
 
 	</operacion>
 
+	<operacion name="RecuperarContactosDeSucursal" clase="com.jkt.pedido.operaciones.RecuperarContactosParaSucursal" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDescriptibleOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="ID_SUCURSAL"/>
+		</input>
+
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+
+	</operacion>
+	
+	
+	<operacion name="ValidarEntidad" clase="com.jkt.operaciones.ValidarExistenciaSimple" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.DescriptibleOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="ENTIDAD"/>
+			<campoEntrada propertyOV="string2" name="CODIGO"/>
+			<campoEntrada propertyOV="string3" name="CAMPOVALIDADO"/>
+		</input>
+
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+
+	</operacion>
+
 	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
 
 		<input>
@@ -271,11 +306,25 @@
 		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
 			<campoEntrada propertyOV="nro" metodo="setNro" />
 			<campoEntrada propertyOV="letra" metodo="setLetra" />
+			<campoEntrada propertyOV="referencia" metodo="setReferencia" />
+			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" />
+			<campoEntrada propertyOV="idRepresentante" metodo="setRepresentante" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
+			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
 			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
 			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
 			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setCargaACargoDeCliente" />
+			
+			<campoEntrada propertyOV="notas" metodo="setNotas">
+				<campoEntrada propertyOV="id" metodo="setId"/>
+			</campoEntrada>
+
+<!-- 			<campoEntrada propertyOV="docs" metodo="setDocumentacion"> -->
+<!-- 				<campoEntrada propertyOV="idDocumento" metodo="setDocumentacion"/> -->
+<!-- 				<campoEntrada propertyOV="entregado" metodo="setEntregado"/> -->
+<!-- 			</campoEntrada> -->
+
 		</input>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

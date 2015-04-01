@@ -30,6 +30,7 @@
 		<module>./Common/varios</module>
 		<module>./Common/Framework/java/web</module>
 		<module>./Common/Framework/java/persistencia</module>
+		<module>./Common/Framework/java/objetosVista</module>
 		<module>./Common/seguridad</module>
 	
 		<module>./JakartaERP/java/articulos</module>

@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.jkt.dominio.PersistentEntity;
 
 /**
- * Entidad que representa la información de contacto
+ * Entidad que representa la informaciï¿½n de contacto
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -17,7 +17,7 @@ public class Contacto extends PersistentEntity {
 	@NotBlank
 	private String apellidoYNombre;
 
-	@NotBlank(message="Falta completar teléfono de Contacto")
+	@NotBlank(message="Falta completar telefono de Contacto")
 	private String telefono;
 
 	private String telefonoAlternativo;
@@ -105,4 +105,15 @@ public class Contacto extends PersistentEntity {
 		this.celular = celular;
 	}
 
+	
+	/*
+	 * Helper methods para no crear una nueva operacion
+	 */
+	
+	public String getCodigo(){
+		return this.apellidoYNombre;
+	}
+	public String getDescripcion(){
+		return this.telefono;
+	}
 }

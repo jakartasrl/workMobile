@@ -1,20 +1,27 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
-	<listbox model="@load(vm.lDocumentacion.list)" multiple="true" mold="paging" pageSize="10" hflex="1" vflex="1" checkmark="true">
+		<listbox 
+			model="@load(vm.lDocumentacion.list)" 
+			multiple="true" checkmark="true" 
+			emptyMessage="No existen documentación disponible." mold="paging" pageSize="10"
+			selectedItems="@bind(vm.docEntregados)"
+			hflex="1" vflex="1" 
+		>
+		
 		<listhead>
-			<listheader width="10%" label="Entregado" />
+			<listheader width="3%" style="text-align:center" />
 			<listheader width="5%" label="Codigo" />
-			<listheader width="85%" label="Descripcion Documento" />
+			<listheader width="72%" label="Descripcion Documentación" />
 		</listhead>
-
+		
+		
 		<template name="model">
 			<listitem>
-				<listcell />
-				<listcell label="@load(each.codigo)" />
-				<listcell label="@load(each.descripcion)" />
+				<listcell style="text-align:center" />
+				<listcell label="@bind(each.codigo)" />
+				<listcell label="@bind(each.descripcion)" />
 			</listitem>
 		</template>
-
 	</listbox>
 	
 </zk>

@@ -1,8 +1,15 @@
-<zk viewModel="@id('vm') @load(viewModel)"  >
+<zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
 
-	<listbox model="@load(vm.lNotas.list)" multiple="true" hflex="1" vflex="1" checkmark="true" emptyMessage="No existen notas disponibles." mold="paging" pageSize="10">
+	<listbox 
+			model="@load(vm.lNotas.list)" 
+			multiple="true" checkmark="true" 
+			emptyMessage="No existen notas disponibles." mold="paging" pageSize="10"
+			selectedItems="@bind(vm.pedidoOV.notas)"
+			hflex="1" vflex="1" 
+		>
+		
 		<listhead>
-			<listheader width="3%" />
+			<listheader width="3%" style="text-align:center" />
 			<listheader width="5%" label="Codigo" />
 			<listheader width="72%" label="Descripcion" />
 		</listhead>
@@ -10,7 +17,7 @@
 
 		<template name="model">
 			<listitem>
-				<listcell />
+				<listcell style="text-align:center"/>
 				<listcell label="@bind(each.codigo)" />
 				<listcell label="@bind(each.descripcion)" />
 			</listitem>

@@ -8,31 +8,68 @@
 		</columns>
 
 		<rows>
+	
 			<row>
+				<cell colspan="1" width="8%">
+	
+					<label value="Vendedor : " />
 
-				<hlayout>
-					<checkbox label="Carga a cargo de cliente" checked="@bind(vm.pedidoOV.cargaACargoDeCliente)" />
-				</hlayout>
+				</cell>
+				<cell colspan="2">
+		    		<hlayout>
+						<label visible="false" value="@load(vm.vendedorOV.id)"/>
+						<textbox sclass="campoCodigo" value="@bind(vm.vendedorOV.codigo)" />
+						<button label="..." onClick="@command('openHelper', clase='vendedor', ov=vm.vendedorOV)" />
+						<textbox width="300px" value="@bind(vm.vendedorOV.descripcion)" readonly="true"/>
+		    		</hlayout>
+				</cell>
 
-				<hlayout>
-					<checkbox label="Transporte a cargo de cliente" checked="@bind(vm.pedidoOV.transporteACargoDeCliente)" />
-				</hlayout>
+			</row>
+			
+			<row>
+				<cell colspan="1" width="8%">
+	
+					<label value="Representante : " />
 
-				<hlayout>
-					<checkbox label="Descarga a cargo de cliente" checked="@bind(vm.pedidoOV.descargaACargoDeCliente)" />
-				</hlayout>
+				</cell>
+				<cell colspan="2">
+		    		<hlayout>
+						<label visible="false" value="@load(vm.representanteOV.id)"/>
+						<textbox sclass="campoCodigo" value="@bind(vm.representanteOV.codigo)" />
+						<button label="..." onClick="@command('openHelper', clase='representante', ov=vm.representanteOV)" />
+						<textbox width="300px" value="@bind(vm.representanteOV.descripcion)" />
+		    		</hlayout>
+				</cell>
 
 			</row>
 
+
 			<row>
-				<hlayout hflex="1">
+				<cell colspan="1" width="8%">
 					<label value="Contacto Ref : " />
-					<combobox id="cmbColor">
-						<comboitem label="Contacto1" />
-						<comboitem label="Contacto2" />
-						<comboitem label="Contacto3" />
-					</combobox>
+				</cell>
+				
+				<cell colspan="2" >
+					<hlayout>
+						<combobox  model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)" readonly=  "true">
+							<template name="model">
+								<comboitem label="@bind(each.codigo)" />
+							</template>
+						</combobox>
+					</hlayout>
+				</cell>
+			</row>
+
+			<row>
+				
+				<cell colspan="2">
+				<hlayout>
+					<checkbox style="margin:15px;" label="Carga a cargo de cliente" checked="@bind(vm.pedidoOV.cargaACargoDeCliente)" />
+					<checkbox style="margin:15px;" label="Transporte a cargo de cliente" checked="@bind(vm.pedidoOV.transporteACargoDeCliente)" />
+					<checkbox style="margin:15px;" label="Descarga a cargo de cliente" checked="@bind(vm.pedidoOV.descargaACargoDeCliente)" />
 				</hlayout>
+				</cell>
+
 			</row>
 
 		</rows>

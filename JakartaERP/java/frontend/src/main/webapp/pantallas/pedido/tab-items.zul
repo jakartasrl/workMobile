@@ -1,21 +1,18 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
 	<vlayout width="100%" style="text-align:center;">
-		<button style="margin-bottom:2px;"
-			image="/pantallas/icons/new.png" label=""
-			onClick="@command('agregarElemento')"
-			tooltiptext="Agregar un nuevo item." />
+		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
+			 <attribute name="onClick"><![CDATA[
+					//box.pagingPosition = "top";
+					//siempre retorna a la primer pagina
+			        box.setActivePage(0);
+        		]]></attribute>
+		</button>
 			<label value="Agregar un item"></label>
 	</vlayout>
 
 
 	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
-
-	<attribute name="onPaging">
-		<![CDATA[
-			this.pagingChild.mold = "os";
-        ]]>	
-	</attribute>
 
 		<listhead>
 			<listheader />
@@ -26,7 +23,6 @@
 				<listcell>
 
 					<groupbox width="100%" style="border-style:none; cursor: default">
-<!-- 					<groupbox id="gb3-${each} " mold="3d" width="100%"> -->
 					
 							<hlayout>
 							
@@ -38,16 +34,16 @@
 								</combobox>
 							
 								<label value="Referencia:" />
-								<textbox width="120px" value="@bind(each.referencia)" />
+								<textbox width="350px" value="@bind(each.referencia)" />
 		
 								<label value="Cantidad:" />
 								<textbox width="40px;" value="@bind(each.cantidad)" />
 		
 								<label value="Moneda:" />
-								<combobox width="80px;">
-									<comboitem label="Peso" />
-									<comboitem label="Dolar" />
-									<comboitem label="Euro" />
+								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)">
+									<template name="model" var="moneda">
+										<comboitem label="@bind(moneda.descripcion)" />
+									</template>
 								</combobox>
 		
 								<label value="Importe:" />
@@ -72,5 +68,4 @@
 		</template>
 
 	</listbox>
-
 </zk>

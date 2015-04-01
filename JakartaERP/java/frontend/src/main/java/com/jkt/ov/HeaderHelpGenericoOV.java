@@ -11,8 +11,8 @@ public class HeaderHelpGenericoOV extends ObjectView {
 
 	private String titulo="Consulta generica";
 	private String columnaId;
-	private String columnaCodigo = "Código";
-	private String columnaDescripcion = "Descripción";
+	private String columnaCodigo = "CÃ³digo";
+	private String columnaDescripcion = "DescripciÃ³n";
 	
 	public String getTitulo() {
 		return titulo;
