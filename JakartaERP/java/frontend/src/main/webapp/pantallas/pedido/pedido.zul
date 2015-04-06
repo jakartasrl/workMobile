@@ -29,13 +29,14 @@
 						<textbox class="campoCodigo" value="" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
-						<datebox id="fecha" />
+						<datebox id="fecha" value="@bind(vm.pedidoOV.fecha)" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" />
+						
 					</row>
 					
 			    	<row sclass="fila-maestro">
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox id="codigoCliente" sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+							<textbox sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	
@@ -97,8 +98,6 @@
 			        <tabpanel>
 						<include id="dQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
 					</tabpanel>
-					
-					
 
 			        <tabpanel>
 						<include id="productosContent" hflex="1" src="/pantallas/pedido/tab-productos.zul" viewModel="${vm}"/>
