@@ -1,43 +1,6 @@
-<zk viewModel="@id('vm') @load(viewModel)"  >
+<zk viewModel="@id('vm') @load(viewModel)">
 
 	<vlayout>
-<!-- 		<panel sclass="panel-maestro" style="padding:5px;"  title="Datos Principales de Laboratorio" border="normal" height="auto" width="60%"> -->
-
-<!-- 			<panelchildren> -->
-
-<!-- 				<grid width="50%"> -->
-
-<!-- 					<columns> -->
-<!-- 						<column></column> -->
-<!-- 					</columns> -->
-
-<!-- 					<rows> -->
-<!-- 						<row> -->
-<!-- 							<label>Codigo</label> -->
-<!-- 							<textbox value="@bind(vm.ov.codigo)" /> -->
-<!-- 						</row> -->
-<!-- 						<row> -->
-<!-- 							<label>Descripcion</label> -->
-<!-- 							<textbox value="@bind(vm.ov.descripcion)" /> -->
-<!-- 						</row> -->
-<!-- 						<row> -->
-<!-- 							<button onClick="@command('guardar')"> -->
-<!-- 								Guardar -->
-<!-- 							</button> -->
-<!-- 						</row> -->
-
-<!-- 					</rows> -->
-
-<!-- 				</grid> -->
-
-<!-- 			</panelchildren> -->
-<!-- 		</panel> -->
-
-<!-- 		<separator></separator> -->
-
-<!-- 		<button id="traerBtn" hflex="1" onClick="@command('traer')" > -->
-<!-- 			Cargar laboratorios -->
-<!-- 		</button> -->
 
 		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="10" width="60%" emptyMessage="No existen laboratorios disponibles." style="margin-top:5px;">
 		
@@ -50,6 +13,7 @@
 				<column hflex="1" label="Descripcion" />
 				<column hflex="1" label="Activo" /> 
 			</columns>
+			
 			<rows>
 				<template name="model">
 					<row>
@@ -60,9 +24,7 @@
 				</template>
 			</rows>
 		</grid>
-<!-- 		<button id="updateBtn" hflex="1" label="Actualizar" onClick="@command('update')" /> -->
-<!-- 		<button label="Agregar Laboratorio" onClick="@command('agregarLaboratorio')" /> -->
-	</vlayout>
 
+	</vlayout>
 
 </zk>
