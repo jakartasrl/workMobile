@@ -77,7 +77,7 @@ public abstract class BaseController{
 			Gson gson = new GsonBuilder().create();
 			//lo paso en formato json para que tome los \n
 			response.addHeader("error", gson.toJson(error));
-		    response.setStatus(Response.SC_INTERNAL_SERVER_ERROR);
+		    response.setStatus(Response.SC_EXPECTATION_FAILED);
 		}
 	}
 	

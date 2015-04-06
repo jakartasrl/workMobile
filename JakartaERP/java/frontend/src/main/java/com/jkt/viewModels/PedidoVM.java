@@ -9,6 +9,8 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.apache.commons.collections.Closure;
+import org.apache.commons.collections.CollectionUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
@@ -20,10 +22,12 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ClienteOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.DeterminacionOV;
 import com.jkt.ov.HelperOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListDeterminacionOV;
+import com.jkt.ov.ListItemsOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.ListaPrecioOV;
 import com.jkt.ov.NotaOV;
@@ -43,14 +47,18 @@ public class PedidoVM extends ViewModel {
 	private ClienteOV clienteOV=new ClienteOV();
 	private SucursalOV sucursalOV=new SucursalOV();
 	private ListaPrecioOV lPreciosOV=new ListaPrecioOV();
-	private ListDeterminacionOV lDeterminacionesQuimicas=new ListDeterminacionOV();
-	private ListDeterminacionOV lDeterminacionesElectricas=new ListDeterminacionOV();
+	
+	private List<ItemsOV> lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
+	private List<ItemsOV> lDeterminacionesElectricas=new ArrayList<ItemsOV>();
+	
 	private ListNotasOV lNotas=new ListNotasOV();
 	
 	private ListDescriptibleOV lDocumentacion=new ListDescriptibleOV();
 	private List<DescriptibleOV> docEntregados=new ArrayList<DescriptibleOV>();
 
 	private List<ItemsOV> items = new ArrayList<ItemsOV>();
+	private List<ItemsOV> itemsArticulos = new ArrayList<ItemsOV>();
+	
 	private ListDescriptibleOV lMonedas=new ListDescriptibleOV();
 	
 	private DescriptibleOV vendedorOV=new DescriptibleOV();
@@ -75,14 +83,14 @@ public class PedidoVM extends ViewModel {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"contactos","lNotas","items","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		
 		this.clienteOV = new ClienteOV();
 		this.sucursalOV = new SucursalOV();
 		this.lPreciosOV = new ListaPrecioOV();
-		this.lDeterminacionesQuimicas = new ListDeterminacionOV();
-		this.lDeterminacionesElectricas = new ListDeterminacionOV();
+		this.lDeterminacionesQuimicas = new ArrayList<ItemsOV>();
+		this.lDeterminacionesElectricas = new ArrayList<ItemsOV>();
 		this.lNotas = new ListNotasOV();
 		this.lDocumentacion = new ListDescriptibleOV();
 		this.items = new ArrayList<ItemsOV>();
@@ -122,7 +130,38 @@ public class PedidoVM extends ViewModel {
 		pedidoOV.setIdRepresentante(representanteOV.getId());
 		pedidoOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		
-		pedidoOV.completarListaDocumentos(this.lDocumentacion.getList(), this.docEntregados);
+		pedidoOV.completarListaDocumentos(lDocumentacion.getList(), docEntregados);
+		
+		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
+		
+		for (ItemsOV itemsOV : items) {
+			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
+			itemsFinal.add(itemsOV);
+		}
+
+		for (ItemsOV itemsOV : itemsArticulos) {
+			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
+			itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
+			itemsFinal.add(itemsOV);
+		}
+		
+		for (ItemsOV itemsOV : this.lDeterminacionesQuimicas) {
+			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+			itemsFinal.add(itemsOV);
+		}
+
+		for (ItemsOV itemsOV : this.lDeterminacionesElectricas) {
+			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+			itemsFinal.add(itemsOV);
+		}
+		
+		/*
+		 * Junta todos los items
+		 */
+		pedidoOV.setItems(itemsFinal);
+		
 	}
 
 	@Init
@@ -141,12 +180,21 @@ public class PedidoVM extends ViewModel {
 		log.info("Inicializando items...");
 		this.items=new ArrayList<ItemsOV>();
 		this.items.add(new ItemsOV());
+
+		log.info("Inicializando items para articulos...");
+		this.itemsArticulos=new ArrayList<ItemsOV>();
+		this.itemsArticulos.add(new ItemsOV());
 	}
 	
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento(){
 		this.items.add(0, new ItemsOV());
+	}
+	@Command
+	@NotifyChange("itemsArticulos")
+	public void agregarElementoArticulo(){
+		this.itemsArticulos.add(0, new ItemsOV());
 	}
 	
 	/**
@@ -164,18 +212,19 @@ public class PedidoVM extends ViewModel {
 	 * Actualiza las determinaciones recibiendo el nombre del parametro de laboratorio y una coleccion dnd depositar los resultados
 	 * 
 	 */
-	private ListDeterminacionOV actualizarDeterminaciones(String parametroLaboratorio) {
+	private ArrayList<ItemsOV> actualizarDeterminaciones(String parametroLaboratorio) {
 		Long idListaPrecio = this.lPreciosOV.getId();
 		
 		ContainerOV containerOV = new ContainerOV();
 		containerOV.setString1(parametroLaboratorio);
 		containerOV.setString2(String.valueOf(idListaPrecio));
 		
-		return (ListDeterminacionOV) Operaciones.ejecutar("TraerDeterminacionConPrecio",containerOV,ListDeterminacionOV.class);
+		ListItemsOV list = (ListItemsOV) Operaciones.ejecutar("TraerDeterminacionConPrecio",containerOV,ListItemsOV.class);
+		return (ArrayList<ItemsOV>) list.getList();
 	}
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","vendedorOV","representanteOV"})
+	@NotifyChange({"contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
@@ -218,24 +267,6 @@ public class PedidoVM extends ViewModel {
 		this.lPreciosOV = lPreciosOV;
 	}
 
-	public ListDeterminacionOV getlDeterminacionesQuimicas() {
-		return lDeterminacionesQuimicas;
-	}
-
-	public void setlDeterminacionesQuimicas(
-			ListDeterminacionOV lDeterminacionesQuimicas) {
-		this.lDeterminacionesQuimicas = lDeterminacionesQuimicas;
-	}
-
-	public ListDeterminacionOV getlDeterminacionesElectricas() {
-		return lDeterminacionesElectricas;
-	}
-
-	public void setlDeterminacionesElectricas(
-			ListDeterminacionOV lDeterminacionesElectricas) {
-		this.lDeterminacionesElectricas = lDeterminacionesElectricas;
-	}
-
 	public ListNotasOV getlNotas() {
 		return lNotas;
 	}
@@ -259,5 +290,22 @@ public class PedidoVM extends ViewModel {
 	public void setlMonedas(ListDescriptibleOV lMonedas) {
 		this.lMonedas = lMonedas;
 	}
-	
+
+	public List<ItemsOV> getlDeterminacionesQuimicas() {
+		return lDeterminacionesQuimicas;
+	}
+
+	public void setlDeterminacionesQuimicas(List<ItemsOV> lDeterminacionesQuimicas) {
+		this.lDeterminacionesQuimicas = lDeterminacionesQuimicas;
+	}
+
+	public List<ItemsOV> getlDeterminacionesElectricas() {
+		return lDeterminacionesElectricas;
+	}
+
+	public void setlDeterminacionesElectricas(
+			List<ItemsOV> lDeterminacionesElectricas) {
+		this.lDeterminacionesElectricas = lDeterminacionesElectricas;
+	}
+
 }

@@ -88,9 +88,14 @@
 			<property name="cargaACargoDeCliente" column="CARGA_A_CARGO_DE_CLIENTE" type="boolean" />
 			<property name="transporteACargoDeCliente" column="TRANSPORTE_A_CARGO_DE_CLIENTE" type="boolean" />
 			<property name="descargaACargoDeCliente" column="DESCARGA_A_CARGO_DE_CLIENTE" type="boolean" />
+			
+			<list name="detalles" table="DETALLES_PEDIDO" lazy="true" cascade="all">
+				<key column="PEDIDO_ID" />
+				<index column="ORDEN" />
+				<one-to-many class="com.jkt.pedido.dominio.PedidoDet" />
+			</list>
 
 		</union-subclass>
-
 
 
 

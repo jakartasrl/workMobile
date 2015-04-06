@@ -18,7 +18,10 @@
 				<cell colspan="2">
 		    		<hlayout>
 						<label visible="false" value="@load(vm.vendedorOV.id)"/>
-						<textbox sclass="campoCodigo" value="@bind(vm.vendedorOV.codigo)" />
+						<textbox id="codVendedor" sclass="campoCodigo" value="@bind(vm.vendedorOV.codigo)" 
+							onBlur="@command('validarCampo', clase='vendedor', codigo=codVendedor, ov=vm.vendedorOV)"
+							/>
+
 						<button label="..." onClick="@command('openHelper', clase='vendedor', ov=vm.vendedorOV)" />
 						<textbox width="300px" value="@bind(vm.vendedorOV.descripcion)" readonly="true"/>
 		    		</hlayout>
@@ -35,9 +38,12 @@
 				<cell colspan="2">
 		    		<hlayout>
 						<label visible="false" value="@load(vm.representanteOV.id)"/>
-						<textbox sclass="campoCodigo" value="@bind(vm.representanteOV.codigo)" />
+						<textbox id="codRepresentante" sclass="campoCodigo" value="@bind(vm.representanteOV.codigo)" 
+							onBlur="@command('validarCampo', clase='representante', codigo=codRepresentante, ov=vm.representanteOV)"
+							/>
+						
 						<button label="..." onClick="@command('openHelper', clase='representante', ov=vm.representanteOV)" />
-						<textbox width="300px" value="@bind(vm.representanteOV.descripcion)" />
+						<textbox width="300px" value="@bind(vm.representanteOV.descripcion)" readonly="true"/>
 		    		</hlayout>
 				</cell>
 

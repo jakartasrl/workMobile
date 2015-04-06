@@ -248,7 +248,7 @@
 
 	</operacion>
 
-	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDeterminacionOV">
+	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListItemsOV">
 
 		<input>
 			<campoEntrada propertyOV="string1" name="LABORATORIO"/>
@@ -257,7 +257,7 @@
 
 		<output>
 
-			<campoSalida value="id" target="determinacion.id" />
+			<campoSalida value="idDeterminacion" target="determinacion.id" />
 			<campoSalida value="codigo" target="determinacion.codigo" />
 			<campoSalida value="descripcion" target="determinacion.descripcion" />
 
@@ -317,6 +317,19 @@
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>
+			</campoEntrada>
+			
+			<campoEntrada propertyOV="items" metodo="setDetalles">
+				<campoEntrada propertyOV="id" metodo="setId"/>
+				<campoEntrada propertyOV="idMoneda" metodo="setMoneda"/>
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="cantidad" metodo="setCantidad"/>
+				<campoEntrada propertyOV="importe" metodo="setPrecio"/>
+				<campoEntrada propertyOV="referencia" metodo="setReferencia"/>
+				
+				<campoEntrada propertyOV="idDeterminacion" metodo="setDeterminacion"/>
+				<campoEntrada propertyOV="idProducto" metodo="setProducto"/>
+				
 			</campoEntrada>
 
 <!-- 			<campoEntrada propertyOV="docs" metodo="setDocumentacion"> -->

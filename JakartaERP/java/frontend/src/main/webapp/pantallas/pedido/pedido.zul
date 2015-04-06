@@ -29,18 +29,19 @@
 						<textbox class="campoCodigo" value="" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
-						<datebox id="fecha" />
+						<datebox id="fecha" value="@bind(vm.pedidoOV.fecha)" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" />
+						
 					</row>
 					
 			    	<row sclass="fila-maestro">
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox id="codigoCliente" sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV)" />
+							<textbox sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	
 						<hlayout>
-							<textbox id="codigoSucursal" sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=codigoSucursal, ov=vm.sucursalOV)" />
+							<textbox id="codigoSucursal" sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=codigoSucursal, ov=vm.sucursalOV, post='actualizarCampoSucursal')" />
 							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
 
@@ -55,7 +56,7 @@
 
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
-							<textbox sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" />
+							<textbox id="codigoLista" sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" onBlur="@command('validarCampo', clase='listaPrecios', codigo=codigoLista, ov=vm.lPreciosOV, post='actualizarDeterminaciones')"/>
 							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
@@ -98,7 +99,9 @@
 						<include id="dQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
 					</tabpanel>
 
-			        <tabpanel><label style="font-size:12px;" /></tabpanel>
+			        <tabpanel>
+						<include id="productosContent" hflex="1" src="/pantallas/pedido/tab-productos.zul" viewModel="${vm}"/>
+					</tabpanel>
 			        
 			        <tabpanel>
 						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />

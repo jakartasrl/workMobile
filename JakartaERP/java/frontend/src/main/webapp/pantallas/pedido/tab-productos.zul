@@ -1,18 +1,18 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
 	<vlayout width="100%" style="text-align:center;">
-		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
+		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElementoArticulo')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
 					//box.pagingPosition = "top";
 					//siempre retorna a la primer pagina
-			        box.setActivePage(0);
+					boxMateriales.setActivePage(0);
         		]]></attribute>
 		</button>
 			<label value="Agregar un item"></label>
 	</vlayout>
 
 
-	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
+	<listbox id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
 
 		<listhead>
 			<listheader />
@@ -52,6 +52,17 @@
 								<label value="Importe Total:" />
 								<textbox width="50px;" value="@bind(each.importeTotal)" />
 								
+							</hlayout>
+					
+							<hlayout>
+
+								<label value="Articulo : " width="200px" />
+							
+								<textbox id="codigoArticulo" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo='codigoArticulo', ov=each.productoOV )" />
+								<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
+								
+								<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>
+
 							</hlayout>
 							
 							<hlayout style="margin:10px;">
