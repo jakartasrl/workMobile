@@ -1,62 +1,68 @@
-<window id="modalDialog" apply="org.zkoss.bind.BindComposer"
-	viewModel="@id('vm') @init('com.jkt.viewModels.LaboratorioVM')"
-	title="Laboratorios" border="normal">
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
 	<vlayout>
-		<panel>
+<!-- 		<panel sclass="panel-maestro" style="padding:5px;"  title="Datos Principales de Laboratorio" border="normal" height="auto" width="60%"> -->
 
-			<panelchildren>
+<!-- 			<panelchildren> -->
 
-				<grid width="50%">
+<!-- 				<grid width="50%"> -->
 
-					<columns>
-						<column></column>
-					</columns>
+<!-- 					<columns> -->
+<!-- 						<column></column> -->
+<!-- 					</columns> -->
 
-					<rows>
-						<row>
-							<label>Codigo</label>
-							<textbox value="@bind(vm.ov.codigo)" />
-						</row>
-						<row>
-							<label>Descripcion</label>
-							<textbox value="@bind(vm.ov.descripcion)" />
-						</row>
-						<row>
-							<button onClick="@command('guardar')">
-								Guardar
-							</button>
-						</row>
+<!-- 					<rows> -->
+<!-- 						<row> -->
+<!-- 							<label>Codigo</label> -->
+<!-- 							<textbox value="@bind(vm.ov.codigo)" /> -->
+<!-- 						</row> -->
+<!-- 						<row> -->
+<!-- 							<label>Descripcion</label> -->
+<!-- 							<textbox value="@bind(vm.ov.descripcion)" /> -->
+<!-- 						</row> -->
+<!-- 						<row> -->
+<!-- 							<button onClick="@command('guardar')"> -->
+<!-- 								Guardar -->
+<!-- 							</button> -->
+<!-- 						</row> -->
 
-					</rows>
+<!-- 					</rows> -->
 
-				</grid>
+<!-- 				</grid> -->
 
-			</panelchildren>
-		</panel>
+<!-- 			</panelchildren> -->
+<!-- 		</panel> -->
 
-		<separator></separator>
+<!-- 		<separator></separator> -->
 
-		<button id="traerBtn" hflex="1" onClick="@command('traer')" >
-			Cargar laboratorios
-		</button>
+<!-- 		<button id="traerBtn" hflex="1" onClick="@command('traer')" > -->
+<!-- 			Cargar laboratorios -->
+<!-- 		</button> -->
 
-		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="5">
+		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="10" width="60%" emptyMessage="No existen laboratorios disponibles." style="margin-top:5px;">
+		
+			<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
+				<auxheader label="Lista de Laboratorios" colspan="3" />
+			</auxhead>
+			        
 			<columns>
-				<column hflex="1" label="codigo" />
-				<column hflex="1" label="descripcion" />
-				<column hflex="1" label="activo" /> 
+				<column hflex="1" label="Codigo" />
+				<column hflex="1" label="Descripcion" />
+				<column hflex="1" label="Activo" /> 
 			</columns>
 			<rows>
 				<template name="model">
 					<row>
-						<textbox value="@bind(each.codigo)" />
+						<textbox value="@bind(each.codigo)" constraint="no empty" maxlength="15"/>
 						<textbox value="@bind(each.descripcion)" />
 						<checkbox checked="@bind(each.activo)" />
 					</row>
 				</template>
 			</rows>
 		</grid>
-		<button id="updateBtn" hflex="1" label="Actualizar" onClick="@command('update')" />
+<!-- 		<button id="updateBtn" hflex="1" label="Actualizar" onClick="@command('update')" /> -->
+<!-- 		<button label="Agregar Laboratorio" onClick="@command('agregarLaboratorio')" /> -->
 	</vlayout>
 
-</window>
+
+</zk>

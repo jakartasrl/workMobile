@@ -54,7 +54,7 @@
 								<label>Tipo Producto</label>
 								
 								<cell>
-									<textbox id="tProducto" value="@bind(vm.tipoProductoOV.codigo)" onBlur="@command('validarCampo', clase='tipoProducto', codigo=tProducto, ov=vm.tipoProductoOV, post='traerTipoProducto'))" />
+									<textbox id="tProducto" value="@bind(vm.tipoProductoOV.codigo)" onBlur="@command('validarCampo', clase='tipoProducto', codigo=tProducto, ov=vm.tipoProductoOV, post='traerTipoProducto')" />
 									<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
 								</cell>
 

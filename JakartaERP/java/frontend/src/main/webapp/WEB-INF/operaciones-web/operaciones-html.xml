@@ -49,7 +49,7 @@
 <entity>
 
 	<operacion name="saveLabo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Laboratorio" inputOV="com.jkt.ov.LaboratorioOV">
-		
+	
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Laboratorio">
 			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
@@ -108,7 +108,6 @@
 	</operacion>
 	
 	<operacion name="saveEquipo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Equipo" inputOV="com.jkt.ov.EquipoOV">
-		
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Equipo">
 			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="codigo" metodo="setCodigo" />

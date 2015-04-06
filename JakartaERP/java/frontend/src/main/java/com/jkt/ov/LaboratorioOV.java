@@ -3,6 +3,10 @@ package com.jkt.ov;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
+import lombok.EqualsAndHashCode;
+
 import com.jkt.view.ObjectView;
 
 /**
@@ -11,21 +15,19 @@ import com.jkt.view.ObjectView;
  * @author erubino
  *
  */
+@EqualsAndHashCode(callSuper=true, of={"codigo","descripcion"})
 public class LaboratorioOV extends ObjectView {
 
+	public LaboratorioOV() {
+		this.setActivo(Boolean.TRUE);
+		this.codigo=StringUtils.EMPTY;
+		this.descripcion=StringUtils.EMPTY;
+	}
+	
 	private String codigo;
 	private String descripcion;
 	private List laboratorios=new ArrayList();
-	private Boolean activo=Boolean.FALSE;
 	
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
-	}
-
 	public String getCodigo() {
 		return codigo;
 	}
