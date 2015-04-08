@@ -1,7 +1,5 @@
 package com.jkt.pedido.dominio;
 
-import lombok.Data;
-
 import com.jkt.dominio.PersistentEntity;
 
 /**

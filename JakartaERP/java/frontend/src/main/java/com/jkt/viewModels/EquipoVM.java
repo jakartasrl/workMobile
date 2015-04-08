@@ -41,7 +41,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	private CaracteristicaProductoOV caracteristicaProductoOV = new CaracteristicaProductoOV();
 	private List<EquipoCaracteristicaOV> equipoCaracteristicas = new ArrayList<EquipoCaracteristicaOV>();
 	
-	private List<ValoresTablaOV> marcas = new ArrayList();
+	private List<ValoresTablaOV> marcas = new ArrayList<ValoresTablaOV>();
 	private ValoresTablaOV marca= new ValoresTablaOV();
 	
 	public List<ValoresTablaOV> getMarcas() {
@@ -90,6 +90,8 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	@NotifyChange("caracteristicas")
 	public void traerTipoProducto() {
 
+		this.getCaracteristicas().clear();
+		
 		long idTipoProducto = tipoProductoOV.getId();
 		ContainerOV containerOV = new ContainerOV();
 		containerOV.setString1(String.valueOf(idTipoProducto));
@@ -100,7 +102,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"ov","caracteristicas"})
+	@NotifyChange({"ov","caracteristicas","marcas"})
 	public void traerEquipo() {
 		
 		long idEquipo = ov.getId();
@@ -123,10 +125,24 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		TipoProductoOV tipoProductoOV = new TipoProductoOV();
 		tipoProductoOV.setId(eq.getIdTipoProducto());
 		tipoProductoOV.setCodigo(eq.getCodTipoProducto());
+		tipoProductoOV.setDescripcion(eq.getDescTipoProducto());
 		this.setTipoProductoOV(tipoProductoOV);
 		
-		this.setMarcas(eq.getMarcas());
-		this.setMarca(eq.getMarca());
+		ListMarcaOV marcas = (ListMarcaOV) Operaciones.ejecutar("TraerMarca", ListMarcaOV.class);
+		eq.setMarcas(marcas.getList());
+		
+
+		List<ValoresTablaOV> marcasDisponibles = eq.getMarcas();
+		Long idMarca = eq.getIdMarca();
+		ValoresTablaOV marcaSeleccionada=null;
+		for (ValoresTablaOV valoresTablaOV : marcasDisponibles) {
+			if (valoresTablaOV.getId()==idMarca) {
+				marcaSeleccionada=valoresTablaOV;
+				break;
+			}
+		}
+		
+		eq.setMarca(marcaSeleccionada);
 		
 		List<CaracteristicaProductoOV> listCaracteristicaProductoOV = eq.getCaracteristicas();
 		for (CaracteristicaProductoOV caracteristicaProductoOV : listCaracteristicaProductoOV) {	
@@ -138,21 +154,11 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 				
 				caracteristicaProductoOV.setValorTabla(valorTabla);
 			}
-			
+				
 		}
 			 
 		this.setOv(eq);
 		
-	}
-
-	private ValoresTablaOV setearMarcaEnCombo() {
-		List<ValoresTablaOV> marcas = this.getOv().getMarcas();
-		for (ValoresTablaOV valoresTablaOV : marcas) {
-			if (valoresTablaOV.getId()== ov.getIdMarca()) {
-				return valoresTablaOV;
-			}
-		}
-		return null;
 	}
 
 	public TipoProductoOV getTipoProductoOV() {
@@ -194,7 +200,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	@Override
 	@GlobalCommand("actualizar")
-	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV" })
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas" })
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -214,6 +220,9 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		}
 		
 		this.ov.setIdMarca(this.ov.getMarca().getId());
+		
+		this.ov.setMarcas(this.ov.getMarcas());
+		
 		this.ov.setIdCliente(clienteOV.getId());
 		this.ov.setIdTipoProducto(this.tipoProductoOV.getId());
 
@@ -222,31 +231,44 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		List<CaracteristicaProductoOV> c2 = this.ov.getCaracteristicas();
 		for (CaracteristicaProductoOV caracteristicaProductoOV : c2) {
 			EquipoCaracteristicaOV equipoCaracteristicaOV = new EquipoCaracteristicaOV();
+			
+			equipoCaracteristicaOV.setId(caracteristicaProductoOV.getIdEquipoCaracteristica());
+			
 			equipoCaracteristicaOV.setIdValor(caracteristicaProductoOV.getValorTabla().getId()==0L?null:caracteristicaProductoOV.getValorTabla().getId());
 			equipoCaracteristicaOV.setIdCaracteristica(caracteristicaProductoOV.getId());
+			
 			equipoCaracteristicaOV.setValorEntero(caracteristicaProductoOV.getValorEntero());
 			equipoCaracteristicaOV.setValorBoolean(caracteristicaProductoOV.getValorBoolean());
 			equipoCaracteristicaOV.setValorString(caracteristicaProductoOV.getValorString());
 			equipoCaracteristicaOV.setValorDouble(caracteristicaProductoOV.getValorDouble());
-			
 			equipoCaracteristicaOV.setIdValorTabla(caracteristicaProductoOV.getIdValorTabla());
 			equipoCaracteristicaOV.setCodigoValorTabla(caracteristicaProductoOV.getCodigoValorTabla());
 			equipoCaracteristicaOV.setDescValorTabla(caracteristicaProductoOV.getDescValorTabla());
 			
 			this.equipoCaracteristicas.add(equipoCaracteristicaOV);
+			
 		}
 		
 		this.ov.setCaracteristicasEquipo(this.equipoCaracteristicas);
 
+		
 		Operaciones.ejecutar("saveEquipo", this.ov);
 		Messagebox.show("Equipo Guardado correctamente.");
 	}
 
-	@Override
 	@Command
-	public void nuevo() throws JakartaException {
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas"})
+	public void nuevo() {
 		//borrar topdos los ovs, asignando una nueva isntancia... ov= new ovm
-		
+		this.ov = new EquipoOV();
+		this.clienteOV = new ClienteOV();
+		this.tipoProductoOV = new TipoProductoOV();
+		this.caracteristicas = new ArrayList<CaracteristicaProductoOV>();
+		this.caracteristicaProductoOV = new CaracteristicaProductoOV();
+		this.equipoCaracteristicas = new ArrayList<EquipoCaracteristicaOV>();
+		this.marcas = new ArrayList<ValoresTablaOV>();;
+		this.marca= new ValoresTablaOV();
+		this.init();
 	}
 
 	@Override

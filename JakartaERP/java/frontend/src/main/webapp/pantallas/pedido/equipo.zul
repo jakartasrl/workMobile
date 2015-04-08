@@ -1,61 +1,87 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<vlayout>
-		<panel>
+		<panel sclass="panel-maestro" style="padding:5px;"  title="Datos Principales de Equipo" border="normal" height="auto" width="60%">
 
 			<panelchildren>
 
-				<grid>
+				<grid width="100%">
 					<columns>
-						<column></column>
-						<column></column>
-						<column></column>
+						<column width="150px"></column>
+						<column width="190px"></column>
+						<column width="150px"></column>
+						<column width="150px"></column>
 					</columns>
 					
 					<rows>	
 						<row>
 							
 								<label>Marca</label>
-									<combobox id="cmbMarca" model="@load(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
-										<template name="model">
-											<comboitem label="@load(each.descripcion)" />
-										</template>
-									</combobox>
+								
+								<combobox id="cmbMarca" model="@bind(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
+									<template name="model">
+										<comboitem label="@bind(each.descripcion)" value="@bind(each.id)" />
+									</template>
+								</combobox>
 								
 							
 								<label>Nro Serie</label>
 								<textbox value="@bind(vm.ov.nroSerie)" />
 						
-								<label>Descripcion</label>
-								<textbox value="@bind(vm.ov.descripcion)" />
-							
 						</row>
+
+						<row>
+							<label>Descripcion</label>
+							<textbox value="@bind(vm.ov.descripcion)" />
+						</row>
+
 						<row>
 							
 								<label>Cliente Actual</label>
-								<textbox value="@bind(vm.clienteOV.codigo)" />
-								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV,titulo='Clientes')" />
-								<textbox value="@bind(vm.clienteOV.descripcion)" />
+								
+								<cell>
+									<textbox id="codigoCliente" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV)"/>
+									<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV,titulo='Clientes')" />
+								</cell>
+								
+								<cell colspan="2">
+									<textbox width="295px" value="@bind(vm.clienteOV.descripcion)" />
+								</cell>
 															
 						</row>
 						<row>
 							
 								<label>Tipo Producto</label>
-								<textbox value="@bind(vm.tipoProductoOV.codigo)" />
-								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
-														
+								
+								<cell>
+									<textbox id="tProducto" value="@bind(vm.tipoProductoOV.codigo)" onBlur="@command('validarCampo', clase='tipoProducto', codigo=tProducto, ov=vm.tipoProductoOV, post='traerTipoProducto')" />
+									<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
+								</cell>
+
+								<cell colspan="2">
+									<textbox width="295px" value="@bind(vm.tipoProductoOV.descripcion)" />					
+								</cell>
 						</row>
 					</rows>
 				
 			</grid>
+			
+						</panelchildren>
+		</panel>
 						
-				<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" >
+				<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" width="60%" emptyMessage="No existen caracteristicas disponibles." style="margin-top:15px;">
+					
+			        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
+			            <auxheader label="Caracteristicas del equipo" colspan="2" />
+			        </auxhead>
+					
+					
 					<columns>
 <!-- 						<column hflex="1" label="id" /> -->
 <!-- 						<column hflex="1" label="codigo" /> -->
-						<column hflex="1" label="descripcion" /> 
+						<column hflex="1" label="Descripcion de caracteristica" /> 
 <!-- 						<column hflex="1" label="tipoDato" />	 -->
-						<column hflex="1" label="valor" />
+						<column hflex="1" label="Valor de caracteristica" />
 					</columns>
 					
 					<rows>
@@ -63,21 +89,22 @@
 							<row>
 <!-- 								<textbox value="@bind(each.id)" /> -->
 <!-- 								<textbox value="@bind(each.codigo)" /> -->
-								<textbox value="@bind(each.descripcion)" />
+								<label value="@bind(each.descripcion)"> </label>
+								
 <!-- 								<textbox value="@bind(each.tipoDato)" /> -->
 								<hlayout>
 									<zk switch="${each.tipoDato}" >
 										<zk case='Tabla' >
 											<textbox value="@bind(each.valorTabla.descripcion)" />
-											<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla', ov=each.valorTabla , titulo='Tablas disponibles')"/>
+											<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla',oidEntidadMaestra=each.idTabla, ov=each.valorTabla , titulo='Tablas disponibles')"/>
 										</zk>
 										<zk case='Numero'>
 											<textbox value="@bind(each.valorEntero)" />
 										</zk>
 										<zk case='Booleano'>
 											<combobox selectedItem="@bind(each.valorBoolean)">
-													<comboitem label="Verdadero" value="true"></comboitem>												
-													<comboitem label="Falso" value="false"></comboitem>										
+													<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
+													<comboitem label="Falso" value="@bind(false)"></comboitem>										
 											</combobox>
 										</zk>
 										<zk case='String'>
@@ -93,8 +120,7 @@
 					</rows>
 				
 				</grid>
-			</panelchildren>
-		</panel>
+
 
 </vlayout>
 
