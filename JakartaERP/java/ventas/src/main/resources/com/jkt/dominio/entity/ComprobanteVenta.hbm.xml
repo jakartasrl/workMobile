@@ -69,9 +69,13 @@
 		<union-subclass name="com.jkt.pedido.dominio.Pedido" table="PEDIDO">
 			<many-to-one name="comprobanteRelacionado" class="com.jkt.presupuesto.dominio.Presupuesto" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
 
+			<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" />
+
 <!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
 			<property name="referencia" column="REFERENCIA" type="string" />
 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one>
+
+			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />
 
 			<list name="notas" cascade="all" table="PEDIDO_NOTAS">
 				<key column="PEDIDO_ID" />

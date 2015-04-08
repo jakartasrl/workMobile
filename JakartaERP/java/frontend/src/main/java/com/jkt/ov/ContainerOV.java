@@ -19,6 +19,12 @@ public class ContainerOV extends ObjectView {
 	private String string3;
 	private String string4;
 
+	public ContainerOV() {}
+	
+	public ContainerOV(String string) {
+		this.string1=string;
+	}
+
 	public Long getLong1() {
 		return long1;
 	}

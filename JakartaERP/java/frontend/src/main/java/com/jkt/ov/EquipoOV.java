@@ -18,7 +18,7 @@ public class EquipoOV extends ObjectView {
 //	private Boolean activo=Boolean.FALSE;
 	private List<ValoresTablaOV> marcas = new ArrayList();
 	private ValoresTablaOV marca= new ValoresTablaOV();
-	private ClienteOV clienteOV;
+	private DescriptibleOV clienteOV;
 	private TipoProductoOV tipoProductoOV;
 	private String nroSerie;
 	
@@ -140,11 +140,11 @@ public class EquipoOV extends ObjectView {
 		this.marca = marca;
 	}
 
-	public ClienteOV getClienteOV() {
+	public DescriptibleOV getClienteOV() {
 		return clienteOV;
 	}
 
-	public void setClienteOV(ClienteOV clienteOV) {
+	public void setClienteOV(DescriptibleOV clienteOV) {
 		this.clienteOV = clienteOV;
 	}
 

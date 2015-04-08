@@ -22,7 +22,7 @@
 				<row sclass="fila-maestro">
 					<label width="100%" value="@bind(each.codAnalisis)" />
 					<label width="100%" value="@bind(each.codigo)" />
-					<label width="90%" value="@bind(each.descripcion)" />
+					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
 						<intbox width="80%" value="0" />

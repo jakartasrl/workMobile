@@ -9,8 +9,8 @@ import java.util.List;
 
 import lombok.Data;
 
-import org.apache.commons.collections.Closure;
-import org.apache.commons.collections.CollectionUtils;
+import static org.apache.commons.beanutils.BeanUtils.*;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
@@ -19,21 +19,17 @@ import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.ov.ClienteOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
-import com.jkt.ov.DeterminacionOV;
 import com.jkt.ov.HelperOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
-import com.jkt.ov.ListDeterminacionOV;
 import com.jkt.ov.ListItemsOV;
 import com.jkt.ov.ListNotasOV;
-import com.jkt.ov.ListaPrecioOV;
-import com.jkt.ov.NotaOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.SucursalOV;
 import com.jkt.pedido.dominio.Pedido;
+import com.jkt.pedido.dominio.PedidoDet;
 
 /**
  * ViewModel de la entidad {@link Pedido} que se encarga de procesar las diferentes peticiones.
@@ -44,9 +40,11 @@ import com.jkt.pedido.dominio.Pedido;
 public class PedidoVM extends ViewModel {
 
 	private String titulo="Ingreso de Pedido";
-	private ClienteOV clienteOV=new ClienteOV();
+	private DescriptibleOV clienteOV=new DescriptibleOV();
 	private SucursalOV sucursalOV=new SucursalOV();
-	private ListaPrecioOV lPreciosOV=new ListaPrecioOV();
+	private DescriptibleOV lPreciosOV=new DescriptibleOV();
+	
+	private ListDescriptibleOV tiposVenta=new ListDescriptibleOV();
 	
 	private List<ItemsOV> lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 	private List<ItemsOV> lDeterminacionesElectricas=new ArrayList<ItemsOV>();
@@ -83,12 +81,12 @@ public class PedidoVM extends ViewModel {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		
-		this.clienteOV = new ClienteOV();
+		this.clienteOV = new DescriptibleOV();
 		this.sucursalOV = new SucursalOV();
-		this.lPreciosOV = new ListaPrecioOV();
+		this.lPreciosOV = new DescriptibleOV();
 		this.lDeterminacionesQuimicas = new ArrayList<ItemsOV>();
 		this.lDeterminacionesElectricas = new ArrayList<ItemsOV>();
 		this.lNotas = new ListNotasOV();
@@ -102,16 +100,99 @@ public class PedidoVM extends ViewModel {
 		this.representanteOV = new DescriptibleOV();
 		
 		this.pedidoOV= new PedidoOV();
+		
+		this.contactoSeleccionado = new DescriptibleOV();
+		
 		init();
 	}
 	
-	/**
-	 * Abre un help generico
-	 */
+	
+	
+	
+	DescriptibleOV pedidoDescriptible = new DescriptibleOV();
+
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openHelper("pedido", "", this.pedidoOV, "", "Pedidos Disponibles", "Nro Pedido", "Descripción");
+		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Descripción");
 	}
+	
+	/**
+	 * Actualiza los datos recuperados desde el help de pedido.
+	 * Debera setear todas las entidades con el objetivo de mostrar todos los datos previamente salvados.
+	 * @throws JakartaException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 */
+	public void recuperarPedido() throws JakartaException, IllegalAccessException, InvocationTargetException{
+		ContainerOV objetoOV = new ContainerOV();
+		objetoOV.setString1(String.valueOf(this.pedidoDescriptible.getId()));
+		
+		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPedido", objetoOV, PedidoOV.class);
+		
+		this.vendedorOV = Operaciones.recuperarObjetoDescriptible("vendedor",ovRecuperado.getIdVendedor());
+		this.representanteOV = Operaciones.recuperarObjetoDescriptible("representante",ovRecuperado.getIdRepresentante());
+		this.lPreciosOV =  Operaciones.recuperarObjetoDescriptible("listaPrecios",ovRecuperado.getIdListaPrecio());
+		this.clienteOV =  Operaciones.recuperarObjetoDescriptible("clientes",ovRecuperado.getIdCliente());
+		
+		DescriptibleOV sucursal = Operaciones.recuperarObjetoDescriptible("clienteSucursal",ovRecuperado.getIdSucursal());
+		copyProperties(this.sucursalOV, sucursal);
+		
+		actualizarCampoSucursal();
+		
+		
+		this.pedidoOV.setItems(new ArrayList<ItemsOV>());
+		
+		this.items=new ArrayList<ItemsOV>();
+		this.itemsArticulos =new ArrayList<ItemsOV>();
+		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
+		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
+		
+		
+		
+		actualizarContactosReferencia();
+		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
+		
+		
+		DescriptibleOV plantilla;//para asignar la descripcion si el detalle es item o material.
+		//esta bindeado con la plantilla con lo cual debo asignar datos a la plantilla.
+		
+		for (ItemsOV itemsOV : ovRecuperado.getItems()) {
+			
+			itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));
+			itemsOV.setMoneda(completarCombo(this.lMonedas.getList(), itemsOV.getIdMoneda()));
+			
+			
+			switch (itemsOV.getTipoItem()) {
+			case 'I':
+				plantilla = new DescriptibleOV();
+				plantilla.setDescripcion(itemsOV.getDescripcion());
+				itemsOV.setPlantilla(plantilla);
+				this.items.add(itemsOV);
+				break;
+			case 'M':
+				plantilla = new DescriptibleOV();
+				plantilla.setDescripcion(itemsOV.getDescripcion());
+				itemsOV.setPlantilla(plantilla);
+				itemsOV.setProductoOV(Operaciones.recuperarObjetoDescriptible("articulos", itemsOV.getIdProducto()));
+				this.itemsArticulos.add(itemsOV);
+				break;
+			case 'E':
+				this.lDeterminacionesElectricas.add(itemsOV);
+				break;
+			case 'Q':
+				this.lDeterminacionesQuimicas.add(itemsOV);
+				break;
+
+			default:
+				log.warn("El tipo de detalle "+ itemsOV.getId() +" no es correcto.");
+				break;
+			}
+		}
+		
+		//Ejecuta evento para actualizar todas las relaciones
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
 	
 	/**
 	 * Muestra un mensaje solamente
@@ -137,6 +218,8 @@ public class PedidoVM extends ViewModel {
 		for (ItemsOV itemsOV : items) {
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
 			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
+			itemsOV.setTipo(Integer.valueOf(itemsOV.getTipoVenta().getCodigo()));
+			itemsOV.setTipoItem(PedidoDet.CHAR_ITEM);
 			itemsFinal.add(itemsOV);
 		}
 
@@ -144,15 +227,19 @@ public class PedidoVM extends ViewModel {
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
 			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
 			itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
+			itemsOV.setTipo(Integer.valueOf(itemsOV.getTipoVenta().getCodigo()));
+			itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
 			itemsFinal.add(itemsOV);
 		}
 		
 		for (ItemsOV itemsOV : this.lDeterminacionesQuimicas) {
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+			itemsOV.setTipoItem(PedidoDet.CHAR_QUIMICO);
 			itemsFinal.add(itemsOV);
 		}
 
 		for (ItemsOV itemsOV : this.lDeterminacionesElectricas) {
+			itemsOV.setTipoItem(PedidoDet.CHAR_ELECTRICO);
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
 			itemsFinal.add(itemsOV);
 		}
@@ -181,6 +268,9 @@ public class PedidoVM extends ViewModel {
 		this.items=new ArrayList<ItemsOV>();
 		this.items.add(new ItemsOV());
 
+		log.info("Iniciando tipos de venta...");
+		this.tiposVenta=(ListDescriptibleOV) Operaciones.ejecutar("TraerTiposDeVenta", ListDescriptibleOV.class);
+		
 		log.info("Inicializando items para articulos...");
 		this.itemsArticulos=new ArrayList<ItemsOV>();
 		this.itemsArticulos.add(new ItemsOV());
@@ -224,7 +314,7 @@ public class PedidoVM extends ViewModel {
 	}
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV"})
+	@NotifyChange({"contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
@@ -240,6 +330,10 @@ public class PedidoVM extends ViewModel {
 		String text= this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
 		this.sucursalOV.setDescripcionCompleta(text);
 		
+		actualizarContactosReferencia();
+	}
+
+	private void actualizarContactosReferencia() {
 		/*
 		 * Actualiza los contactos de referencia
 		 */
@@ -259,13 +353,6 @@ public class PedidoVM extends ViewModel {
 		this.contactoSeleccionado=new DescriptibleOV();
 	}
 
-	public ListaPrecioOV getlPreciosOV() {
-		return lPreciosOV;
-	}
-
-	public void setlPreciosOV(ListaPrecioOV lPreciosOV) {
-		this.lPreciosOV = lPreciosOV;
-	}
 
 	public ListNotasOV getlNotas() {
 		return lNotas;
@@ -306,6 +393,14 @@ public class PedidoVM extends ViewModel {
 	public void setlDeterminacionesElectricas(
 			List<ItemsOV> lDeterminacionesElectricas) {
 		this.lDeterminacionesElectricas = lDeterminacionesElectricas;
+	}
+
+	public DescriptibleOV getlPreciosOV() {
+		return lPreciosOV;
+	}
+
+	public void setlPreciosOV(DescriptibleOV lPreciosOV) {
+		this.lPreciosOV = lPreciosOV;
 	}
 
 }

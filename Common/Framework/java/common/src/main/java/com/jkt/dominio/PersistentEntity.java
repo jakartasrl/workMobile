@@ -18,7 +18,7 @@ abstract public class PersistentEntity implements Serializable{
 	private long id;
 	private Date creationDate;
 	private Date modificationDate;
-	private boolean activo;
+	private boolean activo=true;
 	private int version;
 
 	

@@ -10,6 +10,10 @@ import org.zkoss.zk.ui.Executions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jkt.excepcion.JakartaException;
+import com.jkt.ov.ContainerOV;
+import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.ListDescriptibleOV;
 
 public class Operaciones {
 
@@ -78,7 +82,7 @@ public class Operaciones {
 	public static void ejecutar(String operacion, Object objetoOV) {
 		ejecutar(operacion, objetoOV, null);
 	}
-
+	
 	public static Object ejecutar(String operacion, Class<?> clazz) {
 		return ejecutar(operacion, null, clazz);
 	}
@@ -86,4 +90,27 @@ public class Operaciones {
 	public static void ejecutar(String operacion) {
 		ejecutar(operacion, null, null);
 	}
+
+	/**
+	 * Helper method for retrieve one, only one entity using his id and entity name.
+	 * 
+	 * @param entidad Entity name, see clases.xml 
+	 * @param id identifier of entity
+	 * @return A {@link DescriptibleOV} entity
+	 * @throws JakartaException
+	 */
+	public static DescriptibleOV recuperarObjetoDescriptible(String entidad, Long id) throws JakartaException {
+		ContainerOV containerOV = new ContainerOV();
+		
+		containerOV.setString1(entidad);
+		containerOV.setString2(String.valueOf(id));
+		
+		ListDescriptibleOV list = (ListDescriptibleOV) ejecutar("Traer", containerOV, ListDescriptibleOV.class);
+		if (list.isEmpty()) {
+			throw new JakartaException("Se esperaba un elemento unico en la consulta de "+entidad.toLowerCase());
+		}
+		
+		return (DescriptibleOV) list.getList().get(0);
+	}
+	
 }

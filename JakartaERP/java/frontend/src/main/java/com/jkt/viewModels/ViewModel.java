@@ -3,6 +3,7 @@ package com.jkt.viewModels;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -47,6 +48,10 @@ public abstract class ViewModel {
 
 	@Command
 	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") Textbox campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
+		
+		if (campo.getValue().isEmpty()) {
+			return;
+		}
 		
 		/*
 		 * Campos de entrada
@@ -178,5 +183,23 @@ public abstract class ViewModel {
 	 * @return String que debe ser igual a la annotation declarada en el metodo actualizar.
 	 */
 	protected abstract String retrieveMethod();
+	
+	/**
+	 * Dada una lista de elementos descriptibles y un id, se retornar el elemento correspondiete.
+	 * 
+	 * @param lista de todos los elementos, generalemten la lista con la que se bindea el componente de .zul
+	 * @param id recuperado desde la base
+	 * @return {@link DescriptibleOV} que se deberá setear en el selectedItem.
+	 */
+	protected DescriptibleOV completarCombo(List lista, Long id){
+		DescriptibleOV elementoActual;
+		for (Object object : lista) {
+			elementoActual = (DescriptibleOV) object;
+			if (elementoActual.getId()==id) {
+				return elementoActual;
+			}
+		}
+		return null;
+	}
 	
 }

@@ -2,16 +2,13 @@ package com.jkt.viewModels;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -19,19 +16,14 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Equipo;
 import com.jkt.ov.CaracteristicaProductoOV;
-import com.jkt.ov.ClienteOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.EquipoCaracteristicaOV;
 import com.jkt.ov.EquipoOV;
-import com.jkt.ov.HeaderHelpGenericoOV;
-import com.jkt.ov.HelperOV;
 import com.jkt.ov.ListCaracteristicaProductoOV;
-import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListMarcaOV;
 import com.jkt.ov.TipoProductoOV;
 import com.jkt.ov.ValoresTablaOV;
-import com.jkt.view.ObjectView;
 
 /**
  * ViewModel de la entidad {@link Equipo} que se encarga de procesar las
@@ -42,7 +34,7 @@ import com.jkt.view.ObjectView;
 public class EquipoVM extends ViewModel implements IBasicOperations{
 	
 	private EquipoOV ov = new EquipoOV();
-	private ClienteOV clienteOV = new ClienteOV();
+	private DescriptibleOV clienteOV = new DescriptibleOV();
 	private TipoProductoOV tipoProductoOV = new TipoProductoOV();
 	private List<CaracteristicaProductoOV> caracteristicas = new ArrayList<CaracteristicaProductoOV>();
 
@@ -122,7 +114,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	
 		this.setCaracteristicas(eq.getCaracteristicas());
 		
-		ClienteOV clienteOV = new ClienteOV();
+		DescriptibleOV clienteOV = new DescriptibleOV();
 		clienteOV.setId(eq.getIdCliente());
 		clienteOV.setCodigo(eq.getCodCliente());
 		clienteOV.setDescripcion(eq.getDescCliente());
@@ -169,14 +161,6 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	public void setTipoProductoOV(TipoProductoOV tipoProductoOV) {
 		this.tipoProductoOV = tipoProductoOV;
-	}
-
-	public ClienteOV getClienteOV() {
-		return clienteOV;
-	}
-
-	public void setClienteOV(ClienteOV clienteOV) {
-		this.clienteOV = clienteOV;
 	}
 
 	public EquipoOV getOv() {
@@ -282,6 +266,14 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	private void levantarExcepcion(Exception e) throws JakartaException{
 		throw new JakartaException("Ocurrio un error al llamar al helper generico");
+	}
+
+	public DescriptibleOV getClienteOV() {
+		return clienteOV;
+	}
+
+	public void setClienteOV(DescriptibleOV clienteOV) {
+		this.clienteOV = clienteOV;
 	}
 	
 }

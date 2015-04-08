@@ -27,10 +27,10 @@
 							<hlayout>
 							
 								<label value="Tipo" />
-								<combobox width="120px;" selectedItem="@bind(each.tipo)">
-									<comboitem label="Service" />
-									<comboitem label="Fabricación" />
-									<comboitem label="Mantenimiento" />
+								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)">
+									<template name="model" var="tVenta">
+										<comboitem label="@bind(tVenta.descripcion)" />
+									</template>
 								</combobox>
 							
 								<label value="Referencia:" />
