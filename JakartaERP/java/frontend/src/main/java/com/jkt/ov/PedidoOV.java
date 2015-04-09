@@ -12,17 +12,18 @@ import com.jkt.view.ObjectView;
 
 /**
  * <p>ObjectView correspondiente a la entidad {@link Pedido}</p>
- * <p>Mapea los atributos que se envian y generar�n o actualizar�n un {@link Pedido}</p>
+ * <p>Mapea los atributos que se envian y generarán o actualizarán un {@link Pedido}</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper=true,of={"nro"})
 public class PedidoOV extends ObjectView {
-	
-	private String letra="l";
-	private String lugarEmision="l";
-	private String nro="10";
+
+	private String nroPresupuesto;
+	private String letra;
+	private String lugarEmision;
+	private String nro;
 	private boolean anulado = false;
 	private Date fecha;
 

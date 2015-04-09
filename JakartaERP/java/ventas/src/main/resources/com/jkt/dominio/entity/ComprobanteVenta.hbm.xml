@@ -80,13 +80,13 @@
 			<list name="notas" cascade="all" table="PEDIDO_NOTAS">
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
+				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota" />
 			</list>
 
 			<list name="documentacion" cascade="all" table="PEDIDO_DOCUMENTACION">
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="DOCUMENTACION_ID" class="com.jkt.pedido.dominio.Documentacion"/>
+				<one-to-many class="com.jkt.pedido.dominio.PedidoDocumentacion" />
 			</list>
 
 			<property name="cargaACargoDeCliente" column="CARGA_A_CARGO_DE_CLIENTE" type="boolean" />

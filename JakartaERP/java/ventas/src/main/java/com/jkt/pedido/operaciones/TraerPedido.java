@@ -57,8 +57,14 @@ public class TraerPedido extends HelperRecuperarDeterminacionesConPrecios {
 		
 		asignarDetalles(pedido);		
 
+		asignarDocs(pedido);		
+
 		notificarObjeto("", pedido);
 
+	}
+
+	private void asignarDocs(Pedido pedido) {
+		
 	}
 
 	Laboratorio laboQuimico, laboElectrico;

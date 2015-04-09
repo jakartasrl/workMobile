@@ -1,7 +1,7 @@
 <zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
 
 	<listbox 
-			model="@load(vm.lNotas.list)" 
+			model="@load(vm.lNotas)" 
 			multiple="true" checkmark="true" 
 			emptyMessage="No existen notas disponibles." mold="paging" pageSize="10"
 			selectedItems="@bind(vm.pedidoOV.notas)"

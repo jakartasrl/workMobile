@@ -58,7 +58,7 @@
 
 								<label value="Articulo : " width="200px" />
 							
-								<textbox id="codigoArticulo" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo='codigoArticulo', ov=each.productoOV )" />
+								<textbox id="articuloItem" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo='articuloItem', ov=each.productoOV )" />
 								<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
 								
 								<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>

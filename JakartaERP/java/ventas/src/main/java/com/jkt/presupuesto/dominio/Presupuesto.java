@@ -65,7 +65,7 @@ public class Presupuesto extends ComprobanteVenta {
 	 * Helper methods.
 	 */
 	/**
-	 * Resuelve cuáles notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
+	 * Resuelve cuï¿½les notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
 	 * 
 	 */
 	public void agregarNota(Nota n){
@@ -166,6 +166,7 @@ public class Presupuesto extends ComprobanteVenta {
 	}
 	
 	public String getDescripcion(){
-		return this.getReferencia();
+		return String.format("%s / %s / %s",this.getVendedor().getApellido(), this.getRepresentante().getDescripcion(), this.getFecha().toString() );
+//		return this.getReferencia();
 	}
 }

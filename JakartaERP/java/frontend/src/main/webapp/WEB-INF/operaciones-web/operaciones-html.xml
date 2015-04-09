@@ -324,8 +324,10 @@
 	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Pedido" inputOV="com.jkt.ov.PedidoOV">
 		
 		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
+			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="nro" metodo="setNro" />
 			<campoEntrada propertyOV="letra" metodo="setLetra" />
+			<campoEntrada propertyOV="fecha" metodo="setFecha" />
 			<campoEntrada propertyOV="referencia" metodo="setReferencia" />
 			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" />
 			<campoEntrada propertyOV="idRepresentante" metodo="setRepresentante" />
@@ -334,11 +336,17 @@
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
 			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
-			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
-			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setCargaACargoDeCliente" />
+			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setDescargaACargoDeCliente" />
+			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setTransporteACargoDeCliente" />
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>
+			</campoEntrada>
+
+			<campoEntrada propertyOV="docs" metodo="setDocumentacion">
+<!-- 				<campoEntrada propertyOV="id" metodo="setId"/> -->
+				<campoEntrada propertyOV="entregado" metodo="setEntregado"/>
+				<campoEntrada propertyOV="idDocumento" metodo="setDocumentacion"/>
 			</campoEntrada>
 			
 			<campoEntrada propertyOV="items" metodo="setDetalles">
@@ -387,6 +395,7 @@
 		<output>
 			<campoSalida value="id" 				target="id" />
 			<campoSalida value="nro" 				target="nro" />
+			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
@@ -394,12 +403,25 @@
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
 			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
 			
+			<campoSalida value="cargaACargoDeCliente" 		target="cargaACargoDeCliente" />
+			<campoSalida value="descargaACargoDeCliente" 	target="descargaACargoDeCliente" />
+			<campoSalida value="transporteACargoDeCliente" 	target="transporteACargoDeCliente" />
+
+			<campoSalida value="docs" target="documentacion">
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="entregado"			target="entregado" />
+				<campoSalida value="idDocumento"		target="documentacion.id" />
+				<campoSalida value="codigo"				target="documentacion.codigo" />
+				<campoSalida value="descripcion"		target="documentacion.descripcion" />
+			</campoSalida>
+			
 			<campoSalida value="notas"					target="notasTransientes" >
 				<campoSalida value="id"					target="id" />
 				<campoSalida value="codigo"				target="codigo" />
 				<campoSalida value="descripcion"		target="descripcion" />
 				<campoSalida value="adicional"			target="adicional" />
 				<campoSalida value="codigoActividad"	target="actividad.codigo" />
+				<campoSalida value="activo"				target="incluida" />
 			</campoSalida>
 
 			<campoSalida value="items"					target="detalles" >

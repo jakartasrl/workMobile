@@ -1,5 +1,7 @@
 package com.jkt.pedido.dominio;
 
+import lombok.Data;
+
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -7,29 +9,11 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class PedidoDocumentacion extends PersistentEntity {
 
 	private Pedido pedido;
 	private Documentacion documentacion;
-	private Boolean entregado = Boolean.FALSE;
+	private boolean entregado = Boolean.FALSE;
 	
-	public Pedido getPedido() {
-		return pedido;
-	}
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-	public Documentacion getDocumentacion() {
-		return documentacion;
-	}
-	public void setDocumentacion(Documentacion documentacion) {
-		this.documentacion = documentacion;
-	}
-	public Boolean getEntregado() {
-		return entregado;
-	}
-	public void setEntregado(Boolean entregado) {
-		this.entregado = entregado;
-	}
-
 }

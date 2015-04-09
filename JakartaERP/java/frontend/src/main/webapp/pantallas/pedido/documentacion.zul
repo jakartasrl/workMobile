@@ -1,7 +1,7 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
 		<listbox 
-			model="@load(vm.lDocumentacion.list)" 
+			model="@bind(vm.lDocumentacion)" 
 			multiple="true" checkmark="true" 
 			emptyMessage="No existen documentación disponible." mold="paging" pageSize="10"
 			selectedItems="@bind(vm.docEntregados)"

@@ -37,7 +37,7 @@ public class Pedido extends ComprobanteVenta {
 	public void agregarDocumentacion(PedidoDocumentacion documento){
 		
 		if (documento.getDocumentacion()==null) {
-			log.warn("La relaci�n de pedido-documentaci�n debe estar asociado a un documento. No se gener� dicha relaci�n por que no se relaciono ning�n documento.");
+			log.warn("La relación de pedido-documentación debe estar asociado a un documento. No se generó dicha relación por que no se relaciono ningún documento.");
 			return;
 		}
 		

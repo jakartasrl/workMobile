@@ -261,7 +261,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	public void nuevo() {
 		//borrar topdos los ovs, asignando una nueva isntancia... ov= new ovm
 		this.ov = new EquipoOV();
-		this.clienteOV = new ClienteOV();
+		this.clienteOV = new DescriptibleOV();
 		this.tipoProductoOV = new TipoProductoOV();
 		this.caracteristicas = new ArrayList<CaracteristicaProductoOV>();
 		this.caracteristicaProductoOV = new CaracteristicaProductoOV();
