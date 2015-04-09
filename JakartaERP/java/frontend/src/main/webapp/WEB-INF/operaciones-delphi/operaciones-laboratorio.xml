@@ -86,7 +86,7 @@
 		</input>
 
 		<forms>
-			<form name="TLaboratorio"></form>
+			<form name="TLaboratorio" />
 		</forms>
 
 	</operacion>
@@ -104,7 +104,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 
 		<forms>
-			<form name="TLaboratorio"></form>
+			<form name="TLaboratorio" />
 		</forms>
 	</operacion>
 
@@ -119,7 +119,7 @@
 		</input>
 
 		<forms>
-			<form name="TLaboratorio"></form>
+			<form name="TLaboratorio" />
 		</forms>
 	</operacion>
 
@@ -135,7 +135,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 
 		<forms>
-			<form name="TLaboratorio"></form>
+			<form name="TLaboratorio" />
 		</forms>
 	</operacion>
 
@@ -172,7 +172,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 
 		<forms>
-			<form name="TLaboratorio"></form>
+			<form name="TLaboratorio" />
 		</forms>
 	</operacion>
 
@@ -193,7 +193,7 @@
 		</input>
 
 		<forms>
-			<form name="TAnalisis"></form>
+			<form name="TAnalisis" />
 		</forms>
 
 	</operacion>
@@ -225,7 +225,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 
 		<forms>
-			<form name="TEmpresa"></form>
+			<form name="TEmpresa" />
 		</forms>
 
 	</operacion>
@@ -286,7 +286,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer" />
 
 		<forms>
-			<form name="TEmpresa"></form>
+			<form name="TEmpresa" />
 		</forms>
 
 	</operacion>
@@ -330,7 +330,7 @@
 		</input>
 
 		<forms>
-			<form name="TAnalisis"></form>
+			<form name="TAnalisis" />
 		</forms>
 
 	</operacion>
@@ -345,7 +345,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer"></transformer>
 		
 		<forms>
-			<form name="TUsuario"></form>
+			<form name="TUsuario" />
 		</forms>
 	
 	</operacion>
@@ -395,7 +395,7 @@
 		</input>
 
 		<forms>
-			<form name="FormEquipo"></form>
+			<form name="FormEquipo" />
 		</forms>
 
 	</operacion>
@@ -451,7 +451,7 @@
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 		
 		<forms>
-			<form name="FormEquipo"></form>
+			<form name="FormEquipo" />
 		</forms>
 	
 	</operacion>
@@ -470,7 +470,7 @@
 		</input>
 
 		<forms>
-			<form name="FormDiagnostico"></form>
+			<form name="FormDiagnostico" />
 		</forms>
 
 	</operacion>
@@ -487,7 +487,7 @@
 		<transformer clase="com.jkt.transformers.SimpleTransformer" />
 
 		<forms>
-			<form name="FormLaboratorio"></form>
+			<form name="FormLaboratorio" />
 		</forms>
 	</operacion>
 	
@@ -524,7 +524,7 @@
 		</input>
 
 		<forms>
-			<form name="FormProtocolo"></form>
+			<form name="FormProtocolo" />
 		</forms>
 
 	</operacion>
@@ -565,7 +565,7 @@
 		</input>
 
 		<forms>
-			<form name="FormProtocolo"></form>
+			<form name="FormProtocolo" />
 		</forms>
 
 	</operacion>
@@ -585,7 +585,7 @@
 		</input>
 
 		<forms>
-			<form name="FormProtocolo"></form>
+			<form name="FormProtocolo" />
 		</forms>
 
 	</operacion>
@@ -593,7 +593,7 @@
 	<!-- INSTANCIAR REPORTE -->
 	<operacion name="CrearReporte" clase="com.jkt.laboratorio.operaciones.CrearDoc">
 		<forms>
-			<form name="FormProtocolo"></form>
+			<form name="FormProtocolo" />
 		</forms>
 	</operacion>
 

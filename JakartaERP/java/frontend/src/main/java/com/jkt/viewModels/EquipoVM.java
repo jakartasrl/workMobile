@@ -16,7 +16,6 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Equipo;
 import com.jkt.ov.CaracteristicaProductoOV;
-import com.jkt.ov.ClienteOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.EquipoCaracteristicaOV;
@@ -35,7 +34,7 @@ import com.jkt.ov.ValoresTablaOV;
 public class EquipoVM extends ViewModel implements IBasicOperations{
 	
 	private EquipoOV ov = new EquipoOV();
-	private ClienteOV clienteOV = new ClienteOV();
+	private DescriptibleOV clienteOV = new DescriptibleOV();
 	private TipoProductoOV tipoProductoOV = new TipoProductoOV();
 	private List<CaracteristicaProductoOV> caracteristicas = new ArrayList<CaracteristicaProductoOV>();
 
@@ -117,7 +116,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	
 		this.setCaracteristicas(eq.getCaracteristicas());
 		
-		ClienteOV clienteOV = new ClienteOV();
+		DescriptibleOV clienteOV = new DescriptibleOV();
 		clienteOV.setId(eq.getIdCliente());
 		clienteOV.setCodigo(eq.getCodCliente());
 		clienteOV.setDescripcion(eq.getDescCliente());
@@ -168,14 +167,6 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	public void setTipoProductoOV(TipoProductoOV tipoProductoOV) {
 		this.tipoProductoOV = tipoProductoOV;
-	}
-
-	public ClienteOV getClienteOV() {
-		return clienteOV;
-	}
-
-	public void setClienteOV(ClienteOV clienteOV) {
-		this.clienteOV = clienteOV;
 	}
 
 	public EquipoOV getOv() {
@@ -270,7 +261,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	public void nuevo() {
 		//borrar topdos los ovs, asignando una nueva isntancia... ov= new ovm
 		this.ov = new EquipoOV();
-		this.clienteOV = new ClienteOV();
+		this.clienteOV = new DescriptibleOV();
 		this.tipoProductoOV = new TipoProductoOV();
 		this.caracteristicas = new ArrayList<CaracteristicaProductoOV>();
 		this.caracteristicaProductoOV = new CaracteristicaProductoOV();
@@ -297,6 +288,14 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	private void levantarExcepcion(Exception e) throws JakartaException{
 		throw new JakartaException("Ocurrio un error al llamar al helper generico");
+	}
+
+	public DescriptibleOV getClienteOV() {
+		return clienteOV;
+	}
+
+	public void setClienteOV(DescriptibleOV clienteOV) {
+		this.clienteOV = clienteOV;
 	}
 	
 }

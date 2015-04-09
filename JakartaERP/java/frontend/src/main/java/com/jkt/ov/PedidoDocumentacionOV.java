@@ -5,7 +5,7 @@ import lombok.Data;
 import com.jkt.view.ObjectView;
 
 @Data
-public class PedidoDocumentacionOV extends ObjectView {
+public class PedidoDocumentacionOV extends DescriptibleOV {
 
 	
 	private Boolean entregado=Boolean.FALSE;

@@ -15,7 +15,7 @@ import com.jkt.view.ListOV;
  */
 public class ListClienteOV extends ListOV {
 
-	private List<ClienteOV> list=new ArrayList<ClienteOV>();
+	private List<DescriptibleOV> list=new ArrayList<DescriptibleOV>();
 	
 	@Override
 	public List getList() {

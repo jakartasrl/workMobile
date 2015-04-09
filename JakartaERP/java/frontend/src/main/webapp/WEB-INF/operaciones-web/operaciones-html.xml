@@ -47,6 +47,28 @@
 ]>
 
 <entity>
+	
+	
+	<operacion name="Traer" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDescriptibleOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="activo" value="activo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+
 
 	<operacion name="saveLabo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Laboratorio" inputOV="com.jkt.ov.LaboratorioOV">
 	
@@ -123,7 +145,6 @@
 				<campoEntrada propertyOV="valorString" metodo="setValorString" />
 				<campoEntrada propertyOV="valorDouble" metodo="setValorDoble" />
 				<campoEntrada propertyOV="idValor" metodo="setValorTabla" />
-				
 			</campoEntrada>
 		</input>
 
@@ -247,7 +268,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 
 	</operacion>
-
+	
 	<operacion name="TraerDeterminacionConPrecio" clase="com.jkt.presupuesto.operaciones.TraerDeterminacionesConPrecios" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListItemsOV">
 
 		<input>
@@ -259,7 +280,7 @@
 
 			<campoSalida value="idDeterminacion" target="determinacion.id" />
 			<campoSalida value="codigo" target="determinacion.codigo" />
-			<campoSalida value="descripcion" target="determinacion.descripcion" />
+			<campoSalida value="descripcionDeterminacion" target="determinacion.descripcion" />
 
 			<campoSalida value="codAnalisis" target="determinacion.codigoAnalisis" />
 			<campoSalida value="desAnalisis" target="determinacion.descripcionAnalisis" />
@@ -303,20 +324,29 @@
 	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Pedido" inputOV="com.jkt.ov.PedidoOV">
 		
 		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
+			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="nro" metodo="setNro" />
 			<campoEntrada propertyOV="letra" metodo="setLetra" />
+			<campoEntrada propertyOV="fecha" metodo="setFecha" />
 			<campoEntrada propertyOV="referencia" metodo="setReferencia" />
 			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" />
 			<campoEntrada propertyOV="idRepresentante" metodo="setRepresentante" />
+			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
 			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
-			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
-			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setCargaACargoDeCliente" />
+			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setDescargaACargoDeCliente" />
+			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setTransporteACargoDeCliente" />
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>
+			</campoEntrada>
+
+			<campoEntrada propertyOV="docs" metodo="setDocumentacion">
+<!-- 				<campoEntrada propertyOV="id" metodo="setId"/> -->
+				<campoEntrada propertyOV="entregado" metodo="setEntregado"/>
+				<campoEntrada propertyOV="idDocumento" metodo="setDocumentacion"/>
 			</campoEntrada>
 			
 			<campoEntrada propertyOV="items" metodo="setDetalles">
@@ -325,10 +355,13 @@
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
 				<campoEntrada propertyOV="cantidad" metodo="setCantidad"/>
 				<campoEntrada propertyOV="importe" metodo="setPrecio"/>
+				<campoEntrada propertyOV="tipo" metodo="setTipoVenta"/>
 				<campoEntrada propertyOV="referencia" metodo="setReferencia"/>
 				
 				<campoEntrada propertyOV="idDeterminacion" metodo="setDeterminacion"/>
 				<campoEntrada propertyOV="idProducto" metodo="setProducto"/>
+
+				<campoEntrada propertyOV="tipoItem" metodo="setTipoDetalle"/>
 				
 			</campoEntrada>
 
@@ -342,6 +375,79 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	
+	<operacion name="TraerTiposDeVenta" clase="com.jkt.cotizador.operaciones.TraerTiposDeVentaWeb" outputOV="com.jkt.ov.ListDescriptibleOV">
+		<output>
+			<campoSalida target="codigo" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+	
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerPedido" clase="com.jkt.pedido.operaciones.TraerPedido" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PedidoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+		
+		<output>
+			<campoSalida value="id" 				target="id" />
+			<campoSalida value="nro" 				target="nro" />
+			<campoSalida value="fecha" 				target="fecha" />
+			<campoSalida value="idRepresentante" 	target="representante.id" />
+			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+			<campoSalida value="idVendedor" 		target="vendedor.id" />
+			<campoSalida value="idCliente"	 		target="cliente.id" />
+			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
+			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
+			
+			<campoSalida value="cargaACargoDeCliente" 		target="cargaACargoDeCliente" />
+			<campoSalida value="descargaACargoDeCliente" 	target="descargaACargoDeCliente" />
+			<campoSalida value="transporteACargoDeCliente" 	target="transporteACargoDeCliente" />
+
+			<campoSalida value="docs" target="documentacion">
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="entregado"			target="entregado" />
+				<campoSalida value="idDocumento"		target="documentacion.id" />
+				<campoSalida value="codigo"				target="documentacion.codigo" />
+				<campoSalida value="descripcion"		target="documentacion.descripcion" />
+			</campoSalida>
+			
+			<campoSalida value="notas"					target="notasTransientes" >
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="codigo"				target="codigo" />
+				<campoSalida value="descripcion"		target="descripcion" />
+				<campoSalida value="adicional"			target="adicional" />
+				<campoSalida value="codigoActividad"	target="actividad.codigo" />
+				<campoSalida value="activo"				target="incluida" />
+			</campoSalida>
+
+			<campoSalida value="items"					target="detalles" >
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="cantidad"			target="cantidad" />
+				<campoSalida value="importe"			target="precio" />
+				<campoSalida value="referencia"			target="referencia" />
+				<campoSalida value="tipoItem"			target="tipoDetalle" />
+				<campoSalida value="tipo"				target="tipoVenta" />
+				
+				<campoSalida value="idMoneda"			target="moneda.id" />
+				<campoSalida value="idProducto"			target="producto.id" />
+				
+				<campoSalida value="descripcion"		target="descripcion" />
+
+				<campoSalida value="idDeterminacion"	target="determinacion.id" />
+				<campoSalida value="codigo"				target="determinacion.codigo" />
+				<campoSalida value="descripcionDeterminacion"		target="determinacion.descripcion" />
+				
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
 	<operacion name="TraerDeterminacion" clase="com.jkt.laboratorio.operaciones.TraerDeterminacion" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.DeterminacionOV">
 	
 		<input>
@@ -372,5 +478,5 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
-	
+
 </entity>

@@ -14,6 +14,10 @@ import com.jkt.presupuesto.dominio.Presupuesto;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+/**
+ * @author ssuarez
+ *
+ */
 public class Pedido extends ComprobanteVenta {
 
 	private ListaPrecios listaPrecios;
@@ -33,7 +37,7 @@ public class Pedido extends ComprobanteVenta {
 	public void agregarDocumentacion(PedidoDocumentacion documento){
 		
 		if (documento.getDocumentacion()==null) {
-			log.warn("La relaci�n de pedido-documentaci�n debe estar asociado a un documento. No se gener� dicha relaci�n por que no se relaciono ning�n documento.");
+			log.warn("La relación de pedido-documentación debe estar asociado a un documento. No se generó dicha relación por que no se relaciono ningún documento.");
 			return;
 		}
 		
@@ -185,6 +189,28 @@ public class Pedido extends ComprobanteVenta {
 	
 	public String getDescripcion(){
 		return this.getReferencia();
+	}
+	
+	
+	/*
+	 * Solamente sirve para mostrar datos en la pantalla.
+	 * No se deberia tocar la variable notas, ya que al finalizar la operación se ejecuta un commit, 
+	 * de este modo, si se modifica la lista de notas, se modifica en la base de mismo modo.
+	 */
+	private List<Nota> notasTransientes=new ArrayList<Nota>();
+
+	public List<Nota> getNotasTransientes() {
+		return notasTransientes;
+	}
+
+	public void setNotasTransientes(List<Nota> notasTransientes) {
+		this.notasTransientes = notasTransientes;
+	}
+	
+	public void agregarNotaTransiente(Nota n){
+		if (!notasTransientes.contains(n)) {
+			this.notasTransientes.add(n);
+		}
 	}
 	
 }

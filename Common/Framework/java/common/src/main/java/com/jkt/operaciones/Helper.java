@@ -28,8 +28,11 @@ public class Helper extends Operation {
 		
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
 
-		
-		notificarObjeto("resultado", list);
+		if (tipoCliente.equals(CLIENTE_DELPHI)) {
+			notificarObjetos("resultado", list);
+		}else{
+			notificarObjeto("resultado", list);
+		}
 		
 //		for (PersistentEntity persistentEntity : list) {
 //			notificarObjeto("", persistentEntity);

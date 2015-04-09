@@ -22,7 +22,7 @@
 				<row>
 					<label value="@bind(each.codAnalisis)" />
 					<label value="@bind(each.codigo)" />
-					<label value="@bind(each.descripcion)" />
+					<label value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
 						<intbox value="0" />

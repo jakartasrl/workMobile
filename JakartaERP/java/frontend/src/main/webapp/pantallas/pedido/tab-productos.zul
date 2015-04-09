@@ -27,10 +27,10 @@
 							<hlayout>
 							
 								<label value="Tipo" />
-								<combobox width="120px;" selectedItem="@bind(each.tipo)">
-									<comboitem label="Service" />
-									<comboitem label="Fabricación" />
-									<comboitem label="Mantenimiento" />
+								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)">
+									<template name="model" var="tVenta">
+										<comboitem label="@bind(tVenta.descripcion)" />
+									</template>
 								</combobox>
 							
 								<label value="Referencia:" />
@@ -58,7 +58,7 @@
 
 								<label value="Articulo : " width="200px" />
 							
-								<textbox id="codigoArticulo" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo='codigoArticulo', ov=each.productoOV )" />
+								<textbox id="articuloItem" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo='articuloItem', ov=each.productoOV )" />
 								<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
 								
 								<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>
