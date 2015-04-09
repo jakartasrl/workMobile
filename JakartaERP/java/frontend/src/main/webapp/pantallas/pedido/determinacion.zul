@@ -1,0 +1,107 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<vlayout>
+		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinacion" border="normal" height="auto" width="auto">
+		
+			<panelchildren>	
+			
+				<grid width="100%">
+				
+					<columns>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+						<column></column>
+					</columns>
+					
+					<rows>
+					
+						<row>
+							<label value="Codigo"/>
+							<textbox value="@bind(vm.determinacion.codigo)" />
+							<cell colspan="6">
+								<textbox value="@bind(vm.determinacion.descripcion)" />
+							</cell>							
+						</row>
+						<row>
+							<label value="Tipo Resultado"/>
+							<combobox>
+								<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
+								<comboitem label="Falso" value="@bind(false)"></comboitem>										
+							</combobox>
+							<label value="Calcula Resultado"/>
+							<checkbox id="l1" onCheck="doChecked()" />
+							<label value="Formato"/>
+							<combobox>
+								<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
+								<comboitem label="Falso" value="@bind(false)"></comboitem>										
+							</combobox>
+							<label value="Leyenda Valor Cero"/>
+							<textbox value="" />
+						</row>
+					</rows>
+					
+				</grid>		
+				
+			</panelchildren>
+		</panel>
+	</vlayout>
+	
+	<vlayout>
+
+		<tabbox mold="accordion">
+			<tabs>
+				<tab label="Metodos" />
+				<tab label="Variables" />
+			</tabs>
+			<tabpanels>
+				<tabpanel>
+				
+					<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarMetodo')" tooltiptext="Agregar un nuevo metodo." />
+
+					<!-- Valores Metodos -->
+					<listbox model="@bind(vm.determinacion.metodos)">
+						<template name="model">
+							<listitem>
+								<listcell>
+									<label value="@bind(each.id)" />
+									<label value="@bind(each.metodo)" />
+								</listcell>
+								<listcell>
+
+								<!-- Valores Esperados -->
+								<listbox model="@bind(each.metodos.valoresEsperados)">
+									<template name="model" var="valor">
+										<listitem>
+											<listcell>
+												<label value="@bind(valor.id)" />
+											</listcell>
+											<listcell>
+												<label value="@bind(valor.valorDesde)" />
+											</listcell>
+											<listcell>
+												<label value="@bind(valor.valorHasta)" />
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+								
+
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+					
+				</tabpanel>
+				<tabpanel>
+
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+	</vlayout>
+
+</zk>

@@ -6,39 +6,33 @@ import java.util.List;
 import com.jkt.dominio.PersistentEntity;
 
 public class Metodo extends PersistentEntity {
+	
 	private Determinacion 		determinacion;
 	private String        		metodo;
 	private Expresion           expresion;
-	
-	
+
+	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
 	
 	public Expresion getExpresion() {
 		return expresion;
 	}
 
-
 	public void setExpresion(Expresion expresion) {
 		this.expresion = expresion;
-	//	expresion.setMetodo(this);
+		expresion.setMetodo(this);
 	}
-
-	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
-	
 
 	public Determinacion getDeterminacion() {
 		return determinacion;
 	}
 
-
 	public void setDeterminacion(Determinacion determinacion) {
 		this.determinacion = determinacion;
 	}
 
-
 	public String getMetodo() {
 		return metodo;
 	}
-
 
 	public void setMetodo(String metodo) {
 		this.metodo = metodo;
@@ -49,7 +43,6 @@ public class Metodo extends PersistentEntity {
 		return expresion.getExpresion();
 	}
 
-
 	public void setExpresionResultado(String aValue) {
 		expresion = getExpresion();
 		if (expresion == null){
@@ -59,15 +52,12 @@ public class Metodo extends PersistentEntity {
 		expresion.setMetodo(this);
 	}
 
-
-
 	public void addValorEsperado(ValorEsperado aValue) {
 		if (!valoresEsperados.contains(aValue)) {
 			valoresEsperados.add(aValue);
 			aValue.setMetodo(this);
 		}
 	}
-
 
 	public List<ValorEsperado> getValoresEsperados() {
 		return valoresEsperados;
@@ -81,9 +71,5 @@ public class Metodo extends PersistentEntity {
 	public boolean sinExpresion() {
 		return getExpresion() == null || getExpresion().getExpresion().isEmpty();
 	}
-
-	
-	
-
 
 }

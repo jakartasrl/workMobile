@@ -1,5 +1,8 @@
 package com.jkt.ov;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 import com.jkt.laboratorio.dominio.Determinacion;
@@ -23,4 +26,11 @@ public class DeterminacionOV extends ObjectView {
 	private double importe;
 	private DescriptibleOV moneda;
 	
+	private List<MetodoOV> metodos = new ArrayList<MetodoOV>();
+	
+	private String tipoResultado;
+	
 }
+
+
+

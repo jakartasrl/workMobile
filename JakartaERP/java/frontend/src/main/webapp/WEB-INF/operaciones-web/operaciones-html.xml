@@ -341,5 +341,36 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="TraerDeterminacion" clase="com.jkt.laboratorio.operaciones.TraerDeterminacion" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.DeterminacionOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+			<campoEntrada propertyOV="string2" name="DETERMINACION"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="id" 			value="id" />
+			<campoSalida target="codigo" 		value="codigo" />	
+			<campoSalida target="descripcion" 	value="descripcion" />
+			
+			<campoSalida target="metodos" 			value="metodos">
+			
+				<campoSalida target="id" 			value="id"/>
+				<campoSalida target="metodo" 		value="metodo"/>
+				
+<!-- 				<campoSalida target="valoresEsperados" 	value="valoresEsperados"> -->
+<!-- 					<campoSalida target="id"				value="id"/> -->
+<!-- 					<campoSalida target="valorDesde" 		value="valorDesde"/> -->
+<!-- 					<campoSalida target="valorHasta" 		value="valorHasta"/> -->
+<!-- 				</campoSalida>				 -->
+				
+			</campoSalida>
+						
+		</output>
 
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 </entity>

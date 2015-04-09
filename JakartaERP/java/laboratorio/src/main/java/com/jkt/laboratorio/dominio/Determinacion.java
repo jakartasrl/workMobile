@@ -45,7 +45,7 @@ public class Determinacion extends Descriptible implements IDetalle {
 	public void addVariable(Variable aValue) {
 		if (!variables.contains(aValue)) {
 			variables.add(aValue);
-			aValue.setDeterminacion(this);
+//			aValue.setDeterminacion(this);
 		}
 	}
 
