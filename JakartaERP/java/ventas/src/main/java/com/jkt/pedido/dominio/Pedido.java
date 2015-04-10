@@ -188,7 +188,8 @@ public class Pedido extends ComprobanteVenta {
 	}
 	
 	public String getDescripcion(){
-		return this.getReferencia();
+//		return this.getReferencia();
+		return String.format("%s / %s",this.getClienteSucursal().getDescripcionCompleta(),this.getFecha().toString() );
 	}
 	
 	

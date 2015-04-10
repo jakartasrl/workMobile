@@ -22,7 +22,7 @@
 			    		
 			    		<hlayout >
 							<textbox id="codigoPresupuesto" sclass="campoCodigo" value="@bind(vm.pedidoOV.nroPresupuesto)" readonly="false" />
-							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto', titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto', post='cargarPresupuesto',ov=vm.presupuestoDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
 			    		</hlayout>
 
 						<label value="Nro. de Pedido : " />
@@ -36,7 +36,7 @@
 			    	<row sclass="fila-maestro">
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+							<textbox id="codigoCliente" sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=codigoCliente, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	

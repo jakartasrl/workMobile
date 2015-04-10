@@ -19,7 +19,7 @@ import com.jkt.varios.dominio.Provincia;
 
 /**
  * <p>Representa los lugares en donde el cliente recibe las compras que ha realizado</p>
- * <p>Se utilizará para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
+ * <p>Se utilizarÃ¡ para definir en el pedido el  lugar en donde se debe entregar la mercaderia</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */

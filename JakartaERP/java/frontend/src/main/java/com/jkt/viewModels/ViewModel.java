@@ -36,7 +36,7 @@ public abstract class ViewModel {
 
 	protected static final Logger log = Logger.getLogger(ViewModel.class);
 
-	private String titulo="-";
+	private String titulo="";
 	
 	public String getTitulo() {
 		return titulo;

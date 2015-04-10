@@ -169,4 +169,27 @@ public class Presupuesto extends ComprobanteVenta {
 		return String.format("%s / %s / %s",this.getVendedor().getApellido(), this.getRepresentante().getDescripcion(), this.getFecha().toString() );
 //		return this.getReferencia();
 	}
+	
+	
+	/*
+	 * Solamente sirve para mostrar datos en la pantalla.
+	 * No se deberia tocar la variable notas, ya que al finalizar la operación se ejecuta un commit, 
+	 * de este modo, si se modifica la lista de notas, se modifica en la base de mismo modo.
+	 */
+	private List<Nota> notasTransientes=new ArrayList<Nota>();
+
+	public List<Nota> getNotasTransientes() {
+		return notasTransientes;
+	}
+
+	public void setNotasTransientes(List<Nota> notasTransientes) {
+		this.notasTransientes = notasTransientes;
+	}
+	
+	public void agregarNotaTransiente(Nota n){
+		if (!notasTransientes.contains(n)) {
+			this.notasTransientes.add(n);
+		}
+	}
+	
 }

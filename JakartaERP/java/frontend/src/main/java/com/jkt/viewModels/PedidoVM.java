@@ -3,12 +3,13 @@
  */
 package com.jkt.viewModels;
 
+import static org.apache.commons.beanutils.BeanUtils.copyProperties;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
-import static org.apache.commons.beanutils.BeanUtils.*;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
@@ -42,7 +43,9 @@ import com.jkt.pedido.dominio.PedidoDet;
 public class PedidoVM extends ViewModel {
 
 	private String titulo="Ingreso de Pedido";
+	
 	private DescriptibleOV clienteOV=new DescriptibleOV();
+	
 	private SucursalOV sucursalOV=new SucursalOV();
 	private DescriptibleOV lPreciosOV=new DescriptibleOV();
 	
@@ -74,9 +77,26 @@ public class PedidoVM extends ViewModel {
 	 */
 	@Command
 	public void guardar(){
+		
+//		if(!validarOV()){
+//			return;
+//		}
+		
 		completarOV();
 		Operaciones.ejecutar("GuardarPedido", pedidoOV);
 		Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
+	}
+
+	private boolean validarOV() {
+		if (clienteOV==null || clienteOV.getCodigo()==null || clienteOV.getCodigo().isEmpty()) {
+			Messagebox.show("Complete el cliente.");
+			return false;
+		}
+		if (sucursalOV==null || sucursalOV.getCodigo()==null || sucursalOV.getCodigo().isEmpty()) {
+			Messagebox.show("Complete la sucursal.");
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -112,29 +132,54 @@ public class PedidoVM extends ViewModel {
 	}
 	
 	
-	
-	
 	DescriptibleOV pedidoDescriptible = new DescriptibleOV();
+	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
 
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Descripción");
+		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente Sucursal / Fecha");
 	}
+	
+	
+	/**
+	 * A partir de un presupuesto, completa datos para el nuevo pedido.
+	 */
+	public void cargarPresupuesto() throws IllegalAccessException, InvocationTargetException, JakartaException{
+		ContainerOV objetoOV = new ContainerOV();
+		objetoOV.setString1(String.valueOf(this.presupuestoDescriptible.getId()));
+		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPresupuesto", objetoOV, PedidoOV.class);
+		
+		cargarDesdeOV(ovRecuperado);
+		
+		this.lDocumentacion = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class)).getList();
+		this.docEntregados=new ArrayList<DescriptibleOV>();
+		
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
 	
 	/**
 	 * Actualiza los datos recuperados desde el help de pedido.
 	 * Debera setear todas las entidades con el objetivo de mostrar todos los datos previamente salvados.
-	 * @throws JakartaException 
-	 * @throws InvocationTargetException 
-	 * @throws IllegalAccessException 
 	 */
 	public void recuperarPedido() throws JakartaException, IllegalAccessException, InvocationTargetException{
 		ContainerOV objetoOV = new ContainerOV();
 		objetoOV.setString1(String.valueOf(this.pedidoDescriptible.getId()));
 		
 		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPedido", objetoOV, PedidoOV.class);
+
+		cargarDesdeOV(ovRecuperado);
+		actualizarDocs(ovRecuperado);
 		
+		this.pedidoOV.setCargaACargoDeCliente(ovRecuperado.getCargaACargoDeCliente());
+		this.pedidoOV.setTransporteACargoDeCliente(ovRecuperado.getTransporteACargoDeCliente());
+		this.pedidoOV.setDescargaACargoDeCliente(ovRecuperado.getDescargaACargoDeCliente());
 		
+		//Ejecuta evento para actualizar todas las relaciones
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
+	private void cargarDesdeOV(PedidoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException{
 		this.vendedorOV = Operaciones.recuperarObjetoDescriptible("vendedor",ovRecuperado.getIdVendedor());
 		this.representanteOV = Operaciones.recuperarObjetoDescriptible("representante",ovRecuperado.getIdRepresentante());
 		this.lPreciosOV =  Operaciones.recuperarObjetoDescriptible("listaPrecios",ovRecuperado.getIdListaPrecio());
@@ -153,12 +198,8 @@ public class PedidoVM extends ViewModel {
 		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
 		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		
-		this.lDocumentacion=new ArrayList<DescriptibleOV>();
-		this.docEntregados=new ArrayList<DescriptibleOV>();
-		
 		actualizarNotas(ovRecuperado);
-		actualizarDocs(ovRecuperado);
-		
+
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
@@ -201,18 +242,14 @@ public class PedidoVM extends ViewModel {
 		
 		this.pedidoOV.setFecha(ovRecuperado.getFecha());
 		this.pedidoOV.setNro(ovRecuperado.getNro());
-		
-		this.pedidoOV.setCargaACargoDeCliente(ovRecuperado.getCargaACargoDeCliente());
-		this.pedidoOV.setTransporteACargoDeCliente(ovRecuperado.getTransporteACargoDeCliente());
-		this.pedidoOV.setDescargaACargoDeCliente(ovRecuperado.getDescargaACargoDeCliente());
-		
-		//Ejecuta evento para actualizar todas las relaciones
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
 	
 	private void actualizarDocs(PedidoOV ovRecuperado) throws IllegalAccessException, InvocationTargetException {
 
+		this.docEntregados = new ArrayList<DescriptibleOV>();
+		this.lDocumentacion = new ArrayList<DescriptibleOV>();
+		
 		List<PedidoDocumentacionOV> docs = ovRecuperado.getDocs();
 		for (PedidoDocumentacionOV pedidoDocumentacionOV : docs) {
 			DescriptibleOV documento = new DescriptibleOV();
