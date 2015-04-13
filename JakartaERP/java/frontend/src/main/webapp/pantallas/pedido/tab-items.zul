@@ -27,27 +27,27 @@
 							<hlayout>
 							
 								<label value="Tipo" />
-								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)">
+								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)" constraint="no empty">
 									<template name="model" var="tVenta">
 										<comboitem label="@bind(tVenta.descripcion)" />
 									</template>
 								</combobox>
 							
 								<label value="Referencia:" />
-								<textbox width="350px" value="@bind(each.referencia)" />
+								<textbox width="350px" value="@bind(each.referencia)" constraint="no empty"/>
 		
 								<label value="Cantidad:" />
-								<textbox width="40px;" value="@bind(each.cantidad)" />
+								<textbox width="40px;" value="@bind(each.cantidad)" constraint="no empty"/>
 		
 								<label value="Moneda:" />
-								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)">
+								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
 									<template name="model" var="moneda">
 										<comboitem label="@bind(moneda.descripcion)" />
 									</template>
 								</combobox>
 		
 								<label value="Importe:" />
-								<textbox width="50px;" value="@bind(each.importe)" />
+								<textbox width="50px;" value="@bind(each.importe)" constraint="no empty"/>
 							
 								<label value="Importe Total:" />
 								<textbox width="50px;" value="@bind(each.importeTotal)" />
@@ -59,7 +59,7 @@
 								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
 							</hlayout>
 							
-							<textbox style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" readonly="false" />
+							<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" readonly="false" />
 
 					</groupbox>
 

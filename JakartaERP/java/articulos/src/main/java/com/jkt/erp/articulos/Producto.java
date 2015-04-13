@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
 import com.jkt.dominio.Descriptible;
 import com.jkt.varios.dominio.UnidadMedida;
 
@@ -15,6 +17,7 @@ import com.jkt.varios.dominio.UnidadMedida;
  * @author Leonel Suarez - Jakarta SRL
  *
  */
+@Data
 public class Producto extends Descriptible {
 
 	/*
@@ -46,160 +49,6 @@ public class Producto extends Descriptible {
 	private List<ArticuloStock> articulosStock=new ArrayList<ArticuloStock>();
 	private List<ProductoDet> detalles=new ArrayList<ProductoDet>();
 	
-	
-	
-	/*
-	 * Variables de instancia
-	 * **********************************************************************************************
-	 */
-	
-	public List<ArticuloStock> getArticulosStock() {
-		return articulosStock;
-	}
-
-	public List<ProductoDet> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<ProductoDet> detalles) {
-		this.detalles = detalles;
-	}
-
-	public List<ProductoEquivUniMed> getEquivalencias() {
-		return equivalencias;
-	}
-
-	public void setEquivalencias(List<ProductoEquivUniMed> equivalencias) {
-		this.equivalencias = equivalencias;
-	}
-
-	public void setArticulosStock(List<ArticuloStock> articulosStock) {
-		this.articulosStock = articulosStock;
-	}
-
-	public List<ProductoClasificador> getClasificadores() {
-		return clasificadores;
-	}
-
-	public void setClasificadores(List<ProductoClasificador> clasificadores) {
-		this.clasificadores = clasificadores;
-	}
-
-	public String getDescripcionAbrev() {
-		return descripcionAbrev;
-	}
-
-	public void setDescripcionAbrev(String descripcionAbrev) {
-		this.descripcionAbrev = descripcionAbrev;
-	}
-
-	public boolean isComprable() {
-		return comprable;
-	}
-
-	public void setComprable(boolean comprable) {
-		this.comprable = comprable;
-	}
-
-	/*
-	 * TODO ver bien esto!!
-	 */
-	public void setServicio(boolean servicio) {
-//		this.bien = !servicio;
-	}
-	
-	public boolean isVendible() {
-		return vendible;
-	}
-
-	public void setVendible(boolean vendible) {
-		this.vendible = vendible;
-	}
-
-	public boolean isStockeable() {
-		return stockeable;
-	}
-	
-	public boolean isServicio() {
-		return !bien;
-	}
-
-	public void setStockeable(boolean stockeable) {
-		this.stockeable = stockeable;
-	}
-
-	public boolean isProdPropia() {
-		return prodPropia;
-	}
-
-	public void setProdPropia(boolean prodPropia) {
-		this.prodPropia = prodPropia;
-	}
-
-	public boolean isBien() {
-		return bien;
-	}
-
-	public void setBien(boolean bien) {
-		this.bien = bien;
-	}
-
-	public TipoProducto getTipoProducto() {
-		return tipoProducto;
-	}
-
-	public void setTipoProducto(TipoProducto tipoProducto) {
-		this.tipoProducto = tipoProducto;
-	}
-
-	public UnidadMedida getUniMedPrin() {
-		return uniMedPrin;
-	}
-
-	public void setUniMedPrin(UnidadMedida uniMedPrin) {
-		this.uniMedPrin = uniMedPrin;
-	}
-
-	public UnidadMedida getUniMedSec() {
-		return uniMedSec;
-	}
-
-	public void setUniMedSec(UnidadMedida uniMedSec) {
-		this.uniMedSec = uniMedSec;
-	}
-
-	public UnidadMedida getUniMedTerc() {
-		return uniMedTerc;
-	}
-
-	public void setUniMedTerc(UnidadMedida uniMedTerc) {
-		this.uniMedTerc = uniMedTerc;
-	}
-
-	public UnidadMedida getUnidadVenta() {
-		return unidadVenta;
-	}
-
-	public void setUnidadVenta(UnidadMedida unidadVenta) {
-		this.unidadVenta = unidadVenta;
-	}
-
-	public UnidadMedida getUnidadProduccion() {
-		return unidadProduccion;
-	}
-
-	public void setUnidadProduccion(UnidadMedida unidadProduccion) {
-		this.unidadProduccion = unidadProduccion;
-	}
-
-	public UnidadMedida getUnidadCompra() {
-		return unidadCompra;
-	}
-
-	public void setUnidadCompra(UnidadMedida unidadCompra) {
-		this.unidadCompra = unidadCompra;
-	}
-
 	
 	/*
 	 * Helper methods

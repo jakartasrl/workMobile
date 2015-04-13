@@ -2,6 +2,8 @@ package com.jkt.dominio;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -9,6 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Descriptible extends PersistentEntity {
 
 	@NotNull(message="El campo codigo no puede ser nulo.")
@@ -17,21 +20,5 @@ public class Descriptible extends PersistentEntity {
 	
 	@NotBlank(message="La descripcion no debe estar vacia.")
 	private String descripcion;
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 
 }

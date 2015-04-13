@@ -29,39 +29,31 @@ public class MenuVM {
 	@Init
 	public void init(){
 		
-		for (int i = 0; i < 14; i++) {
-			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "big"));
-			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "big"));
+//		for (int i = 0; i < 14; i++) {
+			
+			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "small"));
 			menues.add(MenuOV.newInstance("Equipo", "index-equipo.zul", "small"));
-			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "medium"));
-			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "big"));
-			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "big"));
-			menues.add(MenuOV.newInstance("Equipo", "index-equipo.zul", "medium"));
-			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "big"));
-			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "big"));
-			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "big"));
-			menues.add(MenuOV.newInstance("Equipo", "index-equipo.zul", "small"));
-			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "big"));
-			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "big"));
-			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "big"));
-			menues.add(MenuOV.newInstance("Equipo", "index-equipo.zul", "small"));
-			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "big"));
-			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "medium"));
-			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "big"));
-			menues.add(MenuOV.newInstance("Equipo", "index-equipo.zul", "small"));
-			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "big"));
+			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "small"));
 
-		}
+			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "small"));
+			menues.add(MenuOV.newInstance("Presupuesto", "index-presupuesto.zul", "small"));
+
+//		}
 		
 //		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
 //		news.add("Jueves 16 de Abril- Argentina está de fiesta");
 //		news.add("Viernes 17 de Abril- Aique");
-		news.add("18 de Abril - Daniel Shapochnik");
-		news.add("13 de Mayo - Peñalva");
-		news.add("17 de Mayo - Eliana");
-		news.add("20 de Junio - Leo");
-		news.add("30 de Junio - Marcos");
-		news.add("30 de Octubre - Ema");
+			
+		news.add("Reactores - Serie o limitadores de corriente de cortocircuido. Paralelo, derivación o Shunt.");
+		news.add("Transformadores - Potencia - Distribución - Especiales ");
+		news.add("El Mural mas grande del mundo.");
+		news.add("Los Conce. Tel.:(+54 11)46932220");
+//		news.add("18 de Abril - Daniel Shapochnik");
+//		news.add("13 de Mayo - Peñalva");
+//		news.add("17 de Mayo - Eliana");
+//		news.add("20 de Junio - Leo");
+//		news.add("30 de Junio - Marcos");
+//		news.add("30 de Octubre - Ema");
 		
 		currentNew=news.get(index);
 	}

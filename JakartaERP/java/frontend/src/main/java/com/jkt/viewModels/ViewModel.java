@@ -47,9 +47,9 @@ public abstract class ViewModel {
 	}
 
 	@Command
-	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") Textbox campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
+	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") String campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
 		
-		if (campo.getValue().isEmpty()) {
+		if (campo.isEmpty()) {
 			return;
 		}
 		
@@ -58,7 +58,7 @@ public abstract class ViewModel {
 		 */
 		ContainerOV container= new ContainerOV();
 		container.setString1(clase);
-		container.setString2(campo.getValue());
+		container.setString2(campo);
 		container.setString3("codigo");
 		
 		//Asigna el resultado.

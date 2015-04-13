@@ -7,8 +7,8 @@
 				<toolbarbutton image="/pantallas/icons/import.png" label="Guardar" onClick="@command('guardar')" tooltiptext="Guardar" />
 				<toolbarbutton image="/pantallas/icons/new.png" label="Agregar Laboratorio" onClick="@command('agregarLaboratorio')" tooltiptext="Agregar elemento" />
 
-				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
-				<toolbarbutton image="/pantallas/icons/home.png" label="Inicio" href="index.zul" tooltiptext="Volver al menu" />
+				<space bar="true" style="vertical-align: middle; line-height: 18px;" />
+				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="index.zul" tooltiptext="Volver al menu" />
 
 			</div>
 

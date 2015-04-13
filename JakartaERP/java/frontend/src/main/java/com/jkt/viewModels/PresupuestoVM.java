@@ -46,9 +46,9 @@ import com.jkt.pedido.dominio.PedidoDet;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-public class PedidoVM extends ViewModel {
+public class PresupuestoVM extends ViewModel implements IBasicOperations{
 
-	private String titulo="Ingreso de Pedido";
+	private String titulo="Ingreso de Presupuesto";
 	
 	private DescriptibleOV clienteOV=new DescriptibleOV();
 	
@@ -84,14 +84,15 @@ public class PedidoVM extends ViewModel {
 	 */
 	@Command
 	public void guardar(){
-		
-		if(!validarOV()){
-			return;
-		}
-		
-		completarOV();
-		Operaciones.ejecutar("GuardarPedido", pedidoOV);
-		Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
+//		
+//		if(!validarOV()){
+//			return;
+//		}
+//		
+//		completarOV();
+//		Operaciones.ejecutar("GuardarPedido", pedidoOV);
+//		Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
+		Messagebox.show("No se ha implementado aun.", "Mensaje",null, null,null);
 	}
 
 	private boolean validarOV() {
@@ -245,7 +246,7 @@ public class PedidoVM extends ViewModel {
 
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente Sucursal / Fecha");
+		openHelper("presupuesto", "", presupuestoDescriptible, "", "Presupuestos Disponibles", "Nro Presupuesto", "Cliente Sucursal / Fecha");
 	}
 	
 	

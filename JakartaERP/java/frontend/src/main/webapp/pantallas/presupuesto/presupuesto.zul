@@ -18,14 +18,14 @@
 			
 				<rows>
 			    	<row sclass="fila-maestro" >
-			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
+			    		<label style="width:100px;" value="En Base a Cotización ... " />
 			    		
 			    		<hlayout >
-							<textbox id="codigoPresupuesto" sclass="campoCodigo" value="@bind(vm.pedidoOV.nroPresupuesto)" readonly="false" tabindex="1" />
-							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto', post='cargarPresupuesto',ov=vm.presupuestoDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
+							<textbox sclass="campoCodigo" value="@bind(vm.pedidoOV.nroPresupuesto)" readonly="false" tabindex="1" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='cotizacion', post='cargarPresupuesto',ov=vm.presupuestoDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
 			    		</hlayout>
 
-						<label value="Nro. de Pedido : " />
+						<label value="Nro.Presupuesto : " />
 						<textbox class="campoCodigo" value="@bind(vm.pedidoOV.nro)" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
@@ -83,7 +83,7 @@
 			        <tab id="dComerciales" label="Datos Comerciales" />
 			        <tab width="10px" style="background-color:black;" id="separador" label="" disabled="true" />
 			        <tab id="notas" label="Notas" />
-			        <tab id="doc" label="Documentacion" />
+			        <tab id="condComercial" label="Cond.Comerciales" />
 			    </tabs>
 			    <tabpanels>
 			    
@@ -116,7 +116,7 @@
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
+<!-- 						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" /> -->
 					</tabpanel>
 					
 			    </tabpanels>

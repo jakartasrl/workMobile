@@ -25,11 +25,11 @@
 					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
-						<intbox width="80%" value="0" />
+						<intbox width="80%" value="0" constraint="no empty" />
 					</cell>
 
 
-					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)">
+					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
 						<template name="model" var="moneda">
 							<comboitem label="@bind(moneda.descripcion)" />
 						</template>
@@ -37,7 +37,7 @@
 
 					<cell>
 						$
-						<intbox width="80%" value="@bind(each.importe)" />
+						<intbox width="80%" value="@bind(each.importe)" constraint="no empty"/>
 					</cell>
 
 					<cell>
