@@ -4,7 +4,7 @@
 			model="@load(vm.lNotas)" 
 			multiple="true" checkmark="true" 
 			emptyMessage="No existen notas disponibles." mold="paging" pageSize="10"
-			selectedItems="@bind(vm.pedidoOV.notas)"
+			selectedItems="@bind(vm.comprobanteOV.notas)"
 			hflex="1" vflex="1" 
 		>
 		

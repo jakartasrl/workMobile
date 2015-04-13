@@ -46,38 +46,15 @@ import com.jkt.pedido.dominio.PedidoDet;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-public class PedidoVM extends ViewModel {
+public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	private String titulo="Ingreso de Pedido";
 	
-	private DescriptibleOV clienteOV=new DescriptibleOV();
-	
-	private SucursalOV sucursalOV=new SucursalOV();
-	
-	private DescriptibleOV lPreciosOV=new DescriptibleOV();
-	
-	private ListDescriptibleOV tiposVenta=new ListDescriptibleOV();
-	
-	private List<ItemsOV> lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
-	private List<ItemsOV> lDeterminacionesElectricas=new ArrayList<ItemsOV>();
-	
-	private List<NotaOV> lNotas=new ArrayList<NotaOV>();
-	
 	private List<DescriptibleOV> lDocumentacion=new ArrayList<DescriptibleOV>();
 	private List<DescriptibleOV> docEntregados=new ArrayList<DescriptibleOV>();
-
-	private List<ItemsOV> items = new ArrayList<ItemsOV>();
-	private List<ItemsOV> itemsArticulos = new ArrayList<ItemsOV>();
 	
-	private ListDescriptibleOV lMonedas=new ListDescriptibleOV();
+	private PedidoOV comprobanteOV=new PedidoOV();
 	
-	private DescriptibleOV vendedorOV=new DescriptibleOV();
-	private DescriptibleOV representanteOV=new DescriptibleOV();
-	
-	private ListDescriptibleOV contactos=new ListDescriptibleOV();
-	private DescriptibleOV contactoSeleccionado= new DescriptibleOV();
-	
-	private PedidoOV pedidoOV=new PedidoOV();
 	
 	/**
 	 * Guarda un objeto
@@ -90,122 +67,11 @@ public class PedidoVM extends ViewModel {
 		}
 		
 		completarOV();
-		Operaciones.ejecutar("GuardarPedido", pedidoOV);
+		Operaciones.ejecutar("GuardarPedido", comprobanteOV);
 		Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
 	}
 
-	private boolean validarOV() {
-		
-		//Al usar el onCreate del zul no se setea directamente al OV.
-//		if (this.pedidoOV.getFecha()==null) {
-//			Messagebox.show("Complete la fecha.");
-//			return false;
-//		}
-		
-		if (!validarDescriptible(clienteOV, "Complete el Cliente.")) {
-			return false;
-		}
-
-		if (!validarDescriptible(sucursalOV, "Complete la sucursal.")) {
-			return false;
-		}
-
-		if (!validarDescriptible(lPreciosOV, "Complete la lista de precios.")) {
-			return false;
-		}
-		
-		int nroItem=1;
-		for (ItemsOV itemActual : this.items) {
-			
-			if (!validarDescriptible(itemActual.getTipoVenta(), "Complete el tipo de venta del item "+nroItem)) {
-				return false;
-			}
-
-			if (itemActual.getReferencia()==null || itemActual.getReferencia().isEmpty()) {
-				Messagebox.show("Complete la referencia del item "+nroItem);
-				return false;
-			}
-			
-			
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda del item "+nroItem)){
-				return false;
-			}
-
-			if (itemActual.getPlantilla().getDescripcion()==null || itemActual.getPlantilla().getDescripcion().isEmpty()) {
-				Messagebox.show("Complete la descripción del item "+nroItem);
-				return false;
-			}
-			
-			nroItem++;
-		}
-		
-		nroItem=1;
-		for (ItemsOV itemActual : this.lDeterminacionesQuimicas) {
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la determinación quimica número "+nroItem)){
-				return false;
-			}
-			nroItem++;
-		}
-
-		nroItem=1;
-		for (ItemsOV itemActual : this.lDeterminacionesElectricas) {
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la determinación eléctrica número "+nroItem)){
-				return false;
-			}
-			nroItem++;
-		}
-		
-		nroItem=1;
-		for (ItemsOV itemActual : this.itemsArticulos) {
-			
-			if (!validarDescriptible(itemActual.getTipoVenta(), "Complete el tipo de venta de la solapa de materiales, item número "+nroItem)) {
-				return false;
-			}
-
-			if (itemActual.getReferencia()==null || itemActual.getReferencia().isEmpty()) {
-				Messagebox.show("Complete la referencia de la solapa de materiales, item número "+nroItem);
-				return false;
-			}
-			
-			
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la solapa de materiales, item número "+nroItem)){
-				return false;
-			}
-
-			if(!validarDescriptible(itemActual.getProductoOV(), "Complete el producto de la solapa de materiales, item número "+nroItem)){
-				return false;
-			}
-
-			if (itemActual.getPlantilla().getDescripcion()==null || itemActual.getPlantilla().getDescripcion().isEmpty()) {
-				Messagebox.show("Complete la descripción de la solapa de materiales, item número "+nroItem);
-				return false;
-			}
-			
-			nroItem++;
-		}		
-		
-		if(!validarDescriptible(vendedorOV, "Complete el vendedor en la solapa 'Dato Comerciales'.")){
-			return false;
-		}
-
-		if(!validarDescriptible(representanteOV, "Complete el representante en la solapa 'Dato Comerciales'.")){
-			return false;
-		}
-
-		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'.")){
-			return false;
-		}
-		
-		return true;
-	}
-
-	private boolean validarDescriptible(DescriptibleOV desc, String mensaje){
-		if (desc==null || desc.getCodigo()==null || desc.getCodigo().isEmpty()) {
-			Messagebox.show(mensaje);
-			return false;
-		}
-		return true;
-	}
+	
 	
 	/**
 	 * 
@@ -232,7 +98,7 @@ public class PedidoVM extends ViewModel {
 		this.vendedorOV = new DescriptibleOV();
 		this.representanteOV = new DescriptibleOV();
 		
-		this.pedidoOV= new PedidoOV();
+		this.comprobanteOV= new PedidoOV();
 		
 		this.contactoSeleccionado = new DescriptibleOV();
 		
@@ -279,9 +145,9 @@ public class PedidoVM extends ViewModel {
 		cargarDesdeOV(ovRecuperado);
 		actualizarDocs(ovRecuperado);
 		
-		this.pedidoOV.setCargaACargoDeCliente(ovRecuperado.getCargaACargoDeCliente());
-		this.pedidoOV.setTransporteACargoDeCliente(ovRecuperado.getTransporteACargoDeCliente());
-		this.pedidoOV.setDescargaACargoDeCliente(ovRecuperado.getDescargaACargoDeCliente());
+		this.comprobanteOV.setCargaACargoDeCliente(ovRecuperado.getCargaACargoDeCliente());
+		this.comprobanteOV.setTransporteACargoDeCliente(ovRecuperado.getTransporteACargoDeCliente());
+		this.comprobanteOV.setDescargaACargoDeCliente(ovRecuperado.getDescargaACargoDeCliente());
 		
 		//Ejecuta evento para actualizar todas las relaciones
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
@@ -298,8 +164,8 @@ public class PedidoVM extends ViewModel {
 		
 		actualizarCampoSucursal();
 		
-		this.pedidoOV.setId(ovRecuperado.getId());
-		this.pedidoOV.setItems(new ArrayList<ItemsOV>());
+		this.comprobanteOV.setId(ovRecuperado.getId());
+		this.comprobanteOV.setItems(new ArrayList<ItemsOV>());
 		
 		this.items=new ArrayList<ItemsOV>();
 		this.itemsArticulos =new ArrayList<ItemsOV>();
@@ -348,8 +214,8 @@ public class PedidoVM extends ViewModel {
 			}
 		}
 		
-		this.pedidoOV.setFecha(ovRecuperado.getFecha());
-		this.pedidoOV.setNro(ovRecuperado.getNro());
+		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
+		this.comprobanteOV.setNro(ovRecuperado.getNro());
 	}
 	
 	
@@ -377,10 +243,10 @@ public class PedidoVM extends ViewModel {
 	private void actualizarNotas(PedidoOV ovRecuperado) {
 		
 		this.lNotas=ovRecuperado.getNotas();
-		this.pedidoOV.setNotas(new ArrayList<NotaOV>());
+		this.comprobanteOV.setNotas(new ArrayList<NotaOV>());
 		for (NotaOV nota : this.lNotas) {
 			if (nota.getActivo()) {
-				this.pedidoOV.getNotas().add(nota);
+				this.comprobanteOV.getNotas().add(nota);
 			}
 		}
 		
@@ -396,14 +262,14 @@ public class PedidoVM extends ViewModel {
 	
 	
 	private void completarOV() {
-		pedidoOV.setIdCliente(clienteOV.getId());
-		pedidoOV.setIdSucursal(sucursalOV.getId());
-		pedidoOV.setIdListaPrecio(lPreciosOV.getId());
-		pedidoOV.setIdVendedor(vendedorOV.getId());
-		pedidoOV.setIdRepresentante(representanteOV.getId());
-		pedidoOV.setIdContactoReferencia(contactoSeleccionado.getId());
+		comprobanteOV.setIdCliente(clienteOV.getId());
+		comprobanteOV.setIdSucursal(sucursalOV.getId());
+		comprobanteOV.setIdListaPrecio(lPreciosOV.getId());
+		comprobanteOV.setIdVendedor(vendedorOV.getId());
+		comprobanteOV.setIdRepresentante(representanteOV.getId());
+		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		
-		pedidoOV.completarListaDocumentos(lDocumentacion, docEntregados);
+		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);
 		
 		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
 		
@@ -439,7 +305,7 @@ public class PedidoVM extends ViewModel {
 		/*
 		 * Junta todos los items
 		 */
-		pedidoOV.setItems(itemsFinal);
+		comprobanteOV.setItems(itemsFinal);
 		
 	}
 
@@ -473,42 +339,7 @@ public class PedidoVM extends ViewModel {
 		
 	}
 	
-	@Command
-	@NotifyChange("items")
-	public void agregarElemento(){
-		this.items.add(0, new ItemsOV());
-	}
-	@Command
-	@NotifyChange("itemsArticulos")
-	public void agregarElementoArticulo(){
-		this.itemsArticulos.add(0, new ItemsOV());
-	}
-	
-	/**
-	 * 
-	 * Metodo ejecutado desde el post del helper generico de lista de precios.
-	 * 
-	 */
-	public void actualizarDeterminaciones(){
-		this.lDeterminacionesQuimicas = actualizarDeterminaciones("LaboratorioQuimico");
-		this.lDeterminacionesElectricas = actualizarDeterminaciones("LaboratorioElectrico");
-	}
 
-	/**
-	 * 
-	 * Actualiza las determinaciones recibiendo el nombre del parametro de laboratorio y una coleccion dnd depositar los resultados
-	 * 
-	 */
-	private ArrayList<ItemsOV> actualizarDeterminaciones(String parametroLaboratorio) {
-		Long idListaPrecio = this.lPreciosOV.getId();
-		
-		ContainerOV containerOV = new ContainerOV();
-		containerOV.setString1(parametroLaboratorio);
-		containerOV.setString2(String.valueOf(idListaPrecio));
-		
-		ListItemsOV list = (ListItemsOV) Operaciones.ejecutar("TraerDeterminacionConPrecio",containerOV,ListItemsOV.class);
-		return (ArrayList<ItemsOV>) list.getList();
-	}
 	
 	@GlobalCommand("actualizarOVs")
 	@NotifyChange({"pedidoOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
@@ -518,85 +349,6 @@ public class PedidoVM extends ViewModel {
 		return "actualizarOVs";
 	}
 	
-	
-	/**
-	 * Solamente actualiza el campo que representa la descripcion completa de la sucursal.
-	 * <p>ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que está en cada ViewModel.</p>
-	 */
-	public void actualizarCampoSucursal(){
-		String text= this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
-		this.sucursalOV.setDescripcionCompleta(text);
-		
-		actualizarContactosReferencia();
-	}
-
-	private void actualizarContactosReferencia() {
-		/*
-		 * Actualiza los contactos de referencia
-		 */
-		ContainerOV containerOV = new ContainerOV();
-		containerOV.setString1(String.valueOf(this.sucursalOV.getId()));
-		
-		this.contactos = (ListDescriptibleOV) Operaciones.ejecutar("RecuperarContactosDeSucursal", containerOV, ListDescriptibleOV.class);
-		
-		if (this.contactos.isEmpty()) {
-			log.warn("La sucursal no tiene contactos de referencias. Esto puede ocacioner errores.");
-		}else{
-			this.contactoSeleccionado=(DescriptibleOV) this.contactos.getList().get(0);
-		}
-		
-	}
-	
-	/**
-	 * Limpia ovs al momento de seleccionar un cliente.
-	 */
-	public void actualizarCamposDependientesDeCliente(){
-		this.sucursalOV=new SucursalOV();
-		this.contactos=new ListDescriptibleOV();
-		this.contactoSeleccionado=null;
-	}
-
-	public ListDescriptibleOV getlMonedas() {
-		return lMonedas;
-	}
-
-	public void setlMonedas(ListDescriptibleOV lMonedas) {
-		this.lMonedas = lMonedas;
-	}
-
-	public List<ItemsOV> getlDeterminacionesQuimicas() {
-		return lDeterminacionesQuimicas;
-	}
-
-	public void setlDeterminacionesQuimicas(List<ItemsOV> lDeterminacionesQuimicas) {
-		this.lDeterminacionesQuimicas = lDeterminacionesQuimicas;
-	}
-
-	public List<ItemsOV> getlDeterminacionesElectricas() {
-		return lDeterminacionesElectricas;
-	}
-
-	public void setlDeterminacionesElectricas(
-			List<ItemsOV> lDeterminacionesElectricas) {
-		this.lDeterminacionesElectricas = lDeterminacionesElectricas;
-	}
-
-	public DescriptibleOV getlPreciosOV() {
-		return lPreciosOV;
-	}
-
-	public void setlPreciosOV(DescriptibleOV lPreciosOV) {
-		this.lPreciosOV = lPreciosOV;
-	}
-
-	public List<NotaOV> getlNotas() {
-		return lNotas;
-	}
-
-	public void setlNotas(List<NotaOV> lNotas) {
-		this.lNotas = lNotas;
-	}
-
 	public List<DescriptibleOV> getlDocumentacion() {
 		return lDocumentacion;
 	}
