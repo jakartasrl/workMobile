@@ -94,16 +94,6 @@ public abstract class ComprobanteVM extends ViewModel {
 		nroItem=1;
 		for (ItemsOV itemActual : this.itemsArticulos) {
 			
-			if (!validarDescriptible(itemActual.getTipoVenta(), "Complete el tipo de venta de la solapa de materiales, item número "+nroItem)) {
-				return false;
-			}
-
-			if (itemActual.getReferencia()==null || itemActual.getReferencia().isEmpty()) {
-				Messagebox.show("Complete la referencia de la solapa de materiales, item número "+nroItem);
-				return false;
-			}
-			
-			
 			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la solapa de materiales, item número "+nroItem)){
 				return false;
 			}
@@ -112,11 +102,6 @@ public abstract class ComprobanteVM extends ViewModel {
 				return false;
 			}
 
-			if (itemActual.getPlantilla().getDescripcion()==null || itemActual.getPlantilla().getDescripcion().isEmpty()) {
-				Messagebox.show("Complete la descripción de la solapa de materiales, item número "+nroItem);
-				return false;
-			}
-			
 			nroItem++;
 		}		
 		

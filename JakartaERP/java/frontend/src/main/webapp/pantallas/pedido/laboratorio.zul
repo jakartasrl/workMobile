@@ -2,16 +2,16 @@
 
 	<vlayout>
 
-		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="10" width="60%" emptyMessage="No existen laboratorios disponibles." style="margin-top:5px;">
+		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="10" width="510px" emptyMessage="No existen laboratorios disponibles." style="margin-top:5px;">
 		
 			<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 				<auxheader label="Lista de Laboratorios" colspan="3" />
 			</auxhead>
 			        
 			<columns>
-				<column hflex="1" label="Codigo" />
-				<column hflex="1" label="Descripcion" />
-				<column hflex="1" label="Activo" /> 
+				<column width="150px" label="Codigo" />
+				<column width="300px" label="Descripcion" />
+				<column width="50px" label="Activo" style="text-align:center" /> 
 			</columns>
 			
 			<rows>

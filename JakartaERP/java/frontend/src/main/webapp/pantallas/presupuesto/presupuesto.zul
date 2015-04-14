@@ -21,8 +21,8 @@
 			    		<label style="width:100px;" value="En Base a Cotización ... " />
 			    		
 			    		<hlayout >
-							<textbox sclass="campoCodigo" value="@bind(vm.comprobanteOV.nroPresupuesto)" readonly="false" tabindex="1" />
-							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='cotizacion', post='cargarPresupuesto',ov=vm.presupuestoDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
+							<textbox sclass="campoCodigo" value="@bind(vm.comprobanteOV.nroCotizacion)" readonly="false" tabindex="1" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='cotizacion', post='cargarCotizacion',ov=vm.cotizacionDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
 			    		</hlayout>
 
 						<label value="Nro.Presupuesto : " />
@@ -104,7 +104,7 @@
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />
+						<include id="dcContent" hflex="1" src="/pantallas/presupuesto/datosComercialesPresupuesto.zul" viewModel="${vm}" />
 					</tabpanel>
 
 			        <tabpanel>

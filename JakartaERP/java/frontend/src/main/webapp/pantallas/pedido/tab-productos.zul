@@ -1,7 +1,7 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:center;">
-		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElementoArticulo')" tooltiptext="Agregar un nuevo item.">
+	<vlayout width="100%" style="text-align:left;">
+		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElementoArticulo')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
 					//box.pagingPosition = "top";
 					//siempre retorna a la primer pagina
@@ -12,69 +12,65 @@
 	</vlayout>
 
 
-	<listbox id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
+	<listbox width="890px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="8" emptyMessage="No existen items aun.">
 
-		<listhead>
-			<listheader />
+		<listhead style="heigth:10px;" >
+			<listheader width="100px" label="Cod.Articulo"/>
+			<listheader width="310px" label="Desc.Articulo"/>
+			<listheader width="100px" label="Cantidad"/>
+			<listheader width="150px" label="Moneda"/>
+			<listheader width="90px" label="Importe"/>
+			<listheader width="100px" label="Total"/>
 		</listhead>
 
 		<template name="model">
 			<listitem>
-				<listcell>
 
-					<groupbox width="100%" style="border-style:none; cursor: default;">
-					
-							<hlayout>
-							
-								<label value="Tipo" />
-								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)" constraint="no empty">
-									<template name="model" var="tVenta">
-										<comboitem label="@bind(tVenta.descripcion)" />
-									</template>
-								</combobox>
-							
-								<label value="Referencia:" />
-								<textbox width="350px" value="@bind(each.referencia)" constraint="no empty"/>
-		
-								<label value="Cantidad:" />
-								<textbox width="40px;" value="@bind(each.cantidad)" constraint="no empty" />
-		
-								<label value="Moneda:" />
-								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
-									<template name="model" var="moneda">
-										<comboitem label="@bind(moneda.descripcion)" />
-									</template>
-								</combobox>
-		
-								<label value="Importe:" />
-								<textbox width="50px;" value="@bind(each.importe)" constraint="no empty"/>
-							
-								<label value="Importe Total:" />
-								<textbox width="50px;" value="@bind(each.importeTotal)" />
-								
-							</hlayout>
-					
-							<hlayout>
-
-								<label value="Articulo : " width="200px" />
-							
-								<textbox constraint="no empty" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
-								<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
-								
-								<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>
-
-							</hlayout>
-							
-							<hlayout style="margin:10px;">
-								<label value="Cargar Plantilla:" />
-								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
-							</hlayout>
-							
-							<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" readonly="false" />
-
-					</groupbox>
-
+				<listcell style="text-align:center">
+					<hlayout>
+<!-- 						<label value="Articulo : " width="200px" /> -->
+						<textbox constraint="no empty" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
+						<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
+					</hlayout>
 				</listcell>
+						
+				<listcell>
+					<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>
+				</listcell>
+	
+				<listcell style="text-align:center" >
+					<hlayout>
+<!-- 						<label value="Cantidad:" /> -->
+						<textbox width="40px;" value="@bind(each.cantidad)" constraint="no empty" />
+					</hlayout>
+				</listcell>
+
+				<listcell style="text-align:center">
+					<hlayout>
+<!-- 						<label value="Moneda:" /> -->
+						<combobox width="95px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
+							<template name="model" var="moneda">
+								<comboitem label="@bind(moneda.descripcion)" />
+							</template>
+						</combobox>
+					</hlayout>
+				</listcell>
+		
+				<listcell style="text-align:center">
+					<hlayout>
+<!-- 						<label value="Importe:" /> -->
+						<textbox width="60px;" value="@bind(each.importe)" constraint="no empty"/>
+					</hlayout>
+				</listcell>
+							
+				<listcell style="text-align:center">
+					<hlayout>
+<!-- 						<label value="Importe Total:" /> -->
+						<textbox width="60px;" value="@bind(each.importeTotal)" />
+					</hlayout>
+				</listcell>
+								
+
 			</listitem>
 		</template>
 

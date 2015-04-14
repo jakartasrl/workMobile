@@ -18,11 +18,9 @@ import com.jkt.operaciones.Operation;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class TraerCotizacionParaPresupuesto extends Operation {
+public class TraerCotizacionParaPresupuestoWeb extends Operation {
 
 	private static final String COMPORTAMIENTO_PRESUPUESTO = "comportamientoPresupuesto";
-	private static final String WRITER_DETALLES = "detalles";
-	private static final String WRITER_COTIZACION = "cotizacion";
 	private static final String OID_COTIZACION = "oid_cotizacion".toUpperCase();
 
 	@Override
@@ -42,10 +40,9 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 		 * Asignar el numero que tendra el presupuesto.
 		 */
 		asignarNumeroParaPresupuesto(cotizacion);
+		mostrarItems(cotizacion, cotizacion.getDetalles());
+		notificarObjeto("", cotizacion);
 		
-		notificarObjeto(WRITER_COTIZACION, cotizacion);
-		
-		mostrarItems(cotizacion.getDetalles());
 		
 	}
 
@@ -85,8 +82,8 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 	 * Muestra los items de la cotizaci�n uno por uno, retornando los detalles generados por el cotizador
 	 * 
 	 */
-	private void mostrarItems(List<CotizacionDet> detalles) {
-
+	private void mostrarItems(Cotizacion c, List<CotizacionDet> detalles) {
+		
 		/*
 		 * A partir de un detalle de cotizacion, puedo acceder a su cotizador.
 		 * A partir del cotizador puedo acceder a los detalles.
@@ -107,7 +104,7 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 			detalleCotizacion.setTotalCotizado(totalCotizado);
 			
 			//Mostrar detalle
-			notificarObjeto(WRITER_DETALLES, detalleCotizacion);
+			c.agregarDetalleTransiente(detalleCotizacion);
 		}
 		
 	}

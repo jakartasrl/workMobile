@@ -121,7 +121,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	public void cargarPresupuesto() throws IllegalAccessException, InvocationTargetException, JakartaException{
 		ContainerOV objetoOV = new ContainerOV();
 		objetoOV.setString1(String.valueOf(this.presupuestoDescriptible.getId()));
-		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPresupuesto", objetoOV, PedidoOV.class);
+		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPresupuestoParaPedido", objetoOV, PedidoOV.class);
 		
 		cargarDesdeOV(ovRecuperado);
 		
@@ -183,12 +183,11 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		for (ItemsOV itemsOV : ovRecuperado.getItems()) {
 			
-			itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));
 			itemsOV.setMoneda(completarCombo(this.lMonedas.getList(), itemsOV.getIdMoneda()));
-			
 			
 			switch (itemsOV.getTipoItem()) {
 			case 'I':
+				itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));
 				plantilla = new DescriptibleOV();
 				plantilla.setDescripcion(itemsOV.getDescripcion());
 				itemsOV.setPlantilla(plantilla);
@@ -196,8 +195,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				break;
 			case 'M':
 				plantilla = new DescriptibleOV();
-				plantilla.setDescripcion(itemsOV.getDescripcion());
-				itemsOV.setPlantilla(plantilla);
+//				plantilla.setDescripcion(itemsOV.getDescripcion());
+//				itemsOV.setPlantilla(plantilla);
 				itemsOV.setProductoOV(Operaciones.recuperarObjetoDescriptible("articulos", itemsOV.getIdProducto()));
 				this.itemsArticulos.add(itemsOV);
 				break;
@@ -283,9 +282,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 		for (ItemsOV itemsOV : itemsArticulos) {
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
+//			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
 			itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
-			itemsOV.setTipo(Integer.valueOf(itemsOV.getTipoVenta().getCodigo()));
+//			itemsOV.setTipo(Integer.valueOf(itemsOV.getTipoVenta().getCodigo()));
 			itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
 			itemsFinal.add(itemsOV);
 		}
