@@ -37,7 +37,7 @@ public abstract class Comprobante extends PersistentEntity {
 	@NotNull(message="Debe ingresar obligatoriamente un tipo de comprobante.")
 	private TipoComprobante tipoComprobante;
 	
-	@NotNull(message="El comprobante a generar debe tener obligatoriamente una fecha.")
+//	@NotNull(message="El comprobante a generar debe tener obligatoriamente una fecha.")
 	private Date fecha;
 	
 	private List<Especificacion> archivos=new ArrayList<Especificacion>();	

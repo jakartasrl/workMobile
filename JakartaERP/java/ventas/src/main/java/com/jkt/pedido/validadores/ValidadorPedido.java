@@ -1,5 +1,7 @@
 package com.jkt.pedido.validadores;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.Configuracion;
@@ -26,6 +28,11 @@ public class ValidadorPedido extends ValidadorComprobantes {
 		}
 		
 		Pedido p=(Pedido) entity;
+		
+		if (p.getFecha()==null) {
+			p.setFecha(new Date());
+		}
+		
 		if (p.getId()>0) {//es una modificacion, solo puedo adjuntar archivos.Es una validacion rara esta, creo que seria antes del adapter...
 			
 		}else{

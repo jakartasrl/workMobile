@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import com.jkt.view.ObjectView;
 
 @Data
-@EqualsAndHashCode(of={"codigo"})
+@EqualsAndHashCode(callSuper=true)
 public class DescriptibleOV extends ObjectView {
 
 	private String codigo;

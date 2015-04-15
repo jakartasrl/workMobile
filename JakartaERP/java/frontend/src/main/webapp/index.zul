@@ -1,16 +1,18 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 
 <zk>
-	<style src="/style/template.css" />
+
+	<style src="/style/template-grey.css" />
+	
 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')" 
 		style="margin:20px; padding:5px;" >
 
 		
 		<div id="title" style="height:15%;text-align:center;">
-			<label style="font-size: 90px;" value="Los Conce" />
+			<label style="font-size: 90px;color:white;" value="Los Conce" />
 		</div>
 		
-		<div id="content" style="width:95%; height:85%; text-align: center;overflow: scroll; min-width:95%;">
+		<div id="content" style="width:95%; height:85%; text-align: centerS; min-width:95%;">
 				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;">
 					<button label="${each.nombre}" href="${each.enlace}" height="100px" width="100px" style="margin-top:3px;" if="${each.tipo=='small' }" />
 					<button label="${each.nombre}" href="${each.enlace}" height="200px" width="200px" style="margin-top:3px;" if="${each.tipo=='big' }" />
@@ -18,10 +20,11 @@
 				</div>
 		</div>
 
-		<div id="footer" style="text-align:center; height:10%; border-top-style: solid; border-top-width:1px;">
-			<label value="@bind(vm.currentNew)" style="font-size:15px;" onClick="@command('next')" tooltiptext="Click for load new text."/>
+		<div id="footer" style="text-align:center; height:10%; border-top-color:white; border-top-style: solid; border-top-width:1px;">
+			<label value="@bind(vm.currentNew)" style="font-size:15px;color:white;" onClick="@command('next')" tooltiptext="Click for load new text."/>
 		</div>
 
 	</div>
+	
 </zk>
 

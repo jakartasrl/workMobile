@@ -5,9 +5,16 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.MouseEvent;
+import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zk.ui.select.annotation.Listen;
 
 import com.jkt.ov.MenuOV;
 
@@ -20,6 +27,21 @@ import com.jkt.ov.MenuOV;
 @Data
 public class MenuVM {
 
+	@Command
+	public void logIn(){
+		System.out.println();
+	}
+	
+	 @AfterCompose
+    public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
+        Selectors.wireEventListeners(view, this);
+    }
+ 
+    @Listen("onClick=#login")
+    public void onSubmit(MouseEvent event){
+    	System.out.println();
+    }
+	
 	private List<MenuOV> menues=new ArrayList<MenuOV>();
 	
 	private List<String> news=new ArrayList<String>();

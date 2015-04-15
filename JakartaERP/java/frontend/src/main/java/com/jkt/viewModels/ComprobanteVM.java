@@ -113,7 +113,7 @@ public abstract class ComprobanteVM extends ViewModel {
 			return false;
 		}
 
-		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'.")){
+		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")){
 			return false;
 		}
 		
@@ -163,7 +163,20 @@ public abstract class ComprobanteVM extends ViewModel {
 		containerOV.setString2(String.valueOf(idListaPrecio));
 		
 		ListItemsOV list = (ListItemsOV) Operaciones.ejecutar("TraerDeterminacionConPrecio",containerOV,ListItemsOV.class);
-		return (ArrayList<ItemsOV>) list.getList();
+		
+		List list2 = list.getList();
+		
+		//Muestra monedas x defecto.
+		List monedas = this.lMonedas.getList();
+		if (!monedas.isEmpty()) {
+			DescriptibleOV primerMoneda = (DescriptibleOV) monedas.get(0);
+			for (Object itemsOV : list2) {
+				ItemsOV d=(ItemsOV) itemsOV;
+				d.setMoneda(primerMoneda);
+			}
+		}
+		
+		return (ArrayList<ItemsOV>) list2;
 	}
 	
 	/**

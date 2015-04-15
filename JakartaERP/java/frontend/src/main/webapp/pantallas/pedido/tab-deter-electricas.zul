@@ -8,41 +8,41 @@
 		</auxhead>
 
 		<columns>
-			<column label="Cód analisis" align="center" sort="auto(Title)" />
-			<column label="Cód determinacion" align="center" sort="auto(firstName)" />
-			<column label="Determinación" align="center" sort="auto(extension)" />
-			<column label="Cantidad" align="center" sort="auto(extension)" />
-			<column label="Moneda" align="center" sort="auto(extension)" />
-			<column label="Precio Unitario" align="center" sort="auto(extension)" />
-			<column label="Total" align="center" sort="auto(extension)" />
+			<column width="7%" label="Cód.Analisis" align="center" sort="auto(auto)" />
+			<column width="7%" label="Cód Det." tooltip="Código de Determinación"  align="center" />
+			<column width="53%" label="Determinación" align="center" />
+			<column width="7%" label="Cantidad" align="center" />
+			<column width="12%" label="Moneda" align="center" />
+			<column width="7%" label="Precio Unit." tooltip="Precio Unitario" align="center" />
+			<column width="7%" label="Total" align="center" />
 		</columns>
 
 		<rows>
 			<template name="model">
-				<row>
-					<label value="@bind(each.codAnalisis)" />
-					<label value="@bind(each.codigo)" />
-					<label value="@bind(each.descripcionDeterminacion)" />
+				<row sclass="fila-maestro">
+					<label width="100%" value="@bind(each.codAnalisis)" />
+					<label width="100%" value="@bind(each.codigo)" />
+					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
-						<intbox value="0" />
+						<intbox width="80%" value="0" constraint="no empty" />
 					</cell>
 
-					<combobox width="80%" >
-						<comboitem label="Moneda1" />
-						<comboitem label="Moneda2" />
-						<comboitem label="Moneda4" />
-						<comboitem label="Moneda3" />
+
+					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
+						<template name="model" var="moneda">
+							<comboitem label="@bind(moneda.descripcion)" />
+						</template>
 					</combobox>
-					
+
 					<cell>
 						$
-						<intbox value="@bind(each.importe)" />
+						<intbox width="80%" value="@bind(each.importe)" constraint="no empty"/>
 					</cell>
 
 					<cell>
 						$
-						<intbox value="000" />
+						<intbox width="80%" value="000" />
 					</cell>
 
 				</row>

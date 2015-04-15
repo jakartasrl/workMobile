@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.view.ObjectView;
@@ -16,6 +17,7 @@ import com.jkt.view.ObjectView;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class DeterminacionOV extends ObjectView {
 
 	private String idItem;

@@ -615,4 +615,21 @@
 	</operacion>
 
 
+	<operacion name="Login" clase="com.jkt.operaciones.Login" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.DescriptibleOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="USUARIO"/>
+			<campoEntrada propertyOV="string2" name="PASSWORD"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
 </entity>

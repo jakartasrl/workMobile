@@ -45,6 +45,7 @@ public class Login extends Operation {
 		 */
 		
 		log.info(usuario+" "+password);
+		
 		notificarObjeto("resultado", user);
 		
 	}

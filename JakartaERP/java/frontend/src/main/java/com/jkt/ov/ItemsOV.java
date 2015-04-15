@@ -1,10 +1,14 @@
 package com.jkt.ov;
 
+import java.util.Random;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.view.ObjectView;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class ItemsOV extends ObjectView {
 
 	private DescriptibleOV plantilla=new DescriptibleOV();
@@ -30,5 +34,12 @@ public class ItemsOV extends ObjectView {
 	private String desAnalisis;
 	
 	private char tipoItem;
+	
+	public ItemsOV(){
+		Random rand = new Random();
+	    int randomNum = rand.nextInt((10000 - 1) + 1) + 1;
+		
+		this.plantilla.setId(randomNum);
+	}
 	
 }

@@ -8,6 +8,7 @@ import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +18,7 @@ import org.bouncycastle.i18n.MessageBundle;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.Validator;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
@@ -55,7 +57,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	
 	private PedidoOV comprobanteOV=new PedidoOV();
 	
-	
+	private DescriptibleOV plantillaDescriptible = new DescriptibleOV();
+
 	/**
 	 * Guarda un objeto
 	 */
@@ -77,7 +80,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"pedidoOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		
 		this.clienteOV = new DescriptibleOV();
@@ -188,13 +191,26 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			switch (itemsOV.getTipoItem()) {
 			case 'I':
 				itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));
+
+				
+				/*
+				 * Genero nuevas instancias, ya que se duplicaban textos en cada uno de los items al estar referenciando a la misma plantilla
+				 */
 				plantilla = new DescriptibleOV();
+				
+				Random rand = new Random();
+			    int randomNum = rand.nextInt((10000 - 1) + 1) + 1;
+				
+				plantilla.setId(randomNum);
+				
 				plantilla.setDescripcion(itemsOV.getDescripcion());
 				itemsOV.setPlantilla(plantilla);
+				
+				
 				this.items.add(itemsOV);
 				break;
 			case 'M':
-				plantilla = new DescriptibleOV();
+//				plantilla = new DescriptibleOV();
 //				plantilla.setDescripcion(itemsOV.getDescripcion());
 //				itemsOV.setPlantilla(plantilla);
 				itemsOV.setProductoOV(Operaciones.recuperarObjetoDescriptible("articulos", itemsOV.getIdProducto()));
@@ -341,7 +357,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"pedidoOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {

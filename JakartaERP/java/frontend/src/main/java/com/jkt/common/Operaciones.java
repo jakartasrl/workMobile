@@ -17,6 +17,15 @@ import com.jkt.ov.ListDescriptibleOV;
 
 public class Operaciones {
 
+	static public String url;
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	/**
 	 * Metodo que se encarga de llamar la operacion del servlet
@@ -29,11 +38,14 @@ public class Operaciones {
 	 * @throws ServletException
 	 */
 	public static Object ejecutar(String operacion, Object objetoOV, Class<?> clazz) throws ServletException {
-		String server = Executions.getCurrent().getServerName();
-		int port = Executions.getCurrent().getServerPort();
-		String contextPath = "frontend"; 
-		Executions.getCurrent().getContextPath();
-		String url = "http://" + server + ":" + port + "/" + contextPath + "/api/processorHTML5/xml";
+		
+		if (url==null || url.isEmpty()) {
+			String server = Executions.getCurrent().getServerName();
+			int port = Executions.getCurrent().getServerPort();
+			String contextPath = Executions.getCurrent().getContextPath();
+			Operaciones.url = "http://" + server + ":" + port + "/" + contextPath + "/api/processorHTML5/xml";
+		}
+		
 		Object result = null;
 		Gson gson = new GsonBuilder().create();
 		HttpURLConnection con;

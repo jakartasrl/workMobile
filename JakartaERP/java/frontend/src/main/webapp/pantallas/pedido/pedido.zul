@@ -18,6 +18,7 @@
 			
 				<rows>
 			    	<row sclass="fila-maestro" >
+			    	
 			    		<label style="width:100px;" value="En Base a Presupuesto ... " />
 			    		
 			    		<hlayout >
