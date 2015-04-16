@@ -8,8 +8,8 @@ import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.varios.dominio.Contacto;
 
 /**
- * Esta clase genera una cotizaci�n con items a cotizar independientes.
- * <p>Una cotizaci�n puede pasarse a presupuestar, y generar una instancia de un Presupuesto, siempre y cuando todos los items de la cotizaci�n est�n
+ * Esta clase genera una cotización con items a cotizar independientes.
+ * <p>Una cotización puede pasarse a presupuestar, y generar una instancia de un Presupuesto, siempre y cuando todos los items de la cotización están
  * cotizados y autorizador.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL

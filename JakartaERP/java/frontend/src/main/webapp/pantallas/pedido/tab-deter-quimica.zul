@@ -25,7 +25,7 @@
 					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
-						<intbox width="80%" value="0" constraint="no empty" />
+						<intbox width="80%" value="0" constraint="no empty" onBlur="@command('actualizarImporteTotal', item=each)"/>
 					</cell>
 
 
@@ -37,12 +37,12 @@
 
 					<cell>
 						$
-						<intbox width="80%" value="@bind(each.importe)" constraint="no empty"/>
+						<intbox width="80%" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 					</cell>
 
 					<cell>
 						$
-						<intbox width="80%" value="000" />
+						<intbox width="80%" value="000" readonly="true" />
 					</cell>
 
 				</row>

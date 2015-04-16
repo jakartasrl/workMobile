@@ -122,10 +122,16 @@
 				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
 			</list>
 			
-			<list name="condicionesComerciales" cascade="all" table="PRESUPUESTO_CONDICIONES_COMERCIALES">
+<!-- 			<list name="condicionesComerciales" cascade="all" table="PRESUPUESTO_CONDICIONES_COMERCIALES"> -->
+<!-- 				<key column="PRESUPUESTO_ID" /> -->
+<!-- 				<index column="ORDEN" /> -->
+<!-- 				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial"/> -->
+<!-- 			</list> -->
+			
+			<list name="formasFacturacion" cascade="all" table="PRESUPUESTO_FORMA_FACTURACION">
 				<key column="PRESUPUESTO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial"/>
+				<many-to-many column="FORMA_FACTURACION_ID" class="com.jkt.pedido.dominio.FormaFacturacion"/>
 			</list>
 
 			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID"></many-to-one>

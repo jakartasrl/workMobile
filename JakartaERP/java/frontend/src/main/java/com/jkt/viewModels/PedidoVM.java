@@ -188,6 +188,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			itemsOV.setMoneda(completarCombo(this.lMonedas.getList(), itemsOV.getIdMoneda()));
 			
+			itemsOV.setImporteTotal(itemsOV.getImporte()*itemsOV.getCantidad());
+			
 			switch (itemsOV.getTipoItem()) {
 			case 'I':
 				itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));

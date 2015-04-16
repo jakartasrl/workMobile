@@ -77,7 +77,7 @@
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
-			        <tab id="items" label="Items" />
+			        <tab id="items" label="Fabricación/Reparación/Service" />
 			        <tab id="labElec" label="Laboratorio Electrico" />
 			        <tab id="labQuim" label="Laboratorio Quimico" />
 			        <tab id="mat" label="Materiales" />
@@ -105,7 +105,7 @@
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="dcContent" hflex="1" src="/pantallas/pedido/datosComerciales.zul" viewModel="${vm}" />
+						<include id="dcContent" hflex="1" src="/pantallas/pedido/tab-datos-comerciales.zul" viewModel="${vm}" />
 					</tabpanel>
 
 			        <tabpanel>
@@ -113,11 +113,11 @@
 					</tabpanel>
 					
 			        <tabpanel>
-						<include id="notasContent" hflex="1" src="/pantallas/pedido/notas.zul" viewModel="${vm}" />
+						<include id="notasContent" hflex="1" src="/pantallas/pedido/tab-notas.zul" viewModel="${vm}" />
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" />
+						<include id="docContent" hflex="1" src="/pantallas/pedido/tab-documentacion.zul" viewModel="${vm}" />
 					</tabpanel>
 					
 			    </tabpanels>

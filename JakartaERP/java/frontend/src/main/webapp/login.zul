@@ -54,6 +54,7 @@
 			if(data.codigo=="ERROR"){
 				$("#login").css('background-color','red');
 				$("#password").css('background-color','red');
+							
 			}else{
 				location.href="index.zul";
 			}

@@ -37,7 +37,7 @@
 								<textbox width="350px" value="@bind(each.referencia)" constraint="no empty"/>
 		
 								<label value="Cantidad:" />
-								<textbox width="40px;" value="@bind(each.cantidad)" constraint="no empty"/>
+								<textbox width="40px;" value="@bind(each.cantidad)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 		
 								<label value="Moneda:" />
 								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
@@ -47,15 +47,16 @@
 								</combobox>
 		
 								<label value="Importe:" />
-								<textbox width="50px;" value="@bind(each.importe)" constraint="no empty"/>
+								<textbox width="50px;" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 							
 								<label value="Importe Total:" />
-								<textbox width="50px;" value="@bind(each.importeTotal)" />
+								<textbox width="50px;" value="@bind(each.importeTotal)" readonly="true"/>
 								
 							</hlayout>
 							
 							<hlayout style="margin:10px;">
 								<label value="Cargar Plantilla:" />
+								<textbox sclass="campoCodigo" value="@bind(each.plantilla.codigo)" onBlur="@command('validarCampo', clase='plantilla', codigo=self.value, ov=each.plantilla)" />
 								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
 							</hlayout>
 							

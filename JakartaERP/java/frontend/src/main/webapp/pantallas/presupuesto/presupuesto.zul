@@ -76,14 +76,14 @@
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
-			        <tab id="items" label="Items" />
+			        <tab id="items" label="Fabricacion/Reparacion/Service" />
 			        <tab id="labElec" label="Laboratorio Electrico" />
 			        <tab id="labQuim" label="Laboratorio Quimico" />
 			        <tab id="mat" label="Materiales" />
 			        <tab id="dComerciales" label="Datos Comerciales" />
 			        <tab width="10px" style="background-color:black;" id="separador" label="" disabled="true" />
 			        <tab id="notas" label="Notas" />
-			        <tab id="condComercial" label="Cond.Comerciales" />
+			        <tab id="formasFact" label="Formas de Facturacion" />
 			    </tabs>
 			    <tabpanels>
 			    
@@ -104,7 +104,7 @@
 					</tabpanel>
 			        
 			        <tabpanel>
-						<include id="dcContent" hflex="1" src="/pantallas/presupuesto/datosComercialesPresupuesto.zul" viewModel="${vm}" />
+						<include id="dcContent" hflex="1" src="/pantallas/pedido/tab-datos-comerciales.zul" viewModel="${vm}" />
 					</tabpanel>
 
 			        <tabpanel>
@@ -112,11 +112,11 @@
 					</tabpanel>
 					
 			        <tabpanel>
-						<include id="notasContent" hflex="1" src="/pantallas/pedido/notas.zul" viewModel="${vm}" />
+						<include id="notasContent" hflex="1" src="/pantallas/pedido/tab-notas.zul" viewModel="${vm}" />
 					</tabpanel>
 			        
 			        <tabpanel>
-<!-- 						<include id="docContent" hflex="1" src="/pantallas/pedido/documentacion.zul" viewModel="${vm}" /> -->
+<!-- 						<include id="docContent" hflex="1" src="/pantallas/pedido/tab-formas-facturacion.zul" viewModel="${vm}" /> -->
 					</tabpanel>
 					
 			    </tabpanels>

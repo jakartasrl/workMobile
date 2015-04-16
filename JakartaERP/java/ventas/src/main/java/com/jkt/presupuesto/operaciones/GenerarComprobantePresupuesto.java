@@ -88,7 +88,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			/*
 			 * Metodo principal
-			 * A partir de un comprobante, se genera un reporte en PDF y retorna la ruta, que deberia ser compartida, en una instancia de la clase Especificación
+			 * A partir de un comprobante, se genera un reporte en PDF y retorna la ruta, que deberia ser compartida, en una instancia de la clase Especificaciï¿½n
 			 * 
 			 */
 			Especificacion e = generarComprobante(p);
@@ -124,7 +124,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 	 * Asigna los datos de la empresa.
 	 * 
 	 * @throws JakartaException cuando el archivo de datos de empresa es inconsistete, 
-	 * no contiene elementos o la cantidad de elementos que retornan información son mas de uno.
+	 * no contiene elementos o la cantidad de elementos que retornan informaciï¿½n son mas de uno.
 	 */
 	public void obtenerDatosEmpresa() throws JakartaException {
 		try {
@@ -177,7 +177,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			Map<String, Object> parameters=new HashMap<String, Object>();
 			
-			String referenciaPresupuesto="Sobre un (1) Transformador TTE de 15/15/10 MVA - 132/33/12,2 kV (año 1975)";
+			String referenciaPresupuesto="Sobre un (1) Transformador TTE de 15/15/10 MVA - 132/33/12,2 kV (aï¿½o 1975)";
 			parameters.put("descripcionPresupuesto", "-----------------------------");
 			
 			parameters.put("lugarFecha", String.format("%s, %s",datosEmpresa.getProvincia(), obtenerFechaActual()));			
@@ -255,19 +255,19 @@ public class GenerarComprobantePresupuesto extends Operation {
 		titulo.setTitulo("<font size= \"4\" /><b>CONDICIONES COMERCIALES</b>");
 		items.add(titulo);
 		
-		ItemResumen nuevaCondicion;
-		for (CondicionComercial condicion : p.getCondicionesComerciales()) {
-			cantidadCondiciones++;
-			nuevaCondicion=new ItemResumen();
-			nuevaCondicion.setDescripcion(VINIETA+formatLineFeed(condicion.getDescripcion()));
-			items.add(nuevaCondicion);
-		}
+//		ItemResumen nuevaCondicion;
+//		for (CondicionComercial condicion : p.getCondicionesComerciales()) {
+//			cantidadCondiciones++;
+//			nuevaCondicion=new ItemResumen();
+//			nuevaCondicion.setDescripcion(VINIETA+formatLineFeed(condicion.getDescripcion()));
+//			items.add(nuevaCondicion);
+//		}
 
-		if (cantidadCondiciones==0) {
-			nuevaCondicion=new ItemResumen();
-			nuevaCondicion.setDescripcion(MENSAJE_CONDICIONES_VACIAS);
-			items.add(nuevaCondicion);
-		}		
+//		if (cantidadCondiciones==0) {
+//			nuevaCondicion=new ItemResumen();
+//			nuevaCondicion.setDescripcion(MENSAJE_CONDICIONES_VACIAS);
+//			items.add(nuevaCondicion);
+//		}		
 	}
 
 
@@ -335,7 +335,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 			throw new JakartaException("Debe ingresar la provincia de la empresa");
 		}
 		if (datosEmpresa.getDireccion().isEmpty()) {
-			throw new JakartaException("Debe ingresar la dirección de la empresa");
+			throw new JakartaException("Debe ingresar la direcciï¿½n de la empresa");
 		}
 		
 	}
@@ -347,15 +347,15 @@ public class GenerarComprobantePresupuesto extends Operation {
 	private  List<String> obtenerCondiciones() {
 		//Ver el tema del tipo de clase y demas.Si mando Arrays.asList no recuerdo si funcionaba.
 		List<String> condiciones=new ArrayList<String>();
-		
-		for (CondicionComercial condicion: p.getCondicionesComerciales()) {
-			condiciones.add(formatLineFeed(condicion.getDescripcion()));
-		}
-		
-		if (condiciones.isEmpty()) {
-			condiciones.add(MENSAJE_CONDICIONES_VACIAS);
-		}
-		
+//		
+//		for (CondicionComercial condicion: p.getCondicionesComerciales()) {
+//			condiciones.add(formatLineFeed(condicion.getDescripcion()));
+//		}
+//		
+//		if (condiciones.isEmpty()) {
+//			condiciones.add(MENSAJE_CONDICIONES_VACIAS);
+//		}
+//		
 		return condiciones;
 	}
 
@@ -401,10 +401,10 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			switch (detalle.getTipoDetalle()) {
 			case PresupuestoDet.CHAR_ELECTRICO:
-				descripcion=String.format("Determinación Laboratorio Eléctrico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
+				descripcion=String.format("Determinaciï¿½n Laboratorio Elï¿½ctrico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
 				break;
 			case PresupuestoDet.CHAR_QUIMICO:
-				descripcion=String.format("Determinación Laboratorio Quimico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
+				descripcion=String.format("Determinaciï¿½n Laboratorio Quimico - Cantidad: %d - Determinacion: %s", cantidad ,detalle.getDeterminacion().getDescripcion());
 				break;
 			case PresupuestoDet.CHAR_MATERIAL:
 				if (detalle.getDescripcion()==null || detalle.getDescripcion().isEmpty()) {
@@ -417,7 +417,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 				descripcion=formatLineFeed(detalle.getDescripcion());
 				break;
 			default:
-				throw new JakartaException("No se generará el comprobante debido a que los detalles del presupuesto son inconsistentes en cuanto a su tipo.");
+				throw new JakartaException("No se generarï¿½ el comprobante debido a que los detalles del presupuesto son inconsistentes en cuanto a su tipo.");
 			}
 			
 //			ItemResumen itemResumen = new ItemResumen("Titulo Item:"+detalle.getReferencia(),"", "", "");

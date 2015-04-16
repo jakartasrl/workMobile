@@ -66,18 +66,6 @@
 				</cell>
 			</row>
 
-			<row>
-				
-				<cell colspan="2">
-				<hlayout>
-					<checkbox style="margin:15px;" label="Carga a cargo de cliente" checked="@bind(vm.comprobanteOV.cargaACargoDeCliente)" />
-					<checkbox style="margin:15px;" label="Transporte a cargo de cliente" checked="@bind(vm.comprobanteOV.transporteACargoDeCliente)" />
-					<checkbox style="margin:15px;" label="Descarga a cargo de cliente" checked="@bind(vm.comprobanteOV.descargaACargoDeCliente)" />
-				</hlayout>
-				</cell>
-
-			</row>
-
 		</rows>
 
 	</grid>

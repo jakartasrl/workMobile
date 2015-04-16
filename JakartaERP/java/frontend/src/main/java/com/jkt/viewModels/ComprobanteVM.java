@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Messagebox;
@@ -35,6 +36,12 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected DescriptibleOV representanteOV=new DescriptibleOV();
 	protected ListDescriptibleOV contactos=new ListDescriptibleOV();
 	protected DescriptibleOV contactoSeleccionado= new DescriptibleOV();
+	
+	@NotifyChange({"items","lDeterminacionesQuimicas","lDeterminacionesElectricas","itemsArticulos"})
+	@Command
+	public void actualizarImporteTotal(@BindingParam("item") ItemsOV items){
+		items.setImporteTotal(items.getImporte()*items.getCantidad());
+	}
 	
 	protected boolean validarOV() {
 		

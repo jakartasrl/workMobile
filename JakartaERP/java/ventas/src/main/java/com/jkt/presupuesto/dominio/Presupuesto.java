@@ -3,10 +3,11 @@ package com.jkt.presupuesto.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jkt.dominio.Comprobante;
+import lombok.Data;
+
 import com.jkt.dominio.ComprobanteVenta;
-import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.ListaPrecios;
+import com.jkt.pedido.dominio.FormaFacturacion;
 
 /**
  * <p>Representa a un presupuesto. El presupuesto contendra una determinada
@@ -15,57 +16,22 @@ import com.jkt.dominio.ListaPrecios;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Presupuesto extends ComprobanteVenta {
 
 	// Ver en los padres, vendedor, representante, cliente, clienteSucursal, condPago, comprobanteRelacionado
 
-	private List<CondicionComercial> condicionesComerciales = new ArrayList<CondicionComercial>();
+//	private List<CondicionComercial> condicionesComerciales = new ArrayList<CondicionComercial>();
+	private List<FormaFacturacion> formasFacturacion = new ArrayList<FormaFacturacion>();
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
-	
-	public void setComprobanteRelacionado(Cotizacion comprobanteRelacionado) {
-		this.comprobanteRelacionado = comprobanteRelacionado;
-	}
-	
-	public ListaPrecios getListaPrecios() {
-		return listaPrecios;
-	}
-
-	public void setListaPrecios(ListaPrecios listaPrecios) {
-		this.listaPrecios = listaPrecios;
-	}
-
-	public List<CondicionComercial> getCondicionesComerciales() {
-		return condicionesComerciales;
-	}
-
-	public void setCondicionesComerciales(
-			List<CondicionComercial> condicionesComerciales) {
-		this.condicionesComerciales = condicionesComerciales;
-	}
-
-	public List<Nota> getNotas() {
-		return notas;
-	}
-
-	public void setNotas(List<Nota> notas) {
-		this.notas = notas;
-	}
-
-	public List<PresupuestoDet> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<PresupuestoDet> detalles) {
-		this.detalles = detalles;
-	}
 
 	/*
 	 * Helper methods.
 	 */
 	/**
-	 * Resuelve cu�les notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
+	 * Resuelve cuáles notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
 	 * 
 	 */
 	public void agregarNota(Nota n){
@@ -87,25 +53,32 @@ public class Presupuesto extends ComprobanteVenta {
 		}
 		
 	}
-	public void agregarCondicionComercial(CondicionComercial n){
-		
-		if (n.isIncluida()) {
-			if (!condicionesComerciales.contains(n)) {
-				//Ya no existe en la lista y debe ser incluida, se agrega
-				condicionesComerciales.add(n);
-			}else{
-				//Ya existia,no se hace nada.
-			}
-		}else{
-			if (condicionesComerciales.contains(n)) {
-				//Si no esta incluida y estaba en la lista, se elimina.
-				condicionesComerciales.remove(n);
-			}else{
-				//Ya no existia,no se hace nada.
-			}
+	
+	public void agregarFormaFacturacion(FormaFacturacion f){
+		if (!formasFacturacion.contains(f)) {
+			formasFacturacion.add(f);
 		}
-		
 	}
+	
+//	public void agregarCondicionComercial(CondicionComercial n){
+//		
+//		if (n.isIncluida()) {
+//			if (!condicionesComerciales.contains(n)) {
+//				//Ya no existe en la lista y debe ser incluida, se agrega
+//				condicionesComerciales.add(n);
+//			}else{
+//				//Ya existia,no se hace nada.
+//			}
+//		}else{
+//			if (condicionesComerciales.contains(n)) {
+//				//Si no esta incluida y estaba en la lista, se elimina.
+//				condicionesComerciales.remove(n);
+//			}else{
+//				//Ya no existia,no se hace nada.
+//			}
+//		}
+//		
+//	}
 	
 	
 	/**
@@ -178,14 +151,6 @@ public class Presupuesto extends ComprobanteVenta {
 	 */
 	private List<Nota> notasTransientes=new ArrayList<Nota>();
 
-	public List<Nota> getNotasTransientes() {
-		return notasTransientes;
-	}
-
-	public void setNotasTransientes(List<Nota> notasTransientes) {
-		this.notasTransientes = notasTransientes;
-	}
-	
 	public void agregarNotaTransiente(Nota n){
 		if (!notasTransientes.contains(n)) {
 			this.notasTransientes.add(n);
