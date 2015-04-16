@@ -116,7 +116,7 @@
 					</tabpanel>
 			        
 			        <tabpanel>
-<!-- 						<include id="docContent" hflex="1" src="/pantallas/pedido/tab-formas-facturacion.zul" viewModel="${vm}" /> -->
+						<include id="docContent" hflex="1" src="/pantallas/pedido/tab-formas-facturacion.zul" viewModel="${vm}" />
 					</tabpanel>
 					
 			    </tabpanels>

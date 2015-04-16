@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hsqldb.lib.ArrayListIdentity;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,6 +43,7 @@ public class PedidoOV extends ObjectView {
 	private List<PedidoDocumentacionOV> docs=new ArrayList<PedidoDocumentacionOV>();
 
 	private List<ItemsOV> items=new ArrayList<ItemsOV>();
+	private List<FormaFacturacionOV> facturaciones=new ArrayList<FormaFacturacionOV>();
 	
 	/**
 	 * A partir de la lista de todos los documentos y de los documentos seleccionados, forma una lista en la que se diferencian solamente por el campo activo.

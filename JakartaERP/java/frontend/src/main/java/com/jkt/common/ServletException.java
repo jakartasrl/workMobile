@@ -9,8 +9,6 @@ public class ServletException extends RuntimeException {
 	
 	private String descripcion;
 
-	
-	
 	public ServletException(String message) {
 		super(message);
 	}

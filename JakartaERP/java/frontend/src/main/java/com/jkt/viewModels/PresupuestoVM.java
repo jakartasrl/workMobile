@@ -7,6 +7,7 @@ import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 
@@ -21,6 +22,7 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.FormaFacturacionOV;
 import com.jkt.ov.HelperOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
@@ -44,13 +46,25 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	
 	private PresupuestoOV comprobanteOV=new PresupuestoOV();
 	
+	
+	@Command
+	@NotifyChange("comprobanteOV")
+	public void agregarFormaFacturacion(){
+		this.comprobanteOV.getFacturaciones().add(0, new FormaFacturacionOV());
+	}
+	
+	
 	/**
 	 * Guarda un objeto
 	 */
 	@Command
 	public void guardar(){
 //		
-		if(!validarOV()){
+		if(!this.validaPresupuesto()){
+			return;
+		}
+		
+		if(!super.validarOV()){
 			return;
 		}
 //		
@@ -61,32 +75,35 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	}
 
 	
+	private boolean validaPresupuesto() {
+		List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
+		
+		int i=1;
+		for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
+
+			if(!this.validarDescriptible(formaFacturacionOV.getCondicionDePago(), "Complete la condicion de pago de elemento "+i+" en la \n solapa 'Formas de facturación'.")){
+				return false;
+			}
+			
+			if (formaFacturacionOV.getDescripcion()==null || formaFacturacionOV.getDescripcion().isEmpty()) {
+				Messagebox.show("Complete la descripcion del item "+i+" en la solapa 'Formas de facturación'.");
+				return false;
+			}
+			i++;
+		}
+		
+		return true;
+	}
+
+
 	/**
 	 * 
 	 */
 	@Command
 	@NotifyChange({"presupuestoOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
-		
-		this.clienteOV = new DescriptibleOV();
-		this.sucursalOV = new SucursalOV();
-		this.lPreciosOV = new DescriptibleOV();
-		this.lDeterminacionesQuimicas = new ArrayList<ItemsOV>();
-		this.lDeterminacionesElectricas = new ArrayList<ItemsOV>();
-		this.lNotas = new ArrayList<NotaOV>();
-		
-		this.items = new ArrayList<ItemsOV>();
-		this.lMonedas = new ListDescriptibleOV();
-
-		this.contactos = new ListDescriptibleOV();
-
-		this.vendedorOV = new DescriptibleOV();
-		this.representanteOV = new DescriptibleOV();
-		
+		super.nuevo();
 		this.comprobanteOV= new PresupuestoOV();
-		
-		this.contactoSeleccionado = new DescriptibleOV();
-		
 		init();
 	}
 	

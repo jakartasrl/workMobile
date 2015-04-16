@@ -39,7 +39,7 @@
 	
 				<listcell style="text-align:center" >
 					<hlayout>
-						<textbox width="40px;" value="@bind(each.cantidad)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty" />
+						<textbox width="40px;" sclass="importe" value="@bind(each.cantidad)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty" />
 					</hlayout>
 				</listcell>
 
@@ -55,13 +55,13 @@
 		
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox width="60px;" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+						<textbox width="60px;" value="@bind(each.importe)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 					</hlayout>
 				</listcell>
 							
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox width="60px;" value="@bind(each.importeTotal)" readonly="true"/>
+						<textbox width="60px;" value="@bind(each.importeTotal)" sclass="importe" readonly="true"/>
 					</hlayout>
 				</listcell>
 								

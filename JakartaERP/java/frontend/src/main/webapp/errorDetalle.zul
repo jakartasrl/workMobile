@@ -1,0 +1,30 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="error" mode="modal" sizable="true" closable="true" title="Error" style="width:350px;" height="110px;">
+		<hlayout  >
+			<image src="/pantallas/icons/dialog-error2.png"   vflex="min"/>
+			<label multiline="true" hflex="1"	vflex="1" value="${requestScope['javax.servlet.error.exception'].message}" 
+					style="font-size: 15px;margin-left:10px;"/>
+		</hlayout>
+			<groupbox closable="true" open="false" height="100%" width="100%" visible="${not empty requestScope['javax.servlet.error.exception'].descripcion }" >
+				<attribute name="onOpen" >
+	                    <![CDATA[
+	                             if(self.isOpen()){
+									self.getCaption().setLabel("Ocultar Detalle"); 
+								 	Window win= (Window) self.getParent();
+									win.setHeight("500px");
+								}else{
+	 								self.getCaption().setLabel("Mostrar Detalles");
+								 	Window win= (Window) self.getParent();
+	 								win.setHeight("110px");
+								}
+									]]>
+				</attribute>
+				<caption label="Mostrar Detalle"/>
+				<textbox disabled="true" multiline="true" cols="50"  width="100%" height="100%" value="${requestScope['javax.servlet.error.exception'].descripcion}" 
+						style="font-size: 10px;padding:10px;"/>
+			</groupbox>
+	</window>
+</zk>

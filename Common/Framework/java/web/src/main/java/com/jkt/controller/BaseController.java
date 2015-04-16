@@ -41,6 +41,7 @@ public abstract class BaseController{
 	
 	protected static final String CLIENTE_DELPHI= "DELPHI";
 	protected static final String CLIENTE_HTML = "HTML";
+	protected static final String MSJ_ERROR_DEFAULT="Error inesperado";
 	
 	private HttpServletResponse response;
 
@@ -67,42 +68,60 @@ public abstract class BaseController{
 		this.response = response;
 	}
 
+	
+	
 	public void manejoExcepcionPorOrigen(String error) throws IOException{
+		manejoExcepcionPorOrigen(error, null);
+	}
+	
+	private void manejoExcepcionPorOrigen(Exception exception) throws IOException {
+		manejoExcepcionPorOrigen(exception.getMessage(),ExceptionUtils.getFullStackTrace(exception));
+	}
+
+	
+	public void manejoExcepcionPorOrigen(String error,String descripcion) throws IOException{
 		if(CLIENTE_DELPHI.equals(getAppRequest())){
 			response.getOutputStream().flush();
 			XMLStreamMaker xmlStreamMaker = new XMLStreamMaker();
 			xmlStreamMaker.setStream(response.getOutputStream());
 			xmlStreamMaker.writeStartTagException(error);
 		}else{
+			response.setStatus(Response.SC_INTERNAL_SERVER_ERROR);
 			Gson gson = new GsonBuilder().create();
 			//lo paso en formato json para que tome los \n
 			response.addHeader("error", gson.toJson(error));
-		    response.setStatus(Response.SC_EXPECTATION_FAILED);
+			if(descripcion!=null && !descripcion.isEmpty()){
+				getOutputStream().write(descripcion.getBytes());
+				getOutputStream().flush();
+				getOutputStream().close();
+			}
 		}
 	}
 	
 	@ExceptionHandler(ExceptionDS.class)
 	public @ResponseBody void manejarExcepcionJakarta(ExceptionDS exceptionDS) throws IOException{
-		manejoExcepcionPorOrigen(exceptionDS.getMessage());
+		manejoExcepcionPorOrigen(exceptionDS);
 		log.error(ExceptionUtils.getFullStackTrace(exceptionDS));
 	}
 	
 	
+
+
 	@ExceptionHandler(EntityNotFoundException.class)
 	public void manejarEntityNotFoundException(EntityNotFoundException e) throws IOException{
-		manejoExcepcionPorOrigen(e.getMessage());
+		manejoExcepcionPorOrigen(e);
 		log.error(ExceptionUtils.getFullStackTrace(e));
 	}
 
 	@ExceptionHandler(ValidacionDeNegocioException.class)
 	public void manejarValidacionException(ValidacionDeNegocioException e) throws IOException{
-		manejoExcepcionPorOrigen(e.getMessage());
+		manejoExcepcionPorOrigen(e);
 		log.error(ExceptionUtils.getFullStackTrace(e));
 	}
 	
 	@ExceptionHandler(LoginException.class)
 	public  void manejarLoginException(LoginException loginException) throws IOException{
-		manejoExcepcionPorOrigen(loginException.getMessage());
+		manejoExcepcionPorOrigen(loginException);
 		log.error(ExceptionUtils.getFullStackTrace(loginException));
 
 	}
@@ -123,8 +142,9 @@ public abstract class BaseController{
 			xmlStreamMaker.writeStartTagException(out.toString());
 		}else{
 			response.setStatus(Response.SC_INTERNAL_SERVER_ERROR);
-			getOutputStream().write(ExceptionUtils.getFullStackTrace(runtimeException).getBytes());
-			getOutputStream().flush();
+			manejoExcepcionPorOrigen(runtimeException);
+//			getOutputStream().write(ExceptionUtils.getFullStackTrace(runtimeException).getBytes());
+//			getOutputStream().flush();
 		}
 
 	} 
@@ -139,14 +159,14 @@ public abstract class BaseController{
 	
 	@ExceptionHandler(Exception.class)
 	public void manejarExcepcionJakarta(Exception exception) throws IOException{
-		manejoExcepcionPorOrigen(exception.getMessage());
+		manejoExcepcionPorOrigen(exception);
 		log.error(ExceptionUtils.getFullStackTrace(exception));
 
 	} 
 
 	@ExceptionHandler(JakartaException.class)
 	public void manejarExcepcionJakarta(JakartaException exception) throws IOException{
-		manejoExcepcionPorOrigen(exception.getMessage());
+		manejoExcepcionPorOrigen(exception.getMessage(),exception.getDescripcion());
 		log.error(ExceptionUtils.getFullStackTrace(exception));
 
 	} 

@@ -13,6 +13,7 @@ import org.zkoss.zul.Messagebox;
 import com.jkt.common.Operaciones;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.FormaFacturacionOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListItemsOV;
@@ -123,11 +124,11 @@ public abstract class ComprobanteVM extends ViewModel {
 		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")){
 			return false;
 		}
-		
+
 		return true;
 	}
 
-	private boolean validarDescriptible(DescriptibleOV desc, String mensaje){
+	protected boolean validarDescriptible(DescriptibleOV desc, String mensaje){
 		if (desc==null || desc.getCodigo()==null || desc.getCodigo().isEmpty()) {
 			Messagebox.show(mensaje);
 			return false;
@@ -264,5 +265,24 @@ public abstract class ComprobanteVM extends ViewModel {
 		this.lNotas = lNotas;
 	}
 
+	protected void nuevo(){
+		this.clienteOV = new DescriptibleOV();
+		this.sucursalOV = new SucursalOV();
+		this.lPreciosOV = new DescriptibleOV();
+		this.lDeterminacionesQuimicas = new ArrayList<ItemsOV>();
+		this.lDeterminacionesElectricas = new ArrayList<ItemsOV>();
+		this.lNotas = new ArrayList<NotaOV>();
+		
+		this.items = new ArrayList<ItemsOV>();
+		this.lMonedas = new ListDescriptibleOV();
+
+		this.contactos = new ListDescriptibleOV();
+
+		this.vendedorOV = new DescriptibleOV();
+		this.representanteOV = new DescriptibleOV();
+		
+		this.contactoSeleccionado = new DescriptibleOV();
+	}
+	
 
 }

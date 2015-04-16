@@ -26,6 +26,7 @@ public class Presupuesto extends ComprobanteVenta {
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
+	
 
 	/*
 	 * Helper methods.

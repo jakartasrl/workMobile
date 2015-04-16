@@ -2,16 +2,18 @@
 
 
 <zk>
-
 	<device-config>
 		<device-type>ajax</device-type>
-		<timeout-uri>/index.zul</timeout-uri>
-		<!-- An empty URL can cause the browser to reload the same URL -->
+		<timeout-uri>/index.zul</timeout-uri><!-- An empty URL can cause the 
+			browser to reload the same URL -->
 	</device-config>
 
+	<error-page>
+		<exception-type>com.jkt.common.ServletException</exception-type>
+		<location>/errorDetalle.zul</location>
+	</error-page>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error.zul</location>
 	</error-page>
-	
 </zk>

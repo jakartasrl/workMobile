@@ -1,73 +1,66 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:left;">
-		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarFormaFacturacion')" tooltiptext="Agregar un nuevo item.">
-			 <attribute name="onClick"><![CDATA[
-					//box.pagingPosition = "top";
-					//siempre retorna a la primer pagina
-					boxMateriales.setActivePage(0);
-        		]]></attribute>
-		</button>
-			<label value="Agregar un item"></label>
+	<vlayout width="100%" style="text-align:left;margin-left:400px">
+		<hlayout>
+			<button style="margin-bottom:2px;margin-left:40px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarFormaFacturacion')" tooltiptext="Agregar un nuevo item.">
+				 <attribute name="onClick"><![CDATA[
+						//box.pagingPosition = "top";
+						//siempre retorna a la primer pagina
+						boxMateriales.setActivePage(0);
+	        		]]></attribute>
+			</button>
+			<label value="Agregar una forma de facturación"></label>
+		</hlayout>
 	</vlayout>
 
 
-	<listbox width="890px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="8" emptyMessage="No existen items aun.">
+	<listbox width="910px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
 
 		<listhead style="heigth:10px;" >
-			<listheader width="100px" label="Cod.Articulo"/>
-			<listheader width="310px" label="Desc.Articulo"/>
-			<listheader width="100px" label="Cantidad"/>
-			<listheader width="150px" label="Moneda"/>
+		
+			<listheader width="310px" label="Descripción"/>
+			
+			<listheader width="90px" label="%"/>
 			<listheader width="90px" label="Importe"/>
-			<listheader width="100px" label="Total"/>
+			
+			<listheader width="100px" label="Cod.Cond.Pago"/>
+			<listheader width="310px" label="Descripción Cond.Pago"/>
+		
 		</listhead>
 
 		<template name="model">
 			<listitem>
 
+				<listcell>
+					<textbox width="300px" value="@bind(each.descripcion)" constraint="no empty"/>
+				</listcell>
+
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox constraint="no empty" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
-						<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
-					</hlayout>
-				</listcell>
-						
-				<listcell>
-					<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>
-				</listcell>
-	
-				<listcell style="text-align:center" >
-					<hlayout>
-						<textbox width="40px;" value="@bind(each.cantidad)" constraint="no empty" />
+						<textbox sclass="importe" width="60px;" value="@bind(each.porcentaje)" constraint="no empty"/>
 					</hlayout>
 				</listcell>
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<combobox width="95px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
-							<template name="model" var="moneda">
-								<comboitem label="@bind(moneda.descripcion)" />
-							</template>
-						</combobox>
-					</hlayout>
-				</listcell>
-		
-				<listcell style="text-align:center">
-					<hlayout>
-						<textbox width="60px;" value="@bind(each.importe)" constraint="no empty"/>
+						<textbox sclass="importe" width="60px;" value="@bind(each.importe)" constraint="no empty"/>
 					</hlayout>
 				</listcell>
 							
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox width="60px;" value="@bind(each.importeTotal)" readonly="true"/>
+						<textbox constraint="no empty" sclass="campoCodigo" value="@bind(each.condicionDePago.codigo)" onBlur="@command('validarCampo', clase='condicionPago', codigo=self.value, ov=each.condicionDePago)" />
+						<button label="..." onClick="@command('openHelper', clase='condicionPago', ov=each.condicionDePago)" />
 					</hlayout>
 				</listcell>
 								
+				<listcell>
+					<textbox width="300px" value="@bind(each.condicionDePago.descripcion)" readonly="true"/>
+				</listcell>
 
 			</listitem>
 		</template>
 
 	</listbox>
+
 </zk>

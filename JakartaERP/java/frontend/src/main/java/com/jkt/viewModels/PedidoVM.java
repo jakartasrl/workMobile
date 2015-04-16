@@ -30,6 +30,7 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.FormaFacturacionOV;
 import com.jkt.ov.HelperOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
@@ -59,13 +60,20 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	
 	private DescriptibleOV plantillaDescriptible = new DescriptibleOV();
 
+	
+	@Command
+	@NotifyChange("comprobanteOV")
+	public void agregarFormaFacturacion(){
+		this.comprobanteOV.getFacturaciones().add(0, new FormaFacturacionOV());
+	}
+	
 	/**
 	 * Guarda un objeto
 	 */
 	@Command
 	public void guardar(){
 		
-		if(!validarOV()){
+		if(!super.validarOV()){
 			return;
 		}
 		
@@ -82,29 +90,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	@Command
 	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
-		
-		this.clienteOV = new DescriptibleOV();
-		this.sucursalOV = new SucursalOV();
-		this.lPreciosOV = new DescriptibleOV();
-		this.lDeterminacionesQuimicas = new ArrayList<ItemsOV>();
-		this.lDeterminacionesElectricas = new ArrayList<ItemsOV>();
-		this.lNotas = new ArrayList<NotaOV>();
-		
+		super.nuevo();
 		this.lDocumentacion = new ArrayList<DescriptibleOV>();
 		this.docEntregados= new ArrayList<DescriptibleOV>();
-
-		this.items = new ArrayList<ItemsOV>();
-		this.lMonedas = new ListDescriptibleOV();
-
-		this.contactos = new ListDescriptibleOV();
-
-		this.vendedorOV = new DescriptibleOV();
-		this.representanteOV = new DescriptibleOV();
-		
 		this.comprobanteOV= new PedidoOV();
-		
-		this.contactoSeleccionado = new DescriptibleOV();
-		
 		init();
 	}
 	
@@ -212,9 +201,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				this.items.add(itemsOV);
 				break;
 			case 'M':
-//				plantilla = new DescriptibleOV();
-//				plantilla.setDescripcion(itemsOV.getDescripcion());
-//				itemsOV.setPlantilla(plantilla);
 				itemsOV.setProductoOV(Operaciones.recuperarObjetoDescriptible("articulos", itemsOV.getIdProducto()));
 				this.itemsArticulos.add(itemsOV);
 				break;
