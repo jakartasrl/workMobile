@@ -340,6 +340,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.contactos = new ListDescriptibleOV();
 		this.contactoSeleccionado=new DescriptibleOV();
 		
+		this.comprobanteOV=new PedidoOV();
+		
 	}
 	
 

@@ -13,5 +13,6 @@ public class FormaFacturacionOV extends ObjectView {
 	private int porcentaje;
 	private double importe;
 	private DescriptibleOV condicionDePago=new DescriptibleOV();
+	private long idCondicionDePago;
 	
 }

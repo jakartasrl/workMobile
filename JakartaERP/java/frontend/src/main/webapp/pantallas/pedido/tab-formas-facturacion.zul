@@ -1,4 +1,4 @@
-<zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
+<zk id="contentFF" viewModel="@id('vm') @load(viewModel)">
 
 	<vlayout width="100%" style="text-align:left;margin-left:400px">
 		<hlayout>
@@ -6,7 +6,7 @@
 				 <attribute name="onClick"><![CDATA[
 						//box.pagingPosition = "top";
 						//siempre retorna a la primer pagina
-						boxMateriales.setActivePage(0);
+						boxFF.setActivePage(0);
 	        		]]></attribute>
 			</button>
 			<label value="Agregar una forma de facturación"></label>
@@ -14,7 +14,7 @@
 	</vlayout>
 
 
-	<listbox width="910px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
+	<listbox width="910px" id="boxFF" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
 
 		<listhead style="heigth:10px;" >
 		
@@ -49,7 +49,7 @@
 							
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox constraint="no empty" sclass="campoCodigo" value="@bind(each.condicionDePago.codigo)" onBlur="@command('validarCampo', clase='condicionPago', codigo=self.value, ov=each.condicionDePago)" />
+						<textbox constraint="no empty" sclass="campoCodigo-small" value="@bind(each.condicionDePago.codigo)" onBlur="@command('validarCampo', clase='condicionPago', codigo=self.value, ov=each.condicionDePago)" />
 						<button label="..." onClick="@command('openHelper', clase='condicionPago', ov=each.condicionDePago)" />
 					</hlayout>
 				</listcell>

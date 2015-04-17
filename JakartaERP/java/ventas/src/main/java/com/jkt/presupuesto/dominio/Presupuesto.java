@@ -16,7 +16,7 @@ import com.jkt.pedido.dominio.FormaFacturacion;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-@Data
+//@Data
 public class Presupuesto extends ComprobanteVenta {
 
 	// Ver en los padres, vendedor, representante, cliente, clienteSucursal, condPago, comprobanteRelacionado
@@ -27,6 +27,45 @@ public class Presupuesto extends ComprobanteVenta {
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
 	
+	public List<FormaFacturacion> getFormasFacturacion() {
+		return formasFacturacion;
+	}
+
+	public void setFormasFacturacion(List<FormaFacturacion> formasFacturacion) {
+		this.formasFacturacion = formasFacturacion;
+	}
+
+	public List<Nota> getNotas() {
+		return notas;
+	}
+
+	public void setNotas(List<Nota> notas) {
+		this.notas = notas;
+	}
+
+	public List<PresupuestoDet> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<PresupuestoDet> detalles) {
+		this.detalles = detalles;
+	}
+
+	public ListaPrecios getListaPrecios() {
+		return listaPrecios;
+	}
+
+	public void setListaPrecios(ListaPrecios listaPrecios) {
+		this.listaPrecios = listaPrecios;
+	}
+
+	public List<Nota> getNotasTransientes() {
+		return notasTransientes;
+	}
+
+	public void setNotasTransientes(List<Nota> notasTransientes) {
+		this.notasTransientes = notasTransientes;
+	}
 
 	/*
 	 * Helper methods.
@@ -36,7 +75,6 @@ public class Presupuesto extends ComprobanteVenta {
 	 * 
 	 */
 	public void agregarNota(Nota n){
-
 		if (n.isIncluida()) {
 			if (!notas.contains(n)) {
 				//Ya no existe en la lista y debe ser incluida, se agrega

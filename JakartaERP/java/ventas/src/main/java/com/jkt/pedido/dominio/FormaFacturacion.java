@@ -16,7 +16,7 @@ public class FormaFacturacion extends PersistentEntity {
 
 	private String descripcion;
 	private int porcentaje;
-	private double costo;
+	private double importe;
 	private CondPago condicionPago;
 
 }

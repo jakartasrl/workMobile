@@ -28,7 +28,7 @@
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox constraint="no empty" sclass="campoCodigo" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
+						<textbox constraint="no empty" sclass="campoCodigo-small" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
 						<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
 					</hlayout>
 				</listcell>

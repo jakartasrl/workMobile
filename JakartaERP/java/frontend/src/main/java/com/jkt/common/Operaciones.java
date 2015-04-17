@@ -6,7 +6,6 @@ import java.net.URL;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.zkoss.zk.ui.Executions;
 
 import com.google.gson.Gson;
@@ -66,27 +65,16 @@ public class Operaciones {
 			}
 			responseCode = con.getResponseCode();
 		} catch (Exception e1) {
-			throw new ServletException("Error invocando la operacion:"+operacion,ExceptionUtils.getFullStackTrace(e1));
+			// TODO Auto-generated catch block
+			throw new RuntimeException();
 		}
 		if (responseCode != 200) {
 			String error = gson.fromJson(con.getHeaderField("error"), String.class);
-			String descError =null;
-			con.getHeaderFields();
+			String descError = con.getHeaderField("descError");
 			if (error == null || error.length() == 0) {
 				error = "Error inesperado";
 			}
-			try {
-				if(con.getErrorStream()!=null){
-					descError= new String(IOUtils.toByteArray(con.getErrorStream()));
-				}
-			} catch (IOException e) {
-			}
-	 
-			if(descError!=null && !descError.isEmpty()){
-				throw new ServletException(error,descError);
-			}else{
-				throw new ServletException(error,null);
-			}
+			throw new ServletException(error.toString(), descError);
 		} else {
 			if (clazz != null) {
 				String json;
@@ -94,9 +82,11 @@ public class Operaciones {
 					json = new String(Base64.decodeBase64(IOUtils.toByteArray(con.getInputStream())));
 					result = gson.fromJson(json, clazz);
 				} catch (IOException e) {
-					throw new ServletException("Error inesperado", ExceptionUtils.getFullStackTrace(e));
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
+
 		}
 		return result;
 	}

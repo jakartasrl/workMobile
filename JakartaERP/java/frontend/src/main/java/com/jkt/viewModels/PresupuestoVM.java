@@ -5,9 +5,17 @@ package com.jkt.viewModels;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import lombok.Data;
 
@@ -16,7 +24,11 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.util.media.AMedia;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -28,9 +40,7 @@ import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.NotaOV;
-import com.jkt.ov.PedidoOV;
 import com.jkt.ov.PresupuestoOV;
-import com.jkt.ov.SucursalOV;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
 
@@ -53,10 +63,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.comprobanteOV.getFacturaciones().add(0, new FormaFacturacionOV());
 	}
 	
-	
-	/**
-	 * Guarda un objeto
-	 */
+	@SuppressWarnings("rawtypes")
 	@Command
 	public void guardar(){
 //		
@@ -69,12 +76,30 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		}
 //		
 		completarOV();
-//		Operaciones.ejecutar("GuardarPedido", presupuestoOV);
-//		Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
-		Messagebox.show("No se ha implementado aun.", "Mensaje",null, null,null);
+		final DescriptibleOV descripcionPresupuesto = (DescriptibleOV) Operaciones.ejecutar("GuardarPresupuesto", comprobanteOV, DescriptibleOV.class);
+		
+		Messagebox.show("¿Desea generar un comprobante del presupuesto generado?", "Reporte de Presupuesto", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
+			public void onEvent(Event evt) throws InterruptedException, IOException {
+		        if (evt.getName().equals("onOK")) {
+					ContainerOV datosPDF = (ContainerOV) Operaciones.ejecutar("GenerarComprobantePresupuesto", new ContainerOV(String.valueOf(descripcionPresupuesto.getId())), ContainerOV.class);
+					
+					String sPath = datosPDF.getString1();
+					String sFile = datosPDF.getString2();
+
+			   		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			   		
+			   		hashMap.put("Path", sPath);
+			   		hashMap.put("File", sFile);
+			   		
+					Window window = (Window) Executions.createComponents("/pantallas/presupuesto/reporte2.zul", null, hashMap);
+					window.doModal();
+		        }
+		    }
+		}
+		);
+		
 	}
 
-	
 	private boolean validaPresupuesto() {
 		List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
 		
@@ -86,21 +111,17 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			}
 			
 			if (formaFacturacionOV.getDescripcion()==null || formaFacturacionOV.getDescripcion().isEmpty()) {
-				Messagebox.show("Complete la descripcion del item "+i+" en la solapa 'Formas de facturación'.");
+				Messagebox.show("Complete la descripción del item "+i+" en la solapa 'Formas de facturación'.");
 				return false;
 			}
 			i++;
 		}
-		
 		return true;
 	}
 
 
-	/**
-	 * 
-	 */
 	@Command
-	@NotifyChange({"presupuestoOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		super.nuevo();
 		this.comprobanteOV= new PresupuestoOV();
@@ -123,11 +144,60 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		objetoOV.setString1(String.valueOf(this.cotizacionDescriptible.getId()));
 		PresupuestoOV ovRecuperado = (PresupuestoOV) Operaciones.ejecutar("TraerCotizacionParaPresupuesto", objetoOV, PresupuestoOV.class);
 		
-		cargarDesdeOV(ovRecuperado);
+		cargarPresupuestoDesdeCotizacion(ovRecuperado);
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
+	private void cargarPresupuestoDesdeCotizacion(PresupuestoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException {
+		this.vendedorOV = Operaciones.recuperarObjetoDescriptible("vendedor",ovRecuperado.getIdVendedor());
+		this.representanteOV = Operaciones.recuperarObjetoDescriptible("representante",ovRecuperado.getIdRepresentante());
+		this.clienteOV =  Operaciones.recuperarObjetoDescriptible("clientes",ovRecuperado.getIdCliente());
+		
+		DescriptibleOV sucursal = Operaciones.recuperarObjetoDescriptible("clienteSucursal",ovRecuperado.getIdSucursal());
+		copyProperties(this.sucursalOV, sucursal);
+		
+		actualizarCampoSucursal();
+		
+		this.comprobanteOV.setId(ovRecuperado.getId());
+		this.comprobanteOV.setItems(new ArrayList<ItemsOV>());
+		
+		this.items=new ArrayList<ItemsOV>();
+		this.itemsArticulos =new ArrayList<ItemsOV>();
+		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
+		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
+		
+		actualizarNotas(ovRecuperado);
+
+		actualizarContactosReferencia();
+		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
+		
+		
+		DescriptibleOV plantilla;
+		
+		for (ItemsOV itemsOV : ovRecuperado.getItems()) {
+			
+			itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));
+			itemsOV.setMoneda(completarCombo(this.lMonedas.getList(), itemsOV.getIdMoneda()));
+		
+			plantilla = new DescriptibleOV();
+			
+			Random rand = new Random();
+		    int randomNum = rand.nextInt((10000 - 1) + 1) + 1;
+			
+			plantilla.setId(randomNum);
+			
+			plantilla.setDescripcion(itemsOV.getDescripcion());
+			itemsOV.setPlantilla(plantilla);
+			
+			this.items.add(itemsOV);
+		
+		}
+		
+		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
+		this.comprobanteOV.setNro(ovRecuperado.getNro());
+	}
+
 	/**
 	 * A partir de un presupuesto, completa datos para el nuevo pedido.
 	 */
@@ -142,6 +212,10 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	}
 	
 	
+	/**
+	 * Carga los datos correspondientes, copiando desde los ids, hacia los descriptibles, generalmente para mostrar combos correctamente
+	 * 
+	 */
 	private void cargarDesdeOV(PresupuestoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException{
 		this.vendedorOV = Operaciones.recuperarObjetoDescriptible("vendedor",ovRecuperado.getIdVendedor());
 		this.representanteOV = Operaciones.recuperarObjetoDescriptible("representante",ovRecuperado.getIdRepresentante());
@@ -232,6 +306,9 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	}
 	
 	
+	/**
+	 * Asigna desde los descriptibles, a ids, para poder enviar al fwk y que setee referencias existentes.(o no, si le id es 0, sera una nueva entidad)
+	 */
 	private void completarOV() {
 		comprobanteOV.setIdCliente(clienteOV.getId());
 		comprobanteOV.setIdSucursal(sucursalOV.getId());
@@ -252,9 +329,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 		for (ItemsOV itemsOV : itemsArticulos) {
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
 			itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
-			itemsOV.setTipo(Integer.valueOf(itemsOV.getTipoVenta().getCodigo()));
 			itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
 			itemsFinal.add(itemsOV);
 		}
@@ -275,6 +350,11 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		 * Junta todos los items
 		 */
 		comprobanteOV.setItems(itemsFinal);
+		
+		List<FormaFacturacionOV> facturaciones = comprobanteOV.getFacturaciones();
+		for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
+			formaFacturacionOV.setIdCondicionDePago(formaFacturacionOV.getCondicionDePago().getId());
+		}
 		
 	}
 
@@ -308,10 +388,11 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.contactos = new ListDescriptibleOV();
 		this.contactoSeleccionado=new DescriptibleOV();
 		
+		this.comprobanteOV= new PresupuestoOV();
 	}
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"presupuestoOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {

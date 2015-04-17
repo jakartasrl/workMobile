@@ -56,7 +56,7 @@
 							
 							<hlayout style="margin:10px;">
 								<label value="Cargar Plantilla:" />
-								<textbox sclass="campoCodigo" value="@bind(each.plantilla.codigo)" onBlur="@command('validarCampo', clase='plantilla', codigo=self.value, ov=each.plantilla)" />
+								<textbox sclass="campoCodigo-small" value="@bind(each.plantilla.codigo)" onBlur="@command('validarCampo', clase='plantilla', codigo=self.value, ov=each.plantilla)" />
 								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
 							</hlayout>
 							

@@ -21,12 +21,12 @@
 			    		<label style="width:100px;" value="En Base a Cotización ... " />
 			    		
 			    		<hlayout >
-							<textbox sclass="campoCodigo" value="@bind(vm.comprobanteOV.nroCotizacion)" readonly="false" tabindex="1" />
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.comprobanteOV.nroCotizacion)" readonly="false" tabindex="1" />
 							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='cotizacion', post='cargarCotizacion',ov=vm.cotizacionDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
 			    		</hlayout>
 
 						<label value="Nro.Presupuesto : " />
-						<textbox class="campoCodigo" value="@bind(vm.comprobanteOV.nro)" readonly="true"/>
+						<textbox class="campoCodigo-medium" value="@bind(vm.comprobanteOV.nro)" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
 						<datebox id="fecha" value="@bind(vm.comprobanteOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" tabindex="2"/>
@@ -36,12 +36,12 @@
 			    	<row sclass="fila-maestro">
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox sclass="campoCodigo" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="3"/>
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="3"/>
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	
 						<hlayout>
-							<textbox sclass="campoCodigo" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
+							<textbox sclass="campoCodigo-vsmall" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
 							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
 
@@ -56,7 +56,7 @@
 
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
-							<textbox sclass="campoCodigo" value="@bind(vm.lPreciosOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='listaPrecios', codigo=self.value, ov=vm.lPreciosOV, post='actualizarDeterminaciones')" tabindex="5" />
+							<textbox sclass="campoCodigo-small" value="@bind(vm.lPreciosOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='listaPrecios', codigo=self.value, ov=vm.lPreciosOV, post='actualizarDeterminaciones')" tabindex="5" />
 							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
