@@ -4,8 +4,8 @@
 <zk>
 	<device-config>
 		<device-type>ajax</device-type>
-		<timeout-uri>/index.zul</timeout-uri><!-- An empty URL can cause the 
-			browser to reload the same URL -->
+		<timeout-uri>/index.zul</timeout-uri><!-- An empty URL can cause the browser 
+			to reload the same URL -->
 	</device-config>
 
 	<error-page>
@@ -16,4 +16,12 @@
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error.zul</location>
 	</error-page>
+
+	<library-property>
+		<name>org.zkoss.theme.preferred</name>
+<!-- 		<value>silvertail</value> sapphire or silvertail, atlantic -->
+		<value>Atlantic</value> 
+<!-- 		sapphire or silvertail, atlantic -->
+	</library-property>
+
 </zk>

@@ -12,7 +12,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 
 /**
- * <p>Operación generica para realizar diferentes validaciones.</p>
+ * <p>Operaciï¿½n generica para realizar diferentes validaciones.</p>
  * 
  * @see ValidarExistencia
  * @see ValidarExistenciaConMaestro
@@ -26,7 +26,7 @@ public abstract class Validar extends Operation{
 	
 	/**
 	 * <p>Campo por el cual es filtrada la entidad recibida.</p>
-	 * <p>El campo principal de filtro en esta operación será el código.</p>
+	 * <p>El campo principal de filtro en esta operaciï¿½n serï¿½ el cï¿½digo.</p>
 	 */
 
 	protected static final String ENTIDAD_FIELD = "entidad".toUpperCase();
@@ -79,8 +79,8 @@ public abstract class Validar extends Operation{
 	protected abstract void manejoDeExistencia(PersistentEntity entity,String className, String codigo)throws ValidacionDeNegocioException;
 
 	/**
-	 * <p>Maneja un filtro avanzado, filtrando una entidad por codigo, y por el identificador de su dueño en la relacion.</p>
-	 * <p>(El dueño de una provincia es Pais, el dueño de un detalle de condicion de pago, es su correspondiente condición de pago)</p>
+	 * <p>Maneja un filtro avanzado, filtrando una entidad por codigo, y por el identificador de su dueï¿½o en la relacion.</p>
+	 * <p>(El dueï¿½o de una provincia es Pais, el dueï¿½o de un detalle de condicion de pago, es su correspondiente condiciï¿½n de pago)</p>
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
@@ -116,7 +116,7 @@ public abstract class Validar extends Operation{
 		
 
 		/*
-		 * Por ahora esto servirá, pero es primordial un refactor cuando se pueda TODO FIXME
+		 * Por ahora esto servirï¿½, pero es primordial un refactor cuando se pueda TODO FIXME
 		 */
 		List<PersistentEntity> results = serviceRepository.getByProperties(clazz, Arrays.asList(filtroActivo,filtroMaestro, filtroEntidad));
 		if (results.size()>1) {
@@ -168,7 +168,7 @@ public abstract class Validar extends Operation{
 	
 	/**
 	 * 
-	 * Para darle un manejo diferente a la entidad buscada. Si la rutina buscada es la inexistencia, se ejecutará este metodo.
+	 * Para darle un manejo diferente a la entidad buscada. Si la rutina buscada es la inexistencia, se ejecutarï¿½ este metodo.
 	 * 
 	 */
 	protected void manejarInexistencia(PersistentEntity entity, String className, String codigo) throws ValidacionDeNegocioException {
@@ -186,7 +186,7 @@ public abstract class Validar extends Operation{
 	
 	
 	private void levantarExcepcion() throws JakartaException {
-		throw new JakartaException("Ocurrió un error al intentar recuperar la clase solicitada.");		
+		throw new JakartaException("Ocurriï¿½ un error al intentar recuperar la clase solicitada.");		
 	}
 	
 	protected Filtro crearFiltro(String nombre, String valor, String condicion,String tipo) {

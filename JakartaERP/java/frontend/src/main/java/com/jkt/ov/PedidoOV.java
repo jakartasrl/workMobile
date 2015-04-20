@@ -44,6 +44,8 @@ public class PedidoOV extends ObjectView {
 
 	private List<ItemsOV> items=new ArrayList<ItemsOV>();
 	private List<FormaFacturacionOV> facturaciones=new ArrayList<FormaFacturacionOV>();
+	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
+
 	
 	/**
 	 * A partir de la lista de todos los documentos y de los documentos seleccionados, forma una lista en la que se diferencian solamente por el campo activo.

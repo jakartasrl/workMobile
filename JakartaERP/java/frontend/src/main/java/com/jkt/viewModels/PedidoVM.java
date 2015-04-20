@@ -273,6 +273,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		
 		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);
+		comprobanteOV.setArchivos(this.archivos);
 		
 		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
 		

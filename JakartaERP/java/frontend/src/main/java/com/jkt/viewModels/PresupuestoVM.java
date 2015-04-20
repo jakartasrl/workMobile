@@ -316,6 +316,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		comprobanteOV.setIdVendedor(vendedorOV.getId());
 		comprobanteOV.setIdRepresentante(representanteOV.getId());
 		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
+		comprobanteOV.setArchivos(this.archivos);
 		
 		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
 		

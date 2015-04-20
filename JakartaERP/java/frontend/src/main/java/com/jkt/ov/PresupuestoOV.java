@@ -38,5 +38,6 @@ public class PresupuestoOV extends ObjectView {
 
 	private List<ItemsOV> items=new ArrayList<ItemsOV>();
 	private List<FormaFacturacionOV> facturaciones=new ArrayList<FormaFacturacionOV>();
+	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
 	
 }

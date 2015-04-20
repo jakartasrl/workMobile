@@ -56,9 +56,10 @@ public class MenuVM {
 			menues.add(MenuOV.newInstance("Laboratorio", "index-laboratorio.zul", "small"));
 			menues.add(MenuOV.newInstance("Equipo", "index-equipo.zul", "small"));
 			menues.add(MenuOV.newInstance("Determinacion", "index-determinacion.zul", "small"));
-
+	
 			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "small"));
 			menues.add(MenuOV.newInstance("Presupuesto", "index-presupuesto.zul", "small"));
+			menues.add(MenuOV.newInstance("Plantilla", "pantallas/plantilla/plantilla.zul", "small"));
 
 //		}
 		
@@ -66,10 +67,16 @@ public class MenuVM {
 //		news.add("Jueves 16 de Abril- Argentina está de fiesta");
 //		news.add("Viernes 17 de Abril- Aique");
 			
-		news.add("Reactores - Serie o limitadores de corriente de cortocircuido. Paralelo, derivación o Shunt.");
-		news.add("Transformadores - Potencia - Distribución - Especiales ");
-		news.add("El Mural mas grande del mundo.");
-		news.add("Los Conce. Tel.:(+54 11)46932220");
+//		news.add("Reactores - Serie o limitadores de corriente de cortocircuido. Paralelo, derivación o Shunt.");
+//		news.add("Transformadores - Potencia - Distribución - Especiales ");
+//		news.add("El Mural mas grande del mundo.");
+//		news.add("Los Conce. Tel.:(+54 11)46932220");
+		
+		news.add("Miercoles 6 de Mayo, o Jueves 7 - River Plata gana 3-0.");
+		news.add("Miercoles 7 de Mayo, o Jueves 14 - River Plata gana 1-0. Logra pasar a Cuartos de final de la copa B. Libertadores.");
+		news.add("Jueves 14, o Viernes 15 de Mayo- Argentina está de fiesta.");
+		news.add("Sabado siguiente - Vamos Millonario!!.");
+
 //		news.add("18 de Abril - Daniel Shapochnik");
 //		news.add("13 de Mayo - Peñalva");
 //		news.add("17 de Mayo - Eliana");

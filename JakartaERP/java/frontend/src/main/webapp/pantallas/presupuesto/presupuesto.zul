@@ -81,9 +81,11 @@
 			        <tab id="labQuim" label="Laboratorio Quimico" />
 			        <tab id="mat" label="Materiales" />
 			        <tab id="dComerciales" label="Datos Comerciales" />
-			        <tab width="10px" style="background-color:black;" id="separador" label="" disabled="true" />
+			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
 			        <tab id="notas" label="Notas" />
 			        <tab id="formasFact" label="Formas de Facturacion" />
+			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
+			        <tab id="archivos" label="Archivos" />
 			    </tabs>
 			    <tabpanels>
 			    
@@ -117,6 +119,14 @@
 			        
 			        <tabpanel>
 						<include id="docContent" hflex="1" src="/pantallas/pedido/tab-formas-facturacion.zul" viewModel="${vm}" />
+					</tabpanel>
+
+			        <tabpanel>
+						<label value="Empty Tab"></label>
+					</tabpanel>
+					
+			        <tabpanel>
+						<include id="archivosContent" hflex="1" src="/pantallas/comprobante-common/tab-archivos.zul" viewModel="${vm}" />
 					</tabpanel>
 					
 			    </tabpanels>

@@ -1,4 +1,0 @@
-<window title="Reporte" border="normal" closable="true" sizable="true" width="800px" height="500px"
-apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ReporteVM')" >
-	<iframe id="report" height="100%" width="100%" autohide="true" src="@bind(vm.media)"></iframe>
-</window>

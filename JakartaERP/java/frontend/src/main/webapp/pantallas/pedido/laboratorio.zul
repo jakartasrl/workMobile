@@ -2,7 +2,7 @@
 
 	<vlayout>
 
-		<grid model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="10" width="502px" emptyMessage="No existen laboratorios disponibles." style="margin-top:5px;">
+		<grid id ="gridLaboratorio" model="@bind(vm.ov.laboratorios)" mold="paging" pageSize="10" width="502px" emptyMessage="No existen laboratorios disponibles." style="margin-top:5px;">
 		
 			<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 				<auxheader label="Lista de Laboratorios" colspan="3" />
@@ -17,7 +17,7 @@
 			<rows>
 				<template name="model">
 					<row>
-						<textbox inplace="true" value="@bind(each.codigo)" constraint="no empty" maxlength="15"/>
+						<textbox id="codigo-${each.codigo}" inplace="true" value="@bind(each.codigo)" constraint="no empty" maxlength="15"/>
 						<textbox inplace="true" value="@bind(each.descripcion)" width="100%"/>
 						<checkbox checked="@bind(each.activo)" />
 					</row>

@@ -1,5 +1,11 @@
 package com.jkt.viewModels;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +14,16 @@ import lombok.Data;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.io.Files;
+import org.zkoss.util.media.AMedia;
+import org.zkoss.util.media.Media;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
+import com.jkt.ov.ArchivoOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
-import com.jkt.ov.FormaFacturacionOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListItemsOV;
@@ -37,6 +47,13 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected DescriptibleOV representanteOV=new DescriptibleOV();
 	protected ListDescriptibleOV contactos=new ListDescriptibleOV();
 	protected DescriptibleOV contactoSeleccionado= new DescriptibleOV();
+	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
+	
+	protected String rutaCompartida="c:\\tmp\\";
+	
+	public ComprobanteVM(){
+		
+	}
 	
 	@NotifyChange({"items","lDeterminacionesQuimicas","lDeterminacionesElectricas","itemsArticulos"})
 	@Command
@@ -125,6 +142,16 @@ public abstract class ComprobanteVM extends ViewModel {
 			return false;
 		}
 
+		
+		for (ArchivoOV archivoOV : this.archivos) {
+			if (archivoOV.getFileName() !=null && !archivoOV.getFileName().isEmpty()) {
+				if (archivoOV.getDescripcion()==null || archivoOV.getDescripcion().isEmpty()) {
+					Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
+					return false;
+				}
+			}
+		}
+		
 		return true;
 	}
 
@@ -145,6 +172,11 @@ public abstract class ComprobanteVM extends ViewModel {
 	@NotifyChange("itemsArticulos")
 	public void agregarElementoArticulo(){
 		this.itemsArticulos.add(0, new ItemsOV());
+	}
+	@Command
+	@NotifyChange("archivos")
+	public void agregarArchivo(){
+		this.archivos.add(0, new ArchivoOV());
 	}
 	
 	
@@ -285,4 +317,45 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 	
 
+	@Command
+	@NotifyChange("archivos")
+	public void subirArchivo(@BindingParam("archivo") Media media, @BindingParam("archivoActual") ArchivoOV archivoActual) throws IOException {
+
+		if (media.isBinary()) {
+			Files.copy(new File(generarRuta(media)), media.getStreamData());
+		} else {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(generarRuta(media)));
+			Files.copy(writer, media.getReaderData());
+		}
+		
+		archivoActual.setFileName(media.getName());
+		archivoActual.setFileURL(this.rutaCompartida);
+		archivoActual.setContentType(media.getContentType());
+		archivoActual.setFormat(media.getFormat());
+		
+	}
+
+	
+	@Command
+	public void obtenerArchivo( @BindingParam("archivoActual") ArchivoOV archivoActual) throws IOException {
+		
+		if (archivoActual.getFileName()==null || archivoActual.getFileName().isEmpty()) {
+			return;
+		}
+		
+		File f = new File(archivoActual.getFileURL() + archivoActual.getFileName());
+		byte[] buffer = new byte[(int) f.length()];
+		FileInputStream fs = new FileInputStream(f);
+		fs.read(buffer);
+		fs.close();
+		ByteArrayInputStream is = new ByteArrayInputStream(buffer);
+		AMedia fileContent = new AMedia(archivoActual.getFileName(), archivoActual.getFormat(), archivoActual.getContentType(), is);
+
+		Filedownload.save(fileContent);
+	}
+	
+	protected String generarRuta(Media media) {
+		return this.rutaCompartida+media.getName();
+	}
+	
 }
