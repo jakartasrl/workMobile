@@ -19,9 +19,7 @@
 
 	<library-property>
 		<name>org.zkoss.theme.preferred</name>
-<!-- 		<value>silvertail</value> sapphire or silvertail, atlantic -->
-		<value>Atlantic</value> 
-<!-- 		sapphire or silvertail, atlantic -->
+		<value>Atlantic</value> <!-- sapphire or silvertail, atlantic -->
 	</library-property>
 
 </zk>

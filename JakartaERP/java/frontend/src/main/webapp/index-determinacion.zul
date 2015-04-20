@@ -1,4 +1,6 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
+
 
 <zk>
 	<style src="/style/template.css" />

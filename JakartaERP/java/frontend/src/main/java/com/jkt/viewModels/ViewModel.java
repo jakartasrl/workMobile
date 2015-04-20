@@ -13,6 +13,8 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -200,6 +202,13 @@ public abstract class ViewModel {
 			}
 		}
 		return null;
+	}
+	
+	@Command
+	public void logOut(){
+		Session sess = Sessions.getCurrent();
+        sess.removeAttribute("userCredential");
+        Executions.sendRedirect("/login.zul");
 	}
 	
 }

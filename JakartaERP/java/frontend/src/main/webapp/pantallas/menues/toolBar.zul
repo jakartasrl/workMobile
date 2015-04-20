@@ -17,8 +17,7 @@
 			</div>
 
 			<div hflex="1" droppable="true" style="text-align: right;">
-				<toolbarbutton image="/pantallas/icons/help.png" onClick="@command('salir')" tooltiptext="Manual" />
-				<toolbarbutton image="/pantallas/icons/config.png" onClick='alert("not found yet");' tooltiptext="Configuración" />
+				<toolbarbutton image="/pantallas/icons/export.png" onClick="@command('logOut')" tooltiptext="Salir" />
 			</div>
 
 		</hlayout>

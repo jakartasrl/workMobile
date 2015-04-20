@@ -17,6 +17,8 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Messagebox;
 
@@ -29,6 +31,7 @@ import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListItemsOV;
 import com.jkt.ov.NotaOV;
 import com.jkt.ov.SucursalOV;
+import com.jkt.ov.UserOV;
 
 @Data
 public abstract class ComprobanteVM extends ViewModel {
@@ -50,9 +53,12 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
 	
 	protected String rutaCompartida="c:\\tmp\\";
+	protected UserOV userOV;
+	
 	
 	public ComprobanteVM(){
-		
+		Session sess = Sessions.getCurrent();
+		this.userOV = (UserOV) sess.getAttribute("userCredential");
 	}
 	
 	@NotifyChange({"items","lDeterminacionesQuimicas","lDeterminacionesElectricas","itemsArticulos"})
@@ -176,7 +182,12 @@ public abstract class ComprobanteVM extends ViewModel {
 	@Command
 	@NotifyChange("archivos")
 	public void agregarArchivo(){
-		this.archivos.add(0, new ArchivoOV());
+		ArchivoOV archivoOV = new ArchivoOV();
+		
+		archivoOV.setIdUsuario(this.userOV.getId());
+		archivoOV.setUsuario(this.userOV.getName()+" "+this.userOV.getLastName());
+		
+		this.archivos.add(0, archivoOV);
 	}
 	
 	

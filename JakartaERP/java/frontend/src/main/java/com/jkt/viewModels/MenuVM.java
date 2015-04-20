@@ -72,8 +72,8 @@ public class MenuVM {
 //		news.add("El Mural mas grande del mundo.");
 //		news.add("Los Conce. Tel.:(+54 11)46932220");
 		
-		news.add("Miercoles 6 de Mayo, o Jueves 7 - River Plata gana 3-0.");
-		news.add("Miercoles 7 de Mayo, o Jueves 14 - River Plata gana 1-0. Logra pasar a Cuartos de final de la copa B. Libertadores.");
+		news.add("Miercoles 6 de Mayo, o Jueves 7 - River Plate gana 3-0.");
+		news.add("Miercoles 7 de Mayo, o Jueves 14 - River Plate gana 1-0. Logra pasar a Cuartos de final de la copa B. Libertadores.");
 		news.add("Jueves 14, o Viernes 15 de Mayo- Argentina está de fiesta.");
 		news.add("Sabado siguiente - Vamos Millonario!!.");
 

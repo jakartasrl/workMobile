@@ -64,12 +64,12 @@ public class Configuration {
 	
 		
 		
-//		List operaciones = (List) digesterParaNombresDeOperaciones.parse(abrirRecurso(rutaOperaciones));
-//		NombreOperacion nombreOperacion;
-//		for (Object object : operaciones) {
-//			nombreOperacion=(NombreOperacion) object;
-//			rutas.add(nombreOperacion.getRuta());
-//		}
+		List operaciones = (List) digesterParaNombresDeOperaciones.parse(abrirRecurso(rutaOperaciones));
+		NombreOperacion nombreOperacion;
+		for (Object object : operaciones) {
+			nombreOperacion=(NombreOperacion) object;
+			rutas.add(nombreOperacion.getRuta());
+		}
 		
 		
 		/*
@@ -89,18 +89,18 @@ public class Configuration {
 		 * Para cada una de las rutas indicadas, se agregan las operaciones que contienen...
 		 */
 		InputStream inputStream;
-//		XMLEntity operacionesAdicionales;
-//		for (String rutaActual : rutas) {
-//			inputStream = abrirRecurso(rutaActual);
-//			operacionesAdicionales = (XMLEntity) digester.parse(inputStream);
-//			
-//			Collection hijos = operacionesAdicionales.getHijos();
-//			XMLEntity xml;
-//			for (Object object : hijos) {
-//				xml=(XMLEntity) object;
-//				this.operaciones.addHijo(xml);
-//			}
-//		}
+		XMLEntity operacionesAdicionales;
+		for (String rutaActual : rutas) {
+			inputStream = abrirRecurso(rutaActual);
+			operacionesAdicionales = (XMLEntity) digester.parse(inputStream);
+			
+			Collection hijos = operacionesAdicionales.getHijos();
+			XMLEntity xml;
+			for (Object object : hijos) {
+				xml=(XMLEntity) object;
+				this.operaciones.addHijo(xml);
+			}
+		}
 		
 		digester = this.generateReaderEventos();
 		inputStream = servletContext.getResourceAsStream("/WEB-INF/eventos.xml");

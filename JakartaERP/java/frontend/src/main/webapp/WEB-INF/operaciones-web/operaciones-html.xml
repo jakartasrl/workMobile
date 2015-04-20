@@ -635,7 +635,8 @@
 		<output>
 
 			<campoSalida target="id" value="id" />
-			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="nombres" value="codigo" />
+			<campoSalida target="apellido" value="descripcion" />
 			
 		</output>
 
