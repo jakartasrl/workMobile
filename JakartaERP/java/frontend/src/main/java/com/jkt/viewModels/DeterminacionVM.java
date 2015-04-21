@@ -18,6 +18,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DeterminacionOV;
+import com.jkt.ov.ExpresionOV;
 import com.jkt.ov.ListValorEsperadoOV;
 import com.jkt.ov.ListVariableOV;
 import com.jkt.ov.MetodoOV;
@@ -42,13 +43,29 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@NotifyChange("determinacion")
 	public void guardar() throws JakartaException {
 		
-		if (this.determinacion.getId()==0) {
 			List<MetodoOV> metodos = this.getDeterminacion().getMetodos();
 			for (MetodoOV metodoOV : metodos) {
-				metodoOV.setIdDeterminacion(-1L);
+				
+				if (this.determinacion.getId()==0) {
+					metodoOV.setIdDeterminacion(-1L);
+				}
+				
+				List<VariableOV> variablesXMetodo = metodoOV.getVariables();
+				
+				
+				List listaVariablesTransientes = new ArrayList<VariableOV>();
+				for (VariableOV variableOV : variablesXMetodo) {
+					VariableOV nuevaVar = new VariableOV();
+					nuevaVar.setCodigo(variableOV.getCodigo());
+					listaVariablesTransientes.add(nuevaVar);
+				}
+				
+				for (VariableOV variableOV : variablesXMetodo) {
+					variableOV.setVariables(listaVariablesTransientes);
+				}
+
 			}
-		}
-	
+		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
 		Messagebox.show("Determinacion Guardada Correctamente.");
 		
@@ -141,7 +158,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	@Command
 	@NotifyChange("determinacion")
-	public void agregarMetodo(@BindingParam("dato") String name){
+	public void agregarMetodo(@BindingParam("dato") String name) throws JakartaException{
+		
+		this.validarMetodo(name);
+		
 		MetodoOV metodo = new MetodoOV();
 		metodo.setMetodo(name);
 		metodo.setIdDeterminacion(this.determinacion.getId()); // le seteamos el id de la determinacion
@@ -149,6 +169,20 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	}
 	
+	private void validarMetodo(String name) throws JakartaException {
+		
+		if (name.equals("")){
+			throw new JakartaException("Debe ingresar un nombre al metodo");
+		}
+		
+		for (MetodoOV metodo : this.determinacion.getMetodos()){
+			if (name.equals(metodo.getMetodo())){
+				throw new JakartaException("Ya existe un metodo con el nombre: " + name);
+			}
+		}
+	
+	}
+
 	@Command("agregarValor")
 	@NotifyChange("determinacion")
 	public void agregarValor(@BindingParam("metodoActual") MetodoOV m){
@@ -188,6 +222,17 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		this.getDeterminacion().getListFormato().add(new DescriptibleOV("Numero"));
 		this.getDeterminacion().getListFormato().add(new DescriptibleOV("Boolean"));
 		this.getDeterminacion().getListFormato().add(new DescriptibleOV("Leyenda"));
+		
+	}
+	
+	@Command
+	public void validarExpresion(@BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
+//		System.out.println();
+
+//		Messagebox.show("TODO.");
+//		for (VariableOV variableOV : variables) {
+//			
+//		}
 		
 	}
 

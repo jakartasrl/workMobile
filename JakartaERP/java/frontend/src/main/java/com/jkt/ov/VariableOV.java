@@ -1,6 +1,7 @@
 package com.jkt.ov;
 
-import com.jkt.laboratorio.dominio.Expresion;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,5 +15,7 @@ public class VariableOV extends DescriptibleOV {
 	
 	private Long idExpresion;
 	private String expresionCadena;
-
+	private List<VariableOV> variables=new ArrayList<VariableOV>();
+	
+	
 }

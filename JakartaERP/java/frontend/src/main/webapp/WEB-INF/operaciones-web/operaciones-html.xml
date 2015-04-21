@@ -556,7 +556,25 @@
 					<campoEntrada propertyOV="codigo" 		metodo="setCodigo"/>
 					<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion"/>
 					<campoEntrada propertyOV="input" 		metodo="setInput"/>
+					
+					
+<!-- 					mando datos transientes para que el validador de determinacion se encargue de generar las expresiones, validarlas, y demas -->
+					<campoEntrada propertyOV="expresionCadena" 		metodo="setExpresionCadena" />
+					
+					<campoEntrada propertyOV="variables" 		metodo="setVariables">
+<!-- 						<campoEntrada propertyOV="id" 			metodo="setId"/> -->
+						<campoEntrada propertyOV="codigo" 		metodo="setCodigo"/>
+					</campoEntrada>
+
+<!-- 					<campoEntrada propertyOV="expresion" 		metodo="setExpresion"> -->
+<!-- 						<campoEntrada propertyOV="expresion" 		metodo="setExpresion" /> -->
+<!-- 						<campoEntrada propertyOV="variables" 		metodo="setVariables"> -->
+<!-- 							<campoEntrada propertyOV="codigo" 		metodo="setCodigo" /> -->
+<!-- 						</campoEntrada> -->
+<!-- 					</campoEntrada> -->
+				
 				</campoEntrada>
+				
 				
 				<campoEntrada propertyOV="valoresEsperados"	metodo="setValoresEsperados">
 					<campoEntrada propertyOV="id" 			metodo="setId"/>

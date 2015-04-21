@@ -15,7 +15,7 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="input" column="INPUT" type="boolean" />
 
-		<many-to-one name="determinacion" column="ID_DETERMINACION" />
+<!-- 		<many-to-one name="determinacion" column="ID_DETERMINACION" /> -->
 		
 		<one-to-one name="expresion" cascade="save-update" class="com.jkt.laboratorio.dominio.Expresion" />
 

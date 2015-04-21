@@ -74,7 +74,7 @@
 		</hlayout>
 		
 		<!-- Metodos -->
-		<listbox model="@bind(vm.determinacion.metodos)">
+		<listbox model="@bind(vm.determinacion.metodos)" emptyMessage="No existen Metodos." >
 			<listhead>
 				<listheader label="Metodos" />
 			</listhead>						
@@ -102,8 +102,7 @@
 											onClick="@command('agregarValor', metodoActual=each)"
 											tooltiptext="Agregar nuevo valor." />
 									
-										<listbox
-											model="@bind(each.valoresEsperados)" width="100%">
+										<listbox model="@bind(each.valoresEsperados)" width="100%" emptyMessage="No existen Valores." >
 											<listhead>
 												<listheader
 													label="Tension Desde" />
@@ -137,18 +136,13 @@
 											onClick="@command('agregarVariable', metodoActual=each)"
 											tooltiptext="Agregar nueva variable." />
 										<!-- Variables -->
-										<listbox
-											model="@bind(each.variables)" mold="paging" pageSize="5">
+										<listbox model="@bind(each.variables)" mold="paging" pageSize="5" emptyMessage="No existen Variables." >
 
 											<listhead>
-												<listheader
-													label="Codigo" />
-												<listheader
-													label="Descripcion" />
-												<listheader
-													label="Imput" />
-												<listheader
-													label="Expresion" />
+												<listheader label="Codigo" />
+												<listheader label="Descripcion" />
+												<listheader label="Input" />
+												<listheader label="Expresion" />
 											</listhead>
 
 											<template name="model"
@@ -166,8 +160,7 @@
 														<checkbox checked="@bind(valor.input)" />
 													</listcell>
 													<listcell>
-														<textbox
-															value="" />
+														<textbox value="@bind(valor.expresionCadena)" onChange="@command('validarExpresion', expresion=self.value, variables=each.variables)" />
 													</listcell>
 												</listitem>
 											</template>
