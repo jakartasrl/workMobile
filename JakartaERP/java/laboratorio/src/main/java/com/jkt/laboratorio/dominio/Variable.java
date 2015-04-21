@@ -1,23 +1,14 @@
 package com.jkt.laboratorio.dominio;
 
+import lombok.Data;
+
 import com.jkt.dominio.Descriptible;
 
+@Data
 public class Variable extends Descriptible {
 	
 	private Determinacion determinacion;
-	private Expresion           expresion;
-	
-	public Determinacion getDeterminacion() {
-		return determinacion;
-	}
-	public void setDeterminacion(Determinacion determinacion) {
-		this.determinacion = determinacion;
-	}
-	public Expresion getExpresion() {
-		return expresion;
-	}
-	public void setExpresion(Expresion expresion) {
-		this.expresion = expresion;
-	}
-	
+	private boolean input;
+	private Expresion expresion;
+		
 }

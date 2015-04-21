@@ -15,7 +15,7 @@
         </property>
 		
 		<property name="creationDate" type="timestamp" ></property>		
-		<property name="modificationDate" type="timestamp"></property>		
+		<property name="modificationDate" type="timestamp" column="ULTIMA_MODIFICACION"></property>		
 		
 <!-- 		<property name="descripcion" column="RAZON_SOCIAL"/> -->
 		<property name="telefono" column="TELEFONO"/>

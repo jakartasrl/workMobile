@@ -27,11 +27,11 @@
 			<one-to-many class="com.jkt.laboratorio.dominio.Metodo" />
 		</list>
 		
-		<list name="variables"  cascade="save-update">
-			<key column="ID_DETERMINACION" />
-			<list-index column="secu" />
-			<one-to-many class="com.jkt.laboratorio.dominio.Variable" />
-		</list>
+<!-- 		<list name="variables"  cascade="save-update"> -->
+<!-- 			<key column="ID_DETERMINACION" /> -->
+<!-- 			<list-index column="secu" /> -->
+<!-- 			<one-to-many class="com.jkt.laboratorio.dominio.Variable" /> -->
+<!-- 		</list> -->
 		
 		
 	</class>

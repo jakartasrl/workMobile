@@ -3,7 +3,7 @@ package com.jkt.laboratorio.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.validator.constraints.NotBlank;
+import lombok.Data;
 
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDetalle;
@@ -13,6 +13,7 @@ import com.jkt.dominio.IDetalle;
  * utiliza en la carga de los protocolos del Laboratorio. Ejemplo: Contenido de
  * Humedad (ppm).
  */
+@Data
 public class Determinacion extends Descriptible implements IDetalle {
 
 	private Laboratorio laboratorio;
@@ -65,22 +66,22 @@ public class Determinacion extends Descriptible implements IDetalle {
 		this.leyendaValorCero = aValue;
 	}
 
-	public String getTipoResultado() {
-		return tipoResultado;
-	}
-
-	@NotBlank(message = "El tipo de resultado no debe estar vacio.")
-	public void setTipoResultado(String tipoResultado) {
-		this.tipoResultado = tipoResultado;
-	}
-
-	public String getFormato() {
-		return formato;
-	}
-
-	public void setFormato(String aValue) {
-		this.formato = aValue;
-	}
+//	public String getTipoResultado() {
+//		return tipoResultado;
+//	}
+//
+//	@NotBlank(message = "El tipo de resultado no debe estar vacio.")
+//	public void setTipoResultado(String tipoResultado) {
+//		this.tipoResultado = tipoResultado;
+//	}
+//
+//	public String getFormato() {
+//		return formato;
+//	}
+//
+//	public void setFormato(String aValue) {
+//		this.formato = aValue;
+//	}
 
 	public boolean isCalculaResultado() {
 		return calculaResultado;
