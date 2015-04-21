@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.varios.dominio.Contacto;
 
 /**
- * Esta clase genera una cotización con items a cotizar independientes.
- * <p>Una cotización puede pasarse a presupuestar, y generar una instancia de un Presupuesto, siempre y cuando todos los items de la cotización estén
+ * Esta clase genera una cotizaciÃ³n con items a cotizar independientes.
+ * <p>Una cotizaciÃ³n puede pasarse a presupuestar, y generar una instancia de un Presupuesto, siempre y cuando todos los items de la cotizaciÃ³n estÃ¡n
  * cotizados y autorizador.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
@@ -75,4 +76,20 @@ public class Cotizacion extends ComprobanteVenta {
 	public boolean isCotizacion(){
 		return true;
 	}
+	
+	private List<CotizacionDet> detallesTransientes=new ArrayList<CotizacionDet>();
+	public void agregarDetalleTransiente(CotizacionDet c){
+		if (!this.detallesTransientes.contains(c)) {
+			this.detallesTransientes.add(c);
+		}
+	}
+
+	public List<CotizacionDet> getDetallesTransientes() {
+		return detallesTransientes;
+	}
+
+	public void setDetallesTransientes(List<CotizacionDet> detallesTransientes) {
+		this.detallesTransientes = detallesTransientes;
+	}
+	
 }

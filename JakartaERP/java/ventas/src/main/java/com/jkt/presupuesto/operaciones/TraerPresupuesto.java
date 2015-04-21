@@ -54,7 +54,7 @@ public class TraerPresupuesto extends HelperRecuperarDeterminacionesConPrecios {
 		
 		notificarNotas(presupuesto);
 		
-		notificarCondiciones(presupuesto);
+//		notificarCondiciones(presupuesto);
 
 		notificarDetalles(presupuesto);
 		
@@ -73,28 +73,28 @@ public class TraerPresupuesto extends HelperRecuperarDeterminacionesConPrecios {
 		
 	}
 
-	private void notificarCondiciones(Presupuesto presupuesto) throws Exception, IllegalAccessException, InvocationTargetException {
-		// Obtengo todas las Condiciones...
-		List<PersistentEntity> condiciones = serviceRepository.getAll(CondicionComercial.class);
-		// Condiciones que tiene el presupuesto guardadas
-		List<CondicionComercial> condicionesDelPresupuesto = presupuesto.getCondicionesComerciales();
-		CondicionComercial condicion;
-		for (PersistentEntity currentObject : condiciones) {
-			condicion = (CondicionComercial) currentObject;
-			// Si la Nota esta activa la notifico
-			if (condicion.isActivo()) {
-				CondicionComercial nuevaCondicion = new CondicionComercial();
-				
-				copyProperties(nuevaCondicion, condicion);
-				
-				// Ahora, si ya estaba guardada en el presupuesto actual, entonces la mando 'chequeada'
-				if (condicionesDelPresupuesto.contains(condicion)) {
-					nuevaCondicion.setIncluida(true);
-				}
-				notificarObjeto(WRITER_COND_COMERCIAL, nuevaCondicion);
-			}
-		}
-	}
+//	private void notificarCondiciones(Presupuesto presupuesto) throws Exception, IllegalAccessException, InvocationTargetException {
+//		// Obtengo todas las Condiciones...
+//		List<PersistentEntity> condiciones = serviceRepository.getAll(CondicionComercial.class);
+//		// Condiciones que tiene el presupuesto guardadas
+//		List<CondicionComercial> condicionesDelPresupuesto = presupuesto.getCondicionesComerciales();
+//		CondicionComercial condicion;
+//		for (PersistentEntity currentObject : condiciones) {
+//			condicion = (CondicionComercial) currentObject;
+//			// Si la Nota esta activa la notifico
+//			if (condicion.isActivo()) {
+//				CondicionComercial nuevaCondicion = new CondicionComercial();
+//				
+//				copyProperties(nuevaCondicion, condicion);
+//				
+//				// Ahora, si ya estaba guardada en el presupuesto actual, entonces la mando 'chequeada'
+//				if (condicionesDelPresupuesto.contains(condicion)) {
+//					nuevaCondicion.setIncluida(true);
+//				}
+//				notificarObjeto(WRITER_COND_COMERCIAL, nuevaCondicion);
+//			}
+//		}
+//	}
 
 	private void notificarNotas(Presupuesto presupuesto) throws Exception, IllegalAccessException, InvocationTargetException {
 		// Obtengo todas las Notas...

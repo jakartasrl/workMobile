@@ -1,17 +1,30 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 
 <zk>
-	<style src="/style/template.css" />
-	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.PedidoVM')" id="contenedorPrincipal">
+
+	<style src="/style/template-grey.css" />
+	
+	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')" 
+		style="margin:20px; padding:5px;" >
+
 		
-		<div sclass="hboxToolBar" >
-			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/>
+		<div id="title" style="height:15%;text-align:center;">
+			<label style="font-size: 90px;color:white;" value="Los Conce" />
+		</div>
+		
+		<div id="content" style="width:95%; height:85%; text-align: centerS; min-width:95%;">
+				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;">
+					<button label="${each.nombre}" href="${each.enlace}" height="100px" width="100px" style="margin-top:3px;" if="${each.tipo=='small' }" />
+					<button label="${each.nombre}" href="${each.enlace}" height="200px" width="200px" style="margin-top:3px;" if="${each.tipo=='big' }" />
+					<button label="${each.nombre}" href="${each.enlace}" height="150px" width="150px" style="margin-top:3px;" if="${each.tipo=='medium' }" />
+				</div>
 		</div>
 
-		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<include id="pedidoId" src="/pantallas/pedido/pedido.zul" viewModel="${vm}"/>
+		<div id="footer" style="text-align:center; height:10%; border-top-color:white; border-top-style: solid; border-top-width:1px;">
+			<label value="@bind(vm.currentNew)" style="font-size:15px;color:white;" onClick="@command('next')" tooltiptext="Click for load new text."/>
 		</div>
-		
+
 	</div>
+	
 </zk>
 

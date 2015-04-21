@@ -13,6 +13,8 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -36,7 +38,7 @@ public abstract class ViewModel {
 
 	protected static final Logger log = Logger.getLogger(ViewModel.class);
 
-	private String titulo="-";
+	private String titulo="";
 	
 	public String getTitulo() {
 		return titulo;
@@ -47,9 +49,9 @@ public abstract class ViewModel {
 	}
 
 	@Command
-	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") Textbox campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
+	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") String campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
 		
-		if (campo.getValue().isEmpty()) {
+		if (campo.isEmpty()) {
 			return;
 		}
 		
@@ -58,7 +60,7 @@ public abstract class ViewModel {
 		 */
 		ContainerOV container= new ContainerOV();
 		container.setString1(clase);
-		container.setString2(campo.getValue());
+		container.setString2(campo);
 		container.setString3("codigo");
 		
 		//Asigna el resultado.
@@ -200,6 +202,13 @@ public abstract class ViewModel {
 			}
 		}
 		return null;
+	}
+	
+	@Command
+	public void logOut(){
+		Session sess = Sessions.getCurrent();
+        sess.removeAttribute("userCredential");
+        Executions.sendRedirect("/login.zul");
 	}
 	
 }

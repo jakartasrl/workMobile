@@ -1,0 +1,28 @@
+<?page title="Administración de Plantilla" id="JakartaERP" cacheable="false"?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
+
+<zk>
+	<style src="/style/template.css" />
+	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.jkt.viewModels.plantilla.PlantillaVM')"
+		id="contenedorPrincipal">
+
+		<div sclass="hboxToolBar">
+			<include id="barraMenu" src="/pantallas/menues/toolBar.zul"
+				viewModel="${vm}" />
+		</div>
+
+		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px" >
+			<hlayout style="margin:10px;">
+				<label value="Codigo de plantilla:" />
+				<textbox sclass="campoCodigo-medium" maxlength="5" value="@bind(vm.plantilla.codigo)" readonly="@bind(vm.editMode)"/>
+			</hlayout>
+
+			<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;"
+				multiline="true" rows="15" value="@bind(vm.plantilla.descripcion)"
+				readonly="false" />
+		</div>
+
+	</div>
+</zk>
+

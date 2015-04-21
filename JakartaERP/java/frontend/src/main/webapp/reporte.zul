@@ -1,0 +1,11 @@
+<window title="Reporte" border="normal" closable="true" sizable="true"
+	width="800px" height="500px" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.jkt.viewModels.ReporteVM')">
+
+	<label value="@bind(vm.target.codigo)" />
+	<button onClick="@command('comando')" />
+
+
+<button label="subir" upload="true,maxsize=300" onUpload="@command('subir',evento=event.media)" ></button>
+
+</window>

@@ -82,7 +82,7 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 
 
 	/**
-	 * Muestra los items de la cotización uno por uno, retornando los detalles generados por el cotizador
+	 * Muestra los items de la cotizaciï¿½n uno por uno, retornando los detalles generados por el cotizador
 	 * 
 	 */
 	private void mostrarItems(List<CotizacionDet> detalles) {
@@ -121,7 +121,7 @@ public class TraerCotizacionParaPresupuesto extends Operation {
 	private void validarEstadoDeItems(Cotizacion cotizacion) throws JakartaException {
 		for (CotizacionDet cotizacionDetalle : cotizacion.getDetalles()) {
 			if (CotizacionDet.Estado.AUTORIZADO.getId()!=cotizacionDetalle.getEstadoId()) {
-				throw new JakartaException("Esta cotización no se puede utilizar ya que contiene ítems que aún no fueron cotizados y autorizados.");
+				throw new JakartaException("Esta cotizaciï¿½n no se puede utilizar ya que contiene ï¿½tems que aï¿½n no fueron cotizados y autorizados.");
 			}
 		}
 	}

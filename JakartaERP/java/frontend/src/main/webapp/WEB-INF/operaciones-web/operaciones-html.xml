@@ -69,6 +69,17 @@
 	</operacion>
 	
 
+	<operacion name="guardarPlantilla" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Plantilla" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.dominio.Plantilla">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 
 	<operacion name="saveLabo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Laboratorio" inputOV="com.jkt.ov.LaboratorioOV">
 	
@@ -335,9 +346,9 @@
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
-			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" />
-			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setDescargaACargoDeCliente" />
-			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setTransporteACargoDeCliente" />
+<!-- 			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" /> -->
+<!-- 			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setDescargaACargoDeCliente" /> -->
+<!-- 			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setTransporteACargoDeCliente" /> -->
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>
@@ -403,9 +414,9 @@
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
 			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
 			
-			<campoSalida value="cargaACargoDeCliente" 		target="cargaACargoDeCliente" />
-			<campoSalida value="descargaACargoDeCliente" 	target="descargaACargoDeCliente" />
-			<campoSalida value="transporteACargoDeCliente" 	target="transporteACargoDeCliente" />
+<!-- 			<campoSalida value="cargaACargoDeCliente" 		target="cargaACargoDeCliente" /> -->
+<!-- 			<campoSalida value="descargaACargoDeCliente" 	target="descargaACargoDeCliente" /> -->
+<!-- 			<campoSalida value="transporteACargoDeCliente" 	target="transporteACargoDeCliente" /> -->
 
 			<campoSalida value="docs" target="documentacion">
 				<campoSalida value="id"					target="id" />
@@ -558,6 +569,227 @@
 						
 		</input>
 
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerPresupuestoParaPedido" clase="com.jkt.presupuesto.operaciones.TraerPresupuestoWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PedidoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+		
+		<output>
+<!-- 			<campoSalida value="id" 				target="id" /> -->
+			<campoSalida value="nro" 				target="nro" />
+			<campoSalida value="fecha" 				target="fecha" />
+			<campoSalida value="idRepresentante" 	target="representante.id" />
+			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+			<campoSalida value="idVendedor" 		target="vendedor.id" />
+			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
+			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
+			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
+			
+			<campoSalida value="notas"					target="notasTransientes" >
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="codigo"				target="codigo" />
+				<campoSalida value="descripcion"		target="descripcion" />
+				<campoSalida value="adicional"			target="adicional" />
+				<campoSalida value="codigoActividad"	target="actividad.codigo" />
+				<campoSalida value="activo"				target="incluida" />
+			</campoSalida>
+
+			<campoSalida value="items"					target="detalles" >
+<!-- 				<campoSalida value="id"					target="id" /> -->
+				<campoSalida value="cantidad"			target="cantidad" />
+				<campoSalida value="importe"			target="precio" />
+				<campoSalida value="referencia"			target="referencia" />
+				<campoSalida value="tipoItem"			target="tipoDetalle" />
+				<campoSalida value="tipo"				target="tipoVenta" />
+				
+				<campoSalida value="idMoneda"			target="moneda.id" />
+				<campoSalida value="idProducto"			target="producto.id" />
+				
+				<campoSalida value="descripcion"		target="descripcion" />
+
+				<campoSalida value="idDeterminacion"	target="determinacion.id" />
+				<campoSalida value="codigo"				target="determinacion.codigo" />
+				<campoSalida value="descripcionDeterminacion"		target="determinacion.descripcion" />
+				
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	<operacion name="TraerPresupuesto" clase="com.jkt.presupuesto.operaciones.TraerPresupuestoWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PresupuestoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+		
+		<output>
+<!-- 			<campoSalida value="id" 				target="id" /> -->
+			<campoSalida value="nro" 				target="nro" />
+			<campoSalida value="fecha" 				target="fecha" />
+			<campoSalida value="idRepresentante" 	target="representante.id" />
+			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+			<campoSalida value="idVendedor" 		target="vendedor.id" />
+			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
+			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
+			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
+			
+			<campoSalida value="notas"					target="notasTransientes" >
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="codigo"				target="codigo" />
+				<campoSalida value="descripcion"		target="descripcion" />
+				<campoSalida value="adicional"			target="adicional" />
+				<campoSalida value="codigoActividad"	target="actividad.codigo" />
+				<campoSalida value="activo"				target="incluida" />
+			</campoSalida>
+
+			<campoSalida value="items"					target="detalles" >
+<!-- 				<campoSalida value="id"					target="id" /> -->
+				<campoSalida value="cantidad"			target="cantidad" />
+				<campoSalida value="importe"			target="precio" />
+				<campoSalida value="referencia"			target="referencia" />
+				<campoSalida value="tipoItem"			target="tipoDetalle" />
+				<campoSalida value="tipo"				target="tipoVenta" />
+				
+				<campoSalida value="idMoneda"			target="moneda.id" />
+				<campoSalida value="idProducto"			target="producto.id" />
+				
+				<campoSalida value="descripcion"		target="descripcion" />
+
+				<campoSalida value="idDeterminacion"	target="determinacion.id" />
+				<campoSalida value="codigo"				target="determinacion.codigo" />
+				<campoSalida value="descripcionDeterminacion"		target="determinacion.descripcion" />
+				
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="TraerCotizacionParaPresupuesto" clase="com.jkt.presupuesto.operaciones.TraerCotizacionParaPresupuestoWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PresupuestoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID_COTIZACION"/>
+		</input>
+		
+		<output>
+
+			<campoSalida value="nroCotizacion" 		target="nro" />
+			<campoSalida value="fecha" 				target="fecha" />
+			<campoSalida value="idRepresentante" 	target="representante.id" />
+			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+			<campoSalida value="idVendedor" 		target="vendedor.id" />
+			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
+			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
+			<campoSalida value="referencia" 		target="referencia" />
+
+			<campoSalida value="items"					target="detallesTransientes" >
+				<campoSalida value="cantidad"			target="cotizador.item.cantidad" />
+				<campoSalida value="importe"			target="totalCotizado" />
+				<campoSalida value="referencia"			target="cotizador.item.referencia" />
+				<campoSalida value="descripcion"		target="cotizador.item.descripcion" />
+<!-- 				<campoSalida value="tipoItem"			target="tipoDetalle" /> TODOS LOS DE COTIZACION SON ITEMS. -->
+				<campoSalida value="tipo"				target="tipoVenta" />
+				
+				<campoSalida value="idMoneda"			target="cotizador.monedaExpresada.id" />
+				<campoSalida value="idProducto"			target="cotizador.item.producto.id" />
+				
+			</campoSalida>
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
+	<operacion name="Login" clase="com.jkt.operaciones.Login" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.DescriptibleOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="USUARIO"/>
+			<campoEntrada propertyOV="string2" name="PASSWORD"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="nombres" value="codigo" />
+			<campoSalida target="apellido" value="descripcion" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
+	<operacion name="GuardarPresupuesto" clase="com.jkt.presupuesto.operaciones.GuardarPresupuesto" entidad="com.jkt.presupuesto.dominio.Presupuesto" outputOV="com.jkt.ov.DescriptibleOV" inputOV="com.jkt.ov.PresupuestoOV">
+		
+		<input keyName="objeto" clase="com.jkt.presupuesto.dominio.Presupuesto">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="nro" metodo="setNro" />
+			<campoEntrada propertyOV="letra" metodo="setLetra" />
+			<campoEntrada propertyOV="fecha" metodo="setFecha" />
+			<campoEntrada propertyOV="referencia" metodo="setReferencia" />
+			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" />
+			<campoEntrada propertyOV="idRepresentante" metodo="setRepresentante" />
+			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
+			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
+			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
+			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
+			
+			<campoEntrada propertyOV="notas" metodo="setNotas">
+				<campoEntrada propertyOV="id" metodo="setId"/>
+			</campoEntrada>
+
+			<campoEntrada propertyOV="items" metodo="setDetalles">
+				<campoEntrada propertyOV="id" metodo="setId"/>
+				<campoEntrada propertyOV="idMoneda" metodo="setMoneda"/>
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="cantidad" metodo="setCantidad"/>
+				<campoEntrada propertyOV="importe" metodo="setPrecio"/>
+				<campoEntrada propertyOV="tipo" metodo="setTipoVenta"/>
+				<campoEntrada propertyOV="referencia" metodo="setReferencia"/>
+				
+				<campoEntrada propertyOV="idDeterminacion" metodo="setDeterminacion"/>
+				<campoEntrada propertyOV="idProducto" metodo="setProducto"/>
+
+				<campoEntrada propertyOV="tipoItem" metodo="setTipoDetalle"/>
+				
+			</campoEntrada>
+
+			<campoEntrada propertyOV="facturaciones" metodo="setFormasFacturacion" >
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="porcentaje" metodo="setPorcentaje"/>
+				<campoEntrada propertyOV="importe" metodo="setImporte"/>
+				<campoEntrada propertyOV="idCondicionDePago" metodo="setCondicionPago"/>
+			</campoEntrada>
+
+		</input>
+		
+<!-- 		Es el id del presupuesto para poder generar un reporte		 -->
+		<output>
+			<campoSalida target="id" value="id" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
+	<operacion name="GenerarComprobantePresupuesto" clase="com.jkt.presupuesto.operaciones.GenerarComprobantePresupuesto" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ContainerOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+		
+		<output>
+			<campoSalida value="string1" target="ruta" />
+			<campoSalida value="string2" target="nombre" />
+		</output>
+		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 

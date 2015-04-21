@@ -89,10 +89,6 @@
 				<one-to-many class="com.jkt.pedido.dominio.PedidoDocumentacion" />
 			</list>
 
-			<property name="cargaACargoDeCliente" column="CARGA_A_CARGO_DE_CLIENTE" type="boolean" />
-			<property name="transporteACargoDeCliente" column="TRANSPORTE_A_CARGO_DE_CLIENTE" type="boolean" />
-			<property name="descargaACargoDeCliente" column="DESCARGA_A_CARGO_DE_CLIENTE" type="boolean" />
-			
 			<list name="detalles" table="DETALLES_PEDIDO" lazy="true" cascade="all">
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
@@ -109,6 +105,8 @@
 <!-- 		PRESUPUESTO MAPPING -->
 	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO">
 
+			<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" /> <!-- el presupuesto ya esta en la mappedSuperclass -->
+
         	<many-to-one name="comprobanteRelacionado" class="com.jkt.dominio.Cotizacion" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
 
 <!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
@@ -122,10 +120,16 @@
 				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
 			</list>
 			
-			<list name="condicionesComerciales" cascade="all" table="PRESUPUESTO_CONDICIONES_COMERCIALES">
+<!-- 			<list name="condicionesComerciales" cascade="all" table="PRESUPUESTO_CONDICIONES_COMERCIALES"> -->
+<!-- 				<key column="PRESUPUESTO_ID" /> -->
+<!-- 				<index column="ORDEN" /> -->
+<!-- 				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial"/> -->
+<!-- 			</list> -->
+			
+			<list name="formasFacturacion" cascade="all" table="PRESUPUESTO_FORMA_FACTURACION">
 				<key column="PRESUPUESTO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial"/>
+				<one-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
 			</list>
 
 			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID"></many-to-one>

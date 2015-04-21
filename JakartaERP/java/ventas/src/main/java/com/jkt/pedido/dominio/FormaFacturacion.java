@@ -1,41 +1,22 @@
 package com.jkt.pedido.dominio;
 
+import lombok.Data;
+
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.varios.dominio.CondPago;
 
 /**
- * Representa a las formas de facturar un item de pedido.
+ * Representa a las formas de facturar un item de presupuesto/pedido.
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class FormaFacturacion extends PersistentEntity {
 
-	private String nombre;
+	private String descripcion;
 	private int porcentaje;
-	private double costo;
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getPorcentaje() {
-		return porcentaje;
-	}
-
-	public void setPorcentaje(int porcentaje) {
-		this.porcentaje = porcentaje;
-	}
-
-	public double getCosto() {
-		return costo;
-	}
-
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
+	private double importe;
+	private CondPago condicionPago;
 
 }

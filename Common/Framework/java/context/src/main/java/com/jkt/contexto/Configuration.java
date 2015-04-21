@@ -55,7 +55,6 @@ public class Configuration {
 	
 	public void iniciarOperacionesYEventos() throws IOException, SAXException, JakartaException{
 
-		String rutaOperacionesWeb="/WEB-INF/operaciones-web/operaciones-html.xml";
 		
 		String rutaOperaciones="/WEB-INF/archivos-operaciones.xml"; /* Indica que archivo es el que contiene las referencias a los demas archivos con operaciones */
 		
@@ -76,6 +75,7 @@ public class Configuration {
 		/*
 		 * Parseo las operaciones para cliente HTML
 		 */
+		String rutaOperacionesWeb="/WEB-INF/operaciones-web/operaciones-html.xml";
 		InputStream inputStreamHTML = abrirRecurso(rutaOperacionesWeb);
 		this.operacionesHTML = (XMLEntity) digester.parse(inputStreamHTML);
 		

@@ -21,7 +21,6 @@ import com.jkt.presupuesto.dominio.Presupuesto;
 public class Pedido extends ComprobanteVenta {
 
 	private ListaPrecios listaPrecios;
-	private boolean cargaACargoDeCliente, transporteACargoDeCliente, descargaACargoDeCliente;
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PedidoDet> detalles=new ArrayList<PedidoDet>();
 	private List<PedidoDocumentacion> documentacion=new ArrayList<PedidoDocumentacion>();
@@ -70,30 +69,6 @@ public class Pedido extends ComprobanteVenta {
 
 	public void setDetalles(List<PedidoDet> detalles) {
 		this.detalles = detalles;
-	}
-
-	public boolean isCargaACargoDeCliente() {
-		return cargaACargoDeCliente;
-	}
-
-	public void setCargaACargoDeCliente(boolean cargaACargoDeCliente) {
-		this.cargaACargoDeCliente = cargaACargoDeCliente;
-	}
-
-	public boolean isTransporteACargoDeCliente() {
-		return transporteACargoDeCliente;
-	}
-
-	public void setTransporteACargoDeCliente(boolean transporteACargoDeCliente) {
-		this.transporteACargoDeCliente = transporteACargoDeCliente;
-	}
-
-	public boolean isDescargaACargoDeCliente() {
-		return descargaACargoDeCliente;
-	}
-
-	public void setDescargaACargoDeCliente(boolean descargaACargoDeCliente) {
-		this.descargaACargoDeCliente = descargaACargoDeCliente;
 	}
 
 	public List<Nota> getNotas() {
@@ -188,7 +163,8 @@ public class Pedido extends ComprobanteVenta {
 	}
 	
 	public String getDescripcion(){
-		return this.getReferencia();
+//		return this.getReferencia();
+		return String.format("%s / %s",this.getClienteSucursal().getDescripcionCompleta(),this.getFecha().toString() );
 	}
 	
 	

@@ -10,7 +10,7 @@
 		<columns>
 			<column width="7%" label="Cód.Analisis" align="center" sort="auto(auto)" />
 			<column width="7%" label="Cód Det." tooltip="Código de Determinación"  align="center" />
-			<column width="53%" label="Determinación" align="center" />
+			<column width="53%" label="Determinación" />
 			<column width="7%" label="Cantidad" align="center" />
 			<column width="12%" label="Moneda" align="center" />
 			<column width="7%" label="Precio Unit." tooltip="Precio Unitario" align="center" />
@@ -25,11 +25,11 @@
 					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
-						<intbox width="80%" value="0" />
+						<intbox width="80%" value="0" sclass="importe" constraint="no empty" onBlur="@command('actualizarImporteTotal', item=each)"/>
 					</cell>
 
 
-					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)">
+					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
 						<template name="model" var="moneda">
 							<comboitem label="@bind(moneda.descripcion)" />
 						</template>
@@ -37,12 +37,12 @@
 
 					<cell>
 						$
-						<intbox width="80%" value="@bind(each.importe)" />
+						<intbox width="80%" value="@bind(each.importe)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 					</cell>
 
 					<cell>
 						$
-						<intbox width="80%" value="000" />
+						<intbox width="80%" value="000" sclass="importe" readonly="true" />
 					</cell>
 
 				</row>

@@ -1,0 +1,73 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<grid>
+		<columns>
+			<column></column>
+			<column></column>
+			<column></column>
+		</columns>
+
+		<rows>
+	
+			<row>
+				<cell colspan="1" width="8%">
+	
+					<label value="Vendedor : " />
+
+				</cell>
+				<cell colspan="2">
+		    		<hlayout>
+						<label visible="false" value="@load(vm.vendedorOV.id)"/>
+						<textbox sclass="campoCodigo-small" value="@bind(vm.vendedorOV.codigo)" 
+							onBlur="@command('validarCampo', clase='vendedor', codigo=self.value, ov=vm.vendedorOV)"
+							/>
+
+						<button label="..." onClick="@command('openHelper', clase='vendedor', ov=vm.vendedorOV)" />
+						<textbox width="300px" value="@bind(vm.vendedorOV.descripcion)" readonly="true"/>
+		    		</hlayout>
+				</cell>
+
+			</row>
+			
+			<row>
+				<cell colspan="1" width="8%">
+	
+					<label value="Representante : " />
+
+				</cell>
+				<cell colspan="2">
+		    		<hlayout>
+						<label visible="false" value="@load(vm.representanteOV.id)"/>
+						<textbox sclass="campoCodigo-small" value="@bind(vm.representanteOV.codigo)" 
+							onBlur="@command('validarCampo', clase='representante', codigo=self.value , ov=vm.representanteOV)"
+							/>
+						
+						<button label="..." onClick="@command('openHelper', clase='representante', ov=vm.representanteOV)" />
+						<textbox width="300px" value="@bind(vm.representanteOV.descripcion)" readonly="true"/>
+		    		</hlayout>
+				</cell>
+
+			</row>
+
+
+			<row>
+				<cell colspan="1" width="8%">
+					<label value="Contacto Ref : " />
+				</cell>
+				
+				<cell colspan="2" >
+					<hlayout>
+						<combobox  model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)" readonly=  "true">
+							<template name="model">
+								<comboitem label="@bind(each.codigo)" />
+							</template>
+						</combobox>
+					</hlayout>
+				</cell>
+			</row>
+
+		</rows>
+
+	</grid>
+
+</zk>

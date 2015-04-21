@@ -1,27 +1,27 @@
-<zk viewModel="@id('vm') @load(viewModel)">
+<zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
 
-		<listbox 
-			model="@bind(vm.lDocumentacion)" 
+	<listbox 
+			model="@load(vm.lNotas)" 
 			multiple="true" checkmark="true" 
-			emptyMessage="No existen documentación disponible." mold="paging" pageSize="10"
-			selectedItems="@bind(vm.docEntregados)"
+			emptyMessage="No existen notas disponibles." mold="paging" pageSize="10"
+			selectedItems="@bind(vm.comprobanteOV.notas)"
 			hflex="1" vflex="1" 
 		>
 		
 		<listhead>
 			<listheader width="3%" style="text-align:center" />
 			<listheader width="5%" label="Codigo" />
-			<listheader width="72%" label="Descripcion Documentación" />
+			<listheader width="72%" label="Descripcion" />
 		</listhead>
 		
-		
+
 		<template name="model">
 			<listitem>
-				<listcell style="text-align:center" />
+				<listcell style="text-align:center"/>
 				<listcell label="@bind(each.codigo)" />
 				<listcell label="@bind(each.descripcion)" />
 			</listitem>
 		</template>
 	</listbox>
-	
+
 </zk>

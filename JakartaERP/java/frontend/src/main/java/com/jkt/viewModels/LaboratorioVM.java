@@ -41,10 +41,8 @@ public class LaboratorioVM extends ViewModel implements IBasicOperations{
 	@Command
 	@NotifyChange("ov")
 	public void guardar() throws JakartaException {
-//		Operaciones.ejecutar("saveLabo", this.ov);
-//		Messagebox.show("Laboratorio Guardado correctamente.");
-//		this.traer();
 		actualizar();
+		Messagebox.show("Se completo la operación de salvado correctamente.");
 	}
 
 	@Command("update")
@@ -106,10 +104,6 @@ public class LaboratorioVM extends ViewModel implements IBasicOperations{
 	@Command("agregarLaboratorio")
 	@NotifyChange("ov")
 	public void agregarLaboratorio(){
-//		LaboratorioOV laboratorioOV = new LaboratorioOV();
-//		laboratorioOV.setCodigo("Nuevo laboratorio");
-//		laboratorioOV.setDescripcion("Nueva descripcion");
-		
 		this.ov.getLaboratorios().add(new LaboratorioOV());
 	}
 

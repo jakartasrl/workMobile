@@ -1,5 +1,10 @@
 package com.jkt.ov;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class CaracteristicaProductoOV extends DescriptibleOV {
 
 	private Long idEquipoCaracteristica=0L;

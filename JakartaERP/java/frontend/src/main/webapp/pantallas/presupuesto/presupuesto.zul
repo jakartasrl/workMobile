@@ -1,0 +1,139 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
+	<div>
+	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%">
+
+		<panelchildren>
+
+			<grid style="border-style:none;" sizedByContent="true">
+
+				<columns>
+					<column width="150px"/>
+					<column width="120px"/>
+					<column width="100px"/>
+					<column width="100px"/>
+					<column width="100px"/>
+					<column width="150px"/>
+				</columns>
+			
+				<rows>
+			    	<row sclass="fila-maestro" >
+			    		<label style="width:100px;" value="En Base a Cotización ... " />
+			    		
+			    		<hlayout >
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.comprobanteOV.nroCotizacion)" readonly="false" tabindex="1" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='cotizacion', post='cargarCotizacion',ov=vm.cotizacionDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
+			    		</hlayout>
+
+						<label value="Nro.Presupuesto : " />
+						<textbox class="campoCodigo-medium" value="@bind(vm.comprobanteOV.nro)" readonly="true"/>
+	
+						<label class="name" value="Fecha : " />
+						<datebox id="fecha" value="@bind(vm.comprobanteOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" tabindex="2"/>
+						
+					</row>
+					
+			    	<row sclass="fila-maestro">
+						<label value="Cliente | Sucursal : " />
+						<hlayout>
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="3"/>
+							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+						</hlayout>
+	
+						<hlayout>
+							<textbox sclass="campoCodigo-vsmall" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
+							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
+						</hlayout>
+
+						<cell colspan="3">
+							<textbox value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" readonly="true"/>
+						</cell>						
+						
+					</row>
+					
+					<row sclass="fila-maestro">
+						<label value="Lista de Precios : " />
+
+			    		<hlayout>
+							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
+							<textbox sclass="campoCodigo-small" value="@bind(vm.lPreciosOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='listaPrecios', codigo=self.value, ov=vm.lPreciosOV, post='actualizarDeterminaciones')" tabindex="5" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
+			    		</hlayout>
+
+						<cell colspan="4">
+							<textbox width="100%" value="@bind(vm.lPreciosOV.descripcion)" readonly="true"/>
+						</cell>
+			    		
+					</row>
+					
+				</rows>
+			</grid>
+
+		</panelchildren>
+	</panel>
+	
+	<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+		<panelchildren>
+			<tabbox id="contenidoTabs" >
+			    <tabs id="tabs">
+			        <tab id="items" label="Fabricacion/Reparacion/Service" />
+			        <tab id="labElec" label="Laboratorio Electrico" visible="@bind(vm.aPartirDeCotizacion?false:true)" />
+			        <tab id="labQuim" label="Laboratorio Quimico" visible="@bind(vm.aPartirDeCotizacion?false:true)" />
+			        <tab id="mat" label="Materiales" visible="@bind(vm.aPartirDeCotizacion?false:true)" />
+			        <tab id="dComerciales" label="Datos Comerciales" />
+			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
+			        <tab id="notas" label="Notas" />
+			        <tab id="formasFact" label="Formas de Facturacion" />
+			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
+			        <tab id="archivos" label="Archivos" />
+			    </tabs>
+			    <tabpanels>
+			    
+			        <tabpanel>
+						<include id="itemsContent" hflex="1" src="/pantallas/pedido/tab-items.zul" viewModel="${vm}"/>
+			        </tabpanel>
+
+			        <tabpanel>
+						<include id="dElecContent" hflex="1" src="/pantallas/pedido/tab-deter-electricas.zul" viewModel="${vm}"/>
+					</tabpanel>
+
+			        <tabpanel>
+						<include id="dQuimContent" hflex="1" src="/pantallas/pedido/tab-deter-quimica.zul" viewModel="${vm}"/>
+					</tabpanel>
+
+			        <tabpanel>
+						<include id="productosContent" hflex="1" src="/pantallas/pedido/tab-productos.zul" viewModel="${vm}"/>
+					</tabpanel>
+			        
+			        <tabpanel>
+						<include id="dcContent" hflex="1" src="/pantallas/pedido/tab-datos-comerciales.zul" viewModel="${vm}" />
+					</tabpanel>
+
+			        <tabpanel>
+						<label value="Empty Tab"></label>
+					</tabpanel>
+					
+			        <tabpanel>
+						<include id="notasContent" hflex="1" src="/pantallas/pedido/tab-notas.zul" viewModel="${vm}" />
+					</tabpanel>
+			        
+			        <tabpanel>
+						<include id="docContent" hflex="1" src="/pantallas/pedido/tab-formas-facturacion.zul" viewModel="${vm}" />
+					</tabpanel>
+
+			        <tabpanel>
+						<label value="Empty Tab"></label>
+					</tabpanel>
+					
+			        <tabpanel>
+						<include id="archivosContent" hflex="1" src="/pantallas/comprobante-common/tab-archivos.zul" viewModel="${vm}" />
+					</tabpanel>
+					
+			    </tabpanels>
+			</tabbox>
+		</panelchildren>
+	</panel>
+	
+</div>
+	
+</zk>

@@ -18,8 +18,8 @@
 				<cell colspan="2">
 		    		<hlayout>
 						<label visible="false" value="@load(vm.vendedorOV.id)"/>
-						<textbox id="codVendedor" sclass="campoCodigo" value="@bind(vm.vendedorOV.codigo)" 
-							onBlur="@command('validarCampo', clase='vendedor', codigo=codVendedor, ov=vm.vendedorOV)"
+						<textbox sclass="campoCodigo-small" value="@bind(vm.vendedorOV.codigo)" 
+							onBlur="@command('validarCampo', clase='vendedor', codigo=self.value, ov=vm.vendedorOV)"
 							/>
 
 						<button label="..." onClick="@command('openHelper', clase='vendedor', ov=vm.vendedorOV)" />
@@ -38,8 +38,8 @@
 				<cell colspan="2">
 		    		<hlayout>
 						<label visible="false" value="@load(vm.representanteOV.id)"/>
-						<textbox id="codRepresentante" sclass="campoCodigo" value="@bind(vm.representanteOV.codigo)" 
-							onBlur="@command('validarCampo', clase='representante', codigo=codRepresentante, ov=vm.representanteOV)"
+						<textbox sclass="campoCodigo-small" value="@bind(vm.representanteOV.codigo)" 
+							onBlur="@command('validarCampo', clase='representante', codigo=self.value , ov=vm.representanteOV)"
 							/>
 						
 						<button label="..." onClick="@command('openHelper', clase='representante', ov=vm.representanteOV)" />
@@ -64,18 +64,6 @@
 						</combobox>
 					</hlayout>
 				</cell>
-			</row>
-
-			<row>
-				
-				<cell colspan="2">
-				<hlayout>
-					<checkbox style="margin:15px;" label="Carga a cargo de cliente" checked="@bind(vm.pedidoOV.cargaACargoDeCliente)" />
-					<checkbox style="margin:15px;" label="Transporte a cargo de cliente" checked="@bind(vm.pedidoOV.transporteACargoDeCliente)" />
-					<checkbox style="margin:15px;" label="Descarga a cargo de cliente" checked="@bind(vm.pedidoOV.descargaACargoDeCliente)" />
-				</hlayout>
-				</cell>
-
 			</row>
 
 		</rows>

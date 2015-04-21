@@ -10,10 +10,12 @@
 			<generator class="native" />
 		</id>
 
-		<property name="nombre" column="NOMBRE" type="string"/>
+		<property name="descripcion" column="DESCRIPCION" type="string"/>
 		<property name="porcentaje" column="PORCENTAJE" type="integer"/>
-		<property name="costo" column="COSTO" type="double"/>
+		<property name="importe" column="IMPORTE" type="double"/>
 		
+		<many-to-one name="condicionPago" column="COND_PAGO_ID" class="com.jkt.varios.dominio.CondPago"></many-to-one>
+
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
 	</class>

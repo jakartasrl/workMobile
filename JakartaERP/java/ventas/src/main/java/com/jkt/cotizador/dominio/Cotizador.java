@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
 import scala.xml.PrettyPrinter.Item;
 
 import com.jkt.dominio.ComprobanteVentaDet;
@@ -19,12 +20,13 @@ import com.jkt.varios.dominio.Moneda;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Cotizador extends PersistentEntity {
 
 	private Date fecha;
 	private boolean revisado;
 	
-	@NotNull(message="La cotización se debe realizar en base a un item existente.")
+	@NotNull(message="La cotizaciï¿½n se debe realizar en base a un item existente.")
 	private CotizacionDet item;
 	
 	private String usuarioCreacion;
@@ -113,7 +115,7 @@ public class Cotizador extends PersistentEntity {
 //				return;
 //			}
 			
-			//Es un detalle que tiene un concepto, en caso contrario es un titulo y no se deberá guardar.
+			//Es un detalle que tiene un concepto, en caso contrario es un titulo y no se deberï¿½ guardar.
 			if (detalle.getConceptoPresupuesto()!=null) {
 				detalles.add(detalle);
 				detalle.setCotizador(this);
@@ -121,58 +123,6 @@ public class Cotizador extends PersistentEntity {
 			
 		}
 		
-		
-	}
-	
-	public Moneda getMonedaExpresada() {
-		return monedaExpresada;
 	}
 
-	public void setMonedaExpresada(Moneda monedaExpresada) {
-		this.monedaExpresada = monedaExpresada;
-	}
-
-	public List<CotizadorDet> getDetalles() {
-		return detalles;
-	}
-	public void setDetalles(List<CotizadorDet> detalles) {
-		this.detalles = detalles;
-	}
-	public ModeloCotizador getModelo() {
-		return modelo;
-	}
-	public void setModelo(ModeloCotizador modelo) {
-		this.modelo = modelo;
-	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-	public boolean isRevisado() {
-		return revisado;
-	}
-	public void setRevisado(boolean revisado) {
-		this.revisado = revisado;
-	}
-	public String getUsuarioCreacion() {
-		return usuarioCreacion;
-	}
-	public void setUsuarioCreacion(String usuarioCreacion) {
-		this.usuarioCreacion = usuarioCreacion;
-	}
-	public String getUsuarioRevision() {
-		return usuarioRevision;
-	}
-	public void setUsuarioRevision(String usuarioRevision) {
-		this.usuarioRevision = usuarioRevision;
-	}
-	public Date getFechaRevision() {
-		return fechaRevision;
-	}
-	public void setFechaRevision(Date fechaRevision) {
-		this.fechaRevision = fechaRevision;
-	}
-	
 }
