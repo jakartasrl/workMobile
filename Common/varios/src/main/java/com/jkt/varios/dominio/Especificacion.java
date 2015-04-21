@@ -2,7 +2,8 @@ package com.jkt.varios.dominio;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
+
+import lombok.Data;
 
 import com.jkt.dominio.PersistentEntity;
 
@@ -12,6 +13,7 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Especificacion extends PersistentEntity {
 	
 	private static final String SEPARADOR = "\\\\";
@@ -37,26 +39,20 @@ public class Especificacion extends PersistentEntity {
 	private String ruta;
 	private String nombre;
 	
+	private String descripcion;
+	
 	private Timestamp fechaDeSubida;
 	
 	private String comentario;
 	
-	private int identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
+	
+	private String contentType;
+	private String format;
+	
+	private long identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
 	//No es muy seguro tener una referencia a un usuario desde un archivo cualquiera. Tener en cuenta que de ser así,
 	//se podria ir desde un archivo comun y corriente al usuario, y del usuario navegar por todos los datos, incluso la password.
 	private String nombreUsuario;
-	
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	public Timestamp getFechaDeSubida() {
-		return fechaDeSubida;
-	}
 	
 	/**
 	 * 
@@ -77,42 +73,6 @@ public class Especificacion extends PersistentEntity {
 	}
 	
 
-	public void setFechaDeSubida(Timestamp fechaDeSubida) {
-		this.fechaDeSubida = fechaDeSubida;
-	}
-
-	public int getIdentificadorDeUsuario() {
-		return identificadorDeUsuario;
-	}
-
-	public void setIdentificadorDeUsuario(int identificadorDeUsuario) {
-		this.identificadorDeUsuario = identificadorDeUsuario;
-	}
-
-	public String getRuta() {
-		return ruta;
-	}
-
-	public void setRuta(String ruta) {
-		this.ruta = ruta;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-	
 	/**
 	 * <p>Devuelve el nombre completo del archivo.Toma la ruta y el nombre y lo retorna con un formato correctamente legible desde el cliente.</p>
 	 * @return String nombre completo (URI) del archivo.

@@ -11,10 +11,13 @@
 		<property name="ruta" column="RUTA"/>
 		<property name="nombre" column="NOMBRE"/>
 		<property name="comentario" column="NOTA" />
+		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
-		<property name="fechaDeSubida" column="FECHA_SUBIDA_2" />
+		<property name="fechaDeSubida" column="FECHA_SUBIDA" />
 <!-- 		<property name="fechaDeSubida" column="FECHA_SUBIDA" type="date" /> -->
-		<property name="identificadorDeUsuario" column="IDENTIFICADOR_DE_USUARIO" type="integer" />
+		<property name="identificadorDeUsuario" column="IDENTIFICADOR_DE_USUARIO" />
+		<property name="contentType" column="CONTENT_TYPE" />
+		<property name="format" column="EXTENSION" />
 		
 	</class>
 	

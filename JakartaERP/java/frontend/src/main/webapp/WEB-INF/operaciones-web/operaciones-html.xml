@@ -584,6 +584,21 @@
 				
 			</campoSalida>
 			
+			
+			<campoSalida value="archivos"					target="archivos" >
+				
+				<campoSalida value="fileURL" 		target="ruta"/>
+				<campoSalida value="fileName" 		target="nombre"/>
+				<campoSalida value="fechaSubida"	target="fechaDeSubida"/>
+				<campoSalida value="comentario" 	target="comentario"/>
+				<campoSalida value="idUsuario" 		target="identificadorDeUsuario"/>
+				<campoSalida value="usuario" 		target="nombreUsuario"/>
+				<campoSalida value="contentType" 	target="contentType"/>
+				<campoSalida value="format" 		target="format"/>
+				<campoSalida value="descripcion" 	target="descripcion"/>
+			
+			</campoSalida>
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -685,6 +700,22 @@
 				<campoEntrada propertyOV="importe" metodo="setImporte"/>
 				<campoEntrada propertyOV="idCondicionDePago" metodo="setCondicionPago"/>
 			</campoEntrada>
+			
+			<campoEntrada propertyOV="archivos" metodo="setArchivos" >
+			
+				<campoEntrada propertyOV="fileURL" metodo="setRuta"/>
+				<campoEntrada propertyOV="fileName" metodo="setNombre"/>
+				<campoEntrada propertyOV="fechaSubida" metodo="setFechaDeSubida"/>
+				<campoEntrada propertyOV="comentario" metodo="setComentario"/>
+				<campoEntrada propertyOV="idUsuario" metodo="setIdentificadorDeUsuario"/>
+				<campoEntrada propertyOV="usuario" metodo="setNombreUsuario"/>
+				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
+				<campoEntrada propertyOV="format" metodo="setFormat"/>
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+
+			</campoEntrada>
+			
+			
 
 		</input>
 		
