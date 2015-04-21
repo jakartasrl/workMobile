@@ -56,6 +56,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	
 	private PresupuestoOV comprobanteOV=new PresupuestoOV();
 	
+	private boolean aPartirDeCotizacion = false;
 	
 	@Command
 	@NotifyChange("comprobanteOV")
@@ -66,7 +67,14 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	@SuppressWarnings("rawtypes")
 	@Command
 	public void guardar(){
-//		
+		
+		//Si se esta guardando un presupuesto a partir de una cotizacion, no se deben validar las listas innecesarias.
+		if(this.aPartirDeCotizacion){
+			this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
+			this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
+			this.itemsArticulos=new ArrayList<ItemsOV>();
+		}
+		
 		if(!this.validaPresupuesto()){
 			return;
 		}
@@ -121,10 +129,11 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 
 	@Command
-	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"aPartirDeCotizacion", "comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		super.nuevo();
 		this.comprobanteOV= new PresupuestoOV();
+		this.aPartirDeCotizacion=false;
 		init();
 	}
 	
@@ -138,6 +147,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	}
 	
 	@Command
+	@NotifyChange("aPartirDeCotizacion")
 	public void cargarCotizacion() throws IllegalAccessException, InvocationTargetException, JakartaException{
 		
 		ContainerOV objetoOV = new ContainerOV();
@@ -147,6 +157,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		cargarPresupuestoDesdeCotizacion(ovRecuperado);
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		this.aPartirDeCotizacion=true;
 	}
 	
 	private void cargarPresupuestoDesdeCotizacion(PresupuestoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException {
@@ -209,6 +220,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		cargarDesdeOV(ovRecuperado);
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		this.aPartirDeCotizacion=false;
+
 	}
 	
 	
@@ -328,23 +341,25 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			itemsFinal.add(itemsOV);
 		}
 
-		for (ItemsOV itemsOV : itemsArticulos) {
-			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-			itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
-			itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
-			itemsFinal.add(itemsOV);
-		}
-		
-		for (ItemsOV itemsOV : lDeterminacionesQuimicas) {
-			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-			itemsOV.setTipoItem(PedidoDet.CHAR_QUIMICO);
-			itemsFinal.add(itemsOV);
-		}
-
-		for (ItemsOV itemsOV : lDeterminacionesElectricas) {
-			itemsOV.setTipoItem(PedidoDet.CHAR_ELECTRICO);
-			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-			itemsFinal.add(itemsOV);
+		if (!this.isaPartirDeCotizacion()) {
+			for (ItemsOV itemsOV : itemsArticulos) {
+				itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+				itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
+				itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
+				itemsFinal.add(itemsOV);
+			}
+			
+			for (ItemsOV itemsOV : lDeterminacionesQuimicas) {
+				itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+				itemsOV.setTipoItem(PedidoDet.CHAR_QUIMICO);
+				itemsFinal.add(itemsOV);
+			}
+	
+			for (ItemsOV itemsOV : lDeterminacionesElectricas) {
+				itemsOV.setTipoItem(PedidoDet.CHAR_ELECTRICO);
+				itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
+				itemsFinal.add(itemsOV);
+			}
 		}
 		
 		/*
@@ -390,14 +405,23 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.contactoSeleccionado=new DescriptibleOV();
 		
 		this.comprobanteOV= new PresupuestoOV();
+
 	}
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"aPartirDeCotizacion","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
 		return "actualizarOVs";
+	}
+
+	public boolean isaPartirDeCotizacion() {
+		return aPartirDeCotizacion;
+	}
+
+	public void setaPartirDeCotizacion(boolean aPartirDeCotizacion) {
+		this.aPartirDeCotizacion = aPartirDeCotizacion;
 	}
 	
 }

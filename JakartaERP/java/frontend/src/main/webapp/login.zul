@@ -25,7 +25,7 @@
 							<label style="margin-left:10px;" value="Usuario"></label>
 						</cell>
 						<cell>
-							<textbox value="@bind(vm.usuario)" />
+							<textbox value="@bind(vm.usuario)" onOK="@command('acceder')"/>
 						</cell>
 					</row>
 
@@ -34,7 +34,7 @@
 							<label style="margin-left:10px;" value="Password" />
 						</cell>
 						<cell>
-							<textbox type="password" value="@bind(vm.password)" />
+							<textbox type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
 						</cell>
 					</row>
 					

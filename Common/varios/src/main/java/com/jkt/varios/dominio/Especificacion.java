@@ -42,7 +42,7 @@ public class Especificacion extends PersistentEntity {
 	private String comentario;
 	
 	private int identificadorDeUsuario;//Guardo el ID del usuario actual (Desde la sesion lo recuperamos.) y no la referencia al usuario.
-	//No es muy seguro tener una referencia a un usuario desde un archivo cualquiera. Tener en cuenta que de ser así,
+	//No es muy seguro tener una referencia a un usuario desde un archivo cualquiera. Tener en cuenta que de ser asÃ­,
 	//se podria ir desde un archivo comun y corriente al usuario, y del usuario navegar por todos los datos, incluso la password.
 	private String nombreUsuario;
 	
@@ -123,7 +123,7 @@ public class Especificacion extends PersistentEntity {
 
 	/**
 	 * <p>Recibe el nombre completo y genera dos textos separados, la ruta completa del archivo, y el nombre con extension.</p>
-	 * FIXME Seguramente existe una mejor forma de hacer esto, al momento de investigar, cambiar por una solución mas elegante.
+	 * FIXME Seguramente existe una mejor forma de hacer esto, al momento de investigar, cambiar por una soluciï¿½n mas elegante.
 	 * 
 	 */
 	public void setNombreCompleto(String nombreCompleto){

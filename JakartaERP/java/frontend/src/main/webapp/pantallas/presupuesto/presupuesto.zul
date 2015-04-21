@@ -77,9 +77,9 @@
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
 			        <tab id="items" label="Fabricacion/Reparacion/Service" />
-			        <tab id="labElec" label="Laboratorio Electrico" />
-			        <tab id="labQuim" label="Laboratorio Quimico" />
-			        <tab id="mat" label="Materiales" />
+			        <tab id="labElec" label="Laboratorio Electrico" visible="@bind(vm.aPartirDeCotizacion?false:true)" />
+			        <tab id="labQuim" label="Laboratorio Quimico" visible="@bind(vm.aPartirDeCotizacion?false:true)" />
+			        <tab id="mat" label="Materiales" visible="@bind(vm.aPartirDeCotizacion?false:true)" />
 			        <tab id="dComerciales" label="Datos Comerciales" />
 			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
 			        <tab id="notas" label="Notas" />
