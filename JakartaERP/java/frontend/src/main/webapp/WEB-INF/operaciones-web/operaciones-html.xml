@@ -468,24 +468,124 @@
 	
 		<output>
 		
-			<campoSalida target="id" 			value="id" />
-			<campoSalida target="codigo" 		value="codigo" />	
-			<campoSalida target="descripcion" 	value="descripcion" />
-			
+			<campoSalida target="id" 						value="id" />
+			<campoSalida target="codigo" 					value="codigo" />	
+			<campoSalida target="descripcion" 				value="descripcion" />
+			<campoSalida target="leyendaValorCero" 			value="leyendaValorCero" />
+			<campoSalida target="calculaResultado" 			value="calculaResultado" />
+			<campoSalida target="formato" 					value="formato" />
+			<campoSalida target="tipoResultado" 			value="tipoResultado" />
+			<campoSalida target="laboratorio.id" 			value="idLaboratorio" />
+						
 			<campoSalida target="metodos" 			value="metodos">
-			
 				<campoSalida target="id" 			value="id"/>
 				<campoSalida target="metodo" 		value="metodo"/>
-				
-<!-- 				<campoSalida target="valoresEsperados" 	value="valoresEsperados"> -->
-<!-- 					<campoSalida target="id"				value="id"/> -->
-<!-- 					<campoSalida target="valorDesde" 		value="valorDesde"/> -->
-<!-- 					<campoSalida target="valorHasta" 		value="valorHasta"/> -->
-<!-- 				</campoSalida>				 -->
-				
+<!-- 				<campoSalida target="expresion.id" 	value="idExpresion"/> -->
+<!-- 				<campoSalida target="expresion.expresion" 	value="expresionCadena"/> -->
 			</campoSalida>
-						
+
+			<campoSalida target="variables" value="variables">
+				<campoSalida target="id" value="id" />
+				<campoSalida target="codigo" value="codigo" />
+				<campoSalida target="descripcion" value="descripcion" />
+				<campoSalida target="input" value="input" />	
+			</campoSalida>
+			
 		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="TraerValoresEsperados" clase="com.jkt.laboratorio.operaciones.TraerValoresEsperados" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListValorEsperadoOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="OID" /> 
+		</input>
+
+		<output>
+
+			<campoSalida target="id" 			value="id" />
+			<campoSalida target="valorDesde" 	value="valorDesde" />
+			<campoSalida target="valorHasta" 	value="valorHasta" />
+			<campoSalida target="limite" 		value="limite" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerVariables" clase="com.jkt.laboratorio.operaciones.TraerVariables" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListVariableOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="OID" /> 
+		</input>
+
+		<output>
+
+			<campoSalida target="id" 			value="id" />
+			<campoSalida target="codigo" 		value="codigo" />
+			<campoSalida target="descripcion" 	value="descripcion" />
+			<campoSalida target="input" 		value="input" />
+			
+			<campoSalida target="expresion.id" 		value="idExpresion" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="saveDeterminacion" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Determinacion" inputOV="com.jkt.ov.DeterminacionOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Determinacion">
+			<campoEntrada propertyOV="id" 				metodo="setId" />
+			<campoEntrada propertyOV="codigo" 			metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" 		metodo="setDescripcion" />
+			<campoEntrada propertyOV="leyendaValorCero" metodo="setLeyendaValorCero" />
+			<campoEntrada propertyOV="calculaResultado" metodo="setCalculaResultado" />
+			<campoEntrada propertyOV="formato" 			metodo="setFormato" />
+			<campoEntrada propertyOV="tipoResultado" 	metodo="setTipoResultado" />
+			<campoEntrada propertyOV="idLaboratorio" 	metodo="setLaboratorio" />
+			
+			<campoEntrada propertyOV="metodos" 				metodo="setMetodos">
+				<campoEntrada propertyOV="id" 				metodo="setId"/>
+				<campoEntrada propertyOV="metodo" 			metodo="setMetodo"/>
+				<campoEntrada propertyOV="idDeterminacion" 	metodo="setDeterminacion"/>		
+				
+				<campoEntrada propertyOV="variables" 		metodo="setVariables">
+					<campoEntrada propertyOV="id" 			metodo="setId"/>
+					<campoEntrada propertyOV="codigo" 		metodo="setCodigo"/>
+					<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion"/>
+					<campoEntrada propertyOV="input" 		metodo="setInput"/>
+					
+					
+<!-- 					mando datos transientes para que el validador de determinacion se encargue de generar las expresiones, validarlas, y demas -->
+					<campoEntrada propertyOV="expresionCadena" 		metodo="setExpresionCadena" />
+					
+					<campoEntrada propertyOV="variables" 		metodo="setVariables">
+<!-- 						<campoEntrada propertyOV="id" 			metodo="setId"/> -->
+						<campoEntrada propertyOV="codigo" 		metodo="setCodigo"/>
+					</campoEntrada>
+
+<!-- 					<campoEntrada propertyOV="expresion" 		metodo="setExpresion"> -->
+<!-- 						<campoEntrada propertyOV="expresion" 		metodo="setExpresion" /> -->
+<!-- 						<campoEntrada propertyOV="variables" 		metodo="setVariables"> -->
+<!-- 							<campoEntrada propertyOV="codigo" 		metodo="setCodigo" /> -->
+<!-- 						</campoEntrada> -->
+<!-- 					</campoEntrada> -->
+				
+				</campoEntrada>
+				
+				
+				<campoEntrada propertyOV="valoresEsperados"	metodo="setValoresEsperados">
+					<campoEntrada propertyOV="id" 			metodo="setId"/>
+					<campoEntrada propertyOV="valorDesde" 	metodo="setValorDesde"/>
+					<campoEntrada propertyOV="valorHasta" 	metodo="setValorHasta"/>
+					<campoEntrada propertyOV="limite" 		metodo="setLimite"/>
+				</campoEntrada>
+							
+			</campoEntrada>
+						
+		</input>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>

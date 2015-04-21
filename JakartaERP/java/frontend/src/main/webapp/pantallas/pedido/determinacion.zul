@@ -1,48 +1,59 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
 	<vlayout>
-		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinacion" border="normal" height="auto" width="auto">
+		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinacion" border="normal" height="auto" width="100%" >
 		
 			<panelchildren>	
 			
 				<grid width="100%">
 				
 					<columns>
-						<column></column>
-						<column></column>
-						<column></column>
-						<column></column>
-						<column></column>
-						<column></column>
-						<column></column>
-						<column></column>
+						<column width="90px"></column>
+						<column width="180px"></column>
+						<column width="300px"></column>
+						<column width="90px"></column>
+						<column width="180px"></column>
+						<column width="120px"></column>
+						<column width="120px"></column>
 					</columns>
 					
 					<rows>
 					
 						<row>
 							<label value="Codigo"/>
-							<textbox value="@bind(vm.determinacion.codigo)" />
-							<cell colspan="6">
-								<textbox value="@bind(vm.determinacion.descripcion)" />
-							</cell>							
+							<textbox value="@bind(vm.determinacion.codigo)" width="100%" />
+							
+								<textbox value="@bind(vm.determinacion.descripcion)" width="100%" />
+													
 						</row>
+						
 						<row>
 							<label value="Tipo Resultado"/>
-							<combobox>
-								<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
-								<comboitem label="Falso" value="@bind(false)"></comboitem>										
-							</combobox>
-							<label value="Calcula Resultado"/>
-							<checkbox id="l1" onCheck="doChecked()" />
+							
+<!-- 							<combobox  model="@bind(vm.determinacion.listTipoResultado)" selectedItem="@bind(vm.determinacion.tipoResultado)" width="100%" height="auto" > -->
+<!-- 								<template name="model" var="tipoResultado" > -->
+<!-- 									<comboitem label="@bind(tipoResultado.descripcion)" value="@bind(tipoResultado.id)" />											 -->
+<!-- 								</template>										 -->
+<!-- 							</combobox> -->
+							<textbox value="@bind(vm.determinacion.tipoResultado)" width="100%" />
+
+							<cell>
+								<label value="Calcula Resultado" width="150px"/>
+								<checkbox checked="@bind(vm.determinacion.calculaResultado)" width="150px"/>
+							</cell>
+							
 							<label value="Formato"/>
-							<combobox>
-								<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
-								<comboitem label="Falso" value="@bind(false)"></comboitem>										
-							</combobox>
+<!-- 							<combobox model="@bind(vm.determinacion.listFormato)" selectedItem="@bind(vm.determinacion.formato)" width="100%"> -->
+<!-- 								<template name="model" var="formato"> -->
+<!-- 									<comboitem label="@bind(formato.descripcion)" value="@bind(formato.id)" />												 -->
+<!-- 								</template>										 -->
+<!-- 							</combobox>							 -->
+							<textbox value="@bind(vm.determinacion.formato)" width="100%" />
+							
 							<label value="Leyenda Valor Cero"/>
-							<textbox value="" />
+							<textbox value="@bind(vm.determinacion.leyendaValorCero)" width="100%" />
 						</row>
+						
 					</rows>
 					
 				</grid>		
@@ -50,58 +61,125 @@
 			</panelchildren>
 		</panel>
 	</vlayout>
-	
+
 	<vlayout>
+	
+		<hlayout>
+		<button style="margin-bottom:2px;"
+			image="/pantallas/icons/new.png" label="Agregar Metodo"
+			onClick="@command('agregarMetodo', dato=textoMetodo.value)"
+			tooltiptext="Agregar un nuevo metodo." />
+			
+		<textbox id="textoMetodo" value="" />
+		</hlayout>
+		
+		<!-- Metodos -->
+		<listbox model="@bind(vm.determinacion.metodos)" emptyMessage="No existen Metodos." >
+			<listhead>
+				<listheader label="Metodos" />
+			</listhead>						
+			<template name="model">
 
-		<tabbox mold="accordion">
-			<tabs>
-				<tab label="Metodos" />
-				<tab label="Variables" />
-			</tabs>
-			<tabpanels>
-				<tabpanel>
-				
-					<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarMetodo')" tooltiptext="Agregar un nuevo metodo." />
+				<listitem>
+					<listcell>
 
-					<!-- Valores Metodos -->
-					<listbox model="@bind(vm.determinacion.metodos)">
-						<template name="model">
-							<listitem>
-								<listcell>
-									<label value="@bind(each.id)" />
-									<label value="@bind(each.metodo)" />
-								</listcell>
-								<listcell>
+						<hbox>
+							<groupbox mold="3d" width="1100px"
+								open="false">
+								<caption label="@bind(each.metodo)"
+									width="100%" />
 
-								<!-- Valores Esperados -->
-								<listbox model="@bind(each.metodos.valoresEsperados)">
-									<template name="model" var="valor">
-										<listitem>
-											<listcell>
-												<label value="@bind(valor.id)" />
-											</listcell>
-											<listcell>
-												<label value="@bind(valor.valorDesde)" />
-											</listcell>
-											<listcell>
-												<label value="@bind(valor.valorHasta)" />
-											</listcell>
-										</listitem>
-									</template>
-								</listbox>
+								<hbox>
 								
+									
 
-								</listcell>
-							</listitem>
-						</template>
-					</listbox>
-					
-				</tabpanel>
-				<tabpanel>
+									<!-- Valores Esperados -->
+									<vlayout>
+									
+										<button
+											style="margin-bottom:2px;" image="/pantallas/icons/new.png"
+											label="Agregar Valor"
+											onClick="@command('agregarValor', metodoActual=each)"
+											tooltiptext="Agregar nuevo valor." />
+									
+										<listbox model="@bind(each.valoresEsperados)" width="100%" emptyMessage="No existen Valores." >
+											<listhead>
+												<listheader
+													label="Tension Desde" />
+												<listheader
+													label="Tension Hasta" />
+												<listheader
+													label="Valor Esperado" />
+											</listhead>
+											<template name="model"
+												var="valor">
+												<listitem>
+													<listcell>
+														<textbox
+															value="@bind(valor.valorDesde)" />
+													</listcell>
+													<listcell>
+														<textbox
+															value="@bind(valor.valorHasta)" />
+													</listcell>
+													<listcell>
+														<textbox
+															value="@bind(valor.limite)" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
 
-				</tabpanel>
-			</tabpanels>
-		</tabbox>
+										<button
+											style="margin-bottom:2px;" image="/pantallas/icons/new.png"
+											label="Agregar Variable"
+											onClick="@command('agregarVariable', metodoActual=each)"
+											tooltiptext="Agregar nueva variable." />
+										<!-- Variables -->
+										<listbox model="@bind(each.variables)" mold="paging" pageSize="5" emptyMessage="No existen Variables." >
+
+											<listhead>
+												<listheader label="Codigo" />
+												<listheader label="Descripcion" />
+												<listheader label="Input" />
+												<listheader label="Expresion" />
+											</listhead>
+
+											<template name="model"
+												var="valor">
+												<listitem>
+													<listcell>
+														<textbox
+															value="@bind(valor.codigo)" />
+													</listcell>
+													<listcell>
+														<textbox
+															value="@bind(valor.descripcion)" />
+													</listcell>
+													<listcell>
+														<checkbox checked="@bind(valor.input)" />
+													</listcell>
+													<listcell>
+														<textbox value="@bind(valor.expresionCadena)" onChange="@command('validarExpresion', expresion=self.value, variables=each.variables)" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+
+									</vlayout>
+
+								</hbox>
+
+							</groupbox>
+						</hbox>
+
+					</listcell>
+				</listitem>
+
+			</template>
+
+		</listbox>
+
 	</vlayout>
 
 </zk>

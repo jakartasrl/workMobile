@@ -10,7 +10,7 @@
 
 		<property name="metodo" column="metodo" type="string" />
 
-		<one-to-one name="expresion" cascade="save-update" class="com.jkt.laboratorio.dominio.Expresion" />
+<!-- 		<one-to-one name="expresion" cascade="save-update" class="com.jkt.laboratorio.dominio.Expresion" /> -->
 
 		<many-to-one name="determinacion" column="ID_DETERMINACION" />
 
@@ -20,7 +20,11 @@
 			<one-to-many class="com.jkt.laboratorio.dominio.ValorEsperado" />
 		</list>
 
-
+		<list name="variables"  cascade="save-update">
+			<key column="ID_METODO" />
+			<list-index column="secu" />
+			<one-to-many class="com.jkt.laboratorio.dominio.Variable" />
+		</list>
 
 	</class>
 

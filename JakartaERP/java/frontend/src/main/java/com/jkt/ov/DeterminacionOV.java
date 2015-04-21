@@ -26,11 +26,29 @@ public class DeterminacionOV extends ObjectView {
 	private String codAnalisis;
 	private String desAnalisis;
 	private double importe;
-	private DescriptibleOV moneda;
 	
-	private List<MetodoOV> metodos = new ArrayList<MetodoOV>();
+	private DescriptibleOV moneda;
+	private String leyendaValorCero;
+	private boolean calculaResultado;
 	
 	private String tipoResultado;
+			
+	private Long idTipoResultado;
+	private String descTipoResultado;
+	
+	private String formato;
+	
+	private Long idFormato;
+	private String descFormato;
+	
+	private List<MetodoOV> metodos = new ArrayList<MetodoOV>();
+	private List<VariableOV> variables = new ArrayList<VariableOV>();
+	
+	private List<DescriptibleOV> listTipoResultado = new ArrayList<DescriptibleOV>();
+	private List<DescriptibleOV> listFormato = new ArrayList<DescriptibleOV>();
+	
+	private LaboratorioOV laboratorio;
+	private long idLaboratorio;
 	
 }
 

@@ -5,15 +5,15 @@
 <hibernate-mapping>
 	<class name="com.jkt.laboratorio.dominio.Expresion" table="ExpresionLab">
 		
-		<id name="id" column  ="ID_METODO" >
+		<id name="id" column  ="ID_VARIABLE" >
 			<generator class="foreign">
-				<param name="property">metodo</param>
+				<param name="property">variable</param>
 			</generator>
         </id>
         
         
-        <one-to-one name="metodo" class="com.jkt.laboratorio.dominio.Metodo"
-			constrained="true"></one-to-one>
+<!--         <one-to-one name="metodo" class="com.jkt.laboratorio.dominio.Metodo" constrained="true"></one-to-one> -->
+        <one-to-one name="variable" class="com.jkt.laboratorio.dominio.Variable" constrained="true" />
 			
 		<property name="expresion" column="EXPRESION" />
 	
