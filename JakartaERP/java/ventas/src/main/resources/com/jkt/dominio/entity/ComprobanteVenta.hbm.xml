@@ -126,7 +126,7 @@
 <!-- 				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial"/> -->
 <!-- 			</list> -->
 			
-			<list name="formasFacturacion" cascade="all" table="PRESUPUESTO_FORMA_FACTURACION">
+			<list name="formasFacturacion" cascade="all" >
 				<key column="PRESUPUESTO_ID" />
 				<index column="ORDEN" />
 				<one-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>

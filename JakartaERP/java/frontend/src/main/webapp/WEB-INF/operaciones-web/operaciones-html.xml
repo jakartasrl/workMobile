@@ -699,6 +699,15 @@
 			
 			</campoSalida>
 			
+			
+			<campoSalida value="facturaciones" 			target="formasFacturacion" >
+				<campoSalida value="descripcion" 		target="descripcion"/>
+				<campoSalida value="porcentaje" 		target="porcentaje"/>
+				<campoSalida value="importe" 			target="importe"/>
+				<campoSalida value="idCondicionDePago" 	target="condicionPago.id"/>
+			</campoSalida>
+			
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

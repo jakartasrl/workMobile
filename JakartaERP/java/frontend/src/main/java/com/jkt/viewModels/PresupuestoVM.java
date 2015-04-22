@@ -19,6 +19,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.hsqldb.lib.ArrayListIdentity;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
@@ -83,7 +84,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		if(!super.validarOV()){
 			return;
 		}
-//		
+
 		completarOV();
 		final DescriptibleOV descripcionPresupuesto = (DescriptibleOV) Operaciones.ejecutar("GuardarPresupuesto", comprobanteOV, DescriptibleOV.class);
 		
@@ -100,7 +101,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			   		hashMap.put("Path", sPath);
 			   		hashMap.put("File", sFile);
 			   		
-					Window window = (Window) Executions.createComponents("/pantallas/presupuesto/reporte2.zul", null, hashMap);
+					Window window = (Window) Executions.createComponents("/pantallas/presupuesto/reporte.zul", null, hashMap);
 					window.doModal();
 		        }
 		    }
@@ -173,6 +174,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		this.comprobanteOV.setId(ovRecuperado.getId());
 		this.comprobanteOV.setItems(new ArrayList<ItemsOV>());
+		this.comprobanteOV.setFacturaciones(new ArrayList<FormaFacturacionOV>());
 		
 		this.items=new ArrayList<ItemsOV>();
 		this.itemsArticulos =new ArrayList<ItemsOV>();
@@ -249,9 +251,9 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
 		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		this.archivos=new ArrayList<ArchivoOV>();
-
+		
 		this.archivos=ovRecuperado.getArchivos();
-
+		
 		actualizarNotas(ovRecuperado);
 
 		actualizarContactosReferencia();
@@ -296,6 +298,12 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
 		this.comprobanteOV.setNro(ovRecuperado.getNro());
+		
+		this.comprobanteOV.setFacturaciones(ovRecuperado.getFacturaciones());
+		for (FormaFacturacionOV formaFacturacionOV : this.comprobanteOV.getFacturaciones()) {
+			formaFacturacionOV.setCondicionDePago(Operaciones.recuperarObjetoDescriptible("condicionPago", formaFacturacionOV.getIdCondicionDePago()));
+		}
+		
 	}
 	
 	
@@ -371,8 +379,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		 */
 		comprobanteOV.setItems(itemsFinal);
 		
-		List<FormaFacturacionOV> facturaciones = comprobanteOV.getFacturaciones();
-		for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
+		for (FormaFacturacionOV formaFacturacionOV : comprobanteOV.getFacturaciones()) {
 			formaFacturacionOV.setIdCondicionDePago(formaFacturacionOV.getCondicionDePago().getId());
 		}
 		
