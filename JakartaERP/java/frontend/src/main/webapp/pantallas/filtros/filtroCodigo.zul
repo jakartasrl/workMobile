@@ -12,6 +12,9 @@
 		<hlayout>
 			<label value="Codigo : "></label>
 			<textbox sclass="campoCodigo-small" value="@bind(vm.ov.codigo)"></textbox>
+			
+			<label style="margin-left:20px;" value="Descripción : "></label>
+			<textbox value="@bind(vm.ov.descripcion)"></textbox>
 		</hlayout>
 	</vbox>
 
