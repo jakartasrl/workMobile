@@ -29,7 +29,7 @@
 						<textbox class="campoCodigo-medium" value="@bind(vm.comprobanteOV.nro)" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
-						<datebox id="fecha" value="@bind(vm.comprobanteOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" tabindex="2"/>
+						<datebox id="fecha" value="@bind(vm.comprobanteOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2"/>
 						
 					</row>
 					
@@ -41,7 +41,7 @@
 						</hlayout>
 	
 						<hlayout>
-							<textbox sclass="campoCodigo-vsmall" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
+							<textbox sclass="campoCodigo-vsmall" readonly="true" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
 							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
 

@@ -68,12 +68,13 @@
 	<vlayout>
 	
 		<hlayout style="margin-top:15px;" >
+		<label value="Nombre del metodo:"></label>	
+		<textbox id="textoMetodo" sclass="campoCodigo-large" />
 		<button style="margin-bottom:2px;"
 			image="/pantallas/icons/new.png" label="Agregar Metodo"
 			onClick="@command('agregarMetodo', dato=textoMetodo.value)"
 			tooltiptext="Agregar un nuevo metodo." />
-			
-		<textbox id="textoMetodo" sclass="campoCodigo-large" />
+		
 		</hlayout>
 		
 		<!-- Metodos -->

@@ -64,7 +64,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	@Command
 	@NotifyChange("comprobanteOV")
 	public void agregarFormaFacturacion(){
-		this.comprobanteOV.getFacturaciones().add(0, new FormaFacturacionOV());
+		this.comprobanteOV.getFacturaciones().add(new FormaFacturacionOV());
 	}
 	
 	

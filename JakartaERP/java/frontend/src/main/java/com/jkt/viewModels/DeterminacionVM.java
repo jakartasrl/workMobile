@@ -183,7 +183,9 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@NotifyChange("determinacion")
 	public void agregarMetodo(@BindingParam("dato") String name) throws JakartaException{
 		
-		this.validarMetodo(name);
+		if(!this.validarMetodo(name)){
+			return;
+		};
 		
 		MetodoOV metodo = new MetodoOV();
 		metodo.setMetodo(name);
@@ -192,17 +194,20 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	}
 	
-	private void validarMetodo(String name) throws JakartaException {
+	private boolean validarMetodo(String name) throws JakartaException {
 		
 		if (name.equals("")){
-			throw new JakartaException("Debe ingresar un nombre al metodo");
+			Messagebox.show("Debe ingresar un nombre al metodo");
+			return false;
 		}
 		
 		for (MetodoOV metodo : this.determinacion.getMetodos()){
 			if (name.equals(metodo.getMetodo())){
-				throw new JakartaException("Ya existe un metodo con el nombre: " + name);
+				Messagebox.show("Ya existe un metodo con el nombre: " + name);
+				return false;
 			}
 		}
+		return true;
 	
 	}
 
@@ -222,7 +227,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		VariableOV variable = new VariableOV();
 		variable.setCodigo("Nueva Variable");
 		m.getVariables().add(variable);
-
+		
 	}
 	
 	private List<DescriptibleOV> cargarListFormato() {
