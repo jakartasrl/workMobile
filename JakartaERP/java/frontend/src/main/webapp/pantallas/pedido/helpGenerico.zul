@@ -1,13 +1,13 @@
 <window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.HelperVM')" title="" width="500px" position="center,center" closable="true" >
     <vlayout>
 
-		<panel style="padding:5px;"  title="Filtro" border="normal" >
+		<panel style="padding:5px;"  title="Filtro" border="normal" if="${vm.conFiltro}" >
 			<panelchildren>
 				<include id="filter" hflex="1" src="/pantallas/filtros/${vm.filtro}.zul" viewModel="${vm}" />
 			</panelchildren>
 		</panel>
 
-		<hlayout style="text-align: center; width:60%;">
+		<hlayout style="text-align: center; width:60%;" if="${vm.conFiltro}">
 			<button label="Buscar" onClick="@command('filtrar')"/>
 		</hlayout>
 

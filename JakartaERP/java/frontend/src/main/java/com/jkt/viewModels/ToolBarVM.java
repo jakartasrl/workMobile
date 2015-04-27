@@ -26,7 +26,7 @@ public class ToolBarVM {
 	public void logOut(){
 		Session sess = Sessions.getCurrent();
         sess.removeAttribute("userCredential");
-        Executions.sendRedirect("../../login.zul");
+        Executions.sendRedirect("../../menu.zul");
 	}
 	
 }

@@ -103,7 +103,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente Sucursal / Fecha");
+		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente Sucursal / Fecha",false);
 	}
 	
 	

@@ -31,10 +31,18 @@ import com.jkt.view.ObjectView;
  */
 public class HelperVM {
 
-	protected static final Logger log = Logger.getLogger(HelperVM.class);
-
+	
 	private String filtro="filtroCodigo";
-	private String codigoParaFiltrar;
+	
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
+	protected static final Logger log = Logger.getLogger(HelperVM.class);
 
 	protected List<FiltroOV> filtrarHook(){
 		return new ArrayList<FiltroOV>();
@@ -44,7 +52,7 @@ public class HelperVM {
 	@NotifyChange("coleccion")
 	public void filtrar(){
 		ContenedorFiltrosOV c=new ContenedorFiltrosOV();
-		c.setClase("pais");
+		c.setClase(this.clase);
 		
 		c.setFiltros(ov.obtenerFiltro());
 		
@@ -52,7 +60,9 @@ public class HelperVM {
 		this.coleccion=listDescriptible.getList();
 	}
 	
+	private Boolean conFiltro=Boolean.FALSE;
 	private String titulo;
+	private String clase;
 	private String codigo;
 	private String descripcion;
 	private List<DescriptibleOV> coleccion = new ArrayList<DescriptibleOV>();
@@ -61,12 +71,22 @@ public class HelperVM {
 	private String invoke;
 	private Object vm;
 
-	public String getCodigoParaFiltrar() {
-		return codigoParaFiltrar;
+	
+	
+	public Boolean getConFiltro() {
+		return conFiltro;
 	}
 
-	public void setCodigoParaFiltrar(String codigoParaFiltrar) {
-		this.codigoParaFiltrar = codigoParaFiltrar;
+	public void setConFiltro(Boolean conFiltro) {
+		this.conFiltro = conFiltro;
+	}
+
+	public String getClase() {
+		return clase;
+	}
+
+	public void setClase(String clase) {
+		this.clase = clase;
 	}
 
 	public String getRefresh() {
@@ -95,14 +115,6 @@ public class HelperVM {
 
 	public ObjectView getOv() {
 		return ov;
-	}
-
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
 	}
 
 	public void setOv(ObjectView ov) {
@@ -165,11 +177,9 @@ public class HelperVM {
 					throw new JakartaException("Ocurrio un problema de seguridad al ejecutar el metodo:".concat(invoke));
 				}
 			}else{
-				log.info("No se ejecutan post acciones adicionales luego de la selecci�n del help generico.");
+				log.info("No se ejecutan post acciones adicionales luego de la selección del help generico.");
 			}
-			
 		}
-		
 	}
 
 	@Init
@@ -178,9 +188,12 @@ public class HelperVM {
 						@ExecutionArgParam("result") ObjectView resultOV,
 						@ExecutionArgParam("refresh") String refresh,
 						@ExecutionArgParam("invoke") String metodo,
-						@ExecutionArgParam("vm") Object vm
+						@ExecutionArgParam("vm") Object vm,
+						@ExecutionArgParam("clase") String clase,
+						@ExecutionArgParam("conFiltro") Boolean conFiltro
 			) {
 		this.coleccion = coleccion;
+		this.conFiltro=conFiltro;
 		
 		if(headerOV==null){//asigna los datos correspondientes.
 			headerOV = new HeaderHelpGenericoOV();
@@ -189,7 +202,7 @@ public class HelperVM {
 		this.codigo=headerOV.getColumnaCodigo();
 		this.descripcion=headerOV.getColumnaDescripcion();
 		this.titulo=headerOV.getTitulo();
-
+		this.clase=clase;
 		this.vm=vm;
 		this.invoke=metodo;
 		this.ov=resultOV;

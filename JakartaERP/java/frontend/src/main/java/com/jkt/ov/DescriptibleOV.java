@@ -27,6 +27,7 @@ public class DescriptibleOV extends ObjectView {
 	public List obtenerFiltro(){
 		ArrayList<FiltroOV> filtros = new ArrayList<FiltroOV>();
 		filtros.add(new FiltroOV("codigo", codigo, "like", "string"));
+		filtros.add(new FiltroOV("descripcion", descripcion, "like", "string"));
 		return filtros;
 	}
 	
