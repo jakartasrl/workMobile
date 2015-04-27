@@ -23,24 +23,10 @@ public class ToolBarVM {
 	}
 	
 	@Command
-	public void showConfiguracion() {
-//		Window window = (Window) Executions.createComponents("/pantallas/configuracion/configuracion.zul", null, null);
-//		window.doModal();
-	}
-	
-	@Command
-	public void print() throws Exception {
-//		Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
-//		Window window = (Window) Executions
-//		.createComponents("/pantallas/conciliacion/print.zul", null, null);
-//		window.doModal();
-	}
-
-	@Command
 	public void logOut(){
 		Session sess = Sessions.getCurrent();
         sess.removeAttribute("userCredential");
-        Executions.sendRedirect("/login.zul");
+        Executions.sendRedirect("../../menu.zul");
 	}
 	
 }

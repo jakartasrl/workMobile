@@ -8,7 +8,7 @@
 				<toolbarbutton image="/pantallas/icons/new.png" label="Agregar Laboratorio" onClick="@command('agregarLaboratorio')" tooltiptext="Agregar elemento" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 18px;" />
-				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="index.zul" tooltiptext="Volver al menu" />
+				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../menu.zul" tooltiptext="Volver al menu" />
 
 			</div>
 
@@ -18,7 +18,6 @@
 
 			<div hflex="1" droppable="true" style="text-align: right;">
 				<toolbarbutton image="/pantallas/icons/help.png" onClick="@command('salir')" tooltiptext="Manual" />
-				<toolbarbutton image="/pantallas/icons/config.png" onClick='alert("not found yet");' tooltiptext="Configuración" />
 			</div>
 
 		</hlayout>

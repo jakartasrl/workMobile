@@ -95,7 +95,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Command
 	public void buscar() {
 		try {
-			this.openHelper("determinacion", "", this.determinacion, "traerDeterminacion", "Determinaciones", "Código", "Descripción");
+			this.openHelper("determinacion", "", this.determinacion, "traerDeterminacion", "Determinaciones", "Código", "Descripción",false);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {

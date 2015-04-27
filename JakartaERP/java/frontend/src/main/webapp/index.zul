@@ -1,31 +1,62 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
-<?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
 
-	<style src="/style/template-grey.css" />
+	<style src="/style/template.css" />
+
+	<panel 
+		id="tool" height="200px" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 
+		style="margin-top:10%; margin-left:35%;margin-right:35% ; padding:30px;"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')"
+	>
 	
-	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')" 
-		style="margin:20px; padding:5px;" >
-
+		<panelchildren>
 		
-		<div id="title" style="height:15%;text-align:center;">
-			<label style="font-size: 90px;color:white;" value="Los Conce" />
-		</div>
+			<grid style="border-style:none">
+				<columns>
+					<column></column>
+					<column></column>
+				</columns>
+				
+				<rows>
+					<row>
+						<cell>
+							<label style="margin-left:10px;" value="Usuario"></label>
+						</cell>
+						<cell>
+							<textbox value="@bind(vm.usuario)" onOK="@command('acceder')"/>
+						</cell>
+					</row>
+
+					<row>
+						<cell>
+							<label style="margin-left:10px;" value="Password" />
+						</cell>
+						<cell>
+							<textbox type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
+						</cell>
+					</row>
+					
+					<row>
+						<cell colspan="2" style="text-align:center">
+							<button label="Acceder" width="50%" onClick="@command('acceder')" />
+						</cell>
+					</row>
+
+					<row>
+						<cell colspan="2" style="text-align:center">
+							<label style="color:red;font-size:10px;" value="@bind(vm.error)" visible="@bind(vm.showError)" />
+						</cell>
+					</row>
+
+					
+				</rows>
+				
+			</grid>
 		
-		<div id="content" style="width:95%; height:85%; text-align: centerS; min-width:95%;">
-				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;">
-					<button label="${each.nombre}" href="${each.enlace}" height="100px" width="100px" style="margin-top:3px;" if="${each.tipo=='small' }" />
-					<button label="${each.nombre}" href="${each.enlace}" height="200px" width="200px" style="margin-top:3px;" if="${each.tipo=='big' }" />
-					<button label="${each.nombre}" href="${each.enlace}" height="150px" width="150px" style="margin-top:3px;" if="${each.tipo=='medium' }" />
-				</div>
-		</div>
+		
+		</panelchildren>
+	</panel>
 
-		<div id="footer" style="text-align:center; height:10%; border-top-color:white; border-top-style: solid; border-top-width:1px;">
-			<label value="@bind(vm.currentNew)" style="font-size:15px;color:white;" onClick="@command('next')" tooltiptext="Click for load new text."/>
-		</div>
-
-	</div>
-	
 </zk>
-

@@ -27,7 +27,7 @@ public class Helper extends Operation {
 		List objetos = recuperarObjetoUsandoKey(aParams);
 		
 		List<PersistentEntity> list = getServiceRepository().getByProperties(Class.forName(className), objetos);
-
+		
 		if (tipoCliente.equals(CLIENTE_DELPHI)) {
 			notificarObjetos("resultado", list);
 		}else{

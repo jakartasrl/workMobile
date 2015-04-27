@@ -88,7 +88,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		super.nuevo();
 		this.lDocumentacion = new ArrayList<DescriptibleOV>();
@@ -103,7 +103,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente Sucursal / Fecha");
+		openHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente Sucursal / Fecha",false);
 	}
 	
 	
@@ -164,6 +164,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
 		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		
+		this.archivos=ovRecuperado.getArchivos();
+		
 		actualizarNotas(ovRecuperado);
 
 		actualizarContactosReferencia();
@@ -219,6 +221,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
 		this.comprobanteOV.setNro(ovRecuperado.getNro());
+
+		this.comprobanteOV.setFacturaciones(ovRecuperado.getFacturaciones());
+		for (FormaFacturacionOV formaFacturacionOV : this.comprobanteOV.getFacturaciones()) {
+			formaFacturacionOV.setCondicionDePago(Operaciones.recuperarObjetoDescriptible("condicionPago", formaFacturacionOV.getIdCondicionDePago()));
+		}
+	
 	}
 	
 	
@@ -311,6 +319,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		 */
 		comprobanteOV.setItems(itemsFinal);
 		
+		for (FormaFacturacionOV formaFacturacionOV : comprobanteOV.getFacturaciones()) {
+			formaFacturacionOV.setIdCondicionDePago(formaFacturacionOV.getCondicionDePago().getId());
+		}
+		
 	}
 
 	@Init
@@ -348,7 +360,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {

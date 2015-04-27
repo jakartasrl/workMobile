@@ -11,12 +11,12 @@ import org.springframework.beans.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Default;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -38,8 +38,17 @@ public abstract class ViewModel {
 
 	protected static final Logger log = Logger.getLogger(ViewModel.class);
 
+	private String filtro="filtroCodigo";
 	private String titulo="";
-	
+
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -103,26 +112,42 @@ public abstract class ViewModel {
 							@BindingParam("post") String metodo,
 							@BindingParam("titulo") String titulo,
 							@BindingParam("codHeader") String codHeader,
-							@BindingParam("descHeader") String descHeader
+							@BindingParam("descHeader") String descHeader,
+							@BindingParam("conFiltro") @Default("false") Boolean filtrar
 			) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
-		if (ov==null) {
-			log.warn("No se ha indicado un objeto vista de destino. Por favor indique uno, de modo contrario, solamente la ventana es de una simple consulta de ayuda.");
+		if (filtrar) {
+			if (ov==null) {
+				log.warn("Hay que indicar el OV, xq de este se toman los filtros!!");
+				Messagebox.show("No se puede abrir la ayuda de esta entidad, ya que no se indico una entidad valida");
+			}
+			
+		}else{
+			if (ov==null) {
+				log.warn("No se ha indicado un objeto vista de destino. Por favor indique uno, de modo contrario, solamente la ventana es de una simple consulta de ayuda.");
+			}
 		}
 		
+		Map<String,Object> map=new HashMap<String,Object>();
 		ListDescriptibleOV listDescriptible;
-		if (oidEntidadMaestra==null || oidEntidadMaestra.isEmpty()) {
-			listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV(clase), ListDescriptibleOV.class);
+
+		if (filtrar) {
+			listDescriptible=new ListDescriptibleOV();
+			map.put("clase",clase);
 		}else{
-			HelperOV helperOV = new HelperOV();
-			helperOV.setClase(clase);
-			helperOV.setOidEntidadMaestra(oidEntidadMaestra);
-			listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperCompuesto",helperOV , ListDescriptibleOV.class);
+			if (oidEntidadMaestra==null || oidEntidadMaestra.isEmpty()) {
+				listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV(clase), ListDescriptibleOV.class);
+			}else{
+				HelperOV helperOV = new HelperOV();
+				helperOV.setClase(clase);
+				helperOV.setOidEntidadMaestra(oidEntidadMaestra);
+				listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperCompuesto",helperOV , ListDescriptibleOV.class);
+			}
 		}
 
-		Map<String,Object> map=new HashMap<String,Object>();
 		
 		map.put("coleccion",listDescriptible.getList());
+		map.put("conFiltro",filtrar);
 		map.put("refresh", retrieveMethod());
 		map.put("result", ov);
 		map.put("invoke", metodo);

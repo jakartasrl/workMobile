@@ -275,7 +275,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	@Command
 	public void buscar() throws JakartaException {
 		try {
-			this.openHelper("equipo", "", this.ov, "traerEquipo", "Equipos", "Código", "Descripción de equipos");
+			this.openHelper("equipo", "", this.ov, "traerEquipo", "Equipos", "Código", "Descripción de equipos",false);
 		} catch (IllegalAccessException e) {
 			levantarExcepcion(e);
 		} catch (IllegalArgumentException e) {

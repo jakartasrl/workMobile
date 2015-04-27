@@ -24,6 +24,15 @@ public class Pedido extends ComprobanteVenta {
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PedidoDet> detalles=new ArrayList<PedidoDet>();
 	private List<PedidoDocumentacion> documentacion=new ArrayList<PedidoDocumentacion>();
+	private List<FormaFacturacion> formasFacturacion = new ArrayList<FormaFacturacion>();
+
+	public List<FormaFacturacion> getFormasFacturacion() {
+		return formasFacturacion;
+	}
+
+	public void setFormasFacturacion(List<FormaFacturacion> formasFacturacion) {
+		this.formasFacturacion = formasFacturacion;
+	}
 
 	public ListaPrecios getListaPrecios() {
 		return listaPrecios;

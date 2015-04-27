@@ -44,7 +44,7 @@ public class LoginVM {
 			userOV.setLastName(result.getDescripcion());
 			sess.setAttribute("userCredential",userOV);
 			     
-			Executions.sendRedirect("/index.zul");
+			Executions.sendRedirect("pantallas/menu.zul");
 
 		}catch(Exception e){
 			this.showError=true;
