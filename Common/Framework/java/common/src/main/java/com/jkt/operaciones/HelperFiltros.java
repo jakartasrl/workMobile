@@ -8,23 +8,21 @@ import com.jkt.dominio.ContenedorFiltros;
 import com.jkt.dominio.Filtro;
 import com.jkt.excepcion.JakartaException;
 
-
-
+/**
+ * Esta operacion recibe una lista de filtros, que puede ser vacia, para filtrar dada entidad.
+ * 
+ * @author ssuarez
+ *
+ */
 public class HelperFiltros extends Helper {
 
 	protected List recuperarObjetoUsandoKey(Map<String, Object> aParams) throws JakartaException {
-		
-//		validarEntrada(aParams.get("FILTROS"));
-//		
-//		aParams.get("FILTROS");
-		
 		ContenedorFiltros containter = (ContenedorFiltros) aParams.get("objeto");
 		
 		String clase=containter.getClase();
 		List<Filtro> filtros = containter.getFiltros();
 		
 		return filtros;
-//		return Arrays.asList(crearFiltro("activo","true","igual","boolean"));
 	}
 
 }

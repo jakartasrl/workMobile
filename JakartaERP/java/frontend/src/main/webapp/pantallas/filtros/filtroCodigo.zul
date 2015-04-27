@@ -1,9 +1,17 @@
-<zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
-	
-	<vbox pack="center" align="center" style="padding: 10px;" >
+<zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)">
+
+	<zscript> 
+		
+		<![CDATA[
+				
+		]]>
+		
+	</zscript>
+
+	<vbox pack="center" align="center" style="padding: 10px;">
 		<hlayout>
 			<label value="Codigo : "></label>
-			<textbox sclass="campoCodigo-small" value="09784" ></textbox>
+			<textbox sclass="campoCodigo-small" value="@bind(vm.ov.codigo)"></textbox>
 		</hlayout>
 	</vbox>
 

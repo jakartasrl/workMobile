@@ -36,17 +36,17 @@ public class HelperVM {
 	private String filtro="filtroCodigo";
 	private String codigoParaFiltrar;
 
+	protected List<FiltroOV> filtrarHook(){
+		return new ArrayList<FiltroOV>();
+	}
+	
 	@Command
 	@NotifyChange("coleccion")
 	public void filtrar(){
 		ContenedorFiltrosOV c=new ContenedorFiltrosOV();
 		c.setClase("pais");
 		
-		FiltroOV filtro2 = new FiltroOV("id", "1", "igual", "integer");
-		FiltroOV filtro3 = new FiltroOV("activo","true","igual","boolean");
-		
-		c.getFiltros().add(filtro2);
-		c.getFiltros().add(filtro3);
+		c.setFiltros(ov.obtenerFiltro());
 		
 		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
 		this.coleccion=listDescriptible.getList();
