@@ -19,6 +19,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.commons.lang.StringUtils;
 import org.hsqldb.lib.ArrayListIdentity;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
@@ -65,6 +66,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	public void agregarFormaFacturacion(){
 		this.comprobanteOV.getFacturaciones().add(0, new FormaFacturacionOV());
 	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	@Command

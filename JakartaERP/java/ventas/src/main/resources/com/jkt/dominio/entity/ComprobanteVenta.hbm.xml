@@ -95,6 +95,12 @@
 				<one-to-many class="com.jkt.pedido.dominio.PedidoDet" />
 			</list>
 
+			<list name="formasFacturacion" cascade="all" >
+				<key column="PEDIDO_ID" />
+				<index column="ORDEN" />
+				<one-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
+			</list>
+
 		</union-subclass>
 
 

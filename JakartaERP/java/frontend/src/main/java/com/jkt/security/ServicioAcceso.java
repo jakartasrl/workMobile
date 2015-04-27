@@ -19,7 +19,7 @@ public class ServicioAcceso implements Initiator {
 		UserOV cre = (UserOV) sess.getAttribute("userCredential");
 		if (cre == null) {
 			Log.warn("El usuario no tiene las credencials correctas.");
-	        Executions.sendRedirect("/login.zul");
+	        Executions.sendRedirect("/index.zul");
 		}
 	}
 

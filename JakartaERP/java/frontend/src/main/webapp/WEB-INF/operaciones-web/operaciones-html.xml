@@ -212,6 +212,33 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="HelperConFiltro" clase="com.jkt.operaciones.HelperFiltros" inputOV="com.jkt.ov.ContenedorFiltrosOV" outputOV="com.jkt.ov.ListDescriptibleOV">
+
+		<input keyName="objeto" clase="com.jkt.dominio.ContenedorFiltros" >
+			
+			<campoEntrada propertyOV="clase" name="ENTIDAD"/>
+			
+			<campoEntrada propertyOV="clase" metodo="setClase"/>
+			
+			<campoEntrada propertyOV="filtros" metodo="setFiltros" >
+				<campoEntrada propertyOV="nombre" metodo="setNombre" />
+				<campoEntrada propertyOV="valor" metodo="setValor" />
+				<campoEntrada propertyOV="condicion" metodo="setCondicion" />
+				<campoEntrada propertyOV="tipoDeDato" metodo="setTipoDeDato" />
+			</campoEntrada>
+			
+		</input>
+
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+
+	</operacion>
+
 	<operacion name="Helper" clase="com.jkt.operaciones.HelperActivos" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
 
 		<input>
@@ -376,6 +403,28 @@
 				
 			</campoEntrada>
 
+			<campoEntrada propertyOV="facturaciones" metodo="setFormasFacturacion" >
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="porcentaje" metodo="setPorcentaje"/>
+				<campoEntrada propertyOV="importe" metodo="setImporte"/>
+				<campoEntrada propertyOV="idCondicionDePago" metodo="setCondicionPago"/>
+			</campoEntrada>
+			
+			<campoEntrada propertyOV="archivos" metodo="setArchivos" >
+			
+				<campoEntrada propertyOV="fileURL" metodo="setRuta"/>
+				<campoEntrada propertyOV="fileName" metodo="setNombre"/>
+				<campoEntrada propertyOV="fechaSubida" metodo="setFechaDeSubida"/>
+				<campoEntrada propertyOV="comentario" metodo="setComentario"/>
+				<campoEntrada propertyOV="idUsuario" metodo="setIdentificadorDeUsuario"/>
+				<campoEntrada propertyOV="usuario" metodo="setNombreUsuario"/>
+				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
+				<campoEntrada propertyOV="format" metodo="setFormat"/>
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+
+			</campoEntrada>
+
+
 <!-- 			<campoEntrada propertyOV="docs" metodo="setDocumentacion"> -->
 <!-- 				<campoEntrada propertyOV="idDocumento" metodo="setDocumentacion"/> -->
 <!-- 				<campoEntrada propertyOV="entregado" metodo="setEntregado"/> -->
@@ -452,6 +501,28 @@
 				<campoSalida value="codigo"				target="determinacion.codigo" />
 				<campoSalida value="descripcionDeterminacion"		target="determinacion.descripcion" />
 				
+			</campoSalida>
+			
+			<campoSalida value="archivos"					target="archivos" >
+				
+				<campoSalida value="fileURL" 		target="ruta"/>
+				<campoSalida value="fileName" 		target="nombre"/>
+				<campoSalida value="fechaSubida"	target="fechaDeSubida"/>
+				<campoSalida value="comentario" 	target="comentario"/>
+				<campoSalida value="idUsuario" 		target="identificadorDeUsuario"/>
+				<campoSalida value="usuario" 		target="nombreUsuario"/>
+				<campoSalida value="contentType" 	target="contentType"/>
+				<campoSalida value="format" 		target="format"/>
+				<campoSalida value="descripcion" 	target="descripcion"/>
+			
+			</campoSalida>
+			
+			
+			<campoSalida value="facturaciones" 			target="formasFacturacion" >
+				<campoSalida value="descripcion" 		target="descripcion"/>
+				<campoSalida value="porcentaje" 		target="porcentaje"/>
+				<campoSalida value="importe" 			target="importe"/>
+				<campoSalida value="idCondicionDePago" 	target="condicionPago.id"/>
 			</campoSalida>
 			
 		</output>

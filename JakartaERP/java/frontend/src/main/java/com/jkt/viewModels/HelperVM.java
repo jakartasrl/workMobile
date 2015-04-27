@@ -12,11 +12,16 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Window;
 
+import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.ov.ContenedorFiltrosOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.FiltroOV;
 import com.jkt.ov.HeaderHelpGenericoOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.view.ObjectView;
 
 /**
@@ -28,6 +33,25 @@ public class HelperVM {
 
 	protected static final Logger log = Logger.getLogger(HelperVM.class);
 
+	private String filtro="filtroCodigo";
+	private String codigoParaFiltrar;
+
+	@Command
+	@NotifyChange("coleccion")
+	public void filtrar(){
+		ContenedorFiltrosOV c=new ContenedorFiltrosOV();
+		c.setClase("pais");
+		
+		FiltroOV filtro2 = new FiltroOV("id", "1", "igual", "integer");
+		FiltroOV filtro3 = new FiltroOV("activo","true","igual","boolean");
+		
+		c.getFiltros().add(filtro2);
+		c.getFiltros().add(filtro3);
+		
+		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
+		this.coleccion=listDescriptible.getList();
+	}
+	
 	private String titulo;
 	private String codigo;
 	private String descripcion;
@@ -36,6 +60,14 @@ public class HelperVM {
 	private String refresh;
 	private String invoke;
 	private Object vm;
+
+	public String getCodigoParaFiltrar() {
+		return codigoParaFiltrar;
+	}
+
+	public void setCodigoParaFiltrar(String codigoParaFiltrar) {
+		this.codigoParaFiltrar = codigoParaFiltrar;
+	}
 
 	public String getRefresh() {
 		return refresh;
@@ -63,6 +95,14 @@ public class HelperVM {
 
 	public ObjectView getOv() {
 		return ov;
+	}
+
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 
 	public void setOv(ObjectView ov) {
@@ -105,7 +145,7 @@ public class HelperVM {
 	public void obtenerElemento(@BindingParam("objeto") DescriptibleOV d, @BindingParam("window") Window x) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		if (ov==null) {
-			log.warn("No est� disponible la funcionalidad para el evento de click sobre una fila, ya que no existe un destino donde depositar los datos.");
+			log.warn("No está disponible la funcionalidad para el evento de click sobre una fila, ya que no existe un destino donde depositar los datos.");
 		}else{
 			BeanUtils.copyProperties(d, ov);
 			x.detach();
