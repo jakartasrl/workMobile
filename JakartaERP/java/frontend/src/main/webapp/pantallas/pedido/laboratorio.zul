@@ -17,7 +17,7 @@
 			<rows>
 				<template name="model">
 					<row>
-						<textbox id="codigo-${each.codigo}" inplace="true" value="@bind(each.codigo)" constraint="no empty" maxlength="15"/>
+						<textbox inplace="true" value="@bind(each.codigo)" constraint="no empty" maxlength="15"/>
 						<textbox inplace="true" value="@bind(each.descripcion)" width="100%"/>
 						<checkbox checked="@bind(each.activo)" />
 					</row>

@@ -12,10 +12,10 @@ public class Variable extends Descriptible {
 	
 	private Determinacion determinacion;
 	private boolean input;
-	private Expresion expresion;
+//	private Expresion expresion;
 	
 	//TRANSIENT FIELDS
-	private String expresionCadena;
+	private String expresion;
 	private List<Variable> variables=new ArrayList<Variable>();
 		
 }

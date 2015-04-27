@@ -28,11 +28,12 @@ public class ValidadorDeterminaciones extends ValidacionDeNegocio{
 					//Se tiene que calcular la expresion...
 					
 					Expresion expresion = new Expresion();
-					expresion.setExpresion(variable.getExpresionCadena());
-					expresion.setVariable(variable);
-					variable.setExpresion(expresion);
+					expresion.setExpresion(variable.getExpresion());
+//					expresion.setVariable(variable);
 					
-					expresion.validar(variable.getExpresionCadena());
+//					variable.setExpresion(expresion);
+					
+					expresion.validar(variable.getExpresion());
 					
 //					List<Variable> variablesPrimitivas= new ArrayList<Variable>();
 //					for (Variable varAux : variable.getVariables()) {

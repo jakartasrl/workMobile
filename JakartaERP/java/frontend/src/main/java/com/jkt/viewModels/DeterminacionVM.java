@@ -11,6 +11,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
@@ -18,11 +19,11 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DeterminacionOV;
-import com.jkt.ov.ExpresionOV;
 import com.jkt.ov.ListValorEsperadoOV;
 import com.jkt.ov.ListVariableOV;
 import com.jkt.ov.MetodoOV;
 import com.jkt.ov.ValorEsperadoOV;
+import com.jkt.ov.ValoresTablaOV;
 import com.jkt.ov.VariableOV;
 
 @Data
@@ -35,42 +36,54 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	public void init() {
 		this.setTitulo("Determinaciones");
 		this.determinacion.setIdLaboratorio(1);
-//		this.getDeterminacion().setListFormato((cargarListFormato()));
-		
+		this.determinacion.setListTipoResultado(this.cargarListTipoResultados());
+		this.determinacion.setListFormato(this.cargarListFormato());
 	}
 
 	@Command("guardar")
 	@NotifyChange("determinacion")
 	public void guardar() throws JakartaException {
 		
-			List<MetodoOV> metodos = this.getDeterminacion().getMetodos();
-			for (MetodoOV metodoOV : metodos) {
-				
-				if (this.determinacion.getId()==0) {
-					metodoOV.setIdDeterminacion(-1L);
-				}
-				
-				List<VariableOV> variablesXMetodo = metodoOV.getVariables();
-				
-				
-				List listaVariablesTransientes = new ArrayList<VariableOV>();
-				for (VariableOV variableOV : variablesXMetodo) {
-					VariableOV nuevaVar = new VariableOV();
-					nuevaVar.setCodigo(variableOV.getCodigo());
-					listaVariablesTransientes.add(nuevaVar);
-				}
-				
-				for (VariableOV variableOV : variablesXMetodo) {
-					variableOV.setVariables(listaVariablesTransientes);
-				}
+		List<MetodoOV> metodos = this.getDeterminacion().getMetodos();
+		for (MetodoOV metodoOV : metodos) {
 
+			if (this.determinacion.getId() == 0) {
+				metodoOV.setIdDeterminacion(-1L);
 			}
+
+			List<VariableOV> variablesXMetodo = metodoOV.getVariables();
+
+			List listaVariablesTransientes = new ArrayList<VariableOV>();
+			for (VariableOV variableOV : variablesXMetodo) {
+				VariableOV nuevaVar = new VariableOV();
+				nuevaVar.setCodigo(variableOV.getCodigo());
+				listaVariablesTransientes.add(nuevaVar);
+			}
+
+			for (VariableOV variableOV : variablesXMetodo) {
+				variableOV.setVariables(listaVariablesTransientes);
+			}
+
+		}
+
+		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getDescripcion());
+		this.determinacion.setDescFormato(this.determinacion.getFormato().getDescripcion());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
 		Messagebox.show("Determinacion Guardada Correctamente.");
 		
 	}
 
+	@Command
+	public void toogleAccordion(@BindingParam("element") Groupbox currentAccordion){
+		if (currentAccordion.isOpen()) {
+			currentAccordion.setOpen(false);
+		}else{
+			currentAccordion.setOpen(true);
+		}
+	}
+	
+	
 	@Command
 	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
@@ -95,7 +108,6 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 	}
 
-	@Override
 	@GlobalCommand("actualizar")
 	@NotifyChange("determinacion")
 	public void actualizar() {
@@ -138,24 +150,35 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 			metodo.setIdDeterminacion(this.determinacion.getId());
 			
 		}
-			
+		
+		det.setListTipoResultado(this.cargarListTipoResultados());
+		det.setListFormato(this.cargarListFormato());
+		
+		Long idTipoResultado = det.getIdTipoResultado();
+		DescriptibleOV tipoResultadoSeleccionado=null;
+		for (DescriptibleOV tipoResultado : det.getListTipoResultado()) {
+			if (tipoResultado.getId()==idTipoResultado) {
+				tipoResultadoSeleccionado=tipoResultado;
+				break;
+			}
+		}
+		
+		det.setTipoResultado(tipoResultadoSeleccionado);
+		
+		Long idFormato = det.getIdFormato();
+		DescriptibleOV formatoSeleccionado=null;
+		for (DescriptibleOV formato : det.getListFormato()) {
+			if (formato.getId()==idFormato) {
+				formatoSeleccionado=formato;
+				break;
+			}
+		}
+		
+		det.setFormato(formatoSeleccionado);
+		
 		this.setDeterminacion(det);
 	}
 
-//	private void asignarDatosEnCombo(DeterminacionOV determinacion) {
-//		
-//		List<DescriptibleOV> listFormato = this.determinacion.getListFormato();
-//		DescriptibleOV formatoSeleccionado=null;
-//		for (DescriptibleOV descriptibleOV : listFormato) {
-//			if (descriptibleOV.getDescripcion().equals(determinacion.getDescFormato())) {
-//				formatoSeleccionado=descriptibleOV;
-//			}
-//		}
-//		
-//		this.determinacion.setFormato(formatoSeleccionado);
-//
-//	}
-	
 	@Command
 	@NotifyChange("determinacion")
 	public void agregarMetodo(@BindingParam("dato") String name) throws JakartaException{
@@ -204,7 +227,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	private List<DescriptibleOV> cargarListFormato() {
 		
-		List <DescriptibleOV> listFormato = new ArrayList<DescriptibleOV>();
+		List <DescriptibleOV> listFormato = new ArrayList();
 		
 		listFormato.add(new DescriptibleOV("0"));
 		listFormato.add(new DescriptibleOV("0.0"));
@@ -214,14 +237,18 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		listFormato.add(new DescriptibleOV("0E-000"));
 		
 		return listFormato;
-		
+			
 	}
 	
-	private void cargarListTipoResultados() {
+	private List<DescriptibleOV> cargarListTipoResultados() {
 		
-		this.getDeterminacion().getListFormato().add(new DescriptibleOV("Numero"));
-		this.getDeterminacion().getListFormato().add(new DescriptibleOV("Boolean"));
-		this.getDeterminacion().getListFormato().add(new DescriptibleOV("Leyenda"));
+		List <DescriptibleOV> listTipoResultado = new ArrayList();
+		
+		listTipoResultado.add(new DescriptibleOV("Numero"));
+		listTipoResultado.add(new DescriptibleOV("Boolean"));
+		listTipoResultado.add(new DescriptibleOV("Leyenda"));
+		
+		return listTipoResultado;
 		
 	}
 	

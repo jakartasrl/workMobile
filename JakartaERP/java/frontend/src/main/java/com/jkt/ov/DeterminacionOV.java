@@ -31,12 +31,12 @@ public class DeterminacionOV extends ObjectView {
 	private String leyendaValorCero;
 	private boolean calculaResultado;
 	
-	private String tipoResultado;
+	private DescriptibleOV tipoResultado;
 			
 	private Long idTipoResultado;
 	private String descTipoResultado;
 	
-	private String formato;
+	private DescriptibleOV formato;
 	
 	private Long idFormato;
 	private String descFormato;

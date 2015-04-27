@@ -60,6 +60,8 @@ public class MenuVM {
 			menues.add(MenuOV.newInstance("Pedido", "index-pedido.zul", "small"));
 			menues.add(MenuOV.newInstance("Presupuesto", "index-presupuesto.zul", "small"));
 			menues.add(MenuOV.newInstance("Plantilla", "pantallas/plantilla/plantilla.zul", "small"));
+			
+			menues.add(MenuOV.newInstance("Cotizacion", "index-cotizacion.zul", "small"));
 
 //		}
 		

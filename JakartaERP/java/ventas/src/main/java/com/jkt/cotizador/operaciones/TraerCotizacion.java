@@ -35,19 +35,25 @@ public class TraerCotizacion extends Operation {
 		validarEntrada(aParams.get(OID));
 		
 		Cotizacion cotizacion = (Cotizacion) obtener(Cotizacion.class,(String)aParams.get(OID));
-		long identificadorDeUsuario;
 		
-		notificarObjeto(WRITER_COTIZACIONES, cotizacion);
-
-		for (ComprobanteVentaDet detalle : cotizacion.getDetalles()) {
-			notificarObjeto(WRITER_DETALLES, detalle);
-		}
 		
-		for (Especificacion adjunto : cotizacion.getArchivos()) {
-			identificadorDeUsuario = adjunto.getIdentificadorDeUsuario();
-			Usuario usuario = (Usuario) obtener(Usuario.class, identificadorDeUsuario);
-			adjunto.setNombreUsuario(usuario.getNombres().concat(" ").concat(usuario.getApellido()));
-			notificarObjeto(WRITER_ARCHIVOS, adjunto);
+		if (this.tipoCliente.equals(this.CLIENTE_DELPHI)) {
+			long identificadorDeUsuario;
+			
+			notificarObjeto(WRITER_COTIZACIONES, cotizacion);
+			
+			for (ComprobanteVentaDet detalle : cotizacion.getDetalles()) {
+				notificarObjeto(WRITER_DETALLES, detalle);
+			}
+			
+			for (Especificacion adjunto : cotizacion.getArchivos()) {
+				identificadorDeUsuario = adjunto.getIdentificadorDeUsuario();
+				Usuario usuario = (Usuario) obtener(Usuario.class, identificadorDeUsuario);
+				adjunto.setNombreUsuario(usuario.getNombres().concat(" ").concat(usuario.getApellido()));
+				notificarObjeto(WRITER_ARCHIVOS, adjunto);
+			}
+		}else{
+			notificarObjeto(WRITER_COTIZACIONES, cotizacion);
 		}
 			
 	}

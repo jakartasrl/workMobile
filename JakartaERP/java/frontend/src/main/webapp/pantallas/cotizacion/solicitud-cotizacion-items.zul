@@ -1,0 +1,72 @@
+<zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
+
+	<vlayout width="100%" style="text-align:center;">
+		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
+			 <attribute name="onClick"><![CDATA[
+					//box.pagingPosition = "top";
+					//siempre retorna a la primer pagina
+			        box.setActivePage(0);
+        		]]></attribute>
+		</button>
+			<label value="Agregar un item"></label>
+	</vlayout>
+
+
+	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
+
+		<listhead>
+			<listheader />
+		</listhead>
+
+		<template name="model">
+			<listitem>
+				<listcell>
+
+					<groupbox width="100%" style="border-style:none; cursor: default">
+					
+							<hlayout>
+							
+								<label value="Tipo" />
+								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)" constraint="no empty">
+									<template name="model" var="tVenta">
+										<comboitem label="@bind(tVenta.descripcion)" />
+									</template>
+								</combobox>
+							
+								<label value="Referencia:" />
+								<textbox width="350px" value="@bind(each.referencia)" constraint="no empty"/>
+		
+								<label value="Cantidad:" />
+								<textbox width="40px;" value="@bind(each.cantidad)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+		
+<!-- 								<label value="Moneda:" /> -->
+<!-- 								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty"> -->
+<!-- 									<template name="model" var="moneda"> -->
+<!-- 										<comboitem label="@bind(moneda.descripcion)" /> -->
+<!-- 									</template> -->
+<!-- 								</combobox> -->
+		
+<!-- 								<label value="Importe:" /> -->
+<!-- 								<textbox width="50px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/> -->
+							
+<!-- 								<label value="Importe Total:" /> -->
+<!-- 								<textbox width="50px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/> -->
+								
+							</hlayout>
+							
+							<hlayout style="margin:10px;">
+								<label value="Cargar Plantilla:" />
+								<textbox sclass="campoCodigo-small" value="@bind(each.plantilla.codigo)" onBlur="@command('validarCampo', clase='plantilla', codigo=self.value, ov=each.plantilla)" />
+								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
+							</hlayout>
+							
+							<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" readonly="false" />
+
+					</groupbox>
+
+				</listcell>
+			</listitem>
+		</template>
+
+	</listbox>
+</zk>
