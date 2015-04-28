@@ -16,7 +16,7 @@ import com.jkt.varios.dominio.Idioma;
 
 /**
  * <p>Representa los Clientes de la empresa</p>
- * <p>Se utilizará en el ingreso  pedidos, cotizaciones, facturas, etc</p>
+ * <p>Se utilizarï¿½ en el ingreso  pedidos, cotizaciones, facturas, etc</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -128,7 +128,8 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 	 */
 	public String getDescripcion(){
 		String valorCuit=(" (").concat(sujetoImpositivo.getCuit()==null?"-":sujetoImpositivo.getCuit()).concat(")");
-		return sujetoImpositivo.getRazonSocial().concat(valorCuit);
+//		return sujetoImpositivo.getRazonSocial().concat(valorCuit);
+		return sujetoImpositivo.getRazonSocial();
 	}
 	/*
 	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
