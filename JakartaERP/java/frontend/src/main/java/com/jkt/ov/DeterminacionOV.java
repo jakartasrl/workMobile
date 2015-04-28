@@ -33,12 +33,12 @@ public class DeterminacionOV extends ObjectView {
 	
 	private DescriptibleOV tipoResultado;
 			
-	private Long idTipoResultado;
+	private String idTipoResultado;
 	private String descTipoResultado;
 	
 	private DescriptibleOV formato;
 	
-	private Long idFormato;
+	private String idFormato;
 	private String descFormato;
 	
 	private List<MetodoOV> metodos = new ArrayList<MetodoOV>();

@@ -45,25 +45,25 @@ public class Expresion extends PersistentEntity  implements Observer  {
 	
 	
 	public void validar(String aValue) throws ValidacionDeNegocioException{
-		Evaluator evaluator = new Evaluator();
-		
-		evaluator.getVariables();
-		
-		Map vars=new HashMap();
-		vars.put("A", 10);
-		vars.put("B", 10);
-		vars.put("C", 10);
-		vars.put("D", 10);
-		evaluator.setVariables(vars);
-		
-		evaluator.setVariableResolver(new NotifyVariableResolver(this));
-		
-		try{
-	 	   evaluator.evaluate(aValue);
-		}
-		catch (EvaluationException e){
-			throw new ValidacionDeNegocioException(e.getMessage());
-		}
+//		Evaluator evaluator = new Evaluator();
+//		
+//		evaluator.getVariables();
+//		
+//		Map vars=new HashMap();
+//		vars.put("A", 10);
+//		vars.put("B", 10);
+//		vars.put("C", 10);
+//		vars.put("D", 10);
+//		evaluator.setVariables(vars);
+//		
+//		evaluator.setVariableResolver(new NotifyVariableResolver(this));
+//		
+//		try{
+//	 	   evaluator.evaluate(aValue);
+//		}
+//		catch (EvaluationException e){
+//			throw new ValidacionDeNegocioException(e.getMessage());
+//		}
 	}
 	
 	public double calcular(){

@@ -13,6 +13,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -44,6 +45,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@NotifyChange("determinacion")
 	public void guardar() throws JakartaException {
 		
+		if(!validarDeterminacion()){
+			return;
+		}
+		
 		List<MetodoOV> metodos = this.getDeterminacion().getMetodos();
 		for (MetodoOV metodoOV : metodos) {
 
@@ -66,12 +71,39 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 		}
 
-		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getDescripcion());
-		this.determinacion.setDescFormato(this.determinacion.getFormato().getDescripcion());
+		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getCodigo());
+		this.determinacion.setDescFormato(this.determinacion.getFormato().getCodigo());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
 		Messagebox.show("Determinacion Guardada Correctamente.");
 		
+	}
+
+	private boolean validarDeterminacion() {
+		
+		if (determinacion.getCodigo()==null || determinacion.getCodigo().isEmpty()) {
+			Messagebox.show("Debe ingresar un codigo para la determinacion.");
+			return false;
+		}
+		
+		if (determinacion.getDescripcion()==null || determinacion.getDescripcion().isEmpty()) {
+			Messagebox.show("Debe ingresar una descripcion para la determinacion.");
+			return false;
+		}
+		
+		if (determinacion.getFormato()==null) {
+			Messagebox.show("Debe ingresar un formato.");
+			return false;
+		}
+		if (determinacion.getTipoResultado()==null) {
+			Messagebox.show("Debe ingresar un tipo de resultado.");
+			return false;
+		}
+		if (determinacion.getMetodos().isEmpty()) {
+			Messagebox.show("Debe ingresar como minimo un metodo.");
+			return false;
+		}
+		return true;
 	}
 
 	@Command
@@ -88,6 +120,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
 		this.determinacion = new DeterminacionOV();
+		
 		this.init();
 	}
 
@@ -124,6 +157,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	public void traerDeterminacion() {
 		
 		long idDeterminacion = determinacion.getId();
+		determinacion=new DeterminacionOV();
 		String entidad = "Determinacion";
 		
 		ContainerOV containerOV = new ContainerOV();
@@ -154,10 +188,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		det.setListTipoResultado(this.cargarListTipoResultados());
 		det.setListFormato(this.cargarListFormato());
 		
-		Long idTipoResultado = det.getIdTipoResultado();
+		String idTipoResultado = det.getIdTipoResultado();
 		DescriptibleOV tipoResultadoSeleccionado=null;
 		for (DescriptibleOV tipoResultado : det.getListTipoResultado()) {
-			if (tipoResultado.getId()==idTipoResultado) {
+			if (tipoResultado.getCodigo().equals(idTipoResultado)) {
 				tipoResultadoSeleccionado=tipoResultado;
 				break;
 			}
@@ -165,10 +199,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		
 		det.setTipoResultado(tipoResultadoSeleccionado);
 		
-		Long idFormato = det.getIdFormato();
+		String cadenaFormato = det.getIdFormato();
 		DescriptibleOV formatoSeleccionado=null;
 		for (DescriptibleOV formato : det.getListFormato()) {
-			if (formato.getId()==idFormato) {
+			if (formato.getCodigo().equals(cadenaFormato)) {
 				formatoSeleccionado=formato;
 				break;
 			}
@@ -181,7 +215,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 	@Command
 	@NotifyChange("determinacion")
-	public void agregarMetodo(@BindingParam("dato") String name) throws JakartaException{
+	public void agregarMetodo(@BindingParam("dato") String name, @BindingParam("componente") Textbox text) throws JakartaException{
 		
 		if(!this.validarMetodo(name)){
 			return;
@@ -191,6 +225,21 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		metodo.setMetodo(name);
 		metodo.setIdDeterminacion(this.determinacion.getId()); // le seteamos el id de la determinacion
 		this.determinacion.getMetodos().add(metodo);
+		text.setValue("");
+	
+	}
+
+	@Command
+	@NotifyChange("determinacion")
+	public void eliminarMetodo(@BindingParam("nroMetodo") int nroMetodo) throws JakartaException{
+		
+		if (this.determinacion.getMetodos().isEmpty()) {
+			Messagebox.show("No hay metodos a eliminar.");
+		}else{
+//			int pos = this.determinacion.getMetodos().size();
+			this.determinacion.getMetodos().remove(nroMetodo);
+		}
+	
 	
 	}
 	
@@ -211,6 +260,30 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	}
 
+	@Command
+	@NotifyChange("determinacion")
+	public void borrarValor(@BindingParam("metodoActual") MetodoOV m){
+	
+		if (m.getValoresEsperados().isEmpty()) {
+			Messagebox.show("No hay valores a borrar.");
+			return;
+		}
+		m.getValoresEsperados().remove(m.getValoresEsperados().size()-1);
+		
+	}
+
+	@Command
+	@NotifyChange("determinacion")
+	public void borrarVar(@BindingParam("metodoActual") MetodoOV m){
+		
+		if (m.getVariables().isEmpty()) {
+			Messagebox.show("No hay variables a borrar.");
+			return;
+		}
+		m.getVariables().remove(m.getVariables().size()-1);
+		
+	}
+	
 	@Command("agregarValor")
 	@NotifyChange("determinacion")
 	public void agregarValor(@BindingParam("metodoActual") MetodoOV m){
