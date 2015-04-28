@@ -34,7 +34,7 @@
 						
 						<row sclass="fila-maestro">
 							<label style="width:100px;" value="Referencia : " />
-							<cell colspan="2">
+							<cell colspan="3">
 								<textbox class="campoCodigo-medium" value="@bind(vm.cotizacionOV.referencia)" tabindex="4" width="100%" />
 							</cell>
 						</row>
@@ -53,9 +53,9 @@
 								<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 							</hlayout>
 
-							<label value="Nombre Comercial : " />
-							<cell colspan="2">
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" tabindex="7" />
+<!-- 							<label value="Nombre Comercial : " /> -->
+							<cell colspan="3">
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" readonly="true" tabindex="7" />
 							</cell>
 						</row>
 						
