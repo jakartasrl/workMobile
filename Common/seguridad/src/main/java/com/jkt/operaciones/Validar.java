@@ -55,7 +55,8 @@ public abstract class Validar extends Operation{
 	 */
 	private void recuperarValor(Map<String, Object> aParams) {
 		campoAFiltrar = (String) aParams.get(CAMPO_VALIDADO_FIELD);
-		valorAFiltrar = (String) aParams.get(campoAFiltrar.toUpperCase());
+//		valorAFiltrar = (String) aParams.get(campoAFiltrar.toUpperCase());
+		valorAFiltrar = (String) aParams.get("CODIGO");
 	}
 
 	/**

@@ -17,5 +17,9 @@ public abstract class ObjectView implements Serializable {
 	public List obtenerFiltro() {
 		return new ArrayList();
 	}
+	
+	public String getCampoClave(){
+		return "id";
+	};
 
 }

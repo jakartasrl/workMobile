@@ -38,7 +38,7 @@
 			    	<row sclass="fila-maestro">
 						<label value="Cliente | Sucursal : " />
 						<hlayout>
-							<textbox sclass="campoCodigo-medium" readonly="true" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="3"/>
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="3"/>
 							<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
 						</hlayout>
 	

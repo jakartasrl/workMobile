@@ -70,7 +70,7 @@ public abstract class ViewModel {
 		ContainerOV container= new ContainerOV();
 		container.setString1(clase);
 		container.setString2(campo);
-		container.setString3("codigo");
+		container.setString3(ov.getCampoClave());
 		
 		//Asigna el resultado.
 		DescriptibleOV resultado= (DescriptibleOV) Operaciones.ejecutar("ValidarEntidad", container, DescriptibleOV.class);
