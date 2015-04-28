@@ -20,6 +20,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DeterminacionOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListValorEsperadoOV;
 import com.jkt.ov.ListVariableOV;
 import com.jkt.ov.MetodoOV;
@@ -40,6 +41,24 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		this.determinacion.setListTipoResultado(this.cargarListTipoResultados());
 		this.determinacion.setListFormato(this.cargarListFormato());
 	}
+	
+	@Command
+	@NotifyChange("determinacion")
+	public void asignarUnicoResultado(){
+		
+		List<MetodoOV> metodos = this.determinacion.getMetodos();
+		for (MetodoOV metodoOV : metodos) {
+			metodoOV.setVariables(new ArrayList<VariableOV>());
+			
+			VariableOV variable=new VariableOV();
+			variable.setCodigo("Resultado final");
+			variable.setDescripcion("Resultado final");
+			variable.setInput(true);
+			
+			metodoOV.getVariables().add(variable);
+		}
+		
+	}
 
 	@Command("guardar")
 	@NotifyChange("determinacion")
@@ -52,9 +71,14 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		List<MetodoOV> metodos = this.getDeterminacion().getMetodos();
 		for (MetodoOV metodoOV : metodos) {
 
-			if (this.determinacion.getId() == 0) {
-				metodoOV.setIdDeterminacion(-1L);
+			
+			if(!validarTodosLosMetodos(metodos)){
+				return;
 			}
+			
+//			if (this.determinacion.getId() == 0) {
+				metodoOV.setIdDeterminacion(-1L);
+//			}
 
 			List<VariableOV> variablesXMetodo = metodoOV.getVariables();
 
@@ -77,6 +101,26 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
 		Messagebox.show("Determinacion Guardada Correctamente.");
 		
+	}
+
+	private boolean validarTodosLosMetodos(List<MetodoOV> metodos) {
+		for (MetodoOV metodoOV : metodos) {
+			List<VariableOV> variables = metodoOV.getVariables();
+			for (VariableOV variableOV : variables) {
+				if (!variableOV.isInput()) {
+					
+					if (variableOV.getExpresionCadena()==null || variableOV.getExpresionCadena().isEmpty()) {
+						Messagebox.show(String.format("Metodo %s :  Complete la expresión en la variable %s.", metodoOV.getMetodo(), variableOV.getCodigo()));
+						return false;
+					}
+					
+					if(!validarExpresion(metodoOV.getMetodo(),variableOV.getExpresionCadena(), variables)){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	private boolean validarDeterminacion() {
@@ -106,14 +150,14 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		return true;
 	}
 
-	@Command
-	public void toogleAccordion(@BindingParam("element") Groupbox currentAccordion){
-		if (currentAccordion.isOpen()) {
-			currentAccordion.setOpen(false);
-		}else{
-			currentAccordion.setOpen(true);
-		}
-	}
+//	@Command
+//	public void toogleAccordion(@BindingParam("element") Groupbox currentAccordion){
+//		if (currentAccordion.isOpen()) {
+//			currentAccordion.setOpen(false);
+//		}else{
+//			currentAccordion.setOpen(true);
+//		}
+//	}
 	
 	
 	@Command
@@ -331,13 +375,38 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command
-	public void validarExpresion(@BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
-//		System.out.println();
-
-//		Messagebox.show("TODO.");
-//		for (VariableOV variableOV : variables) {
-//			
-//		}
+	public boolean validarExpresion(@BindingParam("metodo") String metodoName, @BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
+		
+		/*
+		 * Se valida el formato
+		 */
+		Object containerOV=new ContainerOV(expresion);
+		ListDescriptibleOV ejecutar = (ListDescriptibleOV) Operaciones.ejecutar("ValidarExpresion", containerOV, ListDescriptibleOV.class);
+		List list = ejecutar.getList();
+		
+		/*
+		 * Si la expresion es validar, se validan todas las variables y su inclusion en el conjunto ya existente.
+		 */
+		
+		/*
+		 * Se carga la lista de variables en cadenas simples para luego comparar con equals
+		 */
+		List<String> variablesCargadas=new ArrayList<String>();
+		for (VariableOV variableOV : variables) {
+			variablesCargadas.add(variableOV.getCodigo());
+		}
+		
+		DescriptibleOV currentExtVar;
+		for (Object extractedVar : list) {
+			currentExtVar=(DescriptibleOV) extractedVar;
+			if (!variablesCargadas.contains(currentExtVar.getCodigo())) {
+				Messagebox.show(String.format("Metodo %s . No existe la variable '%s' para la expresion '%s'", metodoName, currentExtVar.getCodigo(), expresion));
+				return false;
+			}
+		}
+		
+		return true;
+		
 		
 	}
 

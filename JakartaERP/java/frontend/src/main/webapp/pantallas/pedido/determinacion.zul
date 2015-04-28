@@ -56,7 +56,8 @@
 							</combobox>
 							<cell>
 								<label value="Calcula Resultado" width="150px"/>
-								<checkbox checked="@bind(vm.determinacion.calculaResultado)" width="150px"/>
+								<checkbox checked="@bind(vm.determinacion.calculaResultado)" onCheck="@command('asignarUnicoResultado')" width="150px"/>
+
 							</cell>
 							<label value="Formato"/>
 							<combobox model="@bind(vm.determinacion.listFormato)" selectedItem="@bind(vm.determinacion.formato)" width="100%">
@@ -117,21 +118,24 @@
 									
 									<!-- Valores Esperados -->
 									
-									<vlayout>
-										
 									<vlayout style="margin-top:20px;" >
-									<hlayout>
-										<button
-											style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
-											label="Agregar Valor"
-											onClick="@command('agregarValor', metodoActual=each)"
-											tooltiptext="Agregar nuevo valor." />
-										<button 
-											style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
-											label="Borrar Valor"
-											onClick="@command('borrarValor', metodoActual=each)"
-											tooltiptext="Borrar valor." />
-									</hlayout>
+										
+										<hlayout>
+										
+											<button
+												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
+												label="Agregar Valor"
+												onClick="@command('agregarValor', metodoActual=each)"
+												tooltiptext="Agregar nuevo valor." />
+										
+											<button 
+												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
+												label="Borrar Valor"
+												onClick="@command('borrarValor', metodoActual=each)"
+												tooltiptext="Borrar valor." />
+									
+										</hlayout>
+									
 										<listbox model="@bind(each.valoresEsperados)"  emptyMessage="No existen Valores." width="55%" >
 											<listhead>
 												<listheader width="150px" label="Tension Desde" />
@@ -156,23 +160,20 @@
 											</template>
 										</listbox>
 										
-										</vlayout>
-										<vlayout>
-
-										<hlayout style="margin-top:20px;">
-
-										<button
-											style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
-											label="Agregar Variable"
-											onClick="@command('agregarVariable', metodoActual=each)"
-											tooltiptext="Agregar nueva variable." />
-										<!-- Variables -->
-
-										<button
-											style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
-											label="Borrar Variable"
-											onClick="@command('borrarVar', metodoActual=each)"
-											tooltiptext="Borrar variable." />
+										<hlayout style="margin-top:20px;"  >
+									
+											<button
+												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
+												label="Agregar Variable"
+												onClick="@command('agregarVariable', metodoActual=each)"
+												tooltiptext="Agregar nueva variable." visible="@bind(!vm.determinacion.calculaResultado)"/>
+											<!-- Variables -->
+	
+											<button
+												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
+												label="Borrar Variable"
+												onClick="@command('borrarVar', metodoActual=each)"
+												tooltiptext="Borrar variable." visible="@bind(!vm.determinacion.calculaResultado)"/>
 
 										</hlayout> 
 
@@ -190,24 +191,22 @@
 												var="valor">
 												<listitem>
 													<listcell>
-														<textbox value="@bind(valor.codigo)" width="100%"/>
+														<textbox value="@bind(valor.codigo)"  readonly="@bind(vm.determinacion.calculaResultado)" width="100%"/>
 													</listcell>
 													<listcell>
-														<textbox value="@bind(valor.descripcion)" width="100%"/>
+														<textbox value="@bind(valor.descripcion)" readonly="@bind(vm.determinacion.calculaResultado)" width="100%"/>
 													</listcell>
 													<listcell style="text-align:center" >
-														<checkbox checked="@bind(valor.input)" />
+														<checkbox checked="@bind(valor.input)"  visible="@bind(!vm.determinacion.calculaResultado)"/>
 													</listcell>
 													<listcell>
-														<textbox value="@bind(valor.expresionCadena)" width="100%" onChange="@command('validarExpresion', expresion=self.value, variables=each.variables)" visible="@bind(valor.input)" />
+														<textbox value="@bind(valor.expresionCadena)"  width="100%" onBlur="@command('validarExpresion', metodo= each.metodo, expresion=self.value, variables=each.variables)" visible="@bind(!valor.input)" />
 													</listcell>
 												</listitem>
 											</template>
 										</listbox>
 
 										</vlayout>
-									</vlayout>
-
 								</hbox>
 
 							</groupbox>

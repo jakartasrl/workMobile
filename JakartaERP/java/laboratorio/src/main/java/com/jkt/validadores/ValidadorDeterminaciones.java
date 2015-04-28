@@ -27,9 +27,9 @@ public class ValidadorDeterminaciones extends ValidacionDeNegocio{
 				if (!variable.isInput()) {
 					//Se tiene que calcular la expresion...
 					
-//					Expresion expresion = new Expresion();
-//					expresion.setExpresion(variable.getExpresion());
-//					expresion.setVariable(variable);
+					Expresion expresion = new Expresion();
+					expresion.setExpresion(variable.getExpresion());
+					expresion.setVariable(variable);
 					
 //					variable.setExpresion(expresion);
 					
