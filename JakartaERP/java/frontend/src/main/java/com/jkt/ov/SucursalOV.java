@@ -14,4 +14,9 @@ public class SucursalOV extends DescriptibleOV {
 
 	private String descripcionCompleta;
 	
+	@Override
+	public String getCampoClave() {
+		return "numero";
+	}
+	
 }

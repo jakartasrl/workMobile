@@ -88,7 +88,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		super.nuevo();
 		this.lDocumentacion = new ArrayList<DescriptibleOV>();
@@ -167,7 +167,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.archivos=ovRecuperado.getArchivos();
 		
 		actualizarNotas(ovRecuperado);
-
+		crearArbolNotas();
+		
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
@@ -257,6 +258,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.comprobanteOV.setNotas(new ArrayList<NotaOV>());
 		for (NotaOV nota : this.lNotas) {
 			if (nota.getActivo()) {
+				nota.setChecked(true);
 				this.comprobanteOV.getNotas().add(nota);
 			}
 		}
@@ -331,6 +333,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
+		crearArbolNotas();
+
 		
 		log.info("Recuperando documentos...");
 		this.lDocumentacion = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class)).getList();
@@ -357,10 +361,18 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 	}
 	
+	@Command
+	public void toogleNota(@BindingParam("nota") NotaOV nota){
+		if(nota.getChecked()){
+			this.comprobanteOV.getNotas().add(nota);
+		}else{
+			this.comprobanteOV.getNotas().remove(nota);
+		}
+	}
 
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
