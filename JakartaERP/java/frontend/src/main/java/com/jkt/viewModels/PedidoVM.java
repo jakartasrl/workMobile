@@ -167,7 +167,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.archivos=ovRecuperado.getArchivos();
 		
 		actualizarNotas(ovRecuperado);
-
+		crearArbolNotas();
+		
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
@@ -257,6 +258,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.comprobanteOV.setNotas(new ArrayList<NotaOV>());
 		for (NotaOV nota : this.lNotas) {
 			if (nota.getActivo()) {
+				nota.setChecked(true);
 				this.comprobanteOV.getNotas().add(nota);
 			}
 		}
@@ -331,6 +333,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
+		crearArbolNotas();
+
 		
 		log.info("Recuperando documentos...");
 		this.lDocumentacion = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class)).getList();

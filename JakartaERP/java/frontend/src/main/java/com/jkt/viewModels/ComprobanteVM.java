@@ -7,7 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
@@ -19,6 +21,7 @@ import org.zkoss.util.media.AMedia;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Messagebox;
 
@@ -32,6 +35,7 @@ import com.jkt.ov.ListItemsOV;
 import com.jkt.ov.NotaOV;
 import com.jkt.ov.SucursalOV;
 import com.jkt.ov.UserOV;
+import com.jkt.ov.tree.NodoNotas;
 
 @Data
 public abstract class ComprobanteVM extends ViewModel {
@@ -51,6 +55,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected ListDescriptibleOV contactos=new ListDescriptibleOV();
 	protected DescriptibleOV contactoSeleccionado= new DescriptibleOV();
 	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
+	private DefaultTreeModel<NotaOV> arbolNotas;
 	
 	protected String rutaCompartida="c:\\tmp\\";
 	protected UserOV userOV;
@@ -367,6 +372,39 @@ public abstract class ComprobanteVM extends ViewModel {
 	
 	protected String generarRuta(Media media) {
 		return this.rutaCompartida+media.getName();
+	}
+
+	protected void crearArbolNotas() {
+
+		NodoNotas root = new NodoNotas(new NotaOV(),true);
+
+		Map<String, NodoNotas> actividades=new HashMap<String, NodoNotas>();
+		
+		for (NotaOV notaOV : this.lNotas) {
+			
+			String actividad = notaOV.getCodigoActividad();
+			NodoNotas actividadNodo;
+
+			if (actividades.get(actividad)==null) {
+				NotaOV nuevoNodo = new NotaOV();
+				nuevoNodo.setCodigo(actividad);
+				actividadNodo = new NodoNotas(nuevoNodo,true);
+				actividades.put(actividad, actividadNodo);
+			}else{
+				actividadNodo=actividades.get(actividad);
+			}
+			
+			NodoNotas child = new NodoNotas(notaOV);
+			actividadNodo.add(child);
+
+		}
+		
+		for (NodoNotas actividadActual : actividades.values()) {
+			root.add(actividadActual);
+		}
+		
+		this.arbolNotas=new DefaultTreeModel<NotaOV>(root);
+		
 	}
 	
 }

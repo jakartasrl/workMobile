@@ -17,6 +17,6 @@ public class NotaOV extends DescriptibleOV {
 
 	private String adicional;
 	private String codigoActividad;
-	private Boolean checked;
+	private Boolean checked = Boolean.FALSE;
 	
 }

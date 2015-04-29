@@ -5,30 +5,26 @@ package com.jkt.viewModels;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import lombok.Data;
 
-import org.apache.commons.lang.StringUtils;
-import org.hsqldb.lib.ArrayListIdentity;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -44,6 +40,7 @@ import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.NotaOV;
 import com.jkt.ov.PresupuestoOV;
+import com.jkt.ov.tree.NodoNotas;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
 
@@ -133,7 +130,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 
 	@Command
-	@NotifyChange({"archivos","aPartirDeCotizacion", "comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"arbolNotas","archivos","aPartirDeCotizacion", "comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		super.nuevo();
 		this.comprobanteOV= new PresupuestoOV();
@@ -144,6 +141,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	
 	DescriptibleOV cotizacionDescriptible = new DescriptibleOV();
 	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
+
 
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
@@ -184,7 +182,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		
 		actualizarNotas(ovRecuperado);
-
+		crearArbolNotas();
+		
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
@@ -257,7 +256,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.archivos=ovRecuperado.getArchivos();
 		
 		actualizarNotas(ovRecuperado);
-
+		crearArbolNotas();
+		
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
@@ -319,6 +319,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.comprobanteOV.setNotas(new ArrayList<NotaOV>());
 		for (NotaOV nota : this.lNotas) {
 			if (nota.getActivo()) {
+				nota.setChecked(true);
 				this.comprobanteOV.getNotas().add(nota);
 			}
 		}
@@ -393,6 +394,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
+		crearArbolNotas();
 		
 		
 		//TODO aca cargar las condiciones comerciales?
@@ -421,8 +423,18 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 	}
 	
+	@Command
+	public void toogleNota(@BindingParam("nota") NotaOV nota){
+		if(nota.getChecked()){
+			this.comprobanteOV.getNotas().add(nota);
+		}else{
+			this.comprobanteOV.getNotas().remove(nota);
+		}
+	}
+	
+
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"archivos","aPartirDeCotizacion","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"arbolNotas","archivos","aPartirDeCotizacion","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
