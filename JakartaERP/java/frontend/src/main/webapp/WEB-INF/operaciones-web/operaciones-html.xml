@@ -815,6 +815,18 @@
 				<campoSalida value="idProducto"			target="cotizador.item.producto.id" />
 				
 			</campoSalida>
+			
+			<campoSalida value="archivos"			target="archivos" >
+				<campoSalida value="fileURL" 		target="ruta"/>
+				<campoSalida value="fileName" 		target="nombre"/>
+				<campoSalida value="fechaSubida"	target="fechaDeSubida"/>
+				<campoSalida value="comentario" 	target="comentario"/>
+				<campoSalida value="idUsuario" 		target="identificadorDeUsuario"/>
+				<campoSalida value="usuario" 		target="nombreUsuario"/>
+				<campoSalida value="contentType" 	target="contentType"/>
+				<campoSalida value="format" 		target="format"/>
+				<campoSalida value="descripcion" 	target="descripcion"/>
+			</campoSalida>
 
 		</output>
 

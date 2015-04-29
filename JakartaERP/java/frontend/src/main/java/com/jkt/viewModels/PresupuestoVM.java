@@ -172,6 +172,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		actualizarCampoSucursal();
 		
+		
 		this.comprobanteOV.setId(ovRecuperado.getId());
 		this.comprobanteOV.setItems(new ArrayList<ItemsOV>());
 		this.comprobanteOV.setFacturaciones(new ArrayList<FormaFacturacionOV>());
@@ -188,6 +189,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
+		this.archivos=ovRecuperado.getArchivos();
 		
 		DescriptibleOV plantilla;
 		

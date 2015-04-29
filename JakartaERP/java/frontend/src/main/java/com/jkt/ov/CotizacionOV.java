@@ -14,8 +14,8 @@ import com.jkt.view.ObjectView;
 public class CotizacionOV extends ObjectView {
 	
 	private String nroCotizacion;
-	private Date fecha;
-	private Date fechaVencimiento;
+	private Date fecha=new Date();
+	private Date fechaVencimiento=new Date();
 	private String referencia;
 	
 	private long idVendedor; 		

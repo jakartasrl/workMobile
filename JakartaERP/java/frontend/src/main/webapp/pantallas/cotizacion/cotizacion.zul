@@ -22,7 +22,7 @@
 						<row sclass="fila-maestro">
 						
 							<label style="width:100px;" value="Nro. de Cotizacion : " />
-							<textbox sclass="campoCodigo-medium" value="@bind(vm.cotizacionOV.nroCotizacion)" tabindex="1" />
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.cotizacionOV.nroCotizacion)" tabindex="1" readonly="true"/>
 
 							<label class="name" value="Fecha : " />
 							<datebox id="fecha" value="@bind(vm.cotizacionOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" tabindex="2"/>
