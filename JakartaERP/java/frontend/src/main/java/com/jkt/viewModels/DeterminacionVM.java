@@ -13,12 +13,14 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DeterminacionOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListValorEsperadoOV;
 import com.jkt.ov.ListVariableOV;
 import com.jkt.ov.MetodoOV;
@@ -39,17 +41,44 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		this.determinacion.setListTipoResultado(this.cargarListTipoResultados());
 		this.determinacion.setListFormato(this.cargarListFormato());
 	}
+	
+	@Command
+	@NotifyChange("determinacion")
+	public void asignarUnicoResultado(){
+		
+		List<MetodoOV> metodos = this.determinacion.getMetodos();
+		for (MetodoOV metodoOV : metodos) {
+			metodoOV.setVariables(new ArrayList<VariableOV>());
+			
+			VariableOV variable=new VariableOV();
+			variable.setCodigo("Resultado final");
+			variable.setDescripcion("Resultado final");
+			variable.setInput(true);
+			
+			metodoOV.getVariables().add(variable);
+		}
+		
+	}
 
 	@Command("guardar")
 	@NotifyChange("determinacion")
 	public void guardar() throws JakartaException {
 		
+		if(!validarDeterminacion()){
+			return;
+		}
+		
 		List<MetodoOV> metodos = this.getDeterminacion().getMetodos();
 		for (MetodoOV metodoOV : metodos) {
 
-			if (this.determinacion.getId() == 0) {
-				metodoOV.setIdDeterminacion(-1L);
+			
+			if(!validarTodosLosMetodos(metodos)){
+				return;
 			}
+			
+//			if (this.determinacion.getId() == 0) {
+				metodoOV.setIdDeterminacion(-1L);
+//			}
 
 			List<VariableOV> variablesXMetodo = metodoOV.getVariables();
 
@@ -66,28 +95,76 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 		}
 
-		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getDescripcion());
-		this.determinacion.setDescFormato(this.determinacion.getFormato().getDescripcion());
+		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getCodigo());
+		this.determinacion.setDescFormato(this.determinacion.getFormato().getCodigo());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
 		Messagebox.show("Determinacion Guardada Correctamente.");
 		
 	}
 
-	@Command
-	public void toogleAccordion(@BindingParam("element") Groupbox currentAccordion){
-		if (currentAccordion.isOpen()) {
-			currentAccordion.setOpen(false);
-		}else{
-			currentAccordion.setOpen(true);
+	private boolean validarTodosLosMetodos(List<MetodoOV> metodos) {
+		for (MetodoOV metodoOV : metodos) {
+			List<VariableOV> variables = metodoOV.getVariables();
+			for (VariableOV variableOV : variables) {
+				if (!variableOV.isInput()) {
+					
+					if (variableOV.getExpresionCadena()==null || variableOV.getExpresionCadena().isEmpty()) {
+						Messagebox.show(String.format("Metodo %s :  Complete la expresión en la variable %s.", metodoOV.getMetodo(), variableOV.getCodigo()));
+						return false;
+					}
+					
+					if(!validarExpresion(metodoOV.getMetodo(),variableOV.getExpresionCadena(), variables)){
+						return false;
+					}
+				}
+			}
 		}
+		return true;
 	}
+
+	private boolean validarDeterminacion() {
+		
+		if (determinacion.getCodigo()==null || determinacion.getCodigo().isEmpty()) {
+			Messagebox.show("Debe ingresar un codigo para la determinacion.");
+			return false;
+		}
+		
+		if (determinacion.getDescripcion()==null || determinacion.getDescripcion().isEmpty()) {
+			Messagebox.show("Debe ingresar una descripcion para la determinacion.");
+			return false;
+		}
+		
+		if (determinacion.getFormato()==null) {
+			Messagebox.show("Debe ingresar un formato.");
+			return false;
+		}
+		if (determinacion.getTipoResultado()==null) {
+			Messagebox.show("Debe ingresar un tipo de resultado.");
+			return false;
+		}
+		if (determinacion.getMetodos().isEmpty()) {
+			Messagebox.show("Debe ingresar como minimo un metodo.");
+			return false;
+		}
+		return true;
+	}
+
+//	@Command
+//	public void toogleAccordion(@BindingParam("element") Groupbox currentAccordion){
+//		if (currentAccordion.isOpen()) {
+//			currentAccordion.setOpen(false);
+//		}else{
+//			currentAccordion.setOpen(true);
+//		}
+//	}
 	
 	
 	@Command
 	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
 		this.determinacion = new DeterminacionOV();
+		
 		this.init();
 	}
 
@@ -124,6 +201,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	public void traerDeterminacion() {
 		
 		long idDeterminacion = determinacion.getId();
+		determinacion=new DeterminacionOV();
 		String entidad = "Determinacion";
 		
 		ContainerOV containerOV = new ContainerOV();
@@ -154,10 +232,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		det.setListTipoResultado(this.cargarListTipoResultados());
 		det.setListFormato(this.cargarListFormato());
 		
-		Long idTipoResultado = det.getIdTipoResultado();
+		String idTipoResultado = det.getIdTipoResultado();
 		DescriptibleOV tipoResultadoSeleccionado=null;
 		for (DescriptibleOV tipoResultado : det.getListTipoResultado()) {
-			if (tipoResultado.getId()==idTipoResultado) {
+			if (tipoResultado.getCodigo().equals(idTipoResultado)) {
 				tipoResultadoSeleccionado=tipoResultado;
 				break;
 			}
@@ -165,10 +243,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		
 		det.setTipoResultado(tipoResultadoSeleccionado);
 		
-		Long idFormato = det.getIdFormato();
+		String cadenaFormato = det.getIdFormato();
 		DescriptibleOV formatoSeleccionado=null;
 		for (DescriptibleOV formato : det.getListFormato()) {
-			if (formato.getId()==idFormato) {
+			if (formato.getCodigo().equals(cadenaFormato)) {
 				formatoSeleccionado=formato;
 				break;
 			}
@@ -181,7 +259,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 	@Command
 	@NotifyChange("determinacion")
-	public void agregarMetodo(@BindingParam("dato") String name) throws JakartaException{
+	public void agregarMetodo(@BindingParam("dato") String name, @BindingParam("componente") Textbox text) throws JakartaException{
 		
 		if(!this.validarMetodo(name)){
 			return;
@@ -191,6 +269,21 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		metodo.setMetodo(name);
 		metodo.setIdDeterminacion(this.determinacion.getId()); // le seteamos el id de la determinacion
 		this.determinacion.getMetodos().add(metodo);
+		text.setValue("");
+	
+	}
+
+	@Command
+	@NotifyChange("determinacion")
+	public void eliminarMetodo(@BindingParam("nroMetodo") int nroMetodo) throws JakartaException{
+		
+		if (this.determinacion.getMetodos().isEmpty()) {
+			Messagebox.show("No hay metodos a eliminar.");
+		}else{
+//			int pos = this.determinacion.getMetodos().size();
+			this.determinacion.getMetodos().remove(nroMetodo);
+		}
+	
 	
 	}
 	
@@ -211,6 +304,30 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	}
 
+	@Command
+	@NotifyChange("determinacion")
+	public void borrarValor(@BindingParam("metodoActual") MetodoOV m){
+	
+		if (m.getValoresEsperados().isEmpty()) {
+			Messagebox.show("No hay valores a borrar.");
+			return;
+		}
+		m.getValoresEsperados().remove(m.getValoresEsperados().size()-1);
+		
+	}
+
+	@Command
+	@NotifyChange("determinacion")
+	public void borrarVar(@BindingParam("metodoActual") MetodoOV m){
+		
+		if (m.getVariables().isEmpty()) {
+			Messagebox.show("No hay variables a borrar.");
+			return;
+		}
+		m.getVariables().remove(m.getVariables().size()-1);
+		
+	}
+	
 	@Command("agregarValor")
 	@NotifyChange("determinacion")
 	public void agregarValor(@BindingParam("metodoActual") MetodoOV m){
@@ -258,13 +375,38 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command
-	public void validarExpresion(@BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
-//		System.out.println();
-
-//		Messagebox.show("TODO.");
-//		for (VariableOV variableOV : variables) {
-//			
-//		}
+	public boolean validarExpresion(@BindingParam("metodo") String metodoName, @BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
+		
+		/*
+		 * Se valida el formato
+		 */
+		Object containerOV=new ContainerOV(expresion);
+		ListDescriptibleOV ejecutar = (ListDescriptibleOV) Operaciones.ejecutar("ValidarExpresion", containerOV, ListDescriptibleOV.class);
+		List list = ejecutar.getList();
+		
+		/*
+		 * Si la expresion es validar, se validan todas las variables y su inclusion en el conjunto ya existente.
+		 */
+		
+		/*
+		 * Se carga la lista de variables en cadenas simples para luego comparar con equals
+		 */
+		List<String> variablesCargadas=new ArrayList<String>();
+		for (VariableOV variableOV : variables) {
+			variablesCargadas.add(variableOV.getCodigo());
+		}
+		
+		DescriptibleOV currentExtVar;
+		for (Object extractedVar : list) {
+			currentExtVar=(DescriptibleOV) extractedVar;
+			if (!variablesCargadas.contains(currentExtVar.getCodigo())) {
+				Messagebox.show(String.format("Metodo %s . No existe la variable '%s' para la expresion '%s'", metodoName, currentExtVar.getCodigo(), expresion));
+				return false;
+			}
+		}
+		
+		return true;
+		
 		
 	}
 

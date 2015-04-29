@@ -1,0 +1,11 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<window id="error" mode="modal" sizable="true" closable="true" title="Advertencia" style="width:350px;" height="90px;">
+		<hlayout  >
+			<image src="/pantallas/icons/smallHelp.png"  vflex="min"/>
+			<label multiline="true" hflex="1" vflex="1" value="Ingrese un valor numerico" style="font-size: 15px;margin-left:10px;"/>
+		</hlayout>
+	</window>
+</zk>

@@ -1,6 +1,16 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
-
+	<style>
+		input[type=text]:focus{
+			background-color: rgb(67, 95, 119);
+			color: white;
+		}
+		
+		.z-grid-header-border{
+			border-style:none;
+		}
+	</style>
+	
     <zscript><![CDATA[
                       
 				void changePosition(){
@@ -11,13 +21,14 @@
         
 
 	<vlayout>
-		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinacion" border="normal" height="auto" width="64%" >
+		<panel sclass="panel-maestro" style="padding:5px" height="auto" width="64%" >
+<!-- 		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinación" border="normal" height="auto" width="64%" > -->
 		
 			<panelchildren>	
 			
-				<grid width="100%">
+				<grid width="100%" style="padding:5px;" >
 				
-					<columns>
+					<columns style="border-style:none">
 						<column width="90px"></column>
 						<column width="100px"></column>
 						<column width="250px"></column>
@@ -27,11 +38,11 @@
 						<column width="100px"></column>
 					</columns>
 					
-					<rows>
+					<rows style="border-style:none">
 					
 						<row>
 							<label value="Codigo" />
-							<textbox sclass="campoCodigo-small" value="@bind(vm.determinacion.codigo)" width="100%" />							
+							<textbox sclass="campoCodigo-small" value="@bind(vm.determinacion.codigo)" width="100%" maxlength="15" />							
 							<textbox sclass="campoCodigo-large" value="@bind(vm.determinacion.descripcion)" width="100%" />						
 						</row>
 						
@@ -40,17 +51,18 @@
 							
 							<combobox  model="@bind(vm.determinacion.listTipoResultado)" selectedItem="@bind(vm.determinacion.tipoResultado)" width="100%" height="auto" >
 								<template name="model" var="tipoResultado" >
-									<comboitem label="@bind(tipoResultado.descripcion)" value="@bind(tipoResultado.id)" />											
+									<comboitem label="@bind(tipoResultado.codigo)" value="@bind(tipoResultado.codigo)" />											
 								</template>										
 							</combobox>
 							<cell>
 								<label value="Calcula Resultado" width="150px"/>
-								<checkbox checked="@bind(vm.determinacion.calculaResultado)" width="150px"/>
+								<checkbox checked="@bind(vm.determinacion.calculaResultado)" onCheck="@command('asignarUnicoResultado')" width="150px"/>
+
 							</cell>
 							<label value="Formato"/>
 							<combobox model="@bind(vm.determinacion.listFormato)" selectedItem="@bind(vm.determinacion.formato)" width="100%">
 								<template name="model" var="formato">
-									<comboitem label="@bind(formato.descripcion)" value="@bind(formato.id)" />												
+									<comboitem label="@bind(formato.codigo)" value="@bind(formato.codigo)" />												
 								</template>										
 							</combobox>														
 							<label value="Leyenda Valor Cero"/>
@@ -69,16 +81,22 @@
 	
 		<hlayout style="margin-top:15px;" >
 		<label value="Nombre del metodo:"></label>	
-		<textbox id="textoMetodo" sclass="campoCodigo-large" />
-		<button style="margin-bottom:2px;"
-			image="/pantallas/icons/new.png" label="Agregar Metodo"
-			onClick="@command('agregarMetodo', dato=textoMetodo.value)"
-			tooltiptext="Agregar un nuevo metodo." />
+		<textbox id="textoMetodo" />
+		<button style="margin-bottom:2px;margin-left:3px;"
+			image="/pantallas/icons/addSmall.png" label="Agregar Metodo"
+			onClick="@command('agregarMetodo', dato=textoMetodo.value, componente=textoMetodo )"
+			tooltiptext="Agregar un nuevo metodo." >
+		</button>
+
+		<button style="margin-bottom:2px;margin-left:3px;"
+			image="/pantallas/icons/delSmall.png" label="Borrar Metodo"
+			onClick="@command('eliminarMetodo', nroMetodo=listbox.activePage)"
+			tooltiptext="Eliminar nuevo metodo." visible="@bind(!vm.determinacion.metodos.isEmpty())" />
 		
 		</hlayout>
 		
 		<!-- Metodos -->
-		<listbox id="listbox" model="@bind(vm.determinacion.metodos)" emptyMessage="No existen Metodos." onCreate="changePosition()" mold="paging" pageSize="1" style="margin-top:15px;" width="48%" >
+		<listbox visible="@bind(!vm.determinacion.metodos.isEmpty())" id="listbox" model="@bind(vm.determinacion.metodos)" emptyMessage="No existen Metodos." onCreate="changePosition()" mold="paging" pageSize="1" style="margin-top:15px;" width="65%" >
 			<listhead>
 				<listheader label="Metodos" />
 			</listhead>						
@@ -89,24 +107,36 @@
 
 						<hbox>
 							<groupbox mold="3d"  width="100%" open="true" >
-								<caption label="@bind(each.metodo)"
-									width="100%" />
 
-								<hbox>
+								<hlayout>
+									<label value="Nombre de metodo : " />
+									<textbox value="@bind(each.metodo)" />
+								</hlayout>
 								
+								<hbox style="margin-top:20px;">
+								
+									
 									<!-- Valores Esperados -->
 									
-									<vlayout>
+									<vlayout style="margin-top:20px;" >
 										
-										<vlayout>
+										<hlayout>
+										
+											<button
+												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
+												label="Agregar Valor"
+												onClick="@command('agregarValor', metodoActual=each)"
+												tooltiptext="Agregar nuevo valor." />
+										
+											<button 
+												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
+												label="Borrar Valor"
+												onClick="@command('borrarValor', metodoActual=each)"
+												tooltiptext="Borrar valor." />
 									
-										<button
-											style="margin-bottom:2px;" image="/pantallas/icons/new.png"
-											label="Agregar Valor"
-											onClick="@command('agregarValor', metodoActual=each)"
-											tooltiptext="Agregar nuevo valor." />
+										</hlayout>
 									
-										<listbox model="@bind(each.valoresEsperados)"  emptyMessage="No existen Valores." width="73%" >
+										<listbox model="@bind(each.valoresEsperados)"  emptyMessage="No existen Valores." width="55%" >
 											<listhead>
 												<listheader width="150px" label="Tension Desde" />
 												<listheader width="150px" label="Tension Hasta" />
@@ -130,46 +160,53 @@
 											</template>
 										</listbox>
 										
-										</vlayout>
-										<vlayout>
+										<hlayout style="margin-top:20px;"  >
+									
+											<button
+												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
+												label="Agregar Variable"
+												onClick="@command('agregarVariable', metodoActual=each)"
+												tooltiptext="Agregar nueva variable." visible="@bind(!vm.determinacion.calculaResultado)"/>
+											<!-- Variables -->
+	
+											<button
+												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
+												label="Borrar Variable"
+												onClick="@command('borrarVar', metodoActual=each)"
+												tooltiptext="Borrar variable." visible="@bind(!vm.determinacion.calculaResultado)"/>
 
-										<button
-											style="margin-bottom:2px;" image="/pantallas/icons/new.png"
-											label="Agregar Variable"
-											onClick="@command('agregarVariable', metodoActual=each)"
-											tooltiptext="Agregar nueva variable." />
+										</hlayout> 
+
 										<!-- Variables -->
 										<listbox model="@bind(each.variables)" mold="paging" pageSize="5" emptyMessage="No existen Variables." >
 
 											<listhead>
 												<listheader width="150px" label="Codigo" />
-												<listheader width="150px" label="Descripcion" />
-												<listheader width="150px" label="Input" />
-												<listheader width="150px" label="Expresion" />
+												<listheader width="300px" label="Descripcion" />
+												<listheader width="50px" label="Input" />
+												<listheader width="350px" label="Expresion" />
 											</listhead>
 
 											<template name="model"
 												var="valor">
 												<listitem>
 													<listcell>
-														<textbox sclass="campoCodigo-large" value="@bind(valor.codigo)" />
+														<textbox value="@bind(valor.codigo)"  readonly="@bind(vm.determinacion.calculaResultado)" width="100%"/>
 													</listcell>
 													<listcell>
-														<textbox sclass="campoCodigo-large" value="@bind(valor.descripcion)" />
+														<textbox value="@bind(valor.descripcion)" readonly="@bind(vm.determinacion.calculaResultado)" width="100%"/>
+													</listcell>
+													<listcell style="text-align:center" >
+														<checkbox checked="@bind(valor.input)"  visible="@bind(!vm.determinacion.calculaResultado)"/>
 													</listcell>
 													<listcell>
-														<checkbox checked="@bind(valor.input)" />
-													</listcell>
-													<listcell>
-														<textbox sclass="campoCodigo-large" value="@bind(valor.expresionCadena)" onChange="@command('validarExpresion', expresion=self.value, variables=each.variables)" readonly="@bind(valor.input)" />
+														<textbox value="@bind(valor.expresionCadena)"  width="100%" onBlur="@command('validarExpresion', metodo= each.metodo, expresion=self.value, variables=each.variables)" visible="@bind(!valor.input)" />
 													</listcell>
 												</listitem>
 											</template>
 										</listbox>
 
 										</vlayout>
-									</vlayout>
-
 								</hbox>
 
 							</groupbox>

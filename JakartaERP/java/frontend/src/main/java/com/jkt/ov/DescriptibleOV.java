@@ -18,9 +18,15 @@ public class DescriptibleOV extends ObjectView {
 	private String descripcion;
 
 	
-	public DescriptibleOV(String descripcion){
+	public DescriptibleOV(String codigo){
+		this.codigo=codigo;
+	}
+
+	public DescriptibleOV(String codigo, String descripcion){
+		this.codigo=codigo;
 		this.descripcion=descripcion;
 	}
+	
 	public DescriptibleOV(){
 	}
 	

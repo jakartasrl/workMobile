@@ -990,4 +990,18 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="ValidarExpresion" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDescriptibleOV" clase="com.jkt.laboratorio.operaciones.ValidarExpresion">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="EXPRESION"/>
+		</input>
+
+		<output>
+			<campoSalida target="codigo" value="codigo" />
+		</output>
+			
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	
+	</operacion>
+	
 </entity>
