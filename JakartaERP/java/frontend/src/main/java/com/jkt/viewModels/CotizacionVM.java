@@ -66,30 +66,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 			itemsFinal.add(itemsOV);
 		}
 
-//		if (!this.isaPartirDeCotizacion()) {
-//			for (ItemsOV itemsOV : itemsArticulos) {
-//				itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-//				itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
-//				itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
-//				itemsFinal.add(itemsOV);
-//			}
-//			
-//			for (ItemsOV itemsOV : lDeterminacionesQuimicas) {
-//				itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-//				itemsOV.setTipoItem(PedidoDet.CHAR_QUIMICO);
-//				itemsFinal.add(itemsOV);
-//			}
-//	
-//			for (ItemsOV itemsOV : lDeterminacionesElectricas) {
-//				itemsOV.setTipoItem(PedidoDet.CHAR_ELECTRICO);
-//				itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-//				itemsFinal.add(itemsOV);
-//			}
-//		}
-		
-		/*
-		 * Junta todos los items
-		 */
 		this.cotizacionOV.setItems(itemsFinal);
 		
 	}
@@ -99,9 +75,8 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		openHelper("cotizacion", "", this.cotizacionOV, "traerCotizacion", "Cotizaciones", "Nro Cotizacion", "Fecha/Vendedor",false);
 	}
 
-	
 	@GlobalCommand("actualizar")
-	@NotifyChange({"cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos"})
+	@NotifyChange({"cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos","archivos"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -111,21 +86,17 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	}
 	
 	@Command
-	@NotifyChange({"cotizacionOV","contactoSeleccionado","contactos","items","itemsArticulos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos","archivos"})
 	public void nuevo(){
-		super.nuevo();
-		this.cotizacionOV= new CotizacionOV();
+//		super.nuevo();
+//		this.cotizacionOV= new CotizacionOV();
 		init();
 	}
 	
 	@Init
 	public void init(){
-		log.info("Iniciando ViewModel de Pedido.");
-		
-		log.info("Recuperando notas...");
-		
-		log.info("Recuperando monedas...");
-		this.lMonedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
+		super.nuevo();
+		log.info("Iniciando ViewModel de Cotizacion.");
 		
 		log.info("Inicializando items...");
 		this.items=new ArrayList<ItemsOV>();
@@ -140,10 +111,11 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
-		this.contactoSeleccionado=new DescriptibleOV();
+		this.contactoSeleccionado = new DescriptibleOV();
 		
 		this.cotizacionOV= new CotizacionOV();
-
+		this.archivos=new ArrayList<ArchivoOV>();
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -175,9 +147,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.cotizacionOV.setItems(new ArrayList<ItemsOV>());
 		
 		this.items=new ArrayList<ItemsOV>();
-//		this.itemsArticulos =new ArrayList<ItemsOV>();
-//		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
-//		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		
 		actualizarContactosReferencia();
 		this.contactoSeleccionado = completarCombo(this.contactos.getList(), cotizacionOV.getIdContactoReferencia());
@@ -187,7 +156,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		for (ItemsOV itemsOV : cotizacionOV.getItems()) {
 			
 			itemsOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(itemsOV.getTipo())));
-//			itemsOV.setMoneda(completarCombo(this.lMonedas.getList(), itemsOV.getIdMoneda()));
 		
 			plantilla = new DescriptibleOV();
 			
@@ -207,6 +175,9 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.cotizacionOV.setFechaVencimiento(cotizacionOV.getFechaVencimiento());
 		this.cotizacionOV.setReferencia(cotizacionOV.getReferencia());
 		this.cotizacionOV.setNroCotizacion(cotizacionOV.getNroCotizacion());
+		
+		this.archivos=new ArrayList<ArchivoOV>();
+		this.archivos=cotizacionOV.getArchivos();
 
 	}
 	
@@ -234,10 +205,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 			
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda del item "+nroItem)){
-				return false;
-			}
-
 			if (itemActual.getPlantilla().getDescripcion()==null || itemActual.getPlantilla().getDescripcion().isEmpty()) {
 				Messagebox.show("Complete la descripción del item "+nroItem);
 				return false;
@@ -245,37 +212,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 			
 			nroItem++;
 		}
-		
-		nroItem=1;
-		for (ItemsOV itemActual : this.lDeterminacionesQuimicas) {
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la determinación quimica número "+nroItem)){
-				return false;
-			}
-			nroItem++;
-		}
-
-		nroItem=1;
-		for (ItemsOV itemActual : this.lDeterminacionesElectricas) {
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la determinación eléctrica número "+nroItem)){
-				return false;
-			}
-			nroItem++;
-		}
-		
-		nroItem=1;
-		for (ItemsOV itemActual : this.itemsArticulos) {
-			
-			if(!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la solapa de materiales, item número "+nroItem)){
-				return false;
-			}
-
-			if(!validarDescriptible(itemActual.getProductoOV(), "Complete el producto de la solapa de materiales, item número "+nroItem)){
-				return false;
-			}
-
-			nroItem++;
-		}		
-		
+						
 		if(!validarDescriptible(vendedorOV, "Complete el vendedor en la solapa 'Dato Comerciales'.")){
 			return false;
 		}
@@ -288,7 +225,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 			return false;
 		}
 
-		
 		for (ArchivoOV archivoOV : this.archivos) {
 			if (archivoOV.getFileName() !=null && !archivoOV.getFileName().isEmpty()) {
 				if (archivoOV.getDescripcion()==null || archivoOV.getDescripcion().isEmpty()) {
@@ -301,5 +237,4 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		return true;
 	}
 
-	
 }

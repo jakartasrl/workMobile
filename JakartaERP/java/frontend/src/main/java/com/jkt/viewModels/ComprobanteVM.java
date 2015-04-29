@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import lombok.Data;
@@ -17,10 +18,12 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.ov.ArchivoOV;
@@ -362,7 +365,15 @@ public abstract class ComprobanteVM extends ViewModel {
 		ByteArrayInputStream is = new ByteArrayInputStream(buffer);
 		AMedia fileContent = new AMedia(archivoActual.getFileName(), archivoActual.getFormat(), archivoActual.getContentType(), is);
 
-		Filedownload.save(fileContent);
+		if (fileContent.getFormat().equals("jpeg") || fileContent.getFormat().equals("png") || fileContent.getFormat().equals("pdf") ) {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("media", fileContent);
+			Window window = (Window) Executions.createComponents("/pantallas/visorArchivos.zul", null, hashMap);
+			window.doModal();
+		}else{
+			Filedownload.save(fileContent);
+		}
+		
 	}
 	
 	protected String generarRuta(Media media) {

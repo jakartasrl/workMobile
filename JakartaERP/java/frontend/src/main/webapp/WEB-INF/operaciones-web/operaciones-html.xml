@@ -946,12 +946,20 @@
 				<campoSalida value="cantidad"			target="cantidad" />
 				<campoSalida value="referencia"			target="referencia" />
 				<campoSalida value="descripcion"		target="descripcion" />
-<!-- 				<campoSalida value="tipoItem"			target="tipoDetalle" />  --><!-- 				TODOS LOS DE COTIZACION SON ITEMS. -->
 				<campoSalida value="tipo"				target="tipoVenta" />
-				
-<!-- 				<campoSalida value="idMoneda"			target="cotizador.monedaExpresada.id" /> -->
 				<campoSalida value="idProducto"			target="producto.id" />
-				
+			</campoSalida>
+			
+			<campoSalida value="archivos"			target="archivos" >
+				<campoSalida value="fileURL" 		target="ruta"/>
+				<campoSalida value="fileName" 		target="nombre"/>
+				<campoSalida value="fechaSubida"	target="fechaDeSubida"/>
+				<campoSalida value="comentario" 	target="comentario"/>
+				<campoSalida value="idUsuario" 		target="identificadorDeUsuario"/>
+				<campoSalida value="usuario" 		target="nombreUsuario"/>
+				<campoSalida value="contentType" 	target="contentType"/>
+				<campoSalida value="format" 		target="format"/>
+				<campoSalida value="descripcion" 	target="descripcion"/>
 			</campoSalida>
 			
 		</output>
@@ -964,8 +972,8 @@
 		<input keyName="objeto" clase="com.jkt.dominio.Cotizacion">
 			<campoEntrada propertyOV="id" 					metodo="setId" />
 			<campoEntrada propertyOV="nroCotizacion"		metodo="setNro" />
-<!-- 			<campoEntrada propertyOV="letra" 				metodo="setLetra" /> -->
 			<campoEntrada propertyOV="fecha" 				metodo="setFecha" />
+			<campoEntrada propertyOV="fechaVencimiento" 	metodo="setFechaVencimiento" />
 			<campoEntrada propertyOV="referencia" 			metodo="setReferencia" />
 			<campoEntrada propertyOV="idVendedor" 			metodo="setVendedor" />
 			<campoEntrada propertyOV="idRepresentante" 		metodo="setRepresentante" />
@@ -979,10 +987,19 @@
 				<campoEntrada propertyOV="cantidad" metodo="setCantidad"/>
 				<campoEntrada propertyOV="tipo" metodo="setTipoVenta"/>
 				<campoEntrada propertyOV="referencia" metodo="setReferencia"/>
-				
-<!-- 				<campoEntrada propertyOV="idDeterminacion" metodo="setDeterminacion"/> -->
 				<campoEntrada propertyOV="idProducto" metodo="setProducto"/>
-
+			</campoEntrada>
+			
+			<campoEntrada propertyOV="archivos" metodo="setArchivos" >
+				<campoEntrada propertyOV="fileURL" metodo="setRuta"/>
+				<campoEntrada propertyOV="fileName" metodo="setNombre"/>
+				<campoEntrada propertyOV="fechaSubida" metodo="setFechaDeSubida"/>
+				<campoEntrada propertyOV="comentario" metodo="setComentario"/>
+				<campoEntrada propertyOV="idUsuario" metodo="setIdentificadorDeUsuario"/>
+				<campoEntrada propertyOV="usuario" metodo="setNombreUsuario"/>
+				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
+				<campoEntrada propertyOV="format" metodo="setFormat"/>
+				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
 			</campoEntrada>
 			
 		</input>

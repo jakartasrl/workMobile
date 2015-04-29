@@ -57,7 +57,7 @@
 				
 				<cell colspan="2" >
 					<hlayout>
-						<combobox  model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)" readonly=  "true">
+						<combobox  model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)" readonly="true">
 							<template name="model">
 								<comboitem label="@bind(each.codigo)" />
 							</template>

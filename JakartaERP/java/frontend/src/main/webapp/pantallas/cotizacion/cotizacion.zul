@@ -77,11 +77,7 @@
 			    	</tabs>
 			    	
 			    	<tabpanels>
-			    
-<!-- 			        	<tabpanel> -->
-<!-- 							<include id="itemsContent" hflex="1" src="/pantallas/pedido/tab-items.zul" viewModel="${vm}"/> -->
-<!-- 			        	</tabpanel> -->
-			        	
+			    			        	
 			        	<tabpanel>
 							<include id="itemsContent" hflex="1" src="/pantallas/cotizacion/solicitud-cotizacion-items.zul" viewModel="${vm}"/>
 			        	</tabpanel>
