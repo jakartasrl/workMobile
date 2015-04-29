@@ -181,7 +181,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.lDeterminacionesElectricas=new ArrayList<ItemsOV>();
 		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		
-		actualizarNotas(ovRecuperado);
+		log.info("Recuperando notas...");
+		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
 		crearArbolNotas();
 		
 		actualizarContactosReferencia();

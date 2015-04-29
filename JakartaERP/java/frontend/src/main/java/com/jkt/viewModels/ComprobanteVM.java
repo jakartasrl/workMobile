@@ -377,7 +377,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected void crearArbolNotas() {
 
 		NodoNotas root = new NodoNotas(new NotaOV(),true);
-
+		
 		Map<String, NodoNotas> actividades=new HashMap<String, NodoNotas>();
 		
 		for (NotaOV notaOV : this.lNotas) {

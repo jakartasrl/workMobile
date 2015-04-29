@@ -41,7 +41,7 @@
 						</hlayout>
 	
 						<hlayout>
-							<textbox sclass="campoCodigo-vsmall" readonly="true" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
+							<textbox sclass="campoCodigo-vsmall" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="4" />
 							<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 						</hlayout>
 

@@ -1,30 +1,5 @@
 <zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
 
-<!-- 	<listbox  -->
-<!-- 			model="@load(vm.lNotas)"  -->
-<!-- 			multiple="true" checkmark="true"  -->
-<!-- 			emptyMessage="No existen notas disponibles." mold="paging" pageSize="10" -->
-<!-- 			selectedItems="@bind(vm.comprobanteOV.notas)" -->
-<!-- 			hflex="1" vflex="1"  -->
-<!-- 		> -->
-		
-<!-- 		<listhead> -->
-<!-- 			<listheader width="3%" style="text-align:center" /> -->
-<!-- 			<listheader width="5%" label="Codigo" /> -->
-<!-- 			<listheader width="72%" label="Descripcion" /> -->
-<!-- 		</listhead> -->
-		
-
-<!-- 		<template name="model"> -->
-<!-- 			<listitem> -->
-<!-- 				<listcell style="text-align:cRenter"/> -->
-<!-- 				<listcell label="@bind(each.codigo)" /> -->
-<!-- 				<listcell label="@bind(each.descripcion)" /> -->
-<!-- 			</listitem> -->
-<!-- 		</template> -->
-<!-- 	</listbox> -->
-	
-	
 	<tree id="categoriesTree" model="@load(vm.arbolNotas)" width="100%"  >
     <treecols>
         <treecol label="Codigo" width="20%"/> 
@@ -33,7 +8,7 @@
     </treecols>
     <template name="model">
         <treeitem open="true" >
-            <treerow>
+            <treerow >
                 <treecell label="${each.data.codigo}"  />
                 <treecell label="${each.data.descripcion}" />
                 

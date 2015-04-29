@@ -88,7 +88,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 * 
 	 */
 	@Command
-	@NotifyChange({"archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
+	@NotifyChange({"arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
 		super.nuevo();
 		this.lDocumentacion = new ArrayList<DescriptibleOV>();
@@ -361,10 +361,18 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 	}
 	
+	@Command
+	public void toogleNota(@BindingParam("nota") NotaOV nota){
+		if(nota.getChecked()){
+			this.comprobanteOV.getNotas().add(nota);
+		}else{
+			this.comprobanteOV.getNotas().remove(nota);
+		}
+	}
 
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
