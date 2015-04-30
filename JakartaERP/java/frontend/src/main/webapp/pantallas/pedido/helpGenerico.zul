@@ -1,4 +1,4 @@
-<window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.HelperVM')" title="" width="500px" position="center,center" closable="true" >
+<window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.HelperVM')" title="" style="margin-top:50px;" width="700px" position="top,center" closable="true" >
     <vlayout>
 
 		<panel style="padding:5px;"  title="Filtro" border="normal" if="${vm.conFiltro}" >
@@ -14,21 +14,28 @@
         <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
         
 	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
-	            <auxheader label="@load(vm.titulo)" colspan="2" />
+	            <auxheader label="@load(vm.titulo)" colspan="@load(vm.getCantidad())" />
 	        </auxhead>
 
             <columns>
 <!--                 <column hflex="1" label="@load(vm.id)" /> -->
                 <column hflex="1" label="@load(vm.codigo)" align="center" />
                 <column hflex="2" label="@load(vm.descripcion)" align="center" />
+                <column hflex="2" label="@load(vm.descCampo3)" align="center" unless="${empty vm.descCampo3}"/>
+                <column hflex="2" label="@load(vm.descCampo4)" align="center" unless="${empty vm.descCampo4}"/>
+                
+                
+                
             </columns>
 
             <rows>
 	            <template name="model">
-	                <row onClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;" >
+	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;" >
 <!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
 	                    <label hflex="2" value="@load(each.descripcion)" />
+	                    <label hflex="2" value="@load(each.campoAdicional1)" unless="${empty each.campoAdicional1 }"/>
+	                    <label hflex="2" value="@load(each.campoAdicional2)" unless="${empty each.campoAdicional2 }"/>
 	                </row>
 				</template>
             </rows>

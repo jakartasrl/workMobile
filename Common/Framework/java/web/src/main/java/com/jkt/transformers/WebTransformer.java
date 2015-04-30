@@ -4,6 +4,7 @@ package com.jkt.transformers;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.google.gson.GsonBuilder;
 import com.jkt.view.ListOV;
 import com.jkt.xmlreader.CampoSalida;
 import com.jkt.xmlreader.Output;
+import com.jkt.xmlreader.PropertySolver;
 
 public class WebTransformer extends Transformer {
 
@@ -165,11 +167,20 @@ public class WebTransformer extends Transformer {
 				} else {
 					try {
 						if(!isMap){
-							PropertyDescriptor propertyDescriptor = BeanUtils
-									.getPropertyDescriptor(
-											objNotificado.getClass(), target);
-							objectValue = propertyDescriptor.getReadMethod()
-								.invoke(objNotificado, new Object[] {});
+							PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(objNotificado.getClass(), target);
+							if (propertyDescriptor==null) {
+								String metodo = armarMetodo(target);
+								Method method = BeanUtils.findMethodWithMinimalParameters(objNotificado.getClass(), metodo);
+								if (method==null) {
+									objectValue=null;
+								}else{
+									objectValue = method.invoke(objNotificado, new Object[] {});
+								}
+							}else{
+								objectValue = propertyDescriptor.getReadMethod().invoke(objNotificado, new Object[] {});
+							}
+							
+
 						}else{
 							objectValue = mapNotificado.get(target);
 						}
@@ -229,6 +240,19 @@ public class WebTransformer extends Transformer {
 					"Error instanciando el objetoOV de retorno para la clase "
 							+ type);
 		}
+	}
+	
+	private static final String IS    = "is";
+	private static final String GET   = "get";
+	private static final String PUNTO = ".";
+	
+	private String armarMetodo(String aName){
+		if(aName.startsWith(IS)) return aName;
+	      
+			String priLetra = "" + aName.charAt(0);
+			String metodo = GET + priLetra.toUpperCase() +  aName.substring(1, aName.length());
+	      
+			return metodo;
 	}
 
 }

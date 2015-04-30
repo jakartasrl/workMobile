@@ -233,6 +233,9 @@
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="adicional1" value="campoAdicional1" />
+			<campoSalida target="adicional2" value="campoAdicional2" />
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -249,6 +252,8 @@
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="adicional1" value="campoAdicional1" />
+			<campoSalida target="adicional2" value="campoAdicional2" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -266,6 +271,9 @@
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="adicional1" value="campoAdicional1" />
+			<campoSalida target="adicional2" value="campoAdicional2" />
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

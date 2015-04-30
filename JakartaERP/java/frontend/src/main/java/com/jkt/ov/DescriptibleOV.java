@@ -17,6 +17,15 @@ public class DescriptibleOV extends ObjectView {
 	private String codigo;
 	private String descripcion;
 
+	/*
+	 * Campos para helps
+	 */
+	private String campoAdicional1;
+	private String campoAdicional2;
+	
+	public int getCantidad(){
+		return 3;
+	}
 	
 	public DescriptibleOV(String codigo){
 		this.codigo=codigo;
@@ -41,6 +50,5 @@ public class DescriptibleOV extends ObjectView {
 	public String getCampoClave() {
 		return "codigo";
 	}
-	
-	
+
 }

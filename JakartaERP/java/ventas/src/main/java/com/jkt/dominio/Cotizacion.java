@@ -14,7 +14,7 @@ import com.jkt.varios.dominio.Contacto;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-public class Cotizacion extends ComprobanteVenta {
+public class Cotizacion extends ComprobanteVenta implements IDescriptible{
 
 	public enum Estado { PENDIENTE, INICIADA };
 	
@@ -59,7 +59,9 @@ public class Cotizacion extends ComprobanteVenta {
 	}
 
 	public String getDescripcion(){
-		return String.format("%s/%s",this.getFecha().toString(), this.getClienteSucursal().getDescripcion());
+		return this.getClienteSucursal().getCliente().getDescripcion();
+//		return String.format("%s/%s",this.getFecha().toString(), this.getClienteSucursal().getDescripcion());
+//		return String.format("%s/%s",this.getFecha().toString(), this.getClienteSucursal().getDescripcion());
 	}
 	
 	public String getCodigo(){
@@ -90,6 +92,14 @@ public class Cotizacion extends ComprobanteVenta {
 
 	public void setDetallesTransientes(List<CotizacionDet> detallesTransientes) {
 		this.detallesTransientes = detallesTransientes;
+	}
+
+	public String getAdicional1() {
+		return this.getFecha().toString();
+	}
+
+	public String getAdicional2() {
+		return "";
 	}
 	
 }

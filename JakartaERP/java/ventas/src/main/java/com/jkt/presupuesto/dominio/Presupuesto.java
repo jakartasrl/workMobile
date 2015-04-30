@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 import com.jkt.dominio.ComprobanteVenta;
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.ListaPrecios;
 import com.jkt.pedido.dominio.FormaFacturacion;
 
@@ -17,7 +18,7 @@ import com.jkt.pedido.dominio.FormaFacturacion;
  * @author Leonel Suarez - Jakarta SRL
  */
 //@Data
-public class Presupuesto extends ComprobanteVenta {
+public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 
 	// Ver en los padres, vendedor, representante, cliente, clienteSucursal, condPago, comprobanteRelacionado
 
@@ -178,7 +179,10 @@ public class Presupuesto extends ComprobanteVenta {
 	}
 	
 	public String getDescripcion(){
-		return String.format("%s / %s / %s",this.getVendedor().getApellido(), this.getRepresentante().getDescripcion(), this.getFecha().toString() );
+		//busca en la sucursal xq previamente no estaba relacionado el cliente al comprobamte.
+		return this.getClienteSucursal().getCliente().getDescripcion();
+//		return String.format("%s / %s / %s",this.getVendedor().getApellido(), this.getRepresentante().getDescripcion(), this.getFecha().toString() );
+//		return String.format("%s", this.getFecha().toString() );
 //		return this.getReferencia();
 	}
 	
@@ -194,6 +198,16 @@ public class Presupuesto extends ComprobanteVenta {
 		if (!notasTransientes.contains(n)) {
 			this.notasTransientes.add(n);
 		}
+	}
+
+	public String getAdicional1() {
+//		return this.getVendedor().getDescripcion();
+		return this.getFecha().toString();
+	}
+
+	public String getAdicional2() {
+		return "";
+//		return this.getRepresentante().getDescripcion();
 	}
 	
 }

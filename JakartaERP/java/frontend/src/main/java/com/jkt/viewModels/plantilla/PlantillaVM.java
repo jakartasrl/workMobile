@@ -59,7 +59,7 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openHelper("plantilla", "", plantilla, "modoEdicion", "Plantillas Disponibles", "Cod. Plantilla", "Descripción de plantilla", true);
+		openComplexHelper("plantilla", "", plantilla, "modoEdicion", "Plantillas Disponibles", "Cod. Plantilla", "Descripción de plantilla", true, "" , "");
 	}
 	
 	public void modoEdicion(){

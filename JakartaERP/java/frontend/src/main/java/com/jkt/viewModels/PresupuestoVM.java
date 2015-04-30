@@ -140,12 +140,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	
 	
 	DescriptibleOV cotizacionDescriptible = new DescriptibleOV();
-	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
 
-
+//	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
+	PresupuestoOV presupuestoDescriptible = new PresupuestoOV();
+	
 	@Command
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openHelper("presupuesto", "", presupuestoDescriptible, "cargarPresupuesto", "Presupuestos Disponibles", "Nro Presupuesto", "Cliente Sucursal / Fecha",false);
+		openComplexHelper("presupuesto", "", presupuestoDescriptible, "cargarPresupuesto", "Presupuestos Disponibles", "Nro Presupuesto", "Cliente" , true , "Fecha","");
 	}
 	
 	@Command
@@ -393,7 +394,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 	@Init
 	public void init(){
+		
+		
+		
 		log.info("Iniciando ViewModel de Pedido.");
+		
+		log.info("Asignando filtros customizados.");
+		this.setFiltro("filtroPresupuesto");
 		
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
