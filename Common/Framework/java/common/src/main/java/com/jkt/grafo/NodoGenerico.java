@@ -199,8 +199,5 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
 	public void setPosteriores(List<NodoGenerico<T>> posteriores) {
 		this.posteriores = posteriores;
 	}
-	
-	
-	
 
 }
