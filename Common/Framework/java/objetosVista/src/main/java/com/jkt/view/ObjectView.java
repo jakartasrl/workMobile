@@ -33,6 +33,10 @@ public abstract class ObjectView implements Serializable {
 	 */
 	public String getCampoClave(){
 		return "id";
+	}
+
+	public void limpiarFiltro() {
+		return;
 	};
 
 }

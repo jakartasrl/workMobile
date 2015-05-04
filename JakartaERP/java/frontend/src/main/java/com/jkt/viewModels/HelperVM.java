@@ -49,6 +49,14 @@ public class HelperVM {
 	}
 	
 	@Command
+	@NotifyChange({"coleccion","ov"})
+	public void limpiar(){
+		ov.limpiarFiltro();
+		ListDescriptibleOV listDescriptible = new ListDescriptibleOV();//(ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
+		this.coleccion=listDescriptible.getList();
+	}
+	
+	@Command
 	@NotifyChange("coleccion")
 	public void filtrar(){
 		ContenedorFiltrosOV c=new ContenedorFiltrosOV();

@@ -5,7 +5,9 @@ import java.util.List;
 
 import lombok.Data;
 
+import com.jkt.dominio.Comprobante;
 import com.jkt.dominio.ComprobanteVenta;
+import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.ListaPrecios;
 import com.jkt.pedido.dominio.FormaFacturacion;
@@ -208,6 +210,10 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 	public String getAdicional2() {
 		return "";
 //		return this.getRepresentante().getDescripcion();
+	}
+	
+	public void setComprobanteRelacionado(Cotizacion comprobanteRelacionado) {
+		this.comprobanteRelacionado = comprobanteRelacionado;
 	}
 	
 }

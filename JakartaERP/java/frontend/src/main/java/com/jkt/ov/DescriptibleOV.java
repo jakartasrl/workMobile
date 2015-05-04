@@ -45,6 +45,11 @@ public class DescriptibleOV extends ObjectView {
 		filtros.add(new FiltroOV("descripcion", descripcion, "like", "string"));
 		return filtros;
 	}
+	
+	public void limpiarFiltro() {
+		this.codigo="";
+		this.descripcion="";
+	}
 
 	@Override
 	public String getCampoClave() {

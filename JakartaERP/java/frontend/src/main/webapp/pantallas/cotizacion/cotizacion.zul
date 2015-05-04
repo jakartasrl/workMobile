@@ -12,7 +12,7 @@
 					<columns>
 						<column width="120px" />
 						<column width="120px" />
-						<column width="120px" />
+						<column width="100px" />
 						<column width="120px"/>
 						<column width="120px"/>
 						<column width="150px"/>
@@ -35,7 +35,7 @@
 						<row sclass="fila-maestro">
 							<label style="width:100px;" value="Referencia : " />
 							<cell colspan="3">
-								<textbox class="campoCodigo-medium" value="@bind(vm.cotizacionOV.referencia)" tabindex="4" width="100%" />
+								<textbox class="campoCodigo-large" value="@bind(vm.cotizacionOV.referencia)" tabindex="4" width="100%" />
 							</cell>
 						</row>
 
@@ -49,7 +49,7 @@
 							</hlayout>
 							
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="6" />
+								<textbox sclass="campoCodigo-small" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="6" />
 								<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 							</hlayout>
 

@@ -7,8 +7,9 @@
 			</panelchildren>
 		</panel>
 
-		<hlayout style="text-align: center; width:60%;" if="${vm.conFiltro}">
-			<button label="Buscar" onClick="@command('filtrar')"/>
+		<hlayout style="text-align: center; width:100%;margin-bottom:15px;" if="${vm.conFiltro}">
+			<button style="margin-right:25px;" width="50px;" label="Buscar" onClick="@command('filtrar')"/>
+			<button style="margin-left:25px;" width="50px;" label="Limpiar datos" onClick="@command('limpiar')"/>
 		</hlayout>
 
         <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
@@ -30,7 +31,7 @@
 
             <rows>
 	            <template name="model">
-	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;" >
+	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" >
 <!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
 	                    <label hflex="2" value="@load(each.descripcion)" />

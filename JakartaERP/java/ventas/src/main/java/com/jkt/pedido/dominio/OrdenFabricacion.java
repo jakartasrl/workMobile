@@ -1,9 +1,10 @@
 package com.jkt.pedido.dominio;
 
 import com.jkt.dominio.Comprobante;
+import com.jkt.presupuesto.dominio.Presupuesto;
 
 /**
- * <p>Representa un trabajo que puede ser emitido directamente desde un pedido, o por medio de otra orden de fabricación.</p>
+ * <p>Representa un trabajo que puede ser emitido directamente desde un pedido, o por medio de otra orden de fabricaciï¿½n.</p>
  * 
  * 
  * @author Leonel Suarez - Jakarta SRL
@@ -28,13 +29,13 @@ public class OrdenFabricacion extends Comprobante {
 		ANULADO(2) {
 			@Override
 			public String descripcion() {
-				return "Orden de fabricación anulada.";
+				return "Orden de fabricaciï¿½n anulada.";
 			}
 		},
 		COMPLETO(3) {
 			@Override
 			public String descripcion() {
-				return "Orden de fabricación finalizada.";
+				return "Orden de fabricaciï¿½n finalizada.";
 			}
 		};
 
@@ -92,6 +93,10 @@ public class OrdenFabricacion extends Comprobante {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public void setComprobanteRelacionado(Pedido comprobanteRelacionado) {
+		this.comprobanteRelacionado = comprobanteRelacionado;
 	}
 	
 }

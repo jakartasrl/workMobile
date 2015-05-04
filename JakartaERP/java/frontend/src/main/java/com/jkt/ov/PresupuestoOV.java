@@ -27,6 +27,8 @@ public class PresupuestoOV extends ObjectView {
 	private String nro;
 	private boolean anulado = false;
 	private Date fecha;
+	
+	private Long idCotizacion=0L;
 
 	private Long idCliente;
 	private Long idSucursal;
@@ -44,6 +46,11 @@ public class PresupuestoOV extends ObjectView {
 	
 	private String filtroNroPresupuesto="";
 	private String filtroCliente="";
+	
+	public void limpiarFiltro() {
+		this.filtroCliente="";
+		this.filtroNroPresupuesto="";
+	}
 	
 	public List obtenerFiltro() {
 		List<FiltroOV> filtros = new ArrayList<FiltroOV>();

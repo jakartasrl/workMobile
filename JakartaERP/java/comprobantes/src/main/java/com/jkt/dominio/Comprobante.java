@@ -46,9 +46,9 @@ public abstract class Comprobante extends PersistentEntity {
 	 * ***********************************************
 	 */
 
-	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
-		this.comprobanteRelacionado = comprobanteRelacionado;
-	}
+//	public void setComprobanteRelacionado(Comprobante comprobanteRelacionado) {
+//		this.comprobanteRelacionado = comprobanteRelacionado;
+//	}
 	
 	public Comprobante getComprobanteRelacionado() {
 		return comprobanteRelacionado;
