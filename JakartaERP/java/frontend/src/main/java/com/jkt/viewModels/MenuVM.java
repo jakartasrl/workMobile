@@ -62,6 +62,7 @@ public class MenuVM {
 			menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
 			menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
 			menues.add(MenuOV.newInstance("Agenda", "index/index-agenda.html", "small"));
+			menues.add(MenuOV.newInstance("Agenda", "index/index-agenda.zul", "small"));
 
 //		}
 		

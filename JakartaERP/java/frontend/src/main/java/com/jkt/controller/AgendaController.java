@@ -37,6 +37,7 @@ public class AgendaController {
 //		result = (ListDescriptibleOV) Operaciones.ejecutar("Login", ListDescriptibleOV.class);
 //		return (ArrayList<EventoDTO>) result.getList();
 		
+		
 		ArrayList<EventoDTO> result = new ArrayList<EventoDTO>();
 		
 		java.util.Date date = new java.util.Date(); 
@@ -45,12 +46,19 @@ public class AgendaController {
 		
 		
 		Date a=new Date();
+		a.setMonth(5);
 		Date b=new Date();
 		b.setMonth(6);
 		
-		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "red", "green"));
-		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "blue", "white"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "black", "red"));
+		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
+		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
+		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
+		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "#BA88B3", "#BA88B3"));
 		
 		return result;
 		

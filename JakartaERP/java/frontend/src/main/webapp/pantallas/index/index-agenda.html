@@ -1,28 +1,21 @@
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset='utf-8' />
 <link href='../agenda-recursos/fullcalendar.css' rel='stylesheet' />
 <link href='../agenda-recursos/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='../agenda-recursos/lib/moment.min.js'></script>
 <script src='../agenda-recursos/lib/jquery.min.js'></script>
 <script src='../agenda-recursos/lib/jquery-ui.js'></script>
 <script src='../agenda-recursos/fullcalendar.min.js'></script>
+<script src='../agenda-recursos/lang-all.js'></script>
 <script>
 
 	$(document).ready(function() {
-
-// 		var eventos;
-// 		$.get( "http://localhost:8080/frontend/api/agenda", function( data ) {
-//   			debugger;
-// 			eventos=data;
-// 		})
 
 		$('#calendar').fullCalendar({
 			defaultDate: '2015-05-04',
 			editable: false,
 			eventLimit: true,
-
+			lang: 'es',
 			events: {
 				url: 'http://localhost:8080/frontend/api/agenda',
 				error: function() {
