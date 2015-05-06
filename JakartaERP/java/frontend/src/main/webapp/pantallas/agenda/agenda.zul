@@ -1,0 +1,85 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<div>
+
+		<panel sclass="panel-maestro" style="padding:5px;" title="Identificación" border="normal" height="auto" width="100%">
+
+			<panelchildren>
+
+				<grid style="border-style:none;"
+					sizedByContent="true">
+
+					<columns>
+						<column width="120px" />
+						<column width="120px" />
+						<column width="120px" />
+						<column width="120px"/>
+						<column width="120px"/>
+						<column width="150px"/>
+					</columns>
+
+					<rows>
+						<row sclass="fila-maestro">
+						
+							<label style="width:100px;" value="Nro. de Pedido : " />
+							
+							<hlayout>
+								<textbox sclass="campoCodigo-medium" value="" tabindex="1" />
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelperComplejo', clase='pedido', post='cargarAgendaPedido',ov=vm.pedidoDescriptible, titulo='Selección de Pedido', codHeader='Nro. Pedido', descHeader='Cliente' , tituloAdicional1='Fecha' )" />
+							</hlayout>
+							
+
+							<label class="name" value="Fecha de emisión: " />
+							<datebox id="fecha" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2" disabled="true"/>
+
+						</row>
+						
+						<row sclass="fila-maestro">
+							<label value="Cliente | Sucursal : " />
+							<cell colspan="3">
+								<textbox value="" width="100%" readonly="true"/>
+							</cell>
+						</row>
+						
+					</rows>
+					
+				</grid>
+
+			</panelchildren>
+
+		</panel>
+		
+		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+			<panelchildren>
+				<tabbox id="contenidoTabs" >
+			    	<tabs id="tabs">
+			        	<tab id="tGeneral" label="Agenda del pedido" />
+			        	<tab id="tItems" label="Agenda de items de pedido" />
+			        	<tab id="tPrec" label="Precedencias" />
+			    	</tabs>
+			    	
+			    	<tabpanels>
+			    			        	
+			        	<tabpanel>
+							<include id="tGeneralContent" hflex="1" src="/pantallas/agenda/tab-agenda-general.zul" viewModel="${vm}"/>
+			        	</tabpanel>
+
+			        	<tabpanel>
+							<include id="tItemsContent" hflex="1" src="/pantallas/agenda/tab-agenda-item.zul" viewModel="${vm}"/>
+			        	</tabpanel>
+
+			        	<tabpanel>
+							<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}"/>
+			        	</tabpanel>
+			        
+			    	</tabpanels>
+			    
+				</tabbox>
+			
+			</panelchildren>
+		
+		</panel>
+
+	</div>
+
+</zk>

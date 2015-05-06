@@ -1,0 +1,75 @@
+<zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
+
+	<vlayout width="100%" style="text-align:left;">
+		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarTareaGeneral')" tooltiptext="Agregar una nueva tarea.">
+			 <attribute name="onClick"><![CDATA[
+					//box.pagingPosition = "top";
+					//siempre retorna a la primer pagina
+					boxTareas.setActivePage(0);
+        		]]></attribute>
+		</button>
+		<label value="Agregar un item"></label>
+	</vlayout>
+
+
+	<listbox id="boxTareas" multiple="false" checkmark="false" model="@bind(vm.agenda.tareasGenerales)" mold="paging" pageSize="8" emptyMessage="No existen tareas.">
+
+		<listhead style="heigth:10px;" >
+		
+			<listheader width="150px" label="Tarea"/>
+			<listheader width="250px" label="Descripción"/>
+			<listheader width="250px" label="Comentario"/>
+			<listheader width="150px" label="Fecha Limite"/>
+			<listheader width="150px" label="Sector responsable"/>
+			<listheader width="150px" label="Estado"/>
+			<listheader width="150px" label="Fecha cumplimiento"/>
+			
+		</listhead>
+
+		<template name="model">
+			<listitem>
+
+				<listcell >
+					<textbox width="100%" value="@bind(each.tarea)" readonly="false"/>
+				</listcell>
+
+				<listcell >
+					<textbox width="100%" value="@bind(each.descripcion)" readonly="false"/>
+				</listcell>
+
+				<listcell >
+					<textbox width="100%" value="@bind(each.comentario)" readonly="false"/>
+				</listcell>
+
+
+				<listcell >
+					<datebox value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+				</listcell>
+
+				<listcell>
+					<combobox width="100%" >
+						<comboitem label="Sector 1" />
+						<comboitem label="Sector 2" />
+						<comboitem label="Sector 3" />
+						<comboitem label="Sector 4" />
+					</combobox>
+				</listcell>
+
+				<listcell>
+					<combobox width="100%" >
+						<comboitem label="Estado 1" />
+						<comboitem label="Estado 2" />
+						<comboitem label="Estado 3" />
+						<comboitem label="Estado 4" />
+					</combobox>
+				</listcell>
+
+				<listcell >
+					<datebox value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+				</listcell>
+				
+			</listitem>
+		</template>
+
+	</listbox>
+</zk>

@@ -3,39 +3,15 @@
 
 <zk>
 	<style src="/style/template.css" />
-	<style>
-	</style>
-	
-	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.controller.AgendaController')" id="contenedorPrincipal">
+	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.AgendaVM')" id="contenedorPrincipal">
 		
 		<div sclass="hboxToolBar" >
 			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/>
 		</div>
 
 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			
-			<vlayout style="text-align:center">
-				<hlayout>
-					<label value="Sector" />
-					<combobox width="150px;">
-						<comboitem label="Laboratorio" />
-						<comboitem label="Control de calidad" />
-						<comboitem label="Venta" />
-					</combobox>
-	
-					<separator></separator>
-	
-					<label value="Pedido:" />
-					<textbox sclass="campoCodigo-medium" value="PE-12" />
-					<button label="..." onClick="@command('openHelperComplejo', clase='pedido', titulo='Selección de Pedido', codHeader='Nro Pedido', descHeader='Cliente', tituloAdicional1='Fecha')" />
-			
-				</hlayout>
-				<button label="Cargar Agenda" onClick='Clients.evalJavaScript("loadCalendar();");' />
-			</vlayout>
-			
-			<include id="contentAgenda" src="/pantallas/index/index-agenda.html" />
+			<include id="pedidoId" src="/pantallas/agenda/agenda.zul" viewModel="${vm}"/>
 		</div>
 		
 	</div>
 </zk>
-

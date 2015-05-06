@@ -1,0 +1,52 @@
+<zk>
+
+	<zscript language="Java"><![CDATA[
+		import java.io.*;
+		import com.jkt.ov.*;
+		
+		TareaAgendaOV tarea = (TareaAgendaOV) arg.get("tarea");
+		
+		Messagebox.show(tarea.getTarea());
+		
+		for (TareaAgendaOV tareaAgendaOV : tarea.getTodasLasTareas() ) {
+			Messagebox.show(tareaAgendaOV.getTarea());
+		}
+		
+		
+	]]>
+	</zscript>
+
+	<window id="modalDialog" title="Precedencias" style="margin-top:50px;" width="700px" position="top,center" closable="true" >
+	    <vlayout>
+			
+			<label value="${ tarea.tarea }"> </label>
+			<label value="jklsdakljsdakjdsakjl"> </label>
+			
+			
+			<listbox 
+				model="${tarea.todasLasTareas}" 
+				multiple="true" checkmark="true" 
+				emptyMessage="No existen tareas." mold="paging" pageSize="10"
+				selectedItems="${tarea.precedencias}"
+				hflex="1" vflex="1" 
+			>
+		
+				<listhead>
+					<listheader width="3%" style="text-align:center" />
+					<listheader width="15%" label="Tarea" />
+					<listheader width="72%" label="Descripcion" />
+				</listhead>
+		
+		
+				<template name="model">
+					<listitem>
+						<listcell style="text-align:center" />
+						<listcell label="@bind(each.tarea)" />
+						<listcell label="@bind(each.descripcion)" />
+					</listitem>
+				</template>
+			</listbox>
+			
+	    </vlayout>
+	</window>
+</zk>
