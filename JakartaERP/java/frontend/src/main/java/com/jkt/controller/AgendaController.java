@@ -1,5 +1,6 @@
 package com.jkt.controller;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,13 +15,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zkoss.bind.annotation.GlobalCommand;
+import org.zkoss.bind.annotation.Init;
 
 import com.jkt.common.Operaciones;
 import com.jkt.dto.EventoDTO;
+import com.jkt.excepcion.JakartaException;
+import com.jkt.viewModels.IBasicOperations;
+import com.jkt.viewModels.ViewModel;
 
 @Controller
 @RequestMapping(value = "/agenda")
-public class AgendaController {
+public class AgendaController extends ViewModel implements IBasicOperations {
 
 	@Autowired
 	private ServletContext servletContext;
@@ -56,20 +62,55 @@ public class AgendaController {
 		Date h=LocalDate.now().plusDays(7).toDate();
 		
 		
-		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
-		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
-		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(h), "green", "green"));
-		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
-		result.add(new EventoDTO(1L,"uno", sdf.format(b), sdf.format(e), "green", "green"));
-		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(e), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(c), "#BA88B3", "#BA88B3"));
-		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(f), "green", "green"));
-		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(g), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(h), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"Pedido 1 - Tarea 40", sdf.format(a), sdf.format(a), "green", "green"));
+		result.add(new EventoDTO(2L,"Pedido 1 - Tarea 43", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"Pedido 1 - Tarea 45", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"Pedido 1 - Tarea 59", sdf.format(a), sdf.format(h), "green", "green"));
+		result.add(new EventoDTO(2L,"Pedido 2 - Tarea 3", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"Pedido 2 -Tarea final", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"Pedido", sdf.format(b), sdf.format(e), "green", "green"));
+		result.add(new EventoDTO(2L,"Pedido 1", sdf.format(a), sdf.format(e), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"Pedido 2", sdf.format(b), sdf.format(c), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"Pedido 3", sdf.format(a), sdf.format(f), "green", "green"));
+		result.add(new EventoDTO(2L,"Pedido 4", sdf.format(a), sdf.format(g), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"Pedido 5", sdf.format(b), sdf.format(h), "#BA88B3", "#BA88B3"));
 		
 		return result;
 		
 	}
+	
+	@Init
+	public void init(){
+		this.setTitulo("Agenda");
+	}
+
+	@Override
+	public void guardar() throws JakartaException {
+		
+	}
+
+	@Override
+	public void nuevo() throws JakartaException {
+		
+	}
+
+	@Override
+	public void buscar() throws JakartaException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+		
+	}
+
+	@Override
+	@GlobalCommand("update")
+	public void actualizar() {
+		
+	}
+
+	@Override
+	protected String retrieveMethod() {
+		return "update";
+	}
+	
+	
+
 }
