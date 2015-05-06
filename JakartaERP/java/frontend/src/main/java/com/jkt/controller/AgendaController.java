@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,20 +46,28 @@ public class AgendaController {
 		String fecha = sdf.format(date);
 		
 		
-		Date a=new Date();
-		a.setMonth(5);
-		Date b=new Date();
-		b.setMonth(6);
+		Date a=LocalDate.now().plusDays(2).toDate();
+		Date b=LocalDate.now().plusDays(3).toDate();
+		Date c=LocalDate.now().plusDays(4).toDate();
+		Date d=LocalDate.now().plusDays(5).toDate();
+		Date e=LocalDate.now().plusDays(14).toDate();
+		Date f=LocalDate.now().plusDays(6).toDate();
+		Date g=LocalDate.now().plusDays(15).toDate();
+		Date h=LocalDate.now().plusDays(7).toDate();
+		
 		
 		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
 		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "#BA88B3", "#BA88B3"));
-		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(h), "green", "green"));
 		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "#BA88B3", "#BA88B3"));
-		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(a), "green", "green"));
-		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
-		result.add(new EventoDTO(3L,"tres", sdf.format(a), sdf.format(b), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"uno", sdf.format(b), sdf.format(e), "green", "green"));
+		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(e), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(c), "#BA88B3", "#BA88B3"));
+		result.add(new EventoDTO(1L,"uno", sdf.format(a), sdf.format(f), "green", "green"));
+		result.add(new EventoDTO(2L,"dos", sdf.format(a), sdf.format(g), "#3a87ad", "#3a87ad"));
+		result.add(new EventoDTO(3L,"tres", sdf.format(b), sdf.format(h), "#BA88B3", "#BA88B3"));
 		
 		return result;
 		

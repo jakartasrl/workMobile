@@ -2,59 +2,6 @@
 <?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
-	<style src="/style/template.css" />
-	<style src="../agenda-recursos/fullcalendar.css" />
-	<style src="../agenda-recursos/fullcalendar.print.css" />
-
-
-	<style>
-	
-		body {
-			margin: 40px 10px;
-			padding: 0;
-			font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-			font-size: 14px;
-		}
-	
-		#calendar {
-			max-width: 900px;
-			margin: 0 auto;
-		}
-	
-	</style>
-
-	<script src='../agenda-recursos/lib/moment.min.js'></script>
-	<script src='../agenda-recursos/lib/jquery.min.js'></script>
-	<script src='../agenda-recursos/lib/jquery-ui.js'></script>
-	<script src='../agenda-recursos/fullcalendar.min.js'></script>
-	<script src='../agenda-recursos/lang-all.js'></script>
-	
-	
-	<script>
-	
-		jQuery.noConflict();
-        jQuery(document).ready(function() {
-	
-			jQuery('#calendar').fullCalendar({
-				defaultDate: '2015-05-04',
-				editable: false,
-				eventLimit: true,
-				lang: 'es',
-				events: {
-					url: 'http://localhost:8080/frontend/api/agenda',
-					error: function() {
-						$('#script-warning').show();
-					}
-				},
-				loading: function(bool) {
-					$('#loading').toggle(bool);
-				}
-	
-			})
-			
-		});
-	
-	</script>
 	
 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.CotizacionVM')" id="contenedorPrincipal">
 		
@@ -63,7 +10,7 @@
 		</div>
 
 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<div id='calendar'>sasdasda</div>
+			<include id="contentAgenda" src="/pantallas/index/index-agenda.html" />
 		</div>
 		
 	</div>
