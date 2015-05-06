@@ -61,7 +61,15 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 		Date g=LocalDate.now().plusDays(15).toDate();
 		Date h=LocalDate.now().plusDays(7).toDate();
 		
+		Date gg=LocalDate.now().minusDays(10).toDate();
+		Date hh=LocalDate.now().minusDays(13).toDate();
+		Date ff=LocalDate.now().minusDays(5).toDate();
 		
+		
+		result.add(new EventoDTO(1L,"Pedido 1 - Tarea 59", sdf.format(hh), sdf.format(a), "orange", "orange"));
+		result.add(new EventoDTO(1L,"Pedido 1 - Tarea 59", sdf.format(gg), sdf.format(c), "green", "green"));
+		result.add(new EventoDTO(1L,"Pedido 1 - Tarea 59", sdf.format(hh), sdf.format(ff), "#3a87ad", "#3a87ad"));
+
 		result.add(new EventoDTO(1L,"Pedido 1 - Tarea 40", sdf.format(a), sdf.format(a), "green", "green"));
 		result.add(new EventoDTO(2L,"Pedido 1 - Tarea 43", sdf.format(a), sdf.format(b), "#3a87ad", "#3a87ad"));
 		result.add(new EventoDTO(3L,"Pedido 1 - Tarea 45", sdf.format(b), sdf.format(d), "#BA88B3", "#BA88B3"));
