@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zul.Menupopup;
 
 import com.jkt.ov.MenuOV;
 
@@ -46,6 +47,10 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
 		menues.add(MenuOV.newInstance("Carga de Agenda", "index/index-agenda.zul", "medium"));
 		menues.add(MenuOV.newInstance("Visor de Agenda", "index/visor-agenda.zul", "medium"));
+		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarSector", "sector"));
+		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarTareaSimple", "tarea"));
+		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarGenerico", "sector"));
+		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarGenerico", "tarea"));
 
 //		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
 //		news.add("Jueves 16 de Abril- Argentina está de fiesta");

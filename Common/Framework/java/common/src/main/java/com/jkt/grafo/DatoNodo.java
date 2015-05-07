@@ -1,5 +1,6 @@
 package com.jkt.grafo;
 
+import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 
@@ -12,7 +13,7 @@ import com.jkt.excepcion.JakartaException;
  * 
  * Leonel Suarez - Jakarta SRL
  */
-abstract public class DatoNodo extends PersistentEntity{
+abstract public class DatoNodo extends Descriptible{
 
 	public enum Estado {
 		NO_INICIADO, EN_EJECUCION, FINALIZADO;

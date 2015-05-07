@@ -17,6 +17,9 @@ public class DescriptibleOV extends ObjectView {
 	private String codigo;
 	private String descripcion;
 
+	//Para enviar una entidad
+	private String entidad;
+	
 	/*
 	 * Campos para helps
 	 */

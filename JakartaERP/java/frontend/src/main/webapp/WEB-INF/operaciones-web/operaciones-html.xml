@@ -68,6 +68,29 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="guardarTareaSimple" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Tarea" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.dominio.Tarea">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="guardarSector" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Sector" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.dominio.Sector">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 
 	<operacion name="guardarPlantilla" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Plantilla" inputOV="com.jkt.ov.DescriptibleOV">
 	
