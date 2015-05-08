@@ -225,16 +225,13 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 			}
 		}
 	}
-	public String getCadena() {
-		return "";
-	}
-	
-//	public void deleteValorClasificador(ClienteClasificador clienteClasificador){
-//		borrarObjetoDeColeccion(listaClasificadores, clienteClasificador);
-//	}
 
-	/*
-	 * helper methods
-	 */
+	public String getAdicional1() {
+		return this.getTelefono();
+	}
+
+	public String getAdicional2() {
+		return this.getFax();
+	}
 	
 }

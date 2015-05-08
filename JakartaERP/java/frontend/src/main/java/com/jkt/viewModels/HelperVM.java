@@ -49,6 +49,14 @@ public class HelperVM {
 	}
 	
 	@Command
+	@NotifyChange({"coleccion","ov"})
+	public void limpiar(){
+		ov.limpiarFiltro();
+		ListDescriptibleOV listDescriptible = new ListDescriptibleOV();//(ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
+		this.coleccion=listDescriptible.getList();
+	}
+	
+	@Command
 	@NotifyChange("coleccion")
 	public void filtrar(){
 		ContenedorFiltrosOV c=new ContenedorFiltrosOV();
@@ -70,9 +78,37 @@ public class HelperVM {
 	private String refresh;
 	private String invoke;
 	private Object vm;
+	
+	private String descCampo3;
+	private String descCampo4;
+	
+	public int getCantidad(){
+		int cantidad=2;
+		if (descCampo3!=null && !descCampo3.isEmpty()) {
+			cantidad++;
+		}
+		if (descCampo4!=null && !descCampo4.isEmpty()) {
+			cantidad++;
+		}
+		return cantidad;
+	}
 
-	
-	
+	public String getDescCampo4() {
+		return descCampo4;
+	}
+
+	public void setDescCampo4(String descCampo4) {
+		this.descCampo4 = descCampo4;
+	}
+
+	public String getDescCampo3() {
+		return descCampo3;
+	}
+
+	public void setDescCampo3(String descCampo3) {
+		this.descCampo3 = descCampo3;
+	}
+
 	public Boolean getConFiltro() {
 		return conFiltro;
 	}
@@ -192,6 +228,13 @@ public class HelperVM {
 						@ExecutionArgParam("clase") String clase,
 						@ExecutionArgParam("conFiltro") Boolean conFiltro
 			) {
+		
+		
+		if (conFiltro) {
+			ViewModel v=(ViewModel) vm;
+			this.filtro= v.getFiltro();
+		}
+		
 		this.coleccion = coleccion;
 		this.conFiltro=conFiltro;
 		
@@ -201,6 +244,10 @@ public class HelperVM {
 		
 		this.codigo=headerOV.getColumnaCodigo();
 		this.descripcion=headerOV.getColumnaDescripcion();
+		
+		this.descCampo3=headerOV.getColumnaAdicional1();
+		this.descCampo4=headerOV.getColumnaAdicional2();
+		
 		this.titulo=headerOV.getTitulo();
 		this.clase=clase;
 		this.vm=vm;

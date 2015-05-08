@@ -1,0 +1,53 @@
+<html>
+<head>
+<link href='../agenda-recursos/fullcalendar.css' rel='stylesheet' />
+
+<link rel='stylesheet' href='../agenda-recursos/lib/cupertino/jquery-ui.min.css' />
+<link href='../agenda-recursos/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../agenda-recursos/lib/moment.min.js'></script>
+<script src='../agenda-recursos/lib/jquery.min.js'></script>
+<script src='../agenda-recursos/lib/jquery-ui.js'></script>
+<script src='../agenda-recursos/fullcalendar.min.js'></script>
+<script src='../agenda-recursos/lang-all.js'></script>
+<script>
+
+	function loadCalendar(){
+	
+		debugger;
+		
+		$('#calendar').fullCalendar({
+// 			theme: true,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek'
+// 				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: '2015-05-04',
+			editable: false,
+			eventLimit: true,
+			lang: 'es',
+			events: {
+				url: 'http://localhost:8080/frontend/api/agenda',
+				error: function() {
+					$('#script-warning').show();
+				}
+			},
+			loading: function(bool) {
+				$('#loading').toggle(bool);
+			}
+
+		})
+		
+	}
+
+</script>
+
+</head>
+<body>
+
+	<div id='calendar' style='max-width:800px;font-size: 14px;margin: 0 auto;font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;padding: 0;' >
+	</div>
+
+</body>
+</html>

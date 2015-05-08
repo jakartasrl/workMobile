@@ -1,15 +1,18 @@
 package com.jkt.grafo;
 
+import lombok.Data;
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 
 /**
  * Esta <strike>interface</strike> super clase reporta datos para la agenda.
- * <p>Cualquier entidad, objeto, tarea, o lo que sea que pueda ser representado en una agenda deberá
+ * <p>Cualquier entidad, objeto, tarea, o lo que sea que pueda ser representado en una agenda deberï¿½
  * <strike>implementar esta interface</strike> extender de esta clase e implementar los metodos</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Agendable extends PersistentEntity{
 
 //	public abstract boolean sePuedeCompletar();
@@ -28,22 +31,5 @@ public class Agendable extends PersistentEntity{
 	 */
 	private long idTarea;
 	private String claseTarea;
-	
-	/*
-	 * Getters & setters
-	 */
-	public long getIdTarea() {
-		return idTarea;
-	}
-	public void setIdTarea(long idTarea) {
-		this.idTarea = idTarea;
-	}
-	public String getClaseTarea() {
-		return claseTarea;
-	}
-	public void setClaseTarea(String claseTarea) {
-		this.claseTarea = claseTarea;
-	}
-	
 	
 }

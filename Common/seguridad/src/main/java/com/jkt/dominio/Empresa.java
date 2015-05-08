@@ -30,7 +30,7 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 
 	/**
 	 * El parser hecho anteriormente no se encargaba de los atributos booleanos,
-	 * asiq es un parche temporal, Luego se verá que se hace... FIXME TODO
+	 * asiq es un parche temporal, Luego se verï¿½ que se hace... FIXME TODO
 	 * 
 	 * @return
 	 */
@@ -74,6 +74,14 @@ public class Empresa extends PersistentEntity implements IDescriptible {
 	
 	public String getCadena() {
 		return getRazonSocial();
+	}
+
+	public String getAdicional1() {
+		return null;
+	}
+
+	public String getAdicional2() {
+		return null;
 	}
 
 }

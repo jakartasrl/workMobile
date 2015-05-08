@@ -8,6 +8,7 @@ public interface IDescriptible {
 
 	String getCodigo();
 	String getDescripcion();
-	String getCadena();
+	String getAdicional1();
+	String getAdicional2();
 	
 }

@@ -15,7 +15,7 @@
 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px" >
 			<hlayout style="margin:10px;">
 				<label value="Codigo de plantilla:" />
-				<textbox sclass="campoCodigo-medium" maxlength="5" value="@bind(vm.plantilla.codigo)" readonly="@bind(vm.editMode)"/>
+				<textbox sclass="campoCodigo-medium" maxlength="5" value="@bind(vm.plantilla.codigo)" />
 			</hlayout>
 
 			<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;"

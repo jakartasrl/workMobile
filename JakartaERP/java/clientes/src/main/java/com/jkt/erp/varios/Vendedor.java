@@ -71,8 +71,12 @@ public class Vendedor extends PersistentEntity implements IDescriptible {
 		return apellido + ","  + nombres;
 	}
 
-	public String getCadena() {
-		return "";
+	public String getAdicional1() {
+		return null;
+	}
+
+	public String getAdicional2() {
+		return null;
 	}
 
 }

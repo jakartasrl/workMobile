@@ -1,0 +1,21 @@
+<zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)">
+
+	<zscript> 
+		
+		<![CDATA[
+				
+		]]>
+		
+	</zscript>
+
+	<vbox pack="center" align="center" style="padding: 10px;">
+		<hlayout>
+			<label value="Número de presupuesto : "></label>
+			<textbox sclass="campoCodigo-small" value="@bind(vm.ov.filtroNroPresupuesto)"></textbox>
+			
+			<label style="margin-left:20px;" value="Cliente : "></label>
+			<textbox value="@bind(vm.ov.filtroCliente)"></textbox>
+		</hlayout>
+	</vbox>
+
+</zk>

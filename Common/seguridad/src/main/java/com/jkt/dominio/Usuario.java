@@ -46,12 +46,12 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	private Set<EmpresaHabilitada> empresasHabilitadas = new HashSet<EmpresaHabilitada>();
 
 	private String password;// Elemento transiente para setear datos desde la
-							// entrada de delphi¿?
+							// entrada de delphiï¿½?
 	private boolean activo = true;
 
 	/**
 	 * El parser hecho anteriormente no se encargaba de los atributos booleanos,
-	 * asiq es un parche temporal, Luego se verá que se hace... FIXME TODO
+	 * asiq es un parche temporal, Luego se verï¿½ que se hace... FIXME TODO
 	 * 
 	 * @return
 	 */
@@ -149,10 +149,6 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 		return this.getApellido().concat(", ").concat(this.getNombres());
 	}
 	
-	public String getCadena() {
-		return this.getNombres().concat(" ").concat(this.getApellido());
-	}
-
 	/*
 	 * Metodo utilitario para recibir datos de delphi.TRANSIENT FIELD.
 	 */
@@ -168,6 +164,14 @@ public class Usuario extends PersistentEntity implements IDescriptible {
 	public void setEmpresasHabilitadasPlanas(
 			List<EmpresaHabilitada> empresasHabilitadasPlanas) {
 		this.empresasHabilitadasPlanas = empresasHabilitadasPlanas;
+	}
+
+	public String getAdicional1() {
+		return this.getNombres().concat(" ").concat(this.getApellido());
+	}
+
+	public String getAdicional2() {
+		return null;
 	}
 	
 

@@ -13,7 +13,7 @@
 			</div>
 
 			<div hflex="1" droppable="true" style="text-align: center;">
-				<label value="@load(vm.titulo)" style="vertical-align:middle; font-size:25px; color:grey;" />
+				<label value="@bind(vm.titulo)" style="vertical-align:middle; font-size:25px; color:grey;" />
 			</div>
 
 			<div hflex="1" droppable="true" style="text-align: right;">

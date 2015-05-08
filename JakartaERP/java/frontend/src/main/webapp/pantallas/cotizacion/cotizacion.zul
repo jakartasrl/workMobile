@@ -12,7 +12,7 @@
 					<columns>
 						<column width="120px" />
 						<column width="120px" />
-						<column width="120px" />
+						<column width="100px" />
 						<column width="120px"/>
 						<column width="120px"/>
 						<column width="150px"/>
@@ -22,20 +22,20 @@
 						<row sclass="fila-maestro">
 						
 							<label style="width:100px;" value="Nro. de Cotizacion : " />
-							<textbox sclass="campoCodigo-medium" value="@bind(vm.cotizacionOV.nroCotizacion)" tabindex="1" />
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.cotizacionOV.nroCotizacion)" tabindex="1" readonly="true"/>
 
 							<label class="name" value="Fecha : " />
-							<datebox id="fecha" value="@bind(vm.cotizacionOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" tabindex="2"/>
+							<datebox id="fecha" value="@bind(vm.cotizacionOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2"/>
 
 							<label class="name" value="Fecha Vencimiento : " />
-							<datebox id="fechaVencimiento" value="@bind(vm.cotizacionOV.fechaVencimiento)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" tabindex="3"/>
+							<datebox id="fechaVencimiento" value="@bind(vm.cotizacionOV.fechaVencimiento)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="3"/>
 							
 						</row>
 						
 						<row sclass="fila-maestro">
 							<label style="width:100px;" value="Referencia : " />
 							<cell colspan="3">
-								<textbox class="campoCodigo-medium" value="@bind(vm.cotizacionOV.referencia)" tabindex="4" width="100%" />
+								<textbox class="campoCodigo-large" value="@bind(vm.cotizacionOV.referencia)" tabindex="4" width="100%" />
 							</cell>
 						</row>
 
@@ -49,7 +49,7 @@
 							</hlayout>
 							
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="6" />
+								<textbox sclass="campoCodigo-small" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" tabindex="6" />
 								<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
 							</hlayout>
 

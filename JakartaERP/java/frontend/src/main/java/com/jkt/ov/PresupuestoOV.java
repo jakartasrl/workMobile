@@ -1,6 +1,7 @@
 package com.jkt.ov;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class PresupuestoOV extends ObjectView {
 	private String nro;
 	private boolean anulado = false;
 	private Date fecha;
+	
+	private Long idCotizacion=0L;
 
 	private Long idCliente;
 	private Long idSucursal;
@@ -39,5 +42,28 @@ public class PresupuestoOV extends ObjectView {
 	private List<ItemsOV> items=new ArrayList<ItemsOV>();
 	private List<FormaFacturacionOV> facturaciones=new ArrayList<FormaFacturacionOV>();
 	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
+	
+	
+	private String filtroNroPresupuesto="";
+	private String filtroCliente="";
+	
+	public void limpiarFiltro() {
+		this.filtroCliente="";
+		this.filtroNroPresupuesto="";
+	}
+	
+	public List obtenerFiltro() {
+		List<FiltroOV> filtros = new ArrayList<FiltroOV>();
+		
+		if (!filtroCliente.isEmpty()) {
+			filtros.add(new FiltroOV("cliente.sujetoImpositivo.razonSocial", filtroCliente, "like", "string"));
+		}
+		
+		if (!filtroNroPresupuesto.isEmpty()) {
+			filtros.add(new FiltroOV("nro", filtroNroPresupuesto, "like", "string"));
+		}
+		
+		return filtros;
+	}
 	
 }

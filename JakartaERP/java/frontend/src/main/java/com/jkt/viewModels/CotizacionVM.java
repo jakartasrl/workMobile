@@ -72,7 +72,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openHelper("cotizacion", "", this.cotizacionOV, "traerCotizacion", "Cotizaciones", "Nro Cotizacion", "Fecha/Vendedor",false);
+		openComplexHelper("cotizacion", "", this.cotizacionOV, "traerCotizacion", "Cotizaciones", "Nro Cotizacion", "Cliente",false, "Fecha","");
 	}
 
 	@GlobalCommand("actualizar")

@@ -1,7 +1,9 @@
 package com.jkt.viewModels;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.zkoss.bind.annotation.BindingParam;
@@ -9,6 +11,8 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -188,8 +192,19 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	@NotifyChange("ov")
 	public void traer() {
 
-		ListMarcaOV marcas = (ListMarcaOV) Operaciones.ejecutar("TraerMarca", ListMarcaOV.class);
-		this.ov.setMarcas(marcas.getList());
+		try{
+			ListMarcaOV marcas = (ListMarcaOV) Operaciones.ejecutar("TraerMarca", ListMarcaOV.class);
+			this.ov.setMarcas(marcas.getList());
+		}catch(Exception e){
+			Messagebox.show("Compruebe la parametrización del sistema, correspondiente con las marcas.", "Mensaje de error", Messagebox.OK , Messagebox.EXCLAMATION, new org.zkoss.zk.ui.event.EventListener() {    
+				public void onEvent(Event evt) throws InterruptedException, IOException {
+					Executions.sendRedirect("../menu.zul");
+			    }
+			}
+			);
+		
+		}
+		
 	}
 
 	@Command

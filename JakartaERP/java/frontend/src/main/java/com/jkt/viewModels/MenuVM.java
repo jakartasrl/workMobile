@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zul.Menupopup;
 
 import com.jkt.ov.MenuOV;
 
@@ -27,21 +28,6 @@ import com.jkt.ov.MenuOV;
 @Data
 public class MenuVM {
 
-	@Command
-	public void logIn(){
-		System.out.println();
-	}
-	
-	 @AfterCompose
-    public void afterCompose(@ContextParam(ContextType.VIEW) Component view){
-        Selectors.wireEventListeners(view, this);
-    }
- 
-    @Listen("onClick=#login")
-    public void onSubmit(MouseEvent event){
-    	System.out.println();
-    }
-	
 	private List<MenuOV> menues=new ArrayList<MenuOV>();
 	
 	private List<String> news=new ArrayList<String>();
@@ -51,19 +37,22 @@ public class MenuVM {
 	@Init
 	public void init(){
 		
-//		for (int i = 0; i < 14; i++) {
-			
-			menues.add(MenuOV.newInstance("Laboratorio", "index/index-laboratorio.zul", "small"));
-			menues.add(MenuOV.newInstance("Equipo", "index/index-equipo.zul", "small"));
-			menues.add(MenuOV.newInstance("Determinacion", "index/index-determinacion.zul", "small"));
-	
-			menues.add(MenuOV.newInstance("Presupuesto", "index/index-presupuesto.zul", "small"));
-			menues.add(MenuOV.newInstance("Pedido", "index/index-pedido.zul", "small"));
-			menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
-			menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
-			menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
+		menues.add(MenuOV.newInstance("Laboratorio", "index/index-laboratorio.zul", "small"));
+		menues.add(MenuOV.newInstance("Equipo", "index/index-equipo.zul", "small"));
+		menues.add(MenuOV.newInstance("Determinacion", "index/index-determinacion.zul", "small"));
 
-//		}
+		menues.add(MenuOV.newInstance("Presupuesto", "index/index-presupuesto.zul", "small"));
+		menues.add(MenuOV.newInstance("Pedido", "index/index-pedido.zul", "small"));
+		menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
+		menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
+		menues.add(MenuOV.newInstance("Carga de Agenda", "index/index-agenda.zul", "medium"));
+		menues.add(MenuOV.newInstance("Visor de Agenda", "index/visor-agenda.zul", "medium"));
+		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarSector", "sector"));
+		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarTareaSimple", "tarea"));
+		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarGenerico", "sector"));
+		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarGenerico", "tarea"));
+		menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
+
 		
 //		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
 //		news.add("Jueves 16 de Abril- Argentina está de fiesta");

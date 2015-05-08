@@ -54,6 +54,7 @@
 	<elemento key="equipo" value="com.jkt.laboratorio.dominio.Equipo" />
 	<elemento key="documentacion" value="com.jkt.pedido.dominio.Documentacion"/>
 	<elemento key="contactos" value="com.jkt.varios.dominio.Contacto"/>
-	<elemento key="tituloModeloCotizador" value="com.jkt.cotizador.dominio.TituloModeloCotizador"/>
+	<elemento key="sector" value="com.jkt.dominio.Sector"/>
+	<elemento key="tarea" value="com.jkt.dominio.Tarea"/>
 
 </elementos>

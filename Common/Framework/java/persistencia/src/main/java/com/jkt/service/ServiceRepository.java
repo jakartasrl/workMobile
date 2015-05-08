@@ -242,6 +242,19 @@ public class ServiceRepository implements IServiceRepository {
 	 * @param tipo tipo de valor que sera puesto en prueba
 	 */
 	private void agregarCriteria(Criteria criteria, String propertyName, String condicion, Object tipo) {
+		
+		String[] splitedProperty = propertyName.split("\\.");
+		if(splitedProperty.length>1){
+			String[] array = splitedProperty;
+			criteria.createAlias(array[0],array[0]);
+			for(int i=1; i< (array.length-1); i++ ){
+				criteria.createAlias(array[i-1]+"."+array[i], array[i]);
+			}
+			
+			propertyName= array[array.length-2]+"."+array[array.length-1];
+		}
+		
+		
 		if (CONDICION_IGUAL.equals(condicion)) {
 			criteria.add(eq(propertyName, tipo));
 			return;
@@ -277,7 +290,7 @@ public class ServiceRepository implements IServiceRepository {
 			return;
 		}
 	}
-
+	
 	private Criteria createCriteria(Class className) {
 		return getSession().createCriteria(className);
 	}

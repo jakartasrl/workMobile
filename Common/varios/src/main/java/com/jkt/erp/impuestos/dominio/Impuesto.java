@@ -41,8 +41,12 @@ public class Impuesto extends Descriptible implements IDescriptible{
 		}
 	}
 
-	public String getCadena() {
+	public String getAdicional1() {
 		return getDescripcion();
+	}
+
+	public String getAdicional2() {
+		return null;
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Data;
+
 import org.apache.commons.collections.Closure;
 
 import com.jkt.dominio.PersistentEntity;
@@ -14,6 +16,7 @@ import com.jkt.dominio.PersistentEntity;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity {
 
 	private boolean completo = false;
@@ -22,26 +25,6 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
 	private List<NodoGenerico<T>> posteriores = new ArrayList<NodoGenerico<T>>();
 	private T dato;
 
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public boolean isCompleto() {
-		return completo;
-	}
-	public void setCompleto(boolean completo) {
-		this.completo = completo;
-	}
-	public T getDato() {
-		return dato;
-	}
-	public void setDato(T dato) {
-		this.dato = dato;
-	}
-
-	
 	public boolean tieneTodosLosPrecedentesCumplidos(){
 		for (NodoGenerico<T> nodo : precedentes) {
 			if (!nodo.isCompleto()) {
@@ -187,20 +170,5 @@ abstract public class NodoGenerico<T extends DatoNodo> extends PersistentEntity 
             }
         }
     }
-	public List<NodoGenerico<T>> getPrecedentes() {
-		return precedentes;
-	}
-	public void setPrecedentes(List<NodoGenerico<T>> precedentes) {
-		this.precedentes = precedentes;
-	}
-	public List<NodoGenerico<T>> getPosteriores() {
-		return posteriores;
-	}
-	public void setPosteriores(List<NodoGenerico<T>> posteriores) {
-		this.posteriores = posteriores;
-	}
-	
-	
-	
 
 }

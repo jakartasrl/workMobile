@@ -115,6 +115,22 @@ public abstract class ViewModel {
 							@BindingParam("descHeader") String descHeader,
 							@BindingParam("conFiltro") @Default("false") Boolean filtrar
 			) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		this.openComplexHelper(clase, oidEntidadMaestra, ov, metodo, titulo, codHeader, descHeader, filtrar,"","");
+	}
+
+	
+	@Command("openHelperComplejo")
+	public void openComplexHelper(	@BindingParam("clase") String clase, 
+							@BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,
+							@BindingParam("ov") ObjectView ov,
+							@BindingParam("post") String metodo,
+							@BindingParam("titulo") String titulo,
+							@BindingParam("codHeader") String codHeader,
+							@BindingParam("descHeader") String descHeader,
+							@BindingParam("conFiltro") @Default("false") Boolean filtrar,
+							@BindingParam("tituloAdicional1") String tituloAdicional1,
+							@BindingParam("tituloAdicional2") String tituloAdicional2
+			) throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		if (filtrar) {
 			if (ov==null) {
@@ -164,6 +180,13 @@ public abstract class ViewModel {
 		if (campoValido(descHeader)) {
 			metaDatos.setColumnaDescripcion(descHeader);
 		}
+		if (campoValido(tituloAdicional1)) {
+			metaDatos.setColumnaAdicional1(tituloAdicional1);
+		}
+		if (campoValido(tituloAdicional2)) {
+			metaDatos.setColumnaAdicional2(tituloAdicional2);
+		}
+		
 		
 		map.put("metaDatos", metaDatos);
 		

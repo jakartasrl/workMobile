@@ -1,5 +1,7 @@
 package com.jkt.agenda;
 
+import lombok.Data;
+
 import org.joda.time.LocalDate;
 
 import com.jkt.grafo.NodoGenerico;
@@ -12,6 +14,7 @@ import com.jkt.grafo.NodoGenerico;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class EventoAgenda extends NodoGenerico<Evento> {
 
 	
@@ -29,45 +32,4 @@ public class EventoAgenda extends NodoGenerico<Evento> {
 	private LocalDate fechaFin;
 	private int diasAtrasados=0;
 	
-	/*
-	 * setters y getters
-	 */
-	
-	public LocalDate getFechaInicio() {
-		return fechaInicio;
-	}
-	public void setFechaInicio(LocalDate fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-	public int getDiasDuracion() {
-		return diasDuracion;
-	}
-	public void setDiasDuracion(int diasDuracion) {
-		this.diasDuracion = diasDuracion;
-	}
-	public String getSector() {
-		return sector;
-	}
-	public void setSector(String sector) {
-		this.sector = sector;
-	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-	public LocalDate getFechaFin() {
-		return fechaFin;
-	}
-	public void setFechaFin(LocalDate fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-	public int getDiasAtrasados() {
-		return diasAtrasados;
-	}
-	public void setDiasAtrasados(int diasAtrasados) {
-		this.diasAtrasados = diasAtrasados;
-	}
-
 }

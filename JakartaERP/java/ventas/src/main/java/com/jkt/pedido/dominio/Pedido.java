@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jkt.dominio.ComprobanteVenta;
+import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.ListaPrecios;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
@@ -18,7 +19,7 @@ import com.jkt.presupuesto.dominio.Presupuesto;
  * @author ssuarez
  *
  */
-public class Pedido extends ComprobanteVenta {
+public class Pedido extends ComprobanteVenta implements IDescriptible{
 
 	private ListaPrecios listaPrecios;
 	private List<Nota> notas = new ArrayList<Nota>();
@@ -172,8 +173,9 @@ public class Pedido extends ComprobanteVenta {
 	}
 	
 	public String getDescripcion(){
+		return this.getCliente().getDescripcion();
 //		return this.getReferencia();
-		return String.format("%s / %s",this.getClienteSucursal().getDescripcionCompleta(),this.getFecha().toString() );
+//		return String.format("%s / %s",this.getClienteSucursal().getDescripcionCompleta(),this.getFecha().toString() );
 	}
 	
 	
@@ -196,6 +198,14 @@ public class Pedido extends ComprobanteVenta {
 		if (!notasTransientes.contains(n)) {
 			this.notasTransientes.add(n);
 		}
+	}
+
+	public String getAdicional1() {
+		return this.getFecha().toString();
+	}
+
+	public String getAdicional2() {
+		return "";
 	}
 	
 }

@@ -14,6 +14,25 @@ public class HeaderHelpGenericoOV extends ObjectView {
 	private String columnaCodigo = "Código";
 	private String columnaDescripcion = "Descripción";
 	
+	private String columnaAdicional1;
+	private String columnaAdicional2;
+	
+	public String getColumnaAdicional1() {
+		return columnaAdicional1;
+	}
+
+	public void setColumnaAdicional1(String columnaAdicional1) {
+		this.columnaAdicional1 = columnaAdicional1;
+	}
+
+	public String getColumnaAdicional2() {
+		return columnaAdicional2;
+	}
+
+	public void setColumnaAdicional2(String columnaAdicional2) {
+		this.columnaAdicional2 = columnaAdicional2;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}

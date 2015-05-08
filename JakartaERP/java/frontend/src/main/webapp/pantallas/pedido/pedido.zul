@@ -24,7 +24,7 @@
 			    		
 			    		<hlayout >
 							<textbox id="codigoPresupuesto" sclass="campoCodigo-medium" value="@bind(vm.comprobanteOV.nroPresupuesto)" readonly="false" tabindex="1" />
-							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='presupuesto', post='cargarPresupuesto',ov=vm.presupuestoDescriptible, titulo='Selección de Presupuesto', codHeader='Número de Presupuesto', descHeader='Vendedor/Representante/Fecha')" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelperComplejo', clase='presupuesto', post='cargarPresupuesto',ov=vm.presupuestoDescriptible, titulo='Selección de Presupuesto', codHeader='Nro. Presupuesto', descHeader='Cliente' , tituloAdicional1='Fecha' )" />
 			    		</hlayout>
 
 						<label value="Nro. de Pedido : " />

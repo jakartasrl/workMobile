@@ -19,7 +19,7 @@ import com.jkt.viewModels.ViewModel;
 @Data
 public class PlantillaVM extends ViewModel implements IBasicOperations{
 
-	private boolean editMode=false;
+//	private boolean editMode=false;
 	
 	private DescriptibleOV plantilla= new DescriptibleOV();
 	
@@ -35,7 +35,7 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 	@Init
 	public void init(){
 		this.setTitulo("Administración de Plantila");
-		this.editMode=false;
+//		this.editMode=false;
 	}
 	
 	@Command
@@ -59,11 +59,11 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openHelper("plantilla", "", plantilla, "modoEdicion", "Plantillas Disponibles", "Cod. Plantilla", "Descripción de plantilla", true);
+		openComplexHelper("plantilla", "", plantilla, "modoEdicion", "Plantillas Disponibles", "Cod. Plantilla", "Descripción de plantilla", true, "" , "");
 	}
 	
 	public void modoEdicion(){
-		this.editMode=true;
+//		this.editMode=true;
 	}
 
 }
