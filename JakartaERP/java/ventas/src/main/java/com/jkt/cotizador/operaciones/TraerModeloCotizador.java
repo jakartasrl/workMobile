@@ -22,18 +22,21 @@ public class TraerModeloCotizador extends Operation {
 	private static final String WRITER_MODELO = "modelo";
 	private static final String WRITER_TITULO = "titulos";
 
+	
+	private ModeloCotizador modelo;
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
 		
-		ModeloCotizador modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
+		modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
 		
-		notificarObjeto(WRITER_MODELO, modelo);
 		
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
 		}
+		notificarObjeto(WRITER_MODELO, modelo);
 		
 	}
 
@@ -66,7 +69,8 @@ public class TraerModeloCotizador extends Operation {
 			}
 		}
 
-		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+//		notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+		this.modelo.agregarTituloTransiente(tituloModeloCotizador);
 		
 		if (tieneHijos) {
 			for (TituloModeloCotizador subTitulo : titulosHijos) {

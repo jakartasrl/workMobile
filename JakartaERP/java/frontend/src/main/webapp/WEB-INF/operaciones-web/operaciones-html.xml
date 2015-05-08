@@ -1021,4 +1021,66 @@
 	
 	</operacion>
 	
+	<operacion name="TraerModeloCotizador" clase="com.jkt.cotizador.operaciones.TraerModeloCotizador" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ModeloCotizadorOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="codigo" 			value="codigo" />	
+			<campoSalida target="descripcion" 		value="descripcion" />
+			
+			<campoSalida target="titulosTransientes" 			value="titulos">
+				<campoSalida target="id" 			value="id" />
+				<campoSalida target="codigo" 			value="codigo" />	
+				<campoSalida target="descripcion" 		value="descripcion" />
+				<campoSalida target="codigoInterno" 	value="codigoInterno" />
+				<campoSalida target="codigoInternoPadre" 	value="codigoInternoPadre" />
+				<campoSalida target="tipo" 	value="tipo" />
+				
+				<campoSalida target="concepto.id" 			value="idC" />
+				<campoSalida target="concepto.codigo" 			value="codigoC" />	
+				<campoSalida target="concepto.descripcion" 		value="descripcionC" />
+				
+				
+			</campoSalida>
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerConceptoPresupuestoOV" clase="com.jkt.cotizador.operaciones.TraerConceptoPresupuesto" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ConceptoPresupuestoOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="codigo" 			value="codigo" />	
+			<campoSalida target="descripcion" 		value="descripcion" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarModeloCotizador" clase="com.jkt.cotizador.operaciones.GuardarModeloCotizador" entidad="com.jkt.cotizador.dominio.ModeloCotizador" outputOV="com.jkt.ov.DescriptibleOV" inputOV="com.jkt.ov.ModeloCotizadorOV">
+		
+		<input keyName="objeto" clase="com.jkt.cotizador.dominio.ModeloCotizador">
+		
+			<campoEntrada propertyOV="id" 					metodo="setId" />
+			<campoEntrada propertyOV="codigo"				metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" 			metodo="setDescripcion" />
+						
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 </entity>

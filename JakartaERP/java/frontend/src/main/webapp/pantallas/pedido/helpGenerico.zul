@@ -10,7 +10,7 @@
 		<hlayout style="text-align: center; width:60%;" if="${vm.conFiltro}">
 			<button label="Buscar" onClick="@command('filtrar')"/>
 		</hlayout>
-
+		
         <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
         
 	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
