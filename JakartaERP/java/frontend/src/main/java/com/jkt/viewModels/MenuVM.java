@@ -40,17 +40,19 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Laboratorio", "index/index-laboratorio.zul", "small"));
 		menues.add(MenuOV.newInstance("Equipo", "index/index-equipo.zul", "small"));
 		menues.add(MenuOV.newInstance("Determinacion", "index/index-determinacion.zul", "small"));
-
 		menues.add(MenuOV.newInstance("Presupuesto", "index/index-presupuesto.zul", "small"));
 		menues.add(MenuOV.newInstance("Pedido", "index/index-pedido.zul", "small"));
-		menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
 		menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
-		menues.add(MenuOV.newInstance("Carga de Agenda", "index/index-agenda.zul", "medium"));
-		menues.add(MenuOV.newInstance("Visor de Agenda", "index/visor-agenda.zul", "medium"));
+		menues.add(MenuOV.newInstance("Planificación de Agenda", "index/index-agenda.zul", "small"));
+		menues.add(MenuOV.newInstance("Visor de Agenda", "index/visor-agenda.zul", "small"));
 		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarSector", "sector"));
 		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarTareaSimple", "tarea"));
-		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarGenerico", "sector"));
-		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarGenerico", "tarea"));
+		menues.add(MenuOV.newInstance("Unidad Medida", "generic/generic.zul", "small","guardarUnidadMedida", "unidadMedida"));
+		menues.add(MenuOV.newInstance("Idioma", "generic/generic.zul", "small","guardarIdioma", "idioma"));
+		menues.add(MenuOV.newInstance("Moneda", "generic/generic.zul", "small","guardarMoneda", "moneda"));
+		menues.add(MenuOV.newInstance("Pais", "generic/generic.zul", "small","guardarPais", "pais"));
+		menues.add(MenuOV.newInstance("Plantilla", "generic/generic.zul", "small","guardarPlantilla", "plantilla"));
+		menues.add(MenuOV.newInstance("Documentación", "generic/generic.zul", "small","guardarDocumentacion", "documentacion"));
 
 //		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
 //		news.add("Jueves 16 de Abril- Argentina está de fiesta");

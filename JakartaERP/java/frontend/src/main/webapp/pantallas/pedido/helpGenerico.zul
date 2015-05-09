@@ -12,7 +12,7 @@
 			<button style="margin-left:25px;" width="50px;" label="Limpiar datos" onClick="@command('limpiar')"/>
 		</hlayout>
 
-        <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
+        <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada." >
         
 	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 	            <auxheader label="@load(vm.titulo)" colspan="@load(vm.getCantidad())" />

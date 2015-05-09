@@ -54,7 +54,6 @@
 				<tabbox id="contenidoTabs" >
 			    	<tabs id="tabs">
 			        	<tab id="tGeneral" label="Agenda del pedido" />
-			        	<tab id="tItems" label="Agenda de items de pedido" />
 			        	<tab id="tPrec" label="Precedencias" />
 			    	</tabs>
 			    	
@@ -62,10 +61,6 @@
 			    			        	
 			        	<tabpanel>
 							<include id="tGeneralContent" hflex="1" src="/pantallas/agenda/tab-agenda-general.zul" viewModel="${vm}"/>
-			        	</tabpanel>
-
-			        	<tabpanel>
-							<include id="tItemsContent" hflex="1" src="/pantallas/agenda/tab-agenda-item.zul" viewModel="${vm}"/>
 			        	</tabpanel>
 
 			        	<tabpanel>

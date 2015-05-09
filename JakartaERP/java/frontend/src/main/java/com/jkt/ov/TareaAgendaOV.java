@@ -1,33 +1,41 @@
 package com.jkt.ov;
 
-import groovy.transform.EqualsAndHashCode;
+
+
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import lombok.Data;
-import lombok.Delegate;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.view.ObjectView;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=true)
 public class TareaAgendaOV extends ObjectView {
+
+	private int randomNumber;
 	
-	private String tarea;
-	private String descripcion;
+	private DescriptibleOV tarea=new DescriptibleOV();
+	
 	private String comentario;
-	private Date fechaLimite;
-	private Date fechaCumplimiento;
+	private Date fechaLimite=new Date();
+	private Date fechaCumplimiento=new Date();
 	
-	private DescriptibleOV sector;
+	private DescriptibleOV sector=new DescriptibleOV();
 	private Long idSector;
 	
 	private String estado;
-	
+
 	private List<TareaAgendaOV> precedencias=new ArrayList<TareaAgendaOV>();
-
-	private List<TareaAgendaOV> todasLasTareas=new ArrayList<TareaAgendaOV>();
-
+	
+	public TareaAgendaOV(){
+		Random rand = new Random();
+	    this.randomNumber = rand.nextInt((999999 - 1) + 1) + 1;
+	}
+	
 }

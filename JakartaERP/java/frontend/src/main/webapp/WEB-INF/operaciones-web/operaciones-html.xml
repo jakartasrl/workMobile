@@ -82,7 +82,7 @@
 	
 	<operacion name="guardarSector" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Sector" inputOV="com.jkt.ov.DescriptibleOV">
 	
-		<input keyName="objeto" clase="com.jkt.dominio.Sector">
+		<input keyName="objeto" clase="com.jkt.dominio.Sector"> 
 			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
 			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
@@ -1094,5 +1094,71 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	
 	</operacion>
+	
+	
+	
+<!-- 	GENERICS OPERATIONS -->
+	<operacion name="guardarDocumentacion" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Documentacion" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.Documentacion">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="guardarIdioma" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.Idioma" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.varios.dominio.Idioma">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
+	<operacion name="guardarMoneda" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.Moneda" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.varios.dominio.Moneda">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="guardarPais" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.Pais" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.varios.dominio.Pais">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="guardarUnidadMedida" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.UnidadMedida" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.varios.dominio.UnidadMedida">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
 	
 </entity>

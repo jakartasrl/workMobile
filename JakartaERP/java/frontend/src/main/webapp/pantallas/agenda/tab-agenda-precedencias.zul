@@ -1,48 +1,32 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:left;">
-		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarTareaGeneral')" tooltiptext="Agregar una nueva tarea.">
-			 <attribute name="onClick"><![CDATA[
-					//box.pagingPosition = "top";
-					//siempre retorna a la primer pagina
-					boxTareas.setActivePage(0);
-        		]]></attribute>
-		</button>
-		<label value="Agregar un item"></label>
-	</vlayout>
-
-
-	<listbox id="boxTareas" multiple="false" checkmark="false" model="@bind(vm.agenda.tareasGenerales)" mold="paging" pageSize="8" emptyMessage="No existen tareas.">
-
-		<listhead style="heigth:10px;" >
-		
-			<listheader width="150px" label="Tarea"/>
-			<listheader width="250px" label="Descripción"/>
-			<listheader width="20px" label=""/>
-			<listheader width="150px" label="Precedencias"/>
-			
-		</listhead>
-
-		<template name="model">
-			<listitem>
-
-				<listcell>
-					<textbox width="100%" value="@bind(each.tarea)" readonly="false"/>
-				</listcell>
-
-				<listcell>
-					<textbox width="100%" value="@bind(each.descripcion)" readonly="false"/>
-				</listcell>
-
-				<listcell>
-				</listcell>
-
-				<listcell>
-					<button onClick="@command('abrirPrecedencias', actual=each)">...</button>
-				</listcell>
-				
-			</listitem>
-		</template>
-
-	</listbox>
+	<tree id="categoriesTree" model="@load(vm.agenda.arbolPrecedencias)" width="100%"  >
+    <treecols>
+        <treecol label="Codigo" width="10%"/> 
+        <treecol label="Descripcion" align="center" width="40%" />
+        <treecol label="Comentario" align="center" width="30%" />
+        <treecol label="Fecha Limite" align="center" width="10%" />
+        <treecol label="Precedente" align="center" width="10%" />
+    </treecols>
+    <template name="model">
+        <treeitem open="true" >
+            <treerow >
+                <treecell label="@bind(each.data.tarea.tarea.codigo)"  />
+                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion)" />
+                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.comentario)" />
+                <treecell >
+	                <datebox disabled="true" 
+	                    value="@bind(each.data.tarea.fechaLimite)" format="dd/MM/yyyy"
+	                    />
+                </treecell>
+                
+                
+                <treecell style="text-align:center">
+	                <checkbox checked="@bind(each.data.esPrecedente)" if="${each.isLeaf()}"/>
+                </treecell>
+                
+            </treerow>
+        </treeitem>
+    </template>
+	</tree>
 </zk>

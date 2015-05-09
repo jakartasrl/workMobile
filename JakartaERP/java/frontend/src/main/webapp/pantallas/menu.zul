@@ -5,6 +5,13 @@
 
 	<style src="/style/template-grey.css" />
 	
+	<style>
+		.buttonMenuGeneric{
+			//background-color : rgb(92, 92, 110);		
+			//border-color : rgb(92, 92, 110)	;
+		}
+	</style>
+	
 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')" 
 		style="margin:20px; padding:5px;" >
 
@@ -14,11 +21,13 @@
 		</div>
 		
 		<div id="content" style="width:95%; height:85%; text-align: centerS; min-width:95%;">
-				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;">
-<!-- 					<button label="${each.nombre}" href="${each.enlace}" height="100px" width="100px" style="margin-top:3px;" if="${each.tipo=='small' }" /> -->
-<!-- 					<button label="${each.nombre}" href="${each.enlace}" height="200px" width="200px" style="margin-top:3px;" if="${each.tipo=='big' }" /> -->
-<!-- 					<button label="${each.nombre}" href="${each.enlace}" height="150px" width="150px" style="margin-top:3px;" if="${each.tipo=='medium' }" /> -->
-					<button label="${each.nombre}" href="${each.enlace}?metaData=${each.operacion}-${each.clase}" height="150px" width="150px" style="margin-top:3px;" if="${not empty each.operacion}" />
+				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;" if="${empty each.clase}" >
+					<button label="${each.nombre}" href="${each.enlace}" height="100px" width="100px" style="margin-top:3px;white-space: normal;" if="${each.tipo=='small' }" />
+					<button label="${each.nombre}" href="${each.enlace}" height="200px" width="200px" style="margin-top:3px;" if="${each.tipo=='big' }" />
+					<button label="${each.nombre}" href="${each.enlace}" height="150px" width="150px" style="margin-top:3px;" if="${each.tipo=='medium' }" />
+				</div>
+				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;" if="${not empty each.clase}">
+					<button label="${each.nombre}" href="${each.enlace}?metaData=${each.operacion}-${each.clase}" height="100px" width="100px"/>
 				</div>
 		</div>
 

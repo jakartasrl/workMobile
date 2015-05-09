@@ -17,18 +17,11 @@ public class DescriptibleOV extends ObjectView {
 	private String codigo;
 	private String descripcion;
 
-	//Para enviar una entidad
-	private String entidad;
-	
 	/*
 	 * Campos para helps
 	 */
 	private String campoAdicional1;
 	private String campoAdicional2;
-	
-	public int getCantidad(){
-		return 3;
-	}
 	
 	public DescriptibleOV(String codigo){
 		this.codigo=codigo;
@@ -39,24 +32,27 @@ public class DescriptibleOV extends ObjectView {
 		this.descripcion=descripcion;
 	}
 	
-	public DescriptibleOV(){
-	}
+	public DescriptibleOV(){}
 	
 	public List obtenerFiltro(){
 		ArrayList<FiltroOV> filtros = new ArrayList<FiltroOV>();
-		filtros.add(new FiltroOV("codigo", codigo, "like", "string"));
-		filtros.add(new FiltroOV("descripcion", descripcion, "like", "string"));
+		filtros.add(new FiltroOV("codigo", filtroCodigo, "like", "string"));
+		filtros.add(new FiltroOV("descripcion", filtroDescripcion, "like", "string"));
 		return filtros;
 	}
 	
 	public void limpiarFiltro() {
-		this.codigo="";
-		this.descripcion="";
+		this.filtroCodigo="";
+		this.filtroDescripcion="";
 	}
 
 	@Override
 	public String getCampoClave() {
 		return "codigo";
 	}
+	
+	private String filtroCodigo;
+	private String filtroDescripcion;
+	
 
 }
