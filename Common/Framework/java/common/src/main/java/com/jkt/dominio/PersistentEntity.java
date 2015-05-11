@@ -15,8 +15,8 @@ abstract public class PersistentEntity implements Serializable{
 
 	protected static final Logger log = Logger.getLogger(PersistentEntity.class);
 	
-	private long id;
 	private Date creationDate;
+	private long id;
 	private Date modificationDate;
 	private boolean activo=true;
 	private int version;

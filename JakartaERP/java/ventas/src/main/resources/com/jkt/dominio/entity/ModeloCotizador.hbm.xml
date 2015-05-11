@@ -18,7 +18,7 @@
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		<list name="titulos" table="TITULO_MODELO_COTIZADOR" lazy="true" cascade="all">
+		<list name="titulos" table="TITULO_MODELO_COTIZADOR" lazy="false" cascade="all">
 			<key column="MODELO_COTIZADOR_ID" />
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.cotizador.dominio.TituloModeloCotizador" />

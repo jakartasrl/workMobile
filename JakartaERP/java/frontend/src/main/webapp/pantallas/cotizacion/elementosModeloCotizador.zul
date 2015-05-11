@@ -1,0 +1,47 @@
+<zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
+    
+	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%"  >
+	
+    <treecols>
+        <treecol label="Codigo" 		align="center" width="50%"/>
+        <treecol label="Descripcion" 	align="center" width="50%" />
+    </treecols>
+    
+    <template name="model" var="titulo">
+    
+        <treeitem open="true" >
+            <treerow >
+
+                <treecell>
+                	<textbox context="menuContextualConcepto" value="${titulo.data.concepto.codigo}"  if="${titulo.data.tipo=='C'}" readonly="true"  onRightClick="@command('recuperarConcepto',titulo=titulo)" />
+                	<textbox context="menuContextualTitulo" value="@bind(titulo.data.codigo)" onRightClick="@command('recuperarConcepto',titulo=titulo)" inplace="true" if="${titulo.data.tipo=='T'}" />
+                </treecell>
+                
+                <treecell  >
+ 	               <textbox width="100%" style="margin:10px;" value="${titulo.data.concepto.descripcion}" if="${titulo.data.tipo=='C'}" readonly="true"/>
+ 	               <textbox width="100%" style="margin:10px;" value="@bind(titulo.data.descripcion)" inplace="true" if="${titulo.data.tipo=='T'}"/>
+                </treecell>
+                
+            </treerow>
+        </treeitem>
+                  
+    </template>
+	</tree>
+	
+	<menupopup id="menuContextualTitulo" >
+        <menuitem label="Insertar Titulo" onClick='@command("agregarTitulo")'/>
+        <menuseparator />
+        <menuitem label="Insertar Concepto" onClick='@command("agregarConcepto")' />
+        <menuseparator />
+        <menuitem label="Eliminar" onClick='@command("eliminarTitulo")'/>
+    </menupopup>
+	
+	<menupopup id="menuContextualConcepto" >
+        <menuitem label="Insertar Titulo" disabled="true"/>
+        <menuseparator />
+        <menuitem label="Modificar" onClick='@command("modificarConcepto")' />
+        <menuseparator />
+        <menuitem label="Eliminar" onClick='@command("eliminarConcepto")'/>
+    </menupopup>
+    
+</zk>

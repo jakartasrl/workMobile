@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.varios.dominio.Moneda;
+
 
 /**
  * <p>Representa un elemento del arbol de modelo de cotizador. Es un nodo, q puede ser titulo o concepto.</p>
@@ -14,6 +18,8 @@ import com.jkt.varios.dominio.Moneda;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class TituloModeloCotizador extends PersistentEntity {
 
 
@@ -22,13 +28,6 @@ public class TituloModeloCotizador extends PersistentEntity {
 	 */
 	private int identificadorDetalle=0;
 	
-	public int getIdentificadorDetalle() {
-		return identificadorDetalle;
-	}
-
-	public void setIdentificadorDetalle(int identificadorDetalle) {
-		this.identificadorDetalle = identificadorDetalle;
-	}
 	/*
 	 * Variable transiente para mostar informacion
 	 */
@@ -46,94 +45,6 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private CotizadorDet detalleDeConcepto;//campo transiente para mostrar la salida en la operacion de mostrar cotizador.
 	private Producto producto;//campo transiente para mostrar la descripcion y demas datos a completar...
 	
-	
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
-
-	public CotizadorDet getDetalleDeConcepto() {
-		return detalleDeConcepto;
-	}
-
-	public void setDetalleDeConcepto(CotizadorDet detalleDeConcepto) {
-		this.detalleDeConcepto = detalleDeConcepto;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public TituloModeloCotizador getTituloPadre() {
-		return tituloPadre;
-	}
-
-	public void setTituloPadre(TituloModeloCotizador tituloPadre) {
-		this.tituloPadre = tituloPadre;
-	}
-
-	public List<TituloModeloCotizador> getTitulosHijos() {
-		return titulosHijos;
-	}
-
-	public void setTitulosHijos(List<TituloModeloCotizador> titulosHijos) {
-		this.titulosHijos = titulosHijos;
-	}
-
-	public ConceptoPresupuesto getConcepto() {
-		return concepto;
-	}
-
-	public void setConcepto(ConceptoPresupuesto concepto) {
-		this.concepto = concepto;
-	}
-
-	public ModeloCotizador getModeloCotizador() {
-		return modeloCotizador;
-	}
-
-	public void setModeloCotizador(ModeloCotizador modeloCotizador) {
-		this.modeloCotizador = modeloCotizador;
-	}
-
-	public int getCodigoInterno() {
-		return codigoInterno;
-	}
-
-	public void setCodigoInterno(int codigoInterno) {
-		this.codigoInterno = codigoInterno;
-	}
-
-	public int getCodigoInternoPadre() {
-		return codigoInternoPadre;
-	}
-
-	public void setCodigoInternoPadre(int codigoInternoPadre) {
-		this.codigoInternoPadre = codigoInternoPadre;
-	}
 	
 	public void agregarHijo(TituloModeloCotizador hijo){
 		if (!titulosHijos.contains(hijo)) {
@@ -173,32 +84,4 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private double precio;
 	private Date fechaPrecioCosto;
 	
-	public Date getFechaPrecioCosto() {
-		return fechaPrecioCosto;
-	}
-
-	public void setFechaPrecioCosto(Date fechaPrecioCosto) {
-		this.fechaPrecioCosto = fechaPrecioCosto;
-	}
-
-	public Moneda getMoneda() {
-		return moneda;
-	}
-
-	public void setMoneda(Moneda moneda) {
-		this.moneda = moneda;
-	}
-
-	public double getPrecio() {
-		if(precio==0){
-			return (Double) null;
-		}
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-	
-
 }

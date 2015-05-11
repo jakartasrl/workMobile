@@ -11,7 +11,6 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -25,7 +24,6 @@ import com.jkt.ov.ListValorEsperadoOV;
 import com.jkt.ov.ListVariableOV;
 import com.jkt.ov.MetodoOV;
 import com.jkt.ov.ValorEsperadoOV;
-import com.jkt.ov.ValoresTablaOV;
 import com.jkt.ov.VariableOV;
 
 @Data
@@ -172,7 +170,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Command
 	public void buscar() {
 		try {
-			this.openHelper("determinacion", "", this.determinacion, "traerDeterminacion", "Determinaciones", "Código", "Descripción",false);
+			this.openHelper("determinacion", "", this.determinacion, "traerDeterminacion", "Determinaciones", "Código", "Descripción",true);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
