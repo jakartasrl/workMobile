@@ -1251,4 +1251,35 @@
 	</operacion>
 	
 	
+	<operacion name="TraerPedidoConTareas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PedidoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="activo" value="activo" />
+			
+			<campoSalida value="tareas" target="tareas" >
+			
+				<campoSalida value="idTarea" target="tarea.id" />
+				<campoSalida value="codigoTarea" target="tarea.codigo" />
+				<campoSalida value="descripcionTarea" target="tarea.descripcion" />
+				
+				<campoSalida value="comentario" target="cometario" />
+				<campoSalida value="fechaLimite" target="fechaLimite" />
+				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+				<campoSalida value="idSector" target="sector.id" />
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 </entity>
