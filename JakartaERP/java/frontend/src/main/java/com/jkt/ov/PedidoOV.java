@@ -72,5 +72,9 @@ public class PedidoOV extends ObjectView {
 		this.docs=finalList;
 	}	
 	
+	@Override
+	public String getCampoClave() {
+		return "nro";
+	}
 	
 }

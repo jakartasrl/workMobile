@@ -1231,6 +1231,9 @@
 			<campoEntrada propertyOV="id" metodo="setId" />
 			
 			<campoEntrada propertyOV="tareas" metodo="setTareas">
+<!-- 				<campoEntrada propertyOV="idTarea" metodo="setId" /> -->
+				<campoEntrada propertyOV="codigoTarea" metodo="setCodigo" />
+				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
 				<campoEntrada propertyOV="comentario" metodo="setComentario" />
 					

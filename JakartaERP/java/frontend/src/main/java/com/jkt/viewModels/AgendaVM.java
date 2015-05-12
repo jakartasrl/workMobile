@@ -17,6 +17,7 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.AgendaOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.PedidoOV;
 import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
 import com.jkt.ov.tree.NodoTareaAgenda;
@@ -46,6 +47,12 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 
 		for (TreeNode<TareaPrecedenteOV> nodoActual : nodosPrincipales) {
 			tarea = nodoActual.getData().getTarea();
+
+			
+			tarea.setIdTarea(tarea.getTarea().getId());
+			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
+			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
+			
 			tareas.add(tarea);//tarea level0, agregarla a la lista de tareas SI O SI
 			
 			hijos = nodoActual.getChildren();
@@ -62,15 +69,16 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			tarea.setPrecedenciasEnNumeros(listaPrecedencias);
 		}
 		
-		this.agenda.getPedido().setTareas(tareas);
-		Operaciones.ejecutar("GenerarPlanificacionPedido", this.agenda.getPedido());
-
+		PedidoOV pedidoAGuardar = this.agenda.getPedido();
+		pedidoAGuardar.setId(this.pedidoDescriptible.getId());
+		pedidoAGuardar.setTareas(tareas);
+		Operaciones.ejecutar("GenerarPlanificacionPedido", pedidoAGuardar);
 	}
 
 	
 	@Command
 	@Override
-	@NotifyChange("agenda")
+	@NotifyChange({"agenda","pedidoDescriptible"})
 	public void nuevo() throws JakartaException {
 		this.agenda=new AgendaOV();
 		this.pedidoDescriptible=new DescriptibleOV();
@@ -80,7 +88,7 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 
 	@Override
 	@Command
-	@NotifyChange({"titulo","agenda"})
+	@NotifyChange({"titulo","agenda","pedidoDescriptible"})
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		openComplexHelper("pedido", "", pedidoDescriptible, "recuperarAgendaPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente", false , "Fecha" , "" );
 	}
@@ -91,7 +99,7 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 
 
 	@GlobalCommand("actualizar")
-	@NotifyChange({"titulo","agenda"})
+	@NotifyChange({"titulo","agenda","pedidoDescriptible"})
 	public void actualizar() {
 		
 	}

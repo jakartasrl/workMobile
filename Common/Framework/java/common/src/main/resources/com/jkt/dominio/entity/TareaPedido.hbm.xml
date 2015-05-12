@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.grafo.TareaPedido" table="TAREA_PEDIDO" >
+		
+		<id name="id" column="TAREA_PEDIDO_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="15" />
+        </property>
+		
+		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<property name="comentario" column="COMENTARIO"/>
+		<property name="diasDuracion" type="integer" column="DURACION_EN_DIAS"></property>
+		<property not-null="false" name="fechaLimite" column="FECHA_LIMITE" type="date"/>
+		<property not-null="false" name="fechaCumplimiento" column="FECHA_CUMPLIMIENTO" type="date"/>
+		
+		<many-to-one name="sector" class="com.jkt.dominio.Sector" column="SECTOR_ID" cascade="all"></many-to-one>
+		
+	</class>
+
+</hibernate-mapping>
+

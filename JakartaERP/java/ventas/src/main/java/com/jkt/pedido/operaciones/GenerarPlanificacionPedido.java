@@ -31,17 +31,20 @@ import com.jkt.pedido.dominio.Pedido;
 @Data
 public class GenerarPlanificacionPedido extends Operation {
 
-	private List<PlanificacionPedido> tareasAgendables=new ArrayList<PlanificacionPedido>();
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Pedido pedido=(Pedido) aParams.get("objeto");
+		List<PlanificacionPedido> tareasAgendables=new ArrayList<PlanificacionPedido>();
+		
+		long idPedido = pedido.getId();
+		
 		List<TareaPedido> tareas = pedido.getTareas();
 		
 		//Todas las tareas deben ser persistidas, y ademas deben ser agregadas a un mapa, para poder generar el grafo de correspondencias...
 		Map<String, TareaPedido> tareasEnMapa=new HashMap<String, TareaPedido>();
 		for (TareaPedido tareaPedido : tareas) {
-//			guardar(tareaPedido);
+			guardar(tareaPedido);
 			tareasEnMapa.put(String.valueOf(tareaPedido.getRandomNumber()), tareaPedido);
 		}
 		
@@ -64,7 +67,12 @@ public class GenerarPlanificacionPedido extends Operation {
 			}
 			tareasAgendables.add(nodoPlanificacion);
 		}
-		System.out.println();
+
+		Pedido pedidoOriginal = (Pedido) obtener(Pedido.class, idPedido);
+		pedidoOriginal.setTareas(tareas);
+		pedidoOriginal.setPlanificaciones(tareasAgendables);
+		
+		guardar(pedidoOriginal);
 		
 	}
 

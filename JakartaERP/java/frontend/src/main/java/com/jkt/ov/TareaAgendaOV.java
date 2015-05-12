@@ -17,6 +17,10 @@ public class TareaAgendaOV extends ObjectView {
 
 	private int randomNumber;
 	
+	private long idTarea;
+	private String codigoTarea;
+	private String descripcionTarea;
+
 	private DescriptibleOV tarea=new DescriptibleOV();
 	
 	private String comentario;
