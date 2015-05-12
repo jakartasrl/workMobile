@@ -53,6 +53,18 @@
 	width: 100px;
 	height: 2px;
 }
+.campoCodigo-vlarge{
+/* 	text-align: center; */
+	padding: 0px;	
+	width: 150px;
+	height: 2px;
+}
+.campoCodigo-evlarge{
+/* 	text-align: center; */
+	padding: 0px;	
+	width: 200px;
+	height: 2px;
+}
 
 .z-listcell-content{
 	background-color: white;

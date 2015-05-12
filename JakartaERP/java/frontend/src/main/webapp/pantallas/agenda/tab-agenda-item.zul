@@ -30,11 +30,11 @@
 			<listitem>
 
 				<listcell >
-					<textbox width="100%" value="@bind(each.tarea)" readonly="false"/>
+					<textbox width="100%" value="@bind(each.tarea.codigo)" readonly="false"/>
 				</listcell>
 
 				<listcell >
-					<textbox width="100%" value="@bind(each.descripcion)" readonly="false"/>
+					<textbox width="100%" value="@bind(each.tarea.descripcion)" readonly="false"/>
 				</listcell>
 
 				<listcell >

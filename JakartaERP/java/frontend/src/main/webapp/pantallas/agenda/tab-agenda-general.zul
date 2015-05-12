@@ -1,6 +1,8 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:left;">
+	<hlayout width="100%" style="text-align:left;">
+		<label value="Agregar tarea : "></label>
+		<textbox sclass="campoCodigo-medium" value="@bind(vm.codigoTareaNueva)" readonly="false"/>
 		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarTareaGeneral')" tooltiptext="Agregar una nueva tarea.">
 			 <attribute name="onClick"><![CDATA[
 					//box.pagingPosition = "top";
@@ -8,33 +10,35 @@
 					boxTareas.setActivePage(0);
         		]]></attribute>
 		</button>
-		<label value="Agregar un item"></label>
-	</vlayout>
+		
+	</hlayout>
 
 
 	<listbox id="boxTareas" multiple="false" checkmark="false" model="@bind(vm.agenda.tareasGenerales)" mold="paging" pageSize="8" emptyMessage="No existen tareas.">
 
 		<listhead style="heigth:10px;" >
 		
-			<listheader width="150px" label="Tarea"/>
+			<listheader width="115px" label="Tarea"/>
 			<listheader width="250px" label="Descripción"/>
 			<listheader width="250px" label="Comentario"/>
-			<listheader width="150px" label="Fecha Limite"/>
-			<listheader width="150px" label="Sector responsable"/>
+			<listheader width="130px" label="Fecha Limite"/>
+			<listheader width="200px" label="Sector responsable"/>
 			<listheader width="150px" label="Estado"/>
-			<listheader width="150px" label="Fecha cumplimiento"/>
+			<listheader width="130px" label="Fecha cumplimiento"/>
+			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
 
 		<template name="model">
 			<listitem>
 
-				<listcell >
-					<textbox width="100%" value="@bind(each.tarea)" readonly="false"/>
+				<listcell>
+					<textbox sclass="campoCodigo-medium" value="@bind(each.tarea.codigo)" onBlur="@command('validarCampo', clase='tarea', codigo=self.value, ov=each.tarea)" readonly="false"/>
+					<button label="..." onClick="@command('openHelper', clase='tarea', ov=each.tarea)" />
 				</listcell>
 
 				<listcell >
-					<textbox width="100%" value="@bind(each.descripcion)" readonly="false"/>
+					<textbox width="100%" value="@bind(each.tarea.descripcion)" readonly="true"/>
 				</listcell>
 
 				<listcell >
@@ -47,12 +51,8 @@
 				</listcell>
 
 				<listcell>
-					<combobox width="100%" >
-						<comboitem label="Sector 1" />
-						<comboitem label="Sector 2" />
-						<comboitem label="Sector 3" />
-						<comboitem label="Sector 4" />
-					</combobox>
+					<textbox sclass="campoCodigo-vlarge" value="@bind(each.sector.codigo)" readonly="false"/>
+					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" />
 				</listcell>
 
 				<listcell>
@@ -66,6 +66,11 @@
 
 				<listcell >
 					<datebox value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+				</listcell>
+
+				<listcell >
+					<button style="margin-bottom:2px;margin-left:3px;"
+						image="/pantallas/icons/delSmall.png" label="" onClick="@command('eliminarTarea', tarea=each )" />
 				</listcell>
 				
 			</listitem>

@@ -1,7 +1,7 @@
 package com.jkt.transformers;
 
 /**
- * La clase Notificacion es usada para enviar como parametro en una notificación.
+ * La clase Notificacion es usada para enviar como parametro en una notificaciÃ³n.
  * Se usa para saber que writer se debe escribir y q parametro sera enviado.
  * 
  * 
