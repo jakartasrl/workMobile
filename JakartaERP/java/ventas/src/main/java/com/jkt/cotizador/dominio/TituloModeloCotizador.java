@@ -19,7 +19,6 @@ import com.jkt.varios.dominio.Moneda;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
 public class TituloModeloCotizador extends PersistentEntity {
 
 

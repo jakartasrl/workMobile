@@ -46,6 +46,7 @@ public class GuardarModeloCotizador extends Operation {
 //		validarTitulos();
 		
 		//guardo el modelo de cotizador.
+//		modelo.setTitulos(titulos);
 		guardar(modelo);
 	}
 
@@ -68,6 +69,9 @@ public class GuardarModeloCotizador extends Operation {
 	private void establecerRelaciones(ModeloCotizador modelo, Map<String, TituloModeloCotizador> mapaDetitulos, List<TituloModeloCotizador> titulos) {
 		int codigoPadre;
 		TituloModeloCotizador tituloEnMapa;
+		
+		modelo.setTitulos(new ArrayList<TituloModeloCotizador>());
+		
 		for (TituloModeloCotizador titulo :titulos ) {
 			
 			codigoPadre = titulo.getCodigoInternoPadre();

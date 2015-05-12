@@ -16,6 +16,8 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Execution;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
@@ -60,6 +62,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		Operaciones.ejecutar("GuardarModeloCotizador", this.modeloCotizadorOV );
 		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
 		
+		Executions.sendRedirect("/pantallas/index/index-modeloCotizador.zul");		
 	}
 
 	/*
@@ -71,11 +74,15 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	
 	private void completarCotizacionOV() {
 		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
+		this.todosLosElementos = new ArrayList<TituloModeloCotizadorOV>();
+		
+		//del arbol completo se genera una lista.
 		List<TreeNode<TituloModeloCotizadorOV>> rootElements = arbol.getRoot().getChildren();
 		for (TreeNode<TituloModeloCotizadorOV> treeNode : rootElements) {
 			establecerCodigos(treeNode, 0);
 		}
 
+		//y se asigna al modelo cotizador q se va a guardar
 		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
 		
 	}
@@ -149,7 +156,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	private void cargarDesdeOV(ModeloCotizadorOV modeloCotizadorOV) throws JakartaException, IllegalAccessException, InvocationTargetException {
 		
 		crearArbolModeloCotizador(modeloCotizadorOV);
-		this.setModeloCotizadorOV(modeloCotizadorOV);
+		this.modeloCotizadorOV=modeloCotizadorOV;
 		
 	}
 
@@ -205,7 +212,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	}
 				
 	@Command
-	@NotifyChange({"arbolTitulos","todosLosElementos"})
+	@NotifyChange({"arbolTitulos","todosLosElementos","modeloCotizadorOV"})
 	public void eliminarConcepto() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		this.nodoActual.getParent().remove(this.nodoActual);
 		this.setArbolTitulos(arbolTitulos);
