@@ -3,9 +3,12 @@ package com.jkt.pedido.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+
 import com.jkt.dominio.ComprobanteVenta;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.ListaPrecios;
+import com.jkt.grafo.TareaPedido;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 
@@ -15,10 +18,7 @@ import com.jkt.presupuesto.dominio.Presupuesto;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-/**
- * @author ssuarez
- *
- */
+@Data
 public class Pedido extends ComprobanteVenta implements IDescriptible{
 
 	private ListaPrecios listaPrecios;
@@ -26,22 +26,6 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 	private List<PedidoDet> detalles=new ArrayList<PedidoDet>();
 	private List<PedidoDocumentacion> documentacion=new ArrayList<PedidoDocumentacion>();
 	private List<FormaFacturacion> formasFacturacion = new ArrayList<FormaFacturacion>();
-
-	public List<FormaFacturacion> getFormasFacturacion() {
-		return formasFacturacion;
-	}
-
-	public void setFormasFacturacion(List<FormaFacturacion> formasFacturacion) {
-		this.formasFacturacion = formasFacturacion;
-	}
-
-	public ListaPrecios getListaPrecios() {
-		return listaPrecios;
-	}
-
-	public void setListaPrecios(ListaPrecios listaPrecios) {
-		this.listaPrecios = listaPrecios;
-	}
 
 	public void agregarDocumentacion(PedidoDocumentacion documento){
 		
@@ -63,30 +47,6 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 	
 	public boolean isPedido() {
 		return true;
-	}
-
-	public List<PedidoDocumentacion> getDocumentacion() {
-		return documentacion;
-	}
-
-	public void setDocumentacion(List<PedidoDocumentacion> documentacion) {
-		this.documentacion = documentacion;
-	}
-
-	public List<PedidoDet> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<PedidoDet> detalles) {
-		this.detalles = detalles;
-	}
-
-	public List<Nota> getNotas() {
-		return notas;
-	}
-
-	public void setNotas(List<Nota> notas) {
-		this.notas = notas;
 	}
 
 	/*
@@ -186,14 +146,6 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 	 */
 	private List<Nota> notasTransientes=new ArrayList<Nota>();
 
-	public List<Nota> getNotasTransientes() {
-		return notasTransientes;
-	}
-
-	public void setNotasTransientes(List<Nota> notasTransientes) {
-		this.notasTransientes = notasTransientes;
-	}
-	
 	public void agregarNotaTransiente(Nota n){
 		if (!notasTransientes.contains(n)) {
 			this.notasTransientes.add(n);
@@ -208,5 +160,10 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 		return "";
 	}
 	
+	
+	/*
+	 * Relacionado con la agenda de tareas
+	 */
+	private List<TareaPedido> tareas=new ArrayList<TareaPedido>();
 }
 	

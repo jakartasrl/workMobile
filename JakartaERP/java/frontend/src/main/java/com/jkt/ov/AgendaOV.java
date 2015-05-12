@@ -14,9 +14,15 @@ import lombok.Data;
 import com.jkt.ov.tree.NodoTareaAgenda;
 import com.jkt.view.ObjectView;
 
+/**
+ * El {@link ObjectView} de una Agenda, contiene una referencia a un Pedido, sobre el cual se relacionan los items.
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 @Data
 public class AgendaOV extends ObjectView {
 
+	private PedidoOV pedido=new PedidoOV();
 	private List<TareaAgendaOV> tareasGenerales = new ArrayList<TareaAgendaOV>();
 	private DefaultTreeModel<TareaPrecedenteOV> arbolPrecedencias;
 	
