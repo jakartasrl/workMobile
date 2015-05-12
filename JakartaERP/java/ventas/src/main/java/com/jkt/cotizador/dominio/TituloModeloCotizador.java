@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
+import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.varios.dominio.Moneda;
 
 
@@ -82,5 +83,31 @@ public class TituloModeloCotizador extends PersistentEntity {
 	private Moneda moneda;
 	private double precio;
 	private Date fechaPrecioCosto;
+	
+	/*
+	 * Metodos para el manejo de la direccion.
+	 */
+	 public boolean equals(Object other) {
+        if (this == other) return true;
+        if ( !(other instanceof TituloModeloCotizador) ) return false;
+
+        final TituloModeloCotizador title = (TituloModeloCotizador) other;
+        	
+        if (title.getId()==0) return false;
+			
+        if ( !(title.getId()==getId())) return false;
+
+        if ( !(title.getCodigo().equals(getCodigo()))) return false;
+        if ( !(title.getDescripcion().equals(getDescripcion()))) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        int result;
+        result = (int) (29 * getId());
+        return result;
+    }
+
 	
 }

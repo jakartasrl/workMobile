@@ -39,6 +39,14 @@ public class TituloModeloCotizadorOV extends ObjectView {
 		tituloModeloCotizadorOV.setTipo("C");
 		return tituloModeloCotizadorOV;
 	}
+
+	public static TituloModeloCotizadorOV newTitulo(){
+		TituloModeloCotizadorOV tituloModeloCotizadorOV = new TituloModeloCotizadorOV();
+		tituloModeloCotizadorOV.setTipo("T");
+		tituloModeloCotizadorOV.setCodigo("nuevo");
+		tituloModeloCotizadorOV.setDescripcion("Nuevo descripcion titulo");
+		return tituloModeloCotizadorOV;
+	}
 	
 	private Long idMoneda;
 	

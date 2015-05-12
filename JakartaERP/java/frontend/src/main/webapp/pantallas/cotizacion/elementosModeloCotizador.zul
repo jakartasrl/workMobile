@@ -31,6 +31,8 @@
 	<menupopup id="menuContextualTitulo" >
         <menuitem label="Insertar Titulo" onClick='@command("agregarTitulo")'/>
         <menuseparator />
+        <menuitem label="Insertar Titulo al mismo nivel" onClick='@command("agregarTituloAlMismoNivel")'/>
+        <menuseparator />
         <menuitem label="Insertar Concepto" onClick='@command("agregarConcepto")' />
         <menuseparator />
         <menuitem label="Eliminar" onClick='@command("eliminarTitulo")'/>

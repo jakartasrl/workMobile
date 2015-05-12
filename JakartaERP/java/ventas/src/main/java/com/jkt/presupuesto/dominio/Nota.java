@@ -8,8 +8,8 @@ import com.jkt.erp.varios.DomicilioEntrega;
 import com.jkt.varios.dominio.CondPagoDet;
 
 /**
- * Esta clase representa una nota que puede ser adjunta a un presupuesto, un pedido, en definitiva a un comprobante, o entidades que así lo precisen.
- * <p>Los datos básicos a persistir son un código y una descripción.</p>
+ * Esta clase representa una nota que puede ser adjunta a un presupuesto, un pedido, en definitiva a un comprobante, o entidades que asï¿½ lo precisen.
+ * <p>Los datos bï¿½sicos a persistir son un cï¿½digo y una descripciï¿½n.</p>
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
@@ -53,7 +53,7 @@ public class Nota extends Descriptible {
 	 * En caso de incluida ser 'true', la entidad se debe persistir en la base.
 	 * 
 	 * En cas de que incluida es 'false', la entidad nota no se persistira en la base de datos, y si ya estaba persistida, 
-	 * se debe eliminar de la relación. (NO SE BORRA LA NOTA, SINO LA RELACION ENTRE ENTIDAD-NOTA)
+	 * se debe eliminar de la relaciï¿½n. (NO SE BORRA LA NOTA, SINO LA RELACION ENTRE ENTIDAD-NOTA)
 	 */
 	private boolean incluida=false; //no incluida por defecto al momento de la creacion de la instancia.
 
@@ -66,29 +66,29 @@ public class Nota extends Descriptible {
 	}
 
 	
+
 	/*
 	 * Metodos para el manejo de la direccion.
 	 */
-	 public boolean equals(Object other) {
-        if (this == other) return true;
-        if ( !(other instanceof Nota) ) return false;
-
-        final Nota nota = (Nota) other;
-        	
-        if (nota.getId()==0) return false;
-			
-        if ( !(nota.getId()==getId())) return false;
-
-        if ( !(nota.getCodigo().equals(getCodigo()))) return false;
-        if ( !(nota.getDescripcion().equals(getDescripcion()))) return false;
-
-        return true;
-    }
-
-    public int hashCode() {
-        int result;
-        result = (int) (29 * getId());
-        return result;
-    }
-
+	public boolean equals(Object other) {
+		if (this == other) return true;
+		if ( !(other instanceof Nota) ) return false;
+		
+		final Nota nota = (Nota) other;
+		
+		if (nota.getId()==0) return false;
+		
+		if ( !(nota.getId()==getId())) return false;
+		
+		if ( !(nota.getCodigo().equals(getCodigo()))) return false;
+		if ( !(nota.getDescripcion().equals(getDescripcion()))) return false;
+		
+		return true;
+	}
+	
+	public int hashCode() {
+		int result;
+		result = (int) (29 * getId());
+		return result;
+	}
 }

@@ -33,6 +33,7 @@ public class GuardarModeloCotizador extends Operation {
 		
 		//Guardo todos los titulos en un mapa para tener una referencia de la jerarquia...
 		for (TituloModeloCotizador titulo : titulos) {
+			titulo.setTitulosHijos(new ArrayList<TituloModeloCotizador>());
 			mapaDetitulos.put(String.valueOf(titulo.getCodigoInterno()), titulo);
 			
 			if ("T".equals(titulo.getTipo())) {
@@ -76,6 +77,7 @@ public class GuardarModeloCotizador extends Operation {
 			
 			codigoPadre = titulo.getCodigoInternoPadre();
 			if (codigoPadre==0) {
+//				titulo.setTitulosHijos(new ArrayList<TituloModeloCotizador>());
 				modelo.agregarTitulo(titulo);//es el nivel mas alto.
 			}else{
 				//buscar la referencia del padre.

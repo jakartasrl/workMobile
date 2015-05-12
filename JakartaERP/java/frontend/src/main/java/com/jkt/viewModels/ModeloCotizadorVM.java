@@ -11,6 +11,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.objenesis.instantiator.gcj.GCJInstantiator;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -215,10 +216,10 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"arbolTitulos","todosLosElementos","modeloCotizadorOV"})
 	public void eliminarConcepto() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		this.nodoActual.getParent().remove(this.nodoActual);
-		this.setArbolTitulos(arbolTitulos);
-		
-		this.todosLosElementos.remove(this.nodoActual);
-		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
+
+		//		this.setArbolTitulos(arbolTitulos);
+//		this.todosLosElementos.remove(this.nodoActual);
+//		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
 		
 	}
 
@@ -284,11 +285,17 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	@Command
 	@NotifyChange({"arbolTitulos","tituloModeloCotizadorOV","modeloCotizadorOV"})
 	public void agregarTitulo() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		
-		TituloModeloCotizadorOV data=new TituloModeloCotizadorOV();
-		data.setTipo("T");
+		TituloModeloCotizadorOV data=TituloModeloCotizadorOV.newTitulo();
 		NodoTitulos nodoTitulos = new NodoTitulos(data,true);
 		this.nodoActual.add(nodoTitulos);	
+		
+	}
+	@Command
+	@NotifyChange({"arbolTitulos","tituloModeloCotizadorOV","modeloCotizadorOV"})
+	public void agregarTituloAlMismoNivel() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
+		TituloModeloCotizadorOV data=TituloModeloCotizadorOV.newTitulo();
+		NodoTitulos nodoTitulos = new NodoTitulos(data,true);
+		this.nodoActual.getParent().add(nodoTitulos);	
 		
 	}
 	
