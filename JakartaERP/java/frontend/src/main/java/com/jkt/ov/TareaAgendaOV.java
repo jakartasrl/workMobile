@@ -1,9 +1,5 @@
 package com.jkt.ov;
 
-
-
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +10,9 @@ import lombok.EqualsAndHashCode;
 
 import com.jkt.view.ObjectView;
 
+@SuppressWarnings("serial")
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper=true,of={"randomNumber"})
 public class TareaAgendaOV extends ObjectView {
 
 	private int randomNumber;
@@ -32,6 +29,8 @@ public class TareaAgendaOV extends ObjectView {
 	private String estado;
 
 	private List<TareaAgendaOV> precedencias=new ArrayList<TareaAgendaOV>();
+	private List<DescriptibleOV> precedenciasEnNumeros=new ArrayList<DescriptibleOV>();
+	
 	
 	public TareaAgendaOV(){
 		Random rand = new Random();

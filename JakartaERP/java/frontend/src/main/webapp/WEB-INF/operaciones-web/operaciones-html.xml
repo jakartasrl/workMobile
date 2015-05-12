@@ -1222,4 +1222,30 @@
 	</operacion>
 	
 	
+	
+	
+	
+	<operacion name="GenerarPlanificacionPedido" clase="com.jkt.pedido.operaciones.GenerarPlanificacionPedido" outputOV="com.jkt.ov.DescriptibleOV" inputOV="com.jkt.ov.PedidoOV">
+		
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			
+			<campoEntrada propertyOV="tareas" metodo="setTareas">
+				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
+				<campoEntrada propertyOV="comentario" metodo="setComentario" />
+					
+				<!-- level dos -->
+				<campoEntrada propertyOV="precedenciasEnNumeros" metodo="setTareasSimples">
+					<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+					
+				</campoEntrada>
+				
+			</campoEntrada>
+			
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
 </entity>
