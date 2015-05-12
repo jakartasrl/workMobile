@@ -79,17 +79,6 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
-	<operacion name="guardarPais" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.Tarea" inputOV="com.jkt.ov.DescriptibleOV">
-	
-		<input keyName="objeto" clase="com.jkt.varios.dominio.Pais">
-			<campoEntrada propertyOV="id" metodo="setId" />
-			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
-			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
- 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
-		</input>
-
-		<transformer clase="com.jkt.transformers.WebTransformer" />
-	</operacion>
 	
 	<operacion name="guardarSector" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Sector" inputOV="com.jkt.ov.DescriptibleOV">
 	
