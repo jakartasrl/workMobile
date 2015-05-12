@@ -25,7 +25,8 @@ public class GuardarModeloCotizador extends Operation {
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		ModeloCotizador modelo = (ModeloCotizador) aParams.get(KEY_OBJECT);
+//		ModeloCotizador modelo = (ModeloCotizador) aParams.get(KEY_OBJECT);
+		ModeloCotizador modelo = (ModeloCotizador) aParams.get("objeto");
 		
 		Map<String, TituloModeloCotizador> mapaDetitulos=new HashMap<String, TituloModeloCotizador>();
 		List<TituloModeloCotizador> titulos = modelo.getTitulosTransientes();

@@ -49,8 +49,7 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Visor de Agenda", "index/visor-agenda.zul", "medium"));
 		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarSector", "sector"));
 		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarTareaSimple", "tarea"));
-		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarGenerico", "sector"));
-		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarGenerico", "tarea"));
+		menues.add(MenuOV.newInstance("Pais", "generic/generic.zul", "small","guardarPais", "pais"));
 		menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
 
 		

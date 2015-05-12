@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.erp.articulos.Producto;
+import com.jkt.varios.dominio.Moneda;
 import com.jkt.view.ObjectView;
 
 @Data
@@ -38,5 +39,7 @@ public class TituloModeloCotizadorOV extends ObjectView {
 		tituloModeloCotizadorOV.setTipo("C");
 		return tituloModeloCotizadorOV;
 	}
+	
+	private Long idMoneda;
 	
 }

@@ -27,7 +27,7 @@
 		</list>
 		
 		<many-to-one name="modeloCotizador" class="com.jkt.cotizador.dominio.ModeloCotizador" column="MODELO_COTIZADOR_ID" cascade="none"></many-to-one>
-		<many-to-one name="concepto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID"  lazy="false" cascade="none"></many-to-one>
+		<many-to-one name="concepto" class="com.jkt.cotizador.dominio.ConceptoPresupuesto" column="CONCEPTO_PRESUPUESTO_ID" cascade="all"></many-to-one>
 	
 	</class>
 

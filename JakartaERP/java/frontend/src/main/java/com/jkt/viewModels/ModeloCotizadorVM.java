@@ -2,11 +2,15 @@ package com.jkt.viewModels;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
 import lombok.Data;
+
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -16,6 +20,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
+
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
@@ -50,20 +55,78 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"modeloCotizadorOV"})
 	public void guardar() throws JakartaException {
 		
+		this.completarCotizacionOV();
+		
 		Operaciones.ejecutar("GuardarModeloCotizador", this.modeloCotizadorOV );
 		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
 		
 	}
 
+	/*
+	 * Esta lista es una lista transiente que contiene toda la informacion de la jerarquia usando codigoInterno y codigoPadre.
+	 * Posteriormente una operacion recupera la lista y arma el arbol como corresponde.
+	 */
+	private List<TituloModeloCotizadorOV> todosLosElementos= new ArrayList<TituloModeloCotizadorOV>();
+	Random rand = new Random();
+	
+	private void completarCotizacionOV() {
+		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
+		List<TreeNode<TituloModeloCotizadorOV>> rootElements = arbol.getRoot().getChildren();
+		for (TreeNode<TituloModeloCotizadorOV> treeNode : rootElements) {
+			establecerCodigos(treeNode, 0);
+		}
+
+		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
+		
+	}
+
+	private void establecerCodigos(TreeNode<TituloModeloCotizadorOV> treeNode, int codigoPadre){
+		int randomNum = rand.nextInt((999999 - 1) + 1) + 1;
+		treeNode.getData().setCodigoInterno(randomNum);
+		treeNode.getData().setCodigoInternoPadre(codigoPadre);
+		
+		
+		if(treeNode.getData().getTipo().equals("C")){
+			treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
+			treeNode.getData().setConcepto(null);//para q el fwk no vaya a buscarlo a la base y le asigne null...
+			//recordar, si elp valor es cero, se crea uno nuevo, si es >0 se busca en la base, si es null, se retorna null.
+		}else{
+			treeNode.getData().setIdC(null);
+		}
+				
+		if (!treeNode.isLeaf()) {
+			List<TreeNode<TituloModeloCotizadorOV>> children = treeNode.getChildren();
+			for (TreeNode<TituloModeloCotizadorOV> nodoHijo : children) {
+				establecerCodigos(nodoHijo, randomNum);
+			}
+		}
+		todosLosElementos.add(treeNode.getData());
+		
+	}
+	
+
 	@Override
 	@Command
 	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos"})
 	public void nuevo() throws JakartaException {	
+		
+		nodoActual = null;
+		tituloModeloCotizadorOV = new TituloModeloCotizadorOV();
 		this.modeloCotizadorOV = new ModeloCotizadorOV();
 		this.tituloModeloCotizadorOV = new TituloModeloCotizadorOV();
-		
+		todosLosElementos= new ArrayList<TituloModeloCotizadorOV>();
+
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new DefaultTreeModel<TituloModeloCotizadorOV>(root);
+		
+		TituloModeloCotizadorOV data = new TituloModeloCotizadorOV();
+		data.setTipo("T");
+		data.setCodigo("New");
+		data.setDescripcion("Nuevo titulo");
+
+		nodoActual = new NodoTitulos(data,true);
+		root.add(nodoActual);
+		
 	}
 	
 	@Command
@@ -142,14 +205,28 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	}
 				
 	@Command
-	@NotifyChange("arbolTitulos")
+	@NotifyChange({"arbolTitulos","todosLosElementos"})
 	public void eliminarConcepto() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		this.nodoActual.getParent().remove(this.nodoActual);
+		this.setArbolTitulos(arbolTitulos);
+		
+		this.todosLosElementos.remove(this.nodoActual);
+		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
+		
 	}
 
 	@Command
 	@NotifyChange({"arbolTitulos","tituloModeloCotizadorOV","modeloCotizadorOV"})
 	public void eliminarTitulo() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		if (nodoActual.getParent().getChildren().size()==1) {
+			TreeNode<TituloModeloCotizadorOV> root = this.arbolTitulos.getRoot();
+			TreeNode<TituloModeloCotizadorOV> primerHijo = root.getChildAt(0);
+			if (primerHijo==nodoActual) {
+				Messagebox.show("No se puede eliminar el titulo ya que debe si o si contener al menos uno.");
+				return;
+			}
+		}
 		
 		final TreeNode<TituloModeloCotizadorOV> parent = nodoActual.getParent();
 		final NodoTitulos nodoActual = this.nodoActual;
@@ -167,6 +244,8 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		}else{
 			parent.remove(nodoActual);
 		}
+		
+		this.setArbolTitulos(arbolTitulos);
 		
 	}
 	
@@ -200,6 +279,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	public void agregarTitulo() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
 		
 		TituloModeloCotizadorOV data=new TituloModeloCotizadorOV();
+		data.setTipo("T");
 		NodoTitulos nodoTitulos = new NodoTitulos(data,true);
 		this.nodoActual.add(nodoTitulos);	
 		
