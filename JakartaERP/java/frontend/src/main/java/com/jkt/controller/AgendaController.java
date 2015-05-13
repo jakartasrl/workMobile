@@ -2,14 +2,14 @@ package com.jkt.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.joda.time.LocalDate;
+import lombok.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
@@ -32,12 +33,13 @@ import com.jkt.viewModels.ViewModel;
 
 @Controller
 @RequestMapping(value = "/agenda")
+@Data
 public class AgendaController extends ViewModel implements IBasicOperations {
 
 	@Autowired
 	private ServletContext servletContext;
 	
-	private DescriptibleOV pedidoDescriptible;
+	private DescriptibleOV pedidoDescriptible= new DescriptibleOV();
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody ArrayList<EventoDTO> obtenerEventos(ServletRequest request, ServletResponse response){
@@ -50,8 +52,8 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 
 		ContainerOV container = new ContainerOV();
 		container.setString1("pedido");
-//		container.setString2(String.valueOf(pedidoDescriptible.getId()));
-		container.setString2(String.valueOf(3375104L));
+		container.setString2(String.valueOf(pedidoDescriptible.getId()));
+//		container.setString2(String.valueOf(3375104L));
 		
 		ListPedidoOV l = (ListPedidoOV) Operaciones.ejecutar("TraerPedidoConTareas", container, ListPedidoOV.class);
 		List list = l.getList();
@@ -95,8 +97,9 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 
 	@Override
 	@GlobalCommand("update")
+	@NotifyChange("pedidoDescriptible")
 	public void actualizar() {
-		
+
 	}
 
 	@Override

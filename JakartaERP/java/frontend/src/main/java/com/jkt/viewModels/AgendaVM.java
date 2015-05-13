@@ -16,6 +16,7 @@ import org.zkoss.zul.TreeNode;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.grafo.TareaPedido;
 import com.jkt.ov.AgendaOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -25,7 +26,13 @@ import com.jkt.ov.PrecedenteOV;
 import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
 import com.jkt.ov.tree.NodoTareaAgenda;
+import com.jkt.pedido.dominio.Pedido;
 
+/**
+ * {@link ViewModel} de la planificacion de las tareas ( {@link TareaPedido} ) de un {@link Pedido}
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 @Data
 public class AgendaVM extends ViewModel implements IBasicOperations{
 	
@@ -52,7 +59,6 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 		for (TreeNode<TareaPrecedenteOV> nodoActual : nodosPrincipales) {
 			tarea = nodoActual.getData().getTarea();
 
-			
 			tarea.setIdTarea(tarea.getTarea().getId());
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
 			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
@@ -64,11 +70,9 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			List<DescriptibleOV> listaPrecedencias=new ArrayList<DescriptibleOV>();
 			for (TreeNode<TareaPrecedenteOV> nodoLevel2 : hijos) {
 				if (nodoLevel2.getData().getEsPrecedente()) {
-//					tarea.getPrecedencias().add(nodoLevel2.getData().getTarea());
 					DescriptibleOV descriptibleOV = new DescriptibleOV();
 					descriptibleOV.setCodigo(String.valueOf(nodoLevel2.getData().getTarea().getRandomNumber()));
 					listaPrecedencias.add(descriptibleOV);
-//					tarea.getPrecedenciasEnNumeros().add(descriptibleOV);
 				}
 			}
 			tarea.setPrecedenciasEnNumeros(listaPrecedencias);

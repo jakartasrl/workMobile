@@ -16,18 +16,19 @@
 			
 			<vlayout style="text-align:center">
 				<hlayout>
-					<label value="Sector" />
-					<combobox width="150px;">
-						<comboitem label="Laboratorio" />
-						<comboitem label="Control de calidad" />
-						<comboitem label="Venta" />
-					</combobox>
+<!-- 					<label value="Sector" /> -->
+<!-- 					<combobox width="150px;"> -->
+<!-- 						<comboitem label="Laboratorio" /> -->
+<!-- 						<comboitem label="Control de calidad" /> -->
+<!-- 						<comboitem label="Venta" /> -->
+<!-- 					</combobox> -->
 	
-					<separator></separator>
+<!-- 					<separator></separator> -->
 	
 					<label value="Pedido:" />
-					<textbox sclass="campoCodigo-medium" value="PE-12" />
-					<button label="..." onClick="@command('openHelperComplejo', clase='pedido', titulo='Selección de Pedido', codHeader='Nro Pedido', descHeader='Cliente', tituloAdicional1='Fecha')" />
+					<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoDescriptible.codigo)" />
+<!-- 					<textbox sclass="campoCodigo-medium" value="PE-12" /> -->
+					<button label="..." onClick="@command('openHelperComplejo', clase='pedido',ov=vm.pedidoDescriptible, titulo='Selección de Pedido', codHeader='Nro Pedido', descHeader='Cliente', tituloAdicional1='Fecha')" />
 			
 				</hlayout>
 				<button label="Cargar Agenda" onClick='Clients.evalJavaScript("loadCalendar();");' />
