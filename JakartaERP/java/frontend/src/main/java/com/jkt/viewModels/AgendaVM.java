@@ -21,6 +21,7 @@ import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.ListPedidoOV;
 import com.jkt.ov.PedidoOV;
+import com.jkt.ov.PrecedenteOV;
 import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
 import com.jkt.ov.tree.NodoTareaAgenda;
@@ -77,6 +78,8 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 		pedidoAGuardar.setId(this.pedidoDescriptible.getId());
 		pedidoAGuardar.setTareas(tareas);
 		Operaciones.ejecutar("GenerarPlanificacionPedido", pedidoAGuardar);
+		
+		Messagebox.show("Se planifico el pedido correctamente.");
 	}
 
 	
@@ -98,12 +101,10 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 		openComplexHelper("pedido", "", pedidoDescriptible, "recuperarAgendaPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente", false , "Fecha" , "" );
 	}
 	
-	public void recuperarAgendaPedido() throws IllegalAccessException, InvocationTargetException{
+	public void recuperarAgendaPedido() throws IllegalAccessException, InvocationTargetException, JakartaException{
 		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getCodigo()+"' .");
 		
 		this.agenda=new AgendaOV();
-//		this.tareaAgregada=null;
-//		this.agenda.setTareasGenerales(new ArrayList<TareaAgendaOV>());
 		
 		ContainerOV container = new ContainerOV();
 		container.setString1("pedido");
@@ -116,6 +117,10 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			return;
 		}
 		PedidoOV pedido = (PedidoOV) list.get(0);
+		
+		/*
+		 * Genero el grafo.
+		 */
 		for (TareaAgendaOV tareaAgendaOV : pedido.getTareas()) {
 			
 			DescriptibleOV tarea = new DescriptibleOV();
@@ -123,6 +128,8 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			tarea.setDescripcion(tareaAgendaOV.getDescripcionTarea());
 			
 			tareaAgendaOV.setTarea(tarea);
+			
+			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector",tareaAgendaOV.getIdSector()));
 			
 			this.tareaAgregada=tareaAgendaOV;
 			this.agenda.getTareasGenerales().add(this.tareaAgregada);
@@ -134,6 +141,42 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			actualizarArboles();
 		}
 		
+		/*
+		 * Recorro el grafo, y para cada hijo del primer nivel, busco si esta en la lista de precedentes.
+		 */
+		List<TreeNode<TareaPrecedenteOV>> children = this.agenda.getArbolPrecedencias().getRoot().getChildren();
+		for (TreeNode<TareaPrecedenteOV> treeNode : children) {
+			TareaAgendaOV tareaActual = treeNode.getData().getTarea();
+			
+			//Busco el precedente actual en la lista recuperada de la base. de seguro existirá, pero debo dar con el.
+			PrecedenteOV precedenteActual=null;
+			for (PrecedenteOV precedente : pedido.getPrecedentesPlanos()) {
+				if(precedente.getCodigo().equals(String.valueOf(tareaActual.getId()))){
+					precedenteActual=precedente;
+					break;
+				}
+			}
+			
+			if (precedenteActual==null) {
+				Messagebox.show("Ocurrio un error al cargar las precedencias de pedido seleccionado.");//en el OK redireccionar...
+				return;
+			}
+			
+			//Una vez encontrado el precedente en la lista recuperada de la base.
+			//Para cada hijo del arbol, es decir, precedencia en arbol, hay que buscar y matchear su correspondencia con la lista de precedentes planos...
+			//Si existe lo seteo como precedente, y de modo contrario, no...
+			
+			List<TreeNode<TareaPrecedenteOV>> hijosLevel2 = treeNode.getChildren();
+			for (TreeNode<TareaPrecedenteOV> hijoLevel2 : hijosLevel2) {
+				for (DescriptibleOV descriptibleOV : precedenteActual.getPrecedentes()) {
+					if (String.valueOf(hijoLevel2.getData().getTarea().getId()).equals(descriptibleOV.getCodigo())) {
+						hijoLevel2.getData().setEsPrecedente(true);
+						break;
+					}
+				}
+			}
+			
+		}
 		
 	}
 

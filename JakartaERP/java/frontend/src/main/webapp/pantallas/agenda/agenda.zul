@@ -56,7 +56,7 @@
 				<tabbox id="contenidoTabs" >
 			    	<tabs id="tabs">
 			        	<tab id="tGeneral" label="Agenda del pedido" />
-			        	<tab id="tPrec" label="Precedencias" visible="@bind( vm.agenda.tareasGenerales.size()>0 )" />
+			        	<tab id="tPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" />
 			    	</tabs>
 			    	
 			    	<tabpanels>
@@ -65,8 +65,8 @@
 							<include id="tGeneralContent" hflex="1" src="/pantallas/agenda/tab-agenda-general.zul" viewModel="${vm}"/>
 			        	</tabpanel>
 
-			        	<tabpanel>
-							<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}" visible="@bind( vm.agenda.tareasGenerales.size()>0 )" />
+			        	<tabpanel visible="@bind( vm.agenda.tareasGenerales.size()>0 )" >
+							<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}" />
 			        	</tabpanel>
 			        
 			    	</tabpanels>

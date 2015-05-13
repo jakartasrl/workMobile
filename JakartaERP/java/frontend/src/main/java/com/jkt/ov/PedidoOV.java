@@ -48,7 +48,7 @@ public class PedidoOV extends ObjectView {
 
 	
 	private List<TareaAgendaOV> tareas=new ArrayList<TareaAgendaOV>();
-	private List<DescriptibleOV> precedentesPlanos=new ArrayList<DescriptibleOV>();
+	private List<PrecedenteOV> precedentesPlanos=new ArrayList<PrecedenteOV>();
 	
 	/**
 	 * A partir de la lista de todos los documentos y de los documentos seleccionados, forma una lista en la que se diferencian solamente por el campo activo.

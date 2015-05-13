@@ -51,7 +51,9 @@
 				</listcell>
 
 				<listcell>
-					<textbox sclass="campoCodigo-vlarge" value="@bind(each.sector.codigo)" readonly="false"/>
+					<textbox sclass="campoCodigo-vlarge" value="@bind(each.sector.codigo)" readonly="false"  
+						onBlur="@command('validarCampo', clase='sector', codigo=self.value, ov=each.sector)"
+						/>
 					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" />
 				</listcell>
 
