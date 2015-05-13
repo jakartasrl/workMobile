@@ -47,7 +47,7 @@
 
 
 				<listcell >
-					<datebox value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+					<datebox value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 				</listcell>
 
 				<listcell>
@@ -67,7 +67,7 @@
 				</listcell>
 
 				<listcell >
-					<datebox value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+					<datebox value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
 				</listcell>
 
 				<listcell >
