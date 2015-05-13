@@ -11,12 +11,15 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.AgendaOV;
+import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.ListPedidoOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
@@ -52,6 +55,7 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			tarea.setIdTarea(tarea.getTarea().getId());
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
 			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
+			tarea.setIdSector(tarea.getSector().getId());
 			
 			tareas.add(tarea);//tarea level0, agregarla a la lista de tareas SI O SI
 			
@@ -78,10 +82,11 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 	
 	@Command
 	@Override
-	@NotifyChange({"agenda","pedidoDescriptible"})
+	@NotifyChange({"agenda","pedidoDescriptible","titulo"})
 	public void nuevo() throws JakartaException {
 		this.agenda=new AgendaOV();
 		this.pedidoDescriptible=new DescriptibleOV();
+		this.setTitulo("Planificación del Pedido");
 	}
 
 	DescriptibleOV pedidoDescriptible = new DescriptibleOV();
@@ -93,8 +98,43 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 		openComplexHelper("pedido", "", pedidoDescriptible, "recuperarAgendaPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente", false , "Fecha" , "" );
 	}
 	
-	public void recuperarAgendaPedido(){
+	public void recuperarAgendaPedido() throws IllegalAccessException, InvocationTargetException{
 		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getCodigo()+"' .");
+		
+		this.agenda=new AgendaOV();
+//		this.tareaAgregada=null;
+//		this.agenda.setTareasGenerales(new ArrayList<TareaAgendaOV>());
+		
+		ContainerOV container = new ContainerOV();
+		container.setString1("pedido");
+		container.setString2(String.valueOf(pedidoDescriptible.getId()));
+		
+		ListPedidoOV l = (ListPedidoOV) Operaciones.ejecutar("TraerPedidoConTareas", container, ListPedidoOV.class);
+		List list = l.getList();
+		if(list.isEmpty() || list.size()>1){
+			Messagebox.show("Ocurrio un error al intentar recuperar el pedido y su planificación.");
+			return;
+		}
+		PedidoOV pedido = (PedidoOV) list.get(0);
+		for (TareaAgendaOV tareaAgendaOV : pedido.getTareas()) {
+			
+			DescriptibleOV tarea = new DescriptibleOV();
+			tarea.setCodigo(tareaAgendaOV.getCodigoTarea());
+			tarea.setDescripcion(tareaAgendaOV.getDescripcionTarea());
+			
+			tareaAgendaOV.setTarea(tarea);
+			
+			this.tareaAgregada=tareaAgendaOV;
+			this.agenda.getTareasGenerales().add(this.tareaAgregada);
+			TareaPrecedenteOV tareaPrecedenteOV = new TareaPrecedenteOV();
+			tareaPrecedenteOV.setTarea(this.tareaAgregada);
+			this.siguienteRoot=new NodoTareaAgenda(tareaPrecedenteOV, true);
+			this.agenda.getArbolPrecedencias().getRoot().add(siguienteRoot);
+			
+			actualizarArboles();
+		}
+		
+		
 	}
 
 

@@ -37,6 +37,14 @@ public class TareaAgendaOV extends ObjectView {
 	
 	
 	public TareaAgendaOV(){
+		generateRandom();
+	}
+	
+	public void generarRandom(){
+		generateRandom();
+	}
+
+	protected void generateRandom() {
 		Random rand = new Random();
 	    this.randomNumber = rand.nextInt((999999 - 1) + 1) + 1;
 	}

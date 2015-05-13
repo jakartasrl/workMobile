@@ -1236,11 +1236,13 @@
 				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
 				<campoEntrada propertyOV="comentario" metodo="setComentario" />
+				<campoEntrada propertyOV="fechaLimite" metodo="setFechaLimite" />
+				<campoEntrada propertyOV="fechaCumplimiento" metodo="setFechaCumplimiento" />
+				<campoEntrada propertyOV="idSector" metodo="setSector" />
 					
 				<!-- level dos -->
 				<campoEntrada propertyOV="precedenciasEnNumeros" metodo="setTareasSimples">
 					<campoEntrada propertyOV="codigo" metodo="setCodigo" />
-					
 				</campoEntrada>
 				
 			</campoEntrada>
@@ -1251,7 +1253,7 @@
 	</operacion>
 	
 	
-	<operacion name="TraerPedidoConTareas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PedidoOV">
+	<operacion name="TraerPedidoConTareas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
 		
 		<input>
 			<campoEntrada propertyOV="string1" name="entidad"/>
@@ -1267,11 +1269,18 @@
 			
 			<campoSalida value="tareas" target="tareas" >
 			
-				<campoSalida value="idTarea" target="tarea.id" />
-				<campoSalida value="codigoTarea" target="tarea.codigo" />
-				<campoSalida value="descripcionTarea" target="tarea.descripcion" />
+				<campoSalida value="id" target="id" />
+				<campoSalida value="codigoTarea" target="codigo" />
+				<campoSalida value="descripcionTarea" target="descripcion" />
 				
-				<campoSalida value="comentario" target="cometario" />
+				<campoSalida value="comentario" target="comentario" />
+				<campoSalida value="fechaLimite" target="fechaLimite" />
+				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+				<campoSalida value="idSector" target="sector.id" />
+			</campoSalida>
+			
+			<campoSalida value="precedentesPlanos" target="planificaciones" >
+				<campoSalida value="comentario" target="comentario" />
 				<campoSalida value="fechaLimite" target="fechaLimite" />
 				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
 				<campoSalida value="idSector" target="sector.id" />
