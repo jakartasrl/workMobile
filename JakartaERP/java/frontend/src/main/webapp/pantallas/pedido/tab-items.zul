@@ -47,10 +47,10 @@
 								</combobox>
 		
 								<label value="Importe:" />
-								<textbox width="50px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+								<textbox width="70px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 							
 								<label value="Importe Total:" />
-								<textbox width="50px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/>
+								<textbox width="70px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/>
 								
 							</hlayout>
 							

@@ -20,6 +20,8 @@ public class TareaAgendaOV extends ObjectView {
 	private long idTarea;
 	private String codigoTarea;
 	private String descripcionTarea;
+	
+	private int duracion=1;
 
 	private DescriptibleOV tarea=new DescriptibleOV();
 	
@@ -30,7 +32,8 @@ public class TareaAgendaOV extends ObjectView {
 	private DescriptibleOV sector=new DescriptibleOV();
 	private Long idSector;
 	
-	private String estado;
+	private DescriptibleOV estado=new DescriptibleOV();
+	private int idEstado;
 
 	private List<TareaAgendaOV> precedencias=new ArrayList<TareaAgendaOV>();
 	private List<DescriptibleOV> precedenciasEnNumeros=new ArrayList<DescriptibleOV>();

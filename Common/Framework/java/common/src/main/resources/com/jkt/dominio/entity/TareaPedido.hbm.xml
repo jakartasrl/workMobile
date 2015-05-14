@@ -17,6 +17,8 @@
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
+		<property name="idEstado" column="ESTADO" type="integer" />
+
 		<property name="comentario" column="COMENTARIO"/>
 		<property name="diasDuracion" type="integer" column="DURACION_EN_DIAS"></property>
 		<property not-null="false" name="fechaLimite" column="FECHA_LIMITE" type="date"/>

@@ -1239,6 +1239,8 @@
 				<campoEntrada propertyOV="fechaLimite" metodo="setFechaLimite" />
 				<campoEntrada propertyOV="fechaCumplimiento" metodo="setFechaCumplimiento" />
 				<campoEntrada propertyOV="idSector" metodo="setSector" />
+				<campoEntrada propertyOV="idEstado" metodo="setIdEstado" />
+				<campoEntrada propertyOV="duracion" metodo="setDiasDuracion" />
 					
 				<!-- level dos -->
 				<campoEntrada propertyOV="precedenciasEnNumeros" metodo="setTareasSimples">
@@ -1274,6 +1276,9 @@
 				<campoSalida value="descripcionTarea" target="descripcion" />
 				
 				<campoSalida value="comentario" target="comentario" />
+				<campoSalida value="idEstado" target="idEstado" />
+				<campoSalida value="duracion" target="diasDuracion" />
+				
 				<campoSalida value="fechaLimite" target="fechaLimite" />
 				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
 				<campoSalida value="idSector" target="sector.id" />
@@ -1292,5 +1297,18 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="TraerEstadosTareas" clase="com.jkt.pedido.operaciones.TraerEstadosDeTareas" outputOV="com.jkt.ov.ListDescriptibleOV">
+	
+		<output>
+		
+			<campoSalida target="codigo" 			value="codigo" />	
+			<campoSalida target="descripcion" 		value="descripcion" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 	
 </entity>

@@ -20,6 +20,7 @@ import com.jkt.grafo.TareaPedido;
 import com.jkt.ov.AgendaOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListPedidoOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.PrecedenteOV;
@@ -38,17 +39,25 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 	
 	private AgendaOV agenda;
 	private String codigoTareaNueva;
+	private ListDescriptibleOV estados;//=new ListDescriptibleOV();
+	
 	
 	@Init
-	public void init(){
+	public void init() {
 		this.setTitulo("Planificación del Pedido");
-		this.agenda=new AgendaOV();
+		this.agenda = new AgendaOV();
+		this.estados = (ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class);
 	}
 	
 	@Command
 	@Override
 	public void guardar() throws JakartaException {
 
+		if(!validarTareas()){
+			Messagebox.show("Debe completar el sector en todas las tareas.");
+			return;
+		}
+		
 		List<TreeNode<TareaPrecedenteOV>> nodosPrincipales = this.agenda.getArbolPrecedencias().getRoot().getChildren();
 		
 		List<TareaAgendaOV> tareas=new ArrayList<TareaAgendaOV>();//Todas las tareas a enviar a la operacion
@@ -63,6 +72,7 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
 			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
 			tarea.setIdSector(tarea.getSector().getId());
+			tarea.setIdEstado(Integer.valueOf(tarea.getEstado().getCodigo()));
 			
 			tareas.add(tarea);//tarea level0, agregarla a la lista de tareas SI O SI
 			
@@ -87,6 +97,19 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 	}
 
 	
+	/**
+	 * Valida si TODAS las tareas tiene un sector seleccionado.
+	 */
+	private boolean validarTareas() {
+		for (TareaAgendaOV tareaAgendaOV : this.agenda.getTareasGenerales()) {
+			long id = tareaAgendaOV.getSector().getId();
+			if (id==0) { //significa que no se selecciono un sector para la tarea actual
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Command
 	@Override
 	@NotifyChange({"agenda","pedidoDescriptible","titulo"})
@@ -134,6 +157,17 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			tareaAgendaOV.setTarea(tarea);
 			
 			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector",tareaAgendaOV.getIdSector()));
+			
+			
+			//Asigna el estado al combo.
+			DescriptibleOV estadoActual;
+			for (Object object : this.estados.getList()) {
+				estadoActual=(DescriptibleOV) object;
+				if (estadoActual.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))) {
+					tareaAgendaOV.setEstado(estadoActual);
+				}
+			}
+			
 			
 			this.tareaAgregada=tareaAgendaOV;
 			this.agenda.getTareasGenerales().add(this.tareaAgregada);
@@ -242,6 +276,8 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 		
 
 		this.tareaAgregada=new TareaAgendaOV();
+		
+		this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
 
 		if (this.codigoTareaNueva!=null && !this.codigoTareaNueva.isEmpty()) {
 			validarCampo("tarea", this.codigoTareaNueva, this.tareaAgregada.getTarea(), "actualizarTareasYArbol");

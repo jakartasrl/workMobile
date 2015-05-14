@@ -22,6 +22,7 @@
 			<listheader width="250px" label="Descripción"/>
 			<listheader width="250px" label="Comentario"/>
 			<listheader width="130px" label="Fecha Limite"/>
+<!-- 			<listheader width="130px" label="Duración"/> -->
 			<listheader width="200px" label="Sector responsable"/>
 			<listheader width="150px" label="Estado"/>
 			<listheader width="130px" label="Fecha cumplimiento"/>
@@ -50,6 +51,11 @@
 					<datebox value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 				</listcell>
 
+<!-- 				<listcell > -->
+<!-- 					<label value="Cantidad:" /> -->
+<!-- 					<textbox width="40px;" value="@bind(each.duracion)" sclass="importe" constraint="no empty"/> -->
+<!-- 				</listcell> -->
+
 				<listcell>
 					<textbox sclass="campoCodigo-vlarge" value="@bind(each.sector.codigo)" readonly="false"  
 						onBlur="@command('validarCampo', clase='sector', codigo=self.value, ov=each.sector)"
@@ -58,11 +64,10 @@
 				</listcell>
 
 				<listcell>
-					<combobox width="100%" >
-						<comboitem label="Estado 1" />
-						<comboitem label="Estado 2" />
-						<comboitem label="Estado 3" />
-						<comboitem label="Estado 4" />
+					<combobox width="100%" model="@bind(vm.estados.list)" selectedItem="@bind(each.estado)" constraint="no empty">
+						<template name="model" var="e">
+							<comboitem label="@bind(e.descripcion)" />
+						</template>
 					</combobox>
 				</listcell>
 

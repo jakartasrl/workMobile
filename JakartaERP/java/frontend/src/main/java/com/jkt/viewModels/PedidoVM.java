@@ -351,7 +351,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando items para articulos...");
 		this.itemsArticulos=new ArrayList<ItemsOV>();
-		this.itemsArticulos.add(new ItemsOV());
+//		this.itemsArticulos.add(new ItemsOV());
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();

@@ -46,12 +46,13 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Planificación de Agenda", "index/index-agenda.zul", "small"));
 		menues.add(MenuOV.newInstance("Visor de Agenda", "index/visor-agenda.zul", "small"));
 		menues.add(MenuOV.newInstance("Sector", "generic/generic.zul", "small","guardarSector", "sector"));
+		menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
 		menues.add(MenuOV.newInstance("Tarea", "generic/generic.zul", "small","guardarTareaSimple", "tarea"));
 		menues.add(MenuOV.newInstance("Unidad Medida", "generic/generic.zul", "small","guardarUnidadMedida", "unidadMedida"));
 		menues.add(MenuOV.newInstance("Idioma", "generic/generic.zul", "small","guardarIdioma", "idioma"));
 		menues.add(MenuOV.newInstance("Moneda", "generic/generic.zul", "small","guardarMoneda", "moneda"));
 		menues.add(MenuOV.newInstance("Pais", "generic/generic.zul", "small","guardarPais", "pais"));
-		menues.add(MenuOV.newInstance("Plantilla", "generic/generic.zul", "small","guardarPlantilla", "plantilla"));
+//		menues.add(MenuOV.newInstance("Plantilla", "generic/generic.zul", "small","guardarPlantilla", "plantilla"));
 		menues.add(MenuOV.newInstance("Documentación", "generic/generic.zul", "small","guardarDocumentacion", "documentacion"));
 		menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
 
