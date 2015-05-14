@@ -25,13 +25,15 @@ public class GuardarModeloCotizador extends Operation {
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
-		ModeloCotizador modelo = (ModeloCotizador) aParams.get(KEY_OBJECT);
+//		ModeloCotizador modelo = (ModeloCotizador) aParams.get(KEY_OBJECT);
+		ModeloCotizador modelo = (ModeloCotizador) aParams.get("objeto");
 		
 		Map<String, TituloModeloCotizador> mapaDetitulos=new HashMap<String, TituloModeloCotizador>();
 		List<TituloModeloCotizador> titulos = modelo.getTitulosTransientes();
 		
 		//Guardo todos los titulos en un mapa para tener una referencia de la jerarquia...
 		for (TituloModeloCotizador titulo : titulos) {
+			titulo.setTitulosHijos(new ArrayList<TituloModeloCotizador>());
 			mapaDetitulos.put(String.valueOf(titulo.getCodigoInterno()), titulo);
 			
 			if ("T".equals(titulo.getTipo())) {
@@ -45,6 +47,7 @@ public class GuardarModeloCotizador extends Operation {
 //		validarTitulos();
 		
 		//guardo el modelo de cotizador.
+//		modelo.setTitulos(titulos);
 		guardar(modelo);
 	}
 
@@ -67,10 +70,14 @@ public class GuardarModeloCotizador extends Operation {
 	private void establecerRelaciones(ModeloCotizador modelo, Map<String, TituloModeloCotizador> mapaDetitulos, List<TituloModeloCotizador> titulos) {
 		int codigoPadre;
 		TituloModeloCotizador tituloEnMapa;
+		
+		modelo.setTitulos(new ArrayList<TituloModeloCotizador>());
+		
 		for (TituloModeloCotizador titulo :titulos ) {
 			
 			codigoPadre = titulo.getCodigoInternoPadre();
 			if (codigoPadre==0) {
+//				titulo.setTitulosHijos(new ArrayList<TituloModeloCotizador>());
 				modelo.agregarTitulo(titulo);//es el nivel mas alto.
 			}else{
 				//buscar la referencia del padre.

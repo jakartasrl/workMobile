@@ -13,12 +13,12 @@
             <treerow >
 
                 <treecell>
-                	<textbox context="menuContextualConcepto" value="${titulo.data.concepto.codigo}"  if="${titulo.data.tipo=='C'}" readonly="true"  onRightClick="@command('recuperarConcepto',titulo=titulo)" />
+                	<label context="menuContextualConcepto" value="${titulo.data.concepto.codigo}"  if="${titulo.data.tipo=='C'}" onRightClick="@command('recuperarConcepto',titulo=titulo)" />
                 	<textbox context="menuContextualTitulo" value="@bind(titulo.data.codigo)" onRightClick="@command('recuperarConcepto',titulo=titulo)" inplace="true" if="${titulo.data.tipo=='T'}" />
                 </treecell>
                 
                 <treecell  >
- 	               <textbox width="100%" style="margin:10px;" value="${titulo.data.concepto.descripcion}" if="${titulo.data.tipo=='C'}" readonly="true"/>
+ 	               <label width="100%" style="margin:10px;" value="${titulo.data.concepto.descripcion}" if="${titulo.data.tipo=='C'}" />
  	               <textbox width="100%" style="margin:10px;" value="@bind(titulo.data.descripcion)" inplace="true" if="${titulo.data.tipo=='T'}"/>
                 </treecell>
                 
@@ -30,6 +30,8 @@
 	
 	<menupopup id="menuContextualTitulo" >
         <menuitem label="Insertar Titulo" onClick='@command("agregarTitulo")'/>
+        <menuseparator />
+        <menuitem label="Insertar Titulo al mismo nivel" onClick='@command("agregarTituloAlMismoNivel")'/>
         <menuseparator />
         <menuitem label="Insertar Concepto" onClick='@command("agregarConcepto")' />
         <menuseparator />
