@@ -20,10 +20,10 @@
 
             <columns>
 <!--                 <column hflex="1" label="@load(vm.id)" /> -->
-                <column hflex="1" label="@load(vm.codigo)" align="center" />
-                <column hflex="2" label="@load(vm.descripcion)" align="center" />
-                <column hflex="2" label="@load(vm.descCampo3)" align="center" unless="${empty vm.descCampo3}"/>
-                <column hflex="2" label="@load(vm.descCampo4)" align="center" unless="${empty vm.descCampo4}"/>
+                <column hflex="1" label="@load(vm.codigo)" align="left" sort="auto(codigo)" />
+                <column hflex="2" label="@load(vm.descripcion)" align="left" sort="auto(descripcion)" />
+                <column hflex="2" label="@load(vm.descCampo3)" align="left" unless="${empty vm.descCampo3}"/>
+                <column hflex="2" label="@load(vm.descCampo4)" align="left" unless="${empty vm.descCampo4}"/>
                 
                 
                 
