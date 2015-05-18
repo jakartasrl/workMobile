@@ -38,7 +38,7 @@
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<doublebox sclass="importe" width="60px;" value="@bind(each.porcentaje)" format=",###" constraint="no empty,no negative" />
+						<doublebox sclass="importe" width="60px;" value="@bind(each.porcentaje)" format="##.##" constraint="no empty,no negative" />
 					</hlayout>
 				</listcell>
 

@@ -77,12 +77,16 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			return;
 		}
 		
+		if(!this.validaFacturaciones(this.comprobanteOV.getFacturaciones())){
+			return;
+		}
+
+		
 		completarOV();
 		Operaciones.ejecutar("GuardarPedido", comprobanteOV);
 		Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
 	}
 
-	
 	
 	/**
 	 * 

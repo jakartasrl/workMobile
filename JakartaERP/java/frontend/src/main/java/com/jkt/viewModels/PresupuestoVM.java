@@ -77,7 +77,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			this.itemsArticulos=new ArrayList<ItemsOV>();
 		}
 		
-		if(!this.validaPresupuesto()){
+		if(!this.validaFacturaciones(this.comprobanteOV.getFacturaciones())){
 			return;
 		}
 		
@@ -109,26 +109,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		);
 		
 	}
-
-	private boolean validaPresupuesto() {
-		List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
-		
-		int i=1;
-		for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
-
-			if(!this.validarDescriptible(formaFacturacionOV.getCondicionDePago(), "Complete la condicion de pago de elemento "+i+" en la \n solapa 'Formas de facturación'.")){
-				return false;
-			}
-			
-			if (formaFacturacionOV.getDescripcion()==null || formaFacturacionOV.getDescripcion().isEmpty()) {
-				Messagebox.show("Complete la descripción del item "+i+" en la solapa 'Formas de facturación'.");
-				return false;
-			}
-			i++;
-		}
-		return true;
-	}
-
 
 	@Command
 	@NotifyChange({"arbolNotas","archivos","aPartirDeCotizacion", "comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})

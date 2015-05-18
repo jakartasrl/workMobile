@@ -182,7 +182,7 @@ public abstract class ComprobanteVM extends ViewModel {
 				}
 			}
 		}
-
+		
 		return true;
 	}
 
@@ -482,6 +482,38 @@ public abstract class ComprobanteVM extends ViewModel {
 
 		this.arbolNotas = new DefaultTreeModel<NotaOV>(root);
 
+	}
+	
+	protected boolean validaFacturaciones(List<FormaFacturacionOV> facturaciones) {
+		
+		int i=1;
+		for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
+
+			if(!this.validarDescriptible(formaFacturacionOV.getCondicionDePago(), "Complete la condicion de pago de elemento "+i+" en la \n solapa 'Formas de facturación'.")){
+				return false;
+			}
+			
+			if (formaFacturacionOV.getDescripcion()==null || formaFacturacionOV.getDescripcion().isEmpty()) {
+				Messagebox.show("Complete la descripción del item "+i+" en la solapa 'Formas de facturación'.");
+				return false;
+			}
+			i++;
+		}
+		
+		if (facturaciones.isEmpty()) {
+			return true;
+		}else{
+			double porcentaje=0;
+			for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
+				porcentaje+=formaFacturacionOV.getPorcentaje();
+			}
+			if (porcentaje!=100) {
+				Messagebox.show("La suma de todas las formas de facturación deben sumar 100%.");
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }
