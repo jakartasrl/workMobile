@@ -20,7 +20,16 @@ public class TraerEntidadesRelacionWeb extends Operation {
 		
 		List<PersistentEntity> obtenerTodos=new ArrayList<PersistentEntity>();
 		if (id == null || id.isEmpty()) {
-			obtenerTodos = obtenerTodos((Class<? extends PersistentEntity>) Class.forName(entidad));
+			
+			if (entidad==null) {
+				if (entidadWeb!=null) {
+					obtenerTodos = obtenerTodos((Class<? extends PersistentEntity>) Class.forName(this.getRepositorioClases().getClass(entidadWeb)));
+				}
+			}else{
+				obtenerTodos = obtenerTodos((Class<? extends PersistentEntity>) Class.forName(entidad));
+			}
+			
+			
 		}else{
 			PersistentEntity objeto = obtener((Class<? extends PersistentEntity>) Class.forName(this.getRepositorioClases().getClass(entidadWeb)), id);
 			obtenerTodos.add(objeto);

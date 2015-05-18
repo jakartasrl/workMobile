@@ -15,11 +15,12 @@
 	<listbox id="boxArchivos" multiple="false" checkmark="false" model="@bind(vm.archivos)" mold="paging" pageSize="8" emptyMessage="No existen archivos.">
 
 		<listhead style="heigth:10px;" >
-			<listheader width="170px" label="Fecha de subida"/>
-			<listheader width="250px" label="Usuario"/>
-			<listheader width="250px" label="Descripción"/>
+			<listheader width="150px" label="Fecha de subida"/>
+			<listheader width="200px" label="Usuario"/>
+			<listheader width="500px" label="Descripción"/>
 			<listheader width="300px" label="Archivo"/>
-			<listheader width="300px" label="Comentario"/>
+			<listheader width="50px" label="Borrar"/>
+<!-- 			<listheader width="300px" label="Comentario"/> -->
 		</listhead>
 
 		<template name="model">
@@ -40,12 +41,16 @@
 
 				<listcell >
 					<textbox width="80%" value="@bind(each.fileName)" readonly="true" onClick="@command('obtenerArchivo',archivoActual=each)" tooltiptext="@bind(each.fileName)" />
-					<button width="20%" label="Subir" upload="true,maxsize=1000" onUpload="@command('subirArchivo',archivo=event.media, archivoActual=each)" />
+					<button width="20%" label="Subir" upload="true,maxsize=5000" onUpload="@command('subirArchivo',archivo=event.media, archivoActual=each)" />
 				</listcell>
 
-				<listcell >
-					<textbox width="100%" value="@bind(each.comentario)" readonly="false"/>
+				<listcell>
+					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarArchivo', elemento=each )" />
 				</listcell>
+
+<!-- 				<listcell > -->
+<!-- 					<textbox width="100%" value="@bind(each.comentario)" readonly="false"/> -->
+<!-- 				</listcell> -->
 
 			</listitem>
 		</template>

@@ -26,7 +26,6 @@
                 <column hflex="2" label="@load(vm.descCampo4)" align="left" unless="${empty vm.descCampo4}"/>
                 
                 
-                
             </columns>
 
             <rows>

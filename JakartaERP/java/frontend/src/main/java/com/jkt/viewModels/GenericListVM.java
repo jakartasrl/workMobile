@@ -1,8 +1,10 @@
 package com.jkt.viewModels;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import lombok.Data;
 
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
@@ -10,11 +12,15 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.LaboratorioOV;
 import com.jkt.ov.ListDescriptibleOV;
+import com.jkt.ov.ListLaboratorioOV;
 
 
 /**
@@ -24,9 +30,9 @@ import com.jkt.ov.ListDescriptibleOV;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-public class GenericVM extends ViewModel implements IBasicOperations{
+public class GenericListVM extends ViewModel implements IBasicOperations{
 
-	private DescriptibleOV entidad = new DescriptibleOV();
+	private ListDescriptibleOV entidades;
 	
 	private String clase;
 	private String operacion;
@@ -52,6 +58,10 @@ public class GenericVM extends ViewModel implements IBasicOperations{
 		nuevo();
 		
 		this.setTitulo(formatearTitulo(clase));
+		
+		ContainerOV containerOV = new ContainerOV();
+		containerOV.setString1(getClase());
+		this.entidades = (com.jkt.ov.ListDescriptibleOV) Operaciones.ejecutar("Traer", containerOV, com.jkt.ov.ListDescriptibleOV.class);
 	}
 
 	/**
@@ -78,22 +88,40 @@ public class GenericVM extends ViewModel implements IBasicOperations{
 	@Command
 	@NotifyChange("entidad")
 	public void guardar() throws JakartaException {
-		Operaciones.ejecutar(operacion, this.entidad);
-		Messagebox.show("Se ha guardado la entidad correctamente.");
-		this.nuevo();
+		
+		List list = this.entidades.getList();
+		for (Object object : list) {
+			Operaciones.ejecutar(operacion, object);
+		}
+		
 	}
 
 	@Override
 	@Command
 	@NotifyChange("entidad")
 	public void nuevo() throws JakartaException {
-		this.entidad=new DescriptibleOV();
+//		this.entidad=new DescriptibleOV();
 	}
 
+	@Command
+	@NotifyChange("entidades")
+	public void agregarElemento(){
+		this.entidades.getList().add(new DescriptibleOV());
+	}
+	
 	@Override
 	@Command
+	@NotifyChange("entidades")
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openComplexHelper(clase, "", this.entidad, "", "Entidades disponibles", "Codigo", "Descripción", true, "" , "");
+		ContainerOV containerOV = new ContainerOV();
+		containerOV.setString1(getClase());
+		this.entidades = (com.jkt.ov.ListDescriptibleOV) Operaciones.ejecutar("Traer", containerOV, com.jkt.ov.ListDescriptibleOV.class);
 	}
-
+	
+	@Command
+	@NotifyChange("entidades")
+	public void eliminar(@BindingParam("elemento") DescriptibleOV elemento){
+		this.entidades.getList().remove(elemento);
+	}
+	
 }

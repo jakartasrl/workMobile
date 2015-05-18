@@ -1,5 +1,8 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
+
+	<hlayout>
+
 	<vlayout width="100%" style="text-align:center;">
 		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
@@ -10,7 +13,14 @@
 		</button>
 			<label value="Agregar un item"></label>
 	</vlayout>
+	
+	<vlayout width="100%" style="text-align:center;" >
+		<button style="margin-bottom:2px;" image="/pantallas/icons/delSmall.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Agregar un nuevo item.">
+		</button>
+		<label value="Eliminar este item."></label>
+	</vlayout>
 
+	</hlayout>
 
 	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
 
@@ -47,10 +57,10 @@
 								</combobox>
 		
 								<label value="Importe:" />
-								<textbox width="70px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+								<textbox width="100px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 							
 								<label value="Importe Total:" />
-								<textbox width="70px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/>
+								<textbox width="100px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/>
 								
 							</hlayout>
 							

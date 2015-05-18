@@ -12,7 +12,7 @@
 	</vlayout>
 
 
-	<listbox width="890px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="8" emptyMessage="No existen items aun.">
+	<listbox width="940px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="8" emptyMessage="No existen items aun.">
 
 		<listhead style="heigth:10px;" >
 			<listheader width="100px" label="Cod.Articulo"/>
@@ -21,6 +21,7 @@
 			<listheader width="150px" label="Moneda"/>
 			<listheader width="90px" label="Importe"/>
 			<listheader width="100px" label="Total"/>
+			<listheader width="50px" label="Borrar" />
 		</listhead>
 
 		<template name="model">
@@ -64,7 +65,10 @@
 						<textbox width="60px;" value="@bind(each.importeTotal)" sclass="importe" readonly="true"/>
 					</hlayout>
 				</listcell>
-								
+
+				<listcell style="text-align:center" >
+					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElementoArticulo', elemento=each )" />
+				</listcell>
 
 			</listitem>
 		</template>

@@ -482,5 +482,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	public void setaPartirDeCotizacion(boolean aPartirDeCotizacion) {
 		this.aPartirDeCotizacion = aPartirDeCotizacion;
 	}
+
+	
+	@Command
+	@NotifyChange("comprobanteOV")
+	public void eliminarFacturacion(@BindingParam("elemento") FormaFacturacionOV elemento) {
+		this.comprobanteOV.getFacturaciones().remove(elemento);
+	}
+
 	
 }

@@ -14,7 +14,7 @@
 	</vlayout>
 
 
-	<listbox width="910px" id="boxFF" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
+	<listbox width="960px" id="boxFF" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
 
 		<listhead style="heigth:10px;" >
 		
@@ -25,6 +25,7 @@
 			
 			<listheader width="100px" label="Cod.Cond.Pago"/>
 			<listheader width="310px" label="Descripción Cond.Pago"/>
+			<listheader width="50px" label="Borrar"/>
 		
 		</listhead>
 
@@ -37,13 +38,13 @@
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox sclass="importe" width="60px;" value="@bind(each.porcentaje)" constraint="no empty"/>
+						<doublebox sclass="importe" width="60px;" value="@bind(each.porcentaje)" format=",###" constraint="no empty,no negative" />
 					</hlayout>
 				</listcell>
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox sclass="importe" width="60px;" value="@bind(each.importe)" constraint="no empty"/>
+						<intbox sclass="importe" width="60px;" value="@bind(each.importe)" constraint="no empty,no negative"/>
 					</hlayout>
 				</listcell>
 							
@@ -56,6 +57,10 @@
 								
 				<listcell>
 					<textbox width="300px" value="@bind(each.condicionDePago.descripcion)" readonly="true"/>
+				</listcell>
+
+				<listcell>
+					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarFacturacion', elemento=each )" />
 				</listcell>
 
 			</listitem>

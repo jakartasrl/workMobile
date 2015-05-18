@@ -387,4 +387,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.lDocumentacion = lDocumentacion;
 	}
 	
+	@Command
+	@NotifyChange("comprobanteOV")
+	public void eliminarFacturacion(@BindingParam("elemento") FormaFacturacionOV elemento) {
+		this.comprobanteOV.getFacturaciones().remove(elemento);
+	}
+	
 }
