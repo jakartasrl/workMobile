@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import lombok.Data;
 
+import org.zkforge.ckez.CKeditor;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
@@ -35,7 +36,6 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 	@Init
 	public void init(){
 		this.setTitulo("Administración de Plantila");
-//		this.editMode=false;
 	}
 	
 	@Command
