@@ -1,0 +1,42 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+
+	<grid style="border-style:none;" sizedByContent="true">
+					<columns>
+						<column width="130px" />
+						<column width="100px" />
+						<column width="200px" />
+					</columns>
+					<rows>
+					
+						<row sclass="fila-maestro">
+							<label style="width:100px;" value="Modelo a utilizar : " />
+							<hlayout width="100%">
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" tabindex="5"/>
+								<button label="..." onClick="@command('openHelper', clase='modeloCotizador', ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" />
+							</hlayout>
+							<textbox width="100%" sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="1" readonly="true"/>
+						</row>
+			
+						<row sclass="fila-maestro">
+									
+							<label value="Expresar en moneda : " />
+							<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.cotizadorOV.monedaExpresada)" readonly="true">
+								<template name="model">
+									<comboitem style="margin-top:15px;" label="@bind(moneda.codigo)" />
+								</template>
+							</combobox>
+							
+						</row>
+						
+						<row sclass="fila-maestro">
+						
+							<button style="margin-bottom:2px;margin-left:3px;" label="Tipos de Cambio..." onClick="@command('tiposCambio')" />
+				
+						</row>
+						
+					</rows>
+					
+				</grid>
+				
+</zk>

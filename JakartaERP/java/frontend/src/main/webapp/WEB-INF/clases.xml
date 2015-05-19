@@ -56,5 +56,6 @@
 	<elemento key="contactos" value="com.jkt.varios.dominio.Contacto"/>
 	<elemento key="sector" value="com.jkt.dominio.Sector"/>
 	<elemento key="tarea" value="com.jkt.dominio.Tarea"/>
+	<elemento key="itemCotizacion" value="com.jkt.dominio.CotizacionDet"/>
 
 </elementos>

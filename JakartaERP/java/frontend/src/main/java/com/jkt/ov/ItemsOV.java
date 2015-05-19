@@ -1,10 +1,12 @@
 package com.jkt.ov;
 
+import java.util.Date;
 import java.util.Random;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import com.jkt.cotizador.dominio.CotizadorDet;
 import com.jkt.view.ObjectView;
 
 @Data
@@ -34,6 +36,10 @@ public class ItemsOV extends ObjectView {
 	private String desAnalisis;
 	
 	private char tipoItem;
+	
+	private CotizadorDet cotizadorDet;
+	private long idCotizador;
+	private Date fecha;
 	
 	public ItemsOV(){
 		Random rand = new Random();

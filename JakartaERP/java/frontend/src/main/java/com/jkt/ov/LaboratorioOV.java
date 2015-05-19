@@ -16,33 +16,15 @@ import com.jkt.view.ObjectView;
  *
  */
 @EqualsAndHashCode(callSuper=true, of={"codigo","descripcion"})
-public class LaboratorioOV extends ObjectView {
+public class LaboratorioOV extends DescriptibleOV {
 
 	public LaboratorioOV() {
 		this.setActivo(Boolean.TRUE);
-		this.codigo=StringUtils.EMPTY;
-		this.descripcion=StringUtils.EMPTY;
+		this.setCodigo(StringUtils.EMPTY);
+		this.setDescripcion(StringUtils.EMPTY);
 	}
 	
-	private String codigo;
-	private String descripcion;
 	private List laboratorios=new ArrayList();
-	
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 	
 	public List getLaboratorios() {
 		return laboratorios;

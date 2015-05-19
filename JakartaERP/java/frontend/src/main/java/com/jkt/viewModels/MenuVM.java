@@ -46,7 +46,7 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Plantilla", "generic/generic.zul", "small","guardarPlantilla", "plantilla"));
 		menues.add(MenuOV.newInstance("Documentación", "generic/generic.zul", "small","guardarDocumentacion", "documentacion"));
 		menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
-
+		menues.add(MenuOV.newInstance("Cotizador", "index/index-Cotizador.zul", "small"));
 		
 //		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
 //		news.add("Jueves 16 de Abril- Argentina está de fiesta");

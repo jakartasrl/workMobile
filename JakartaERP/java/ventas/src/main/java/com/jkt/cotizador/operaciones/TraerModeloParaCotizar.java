@@ -1,5 +1,6 @@
 package com.jkt.cotizador.operaciones;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -20,18 +21,31 @@ import com.jkt.varios.dominio.ComponenteValor;
  * @author Leonel Suarez - Jakarta SRL
  */
 public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
+	
+	private List<TituloModeloCotizador> titulos=new ArrayList<TituloModeloCotizador>();
+	private static final String OID = "OID";
+	private static final String WRITER_MODELO = "WRITER_MODELO";
+	
+	private ModeloCotizador modelo;
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
 		
-		ModeloCotizador modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
+		modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
 		
-//		notificarObjeto(WRITER_MODELO, modelo);
-		
+		if (tipoCliente.equals(CLIENTE_DELPHI)) {
+			notificarObjeto(WRITER_MODELO, modelo);
+		}
+				
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
+		}
+		
+		if (!tipoCliente.equals(CLIENTE_DELPHI)){
+			modelo.setTitulos(titulos);
+			notificarObjeto("", modelo);
 		}
 		
 	}
@@ -49,18 +63,19 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 		if (!tieneHijos) {
 			if(tituloModeloCotizador.getConcepto()==null){
 				throw new JakartaException("Este modelo no se puede utilizar hasta que todos los "
-						+ "tÌtulos de nivel m·s bajo tengan un concepto relacionado. TÌtulo: " + tituloModeloCotizador.getCodigo());
+						+ "t√≠tulos de nivel m√°s bajo tengan un concepto relacionado. T√≠tulo: " + tituloModeloCotizador.getCodigo());
 			}
 			
 			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
 				if (tituloModeloCotizador.getConcepto().getComponenteValor()==null) {
 					throw new JakartaException("El concepto '" + tituloModeloCotizador.getConcepto().getCodigo() + " - " + tituloModeloCotizador.getConcepto().getDescripcion() +
-							"' asociado a este modelo pide artÌculo, y por lo tanto, debe tener relacionado un valor de clasificador de artÌculo.");
+							"' asociado a este modelo pide art√≠culo, y por lo tanto, debe tener relacionado un valor de clasificador de art√≠culo.");
 				}
 			}
 			
-			tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
-		
+			if (tituloModeloCotizador.getConcepto() != null){
+				tituloModeloCotizador.setTipo("C");//Solamente para retornar correctamente un tipo y que sea mas simple desde el cliente la lectura.
+			}
 		
 		}
 		//Si es un concepto, es un for a mostrar cada uno de los valores segun el concepto y el componente valor...
@@ -85,15 +100,30 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 					
 					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
 					
-					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+					if (tipoCliente.equals(CLIENTE_DELPHI)) {
+						notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+					} else {
+						this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+					}
 				}
 				
 			}else{
 				asignarMonedaPrecioFecha(tituloModeloCotizador, null);
-				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+				if (tipoCliente.equals(CLIENTE_DELPHI)) {
+					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+				} else {
+					this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+				}
 			}
+			
 		}else{
-			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+			
+			if (tipoCliente.equals(CLIENTE_DELPHI)) {
+				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+			} else {
+				this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+			}
+			
 		}
 		
 		
