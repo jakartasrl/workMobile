@@ -325,6 +325,5 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 				this.siguienteRoot.add(new NodoTareaAgenda(nuevaPrecedencia));
 			}
 		}
-		
 	}
 }

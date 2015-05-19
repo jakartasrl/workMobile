@@ -2,7 +2,7 @@
 
 		<listbox 
 			model="@bind(vm.lDocumentacion)" 
-			multiple="true" checkmark="true" 
+			multiple="true" checkmark="@bind(!vm.modoAgenda)" 
 			emptyMessage="No existe documentación disponible." mold="paging" pageSize="10"
 			selectedItems="@bind(vm.docEntregados)"
 			hflex="1" vflex="1" 

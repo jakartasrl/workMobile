@@ -1,6 +1,6 @@
 <zk id="contentFF" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:left;margin-left:400px">
+	<vlayout width="100%" style="text-align:left;margin-left:400px" visible="@bind(!vm.modoAgenda)">
 		<hlayout>
 			<button style="margin-bottom:2px;margin-left:40px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarFormaFacturacion')" tooltiptext="Agregar un nuevo item.">
 				 <attribute name="onClick"><![CDATA[
@@ -33,25 +33,25 @@
 			<listitem>
 
 				<listcell>
-					<textbox width="300px" value="@bind(each.descripcion)" constraint="no empty"/>
+					<textbox readonly="@bind(vm.modoAgenda)" width="300px" value="@bind(each.descripcion)" constraint="no empty"/>
 				</listcell>
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<doublebox sclass="importe" width="60px;" value="@bind(each.porcentaje)" format="##.##" constraint="no empty,no negative" />
+						<doublebox readonly="@bind(vm.modoAgenda)" sclass="importe" width="60px;" value="@bind(each.porcentaje)" format="##.##" constraint="no empty,no negative" />
 					</hlayout>
 				</listcell>
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<intbox sclass="importe" width="60px;" value="@bind(each.importe)" constraint="no empty,no negative"/>
+						<intbox readonly="@bind(vm.modoAgenda)" sclass="importe" width="60px;" value="@bind(each.importe)" constraint="no empty,no negative"/>
 					</hlayout>
 				</listcell>
 							
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox constraint="no empty" sclass="campoCodigo-small" value="@bind(each.condicionDePago.codigo)" onBlur="@command('validarCampo', clase='condicionPago', codigo=self.value, ov=each.condicionDePago)" />
-						<button label="..." onClick="@command('openHelper', clase='condicionPago', ov=each.condicionDePago)" />
+						<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" sclass="campoCodigo-small" value="@bind(each.condicionDePago.codigo)" onBlur="@command('validarCampo', clase='condicionPago', codigo=self.value, ov=each.condicionDePago)" />
+						<button disabled="@bind(vm.modoAgenda)" label="..." onClick="@command('openHelper', clase='condicionPago', ov=each.condicionDePago)" />
 					</hlayout>
 				</listcell>
 								
@@ -60,7 +60,7 @@
 				</listcell>
 
 				<listcell>
-					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarFacturacion', elemento=each )" />
+					<button disabled="@bind(vm.modoAgenda)" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarFacturacion', elemento=each )" />
 				</listcell>
 
 			</listitem>
