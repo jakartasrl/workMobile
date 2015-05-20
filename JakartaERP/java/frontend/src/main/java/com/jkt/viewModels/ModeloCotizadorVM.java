@@ -204,6 +204,16 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command
+	@NotifyChange({"arbolTitulos","tituloModeloCotizadorOV","modeloCotizadorOV"})
+	public synchronized void mover(@BindingParam("titulo") NodoTitulos nodo){
+//		this.nodoActual=nodo;
+//		this.tituloModeloCotizadorOV=nodo.getData();
+		
+		Messagebox.show("Moviendo " + nodo.getData().getCodigo());
+		
+	}
+	
+	@Command
 	@NotifyChange({"arbolTitulos","modeloCotizadorOV"})
 	public void modificarConcepto() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		openHelper("conceptoPresupuesto", "", this.tituloModeloCotizadorOV.getConcepto(), "traerConceptoPresupuesto", "Conceptos", "Codigo", "Descripcion", false);
@@ -296,5 +306,5 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		this.nodoActual.getParent().add(nodoTitulos);	
 		
 	}
-	
+	    
 }
