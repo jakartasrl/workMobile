@@ -43,6 +43,8 @@ import com.jkt.ov.tree.NodoNotas;
 @Data
 public abstract class ComprobanteVM extends ViewModel {
 
+	protected boolean modoAgenda=false;
+	
 	protected DescriptibleOV clienteOV = new DescriptibleOV();
 	protected SucursalOV sucursalOV = new SucursalOV();
 	protected DescriptibleOV lPreciosOV = new DescriptibleOV();

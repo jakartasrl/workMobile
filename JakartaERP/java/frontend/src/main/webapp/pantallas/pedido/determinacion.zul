@@ -89,7 +89,7 @@
 		</button>
 
 		<button style="margin-bottom:2px;margin-left:3px;"
-			image="/pantallas/icons/delSmall.png" label="Borrar Metodo"
+			image="/pantallas/icons/deleteRow.png" label="Borrar Metodo"
 			onClick="@command('eliminarMetodo', nroMetodo=listbox.activePage)"
 			tooltiptext="Eliminar nuevo metodo." visible="@bind(!vm.determinacion.metodos.isEmpty())" />
 		
@@ -129,7 +129,7 @@
 												tooltiptext="Agregar nuevo valor." />
 										
 											<button 
-												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
+												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/deleteRow.png"
 												label="Borrar Valor"
 												onClick="@command('borrarValor', metodoActual=each)"
 												tooltiptext="Borrar valor." />
@@ -170,7 +170,7 @@
 											<!-- Variables -->
 	
 											<button
-												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/delSmall.png"
+												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/deleteRow.png"
 												label="Borrar Variable"
 												onClick="@command('borrarVar', metodoActual=each)"
 												tooltiptext="Borrar variable." visible="@bind(!vm.determinacion.calculaResultado)"/>

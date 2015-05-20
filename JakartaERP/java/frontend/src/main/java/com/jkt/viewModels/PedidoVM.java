@@ -35,6 +35,7 @@ import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.ListPedidoOV;
 import com.jkt.ov.NotaOV;
+import com.jkt.ov.ParametroOV;
 import com.jkt.ov.PedidoDocumentacionOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.PrecedenteOV;
@@ -56,9 +57,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	/*
 	 * Variables para la planificacion de la agenda
 	 */
-	private boolean modoAgenda=false;
-//	private boolean modoAgenda=true;
-	
 	private TareaAgendaOV tareaAgregada;
 	private NodoTareaAgenda siguienteRoot;
 	
@@ -616,8 +614,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			validarCampo("tarea", this.codigoTareaNueva, this.tareaAgregada.getTarea(), "actualizarTareasYArbol");
 			return;
 		}
-		actualizarTareas();
-		openComplexHelper("tarea", "", this.tareaAgregada.getTarea(), "actualizarArboles", "Seleccionar tarea", "Tarea", "Descripción", true , "" , "" );
+//		actualizarTareas();
+		openComplexHelper("tarea", "", this.tareaAgregada.getTarea(), "tratamientoTarea", "Seleccionar tarea", "Tarea", "Descripción", true , "" , "" );
 	}
 	
 	public void actualizarTareasYArbol() throws IllegalAccessException, InvocationTargetException{
@@ -631,6 +629,61 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		tareaPrecedenteOV.setTarea(this.tareaAgregada);
 		this.siguienteRoot=new NodoTareaAgenda(tareaPrecedenteOV, true);
 		this.agenda.getArbolPrecedencias().getRoot().add(siguienteRoot);
+	}
+	
+	/**
+	 * Dependiente del comportamiento de la tarea, se abre un help para los items, se insertan las determinaciones, o las formas de facturacion...
+	 * Cualquiera sea el caso, 1, 2 o N tareas, se llamará a el metodo actualizarArboles siempre...
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws JakartaException 
+	 */
+	public void tratamientoTarea() throws IllegalAccessException, InvocationTargetException, JakartaException{
+		
+		ParametroOV paramTareaTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaTaller"), ParametroOV.class);
+		ParametroOV paramTareaLab = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaLab"), ParametroOV.class);
+		ParametroOV paramTareaFacturar = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaFacturar"), ParametroOV.class);
+		
+		ParametroOV sectorTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorTaller"), ParametroOV.class);
+		ParametroOV sectorLab = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorLab"), ParametroOV.class);
+
+		if(this.tareaAgregada.getTarea().getId()==paramTareaTaller.getValorNumero()){
+			
+		}else if(this.tareaAgregada.getTarea().getId()==paramTareaLab.getValorNumero()){
+			DescriptibleOV tarea = this.tareaAgregada.getTarea();
+			if(this.lDeterminacionesQuimicas.isEmpty()){
+				actualizarTareasYArbol();
+			}else{
+				for (ItemsOV itemsOV : this.lDeterminacionesQuimicas) {
+					this.tareaAgregada=new TareaAgendaOV();
+					this.tareaAgregada.setTarea(tarea);
+					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+					this.tareaAgregada.setComentario(itemsOV.getDescripcionDeterminacion());
+					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
+					actualizarTareasYArbol();
+				}
+			}
+		}else if(this.tareaAgregada.getTarea().getId()==paramTareaFacturar.getValorNumero()){
+			
+			DescriptibleOV tarea = this.tareaAgregada.getTarea();
+			List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
+
+			if (facturaciones.isEmpty()) {
+				actualizarTareasYArbol();
+			}else{
+				for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
+					this.tareaAgregada=new TareaAgendaOV();
+					this.tareaAgregada.setTarea(tarea);
+					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+					this.tareaAgregada.setComentario(formaFacturacionOV.getDescripcion());
+					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
+					actualizarTareasYArbol();
+				}
+			}
+			
+		}else{
+			actualizarTareasYArbol();
+		}
 	}
 	
 	/**

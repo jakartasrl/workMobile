@@ -1347,4 +1347,25 @@
 	</operacion>
 	
 	
+	
+	<operacion name="TraerParametro" clase="com.jkt.operaciones.TraerParametro" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ParametroOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="NOMBREPARAMETRO"/>
+		</input>
+	
+		<output >
+			<campoSalida value="id" target="id" />
+			<campoSalida value="codigo" target="nombre" />
+			
+			<campoSalida value="valorCadena" target="valorCadena" />
+			<campoSalida value="valorNumero" target="valorNumero" />
+			<campoSalida value="valorFecha" target="valorFecha" />
+			<campoSalida value="valorDoble" target="valorDoble" />
+			<campoSalida value="valorBooleano" target="isValorBooleano" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
 </entity>

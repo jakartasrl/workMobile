@@ -77,7 +77,7 @@
 
 				<listcell >
 					<button style="margin-bottom:2px;margin-left:3px;"
-						image="/pantallas/icons/delSmall.png" label="" onClick="@command('eliminarTarea', tarea=each )" />
+						image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarTarea', tarea=each )" />
 				</listcell>
 				
 			</listitem>
