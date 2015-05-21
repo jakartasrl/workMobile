@@ -17,7 +17,7 @@
 	<vlayout width="100%" style="text-align:center;" >
 		<button style="margin-bottom:2px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Agregar un nuevo item.">
 		</button>
-		<label value="Eliminar este item."></label>
+		<label value="Eliminar este item." />
 	</vlayout>
 
 	</hlayout>

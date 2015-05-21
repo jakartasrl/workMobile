@@ -27,7 +27,7 @@ public class PedidoOV extends ObjectView {
 	private String lugarEmision;
 	private String nro;
 	private boolean anulado = false;
-	private Date fecha;
+	private Date fecha = new Date();
 
 	private Long idCliente;
 	private Long idSucursal;

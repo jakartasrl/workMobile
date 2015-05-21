@@ -78,22 +78,22 @@
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
-			        <tab id="items" label="Fabricación/Reparación/Service" />
-			        <tab id="labElec" label="Laboratorio Electrico" />
-			        <tab id="labQuim" label="Laboratorio Quimico" />
-			        <tab id="mat" label="Materiales" />
+			        <tab id="items" label="Fabricación/Reparación/Service" visible="@bind(vm.modoAgenda and !vm.items.isEmpty())" />
+			        <tab id="labElec" label="Laboratorio Electrico" visible="@bind(vm.modoAgenda and !vm.lDeterminacionesElectricas.isEmpty())" />
+			        <tab id="labQuim" label="Laboratorio Quimico" visible="@bind(vm.modoAgenda and !vm.lDeterminacionesQuimicas.isEmpty())" />
+			        <tab id="mat" label="Materiales" visible="@bind(vm.modoAgenda and !vm.itemsArticulos.isEmpty())" />
 			        <tab id="dComerciales" label="Datos Comerciales" />
 			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
 			        <tab id="notas" label="Notas" />
 			        <tab id="doc" label="Documentacion" />
 			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
-			        <tab id="ff" label="Formas de Facturación" />
-			        <tab id="files" label="Archivos" />
+			        <tab id="ff" label="Formas de Facturación"  visible="@bind(vm.modoAgenda and !vm.comprobanteOV.facturaciones.isEmpty())" />
+			        <tab id="files" label="Archivos" visible="@bind(vm.modoAgenda and !vm.archivos.isEmpty())" />
 		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda)"/>
 		        	<tab id="tPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" />
 			    </tabs>
 			    <tabpanels>
-			    
+
 			        <tabpanel>
 						<include id="itemsContent" hflex="1" src="/pantallas/pedido/tab-items.zul" viewModel="${vm}"/>
 			        </tabpanel>

@@ -25,7 +25,7 @@
 			    		</hlayout>
 
 						<label value="Descripción : " />
-						<textbox class="campoCodigo-medium" width="100%" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="2" />
+						<textbox class="campoCodigo-medium" width="R00%" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="2" />
 							
 					</row>
 										

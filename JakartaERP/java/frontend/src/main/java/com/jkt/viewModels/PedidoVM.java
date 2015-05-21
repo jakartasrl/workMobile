@@ -7,7 +7,9 @@ import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import lombok.Data;
@@ -15,13 +17,13 @@ import lombok.Data;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.Default;
-import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -493,11 +495,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		if (modoAgenda.equals("true")) {
 			this.modoAgenda=true;
+			this.titulo="Planificación de Pedido";
 		}else{
+			this.titulo="Ingreso de Pedido";
 			this.modoAgenda=false;
 		}
-		
-		
+
 		log.info("Iniciando ViewModel de Pedido.");
 		
 		log.info("Recuperando notas...");
@@ -513,7 +516,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando items...");
 		this.items=new ArrayList<ItemsOV>();
-		this.items.add(new ItemsOV());
+//		this.items.add(new ItemsOV()); //se agrega un item para no iniciar tocando un boton!
 
 		log.info("Iniciando tipos de venta...");
 		this.tiposVenta=(ListDescriptibleOV) Operaciones.ejecutar("TraerTiposDeVenta", ListDescriptibleOV.class);
@@ -640,6 +643,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 */
 	public void tratamientoTarea() throws IllegalAccessException, InvocationTargetException, JakartaException{
 		
+		// Hacer variables de instancias para evitar esta query en cada momento!
+		
 		ParametroOV paramTareaTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaTaller"), ParametroOV.class);
 		ParametroOV paramTareaLab = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaLab"), ParametroOV.class);
 		ParametroOV paramTareaFacturar = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaFacturar"), ParametroOV.class);
@@ -649,7 +654,27 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 		if(this.tareaAgregada.getTarea().getId()==paramTareaTaller.getValorNumero()){
 			
+			//Tareas para cuando la tarea es de tipo taller
+			if(this.items.isEmpty() && this.itemsArticulos.isEmpty()){
+				actualizarTareasYArbol();
+			}else{
+				//Comportamiento que maneja todos los items en una ventana separada, y al aceptar, agrega todos esos items como tareas.
+				Map<String, Object> parametros = new HashMap<String, Object>();
+				
+				parametros.put("vm", this);
+				parametros.put("tarea", this.tareaAgregada.getTarea());
+				
+				//viajan listas vacias.
+				parametros.put("items", this.items);
+				parametros.put("itemsArticulos", this.itemsArticulos);
+				
+				Window window = (Window) Executions.createComponents("/pantallas/pedido/editorItems.zul", null, parametros);
+				window.doModal();
+			}
 		}else if(this.tareaAgregada.getTarea().getId()==paramTareaLab.getValorNumero()){
+			
+			//Tareas para cuando la tarea es de tipo laboratorio
+			
 			DescriptibleOV tarea = this.tareaAgregada.getTarea();
 			if(this.lDeterminacionesQuimicas.isEmpty()){
 				actualizarTareasYArbol();
@@ -664,6 +689,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				}
 			}
 		}else if(this.tareaAgregada.getTarea().getId()==paramTareaFacturar.getValorNumero()){
+			
+			//Tareas para cuando la tarea es de tipo facturacion
 			
 			DescriptibleOV tarea = this.tareaAgregada.getTarea();
 			List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
@@ -682,6 +709,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 		}else{
+			
+			//Tarea estandar
 			actualizarTareasYArbol();
 		}
 	}
@@ -695,12 +724,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		//Agrega a cada nodo el nuevo elemento
 		for (TreeNode<TareaPrecedenteOV> nodoActual : nodosHijos) {
-				if (nodoActual!=this.siguienteRoot) { //el nodo recientemente agregado ya pertenece al arbol, x eso este if
-					TareaPrecedenteOV nuevoPrecedente=new TareaPrecedenteOV();
-					nuevoPrecedente.setTarea(this.tareaAgregada);
-					NodoTareaAgenda nuevoNodo=new NodoTareaAgenda(nuevoPrecedente);
-					nodoActual.add(nuevoNodo);
-				}
+			if (nodoActual!=this.siguienteRoot) { //el nodo recientemente agregado ya pertenece al arbol, x eso este if
+				TareaPrecedenteOV nuevoPrecedente=new TareaPrecedenteOV();
+				nuevoPrecedente.setTarea(this.tareaAgregada);
+				NodoTareaAgenda nuevoNodo=new NodoTareaAgenda(nuevoPrecedente);
+				nodoActual.add(nuevoNodo);
+			}
 		}
 		
 		//para el nuevo elemento, agregar todos menos a mi mismo.
@@ -711,6 +740,23 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				this.siguienteRoot.add(new NodoTareaAgenda(nuevaPrecedencia));
 			}
 		}
+	}
+	
+	
+	public void actualizarTareasDesdeHelpExterno(List<ItemsOV> items, DescriptibleOV tarea) throws JakartaException, IllegalAccessException, InvocationTargetException{
+		ParametroOV sectorTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorTaller"), ParametroOV.class);
+
+		for (ItemsOV itemsOV : items) {
+			this.tareaAgregada=new TareaAgendaOV();
+			this.tareaAgregada.setTarea(tarea);
+			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+			this.tareaAgregada.setComentario(String.format("%s - %s", itemsOV.getReferencia(), itemsOV.getPlantilla().getDescripcion()));
+			this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
+			actualizarTareasYArbol();
+		}
+		
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+
 	}
 	
 }

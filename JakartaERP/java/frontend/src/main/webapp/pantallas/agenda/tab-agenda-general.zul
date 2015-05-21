@@ -21,11 +21,11 @@
 			<listheader width="115px" label="Tarea"/>
 			<listheader width="250px" label="Descripción"/>
 			<listheader width="250px" label="Comentario"/>
-			<listheader width="130px" label="Fecha Limite"/>
-<!-- 			<listheader width="130px" label="Duración"/> -->
-			<listheader width="200px" label="Sector responsable"/>
-			<listheader width="150px" label="Estado"/>
-			<listheader width="130px" label="Fecha cumplimiento"/>
+			<listheader width="110px" label="Fecha Limite"/>
+			<listheader width="50px" label="Dias"/>
+			<listheader width="110px" label="Sector"/>
+			<listheader width="130px" label="Estado"/>
+			<listheader width="110px" label="Cumplimiento"/>
 			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
@@ -48,23 +48,22 @@
 
 
 				<listcell >
-					<datebox value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
+					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 				</listcell>
 
-<!-- 				<listcell > -->
-<!-- 					<label value="Cantidad:" /> -->
-<!-- 					<textbox width="40px;" value="@bind(each.duracion)" sclass="importe" constraint="no empty"/> -->
-<!-- 				</listcell> -->
+				<listcell >
+					<intbox width="100%" value="@bind(each.duracion)" sclass="importe" constraint="no empty"/>
+				</listcell>
 
 				<listcell>
-					<textbox sclass="campoCodigo-vlarge" value="@bind(each.sector.codigo)" readonly="false"  
+					<textbox sclass="campoCodigo-medium" value="@bind(each.sector.codigo)" readonly="false"  
 						onBlur="@command('validarCampo', clase='sector', codigo=self.value, ov=each.sector)"
 						/>
 					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" />
 				</listcell>
 
 				<listcell>
-					<combobox width="100%" model="@bind(vm.estados.list)" selectedItem="@bind(each.estado)" constraint="no empty">
+					<combobox width="95%" model="@bind(vm.estados.list)" selectedItem="@bind(each.estado)" constraint="no empty">
 						<template name="model" var="e">
 							<comboitem label="@bind(e.descripcion)" />
 						</template>
@@ -72,7 +71,7 @@
 				</listcell>
 
 				<listcell >
-					<datebox value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+					<datebox width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
 				</listcell>
 
 				<listcell >
