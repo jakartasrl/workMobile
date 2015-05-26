@@ -68,8 +68,10 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		}
 		
 		
-		this.fechaFiltroInicio = LocalDate.now().minusDays(15).toDate();
-		this.fechaFiltroFin = LocalDate.now().plusDays(15).toDate();
+		this.fechaFiltroInicio = LocalDate.now().toDate();
+		this.fechaFiltroFin = LocalDate.now().toDate();
+//		this.fechaFiltroInicio = LocalDate.now().minusDays(15).toDate();
+//		this.fechaFiltroFin = LocalDate.now().plusDays(15).toDate();
 		
 		//Actualiza todo el vm
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
