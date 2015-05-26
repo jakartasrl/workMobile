@@ -104,13 +104,13 @@
 			<list name="tareas" cascade="all" table="PEDIDO_TAREAS">
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="TAREA_ID" class="com.jkt.grafo.TareaPedido" />
+				<many-to-many column="TAREA_ID" class="com.jkt.pedido.dominio.TareaPedido" />
 			</list>
 
 			<list name="planificaciones" cascade="all" table="PEDIDO_PLAN">
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="PLAN_ID" class="com.jkt.grafo.PlanificacionPedido" />
+				<many-to-many column="PLAN_ID" class="com.jkt.pedido.dominio.PlanificacionPedido" />
 			</list>
 			
 		</union-subclass>

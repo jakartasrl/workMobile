@@ -14,7 +14,6 @@ package com.jkt.dominio;
  */
 public class Container extends Descriptible {
 
-	
 	public Container(String codigo, String descripcion) {
 		this.setCodigo(codigo);
 		this.setDescripcion(descripcion);

@@ -1,10 +1,9 @@
-package com.jkt.grafo;
+package com.jkt.pedido.dominio;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -12,9 +11,11 @@ import lombok.Data;
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.Sector;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.grafo.DatoNodo;
 
 @Data
 public class TareaPedido extends DatoNodo {
+	
 	
 	//transiente! para generar las correspondencias.
 	private int randomNumber;
@@ -35,6 +36,7 @@ public class TareaPedido extends DatoNodo {
 	
 	private List<TareaPedido> tareas=new ArrayList<TareaPedido>();
 	private List<Descriptible> tareasSimples=new ArrayList<Descriptible>();
+	private Pedido pedido;
 	
 	/*
 	 * Estos metodos quedan sin utilidad, ya que serán utilizados para entidades mas complejas.
@@ -53,4 +55,8 @@ public class TareaPedido extends DatoNodo {
 		return true;
 	}
 
+	private long idSector;
+	private Date fechaFiltro1 , fechaFiltro2;
+	
+	
 }

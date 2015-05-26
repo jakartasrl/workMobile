@@ -1368,4 +1368,33 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 
+
+	<operacion name="RecuperarTareasPorSector" clase="com.jkt.pedido.operaciones.RecuperarTareasPorSector" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListTareaAgendaOV">
+	
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.TareaPedido">
+			<campoEntrada propertyOV="long1" metodo="setIdSector" />
+			<campoEntrada propertyOV="fecha1" metodo="setFechaFiltro1" />
+			<campoEntrada propertyOV="fecha2" metodo="setFechaFiltro2" />
+		</input>
+	
+		<output>
+			<campoSalida value="id" target="id" />
+			<campoSalida value="codigoTarea" target="codigo" />
+			<campoSalida value="descripcionTarea" target="descripcion" />
+			
+			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="idEstado" target="idEstado" />
+			<campoSalida value="duracion" target="diasDuracion" />
+			
+			<campoSalida value="fechaLimite" target="fechaLimite" />
+			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="idSector" target="sector.id" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
+
+
 </entity>

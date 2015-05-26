@@ -1,0 +1,103 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<style>
+
+		redRow{
+			background-color : red;
+			color: yellow;
+		}
+		
+		blueRow{
+			background-color : blue;
+		}
+		
+		yellowRow{
+			background-color : yellow;
+		}
+		
+	</style>
+				
+	<div>
+
+		<vlayout >
+<!-- 		<vlayout style="text-align:center"> -->
+
+				<hlayout>
+					<label value="Sector" />
+<!-- 					<combobox width="150px;"> -->
+<!-- 						<comboitem label="Laboratorio" /> -->
+<!-- 						<comboitem label="Control de calidad" /> -->
+<!-- 						<comboitem label="Venta" /> -->
+<!-- 					</combobox> -->
+	
+					<combobox width="150px;" model="@bind(vm.sectores)" selectedItem="@bind(vm.sectorSeleccionado)" constraint="no empty">
+						<template name="model" >
+							<comboitem label="@bind(each.descripcion)" />
+						</template>
+					</combobox>
+	
+	
+					<separator></separator>
+	
+					<label value="Fecha de inicio:"> </label>
+					<datebox id="fechaI" value="@bind(vm.fechaFiltroInicio)" constraint="no empty" format="dd/MM/yyyy" />
+					<label value="Fecha de fin:"> </label>
+					<datebox id="fechaF" value="@bind(vm.fechaFiltroFin)" constraint="no empty" format="dd/MM/yyyy" />
+
+					<separator></separator>
+
+					<button label="Buscar Tareas" onClick="@command('buscarTareas')" />
+					
+<!-- 					<label value="Pedido:" /> -->
+<!-- 					<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoDescriptible.codigo)" /> -->
+<!-- 					<button label="..." onClick="@command('openHelperComplejo', clase='pedido',ov=vm.pedidoDescriptible, titulo='Selección de Pedido', codHeader='Nro Pedido', descHeader='Cliente', tituloAdicional1='Fecha')" /> -->
+			
+				</hlayout>
+				
+<!-- 				<hlayout> -->
+<!-- 				</hlayout> -->
+				
+<!-- 				<button label="Cargar Agenda" onClick='Clients.evalJavaScript("loadCalendar();");' /> -->
+			</vlayout>
+			
+			<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
+			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="auto" emptyMessage="No existen entidades disponibles." style="margin-top:5px;">
+	
+				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
+					<auxheader label="Lista de Entidades" colspan="4" />
+				</auxhead>
+				        
+				<columns>
+					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
+					<column width="300px" label="Descripcion" sort="auto(descripcionTarea)" />
+					<column width="110px" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
+					<column width="110px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
+				</columns>
+				
+				<rows>
+					<template name="model">
+						<row>
+							<attribute name="onCreate" >
+								<![CDATA[
+									
+								]]>
+							</attribute>
+						
+							<label value="@bind(each.codigoTarea)" maxlength="15"/>
+							<label value="@bind(each.descripcionTarea)" width="100%"/>
+							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+							<cell>
+								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 1 }" />
+								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 2 }"/>
+								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 3 }"/>
+							</cell>
+						</row>
+					</template>
+				</rows>
+				
+			</grid>
+		</div>
+
+	</div>
+
+</zk>

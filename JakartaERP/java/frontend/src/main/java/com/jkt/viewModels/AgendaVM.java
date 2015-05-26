@@ -16,7 +16,6 @@ import org.zkoss.zul.TreeNode;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.grafo.TareaPedido;
 import com.jkt.ov.AgendaOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -28,6 +27,7 @@ import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
 import com.jkt.ov.tree.NodoTareaAgenda;
 import com.jkt.pedido.dominio.Pedido;
+import com.jkt.pedido.dominio.TareaPedido;
 
 /**
  * {@link ViewModel} de la planificacion de las tareas ( {@link TareaPedido} ) de un {@link Pedido}

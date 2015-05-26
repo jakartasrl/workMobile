@@ -8,8 +8,6 @@ import lombok.Data;
 import com.jkt.dominio.ComprobanteVenta;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.ListaPrecios;
-import com.jkt.grafo.PlanificacionPedido;
-import com.jkt.grafo.TareaPedido;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 

@@ -1,6 +1,7 @@
 package com.jkt.pedido.operaciones;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +10,10 @@ import java.util.Map;
 import lombok.Data;
 
 import com.jkt.dominio.Descriptible;
-import com.jkt.grafo.PlanificacionPedido;
-import com.jkt.grafo.TareaPedido;
 import com.jkt.operaciones.Operation;
 import com.jkt.pedido.dominio.Pedido;
+import com.jkt.pedido.dominio.PlanificacionPedido;
+import com.jkt.pedido.dominio.TareaPedido;
 
 /**
  * A partir de N tareas, esta operacion las guarda en un mapa, y genera el grafo de tareas.
@@ -38,6 +39,9 @@ public class GenerarPlanificacionPedido extends Operation {
 		List<PlanificacionPedido> tareasAgendables=new ArrayList<PlanificacionPedido>();
 		
 		long idPedido = pedido.getId();
+		Pedido pedidoOriginal = (Pedido) obtener(Pedido.class, idPedido);
+		pedidoOriginal.setTareas(new ArrayList<TareaPedido>());
+		pedidoOriginal.setPlanificaciones(new ArrayList<PlanificacionPedido>());
 		
 		List<TareaPedido> tareas = pedido.getTareas();
 		
@@ -58,6 +62,7 @@ public class GenerarPlanificacionPedido extends Operation {
 		for (TareaPedido tareaPedido : persistentesEnMapa) {
 			PlanificacionPedido nodoPlanificacion = new PlanificacionPedido();
 			nodoPlanificacion.setDato(tareaPedido);
+			tareaPedido.setPedido(pedidoOriginal);
 			
 			List<Descriptible> precedentesSimples = tareaPedido.getTareasSimples();
 			for (Descriptible descriptible : precedentesSimples) {
@@ -68,7 +73,6 @@ public class GenerarPlanificacionPedido extends Operation {
 			tareasAgendables.add(nodoPlanificacion);
 		}
 
-		Pedido pedidoOriginal = (Pedido) obtener(Pedido.class, idPedido);
 		pedidoOriginal.setTareas(tareas);
 		pedidoOriginal.setPlanificaciones(tareasAgendables);
 		

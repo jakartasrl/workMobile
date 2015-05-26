@@ -1,5 +1,4 @@
 <zk apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @load(viewModel)"  >
-    
 	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%"  >
 	
     <treecols>
