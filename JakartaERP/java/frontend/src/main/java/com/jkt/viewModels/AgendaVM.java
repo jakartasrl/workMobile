@@ -326,4 +326,5 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			}
 		}
 	}
+	
 }

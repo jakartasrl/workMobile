@@ -3,19 +3,23 @@ package com.jkt.viewModels;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
 import org.joda.time.LocalDate;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
-import com.jkt.dominio.Container;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -92,8 +96,17 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		container.setFecha2(this.fechaFiltroFin);
 		
 		allTasks = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
+		
+		//Acca hacer la logica de setear el estado y el sector que correspondan!!!!
 	
 	}
 
+	@Command
+	public void verDetalle(@BindingParam("elemento") TareaAgendaOV tarea){
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("tarea", tarea);
+		Window window = (Window) Executions.createComponents("/pantallas/agenda/detalleTarea.zul", null, params);
+		window.doModal();
+	}
 	
 }

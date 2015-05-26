@@ -1,0 +1,105 @@
+<window id="tareaDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DetalleTareaVM')" title="Detalle de tarea" style="margin-top:50px;" height="auto" width="700px" position="top,center" closable="true" >
+    
+    <style>
+    	.negrita{
+    		font-weight: bold;
+    		text-decoration: underline;
+    	}
+    </style>
+    
+    
+    <tabbox id="tb" width="100%" height="auto" mold="accordion">
+    <tabs>
+        <tab label="Datos" />
+        <tab label="Precedencias" />
+    </tabs>
+    <tabpanels>
+    
+        <tabpanel>
+            
+			<label sclass="negrita" value="Codigo Tarea:" />            
+			<label value="@bind(vm.tarea.codigoTarea)" />            
+
+			<separator> </separator>
+			
+			<label sclass="negrita" value="Descripción:" />            
+			<label value="@bind(vm.tarea.descripcionTarea)" />            
+	
+			<label sclass="negrita" value="Comentario:" />            
+			<label value="@bind(vm.tarea.comentario)" />            
+
+			<separator />
+		
+			<hlayout>
+				<label sclass="negrita" value="Fecha cumplimiento:" />
+				<datebox value="@bind(vm.tarea.fechaCumplimiento)" format="dd/MM/yyyy" />
+
+				<separator />
+		
+				<label sclass="negrita" value="Fecha límite:" />
+				<datebox value="@bind(vm.tarea.fechaLimite)" format="dd/MM/yyyy" />
+
+				<separator />
+	
+				<label sclass="negrita" value="Duración:" />            
+				<label value="@bind(vm.tarea.duracion)" />
+				     
+			</hlayout>
+
+			<hlayout>
+				<label sclass="negrita" value="Sector:" />            
+				<label value="@bind(vm.tarea.sector.descripcion)" />            
+	
+				<separator />
+		
+				<label sclass="negrita" value="Estado:" />            
+				<label value="@bind(vm.tarea.estado.descripcion)" />            
+			</hlayout>
+            
+        </tabpanel>
+
+        <tabpanel>
+			<grid id ="grid" model="@bind(vm.precedencias)" mold="paging" pageSize="10" width="630px" emptyMessage="Esta tarea no tiene precedencias." style="margin-top:5px;">
+	
+				<columns>
+					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
+					<column width="300px" label="Descripcion" sort="auto(descripcionTarea)" />
+					<column width="110px" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
+					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
+				</columns>
+				
+				<rows>
+					<template name="model">
+						<row>
+							<attribute name="onCreate" >
+								<![CDATA[
+									
+								]]>
+							</attribute>
+						
+							<label value="@bind(each.codigoTarea)" maxlength="15"/>
+							<label value="@bind(each.descripcionTarea)" width="100%"/>
+							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+						
+							<cell>
+								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 1 }" />
+								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 2 }"/>
+								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 3 }"/>
+							</cell>
+							
+						</row>
+					</template>
+				</rows>
+				
+			</grid>
+
+        </tabpanel>
+
+    </tabpanels>
+
+</tabbox>
+<!-- <hlayout style="text-align:center;"> -->
+<!-- 	<button style="width:150px; text-align:center"  onClick="@command('cerrar', win=tareaDialog)">Cerrar</button> -->
+<!-- </hlayout> -->
+    
+</window>

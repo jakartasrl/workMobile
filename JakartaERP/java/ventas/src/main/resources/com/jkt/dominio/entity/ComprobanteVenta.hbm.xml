@@ -101,10 +101,10 @@
 				<one-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
 			</list>
 			
-			<list name="tareas" cascade="all" table="PEDIDO_TAREAS">
+			<list name="tareas" cascade="all" >
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
-				<many-to-many column="TAREA_ID" class="com.jkt.pedido.dominio.TareaPedido" />
+				<one-to-many class="com.jkt.pedido.dominio.TareaPedido" />
 			</list>
 
 			<list name="planificaciones" cascade="all" table="PEDIDO_PLAN">
