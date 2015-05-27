@@ -44,6 +44,12 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		this.nuevo();
 	}
 	
+	@Command
+	@NotifyChange({"allTasks"})
+	public void limpiarGrilla(){
+		allTasks = new ArrayList<TareaAgendaOV>();
+	}
+	
 	@Override
 	@GlobalCommand("actualizarTodo")
 	@NotifyChange({"allTasks"})

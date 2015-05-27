@@ -30,7 +30,7 @@
 <!-- 						<comboitem label="Venta" /> -->
 <!-- 					</combobox> -->
 	
-					<combobox width="150px;" model="@bind(vm.sectores)" selectedItem="@bind(vm.sectorSeleccionado)" constraint="no empty">
+					<combobox width="150px;" model="@bind(vm.sectores)" selectedItem="@bind(vm.sectorSeleccionado)" constraint="no empty" onChange="@command('limpiarGrilla')">
 						<template name="model" >
 							<comboitem label="@bind(each.descripcion)" />
 						</template>

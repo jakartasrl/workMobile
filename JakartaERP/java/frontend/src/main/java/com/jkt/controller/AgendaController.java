@@ -12,6 +12,7 @@ import lombok.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,8 +42,8 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 	
 	private DescriptibleOV pedidoDescriptible= new DescriptibleOV();
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody ArrayList<EventoDTO> obtenerEventos(ServletRequest request, ServletResponse response){
+	@RequestMapping(method = RequestMethod.GET, value="/{id}")
+	public @ResponseBody ArrayList<EventoDTO> obtenerEventos(ServletRequest request, ServletResponse response, @PathVariable("id") String idPedido){
 		
 		String serverName = request.getServerName();
 		int serverPort = request.getServerPort();
@@ -52,7 +53,8 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 
 		ContainerOV container = new ContainerOV();
 		container.setString1("pedido");
-		container.setString2(String.valueOf(pedidoDescriptible.getId()));
+//		container.setString2(String.valueOf(pedidoDescriptible.getId()));
+		container.setString2(idPedido);
 //		container.setString2(String.valueOf(3375104L));
 		
 		ListPedidoOV l = (ListPedidoOV) Operaciones.ejecutar("TraerPedidoConTareas", container, ListPedidoOV.class);
@@ -67,7 +69,19 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 		ArrayList<EventoDTO> result = new ArrayList<EventoDTO>();
 		for (TareaAgendaOV tarea : pedido.getTareas()) {
 			String value=String.format("%s - %s", tarea.getCodigoTarea(), tarea.getDescripcionTarea());
-			result.add(new EventoDTO(1L,value , sdf.format(tarea.getFechaLimite()), sdf.format(tarea.getFechaCumplimiento()), "orange", "orange"));
+			
+			String color="orange";
+			if(tarea.getIdEstado()==1){
+				//no iniciaco
+			}else if(tarea.getIdEstado()==2){
+				//en ejecucion
+				color="#3A87AD";
+			}else{
+				//finalizado
+				color="#99D86F";
+			}
+			
+			result.add(new EventoDTO(1L,value , sdf.format(tarea.getFechaLimite()), sdf.format(tarea.getFechaCumplimiento()), color, color));
 		}
 		
 		return result;
