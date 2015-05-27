@@ -32,12 +32,12 @@
 		
 			<hlayout>
 				<label sclass="negrita" value="Fecha cumplimiento:" />
-				<datebox value="@bind(vm.tarea.fechaCumplimiento)" format="dd/MM/yyyy" />
+				<datebox value="@bind(vm.tarea.fechaCumplimiento)" format="dd/MM/yyyy" lenient="true" buttonVisible="false" readonly="true"/>
 
 				<separator />
 		
 				<label sclass="negrita" value="Fecha límite:" />
-				<datebox value="@bind(vm.tarea.fechaLimite)" format="dd/MM/yyyy" />
+				<datebox value="@bind(vm.tarea.fechaLimite)" format="dd/MM/yyyy" lenient="true" buttonVisible="false" readonly="true" />
 
 				<separator />
 	
@@ -59,7 +59,10 @@
         </tabpanel>
 
         <tabpanel>
-			<grid id ="grid" model="@bind(vm.precedencias)" mold="paging" pageSize="10" width="630px" emptyMessage="Esta tarea no tiene precedencias." style="margin-top:5px;">
+			<grid id ="grid" model="@bind(vm.precedencias)" mold="paging" pageSize="10" width="630px" emptyMessage="Esta tarea no tiene precedencias." 
+			
+			style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;margin-top:5px;"
+			>
 	
 				<columns>
 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
