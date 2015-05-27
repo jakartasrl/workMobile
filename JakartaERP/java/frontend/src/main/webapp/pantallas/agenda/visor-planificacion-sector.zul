@@ -61,15 +61,17 @@
 			</vlayout>
 			
 			<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="662px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
+			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="1112px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
 	
 				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
-					<auxheader label="@bind('Lista de Tareas del sector '.concat(vm.sectorSeleccionado.descripcion))" colspan="5" />
+					<auxheader label="@bind('Lista de Tareas del sector '.concat(vm.sectorSeleccionado.descripcion))" colspan="7" />
 				</auxhead>
 				        
 				<columns>
+					<column width="150px" label="Pedido" sort="auto(idPedido)" />
 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
-					<column width="300px" label="Descripcion" sort="auto(descripcionTarea)" />
+					<column width="200px" label="Descripcion" sort="auto(descripcionTarea)" />
+					<column width="400px" label="Comentario" sort="auto(comentario)" />
 					<column width="110px" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
@@ -84,8 +86,10 @@
 								]]>
 							</attribute>
 						
+							<label value="@bind(each.pedidoDescriptible.codigo)" maxlength="15"/>
 							<label value="@bind(each.codigoTarea)" maxlength="15"/>
 							<label value="@bind(each.descripcionTarea)" width="100%"/>
+							<label value="@bind(each.comentario)" width="100%"/>
 							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>

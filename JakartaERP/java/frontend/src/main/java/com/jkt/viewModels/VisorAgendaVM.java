@@ -94,7 +94,7 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 	
 	@Command
 	@NotifyChange("allTasks")
-	public void buscarTareas(){
+	public void buscarTareas() throws JakartaException{
 
 		ContainerOV container = new ContainerOV();
 		container.setLong1(this.sectorSeleccionado.getId());
@@ -103,8 +103,26 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		
 		allTasks = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
 		
-		//Acca hacer la logica de setear el estado y el sector que correspondan!!!!
-	
+		List allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
+
+		for (TareaAgendaOV tareaAgendaOV : allTasks) {
+			DescriptibleOV descriptible = Operaciones.recuperarObjetoDescriptible("pedido", tareaAgendaOV.getIdPedido());
+			tareaAgendaOV.setPedidoDescriptible(descriptible);
+			
+			DescriptibleOV d;
+			
+			for (Object object : allStates) {
+				d=(DescriptibleOV) object;
+				if(d.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))){
+					tareaAgendaOV.setEstado(d);
+					break;//break the small for!
+				}
+			}
+			
+			DescriptibleOV sector = Operaciones.recuperarObjetoDescriptible("sector", tareaAgendaOV.getIdSector());
+			tareaAgendaOV.setSector(sector);
+		}
+		
 	}
 
 	@Command

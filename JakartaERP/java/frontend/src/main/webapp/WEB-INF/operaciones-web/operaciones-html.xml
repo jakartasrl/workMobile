@@ -1389,6 +1389,7 @@
 			<campoSalida value="fechaLimite" target="fechaLimite" />
 			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
 			<campoSalida value="idSector" target="sector.id" />
+			<campoSalida value="idPedido" target="pedido.id" />
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

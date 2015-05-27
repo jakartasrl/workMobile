@@ -38,6 +38,9 @@ public class TareaAgendaOV extends ObjectView {
 	private List<TareaAgendaOV> precedencias=new ArrayList<TareaAgendaOV>();
 	private List<DescriptibleOV> precedenciasEnNumeros=new ArrayList<DescriptibleOV>();
 	
+	private Long idPedido;
+	private DescriptibleOV pedidoDescriptible;
+	
 	
 	public TareaAgendaOV(){
 		generateRandom();

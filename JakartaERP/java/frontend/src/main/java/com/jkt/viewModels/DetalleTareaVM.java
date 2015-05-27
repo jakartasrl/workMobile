@@ -27,23 +27,6 @@ public class DetalleTareaVM {
 	public void init(@ExecutionArgParam("tarea") TareaAgendaOV tarea) throws JakartaException{
 		this.tarea=tarea;
 		
-		ListDescriptibleOV l = (ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class);
-		List list = l.getList();
-		DescriptibleOV d;
-		
-		for (Object object : list) {
-			d=(DescriptibleOV) object;
-			if(d.getCodigo().equals(String.valueOf(this.tarea.getIdEstado()))){
-				this.tarea.setEstado(d);
-				break;
-			}
-		}
-		
-		DescriptibleOV sector = Operaciones.recuperarObjetoDescriptible("sector", this.tarea.getIdSector());
-		this.tarea.setSector(sector);
-		
-		
-		
 		//cargando precedencias
 		ContainerOV container = new ContainerOV();
 		container.setLong1(1L);
@@ -51,6 +34,10 @@ public class DetalleTareaVM {
 		container.setFecha2(LocalDate.now().toDate());
 		
 		precedencias = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
+		
+		
+		
+		
 	}
 
 }

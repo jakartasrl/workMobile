@@ -45,6 +45,12 @@
 				<label value="@bind(vm.tarea.duracion)" />
 				     
 			</hlayout>
+			
+			<hlayout>
+				<label sclass="negrita" value="Pedido:" />            
+				<label value="@bind(vm.tarea.pedidoDescriptible.codigo)" />
+			</hlayout>
+			     
 
 			<hlayout>
 				<label sclass="negrita" value="Sector:" />            
