@@ -28,7 +28,7 @@ public class RecuperarTareasPorSector extends Operation {
 
 		validarFiltros(aParams);
 		
-		Query consultaHQL = crearHQL("from TareaPedido as t where t.sector.id = :sector AND t.fechaLimite BETWEEN :f1 and :f2 order by t.fechaLimite");
+		Query consultaHQL = crearHQL("from TareaPedido as t where t.sector.id = :sector AND t.fechaLimite BETWEEN :f1 and :f2 AND t.pedido is not null order by t.fechaLimite");
 		
 		consultaHQL.setParameter("f1", this.f1);
 		consultaHQL.setParameter("f2", this.f2);

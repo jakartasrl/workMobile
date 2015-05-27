@@ -61,10 +61,10 @@
 			</vlayout>
 			
 			<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="662px" emptyMessage="No existen entidades disponibles." style="margin-top:5px;">
+			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="662px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
 	
 				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
-					<auxheader label="Lista de Tareas" colspan="5" />
+					<auxheader label="@bind('Lista de Tareas del sector '.concat(vm.sectorSeleccionado.descripcion))" colspan="5" />
 				</auxhead>
 				        
 				<columns>

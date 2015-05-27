@@ -46,8 +46,8 @@ public class GenerarPlanificacionPedido extends Operation {
 		/*
 		 * Limpio la lista de tareas en el pedido para evitar referencias circulares
 		 */
-//		pedidoOriginal.setTareas(new ArrayList<TareaPedido>());
-//		pedidoOriginal.setPlanificaciones(new ArrayList<PlanificacionPedido>());
+		pedidoOriginal.setTareas(new ArrayList<TareaPedido>());
+		pedidoOriginal.setPlanificaciones(new ArrayList<PlanificacionPedido>());
 		
 		//Todas las tareas deben ser persistidas, y ademas deben ser agregadas a un mapa, para poder generar el grafo de correspondencias...
 		Map<String, TareaPedido> tareasEnMapa=new HashMap<String, TareaPedido>();
