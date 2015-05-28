@@ -27,17 +27,12 @@ public class DetalleTareaVM {
 	public void init(@ExecutionArgParam("tarea") TareaAgendaOV tarea) throws JakartaException{
 		this.tarea=tarea;
 		
-		//cargando precedencias
 		ContainerOV container = new ContainerOV();
-		container.setLong1(1L);
-		container.setFecha1(LocalDate.now().toDate());
-		container.setFecha2(LocalDate.now().toDate());
+		container.setString1(String.valueOf(tarea.getPedidoDescriptible().getId()));
+		container.setString2(String.valueOf(tarea.getId()));
 		
-		precedencias = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
-		
-		
-		
-		
+		precedencias = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPrecedentes", container , ListTareaAgendaOV.class )).getList();
+
 	}
 
 }

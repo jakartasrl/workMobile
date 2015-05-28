@@ -4,7 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import lombok.Data;
 
-import org.zkforge.ckez.CKeditor;
+import org.jsoup.Jsoup;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
@@ -13,7 +14,9 @@ import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.viewModels.IBasicOperations;
 import com.jkt.viewModels.ViewModel;
 
@@ -25,7 +28,7 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 	private DescriptibleOV plantilla= new DescriptibleOV();
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"plantilla","editMode"})
+	@NotifyChange({"plantilla"})
 	public void actualizar() {}
 
 	@Override
@@ -46,6 +49,8 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 			op = "guardado";
 		}
 		
+		plantilla.setDescripcion(Jsoup.parse(plantilla.getCampoAdicional1()).text());
+		
 		Operaciones.ejecutar("guardarPlantilla", plantilla);
 		Messagebox.show("Se ha " + op + " la plantilla correctamente");
 		this.nuevo();
@@ -63,7 +68,18 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 	}
 	
 	public void modoEdicion(){
-//		this.editMode=true;
+
+		ContainerOV container=new ContainerOV();
+		container.setString1("plantilla");
+		container.setString2(String.valueOf(plantilla.getId()));
+		
+		//recuperar la plantilla usando el id, para traer los datos con formato.
+		ListDescriptibleOV listaDescriptibles = (ListDescriptibleOV) Operaciones.ejecutar("TraerPlantilla", container, com.jkt.ov.ListDescriptibleOV.class);
+		DescriptibleOV plantilla = (DescriptibleOV) listaDescriptibles.getList().get(0);
+		this.plantilla=plantilla;
+		
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+
 	}
 
 }

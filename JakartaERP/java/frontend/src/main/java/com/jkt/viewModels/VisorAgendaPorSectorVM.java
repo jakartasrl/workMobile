@@ -29,25 +29,17 @@ import com.jkt.ov.ListTareaAgendaOV;
 import com.jkt.ov.TareaAgendaOV;
 
 @Data
-public class VisorAgendaVM extends ViewModel implements IBasicOperations {
+public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 
-	private List<TareaAgendaOV> allTasks = new ArrayList<TareaAgendaOV>();
 	private Date fechaFiltroInicio;
 	private Date fechaFiltroFin;
-	private DescriptibleOV pedidoDescriptible;
-	private List<DescriptibleOV> sectores;
 	private DescriptibleOV sectorSeleccionado;
 	
 	
 	@Init
 	public void init() throws JakartaException{
 		this.nuevo();
-	}
-	
-	@Command
-	@NotifyChange({"allTasks"})
-	public void limpiarGrilla(){
-		allTasks = new ArrayList<TareaAgendaOV>();
+		this.vistaPorSector = true;
 	}
 	
 	@Override
@@ -62,12 +54,6 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		return "actualizarTodo";
 	}
 
-	@Override
-	public void guardar() throws JakartaException {
-		
-	}
-
-	@Override
 	@Command
 	public void nuevo() throws JakartaException {
 		this.allTasks = new ArrayList<TareaAgendaOV>();
@@ -80,21 +66,14 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		
 		this.fechaFiltroInicio = LocalDate.now().toDate();
 		this.fechaFiltroFin = LocalDate.now().toDate();
-//		this.fechaFiltroInicio = LocalDate.now().minusDays(15).toDate();
-//		this.fechaFiltroFin = LocalDate.now().plusDays(15).toDate();
 		
 		//Actualiza todo el vm
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
-	@Override
-	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		
-	}
-	
 	@Command
 	@NotifyChange("allTasks")
-	public void buscarTareas() throws JakartaException{
+	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 
 		ContainerOV container = new ContainerOV();
 		container.setLong1(this.sectorSeleccionado.getId());
@@ -125,12 +104,5 @@ public class VisorAgendaVM extends ViewModel implements IBasicOperations {
 		
 	}
 
-	@Command
-	public void verDetalle(@BindingParam("elemento") TareaAgendaOV tarea){
-		Map<String, Object> params=new HashMap<String, Object>();
-		params.put("tarea", tarea);
-		Window window = (Window) Executions.createComponents("/pantallas/agenda/detalleTarea.zul", null, params);
-		window.doModal();
-	}
 	
 }

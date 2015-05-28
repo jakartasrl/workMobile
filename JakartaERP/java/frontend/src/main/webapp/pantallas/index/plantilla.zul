@@ -18,12 +18,12 @@
 				<textbox sclass="campoCodigo-medium" maxlength="5" value="@bind(vm.plantilla.codigo)" />
 			</hlayout>
 
-			<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;"
-				multiline="true" rows="15" value="@bind(vm.plantilla.descripcion)"
-				readonly="false" />
+<!-- 			<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" -->
+<!-- 				multiline="true" rows="15" value="@bind(vm.plantilla.descripcion)" -->
+<!-- 				readonly="false" /> -->
+
+			<ckeditor value="@bind(vm.plantilla.campoAdicional1)" />
 				
-				
-		    <ckeditor value="@bind(vm.plantilla.descripcion)"/>
 		</div>
 	</div>
 </zk>
