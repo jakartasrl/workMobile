@@ -19,7 +19,7 @@
 		
 		<property name="idEstado" column="ESTADO" type="integer" />
 
-		<property name="comentario" column="COMENTARIO"/>
+		<property name="comentario" column="COMENTARIO" type="text"/>
 		<property name="diasDuracion" type="integer" column="DURACION_EN_DIAS"></property>
 		<property not-null="false" name="fechaLimite" column="FECHA_LIMITE" type="date"/>
 		<property not-null="false" name="fechaCumplimiento" column="FECHA_CUMPLIMIENTO" type="date"/>

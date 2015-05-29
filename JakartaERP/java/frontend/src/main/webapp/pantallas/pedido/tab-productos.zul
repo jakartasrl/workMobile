@@ -30,7 +30,7 @@
 				<listcell style="text-align:center">
 					<hlayout>
 						<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" sclass="campoCodigo-small" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
-						<button visible="!@bind(vm.modoAgenda)" label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
+						<button visible="@bind(!vm.modoAgenda)" label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
 					</hlayout>
 				</listcell>
 						
