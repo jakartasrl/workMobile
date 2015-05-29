@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 import lombok.Data;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -28,6 +30,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
+import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ArchivoOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -62,6 +65,38 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
 	private DefaultTreeModel<NotaOV> arbolNotas;
 
+	private DescriptibleOV plantillaTemporal = new DescriptibleOV();
+
+	@Command
+	public void validarPlantilla(@BindingParam("plantilla") DescriptibleOV plantilla , @BindingParam("codigo") String codigo) throws JakartaException{
+		this.plantillaTemporal=plantilla;
+		this.validarCampo("plantilla", codigo , this.plantillaTemporal, "actualizarHTML");
+	}
+	
+	@Command
+	public void actualizarPlantilla(@BindingParam("ov") ItemsOV item, @BindingParam("plantilla") DescriptibleOV plantilla) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
+//		@command('openHelper', clase='plantilla', ov=each.plantilla)
+		this.plantillaTemporal=plantilla;
+		openHelper("plantilla", "", this.plantillaTemporal, "actualizarHTML", "Plantillas", "" , " ", false);
+	}
+	
+	public void actualizarHTML(){
+		ContainerOV container=new ContainerOV();
+		container.setString1("plantilla");
+		container.setString2(String.valueOf(plantillaTemporal.getId()));
+		
+		//recuperar la plantilla usando el id, para traer los datos con formato.
+		ListDescriptibleOV listaDescriptibles = (ListDescriptibleOV) Operaciones.ejecutar("TraerPlantilla", container, com.jkt.ov.ListDescriptibleOV.class);
+		DescriptibleOV plantillaL = (DescriptibleOV) listaDescriptibles.getList().get(0);
+
+		plantillaTemporal.setCampoAdicional1(plantillaL.getCampoAdicional1());
+		plantillaTemporal.setDescripcion(plantillaL.getCampoAdicional1());
+//		plantillaTemporal=plantillaL;
+//		plantillaTemporal.setDescripcion(plantillaTemporal.getCampoAdicional1());
+		
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
 	protected String rutaCompartida = "c:\\tmp\\";
 	protected UserOV userOV;
 

@@ -66,15 +66,18 @@
 							
 							<hlayout style="margin:10px;" if="${!vm.modoAgenda}" >
 								<label value="Cargar Plantilla:" />
-								<textbox sclass="campoCodigo-small" value="@bind(each.plantilla.codigo)" onBlur="@command('validarCampo', clase='plantilla', codigo=self.value, ov=each.plantilla)" />
-								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
+								<textbox sclass="campoCodigo-small" value="@bind(each.plantilla.codigo)" onBlur="@command('validarPlantilla', codigo=self.value, plantilla=each.plantilla)" />
+<!-- 								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" /> -->
+								<button label="..." onClick="@command('actualizarPlantilla', ov=each, plantilla = each.plantilla)" />
 							</hlayout>
 
 							<hlayout style="margin:10px;" if="${vm.modoAgenda}" >
 								<label value="Plantilla:" />
 							</hlayout>
 							
-							<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" />
+<!-- 							<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" /> -->
+							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100px" />
+
 
 					</groupbox>
 

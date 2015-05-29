@@ -14,6 +14,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -664,7 +665,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				parametros.put("vm", this);
 				parametros.put("tarea", this.tareaAgregada.getTarea());
 				
-				//viajan listas vacias.
+				for (ItemsOV itemsOV : this.items) {
+					itemsOV.getPlantilla().setDescripcion(Jsoup.parse(itemsOV.getPlantilla().getDescripcion()).text());
+				}
+				
 				parametros.put("items", this.items);
 				parametros.put("itemsArticulos", this.itemsArticulos);
 				

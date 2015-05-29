@@ -819,7 +819,7 @@
 		</input>
 		
 		<output>
-<!-- 			<campoSalida value="id" 				target="id" /> -->
+			<campoSalida value="id" 				target="id" />
 			<campoSalida value="nro" 				target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />

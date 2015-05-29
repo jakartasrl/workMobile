@@ -3,6 +3,7 @@
 
 <zk>
 	<style src="/style/template.css" />
+	
 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('com.jkt.viewModels.plantilla.PlantillaVM')"
 		id="contenedorPrincipal">
@@ -22,7 +23,13 @@
 <!-- 				multiline="true" rows="15" value="@bind(vm.plantilla.descripcion)" -->
 <!-- 				readonly="false" /> -->
 
-			<ckeditor value="@bind(vm.plantilla.campoAdicional1)" />
+			<ckeditor value="@bind(vm.plantilla.campoAdicional1)" 				 
+				filebrowserImageBrowseUrl="/pantallas/common/img"
+        		filebrowserFlashBrowseUrl="/pantallas/common/flash"
+        		customConfigurationsPath="/pantallas/common/config.js" 
+        	/>
+				
+
 				
 		</div>
 	</div>

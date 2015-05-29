@@ -10,7 +10,8 @@
 				</auxhead>
 				        
 				<columns>
-					<column width="150px" label="Pedido" sort="auto(idPedido)" />
+					<column width="150px" label="Pedido" sort="auto(idPedido)" if="${vm.vistaPorSector}" />
+					<column width="150px" label="Sector" sort="auto(sector.descripcion)" if="${vm.vistaPorPedido}"/>
 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
 					<column width="200px" label="Descripcion" sort="auto(descripcionTarea)" />
 					<column width="400px" label="Comentario" sort="auto(comentario)" />
@@ -23,7 +24,8 @@
 					<template name="model">
 						<row>
 						
-							<label value="@bind(each.pedidoDescriptible.codigo)" maxlength="15"/>
+							<label value="@bind(each.pedidoDescriptible.codigo)" maxlength="15" if="${vm.vistaPorSector}"/>
+							<label value="@bind(each.sector.descripcion)" maxlength="15" if="${vm.vistaPorPedido}"/>
 							<label value="@bind(each.codigoTarea)" maxlength="15"/>
 							<label value="@bind(each.descripcionTarea)" width="100%"/>
 							<label value="@bind(each.comentario)" width="100%"/>
