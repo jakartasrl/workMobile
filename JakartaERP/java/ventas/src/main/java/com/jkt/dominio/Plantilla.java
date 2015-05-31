@@ -17,4 +17,6 @@ public class Plantilla extends Descriptible {
 
 	private String descripcionHTML;
 	
+	
+	
 }

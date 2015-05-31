@@ -47,7 +47,7 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Planificación de Pedido", "index/index-agenda.zul", "small"));
 		menues.add(MenuOV.newInstance("Visor de Tareas por Sector", "index/index-vista-agenda-sector.zul", "small"));
 		menues.add(MenuOV.newInstance("Visor de Tareas por Pedido", "index/index-vista-agenda-pedido.zul", "small"));
-		menues.add(MenuOV.newInstance("Visor de Planificación", "index/visor-agenda.zul", "small"));
+//		menues.add(MenuOV.newInstance("Visor de Planificación", "index/visor-agenda.zul", "small"));
 
 		
 //		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
