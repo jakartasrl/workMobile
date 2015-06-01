@@ -13,7 +13,7 @@
 			<label style="font-size: 90px;color:white;" value="Los Conce" />
 		</div>
 		
-		<div id="content" style="width:95%; height:85%; text-align: centerS; min-width:95%;">
+		<div id="content" style="width:95%; height:85%; min-width:95%;text-align:left;">
 				<div forEach="${vm.menues}" style="float:left;margin:10px; padding:2px;" if="${empty each.clase}" >
 					<button label="${each.nombre}" href="${each.enlace}" height="100px" width="100px" style="margin-top:3px;white-space: normal;" if="${each.tipo=='small' }" />
 					<button label="${each.nombre}" href="${each.enlace}" height="200px" width="200px" style="margin-top:3px;" if="${each.tipo=='big' }" />

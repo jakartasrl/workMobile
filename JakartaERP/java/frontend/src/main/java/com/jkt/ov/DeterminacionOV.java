@@ -18,11 +18,9 @@ import com.jkt.view.ObjectView;
  */
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class DeterminacionOV extends ObjectView {
+public class DeterminacionOV extends DescriptibleOV {
 
 	private String idItem;
-	private String codigo;
-	private String descripcion;
 	private String codAnalisis;
 	private String desAnalisis;
 	private double importe;

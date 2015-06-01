@@ -256,7 +256,8 @@ public abstract class ViewModel {
 	public void logOut(){
 		Session sess = Sessions.getCurrent();
         sess.removeAttribute("userCredential");
-        Executions.sendRedirect("/login.zul");
+        Executions.sendRedirect("/index.zul");
 	}
+	
 	
 }

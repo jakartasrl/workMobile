@@ -24,21 +24,22 @@
 							<label style="width:100px;" value="Nro. de Pedido : " />
 							
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="" tabindex="1" />
+<!-- 								<textbox sclass="campoCodigo-medium" value="@load(vm.pedidoDescriptible.codigo)" onBlur="@command('validarCampo', clase='pedido', codigo=self.value, ov=vm.pedidoDescriptible, post='recuperarAgendaPedido')" tabindex="1" /> -->
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoDescriptible.codigo)" tabindex="1" />
 								<button style="padding-left:-15px;" label="..." onClick="@command('openHelperComplejo', clase='pedido', post='recuperarAgendaPedido',ov=vm.pedidoDescriptible, titulo='Selección de Pedido', codHeader='Nro. Pedido', descHeader='Cliente' , tituloAdicional1='Fecha' )" />
 							</hlayout>
 							
 
 							<label class="name" value="Fecha de emisión: " />
 <!-- 							<datebox id="fecha" constraint="no empty" format="dd/MM/yyyy" tabindex="2" disabled="true"/> -->
-							<textbox value="@load(vm.pedidoDescriptible.campoAdicional2)" width="100%" readonly="true"/>
+							<textbox value="@bind(vm.pedidoDescriptible.campoAdicional1)" width="100%" readonly="true"/>
 							
 						</row>
 						
 						<row sclass="fila-maestro">
 							<label value="Cliente | Sucursal : " />
 							<cell colspan="3">
-								<textbox value="@load(vm.pedidoDescriptible.campoAdicional1)" width="100%" readonly="true"/>
+								<textbox value="@load(vm.pedidoDescriptible.descripcion)" width="100%" readonly="true"/>
 							</cell>
 						</row>
 						
@@ -55,7 +56,7 @@
 				<tabbox id="contenidoTabs" >
 			    	<tabs id="tabs">
 			        	<tab id="tGeneral" label="Agenda del pedido" />
-			        	<tab id="tPrec" label="Precedencias" />
+			        	<tab id="tPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" />
 			    	</tabs>
 			    	
 			    	<tabpanels>
@@ -64,8 +65,8 @@
 							<include id="tGeneralContent" hflex="1" src="/pantallas/agenda/tab-agenda-general.zul" viewModel="${vm}"/>
 			        	</tabpanel>
 
-			        	<tabpanel>
-							<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}"/>
+			        	<tabpanel visible="@bind( vm.agenda.tareasGenerales.size()>0 )" >
+							<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}" />
 			        	</tabpanel>
 			        
 			    	</tabpanels>

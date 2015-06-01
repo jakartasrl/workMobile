@@ -98,8 +98,29 @@
 			<campoEntrada propertyOV="id" metodo="setId" />
 			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
 			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+			<campoEntrada propertyOV="campoAdicional1" metodo="setDescripcionHTML" />
  			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
 		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerPlantilla" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDescriptibleOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="descripcionHTML" value="campoAdicional1" />
+			<campoSalida target="activo" value="activo" />
+			
+		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
@@ -556,6 +577,30 @@
 				<campoSalida value="idCondicionDePago" 	target="condicionPago.id"/>
 			</campoSalida>
 			
+			<campoSalida value="tareas" target="tareas" >
+			
+				<campoSalida value="id" target="id" />
+				<campoSalida value="codigoTarea" target="codigo" />
+				<campoSalida value="descripcionTarea" target="descripcion" />
+				
+				<campoSalida value="comentario" target="comentario" />
+				<campoSalida value="idEstado" target="idEstado" />
+				<campoSalida value="duracion" target="diasDuracion" />
+				
+				<campoSalida value="fechaLimite" target="fechaLimite" />
+				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+				<campoSalida value="idSector" target="sector.id" />
+			</campoSalida>
+			
+			<campoSalida value="precedentesPlanos" target="planificaciones" >
+				<campoSalida value="codigo" target="dato.id" /> <!--  es el ID de la tarea de pedido. -->
+				
+				<campoSalida value="precedentes" target="precedentes" >
+					<campoSalida value="codigo" target="dato.id" /> <!--  es el ID de la tarea de pedido. -->
+				</campoSalida>
+				
+			</campoSalida>
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -774,7 +819,7 @@
 		</input>
 		
 		<output>
-<!-- 			<campoSalida value="id" 				target="id" /> -->
+			<campoSalida value="id" 				target="id" />
 			<campoSalida value="nro" 				target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
@@ -1246,13 +1291,20 @@
 			<campoEntrada propertyOV="id" metodo="setId" />
 			
 			<campoEntrada propertyOV="tareas" metodo="setTareas">
+<!-- 				<campoEntrada propertyOV="idTarea" metodo="setId" /> -->
+				<campoEntrada propertyOV="codigoTarea" metodo="setCodigo" />
+				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
 				<campoEntrada propertyOV="comentario" metodo="setComentario" />
+				<campoEntrada propertyOV="fechaLimite" metodo="setFechaLimite" />
+				<campoEntrada propertyOV="fechaCumplimiento" metodo="setFechaCumplimiento" />
+				<campoEntrada propertyOV="idSector" metodo="setSector" />
+				<campoEntrada propertyOV="idEstado" metodo="setIdEstado" />
+				<campoEntrada propertyOV="duracion" metodo="setDiasDuracion" />
 					
 				<!-- level dos -->
 				<campoEntrada propertyOV="precedenciasEnNumeros" metodo="setTareasSimples">
 					<campoEntrada propertyOV="codigo" metodo="setCodigo" />
-					
 				</campoEntrada>
 				
 			</campoEntrada>
@@ -1340,4 +1392,133 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TraerPedidoConTareas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="activo" value="activo" />
+			
+			<campoSalida value="tareas" target="tareas" >
+			
+				<campoSalida value="id" target="id" />
+				<campoSalida value="codigoTarea" target="codigo" />
+				<campoSalida value="descripcionTarea" target="descripcion" />
+				
+				<campoSalida value="comentario" target="comentario" />
+				<campoSalida value="idEstado" target="idEstado" />
+				<campoSalida value="duracion" target="diasDuracion" />
+				
+				<campoSalida value="fechaLimite" target="fechaLimite" />
+				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+				<campoSalida value="idSector" target="sector.id" />
+			</campoSalida>
+			
+			<campoSalida value="precedentesPlanos" target="planificaciones" >
+				<campoSalida value="codigo" target="dato.id" /> <!--  es el ID de la tarea de pedido. -->
+				
+				<campoSalida value="precedentes" target="precedentes" >
+					<campoSalida value="codigo" target="dato.id" /> <!--  es el ID de la tarea de pedido. -->
+				</campoSalida>
+				
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerEstadosTareas" clase="com.jkt.pedido.operaciones.TraerEstadosDeTareas" outputOV="com.jkt.ov.ListDescriptibleOV">
+	
+		<output>
+		
+			<campoSalida target="codigo" 			value="codigo" />	
+			<campoSalida target="descripcion" 		value="descripcion" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
+	
+	<operacion name="TraerParametro" clase="com.jkt.operaciones.TraerParametro" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ParametroOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="NOMBREPARAMETRO"/>
+		</input>
+	
+		<output >
+			<campoSalida value="id" target="id" />
+			<campoSalida value="codigo" target="nombre" />
+			
+			<campoSalida value="valorCadena" target="valorCadena" />
+			<campoSalida value="valorNumero" target="valorNumero" />
+			<campoSalida value="valorFecha" target="valorFecha" />
+			<campoSalida value="valorDoble" target="valorDoble" />
+			<campoSalida value="valorBooleano" target="isValorBooleano" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
+	<operacion name="RecuperarTareasPorSector" clase="com.jkt.pedido.operaciones.RecuperarTareasPorSector" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListTareaAgendaOV">
+	
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.TareaPedido">
+			<campoEntrada propertyOV="long1" metodo="setIdSector" />
+			<campoEntrada propertyOV="fecha1" metodo="setFechaFiltro1" />
+			<campoEntrada propertyOV="fecha2" metodo="setFechaFiltro2" />
+		</input>
+	
+		<output>
+			<campoSalida value="id" target="id" />
+			<campoSalida value="codigoTarea" target="codigo" />
+			<campoSalida value="descripcionTarea" target="descripcion" />
+			
+			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="idEstado" target="idEstado" />
+			<campoSalida value="duracion" target="diasDuracion" />
+			
+			<campoSalida value="fechaLimite" target="fechaLimite" />
+			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="idSector" target="sector.id" />
+			<campoSalida value="idPedido" target="pedido.id" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="RecuperarTareasPrecedentes" clase="com.jkt.pedido.operaciones.RecuperarTareasPrecedentes" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListTareaAgendaOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="ID_PEDIDO"/>
+			<campoEntrada propertyOV="string2" name="ID_TAREA"/>
+		</input>
+	
+		<output>
+			<campoSalida value="id" target="id" />
+			<campoSalida value="codigoTarea" target="codigo" />
+			<campoSalida value="descripcionTarea" target="descripcion" />
+			
+			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="idEstado" target="idEstado" />
+			<campoSalida value="duracion" target="diasDuracion" />
+			
+			<campoSalida value="fechaLimite" target="fechaLimite" />
+			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="idSector" target="sector.id" />
+			<campoSalida value="idPedido" target="pedido.id" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
 </entity>

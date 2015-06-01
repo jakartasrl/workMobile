@@ -27,7 +27,7 @@ public class PedidoOV extends ObjectView {
 	private String lugarEmision;
 	private String nro;
 	private boolean anulado = false;
-	private Date fecha;
+	private Date fecha = new Date();
 
 	private Long idCliente;
 	private Long idSucursal;
@@ -48,6 +48,7 @@ public class PedidoOV extends ObjectView {
 
 	
 	private List<TareaAgendaOV> tareas=new ArrayList<TareaAgendaOV>();
+	private List<PrecedenteOV> precedentesPlanos=new ArrayList<PrecedenteOV>();
 	
 	/**
 	 * A partir de la lista de todos los documentos y de los documentos seleccionados, forma una lista en la que se diferencian solamente por el campo activo.
@@ -72,5 +73,9 @@ public class PedidoOV extends ObjectView {
 		this.docs=finalList;
 	}	
 	
+	@Override
+	public String getCampoClave() {
+		return "nro";
+	}
 	
 }

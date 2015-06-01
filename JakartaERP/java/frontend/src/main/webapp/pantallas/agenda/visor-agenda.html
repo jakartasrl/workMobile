@@ -11,7 +11,7 @@
 <script src='../agenda-recursos/lang-all.js'></script>
 <script>
 
-	function loadCalendar(){
+	function loadCalendar(id){
 	
 		debugger;
 		
@@ -28,7 +28,7 @@
 			eventLimit: true,
 			lang: 'es',
 			events: {
-				url: 'http://localhost:8080/frontend/api/agenda',
+				url: 'http://localhost:8080/frontend/api/agenda/'+id,
 				error: function() {
 					$('#script-warning').show();
 				}

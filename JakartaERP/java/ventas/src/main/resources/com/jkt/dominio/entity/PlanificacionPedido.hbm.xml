@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.pedido.dominio.PlanificacionPedido" table="PLANIFICACION_PEDIDO" >
+		
+		<id name="id" column="PLANIFICACION_PEDIDO_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="descripcion" type="string" column="DESCRIPCION"></property>
+		<property name="completo" column="COMPLETO" type="boolean" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+			
+		<many-to-one name="dato" class="com.jkt.pedido.dominio.TareaPedido" column="TAREA_ID" />
+	
+		<list name="precedentes" table="PLANIFICACION_PRECEDENTES" cascade="all">
+			<key column="PLANIFICACION_PEDIDO_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.pedido.dominio.PlanificacionPedido" column="PLANIFICACION_PEDIDO_REL_ID" />
+		</list>
+
+	</class>
+
+</hibernate-mapping>
+

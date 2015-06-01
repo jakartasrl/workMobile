@@ -10,7 +10,7 @@ import com.jkt.view.ObjectView;
 public class FormaFacturacionOV extends ObjectView {
 	
 	private String descripcion;
-	private int porcentaje;
+	private double porcentaje;
 	private double importe;
 	private DescriptibleOV condicionDePago=new DescriptibleOV();
 	private long idCondicionDePago;

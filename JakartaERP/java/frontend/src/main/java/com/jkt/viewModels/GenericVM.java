@@ -14,6 +14,7 @@ import org.zkoss.zul.Messagebox;
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.ListDescriptibleOV;
 
 
 /**

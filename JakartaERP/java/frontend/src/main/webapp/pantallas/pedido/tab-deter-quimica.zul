@@ -25,11 +25,11 @@
 					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
-						<intbox width="80%" value="0" sclass="importe" constraint="no empty" onBlur="@command('actualizarImporteTotal', item=each)"/>
+						<intbox readonly="@bind(vm.modoAgenda)" width="80%" value="0" sclass="importe" constraint="no empty" onBlur="@command('actualizarImporteTotal', item=each)"/>
 					</cell>
 
 
-					<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
+					<combobox disabled="@bind(vm.modoAgenda)" width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
 						<template name="model" var="moneda">
 							<comboitem label="@bind(moneda.descripcion)" />
 						</template>
@@ -37,7 +37,7 @@
 
 					<cell>
 						$
-						<intbox width="80%" value="@bind(each.importe)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+						<intbox readonly="@bind(vm.modoAgenda)" width="80%" value="@bind(each.importe)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 					</cell>
 
 					<cell>

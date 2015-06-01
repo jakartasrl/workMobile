@@ -13,7 +13,7 @@
                 <treecell label="${each.data.descripcion}" />
                 
                 <treecell style="text-align:center">
-	                <checkbox checked="@bind(each.data.checked)" if="${each.leaf}" onCheck="@command('toogleNota', nota=each.data)" />
+	                <checkbox disabled="@bind(vm.modoAgenda)" checked="@bind(each.data.checked)" if="${each.leaf}" onCheck="@command('toogleNota', nota=each.data)" />
                 </treecell>
                 
             </treerow>

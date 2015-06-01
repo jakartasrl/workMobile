@@ -251,9 +251,9 @@ public class GenerarComprobantePresupuesto extends Operation {
 		espacio.setTitulo("<br>");
 		items.add(espacio);
 		
-		ItemResumen titulo = new ItemResumen();
-		titulo.setTitulo("<font size= \"4\" /><b>CONDICIONES COMERCIALES</b>");
-		items.add(titulo);
+//		ItemResumen titulo = new ItemResumen();
+//		titulo.setTitulo("<font size= \"4\" /><b>CONDICIONES COMERCIALES</b>");
+//		items.add(titulo);
 		
 //		ItemResumen nuevaCondicion;
 //		for (CondicionComercial condicion : p.getCondicionesComerciales()) {

@@ -100,10 +100,20 @@
 				<index column="ORDEN" />
 				<one-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
 			</list>
+			
+			<list name="tareas" cascade="all" >
+				<key column="PEDIDO_ID" />
+				<index column="ORDEN" />
+				<one-to-many class="com.jkt.pedido.dominio.TareaPedido" />
+			</list>
 
+			<list name="planificaciones" cascade="all" table="PEDIDO_PLAN">
+				<key column="PEDIDO_ID" />
+				<index column="ORDEN" />
+				<many-to-many column="PLAN_ID" class="com.jkt.pedido.dominio.PlanificacionPedido" />
+			</list>
+			
 		</union-subclass>
-
-
 
 <!-- 		PRESUPUESTO MAPPING -->
 <!-- 		PRESUPUESTO MAPPING -->

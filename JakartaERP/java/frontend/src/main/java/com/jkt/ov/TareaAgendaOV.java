@@ -17,6 +17,12 @@ public class TareaAgendaOV extends ObjectView {
 
 	private int randomNumber;
 	
+	private long idTarea;
+	private String codigoTarea;
+	private String descripcionTarea;
+	
+	private int duracion=1;
+
 	private DescriptibleOV tarea=new DescriptibleOV();
 	
 	private String comentario;
@@ -26,13 +32,25 @@ public class TareaAgendaOV extends ObjectView {
 	private DescriptibleOV sector=new DescriptibleOV();
 	private Long idSector;
 	
-	private String estado;
+	private DescriptibleOV estado=new DescriptibleOV();
+	private int idEstado;
 
 	private List<TareaAgendaOV> precedencias=new ArrayList<TareaAgendaOV>();
 	private List<DescriptibleOV> precedenciasEnNumeros=new ArrayList<DescriptibleOV>();
 	
+	private Long idPedido;
+	private DescriptibleOV pedidoDescriptible;
+	
 	
 	public TareaAgendaOV(){
+		generateRandom();
+	}
+	
+	public void generarRandom(){
+		generateRandom();
+	}
+
+	protected void generateRandom() {
 		Random rand = new Random();
 	    this.randomNumber = rand.nextInt((999999 - 1) + 1) + 1;
 	}

@@ -1,6 +1,6 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:left;">
+	<vlayout width="100%" style="text-align:left;" visible="@bind(!vm.modoAgenda)">
 		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElementoArticulo')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
 					//box.pagingPosition = "top";
@@ -12,7 +12,7 @@
 	</vlayout>
 
 
-	<listbox width="890px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="8" emptyMessage="No existen items aun.">
+	<listbox width="940px" id="boxMateriales" multiple="false" checkmark="false" model="@bind(vm.itemsArticulos)" mold="paging" pageSize="8" emptyMessage="No existen items aun.">
 
 		<listhead style="heigth:10px;" >
 			<listheader width="100px" label="Cod.Articulo"/>
@@ -21,6 +21,7 @@
 			<listheader width="150px" label="Moneda"/>
 			<listheader width="90px" label="Importe"/>
 			<listheader width="100px" label="Total"/>
+			<listheader width="50px" label="Borrar" />
 		</listhead>
 
 		<template name="model">
@@ -28,8 +29,8 @@
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox constraint="no empty" sclass="campoCodigo-small" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
-						<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
+						<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" sclass="campoCodigo-small" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
+						<button visible="@bind(!vm.modoAgenda)" label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
 					</hlayout>
 				</listcell>
 						
@@ -39,13 +40,13 @@
 	
 				<listcell style="text-align:center" >
 					<hlayout>
-						<textbox width="40px;" sclass="importe" value="@bind(each.cantidad)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty" />
+						<textbox readonly="@bind(vm.modoAgenda)" width="40px;" sclass="importe" value="@bind(each.cantidad)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty" />
 					</hlayout>
 				</listcell>
 
 				<listcell style="text-align:center">
 					<hlayout>
-						<combobox width="95px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
+						<combobox disabled="@bind(vm.modoAgenda)" width="95px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
 							<template name="model" var="moneda">
 								<comboitem label="@bind(moneda.descripcion)" />
 							</template>
@@ -55,7 +56,7 @@
 		
 				<listcell style="text-align:center">
 					<hlayout>
-						<textbox width="60px;" value="@bind(each.importe)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+						<textbox readonly="@bind(vm.modoAgenda)" width="60px;" value="@bind(each.importe)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 					</hlayout>
 				</listcell>
 							
@@ -64,7 +65,10 @@
 						<textbox width="60px;" value="@bind(each.importeTotal)" sclass="importe" readonly="true"/>
 					</hlayout>
 				</listcell>
-								
+
+				<listcell style="text-align:center" >
+					<button disabled="@bind(vm.modoAgenda)" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElementoArticulo', elemento=each )" />
+				</listcell>
 
 			</listitem>
 		</template>

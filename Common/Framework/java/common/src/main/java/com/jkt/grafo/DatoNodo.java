@@ -1,7 +1,8 @@
 package com.jkt.grafo;
 
+import lombok.Data;
+
 import com.jkt.dominio.Descriptible;
-import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 
 /**
@@ -13,14 +14,68 @@ import com.jkt.excepcion.JakartaException;
  * 
  * Leonel Suarez - Jakarta SRL
  */
+@Data
 abstract public class DatoNodo extends Descriptible{
 
 	public enum Estado {
-		NO_INICIADO, EN_EJECUCION, FINALIZADO;
+		
+		NO_INICIADO(1) {
+			@Override
+			public String getDescripcion() {
+				return "No Iniciado";
+			}
+			
+		}, 
+		
+		EN_EJECUCION(2) {
+			@Override
+			public String getDescripcion() {
+				return "En Ejecución";
+			}
+			
+		},
+		FINALIZADO(3) {
+			@Override
+			public String getDescripcion() {
+				return "Finalizado";
+			}
+			
+		};
+		
+		private int value;
+		public abstract String getDescripcion();
+
+		private Estado (int value){
+			this.value=value;
+		}
+		
+		public int getValue(){
+			return this.value;
+		}
+		
+		/**
+		 * Obtiene un elemento de la enumeracion recibiendo un entero.
+		 * 
+		 */
+		public static Estado getEstado(int value) throws JakartaException{
+			Estado[] values = values();
+			Estado c = null;
+			for (Estado comportamiento : values) {
+				if(comportamiento.getValue()==value){
+					c=comportamiento;
+					break;
+				}
+			}
+			if (c==null) {
+				throw new JakartaException("No existe un comportamiento para la solicitud recibida.");
+			}
+			return c;
+		}
+		
 	}
 	
 	private Estado estado=Estado.NO_INICIADO;
-	
+	private int idEstado=Estado.NO_INICIADO.getValue();
 	
 	/**
 	 * Logica interna para ver si se puede completar la 'tarea'.

@@ -77,7 +77,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			this.itemsArticulos=new ArrayList<ItemsOV>();
 		}
 		
-		if(!this.validaPresupuesto()){
+		if(!this.validaFacturaciones(this.comprobanteOV.getFacturaciones())){
 			return;
 		}
 		
@@ -109,26 +109,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		);
 		
 	}
-
-	private boolean validaPresupuesto() {
-		List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
-		
-		int i=1;
-		for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
-
-			if(!this.validarDescriptible(formaFacturacionOV.getCondicionDePago(), "Complete la condicion de pago de elemento "+i+" en la \n solapa 'Formas de facturación'.")){
-				return false;
-			}
-			
-			if (formaFacturacionOV.getDescripcion()==null || formaFacturacionOV.getDescripcion().isEmpty()) {
-				Messagebox.show("Complete la descripción del item "+i+" en la solapa 'Formas de facturación'.");
-				return false;
-			}
-			i++;
-		}
-		return true;
-	}
-
 
 	@Command
 	@NotifyChange({"arbolNotas","archivos","aPartirDeCotizacion", "comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
@@ -447,7 +427,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		log.info("Inicializando items para articulos...");
 		this.itemsArticulos=new ArrayList<ItemsOV>();
-		this.itemsArticulos.add(new ItemsOV());
+//		this.itemsArticulos.add(new ItemsOV());
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
@@ -482,5 +462,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	public void setaPartirDeCotizacion(boolean aPartirDeCotizacion) {
 		this.aPartirDeCotizacion = aPartirDeCotizacion;
 	}
+
+	
+	@Command
+	@NotifyChange("comprobanteOV")
+	public void eliminarFacturacion(@BindingParam("elemento") FormaFacturacionOV elemento) {
+		this.comprobanteOV.getFacturaciones().remove(elemento);
+	}
+
 	
 }

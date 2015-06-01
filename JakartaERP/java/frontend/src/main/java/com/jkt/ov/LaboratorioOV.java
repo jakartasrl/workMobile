@@ -26,6 +26,7 @@ public class LaboratorioOV extends DescriptibleOV {
 	
 	private List laboratorios=new ArrayList();
 	
+	
 	public List getLaboratorios() {
 		return laboratorios;
 	}

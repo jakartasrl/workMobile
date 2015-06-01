@@ -1,6 +1,7 @@
 package com.jkt.pedido.operaciones;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +10,10 @@ import java.util.Map;
 import lombok.Data;
 
 import com.jkt.dominio.Descriptible;
-import com.jkt.grafo.PlanificacionPedido;
-import com.jkt.grafo.TareaPedido;
 import com.jkt.operaciones.Operation;
 import com.jkt.pedido.dominio.Pedido;
+import com.jkt.pedido.dominio.PlanificacionPedido;
+import com.jkt.pedido.dominio.TareaPedido;
 
 /**
  * A partir de N tareas, esta operacion las guarda en un mapa, y genera el grafo de tareas.
@@ -31,17 +32,27 @@ import com.jkt.pedido.dominio.Pedido;
 @Data
 public class GenerarPlanificacionPedido extends Operation {
 
-	private List<PlanificacionPedido> tareasAgendables=new ArrayList<PlanificacionPedido>();
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Pedido pedido=(Pedido) aParams.get("objeto");
+		List<PlanificacionPedido> tareasAgendables=new ArrayList<PlanificacionPedido>();
+		
+		long idPedido = pedido.getId();
+		Pedido pedidoOriginal = (Pedido) obtener(Pedido.class, idPedido);
+		
 		List<TareaPedido> tareas = pedido.getTareas();
+
+		/*
+		 * Limpio la lista de tareas en el pedido para evitar referencias circulares
+		 */
+		pedidoOriginal.setTareas(new ArrayList<TareaPedido>());
+		pedidoOriginal.setPlanificaciones(new ArrayList<PlanificacionPedido>());
 		
 		//Todas las tareas deben ser persistidas, y ademas deben ser agregadas a un mapa, para poder generar el grafo de correspondencias...
 		Map<String, TareaPedido> tareasEnMapa=new HashMap<String, TareaPedido>();
 		for (TareaPedido tareaPedido : tareas) {
-//			guardar(tareaPedido);
+			guardar(tareaPedido);
 			tareasEnMapa.put(String.valueOf(tareaPedido.getRandomNumber()), tareaPedido);
 		}
 		
@@ -55,6 +66,7 @@ public class GenerarPlanificacionPedido extends Operation {
 		for (TareaPedido tareaPedido : persistentesEnMapa) {
 			PlanificacionPedido nodoPlanificacion = new PlanificacionPedido();
 			nodoPlanificacion.setDato(tareaPedido);
+//			tareaPedido.setPedido(pedidoOriginal);
 			
 			List<Descriptible> precedentesSimples = tareaPedido.getTareasSimples();
 			for (Descriptible descriptible : precedentesSimples) {
@@ -64,7 +76,11 @@ public class GenerarPlanificacionPedido extends Operation {
 			}
 			tareasAgendables.add(nodoPlanificacion);
 		}
-		System.out.println();
+
+		pedidoOriginal.setTareas(tareas);
+		pedidoOriginal.setPlanificaciones(tareasAgendables);
+		
+		guardar(pedidoOriginal);
 		
 	}
 

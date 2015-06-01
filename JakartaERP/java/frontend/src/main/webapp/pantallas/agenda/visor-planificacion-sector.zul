@@ -1,0 +1,51 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<style>
+
+		redRow{
+			background-color : red;
+			color: yellow;
+		}
+		
+		blueRow{
+			background-color : blue;
+		}
+		
+		yellowRow{
+			background-color : yellow;
+		}
+		
+	</style>
+				
+	<div>
+
+		<vlayout >
+
+			<hlayout>
+				<label value="Sector" />
+
+				<combobox width="150px;" model="@bind(vm.sectores)" selectedItem="@bind(vm.sectorSeleccionado)" constraint="no empty" onChange="@command('limpiarGrilla')">
+					<template name="model" >
+						<comboitem label="@bind(each.descripcion)" />
+					</template>
+				</combobox>
+
+
+				<separator></separator>
+
+				<label value="Fecha de inicio:"> </label>
+				<datebox id="fechaI" value="@bind(vm.fechaFiltroInicio)" constraint="no empty" format="dd/MM/yyyy" />
+				<label value="Fecha de fin:"> </label>
+				<datebox id="fechaF" value="@bind(vm.fechaFiltroFin)" constraint="no empty" format="dd/MM/yyyy" />
+
+				<separator></separator>
+		
+			</hlayout>
+				
+		</vlayout>
+			
+		<include id="gridDetailTasks" src="/pantallas/agenda/grilla-tareas-filtradas.zul" />
+
+	</div>
+
+</zk>

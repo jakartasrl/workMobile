@@ -1,5 +1,8 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
+
+	<hlayout visible="@bind(!vm.modoAgenda)" >
+
 	<vlayout width="100%" style="text-align:center;">
 		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
@@ -10,7 +13,14 @@
 		</button>
 			<label value="Agregar un item"></label>
 	</vlayout>
+	
+	<vlayout width="100%" style="text-align:center;" >
+		<button style="margin-bottom:2px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Agregar un nuevo item.">
+		</button>
+		<label value="Eliminar este item." />
+	</vlayout>
 
+	</hlayout>
 
 	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
 
@@ -27,40 +37,47 @@
 							<hlayout>
 							
 								<label value="Tipo" />
-								<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)" constraint="no empty">
+								<combobox disabled="@bind(vm.modoAgenda)" width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(each.tipoVenta)" constraint="no empty">
 									<template name="model" var="tVenta">
 										<comboitem label="@bind(tVenta.descripcion)" />
 									</template>
 								</combobox>
 							
 								<label value="Referencia:" />
-								<textbox width="350px" value="@bind(each.referencia)" constraint="no empty"/>
+								<textbox readonly="@bind(vm.modoAgenda)" width="350px" value="@bind(each.referencia)" constraint="no empty"/>
 		
 								<label value="Cantidad:" />
-								<textbox width="40px;" value="@bind(each.cantidad)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+								<textbox readonly="@bind(vm.modoAgenda)" width="40px;" value="@bind(each.cantidad)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 		
 								<label value="Moneda:" />
-								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
+								<combobox disabled="@bind(vm.modoAgenda)" width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty">
 									<template name="model" var="moneda">
 										<comboitem label="@bind(moneda.descripcion)" />
 									</template>
 								</combobox>
 		
 								<label value="Importe:" />
-								<textbox width="50px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
+								<textbox readonly="@bind(vm.modoAgenda)" width="100px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 							
 								<label value="Importe Total:" />
-								<textbox width="50px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/>
+								<textbox width="100px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/>
 								
 							</hlayout>
 							
-							<hlayout style="margin:10px;">
+							<hlayout style="margin:10px;" if="${!vm.modoAgenda}" >
 								<label value="Cargar Plantilla:" />
-								<textbox sclass="campoCodigo-small" value="@bind(each.plantilla.codigo)" onBlur="@command('validarCampo', clase='plantilla', codigo=self.value, ov=each.plantilla)" />
-								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" />
+								<textbox sclass="campoCodigo-small" value="@bind(each.plantilla.codigo)" onBlur="@command('validarPlantilla', codigo=self.value, plantilla=each.plantilla)" />
+<!-- 								<button label="..." onClick="@command('openHelper', clase='plantilla', ov=each.plantilla)" /> -->
+								<button label="..." onClick="@command('actualizarPlantilla', ov=each, plantilla = each.plantilla)" />
+							</hlayout>
+
+							<hlayout style="margin:10px;" if="${vm.modoAgenda}" >
+								<label value="Plantilla:" />
 							</hlayout>
 							
-							<textbox constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" readonly="false" />
+<!-- 							<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" /> -->
+							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100px" />
+
 
 					</groupbox>
 
