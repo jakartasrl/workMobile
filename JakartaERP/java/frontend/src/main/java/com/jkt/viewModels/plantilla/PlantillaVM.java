@@ -23,8 +23,6 @@ import com.jkt.viewModels.ViewModel;
 @Data
 public class PlantillaVM extends ViewModel implements IBasicOperations{
 
-//	private boolean editMode=false;
-	
 	private DescriptibleOV plantilla= new DescriptibleOV();
 	
 	@GlobalCommand("actualizarOVs")
@@ -42,8 +40,20 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 	}
 	
 	@Command
-	@NotifyChange({"plantilla","editMode"})
+	@NotifyChange({"plantilla"})
 	public void guardar() throws JakartaException {
+		
+		if(plantilla.getCodigo().isEmpty()){
+			Messagebox.show("Complete el codigo de la plantilla");
+			return;
+		}
+		
+		if(plantilla.getDescripcion().isEmpty()){
+			Messagebox.show("Complete la descripción de la plantilla");
+			return;
+		}
+		
+		
 		String op = "actualizado";
 		if (plantilla.getId()==0) {
 			op = "guardado";

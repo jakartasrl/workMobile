@@ -15,7 +15,7 @@
 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
 					<column width="200px" label="Descripcion" sort="auto(descripcionTarea)" />
 					<column width="400px" label="Comentario" sort="auto(comentario)" />
-					<column width="110px" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
+					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
 				</columns>
@@ -29,7 +29,7 @@
 							<label value="@bind(each.codigoTarea)" maxlength="15"/>
 							<label value="@bind(each.descripcionTarea)" width="100%"/>
 							<label value="@bind(each.comentario)" width="100%"/>
-							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+							<datebox disabled="true" width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>
 								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 1 }" />

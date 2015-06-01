@@ -25,7 +25,8 @@
 			<listheader width="50px" label="Dias"/>
 			<listheader width="110px" label="Sector"/>
 			<listheader width="130px" label="Estado"/>
-			<listheader width="110px" label="Cumplimiento"/>
+<!-- 			<listheader width="110px" label="Cumplimiento"/> -->
+<!-- 			<listheader width="110px" label="Fecha Lim."/> -->
 			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
@@ -71,7 +72,7 @@
 				</listcell>
 
 				<listcell >
-					<datebox width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 				</listcell>
 
 				<listcell >

@@ -11,7 +11,7 @@
 					<column width="50px"/>
 					<column width="100px"/>
 					<column width="80px"/>
-					<column width="250px"/>
+					<column width="300px"/>
 				</columns>
 			
 				<rows>
@@ -20,12 +20,12 @@
 			    		<label style="width:100px;" value="Código : " />
 			    		
 			    		<hlayout >
-							<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" tabindex="1" />
+							<textbox sclass="campoCodigo-small" value="@bind(vm.modeloCotizadorOV.codigo)" tabindex="1" />
 <!-- 							<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='modeloCotizador', post='cargarModeloCotizador',ov=vm.modeloCotizadorOV, titulo='Selección de Modelos de Cotizador', codHeader='Codigo', descHeader='Descripcion')" /> -->
 			    		</hlayout>
 
 						<label value="Descripción : " />
-						<textbox class="campoCodigo-medium" width="R00%" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="2" />
+						<textbox class="campoCodigo-vlarge" width="100%" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="2" />
 							
 					</row>
 										

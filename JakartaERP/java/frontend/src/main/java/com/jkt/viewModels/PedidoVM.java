@@ -272,7 +272,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	@Command
 	@NotifyChange({"titulo","agenda","pedidoDescriptible"})
 	public void buscar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		openComplexHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente",false, "Fecha" , "" );
+		openComplexHelper("pedido", "", pedidoDescriptible, "recuperarPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente",true, "Fecha" , "" );
 	}
 	
 	/**
@@ -664,6 +664,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				
 				parametros.put("vm", this);
 				parametros.put("tarea", this.tareaAgregada.getTarea());
+				
+				for (ItemsOV itemsOV : this.itemsArticulos) {
+					itemsOV.getPlantilla().setDescripcion("Facturar producto : " + itemsOV.getProductoOV().getCodigo() + " " + itemsOV.getProductoOV().getDescripcion() );
+				}
 				
 				for (ItemsOV itemsOV : this.items) {
 					itemsOV.getPlantilla().setDescripcion(Jsoup.parse(itemsOV.getPlantilla().getDescripcion()).text());

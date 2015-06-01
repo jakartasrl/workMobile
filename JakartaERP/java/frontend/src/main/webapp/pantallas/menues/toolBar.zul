@@ -1,4 +1,9 @@
 <zk viewModel="@id('vm') @load(viewModel)">
+
+	<script>
+		
+	</script>
+	
 	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar"
 		align="start">
 		<hlayout style="width:100%" id="idLayout">
@@ -7,6 +12,9 @@
 				<toolbarbutton image="/pantallas/icons/new.png" label="Nuevo" onClick="@command('nuevo')" tooltiptext="Nuevo" />
 				<toolbarbutton image="/pantallas/icons/openFile.png" label="Abrir" onClick="@command('buscar')" tooltiptext="Buscar" />
 				<toolbarbutton image="/pantallas/icons/import.png" label="Guardar" onClick="@command('guardar')" tooltiptext="Guardar" />
+
+				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
+				<toolbarbutton image="/pantallas/icons/not.png" label="Cancelar" onClick="@command('nuevo')" tooltiptext="Cancelar" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../menu.zul" tooltiptext="Volver al menu" />
