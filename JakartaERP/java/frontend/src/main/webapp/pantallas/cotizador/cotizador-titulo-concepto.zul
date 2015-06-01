@@ -3,17 +3,17 @@
 	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%"  >
 	
     <treecols>
-        <treecol label="Título / Concepto" 	align="center" width="300px" />
-        <treecol label="Artículo" 			align="center" width="100px" />
-        <treecol label="Cantidad" 			align="center" width="100px" />
+        <treecol label="Título / Concepto" 	align="center" width="250px" />
+        <treecol label="Artículo" 			align="center" width="150px" />
+        <treecol label="Cantidad" 			align="center" width="80px" />
         <treecol label="Unid. Med." 		align="center" width="100px" />
         <treecol label="Costo Unitario" 	align="center" width="100px" />
-        <treecol label="Moneda" 			align="center" width="100px" />
-        <treecol label="Fecha Costo" 		align="center" width="100px" />
-        <treecol label="Costo" 				align="center" width="100px" />
-        <treecol label="Markup (%)" 		align="center" width="100px" />
-        <treecol label="Costo En" 			align="center" width="100px" />
-        <treecol label="Importe de Venta"	align="center" width="150px" />
+        <treecol label="Moneda" 			align="center" width="80px" />
+        <treecol label="Fecha Costo" 		align="center" width="80px" />
+        <treecol label="Costo" 				align="center" width="80px" />
+        <treecol label="Markup (%)" 		align="center" width="80px" />
+        <treecol label="Costo En" 			align="center" width="80px" />
+        <treecol label="Importe de Venta"	align="center" width="110px" />
         
     </treecols>
     
@@ -23,48 +23,55 @@
             <treerow >
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.concepto.descripcion}" if="${titulo.data.tipo=='C'}" />
- 	               <textbox width="100%" style="margin:10px;" value="@bind(titulo.data.descripcion)" inplace="true" if="${titulo.data.tipo=='T'}"/>
+ 	               <textbox width="auto" value="@bind(titulo.data.concepto.descripcion)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox width="auto"  value="@bind(titulo.data.descripcion)" if="${titulo.data.tipo=='T'}" />
                 </treecell>
                 
 				<treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.producto.codigo}" if="${titulo.data.tipo=='C'}" />
+ 	               <label sclass="importe" width="100%" value="@bind(titulo.data.producto.descripcion)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
                
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.cantidad}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.codUnidadMedida}" if="${titulo.data.tipo=='C'}" />
+ 	               	<hlayout width="100%">
+						<textbox sclass="campoCodigo-medium" inplace="true" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" />
+						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" />
+					</hlayout>
                 </treecell>
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.precioUnitario}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.codMoneda}" if="${titulo.data.tipo=='C'}" />
+ 	            	<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" >
+						<template name="model" var="moneda" >
+							<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
+						</template>
+					</combobox>
                 </treecell>
                                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.fechaPrecioCosto}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.fechaPrecioCosto)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.precio}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.markUp}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.costoEn}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
 
                 <treecell>
- 	               <label width="100%" style="margin:10px;" value="${titulo.data.importeVenta}" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
                 
             </treerow>

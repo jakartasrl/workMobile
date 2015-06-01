@@ -53,24 +53,30 @@ public class TituloModeloCotizadorOV extends ObjectView {
 		return tituloModeloCotizadorOV;
 	}
 	
-	private DescriptibleOV producto = new DescriptibleOV();
+	
+	private DescriptibleOV producto= new DescriptibleOV();
 	private Long idProducto;
 	private String codProducto;
+	private String descProducto;
 	
 	private DescriptibleOV detalleDeConcepto = new DescriptibleOV();
 	
 	private DescriptibleOV moneda = new DescriptibleOV();
 	private Long idMoneda;
 	private String codMoneda;
+	private String descMoneda;
 	
 	private double precio;
 	private Date fechaPrecioCosto;
 	
 	private Cotizador cotizador;
 	private double cantidad;
+	
 	private DescriptibleOV unidadMedida = new DescriptibleOV();
 	private Long idUnidadMedida;
 	private String codUnidadMedida;
+	private String descUnidadMedida;
+	
 	private double precioUnitario;
 	
 	@Range(min=0,max=500, message="El mark up  debe estar entre 1 y 500")

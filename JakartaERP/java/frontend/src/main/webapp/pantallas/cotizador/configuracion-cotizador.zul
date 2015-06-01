@@ -1,7 +1,7 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
 
-	<grid style="border-style:none;" sizedByContent="true">
+	<grid style="border-style:none;" sizedByContent="true" width="100%" >
 					<columns>
 						<column width="130px" />
 						<column width="100px" />
@@ -19,19 +19,51 @@
 						</row>
 			
 						<row sclass="fila-maestro">
-									
 							<label value="Expresar en moneda : " />
-							<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.cotizadorOV.monedaExpresada)" readonly="true">
-								<template name="model">
-									<comboitem style="margin-top:15px;" label="@bind(moneda.codigo)" />
+							<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" >
+								<template name="model" var="moneda">
+									<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 								</template>
 							</combobox>
-							
 						</row>
 						
 						<row sclass="fila-maestro">
 						
-							<button style="margin-bottom:2px;margin-left:3px;" label="Tipos de Cambio..." onClick="@command('tiposCambio')" />
+							<cell colspan="2">
+							
+							<panel sclass="panel-maestro" style="padding:5px;" title="Tipos de Cambio" border="normal" width="100%">
+							
+							<panelchildren>
+							
+							<grid emptyMessage="Tipos de cambio" model="@bind(vm.lsTipoDeCambio)" >
+							
+								<columns>
+									<column width="65px" label="Codigo" />
+									<column width="65px" label="Moneda" />
+									<column width="70px" label="Cotizacion" /> 
+								</columns>
+			
+								<rows>
+								
+									<template name="model">
+										<row>
+										
+ 											<textbox width="100%" value="@bind(each.codMoneda)" /> 
+ 											<textbox width="100%" value="@bind(each.descMoneda)" /> 
+ 											<textbox width="100%" value="@bind(each.cotizacion)" />
+ 											
+										</row>
+									</template>
+									
+								</rows>
+																						
+							</grid>
+							
+							</panelchildren>
+							
+							</panel>
+							
+							</cell>
 				
 						</row>
 						

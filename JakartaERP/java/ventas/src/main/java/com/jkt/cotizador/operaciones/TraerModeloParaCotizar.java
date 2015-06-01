@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.jkt.constantes.TiposDeDato;
+import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.dominio.Filtro;
@@ -24,7 +28,6 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 	
 	private List<TituloModeloCotizador> titulos=new ArrayList<TituloModeloCotizador>();
 	private static final String OID = "OID";
-	private static final String WRITER_MODELO = "WRITER_MODELO";
 	
 	private ModeloCotizador modelo;
 
@@ -33,18 +36,14 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 		validarEntrada(aParams.get(OID));
 		
 		modelo=(ModeloCotizador) obtener(ModeloCotizador.class, (String)aParams.get(OID));
-		
-		if (tipoCliente.equals(CLIENTE_DELPHI)) {
-			notificarObjeto(WRITER_MODELO, modelo);
-		}
-				
+						
 		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
 		}
 		
 		if (!tipoCliente.equals(CLIENTE_DELPHI)){
-			modelo.setTitulos(titulos);
+//			modelo.setTitulos(titulos);
 			notificarObjeto("", modelo);
 		}
 		
@@ -92,18 +91,33 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
 				int i = 10000;
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
+					
+					TituloModeloCotizador tituloModeloCotizador2 = new TituloModeloCotizador();
+					tituloModeloCotizador2.setTipo("C");//Producto(producto);
+					tituloModeloCotizador2.setDetalleDeConcepto(tituloModeloCotizador.getDetalleDeConcepto());
+					
+					ConceptoPresupuesto concepto = tituloModeloCotizador.getConcepto(); 					
+					tituloModeloCotizador2.setConcepto(concepto);					
+					concepto.setUnidadDeMedidaPorDefecto(concepto.getUnidadDeMedidaPorDefecto());
+					
+					tituloModeloCotizador2.setCodigoInterno((int)tituloModeloCotizador.getId());
+					tituloModeloCotizador2.setCodigoInternoPadre(codigoInternoPadre);
+					
 					productoClasificador=(ProductoClasificador) persistentEntity;
-					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
-					tituloModeloCotizador.setProducto(producto);
+					producto = (Producto) obtener(Producto.class, Long.toString(productoClasificador.getProducto().getId()));
 					
-					tituloModeloCotizador.setCodigoInterno(tituloModeloCotizador.getCodigoInterno()+(i++));
+					producto.setCodigo(producto.getCodigo());
 					
-					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
+					tituloModeloCotizador2.setProducto(producto);
+
+					tituloModeloCotizador2.setCodigoInterno(tituloModeloCotizador2.getCodigoInterno()+(i++));
+					
+					asignarMonedaPrecioFecha(tituloModeloCotizador2, producto);
 					
 					if (tipoCliente.equals(CLIENTE_DELPHI)) {
-						notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+						notificarObjeto(WRITER_TITULO, tituloModeloCotizador2);
 					} else {
-						this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+						this.modelo.agregarTituloTransiente(tituloModeloCotizador2);
 					}
 				}
 				

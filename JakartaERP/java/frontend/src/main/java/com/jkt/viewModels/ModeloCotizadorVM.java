@@ -16,18 +16,31 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.HtmlBasedComponent;
+import org.zkoss.zk.ui.event.DropEvent;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.DefaultTreeModel;
+import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tree;
+import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.TreeNode;
+import org.zkoss.zul.Treecell;
+import org.zkoss.zul.Treechildren;
+import org.zkoss.zul.Treeitem;
 
+import com.jkt.arbol.clasificador.ComponenteNodo;
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.ModeloCotizadorOV;
 import com.jkt.ov.TituloModeloCotizadorOV;
+import com.jkt.ov.tree.AdvancedTreeModel;
 import com.jkt.ov.tree.NodoTitulos;
 
 @Data
@@ -35,7 +48,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		
 	private String titulo = "Modelos de Cotizador";
 	private ModeloCotizadorOV modeloCotizadorOV = new ModeloCotizadorOV();
-	private DefaultTreeModel<TituloModeloCotizadorOV> arbolTitulos;
+	private AdvancedTreeModel arbolTitulos;
 	
 	//Elementos recuperados del click
 	private NodoTitulos nodoActual;
@@ -123,7 +136,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		todosLosElementos= new ArrayList<TituloModeloCotizadorOV>();
 
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
-		this.arbolTitulos=new DefaultTreeModel<TituloModeloCotizadorOV>(root);
+		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
 		
 		TituloModeloCotizadorOV data = new TituloModeloCotizadorOV();
 		data.setTipo("T");
@@ -192,8 +205,8 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 			}
 		}
 		
-		this.arbolTitulos=new DefaultTreeModel<TituloModeloCotizadorOV>(root);
-		
+		this.arbolTitulos=new AdvancedTreeModel(root);//<TituloModeloCotizadorOV>(root);
+
 	}
 	
 	@Command
@@ -202,17 +215,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		this.nodoActual=nodo;
 		this.tituloModeloCotizadorOV=nodo.getData();
 	}
-	
-	@Command
-	@NotifyChange({"arbolTitulos","tituloModeloCotizadorOV","modeloCotizadorOV"})
-	public synchronized void mover(@BindingParam("titulo") NodoTitulos nodo){
-//		this.nodoActual=nodo;
-//		this.tituloModeloCotizadorOV=nodo.getData();
 		
-		Messagebox.show("Moviendo " + nodo.getData().getCodigo());
-		
-	}
-	
 	@Command
 	@NotifyChange({"arbolTitulos","modeloCotizadorOV"})
 	public void modificarConcepto() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -223,12 +226,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	@Command
 	@NotifyChange({"arbolTitulos","todosLosElementos","modeloCotizadorOV"})
 	public void eliminarConcepto() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		this.nodoActual.getParent().remove(this.nodoActual);
-
-		//		this.setArbolTitulos(arbolTitulos);
-//		this.todosLosElementos.remove(this.nodoActual);
-//		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
-		
+		this.nodoActual.getParent().remove(this.nodoActual);	
 	}
 
 	@Command
@@ -306,5 +304,37 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		this.nodoActual.getParent().add(nodoTitulos);	
 		
 	}
-	    
+
+	
+	@Command
+	public void setear(@BindingParam("componente") final Component componente, @BindingParam("nodo") NodoTitulos nodo){
+		
+		nodo.setComponenteAsociado(componente);
+		
+		/*
+		componente.addEventListener(Events.ON_DROP, new EventListener<Event>() {
+             @Override
+             public void onEvent(Event event) throws Exception {
+            	 
+            	 Treeitem actual = (Treeitem) ((DropEvent) event).getDragged();
+                 NodoTitulos valorActual = (NodoTitulos) actual.getValue();
+                 
+                 Treeitem destino = (Treeitem) ((DropEvent) event).getTarget().getParent().getParent();
+                 NodoTitulos valorDestino = (NodoTitulos) destino.getValue();
+
+                 NodoTitulos valorOrigen= (NodoTitulos) valorActual.getParent();
+                                  
+                 //Agregamos
+//                 valorDestino.add(valorActual);
+                 
+                 //Borramos
+//                 valorOrigen.remove(valorActual);
+               
+               
+             }
+         });
+	*/
+		
+	}
+	
 }
