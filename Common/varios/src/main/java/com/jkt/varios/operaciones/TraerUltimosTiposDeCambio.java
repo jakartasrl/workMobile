@@ -29,10 +29,12 @@ public class TraerUltimosTiposDeCambio extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
+		List<PersistentEntity> lsTipoDeCambio=new ArrayList<PersistentEntity>();
+		
 		Configuracion configuracion = (Configuracion) serviceRepository.getUniqueByProperty(Configuracion.class, "nombre", MONEDA_POR_DEFECTO);
 		
 		if (configuracion==null) {
-			throw new JakartaException("No existe el parametro de moneda por defecto en la tabla de configuración.");
+			throw new JakartaException("No existe el parametro de moneda por defecto en la tabla de configuraciï¿½n.");
 		}
 		
 		List<PersistentEntity> monedas = obtenerTodos(Moneda.class);
@@ -68,8 +70,12 @@ public class TraerUltimosTiposDeCambio extends Operation {
 				nuevosTiposDeCambio.add(tipoCambio);
 			}
 
-			notificarObjeto(WRITER_TIPO_CAMBIO, tipoCambio);
-			
+			if (tipoCliente.equals(CLIENTE_DELPHI)){
+				notificarObjeto(WRITER_TIPO_CAMBIO, tipoCambio);
+			} else {
+				lsTipoDeCambio.add(tipoCambio);
+			}
+
 		}
 		
 		/*
@@ -78,6 +84,10 @@ public class TraerUltimosTiposDeCambio extends Operation {
 		 */
 		for (TipoDeCambio tipoDeCambio : nuevosTiposDeCambio) {
 			guardar(tipoDeCambio);
+		}
+		
+		if (!tipoCliente.equals(CLIENTE_DELPHI)){
+			notificarObjeto("", lsTipoDeCambio);
 		}
 		
 	}

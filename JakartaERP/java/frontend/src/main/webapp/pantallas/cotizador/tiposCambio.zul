@@ -1,0 +1,26 @@
+<window viewModel="@id('vm') @init('com.jkt.viewModels.TiposCambioVM')" apply="org.zkoss.bind.BindComposer" title="Tipos de cambio" width="225px" position="center,center" closable="true" action="show: slideDown;hide: slideUp" >
+
+		       
+		<grid style="margin:0px;" emptyMessage="No existen tipos de cambio" model="@bind(vm.lsTipoDeCambio)" >
+			<columns>
+				<column width="65px" label="Codigo" />
+				<column width="65px" label="Moneda" />
+				<column width="70px" label="Cotizacion" />
+			</columns>
+
+			<rows>
+
+				<template name="model">
+					<row>
+
+						<label width="100%" value="@bind(each.codMoneda)" />
+						<label width="100%" value="@bind(each.descMoneda)" />
+						<label width="100%" value="@bind(each.cotizacion)" />
+
+					</row>
+				</template>
+
+			</rows>
+		</grid>
+	
+</window>

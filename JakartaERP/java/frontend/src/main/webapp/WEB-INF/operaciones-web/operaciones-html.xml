@@ -1226,6 +1226,9 @@
 				
 				<campoSalida target="moneda.id" 				value="idMoneda" />
 				
+				<campoSalida target="producto.id" 				value="idProducto" />
+				<campoSalida target="producto.codigo" 			value="codProducto" />
+				
 				<campoSalida target="concepto.id" 				value="idC" />
 				<campoSalida target="concepto.codigo" 			value="codigoC" />	
 				<campoSalida target="concepto.descripcion" 		value="descripcionC" />
@@ -1311,6 +1314,83 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TraerItem" clase="com.jkt.cotizador.operaciones.TraerItem" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ItemsOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="codigo" 					value="codigo" />	
+			<campoSalida target="descripcion" 				value="descripcion" />
+			<campoSalida target="referencia" 				value="referencia" />
+			<campoSalida target="cotizador.id" 				value="idCotizador" />
+			<campoSalida target="cotizador.fecha" 			value="fecha" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerModeloParaCotizar" clase="com.jkt.cotizador.operaciones.TraerModeloParaCotizar" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ModeloCotizadorOV">
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="id" 												value="id" />
+			<campoSalida target="codigo" 											value="codigo" />	
+			<campoSalida target="descripcion" 										value="descripcion" />
+			
+			<campoSalida target="titulosTransientes" 								value="titulos">
+				<campoSalida target="id" 											value="id" />
+				<campoSalida target="codigo" 										value="codigo" />	
+				<campoSalida target="descripcion" 									value="descripcion" />
+				<campoSalida target="codigoInterno" 								value="codigoInterno" />
+				<campoSalida target="codigoInternoPadre" 							value="codigoInternoPadre" />
+				<campoSalida target="tipo" 											value="tipo" />
+				
+				<campoSalida target="concepto.id" 									value="idC" />
+				<campoSalida target="concepto.codigo" 								value="codigoC" />	
+				<campoSalida target="concepto.descripcion" 							value="descripcionC" />
+				
+				<campoSalida target="concepto.monedaPorDefecto.id" 					value="idMoneda" />
+				<campoSalida target="concepto.monedaPorDefecto.codigo" 				value="codMoneda" />
+				<campoSalida target="concepto.monedaPorDefecto.descripcion" 		value="descMoneda" />
+				
+				<campoSalida target="producto.id" 									value="idProducto" />
+				<campoSalida target="producto.codigo" 								value="codProducto" />
+				<campoSalida target="producto.descripcion" 							value="descProducto" />
+				
+				<campoSalida target="concepto.unidadDeMedidaPorDefecto.id" 			value="idUnidadMedida" />
+				<campoSalida target="concepto.unidadDeMedidaPorDefecto.codigo" 		value="codUnidadMedida" />
+				<campoSalida target="concepto.unidadDeMedidaPorDefecto.descripcion" value="descUnidadMedida" />
+				
+				<campoSalida target="fechaPrecioCosto" 								value="fechaPrecioCosto" />
+				<campoSalida target="precio" 										value="precio" />
+
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerTipoDeCambio" clase="com.jkt.varios.operaciones.TraerUltimosTiposDeCambio" entidad="com.jkt.varios.dominio.TipoDeCambio" outputOV="com.jkt.ov.ListTipoDeCambioOV">
+		
+		<output>
+
+			<campoSalida target="moneda.id" 			value="idMoneda" />
+			<campoSalida target="moneda.codigo" 		value="codMoneda" />
+			<campoSalida target="moneda.descripcion" 	value="descMoneda" />
+			<campoSalida target="cotizacion"			value="cotizacion" />
+						
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 	
 	<operacion name="TraerPedidoConTareas" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
 		

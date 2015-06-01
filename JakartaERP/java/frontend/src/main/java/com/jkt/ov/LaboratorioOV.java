@@ -20,8 +20,8 @@ public class LaboratorioOV extends DescriptibleOV {
 
 	public LaboratorioOV() {
 		this.setActivo(Boolean.TRUE);
-		this.setCodigo("");//=StringUtils.EMPTY;
-		this.setDescripcion("");//=StringUtils.EMPTY;
+		this.setCodigo(StringUtils.EMPTY);
+		this.setDescripcion(StringUtils.EMPTY);
 	}
 	
 	private List laboratorios=new ArrayList();

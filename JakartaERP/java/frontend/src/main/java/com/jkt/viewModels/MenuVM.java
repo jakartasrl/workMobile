@@ -42,6 +42,7 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Documentación", "generic/genericList.zul", "small","guardarDocumentacion", "documentacion"));
 		menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
 		menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
+		menues.add(MenuOV.newInstance("Cotizador", "index/index-Cotizador.zul", "small"));
 		menues.add(MenuOV.newInstance("Presupuesto", "index/index-presupuesto.zul", "small"));
 		menues.add(MenuOV.newInstance("Pedido", "index/index-pedido.zul", "small"));
 		menues.add(MenuOV.newInstance("Planificación de Pedido", "index/index-agenda.zul", "small"));

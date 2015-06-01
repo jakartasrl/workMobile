@@ -1,0 +1,163 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+	
+	
+	<hlayout style="margin-top:10px; margin-bottom:10px;">
+	
+<!-- <grid style="border-style:none;" sizedByContent="true" width="100%" > -->
+<!-- 					<columns> -->
+<!-- 						<column width="130px" /> -->
+<!-- 						<column width="100px" /> -->
+<!-- 						<column width="200px" /> -->
+<!-- 					</columns> -->
+<!-- 					<rows> -->
+					
+<!-- 						<row sclass="fila-maestro"> -->
+							<label style="width:100px;" value="Modelo a utilizar : " />
+							<hlayout width="100%">
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" tabindex="5"/>
+								<button label="..." onClick="@command('openHelper', clase='modeloCotizador', ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" />
+							</hlayout>
+							<textbox width="100%" sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="1" readonly="true"/>
+<!-- 						</row> -->
+			
+<!-- 						<row sclass="fila-maestro"> -->
+							<label value="Expresar en moneda : " />
+							<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" >
+								<template name="model" var="moneda">
+									<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
+								</template>
+							</combobox>
+							<separator></separator>
+							<button onClick="@command('abrirTiposCambio')">Tipos de cambio
+							</button>
+							
+<!-- 						</row> -->
+						
+<!-- 						<row sclass="fila-maestro"> -->
+						
+<!-- 							<cell colspan="2"> -->
+							
+<!-- 							<panel sclass="panel-maestro" style="padding:5px;" title="Tipos de Cambio" border="normal" width="100%"> -->
+							
+<!-- 							<panelchildren> -->
+							
+<!-- 							<grid emptyMessage="Tipos de cambio" model="@bind(vm.lsTipoDeCambio)" > -->
+							
+<!-- 								<columns> -->
+<!-- 									<column width="65px" label="Codigo" /> -->
+<!-- 									<column width="65px" label="Moneda" /> -->
+<!-- 									<column width="70px" label="Cotizacion" />  -->
+<!-- 								</columns> -->
+			
+<!-- 								<rows> -->
+								
+<!-- 									<template name="model"> -->
+<!-- 										<row> -->
+										
+<!--  											<textbox width="100%" value="@bind(each.codMoneda)" />  -->
+<!--  											<textbox width="100%" value="@bind(each.descMoneda)" />  -->
+<!--  											<textbox width="100%" value="@bind(each.cotizacion)" /> -->
+ 											
+<!-- 										</row> -->
+<!-- 									</template> -->
+									
+<!-- 								</rows> -->
+																						
+<!-- 							</grid> -->
+							
+<!-- 							</panelchildren> -->
+							
+<!-- 							</panel> -->
+							
+<!-- 							</cell> -->
+				
+<!-- 						</row> -->
+						
+<!-- 					</rows> -->
+					
+<!-- 				</grid>	 -->
+	</hlayout>
+	
+	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%"  >
+	
+    <treecols>
+        <treecol label="Título / Concepto" 	align="center" width="300px"/>
+        <treecol label="Artículo" 			align="center" width="200px" />
+        <treecol label="Cantidad" 			align="center" width="80px" />
+        <treecol label="Unid. Med." 		align="center" width="100px" />
+        <treecol label="Costo Unitario" 	align="center" width="100px" />
+        <treecol label="Moneda" 			align="center" width="80px" />
+        <treecol label="Fecha Costo" 		align="center" width="80px" />
+        <treecol label="Costo" 				align="center" width="80px" />
+        <treecol label="Markup (%)" 		align="center" width="80px" />
+        <treecol label="Costo En" 			align="center" width="80px" />
+        <treecol label="Importe de Venta"	align="center" width="110px" />
+        
+    </treecols>
+    
+    <template name="model" var="titulo">
+    
+        <treeitem open="true" width="100%" >
+            <treerow >
+                
+                <treecell>
+ 	               <label width="auto" value="@bind(titulo.data.concepto.descripcion)" if="${titulo.data.tipo=='C'}" />
+ 	               <label width="auto"  value="@bind(titulo.data.descripcion)" if="${titulo.data.tipo=='T'}" />
+                </treecell>
+                
+				<treecell>
+ 	               <label sclass="importe" width="100%" value="@bind(titulo.data.producto.descripcion)" if="${titulo.data.tipo=='C'}" />
+                </treecell>
+               
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+                </treecell>
+                
+                <treecell>
+ 	               	<hlayout width="100%">
+						<textbox sclass="importe" width="65px" inplace="true" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
+							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)"
+							/>
+						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" />
+					</hlayout>
+                </treecell>
+                
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+                </treecell>
+                
+                <treecell>
+ 	            	<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" >
+						<template name="model" var="moneda" >
+							<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
+						</template>
+					</combobox>
+                </treecell>
+                                
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.fechaPrecioCosto)" if="${titulo.data.tipo=='C'}" />
+                </treecell>
+                
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" />
+                </treecell>
+                
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" />
+                </treecell>
+                
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" />
+                </treecell>
+
+                <treecell>
+ 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" />
+                </treecell>
+                
+            </treerow>
+        </treeitem>
+                  
+    </template>
+	</tree>
+		
+</zk>

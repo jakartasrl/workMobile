@@ -11,6 +11,7 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.erp.articulos.Producto;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.varios.dominio.Moneda;
+import com.jkt.varios.dominio.UnidadMedida;
 
 
 /**
