@@ -15,7 +15,9 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.DefaultTreeModel;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -230,5 +232,14 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		titulo.getData().setImporteVenta(titulo.getData().getPrecio() + titulo.getData().getPrecio() * titulo.getData().getMarkUp() / 100);
 		
 	}
-		
+
+	@Command
+	@NotifyChange({"lsTipoDeCambio"})
+	public void abrirTiposCambio(){
+		Map<String,Object> args=new HashMap<String, Object>();
+		args.put("lista", lsTipoDeCambio);
+		Window window = (Window) Executions.createComponents("/pantallas/cotizador/tiposCambio.zul", null, args);
+		window.doModal();
+	}
+	
 }

@@ -1,4 +1,4 @@
-<zk viewModel="@id('vm') @load(viewModel)">
+<zk viewModel="@id('vm') @init('com.jkt.viewModels.TiposCambioVM')">
 
 	<div>
 

@@ -1,80 +1,87 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 	
 	
-<grid style="border-style:none;" sizedByContent="true" width="100%" >
-					<columns>
-						<column width="130px" />
-						<column width="100px" />
-						<column width="200px" />
-					</columns>
-					<rows>
+	<hlayout style="margin-top:10px; margin-bottom:10px;">
+	
+<!-- <grid style="border-style:none;" sizedByContent="true" width="100%" > -->
+<!-- 					<columns> -->
+<!-- 						<column width="130px" /> -->
+<!-- 						<column width="100px" /> -->
+<!-- 						<column width="200px" /> -->
+<!-- 					</columns> -->
+<!-- 					<rows> -->
 					
-						<row sclass="fila-maestro">
+<!-- 						<row sclass="fila-maestro"> -->
 							<label style="width:100px;" value="Modelo a utilizar : " />
 							<hlayout width="100%">
 								<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" tabindex="5"/>
 								<button label="..." onClick="@command('openHelper', clase='modeloCotizador', ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" />
 							</hlayout>
 							<textbox width="100%" sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="1" readonly="true"/>
-						</row>
+<!-- 						</row> -->
 			
-						<row sclass="fila-maestro">
+<!-- 						<row sclass="fila-maestro"> -->
 							<label value="Expresar en moneda : " />
 							<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" >
 								<template name="model" var="moneda">
 									<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 								</template>
 							</combobox>
-						</row>
+							<separator></separator>
+							<button onClick="@command('abrirTiposCambio')">Tipos de cambio
+							</button>
+							
+<!-- 						</row> -->
 						
-						<row sclass="fila-maestro">
+<!-- 						<row sclass="fila-maestro"> -->
 						
-							<cell colspan="2">
+<!-- 							<cell colspan="2"> -->
 							
-							<panel sclass="panel-maestro" style="padding:5px;" title="Tipos de Cambio" border="normal" width="100%">
+<!-- 							<panel sclass="panel-maestro" style="padding:5px;" title="Tipos de Cambio" border="normal" width="100%"> -->
 							
-							<panelchildren>
+<!-- 							<panelchildren> -->
 							
-							<grid emptyMessage="Tipos de cambio" model="@bind(vm.lsTipoDeCambio)" >
+<!-- 							<grid emptyMessage="Tipos de cambio" model="@bind(vm.lsTipoDeCambio)" > -->
 							
-								<columns>
-									<column width="65px" label="Codigo" />
-									<column width="65px" label="Moneda" />
-									<column width="70px" label="Cotizacion" /> 
-								</columns>
+<!-- 								<columns> -->
+<!-- 									<column width="65px" label="Codigo" /> -->
+<!-- 									<column width="65px" label="Moneda" /> -->
+<!-- 									<column width="70px" label="Cotizacion" />  -->
+<!-- 								</columns> -->
 			
-								<rows>
+<!-- 								<rows> -->
 								
-									<template name="model">
-										<row>
+<!-- 									<template name="model"> -->
+<!-- 										<row> -->
 										
- 											<textbox width="100%" value="@bind(each.codMoneda)" /> 
- 											<textbox width="100%" value="@bind(each.descMoneda)" /> 
- 											<textbox width="100%" value="@bind(each.cotizacion)" />
+<!--  											<textbox width="100%" value="@bind(each.codMoneda)" />  -->
+<!--  											<textbox width="100%" value="@bind(each.descMoneda)" />  -->
+<!--  											<textbox width="100%" value="@bind(each.cotizacion)" /> -->
  											
-										</row>
-									</template>
+<!-- 										</row> -->
+<!-- 									</template> -->
 									
-								</rows>
+<!-- 								</rows> -->
 																						
-							</grid>
+<!-- 							</grid> -->
 							
-							</panelchildren>
+<!-- 							</panelchildren> -->
 							
-							</panel>
+<!-- 							</panel> -->
 							
-							</cell>
+<!-- 							</cell> -->
 				
-						</row>
+<!-- 						</row> -->
 						
-					</rows>
+<!-- 					</rows> -->
 					
-				</grid>	
+<!-- 				</grid>	 -->
+	</hlayout>
 	
 	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%"  >
 	
     <treecols>
-        <treecol label="Título / Concepto" 	align="center" width="300px" />
+        <treecol label="Título / Concepto" 	align="center" width="300px"/>
         <treecol label="Artículo" 			align="center" width="200px" />
         <treecol label="Cantidad" 			align="center" width="80px" />
         <treecol label="Unid. Med." 		align="center" width="100px" />

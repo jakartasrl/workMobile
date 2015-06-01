@@ -59,31 +59,33 @@
 
 		</panel>
 		
-		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
-			<panelchildren>
-				<tabbox id="contenidoTabs" >
-			    	<tabs id="tabs">
-			        	<tab id="items" label="Configuracion Cotizador" />
-			        	<tab id="dComerciales" label="Cotizador" />
-			    	</tabs>
+		<div width="100%">
+<!-- 		<panel style="margin-top:15px;" border="none" height="auto" width="100%"> -->
+<!-- 			<panelchildren> -->
+<!-- 				<tabbox id="contenidoTabs" > -->
+<!-- 			    	<tabs id="tabs"> -->
+<!-- 			        	<tab id="items" label="Configuracion Cotizador" /> -->
+<!-- 			        	<tab id="dComerciales" label="Cotizador" /> -->
+<!-- 			    	</tabs> -->
 			    	
-			    	<tabpanels>
+<!-- 			    	<tabpanels> -->
 			    			        	
-			        	<tabpanel>
-							<include id="itemsContent" hflex="1" src="/pantallas/cotizador/configuracion-cotizador.zul" viewModel="${vm}"/>
-			        	</tabpanel>
+<!-- 			        	<tabpanel> -->
+<!-- 							<include id="itemsContent" hflex="1" src="/pantallas/cotizador/configuracion-cotizador.zul" viewModel="${vm}"/> -->
+<!-- 			        	</tabpanel> -->
 			        
-			        	<tabpanel>
+<!-- 			        	<tabpanel> -->
 							<include id="dcContent" hflex="1" src="/pantallas/cotizador/cotizador-titulo-concepto.zul" viewModel="${vm}" />
-						</tabpanel>
+<!-- 						</tabpanel> -->
 					
-			    	</tabpanels>
+<!-- 			    	</tabpanels> -->
 			    
-				</tabbox>
+<!-- 				</tabbox> -->
 			
-			</panelchildren>
+<!-- 			</panelchildren> -->
 		
-		</panel>
+		</div>
+<!-- 		</panel> -->
 		
 	</div>
 
