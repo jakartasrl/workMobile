@@ -1,7 +1,6 @@
 package com.jkt.cotizador.validadores;
 
 import com.jkt.cotizador.dominio.Cotizador;
-import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.CotizacionDet;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;

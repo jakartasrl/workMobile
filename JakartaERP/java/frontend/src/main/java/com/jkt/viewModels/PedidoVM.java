@@ -133,7 +133,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 			tarea.setIdTarea(tarea.getTarea().getId());
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
-			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
+//			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
 			tarea.setIdSector(tarea.getSector().getId());
 			tarea.setIdEstado(Integer.valueOf(tarea.getEstado().getCodigo()));
 			
@@ -173,7 +173,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	}
 	
 	public void recuperarAgendaPedido() throws IllegalAccessException, InvocationTargetException, JakartaException{
-		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getNro()+"' .");
+//		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getNro()+"' .");
+		this.setTitulo("Planificación del Pedido");
 		
 		this.agenda=new AgendaOV();
 		
@@ -551,14 +552,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			this.estados = (ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class);
 		}
 		
-		
-		//recuperar desde session!!! carahoooo
-		Session sess = Sessions.getCurrent();
-		PedidoVM pedidoEnSesion = (PedidoVM) sess.getAttribute(this.getClass().getCanonicalName());
-		if(pedidoEnSesion!=null){
-			BeanUtils.copyProperties(this, pedidoEnSesion);
-		}
-		
 	}
 	
 	@Command
@@ -641,6 +634,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			return;
 		}
 //		actualizarTareas();
+		this.setFiltro("filtroCodigo");
+
 		openComplexHelper("tarea", "", this.tareaAgregada.getTarea(), "tratamientoTarea", "Seleccionar tarea", "Tarea", "Descripción", true , "" , "" );
 	}
 	
@@ -665,6 +660,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 * @throws JakartaException 
 	 */
 	public void tratamientoTarea() throws IllegalAccessException, InvocationTargetException, JakartaException{
+		
+		//Retorna al filtro de cliente!!
+		this.setFiltro("filtroComprobanteCliente");
 		
 		// Hacer variables de instancias para evitar esta query en cada momento!
 		
@@ -780,7 +778,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			this.tareaAgregada=new TareaAgendaOV();
 			this.tareaAgregada.setTarea(tarea);
 			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
-			this.tareaAgregada.setComentario(String.format("%s - %s", itemsOV.getReferencia(), itemsOV.getPlantilla().getDescripcion()));
+//			this.tareaAgregada.set
+			this.tareaAgregada.setComentario(itemsOV.getReferencia());
+			this.tareaAgregada.setDescripcionTarea(itemsOV.getPlantilla().getDescripcion());
+//			this.tareaAgregada.setComentario(String.format("%s - %s", itemsOV.getReferencia(), itemsOV.getPlantilla().getDescripcion()));
 			this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
 			actualizarTareasYArbol();
 		}

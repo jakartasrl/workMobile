@@ -262,10 +262,14 @@ public abstract class ViewModel {
 	@Command
 	public void irAInicio(){
 		Session sess = Sessions.getCurrent();
-		
-		
-		Executions.sendRedirect("/index.zul");
+		sess.setAttribute(this.getClass().getCanonicalName(), this );
+		Executions.sendRedirect("/pantallas/menu.zul");
 	}
-	
-	
+
+	@Command
+	public void cancelar(){
+		Session sess = Sessions.getCurrent();
+		sess.removeAttribute(this.getClass().getCanonicalName());
+	}
+
 }

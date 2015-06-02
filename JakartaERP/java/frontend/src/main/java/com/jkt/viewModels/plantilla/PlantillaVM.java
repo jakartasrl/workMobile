@@ -48,7 +48,7 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 			return;
 		}
 		
-		if(plantilla.getDescripcion().isEmpty()){
+		if(plantilla.getCampoAdicional1().isEmpty()){
 			Messagebox.show("Complete la descripción de la plantilla");
 			return;
 		}

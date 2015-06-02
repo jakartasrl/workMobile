@@ -26,7 +26,7 @@
 			<listheader width="110px" label="Sector"/>
 			<listheader width="130px" label="Estado"/>
 <!-- 			<listheader width="110px" label="Cumplimiento"/> -->
-<!-- 			<listheader width="110px" label="Fecha Lim."/> -->
+			<listheader width="110px" label="Fecha Lim."/>
 			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
@@ -76,8 +76,7 @@
 				</listcell>
 
 				<listcell >
-					<button style="margin-bottom:2px;margin-left:3px;"
-						image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarTarea', tarea=each )" />
+					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarTarea', tarea=each )" />
 				</listcell>
 				
 			</listitem>

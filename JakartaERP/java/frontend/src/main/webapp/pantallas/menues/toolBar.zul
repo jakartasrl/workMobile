@@ -14,7 +14,7 @@
 				<toolbarbutton image="/pantallas/icons/import.png" label="Guardar" onClick="@command('guardar')" tooltiptext="Guardar" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
-				<toolbarbutton image="/pantallas/icons/not.png" label="Cancelar" onClick="@command('nuevo')" tooltiptext="Cancelar" />
+				<toolbarbutton image="/pantallas/icons/not.png" label="Cancelar" onClick="@command('cancelar')" tooltiptext="Cancelar" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" onClick="@command('irAInicio')" tooltiptext="Volver al menu" />

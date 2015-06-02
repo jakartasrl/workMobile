@@ -20,7 +20,7 @@ import com.jkt.view.ObjectView;
  */
 @Data
 @EqualsAndHashCode(callSuper=true,of={"nro"})
-public class PedidoOV extends ObjectView {
+public class PedidoOV extends DescriptibleOV {
 	
 	private String nroPresupuesto;
 	private String letra;

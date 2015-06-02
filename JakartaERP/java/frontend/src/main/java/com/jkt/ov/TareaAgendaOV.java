@@ -19,6 +19,7 @@ public class TareaAgendaOV extends ObjectView {
 	
 	private long idTarea;
 	private String codigoTarea;
+	private String descripcionAbreviada;
 	private String descripcionTarea;
 	
 	private int duracion=1;

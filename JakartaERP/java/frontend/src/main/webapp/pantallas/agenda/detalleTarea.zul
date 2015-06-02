@@ -19,14 +19,18 @@
             
 			<label sclass="negrita" value="Codigo Tarea:" />            
 			<label value="@bind(vm.tarea.codigoTarea)" />            
-
-			<separator> </separator>
 			
-			<label sclass="negrita" value="Descripción:" />            
-			<label value="@bind(vm.tarea.descripcionTarea)" />            
-	
-			<label sclass="negrita" value="Comentario:" />            
-			<label value="@bind(vm.tarea.comentario)" />            
+			<hlayout>
+				<label sclass="negrita" value="Comentario:" />            
+				<label value="@bind(vm.tarea.comentario)" />            
+			</hlayout>
+
+			<hlayout>
+				<label sclass="negrita" value="Descripción" />            
+			</hlayout>
+			<hlayout width="400px" >
+				<label value="@bind(vm.tarea.descripcionTarea)" />            
+			</hlayout>
 
 			<separator />
 		
