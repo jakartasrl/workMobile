@@ -14,6 +14,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -22,6 +23,8 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
@@ -44,6 +47,7 @@ import com.jkt.ov.PedidoOV;
 import com.jkt.ov.PrecedenteOV;
 import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
+import com.jkt.ov.UserOV;
 import com.jkt.ov.tree.NodoTareaAgenda;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
@@ -80,7 +84,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	
 	private DescriptibleOV plantillaDescriptible = new DescriptibleOV();
 
-	DescriptibleOV pedidoDescriptible = new DescriptibleOV();
+//	DescriptibleOV pedidoDescriptible = new DescriptibleOV();
+	PedidoOV pedidoDescriptible = new PedidoOV();
 	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
 	
 	
@@ -168,7 +173,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	}
 	
 	public void recuperarAgendaPedido() throws IllegalAccessException, InvocationTargetException, JakartaException{
-		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getCodigo()+"' .");
+		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getNro()+"' .");
 		
 		this.agenda=new AgendaOV();
 		
@@ -265,7 +270,13 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.lDocumentacion = new ArrayList<DescriptibleOV>();
 		this.docEntregados= new ArrayList<DescriptibleOV>();
 		this.comprobanteOV= new PedidoOV();
-		init(String.valueOf(this.modoAgenda));
+		try {
+			init(String.valueOf(this.modoAgenda));
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -492,7 +503,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	}
 
 	@Init
-	public void init(@BindingParam("modoAgenda") String modoAgenda){
+	public void init(@BindingParam("modoAgenda") String modoAgenda) throws IllegalAccessException, InvocationTargetException{
 		
 		if (modoAgenda.equals("true")) {
 			this.modoAgenda=true;
@@ -503,6 +514,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		}
 
 		log.info("Iniciando ViewModel de Pedido.");
+		
+//		FILTROS
+		this.setFiltro("filtroComprobanteCliente");
 		
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
@@ -535,6 +549,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		if (this.modoAgenda) {
 			this.agenda = new AgendaOV();
 			this.estados = (ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class);
+		}
+		
+		
+		//recuperar desde session!!! carahoooo
+		Session sess = Sessions.getCurrent();
+		PedidoVM pedidoEnSesion = (PedidoVM) sess.getAttribute(this.getClass().getCanonicalName());
+		if(pedidoEnSesion!=null){
+			BeanUtils.copyProperties(this, pedidoEnSesion);
 		}
 		
 	}

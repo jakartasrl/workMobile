@@ -259,5 +259,13 @@ public abstract class ViewModel {
         Executions.sendRedirect("/index.zul");
 	}
 	
+	@Command
+	public void irAInicio(){
+		Session sess = Sessions.getCurrent();
+		
+		
+		Executions.sendRedirect("/index.zul");
+	}
+	
 	
 }

@@ -43,13 +43,12 @@ public class PresupuestoOV extends ObjectView {
 	private List<FormaFacturacionOV> facturaciones=new ArrayList<FormaFacturacionOV>();
 	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();
 	
-	
-	private String filtroNroPresupuesto="";
+	private String filtroNro="";
 	private String filtroCliente="";
 	
 	public void limpiarFiltro() {
 		this.filtroCliente="";
-		this.filtroNroPresupuesto="";
+		this.filtroNro="";
 	}
 	
 	public List obtenerFiltro() {
@@ -59,8 +58,8 @@ public class PresupuestoOV extends ObjectView {
 			filtros.add(new FiltroOV("cliente.sujetoImpositivo.razonSocial", filtroCliente, "like", "string"));
 		}
 		
-		if (!filtroNroPresupuesto.isEmpty()) {
-			filtros.add(new FiltroOV("nro", filtroNroPresupuesto, "like", "string"));
+		if (!filtroNro.isEmpty()) {
+			filtros.add(new FiltroOV("nro", filtroNro, "like", "string"));
 		}
 		
 		return filtros;
