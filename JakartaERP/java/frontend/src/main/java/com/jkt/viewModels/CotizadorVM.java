@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import lombok.Data;
 
@@ -17,6 +18,8 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.DefaultTreeModel;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -31,6 +34,7 @@ import com.jkt.ov.ListTipoDeCambioOV;
 import com.jkt.ov.ModeloCotizadorOV;
 import com.jkt.ov.TipoDeCambioOV;
 import com.jkt.ov.TituloModeloCotizadorOV;
+import com.jkt.ov.tree.AdvancedTreeModel;
 import com.jkt.ov.tree.NodoTitulos;
 
 @Data
@@ -46,15 +50,76 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private DefaultTreeModel<TituloModeloCotizadorOV> arbolTitulos;
 	private ListDescriptibleOV monedas=new ListDescriptibleOV();
 	private List<TipoDeCambioOV> lsTipoDeCambio = new ArrayList<TipoDeCambioOV>();
-	
-	
+
 	private DescriptibleOV expresarEnMonedaSeleccionado= new DescriptibleOV();
+		
+
+	//Esta lista es una lista transiente que contiene toda la informacion de la jerarquia usando codigoInterno y codigoPadre.
+	//Posteriormente una operacion recupera la lista y arma el arbol como corresponde.
+	private List<TituloModeloCotizadorOV> todosLosElementos= new ArrayList<TituloModeloCotizadorOV>();
+	Random rand = new Random();
 	
-	
+	@Command("guardar")
+	@NotifyChange({"modeloCotizadorOV"})
 	public void guardar() throws JakartaException {
+	
+		this.completarCotizadorOV();
+		
+		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
+		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
 		
 	}
 	
+	private void completarCotizadorOV() {
+		
+		this.cotizadorOV.setIdCotizacionDet(itemSelected.getId());
+		this.cotizadorOV.setIdModelo(modeloCotizadorOV.getId());
+		this.cotizadorOV.setIdMoneda(expresarEnMonedaSeleccionado.getId());
+		this.cotizadorOV.setCodigoEstado("1");
+		
+		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
+		this.todosLosElementos = new ArrayList<TituloModeloCotizadorOV>();
+		
+		//del arbol completo se genera una lista.
+		List<TreeNode<TituloModeloCotizadorOV>> rootElements = arbol.getRoot().getChildren();
+		for (TreeNode<TituloModeloCotizadorOV> treeNode : rootElements) {
+			establecerCodigos(treeNode, 0);
+		}
+
+		//y se asigna al modelo cotizador q se va a guardar
+		this.modeloCotizadorOV.setTitulos(this.todosLosElementos);
+		this.cotizadorOV.setDetalles(this.todosLosElementos);
+		
+	}
+
+	private void establecerCodigos(TreeNode<TituloModeloCotizadorOV> treeNode, int codigoPadre){
+		int randomNum = rand.nextInt((999999 - 1) + 1) + 1;
+		treeNode.getData().setCodigoInterno(randomNum);
+		treeNode.getData().setCodigoInternoPadre(codigoPadre);
+		
+		
+		if(treeNode.getData().getTipo().equals("C")){
+			treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
+			treeNode.getData().setConcepto(null);//para q el fwk no vaya a buscarlo a la base y le asigne null...
+			//recordar, si elp valor es cero, se crea uno nuevo, si es >0 se busca en la base, si es null, se retorna null.
+		}else{
+			treeNode.getData().setIdC(null);
+		}
+				
+		if (!treeNode.isLeaf()) {
+			List<TreeNode<TituloModeloCotizadorOV>> children = treeNode.getChildren();
+			for (TreeNode<TituloModeloCotizadorOV> nodoHijo : children) {
+				establecerCodigos(nodoHijo, randomNum);
+			}
+		}
+		
+		//Agregamos solo los conceptos
+		if (treeNode.getData().getTipo().equalsIgnoreCase("C")){
+			todosLosElementos.add(treeNode.getData());
+		}
+		
+	}
+
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		openComplexHelper("itemCotizacion", "", this.itemSelected, "cargarItemACotizar", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
@@ -83,19 +148,20 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		return "actualizar";
 	}
 	
+	@Override
 	@Command
-	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos"})
+	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos","cotizadorOV","clienteOV","vendedorOV","modeloCotizadorOV","itemSelected"})
 	public void nuevo(){
+		
+		this.modeloCotizadorOV = new ModeloCotizadorOV();
+		this.cotizadorOV = new CotizadorOV();
+		this.clienteOV = new DescriptibleOV();
+		this.vendedorOV = new DescriptibleOV();
+		this.itemSelected = new ItemsOV();
+		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
-		NodoTitulos nodo1 =  new NodoTitulos(new TituloModeloCotizadorOV(),true);
-		NodoTitulos nodo2 =  new NodoTitulos(new TituloModeloCotizadorOV(),true);
-		nodo1.getData().setCodigo("AAA");
-		nodo1.getData().setDescripcion("BBB");
-		nodo2.getData().setCodigo("CCC");
-		nodo2.getData().setDescripcion("DDD");
-		root.add(nodo1);
-		root.add(nodo2);
-		this.arbolTitulos=new DefaultTreeModel<TituloModeloCotizadorOV>(root);
+		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
+	
 	}
 	
 	@Init
@@ -162,7 +228,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 				tituloModeloCotizadorOV.setMoneda(this.completarCombo(monedas.getList(), tituloModeloCotizadorOV.getIdMoneda()));
 			
 				DescriptibleOV producto = new DescriptibleOV();
-				if (tituloModeloCotizadorOV.getIdProducto() != 0L){
+				if (tituloModeloCotizadorOV.getIdProducto() != null && tituloModeloCotizadorOV.getIdProducto() != 0L ){
 					producto.setId(tituloModeloCotizadorOV.getIdProducto());
 					producto.setCodigo(tituloModeloCotizadorOV.getCodProducto());
 					producto.setDescripcion(tituloModeloCotizadorOV.getDescProducto());

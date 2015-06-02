@@ -41,6 +41,8 @@ public class ItemsOV extends ObjectView {
 	private long idCotizador;
 	private Date fecha;
 	
+	private ModeloCotizadorOV modeloCotizador = new ModeloCotizadorOV();
+	
 	public ItemsOV(){
 		Random rand = new Random();
 	    int randomNum = rand.nextInt((10000 - 1) + 1) + 1;

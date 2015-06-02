@@ -13,7 +13,7 @@
 						<column width="110px" />
 						<column width="100px" />
 						<column width="50px" />
-						<column width="120px"/>
+						<column width="100px"/>
 						<column width="90px"/>
 						<column width="300px"/>
 					</columns>
@@ -22,13 +22,13 @@
 					
 						<row sclass="fila-maestro">
 						
-							<label style="width:100px;" value="Nro. Presupuesto : " />
+							<label width="100%" value="Nro. Presupuesto : " />
 						
 							<textbox sclass="campoCodigo-medium" value="@bind(vm.cotizadorOV.nro)" tabindex="1" readonly="true" width="100%" />
 							<label class="name" value="Fecha : " />
-							<datebox id="fecha" value="@bind(vm.itemSelected.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2" readonly="true" />
+							<datebox width="100%" id="fecha" value="@bind(vm.itemSelected.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2" readonly="true" />
 
-							<label class="name" value="Tipo : " />
+							<label style="width:87px;margin-left:3px;" class="name" value="Tipo : " />
 							<textbox sclass="campoCodigo-medium" value="@bind(vm.itemSelected.referencia)" tabindex="1" readonly="true" width="100%" />
 							
 						</row>
@@ -39,7 +39,7 @@
 							<cell colspan="3">
 								<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" readonly="true" width="100%" />
 							</cell>
-							<label value="Item a Cotizar : " />
+							<label style="width:87px;margin-left:3px;" value="Item a Cotizar : " />
 							<textbox  sclass="campoCodigo-medium" value="@bind(vm.itemSelected.descripcion)" multiline="true" readonly="true" width="100%" />
 						
 						</row>
@@ -60,32 +60,8 @@
 		</panel>
 		
 		<div width="100%">
-<!-- 		<panel style="margin-top:15px;" border="none" height="auto" width="100%"> -->
-<!-- 			<panelchildren> -->
-<!-- 				<tabbox id="contenidoTabs" > -->
-<!-- 			    	<tabs id="tabs"> -->
-<!-- 			        	<tab id="items" label="Configuracion Cotizador" /> -->
-<!-- 			        	<tab id="dComerciales" label="Cotizador" /> -->
-<!-- 			    	</tabs> -->
-			    	
-<!-- 			    	<tabpanels> -->
-			    			        	
-<!-- 			        	<tabpanel> -->
-<!-- 							<include id="itemsContent" hflex="1" src="/pantallas/cotizador/configuracion-cotizador.zul" viewModel="${vm}"/> -->
-<!-- 			        	</tabpanel> -->
-			        
-<!-- 			        	<tabpanel> -->
-							<include id="dcContent" hflex="1" src="/pantallas/cotizador/cotizador-titulo-concepto.zul" viewModel="${vm}" />
-<!-- 						</tabpanel> -->
-					
-<!-- 			    	</tabpanels> -->
-			    
-<!-- 				</tabbox> -->
-			
-<!-- 			</panelchildren> -->
-		
+			<include id="dcContent" hflex="1" src="/pantallas/cotizador/cotizador-titulo-concepto.zul" viewModel="${vm}" />
 		</div>
-<!-- 		</panel> -->
 		
 	</div>
 

@@ -18,7 +18,7 @@ import com.jkt.varios.dominio.UnidadMedida;
 import com.jkt.view.ObjectView;
 
 @Data
-@EqualsAndHashCode(callSuper=true, of={"codigo"})
+@EqualsAndHashCode(callSuper=true)
 public class TituloModeloCotizadorOV extends ObjectView {
 	
 	private int identificadorDetalle=0;

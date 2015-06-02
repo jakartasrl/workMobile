@@ -23,11 +23,12 @@ import com.jkt.varios.dominio.UnidadMedida;
 @Data
 public class TituloModeloCotizador extends PersistentEntity {
 
-
+	
 	/*
 	 * Variable transiente para mostar informacion
 	 */
 	private int identificadorDetalle=0;
+	private long idTransiente=0;
 	
 	/*
 	 * Variable transiente para mostar informacion

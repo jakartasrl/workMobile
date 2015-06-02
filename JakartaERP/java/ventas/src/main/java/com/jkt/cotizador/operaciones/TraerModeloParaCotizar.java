@@ -93,6 +93,9 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
 					
 					TituloModeloCotizador tituloModeloCotizador2 = new TituloModeloCotizador();
+					
+					tituloModeloCotizador2.setIdTransiente(tituloModeloCotizador.getId());
+					
 					tituloModeloCotizador2.setTipo("C");//Producto(producto);
 					tituloModeloCotizador2.setDetalleDeConcepto(tituloModeloCotizador.getDetalleDeConcepto());
 					
@@ -122,6 +125,7 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 				}
 				
 			}else{
+				tituloModeloCotizador.setIdTransiente(tituloModeloCotizador.getId());
 				asignarMonedaPrecioFecha(tituloModeloCotizador, null);
 				if (tipoCliente.equals(CLIENTE_DELPHI)) {
 					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
@@ -132,6 +136,7 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 			
 		}else{
 			
+			tituloModeloCotizador.setIdTransiente(tituloModeloCotizador.getId());
 			if (tipoCliente.equals(CLIENTE_DELPHI)) {
 				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
 			} else {
