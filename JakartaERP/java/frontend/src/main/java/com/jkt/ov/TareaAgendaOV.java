@@ -12,7 +12,7 @@ import com.jkt.view.ObjectView;
 
 @SuppressWarnings("serial")
 @Data
-@EqualsAndHashCode(callSuper=true,of={"randomNumber"})
+@EqualsAndHashCode(callSuper = true, of = { "randomNumber" })
 public class TareaAgendaOV extends ObjectView {
 
 	private int randomNumber;
@@ -23,22 +23,22 @@ public class TareaAgendaOV extends ObjectView {
 	private String descripcionAbreviada;
 	private String descripcionCompleta;
 	
-	private int duracion=1;
+	private int duracion = 1;
 
-	private DescriptibleOV tarea=new DescriptibleOV();
-	
-//	private String comentario;
-	private Date fechaLimite=new Date();
-	private Date fechaCumplimiento=new Date();
-	
-	private DescriptibleOV sector=new DescriptibleOV();
+	private DescriptibleOV tarea = new DescriptibleOV();
+
+	private Date fechaLimite = new Date();
+	private Date fechaCumplimiento = new Date();
+	private Date fechaUltimoPrecedente = new Date();
+
+	private DescriptibleOV sector = new DescriptibleOV();
 	private Long idSector;
-	
-	private DescriptibleOV estado=new DescriptibleOV();
+
+	private DescriptibleOV estado = new DescriptibleOV();
 	private int idEstado;
 
-	private List<TareaAgendaOV> precedencias=new ArrayList<TareaAgendaOV>();
-	private List<DescriptibleOV> precedenciasEnNumeros=new ArrayList<DescriptibleOV>();
+	private List<TareaAgendaOV> precedencias = new ArrayList<TareaAgendaOV>();
+	private List<DescriptibleOV> precedenciasEnNumeros = new ArrayList<DescriptibleOV>();
 	
 	private Long idPedido;
 	private DescriptibleOV pedidoDescriptible;

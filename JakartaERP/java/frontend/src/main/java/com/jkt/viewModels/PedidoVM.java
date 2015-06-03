@@ -1,6 +1,3 @@
-/*
- * 
- */
 package com.jkt.viewModels;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
@@ -60,7 +57,12 @@ import com.jkt.pedido.dominio.PedidoDet;
 @Data
 public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
+	/**
+	 * Se utiliza para saber cuando el usuario selecciono un pedido, y de esto modo,
+	 * se puede comenzar a planificar sus tareas.
+	 */
 	private boolean seleccionoPedido=false;
+	
 	/*
 	 * Variables para la planificacion de la agenda
 	 */
@@ -69,8 +71,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	
 	private AgendaOV agenda;
 	private String codigoTareaNueva;
-	private ListDescriptibleOV estados;//=new ListDescriptibleOV();
-
+	private ListDescriptibleOV estados;
 	
 	/*
 	 * Atributos de un pedido sin planificacion
@@ -84,10 +85,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	
 	private DescriptibleOV plantillaDescriptible = new DescriptibleOV();
 
-//	DescriptibleOV pedidoDescriptible = new DescriptibleOV();
 	PedidoOV pedidoDescriptible = new PedidoOV();
 	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
-	
 	
 	@Command
 	@NotifyChange("comprobanteOV")
@@ -115,6 +114,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		}
 	}
 	
+	/**
+	 * Es el guardar, cuando la funcionalidad está en modo agenda
+	 */
 	public void planificarPedido(){
 		if(!validarTareas()){
 			Messagebox.show("Debe completar el sector en todas las tareas.");
@@ -133,7 +135,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 			tarea.setIdTarea(tarea.getTarea().getId());
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
-//			tarea.setDescripcionTarea(tarea.getTarea().getDescripcion());
 			tarea.setIdSector(tarea.getSector().getId());
 			tarea.setIdEstado(Integer.valueOf(tarea.getEstado().getCodigo()));
 			
@@ -251,12 +252,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			List<TreeNode<TareaPrecedenteOV>> hijosLevel2 = treeNode.getChildren();
 			for (TreeNode<TareaPrecedenteOV> hijoLevel2 : hijosLevel2) {
+				
 				for (DescriptibleOV descriptibleOV : precedenteActual.getPrecedentes()) {
 					if (String.valueOf(hijoLevel2.getData().getTarea().getId()).equals(descriptibleOV.getCodigo())) {
 						hijoLevel2.getData().setEsPrecedente(true);
 						break;
 					}
 				}
+				
 			}
 			
 		}
@@ -523,7 +526,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
 		crearArbolNotas();
-
 		
 		log.info("Recuperando documentos...");
 		this.lDocumentacion = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class)).getList();
@@ -540,7 +542,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando items para articulos...");
 		this.itemsArticulos=new ArrayList<ItemsOV>();
-//		this.itemsArticulos.add(new ItemsOV());
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
@@ -611,6 +612,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				
 			}
 		}
+		
 		if (nodoRootABorrar!=null) {
 			children.remove(nodoRootABorrar);
 		}
@@ -634,7 +636,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			validarCampo("tarea", this.codigoTareaNueva, this.tareaAgregada.getTarea(), "actualizarTareasYArbol");
 			return;
 		}
-//		actualizarTareas();
+
 		this.setFiltro("filtroCodigo");
 
 		openComplexHelper("tarea", "", this.tareaAgregada.getTarea(), "tratamientoTarea", "Seleccionar tarea", "Tarea", "Descripción", true , "" , "" );
