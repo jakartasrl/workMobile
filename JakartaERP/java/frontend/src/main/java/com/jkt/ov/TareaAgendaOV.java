@@ -19,14 +19,15 @@ public class TareaAgendaOV extends ObjectView {
 	
 	private long idTarea;
 	private String codigoTarea;
-	private String descripcionAbreviada;
 	private String descripcionTarea;
+	private String descripcionAbreviada;
+	private String descripcionCompleta;
 	
 	private int duracion=1;
 
 	private DescriptibleOV tarea=new DescriptibleOV();
 	
-	private String comentario;
+//	private String comentario;
 	private Date fechaLimite=new Date();
 	private Date fechaCumplimiento=new Date();
 	

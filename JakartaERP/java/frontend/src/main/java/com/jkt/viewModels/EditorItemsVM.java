@@ -6,10 +6,12 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.apache.commons.lang.StringUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.jkt.excepcion.JakartaException;
@@ -37,6 +39,10 @@ public class EditorItemsVM {
 		this.tarea = tarea;
 		this.pedidoVM = vm;
 		
+		for (ItemsOV itemsOV : items) {
+			itemsOV.setDescripcion(StringUtils.EMPTY);
+		}
+		
 		this.todosLosItems.addAll(itemsArticulos);
 		this.todosLosItems.addAll(items);
 	}
@@ -48,6 +54,20 @@ public class EditorItemsVM {
 
 	@Command
 	public void aceptar(@BindingParam("window") Window w) throws IllegalAccessException, InvocationTargetException, JakartaException{
+		for (ItemsOV itemsOV : todosLosItems) {
+			
+			if (itemsOV.getReferencia().isEmpty()) {
+				Messagebox.show("Complete la referencia de todos los items");
+				return;
+			}
+
+			if (itemsOV.getDescripcionAbreviada().isEmpty()) {
+				Messagebox.show("Complete la descripción (abreviada) de todos los items");
+				return;
+			}
+			
+		}
+		
 		pedidoVM.actualizarTareasDesdeHelpExterno(todosLosItems, tarea);
 		w.detach();
 	}

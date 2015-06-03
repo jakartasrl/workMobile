@@ -10,11 +10,13 @@
 				</auxhead>
 				        
 				<columns>
+					
 					<column width="150px" label="Pedido" sort="auto(idPedido)" if="${vm.vistaPorSector}" />
 					<column width="150px" label="Sector" sort="auto(sector.descripcion)" if="${vm.vistaPorPedido}"/>
+					
 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
 					<column width="200px" label="Descripcion" sort="auto(descripcionTarea)" />
-					<column width="400px" label="Comentario" sort="auto(comentario)" />
+					<column width="400px" label="Descripcion" sort="auto(descripcionAbreviada)" />
 					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
@@ -28,7 +30,7 @@
 							<label value="@bind(each.sector.descripcion)" maxlength="15" if="${vm.vistaPorPedido}"/>
 							<label value="@bind(each.codigoTarea)" maxlength="15"/>
 							<label value="@bind(each.descripcionTarea)" width="100%"/>
-							<label value="@bind(each.comentario)" width="100%"/>
+							<label value="@bind(each.descripcionAbreviada)" width="100%"/>
 							<datebox disabled="true" width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>

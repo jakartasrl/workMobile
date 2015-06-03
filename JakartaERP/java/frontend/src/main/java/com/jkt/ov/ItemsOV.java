@@ -3,6 +3,8 @@ package com.jkt.ov;
 import java.util.Date;
 import java.util.Random;
 
+import org.apache.commons.lang.StringUtils;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -47,5 +49,11 @@ public class ItemsOV extends ObjectView {
 		
 		this.plantilla.setId(randomNum);
 	}
+	
+	
+	/*
+	 * Atributo descripcion abreviada para mostrar vacia en el editor de items de la planificacion de tareas
+	 */
+	private String descripcionAbreviada=StringUtils.EMPTY;
 	
 }

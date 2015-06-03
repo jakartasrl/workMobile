@@ -44,7 +44,7 @@
 				</listcell>
 
 				<listcell >
-					<textbox width="100%" value="@bind(each.comentario)" readonly="false"/>
+					<textbox width="100%" value="@bind(each.descripcionAbreviada)" readonly="false"/>
 				</listcell>
 
 

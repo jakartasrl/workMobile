@@ -60,7 +60,7 @@ import com.jkt.pedido.dominio.PedidoDet;
 @Data
 public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
-	
+	private boolean seleccionoPedido=false;
 	/*
 	 * Variables para la planificacion de la agenda
 	 */
@@ -323,6 +323,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		if (modoAgenda) {
 			recuperarAgendaPedido();
+			this.seleccionoPedido=true;
 		}
 		
 		
@@ -665,14 +666,13 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.setFiltro("filtroComprobanteCliente");
 		
 		// Hacer variables de instancias para evitar esta query en cada momento!
-		
 		ParametroOV paramTareaTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaTaller"), ParametroOV.class);
 		ParametroOV paramTareaLab = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaLab"), ParametroOV.class);
 		ParametroOV paramTareaFacturar = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaFacturar"), ParametroOV.class);
 		
 		ParametroOV sectorTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorTaller"), ParametroOV.class);
 		ParametroOV sectorLab = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorLab"), ParametroOV.class);
-
+		
 		if(this.tareaAgregada.getTarea().getId()==paramTareaTaller.getValorNumero()){
 			
 			//Tareas para cuando la tarea es de tipo taller
@@ -711,7 +711,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
 					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
-					this.tareaAgregada.setComentario(itemsOV.getDescripcionDeterminacion());
+					this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionDeterminacion());
 					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
 					actualizarTareasYArbol();
 				}
@@ -730,7 +730,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
 					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
-					this.tareaAgregada.setComentario(formaFacturacionOV.getDescripcion());
+					this.tareaAgregada.setDescripcionAbreviada(formaFacturacionOV.getDescripcion());
 					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
 					actualizarTareasYArbol();
 				}
@@ -778,10 +778,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			this.tareaAgregada=new TareaAgendaOV();
 			this.tareaAgregada.setTarea(tarea);
 			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
-//			this.tareaAgregada.set
-			this.tareaAgregada.setComentario(itemsOV.getReferencia());
-			this.tareaAgregada.setDescripcionTarea(itemsOV.getPlantilla().getDescripcion());
-//			this.tareaAgregada.setComentario(String.format("%s - %s", itemsOV.getReferencia(), itemsOV.getPlantilla().getDescripcion()));
+			this.tareaAgregada.setDescripcionTarea(itemsOV.getReferencia());
+			this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionAbreviada());
+			this.tareaAgregada.setDescripcionCompleta(itemsOV.getPlantilla().getDescripcion());
 			this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
 			actualizarTareasYArbol();
 		}

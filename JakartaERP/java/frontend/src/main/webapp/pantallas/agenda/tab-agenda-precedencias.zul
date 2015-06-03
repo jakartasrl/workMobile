@@ -12,8 +12,9 @@
         <treeitem open="true" >
             <treerow >
                 <treecell label="@bind(each.data.tarea.tarea.codigo)"  />
-                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion.concat(' ').concat(each.data.tarea.comentario))" />
-                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.comentario)" />
+<!--                 <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion.concat(' ').concat(each.data.tarea.comentario))" /> -->
+                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion)" />
+                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.descripcionAbreviada)" />
                 <treecell >
 	                <datebox disabled="true" value="@bind(each.data.tarea.fechaLimite)" format="dd/MM/yyyy" />
                 </treecell>

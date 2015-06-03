@@ -1248,9 +1248,9 @@
 		</input>
 	
 		<output>
-		
+
 			<campoSalida target="id" 				value="id" />
-			<campoSalida target="codigo" 			value="codigo" />	
+			<campoSalida target="codigo" 			value="codigo" />
 			<campoSalida target="descripcion" 		value="descripcion" />
 
 		</output>
@@ -1293,9 +1293,12 @@
 			<campoEntrada propertyOV="tareas" metodo="setTareas">
 <!-- 				<campoEntrada propertyOV="idTarea" metodo="setId" /> -->
 				<campoEntrada propertyOV="codigoTarea" metodo="setCodigo" />
-				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
-				<campoEntrada propertyOV="comentario" metodo="setComentario" />
+
+				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
+				<campoEntrada propertyOV="descripcionAbreviada" metodo="setDescripcionAbreviada" /> <!-- texto corto -->
+				<campoEntrada propertyOV="descripcionCompleta" metodo="setDescripcionCompleta" /> <!-- texto largo -->
+
 				<campoEntrada propertyOV="fechaLimite" metodo="setFechaLimite" />
 				<campoEntrada propertyOV="fechaCumplimiento" metodo="setFechaCumplimiento" />
 				<campoEntrada propertyOV="idSector" metodo="setSector" />
@@ -1410,7 +1413,10 @@
 			
 				<campoSalida value="id" target="id" />
 				<campoSalida value="codigoTarea" target="codigo" />
+				
 				<campoSalida value="descripcionTarea" target="descripcion" />
+				<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
+				<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
 				
 				<campoSalida value="comentario" target="comentario" />
 				<campoSalida value="idEstado" target="idEstado" />
@@ -1481,9 +1487,11 @@
 		<output>
 			<campoSalida value="id" target="id" />
 			<campoSalida value="codigoTarea" target="codigo" />
-			<campoSalida value="descripcionTarea" target="descripcion" />
 			
-			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="descripcionTarea" target="descripcion" />
+			<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
+			<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
+			
 			<campoSalida value="idEstado" target="idEstado" />
 			<campoSalida value="duracion" target="diasDuracion" />
 			
@@ -1507,8 +1515,9 @@
 			<campoSalida value="id" target="id" />
 			<campoSalida value="codigoTarea" target="codigo" />
 			<campoSalida value="descripcionTarea" target="descripcion" />
+			<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
+			<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
 			
-			<campoSalida value="comentario" target="comentario" />
 			<campoSalida value="idEstado" target="idEstado" />
 			<campoSalida value="duracion" target="diasDuracion" />
 			
