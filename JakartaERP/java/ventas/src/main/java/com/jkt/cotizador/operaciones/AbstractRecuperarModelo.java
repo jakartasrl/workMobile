@@ -12,7 +12,7 @@ import com.jkt.operaciones.Operation;
 
 public abstract class AbstractRecuperarModelo extends Operation {
 
-	//key para recuperar del mapa, desde el cliente enviarán OID=2, por ejemplo.
+	//key para recuperar del mapa, desde el cliente enviarï¿½n OID=2, por ejemplo.
 	protected static final String OID = "OID";
 	//writers mapeados contra el archivo operaciones-ventas.xml
 	protected static final String WRITER_TITULO = "titulos";
@@ -22,6 +22,7 @@ public abstract class AbstractRecuperarModelo extends Operation {
 			//setear los del detalle
 			tituloModeloCotizador.setMoneda(tituloModeloCotizador.getDetalleDeConcepto().getMoneda());
 			tituloModeloCotizador.setPrecio(tituloModeloCotizador.getDetalleDeConcepto().getPrecioUnitario());
+			
 		}else{
 			//buscamos en la lista de precios de costo del concepto
 			ConceptoPresupuesto concepto = tituloModeloCotizador.getConcepto();
@@ -51,6 +52,7 @@ public abstract class AbstractRecuperarModelo extends Operation {
 				tituloModeloCotizador.setMoneda(costoRecuperado.getMoneda());
 				tituloModeloCotizador.setPrecio(costoRecuperado.getCosto());
 				tituloModeloCotizador.setFechaPrecioCosto(costoRecuperado.getFecha());
+
 			}
 			
 		}

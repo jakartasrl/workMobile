@@ -83,8 +83,12 @@ public class TituloModeloCotizador extends PersistentEntity {
 	 * 
 	 */
 	private Moneda moneda;
-	private double precio;
 	private Date fechaPrecioCosto;
+	private double cantidad;
+	private double precio;
+	private double precioUnitario;
+	private double markUp;
+	private double importeVenta;
 	
 	/*
 	 * Metodos para el manejo de la direccion.

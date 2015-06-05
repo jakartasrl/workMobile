@@ -21,6 +21,8 @@ public class CotizadorDet extends PersistentEntity {
 	private double precioUnitario;
 	private Moneda moneda;
 	
+	private double precio; //Se agrego para el cotizador
+	
 	@Range(min=0,max=500, message="El mark up  debe estar entre 1 y 500")
 	private double markUp;
 	
@@ -29,6 +31,16 @@ public class CotizadorDet extends PersistentEntity {
 	private ConceptoPresupuesto conceptoPresupuesto;
 	private TituloModeloCotizador tituloModeloCotizador;
 	
+	
+	
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
 	public TituloModeloCotizador getTituloModeloCotizador() {
 		return tituloModeloCotizador;
 	}

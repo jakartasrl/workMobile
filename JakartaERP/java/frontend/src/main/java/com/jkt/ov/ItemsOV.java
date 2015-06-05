@@ -1,6 +1,8 @@
 package com.jkt.ov;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import lombok.Data;
@@ -42,6 +44,9 @@ public class ItemsOV extends ObjectView {
 	private Date fecha;
 	
 	private ModeloCotizadorOV modeloCotizador = new ModeloCotizadorOV();
+	private long idModeloCotizador;
+	private String codModeloCotizador;
+	private String descModeloCotizador;
 	
 	public ItemsOV(){
 		Random rand = new Random();
@@ -49,5 +54,9 @@ public class ItemsOV extends ObjectView {
 		
 		this.plantilla.setId(randomNum);
 	}
+	
+	//variable para agregar al modelo dsps...o directamente renderizar el arbol con esto.
+	private List<TituloModeloCotizadorOV> titulos=new ArrayList<TituloModeloCotizadorOV>();
+
 	
 }

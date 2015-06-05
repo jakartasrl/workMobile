@@ -52,8 +52,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private List<TipoDeCambioOV> lsTipoDeCambio = new ArrayList<TipoDeCambioOV>();
 
 	private DescriptibleOV expresarEnMonedaSeleccionado= new DescriptibleOV();
-		
-
+	
 	//Esta lista es una lista transiente que contiene toda la informacion de la jerarquia usando codigoInterno y codigoPadre.
 	//Posteriormente una operacion recupera la lista y arma el arbol como corresponde.
 	private List<TituloModeloCotizadorOV> todosLosElementos= new ArrayList<TituloModeloCotizadorOV>();
@@ -65,6 +64,15 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
 		this.completarCotizadorOV();
 		
+		for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
+			tituloModeloCotizadorOV.setIdNuevo(0L);
+			
+			if(tituloModeloCotizadorOV.getId()==0L){
+				tituloModeloCotizadorOV.setId(-1);
+			}
+		
+		}
+		this.cotizadorOV.setIdMoneda(1L);
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
 		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
 		
@@ -72,6 +80,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
 	private void completarCotizadorOV() {
 		
+		this.cotizadorOV.setId(itemSelected.getIdCotizador());
 		this.cotizadorOV.setIdCotizacionDet(itemSelected.getId());
 		this.cotizadorOV.setIdModelo(modeloCotizadorOV.getId());
 		this.cotizadorOV.setIdMoneda(expresarEnMonedaSeleccionado.getId());
@@ -97,11 +106,35 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		treeNode.getData().setCodigoInterno(randomNum);
 		treeNode.getData().setCodigoInternoPadre(codigoPadre);
 		
-		
 		if(treeNode.getData().getTipo().equals("C")){
-			treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
-			treeNode.getData().setConcepto(null);//para q el fwk no vaya a buscarlo a la base y le asigne null...
+//			treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
+//			treeNode.getData().setConcepto(null);//para q el fwk no vaya a buscarlo a la base y le asigne null...
 			//recordar, si elp valor es cero, se crea uno nuevo, si es >0 se busca en la base, si es null, se retorna null.
+			if (treeNode.getData().getIdC() != null){
+				treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
+				treeNode.getData().setCodigoC(treeNode.getData().getCodigoC());
+				treeNode.getData().setDescripcionC(treeNode.getData().getDescripcionC());
+				DescriptibleOV concepto = new DescriptibleOV();
+				concepto.setId(treeNode.getData().getIdC());
+				concepto.setCodigo(treeNode.getData().getCodigoC());
+				concepto.setDescripcion(treeNode.getData().getDescripcionC());
+				treeNode.getData().setConcepto(concepto);
+				treeNode.getData().setIdMoneda(treeNode.getData().getMoneda().getId());
+				
+				if(treeNode.getData().getProducto().getId()==0){
+					treeNode.getData().setIdProducto(null);
+				}else{
+					treeNode.getData().setIdProducto(treeNode.getData().getProducto().getId());
+				}
+
+				if(treeNode.getData().getMoneda().getId()==0){
+					treeNode.getData().setIdMoneda(null);
+				}else{
+					treeNode.getData().setIdMoneda(treeNode.getData().getMoneda().getId());
+				}
+				
+			}
+		
 		}else{
 			treeNode.getData().setIdC(null);
 		}
@@ -129,11 +162,28 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"cotizadorOV","itemSelected"})
 	public void cargarItemACotizar(){
 		
+		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
 		objetoOV.setString1(String.valueOf(this.itemSelected.getId()));
-		ItemsOV itemsOV = (ItemsOV) Operaciones.ejecutar("TraerItem", objetoOV, ItemsOV.class);
-		objetoOV.setString1(String.valueOf(this.itemSelected.getIdCotizador()));
-		this.setItemSelected(itemsOV);	
+		
+		ItemsOV itemOV = (ItemsOV) Operaciones.ejecutar("TraerCotizacionDelItem", objetoOV, ItemsOV.class);
+		this.itemSelected = itemOV;
+		
+//		this.modeloCotizadorOV = this.itemSelected.getModeloCotizador();
+		
+		this.modeloCotizadorOV.setId(itemOV.getIdModeloCotizador());
+		this.modeloCotizadorOV.setCodigo(itemOV.getCodModeloCotizador());
+		this.modeloCotizadorOV.setDescripcion(itemOV.getDescModeloCotizador());
+		
+		this.modeloCotizadorOV.setTitulos(this.itemSelected.getTitulos());
+		
+		crearArbolModeloCotizador(this.modeloCotizadorOV);
+		this.setModeloCotizadorOV(this.modeloCotizadorOV);
+		
+		this.getModeloCotizadorOV().setCodigo(this.itemSelected.getCodModeloCotizador());
+		this.getModeloCotizadorOV().setDescripcion(this.itemSelected.getDescModeloCotizador());
+		
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 		
 	}
 	
@@ -173,6 +223,32 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		this.cargarTiposDeCambio();
 
+		
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+		itemSelected =new ItemsOV();
+		itemSelected.setId(80L);
+		
+		cargarItemACotizar();;;;;;;;;;;;;;;;;;
+	
+		
 	}
 
 	private void cargarTiposDeCambio() {

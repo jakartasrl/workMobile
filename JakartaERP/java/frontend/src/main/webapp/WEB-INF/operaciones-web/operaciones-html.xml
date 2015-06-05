@@ -1526,10 +1526,10 @@
 	
 		<input keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador">
 		
-			<campoEntrada propertyOV="id" metodo="setId" />
-<!-- 			<campoEntrada propertyOV="nro" metodo="setNro" /> -->
-			<campoEntrada propertyOV="fecha" metodo="setFecha" />
-			<campoEntrada propertyOV="idMoneda" metodo="setMonedaExpresada" />
+			<campoEntrada propertyOV="id" 				metodo="setId" />
+<!-- 			<campoEntrada propertyOV="nro" 				metodo="setNro" /> -->
+			<campoEntrada propertyOV="fecha" 			metodo="setFecha" />
+			<campoEntrada propertyOV="idMoneda" 		metodo="setMonedaExpresada" />
 			<campoEntrada propertyOV="codigoEstado" 	metodo="setCodigoEstado" />
 			
 			<campoEntrada propertyOV="idCotizacionDet" 	metodo="setItem" />
@@ -1539,23 +1539,87 @@
 <!-- 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" /> -->
 			
 			<campoEntrada propertyOV="detalles" metodo="setDetalles">
+				<campoEntrada propertyOV="idNuevo" 				metodo="setId" />
 				<campoEntrada propertyOV="id" 				metodo="setTituloModeloCotizador" />
 				<campoEntrada propertyOV="idProducto" 		metodo="setProducto" />
 				<campoEntrada propertyOV="cantidad" 		metodo="setCantidad" />
-				<campoEntrada propertyOV="idUnidadMedida" 	metodo="setUnidadMedida" />
+<!-- 				<campoEntrada propertyOV="idUnidadMedida" 	metodo="setUnidadMedida" /> -->
 				<campoEntrada propertyOV="precioUnitario" 	metodo="setPrecioUnitario" />
 				<campoEntrada propertyOV="idMoneda" 		metodo="setMoneda" />
 <!-- 				<campoEntrada propertyOV="fechaPrecioCosto" metodo="setFechaPrecioCosto" /> -->
 				<campoEntrada propertyOV="precio" 			metodo="setCotizacion" />
 				<campoEntrada propertyOV="markUp" 			metodo="setMarkUp" />
 <!-- 				<campoEntrada propertyOV="costoEn" 			metodo="setCostoEn" /> -->
-				<campoEntrada propertyOV="importeVenta" 	metodo="setImporteVenta" />
-				<campoEntrada propertyOV="idC" 				metodo="setConceptoPresupuesto" />
+<!-- 				<campoEntrada propertyOV="importeVenta" 	metodo="setImporteVenta" /> -->
+<!-- 				<campoEntrada propertyOV="idC" 				metodo="setConceptoPresupuesto" /> -->
 			</campoEntrada>
 
 		</input>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="TraerCotizacionDelItem" clase="com.jkt.operaciones.TraerCotizacionDelItem" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ItemsOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="id" 												value="id" />
+			<campoSalida target="codigo" 											value="codigo" />	
+			<campoSalida target="descripcion" 										value="descripcion" />
+			<campoSalida target="referencia" 										value="referencia" />
+			<campoSalida target="cotizador.modelo.id" 								value="idModeloCotizador" />
+			<campoSalida target="cotizador.modelo.codigo" 							value="codModeloCotizador" />
+			<campoSalida target="cotizador.modelo.descripcion" 						value="descModeloCotizador" />
+			
+			<campoSalida target="cotizador.id" 										value="idCotizador" />
+			
+			<campoSalida target="titulosTransientes" 								value="titulos">
+				<campoSalida target="idTransiente" 									value="id" />
+				<campoSalida target="codigo" 										value="codigo" />	
+				<campoSalida target="descripcion" 									value="descripcion" />
+				<campoSalida target="codigoInterno" 								value="codigoInterno" />
+				<campoSalida target="codigoInternoPadre" 							value="codigoInternoPadre" />
+				<campoSalida target="tipo" 											value="tipo" />
+				
+				<campoSalida target="concepto.id" 									value="idC" />
+				<campoSalida target="concepto.codigo" 								value="codigoC" />	
+				<campoSalida target="concepto.descripcion" 							value="descripcionC" />
+				
+				<campoSalida target="detalleDeConcepto.moneda.id" 					value="idMoneda" />
+				<campoSalida target="detalleDeConcepto.moneda.codigo" 				value="codMoneda" />
+				<campoSalida target="detalleDeConcepto.moneda.descripcion" 		value="descMoneda" />
+<!-- 				<campoSalida target="concepto.monedaPorDefecto.id" 					value="idMoneda" /> -->
+<!-- 				<campoSalida target="concepto.monedaPorDefecto.codigo" 				value="codMoneda" /> -->
+<!-- 				<campoSalida target="concepto.monedaPorDefecto.descripcion" 		value="descMoneda" /> -->
+				
+				<campoSalida target="producto.id" 									value="idProducto" />
+				<campoSalida target="producto.codigo" 								value="codProducto" />
+				<campoSalida target="producto.descripcion" 							value="descProducto" />
+				
+				<campoSalida target="detalleDeConcepto.unidadMedida.id" 			value="idUnidadMedida" />
+				<campoSalida target="detalleDeConcepto.unidadMedida.codigo" 		value="codUnidadMedida" />
+				<campoSalida target="detalleDeConcepto.unidadMedida.descripcion" value="descUnidadMedida" />
+				
+				<campoSalida target="fechaPrecioCosto" 								value="fechaPrecioCosto" />
+				
+				
+				<campoSalida target="precio" 										value="precio" />	
+				<campoSalida target="precioUnitario" 								value="precioUnitario" />
+				<campoSalida target="cantidad" 										value="cantidad" />
+				<campoSalida target="markUp" 										value="markUp" />
 
+<!-- 				traer markup y cantidad y datos cargados del salvado anterior...estan en el guardar los campos q faltan -->
+
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
 </entity>

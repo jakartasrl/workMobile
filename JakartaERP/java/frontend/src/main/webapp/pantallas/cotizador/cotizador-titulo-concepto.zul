@@ -29,21 +29,25 @@
     <treecols>
         <treecol label="Título / Concepto" 	align="center" width="300px"/>
         <treecol label="Artículo" 			align="center" width="200px" />
-        <treecol label="Cantidad" 			align="center" width="80px" />
-        <treecol label="Unid. Med." 		align="center" width="100px" />
-        <treecol label="Costo Unitario" 	align="center" width="100px" />
-        <treecol label="Moneda" 			align="center" width="80px" />
+        <treecol label="Cantidad" 			align="center" width="70px" />
+        <treecol label="Unid. Med." 		align="center" width="60px" />
+        <treecol label="Costo Unitario" 	align="center" width="60px" />
+        <treecol label="Moneda" 			align="center" width="70px" />
         <treecol label="Fecha Costo" 		align="center" width="100px" />
         <treecol label="Costo" 				align="center" width="80px" />
-        <treecol label="Markup (%)" 		align="center" width="80px" />
-        <treecol label="Costo En" 			align="center" width="80px" />
-        <treecol label="Importe de Venta"	align="center" width="110px" />
+        <treecol label="Markup (%)" 		align="center" width="60px" />
+        <treecol label="Costo En" 			align="center" width="60px" />
+        <treecol label="$ Venta"	align="center" width="80px" />
         
     </treecols>
     
     <template name="model" var="titulo">
     
         <treeitem open="true" width="100%" >
+        	<attribute name="onCreate">
+        		self.setOpen(true);
+        	</attribute>
+        	
             <treerow >
                 
                 <treecell>
@@ -56,12 +60,12 @@
                 </treecell>
                
                 <treecell>
- 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+ 	               <intbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
  	               	<hlayout width="100%">
-						<textbox sclass="importe" width="65px" inplace="true" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
+						<textbox sclass="importe" width="30px" inplace="true" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
 							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)"
 							/>
 						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" />
@@ -81,7 +85,7 @@
                 </treecell>
                                 
                 <treecell>
-					<datebox width="100%" value="@bind(titulo.data.fechaPrecioCosto)" constraint="no empty" format="dd/MM/yyyy" if="${titulo.data.tipo=='C'}"/>
+					<datebox width="100%" value="@bind(titulo.data.fechaPrecioCosto)" constraint="no empty" format="dd/MM/yyyy" if="${titulo.data.tipo=='C'}" disabled="true"/>
                 </treecell>
                 
                 <treecell>

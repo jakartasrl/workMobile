@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -90,6 +91,8 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 
 				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
 				int i = 10000;
+				Random r=new Random();
+				i= r.nextInt((999999 - 1) + 1) + 1;
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
 					
 					TituloModeloCotizador tituloModeloCotizador2 = new TituloModeloCotizador();

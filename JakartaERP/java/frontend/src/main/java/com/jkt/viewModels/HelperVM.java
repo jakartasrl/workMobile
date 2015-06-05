@@ -79,6 +79,18 @@ public class HelperVM {
 	private String invoke;
 	private Object vm;
 	
+	private long id;
+	
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	private String descCampo3;
 	private String descCampo4;
 	

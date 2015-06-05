@@ -1,6 +1,10 @@
 package com.jkt.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jkt.cotizador.dominio.Cotizador;
+import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.varios.dominio.Moneda;
 import com.jkt.varios.dominio.UnidadMedida;
@@ -15,6 +19,19 @@ import com.jkt.varios.dominio.UnidadMedida;
 public class CotizacionDet extends ComprobanteVentaDet {
 
 	private Cotizador cotizador;
+
+	//var transiente
+	private List<TituloModeloCotizador> titulosTransientes=new ArrayList<TituloModeloCotizador>();
+
+	
+	public List<TituloModeloCotizador> getTitulosTransientes() {
+		return titulosTransientes;
+	}
+
+	public void setTitulosTransientes(List<TituloModeloCotizador> titulosTransientes) {
+		this.titulosTransientes = titulosTransientes;
+	}
+
 
 	private int estadoId;
 	

@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.jkt.constantes.TiposDeDato;
+import com.jkt.cotizador.dominio.ConceptoPresupuesto;
 import com.jkt.cotizador.dominio.Cotizador;
 import com.jkt.cotizador.dominio.CotizadorDet;
+import com.jkt.cotizador.dominio.ModeloCotizador;
 import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.cotizador.operaciones.AbstractRecuperarModelo;
 import com.jkt.dominio.CotizacionDet;
@@ -32,24 +35,38 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 	private static final String ITEM_WRITER = "item";
 
 	private Map<String, CotizadorDet> detallesDeCotizador=new HashMap<String, CotizadorDet>();
+	
+	private ModeloCotizador modelo = new ModeloCotizador();
+	private CotizacionDet item = new CotizacionDet();
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
 	
-		CotizacionDet item=(CotizacionDet) obtener(CotizacionDet.class, (String)aParams.get(OID));
+		item=(CotizacionDet) obtener(CotizacionDet.class, (String)aParams.get(OID));
 		
-		notificarObjeto(ITEM_WRITER, item);
-		
-		notificarObjeto(COTIZADOR_WRITER, item.getCotizador());
+		if (tipoCliente.equals(CLIENTE_DELPHI)){
+			notificarObjeto(ITEM_WRITER, item);
+			notificarObjeto(COTIZADOR_WRITER, item.getCotizador());
+		}
 		
 		Cotizador cotizador = item.getCotizador();
 	
 		completarMapaDeDetalles(cotizador);
 		
-		List<TituloModeloCotizador> titulos = cotizador.getModelo().getTitulos();
+		modelo = cotizador.getModelo();
+		
+		List<TituloModeloCotizador> titulos = modelo.getTitulos();
 		for (TituloModeloCotizador tituloModeloCotizador : titulos) {
 			mostrarArbol(tituloModeloCotizador,0);//El nivel de los primeros nodos es cero.
+		}
+		
+		if (!tipoCliente.equals(CLIENTE_DELPHI)){
+//			notificarObjeto("", modelo);
+//			cotizador.setModelo(modelo);
+			item.setCotizador(cotizador);
+			item.setTitulosTransientes(modelo.getTitulosTransientes());
+			notificarObjeto("", item);
 		}
 
 	}
@@ -73,7 +90,9 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 			if (cotizadorDet.getConceptoPresupuesto()!=null) {
 				key=String.valueOf(cotizadorDet.getConceptoPresupuesto().getId());
 				key=key+"-";
-				key=key+String.valueOf(cotizadorDet.getTituloModeloCotizador().getId());
+				if (cotizadorDet.getTituloModeloCotizador() != null){
+					key=key+String.valueOf(cotizadorDet.getTituloModeloCotizador().getId());
+				}
 				detallesDeCotizador.put(key, cotizadorDet);
 			}
 		}
@@ -140,20 +159,56 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				Producto producto;
 				
 				//Para cada relacion de producto-clasificador, muestro el producto asociado al concepto.
+				int i = 10000;
+				Random r=new Random();
+				i= r.nextInt((999999 - 1) + 1) + 1;
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
+					
+					TituloModeloCotizador copiaDeTitulo = new TituloModeloCotizador();
+					copiaDeTitulo.setIdTransiente(tituloModeloCotizador.getId());
+					copiaDeTitulo.setTipo("C");//Producto(producto);
+					copiaDeTitulo.setDetalleDeConcepto(tituloModeloCotizador.getDetalleDeConcepto());
+			
+					ConceptoPresupuesto concepto = tituloModeloCotizador.getConcepto(); 					
+					copiaDeTitulo.setConcepto(concepto);					
+					concepto.setUnidadDeMedidaPorDefecto(concepto.getUnidadDeMedidaPorDefecto());
+					
+					copiaDeTitulo.setCodigoInterno((int)tituloModeloCotizador.getId());
+					copiaDeTitulo.setCodigoInternoPadre(codigoInternoPadre);
+							
 					productoClasificador=(ProductoClasificador) persistentEntity;
 					producto = (Producto) obtener(Producto.class, productoClasificador.getProducto().getId());
+					producto.setCodigo(producto.getCodigo());
 					tituloModeloCotizador.setProducto(producto);
 					
+					copiaDeTitulo.setProducto(producto);
+					copiaDeTitulo.setCantidad(copiaDeTitulo.getCantidad());
+
+					copiaDeTitulo.setCodigoInterno(copiaDeTitulo.getCodigoInterno()+(i++));
+					
+					copiaDeTitulo.setCantidad(copiaDeTitulo.getCantidad());
+					
+//					asignarMonedaPrecioFecha(tituloModeloCotizador2, producto);
+					
+					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
 					//cotizador det es null cuando se agrega un nuevo titulo al modelo de cotizador.
 					//Si se agrega uno debe mostrarse de todos modos este elemento nuevo.
 					if (cotizadorDet!=null) {
-						tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
-						tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
+						copiaDeTitulo.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+						copiaDeTitulo.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
+						copiaDeTitulo.setCantidad(copiaDeTitulo.getDetalleDeConcepto().getCantidad());
+						copiaDeTitulo.setPrecioUnitario(copiaDeTitulo.getDetalleDeConcepto().getPrecioUnitario());
+						copiaDeTitulo.setPrecio(copiaDeTitulo.getDetalleDeConcepto().getCantidad() * copiaDeTitulo.getDetalleDeConcepto().getPrecioUnitario());
+						copiaDeTitulo.setMarkUp(copiaDeTitulo.getDetalleDeConcepto().getMarkUp());
+
 					}
 
-					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
-					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+					if (tipoCliente.equals(CLIENTE_DELPHI)){
+						notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+					} else {
+						this.modelo.agregarTituloTransiente(copiaDeTitulo);
+					}
+					
 				}
 				
 			}else{//Si no pide articulo se muestra una linea sola por concepto
@@ -164,12 +219,24 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				}
 				
 				asignarMonedaPrecioFecha(tituloModeloCotizador, null);
-				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+				if (tipoCliente.equals(CLIENTE_DELPHI)){
+					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+				} else {
+					this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+				}
+				
 			}
-		}else{
+			
+		} else {
+			
 			//Esto es un titulo
 			tituloModeloCotizador.setIdentificadorDetalle(0);
-			notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+			if (tipoCliente.equals(CLIENTE_DELPHI)){
+				notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+			} else {
+				this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+			}
+		
 		}
 		
 		//Recursividad, o muestreo de concepto.

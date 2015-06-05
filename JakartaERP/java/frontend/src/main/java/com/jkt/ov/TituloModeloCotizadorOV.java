@@ -21,6 +21,8 @@ import com.jkt.view.ObjectView;
 @EqualsAndHashCode(callSuper=true)
 public class TituloModeloCotizadorOV extends ObjectView {
 	
+	private long idNuevo=0;//siempre va a ser un elemento nuevo
+	
 	private int identificadorDetalle=0;
 	
 	private String codigo="", descripcion="";
