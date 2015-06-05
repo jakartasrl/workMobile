@@ -14,15 +14,18 @@
             <column name="CODIGO" length="15" />
         </property>
 		
-		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<property name="descripcion" column="DESCRIPCION"/>
+		<property name="descripcionAbreviada" column="DESCRIPCION_ABREV"/>
+		<property name="descripcionCompleta" column="DESCRIPCION_COMPLETA" type="text"/>
 		
 		<property name="idEstado" column="ESTADO" type="integer" />
 
-		<property name="comentario" column="COMENTARIO" type="text"/>
 		<property name="diasDuracion" type="integer" column="DURACION_EN_DIAS"></property>
 		<property not-null="false" name="fechaLimite" column="FECHA_LIMITE" type="date"/>
 		<property not-null="false" name="fechaCumplimiento" column="FECHA_CUMPLIMIENTO" type="date"/>
+		<property not-null="false" name="fechaUltimoPrecedente" column="FECHA_ULTIMO_PRECEDENTE" type="date"/>
 		
 		<many-to-one name="sector" class="com.jkt.dominio.Sector" column="SECTOR_ID" cascade="all"></many-to-one>
 		

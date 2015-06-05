@@ -1,11 +1,15 @@
-<window id="tareaDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DetalleTareaVM')" title="Detalle de tarea" style="margin-top:50px;" height="auto" width="700px" position="top,center" closable="true" >
+<window id="tareaDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DetalleTareaVM')" 
+title="@bind('Tarea '.concat((vm.tarea.descripcionTarea)).concat(' | Pedido ').concat(vm.tarea.pedidoDescriptible.codigo).concat(' | Sector ').concat(vm.tarea.sector.descripcion).concat(' | Tarea ').concat(vm.tarea.estado.descripcion))" 
+style="margin-top:50px;" height="auto" width="700px" position="top,center" closable="true" >
     
     <style>
-    	.negrita{
+    	.blacky{
     		font-weight: bold;
     		text-decoration: underline;
     	}
     </style>
+    
+    
     
     
     <tabbox id="tb" width="100%" height="auto" mold="accordion">
@@ -17,48 +21,57 @@
     
         <tabpanel>
             
-			<label sclass="negrita" value="Codigo Tarea:" />            
+			<label sclass="blacky" value="Codigo Tarea:" />            
 			<label value="@bind(vm.tarea.codigoTarea)" />            
-
-			<separator> </separator>
 			
-			<label sclass="negrita" value="Descripción:" />            
-			<label value="@bind(vm.tarea.descripcionTarea)" />            
-	
-			<label sclass="negrita" value="Comentario:" />            
-			<label value="@bind(vm.tarea.comentario)" />            
+			<hlayout>
+				<label sclass="blacky" value="Titulo:" />            
+				<label value="@bind(vm.tarea.descripcionTarea)" />
+			</hlayout>
+
+			<hlayout>
+				<label sclass="blacky" value="Descripcion Abreviada:" />            
+				<label value="@bind(vm.tarea.descripcionAbreviada)" />            
+			</hlayout>
+
+			<hlayout>
+				<label sclass="blacky" value="Descripción Completa" />
+			</hlayout>
+			<hlayout width="500px" >
+				<label value="@bind(vm.tarea.descripcionCompleta)" />
+			</hlayout>
 
 			<separator />
 		
 			<hlayout>
-				<label sclass="negrita" value="Fecha cumplimiento:" />
+				<label sclass="blacky" value="Fecha cumplimiento:" />
 				<datebox value="@bind(vm.tarea.fechaCumplimiento)" format="dd/MM/yyyy" lenient="true" buttonVisible="false" readonly="true"/>
 
 				<separator />
 		
-				<label sclass="negrita" value="Fecha límite:" />
+				<label sclass="blacky" value="Fecha límite:" />
 				<datebox value="@bind(vm.tarea.fechaLimite)" format="dd/MM/yyyy" lenient="true" buttonVisible="false" readonly="true" />
 
 				<separator />
 	
-				<label sclass="negrita" value="Duración:" />            
+				<label sclass="blacky" value="Duración:" />            
 				<label value="@bind(vm.tarea.duracion)" />
 				     
 			</hlayout>
 			
 			<hlayout>
-				<label sclass="negrita" value="Pedido:" />            
+				<label sclass="blacky" value="Pedido:" />            
 				<label value="@bind(vm.tarea.pedidoDescriptible.codigo)" />
 			</hlayout>
 			     
 
 			<hlayout>
-				<label sclass="negrita" value="Sector:" />            
+				<label sclass="blacky" value="Sector:" />            
 				<label value="@bind(vm.tarea.sector.descripcion)" />            
 	
 				<separator />
 		
-				<label sclass="negrita" value="Estado:" />            
+				<label sclass="blacky" value="Estado:" />            
 				<label value="@bind(vm.tarea.estado.descripcion)" />            
 			</hlayout>
             
@@ -91,9 +104,10 @@
 							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>
-								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 1 }" />
-								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 2 }"/>
-								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 3 }"/>
+								<image src="/pantallas/icons/alarmclock.png" if="${each.idEstado eq 1 }"/>
+								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 2 }" />
+								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 3 }"/>
+								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 4 }"/>
 							</cell>
 							
 						</row>

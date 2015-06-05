@@ -3,8 +3,8 @@
 	<tree id="categoriesTree" model="@load(vm.agenda.arbolPrecedencias)" width="100%" >
     <treecols>
         <treecol label="Codigo" width="10%"/> 
-        <treecol label="Descripcion" align="center" width="40%" />
-        <treecol label="Comentario" align="center" width="30%" />
+        <treecol label="Descripcion / Comentario" align="center" width="60%" />
+<!--         <treecol label="Comentario" align="center" width="30%" /> -->
         <treecol label="Fecha Limite" align="center" width="10%" />
         <treecol label="Precedente" align="center" width="10%" />
     </treecols>
@@ -12,15 +12,16 @@
         <treeitem open="true" >
             <treerow >
                 <treecell label="@bind(each.data.tarea.tarea.codigo)"  />
+<!--                 <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion.concat(' ').concat(each.data.tarea.comentario))" /> -->
                 <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion)" />
-                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.comentario)" />
+                <treecell style="padding-left:3px;" label="@bind(each.data.tarea.descripcionAbreviada)" />
                 <treecell >
 	                <datebox disabled="true" value="@bind(each.data.tarea.fechaLimite)" format="dd/MM/yyyy" />
                 </treecell>
                 
                 
                 <treecell style="text-align:center">
-	                <checkbox checked="@bind(each.data.esPrecedente)" if="${each.isLeaf()}"/>
+	                <checkbox checked="@bind(each.data.esPrecedente)" if="${each.isLeaf()}" onCheck="@command('verificarPrecenciaMutua', checkComponent = self, nodo = each )"/>
                 </treecell>
                 
             </treerow>

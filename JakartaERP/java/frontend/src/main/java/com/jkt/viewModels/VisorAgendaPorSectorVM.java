@@ -71,6 +71,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Command
 	@NotifyChange("allTasks")
 	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{

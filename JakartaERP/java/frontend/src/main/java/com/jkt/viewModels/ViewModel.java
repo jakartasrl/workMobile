@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -259,5 +260,17 @@ public abstract class ViewModel {
         Executions.sendRedirect("/index.zul");
 	}
 	
-	
+	@Command
+	public void irAInicio(){
+		Session sess = Sessions.getCurrent();
+		sess.setAttribute(this.getClass().getCanonicalName(), this );
+		Executions.sendRedirect("/pantallas/menu.zul");
+	}
+
+	@Command
+	public void cancelar(){
+		Session sess = Sessions.getCurrent();
+		sess.removeAttribute(this.getClass().getCanonicalName());
+	}
+
 }

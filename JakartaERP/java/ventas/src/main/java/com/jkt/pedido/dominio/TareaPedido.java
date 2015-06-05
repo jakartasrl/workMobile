@@ -20,17 +20,32 @@ public class TareaPedido extends DatoNodo {
 	//transiente! para generar las correspondencias.
 	private int randomNumber;
 
-	private String comentario;
+	private String descripcionAbreviada;
+	private String descripcionCompleta;
 	
 //	@Min(message="Los dias de duración no puede ser cero. Como mínimo un dia.", value = 1)
 	private int diasDuracion;
 	
 //	@Future(message="La fecha limite debe ser posterior al dia actual.")
+	/**
+	 * Esta fecha es la fecha limite de inicio.
+	 * 
+	 */
 	private Date fechaLimite=new Date();
 	
 //	@Future(message="La fecha de cumplimiento debe ser posterior al dia actual.")
+	/**
+	 * Es la fecha en que se cumple la tarea
+	 */
 	private Date fechaCumplimiento=new Date();
 	
+	/**
+	 * Hace referencia a la fecha en que la ultima tarea fue completada
+	 * Automaticamente en un grafo, donde cada tarea tiene una lista de precedentes, cuando el ultimo de todos estos precedentes es finalizado,
+	 * se actualiza esta fecha, y el estado.
+	 */
+	private Date fechaUltimoPrecedente=new Date();
+
 	@NotNull
 	private Sector sector;
 	

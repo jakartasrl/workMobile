@@ -20,7 +20,7 @@ import com.jkt.view.ObjectView;
  */
 @Data
 @EqualsAndHashCode(callSuper=true,of={"nro"})
-public class PedidoOV extends ObjectView {
+public class PedidoOV extends DescriptibleOV {
 	
 	private String nroPresupuesto;
 	private String letra;
@@ -76,6 +76,28 @@ public class PedidoOV extends ObjectView {
 	@Override
 	public String getCampoClave() {
 		return "nro";
+	}
+	
+	private String filtroNro="";
+	private String filtroCliente="";
+	
+	public void limpiarFiltro() {
+		this.filtroCliente="";
+		this.filtroNro="";
+	}
+	
+	public List obtenerFiltro() {
+		List<FiltroOV> filtros = new ArrayList<FiltroOV>();
+		
+		if (!filtroCliente.isEmpty()) {
+			filtros.add(new FiltroOV("cliente.sujetoImpositivo.razonSocial", filtroCliente, "like", "string"));
+		}
+		
+		if (!filtroNro.isEmpty()) {
+			filtros.add(new FiltroOV("nro", filtroNro, "like", "string"));
+		}
+		
+		return filtros;
 	}
 	
 }

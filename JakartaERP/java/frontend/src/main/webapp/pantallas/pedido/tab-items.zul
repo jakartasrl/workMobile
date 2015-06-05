@@ -4,20 +4,20 @@
 	<hlayout visible="@bind(!vm.modoAgenda)" >
 
 	<vlayout width="100%" style="text-align:center;">
-		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
+		<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
 					//box.pagingPosition = "top";
 					//siempre retorna a la primer pagina
 			        box.setActivePage(0);
         		]]></attribute>
 		</button>
-			<label value="Agregar un item"></label>
+<!-- 			<label value="Agregar un item"></label> -->
 	</vlayout>
 	
 	<vlayout width="100%" style="text-align:center;" >
-		<button style="margin-bottom:2px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Agregar un nuevo item.">
+		<button  width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Agregar un nuevo item.">
 		</button>
-		<label value="Eliminar este item." />
+<!-- 		<label value="Eliminar este item." /> -->
 	</vlayout>
 
 	</hlayout>
@@ -76,8 +76,9 @@
 							</hlayout>
 							
 <!-- 							<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" /> -->
-							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100px" />
-
+							<ckeditor value="@bind(each.plantilla.descripcion)" toolbar="Complex"
+				        		customConfigurationsPath="/pantallas/common/config.js" 
+							/>
 
 					</groupbox>
 

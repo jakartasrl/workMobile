@@ -1248,9 +1248,9 @@
 		</input>
 	
 		<output>
-		
+
 			<campoSalida target="id" 				value="id" />
-			<campoSalida target="codigo" 			value="codigo" />	
+			<campoSalida target="codigo" 			value="codigo" />
 			<campoSalida target="descripcion" 		value="descripcion" />
 
 		</output>
@@ -1293,11 +1293,15 @@
 			<campoEntrada propertyOV="tareas" metodo="setTareas">
 <!-- 				<campoEntrada propertyOV="idTarea" metodo="setId" /> -->
 				<campoEntrada propertyOV="codigoTarea" metodo="setCodigo" />
-				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
-				<campoEntrada propertyOV="comentario" metodo="setComentario" />
+
+				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
+				<campoEntrada propertyOV="descripcionAbreviada" metodo="setDescripcionAbreviada" /> <!-- texto corto -->
+				<campoEntrada propertyOV="descripcionCompleta" metodo="setDescripcionCompleta" /> <!-- texto largo -->
+
 				<campoEntrada propertyOV="fechaLimite" metodo="setFechaLimite" />
 				<campoEntrada propertyOV="fechaCumplimiento" metodo="setFechaCumplimiento" />
+				<campoEntrada propertyOV="fechaUltimoPrecedente" metodo="setFechaUltimoPrecedente" />
 				<campoEntrada propertyOV="idSector" metodo="setSector" />
 				<campoEntrada propertyOV="idEstado" metodo="setIdEstado" />
 				<campoEntrada propertyOV="duracion" metodo="setDiasDuracion" />
@@ -1322,7 +1326,6 @@
 	
 		<output>
 		
-			<campoSalida target="id" 												value="id" />
 			<campoSalida target="codigo" 					value="codigo" />	
 			<campoSalida target="descripcion" 				value="descripcion" />
 			<campoSalida target="referencia" 				value="referencia" />
@@ -1346,7 +1349,7 @@
 			<campoSalida target="descripcion" 										value="descripcion" />
 			
 			<campoSalida target="titulosTransientes" 								value="titulos">
-				<campoSalida target="idTransiente" 									value="id" />
+				<campoSalida target="id" 											value="id" />
 				<campoSalida target="codigo" 										value="codigo" />	
 				<campoSalida target="descripcion" 									value="descripcion" />
 				<campoSalida target="codigoInterno" 								value="codigoInterno" />
@@ -1411,7 +1414,10 @@
 			
 				<campoSalida value="id" target="id" />
 				<campoSalida value="codigoTarea" target="codigo" />
+				
 				<campoSalida value="descripcionTarea" target="descripcion" />
+				<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
+				<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
 				
 				<campoSalida value="comentario" target="comentario" />
 				<campoSalida value="idEstado" target="idEstado" />
@@ -1419,6 +1425,7 @@
 				
 				<campoSalida value="fechaLimite" target="fechaLimite" />
 				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+				<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
 				<campoSalida value="idSector" target="sector.id" />
 			</campoSalida>
 			
@@ -1482,14 +1489,17 @@
 		<output>
 			<campoSalida value="id" target="id" />
 			<campoSalida value="codigoTarea" target="codigo" />
-			<campoSalida value="descripcionTarea" target="descripcion" />
 			
-			<campoSalida value="comentario" target="comentario" />
+			<campoSalida value="descripcionTarea" target="descripcion" />
+			<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
+			<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
+			
 			<campoSalida value="idEstado" target="idEstado" />
 			<campoSalida value="duracion" target="diasDuracion" />
 			
 			<campoSalida value="fechaLimite" target="fechaLimite" />
 			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
 			<campoSalida value="idSector" target="sector.id" />
 			<campoSalida value="idPedido" target="pedido.id" />
 		</output>
@@ -1508,13 +1518,15 @@
 			<campoSalida value="id" target="id" />
 			<campoSalida value="codigoTarea" target="codigo" />
 			<campoSalida value="descripcionTarea" target="descripcion" />
+			<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
+			<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
 			
-			<campoSalida value="comentario" target="comentario" />
 			<campoSalida value="idEstado" target="idEstado" />
 			<campoSalida value="duracion" target="diasDuracion" />
 			
 			<campoSalida value="fechaLimite" target="fechaLimite" />
 			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
 			<campoSalida value="idSector" target="sector.id" />
 			<campoSalida value="idPedido" target="pedido.id" />
 		</output>
@@ -1522,6 +1534,19 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="ActualizarEstadoTarea" clase="com.jkt.pedido.operaciones.ActualizarEstadoTarea" inputOV="com.jkt.ov.ContainerOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+			<campoEntrada propertyOV="string2" name="ESTADO"/>
+			<campoEntrada propertyOV="fecha1" name="FECHA_CUMPLIMIENTO"/>
+			<campoEntrada propertyOV="fecha2" name="FECHA_ULTIMO_PRECEDENTE"/>
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+
 	<operacion name="GuardarCotizador" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.cotizador.dominio.Cotizador" inputOV="com.jkt.ov.CotizadorOV">
 	
 		<input keyName="objeto" clase="com.jkt.cotizador.dominio.Cotizador">
@@ -1555,6 +1580,7 @@
 			</campoEntrada>
 
 		</input>
+
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
@@ -1621,5 +1647,6 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 		
 	</operacion>
+
 	
 </entity>

@@ -19,7 +19,15 @@ abstract public class DatoNodo extends Descriptible{
 
 	public enum Estado {
 		
-		NO_INICIADO(1) {
+		EN_ESPERA(1) {
+			@Override
+			public String getDescripcion() {
+				return "En espera de precedentes";
+			}
+			
+		},
+		
+		NO_INICIADO(2) {
 			@Override
 			public String getDescripcion() {
 				return "No Iniciado";
@@ -27,17 +35,17 @@ abstract public class DatoNodo extends Descriptible{
 			
 		}, 
 		
-		EN_EJECUCION(2) {
+		EN_EJECUCION(3) {
 			@Override
 			public String getDescripcion() {
 				return "En Ejecución";
 			}
 			
 		},
-		FINALIZADO(3) {
+		FINALIZADO(4) {
 			@Override
 			public String getDescripcion() {
-				return "Finalizado";
+				return "Tarea Completa";
 			}
 			
 		};

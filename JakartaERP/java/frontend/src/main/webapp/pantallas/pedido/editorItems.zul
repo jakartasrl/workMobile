@@ -18,14 +18,17 @@
 					<groupbox width="100%" style="border-style:none; cursor: default">
 					
 							<hlayout>
-							
-								<label value="Referencia:" />
+								<label value="Titulo:" />
 								<textbox width="350px" value="@bind(each.referencia)" constraint="no empty"/>
-		
+							</hlayout>
+
+							<hlayout>
+								<label value="Descripción Abreviada:" />
+								<textbox width="350px" value="@bind(each.descripcionAbreviada)" constraint="no empty"/>
 							</hlayout>
 							
 							<hlayout style="margin-bottom:10px;" >
-								<label value="Descripción:" />
+								<label value="Descripción Completa:" />
 							</hlayout>
 							
 							<textbox readonly="false" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" />

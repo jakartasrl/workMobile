@@ -404,7 +404,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		log.info("Iniciando ViewModel de Pedido.");
 		
 		log.info("Asignando filtros customizados.");
-		this.setFiltro("filtroPresupuesto");
+		this.setFiltro("filtroComprobanteCliente");
 		
 		log.info("Recuperando notas...");
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();

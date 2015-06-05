@@ -23,11 +23,11 @@
 <!-- 				multiline="true" rows="15" value="@bind(vm.plantilla.descripcion)" -->
 <!-- 				readonly="false" /> -->
 
-			<ckeditor value="@bind(vm.plantilla.campoAdicional1)" />
-			
+			<ckeditor value="@bind(vm.plantilla.campoAdicional1)" toolbar="Complex"
+        		customConfigurationsPath="/pantallas/common/config.js" 
+			/>
 <!-- 				filebrowserImageBrowseUrl="/pantallas/common/img" -->
 <!--         		filebrowserFlashBrowseUrl="/pantallas/common/flash" -->
-<!--         		customConfigurationsPath="/pantallas/common/config.js"  -->
 				
 		</div>
 	</div>
