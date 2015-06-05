@@ -207,6 +207,7 @@ public class WebTransformer extends Transformer {
 		try {
 			if (returnObj != null) {
 				Gson gson = new GsonBuilder().create();
+//				Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 				oos.write(Base64.encodeBase64(gson.toJson(returnObj).getBytes()));
 				oos.close();
 			}

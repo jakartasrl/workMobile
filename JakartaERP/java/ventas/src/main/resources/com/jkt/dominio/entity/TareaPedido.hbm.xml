@@ -25,6 +25,7 @@
 		<property name="diasDuracion" type="integer" column="DURACION_EN_DIAS"></property>
 		<property not-null="false" name="fechaLimite" column="FECHA_LIMITE" type="date"/>
 		<property not-null="false" name="fechaCumplimiento" column="FECHA_CUMPLIMIENTO" type="date"/>
+		<property not-null="false" name="fechaUltimoPrecedente" column="FECHA_ULTIMO_PRECEDENTE" type="date"/>
 		
 		<many-to-one name="sector" class="com.jkt.dominio.Sector" column="SECTOR_ID" cascade="all"></many-to-one>
 		

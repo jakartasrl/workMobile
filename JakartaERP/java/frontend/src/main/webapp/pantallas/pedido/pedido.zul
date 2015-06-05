@@ -88,7 +88,8 @@
 			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
 			        <tab id="ff" label="Formas de Facturación"  visible="@bind((vm.modoAgenda and !vm.comprobanteOV.facturaciones.isEmpty()) or !vm.modoAgenda)" />
 			        <tab id="files" label="Archivos" visible="@bind((vm.modoAgenda and !vm.archivos.isEmpty()) or !vm.modoAgenda)" />
-		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda and vm.seleccionoPedido)"/>
+		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda)"/>
+<!-- 		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda and vm.seleccionoPedido)"/> -->
 		        	<tab id="tPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" />
 			    </tabs>
 			    <tabpanels>

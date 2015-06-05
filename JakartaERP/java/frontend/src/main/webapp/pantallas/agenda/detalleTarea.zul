@@ -104,9 +104,10 @@ style="margin-top:50px;" height="auto" width="700px" position="top,center" closa
 							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>
-								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 1 }" />
-								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 2 }"/>
-								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 3 }"/>
+								<image src="/pantallas/icons/alarmclock.png" if="${each.idEstado eq 1 }"/>
+								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 2 }" />
+								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 3 }"/>
+								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 4 }"/>
 							</cell>
 							
 						</row>

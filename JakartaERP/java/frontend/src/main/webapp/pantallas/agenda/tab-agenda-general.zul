@@ -22,11 +22,13 @@
 			<listheader width="250px" label="Descripción"/>
 			<listheader width="250px" label="Comentario"/>
 			<listheader width="110px" label="Fecha Limite"/>
+			<listheader width="110px" label="Fecha Cumplida"/>
+			<listheader width="110px" label="Ultimo Prec."/>
 			<listheader width="50px" label="Dias"/>
 			<listheader width="110px" label="Sector"/>
-			<listheader width="130px" label="Estado"/>
+<!-- 			<listheader width="130px" label="Estado"/> -->
 <!-- 			<listheader width="110px" label="Cumplimiento"/> -->
-			<listheader width="110px" label="Fecha Lim."/>
+<!-- 			<listheader width="110px" label="Fecha Lim."/> -->
 			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
@@ -53,6 +55,14 @@
 				</listcell>
 
 				<listcell >
+					<datebox width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+				</listcell>
+
+				<listcell >
+					<datebox width="99%" value="@bind(each.fechaUltimoPrecedente)" constraint="no empty" format="dd/MM/yyyy" />
+				</listcell>
+
+				<listcell >
 					<intbox width="100%" value="@bind(each.duracion)" sclass="importe" constraint="no empty"/>
 				</listcell>
 
@@ -63,17 +73,17 @@
 					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" />
 				</listcell>
 
-				<listcell>
-					<combobox width="95%" model="@bind(vm.estados.list)" selectedItem="@bind(each.estado)" constraint="no empty">
-						<template name="model" var="e">
-							<comboitem label="@bind(e.descripcion)" />
-						</template>
-					</combobox>
-				</listcell>
+<!-- 				<listcell> -->
+<!-- 					<combobox width="95%" model="@bind(vm.estados.list)" selectedItem="@bind(each.estado)" constraint="no empty"> -->
+<!-- 						<template name="model" var="e"> -->
+<!-- 							<comboitem label="@bind(e.descripcion)" /> -->
+<!-- 						</template> -->
+<!-- 					</combobox> -->
+<!-- 				</listcell> -->
 
-				<listcell >
-					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
-				</listcell>
+<!-- 				<listcell > -->
+<!-- 					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" /> -->
+<!-- 				</listcell> -->
 
 				<listcell >
 					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarTarea', tarea=each )" />

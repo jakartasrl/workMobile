@@ -1,11 +1,11 @@
 <zk>
 
 <div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="1112px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
+			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="1212px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
 	
 				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 <!-- 					<auxheader label="@bind('Lista de Tareas del sector '.concat(vm.sectorSeleccionado.descripcion))" colspan="7" /> -->
-					<auxheader label="Lista de Tareas" colspan="7" />
+					<auxheader label="Lista de Tareas" colspan="8" />
 <!-- 					<auxheader label="@bind('Lista de Tareas del sector '.concat(vm.sectorSeleccionado.descripcion))" colspan="7" /> -->
 				</auxhead>
 				        
@@ -20,6 +20,9 @@
 					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
+					<column width="50px" label="Cambiar Estado" align="center" style="text-align:center" />
+<!-- 					<column width="50px" label="Cambiar Estado" align="center" style="text-align:center" if="${vm.vistaPorSector}" /> -->
+				
 				</columns>
 				
 				<rows>
@@ -34,15 +37,21 @@
 							<datebox disabled="true" width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>
-								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 1 }" />
-								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 2 }"/>
-								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 3 }"/>
+								<image src="/pantallas/icons/alarmclock.png" if="${each.idEstado eq 1 }"/>
+								<image src="/pantallas/icons/openFile.png" if="${each.idEstado eq 2 }" />
+								<image src="/pantallas/icons/play.png" if="${each.idEstado eq 3 }"/>
+								<image src="/pantallas/icons/ok.png" if="${each.idEstado eq 4 }"/>
 							</cell>
 							
 							<cell>
 								<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/detalle.png" label="" onClick="@command('verDetalle', elemento=each )" />
 							</cell>
 						
+<!-- 							<cell if="${vm.vistaPorSector}"> -->
+							<cell>
+								<button if="${each.idEstado eq 2 }" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/playback_play.png" label="" onClick="@command('iniciar', elemento=each )" />
+								<button if="${each.idEstado eq 3 }" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/candado.png" label="" onClick="@command('finalizar', elemento=each )" />
+							</cell>
 						</row>
 					</template>
 				</rows>

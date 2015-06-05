@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;

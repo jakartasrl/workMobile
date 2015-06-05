@@ -44,7 +44,7 @@ public class TareaPedido extends DatoNodo {
 	 * Automaticamente en un grafo, donde cada tarea tiene una lista de precedentes, cuando el ultimo de todos estos precedentes es finalizado,
 	 * se actualiza esta fecha, y el estado.
 	 */
-	private Date fechaUltimaPrecedente=new Date();
+	private Date fechaUltimoPrecedente=new Date();
 
 	@NotNull
 	private Sector sector;

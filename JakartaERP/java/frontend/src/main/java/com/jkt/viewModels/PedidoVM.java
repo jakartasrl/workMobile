@@ -11,7 +11,6 @@ import java.util.Random;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -20,14 +19,14 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Session;
-import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.grafo.DatoNodo.Estado;
 import com.jkt.ov.AgendaOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
@@ -44,7 +43,6 @@ import com.jkt.ov.PedidoOV;
 import com.jkt.ov.PrecedenteOV;
 import com.jkt.ov.TareaAgendaOV;
 import com.jkt.ov.TareaPrecedenteOV;
-import com.jkt.ov.UserOV;
 import com.jkt.ov.tree.NodoTareaAgenda;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
@@ -118,6 +116,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	 * Es el guardar, cuando la funcionalidad está en modo agenda
 	 */
 	public void planificarPedido(){
+		
 		if(!validarTareas()){
 			Messagebox.show("Debe completar el sector en todas las tareas.");
 			return;
@@ -136,14 +135,41 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			tarea.setIdTarea(tarea.getTarea().getId());
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
 			tarea.setIdSector(tarea.getSector().getId());
-			tarea.setIdEstado(Integer.valueOf(tarea.getEstado().getCodigo()));
+			
+//			tarea.setIdEstado(Integer.valueOf(tarea.getEstado().getCodigo()));
+//			tarea.setIdEstado(Estado.NO_INICIADO.getValue());
 			
 			tareas.add(tarea);//tarea level0, agregarla a la lista de tareas SI O SI
 			
 			hijos = nodoActual.getChildren();
+			
+			//si la tarea se agrego recien, solamente se asigna por defecto el estado no iniciado, de modo contrario se verifican sus precedencias
+			if(tarea.getIdEstado()==0){
+				tarea.setIdEstado(Estado.NO_INICIADO.getValue());
+			}else{ //si la tarea ya existia pero se le borraron los precedentes, debo actualizar el estado, y ponerla como no iniciada
+				
+				boolean noTienePrecedentes = true;
+				for (TreeNode<TareaPrecedenteOV> treeNode : hijos) {
+					if(treeNode.getData().getEsPrecedente()){
+						noTienePrecedentes = false;
+						break;
+					}
+				}
+				
+				if(noTienePrecedentes){
+					tarea.setIdEstado(Estado.NO_INICIADO.getValue());
+				}
+			}
+			
 			List<DescriptibleOV> listaPrecedencias=new ArrayList<DescriptibleOV>();
 			for (TreeNode<TareaPrecedenteOV> nodoLevel2 : hijos) {
 				if (nodoLevel2.getData().getEsPrecedente()) {
+						
+					//Si un solo precedente tiene el estado NO FINALIZADO, se pone la tarea en espera!
+					if(nodoLevel2.getData().getTarea().getIdEstado()!=Estado.FINALIZADO.getValue()){
+						tarea.setIdEstado(Estado.EN_ESPERA.getValue());
+					}
+					
 					DescriptibleOV descriptibleOV = new DescriptibleOV();
 					descriptibleOV.setCodigo(String.valueOf(nodoLevel2.getData().getTarea().getRandomNumber()));
 					listaPrecedencias.add(descriptibleOV);
@@ -267,6 +293,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	}
 
 	
+	
+	
 	@Command
 	@NotifyChange({"agenda","pedidoDescriptible","titulo","arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
@@ -325,8 +353,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.comprobanteOV.setDescargaACargoDeCliente(ovRecuperado.getDescargaACargoDeCliente());
 		
 		if (modoAgenda) {
-			recuperarAgendaPedido();
 			this.seleccionoPedido=true;
+			recuperarAgendaPedido();
 		}
 		
 		
@@ -713,6 +741,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
 					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+					this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 					this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionDeterminacion());
 					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
 					actualizarTareasYArbol();
@@ -732,6 +761,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
 					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+					this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 					this.tareaAgregada.setDescripcionAbreviada(formaFacturacionOV.getDescripcion());
 					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
 					actualizarTareasYArbol();
@@ -739,6 +769,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 		}else{
+			
+			this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 			
 			//Tarea estandar
 			actualizarTareasYArbol();
@@ -790,5 +822,48 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 
 	}
-	
+
+	/**
+	 * Valida si no existe dependencias mutuas
+	 */
+	@Command
+	public void verificarPrecenciaMutua(@BindingParam("checkComponent") Checkbox checkComponent ,  @BindingParam("nodo") NodoTareaAgenda nodo){
+		if(checkComponent.isChecked()){ //solamente si se presiono el check se verifica la dep. mutua.
+			
+			List<TreeNode<TareaPrecedenteOV>> hijosLevel0 = this.agenda.getArbolPrecedencias().getRoot().getChildren();
+			//busco en las raices al elemento que hizo click en check
+			NodoTareaAgenda nodoRaiz = null;
+			for (TreeNode<TareaPrecedenteOV> treeNode : hijosLevel0) {
+				if(treeNode.getData().getTarea().getRandomNumber()==nodo.getData().getTarea().getRandomNumber()){
+					nodoRaiz=(NodoTareaAgenda) treeNode;
+					break;
+				}
+			}
+			
+			if(nodoRaiz==null){
+				Messagebox.show("Existe una inconsistencia con las precedencias al momento de verificar dependencias mutuas.");
+				return;
+			}
+			
+			List<TreeNode<TareaPrecedenteOV>> hijosLevel0DeNodoRaiz = nodoRaiz.getChildren();
+			for (TreeNode<TareaPrecedenteOV> treeNode : hijosLevel0DeNodoRaiz) {
+				if(treeNode.getData().getTarea().getRandomNumber()==nodo.getParent().getData().getTarea().getRandomNumber()){
+					if(treeNode.getData().getEsPrecedente()){
+						Messagebox.show("Es imposible asignar una dependencia mutua.");
+						checkComponent.setChecked(false);
+						nodo.getData().setEsPrecedente(false);
+						BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+						return;
+					}
+				}
+			}
+			
+			checkComponent.setChecked(true);
+			nodo.getData().setEsPrecedente(true);
+			BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+
+
+		}
+	} 
+
 }

@@ -1301,6 +1301,7 @@
 
 				<campoEntrada propertyOV="fechaLimite" metodo="setFechaLimite" />
 				<campoEntrada propertyOV="fechaCumplimiento" metodo="setFechaCumplimiento" />
+				<campoEntrada propertyOV="fechaUltimoPrecedente" metodo="setFechaUltimoPrecedente" />
 				<campoEntrada propertyOV="idSector" metodo="setSector" />
 				<campoEntrada propertyOV="idEstado" metodo="setIdEstado" />
 				<campoEntrada propertyOV="duracion" metodo="setDiasDuracion" />
@@ -1424,6 +1425,7 @@
 				
 				<campoSalida value="fechaLimite" target="fechaLimite" />
 				<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+				<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
 				<campoSalida value="idSector" target="sector.id" />
 			</campoSalida>
 			
@@ -1497,6 +1499,7 @@
 			
 			<campoSalida value="fechaLimite" target="fechaLimite" />
 			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
 			<campoSalida value="idSector" target="sector.id" />
 			<campoSalida value="idPedido" target="pedido.id" />
 		</output>
@@ -1523,10 +1526,23 @@
 			
 			<campoSalida value="fechaLimite" target="fechaLimite" />
 			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
+			<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
 			<campoSalida value="idSector" target="sector.id" />
 			<campoSalida value="idPedido" target="pedido.id" />
 		</output>
 
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="ActualizarEstadoTarea" clase="com.jkt.pedido.operaciones.ActualizarEstadoTarea" inputOV="com.jkt.ov.ContainerOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+			<campoEntrada propertyOV="string2" name="ESTADO"/>
+			<campoEntrada propertyOV="fecha1" name="FECHA_CUMPLIMIENTO"/>
+			<campoEntrada propertyOV="fecha2" name="FECHA_ULTIMO_PRECEDENTE"/>
+		</input>
+		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 
