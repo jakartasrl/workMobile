@@ -42,7 +42,6 @@ import com.jkt.ov.tree.NodoTitulos;
 @Data
 public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
-	
 	private String titulo = "Cotizador";
 	private CotizadorOV cotizadorOV = new CotizadorOV();
 	private DescriptibleOV clienteOV = new DescriptibleOV();
@@ -63,6 +62,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@Command("guardar")
 	@NotifyChange({"modeloCotizadorOV"})
 	public void guardar() throws JakartaException {
+		
+		this.validar();
 	
 		this.completarCotizadorOV();
 
@@ -97,9 +98,13 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 //		Messagebox.show("Se ha configurado una cotizacion correctamente.");
 		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");		
 
-		
 	}
 	
+	private void validar() {
+		
+		
+	}
+
 	private void completarCotizadorOV() {
 		
 		this.cotizadorOV.setId(itemSelected.getIdCotizador());
@@ -181,7 +186,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-//		openComplexHelper("itemCotizacion", "", this.itemSelected, "cargarItemACotizar", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("vm", this);
@@ -190,7 +194,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		window.doModal();
 		
-//		openComplexHelper("itemCotizacion", "", this.itemSelected, "", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
 	}
 	
 	private boolean apertura=false;
@@ -201,11 +204,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		apertura = true;
 		
-//		this.arbolTitulos = new DefaultTreeModel<TituloModeloCotizadorOV>();
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
-		
-
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
@@ -215,8 +215,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.itemSelected = itemOV;
 		
 		this.itemSelected.setDescripcion(Jsoup.parse(this.itemSelected.getDescripcion()).text());
-
-//		this.modeloCotizadorOV = this.itemSelected.getModeloCotizador();
 		
 		this.modeloCotizadorOV.setId(itemOV.getIdModeloCotizador());
 		this.modeloCotizadorOV.setCodigo(itemOV.getCodModeloCotizador());
@@ -270,49 +268,23 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"lsTipoDeCambio"})
 	public void init(){
 		
-//		try {
-//			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-//			if(recuperarDesdeSesion!=null){
-//				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-//				return;// true; 
-//			}
-//		} catch (IllegalAccessException e) {
-//			throw new RuntimeException(e.getMessage());
-//		} catch (InvocationTargetException e) {
-//			throw new RuntimeException(e.getMessage());
-//		}
+		try {
+			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			if(recuperarDesdeSesion!=null){
+				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+				return;// true; 
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 
 		log.info("Recuperando monedas...");
 		this.monedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
 		
 		this.cargarTiposDeCambio();
 
-		
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-
-//		itemSelected =new ItemsOV();
-//		itemSelected.setId(80L);
-//		
-//		cargarItemACotizar();;;;;;;;;;;;;;;;;;
-	
-		
 	}
 
 	private void cargarTiposDeCambio() {
@@ -432,6 +404,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		}
 		
 		return 1;
+		
 	}
 
 	@Command
@@ -461,7 +434,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos = new DefaultTreeModel<TituloModeloCotizadorOV>(root);
-//		apertura = true;
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
@@ -473,6 +445,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.itemSelected.setDescripcion(Jsoup.parse(this.itemSelected.getDescripcion()).text());
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		
 	}
 	
 }
