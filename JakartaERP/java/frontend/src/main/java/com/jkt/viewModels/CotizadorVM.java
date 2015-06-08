@@ -91,7 +91,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 			}
 		}
 		
-		this.cotizadorOV.setIdMoneda(1L);
+//		this.cotizadorOV.setIdMoneda(1L);
+		this.cotizadorOV.setIdMoneda(this.expresarEnMonedaSeleccionado.getId());
 		this.cotizadorOV.setIdModelo(this.modeloCotizadorOV.getId());
 		
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
@@ -100,8 +101,15 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	}
 	
-	private void validar() {
+	private void validar() throws JakartaException {
 		
+		if (this.modeloCotizadorOV.getId() == 0){
+			throw new JakartaException("Debe ingresar un Modelo de Cotizador.");
+		}
+		
+		if (this.expresarEnMonedaSeleccionado.getId() == 0){
+			throw new JakartaException("Debe ingresar una moneda para poder expresar.");
+		}
 		
 	}
 
@@ -164,6 +172,12 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 					treeNode.getData().setIdMoneda(treeNode.getData().getMoneda().getId());
 				}
 				
+				if(treeNode.getData().getUnidadMedida().getId()==0){
+					treeNode.getData().setIdUnidadMedida(null);
+				}else{
+					treeNode.getData().setIdUnidadMedida(treeNode.getData().getUnidadMedida().getId());
+				}
+			
 			}
 		
 		}else{
@@ -205,7 +219,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		apertura = true;
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
-		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
+		this.arbolTitulos=new AdvancedTreeModel(root);
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
@@ -227,7 +241,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		this.getModeloCotizadorOV().setCodigo(this.itemSelected.getCodModeloCotizador());
 		this.getModeloCotizadorOV().setDescripcion(this.itemSelected.getDescModeloCotizador());
-		
 		
 		//Selecciono la moneda
 		expresarEnMonedaSeleccionado.setId(itemSelected.getIdMoneda());
@@ -260,7 +273,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.itemSelected = new ItemsOV();
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
-		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
+		this.arbolTitulos=new AdvancedTreeModel(root);
 	
 	}
 	

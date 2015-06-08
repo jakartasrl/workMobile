@@ -200,6 +200,8 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 						copiaDeTitulo.setPrecioUnitario(copiaDeTitulo.getDetalleDeConcepto().getPrecioUnitario());
 						copiaDeTitulo.setPrecio(copiaDeTitulo.getDetalleDeConcepto().getCantidad() * copiaDeTitulo.getDetalleDeConcepto().getPrecioUnitario());
 						copiaDeTitulo.setMarkUp(copiaDeTitulo.getDetalleDeConcepto().getMarkUp());
+						
+						copiaDeTitulo.setImporteVenta(copiaDeTitulo.getDetalleDeConcepto().getImporteVenta());
 
 					}
 

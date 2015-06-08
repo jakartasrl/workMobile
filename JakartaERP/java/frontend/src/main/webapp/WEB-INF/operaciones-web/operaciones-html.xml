@@ -1577,7 +1577,7 @@
 				<campoEntrada propertyOV="precio" 			metodo="setCotizacion" />
 				<campoEntrada propertyOV="markUp" 			metodo="setMarkUp" />
 <!-- 				<campoEntrada propertyOV="costoEn" 			metodo="setCostoEn" /> -->
-<!-- 				<campoEntrada propertyOV="importeVenta" 	metodo="setImporteVenta" /> -->
+				<campoEntrada propertyOV="importeVenta" 	metodo="setImporteVenta" />
 				<campoEntrada propertyOV="idC" 				metodo="setConceptoPresupuesto" />
 			</campoEntrada>
 
@@ -1641,11 +1641,7 @@
 				<campoSalida target="detalleDeConcepto.moneda.id" 					value="idMoneda" />
 				<campoSalida target="detalleDeConcepto.moneda.codigo" 				value="codMoneda" />
 				<campoSalida target="detalleDeConcepto.moneda.descripcion" 			value="descMoneda" />
-			
-<!-- 				<campoSalida target="concepto.monedaPorDefecto.id" 					value="idMoneda" /> -->
-<!-- 				<campoSalida target="concepto.monedaPorDefecto.codigo" 				value="codMoneda" /> -->
-<!-- 				<campoSalida target="concepto.monedaPorDefecto.descripcion" 		value="descMoneda" /> -->
-				
+							
 				<campoSalida target="producto.id" 									value="idProducto" />
 				<campoSalida target="producto.codigo" 								value="codProducto" />
 				<campoSalida target="producto.descripcion" 							value="descProducto" />
@@ -1660,9 +1656,9 @@
 				<campoSalida target="precioUnitario" 								value="precioUnitario" />
 				<campoSalida target="cantidad" 										value="cantidad" />
 				<campoSalida target="markUp" 										value="markUp" />
-
-<!-- 				traer markup y cantidad y datos cargados del salvado anterior...estan en el guardar los campos q faltan -->
-
+				
+				<campoSalida target="importeVenta" 									value="importeVenta" />
+				
 			</campoSalida>
 			
 		</output>
