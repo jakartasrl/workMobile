@@ -64,14 +64,29 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	public void guardar() throws JakartaException {
 	
 		this.completarCotizadorOV();
-		
-		for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
-			tituloModeloCotizadorOV.setIdNuevo(tituloModeloCotizadorOV.getId()); //para el titulo modelo cotizador
-			tituloModeloCotizadorOV.setId(0L); // para generar una nueva instancia siempre!
-//			if(tituloModeloCotizadorOV.getId()==0L){
-//				tituloModeloCotizadorOV.setId(-1);
-//			}
-		
+
+		/*
+		 * Asigna nuevas referencias si se abre un item cotizado, o si es nuevo.
+		 */
+		if(apertura){
+			List<TituloModeloCotizadorOV> auxList=new ArrayList<TituloModeloCotizadorOV>();
+			for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
+				if(tituloModeloCotizadorOV.getId()==0 && tituloModeloCotizadorOV.getIdNuevo()==0){
+					//nada 
+				}else{
+					auxList.add(tituloModeloCotizadorOV);
+				}
+			}
+			 this.cotizadorOV.setDetalles(auxList);
+			 for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
+					tituloModeloCotizadorOV.setIdNuevo(tituloModeloCotizadorOV.getId()); //para el titulo modelo cotizador
+					tituloModeloCotizadorOV.setId(0L); // para generar una nueva instancia siempre!
+			}
+		}else{
+			for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
+				tituloModeloCotizadorOV.setIdNuevo(tituloModeloCotizadorOV.getId()); //para el titulo modelo cotizador
+				tituloModeloCotizadorOV.setId(0L); // para generar una nueva instancia siempre!
+			}
 		}
 		
 		this.cotizadorOV.setIdMoneda(1L);
@@ -169,9 +184,14 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 //		openComplexHelper("itemCotizacion", "", this.itemSelected, "", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
 	}
 	
+	private boolean apertura=false;
+	
 	@SuppressWarnings("unchecked")
 	@NotifyChange({"cotizadorOV","itemSelected"})
 	public void cargarItemACotizar(){
+		
+		apertura = true;
+		
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
@@ -229,17 +249,17 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"lsTipoDeCambio"})
 	public void init(){
 		
-		try {
-			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-			if(recuperarDesdeSesion!=null){
-				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-				return;// true; 
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage());
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e.getMessage());
-		}
+//		try {
+//			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+//			if(recuperarDesdeSesion!=null){
+//				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+//				return;// true; 
+//			}
+//		} catch (IllegalAccessException e) {
+//			throw new RuntimeException(e.getMessage());
+//		} catch (InvocationTargetException e) {
+//			throw new RuntimeException(e.getMessage());
+//		}
 
 		log.info("Recuperando monedas...");
 		this.monedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
@@ -313,18 +333,21 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 				
 				//lo mismo con unidad de medidaa...
 				DescriptibleOV uMed=new DescriptibleOV();
-				uMed.setId(tituloModeloCotizadorOV.getIdUnidadMedida());
-				uMed.setCodigo(tituloModeloCotizadorOV.getCodUnidadMedida());
-				uMed.setDescripcion(tituloModeloCotizadorOV.getDescUnidadMedida());
-				tituloModeloCotizadorOV.setUnidadMedida(uMed);
+				if (tituloModeloCotizadorOV.getIdUnidadMedida() != null){
+					uMed.setId(tituloModeloCotizadorOV.getIdUnidadMedida());
+					uMed.setCodigo(tituloModeloCotizadorOV.getCodUnidadMedida());
+					uMed.setDescripcion(tituloModeloCotizadorOV.getDescUnidadMedida());
+					tituloModeloCotizadorOV.setUnidadMedida(uMed);
+				}
 				
 				//Selecciono la moneda
 				DescriptibleOV moneda=new DescriptibleOV();
-				moneda.setId(tituloModeloCotizadorOV.getIdMoneda());
-				moneda.setCodigo(tituloModeloCotizadorOV.getCodMoneda());
-				moneda.setDescripcion(tituloModeloCotizadorOV.getDescMoneda());
-				
-				tituloModeloCotizadorOV.setMoneda(this.completarCombo(monedas.getList(), tituloModeloCotizadorOV.getIdMoneda()));
+				if(tituloModeloCotizadorOV.getIdMoneda() != null){
+					moneda.setId(tituloModeloCotizadorOV.getIdMoneda());
+					moneda.setCodigo(tituloModeloCotizadorOV.getCodMoneda());
+					moneda.setDescripcion(tituloModeloCotizadorOV.getDescMoneda());
+					tituloModeloCotizadorOV.setMoneda(this.completarCombo(monedas.getList(), tituloModeloCotizadorOV.getIdMoneda()));
+				}
 			
 				DescriptibleOV producto = new DescriptibleOV();
 				if (tituloModeloCotizadorOV.getIdProducto() != null && tituloModeloCotizadorOV.getIdProducto() != 0L ){

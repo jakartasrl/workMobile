@@ -103,8 +103,8 @@ public class TituloModeloCotizador extends PersistentEntity {
 			
         if ( !(title.getId()==getId())) return false;
 
-        if ( !(title.getCodigo().equals(getCodigo()))) return false;
-        if ( !(title.getDescripcion().equals(getDescripcion()))) return false;
+//        if ( !(title.getCodigo().equals(getCodigo()))) return false;
+//        if ( !(title.getDescripcion().equals(getDescripcion()))) return false;
 
         return true;
     }
