@@ -30,6 +30,8 @@ public class ItemsOV extends ObjectView {
 	private int cantidad;
 	private DescriptibleOV moneda=new DescriptibleOV();
 	private Long idMoneda;
+	private String codMoneda;
+	
 	private double importe;
 	private double importeTotal;
 	

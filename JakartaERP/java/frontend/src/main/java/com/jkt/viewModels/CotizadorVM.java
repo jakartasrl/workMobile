@@ -221,6 +221,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.getModeloCotizadorOV().setCodigo(this.itemSelected.getCodModeloCotizador());
 		this.getModeloCotizadorOV().setDescripcion(this.itemSelected.getDescModeloCotizador());
 		
+		
+		//Selecciono la moneda
+		expresarEnMonedaSeleccionado.setId(itemSelected.getIdMoneda());
+		expresarEnMonedaSeleccionado.setCodigo(itemSelected.getCodMoneda());
+		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 		
 	}

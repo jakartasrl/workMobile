@@ -1604,7 +1604,8 @@
 			<campoSalida target="cotizador.modelo.descripcion" 						value="descModeloCotizador" />
 			
 			<campoSalida target="cotizador.id" 										value="idCotizador" />
-			<campoSalida target="modeda.id" 										value="idMoneda" />
+			<campoSalida target="cotizador.monedaExpresada.id" 						value="idMoneda" />
+			<campoSalida target="cotizador.monedaExpresada.codigo" 					value="codMoneda" />
 			
 			<campoSalida target="titulosTransientes" 								value="titulos">
 				<campoSalida target="idTransiente" 									value="id" />
