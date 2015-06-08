@@ -48,7 +48,6 @@
 
 <entity>
 	
-	
 	<operacion name="Traer" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDescriptibleOV">
 		
 		<input>
@@ -1651,5 +1650,19 @@
 		
 	</operacion>
 
+	<operacion name="TraerItemsParaCotizar" clase="com.jkt.cotizador.operaciones.TraerItemsParaCotizar" outputOV="com.jkt.ov.ListDetalleCotizacionOV">
+		
+		<output>
+
+			<campoSalida value="id" 			target="id" 					/>
+			<campoSalida value="nroItem" 		target="numero" 				/>
+			<campoSalida value="descripcion" 	target="descripcion" 			/>
+			<campoSalida value="estado" 		target="estadoId" 				/>
+			<campoSalida value="nroCotizacion" 	target="comprobanteVenta.nro"	/>
+			
+		</output>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 	
 </entity>
