@@ -123,5 +123,10 @@ public class GenericListVM extends ViewModel implements IBasicOperations{
 	public void eliminar(@BindingParam("elemento") DescriptibleOV elemento){
 		this.entidades.getList().remove(elemento);
 	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
 	
 }

@@ -11,6 +11,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -538,6 +539,19 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	@Init
 	public void init(@BindingParam("modoAgenda") String modoAgenda) throws IllegalAccessException, InvocationTargetException{
 		
+		try {
+			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			if(recuperarDesdeSesion!=null){
+				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+				return;// true; 
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+
+		
 		if (modoAgenda.equals("true")) {
 			this.modoAgenda=true;
 			this.titulo="Planificación de Pedido";
@@ -864,6 +878,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 
 		}
+	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	} 
 
 }

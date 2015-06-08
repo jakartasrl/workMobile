@@ -10,6 +10,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -65,16 +66,21 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.completarCotizadorOV();
 		
 		for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
-			tituloModeloCotizadorOV.setIdNuevo(0L);
-			
-			if(tituloModeloCotizadorOV.getId()==0L){
-				tituloModeloCotizadorOV.setId(-1);
-			}
+			tituloModeloCotizadorOV.setIdNuevo(tituloModeloCotizadorOV.getId()); //para el titulo modelo cotizador
+			tituloModeloCotizadorOV.setId(0L); // para generar una nueva instancia siempre!
+//			if(tituloModeloCotizadorOV.getId()==0L){
+//				tituloModeloCotizadorOV.setId(-1);
+//			}
 		
 		}
+		
 		this.cotizadorOV.setIdMoneda(1L);
+		this.cotizadorOV.setIdModelo(this.modeloCotizadorOV.getId());
+		
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
-		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
+//		Messagebox.show("Se ha configurado una cotizacion correctamente.");
+		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");		
+
 		
 	}
 	
@@ -84,7 +90,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.cotizadorOV.setIdCotizacionDet(itemSelected.getId());
 		this.cotizadorOV.setIdModelo(modeloCotizadorOV.getId());
 		this.cotizadorOV.setIdMoneda(expresarEnMonedaSeleccionado.getId());
-		this.cotizadorOV.setCodigoEstado("1");
+		this.cotizadorOV.setCodigoEstado("1"); //va el estado correpondiente TODO
 		
 		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
 		this.todosLosElementos = new ArrayList<TituloModeloCotizadorOV>();
@@ -111,17 +117,21 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 //			treeNode.getData().setConcepto(null);//para q el fwk no vaya a buscarlo a la base y le asigne null...
 			//recordar, si elp valor es cero, se crea uno nuevo, si es >0 se busca en la base, si es null, se retorna null.
 			if (treeNode.getData().getIdC() != null){
+				
 				treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
 				treeNode.getData().setCodigoC(treeNode.getData().getCodigoC());
 				treeNode.getData().setDescripcionC(treeNode.getData().getDescripcionC());
+				
 				DescriptibleOV concepto = new DescriptibleOV();
 				concepto.setId(treeNode.getData().getIdC());
 				concepto.setCodigo(treeNode.getData().getCodigoC());
 				concepto.setDescripcion(treeNode.getData().getDescripcionC());
 				treeNode.getData().setConcepto(concepto);
+				
 				treeNode.getData().setIdMoneda(treeNode.getData().getMoneda().getId());
 				
-				if(treeNode.getData().getProducto().getId()==0){
+				long idProducto = treeNode.getData().getProducto().getId();
+				if(idProducto==0){
 					treeNode.getData().setIdProducto(null);
 				}else{
 					treeNode.getData().setIdProducto(treeNode.getData().getProducto().getId());
@@ -147,7 +157,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		}
 		
 		//Agregamos solo los conceptos
-		if (treeNode.getData().getTipo().equalsIgnoreCase("C")){
+		if (treeNode.getData().getTipo().equals("C")){
 			todosLosElementos.add(treeNode.getData());
 		}
 		
@@ -156,6 +166,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		openComplexHelper("itemCotizacion", "", this.itemSelected, "cargarItemACotizar", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
+//		openComplexHelper("itemCotizacion", "", this.itemSelected, "", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -218,6 +229,18 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"lsTipoDeCambio"})
 	public void init(){
 		
+		try {
+			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			if(recuperarDesdeSesion!=null){
+				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+				return;// true; 
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+
 		log.info("Recuperando monedas...");
 		this.monedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
 		
@@ -243,10 +266,10 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 		//TODO SACAR ESTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
-		itemSelected =new ItemsOV();
-		itemSelected.setId(80L);
-		
-		cargarItemACotizar();;;;;;;;;;;;;;;;;;
+//		itemSelected =new ItemsOV();
+//		itemSelected.setId(80L);
+//		
+//		cargarItemACotizar();;;;;;;;;;;;;;;;;;
 	
 		
 	}
@@ -382,6 +405,12 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		args.put("lista", lsTipoDeCambio);
 		Window window = (Window) Executions.createComponents("/pantallas/cotizador/tiposCambio.zul", null, args);
 		window.doModal();
+	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
 }

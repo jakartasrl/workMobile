@@ -8,6 +8,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
@@ -95,6 +96,20 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	
 	@Init
 	public void init(){
+		
+		try {
+			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			if(recuperarDesdeSesion!=null){
+				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+				return;// true; 
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+
+		
 		super.nuevo();
 		log.info("Iniciando ViewModel de Cotizacion.");
 		
@@ -235,6 +250,11 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		}
 		
 		return true;
+	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
 	}
 
 }

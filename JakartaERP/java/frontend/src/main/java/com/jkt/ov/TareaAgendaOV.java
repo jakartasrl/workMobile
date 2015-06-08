@@ -41,7 +41,7 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 	private Long idSector;
 
 	private DescriptibleOV estado = new DescriptibleOV();
-	private int idEstado;
+	private int idEstado=2;
 
 //	@Expose
 	private List<TareaAgendaOV> precedencias = new ArrayList<TareaAgendaOV>();

@@ -34,7 +34,7 @@ public class TituloModeloCotizadorOV extends ObjectView {
 	
 	private List<TituloModeloCotizadorOV> titulosHijos=new ArrayList<TituloModeloCotizadorOV>();
 	private DescriptibleOV concepto= new DescriptibleOV();
-	private ModeloCotizador modeloCotizador;
+//	private ModeloCotizador modeloCotizador;
 	
 	private int codigoInterno,codigoInternoPadre;
 	private String tipo="T";//para diferenciar entre titulos y conceptos.TODO armar el mapeo de un char en DelphiAdapter...
@@ -71,7 +71,7 @@ public class TituloModeloCotizadorOV extends ObjectView {
 	private double precio;
 	private Date fechaPrecioCosto;
 	
-	private Cotizador cotizador;
+//	private Cotizador cotizador;
 	private double cantidad;
 	
 	private DescriptibleOV unidadMedida = new DescriptibleOV();

@@ -312,5 +312,10 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	public void setClienteOV(DescriptibleOV clienteOV) {
 		this.clienteOV = clienteOV;
 	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
 	
 }

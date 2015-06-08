@@ -60,12 +60,12 @@
                 </treecell>
                
                 <treecell>
- 	               <intbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+ 	               <intbox sclass="importe" width="100%" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
  	               	<hlayout width="100%">
-						<textbox sclass="importe" width="30px" inplace="true" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
+						<textbox sclass="importe" width="30px" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
 							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)"
 							/>
 						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" />
@@ -73,7 +73,7 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+ 	               <textbox sclass="importe" width="100%" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
@@ -89,19 +89,19 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" />
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" inplace="true" value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" />
                 </treecell>
                 
             </treerow>

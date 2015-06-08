@@ -408,4 +408,9 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		
 	}
 
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
+
 }

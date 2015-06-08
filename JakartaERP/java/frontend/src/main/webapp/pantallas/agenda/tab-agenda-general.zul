@@ -55,11 +55,11 @@
 				</listcell>
 
 				<listcell >
-					<datebox width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
+					<datebox width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" disabled="true" />
 				</listcell>
 
 				<listcell >
-					<datebox width="99%" value="@bind(each.fechaUltimoPrecedente)" constraint="no empty" format="dd/MM/yyyy" />
+					<datebox width="99%" value="@bind(each.fechaUltimoPrecedente)" constraint="no empty" format="dd/MM/yyyy" disabled="true" />
 				</listcell>
 
 				<listcell >

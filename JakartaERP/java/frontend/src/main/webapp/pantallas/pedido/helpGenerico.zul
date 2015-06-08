@@ -19,7 +19,7 @@
 	        </auxhead>
 
             <columns>
-                <column hflex="1" label="@load(vm.id)" />
+<!--                 <column hflex="1" label="@load(vm.id)" /> -->
                 <column hflex="1" label="@load(vm.codigo)" align="left" sort="auto(codigo)" />
                 <column hflex="2" label="@load(vm.descripcion)" align="left" sort="auto(descripcion)" />
                 <column hflex="2" label="@load(vm.descCampo3)" align="left" unless="${empty vm.descCampo3}"/>
@@ -31,7 +31,7 @@
             <rows>
 	            <template name="model">
 	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" >
-	                    <label value="@load(each.id)" />
+<!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
 	                    <label hflex="2" value="@load(each.descripcion)" />
 	                    <label hflex="2" value="@load(each.campoAdicional1)" unless="${empty each.campoAdicional1 }"/>

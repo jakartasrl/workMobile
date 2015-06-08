@@ -96,6 +96,9 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 				for (PersistentEntity persistentEntity : clasificacionesDeProducto) {
 					
 					TituloModeloCotizador tituloModeloCotizador2 = new TituloModeloCotizador();
+
+					
+					tituloModeloCotizador2.setId(tituloModeloCotizador.getId());
 					
 					tituloModeloCotizador2.setIdTransiente(tituloModeloCotizador.getId());
 					
