@@ -105,5 +105,10 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		
 	}
 
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
+
 	
 }

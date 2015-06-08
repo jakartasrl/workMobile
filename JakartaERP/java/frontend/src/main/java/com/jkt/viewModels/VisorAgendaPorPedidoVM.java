@@ -136,4 +136,9 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 		
 	}
 
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+
 }

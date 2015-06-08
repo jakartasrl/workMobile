@@ -1,5 +1,7 @@
 package com.jkt.viewModels;
 
+import java.util.HashMap;
+
 import lombok.Data;
 
 import org.zkoss.bind.annotation.Command;
@@ -43,7 +45,9 @@ public class LoginVM {
 			userOV.setName(result.getCodigo());
 			userOV.setLastName(result.getDescripcion());
 			sess.setAttribute("userCredential",userOV);
-			     
+			
+			sess.setAttribute("ventanas",new HashMap<String, Object>());
+			
 			Executions.sendRedirect("pantallas/menu.zul");
 
 		}catch(Exception e){

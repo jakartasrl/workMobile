@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -119,6 +120,12 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 	@Override
 	protected String retrieveMethod() {
 		return "update";
+	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
 	

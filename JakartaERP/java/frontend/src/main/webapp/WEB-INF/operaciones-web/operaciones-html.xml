@@ -1555,6 +1555,7 @@
 <!-- 			<campoEntrada propertyOV="nro" 				metodo="setNro" /> -->
 			<campoEntrada propertyOV="fecha" 			metodo="setFecha" />
 			<campoEntrada propertyOV="idMoneda" 		metodo="setMonedaExpresada" />
+			<campoEntrada propertyOV="idModelo" 		metodo="setModelo" />
 			<campoEntrada propertyOV="codigoEstado" 	metodo="setCodigoEstado" />
 			
 			<campoEntrada propertyOV="idCotizacionDet" 	metodo="setItem" />
@@ -1566,11 +1567,11 @@
 <!-- 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" /> -->
 			
 			<campoEntrada propertyOV="detalles" metodo="setDetalles">
-				<campoEntrada propertyOV="idNuevo" 				metodo="setId" />
-				<campoEntrada propertyOV="id" 				metodo="setTituloModeloCotizador" />
+				<campoEntrada propertyOV="id" 			metodo="setId" />
+				<campoEntrada propertyOV="idNuevo" 			metodo="setTituloModeloCotizador" />
 				<campoEntrada propertyOV="idProducto" 		metodo="setProducto" />
 				<campoEntrada propertyOV="cantidad" 		metodo="setCantidad" />
-<!-- 				<campoEntrada propertyOV="idUnidadMedida" 	metodo="setUnidadMedida" /> -->
+				<campoEntrada propertyOV="idUnidadMedida" 	metodo="setUnidadMedida" />
 				<campoEntrada propertyOV="precioUnitario" 	metodo="setPrecioUnitario" />
 				<campoEntrada propertyOV="idMoneda" 		metodo="setMoneda" />
 <!-- 				<campoEntrada propertyOV="fechaPrecioCosto" metodo="setFechaPrecioCosto" /> -->
@@ -1578,7 +1579,7 @@
 				<campoEntrada propertyOV="markUp" 			metodo="setMarkUp" />
 <!-- 				<campoEntrada propertyOV="costoEn" 			metodo="setCostoEn" /> -->
 <!-- 				<campoEntrada propertyOV="importeVenta" 	metodo="setImporteVenta" /> -->
-<!-- 				<campoEntrada propertyOV="idC" 				metodo="setConceptoPresupuesto" /> -->
+				<campoEntrada propertyOV="idC" 				metodo="setConceptoPresupuesto" />
 			</campoEntrada>
 
 		</input>

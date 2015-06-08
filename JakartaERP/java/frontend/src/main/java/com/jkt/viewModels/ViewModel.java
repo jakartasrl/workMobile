@@ -230,6 +230,8 @@ public abstract class ViewModel {
 	 */
 	public abstract void actualizar();
 
+	public abstract void cancelarCustomizado() throws JakartaException;
+
 	/**
 	 * @return String que debe ser igual a la annotation declarada en el metodo actualizar.
 	 */
@@ -257,20 +259,49 @@ public abstract class ViewModel {
 	public void logOut(){
 		Session sess = Sessions.getCurrent();
         sess.removeAttribute("userCredential");
+        sess.removeAttribute("ventanas");
         Executions.sendRedirect("/index.zul");
 	}
 	
 	@Command
 	public void irAInicio(){
 		Session sess = Sessions.getCurrent();
-		sess.setAttribute(this.getClass().getCanonicalName(), this );
+		
+		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
+		mapa.put(this.getClass().getCanonicalName(), this);
+		sess.setAttribute("ventanas", mapa);
+		
 		Executions.sendRedirect("/pantallas/menu.zul");
 	}
 
 	@Command
-	public void cancelar(){
+	public void cancelar() throws JakartaException{
 		Session sess = Sessions.getCurrent();
-		sess.removeAttribute(this.getClass().getCanonicalName());
+	
+		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
+		mapa.remove(this.getClass().getCanonicalName());
+		
+		sess.setAttribute("ventanas", mapa);
+		
+		this.cancelarCustomizado();
+//		sess.removeAttribute(this.getClass().getCanonicalName());
+//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+
+	}
+	
+	protected ViewModel recuperarDesdeSesion(String canonicalName){
+		Session sess = Sessions.getCurrent();
+		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
+		return (ViewModel) mapa.get(canonicalName);
+	}
+	
+	protected boolean recuperarDesdeSession() throws IllegalAccessException, InvocationTargetException {
+		ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+		if(recuperarDesdeSesion!=null){
+			BeanUtils.copyProperties(this, recuperarDesdeSesion);
+			return true; 
+		}
+		return false;
 	}
 
 }

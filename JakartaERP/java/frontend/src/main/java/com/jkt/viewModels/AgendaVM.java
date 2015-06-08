@@ -326,5 +326,10 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			}
 		}
 	}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
 	
 }

@@ -107,4 +107,9 @@ public class LaboratorioVM extends ViewModel implements IBasicOperations{
 		this.ov.getLaboratorios().add(new LaboratorioOV());
 	}
 
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
+
 }

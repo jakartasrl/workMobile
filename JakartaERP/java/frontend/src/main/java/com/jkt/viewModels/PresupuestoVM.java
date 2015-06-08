@@ -16,6 +16,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -399,7 +400,17 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	@Init
 	public void init(){
 		
-		
+		try {
+			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			if(recuperarDesdeSesion!=null){
+				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+				return;// true; 
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		
 		log.info("Iniciando ViewModel de Pedido.");
 		
@@ -436,7 +447,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.comprobanteOV= new PresupuestoOV();
 
 	}
-	
+
+
 	@Command
 	public void toogleNota(@BindingParam("nota") NotaOV nota){
 		if(nota.getChecked()){
@@ -468,6 +480,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	@NotifyChange("comprobanteOV")
 	public void eliminarFacturacion(@BindingParam("elemento") FormaFacturacionOV elemento) {
 		this.comprobanteOV.getFacturaciones().remove(elemento);
+	}
+
+
+	@Override
+	public void cancelarCustomizado() {
+		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 	

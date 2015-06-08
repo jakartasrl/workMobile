@@ -96,4 +96,9 @@ public class GenericVM extends ViewModel implements IBasicOperations{
 		openComplexHelper(clase, "", this.entidad, "", "Entidades disponibles", "Codigo", "Descripción", true, "" , "");
 	}
 
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+	}
+
 }
