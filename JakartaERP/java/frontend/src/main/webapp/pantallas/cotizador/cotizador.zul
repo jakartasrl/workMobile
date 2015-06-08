@@ -47,7 +47,9 @@
 						<row sclass="fila-maestro">
 							<label value="Vendedor : " />
 							<cell colspan="3">
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.vendedorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="5" readonly="true" width="100%" />
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.vendedorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="5" readonly="true" width="100%" 
+									disabled="@bind(!vm.cotizacionEditable)"
+								/>
 							</cell>							
 						</row>
 						<row>

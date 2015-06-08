@@ -25,6 +25,7 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
+import com.jkt.dominio.CotizacionDet.Estado;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.CotizadorOV;
@@ -62,6 +63,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@Command("guardar")
 	@NotifyChange({"modeloCotizadorOV"})
 	public void guardar() throws JakartaException {
+		
+		if(!this.cotizacionEditable){
+			Messagebox.show("No es posible guardar una cotización ya autorizada");
+			return;
+		}
 		
 		this.validar();
 	
@@ -111,7 +117,12 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.cotizadorOV.setIdCotizacionDet(itemSelected.getId());
 		this.cotizadorOV.setIdModelo(modeloCotizadorOV.getId());
 		this.cotizadorOV.setIdMoneda(expresarEnMonedaSeleccionado.getId());
-		this.cotizadorOV.setCodigoEstado("2"); //va el estado correpondiente TODO
+		
+		if(this.itemSelected.isAutorizado()){
+			this.cotizadorOV.setCodigoEstado(String.valueOf(Estado.AUTORIZADO.getId()));
+		}else{
+			this.cotizadorOV.setCodigoEstado(String.valueOf(Estado.COTIZADO_NO_AUTORIZADO.getId()));
+		}
 		
 		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
 		this.todosLosElementos = new ArrayList<TituloModeloCotizadorOV>();
@@ -197,9 +208,10 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	private boolean apertura=false;
+	private boolean cotizacionEditable = true;
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","cotizacionEditable"})
 	public void cargarItemACotizar(){
 		
 		apertura = true;
@@ -215,6 +227,13 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.itemSelected = itemOV;
 		
 		this.itemSelected.setDescripcion(Jsoup.parse(this.itemSelected.getDescripcion()).text());
+		
+		if(this.itemSelected.getIdEstado()==Estado.AUTORIZADO.getId()){
+			this.itemSelected.setAutorizado(true);
+			this.cotizacionEditable = false;
+		}else{
+			this.cotizacionEditable = true;
+		}
 		
 		this.modeloCotizadorOV.setId(itemOV.getIdModeloCotizador());
 		this.modeloCotizadorOV.setCodigo(itemOV.getCodModeloCotizador());
@@ -238,7 +257,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@GlobalCommand("actualizar")
-	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","modeloCotizadorOV","monedas"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","modeloCotizadorOV","monedas","cotizacionEditable"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -258,6 +277,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.clienteOV = new DescriptibleOV();
 		this.vendedorOV = new DescriptibleOV();
 		this.itemSelected = new ItemsOV();
+		this.cotizacionEditable = true;
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
@@ -280,6 +300,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 			throw new RuntimeException(e.getMessage());
 		}
 
+		this.cotizacionEditable = true;
+		
 		log.info("Recuperando monedas...");
 		this.monedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
 		

@@ -1599,6 +1599,7 @@
 			<campoSalida target="codigo" 											value="codigo" />	
 			<campoSalida target="descripcion" 										value="descripcion" />
 			<campoSalida target="referencia" 										value="referencia" />
+			<campoSalida target="estadoId"	 										value="idEstado" />
 			
 		</output>
 
@@ -1618,6 +1619,9 @@
 			<campoSalida target="codigo" 											value="codigo" />	
 			<campoSalida target="descripcion" 										value="descripcion" />
 			<campoSalida target="referencia" 										value="referencia" />
+			<campoSalida target="estadoId"	 										value="idEstado" />
+			
+			
 			<campoSalida target="cotizador.modelo.id" 								value="idModeloCotizador" />
 			<campoSalida target="cotizador.modelo.codigo" 							value="codModeloCotizador" />
 			<campoSalida target="cotizador.modelo.descripcion" 						value="descModeloCotizador" />

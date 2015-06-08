@@ -23,6 +23,9 @@ public class ItemsOV extends ObjectView {
 	private DescriptibleOV productoOV=new DescriptibleOV();
 	private Long idProducto;
 	
+	private int idEstado;
+	private boolean autorizado=false;
+	
 	private DescriptibleOV tipoVenta=new DescriptibleOV();
 	private int tipo=0;
 	
