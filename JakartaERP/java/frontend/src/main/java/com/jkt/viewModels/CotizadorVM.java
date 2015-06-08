@@ -93,7 +93,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.cotizadorOV.setIdModelo(this.modeloCotizadorOV.getId());
 		
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
-//		Messagebox.show("Se ha configurado una cotizacion correctamente.");
+		Messagebox.show("Se ha configurado una cotizacion correctamente.");
 		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");		
 
 		
@@ -191,7 +191,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	public void cargarItemACotizar(){
 		
 		apertura = true;
-		
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();

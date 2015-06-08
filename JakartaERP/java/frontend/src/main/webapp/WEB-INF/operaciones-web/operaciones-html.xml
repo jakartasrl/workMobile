@@ -1605,6 +1605,7 @@
 			<campoSalida target="cotizador.modelo.descripcion" 						value="descModeloCotizador" />
 			
 			<campoSalida target="cotizador.id" 										value="idCotizador" />
+			<campoSalida target="modeda.id" 										value="idMoneda" />
 			
 			<campoSalida target="titulosTransientes" 								value="titulos">
 				<campoSalida target="idTransiente" 									value="id" />
@@ -1620,7 +1621,8 @@
 				
 				<campoSalida target="detalleDeConcepto.moneda.id" 					value="idMoneda" />
 				<campoSalida target="detalleDeConcepto.moneda.codigo" 				value="codMoneda" />
-				<campoSalida target="detalleDeConcepto.moneda.descripcion" 		value="descMoneda" />
+				<campoSalida target="detalleDeConcepto.moneda.descripcion" 			value="descMoneda" />
+			
 <!-- 				<campoSalida target="concepto.monedaPorDefecto.id" 					value="idMoneda" /> -->
 <!-- 				<campoSalida target="concepto.monedaPorDefecto.codigo" 				value="codMoneda" /> -->
 <!-- 				<campoSalida target="concepto.monedaPorDefecto.descripcion" 		value="descMoneda" /> -->
@@ -1631,10 +1633,9 @@
 				
 				<campoSalida target="detalleDeConcepto.unidadMedida.id" 			value="idUnidadMedida" />
 				<campoSalida target="detalleDeConcepto.unidadMedida.codigo" 		value="codUnidadMedida" />
-				<campoSalida target="detalleDeConcepto.unidadMedida.descripcion" value="descUnidadMedida" />
+				<campoSalida target="detalleDeConcepto.unidadMedida.descripcion" 	value="descUnidadMedida" />
 				
 				<campoSalida target="fechaPrecioCosto" 								value="fechaPrecioCosto" />
-				
 				
 				<campoSalida target="precio" 										value="precio" />	
 				<campoSalida target="precioUnitario" 								value="precioUnitario" />

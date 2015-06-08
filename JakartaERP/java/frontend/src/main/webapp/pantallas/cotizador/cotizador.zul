@@ -40,8 +40,7 @@
 							<cell colspan="3">
 								<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" readonly="true" width="100%" />
 							</cell>
-							<label style="width:87px;margin-left:3px;" value="Item a Cotizar : " />
-							<textbox  sclass="campoCodigo-medium" value="@bind(vm.itemSelected.descripcion)" multiline="true" readonly="true" width="100%" />
+							
 						
 						</row>
 						
@@ -49,6 +48,12 @@
 							<label value="Vendedor : " />
 							<cell colspan="3">
 								<textbox sclass="campoCodigo-medium" value="@bind(vm.vendedorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="5" readonly="true" width="100%" />
+							</cell>							
+						</row>
+						<row>
+							<label style="width:87px;margin-left:3px;" value="Item a Cotizar : " />
+							<cell colspan="3">
+								<textbox  sclass="campoCodigo-medium" value="@bind(vm.itemSelected.descripcion)" multiline="true" readonly="true" width="100%" />
 							</cell>
 						</row>
 						
