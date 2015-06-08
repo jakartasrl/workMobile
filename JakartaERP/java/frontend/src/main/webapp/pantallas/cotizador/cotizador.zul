@@ -52,8 +52,8 @@
 						</row>
 						<row>
 							<label style="width:87px;margin-left:3px;" value="Item a Cotizar : " />
-							<cell colspan="3">
-								<textbox  sclass="campoCodigo-medium" value="@bind(vm.itemSelected.descripcion)" multiline="true" readonly="true" width="100%" />
+							<cell colspan="6">
+								<textbox value="@bind(vm.itemSelected.descripcion)" readonly="true" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="5" />
 							</cell>
 						</row>
 						

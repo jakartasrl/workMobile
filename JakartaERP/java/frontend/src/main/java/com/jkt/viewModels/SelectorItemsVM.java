@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.jsoup.Jsoup;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
@@ -28,12 +29,17 @@ public class SelectorItemsVM {
 		items = ((ListDetalleCotizacionOV)Operaciones.ejecutar("TraerItemsParaCotizar", ListDetalleCotizacionOV.class)).getList();
 		
 		for (DetalleCotizacionOV detalleCotizacionOV : items) {
+			
+			detalleCotizacionOV.setDescripcion(Jsoup.parse(detalleCotizacionOV.getDescripcion()).text());
+			
 			if(detalleCotizacionOV.getEstado()==1){
-				detalleCotizacionOV.setEstadoDescripcion("Sin Cotizar");
+				detalleCotizacionOV.setEstadoDescripcion("Pendiente de Cotizar");
 			}else if(detalleCotizacionOV.getEstado()==2){
-				detalleCotizacionOV.setEstadoDescripcion("Cotizado sin autorizar");
+				detalleCotizacionOV.setEstadoDescripcion("Cotizado pero No Autorizado");
 			}else if(detalleCotizacionOV.getEstado()==3){
 				detalleCotizacionOV.setEstadoDescripcion("Autorizado");
+			}else if(detalleCotizacionOV.getEstado()==4){
+				detalleCotizacionOV.setEstadoDescripcion("Rechazado");
 			}
 		}
 		

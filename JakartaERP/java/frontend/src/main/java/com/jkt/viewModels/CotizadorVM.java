@@ -11,6 +11,7 @@ import java.util.Random;
 import lombok.Data;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -93,7 +94,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.cotizadorOV.setIdModelo(this.modeloCotizadorOV.getId());
 		
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
-		Messagebox.show("Se ha configurado una cotizacion correctamente.");
+//		Messagebox.show("Se ha configurado una cotizacion correctamente.");
 		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");		
 
 		
@@ -195,10 +196,16 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private boolean apertura=false;
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"cotizadorOV","itemSelected"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos"})
 	public void cargarItemACotizar(){
 		
 		apertura = true;
+		
+//		this.arbolTitulos = new DefaultTreeModel<TituloModeloCotizadorOV>();
+		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
+		this.arbolTitulos=new AdvancedTreeModel(root);// DefaultTreeModel<TituloModeloCotizadorOV>(root);
+		
+
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
@@ -207,6 +214,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		ItemsOV itemOV = (ItemsOV) Operaciones.ejecutar("TraerCotizacionDelItem", objetoOV, ItemsOV.class);
 		this.itemSelected = itemOV;
 		
+		this.itemSelected.setDescripcion(Jsoup.parse(this.itemSelected.getDescripcion()).text());
+
 //		this.modeloCotizadorOV = this.itemSelected.getModeloCotizador();
 		
 		this.modeloCotizadorOV.setId(itemOV.getIdModeloCotizador());
@@ -450,6 +459,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	public void cargarItem() {
 
+		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
+		this.arbolTitulos = new DefaultTreeModel<TituloModeloCotizadorOV>(root);
 //		apertura = true;
 		
 		//Traemos el Item a cotizar
@@ -458,6 +469,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		ItemsOV itemOV = (ItemsOV) Operaciones.ejecutar("SimpleTraerCotizacionDelItem", objetoOV, ItemsOV.class);
 		this.itemSelected = itemOV;
+		
+		this.itemSelected.setDescripcion(Jsoup.parse(this.itemSelected.getDescripcion()).text());
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
