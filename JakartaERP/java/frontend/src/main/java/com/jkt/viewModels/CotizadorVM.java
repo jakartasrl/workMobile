@@ -105,7 +105,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.cotizadorOV.setIdCotizacionDet(itemSelected.getId());
 		this.cotizadorOV.setIdModelo(modeloCotizadorOV.getId());
 		this.cotizadorOV.setIdMoneda(expresarEnMonedaSeleccionado.getId());
-		this.cotizadorOV.setCodigoEstado("1"); //va el estado correpondiente TODO
+		this.cotizadorOV.setCodigoEstado("2"); //va el estado correpondiente TODO
 		
 		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
 		this.todosLosElementos = new ArrayList<TituloModeloCotizadorOV>();
@@ -441,6 +441,20 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+
+	public void cargarItem() {
+
+//		apertura = true;
+		
+		//Traemos el Item a cotizar
+		ContainerOV objetoOV = new ContainerOV();
+		objetoOV.setString1(String.valueOf(this.itemSelected.getId()));
+		
+		ItemsOV itemOV = (ItemsOV) Operaciones.ejecutar("SimpleTraerCotizacionDelItem", objetoOV, ItemsOV.class);
+		this.itemSelected = itemOV;
+		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
