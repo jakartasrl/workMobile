@@ -24,7 +24,7 @@
 						
 	</hlayout>
 	
-	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%"  >
+	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%" >
 	
     <treecols>
         <treecol label="Título / Concepto" 	align="center" width="300px"/>

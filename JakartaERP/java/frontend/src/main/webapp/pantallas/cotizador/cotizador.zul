@@ -14,7 +14,7 @@
 						<column width="100px" />
 						<column width="50px" />
 						<column width="100px"/>
-						<column width="90px"/>
+						<column width="50px"/>
 						<column width="300px"/>
 					</columns>
 
@@ -28,7 +28,7 @@
 							<label class="name" value="Fecha : " />
 							<datebox width="100%" id="fecha" value="@bind(vm.itemSelected.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2" readonly="true" />
 
-							<label style="width:87px;margin-left:3px;" class="name" value="Tipo : " />
+							<label style="width:80px;margin-left:3px;" class="name" value="Tipo : " />
 							
 							<textbox sclass="campoCodigo-medium" value="@bind(vm.itemSelected.referencia)" tabindex="1" readonly="true" width="100%" />
 							
@@ -37,7 +37,7 @@
 						<row sclass="fila-maestro" >
 							
 							<label value="Cliente | Sucursal : " />
-							<cell colspan="3">
+							<cell colspan="5">
 								<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" readonly="true" width="100%" />
 							</cell>
 							
