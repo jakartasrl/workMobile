@@ -67,9 +67,9 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		for (TituloModeloCotizadorOV tituloModeloCotizadorOV : this.cotizadorOV.getDetalles()) {
 			tituloModeloCotizadorOV.setIdNuevo(0L);
 			
-			if(tituloModeloCotizadorOV.getId()==0L){
-				tituloModeloCotizadorOV.setId(-1);
-			}
+//			if(tituloModeloCotizadorOV.getId()==0L){
+//				tituloModeloCotizadorOV.setId(-1);
+//			}
 		
 		}
 		this.cotizadorOV.setIdMoneda(1L);

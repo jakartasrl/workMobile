@@ -1559,6 +1559,8 @@
 			
 			<campoEntrada propertyOV="idCotizacionDet" 	metodo="setItem" />
 			
+			<campoEntrada propertyOV="idModelo" 	metodo="setModelo" />
+			
 <!-- 			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" /> -->
 <!-- 			<campoEntrada propertyOV="idCliente" metodo="setCliente" /> -->
 <!-- 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" /> -->
