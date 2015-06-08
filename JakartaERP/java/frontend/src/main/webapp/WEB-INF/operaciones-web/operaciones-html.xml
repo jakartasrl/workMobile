@@ -1587,6 +1587,25 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+		<operacion name="SimpleTraerCotizacionDelItem" clase="com.jkt.operaciones.SimpleTraerCotizacionDelItem" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ItemsOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+	
+		<output>
+		
+			<campoSalida target="id" 												value="id" />
+			<campoSalida target="codigo" 											value="codigo" />	
+			<campoSalida target="descripcion" 										value="descripcion" />
+			<campoSalida target="referencia" 										value="referencia" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
 	<operacion name="TraerCotizacionDelItem" clase="com.jkt.operaciones.TraerCotizacionDelItem" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ItemsOV">
 	
 		<input>

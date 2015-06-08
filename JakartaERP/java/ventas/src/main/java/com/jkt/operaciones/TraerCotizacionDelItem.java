@@ -51,7 +51,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 		}
 		
 		Cotizador cotizador = item.getCotizador();
-	
+		
 		completarMapaDeDetalles(cotizador);
 		
 		modelo = cotizador.getModelo();

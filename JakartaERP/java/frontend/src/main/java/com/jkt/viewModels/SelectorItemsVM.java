@@ -42,11 +42,12 @@ public class SelectorItemsVM {
 	@Command
 	public void obtenerElemento(@BindingParam("objeto") DetalleCotizacionOV actual, @BindingParam("window") Window x ){
 		
-		if(actual.getEstado()>=1){
+		if(actual.getEstado()==1){
+			vm.getItemSelected().setId(actual.getId());
+			vm.cargarItem();
+		}else{
 			vm.getItemSelected().setId(actual.getId());
 			vm.cargarItemACotizar();
-		}else{
-			
 		}
 		
 		x.detach();
