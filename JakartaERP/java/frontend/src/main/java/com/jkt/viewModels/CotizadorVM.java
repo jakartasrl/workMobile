@@ -180,7 +180,15 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openComplexHelper("itemCotizacion", "", this.itemSelected, "cargarItemACotizar", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
+//		openComplexHelper("itemCotizacion", "", this.itemSelected, "cargarItemACotizar", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vm", this);
+		
+		Window window = (Window) Executions.createComponents("/pantallas/cotizador/helpItems.zul", null, map );
+		
+		window.doModal();
+		
 //		openComplexHelper("itemCotizacion", "", this.itemSelected, "", "Items de Presupuesto", "Nro ítem", "Descripción del ítem",false, "","");
 	}
 	

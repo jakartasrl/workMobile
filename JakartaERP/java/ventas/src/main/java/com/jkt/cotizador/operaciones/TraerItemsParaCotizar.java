@@ -1,5 +1,6 @@
 package com.jkt.cotizador.operaciones;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class TraerItemsParaCotizar extends Operation {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
+		List<PersistentEntity> listaItems=new ArrayList<PersistentEntity>();
 
 		Filtro f = new Filtro("estado", Cotizacion.Estado.PENDIENTE.toString(), "igual", TiposDeDato.STRING_TYPE);
 		List<PersistentEntity> listaDeCotizacionesPendientes = serviceRepository.getByProperties(Cotizacion.class, Arrays.asList(f));
@@ -34,11 +36,18 @@ public class TraerItemsParaCotizar extends Operation {
 				comprobanteVentaDet.setNumero(
 							String.valueOf(++nroDetalle)
 						);
-				
-				notificarObjeto("items", comprobanteVentaDet);
+				if(this.getTipoCliente()==CLIENTE_DELPHI){
+					notificarObjeto("items", comprobanteVentaDet);
+				}else{
+					listaItems.add(comprobanteVentaDet);
+				}
 			}
 		}
 		
+		if(this.getTipoCliente()==CLIENTE_HTML){
+			notificarObjeto("", listaItems);
+		}
+		
 	}
-
+	
 }
