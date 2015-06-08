@@ -5,23 +5,33 @@
 		<label style="width:100px;" value="Modelo a utilizar : " />
 							
 			<hlayout width="100%">
-				<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" tabindex="5"/>
-				<button label="..." onClick="@command('openHelper', clase='modeloCotizador', ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" />
+				<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" tabindex="5"
+				disabled="@bind(!vm.cotizacionEditable)" />
+				<button label="..." onClick="@command('openHelper', clase='modeloCotizador', ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" disabled="@bind(!vm.cotizacionEditable)" />
 			</hlayout>
 			
 			<textbox width="100%" sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.descripcion)" tabindex="1" readonly="true"/>
 
+			<separator></separator>
+			<label> | </label>
+
 			<label value="Expresar en moneda : " />
-			<combobox width="80px" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" >
+			<combobox width="80px" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" disabled="@bind(!vm.cotizacionEditable)">
 				<template name="model" var="moneda">
 					<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 				</template>
 			</combobox>
 			<separator></separator>
 			
-			<button onClick="@command('abrirTiposCambio')">Tipos de cambio
+			<button onClick="@command('abrirTiposCambio')" >Tipos de cambio
 			</button>
-						
+			
+			<separator></separator>
+			<label> | </label>
+			<label>Autorizado : </label>
+			<checkbox checked="@bind(vm.itemSelected.autorizado)" disabled="@bind(!vm.cotizacionEditable)"/>
+<!-- 			<checkbox disabled="@bind(vm.itemSelected)" checked="@bind(vm.itemSelected.idEstado eq 3)" if="${each.leaf}" onCheck="@command('toogleNota', nota=each.data)" /> -->
+
 	</hlayout>
 	
 	<tree id="categoriesTree" model="@load(vm.arbolTitulos)" width="100%" >
@@ -60,24 +70,24 @@
                 </treecell>
                
                 <treecell>
- 	               <intbox sclass="importe" width="100%" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+ 	               <intbox sclass="importe" width="100%" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
  	               	<hlayout width="100%">
 						<textbox sclass="importe" width="30px" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
-							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)"
+							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)" disabled="@bind(!vm.cotizacionEditable)"
 							/>
-						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" />
+						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
 					</hlayout>
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" />
+ 	               <textbox sclass="importe" width="100%" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
- 	            	<combobox width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" >
+ 	            	<combobox disabled="@bind(!vm.cotizacionEditable)" width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" >
 						<template name="model" var="moneda" >
 							<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 						</template>
@@ -89,19 +99,19 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" />
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
             </treerow>

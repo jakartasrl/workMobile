@@ -36,7 +36,7 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
 		menues.add(MenuOV.newInstance("Tarea", "generic/genericList.zul", "small","guardarTareaSimple", "tarea"));
 		menues.add(MenuOV.newInstance("Unidad Medida", "generic/genericList.zul", "small","guardarUnidadMedida", "unidadMedida"));
-		menues.add(MenuOV.newInstance("Idioma", "generic/genericList.zul", "small","guardarIdioma", "idioma"));
+//		menues.add(MenuOV.newInstance("Idioma", "generic/genericList.zul", "small","guardarIdioma", "idioma"));
 		menues.add(MenuOV.newInstance("Moneda", "generic/genericList.zul", "small","guardarMoneda", "moneda"));
 		menues.add(MenuOV.newInstance("Pais", "generic/genericList.zul", "small","guardarPais", "pais"));
 		menues.add(MenuOV.newInstance("Documentación", "generic/genericList.zul", "small","guardarDocumentacion", "documentacion"));

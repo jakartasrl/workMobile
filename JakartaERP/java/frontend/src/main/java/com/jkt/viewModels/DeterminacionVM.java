@@ -6,6 +6,8 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
@@ -34,6 +36,19 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Init
 	@NotifyChange("determinacion")
 	public void init() {
+		
+		try {
+			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			if(recuperarDesdeSesion!=null){
+				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+				return;// true; 
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		
 		this.setTitulo("Determinaciones");
 		this.determinacion.setIdLaboratorio(1);
 		this.determinacion.setListTipoResultado(this.cargarListTipoResultados());
@@ -411,6 +426,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 }
