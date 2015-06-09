@@ -46,6 +46,18 @@ public class Cotizacion extends ComprobanteVenta implements IDescriptible{
 	public void setDetalles(List<CotizacionDet> detalles) {
 		this.detalles = detalles;
 	}
+
+	public void setDetallesConReferencias(List<CotizacionDet> detalles) {
+		
+		this.detalles=new ArrayList<CotizacionDet>();
+		
+		for (CotizacionDet cotizacionDet : detalles) {
+			cotizacionDet.setComprobanteVenta(this);
+			this.detalles.add(cotizacionDet);
+		}
+		
+//		this.detalles = detalles;
+	}
 	
 	/*
 	 * Setters y getters

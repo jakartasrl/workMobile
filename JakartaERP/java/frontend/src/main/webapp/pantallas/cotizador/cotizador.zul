@@ -23,7 +23,7 @@
 						<row sclass="fila-maestro">
 						
 							<label width="100%" value="Nro. Presupuesto : " />
-							<textbox sclass="campoCodigo-medium" value="@bind(vm.cotizadorOV.nro)" tabindex="1" readonly="true" width="100%" />
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.itemSelected.nroComprobante)" tabindex="1" readonly="true" width="100%" />
 							
 							<label class="name" value="Fecha : " />
 							<datebox width="100%" id="fecha" value="@bind(vm.itemSelected.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2" readonly="true" />
@@ -38,7 +38,7 @@
 							
 							<label value="Cliente | Sucursal : " />
 							<cell colspan="5">
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" readonly="true" width="100%" />
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.itemSelected.clienteSucursal)" readonly="true" width="100%" />
 							</cell>
 							
 						
@@ -47,7 +47,7 @@
 						<row sclass="fila-maestro">
 							<label value="Vendedor : " />
 							<cell colspan="3">
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.vendedorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="5" readonly="true" width="100%" 
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.itemSelected.vendedor)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" tabindex="5" readonly="true" width="100%" 
 									disabled="@bind(!vm.cotizacionEditable)"
 								/>
 							</cell>							

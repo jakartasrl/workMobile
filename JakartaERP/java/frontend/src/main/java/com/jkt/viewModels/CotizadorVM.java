@@ -44,8 +44,12 @@ import com.jkt.ov.tree.NodoTitulos;
 public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
 	private String titulo = "Cotizador";
+	
 	private CotizadorOV cotizadorOV = new CotizadorOV();
 	private DescriptibleOV clienteOV = new DescriptibleOV();
+	
+	
+	
 	private DescriptibleOV vendedorOV = new DescriptibleOV();
 	private ModeloCotizadorOV modeloCotizadorOV = new ModeloCotizadorOV();
 	private ItemsOV itemSelected = new ItemsOV();
@@ -282,7 +286,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
 	@Override
 	@Command
-	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos","cotizadorOV","clienteOV","vendedorOV","modeloCotizadorOV","itemSelected"})
+	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos","cotizadorOV","modeloCotizadorOV","itemSelected","cotizacionEditable"})
 	public void nuevo(){
 		
 		this.modeloCotizadorOV = new ModeloCotizadorOV();
@@ -456,7 +460,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		Map<String,Object> args=new HashMap<String, Object>();
 		args.put("lista", lsTipoDeCambio);
 		Window window = (Window) Executions.createComponents("/pantallas/cotizador/tiposCambio.zul", null, args);
-		window.doModal();
+//		window.doModal();
+		window.doPopup();
 	}
 
 	@Override

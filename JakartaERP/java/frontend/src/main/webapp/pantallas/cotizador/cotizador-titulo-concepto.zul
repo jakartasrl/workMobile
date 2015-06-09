@@ -70,7 +70,7 @@
                 </treecell>
                
                 <treecell>
- 	               <intbox sclass="importe" width="100%" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <intbox sclass="importe" width="100%" value="@bind(titulo.data.cantidad)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
@@ -83,11 +83,11 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <textbox sclass="importe" width="100%" value="@bind(titulo.data.precioUnitario)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
- 	            	<combobox disabled="@bind(!vm.cotizacionEditable)" width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" >
+ 	            	<combobox disabled="@bind(!vm.cotizacionEditable)" width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularPrecio',titulo=titulo )" >
 						<template name="model" var="moneda" >
 							<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 						</template>
@@ -103,7 +103,7 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularMarkUp',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularMarkUp',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
