@@ -81,26 +81,18 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 		PedidoOV pedido = (PedidoOV) list.get(0);
 
 		allTasks = pedido.getTareas();
+		allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
+		DescriptibleOV estadoDescriptible;
+		Map<String, DescriptibleOV> estadosEnMapa = new HashMap<String, DescriptibleOV>();
+		for (Object estado : allStates) {
+			estadoDescriptible=(DescriptibleOV) estado;
+			estadosEnMapa.put(String.valueOf(estadoDescriptible.getId()), estadoDescriptible);
+		}
 		
 		for (TareaAgendaOV tareaAgendaOV : allTasks) {
 			tareaAgendaOV.setPedidoDescriptible(pedidoDescriptible);
-			
-			
-			/*
-			 * Asignar el estado correspondiente a cada tarea
-			 */
-			List allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
-			DescriptibleOV d;
-			for (Object object : allStates) {
-				d=(DescriptibleOV) object;
-				if(d.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))){
-					tareaAgendaOV.setEstado(d);
-					break;//break the small for!
-				}
-			}
-			
-			DescriptibleOV sector = Operaciones.recuperarObjetoDescriptible("sector", tareaAgendaOV.getIdSector());
-			tareaAgendaOV.setSector(sector);
+			tareaAgendaOV.setEstado(estadosEnMapa.get(String.valueOf(tareaAgendaOV.getIdEstado())));
+			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector", tareaAgendaOV.getIdSector()));
 		}
 		
 		/*

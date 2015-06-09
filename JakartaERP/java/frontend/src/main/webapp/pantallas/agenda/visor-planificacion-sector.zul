@@ -32,11 +32,26 @@
 
 
 				<separator></separator>
+				<separator bar="true"></separator>
+
+				<label value="En espera"></label>
+				<checkbox checked="@bind(vm.fEnEspera)" />
+				<separator></separator>
+				
+				<label value="No Iniciada"></label>
+				<checkbox checked="@bind(vm.fNoIniciadas)" />
+				<separator></separator>
+
+				<label value="Finalizadas"></label>
+				<checkbox checked="@bind(vm.fFinalizadas)" />
+<!-- 				<checkbox checked="@bind(vm.fFinalizadas)" onCheck="@command('modificarFiltros', checkComponent=self)"/> -->
+				<separator></separator>
+
 
 				<label value="Fecha de inicio:"> </label>
-				<datebox id="fechaI" value="@bind(vm.fechaFiltroInicio)" constraint="no empty" format="dd/MM/yyyy" />
+				<datebox id="fechaI" value="@bind(vm.fechaFiltroInicio)" constraint="no empty" format="dd/MM/yyyy" disabled="@bind(!vm.fFinalizadas)"/>
 				<label value="Fecha de fin:"> </label>
-				<datebox id="fechaF" value="@bind(vm.fechaFiltroFin)" constraint="no empty" format="dd/MM/yyyy" />
+				<datebox id="fechaF" value="@bind(vm.fechaFiltroFin)" constraint="no empty" format="dd/MM/yyyy" disabled="@bind(!vm.fFinalizadas)"/>
 
 				<separator></separator>
 		

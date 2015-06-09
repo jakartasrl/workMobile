@@ -72,6 +72,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	private String codigoTareaNueva;
 	private ListDescriptibleOV estados;
 	
+	private List<DescriptibleOV> sectores=new ArrayList<DescriptibleOV>();
+//	this.sectores = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("sector"), ListDescriptibleOV.class)).getList();
+//	if (!this.sectores.isEmpty()) {
+//		this.sectorSeleccionado = this.sectores.get(0);
+//	}
+	
 	/*
 	 * Atributos de un pedido sin planificacion
 	 */
@@ -584,6 +590,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando items para articulos...");
 		this.itemsArticulos=new ArrayList<ItemsOV>();
+
+		log.info("Inicializando Sectores disponibles...");
+		this.sectores = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("sector"), ListDescriptibleOV.class)).getList();
+//		if (!this.sectores.isEmpty()) {
+//			this.sectorSeleccionado = this.sectores.get(0);
+//		}
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();

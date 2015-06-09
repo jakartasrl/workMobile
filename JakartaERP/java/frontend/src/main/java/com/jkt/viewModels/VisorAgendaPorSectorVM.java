@@ -17,6 +17,8 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -27,14 +29,18 @@ import com.jkt.ov.HelperOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListTareaAgendaOV;
 import com.jkt.ov.TareaAgendaOV;
+import com.jkt.ov.tree.NodoTareaAgenda;
 
 @Data
 public class VisorAgendaPorSectorVM extends VisorAgendaVM {
-
+	
 	private Date fechaFiltroInicio;
 	private Date fechaFiltroFin;
 	private DescriptibleOV sectorSeleccionado;
 	
+	private Boolean fNoIniciadas = Boolean.TRUE;
+	private Boolean fEnEspera = Boolean.TRUE;
+	private Boolean fFinalizadas = Boolean.FALSE;
 	
 	@Init
 	public void init() throws JakartaException{
@@ -44,7 +50,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	
 	@Override
 	@GlobalCommand("actualizarTodo")
-	@NotifyChange({"allTasks"})
+	@NotifyChange({"allTasks","fNoIniciadas", "fFinalizadas", "fEnEspera"})
 	public void actualizar() {
 
 	}
@@ -76,6 +82,11 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	@NotifyChange("allTasks")
 	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 
+		if(!fNoIniciadas && !fEnEspera && !fFinalizadas){
+			Messagebox.show("Debe completar un filtro de estado de tareas.");
+			return;
+		}
+		
 		ContainerOV container = new ContainerOV();
 		container.setLong1(this.sectorSeleccionado.getId());
 		container.setFecha1(this.fechaFiltroInicio);
@@ -83,7 +94,8 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		
 		allTasks = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
 		
-		List allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
+//		List 
+		allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
 
 		for (TareaAgendaOV tareaAgendaOV : allTasks) {
 			DescriptibleOV descriptible = Operaciones.recuperarObjetoDescriptible("pedido", tareaAgendaOV.getIdPedido());
@@ -104,11 +116,45 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		}
 		
 	}
+	
+//	@Command
+//	public void modificarFiltros(@BindingParam("checkComponent") Checkbox checkComponent){
+//		if(checkComponent.isChecked()){
+//			this.fEnEspera=Boolean.FALSE;
+//			this.fNoIniciadas=Boolean.FALSE;
+//		}else{
+//			this.fEnEspera=Boolean.TRUE;
+//			this.fNoIniciadas=Boolean.TRUE;
+//		}
+//	}
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
 	}
 
-	
+	public Boolean getfNoIniciadas() {
+		return fNoIniciadas;
+	}
+
+	public void setfNoIniciadas(Boolean fNoIniciadas) {
+		this.fNoIniciadas = fNoIniciadas;
+	}
+
+	public Boolean getfEnEspera() {
+		return fEnEspera;
+	}
+
+	public void setfEnEspera(Boolean fEnEspera) {
+		this.fEnEspera = fEnEspera;
+	}
+
+	public Boolean getfFinalizadas() {
+		return fFinalizadas;
+	}
+
+	public void setfFinalizadas(Boolean fFinalizadas) {
+		this.fFinalizadas = fFinalizadas;
+	}
+
 }

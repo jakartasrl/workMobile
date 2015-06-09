@@ -20,7 +20,7 @@
 					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
-					<column width="50px" label="Cambiar Estado" align="center" style="text-align:center" />
+					<column width="100px" label="Cambiar Estado" align="center" style="text-align:center" />
 <!-- 					<column width="50px" label="Cambiar Estado" align="center" style="text-align:center" if="${vm.vistaPorSector}" /> -->
 				
 				</columns>

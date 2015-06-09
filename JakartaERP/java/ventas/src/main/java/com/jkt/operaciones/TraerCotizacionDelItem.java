@@ -1,5 +1,6 @@
 package com.jkt.operaciones;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 	private static final String COTIZADOR_WRITER = "cotizador";
 	private static final String ITEM_WRITER = "item";
 
-	private Map<String, CotizadorDet> detallesDeCotizador=new HashMap<String, CotizadorDet>();
+	private Map<String, Map<String,CotizadorDet>> detallesDeCotizador=new HashMap<String, Map<String,CotizadorDet>>();
 	
 	private ModeloCotizador modelo = new ModeloCotizador();
 	private CotizacionDet item = new CotizacionDet();
@@ -93,7 +94,19 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				if (cotizadorDet.getTituloModeloCotizador() != null){
 					key=key+String.valueOf(cotizadorDet.getTituloModeloCotizador().getId());
 				}
-				detallesDeCotizador.put(key, cotizadorDet);
+				
+				Map<String,CotizadorDet> mapComponenteValor = detallesDeCotizador.get(key);
+				if(mapComponenteValor==null){
+					mapComponenteValor= new HashMap<String, CotizadorDet>();
+				}
+				
+				if(cotizadorDet.getProducto()==null){
+					mapComponenteValor.put(String.valueOf("1"), cotizadorDet);
+				}else{
+					mapComponenteValor.put(String.valueOf(cotizadorDet.getProducto().getId()), cotizadorDet);
+				}
+				
+				detallesDeCotizador.put(key, mapComponenteValor);
 			}
 		}
 	}
@@ -147,10 +160,13 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 			
 			//Logica para recuperar el detalle correspondiente, recuperando con una clave ID1-ID2, donde id1 es el concepto y ids2 es el titulo (sus ids)
 			String key=String.valueOf(tituloModeloCotizador.getConcepto().getId())+"-"+String.valueOf(tituloModeloCotizador.getId());
-			CotizadorDet cotizadorDet = detallesDeCotizador.get(key);
+//			CotizadorDet cotizadorDet = detallesDeCotizador.get(key);
+			Map<String, CotizadorDet> mapaDeDetallesPorIdValor = detallesDeCotizador.get(key);
+//			CotizadorDet cotizadorDet = detallesDeCotizador.get(key);
 			
 			
 			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {//Mostrar para cada concepto la lista de articulos que se corresponden con el valor de clasificador del concepto
+				
 				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
 				
 				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
@@ -193,6 +209,9 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 					asignarMonedaPrecioFecha(tituloModeloCotizador, producto);
 					//cotizador det es null cuando se agrega un nuevo titulo al modelo de cotizador.
 					//Si se agrega uno debe mostrarse de todos modos este elemento nuevo.
+					
+					CotizadorDet cotizadorDet = mapaDeDetallesPorIdValor.get(String.valueOf(productoClasificador.getProducto().getId()));
+					
 					if (cotizadorDet!=null) {
 						copiaDeTitulo.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
 						copiaDeTitulo.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
@@ -212,17 +231,24 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				}
 				
 			}else{//Si no pide articulo se muestra una linea sola por concepto
-
-				if (cotizadorDet!=null) {
-					tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
-					tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
-				}
 				
-				asignarMonedaPrecioFecha(tituloModeloCotizador, null);
-				if (tipoCliente.equals(CLIENTE_DELPHI)){
-					notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
-				} else {
-					this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+				
+//				ArrayList<CotizadorDet> values = (ArrayList<CotizadorDet>) mapaDeDetallesPorIdValor.values();
+				if(mapaDeDetallesPorIdValor!=null){
+					
+					CotizadorDet cotizadorDet = mapaDeDetallesPorIdValor.get("1");//values.get(0);
+					if (cotizadorDet!=null) {
+	//				if (cotizadorDet!=null) {
+						tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...
+						tituloModeloCotizador.setIdentificadorDetalle(Long.valueOf(cotizadorDet.getId()).intValue());
+					}
+					
+					asignarMonedaPrecioFecha(tituloModeloCotizador, null);
+					if (tipoCliente.equals(CLIENTE_DELPHI)){
+						notificarObjeto(WRITER_TITULO, tituloModeloCotizador);
+					} else {
+						this.modelo.agregarTituloTransiente(tituloModeloCotizador);
+					}
 				}
 				
 			}
