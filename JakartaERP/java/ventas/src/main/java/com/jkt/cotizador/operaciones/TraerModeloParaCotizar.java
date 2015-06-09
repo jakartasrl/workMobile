@@ -98,7 +98,7 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 					TituloModeloCotizador tituloModeloCotizador2 = new TituloModeloCotizador();
 
 					
-					tituloModeloCotizador2.setId(tituloModeloCotizador.getId());
+//					tituloModeloCotizador2.setId(tituloModeloCotizador.getId());
 					
 					tituloModeloCotizador2.setIdTransiente(tituloModeloCotizador.getId());
 					

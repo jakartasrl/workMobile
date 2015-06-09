@@ -1560,26 +1560,27 @@
 			
 			<campoEntrada propertyOV="idCotizacionDet" 	metodo="setItem" />
 			
-			<campoEntrada propertyOV="idModelo" 	metodo="setModelo" />
+			<campoEntrada propertyOV="idModelo" 		metodo="setModelo" />
 			
 <!-- 			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" /> -->
 <!-- 			<campoEntrada propertyOV="idCliente" metodo="setCliente" /> -->
 <!-- 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" /> -->
 			
 			<campoEntrada propertyOV="detalles" metodo="setDetalles">
-				<campoEntrada propertyOV="id" 			metodo="setId" />
-				<campoEntrada propertyOV="idNuevo" 			metodo="setTituloModeloCotizador" />
-				<campoEntrada propertyOV="idProducto" 		metodo="setProducto" />
-				<campoEntrada propertyOV="cantidad" 		metodo="setCantidad" />
-				<campoEntrada propertyOV="idUnidadMedida" 	metodo="setUnidadMedida" />
-				<campoEntrada propertyOV="precioUnitario" 	metodo="setPrecioUnitario" />
-				<campoEntrada propertyOV="idMoneda" 		metodo="setMoneda" />
+				<campoEntrada propertyOV="idComponenteValor"	metodo="setIdComponenteValor" />
+				<campoEntrada propertyOV="id" 					metodo="setId" />
+				<campoEntrada propertyOV="idNuevo" 				metodo="setTituloModeloCotizador" />
+				<campoEntrada propertyOV="idProducto" 			metodo="setProducto" />
+				<campoEntrada propertyOV="cantidad" 			metodo="setCantidad" />
+				<campoEntrada propertyOV="idUnidadMedida" 		metodo="setUnidadMedida" />
+				<campoEntrada propertyOV="precioUnitario" 		metodo="setPrecioUnitario" />
+				<campoEntrada propertyOV="idMoneda" 			metodo="setMoneda" />
 <!-- 				<campoEntrada propertyOV="fechaPrecioCosto" metodo="setFechaPrecioCosto" /> -->
-				<campoEntrada propertyOV="precio" 			metodo="setCotizacion" />
-				<campoEntrada propertyOV="markUp" 			metodo="setMarkUp" />
+				<campoEntrada propertyOV="precio" 				metodo="setCotizacion" />
+				<campoEntrada propertyOV="markUp" 				metodo="setMarkUp" />
 <!-- 				<campoEntrada propertyOV="costoEn" 			metodo="setCostoEn" /> -->
-				<campoEntrada propertyOV="importeVenta" 	metodo="setImporteVenta" />
-				<campoEntrada propertyOV="idC" 				metodo="setConceptoPresupuesto" />
+				<campoEntrada propertyOV="importeVenta" 		metodo="setImporteVenta" />
+				<campoEntrada propertyOV="idC" 					metodo="setConceptoPresupuesto" />
 			</campoEntrada>
 
 		</input>
@@ -1637,6 +1638,7 @@
 			<campoSalida target="cotizador.monedaExpresada.codigo" 					value="codMoneda" />
 			
 			<campoSalida target="titulosTransientes" 								value="titulos">
+				<campoSalida target="idComponenteValor" 							value="idComponenteValor" />
 				<campoSalida target="idTransiente" 									value="id" />
 				<campoSalida target="codigo" 										value="codigo" />	
 				<campoSalida target="descripcion" 									value="descripcion" />
