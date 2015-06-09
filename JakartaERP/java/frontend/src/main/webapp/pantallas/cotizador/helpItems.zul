@@ -17,7 +17,8 @@
 	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" >
 	                    <label hflex="1" value="@load(each.nroCotizacion)" />
 	                    <label hflex="1" value="@load(each.nroItem)" />
-	                    <label hflex="2" value="@load(each.descripcion)" />
+	                    <textbox hflex="2" value="@load(each.descripcion)" readonly="true" style="font-size:16x; width:100%;vertical-align: middle;resize:none; " multiline="true" rows="4" />
+<!-- 	                    <label hflex="2" value="@load(each.descripcion)" /> -->
 	                    <label hflex="2" value="@load(each.estadoDescripcion)"/>
 	                </row>
 				</template>

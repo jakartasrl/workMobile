@@ -30,9 +30,16 @@ public class CotizadorDet extends PersistentEntity {
 	private double importeVenta;
 	private ConceptoPresupuesto conceptoPresupuesto;
 	private TituloModeloCotizador tituloModeloCotizador;
-	
-	
-	
+	private long idComponenteValor;
+
+	public long getIdComponenteValor() {
+		return idComponenteValor;
+	}
+
+	public void setIdComponenteValor(long idComponenteValor) {
+		this.idComponenteValor = idComponenteValor;
+	}
+
 	public double getPrecio() {
 		return precio;
 	}

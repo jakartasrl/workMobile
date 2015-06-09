@@ -66,20 +66,20 @@
 					<intbox width="100%" value="@bind(each.duracion)" sclass="importe" constraint="no empty"/>
 				</listcell>
 
-				<listcell>
-					<textbox sclass="campoCodigo-medium" value="@bind(each.sector.codigo)" readonly="false"  
-						onBlur="@command('validarCampo', clase='sector', codigo=self.value, ov=each.sector)"
-						/>
-					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" />
-				</listcell>
-
 <!-- 				<listcell> -->
-<!-- 					<combobox width="95%" model="@bind(vm.estados.list)" selectedItem="@bind(each.estado)" constraint="no empty"> -->
-<!-- 						<template name="model" var="e"> -->
-<!-- 							<comboitem label="@bind(e.descripcion)" /> -->
-<!-- 						</template> -->
-<!-- 					</combobox> -->
+<!-- 					<textbox sclass="campoCodigo-medium" value="@bind(each.sector.codigo)" readonly="false"   -->
+<!-- 						onBlur="@command('validarCampo', clase='sector', codigo=self.value, ov=each.sector)" -->
+<!-- 						/> -->
+<!-- 					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" /> -->
 <!-- 				</listcell> -->
+
+				<listcell>
+					<combobox width="95%" model="@bind(vm.sectores)" selectedItem="@bind(each.sector)" constraint="no empty">
+						<template name="model" var="e">
+							<comboitem label="@bind(e.descripcion)" />
+						</template>
+					</combobox>
+				</listcell>
 
 <!-- 				<listcell > -->
 <!-- 					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" /> -->

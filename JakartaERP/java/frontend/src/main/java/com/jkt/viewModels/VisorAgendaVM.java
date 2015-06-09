@@ -35,7 +35,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 	protected List<TareaAgendaOV> allTasks = new ArrayList<TareaAgendaOV>();
 	protected DescriptibleOV pedidoDescriptible = new DescriptibleOV();
 	protected List<DescriptibleOV> sectores;
-	private List allStates;
+	protected List allStates;
 	
 	@Command
 	@NotifyChange({"allTasks"})

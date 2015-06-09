@@ -1,7 +1,8 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<div>
-	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%">
+<!-- 	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%"> -->
+	<panel sclass="panel-maestro" style="padding:5px;"   border="normal" height="auto" width="100%">
 
 		<panelchildren>
 
@@ -88,9 +89,11 @@
 			        <tab width="10px" style="background-color:black;" label="" disabled="true" />
 			        <tab id="ff" label="Formas de Facturación"  visible="@bind((vm.modoAgenda and !vm.comprobanteOV.facturaciones.isEmpty()) or !vm.modoAgenda)" />
 			        <tab id="files" label="Archivos" visible="@bind((vm.modoAgenda and !vm.archivos.isEmpty()) or !vm.modoAgenda)" />
+			        
 		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda)"/>
+<!-- 		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda)"/> -->
 <!-- 		        	<tab id="tGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda and vm.seleccionoPedido)"/> -->
-		        	<tab id="tPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" />
+<!-- 		        	<tab id="tPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" /> -->
 			    </tabs>
 			    <tabpanels>
 
@@ -138,15 +141,29 @@
 						<include id="archivosContent" hflex="1" src="/pantallas/comprobante-common/tab-archivos.zul" viewModel="${vm}" />
 					</tabpanel>
 					
-		        	<tabpanel>
-						<include id="tGeneralContent" hflex="1" src="/pantallas/agenda/tab-agenda-general.zul" viewModel="${vm}"/>
-		        	</tabpanel>
-
-		        	<tabpanel visible="@bind( vm.agenda.tareasGenerales.size()>0 )" >
-						<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}" />
-		        	</tabpanel>
-
-			    </tabpanels>
+					<tabpanel>
+						
+						<tabbox id="subAgendaTab" >
+			 		   		
+			 		   		<tabs id="stabs">
+					        	<tab id="stGeneral" label="Agenda del pedido" visible="@bind(vm.modoAgenda)"/>
+					        	<tab id="stPrec" label="Precedencias" visible="@bind(vm.agenda.tareasGenerales.size()>0 )" />
+						    </tabs>
+						    
+						    <tabpanels>
+							    <tabpanel>
+									<include id="tGeneralContent" hflex="1" src="/pantallas/agenda/tab-agenda-general.zul" viewModel="${vm}"/>
+			        			</tabpanel>
+	
+					        	<tabpanel visible="@bind( vm.agenda.tareasGenerales.size()>0 )" >
+									<include id="tPrecContent" hflex="1" src="/pantallas/agenda/tab-agenda-precedencias.zul" viewModel="${vm}" />
+					        	</tabpanel>
+						    </tabpanels>
+						    
+						</tabbox>
+						
+					</tabpanel>
+				</tabpanels>
 			</tabbox>
 		</panelchildren>
 	</panel>
