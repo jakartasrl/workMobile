@@ -78,7 +78,7 @@
 						<textbox sclass="importe" width="30px" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
 							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)" disabled="@bind(!vm.cotizacionEditable)"
 							/>
-						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
+<!-- 						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/> -->
 					</hlayout>
                 </treecell>
                 
