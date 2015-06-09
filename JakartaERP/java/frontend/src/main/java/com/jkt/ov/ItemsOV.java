@@ -17,6 +17,11 @@ import com.jkt.view.ObjectView;
 @EqualsAndHashCode(callSuper=true)
 public class ItemsOV extends ObjectView {
 
+
+	/*
+	 * Atributos para modulos de pedido, presupuesto y cotizacion.
+	 * Son los detalles de cada una de estas entidades.
+	 */
 	private DescriptibleOV plantilla=new DescriptibleOV();
 	private String descripcion;
 	
@@ -46,14 +51,6 @@ public class ItemsOV extends ObjectView {
 	
 	private char tipoItem;
 	
-	private CotizadorDet cotizadorDet;
-	private long idCotizador;
-	private Date fecha;
-	
-	private ModeloCotizadorOV modeloCotizador = new ModeloCotizadorOV();
-	private long idModeloCotizador;
-	private String codModeloCotizador;
-	private String descModeloCotizador;
 	
 	public ItemsOV(){
 		Random rand = new Random();
@@ -62,11 +59,29 @@ public class ItemsOV extends ObjectView {
 		this.plantilla.setId(randomNum);
 	}
 	
-	
 	/*
 	 * Atributo descripcion abreviada para mostrar vacia en el editor de items de la planificacion de tareas
 	 */
 	private String descripcionAbreviada=StringUtils.EMPTY;
-		private List<TituloModeloCotizadorOV> titulos=new ArrayList<TituloModeloCotizadorOV>();
+	
+	
+	/*
+	 * Atributos usados para el cotizador
+	 * Encabezado de una cotizacion cuando se usa el cotizador.
+	 */
+	private List<TituloModeloCotizadorOV> titulos=new ArrayList<TituloModeloCotizadorOV>();
+	private String nroComprobante;
+	private String vendedor;
+	private String clienteSucursal;
+//	private Date fecha;
+
+	private CotizadorDet cotizadorDet;
+	private long idCotizador;
+	private Date fecha;
+	
+	private ModeloCotizadorOV modeloCotizador = new ModeloCotizadorOV();
+	private long idModeloCotizador;
+	private String codModeloCotizador;
+	private String descModeloCotizador;
 
 }

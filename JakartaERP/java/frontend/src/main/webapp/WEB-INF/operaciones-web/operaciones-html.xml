@@ -1099,7 +1099,8 @@
 			<campoEntrada propertyOV="idSucursal" 			metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
 			
-			<campoEntrada propertyOV="items" metodo="setDetalles">
+<!-- 			<campoEntrada propertyOV="items" metodo="setDetalles"> -->
+			<campoEntrada propertyOV="items" metodo="setDetallesConReferencias">
 				<campoEntrada propertyOV="id" metodo="setId"/>
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
 				<campoEntrada propertyOV="cantidad" metodo="setCantidad"/>
@@ -1601,6 +1602,11 @@
 			<campoSalida target="referencia" 										value="referencia" />
 			<campoSalida target="estadoId"	 										value="idEstado" />
 			
+			<campoSalida target="comprobanteVenta.nro"	 											value="nroComprobante" />
+			<campoSalida target="comprobanteVenta.clienteSucursal.descripcionCompleta"	 		value="clienteSucursal" />
+			<campoSalida target="comprobanteVenta.vendedor.descripcion"	 							value="vendedor" />
+			<campoSalida target="comprobanteVenta.fecha"	 											value="fecha" />
+
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

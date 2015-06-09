@@ -24,7 +24,8 @@ public class TraerItemsParaCotizar extends Operation {
 		List<PersistentEntity> listaItems=new ArrayList<PersistentEntity>();
 
 		Filtro f = new Filtro("estado", Cotizacion.Estado.PENDIENTE.toString(), "igual", TiposDeDato.STRING_TYPE);
-		List<PersistentEntity> listaDeCotizacionesPendientes = serviceRepository.getByProperties(Cotizacion.class, Arrays.asList(f));
+		Filtro f2 = new Filtro("activo", "true", "igual", TiposDeDato.BOOLEAN_TYPE);
+		List<PersistentEntity> listaDeCotizacionesPendientes = serviceRepository.getByProperties(Cotizacion.class, Arrays.asList(f,f2));
 		
 		Cotizacion cotizacion;
 		for (PersistentEntity persistentEntity : listaDeCotizacionesPendientes) {
