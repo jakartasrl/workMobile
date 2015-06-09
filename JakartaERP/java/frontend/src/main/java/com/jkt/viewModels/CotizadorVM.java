@@ -472,12 +472,16 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	public void cargarItem() {
 
+		long idABuscar = this.itemSelected.getId();
+		this.nuevo();
+		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos = new DefaultTreeModel<TituloModeloCotizadorOV>(root);
 		
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
-		objetoOV.setString1(String.valueOf(this.itemSelected.getId()));
+		objetoOV.setString1(String.valueOf(idABuscar));
+		
 		
 		ItemsOV itemOV = (ItemsOV) Operaciones.ejecutar("SimpleTraerCotizacionDelItem", objetoOV, ItemsOV.class);
 		this.itemSelected = itemOV;

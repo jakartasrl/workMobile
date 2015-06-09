@@ -1567,7 +1567,7 @@
 <!-- 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" /> -->
 			
 			<campoEntrada propertyOV="detalles" metodo="setDetalles">
-				<campoEntrada propertyOV="idComponenteValor"	metodo="setIdComponenteValor" />
+<!-- 				<campoEntrada propertyOV="idComponenteValor"	metodo="setIdComponenteValor" /> -->
 				<campoEntrada propertyOV="id" 					metodo="setId" />
 				<campoEntrada propertyOV="idNuevo" 				metodo="setTituloModeloCotizador" />
 				<campoEntrada propertyOV="idProducto" 			metodo="setProducto" />
@@ -1638,7 +1638,7 @@
 			<campoSalida target="cotizador.monedaExpresada.codigo" 					value="codMoneda" />
 			
 			<campoSalida target="titulosTransientes" 								value="titulos">
-				<campoSalida target="idComponenteValor" 							value="idComponenteValor" />
+<!-- 				<campoSalida target="idComponenteValor" 							value="idComponenteValor" /> -->
 				<campoSalida target="idTransiente" 									value="id" />
 				<campoSalida target="codigo" 										value="codigo" />	
 				<campoSalida target="descripcion" 									value="descripcion" />
