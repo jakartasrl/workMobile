@@ -25,6 +25,7 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
+import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.dominio.CotizacionDet.Estado;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
@@ -418,6 +419,48 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command
+	@NotifyChange({"arbolTitulos"})
+	public void actualizarMonedaExpresada(){
+		
+		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
+		
+		//del arbol completo se genera una lista.
+		List<TreeNode<TituloModeloCotizadorOV>> rootElements = arbol.getRoot().getChildren();
+		for (TreeNode<TituloModeloCotizadorOV> treeNode : rootElements) {
+			mostrarArbol(treeNode);
+		}
+		
+		
+	}
+	
+	private void mostrarArbol(TreeNode<TituloModeloCotizadorOV> treeNode){
+		
+		if(treeNode.getData().getTipo().equals("C")){
+
+			if (treeNode.getData().getIdC() != null){
+				
+				//Calculamos importeVenta
+				double precio = treeNode.getData().getPrecio();
+				double markUp = treeNode.getData().getMarkUp();
+				treeNode.getData().setImporteVenta(this.calcularCostoEn(treeNode.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio + markUp));
+				
+				//Calculamos el costoEn 
+				treeNode.getData().setCostoEn(this.calcularCostoEn(treeNode.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio));
+				
+				return;
+			}
+		
+		}else{
+			if (!treeNode.isLeaf()) {
+				List<TreeNode<TituloModeloCotizadorOV>> children = treeNode.getChildren();
+				for (TreeNode<TituloModeloCotizadorOV> nodoHijo : children) {
+					mostrarArbol(nodoHijo);
+				}
+			}
+		}
+	}
+		
+	@Command
 	@NotifyChange({"cotizadorOV","modeloCotizadorOV","arbolTitulos"})
 	public void calcularPrecio(@BindingParam("titulo") NodoTitulos titulo){
 		
@@ -429,11 +472,26 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		if (this.expresarEnMonedaSeleccionado != null){
 			markUp = precio * titulo.getData().getMarkUp() / 100;
-			titulo.getData().setImporteVenta(precio / buscarCotizacion(this.expresarEnMonedaSeleccionado.getCodigo()) + markUp);
+//			titulo.getData().setImporteVenta(precio / buscarCotizacion(this.expresarEnMonedaSeleccionado.getCodigo()) + markUp);
+			titulo.getData().setImporteVenta(this.calcularCostoEn(titulo.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio + markUp));
+			
+			
+			//Calculamos el costoEn 
+			titulo.getData().setCostoEn(this.calcularCostoEn(titulo.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio));
+			
 		}
 		
 	}
 	
+	private double calcularCostoEn(DescriptibleOV monedaOrigen, DescriptibleOV monedaDestino, double monto) {
+		
+		double valorMonedaOrigen = buscarCotizacion(monedaOrigen.getCodigo());
+		double valorMonedaDestino =  buscarCotizacion(monedaDestino.getCodigo());
+		
+		return monto * valorMonedaOrigen / valorMonedaDestino;
+		
+	}
+
 	private double buscarCotizacion(String codMoneda) {
 		
 		for(TipoDeCambioOV tipoDeCambioOV : lsTipoDeCambio){

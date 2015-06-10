@@ -16,7 +16,7 @@
 			<label> | </label>
 
 			<label value="Expresar en moneda : " />
-			<combobox width="80px" model="@bind(vm.monedas.list)" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" disabled="@bind(!vm.cotizacionEditable)">
+			<combobox width="80px" model="@bind(vm.monedas.list)" readonly="true" selectedItem="@bind(vm.expresarEnMonedaSeleccionado)" disabled="@bind(!vm.cotizacionEditable)" onChange="@command('actualizarMonedaExpresada')" >
 				<template name="model" var="moneda">
 					<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 				</template>
@@ -75,7 +75,7 @@
                 
                 <treecell>
  	               	<hlayout width="100%">
-						<textbox sclass="importe" width="30px" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
+						<textbox sclass="importe" readonly="true" width="50px" value="@bind(titulo.data.unidadMedida.codigo)" if="${titulo.data.tipo=='C'}" 
 							onBlur="@command('validarCampo', clase='unidadMedida', codigo=self.value, ov=titulo.data.unidadMedida)" disabled="@bind(!vm.cotizacionEditable)"
 							/>
 <!-- 						<button label="..." onClick="@command('openHelper', clase='unidadMedida', ov=titulo.data.unidadMedida)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/> -->
@@ -87,7 +87,7 @@
                 </treecell>
                 
                 <treecell>
- 	            	<combobox disabled="@bind(!vm.cotizacionEditable)" width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularPrecio',titulo=titulo )" >
+ 	            	<combobox disabled="@bind(!vm.cotizacionEditable)" readonly="true" width="100%" model="@bind(vm.monedas.list)" selectedItem="@bind(titulo.data.moneda)" if="${titulo.data.tipo=='C'}" onChange="@command('calcularPrecio',titulo=titulo )" >
 						<template name="model" var="moneda" >
 							<comboitem label="@bind(moneda.codigo)" value="@bind(moneda.codigo)" />
 						</template>
@@ -99,7 +99,7 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <textbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.precio)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
@@ -107,17 +107,22 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <textbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <textbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
             </treerow>
         </treeitem>
                   
     </template>
+    
+    <treefoot>
+    	
+    </treefoot>
+    
 	</tree>
 		
 </zk>
