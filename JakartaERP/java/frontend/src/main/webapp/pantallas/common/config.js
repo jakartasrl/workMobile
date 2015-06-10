@@ -1,4 +1,5 @@
 CKEDITOR.editorConfig = function(config) {
+//	config.
 	config.resize_enabled = false;
 	config.toolbar = 'Complex';
 	config.toolbar_Simple = [ [ 'Bold', 'Italic', '-', 'NumberedList',

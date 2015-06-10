@@ -22,7 +22,7 @@ import com.jkt.ov.ItemsOV;
 public class EditorItemsVM {
 	
 	private List<ItemsOV> items;
-	private List<ItemsOV> itemsArticulos;
+//	private List<ItemsOV> itemsArticulos;
 	
 	private List<ItemsOV> todosLosItems=new ArrayList<ItemsOV>();
 	
@@ -31,11 +31,11 @@ public class EditorItemsVM {
 	
 	@Init
 	public void init(	@ExecutionArgParam("items") List<ItemsOV> items,
-						@ExecutionArgParam("itemsArticulos") List<ItemsOV> itemsArticulos,
+//						@ExecutionArgParam("itemsArticulos") List<ItemsOV> itemsArticulos,
 						@ExecutionArgParam("vm") PedidoVM vm,
 						@ExecutionArgParam("tarea") DescriptibleOV tarea){
 		this.items = items;
-		this.itemsArticulos = itemsArticulos;
+//		this.itemsArticulos = itemsArticulos;
 		this.tarea = tarea;
 		this.pedidoVM = vm;
 		
@@ -43,7 +43,7 @@ public class EditorItemsVM {
 			itemsOV.setDescripcion(StringUtils.EMPTY);
 		}
 		
-		this.todosLosItems.addAll(itemsArticulos);
+//		this.todosLosItems.addAll(itemsArticulos);
 		this.todosLosItems.addAll(items);
 	}
 	

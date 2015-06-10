@@ -21,7 +21,7 @@
                 
                 
                 <treecell style="text-align:center">
-	                <checkbox checked="@bind(each.data.esPrecedente)" if="${each.isLeaf()}" onCheck="@command('verificarPrecenciaMutua', checkComponent = self, nodo = each )"/>
+	                <checkbox disabled="@bind(!each.data.editable)" checked="@bind(each.data.esPrecedente)" if="${each.isLeaf()}" onCheck="@command('verificarPrecenciaMutua', checkComponent = self, nodo = each )"/>
                 </treecell>
                 
             </treerow>

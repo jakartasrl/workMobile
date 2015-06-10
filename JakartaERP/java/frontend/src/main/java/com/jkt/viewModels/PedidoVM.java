@@ -151,7 +151,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			hijos = nodoActual.getChildren();
 			
 			//si la tarea se agrego recien, solamente se asigna por defecto el estado no iniciado, de modo contrario se verifican sus precedencias
-			if(tarea.getIdEstado()==0){
+			if(tarea.getIdEstado()==0 || tarea.getIdEstado()==1 ){
 				tarea.setIdEstado(Estado.NO_INICIADO.getValue());
 			}else if(tarea.getIdEstado()==3 || tarea.getIdEstado()==4){ //si es iniciada o finalizada no se le cambia el estado :) 
 				//nothing.
@@ -171,6 +171,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 			List<DescriptibleOV> listaPrecedencias=new ArrayList<DescriptibleOV>();
+			
+//			tarea.setIdEstado(Estado.NO_INICIADO.getValue());
+			
 			for (TreeNode<TareaPrecedenteOV> nodoLevel2 : hijos) {
 				if (nodoLevel2.getData().getEsPrecedente()) {
 						
@@ -240,14 +243,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector",tareaAgendaOV.getIdSector()));
 			
 			
-			//Asigna el estado al combo.
-			DescriptibleOV estadoActual;
-			for (Object object : this.estados.getList()) {
-				estadoActual=(DescriptibleOV) object;
-				if (estadoActual.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))) {
-					tareaAgendaOV.setEstado(estadoActual);
-				}
-			}
+//			//Asigna el estado al combo.
+//			DescriptibleOV estadoActual;
+//			for (Object object : this.estados.getList()) {
+//				estadoActual=(DescriptibleOV) object;
+//				if (estadoActual.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))) {
+//					tareaAgendaOV.setEstado(estadoActual);
+//				}
+//			}
 			
 			
 			this.tareaAgregada=tareaAgendaOV;
@@ -288,7 +291,20 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			List<TreeNode<TareaPrecedenteOV>> hijosLevel2 = treeNode.getChildren();
 			for (TreeNode<TareaPrecedenteOV> hijoLevel2 : hijosLevel2) {
 				
+				if(		treeNode.getData().getTarea().getIdEstado()==Estado.EN_EJECUCION.getValue() || 
+						treeNode.getData().getTarea().getIdEstado()==Estado.FINALIZADO.getValue()){
+					hijoLevel2.getData().setEditable(Boolean.FALSE);
+				}
+				
 				for (DescriptibleOV descriptibleOV : precedenteActual.getPrecedentes()) {
+					
+//					TareaPrecedenteOV nuevaPrecedencia=new TareaPrecedenteOV();
+//
+//					if(		this.siguienteRoot.getData().getTarea().getIdEstado()==Estado.EN_EJECUCION.getValue() || 
+//							this.siguienteRoot.getData().getTarea().getIdEstado()==Estado.FINALIZADO.getValue()){
+//						nuevaPrecedencia.setEditable(Boolean.FALSE);
+//					}
+					
 					if (String.valueOf(hijoLevel2.getData().getTarea().getId()).equals(descriptibleOV.getCodigo())) {
 						hijoLevel2.getData().setEsPrecedente(true);
 						break;
@@ -548,10 +564,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	public void init(@BindingParam("modoAgenda") String modoAgenda) throws IllegalAccessException, InvocationTargetException{
 		
 		try {
-			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+			PedidoVM recuperarDesdeSesion = (PedidoVM) recuperarDesdeSesion(this.getClass().getCanonicalName());
+
 			if(recuperarDesdeSesion!=null){
-				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-				return;// true; 
+				//si no se corresponden los modos agenda de cada VM...
+				if(recuperarDesdeSesion.isModoAgenda()==Boolean.parseBoolean(modoAgenda)){
+					BeanUtils.copyProperties(this, recuperarDesdeSesion);
+					return;
+				}
 			}
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e.getMessage());
@@ -685,8 +705,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 
 		this.tareaAgregada=new TareaAgendaOV();
-		
-		this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+//		this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
 
 		if (this.codigoTareaNueva!=null && !this.codigoTareaNueva.isEmpty()) {
 			validarCampo("tarea", this.codigoTareaNueva, this.tareaAgregada.getTarea(), "actualizarTareasYArbol");
@@ -752,7 +771,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				}
 				
 				parametros.put("items", this.items);
-				parametros.put("itemsArticulos", this.itemsArticulos);
+//				parametros.put("itemsArticulos", this.itemsArticulos);
 				
 				Window window = (Window) Executions.createComponents("/pantallas/pedido/editorItems.zul", null, parametros);
 				window.doModal();
@@ -765,6 +784,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			if(this.lDeterminacionesQuimicas.isEmpty()){
 				actualizarTareasYArbol();
 			}else{
+				this.tareaAgregada=new TareaAgendaOV();
+				this.tareaAgregada.setTarea(tarea);
+				this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
+				this.tareaAgregada.setDescripcionAbreviada("Trabajo de Laboratorio");
+				this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
+				actualizarTareasYArbol();
+				/*
 				for (ItemsOV itemsOV : this.lDeterminacionesQuimicas) {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
@@ -774,6 +801,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
 					actualizarTareasYArbol();
 				}
+				*/
 			}
 		}else if(this.tareaAgregada.getTarea().getId()==paramTareaFacturar.getValorNumero()){
 			
@@ -817,6 +845,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			if (nodoActual!=this.siguienteRoot) { //el nodo recientemente agregado ya pertenece al arbol, x eso este if
 				TareaPrecedenteOV nuevoPrecedente=new TareaPrecedenteOV();
 				nuevoPrecedente.setTarea(this.tareaAgregada);
+				
+				//si el estado del padre es finalizado, o ya iniciado, no se le permite modificar las precedencias.
+				if(nodoActual.getData().getTarea().getIdEstado() == Estado.FINALIZADO.getValue() || nodoActual.getData().getTarea().getIdEstado() == Estado.EN_EJECUCION.getValue()){
+					nuevoPrecedente.setEditable(Boolean.FALSE);
+				}
+				
 				NodoTareaAgenda nuevoNodo=new NodoTareaAgenda(nuevoPrecedente);
 				nodoActual.add(nuevoNodo);
 			}
@@ -839,7 +873,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		for (ItemsOV itemsOV : items) {
 			this.tareaAgregada=new TareaAgendaOV();
 			this.tareaAgregada.setTarea(tarea);
-			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+//			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
 			this.tareaAgregada.setDescripcionTarea(itemsOV.getReferencia());
 			this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionAbreviada());
 			this.tareaAgregada.setDescripcionCompleta(itemsOV.getPlantilla().getDescripcion());

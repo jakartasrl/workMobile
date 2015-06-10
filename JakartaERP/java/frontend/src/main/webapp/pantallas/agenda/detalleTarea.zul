@@ -1,7 +1,8 @@
 <window id="tareaDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DetalleTareaVM')" 
-title="@bind('Tarea '.concat((vm.tarea.descripcionTarea)).concat(' | Pedido ').concat(vm.tarea.pedidoDescriptible.codigo).concat(' | Sector ').concat(vm.tarea.sector.descripcion).concat(' | Tarea ').concat(vm.tarea.estado.descripcion))" 
+title="@bind('Tarea '.concat((vm.tarea.descripcionTarea)).concat(' | Pedido ').concat(vm.tarea.pedidoDescriptible.codigo).concat(' | Sector ').concat(vm.tarea.sector.descripcion))" 
 style="margin-top:50px;" height="auto" width="700px" position="top,center" closable="true" >
     
+<!-- title="@bind('Tarea '.concat((vm.tarea.descripcionTarea)).concat(' | Pedido ').concat(vm.tarea.pedidoDescriptible.codigo).concat(' | Sector ').concat(vm.tarea.sector.descripcion).concat(' | Tarea ').concat(vm.tarea.estado.descripcion))"  -->
     <style>
     	.blacky{
     		font-weight: bold;
@@ -78,16 +79,21 @@ style="margin-top:50px;" height="auto" width="700px" position="top,center" closa
         </tabpanel>
 
         <tabpanel>
-			<grid id ="grid" model="@bind(vm.precedencias)" mold="paging" pageSize="10" width="630px" emptyMessage="Esta tarea no tiene precedencias." 
+			<grid id ="grid" model="@bind(vm.precedencias)" mold="paging" pageSize="10" width="auto" emptyMessage="Esta tarea no tiene precedencias." 
 			
 			style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;margin-top:5px;"
 			>
+<!-- 			<grid id ="grid" model="@bind(vm.precedencias)" mold="paging" pageSize="10" width="630px" emptyMessage="Esta tarea no tiene precedencias."  -->
 	
 				<columns>
-					<column width="150px" label="Codigo" sort="auto(codigoTarea)" />
-					<column width="300px" label="Descripcion" sort="auto(descripcionTarea)" />
-					<column width="110px" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
-					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
+					<column hflex="1" label="Codigo" sort="auto(codigoTarea)" />
+					<column hflex="3" label="Descripcion" sort="auto(descripcionTarea)" />
+					<column hflex="1" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
+					<column hflex="1" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
+<!-- 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" /> -->
+<!-- 					<column width="300px" label="Descripcion" sort="auto(descripcionTarea)" /> -->
+<!-- 					<column width="110px" label="Cumplimiento" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" />  -->
+<!-- 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/>  -->
 				</columns>
 				
 				<rows>
@@ -99,8 +105,9 @@ style="margin-top:50px;" height="auto" width="700px" position="top,center" closa
 								]]>
 							</attribute>
 						
-							<label value="@bind(each.codigoTarea)" maxlength="15"/>
+<!-- 							<label value="@bind(each.codigoTarea)" maxlength="15"/> -->
 							<label value="@bind(each.descripcionTarea)" width="100%"/>
+							<label value="@bind(each.descripcionAbreviada)" width="100%"/>
 							<datebox disabled="true" width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>

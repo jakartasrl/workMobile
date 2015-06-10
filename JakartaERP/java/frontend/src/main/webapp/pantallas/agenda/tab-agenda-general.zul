@@ -51,7 +51,7 @@
 
 
 				<listcell >
-					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" disabled="${ each.idEstado ne 2 }"/>
+					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }"/>
 				</listcell>
 
 				<listcell >
