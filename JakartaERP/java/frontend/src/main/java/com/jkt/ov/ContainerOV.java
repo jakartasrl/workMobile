@@ -24,6 +24,11 @@ public class ContainerOV extends ObjectView {
 	private String string3;
 	private String string4;
 	
+	private Boolean boolean1;
+	private Boolean boolean2;
+	private Boolean boolean3;
+	private Boolean boolean4;
+
 	private Date fecha1;
 	private Date fecha2;
 	

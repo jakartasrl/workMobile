@@ -14,5 +14,6 @@ public class TareaPrecedenteOV extends ObjectView{
 
 	private TareaAgendaOV tarea;
 	private Boolean esPrecedente = Boolean.FALSE;
+	private Boolean editable= Boolean.TRUE;
 	
 }

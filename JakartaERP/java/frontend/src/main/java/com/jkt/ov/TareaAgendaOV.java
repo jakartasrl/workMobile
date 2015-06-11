@@ -41,9 +41,8 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 	private Long idSector;
 
 	private DescriptibleOV estado = new DescriptibleOV();
-	private int idEstado=2;
+	private int idEstado;
 
-//	@Expose
 	private List<TareaAgendaOV> precedencias = new ArrayList<TareaAgendaOV>();
 	
 	private List<DescriptibleOV> precedenciasEnNumeros = new ArrayList<DescriptibleOV>();
@@ -54,6 +53,7 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 	
 	public TareaAgendaOV(){
 		generateRandom();
+		this.idEstado = Estado.NO_INICIADO.getValue();
 	}
 	
 	public void generarRandom(){

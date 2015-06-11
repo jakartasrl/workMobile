@@ -86,7 +86,7 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 		Map<String, DescriptibleOV> estadosEnMapa = new HashMap<String, DescriptibleOV>();
 		for (Object estado : allStates) {
 			estadoDescriptible=(DescriptibleOV) estado;
-			estadosEnMapa.put(String.valueOf(estadoDescriptible.getId()), estadoDescriptible);
+			estadosEnMapa.put(String.valueOf(estadoDescriptible.getCodigo()), estadoDescriptible);
 		}
 		
 		for (TareaAgendaOV tareaAgendaOV : allTasks) {
