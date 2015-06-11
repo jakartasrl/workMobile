@@ -82,7 +82,6 @@ public class Operaciones {
 					json = new String(Base64.decodeBase64(IOUtils.toByteArray(con.getInputStream())));
 					result = gson.fromJson(json, clazz);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

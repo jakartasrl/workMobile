@@ -475,6 +475,7 @@ public class GenerarComprobantePresupuesto extends Operation {
 	 * Genera un nombre para el comprobante a ser creado.
 	 * Toma el nombre de la clase del comprobamte y la fecha actual.
 	 * TODO ver que formato quieren...
+	 * RUBY  AWD 
 	 */
 	private String generarNombreDeArchivo() {
 		Date date = new Date();

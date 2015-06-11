@@ -107,11 +107,11 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <intbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.costoEn)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
 
                 <treecell>
- 	               <textbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <intbox sclass="importe" width="100%" readonly="true" value="@bind(titulo.data.importeVenta)" if="${titulo.data.tipo=='C'}" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
             </treerow>
@@ -120,8 +120,20 @@
     </template>
     
     <treefoot>
-    	
-    </treefoot>
+        
+        <treefooter label="" width="300px" align="left"> <label style="text-align:left">Totales</label> </treefooter>
+        <treefooter label="" width="200px" />
+        <treefooter label="" width="70px" />
+        <treefooter label="" width="60px" />
+        <treefooter label="" width="60px" />
+        <treefooter label="" width="70px" />
+        <treefooter label="" width="100px" />
+        <treefooter label="" width="80px" />
+        <treefooter label="" width="60px" />
+        <treefooter  width="60px" label=""> <intbox sclass="importe" style="width:100%" readonly="true" value="@bind(vm.totalCostoEn)"></intbox> </treefooter>
+        <treefooter  width="80px" label=""> <intbox sclass="importe" style="width:100%" readonly="true" value="@bind(vm.totalImporteVenta)"></intbox> </treefooter>
+        
+     </treefoot>
     
 	</tree>
 		

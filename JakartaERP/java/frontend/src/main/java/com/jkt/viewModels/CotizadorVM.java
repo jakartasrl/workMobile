@@ -25,7 +25,6 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
-import com.jkt.cotizador.dominio.TituloModeloCotizador;
 import com.jkt.dominio.CotizacionDet.Estado;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
@@ -49,8 +48,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private CotizadorOV cotizadorOV = new CotizadorOV();
 	private DescriptibleOV clienteOV = new DescriptibleOV();
 	
-	
-	
 	private DescriptibleOV vendedorOV = new DescriptibleOV();
 	private ModeloCotizadorOV modeloCotizadorOV = new ModeloCotizadorOV();
 	private ItemsOV itemSelected = new ItemsOV();
@@ -58,7 +55,10 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private ListDescriptibleOV monedas=new ListDescriptibleOV();
 	private List<TipoDeCambioOV> lsTipoDeCambio = new ArrayList<TipoDeCambioOV>();
 
-	private DescriptibleOV expresarEnMonedaSeleccionado= new DescriptibleOV();
+	private DescriptibleOV expresarEnMonedaSeleccionado = new DescriptibleOV();
+	
+	private double totalCostoEn = 0;
+	private double totalImporteVenta = 0;
 	
 	//Esta lista es una lista transiente que contiene toda la informacion de la jerarquia usando codigoInterno y codigoPadre.
 	//Posteriormente una operacion recupera la lista y arma el arbol como corresponde.
@@ -102,13 +102,12 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 			}
 		}
 		
-//		this.cotizadorOV.setIdMoneda(1L);
 		this.cotizadorOV.setIdMoneda(this.expresarEnMonedaSeleccionado.getId());
 		this.cotizadorOV.setIdModelo(this.modeloCotizadorOV.getId());
 		
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
-//		Messagebox.show("Se ha configurado una cotizacion correctamente.");
-		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");		
+		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");
+		Messagebox.show("Se ha guardado una cotizacion correctamente.");
 
 	}
 	
@@ -153,13 +152,13 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 
 	private void establecerCodigos(TreeNode<TituloModeloCotizadorOV> treeNode, int codigoPadre){
+		
 		int randomNum = rand.nextInt((999999 - 1) + 1) + 1;
 		treeNode.getData().setCodigoInterno(randomNum);
 		treeNode.getData().setCodigoInternoPadre(codigoPadre);
 		
 		if(treeNode.getData().getTipo().equals("C")){
-//			treeNode.getData().setIdC(treeNode.getData().getConcepto().getId());
-//			treeNode.getData().setConcepto(null);//para q el fwk no vaya a buscarlo a la base y le asigne null...
+
 			//recordar, si elp valor es cero, se crea uno nuevo, si es >0 se busca en la base, si es null, se retorna null.
 			if (treeNode.getData().getIdC() != null){
 				
@@ -215,6 +214,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
+	@NotifyChange({"totalImporteVenta","totalCostoEn"})
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -230,10 +230,14 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private boolean cotizacionEditable = true;
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","cotizacionEditable"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","cotizacionEditable","expresarEnMonedaSeleccionado"})
 	public void cargarItemACotizar(){
 		
 		apertura = true;
+		
+		this.totalCostoEn = 0;
+		this.totalImporteVenta = 0;
+		
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new AdvancedTreeModel(root);
@@ -275,7 +279,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@GlobalCommand("actualizar")
-	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","modeloCotizadorOV","monedas","cotizacionEditable"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","modeloCotizadorOV","monedas","cotizacionEditable","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -303,8 +307,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Init
-	@NotifyChange({"lsTipoDeCambio"})
+	@NotifyChange({"lsTipoDeCambio","monedas","totalCostoEn","totalImporteVenta"})
 	public void init(){
+		
+		this.totalCostoEn = 0;
+		this.totalImporteVenta = 0;
 		
 		try {
 			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
@@ -335,8 +342,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
-	@NotifyChange({"cotizadorOV","modeloCotizadorOV"})
+	@NotifyChange({"cotizadorOV","modeloCotizadorOV","totalImporteVenta","totalCostoEn","expresarEnMonedaSeleccionado","itemSelected"})
 	public void traerModeloCotizador() throws IllegalAccessException, InvocationTargetException, JakartaException {
+		
+		this.totalCostoEn = 0;
+		this.totalImporteVenta = 0;
 		
 		ContainerOV objetoOV = new ContainerOV();
 		objetoOV.setString1(String.valueOf(this.modeloCotizadorOV.getId()));
@@ -381,7 +391,29 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 					moneda.setDescripcion(tituloModeloCotizadorOV.getDescMoneda());
 					tituloModeloCotizadorOV.setMoneda(this.completarCombo(monedas.getList(), tituloModeloCotizadorOV.getIdMoneda()));
 				}
-			
+				
+				/*
+				 * Usar la moneda! :D TODO
+				 */
+				
+				if (this.itemSelected.getIdMoneda() != null){
+					
+					DescriptibleOV monedaDestino = new DescriptibleOV();
+					monedaDestino.setId(this.itemSelected.getIdMoneda());
+					monedaDestino.setCodigo(this.itemSelected.getCodMoneda());
+					
+					double markUp = tituloModeloCotizadorOV.getPrecio() * tituloModeloCotizadorOV.getMarkUp() / 100;
+					
+					tituloModeloCotizadorOV.setCostoEn(this.calcularCostoEn(tituloModeloCotizadorOV.getMoneda(),monedaDestino,tituloModeloCotizadorOV.getPrecio()));
+					tituloModeloCotizadorOV.setImporteVenta(this.calcularCostoEn(tituloModeloCotizadorOV.getMoneda(),monedaDestino, tituloModeloCotizadorOV.getPrecio() + markUp));
+
+					this.totalCostoEn += this.calcularCostoEn(tituloModeloCotizadorOV.getMoneda(),monedaDestino,tituloModeloCotizadorOV.getPrecio());
+					this.totalImporteVenta += this.calcularCostoEn(tituloModeloCotizadorOV.getMoneda(),monedaDestino, tituloModeloCotizadorOV.getPrecio() + markUp);
+					
+				} 
+				
+				tituloModeloCotizadorOV.setPrecio(tituloModeloCotizadorOV.getCantidad() * tituloModeloCotizadorOV.getPrecioUnitario());
+				
 				DescriptibleOV producto = new DescriptibleOV();
 				if (tituloModeloCotizadorOV.getIdProducto() != null && tituloModeloCotizadorOV.getIdProducto() != 0L ){
 					producto.setId(tituloModeloCotizadorOV.getIdProducto());
@@ -419,8 +451,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command
-	@NotifyChange({"arbolTitulos"})
+	@NotifyChange({"arbolTitulos","totalCostoEn","totalImporteVenta"})
 	public void actualizarMonedaExpresada(){
+		
+		this.totalCostoEn = 0;
+		this.totalImporteVenta = 0;
 		
 		DefaultTreeModel<TituloModeloCotizadorOV> arbol = this.arbolTitulos;
 		
@@ -441,12 +476,14 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 				
 				//Calculamos importeVenta
 				double precio = treeNode.getData().getPrecio();
-				double markUp = treeNode.getData().getMarkUp();
+				double markUp = treeNode.getData().getPrecio() * treeNode.getData().getMarkUp() / 100;
 				treeNode.getData().setImporteVenta(this.calcularCostoEn(treeNode.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio + markUp));
+				this.totalImporteVenta += this.calcularCostoEn(treeNode.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio + markUp);
 				
 				//Calculamos el costoEn 
 				treeNode.getData().setCostoEn(this.calcularCostoEn(treeNode.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio));
-				
+				this.totalCostoEn += this.calcularCostoEn(treeNode.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio);
+				 
 				return;
 			}
 		
@@ -460,8 +497,9 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		}
 	}
 		
+	
 	@Command
-	@NotifyChange({"cotizadorOV","modeloCotizadorOV","arbolTitulos"})
+	@NotifyChange({"cotizadorOV","modeloCotizadorOV","arbolTitulos","totalCostoEn","totalImporteVenta"})
 	public void calcularPrecio(@BindingParam("titulo") NodoTitulos titulo){
 		
 		double precio = 0;
@@ -471,15 +509,16 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		titulo.getData().setPrecio(precio);
 		
 		if (this.expresarEnMonedaSeleccionado != null){
-			markUp = precio * titulo.getData().getMarkUp() / 100;
-//			titulo.getData().setImporteVenta(precio / buscarCotizacion(this.expresarEnMonedaSeleccionado.getCodigo()) + markUp);
-			titulo.getData().setImporteVenta(this.calcularCostoEn(titulo.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio + markUp));
-			
 			
 			//Calculamos el costoEn 
 			titulo.getData().setCostoEn(this.calcularCostoEn(titulo.getData().getMoneda(),this.expresarEnMonedaSeleccionado,precio));
 			
+			markUp = precio * titulo.getData().getMarkUp() / 100;
+			titulo.getData().setImporteVenta(this.calcularCostoEn(titulo.getData().getMoneda(),this.expresarEnMonedaSeleccionado, precio + markUp));
+						
 		}
+		
+		this.actualizarMonedaExpresada();
 		
 	}
 	
@@ -524,12 +563,16 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
+		this.init();
 		this.nuevo();
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 	public void cargarItem() {
 
+		this.totalCostoEn = 0;
+		this.totalImporteVenta = 0;
+		
 		long idABuscar = this.itemSelected.getId();
 		this.nuevo();
 		
