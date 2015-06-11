@@ -70,11 +70,9 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 			this.sectorSeleccionado = this.sectores.get(0);
 		}
 		
-		
 		this.fechaFiltroInicio = LocalDate.now().toDate();
 		this.fechaFiltroFin = LocalDate.now().toDate();
 		
-		//Actualiza todo el vm
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
@@ -101,7 +99,6 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		
 		allTasks = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
 		
-//		List 
 		allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
 		DescriptibleOV estadoDescriptible;
 		Map<String, DescriptibleOV> estadosEnMapa = new HashMap<String, DescriptibleOV>();
@@ -111,27 +108,14 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		}
 		
 		for (TareaAgendaOV tareaAgendaOV : allTasks) {
-			
 			DescriptibleOV descriptible = Operaciones.recuperarObjetoDescriptible("pedido", tareaAgendaOV.getIdPedido());
 			tareaAgendaOV.setPedidoDescriptible(descriptible);
 			//Para mostrar el nº de comprobante de pedido
 			tareaAgendaOV.setEstado(estadosEnMapa.get(String.valueOf(tareaAgendaOV.getIdEstado())));
-//			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector", tareaAgendaOV.getIdSector())); //Este no es necesario, ya que son todas las tareas de mismo sector
 		}
 		
 	}
 	
-//	@Command
-//	public void modificarFiltros(@BindingParam("checkComponent") Checkbox checkComponent){
-//		if(checkComponent.isChecked()){
-//			this.fEnEspera=Boolean.FALSE;
-//			this.fNoIniciadas=Boolean.FALSE;
-//		}else{
-//			this.fEnEspera=Boolean.TRUE;
-//			this.fNoIniciadas=Boolean.TRUE;
-//		}
-//	}
-
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
