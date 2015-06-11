@@ -42,15 +42,18 @@ import com.jkt.ov.tree.NodoTareaAgenda;
 @Data
 public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 
+	private PedidoOV pedido;
+
 	@Init
 	public void init(){
 		super.inicializar();
 		this.vistaPorPedido = true;
+		this.setTitulo("Visor de planificacion de pedido");
 	}
 	
 	@Override
 	@GlobalCommand("actualizarTodo")
-	@NotifyChange({"allTasks"})
+	@NotifyChange({"allTasks", "pedido","titulo"})
 	public void actualizar() {
 
 	}
@@ -61,7 +64,7 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 	}
 
 	@Command
-	@NotifyChange("allTasks")
+//	@NotifyChange({"allTasks", "pedido"})
 	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		openComplexHelper("pedido", "", pedidoDescriptible, "postHelperPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente",true, "Fecha" , "" );
 	}
@@ -78,7 +81,9 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 			Messagebox.show("Ocurrio un error al intentar recuperar el pedido y sus tareas.");
 			return;
 		}
-		PedidoOV pedido = (PedidoOV) list.get(0);
+		pedido = (PedidoOV) list.get(0);
+		
+		this.setTitulo("Tareas de pedido #"+pedido.getNro());
 
 		allTasks = pedido.getTareas();
 		allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();

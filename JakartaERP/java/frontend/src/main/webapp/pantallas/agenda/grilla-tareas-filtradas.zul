@@ -11,8 +11,8 @@
 				        
 				<columns>
 					
-					<column width="150px" label="Pedido" sort="auto(idPedido)" if="${vm.vistaPorSector}" />
-					<column width="150px" label="Sector" sort="auto(sector.descripcion)" if="${vm.vistaPorPedido}"/>
+					<column width="100px" label="Pedido" sort="auto(idPedido)" if="${vm.vistaPorSector}" />
+					<column width="100px" label="Sector" sort="auto(sector.descripcion)" if="${vm.vistaPorPedido}"/>
 					
 <!-- 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" /> -->
 					<column width="200px" label="Tarea" sort="auto(descripcionTarea)" />

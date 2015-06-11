@@ -60,7 +60,10 @@
 								<button label="..." onClick="@command('actualizarPlantilla', ov=each, plantilla = each.plantilla)" />
 							</hlayout>
 							
-							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100px" />
+							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100px" 
+									toolbar="Complex" 
+				        			customConfigurationsPath="/pantallas/common/config.js"  
+				        		/>
 
 					</groupbox>
 

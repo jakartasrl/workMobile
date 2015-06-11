@@ -92,6 +92,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	PedidoOV pedidoDescriptible = new PedidoOV();
 	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
+
+	private Map<String, String> estadosEnMapa;
 	
 	@Command
 	@NotifyChange("comprobanteOV")
@@ -240,10 +242,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			tarea.setCodigo(tareaAgendaOV.getCodigoTarea());
 			tarea.setDescripcion(tareaAgendaOV.getDescripcionTarea());
 			
+			
 			tareaAgendaOV.setTarea(tarea);
-			
 			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector",tareaAgendaOV.getIdSector()));
-			
+			tareaAgendaOV.getEstado().setDescripcion(estadosEnMapa.get(String.valueOf(tareaAgendaOV.getIdEstado())));
 			
 //			//Asigna el estado al combo.
 //			DescriptibleOV estadoActual;
@@ -630,6 +632,15 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		if (this.modoAgenda) {
 			this.agenda = new AgendaOV();
 			this.estados = (ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class);
+		
+			DescriptibleOV estadoDescriptible;
+			estadosEnMapa = new HashMap<String, String>();
+			for (Object estado : this.estados.getList()) {
+				estadoDescriptible=(DescriptibleOV) estado;
+				estadosEnMapa.put(String.valueOf(estadoDescriptible.getCodigo()), estadoDescriptible.getDescripcion());
+			}
+			
+			
 		}
 		
 	}
@@ -710,6 +721,11 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 //		this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
 
 		if (this.codigoTareaNueva!=null && !this.codigoTareaNueva.isEmpty()) {
+			
+			DescriptibleOV estadoTemporal = new DescriptibleOV();
+			estadoTemporal.setDescripcion("No Guardada aun");
+			this.tareaAgregada.setEstado(estadoTemporal);
+			
 			validarCampo("tarea", this.codigoTareaNueva, this.tareaAgregada.getTarea(), "actualizarTareasYArbol");
 			return;
 		}
@@ -752,6 +768,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		ParametroOV sectorTaller = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorTaller"), ParametroOV.class);
 		ParametroOV sectorLab = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("sectorLab"), ParametroOV.class);
 		
+		DescriptibleOV estadoTemporal = new DescriptibleOV();
+		estadoTemporal.setDescripcion("No Guardada aun");
+		this.tareaAgregada.setEstado(estadoTemporal);
+		
 		if(this.tareaAgregada.getTarea().getId()==paramTareaTaller.getValorNumero()){
 			
 			//Tareas para cuando la tarea es de tipo taller
@@ -783,12 +803,22 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			//Tareas para cuando la tarea es de tipo laboratorio
 			
 			DescriptibleOV tarea = this.tareaAgregada.getTarea();
+			this.tareaAgregada.setEstado(estadoTemporal);
 			if(this.lDeterminacionesQuimicas.isEmpty()){
+//				this.tareaAgregada.setEstado(estadoTemporal);
+				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 				actualizarTareasYArbol();
 			}else{
 				this.tareaAgregada=new TareaAgendaOV();
 				this.tareaAgregada.setTarea(tarea);
-				this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+//				this.tareaAgregada.setEstado(estadoTemporal);
+
+//				this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+				
+//				DescriptibleOV estadoTemporal = new DescriptibleOV();
+//				estadoTemporal.setDescripcion("No Guardada aun");
+//				this.tareaAgregada.setEstado(estadoTemporal);
+				
 				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 				this.tareaAgregada.setDescripcionAbreviada("Trabajo de Laboratorio");
 				this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
@@ -818,7 +848,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
-					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+
+//					estadoTemporal.setDescripcion("No Guardada aun");
+					this.tareaAgregada.setEstado(estadoTemporal);
+					
+//					DescriptibleOV estadoTemporal = new DescriptibleOV();
+//					estadoTemporal.setDescripcion("No Guardada aun");
+//					this.tareaAgregada.setEstado(estadoTemporal);
+					
 					this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 					this.tareaAgregada.setDescripcionAbreviada(formaFacturacionOV.getDescripcion());
 					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
@@ -875,7 +912,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		for (ItemsOV itemsOV : items) {
 			this.tareaAgregada=new TareaAgendaOV();
 			this.tareaAgregada.setTarea(tarea);
-//			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
+//			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));v
+			
+			DescriptibleOV estadoTemporal = new DescriptibleOV();
+			estadoTemporal.setDescripcion("No Guardada aun");
+			this.tareaAgregada.setEstado(estadoTemporal);
+			
 			this.tareaAgregada.setDescripcionTarea(itemsOV.getReferencia());
 			this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionAbreviada());
 			this.tareaAgregada.setDescripcionCompleta(itemsOV.getPlantilla().getDescripcion());

@@ -17,12 +17,12 @@
 		
 	</style>
 		
-	<div>	
-		<panel sclass="panel-maestro" style="padding:5px;" border="normal" height="auto" width="100%">
+	<div width="55%" >	
+		<panel sclass="panel-maestro" title="Pedido" border="normal" height="auto" width="100%">
 	
 			<panelchildren>
 	
-				<grid style="border-style:none;" sizedByContent="true">
+				<grid style="border-style:none;padding:3px;" sizedByContent="true">
 	
 					<columns>
 						<column width="150px"/>
@@ -37,25 +37,25 @@
 				    	<row sclass="fila-maestro" >
 				    	
 							<label value="Nro. de Pedido : " />
-							<textbox class="campoCodigo-medium" value="" readonly="true"/>
+							<textbox class="campoCodigo-medium" value="@bind(vm.pedido.nro)" readonly="true"/>
 		
 							<label class="name" value="Fecha : " />
-							<datebox id="fecha" format="dd/MM/yyyy" disabled="true" />
+							<datebox id="fecha" value="@bind(vm.pedido.fecha)" format="dd/MM/yyyy" disabled="true" />
 							
 						</row>
 						
 				    	<row sclass="fila-maestro">
 							<label value="Cliente | Sucursal : " />
 							<hlayout>
-								<textbox readonly="true" sclass="campoCodigo-medium" value="" />
+								<textbox readonly="true" sclass="campoCodigo-medium" value="@bind(vm.pedido.codCliente)" />
 							</hlayout>
 		
 							<hlayout>
-								<textbox readonly="true" sclass="campoCodigo-vsmall" value="" />
+								<textbox readonly="true" sclass="campoCodigo-vsmall" value="@bind(vm.pedido.codSucursal)" />
 							</hlayout>
 	
 							<cell colspan="3">
-								<textbox value="" width="100%" readonly="true"/>
+								<textbox value="@bind(vm.pedido.descripcionClienteSucursal)" width="100%" readonly="true"/>
 							</cell>						
 							
 						</row>
@@ -65,11 +65,11 @@
 	
 				    		<hlayout>
 								<label visible="false" value=""/>
-								<textbox readonly="true" sclass="campoCodigo-small" value=""/>
+								<textbox readonly="true" sclass="campoCodigo-small" value="@bind(vm.pedido.codListaPrecio)"/>
 				    		</hlayout>
 	
 							<cell colspan="4">
-								<textbox width="100%" value="" readonly="true"/>
+								<textbox width="100%" value="@bind(vm.pedido.descripcionListaPrecio)" readonly="true"/>
 							</cell>
 				    		
 						</row>

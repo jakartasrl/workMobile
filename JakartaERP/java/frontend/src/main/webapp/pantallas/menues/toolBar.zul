@@ -4,8 +4,7 @@
 		
 	</script>
 	
-	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar"
-		align="start">
+	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar" align="start">
 		<hlayout style="width:100%" id="idLayout">
 
 			<div hflex="1" id="idDiv">
@@ -17,7 +16,7 @@
 				<toolbarbutton image="/pantallas/icons/not.png" label="Cancelar" onClick="@command('cancelar')" tooltiptext="Cancelar" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
-				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" onClick="@command('irAInicio')" tooltiptext="Volver al menu" />
+				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Menu" onClick="@command('irAInicio')" tooltiptext="Volver al menu" />
 <!-- 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../menu.zul" tooltiptext="Volver al menu" /> -->
 			</div>
 
@@ -26,7 +25,7 @@
 			</div>
 
 			<div hflex="1" droppable="true" style="text-align: right;">
-				<toolbarbutton image="/pantallas/icons/export.png" onClick="@command('logOut')" tooltiptext="Salir" />
+<!-- 				<toolbarbutton image="/pantallas/icons/export.png" onClick="@command('logOut')" tooltiptext="Salir" /> -->
 			</div>
 
 		</hlayout>

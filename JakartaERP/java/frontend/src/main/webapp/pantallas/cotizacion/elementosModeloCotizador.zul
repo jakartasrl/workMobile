@@ -10,7 +10,8 @@
         }
     ]]></zscript>
 
-	<tree id="categoriesTree" model="@bind(vm.arbolTitulos)" width="100%" droppable="true" >
+<!-- 	<tree id="categoriesTree" model="@bind(vm.arbolTitulos)" width="100%" droppable="true" > -->
+	<tree id="categoriesTree" model="@bind(vm.arbolTitulos)" width="100%"  >
 	
     <treecols>
         <treecol label="Codigo" 		align="center" width="50%"/>
@@ -19,7 +20,7 @@
     
     <template name="model" var="titulo">
     
-        <treeitem open="true" draggable="true" droppable="true" onDrop="move(event.dragged,self)" onCreate="@command('setear', componente=self, nodo=titulo)" >
+        <treeitem open="true" onCreate="@command('setear', componente=self, nodo=titulo)" >
             <treerow style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" >
 
                 <treecell>

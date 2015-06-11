@@ -1410,6 +1410,16 @@
 			<campoSalida target="descripcion" value="descripcion" />
 			<campoSalida target="activo" value="activo" />
 			
+			<campoSalida value="nro"	target="nro" />
+			<campoSalida value="fecha" 	target="fecha" />
+
+			<campoSalida value="codCliente"	 					target="cliente.codigo" />
+			<campoSalida value="codSucursal" 					target="clienteSucursal.codigo" />
+			<campoSalida value="descripcionClienteSucursal" 	target="clienteSucursal.descripcionCompleta" />
+
+			<campoSalida value="codListaPrecio" 		target="listaPrecios.codigo" />
+			<campoSalida value="descripcionListaPrecio" target="listaPrecios.descripcion" />
+			
 			<campoSalida value="tareas" target="tareas" >
 			
 				<campoSalida value="id" target="id" />
