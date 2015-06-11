@@ -153,8 +153,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			//si la tarea se agrego recien, solamente se asigna por defecto el estado no iniciado, de modo contrario se verifican sus precedencias
 			if(tarea.getIdEstado()==0 || tarea.getIdEstado()==1 ){
 				tarea.setIdEstado(Estado.NO_INICIADO.getValue());
-			}else if(tarea.getIdEstado()==3 || tarea.getIdEstado()==4){ //si es iniciada o finalizada no se le cambia el estado :) 
+			}else if(tarea.getIdEstado()==3 || tarea.getIdEstado()==4){ //si es iniciada o finalizada no se le cambia el estado 
+				
 				//nothing.
+				
 			}else{ //si la tarea ya existia pero se le borraron los precedentes, debo actualizar el estado, y ponerla como no iniciada
 				
 				boolean noTienePrecedentes = true;

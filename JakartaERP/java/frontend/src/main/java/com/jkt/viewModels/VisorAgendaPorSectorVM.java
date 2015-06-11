@@ -40,6 +40,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	
 	private Boolean fNoIniciadas = Boolean.TRUE;
 	private Boolean fEnEspera = Boolean.TRUE;
+	private Boolean fEnEjecucion = Boolean.TRUE;
 	private Boolean fFinalizadas = Boolean.FALSE;
 	
 	@Init
@@ -82,37 +83,40 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	@NotifyChange("allTasks")
 	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 
-		if(!fNoIniciadas && !fEnEspera && !fFinalizadas){
+		if(!fNoIniciadas && !fEnEspera && !fEnEjecucion && !fFinalizadas){
 			Messagebox.show("Debe completar un filtro de estado de tareas.");
 			return;
 		}
 		
 		ContainerOV container = new ContainerOV();
 		container.setLong1(this.sectorSeleccionado.getId());
-		container.setFecha1(this.fechaFiltroInicio);
-		container.setFecha2(this.fechaFiltroFin);
+
+		container.setBoolean1(fNoIniciadas);
+		container.setBoolean2(fEnEspera);
+		container.setBoolean3(fEnEjecucion);
+		container.setBoolean4(fFinalizadas);
+		
+		container.setFecha1(fechaFiltroInicio);
+		container.setFecha2(fechaFiltroFin);
 		
 		allTasks = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
 		
 //		List 
 		allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
-
+		DescriptibleOV estadoDescriptible;
+		Map<String, DescriptibleOV> estadosEnMapa = new HashMap<String, DescriptibleOV>();
+		for (Object estado : allStates) {
+			estadoDescriptible=(DescriptibleOV) estado;
+			estadosEnMapa.put(String.valueOf(estadoDescriptible.getCodigo()), estadoDescriptible);
+		}
+		
 		for (TareaAgendaOV tareaAgendaOV : allTasks) {
+			
 			DescriptibleOV descriptible = Operaciones.recuperarObjetoDescriptible("pedido", tareaAgendaOV.getIdPedido());
 			tareaAgendaOV.setPedidoDescriptible(descriptible);
-			
-			DescriptibleOV d;
-			
-			for (Object object : allStates) {
-				d=(DescriptibleOV) object;
-				if(d.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))){
-					tareaAgendaOV.setEstado(d);
-					break;//break the small for!
-				}
-			}
-			
-			DescriptibleOV sector = Operaciones.recuperarObjetoDescriptible("sector", tareaAgendaOV.getIdSector());
-			tareaAgendaOV.setSector(sector);
+			//Para mostrar el nº de comprobante de pedido
+			tareaAgendaOV.setEstado(estadosEnMapa.get(String.valueOf(tareaAgendaOV.getIdEstado())));
+//			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector", tareaAgendaOV.getIdSector())); //Este no es necesario, ya que son todas las tareas de mismo sector
 		}
 		
 	}
@@ -157,4 +161,12 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		this.fFinalizadas = fFinalizadas;
 	}
 
+	public Boolean getfEnEjecucion() {
+		return fEnEjecucion;
+	}
+
+	public void setfEnEjecucion(Boolean fEnEjecucion) {
+		this.fEnEjecucion = fEnEjecucion;
+	}
+	
 }

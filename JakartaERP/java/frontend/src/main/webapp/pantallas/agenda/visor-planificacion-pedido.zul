@@ -16,7 +16,71 @@
 		}
 		
 	</style>
+		
+	<div>	
+		<panel sclass="panel-maestro" style="padding:5px;" border="normal" height="auto" width="100%">
+	
+			<panelchildren>
+	
+				<grid style="border-style:none;" sizedByContent="true">
+	
+					<columns>
+						<column width="150px"/>
+						<column width="120px"/>
+						<column width="100px"/>
+						<column width="100px"/>
+						<column width="100px"/>
+						<column width="150px"/>
+					</columns>
 				
+					<rows>
+				    	<row sclass="fila-maestro" >
+				    	
+							<label value="Nro. de Pedido : " />
+							<textbox class="campoCodigo-medium" value="" readonly="true"/>
+		
+							<label class="name" value="Fecha : " />
+							<datebox id="fecha" format="dd/MM/yyyy" disabled="true" />
+							
+						</row>
+						
+				    	<row sclass="fila-maestro">
+							<label value="Cliente | Sucursal : " />
+							<hlayout>
+								<textbox readonly="true" sclass="campoCodigo-medium" value="" />
+							</hlayout>
+		
+							<hlayout>
+								<textbox readonly="true" sclass="campoCodigo-vsmall" value="" />
+							</hlayout>
+	
+							<cell colspan="3">
+								<textbox value="" width="100%" readonly="true"/>
+							</cell>						
+							
+						</row>
+						
+						<row sclass="fila-maestro">
+							<label value="Lista de Precios : " />
+	
+				    		<hlayout>
+								<label visible="false" value=""/>
+								<textbox readonly="true" sclass="campoCodigo-small" value=""/>
+				    		</hlayout>
+	
+							<cell colspan="4">
+								<textbox width="100%" value="" readonly="true"/>
+							</cell>
+				    		
+						</row>
+						
+					</rows>
+				</grid>
+	
+			</panelchildren>
+		</panel>
+	</div>
+			
 	<div>
 		<include id="gridDetailTasks" src="/pantallas/agenda/grilla-tareas-filtradas.zul" />
 	</div>

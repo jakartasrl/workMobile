@@ -1,13 +1,19 @@
 package com.jkt.pedido.operaciones;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.bouncycastle.asn1.isismtt.x509.Restriction;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.LocalDate;
 
 import com.jkt.excepcion.JakartaException;
+import com.jkt.grafo.DatoNodo.Estado;
 import com.jkt.operaciones.Operation;
 import com.jkt.pedido.dominio.TareaPedido;
 
@@ -19,57 +25,91 @@ import com.jkt.pedido.dominio.TareaPedido;
  */
 public class RecuperarTareasPorSector extends Operation {
 
-	private Date f1=new Date();
-	private Date f2 = new Date();
-	private long idSector;
+//	private Date f1=new Date();
+//	private Date f2 = new Date();
+//	private long idSector;
+
+	private static final String ID_SECTOR = "ID_SECTOR";
+	private static final String FECHA_1 = "FECHA_1";
+	private static final String FECHA_2 = "FECHA_2";
+	private static final String ESPERA = "ESPERA";
+	private static final String NO_INICIADA = "NO_INICIADA";
+	private static final String EJECUCION = "EJECUCION";
+	private static final String COMPLETA = "COMPLETA";
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 
-		validarFiltros(aParams);
+//		validarFiltros(aParams);
 		
-		Query consultaHQL = crearHQL("from TareaPedido as t where t.sector.id = :sector AND t.fechaLimite BETWEEN :f1 and :f2 AND t.pedido is not null order by t.fechaLimite");
+		long idSector = (Long) aParams.get(ID_SECTOR);
 		
-		consultaHQL.setParameter("f1", this.f1);
-		consultaHQL.setParameter("f2", this.f2);
-		consultaHQL.setParameter("sector", this.idSector);
-		
-		List list = consultaHQL.list();
-		notificarObjeto("", list);
-	}
+		boolean enEspera = (Boolean) aParams.get(ESPERA);
+		boolean noIniciada = (Boolean) aParams.get(NO_INICIADA);
+		boolean enEjecucion = (Boolean) aParams.get(EJECUCION);
+		boolean completa = (Boolean) aParams.get(COMPLETA);
 
-	/**
-	 * Valida que si o si exista el filtro de sector, y asigna fechas en caso de q las fechas vengan vacias.
-	 * 
-	 */
-	private void validarFiltros(Map<String, Object> aParams) throws JakartaException {
-		TareaPedido t = (TareaPedido) aParams.get("objeto");
-		if (t==null) {
-			throw new JakartaException("Debe completar los filtros. Minimamente debe ingresar un sector.");
+		
+		Criteria criteria = crearCriterio(TareaPedido.class);
+		
+		criteria.add(Restrictions.eq("sector.id", idSector));
+		criteria.add(Restrictions.isNotNull("pedido"));// eq("sector.id", idSector));
+		
+		
+		Disjunction or = null;
+		if(enEspera){
+			or = Restrictions.or(Restrictions.eq("idEstado", Estado.EN_ESPERA.getValue()));
 		}
-
-		Date fecha1,fecha2 = new Date();
 		
-		if(t.getIdSector()==0L){
-			throw new JakartaException("Mínimamente debe ingresar un sector.");
-		}
-		this.idSector = t.getIdSector();
-
-		fecha1 = t.getFechaFiltro1()==null?LocalDate.now().toDate():t.getFechaFiltro1();
-		
-		if (t.getFechaFiltro2()==null) {
-			if (t.getFechaFiltro1()==null) {
-				fecha2 = LocalDate.now().plusDays(10).toDate(); //A la fecha de hoy se le suman 10 dias
+		if(noIniciada){
+			if(or==null){
+				or= Restrictions.or(Restrictions.eq("idEstado", Estado.NO_INICIADO.getValue()));
 			}else{
-				LocalDate fromDateFields = LocalDate.fromDateFields(fecha1);
-				fecha2 = fromDateFields.plusDays(10).toDate();//a la fecha ingresada como fecha1, se le suman 10 dias
+				or.add(Restrictions.eq("idEstado", Estado.NO_INICIADO.getValue()));
 			}
-		}else{
-			fecha2 = t.getFechaFiltro2();
 		}
 
-		this.f1 = fecha1;
-		this.f2 = fecha2;
+		if(enEjecucion){
+			if(or==null){
+				or= Restrictions.or(Restrictions.eq("idEstado", Estado.EN_EJECUCION.getValue()));
+			}else{
+				or.add(Restrictions.eq("idEstado", Estado.EN_EJECUCION.getValue()));
+			}
+		}
+
+		List firstList = new ArrayList<TareaPedido>();
+		if(or!=null){
+			criteria.add(or);
+			firstList = criteria.list();
+		}
+		
+
+		/*
+		 * Ahora se arma una nueva criteria con filtros para las tareas finalizadas entre tantas fechas
+		 * TODO lo ideal seria hacer una union...
+		 */
+		Criteria criteriaParaFinalizados = crearCriterio(TareaPedido.class);
+		
+		criteriaParaFinalizados.add(Restrictions.eq("sector.id", idSector));
+		criteriaParaFinalizados.add(Restrictions.isNotNull("pedido"));
+		
+		Date f1 = null, f2=null;
+		List secondList = new ArrayList<TareaPedido>();
+		if(completa){
+			f1 =  (Date) aParams.get(FECHA_1);
+			f2 =  (Date) aParams.get(FECHA_2);
+		
+			criteriaParaFinalizados.add(Restrictions.between("fechaLimite", f1, f2)) ;
+			criteriaParaFinalizados.add(Restrictions.eq("idEstado", Estado.FINALIZADO.getValue()));
+			
+			secondList = criteriaParaFinalizados.list();
+		}
+		
+		if(!secondList.isEmpty()){
+			firstList.addAll(secondList);
+		}
+		
+		notificarObjeto("", firstList);
 
 	}
 

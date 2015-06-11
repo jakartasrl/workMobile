@@ -1480,11 +1480,23 @@
 
 	<operacion name="RecuperarTareasPorSector" clase="com.jkt.pedido.operaciones.RecuperarTareasPorSector" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListTareaAgendaOV">
 	
-		<input keyName="objeto" clase="com.jkt.pedido.dominio.TareaPedido">
-			<campoEntrada propertyOV="long1" metodo="setIdSector" />
-			<campoEntrada propertyOV="fecha1" metodo="setFechaFiltro1" />
-			<campoEntrada propertyOV="fecha2" metodo="setFechaFiltro2" />
+<!-- 		<input keyName="objeto" clase="com.jkt.pedido.dominio.TareaPedido"> -->
+<!-- 			<campoEntrada propertyOV="long1" metodo="setIdSector" /> -->
+<!-- 			<campoEntrada propertyOV="fecha1" metodo="setFechaFiltro1" /> -->
+<!-- 			<campoEntrada propertyOV="fecha2" metodo="setFechaFiltro2" /> -->
+<!-- 			<campoEntrada propertyOV="b" metodo="setFechaFiltro2" /> -->
+<!-- 		</input> -->
+
+		<input>
+			<campoEntrada propertyOV="long1" 	name="ID_SECTOR"/>
+			<campoEntrada propertyOV="fecha1" 	name="FECHA_1" />
+			<campoEntrada propertyOV="fecha2" 	name="FECHA_2" />
+			<campoEntrada propertyOV="boolean1" name="ESPERA" />
+			<campoEntrada propertyOV="boolean2" name="NO_INICIADA" />
+			<campoEntrada propertyOV="boolean3" name="EJECUCION" />
+			<campoEntrada propertyOV="boolean4" name="COMPLETA" />
 		</input>
+	
 	
 		<output>
 			<campoSalida value="id" target="id" />
