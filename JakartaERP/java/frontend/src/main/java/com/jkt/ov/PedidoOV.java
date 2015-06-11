@@ -100,4 +100,11 @@ public class PedidoOV extends DescriptibleOV {
 		return filtros;
 	}
 	
+	
+	/*
+	 * Atributos para mostrar en formato plano datos del pedido.
+	 */
+	private String codCliente, codSucursal, descripcionClienteSucursal;
+	private String codListaPrecio, descripcionListaPrecio;
+	
 }

@@ -26,7 +26,7 @@
 			<listheader width="110px" label="Ultimo Prec."/>
 			<listheader width="50px" label="Dias"/>
 			<listheader width="110px" label="Sector"/>
-<!-- 			<listheader width="130px" label="Estado"/> -->
+			<listheader width="130px" label="Estado"/>
 <!-- 			<listheader width="110px" label="Cumplimiento"/> -->
 <!-- 			<listheader width="110px" label="Fecha Lim."/> -->
 			<listheader width="50px" label="Borrar"/>
@@ -81,6 +81,9 @@
 					</combobox>
 				</listcell>
 
+				<listcell >
+					<textbox width="100%" readonly="true" value="@bind(each.estado.descripcion)" sclass="importe" constraint="no empty"/>
+				</listcell>
 <!-- 				<listcell > -->
 <!-- 					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" /> -->
 <!-- 				</listcell> -->
