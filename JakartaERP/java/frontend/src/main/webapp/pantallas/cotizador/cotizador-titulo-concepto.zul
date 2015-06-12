@@ -103,7 +103,7 @@
                 </treecell>
                 
                 <treecell>
- 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularMarkUp',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
+ 	               <textbox sclass="importe" width="100%"  value="@bind(titulo.data.markUp)" if="${titulo.data.tipo=='C'}" onBlur="@command('calcularPrecio',titulo=titulo )" disabled="@bind(!vm.cotizacionEditable)"/>
                 </treecell>
                 
                 <treecell>
