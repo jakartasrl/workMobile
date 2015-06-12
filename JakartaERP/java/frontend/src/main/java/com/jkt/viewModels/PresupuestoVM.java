@@ -104,12 +104,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			   		
 					Window window = (Window) Executions.createComponents("/pantallas/presupuesto/reporte.zul", null, hashMap);
 					window.doModal();
+
+//					Executions.sendRedirect("/pantallas/index/index-presupuesto.zul");		
 		        }
 		    }
 		}
 		);
 		
-		Executions.sendRedirect("/pantallas/index/index-presupuesto.zul");		
 		
 	}
 

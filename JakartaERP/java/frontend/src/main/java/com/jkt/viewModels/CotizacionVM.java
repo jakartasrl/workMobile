@@ -14,6 +14,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
@@ -44,8 +45,9 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.completarCotizacionOV();
 		
 		Operaciones.ejecutar("GuardarCotizacion", this.cotizacionOV );
-		Messagebox.show("Cotización Guardada Correctamente.");
-				
+//		Messagebox.show("Cotización Guardada Correctamente.");
+		Executions.sendRedirect("/pantallas/index/index-cotizacion.zul");		
+
 	}
 
 	private void completarCotizacionOV() {
