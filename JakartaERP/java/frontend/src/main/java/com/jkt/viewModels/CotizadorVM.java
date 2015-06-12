@@ -7,9 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import lombok.Data;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
@@ -23,7 +21,6 @@ import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
-
 import com.jkt.common.Operaciones;
 import com.jkt.dominio.CotizacionDet.Estado;
 import com.jkt.excepcion.JakartaException;
@@ -107,7 +104,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		
 		Operaciones.ejecutar("GuardarCotizador", this.cotizadorOV );
 		Executions.sendRedirect("/pantallas/index/index-cotizador.zul");
-		Messagebox.show("Se ha guardado una cotizacion correctamente.");
 
 	}
 	
@@ -291,7 +287,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
 	@Override
 	@Command
-	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos","cotizadorOV","modeloCotizadorOV","itemSelected","cotizacionEditable"})
+	@NotifyChange({"modeloCotizadorOV","tituloModeloCotizadorOV","arbolTitulos","cotizadorOV","modeloCotizadorOV","itemSelected","cotizacionEditable","expresarEnMonedaSeleccionado"})
 	public void nuevo(){
 		
 		this.modeloCotizadorOV = new ModeloCotizadorOV();
@@ -300,6 +296,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.vendedorOV = new DescriptibleOV();
 		this.itemSelected = new ItemsOV();
 		this.cotizacionEditable = true;
+		this.expresarEnMonedaSeleccionado = new DescriptibleOV();
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new AdvancedTreeModel(root);
@@ -307,8 +304,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Init
-	@NotifyChange({"lsTipoDeCambio","monedas","totalCostoEn","totalImporteVenta"})
+	@NotifyChange({"lsTipoDeCambio","monedas","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado","itemSelected"})
 	public void init(){
+		
+		expresarEnMonedaSeleccionado = new DescriptibleOV();
+		itemSelected = new ItemsOV();
 		
 		this.totalCostoEn = 0;
 		this.totalImporteVenta = 0;
@@ -331,6 +331,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.monedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
 		
 		this.cargarTiposDeCambio();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 
 	}
 
@@ -465,7 +466,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 			mostrarArbol(treeNode);
 		}
 		
-		
 	}
 	
 	private void mostrarArbol(TreeNode<TituloModeloCotizadorOV> treeNode){
@@ -488,12 +488,14 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 			}
 		
 		}else{
+			
 			if (!treeNode.isLeaf()) {
 				List<TreeNode<TituloModeloCotizadorOV>> children = treeNode.getChildren();
 				for (TreeNode<TituloModeloCotizadorOV> nodoHijo : children) {
 					mostrarArbol(nodoHijo);
 				}
 			}
+			
 		}
 	}
 		
@@ -554,18 +556,22 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@Command
 	@NotifyChange({"lsTipoDeCambio"})
 	public void abrirTiposCambio(){
+		
 		Map<String,Object> args=new HashMap<String, Object>();
 		args.put("lista", lsTipoDeCambio);
 		Window window = (Window) Executions.createComponents("/pantallas/cotizador/tiposCambio.zul", null, args);
-//		window.doModal();
 		window.doPopup();
+		
 	}
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
+		
 		this.init();
 		this.nuevo();
+		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		
 	}
 
 	public void cargarItem() {
@@ -582,7 +588,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		//Traemos el Item a cotizar
 		ContainerOV objetoOV = new ContainerOV();
 		objetoOV.setString1(String.valueOf(idABuscar));
-		
 		
 		ItemsOV itemOV = (ItemsOV) Operaciones.ejecutar("SimpleTraerCotizacionDelItem", objetoOV, ItemsOV.class);
 		this.itemSelected = itemOV;
