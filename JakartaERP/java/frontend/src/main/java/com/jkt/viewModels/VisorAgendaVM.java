@@ -38,7 +38,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 	protected List<TareaAgendaOV> allTasks = new ArrayList<TareaAgendaOV>();
 	protected DescriptibleOV pedidoDescriptible = new DescriptibleOV();
 	protected List<DescriptibleOV> sectores;
-	protected List allStates;
+	protected List<DescriptibleOV> allStates;
 	
 	@Command
 	@NotifyChange({"allTasks"})
@@ -74,7 +74,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 	public void finalizarTareaConfirmada(TareaAgendaOV tarea){
 		tarea.setIdEstado(Estado.FINALIZADO.getValue());
 
-		asignarNuevoEstado(tarea);
+//		asignarNuevoEstado(tarea);
 		tarea.setFechaCumplimiento(new Date());
 		
 		guardarTarea(tarea);
@@ -87,8 +87,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 	@Command
 	public void iniciar(@BindingParam("elemento") TareaAgendaOV tarea){
 		tarea.setIdEstado(Estado.EN_EJECUCION.getValue());
-		
-		asignarNuevoEstado(tarea);
+//		asignarNuevoEstado(tarea);
 		guardarTarea(tarea);
 
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
@@ -107,21 +106,6 @@ public abstract class VisorAgendaVM extends ViewModel {
 	}
 	
 	abstract public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
-
-	/**
-	 * Asigna a partir de un id de estado, el estado descriptible correspondiente
-	 * 
-	 */
-	protected void asignarNuevoEstado(TareaAgendaOV tarea) {
-		DescriptibleOV d;
-		for (Object object : allStates) {
-			d=(DescriptibleOV) object;
-			if(d.getCodigo().equals(String.valueOf(tarea.getIdEstado()))){
-				tarea.setEstado(d);
-				break;//break the small for!
-			}
-		}
-	}
 
 	/**
 	 * Carga los estados disponibles

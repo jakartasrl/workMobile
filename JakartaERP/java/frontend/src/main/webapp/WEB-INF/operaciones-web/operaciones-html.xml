@@ -1510,19 +1510,19 @@
 	
 		<output>
 			<campoSalida value="id" target="id" />
-			<campoSalida value="codigoTarea" target="codigo" />
+<!-- 			<campoSalida value="codigoTarea" target="codigo" /> -->
 			
-			<campoSalida value="descripcionTarea" target="descripcion" />
-			<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" />
-			<campoSalida value="descripcionCompleta" target="descripcionCompleta" />
+<!-- 			<campoSalida value="descripcionTarea" target="descripcion" /> -->
+<!-- 			<campoSalida value="descripcionAbreviada" target="descripcionAbreviada" /> -->
+<!-- 			<campoSalida value="descripcionCompleta" target="descripcionCompleta" /> -->
 			
-			<campoSalida value="idEstado" target="idEstado" />
-			<campoSalida value="duracion" target="diasDuracion" />
+<!-- 			<campoSalida value="idEstado" target="idEstado" /> -->
+<!-- 			<campoSalida value="duracion" target="diasDuracion" /> -->
 			
-			<campoSalida value="fechaLimite" target="fechaLimite" />
-			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" />
-			<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" />
-			<campoSalida value="idSector" target="sector.id" />
+<!-- 			<campoSalida value="fechaLimite" target="fechaLimite" /> -->
+<!-- 			<campoSalida value="fechaCumplimiento" target="fechaCumplimiento" /> -->
+<!-- 			<campoSalida value="fechaUltimoPrecedente" target="fechaUltimoPrecedente" /> -->
+<!-- 			<campoSalida value="idSector" target="sector.id" /> -->
 			<campoSalida value="idPedido" target="pedido.id" />
 		</output>
 

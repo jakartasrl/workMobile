@@ -31,7 +31,7 @@
 						<textbox class="campoCodigo-medium" value="@bind(vm.comprobanteOV.nro)" readonly="true"/>
 	
 						<label class="name" value="Fecha : " />
-						<datebox id="fecha" value="@bind(vm.comprobanteOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2"/>
+						<datebox id="fecha" value="@bind(vm.comprobanteOV.fecha)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" tabindex="2" disabled="@bind(vm.modoAgenda)"/>
 						
 					</row>
 					

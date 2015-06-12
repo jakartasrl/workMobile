@@ -1,4 +1,4 @@
-<window id="tareaDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DetalleTareaVM')" 
+<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DetalleTareaVM')" 
 title="@bind('Tarea '.concat((vm.tarea.descripcionTarea)).concat(' | Pedido ').concat(vm.tarea.pedidoDescriptible.codigo).concat(' | Sector ').concat(vm.tarea.sector.descripcion))" 
 style="margin-top:50px;" height="auto" width="700px" position="top,center" closable="true" >
     

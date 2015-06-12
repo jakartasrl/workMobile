@@ -54,6 +54,14 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	private NodoTitulos nodoActual;
 	private TituloModeloCotizadorOV tituloModeloCotizadorOV = new TituloModeloCotizadorOV();
 
+	
+	
+	/**
+	 * Variable para cortar y pegar elementos
+	 */
+	private List<NodoTitulos> titulosCortados = new ArrayList<NodoTitulos>();
+	
+	
 	@GlobalCommand("actualizar")
 	@NotifyChange({"modeloCotizadorOV","arbolTitulos","tituloModeloCotizadorOV","conceptoPresupuestoOV"})
 	public void actualizar() {

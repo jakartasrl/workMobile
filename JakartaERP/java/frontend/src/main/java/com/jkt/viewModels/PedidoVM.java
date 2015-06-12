@@ -117,7 +117,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 			completarOV();
 			Operaciones.ejecutar("GuardarPedido", comprobanteOV);
-			Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
+			Executions.sendRedirect("/pantallas/index/index-pedido.zul");		
+
+//			Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
 		}
 	}
 	
@@ -198,8 +200,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		pedidoAGuardar.setId(this.pedidoDescriptible.getId());
 		pedidoAGuardar.setTareas(tareas);
 		Operaciones.ejecutar("GenerarPlanificacionPedido", pedidoAGuardar);
-		
-		Messagebox.show("Se planifico el pedido correctamente.");
+		Executions.sendRedirect("/pantallas/index/index-agenda.zul");
+
+//		Messagebox.show("Se planifico el pedido correctamente.");
 	}
 	
 	/**
