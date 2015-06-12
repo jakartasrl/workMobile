@@ -11,6 +11,7 @@ import java.util.Random;
 
 import lombok.Data;
 
+import org.apache.velocity.runtime.directive.Foreach;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -60,14 +61,30 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	 * Variable para cortar y pegar elementos
 	 */
 	private List<NodoTitulos> titulosCortados = new ArrayList<NodoTitulos>();
+	private String codigosTitulosCortados;
 	
 	
 	/**
 	 * Corta todos los elementos hijos marcados con el check.
 	 */
 	@Command
-	@NotifyChange({"arbolTitulos"})
+	@NotifyChange({"arbolTitulos","titulosCortados","codigosTitulosCortados"})
 	public void cortar(){
+		
+		this.titulosCortados = new ArrayList<NodoTitulos>();
+		
+		List<TreeNode<TituloModeloCotizadorOV>> hijos = this.nodoActual.getChildren();
+		for (TreeNode<TituloModeloCotizadorOV> treeNode : hijos) {
+			if(treeNode.getData().getForCut()){
+				titulosCortados.add((NodoTitulos) treeNode);
+			}
+		}
+
+		codigosTitulosCortados = "Titulos Cortados : ";
+		for (NodoTitulos nodoTitulos : titulosCortados) {
+			 this.nodoActual.remove(nodoTitulos);
+			 codigosTitulosCortados+=nodoTitulos.getData().getCodigoC()+" | ";
+		}
 		
 	}
 	
@@ -75,8 +92,15 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	 * Usa la variable {@link #titulosCortados} y {@link #nodoActual} para pegar
 	 */
 	@Command
-	@NotifyChange({"arbolTitulos"})
+	@NotifyChange({"arbolTitulos","titulosCortados"})
 	public void pegar(){
+
+		for (NodoTitulos nodoTitulos : titulosCortados) {
+			this.nodoActual.add(nodoTitulos);
+			nodoTitulos.getData().setForCut(Boolean.FALSE);
+		}
+		
+		this.titulosCortados = new ArrayList<NodoTitulos>();
 		
 	}
 	
@@ -169,8 +193,8 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		
 		TituloModeloCotizadorOV data = new TituloModeloCotizadorOV();
 		data.setTipo("T");
-		data.setCodigo("New");
-		data.setDescripcion("Nuevo titulo");
+		data.setCodigo("----");
+		data.setDescripcion("----");
 
 		nodoActual = new NodoTitulos(data,true);
 		root.add(nodoActual);

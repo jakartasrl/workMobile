@@ -23,6 +23,8 @@ public class TituloModeloCotizadorOV extends ObjectView {
 	
 	private long idNuevo=0;//siempre va a ser un elemento nuevo
 	
+	private Boolean forCut=Boolean.FALSE;
+	
 	private long idComponenteValor=0;
 	
 	private int identificadorDetalle=0;
