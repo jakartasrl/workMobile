@@ -546,14 +546,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
-	@NotifyChange({"cotizadorOV","modeloCotizadorOV","arbolTitulos"})
-	public void calcularMarkUp(@BindingParam("titulo") NodoTitulos titulo){
-	
-		titulo.getData().setImporteVenta(titulo.getData().getPrecio() + titulo.getData().getPrecio() * titulo.getData().getMarkUp() / 100);
-		
-	}
-
-	@Command
 	@NotifyChange({"lsTipoDeCambio"})
 	public void abrirTiposCambio(){
 		
@@ -567,8 +559,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		
-		this.init();
-		
+		this.init();		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 		
 	}

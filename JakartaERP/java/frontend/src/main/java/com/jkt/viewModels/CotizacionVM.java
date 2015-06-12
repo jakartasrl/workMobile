@@ -255,6 +255,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 }
