@@ -102,10 +102,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	}
 	
 	@Command
-	public void guardar(){
+	public void guardar() throws JakartaException{
 		
 		if (modoAgenda) {
 			planificarPedido();
+			cancelar();
+			Executions.sendRedirect("/pantallas/index/index-agenda.zul");
 		}else{
 			if(!super.validarOV()){
 				return;
@@ -117,9 +119,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 			completarOV();
 			Operaciones.ejecutar("GuardarPedido", comprobanteOV);
+			cancelar();
 			Executions.sendRedirect("/pantallas/index/index-pedido.zul");		
-
-//			Messagebox.show("Se ha guardado el pedido correctamente.", "Mensaje",null, null,null);
 		}
 	}
 	
@@ -200,9 +201,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		pedidoAGuardar.setId(this.pedidoDescriptible.getId());
 		pedidoAGuardar.setTareas(tareas);
 		Operaciones.ejecutar("GenerarPlanificacionPedido", pedidoAGuardar);
-		Executions.sendRedirect("/pantallas/index/index-agenda.zul");
-
-//		Messagebox.show("Se planifico el pedido correctamente.");
+//		Executions.sendRedirect("/pantallas/index/index-agenda.zul");
 	}
 	
 	/**
@@ -961,7 +960,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 						Messagebox.show("Es imposible asignar una dependencia mutua.");
 						checkComponent.setChecked(false);
 						nodo.getData().setEsPrecedente(false);
-						BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+//						BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 						return;
 					}
 				}
@@ -969,7 +968,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			checkComponent.setChecked(true);
 			nodo.getData().setEsPrecedente(true);
-			BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+//			BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 
 
 		}
