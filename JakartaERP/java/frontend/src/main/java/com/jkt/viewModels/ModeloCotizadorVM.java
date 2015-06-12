@@ -62,6 +62,27 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	private List<NodoTitulos> titulosCortados = new ArrayList<NodoTitulos>();
 	
 	
+	/**
+	 * Corta todos los elementos hijos marcados con el check.
+	 */
+	@Command
+	@NotifyChange({"arbolTitulos"})
+	public void cortar(){
+		
+	}
+	
+	/**
+	 * Usa la variable {@link #titulosCortados} y {@link #nodoActual} para pegar
+	 */
+	@Command
+	@NotifyChange({"arbolTitulos"})
+	public void pegar(){
+		
+	}
+	
+	
+	
+	
 	@GlobalCommand("actualizar")
 	@NotifyChange({"modeloCotizadorOV","arbolTitulos","tituloModeloCotizadorOV","conceptoPresupuestoOV"})
 	public void actualizar() {
