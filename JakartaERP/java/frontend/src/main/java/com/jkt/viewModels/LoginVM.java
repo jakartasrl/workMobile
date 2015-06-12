@@ -18,8 +18,10 @@ import com.jkt.ov.UserOV;
 @Data
 public class LoginVM {
 	
-	private String usuario="lconce";
-	private String password="lconce";
+	private String usuario="";
+	private String password="";
+//	private String usuario="lconce";
+//	private String password="lconce";
 	
 	private boolean showError=false;
 	private String error="";

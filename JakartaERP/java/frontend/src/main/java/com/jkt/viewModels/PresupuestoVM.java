@@ -109,6 +109,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		}
 		);
 		
+		Executions.sendRedirect("/pantallas/index/index-presupuesto.zul");		
+		
 	}
 
 	@Command

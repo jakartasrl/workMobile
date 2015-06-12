@@ -568,7 +568,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	public void cancelarCustomizado() throws JakartaException {
 		
 		this.init();
-		this.nuevo();
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 		

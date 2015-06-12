@@ -125,7 +125,7 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		this.completarCotizacionOV();
 		
 		Operaciones.ejecutar("GuardarModeloCotizador", this.modeloCotizadorOV );
-		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
+//		Messagebox.show("Modelo de Cotizador Guardado Correctamente.");
 		
 		Executions.sendRedirect("/pantallas/index/index-modeloCotizador.zul");		
 	}
@@ -361,38 +361,13 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 	
 	@Command
 	public void setear(@BindingParam("componente") final Component componente, @BindingParam("nodo") NodoTitulos nodo){
-		
 		nodo.setComponenteAsociado(componente);
-		
-		/*
-		componente.addEventListener(Events.ON_DROP, new EventListener<Event>() {
-             @Override
-             public void onEvent(Event event) throws Exception {
-            	 
-            	 Treeitem actual = (Treeitem) ((DropEvent) event).getDragged();
-                 NodoTitulos valorActual = (NodoTitulos) actual.getValue();
-                 
-                 Treeitem destino = (Treeitem) ((DropEvent) event).getTarget().getParent().getParent();
-                 NodoTitulos valorDestino = (NodoTitulos) destino.getValue();
-
-                 NodoTitulos valorOrigen= (NodoTitulos) valorActual.getParent();
-                                  
-                 //Agregamos
-//                 valorDestino.add(valorActual);
-                 
-                 //Borramos
-//                 valorOrigen.remove(valorActual);
-               
-               
-             }
-         });
-	*/
-		
 	}
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
 }
