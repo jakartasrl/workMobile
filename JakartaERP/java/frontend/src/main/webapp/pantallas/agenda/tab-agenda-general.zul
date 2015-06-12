@@ -37,8 +37,8 @@
 			<listitem>
 
 				<listcell>
-					<textbox sclass="campoCodigo-medium" value="@bind(each.tarea.codigo)" onBlur="@command('validarCampo', clase='tarea', codigo=self.value, ov=each.tarea)" readonly="false"/>
-					<button label="..." onClick="@command('openHelper', clase='tarea', ov=each.tarea)" />
+					<textbox sclass="campoCodigo-medium" value="@bind(each.tarea.codigo)" onBlur="@command('validarCampo', clase='tarea', codigo=self.value, ov=each.tarea)" readonly="${ each.idEstado eq 3 or each.idEstado eq 4 }" />
+					<button label="..." onClick="@command('openHelper', clase='tarea', ov=each.tarea)" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }" />
 				</listcell>
 
 				<listcell >
@@ -46,7 +46,7 @@
 				</listcell>
 
 				<listcell >
-					<textbox width="100%" value="@bind(each.descripcionAbreviada)" readonly="false"/>
+					<textbox width="100%" value="@bind(each.descripcionAbreviada)" readonly="${ each.idEstado eq 3 or each.idEstado eq 4 }"/>
 				</listcell>
 
 
@@ -63,18 +63,11 @@
 				</listcell>
 
 				<listcell >
-					<intbox width="100%" value="@bind(each.duracion)" sclass="importe" constraint="no empty"/>
+					<intbox width="100%" value="@bind(each.duracion)" sclass="importe" constraint="no empty" readonly="${ each.idEstado eq 3 or each.idEstado eq 4 }" />
 				</listcell>
 
-<!-- 				<listcell> -->
-<!-- 					<textbox sclass="campoCodigo-medium" value="@bind(each.sector.codigo)" readonly="false"   -->
-<!-- 						onBlur="@command('validarCampo', clase='sector', codigo=self.value, ov=each.sector)" -->
-<!-- 						/> -->
-<!-- 					<button label="..." onClick="@command('openHelper', clase='sector', ov=each.sector)" /> -->
-<!-- 				</listcell> -->
-
 				<listcell>
-					<combobox width="95%" model="@bind(vm.sectores)" selectedItem="@bind(each.sector)" constraint="no empty">
+					<combobox width="95%" model="@bind(vm.sectores)" selectedItem="@bind(each.sector)" constraint="no empty" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }">
 						<template name="model" var="e">
 							<comboitem label="@bind(e.descripcion)" />
 						</template>
@@ -82,11 +75,8 @@
 				</listcell>
 
 				<listcell >
-					<textbox width="100%" readonly="true" value="@bind(each.estado.descripcion)" sclass="importe" constraint="no empty"/>
+					<textbox width="100%" readonly="true" value="@bind(each.estado.descripcion)" sclass="importe" constraint="no empty" style="text-align:left"/>
 				</listcell>
-<!-- 				<listcell > -->
-<!-- 					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" /> -->
-<!-- 				</listcell> -->
 
 				<listcell >
 					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarTarea', tarea=each )" />

@@ -48,8 +48,9 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 	private List<DescriptibleOV> precedenciasEnNumeros = new ArrayList<DescriptibleOV>();
 	
 	private Long idPedido;
-	private DescriptibleOV pedidoDescriptible;
+	private DescriptibleOV pedidoDescriptible = new DescriptibleOV();
 	
+	private String descripcionCliente;
 	
 	public TareaAgendaOV(){
 		generateRandom();
@@ -87,7 +88,8 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 
 		// Guardar la tarea
 		VisorAgendaVM visorVM = (VisorAgendaVM) args.get("vm");
-		visorVM.guardarTarea(tareaQueCambioEstado);
+//		visorVM.guardarTarea(tareaQueCambioEstado); //finalizo la tarea... no se si hace falta
+		visorVM.guardarTarea(this);//le cambio el estado a iniciado :D
 		
 	}
 

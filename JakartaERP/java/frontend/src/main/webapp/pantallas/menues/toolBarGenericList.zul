@@ -17,7 +17,7 @@
 			</div>
 
 			<div hflex="1" droppable="true" style="text-align: right;">
-				<toolbarbutton image="/pantallas/icons/help.png" onClick="@command('salir')" tooltiptext="Manual" />
+<!-- 				<toolbarbutton image="/pantallas/icons/help.png" onClick="@command('salir')" tooltiptext="Manual" /> -->
 			</div>
 
 		</hlayout>

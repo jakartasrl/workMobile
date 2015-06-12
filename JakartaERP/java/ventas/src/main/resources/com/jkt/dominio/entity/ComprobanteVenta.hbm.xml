@@ -89,7 +89,7 @@
 				<one-to-many class="com.jkt.pedido.dominio.PedidoDocumentacion" />
 			</list>
 
-			<list name="detalles" table="DETALLES_PEDIDO" lazy="true" cascade="all">
+			<list name="detalles" lazy="true" cascade="all">
 				<key column="PEDIDO_ID" />
 				<index column="ORDEN" />
 				<one-to-many class="com.jkt.pedido.dominio.PedidoDet" />

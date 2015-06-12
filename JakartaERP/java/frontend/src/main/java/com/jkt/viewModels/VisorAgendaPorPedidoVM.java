@@ -64,7 +64,6 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 	}
 
 	@Command
-//	@NotifyChange({"allTasks", "pedido"})
 	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		openComplexHelper("pedido", "", pedidoDescriptible, "postHelperPedido", "Pedidos Disponibles", "Nro Pedido", "Cliente",true, "Fecha" , "" );
 	}
@@ -89,6 +88,7 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 		allStates = ((ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class)).getList();
 		DescriptibleOV estadoDescriptible;
 		Map<String, DescriptibleOV> estadosEnMapa = new HashMap<String, DescriptibleOV>();
+		
 		for (Object estado : allStates) {
 			estadoDescriptible=(DescriptibleOV) estado;
 			estadosEnMapa.put(String.valueOf(estadoDescriptible.getCodigo()), estadoDescriptible);
@@ -103,7 +103,6 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 		/*
 		 * Aca voy a asignar las precedencias de las tareas!!!
 		 */
-		
 		armarGrafoYAsignarNotifiers(allTasks, pedido.getPrecedentesPlanos());
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
@@ -123,7 +122,6 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 			TareaAgendaOV tareaActual = tareasMap.get(precedenteOV.getCodigo());
 			
 			for (DescriptibleOV descriptibleOV : precedenteOV.getPrecedentes()) {
-//				tareaActual.addObserver(tareasMap.get(descriptibleOV.getCodigo()));
 				TareaAgendaOV tareaAgendaOV = tareasMap.get(descriptibleOV.getCodigo());
 				tareaAgendaOV.addObserver(tareaActual);
 				tareaActual.getPrecedencias().add(tareaAgendaOV);
@@ -135,7 +133,6 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 }

@@ -12,10 +12,11 @@
 				<columns>
 					
 					<column width="100px" label="Pedido" sort="auto(idPedido)" if="${vm.vistaPorSector}" />
+					<column width="200px" label="Cliente" if="${vm.vistaPorSector}" />
 					<column width="100px" label="Sector" sort="auto(sector.descripcion)" if="${vm.vistaPorPedido}"/>
 					
 <!-- 					<column width="150px" label="Codigo" sort="auto(codigoTarea)" /> -->
-					<column width="200px" label="Tarea" sort="auto(descripcionTarea)" />
+					<column width="200px" label="Tarea" sort="auto(descripcionTarea)" if="${vm.vistaPorPedido}"/>
 					<column width="500px" label="Comentario" sort="auto(descripcionAbreviada)" />
 					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaCumplimiento)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
@@ -30,9 +31,10 @@
 						<row>
 						
 							<label value="@bind(each.pedidoDescriptible.codigo)" maxlength="15" if="${vm.vistaPorSector}"/>
+							<label value="@bind(each.descripcionCliente)" if="${vm.vistaPorSector}"/>
 							<label value="@bind(each.sector.descripcion)" maxlength="15" if="${vm.vistaPorPedido}"/>
 <!-- 							<label value="@bind(each.codigoTarea)" maxlength="15"/> -->
-							<label value="@bind(each.descripcionTarea)" width="100%"/>
+							<label value="@bind(each.descripcionTarea)" width="100%" if="${vm.vistaPorPedido}"/>
 							<label value="@bind(each.descripcionAbreviada)" width="100%"/>
 							<datebox disabled="true" width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 						

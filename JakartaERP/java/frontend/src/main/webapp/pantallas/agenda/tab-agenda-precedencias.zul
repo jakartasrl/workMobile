@@ -9,7 +9,10 @@
         <treecol label="Precedente" align="center" width="10%" />
     </treecols>
     <template name="model">
-        <treeitem open="true" >
+        <treeitem>
+			<attribute name="onCreate">
+        		self.setOpen(true);
+        	</attribute>
             <treerow >
                 <treecell label="@bind(each.data.tarea.tarea.codigo)"  />
 <!--                 <treecell style="padding-left:3px;" label="@bind(each.data.tarea.tarea.descripcion.concat(' ').concat(each.data.tarea.comentario))" /> -->
