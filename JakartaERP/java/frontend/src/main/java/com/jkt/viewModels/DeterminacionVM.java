@@ -3,6 +3,7 @@ package com.jkt.viewModels;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import lombok.Data;
 
@@ -13,6 +14,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -89,9 +91,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 				return;
 			}
 			
-//			if (this.determinacion.getId() == 0) {
-				metodoOV.setIdDeterminacion(-1L);
-//			}
+			metodoOV.setIdDeterminacion(-1L);
 
 			List<VariableOV> variablesXMetodo = metodoOV.getVariables();
 
@@ -107,12 +107,36 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 			}
 
 		}
+	
+//		this.parsearCadenaExpresion(metodos);
 
 		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getCodigo());
 		this.determinacion.setDescFormato(this.determinacion.getFormato().getCodigo());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
-		Messagebox.show("Determinacion Guardada Correctamente.");
+		Executions.sendRedirect("/pantallas/index/index-determinacion.zul");
+
+		
+	}
+
+	private void parsearCadenaExpresion(List<MetodoOV> metodos) {
+		
+		for (MetodoOV metodoOV : metodos){
+			List<VariableOV> variables = metodoOV.getVariables();
+			for (VariableOV variableOV : variables) {
+				
+				String nuevaCadena = "";
+				
+				if (!variableOV.isInput()) {
+					String cadenaExpresion = variableOV.getExpresionCadena();
+					StringTokenizer tokens=new StringTokenizer(cadenaExpresion,"#{}");
+					while(tokens.hasMoreTokens()){
+						nuevaCadena = nuevaCadena + tokens.nextToken();
+					}
+					variableOV.setExpresionCadena(nuevaCadena);
+				}
+			}
+		}
 		
 	}
 
@@ -120,20 +144,67 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		for (MetodoOV metodoOV : metodos) {
 			List<VariableOV> variables = metodoOV.getVariables();
 			for (VariableOV variableOV : variables) {
+				
+				if (this.variableRepetida(variableOV,variables) > 1){
+					Messagebox.show(String.format("Metodo '%s' : La variable '%s' se encuentra repetida.", metodoOV.getMetodo(), variableOV.getCodigo()));
+					return false;
+				}
+				
 				if (!variableOV.isInput()) {
 					
 					if (variableOV.getExpresionCadena()==null || variableOV.getExpresionCadena().isEmpty()) {
-						Messagebox.show(String.format("Metodo %s :  Complete la expresión en la variable %s.", metodoOV.getMetodo(), variableOV.getCodigo()));
+						Messagebox.show(String.format("Metodo %s : Complete la expresión en la variable %s.", metodoOV.getMetodo(), variableOV.getCodigo()));
 						return false;
 					}
 					
 					if(!validarExpresion(metodoOV.getMetodo(),variableOV.getExpresionCadena(), variables)){
 						return false;
 					}
+					
+					if (verificarCodigo(variableOV, variableOV.getExpresionCadena())){
+						Messagebox.show(String.format("Metodo '%s' : La variable '%s' se encuentra en ambos lados de la expresion.", metodoOV.getMetodo(), variableOV.getCodigo()));
+						return false;
+					}
+					
 				}
 			}
 		}
 		return true;
+	}
+
+	private boolean verificarCodigo(VariableOV variableOV, String expresion) {
+		
+		expresion = this.transformarExpresion(expresion);
+		
+		Object containerOV=new ContainerOV(expresion);
+		ListDescriptibleOV ejecutar = (ListDescriptibleOV) Operaciones.ejecutar("ValidarExpresion", containerOV, ListDescriptibleOV.class);
+		List list = ejecutar.getList();
+		
+		DescriptibleOV currentExtVar;
+		for (Object extractedVar : list) {
+			currentExtVar=(DescriptibleOV) extractedVar;
+			if (currentExtVar.getCodigo().equals(variableOV.getCodigo())) {
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+
+	private int variableRepetida(VariableOV variableOV, List<VariableOV> variables) {
+		
+		int cont = 0;
+		
+		for (VariableOV var : variables){
+			if (var.getCodigo().equals(variableOV.getCodigo())){
+				cont++;
+				
+			}
+		}
+		
+		return cont;
+			
 	}
 
 	private boolean validarDeterminacion() {
@@ -163,16 +234,6 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		return true;
 	}
 
-//	@Command
-//	public void toogleAccordion(@BindingParam("element") Groupbox currentAccordion){
-//		if (currentAccordion.isOpen()) {
-//			currentAccordion.setOpen(false);
-//		}else{
-//			currentAccordion.setOpen(true);
-//		}
-//	}
-	
-	
 	@Command
 	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
@@ -355,7 +416,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	public void agregarVariable(@BindingParam("metodoActual") MetodoOV m){
 		
 		VariableOV variable = new VariableOV();
-		variable.setCodigo("Nueva Variable");
+//		variable.setCodigo("Nueva Variable");
 		m.getVariables().add(variable);
 		
 	}
@@ -390,10 +451,13 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Command
 	public boolean validarExpresion(@BindingParam("metodo") String metodoName, @BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
 		
+		String expresionTransformada = "";
+		expresionTransformada = this.transformarExpresion(expresion);
+		
 		/*
 		 * Se valida el formato
 		 */
-		Object containerOV=new ContainerOV(expresion);
+		Object containerOV=new ContainerOV(expresionTransformada);
 		ListDescriptibleOV ejecutar = (ListDescriptibleOV) Operaciones.ejecutar("ValidarExpresion", containerOV, ListDescriptibleOV.class);
 		List list = ejecutar.getList();
 		
@@ -406,7 +470,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		 */
 		List<String> variablesCargadas=new ArrayList<String>();
 		for (VariableOV variableOV : variables) {
-			variablesCargadas.add(variableOV.getCodigo());
+			variablesCargadas.add(variableOV.getCodigo());			
 		}
 		
 		DescriptibleOV currentExtVar;
@@ -417,9 +481,71 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 				return false;
 			}
 		}
-		
+			
 		return true;
 		
+		
+	}
+
+	private String transformarExpresion(String exp) {
+		
+		List<String> operadores = new ArrayList<String>();
+		String variablesYConstantes = "";
+		
+		for (int x=0; x < exp.length(); x++){
+			switch (exp.codePointAt(x)) {
+				case '+':
+				case '-':
+				case '*':
+				case '/':
+					String op = (new StringBuffer().append(exp.charAt(x))).toString();
+					operadores.add(op);
+					break;
+				default:
+					break;
+			}
+			
+		}
+		      
+		StringTokenizer tokens=new StringTokenizer(exp," +-*/");
+		while(tokens.hasMoreTokens()){
+			String currentToken = tokens.nextToken();
+			if (!this.esNumero(currentToken)){
+				variablesYConstantes += "#{" + currentToken + "}" + "|";
+			} else {
+				variablesYConstantes += currentToken;
+			}
+		}
+		
+		return this.armarExpresion(variablesYConstantes,operadores);
+		
+	}
+
+	private String armarExpresion(String variablesYConstantes, List<String> operadores) {
+	
+		String result = "";
+		int i = 0;
+		StringTokenizer tokens = new StringTokenizer(variablesYConstantes,"|");
+		while(tokens.hasMoreTokens()){
+			String currentToken = tokens.nextToken();
+			if (tokens.hasMoreTokens()){
+				result += currentToken + operadores.get(i++);
+			} else {
+				result += currentToken;
+			}
+		}
+		
+		return result;
+		
+	}
+
+	private boolean esNumero(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
 		
 	}
 

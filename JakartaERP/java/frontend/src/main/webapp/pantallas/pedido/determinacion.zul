@@ -21,7 +21,7 @@
         
 
 	<vlayout>
-		<panel sclass="panel-maestro" style="padding:5px" height="auto" width="64%" >
+		<panel sclass="panel-maestro" style="padding:5px" height="auto" width="44%" >
 <!-- 		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinación" border="normal" height="auto" width="64%" > -->
 		
 			<panelchildren>	
@@ -30,20 +30,22 @@
 				
 					<columns style="border-style:none">
 						<column width="90px"></column>
-						<column width="100px"></column>
-						<column width="250px"></column>
-						<column width="70px"></column>
-						<column width="100px"></column>
+						<column width="90px"></column>
+						<column width="50px"></column>
+						<column width="90px"></column>
 						<column width="120px"></column>
-						<column width="100px"></column>
+						<column width="120px"></column>
+<!-- 						<column width="100px"></column> -->
 					</columns>
 					
 					<rows style="border-style:none">
 					
 						<row>
 							<label value="Codigo" />
-							<textbox sclass="campoCodigo-small" value="@bind(vm.determinacion.codigo)" width="100%" maxlength="15" />							
-							<textbox sclass="campoCodigo-large" value="@bind(vm.determinacion.descripcion)" width="100%" />						
+							<textbox sclass="campoCodigo-small" value="@bind(vm.determinacion.codigo)" width="100%" maxlength="15" />
+							<cell colspan="4">
+								<textbox sclass="campoCodigo-large" value="@bind(vm.determinacion.descripcion)" width="100%" />
+							</cell>						
 						</row>
 						
 						<row>
@@ -54,11 +56,11 @@
 									<comboitem label="@bind(tipoResultado.codigo)" value="@bind(tipoResultado.codigo)" />											
 								</template>										
 							</combobox>
-							<cell>
-								<label value="Calcula Resultado" width="150px"/>
-								<checkbox checked="@bind(vm.determinacion.calculaResultado)" onCheck="@command('asignarUnicoResultado')" width="150px"/>
+<!-- 							<cell> -->
+<!-- 								<label value="Calcula Resultado" width="150px"/> -->
+<!-- 								<checkbox checked="@bind(vm.determinacion.calculaResultado)" onCheck="@command('asignarUnicoResultado')" width="150px"/> -->
 
-							</cell>
+<!-- 							</cell> -->
 							<label value="Formato"/>
 							<combobox model="@bind(vm.determinacion.listFormato)" selectedItem="@bind(vm.determinacion.formato)" width="100%">
 								<template name="model" var="formato">
@@ -166,14 +168,16 @@
 												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
 												label="Agregar Variable"
 												onClick="@command('agregarVariable', metodoActual=each)"
-												tooltiptext="Agregar nueva variable." visible="@bind(!vm.determinacion.calculaResultado)"/>
+												tooltiptext="Agregar nueva variable." />
+<!-- 												visible="@bind(!vm.determinacion.calculaResultado)" -->
 											<!-- Variables -->
 	
 											<button
 												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/deleteRow.png"
 												label="Borrar Variable"
 												onClick="@command('borrarVar', metodoActual=each)"
-												tooltiptext="Borrar variable." visible="@bind(!vm.determinacion.calculaResultado)"/>
+												tooltiptext="Borrar variable." />
+<!-- 												visible="@bind(!vm.determinacion.calculaResultado)" -->
 
 										</hlayout> 
 
@@ -191,13 +195,16 @@
 												var="valor">
 												<listitem>
 													<listcell>
-														<textbox value="@bind(valor.codigo)"  readonly="@bind(vm.determinacion.calculaResultado)" width="100%"/>
+														<textbox value="@bind(valor.codigo)" width="100%" placeholder="Nueva variable"/>
+<!-- 														readonly="@bind(vm.determinacion.calculaResultado)" -->
 													</listcell>
 													<listcell>
-														<textbox value="@bind(valor.descripcion)" readonly="@bind(vm.determinacion.calculaResultado)" width="100%"/>
+														<textbox value="@bind(valor.descripcion)" width="100%" placeholder="Descripción variable"/>
+<!-- 														readonly="@bind(vm.determinacion.calculaResultado)" -->
 													</listcell>
 													<listcell style="text-align:center" >
-														<checkbox checked="@bind(valor.input)"  visible="@bind(!vm.determinacion.calculaResultado)"/>
+														<checkbox checked="@bind(valor.input)" />
+<!-- 														visible="@bind(!vm.determinacion.calculaResultado)" -->
 													</listcell>
 													<listcell>
 														<textbox value="@bind(valor.expresionCadena)"  width="100%" onBlur="@command('validarExpresion', metodo= each.metodo, expresion=self.value, variables=each.variables)" visible="@bind(!valor.input)" />
