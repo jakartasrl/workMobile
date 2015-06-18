@@ -16,6 +16,7 @@ import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -367,6 +368,12 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
+		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
+	@Init
+	public void init() throws JakartaException {
 		this.nuevo();
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}

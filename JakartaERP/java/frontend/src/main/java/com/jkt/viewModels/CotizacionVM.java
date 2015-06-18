@@ -15,7 +15,10 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.EventListener;
+
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Messagebox.ClickEvent;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -23,7 +26,6 @@ import com.jkt.ov.ArchivoOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.CotizacionOV;
 import com.jkt.ov.DescriptibleOV;
-import com.jkt.ov.HelperOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.pedido.dominio.PedidoDet;
@@ -44,10 +46,19 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 
 		this.completarCotizacionOV();
 		
-		Operaciones.ejecutar("GuardarCotizacion", this.cotizacionOV );
-//		Messagebox.show("Cotización Guardada Correctamente.");
-		Executions.sendRedirect("/pantallas/index/index-cotizacion.zul");		
-
+		CotizacionOV cotizacionOV = (CotizacionOV) Operaciones.ejecutar("GuardarCotizacion", this.cotizacionOV , CotizacionOV.class );
+//		Messagebox.show("Se genero el numero de Cotizacion " + cotizacionOV.getNroCotizacion());
+      
+		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+            public void onEvent(ClickEvent event) throws Exception {
+                if(Messagebox.Button.OK.equals(event.getButton())) {
+                	cancelarCustomizado();
+                }
+            }
+        };
+        
+        Messagebox.show("Se genero el numero de Cotizacion " + cotizacionOV.getNroCotizacion(), "Nro Cotizacion", new Messagebox.Button[]{
+        		Messagebox.Button.OK }, Messagebox.INFORMATION, clickListener);
 	}
 
 	private void completarCotizacionOV() {

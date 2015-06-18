@@ -20,13 +20,16 @@ public class GuardarCotizacion extends Operation {
 			throw new JakartaException("Error en el archivo operaciones.xml. Dentro del tag INPUT, el atributo 'keyName' debe llamarse 'objeto'.");
 		}
 		guardar(object);
-		
 	}
 	
 	protected void guardar(List object) throws ClassNotFoundException, InstantiationException, IllegalAccessException, ValidacionDeNegocioException, JakartaException {
 		Object objectToSave = object.get(0);
 		serviceRepository.save((PersistentEntity) objectToSave);
-		notificarObjeto(WRITER_COTIZACION, objectToSave);
+		if (this.tipoCliente.equals(this.CLIENTE_DELPHI)) {
+			notificarObjeto(WRITER_COTIZACION, objectToSave);
+		} else {
+			notificarObjeto("", objectToSave);
+		}
 	}
 
 }

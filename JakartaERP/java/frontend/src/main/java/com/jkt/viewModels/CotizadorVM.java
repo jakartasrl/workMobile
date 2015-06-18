@@ -11,7 +11,6 @@ import java.util.Random;
 import lombok.Data;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -20,10 +19,12 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Messagebox.ClickEvent;
 
 import com.jkt.common.Operaciones;
 import com.jkt.dominio.CotizacionDet.Estado;
@@ -67,9 +68,13 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	Random rand = new Random();
 	
 	@Command("guardar")
-	@NotifyChange({"modeloCotizadorOV"})
+	@NotifyChange({"modeloCotizadorOV","apertura","cotizacionEditable"})
 	public void guardar() throws JakartaException {
 		
+		if(this.itemSelected.getNroComprobante() == null ) {
+			Messagebox.show("Debe abrir un Item de Cotizacion.");
+			return;
+		}
 		if(!this.cotizacionEditable){
 			Messagebox.show("No es posible guardar una cotización ya autorizada");
 			return;
@@ -214,7 +219,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
-	@NotifyChange({"totalImporteVenta","totalCostoEn"})
+	@NotifyChange({"totalImporteVenta","totalCostoEn","apertura","cotizacionEditable"})
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -230,7 +235,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	private boolean cotizacionEditable = true;
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","cotizacionEditable","expresarEnMonedaSeleccionado"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","cotizacionEditable","expresarEnMonedaSeleccionado","apertura"})
 	public void cargarItemACotizar(){
 		
 		apertura = true;
@@ -279,7 +284,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@GlobalCommand("actualizar")
-	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","modeloCotizadorOV","monedas","cotizacionEditable","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado"})
+	@NotifyChange({"cotizadorOV","itemSelected","arbolTitulos","modeloCotizadorOV","monedas","cotizacionEditable","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado","apertura"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -301,7 +306,6 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.itemSelected = new ItemsOV();
 		this.cotizacionEditable = true;
 		this.expresarEnMonedaSeleccionado = new DescriptibleOV();
-		this.expresarEnMonedaSeleccionado.setDescripcion(StringUtils.EMPTY);
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new AdvancedTreeModel(root);
@@ -309,7 +313,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Init
-	@NotifyChange({"lsTipoDeCambio","monedas","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado","itemSelected"})
+	@NotifyChange({"lsTipoDeCambio","monedas","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado","itemSelected","cotizacionEditable","apertura"})
 	public void init(){
 		
 		expresarEnMonedaSeleccionado = new DescriptibleOV();
@@ -348,9 +352,11 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
-	@NotifyChange({"cotizadorOV","modeloCotizadorOV","totalImporteVenta","totalCostoEn","expresarEnMonedaSeleccionado","itemSelected"})
+	@NotifyChange({"cotizadorOV","modeloCotizadorOV","totalImporteVenta","totalCostoEn","expresarEnMonedaSeleccionado","itemSelected","apertura"})
 	public void traerModeloCotizador() throws IllegalAccessException, InvocationTargetException, JakartaException {
 		
+//		this.validarItemDeCotizacion();
+					
 		this.totalCostoEn = 0;
 		this.totalImporteVenta = 0;
 		
@@ -362,6 +368,32 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.setModeloCotizadorOV(modeloCotizadorOV);
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 		
+	}
+
+	private void validarItemDeCotizacion() {
+
+			
+		if (this.itemSelected.getNroComprobante() == null ) {
+			
+			EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
+				public void onEvent(ClickEvent event) throws Exception {
+					if(Messagebox.Button.OK.equals(event.getButton())) {
+						cancelarCustomizado();
+					}
+				}
+			};
+        
+			Messagebox.show("Debe abrir un Item de Cotizacion.", "ERROR", new Messagebox.Button[]{
+					Messagebox.Button.OK }, Messagebox.INFORMATION, new EventListener<ClickEvent>(){
+
+						@Override
+						public void onEvent(ClickEvent event) throws Exception {
+							// TODO Auto-generated method stub
+							
+						}} );
+		
+		}
+
 	}
 
 	private void crearArbolModeloCotizador(ModeloCotizadorOV modeloCotizadorOV2) {
@@ -563,19 +595,19 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-		this.init();
-		this.nuevo();
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
-		
+		this.nuevo();		
+		Executions.sendRedirect("/pantallas/index/index-Cotizador.zul");		
 	}
 
 	public void cargarItem() {
 
+		this.apertura = true;
 		this.totalCostoEn = 0;
 		this.totalImporteVenta = 0;
 		
 		long idABuscar = this.itemSelected.getId();
-		this.nuevo();
+		
+		nuevo();
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos = new DefaultTreeModel<TituloModeloCotizadorOV>(root);

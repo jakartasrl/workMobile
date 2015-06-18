@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +21,7 @@ import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.HeaderHelpGenericoOV;
@@ -74,7 +74,16 @@ public abstract class ViewModel {
 		container.setString3(ov.getCampoClave());
 		
 		//Asigna el resultado.
-		DescriptibleOV resultado= (DescriptibleOV) Operaciones.ejecutar("ValidarEntidad", container, DescriptibleOV.class);
+		DescriptibleOV resultado= null;
+		try{
+			resultado= (DescriptibleOV) Operaciones.ejecutar("ValidarEntidad", container, DescriptibleOV.class);
+		}catch(Exception e){
+			resultado = new DescriptibleOV();
+			BeanUtils.copyProperties(resultado, ov);
+			Messagebox.show(e.getMessage());
+			BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+			return;
+		}
 
 		//Copio los valores simples, no se hace x referencias xq se pierden.
 		BeanUtils.copyProperties(resultado, ov);
