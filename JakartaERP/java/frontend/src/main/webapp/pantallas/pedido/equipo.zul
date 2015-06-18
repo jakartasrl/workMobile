@@ -47,7 +47,7 @@
 								</cell>
 								
 								<cell colspan="2">
-									<textbox width="248px" value="@bind(vm.clienteOV.descripcion)" />
+									<textbox width="248px" value="@bind(vm.clienteOV.descripcion)" readonly="true" />
 								</cell>
 															
 						</row>
@@ -61,7 +61,7 @@
 								</cell>
 
 								<cell colspan="2">
-									<textbox width="248px" value="@bind(vm.tipoProductoOV.descripcion)" />					
+									<textbox width="248px" value="@bind(vm.tipoProductoOV.descripcion)" readonly="true" />					
 								</cell>
 						</row>
 					</rows>

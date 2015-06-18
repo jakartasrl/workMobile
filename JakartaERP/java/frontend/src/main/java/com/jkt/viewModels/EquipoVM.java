@@ -3,7 +3,6 @@ package com.jkt.viewModels;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.zkoss.bind.annotation.BindingParam;
@@ -226,13 +225,14 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 	
 	@Command("guardar")
-	@NotifyChange("ov")
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas"})
 	public void guardar() throws JakartaException {
-		try{
-			this.ov.setCodigo(this.ov.getMarca().getCodigo().concat("-").concat(this.ov.getNroSerie()));
-		} catch(NullPointerException e){
-			throw new JakartaException("Debe ingresar marca y numero de serie.");
+		
+		if (!this.validar()){
+			return;
 		}
+
+		this.ov.setCodigo(this.ov.getMarca().getCodigo().concat("-").concat(this.ov.getNroSerie()));
 		
 		this.ov.setIdMarca(this.ov.getMarca().getId());
 		
@@ -266,9 +266,39 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		
 		this.ov.setCaracteristicasEquipo(this.equipoCaracteristicas);
 
-		
 		Operaciones.ejecutar("saveEquipo", this.ov);
-		Messagebox.show("Equipo Guardado correctamente.");
+		Executions.sendRedirect("/pantallas/index/index-equipo.zul");
+	}
+
+	private boolean validar() {
+		
+		if (this.ov.getMarca().getCodigo() == null || this.ov.getMarca().getCodigo().equals("")) {
+			Messagebox.show("Debe seleccionar una marca.");
+			return false;
+		}
+		
+		if (this.ov.getNroSerie() == null || this.ov.getNroSerie().equals("")) {
+			Messagebox.show("Debe ingresar un numero de serie.");
+			return false;
+		}
+		
+		if (this.ov.getDescripcion() == null || this.ov.getDescripcion().equals("")) {
+			Messagebox.show("Debe ingresar una descripcion del Equipo.");
+			return false;
+		}
+		
+		if (this.clienteOV.getCodigo() == null || this.clienteOV.getCodigo().equals("")) {
+			Messagebox.show("Debe ingresar un Cliente.");
+			return false;
+		}
+		
+		if (this.tipoProductoOV.getCodigo() == null || this.tipoProductoOV.getCodigo().equals("")) {
+			Messagebox.show("Debe ingresar un Tipo de Producto.");
+			return false;
+		}
+		
+		return true;
+		
 	}
 
 	@Command
@@ -284,6 +314,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		this.marcas = new ArrayList<ValoresTablaOV>();;
 		this.marca= new ValoresTablaOV();
 		this.init();
+		Executions.sendRedirect("/pantallas/index/index-equipo.zul");
 	}
 
 	@Override
@@ -292,7 +323,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		try {
 			this.openHelper("equipo", "", this.ov, "traerEquipo", "Equipos", "Código", "Descripción de equipos",false);
 		} catch (IllegalAccessException e) {
-			levantarExcepcion(e);
+			levantarExcepcion(e); 
 		} catch (IllegalArgumentException e) {
 			levantarExcepcion(e);
 		} catch (InvocationTargetException e) {
@@ -314,8 +345,10 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 
 	@Override
+	@NotifyChange({"ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas"})
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
+		Executions.sendRedirect("/pantallas/index/index-equipo.zul");
 	}
 	
 }

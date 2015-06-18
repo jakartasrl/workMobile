@@ -1085,8 +1085,10 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-		<operacion name="GuardarCotizacion" clase="com.jkt.presupuesto.operaciones.GuardarCotizacion" entidad="com.jkt.dominio.Cotizacion" outputOV="com.jkt.ov.DescriptibleOV" inputOV="com.jkt.ov.CotizacionOV">
+		<operacion name="GuardarCotizacion" clase="com.jkt.presupuesto.operaciones.GuardarCotizacion" entidad="com.jkt.dominio.Cotizacion" outputOV="com.jkt.ov.CotizacionOV" inputOV="com.jkt.ov.CotizacionOV">
 		
+<!-- 		outputOV="com.jkt.ov.DescriptibleOV" -->
+
 		<input keyName="objeto" clase="com.jkt.dominio.Cotizacion">
 			<campoEntrada propertyOV="id" 					metodo="setId" />
 			<campoEntrada propertyOV="nroCotizacion"		metodo="setNro" />
@@ -1122,6 +1124,10 @@
 			</campoEntrada>
 			
 		</input>
+		
+		<output>
+			<campoSalida target="nro" 				value="nroCotizacion"/>
+		</output>
 		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
@@ -1606,8 +1612,7 @@
 			</campoEntrada>
 
 		</input>
-
-
+		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	

@@ -66,8 +66,7 @@
 			</panelchildren>
 
 		</panel>
-		
-		<div width="100%">
+		<div width="100%" visible="@bind(vm.apertura)">
 			<include id="dcContent" hflex="1" src="/pantallas/cotizador/cotizador-titulo-concepto.zul" viewModel="${vm}" />
 		</div>
 		
