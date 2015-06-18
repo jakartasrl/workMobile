@@ -73,10 +73,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	private ListDescriptibleOV estados;
 	
 	private List<DescriptibleOV> sectores=new ArrayList<DescriptibleOV>();
-//	this.sectores = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("sector"), ListDescriptibleOV.class)).getList();
-//	if (!this.sectores.isEmpty()) {
-//		this.sectorSeleccionado = this.sectores.get(0);
-//	}
 	
 	/*
 	 * Atributos de un pedido sin planificacion
@@ -148,15 +144,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			tarea.setCodigoTarea(tarea.getTarea().getCodigo());
 			tarea.setIdSector(tarea.getSector().getId());
 			
-//			tarea.setIdEstado(Integer.valueOf(tarea.getEstado().getCodigo()));
-//			tarea.setIdEstado(Estado.NO_INICIADO.getValue());
-			
 			tareas.add(tarea);//tarea level0, agregarla a la lista de tareas SI O SI
 			
 			hijos = nodoActual.getChildren();
 			
 			//si la tarea se agrego recien, solamente se asigna por defecto el estado no iniciado, de modo contrario se verifican sus precedencias
-			if(tarea.getIdEstado()==0 || tarea.getIdEstado()==1 ){
+			if(tarea.getIdEstado()==0 || tarea.getIdEstado()==Estado.EN_ESPERA.getValue() ){
 				tarea.setIdEstado(Estado.NO_INICIADO.getValue());
 			}else if(tarea.getIdEstado()==3 || tarea.getIdEstado()==4){ //si es iniciada o finalizada no se le cambia el estado 
 				
@@ -179,8 +172,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			List<DescriptibleOV> listaPrecedencias=new ArrayList<DescriptibleOV>();
 			
-//			tarea.setIdEstado(Estado.NO_INICIADO.getValue());
-			
 			for (TreeNode<TareaPrecedenteOV> nodoLevel2 : hijos) {
 				if (nodoLevel2.getData().getEsPrecedente()) {
 						
@@ -201,7 +192,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		pedidoAGuardar.setId(this.pedidoDescriptible.getId());
 		pedidoAGuardar.setTareas(tareas);
 		Operaciones.ejecutar("GenerarPlanificacionPedido", pedidoAGuardar);
-//		Executions.sendRedirect("/pantallas/index/index-agenda.zul");
 	}
 	
 	/**
@@ -218,7 +208,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	}
 	
 	public void recuperarAgendaPedido() throws IllegalAccessException, InvocationTargetException, JakartaException{
-//		this.setTitulo("Planificación del Pedido '"+this.pedidoDescriptible.getNro()+"' .");
 		this.setTitulo("Planificación del Pedido");
 		
 		this.agenda=new AgendaOV();
@@ -248,16 +237,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			tareaAgendaOV.setTarea(tarea);
 			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector",tareaAgendaOV.getIdSector()));
 			tareaAgendaOV.getEstado().setDescripcion(estadosEnMapa.get(String.valueOf(tareaAgendaOV.getIdEstado())));
-			
-//			//Asigna el estado al combo.
-//			DescriptibleOV estadoActual;
-//			for (Object object : this.estados.getList()) {
-//				estadoActual=(DescriptibleOV) object;
-//				if (estadoActual.getCodigo().equals(String.valueOf(tareaAgendaOV.getIdEstado()))) {
-//					tareaAgendaOV.setEstado(estadoActual);
-//				}
-//			}
-			
 			
 			this.tareaAgregada=tareaAgendaOV;
 			this.agenda.getTareasGenerales().add(this.tareaAgregada);
@@ -304,13 +283,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				
 				for (DescriptibleOV descriptibleOV : precedenteActual.getPrecedentes()) {
 					
-//					TareaPrecedenteOV nuevaPrecedencia=new TareaPrecedenteOV();
-//
-//					if(		this.siguienteRoot.getData().getTarea().getIdEstado()==Estado.EN_EJECUCION.getValue() || 
-//							this.siguienteRoot.getData().getTarea().getIdEstado()==Estado.FINALIZADO.getValue()){
-//						nuevaPrecedencia.setEditable(Boolean.FALSE);
-//					}
-					
 					if (String.valueOf(hijoLevel2.getData().getTarea().getId()).equals(descriptibleOV.getCodigo())) {
 						hijoLevel2.getData().setEsPrecedente(true);
 						break;
@@ -320,11 +292,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 		}
-		
 	}
-
-	
-	
 	
 	@Command
 	@NotifyChange({"agenda","pedidoDescriptible","titulo","arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
@@ -621,9 +589,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 		log.info("Inicializando Sectores disponibles...");
 		this.sectores = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("sector"), ListDescriptibleOV.class)).getList();
-//		if (!this.sectores.isEmpty()) {
-//			this.sectorSeleccionado = this.sectores.get(0);
-//		}
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
@@ -795,7 +760,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				}
 				
 				parametros.put("items", this.items);
-//				parametros.put("itemsArticulos", this.itemsArticulos);
 				
 				Window window = (Window) Executions.createComponents("/pantallas/pedido/editorItems.zul", null, parametros);
 				window.doModal();
@@ -803,39 +767,18 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		}else if(this.tareaAgregada.getTarea().getId()==paramTareaLab.getValorNumero()){
 			
 			//Tareas para cuando la tarea es de tipo laboratorio
-			
 			DescriptibleOV tarea = this.tareaAgregada.getTarea();
 			this.tareaAgregada.setEstado(estadoTemporal);
 			if(this.lDeterminacionesQuimicas.isEmpty()){
-//				this.tareaAgregada.setEstado(estadoTemporal);
 				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 				actualizarTareasYArbol();
 			}else{
 				this.tareaAgregada=new TareaAgendaOV();
 				this.tareaAgregada.setTarea(tarea);
-//				this.tareaAgregada.setEstado(estadoTemporal);
-
-//				this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
-				
-//				DescriptibleOV estadoTemporal = new DescriptibleOV();
-//				estadoTemporal.setDescripcion("No Guardada aun");
-//				this.tareaAgregada.setEstado(estadoTemporal);
-				
 				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 				this.tareaAgregada.setDescripcionAbreviada("Trabajo de Laboratorio");
 				this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
 				actualizarTareasYArbol();
-				/*
-				for (ItemsOV itemsOV : this.lDeterminacionesQuimicas) {
-					this.tareaAgregada=new TareaAgendaOV();
-					this.tareaAgregada.setTarea(tarea);
-					this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
-					this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
-					this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionDeterminacion());
-					this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorLab.getValorNumero())) );
-					actualizarTareasYArbol();
-				}
-				*/
 			}
 		}else if(this.tareaAgregada.getTarea().getId()==paramTareaFacturar.getValorNumero()){
 			
@@ -845,18 +788,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
 
 			if (facturaciones.isEmpty()) {
+				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 				actualizarTareasYArbol();
 			}else{
 				for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
 
-//					estadoTemporal.setDescripcion("No Guardada aun");
 					this.tareaAgregada.setEstado(estadoTemporal);
-					
-//					DescriptibleOV estadoTemporal = new DescriptibleOV();
-//					estadoTemporal.setDescripcion("No Guardada aun");
-//					this.tareaAgregada.setEstado(estadoTemporal);
 					
 					this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 					this.tareaAgregada.setDescripcionAbreviada(formaFacturacionOV.getDescripcion());
@@ -914,7 +853,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		for (ItemsOV itemsOV : items) {
 			this.tareaAgregada=new TareaAgendaOV();
 			this.tareaAgregada.setTarea(tarea);
-//			this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));v
 			
 			DescriptibleOV estadoTemporal = new DescriptibleOV();
 			estadoTemporal.setDescripcion("No Guardada aun");
@@ -960,7 +898,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 						Messagebox.show("Es imposible asignar una dependencia mutua.");
 						checkComponent.setChecked(false);
 						nodo.getData().setEsPrecedente(false);
-//						BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 						return;
 					}
 				}
@@ -968,8 +905,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			checkComponent.setChecked(true);
 			nodo.getData().setEsPrecedente(true);
-//			BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
-
 
 		}
 	}

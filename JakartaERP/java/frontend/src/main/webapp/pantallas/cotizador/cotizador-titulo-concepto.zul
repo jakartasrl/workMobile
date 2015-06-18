@@ -5,7 +5,7 @@
 		<label style="width:100px;" value="Modelo a utilizar : " />
 							
 			<hlayout width="100%">
-				<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" tabindex="5"
+				<textbox sclass="campoCodigo-medium" value="@bind(vm.modeloCotizadorOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='modeloCotizador', codigo=self.value, ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" 
 				disabled="@bind(!vm.cotizacionEditable)" />
 				<button label="..." onClick="@command('openHelper', clase='modeloCotizador', ov=vm.modeloCotizadorOV, post='traerModeloCotizador')" disabled="@bind(!vm.cotizacionEditable)" />
 			</hlayout>

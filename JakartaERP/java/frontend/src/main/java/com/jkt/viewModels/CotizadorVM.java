@@ -7,8 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import lombok.Data;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -21,6 +24,7 @@ import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
+
 import com.jkt.common.Operaciones;
 import com.jkt.dominio.CotizacionDet.Estado;
 import com.jkt.excepcion.JakartaException;
@@ -297,6 +301,7 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 		this.itemSelected = new ItemsOV();
 		this.cotizacionEditable = true;
 		this.expresarEnMonedaSeleccionado = new DescriptibleOV();
+		this.expresarEnMonedaSeleccionado.setDescripcion(StringUtils.EMPTY);
 		
 		NodoTitulos root = new NodoTitulos(new TituloModeloCotizadorOV(),true);
 		this.arbolTitulos=new AdvancedTreeModel(root);
@@ -558,8 +563,8 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-		
-		this.init();		
+		this.init();
+		this.nuevo();
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 		
 	}

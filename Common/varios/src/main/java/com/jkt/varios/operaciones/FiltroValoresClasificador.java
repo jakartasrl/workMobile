@@ -1,8 +1,10 @@
 package com.jkt.varios.operaciones;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.jkt.dominio.Descriptible;
 import com.jkt.operaciones.Operation;
 import com.jkt.varios.dominio.Clasificador;
 import com.jkt.varios.dominio.Componente;
@@ -17,6 +19,8 @@ public class FiltroValoresClasificador extends Operation {
 
 	private static final String OID_CLASIFICADOR = "oidentidadmaestra".toUpperCase();
 
+	private List<Descriptible> lista =  new ArrayList<Descriptible>();
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		
@@ -42,6 +46,12 @@ public class FiltroValoresClasificador extends Operation {
 			}
 			mostrarValores(componenteActual);
 		}
+		
+		
+		if(CLIENTE_HTML.equals(this.getTipoCliente())){
+			notificarObjeto("", lista);
+		}
+
 	}
 
 	/**
@@ -53,7 +63,11 @@ public class FiltroValoresClasificador extends Operation {
 			if (componenteValor==null) {
 				continue;
 			}
-			notificarObjeto("resultado", componenteValor);
+			if(CLIENTE_DELPHI.equals(this.getTipoCliente())){
+				notificarObjeto("resultado", componenteValor);
+			}else{
+				lista.add(componenteValor);
+			}
 		}
 	}
 

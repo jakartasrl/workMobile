@@ -303,6 +303,23 @@
 
 	</operacion>
 	
+	
+	<operacion name="FiltroValoresClasificador" clase="com.jkt.varios.operaciones.FiltroValoresClasificador" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
+
+		<input>
+			<campoEntrada propertyOV="oidEntidadMaestra" name="OIDENTIDADMAESTRA"/>
+		</input>
+		
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
 	<operacion name="HelperCompuesto" clase="com.jkt.operaciones.HelperCompuesto" inputOV="com.jkt.ov.HelperOV" entidad="com.jkt.dominio.Descriptible" outputOV="com.jkt.ov.ListDescriptibleOV">
 
 		<input>
@@ -1715,5 +1732,78 @@
 		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	
+	
+	
+	
+	
+		<!-- GUARDAR CONCEPTO DE PRESUPUESTO -->
+<!-- 	<operacion name="GuardarConceptoPresupuesto" clase="com.jkt.operaciones.GuardarLista"> -->
+	
+<!-- 		<input name="mtConc" keyName="objeto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto" fieldID="oid_conc"> -->
+<!-- 			<campoEntrada> -->
+<!-- 				<campoEntrada name="cod_conc" clase="String" metodo="setCodigo" /> -->
+<!-- 				<campoEntrada name="des_conc" clase="String" metodo="setDescripcion" /> -->
+<!-- 				<campoEntrada name="pide_art" clase="Boolean" metodo="setPideArticulo" /> -->
+<!-- 				<campoEntrada name="oid_val_cla" clase="com.jkt.varios.dominio.ComponenteValor" metodo="setComponenteValor" /> -->
+<!-- 				<campoEntrada name="oid_mon" clase="com.jkt.varios.dominio.Moneda" metodo="setMonedaPorDefecto" /> -->
+<!-- 				<campoEntrada name="oid_unid_med" clase="com.jkt.varios.dominio.UnidadMedida" metodo="setUnidadDeMedidaPorDefecto" /> -->
+<!-- 			</campoEntrada> -->
+<!-- 		</input> -->
+	
+<!-- 		<forms> -->
+<!-- 			<form name="FNVen0001"></form> -->
+<!-- 		</forms> -->
+
+<!-- 	</operacion> -->
+	
+	<operacion name="guardarConcepto" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.cotizador.dominio.ConceptoPresupuesto" inputOV="com.jkt.ov.ConceptoPresupuestoOV">
+	
+		<input keyName="objeto" clase="com.jkt.cotizador.dominio.ConceptoPresupuesto"> 
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="pideArticulo" metodo="setPideArticulo" /> 
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+
+ 			<campoEntrada propertyOV="idMoneda" metodo="setMonedaPorDefecto" /> 
+ 			<campoEntrada propertyOV="idUnidadMedida" metodo="setUnidadDeMedidaPorDefecto" /> 
+ 			<campoEntrada propertyOV="idComponenteValor" metodo="setComponenteValor" /> 
+
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="TraerConceptoPresupuesto" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV"  outputOV="com.jkt.ov.ListConceptoPresupuestoOV">
+
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+		</input>
+	
+		<output>
+
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="codigo" 			value="codigo" />
+			<campoSalida target="descripcion" 		value="descripcion" />
+
+			<campoSalida target="pideArticulo" 		value="pideArticulo" />
+			<campoSalida target="activo" 		value="activo" />
+
+			<campoSalida target="monedaPorDefecto.id" 					value="idMoneda" />
+			<campoSalida target="monedaPorDefecto.codigo" 				value="codigoMoneda" />
+			<campoSalida target="monedaPorDefecto.descripcion" 			value="descripcionMoneda" />
+			
+			<campoSalida target="unidadDeMedidaPorDefecto.id" 			value="idUnidadMedida" />
+			<campoSalida target="unidadDeMedidaPorDefecto.codigo" 		value="codigoUnidadMedida" />
+			<campoSalida target="unidadDeMedidaPorDefecto.descripcion" 	value="descripcionUnidadMedida" />
+			<campoSalida target="componenteValor.id" 						value="idComponenteValor" />
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 	
 </entity>

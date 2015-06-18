@@ -48,6 +48,7 @@ public class MenuVM {
 		menues.add(MenuOV.newInstance("Planificación de Pedido", "index/index-agenda.zul", "small"));
 		menues.add(MenuOV.newInstance("Visor de Tareas por Sector", "index/index-vista-agenda-sector.zul", "small"));
 		menues.add(MenuOV.newInstance("Visor de Tareas por Pedido", "index/index-vista-agenda-pedido.zul", "small"));
+		menues.add(MenuOV.newInstance("Conceptos Presupuestarios", "index/index-conceptos.zul", "small"));
 //		menues.add(MenuOV.newInstance("Visor de Planificación", "index/visor-agenda.zul", "small"));
 
 		

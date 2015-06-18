@@ -83,7 +83,8 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		codigosTitulosCortados = "Titulos Cortados : ";
 		for (NodoTitulos nodoTitulos : titulosCortados) {
 			 this.nodoActual.remove(nodoTitulos);
-			 codigosTitulosCortados+=nodoTitulos.getData().getCodigoC()+" | ";
+			 String codigoC = nodoTitulos.getData().getCodigoC()==null?nodoTitulos.getData().getConcepto().getCodigo():nodoTitulos.getData().getCodigoC();
+			codigosTitulosCortados+=codigoC+" | ";
 		}
 		
 	}

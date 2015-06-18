@@ -427,6 +427,9 @@ public abstract class ComprobanteVM extends ViewModel {
 		this.representanteOV = new DescriptibleOV();
 
 		this.contactoSeleccionado = new DescriptibleOV();
+
+		this.archivos = new ArrayList<ArchivoOV>();
+		
 	}
 
 	@Command
