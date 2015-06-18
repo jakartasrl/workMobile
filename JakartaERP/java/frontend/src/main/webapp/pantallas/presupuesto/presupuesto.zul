@@ -23,7 +23,7 @@
 			    		
 			    		<hlayout >
 							<textbox sclass="campoCodigo-medium" value="@bind(vm.comprobanteOV.nroCotizacion)" readonly="false" tabindex="1" />
-							<button style="padding-left:-15px;" label="..." onClick="@command('openHelperComplejo', clase='cotizacion', post='cargarCotizacion',ov=vm.cotizacionDescriptible, titulo='Selección de Cotización', codHeader='Nro Cotización', descHeader='Cliente', tituloAdicional1='Fecha')" />
+							<button style="padding-left:-15px;" label="..." onClick="@command('openHelperComplejo', clase='cotizacion', post='cargarCotizacion',ov=vm.cotizacionDescriptible, titulo='Selección de Cotización', codHeader='Nro Cotización', descHeader='Cliente', tituloAdicional1='Fecha', tituloAdicional2='Referencia')" />
 			    		</hlayout>
 
 						<label value="Nro.Presupuesto : " />

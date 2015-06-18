@@ -111,7 +111,7 @@ public class Cotizacion extends ComprobanteVenta implements IDescriptible{
 	}
 
 	public String getAdicional2() {
-		return "";
+		return this.getReferencia();
 	}
 	
 }
