@@ -31,7 +31,8 @@ public class MenuVM {
 		
 		menues.add(MenuOV.newInstance("Laboratorio", "index/index-laboratorio.zul", "small"));
 		menues.add(MenuOV.newInstance("Equipo", "index/index-equipo.zul", "small"));
-		menues.add(MenuOV.newInstance("Determinacion", "index/index-determinacion.zul", "small"));
+		menues.add(MenuOV.newInstance("Determinacion Electrica", "index/index-determinacion.zul?l=LaboratorioElectrico", "small"));
+		menues.add(MenuOV.newInstance("Determinacion Quimica", "index/index-determinacion.zul?l=LaboratorioQuimico", "small"));
 		menues.add(MenuOV.newInstance("Sector", "generic/genericList.zul", "small","guardarSector", "sector"));
 		menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
 		menues.add(MenuOV.newInstance("Tarea", "generic/genericList.zul", "small","guardarTareaSimple", "tarea"));

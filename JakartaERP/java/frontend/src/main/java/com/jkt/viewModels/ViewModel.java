@@ -130,7 +130,8 @@ public abstract class ViewModel {
 
 	
 	@Command("openHelperComplejo")
-	public void openComplexHelper(	@BindingParam("clase") String clase, 
+	public void openComplexHelper(	
+							@BindingParam("clase") String clase, 
 							@BindingParam("oidEntidadMaestra") String oidEntidadMaestra ,
 							@BindingParam("ov") ObjectView ov,
 							@BindingParam("post") String metodo,

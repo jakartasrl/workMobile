@@ -14,6 +14,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -27,6 +28,7 @@ import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListValorEsperadoOV;
 import com.jkt.ov.ListVariableOV;
 import com.jkt.ov.MetodoOV;
+import com.jkt.ov.ParametroOV;
 import com.jkt.ov.ValorEsperadoOV;
 import com.jkt.ov.VariableOV;
 
@@ -34,25 +36,32 @@ import com.jkt.ov.VariableOV;
 public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	private DeterminacionOV determinacion = new DeterminacionOV();
-		
+	
+	private long idLaboratorio;
+	private String laboratorioParametroKey;
+	
+	
 	@Init
 	@NotifyChange("determinacion")
-	public void init() {
+	public void init(@QueryParam("l") String laboratorio) {
+		this.laboratorioParametroKey = laboratorio;
+		ParametroOV laboratorioParam = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV(laboratorio), ParametroOV.class);
+		this.idLaboratorio = Long.valueOf(laboratorioParam.getValorNumero());
 		
-		try {
-			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-			if(recuperarDesdeSesion!=null){
-				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-				return;// true; 
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage());
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e.getMessage());
-		}
+//		try {
+//			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+//			if(recuperarDesdeSesion!=null){
+//				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+//				return;// true; 
+//			}
+//		} catch (IllegalAccessException e) {
+//			throw new RuntimeException(e.getMessage());
+//		} catch (InvocationTargetException e) {
+//			throw new RuntimeException(e.getMessage());
+//		}
 		
 		this.setTitulo("Determinaciones");
-		this.determinacion.setIdLaboratorio(1);
+		this.determinacion.setIdLaboratorio(this.idLaboratorio);
 		this.determinacion.setListTipoResultado(this.cargarListTipoResultados());
 		this.determinacion.setListFormato(this.cargarListFormato());
 	}
@@ -114,7 +123,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		this.determinacion.setDescFormato(this.determinacion.getFormato().getCodigo());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
-		Executions.sendRedirect("/pantallas/index/index-determinacion.zul");
+		Executions.sendRedirect("/pantallas/index/index-determinacion.zul?l="+this.laboratorioParametroKey);
 
 		
 	}
@@ -238,15 +247,14 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
 		this.determinacion = new DeterminacionOV();
-		
-		this.init();
+		this.init(this.laboratorioParametroKey);
 	}
 
 	@Override
 	@Command
 	public void buscar() {
 		try {
-			openComplexHelper("determinacion", "", this.determinacion, "traerDeterminacion", "Determinaciones", "Código", "Descripción",true, "","");
+			openComplexHelper("determinacion", String.valueOf(idLaboratorio), this.determinacion, "traerDeterminacion", "Determinaciones", "Código", "Descripción",false, "","");
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
