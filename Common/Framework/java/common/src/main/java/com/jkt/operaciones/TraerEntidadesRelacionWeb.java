@@ -32,7 +32,9 @@ public class TraerEntidadesRelacionWeb extends Operation {
 			
 		}else{
 			PersistentEntity objeto = obtener((Class<? extends PersistentEntity>) Class.forName(this.getRepositorioClases().getClass(entidadWeb)), id);
-			obtenerTodos.add(objeto);
+//			obtenerTodos.add(objeto);
+			notificarObjeto("", objeto);
+			return;
 		}
 		
 		notificarObjeto("", obtenerTodos);

@@ -292,6 +292,10 @@ public class Configuration {
 		digester.addObjectCreate("entity/operacion/output/campoSalida/campoSalida/campoSalida", CampoSalida.class.getName());
 		digester.addSetProperties("entity/operacion/output/campoSalida/campoSalida/campoSalida");
 		digester.addSetNext("entity/operacion/output/campoSalida/campoSalida/campoSalida", "addHijo", CampoSalida.class.getName());
+
+		digester.addObjectCreate("entity/operacion/output/campoSalida/campoSalida/campoSalida/campoSalida", CampoSalida.class.getName());
+		digester.addSetProperties("entity/operacion/output/campoSalida/campoSalida/campoSalida/campoSalida");
+		digester.addSetNext("entity/operacion/output/campoSalida/campoSalida/campoSalida/campoSalida", "addHijo", CampoSalida.class.getName());
 		
 		
 		/*

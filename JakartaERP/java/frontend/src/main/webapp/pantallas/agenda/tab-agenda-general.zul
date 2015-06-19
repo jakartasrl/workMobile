@@ -67,7 +67,7 @@
 				</listcell>
 
 				<listcell>
-					<combobox width="95%" model="@bind(vm.sectores)" selectedItem="@bind(each.sector)" constraint="no empty" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }">
+					<combobox readonly="true" width="95%" model="@bind(vm.sectores)" selectedItem="@bind(each.sector)" constraint="no empty" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }">
 						<template name="model" var="e">
 							<comboitem label="@bind(e.descripcion)" />
 						</template>

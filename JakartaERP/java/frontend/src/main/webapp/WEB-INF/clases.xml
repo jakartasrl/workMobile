@@ -57,6 +57,7 @@
 	<elemento key="sector" value="com.jkt.dominio.Sector"/>
 	<elemento key="tarea" value="com.jkt.dominio.Tarea"/>
 	<elemento key="idioma" value="com.jkt.varios.dominio.Idioma"/>
-	<elemento key="itemCotizacion" value="com.jkt.dominio.CotizacionDet"/>
+	<elemento key="idioma" value="com.jkt.varios.dominio.Idioma"/>
+	<elemento key="menu" value="com.jkt.dominio.menu.ElementoMenu"/>
 
 </elementos>
