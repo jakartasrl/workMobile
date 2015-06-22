@@ -14,6 +14,8 @@ public class Variable extends Descriptible {
 	private boolean input;
 //	private Expresion expresion;
 	
+	private boolean resultadoFinal;
+	
 	//TRANSIENT FIELDS
 	private String expresion;
 	private List<Variable> variables=new ArrayList<Variable>();

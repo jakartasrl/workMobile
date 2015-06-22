@@ -640,16 +640,17 @@
 			<campoSalida target="tipoResultado" 			value="idTipoResultado" />
 			<campoSalida target="formato" 					value="idFormato" />
 						
-			<campoSalida target="metodos" 			value="metodos">
-				<campoSalida target="id" 			value="id"/>
-				<campoSalida target="metodo" 		value="metodo"/>
+			<campoSalida target="metodos" 					value="metodos">
+				<campoSalida target="id" 					value="id"/>
+				<campoSalida target="metodo" 				value="metodo"/>
 			</campoSalida>
 
-			<campoSalida target="variables" value="variables">
-				<campoSalida target="id" value="id" />
-				<campoSalida target="codigo" value="codigo" />
-				<campoSalida target="descripcion" value="descripcion" />
-				<campoSalida target="input" value="input" />	
+			<campoSalida target="variables" 				value="variables">
+				<campoSalida target="id" 					value="id" />
+				<campoSalida target="codigo" 				value="codigo" />
+				<campoSalida target="descripcion" 			value="descripcion" />
+				<campoSalida target="input" 				value="input" />
+				<campoSalida target="resultadoFinal" 		value="resultadoFinal" />
 			</campoSalida>
 			
 		</output>
@@ -683,10 +684,11 @@
 
 		<output>
 
-			<campoSalida target="id" 			value="id" />
-			<campoSalida target="codigo" 		value="codigo" />
-			<campoSalida target="descripcion" 	value="descripcion" />
-			<campoSalida target="input" 		value="input" />
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="codigo" 			value="codigo" />
+			<campoSalida target="descripcion" 		value="descripcion" />
+			<campoSalida target="input" 			value="input" />
+			<campoSalida target="resultadoFinal" 	value="resultadoFinal" />
 			
 <!-- 			<campoSalida target="expresion.id" 		value="idExpresion" /> -->
 			<campoSalida target="expresion" 		value="expresionCadena" />
@@ -704,8 +706,6 @@
 			<campoEntrada propertyOV="descripcion" 		metodo="setDescripcion" />
 			<campoEntrada propertyOV="leyendaValorCero" metodo="setLeyendaValorCero" />
 			<campoEntrada propertyOV="calculaResultado" metodo="setCalculaResultado" />
-<!-- 			<campoEntrada propertyOV="formato" 			metodo="setFormato" /> -->
-<!-- 			<campoEntrada propertyOV="tipoResultado" 	metodo="setTipoResultado" /> -->
 			<campoEntrada propertyOV="idLaboratorio" 	metodo="setLaboratorio" />
 			
 			<campoEntrada propertyOV="descFormato" 		metodo="setFormato" />
@@ -716,11 +716,12 @@
 				<campoEntrada propertyOV="metodo" 			metodo="setMetodo"/>
 				<campoEntrada propertyOV="idDeterminacion" 	metodo="setDeterminacion"/>		
 				
-				<campoEntrada propertyOV="variables" 		metodo="setVariables">
-					<campoEntrada propertyOV="id" 			metodo="setId"/>
-					<campoEntrada propertyOV="codigo" 		metodo="setCodigo"/>
-					<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion"/>
-					<campoEntrada propertyOV="input" 		metodo="setInput"/>
+				<campoEntrada propertyOV="variables" 				metodo="setVariables">
+					<campoEntrada propertyOV="id" 					metodo="setId"/>
+					<campoEntrada propertyOV="codigo" 				metodo="setCodigo"/>
+					<campoEntrada propertyOV="descripcion" 			metodo="setDescripcion"/>
+					<campoEntrada propertyOV="input" 				metodo="setInput"/>
+					<campoEntrada propertyOV="resultadoFinal" 		metodo="setResultadoFinal"/>
 					
 					
 <!-- 					mando datos transientes para que el validador de determinacion se encargue de generar las expresiones, validarlas, y demas -->
@@ -730,13 +731,6 @@
 						<campoEntrada propertyOV="id" 			metodo="setId"/>
 						<campoEntrada propertyOV="codigo" 		metodo="setCodigo"/>
 					</campoEntrada>
-
-<!-- 					<campoEntrada propertyOV="expresion" 		metodo="setExpresion"> -->
-<!-- 						<campoEntrada propertyOV="expresion" 		metodo="setExpresion" /> -->
-<!-- 						<campoEntrada propertyOV="variables" 		metodo="setVariables"> -->
-<!-- 							<campoEntrada propertyOV="codigo" 		metodo="setCodigo" /> -->
-<!-- 						</campoEntrada> -->
-<!-- 					</campoEntrada> -->
 				
 				</campoEntrada>
 				

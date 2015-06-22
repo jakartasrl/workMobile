@@ -1,0 +1,258 @@
+[33mcommit 04fbebab115450e0a2d9310b98ec039dec0a55a2[m
+Merge: 82dfd7d 2b3c0f8
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Thu Jun 18 12:29:10 2015 -0300
+
+    Merging finished
+
+[33mcommit 82dfd7dfd7a43b45da2744a6b9894870138b9dc8[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Thu Jun 18 12:22:16 2015 -0300
+
+    Nueva columna en filtro de cotizacion en Presupuestos
+
+[33mcommit e4723d108c574067cb9a936e82596e26f6bf89a0[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Thu Jun 18 12:17:30 2015 -0300
+
+    Concepto Presupuesto
+
+[33mcommit 2b3c0f83ab2e4d57e2c4d18861708ec03ab29a56[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Thu Jun 18 12:12:43 2015 -0300
+
+    Correccion de errores varios
+
+[33mcommit dea7c0212ddfd319f3f664edea0ea04626a34fad[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Wed Jun 17 10:11:05 2015 -0300
+
+    Solucionado errores en determinacion
+
+[33mcommit eef5ec6aeeac5d170099e89699aa906b1371daeb[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Fri Jun 12 14:37:05 2015 -0300
+
+    Wip
+
+[33mcommit d90cd8d7cbc427d0707e6ad849ce2ed6d61a71bd[m
+Merge: 4bdfaa0 7f326a1
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Fri Jun 12 13:18:48 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 7f326a1361f669894740150b58be67edbabb9e73[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Fri Jun 12 12:47:49 2015 -0300
+
+    ultimas modificaciones a cotizador y cotizacion
+
+[33mcommit 4bdfaa02616d4c02f6d6635f7313b87b77b89b4f[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Fri Jun 12 11:49:08 2015 -0300
+
+    Correccion en -nueva planificacion-
+
+[33mcommit a107782d4672752d406967f0274fa74b5ebe1527[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Fri Jun 12 11:05:04 2015 -0300
+
+    modificaciones
+
+[33mcommit ec2653326cda287c2f0b107c69838743557515f2[m
+Merge: a6cf6cd d47bfe8
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Fri Jun 12 10:28:21 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit d47bfe89882cf4d1acec423157f22832dde8ec8d[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Fri Jun 12 10:29:52 2015 -0300
+
+    Cortar y pegar en modelo de cotizador
+
+[33mcommit 554bdbe44c7d28d0fdc549c7f977a875b65e2c78[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Fri Jun 12 09:38:35 2015 -0300
+
+    Trabajando sobre modelo de cotizador
+
+[33mcommit a6cf6cda75944a488d680e60c0ab575213a58e95[m
+Merge: 6b9d1d4 554bdbe
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Fri Jun 12 09:36:53 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 6b9d1d45bea45d8d44779868dad855bcc1c1ed84[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Fri Jun 12 09:36:28 2015 -0300
+
+    modificacion cotizador para actualizar moneda expresada
+
+[33mcommit 4d9590b59b975a61dc8d019fa6fafcaf5c63b187[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Fri Jun 12 09:30:11 2015 -0300
+
+    Trabajando sobre modelo de cotizador
+
+[33mcommit 1b5ea2ca38e2fff93bb376581761f4e393db4efe[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Thu Jun 11 15:47:18 2015 -0300
+
+    Mensaje de confirmación en finalización de tareas
+
+[33mcommit 1d0298bbf4b85700500bbe119ebd4a5c013d9e7f[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Thu Jun 11 15:34:37 2015 -0300
+
+    Finalizado temporalmente el visor por pedido.
+
+[33mcommit d7177c5fbe6d72dc66bea26adf0446fc53cb10d6[m
+Merge: 3d13bf6 1d0298b
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Thu Jun 11 15:32:19 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 893bc706a02998c6e54fe013ffd3e2d498eb591d[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Thu Jun 11 11:36:43 2015 -0300
+
+    Testing Planificacion de Pedido
+
+[33mcommit 3d13bf692e08574c403e7af470f48446e4c8242c[m
+Merge: 5cb11c5 893bc70
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Thu Jun 11 11:34:12 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 5cb11c5edd4515bff590b9570eaf55fccd75f128[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Thu Jun 11 11:32:37 2015 -0300
+
+    terminado cotizador sin test
+
+[33mcommit 990170086dc3d16cf0f8a547f25a77e7ec9832d3[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Wed Jun 10 16:23:58 2015 -0300
+
+    Solucionados estados en tareas. Solucionado sesion en VM de Pedido. Agregados iconos de transiciones.
+
+[33mcommit acb7f929266fe7b41136a529b74886f76868c17a[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Wed Jun 10 11:05:54 2015 -0300
+
+    empezando totalizador para cotizador
+
+[33mcommit 9cb21fc7d16dea123c4b6289aa5c59ea025dca19[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Tue Jun 9 17:20:13 2015 -0300
+
+    Cambio en operacion TraerModeloCotizador
+
+[33mcommit 3e74c9091f16efbfa741578a670b5b9d66d9d42f[m
+Merge: d184a22 9cb21fc
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Tue Jun 9 17:17:06 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit d184a22e0ee77efba0143fe068cf769fce3b72c5[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Tue Jun 9 17:16:42 2015 -0300
+
+    Se saco la para cambiar la Unidad de Medida
+
+[33mcommit e54b257cac8f8f39a479254428eac17b36730f07[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Tue Jun 9 16:44:37 2015 -0300
+
+    Modificaciones en los filtros
+
+[33mcommit cd5b2d62f4dbe959cbe63ae6584252a939cc11bb[m
+Merge: 339a62f 60cbafe
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Tue Jun 9 14:49:47 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 60cbafe972644244323e0461c6f1ae76d902fece[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Tue Jun 9 14:53:48 2015 -0300
+
+    Modificaciones en el cotizador.
+
+[33mcommit 339a62f60915db0b2e8771d82f9a34a2120bf7a4[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Tue Jun 9 14:49:17 2015 -0300
+
+    Validaciones
+
+[33mcommit 0d8d853d37f3dad749a47e4e76e8f87af5334201[m
+Merge: 4ef2076 9ace1a1
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Tue Jun 9 10:45:36 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 9ace1a17e6eeab58eb71989182a9d0be4e4cbf7b[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Tue Jun 9 10:21:51 2015 -0300
+
+    Cambios en cotizador y agenda.
+
+[33mcommit 7ab6e6fa7a63102eae5d1f9a3db7817d5def49d7[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Mon Jun 8 17:44:23 2015 -0300
+
+    Validaciones de estado.
+
+[33mcommit 4ef2076433b42e08e61b5fa6df96dad590320ac3[m
+Merge: e87a7f1 7ab6e6f
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Mon Jun 8 17:40:58 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit e87a7f1809f7ab657734464d4dcff760bf3ad32a[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Mon Jun 8 17:40:18 2015 -0300
+
+    wip
+
+[33mcommit 3b27ad1c3a3536eb08496b6d5567019593db6b18[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Mon Jun 8 15:57:43 2015 -0300
+
+    Validaciones en progreso
+
+[33mcommit 29ab3d9520430fe5997236767f571a7b19e9f4f7[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Mon Jun 8 15:50:24 2015 -0300
+
+    Validaciones en progreso
+
+[33mcommit a37d415df156b164f36995bea941f8928b7bf4b5[m
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Mon Jun 8 15:42:27 2015 -0300
+
+    Limpiando pantallas
+
+[33mcommit d5e386f6fec23e225950c0ada7eb129ed6f2141c[m
+Merge: 48695ce 5b9dd7e
+Author: Emanuel Rubiño <erubino@jakartasrl.com.ar>
+Date:   Mon Jun 8 15:11:12 2015 -0300
+
+    Merge branch 'zk2' of https://github.com/jakartasrl/Aplicaciones-3000 into zk2
+
+[33mcommit 5b9dd7e5b238325652e3c21c0b476babd8c2403a[m
+Author: Leo Suarez <ss.leo.10@gmail.com>
+Date:   Mon Jun 8 15:15:38 2015 -0300
+
+    Salvado correspondiente al estado
+
+[33mcommit 48695cee1269237deeabc0efe1315

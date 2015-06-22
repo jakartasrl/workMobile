@@ -56,19 +56,17 @@
 									<comboitem label="@bind(tipoResultado.codigo)" value="@bind(tipoResultado.codigo)" />											
 								</template>										
 							</combobox>
-<!-- 							<cell> -->
-<!-- 								<label value="Calcula Resultado" width="150px"/> -->
-<!-- 								<checkbox checked="@bind(vm.determinacion.calculaResultado)" onCheck="@command('asignarUnicoResultado')" width="150px"/> -->
-
-<!-- 							</cell> -->
+							
 							<label value="Formato"/>
 							<combobox model="@bind(vm.determinacion.listFormato)" selectedItem="@bind(vm.determinacion.formato)" width="100%">
 								<template name="model" var="formato">
 									<comboitem label="@bind(formato.codigo)" value="@bind(formato.codigo)" />												
 								</template>										
-							</combobox>														
+							</combobox>
+																					
 							<label value="Leyenda Valor Cero"/>
 							<textbox value="@bind(vm.determinacion.leyendaValorCero)" width="100%" />
+							
 						</row>
 						
 					</rows>
@@ -98,7 +96,7 @@
 		</hlayout>
 		
 		<!-- Metodos -->
-		<listbox visible="@bind(!vm.determinacion.metodos.isEmpty())" id="listbox" model="@bind(vm.determinacion.metodos)" emptyMessage="No existen Metodos." onCreate="changePosition()" mold="paging" pageSize="1" style="margin-top:15px;" width="65%" >
+		<listbox visible="@bind(!vm.determinacion.metodos.isEmpty())" id="listbox" model="@bind(vm.determinacion.metodos)" emptyMessage="No existen Metodos." onCreate="changePosition()" mold="paging" pageSize="1" style="margin-top:15px;" width="73%" >
 			<listhead>
 				<listheader label="Metodos" />
 			</listhead>						
@@ -169,7 +167,6 @@
 												label="Agregar Variable"
 												onClick="@command('agregarVariable', metodoActual=each)"
 												tooltiptext="Agregar nueva variable." />
-<!-- 												visible="@bind(!vm.determinacion.calculaResultado)" -->
 											<!-- Variables -->
 	
 											<button
@@ -177,38 +174,39 @@
 												label="Borrar Variable"
 												onClick="@command('borrarVar', metodoActual=each)"
 												tooltiptext="Borrar variable." />
-<!-- 												visible="@bind(!vm.determinacion.calculaResultado)" -->
 
 										</hlayout> 
 
 										<!-- Variables -->
+										<radiogroup id="${id}" />
 										<listbox model="@bind(each.variables)" mold="paging" pageSize="5" emptyMessage="No existen Variables." >
-
+										
 											<listhead>
 												<listheader width="150px" label="Codigo" />
 												<listheader width="300px" label="Descripcion" />
 												<listheader width="50px" label="Input" />
 												<listheader width="350px" label="Expresion" />
+												<listheader width="100px" label="Resultado Final" />
 											</listhead>
 
-											<template name="model"
-												var="valor">
+											<template name="model" var="valor">
 												<listitem>
 													<listcell>
 														<textbox value="@bind(valor.codigo)" width="100%" placeholder="Nueva variable"/>
-<!-- 														readonly="@bind(vm.determinacion.calculaResultado)" -->
 													</listcell>
 													<listcell>
 														<textbox value="@bind(valor.descripcion)" width="100%" placeholder="Descripción variable"/>
-<!-- 														readonly="@bind(vm.determinacion.calculaResultado)" -->
 													</listcell>
 													<listcell style="text-align:center" >
 														<checkbox checked="@bind(valor.input)" />
-<!-- 														visible="@bind(!vm.determinacion.calculaResultado)" -->
 													</listcell>
 													<listcell>
 														<textbox value="@bind(valor.expresionCadena)"  width="100%" onBlur="@command('validarExpresion', metodo= each.metodo, expresion=self.value, variables=each.variables)" visible="@bind(!valor.input)" />
 													</listcell>
+													<listcell style="text-align:center" >
+														<radio radiogroup="${id}" onCheck="@command('asignarResultadoFinal',variable=valor, metodoActual=each)" selected="@bind(valor.resultadoFinal)" />
+													</listcell>
+													
 												</listitem>
 											</template>
 										</listbox>

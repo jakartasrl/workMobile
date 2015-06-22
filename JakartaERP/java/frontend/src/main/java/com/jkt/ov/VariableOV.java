@@ -17,5 +17,6 @@ public class VariableOV extends DescriptibleOV {
 	private String expresionCadena;
 	private List<VariableOV> variables=new ArrayList<VariableOV>();
 	
+	private boolean resultadoFinal;
 	
 }

@@ -83,6 +83,21 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		}
 		
 	}
+	
+	@Command
+	@NotifyChange("determinacion")
+	public void asignarResultadoFinal(@BindingParam("variable") VariableOV variable, @BindingParam("metodoActual") MetodoOV metodoActual){
+			
+		List<VariableOV> variables = metodoActual.getVariables();
+		for (VariableOV var : variables) {
+			if (var.getCodigo().equals(variable.getCodigo())){
+				var.setResultadoFinal(true);
+			} else {
+				var.setResultadoFinal(false);
+			}
+		}
+		
+	}
 
 	@Command("guardar")
 	@NotifyChange("determinacion")
@@ -117,35 +132,12 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 		}
 	
-//		this.parsearCadenaExpresion(metodos);
-
 		this.determinacion.setDescTipoResultado(this.determinacion.getTipoResultado().getCodigo());
 		this.determinacion.setDescFormato(this.determinacion.getFormato().getCodigo());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
 		Executions.sendRedirect("/pantallas/index/index-determinacion.zul?l="+this.laboratorioParametroKey);
 
-		
-	}
-
-	private void parsearCadenaExpresion(List<MetodoOV> metodos) {
-		
-		for (MetodoOV metodoOV : metodos){
-			List<VariableOV> variables = metodoOV.getVariables();
-			for (VariableOV variableOV : variables) {
-				
-				String nuevaCadena = "";
-				
-				if (!variableOV.isInput()) {
-					String cadenaExpresion = variableOV.getExpresionCadena();
-					StringTokenizer tokens=new StringTokenizer(cadenaExpresion,"#{}");
-					while(tokens.hasMoreTokens()){
-						nuevaCadena = nuevaCadena + tokens.nextToken();
-					}
-					variableOV.setExpresionCadena(nuevaCadena);
-				}
-			}
-		}
 		
 	}
 
@@ -305,6 +297,14 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 			List<VariableOV> variables = ((ListVariableOV) Operaciones.ejecutar("TraerVariables", containerOV3, ListVariableOV.class)).getList();
 			
 			metodo.setVariables(variables);
+			
+			for (VariableOV variableOV : variables) {
+				if(variableOV.isResultadoFinal()){
+					metodo.setResultadoFinal(variableOV);
+					break;
+				}
+			}
+			
 			metodo.setValoresEsperados(valoresEsperados);
 			metodo.getDeterminacion().setId(this.determinacion.getId());
 			metodo.setIdDeterminacion(this.determinacion.getId());

@@ -15,6 +15,7 @@
 		<property name="expresion" column="EXPRESION" type="string" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 		<property name="input" column="INPUT" type="boolean" />
+		<property name="resultadoFinal" column="RESULTADO_FINAL" type="boolean" />
 
 <!-- 		<many-to-one name="determinacion" column="ID_DETERMINACION" /> -->
 

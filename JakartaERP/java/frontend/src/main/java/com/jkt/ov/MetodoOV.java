@@ -20,6 +20,7 @@ public class MetodoOV extends ObjectView {
 	
 	private List<ValorEsperadoOV> valoresEsperados = new ArrayList<ValorEsperadoOV>();
 	private List<VariableOV> variables = new ArrayList<VariableOV>();
+	private VariableOV resultadoFinal;
 	
 	private long idDeterminacion;
 	private long idVariable;
