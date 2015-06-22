@@ -2,7 +2,11 @@ package com.jkt.viewModels;
 
 import lombok.Data;
 
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 
 import com.jkt.common.Operaciones;
 import com.jkt.ov.ContainerOV;
@@ -16,6 +20,14 @@ import com.jkt.ov.MenuOV;
  */
 @Data
 public class MenuVM {
+	
+    @Command
+	public void logOut(){
+		Session sess = Sessions.getCurrent();
+        sess.removeAttribute("userCredential");
+        sess.removeAttribute("ventanas");
+        Executions.sendRedirect("/index.zul");
+	}
 	
 	@Init
 	public void init(){

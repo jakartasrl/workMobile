@@ -8,7 +8,8 @@
 				<toolbarbutton image="/pantallas/icons/new.png" label="Agregar Laboratorio" onClick="@command('agregarLaboratorio')" tooltiptext="Agregar elemento" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 18px;" />
-				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../index.html" tooltiptext="Volver al menu" />
+<!-- 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../index.html" tooltiptext="Volver al menu" /> -->
+								<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../../index.html" tooltiptext="Volver al menu" />
 
 			</div>
 
