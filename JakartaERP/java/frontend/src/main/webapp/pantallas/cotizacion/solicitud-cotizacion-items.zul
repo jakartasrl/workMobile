@@ -1,16 +1,25 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
+	<hlayout width="100%" style="text-align:center;">
+		
 	<vlayout width="100%" style="text-align:center;">
-		<button style="margin-bottom:2px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
+		<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
 					//box.pagingPosition = "top";
 					//siempre retorna a la primer pagina
 			        box.setActivePage(0);
         		]]></attribute>
 		</button>
-			<label value="Agregar un item"></label>
+	</vlayout>
+	
+	<vlayout width="100%" style="text-align:center;" >
+		<button  width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Eliminar item.">
+		</button>
 	</vlayout>
 
+	</hlayout>		
+			
+			
 
 	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
 

@@ -3,24 +3,12 @@
 <zk>
 
 	<style src="/style/template.css" />
-
-
+	
 	<style>
-	body {
-	    font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue","BBAlpha Sans","S60 Sans",Arial,"sans-serif";
-	    margin: 0px;
-	    height: 100%;
-	    font-size: 100%;
-	    cursor: move;
-	    overflow-x: hidden;
-	    background-image: url('pantallas/img/wallpaper/2.jpg');
-	    background-repeat: no-repeat;
-	    background-position: 50% 50%;
-	    background-color: #000000;
-	    background-attachment: fixed;
-	    background-size: cover;
-	}
+	
+	
 	</style>
+	
 
 	<panel 
 		id="tool" height="200px" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 

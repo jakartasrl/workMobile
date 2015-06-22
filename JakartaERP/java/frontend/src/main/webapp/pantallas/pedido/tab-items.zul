@@ -11,13 +11,11 @@
 			        box.setActivePage(0);
         		]]></attribute>
 		</button>
-<!-- 			<label value="Agregar un item"></label> -->
 	</vlayout>
 	
 	<vlayout width="100%" style="text-align:center;" >
-		<button  width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Agregar un nuevo item.">
+		<button  width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarElemento', indice = box.activePage)" tooltiptext="Eliminar item.">
 		</button>
-<!-- 		<label value="Eliminar este item." /> -->
 	</vlayout>
 
 	</hlayout>

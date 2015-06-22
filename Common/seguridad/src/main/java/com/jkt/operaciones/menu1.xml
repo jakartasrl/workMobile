@@ -43,15 +43,14 @@
 		<texto texto="TextoSecundario" alineacion="derecha" fuente="times" tamanio="8" />
 		
 	</elemento>
-	
+
 	<elemento tipo="MENU" codigo="0044" descripcion="Menu" orden="0">
 
 		<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0"/>
 		<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
 		
 	</elemento>
-	
-	
+
 	<elemento tipo="MENU" codigo="00554" descripcion="Menu" orden="0">
 
 		<elemento tipo="MENU" codigo="004" descripcion="SubMenu" imagen="leo.jpg" orden="0" rutaImagen="C:" argumento="qseyo">
@@ -61,8 +60,7 @@
 			<texto texto="ejemplo" alineacion="izquierda" fuente="arial" tamanio="10" />
 			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
 
-		</elemento>		
+		</elemento>
 	</elemento>
-	
-	
+
 </menues>

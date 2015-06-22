@@ -71,7 +71,7 @@ var tiles1 = [
 },
 {
     'name'        : 'Conceptos',
-    'thumbnail'   : 'pantallas/img/melonhtml5.png',
+    'thumbnail'   : 'pantallas/img/modeloCotizador.png',
     'content'     : 'Concepto Presupuesto',
     'size'        : '2x2',
     'theme'       : 'darkblue',
@@ -112,7 +112,7 @@ var tiles1 = [
 {
 	'name'        : 'Tareas por Sector',
 	'thumbnail'   : 'pantallas/img/planificacion.png',
-	'content'     : 'Visor de Tareas por Sector',
+	'content'     : 'Tareas por Sector',
 	'link'        : 'pantallas/index/index-vista-agenda-sector.zul',
 	'size'        : '2x2',
 	'theme'       : 'red',
@@ -120,7 +120,7 @@ var tiles1 = [
 {
 	'name'        : 'Tareas por Pedido',
 	'thumbnail'   : 'pantallas/img/planificacion.png',
-	'content'     : 'Visor de Tareas por Pedido',
+	'content'     : 'Tareas por Pedido',
 	'link'        : 'pantallas/index/index-vista-agenda-pedido.zul',
 	'size'        : '2x2',
 	'theme'       : 'red',
@@ -189,7 +189,18 @@ var tiles2 = [
 ];
 
 //var tiles3 = [makeRandomTile(31), makeRandomTile(32), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36)];
+var tiles3 = [
+	{
+		'name'        : 'Salir',
+		'thumbnail'   : 'pantallas/icons/deleteRow.png',
+		'content'     : 'Salir',
+		'size'        : '2x2',
+		'theme'       : 'red',
+		'link'         : 'index.zul?action=logout'
+	}
+
+];
 
 Metro.HTML.addContainer({'size':'full', 'tiles':tiles1});
 Metro.HTML.addContainer({'size':'half', 'tiles':tiles2});
-//Metro.HTML.addContainer({'size':'half', 'tiles':tiles3});
+Metro.HTML.addContainer({'size':'half', 'tiles':tiles3});
