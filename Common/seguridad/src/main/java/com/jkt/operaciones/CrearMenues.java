@@ -20,13 +20,16 @@ import com.jkt.excepcion.JakartaException;
 
 /**
  * Operacion que recupera un menu usando el codigo correspondiente.
- * En cada request, se leera un archivo XML y se intentará persistir el mismo, recorriendo la estructura correspondiente
+ * En cada request, se leera un archivo XML y se intentarï¿½ persistir el mismo, recorriendo la estructura correspondiente
  *
  * @author Leonel Suarez - Jakarta SRL
  */
 public class CrearMenues extends Operation {
 
 	
+	private static final String MENU_TYPE = "MENU";
+	private static final String SCRIPT = "SCRIPT";
+	private static final String PROGRAMA = "PROGRAMA";
 	private static final String CODIGO_MENU = "codigoMenu".toUpperCase();
 	private static final String FILE_NAME = "fileName".toUpperCase();
 
@@ -79,7 +82,7 @@ public class CrearMenues extends Operation {
 		
 		ElementoMenu elementoActual = null;
 		String tipo = menu.getTipo();
-		if ("MENU".equals(tipo)) {
+		if (MENU_TYPE.equals(tipo)) {
 			Menu m=new Menu();
 			completarCampos(menu, m);
 			m.setArgumento(menu.getArgumento());
@@ -102,10 +105,10 @@ public class CrearMenues extends Operation {
 				m.addElemento(parsearRespuestaDesdeElXML(menuXML));
 			}
 			return m;
-		}else if ("PROGRAMA".equals(tipo)) {
+		}else if (PROGRAMA.equals(tipo)) {
 			elementoActual=new Programa();
 			completarCampos(menu, elementoActual);
-		}else if ("SCRIPT".equals(tipo)) {
+		}else if (SCRIPT.equals(tipo)) {
 			elementoActual=new Script();
 			completarCampos(menu, elementoActual);
 		}else{

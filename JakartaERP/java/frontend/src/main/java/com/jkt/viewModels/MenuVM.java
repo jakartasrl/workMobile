@@ -1,14 +1,15 @@
 package com.jkt.viewModels;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Data;
 
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 
+import com.jkt.common.Operaciones;
+import com.jkt.ov.ContainerOV;
 import com.jkt.ov.MenuOV;
 
 /**
@@ -19,7 +20,28 @@ import com.jkt.ov.MenuOV;
  */
 @Data
 public class MenuVM {
+	
+    @Command
+	public void logOut(){
+		Session sess = Sessions.getCurrent();
+        sess.removeAttribute("userCredential");
+        sess.removeAttribute("ventanas");
+        Executions.sendRedirect("/index.zul");
+	}
+	
+	@Init
+	public void init(){
+		
+		ContainerOV containerOV = new ContainerOV();
+		containerOV.setString1("menu");
+		containerOV.setString2("1");
 
+		MenuOV menu = (MenuOV) Operaciones.ejecutar("RecuperarMenu", containerOV, MenuOV.class);
+		menu.getNombre();
+	}
+	
+/*
+	
 	private List<MenuOV> menues=new ArrayList<MenuOV>();
 	
 	private List<String> news=new ArrayList<String>();
@@ -87,4 +109,6 @@ public class MenuVM {
 		currentNew=news.get(index);
 	}
 	
+	
+	*/
 }

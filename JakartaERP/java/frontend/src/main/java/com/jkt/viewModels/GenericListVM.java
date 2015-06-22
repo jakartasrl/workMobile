@@ -38,7 +38,7 @@ public class GenericListVM extends ViewModel implements IBasicOperations{
 	private String operacion;
 	
 	@Init
-	public void init(@QueryParam("metaData") String metaData) throws JakartaException{
+	public void init(@QueryParam("metadata") String metaData) throws JakartaException{
 
 		String[] split = metaData.split("-");
 		if (split.length!=2) {

@@ -1,5 +1,8 @@
 package com.jkt.ov;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 import com.jkt.view.ObjectView;
@@ -11,6 +14,8 @@ public class MenuOV extends ObjectView {
 	
 	private String operacion, clase;
 
+	private List<MenuOV> hijos =  new ArrayList<MenuOV>();
+	
 	public MenuOV(String nombre, String enlace, String tipo) {
 		super();
 		this.nombre = nombre;
@@ -26,6 +31,8 @@ public class MenuOV extends ObjectView {
 		this.operacion=operacion;
 		this.clase=clase;
 	}
+	
+	public MenuOV() {}
 	
 	public static MenuOV newInstance(String nombre, String enlace, String tipo){
 		return new MenuOV(nombre, enlace, tipo);

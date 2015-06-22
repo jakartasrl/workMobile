@@ -1,0 +1,10 @@
+<?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
+
+<zk>
+
+<style src="/style/template-grey.css" />
+<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">
+	<include id="menu" src="index.html" />
+</div>
+
+</zk>

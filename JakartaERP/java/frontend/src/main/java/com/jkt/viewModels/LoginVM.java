@@ -50,7 +50,13 @@ public class LoginVM {
 			
 			sess.setAttribute("ventanas",new HashMap<String, Object>());
 			
-			Executions.sendRedirect("pantallas/menu.zul");
+//			ContainerOV containerMenu = new ContainerOV();
+//			containerMenu.setString1("menu1.xml");
+//			containerMenu.setString2("001");
+//			Operaciones.ejecutar("CrearMenues", containerMenu);
+//			
+			Executions.sendRedirect("index.html");
+//			Executions.sendRedirect("pantallas/menu.zul");
 
 		}catch(Exception e){
 			this.showError=true;

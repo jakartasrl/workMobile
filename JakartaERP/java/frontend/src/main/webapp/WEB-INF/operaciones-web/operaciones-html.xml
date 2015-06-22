@@ -1627,7 +1627,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-		<operacion name="SimpleTraerCotizacionDelItem" clase="com.jkt.operaciones.SimpleTraerCotizacionDelItem" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ItemsOV">
+	<operacion name="SimpleTraerCotizacionDelItem" clase="com.jkt.operaciones.SimpleTraerCotizacionDelItem" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ItemsOV">
 	
 		<input>
 			<campoEntrada propertyOV="string1" name="OID"/>
@@ -1799,6 +1799,48 @@
 			<campoSalida target="unidadDeMedidaPorDefecto.descripcion" 	value="descripcionUnidadMedida" />
 			<campoSalida target="componenteValor.id" 						value="idComponenteValor" />
 
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
+	
+	
+	<operacion name="CrearMenues" clase="com.jkt.operaciones.CrearMenues" inputOV="com.jkt.ov.ContainerOV" >
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="FILENAME"/>
+			<campoEntrada propertyOV="string2" name="CODIGOMENU"/>
+		</input>
+	
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
+	<operacion name="RecuperarMenu" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.MenuOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="nombre" />
+			
+			<campoSalida target="elementos" value="hijos">
+				<campoSalida target="id" value="id" />
+				<campoSalida target="codigo" value="nombre" />	
+				
+<!-- 				<campoSalida target="elementos" value="hijos"> -->
+<!-- 					<campoSalida target="id" value="id" /> -->
+<!-- 					<campoSalida target="codigo" value="nombre" />	 -->
+<!-- 				</campoSalida> -->
+				
+			</campoSalida>
+						
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />

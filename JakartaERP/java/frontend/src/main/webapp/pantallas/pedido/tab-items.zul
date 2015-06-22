@@ -76,9 +76,7 @@
 							</hlayout>
 							
 <!-- 							<textbox readonly="@bind(vm.modoAgenda)" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.descripcion)" /> -->
-							<ckeditor value="@bind(each.plantilla.descripcion)" toolbar="Complex" 
-				        		customConfigurationsPath="/pantallas/common/config.js"  
-							>
+							<ckeditor value="@bind(each.plantilla.descripcion)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" >
 							
 <!-- 								<attribute name="onCreate"> -->
 									

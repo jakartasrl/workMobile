@@ -1,3 +1,7 @@
+body{
+	background-color: white;
+	background-image: none ; 
+}
 
 .z-vlayout{
 	width: 100%

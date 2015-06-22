@@ -281,7 +281,8 @@ public abstract class ViewModel {
 		mapa.put(this.getClass().getCanonicalName(), this);
 		sess.setAttribute("ventanas", mapa);
 		
-		Executions.sendRedirect("/pantallas/menu.zul");
+		Executions.sendRedirect("index.html");
+//		Executions.sendRedirect("/pantallas/menu.zul");
 	}
 
 	@Command
