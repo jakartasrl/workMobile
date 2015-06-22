@@ -240,6 +240,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	public void nuevo() throws JakartaException {
 		this.determinacion = new DeterminacionOV();
 		this.init(this.laboratorioParametroKey);
+		Executions.sendRedirect("/pantallas/index/index-determinacion.zul?l="+this.laboratorioParametroKey);
 	}
 
 	@Override
