@@ -1,0 +1,16 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
+	<vlayout>
+		<panel sclass="panel-maestro" title="Datos Generales" style="overflow:hidden;padding:5px;" border="normal" width="42%">
+
+			<panelchildren>
+
+				<label>Cuerpo del protocolo</label>
+			
+			</panelchildren>
+			
+		</panel>
+						
+	</vlayout>
+
+</zk>

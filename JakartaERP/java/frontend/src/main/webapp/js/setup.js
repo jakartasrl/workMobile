@@ -23,10 +23,10 @@ var tiles1 = [
 },
 {
 	'name'        : 'Laboratorio',
-	'thumbnail'   : 'pantallas/img/widget_map.png',
+	'thumbnail'   : 'pantallas/img/labs.png',
 	'content'     : 'Laboratorio',
 	'size'        : '4x2',
-	'theme'       : 'red',
+	'theme'       : 'grey',
 	'link'         : 'pantallas/index/index-laboratorio.zul',
 },
 {
@@ -34,7 +34,7 @@ var tiles1 = [
 	'thumbnail'   : 'pantallas/img/widget_tag.png',
 	'content'     : 'Equipo',
 	'size'        : '4x2',
-	'theme'       : 'orange',
+	'theme'       : 'grey',
 	'link'         : 'pantallas/index/index-equipo.zul',
 },
 {
@@ -43,7 +43,7 @@ var tiles1 = [
     'content'     : 'Determinaciones Electricas',
     'link'         : 'pantallas/index/index-determinacion.zul?l=LaboratorioElectrico',
     'size'        : '2x2',
-    'theme'       : 'yellow'
+    'theme'       : 'grey'
 },
 {
 	'name'        : 'Determinaciones Quimicas',
@@ -51,7 +51,7 @@ var tiles1 = [
 	'content'     : 'Determinaciones Quimicas',
 	'link'         : 'pantallas/index/index-determinacion.zul?l=LaboratorioQuimico',
 	'size'        : '2x2',
-	'theme'       : 'red',
+	'theme'       : 'grey',
 },
 {
 	'name'        : 'Cotizacion',
