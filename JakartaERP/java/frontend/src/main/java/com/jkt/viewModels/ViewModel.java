@@ -204,6 +204,8 @@ public abstract class ViewModel {
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
 		
 		window.doModal();
+//		window.doPopup();
+		
 	}
 	
 	/**

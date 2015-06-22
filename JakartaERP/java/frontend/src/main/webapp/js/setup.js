@@ -11,13 +11,7 @@ function makeRandomTile(id) {
 
 var tiles1 = [
               
-              
-              
-              
-              
 //menues.add(MenuOV.newInstance("Visor de Planificación", "index/visor-agenda.zul", "small"));
-
-
 	
 {
 	'name'        : 'Plantilla',
@@ -43,7 +37,6 @@ var tiles1 = [
 	'theme'       : 'orange',
 	'link'         : 'pantallas/index/index-equipo.zul',
 },
-
 {
     'name'        : 'Determinaciones Electricas',
     'thumbnail'   : 'pantallas/img/widget_tooltip.png',
@@ -60,7 +53,6 @@ var tiles1 = [
 	'size'        : '2x2',
 	'theme'       : 'red',
 },
-
 {
 	'name'        : 'Cotizacion',
 	'thumbnail'   : 'pantallas/img/widget_dialog.png',
@@ -69,10 +61,9 @@ var tiles1 = [
 	'size'        : '4x2',
 	'theme'       : 'orange',
 },
-
 {
 	'name'        : 'Modelo de Cotizador',
-	'thumbnail'   : 'pantallas/img/widget_notification.png',
+	'thumbnail'   : 'pantallas/img/modeloCotizador.png',
 	'content'     : 'Modelo de Cotizador',
 	'link'         : 'pantallas/index/index-modeloCotizador.zul',
 	'size'        : '2x2',
@@ -83,12 +74,12 @@ var tiles1 = [
     'thumbnail'   : 'pantallas/img/melonhtml5.png',
     'content'     : 'Concepto Presupuesto',
     'size'        : '2x2',
-    'theme'       : 'yellow',
+    'theme'       : 'darkblue',
     'link'         : 'pantallas/index/index-conceptos.zul',
 },
 {
     'name'        : 'Cotizador',
-    'thumbnail'   : 'pantallas/img/widget_notification.png',
+    'thumbnail'   : 'pantallas/img/cotizador.png',
     'content'     : 'Cotizador',
     'link'         : 'pantallas/index/index-cotizador.zul',
     'size'        : '4x2',
@@ -96,7 +87,7 @@ var tiles1 = [
 },
 {
     'name'        : 'presupuesto',
-    'thumbnail'   : 'pantallas/img/widget_dialog.png',
+    'thumbnail'   : 'pantallas/img/presupuesto.png',
     'content'     : 'Presupuesto',
     'link'         : 'pantallas/index/index-presupuesto.zul',
     'size'        : '4x2',
@@ -104,31 +95,31 @@ var tiles1 = [
 },
 {
 	'name'        : 'Pedido',
-	'thumbnail'   : 'pantallas/img/widget_dialog.png',
+	'thumbnail'   : 'pantallas/img/order.png',
 	'content'     : 'Pedido',
 	'link'         : 'pantallas/index/index-pedido.zul',
 	'size'        : '4x2',
-	'theme'       : 'orange',
+	'theme'       : 'red',
 },
 {
 	'name'        : 'Planificacion de Pedido',
-	'thumbnail'   : 'pantallas/img/widget_dialog.png',
+	'thumbnail'   : 'pantallas/img/calendar_tasks.png',
 	'content'     : 'Planificacion de Pedido',
 	'link'         : 'pantallas/index/index-agenda.zul',
-	'size'        : '2x2',
-	'theme'       : 'green',
+	'size'        : '4x2',
+	'theme'       : 'red',
 },
 {
-	'name'        : 'Visor de Tareas por Sector',
-	'thumbnail'   : 'pantallas/img/widget_dialog.png',
+	'name'        : 'Tareas por Sector',
+	'thumbnail'   : 'pantallas/img/planificacion.png',
 	'content'     : 'Visor de Tareas por Sector',
 	'link'        : 'pantallas/index/index-vista-agenda-sector.zul',
 	'size'        : '2x2',
-	'theme'       : 'blue',
+	'theme'       : 'red',
 },
 {
-	'name'        : 'Visor de Tareas por Pedido',
-	'thumbnail'   : 'pantallas/img/widget_dialog.png',
+	'name'        : 'Tareas por Pedido',
+	'thumbnail'   : 'pantallas/img/planificacion.png',
 	'content'     : 'Visor de Tareas por Pedido',
 	'link'        : 'pantallas/index/index-vista-agenda-pedido.zul',
 	'size'        : '2x2',
@@ -146,7 +137,6 @@ var tiles2 = [
 	'theme'       : 'green',
 	'link'         : 'pantallas/generic/genericList.zul?metadata=guardarSector-sector',
 },
-
 {
 	'name'        : 'Tarea',
 	'thumbnail'   : 'pantallas/img/widget_dialog.png',
@@ -195,10 +185,11 @@ var tiles2 = [
 	'theme'       : 'green',
 	'link'         : 'pantallas/generic/genericList.zul?metadata=guardarDocumentacion-documentacion',
 }
-              ];
 
-var tiles3 = [makeRandomTile(31), makeRandomTile(32), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36)];
+];
+
+//var tiles3 = [makeRandomTile(31), makeRandomTile(32), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36)];
 
 Metro.HTML.addContainer({'size':'full', 'tiles':tiles1});
 Metro.HTML.addContainer({'size':'half', 'tiles':tiles2});
-Metro.HTML.addContainer({'size':'half', 'tiles':tiles3});
+//Metro.HTML.addContainer({'size':'half', 'tiles':tiles3});
