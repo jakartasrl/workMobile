@@ -10,6 +10,7 @@ import java.util.Map;
 
 import lombok.Data;
 
+import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -24,6 +25,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.grafo.DatoNodo.Estado;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
+import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.TareaAgendaOV;
 
@@ -171,7 +173,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 		);
 		
 	}
-
+	
 	/**
 	 * Luego de la confirmacion se ejecuta el concreto de la operacion, es decir, el cambio de estado.
 	 * De {@link Estado} No Iniciado, a Ejecucion
@@ -205,4 +207,18 @@ public abstract class VisorAgendaVM extends ViewModel {
 	}
 	
 
+	/**
+	 * Abre el pop up de comentarios para la tarea.
+	 * Recordar que la tarea tiene comentarios automaticos, generados cundo se cambia un estado 
+	 * 
+	 */
+	@Command
+	public void comentarios(@BindingParam("elemento") final TareaAgendaOV tarea){
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		Window window = (Window) Executions.createComponents("/pantallas/pedido/editorComentariosTareas.zul", null, parametros);
+		window.doModal();
+	}
+	
+
+	
 }

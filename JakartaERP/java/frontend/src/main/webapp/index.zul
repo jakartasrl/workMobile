@@ -18,7 +18,7 @@
 		viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')"
 	>
 	
-		<panelchildren style="background-color:rgb(50, 50, 50); margin:0px; padding:0px">
+		<panelchildren style="background-color:rgb(50, 50, 50); margin:0px; padding:0px;" >
 		
 			<vlayout style="background-color:rgb(50, 50, 50)">
 			

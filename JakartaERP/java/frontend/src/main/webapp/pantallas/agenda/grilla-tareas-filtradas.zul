@@ -4,7 +4,7 @@
 			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="1312px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
 	
 				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
-					<auxheader label="Lista de Tareas" colspan="8" />
+					<auxheader label="Lista de Tareas" colspan="9" />
 				</auxhead>
 				        
 				<columns >
@@ -20,6 +20,7 @@
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
 					<column width="100px" label="Cambiar Estado" align="center" style="text-align:center" />
 					<column width="100px" label="Deshacer" align="center" style="text-align:center" />
+					<column width="100px" label="Comentarios" align="center" style="text-align:center" />
 				
 				</columns>
 				
@@ -52,6 +53,10 @@
 
 							<cell>
 								<button if="${each.idEstado eq 3 or each.idEstado eq 4}" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/img/undo.png" label="" onClick="@command('deshacer', elemento=each )" />
+							</cell>
+
+							<cell>
+								<button if="${each.idEstado ne 1 }" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/chat.png" label="" onClick="@command('comentarios', elemento=each )" />
 							</cell>
 
 						</row>

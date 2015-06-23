@@ -124,7 +124,7 @@ public class VisorAgendaPorPedidoVM extends VisorAgendaVM {
 			for (DescriptibleOV descriptibleOV : precedenteOV.getPrecedentes()) {
 				TareaAgendaOV tareaAgendaOV = tareasMap.get(descriptibleOV.getCodigo());
 				tareaAgendaOV.addObserver(tareaActual);
-				tareaAgendaOV.agregarPosterior(tareaActual); // Para deshacer acciones.
+				tareaAgendaOV.agregarPosterior(tareaActual);
 				tareaActual.getPrecedencias().add(tareaAgendaOV);
 			}
 			

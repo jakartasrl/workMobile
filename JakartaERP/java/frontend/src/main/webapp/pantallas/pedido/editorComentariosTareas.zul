@@ -1,0 +1,54 @@
+<window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.EditorComentariosTareasVM')" title="Edición de Tareas" style="margin-top:50px;" width="700px" position="top,center" closable="true" >
+    <vlayout>
+		
+		<button style="margin-bottom:2px;margin-left:3px;"
+			image="/pantallas/icons/addSmall.png" label="Agregar Comentario"
+			onClick=""
+			tooltiptext="Agregar un nuevo comentario." >
+			
+			<attribute name="onClick"><![CDATA[
+					//box.pagingPosition = "top";
+					//siempre retorna a la primer pagina
+			        box.setActivePage(0);
+        		]]></attribute>
+        		
+		</button>
+
+		<listbox 
+			id="box"
+			model="@bind(vm.comentarios)" 
+			emptyMessage="No existen comentarios disponible." mold="paging" pageSize="1"
+			hflex="1" vflex="1" 
+		>
+		
+		<auxhead>
+			<auxheader label="Comentarios de tareas"/>
+		</auxhead>
+		
+		<template name="model">
+			<listitem>
+				<listcell>
+
+					<groupbox width="100%" style="border-style:none; cursor: default">
+					
+							<hlayout>
+								<label class="name" value="Fecha : " />
+								<datebox id="fecha" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+							</hlayout>
+
+							<textbox readonly="false" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="" />
+
+					</groupbox>
+
+				</listcell>
+			</listitem>
+		</template>
+	</listbox>
+
+    <hlayout style="text-align:center;">
+	    <button id="closeBtn" width="150px" label="Cancelar" onClick="@command('cerrar',window=modalDialog)"/>
+	    <button id="okBtn" style="margin-left:10px;" width="150px" label="Aceptar" onClick="@command('aceptar',window=modalDialog)"/>
+    </hlayout>
+ 
+    </vlayout>
+</window>
