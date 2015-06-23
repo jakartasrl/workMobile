@@ -80,7 +80,12 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 			return;
 		}
 		
-		this.validar();
+		try{
+			this.validar();
+		}catch(Exception e){
+			Messagebox.show(e.getMessage());
+			return;
+		}
 	
 		this.completarCotizadorOV();
 

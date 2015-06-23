@@ -5,7 +5,9 @@ import java.util.HashMap;
 import lombok.Data;
 
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -63,6 +65,15 @@ public class LoginVM {
 			this.error= e.getMessage();
 		}
 
+	}
+	
+	
+	@Init
+	public void logOut(){
+//	public void logOut(@QueryParam("l") String laboratorio){
+		Session sess = Sessions.getCurrent();
+        sess.removeAttribute("userCredential");
+        sess.removeAttribute("ventanas");
 	}
 	
 }

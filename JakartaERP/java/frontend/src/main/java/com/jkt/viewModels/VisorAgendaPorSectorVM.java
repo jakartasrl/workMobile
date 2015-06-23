@@ -187,8 +187,9 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 			
 			for (DescriptibleOV descriptibleOV : precedenteOV.getPrecedentes()) {
 				TareaAgendaOV tareaAgendaOV = tareasMap.get(descriptibleOV.getCodigo());
-				tareaAgendaOV.addObserver(tareaActual);
-				tareaActual.getPrecedencias().add(tareaAgendaOV);
+				tareaAgendaOV.addObserver(tareaActual); //Para notificar cambios de estado
+				tareaAgendaOV.agregarPosterior(tareaActual); // Para deshacer acciones.
+				tareaActual.getPrecedencias().add(tareaAgendaOV); // Para cambiar de estados. ¡??¡????
 			}
 			
 		}

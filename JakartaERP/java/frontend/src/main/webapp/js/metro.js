@@ -29,7 +29,7 @@ var Metro = {
     widget_page_data              : [],        // ARRAY (page cache)
 
     is_touch_device               : false,     // BOOLEAN
-    title_prefix                  : 'MelonHTML5 - ',
+    title_prefix                  : 'Jakarta ERP - ',
 
     data                          : [],        // Array of container data
 
@@ -340,7 +340,7 @@ var Metro = {
 
     closeWidget: function(e) {
         window.location.hash = '';
-        document.title = Metro.title_prefix + 'Metro Framework';
+        document.title = Metro.title_prefix + '';
 
         Metro.widget_scroll_container.show();
 

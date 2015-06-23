@@ -414,6 +414,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				plantilla.setId(randomNum);
 				
 				plantilla.setDescripcion(itemsOV.getDescripcion());
+				plantilla.setCampoAdicional1(itemsOV.getDescripcion()); //utilziado para mostrar los detalles de items en format de edicion para la planificacion.
 				itemsOV.setPlantilla(plantilla);
 				
 				
@@ -756,7 +757,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				}
 				
 				for (ItemsOV itemsOV : this.items) {
-					itemsOV.getPlantilla().setDescripcion(Jsoup.parse(itemsOV.getPlantilla().getDescripcion()).text());
+					itemsOV.getPlantilla().setCampoAdicional1(Jsoup.parse(itemsOV.getPlantilla().getCampoAdicional1()).text());
+//					itemsOV.getPlantilla().setDescripcion(Jsoup.parse(itemsOV.getPlantilla().getDescripcion()).text());
 				}
 				
 				parametros.put("items", this.items);
@@ -860,7 +862,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			this.tareaAgregada.setDescripcionTarea(itemsOV.getReferencia());
 			this.tareaAgregada.setDescripcionAbreviada(itemsOV.getDescripcionAbreviada());
-			this.tareaAgregada.setDescripcionCompleta(itemsOV.getPlantilla().getDescripcion());
+			this.tareaAgregada.setDescripcionCompleta(itemsOV.getPlantilla().getCampoAdicional1());
 			this.tareaAgregada.setSector(Operaciones.recuperarObjetoDescriptible("sector", Long.valueOf(sectorTaller.getValorNumero())) );
 			actualizarTareasYArbol();
 		}
