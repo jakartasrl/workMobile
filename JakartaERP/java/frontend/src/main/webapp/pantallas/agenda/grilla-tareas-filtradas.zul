@@ -51,7 +51,7 @@
 							</cell>
 
 							<cell>
-								<button if="${each.idEstado eq 2 or each.idEstado eq 3}" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/img/undo.png" label="" onClick="" />
+								<button if="${each.idEstado eq 3 or each.idEstado eq 4}" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/img/undo.png" label="" onClick="@command('deshacer', elemento=each )" />
 							</cell>
 
 						</row>

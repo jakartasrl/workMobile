@@ -44,6 +44,7 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 	private int idEstado;
 
 	private List<TareaAgendaOV> precedencias = new ArrayList<TareaAgendaOV>();
+	private List<TareaAgendaOV> posteriores = new ArrayList<TareaAgendaOV>();
 	
 	private List<DescriptibleOV> precedenciasEnNumeros = new ArrayList<DescriptibleOV>();
 	
@@ -103,5 +104,10 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 		
 		this.notifyObservers(args);
 	}
+
+	public void agregarPosterior(TareaAgendaOV tareaAgendaOV) {
+		posteriores.add(tareaAgendaOV);
+	}
+
 	
 }
