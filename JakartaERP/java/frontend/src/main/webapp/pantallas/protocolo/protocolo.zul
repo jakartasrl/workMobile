@@ -1,12 +1,79 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<vlayout>
-		<panel sclass="panel-maestro" title="Datos Generales" style="overflow:hidden;padding:5px;" border="normal" width="42%">
+		<panel sclass="panel-maestro" title="Datos Generales" style="overflow:hidden;padding:5px;" border="normal" width="100%">
 
 			<panelchildren>
-
-				<label>Cuerpo del protocolo</label>
 			
+				<grid style="border-style:none;" sizedByContent="true">
+
+					<columns>
+						<column width="120px"/>
+						<column width="120px"/>
+						<column width="120px"/>
+						<column width="120px"/>
+						<column width="120px"/>
+						<column width="120px"/>
+					</columns>
+			
+					<rows>
+			    		<row sclass="fila-maestro">
+							<label value="Cliente | Sucursal : " />
+							<hlayout>
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+								<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+							</hlayout>
+	
+							<hlayout>
+								<textbox sclass="campoCodigo-vsmall" value="@bind(vm.sucursalOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteSucursal', codigo=self.value, ov=vm.sucursalOV, post='actualizarCampoSucursal')" />
+								<button label="..." onClick="@command('openHelper', clase='clienteSucursal',  ov=vm.sucursalOV , oidEntidadMaestra= vm.clienteOV.id, post='actualizarCampoSucursal' )" />
+							</hlayout>
+
+							<cell colspan="3">
+								<textbox value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" readonly="true"/>
+							</cell>						
+						
+						</row>
+						<row>
+							<label value="En base a Pedido : " />
+								
+							<hlayout>
+								<textbox sclass="campoCodigo-medium" value=""   />
+								<button label="..." />
+							</hlayout>
+						</row>
+						<row>
+
+							<label value="Laboratorio : " />
+							<hlayout>
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.laboratorioOV.codigo)" onBlur="@command('validarCampo', clase='laboratorio', codigo=self.value, ov=vm.laboratorioOV)"/>
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='laboratorio', ov=vm.laboratorioOV,titulo='Laboratorios')" />
+							</hlayout>
+														
+							<textbox width="100%" value="@bind(vm.laboratorioOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='laboratorioOV', codigo=self.value, ov=vm.laboratorioOV, post='')" />
+							
+						</row>
+						<row>
+							<label value="Equipo : " />
+							<hlayout>
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.equipoOV.codigo)" onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV)"/>
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV,titulo='Equipos')" />
+							</hlayout>
+														
+							<textbox width="100%" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='equipoOV', codigo=self.value, ov=vm.equipoOV, post='')" />
+						</row>
+						<row>
+							<label value="Referencia : " />
+							<textbox sclass="campoCodigo-medium" value="" />
+						</row>
+						<row>
+							<label value="Fecha de muestra : " />
+							<datebox id="fecha" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()"/>
+						</row>
+					</rows>
+				
+				</grid>
+				
 			</panelchildren>
 			
 		</panel>

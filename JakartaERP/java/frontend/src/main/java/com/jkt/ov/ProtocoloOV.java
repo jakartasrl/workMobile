@@ -1,5 +1,7 @@
 package com.jkt.ov;
 
+import java.util.Date;
+
 import lombok.Data;
 
 import com.jkt.view.ObjectView;
@@ -13,5 +15,7 @@ public class ProtocoloOV extends ObjectView {
 	
 	private long idCliente;
 	private long idSucursal;
+	
+	private Date fechaHoraMuestra;
 		
 }
