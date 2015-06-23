@@ -192,7 +192,7 @@ var tiles2 = [
 var tiles3 = [
 	{
 		'name'        : 'Salir',
-		'thumbnail'   : 'pantallas/icons/deleteRow.png',
+		'thumbnail'   : 'pantallas/img/exit.png',
 		'content'     : 'Salir',
 		'size'        : '2x2',
 		'theme'       : 'red',

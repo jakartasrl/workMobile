@@ -87,7 +87,6 @@ public abstract class VisorAgendaVM extends ViewModel {
 	@Command
 	public void iniciar(@BindingParam("elemento") TareaAgendaOV tarea){
 		tarea.setIdEstado(Estado.EN_EJECUCION.getValue());
-//		asignarNuevoEstado(tarea);
 		guardarTarea(tarea);
 
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
