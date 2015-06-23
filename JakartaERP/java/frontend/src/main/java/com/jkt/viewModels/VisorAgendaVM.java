@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+
+import lombok.Data;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -19,8 +19,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
-import lombok.Data;
-
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.grafo.DatoNodo.Estado;
@@ -29,6 +27,11 @@ import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.TareaAgendaOV;
 
+/**
+ * Abstract class for extend both Viewers
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 @Data
 public abstract class VisorAgendaVM extends ViewModel {
 
@@ -39,6 +42,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 	protected DescriptibleOV pedidoDescriptible = new DescriptibleOV();
 	protected List<DescriptibleOV> sectores;
 	protected List<DescriptibleOV> allStates;
+	private TareaAgendaOV tarea;
 	
 	@Command
 	@NotifyChange({"allTasks"})
@@ -54,7 +58,6 @@ public abstract class VisorAgendaVM extends ViewModel {
 		window.doModal();
 	}
 	
-	private TareaAgendaOV tarea;
 	
 	@Command
 	public void finalizar(@BindingParam("elemento") final TareaAgendaOV tarea){
@@ -71,6 +74,11 @@ public abstract class VisorAgendaVM extends ViewModel {
 		
 	}
 
+	/**
+	 * Luego de la confirmacion de finalizacion de tarea, se ejecuta este metodo
+	 * Pasa de un estado en ejecucion, a finalizado.
+	 * 
+	 */
 	public void finalizarTareaConfirmada(TareaAgendaOV tarea){
 		tarea.setIdEstado(Estado.FINALIZADO.getValue());
 
@@ -97,6 +105,11 @@ public abstract class VisorAgendaVM extends ViewModel {
 		);
 	}
 	
+	/**
+	 * Luego de la confirmacion se ejecuta el concreto de la operacion, es decir, el 'deshacer' de estado, el cual retorna al estado anterior.
+	 * De {@link Estado} No Iniciado, a Ejecucion
+	 * 
+	 */
 	protected void deshacerTareaConfirmada(TareaAgendaOV tarea) {
 		
 		if(tarea.getIdEstado()==Estado.EN_EJECUCION.getValue()){
@@ -144,10 +157,29 @@ public abstract class VisorAgendaVM extends ViewModel {
 	}
 
 	@Command
-	public void iniciar(@BindingParam("elemento") TareaAgendaOV tarea){
+	public void iniciar(@BindingParam("elemento") final TareaAgendaOV tarea){
+		
+		final VisorAgendaVM vm = this;
+
+		Messagebox.show("¿Desea iniciar esta tarea?", "Mensaje de confirmación", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
+			public void onEvent(Event evt) throws InterruptedException, IOException {
+				if (evt.getName().equals("onOK")) {
+		        	vm.iniciarTarea(tarea);
+		        }
+			}
+		}
+		);
+		
+	}
+
+	/**
+	 * Luego de la confirmacion se ejecuta el concreto de la operacion, es decir, el cambio de estado.
+	 * De {@link Estado} No Iniciado, a Ejecucion
+	 * 
+	 */
+	protected void iniciarTarea(TareaAgendaOV tarea) {
 		tarea.setIdEstado(Estado.EN_EJECUCION.getValue());
 		guardarTarea(tarea);
-
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
