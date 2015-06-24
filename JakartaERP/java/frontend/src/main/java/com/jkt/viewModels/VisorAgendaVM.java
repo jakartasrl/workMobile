@@ -215,6 +215,7 @@ public abstract class VisorAgendaVM extends ViewModel {
 	@Command
 	public void comentarios(@BindingParam("elemento") final TareaAgendaOV tarea){
 		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("tarea", tarea);
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/editorComentariosTareas.zul", null, parametros);
 		window.doModal();
 	}

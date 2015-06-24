@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.pedido.dominio.LogTarea" table="LOG_TAREA" >
+		
+		<id name="id" column="LOG_TAREA_ID">
+			<generator class="native" />
+		</id>
+
+		<property name="log" column="LOG" type="text"/>
+		<property name="fecha" column="FECHA" type="date" />
+		<property name="usuario" column="USUARIO" />
+
+	</class>
+
+</hibernate-mapping>

@@ -77,7 +77,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 			this.sectorSeleccionado = this.sectores.get(0);
 		}
 		
-		this.fechaFiltroInicio = LocalDate.now().toDate();
+		this.fechaFiltroInicio = LocalDate.now().minusDays(14).toDate();
 		this.fechaFiltroFin = LocalDate.now().toDate();
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);

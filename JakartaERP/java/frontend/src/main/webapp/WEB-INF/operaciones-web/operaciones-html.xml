@@ -1847,4 +1847,47 @@
 	</operacion>
 	
 	
+	<operacion name="TraerTareaConComentarios" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListTareaAgendaOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+	
+		<output>
+
+			<campoSalida value="id" target="id" />
+
+			<campoSalida target="logs" value="comentarios">
+				<campoSalida target="id" value="id" />
+				<campoSalida target="log" value="comentario" />
+				<campoSalida target="usuario" value="usuario" />
+				<campoSalida target="fecha" value="fecha" />
+			</campoSalida>
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
+	
+<!-- 	<operacion name="ActualizarComentariosTarea" clase="com.jkt.pedido.operaciones.ActualizarComentariosTarea" inputOV="com.jkt.ov.TareaAgendaOV" > -->
+	<operacion name="ActualizarComentariosTarea" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.TareaPedido" inputOV="com.jkt.ov.TareaAgendaOV" >
+	
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.TareaPedido"> 
+
+			<campoEntrada propertyOV="id" metodo="setId" />
+
+			<campoEntrada propertyOV="comentarios" metodo="setLogs">
+				<campoEntrada propertyOV="comentario" 		metodo="setLog" />
+				<campoEntrada propertyOV="fecha" 			metodo="setFecha" />
+				<campoEntrada propertyOV="usuario" 			metodo="setUsuario" />
+			</campoEntrada>
+			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 </entity>

@@ -1,24 +1,26 @@
 <window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.EditorComentariosTareasVM')" title="Edición de Tareas" style="margin-top:50px;" width="700px" position="top,center" closable="true" >
     <vlayout>
 		
-		<button style="margin-bottom:2px;margin-left:3px;"
-			image="/pantallas/icons/addSmall.png" label="Agregar Comentario"
-			onClick=""
-			tooltiptext="Agregar un nuevo comentario." >
-			
-			<attribute name="onClick"><![CDATA[
-					//box.pagingPosition = "top";
-					//siempre retorna a la primer pagina
-			        box.setActivePage(0);
-        		]]></attribute>
-        		
-		</button>
+		<div style="text-align:center">
+			<button style="margin-bottom:3px;"
+				image="/pantallas/icons/addSmall.png" label="Agregar Comentario"
+				onClick="@command('agregarComentario')"
+				tooltiptext="Agregar un nuevo comentario." >
+				
+				<attribute name="onClick"><![CDATA[
+						//box.pagingPosition = "top";
+						//siempre retorna a la primer pagina
+				        box.setActivePage(0);
+	        		]]></attribute>
+	        		
+			</button>
+		</div>
 
 		<listbox 
 			id="box"
 			model="@bind(vm.comentarios)" 
 			emptyMessage="No existen comentarios disponible." mold="paging" pageSize="1"
-			hflex="1" vflex="1" 
+			hflex="1" height="auto" 
 		>
 		
 		<auxhead>
@@ -31,12 +33,17 @@
 
 					<groupbox width="100%" style="border-style:none; cursor: default">
 					
-							<hlayout>
-								<label class="name" value="Fecha : " />
-								<datebox id="fecha" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+							<hlayout style="margin-top:10px">
+								<label class="name" value="Usuario : " />
+								<label value="@bind(each.usuario)" />
+							</hlayout>
+							
+							<hlayout style="margin-top:10px">
+								<label class="name" value="Fecha de comentario: " />
+								<datebox value="@bind(each.fecha)" format="dd/MM/yyyy" onCreate="self.value = new Date()" lenient="true" buttonVisible="false" readonly="true"/>
 							</hlayout>
 
-							<textbox readonly="false" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="" />
+							<textbox constraint="no empty" readonly="@bind(!each.nuevo)" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;margin-top:10px" multiline="true" rows="5" value="@bind(each.comentario)" placeholder="Ingrese aquí un comentario" />
 
 					</groupbox>
 
@@ -46,8 +53,8 @@
 	</listbox>
 
     <hlayout style="text-align:center;">
-	    <button id="closeBtn" width="150px" label="Cancelar" onClick="@command('cerrar',window=modalDialog)"/>
-	    <button id="okBtn" style="margin-left:10px;" width="150px" label="Aceptar" onClick="@command('aceptar',window=modalDialog)"/>
+	    <button id="closeBtn" width="150px" label="Cerrar" onClick="@command('cerrar',window=modalDialog)"/>
+	    <button id="okBtn" style="margin-left:10px;" width="150px" label="Guardar" onClick="@command('aceptar',window=modalDialog)" disabled="@bind(!vm.existenNuevosComentarios)"/>
     </hlayout>
  
     </vlayout>
