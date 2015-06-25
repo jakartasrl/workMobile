@@ -1,66 +1,50 @@
 <?xml version="1.0" ?>
 <!DOCTYPE entity [
-  <!ELEMENT menu        (elementos*)>
-  <!ELEMENT elementos   (elemento*)>
-  <!ELEMENT elemento 	(elemento*, texto*)>
-  <!ELEMENT texto 		EMPTY>
+  	<!ELEMENT menu		(elementos*)>
+  	<!ELEMENT elementos	(elemento*)>
+	<!ELEMENT elemento	(elemento*)>
+  	<!ELEMENT texto	EMPTY>
   
-  <!ATTLIST elemento tipo 			CDATA #REQUIRED>
-  <!ATTLIST elemento codigo			CDATA #REQUIRED>
-  <!ATTLIST elemento descripcion	CDATA #REQUIRED>
-  <!ATTLIST elemento orden			CDATA #REQUIRED>
-  <!ATTLIST elemento imagen			CDATA #IMPLIED>
-  <!ATTLIST elemento rutaImagen		CDATA #IMPLIED>
-  <!ATTLIST elemento argumento		CDATA #IMPLIED>
-  
-  <!ATTLIST texto texto			CDATA #REQUIRED>
-  <!ATTLIST texto alineacion	CDATA #REQUIRED>
-  <!ATTLIST texto fuente		CDATA #REQUIRED>
-  <!ATTLIST texto tamanio		CDATA #REQUIRED>
-  
+  	<!ATTLIST elemento codigo CDATA #REQUIRED>
+	<!ATTLIST elemento name	CDATA #REQUIRED>
+	<!ATTLIST elemento img	CDATA #REQUIRED>
+	<!ATTLIST elemento size	CDATA #REQUIRED>
+	<!ATTLIST elemento theme CDATA #REQUIRED>
+	<!ATTLIST elemento link	CDATA #IMPLIED>
+	<!ATTLIST elemento type	CDATA #REQUIRED>
+
 ]>
 
 <menues>
-	<elemento tipo="MENU" codigo="001" descripcion="Menu" orden="0" imagen="leo.jpg" rutaImagen="C:" argumento="qseyo">
 
-
-		<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0"/>
-		<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
-		
-		<elemento tipo="MENU" codigo="004" descripcion="SubMenu" imagen="leo.jpg" orden="0" rutaImagen="C:" argumento="qseyo">
-			<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0" />
-			<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
-			
-			<texto texto="texto1" alineacion="derecha" fuente="arial" tamanio="10" />
-			<texto texto="texto2" alineacion="derecha" fuente="arial" tamanio="9" />
-			<texto texto="otrotexto" alineacion="derecha" fuente="arial" tamanio="10" />
-			<texto texto="textoultimo" alineacion="izquierda" fuente="arial" tamanio="10" />
-			<texto texto="sequedoafueraeltexto" alineacion="derecha" fuente="arial" tamanio="10" />
-
-		</elemento>
-
-		<texto texto="TextoPrincipal" alineacion="izquierda" fuente="arial" tamanio="38" />
-		<texto texto="TextoSecundario" alineacion="derecha" fuente="times" tamanio="8" />
-		
+	<elemento codigo="001" name="Laboratorio" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu">
+		<elemento codigo="002" name="Laboratorio" 					img="pantallas/img/labs.png" 			size="2x2" theme="grey" link="pantallas/index/index-laboratorio.zul" 							type="submenu" />
+		<elemento codigo="003" name="Equipo" 						img="pantallas/img/widget_tag.png'" 	size="2x2" theme="grey" link="pantallas/index/index-equipo.zul" 								type="submenu" />
+		<elemento codigo="004" name="Determinaciones Electricas" 	img="pantallas/img/widget_tooltip.png" 	size="2x2" theme="green" link="pantallas/index/index-determinacion.zul?l=LaboratorioElectrico" 	type="submenu" />
+		<elemento codigo="005" name="Determinaciones Quimico" 		img="pantallas/img/widget_tooltip.png" 	size="2x2" theme="green" link="pantallas/index/index-determinacion.zul?l=LaboratorioQuimico" 	type="submenu" />
 	</elemento>
 
-	<elemento tipo="MENU" codigo="0044" descripcion="Menu" orden="0">
-
-		<elemento tipo="PROGRAMA" codigo="002" descripcion="Programa primero" orden="0"/>
-		<elemento tipo="SCRIPT" codigo="003" descripcion="Script primero" orden="0"/>
-		
+	<elemento codigo="010" name="Ventas" img="pantallas/img/labs.png" size="4x2" theme="red" type="menu">
+		<elemento codigo="011" name="Cotizacion" 				img="pantallas/img/widget_dialog.png" 	size="2x2" theme="orange" link="pantallas/index/index-cotizacion.zul" 		type="submenu" />
+		<elemento codigo="012" name="Modelo de Cotizador" 		img="pantallas/img/modeloCotizador.png" size="2x2" theme="orange" link="pantallas/index/index-modeloCotizador.zul" 	type="submenu" />
+		<elemento codigo="013" name="Conceptos Presupuestarios" img="pantallas/img/modeloCotizador.png" size="2x2" theme="orange" link="pantallas/index/index-conceptos.zul" 		type="submenu" />
+		<elemento codigo="014" name="Cotizador" 				img="pantallas/img/cotizador.png" 		size="2x2" theme="orange" link="pantallas/index/index-cotizador.zul" 		type="submenu" />
+		<elemento codigo="015" name="Presupuesto" 				img="pantallas/img/presupuesto.png" 	size="2x2" theme="orange" link="pantallas/index/index-presupuesto.zul" 		type="submenu" />
+		<elemento codigo="016" name="Pedido" 					img="pantallas/img/order.png" 			size="2x2" theme="orange" link="pantallas/index/index-pedido.zul" 			type="submenu" />
+		<elemento codigo="017" name="Planificacion de Pedido" 	img="pantallas/img/calendar_tasks.png" 	size="2x2" theme="orange" link="pantallas/index/index-agenda.zul" 			type="submenu" />
+		<elemento codigo="018" name="Tareas por Sector" 		img="pantallas/img/planificacion.png" 	size="2x2" theme="orange" link="pantallas/index/index-vista-agenda-sector.zul" type="submenu" />
+		<elemento codigo="019" name="Tareas por Pedido" 		img="pantallas/img/planificacion.png" 	size="2x2" theme="orange" link="pantallas/index/index-vista-agenda-pedido.zul" type="submenu" />
 	</elemento>
-
-	<elemento tipo="MENU" codigo="00554" descripcion="Menu" orden="0">
-
-		<elemento tipo="MENU" codigo="004" descripcion="SubMenu" imagen="leo.jpg" orden="0" rutaImagen="C:" argumento="qseyo">
-			
-			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
-			<texto texto="qseyo" alineacion="derecha" fuente="arial" tamanio="9" />
-			<texto texto="ejemplo" alineacion="izquierda" fuente="arial" tamanio="10" />
-			<texto texto="uno" alineacion="derecha" fuente="arial" tamanio="10" />
-
-		</elemento>
+	
+	<elemento codigo="100" name="Generico" img="pantallas/img/widget_dialog.png" size="4x2" theme="blue" type="menu">
+		<elemento codigo="101" name="Sector" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarSector-sector" 				type="submenu" />
+		<elemento codigo="102" name="Tarea" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarTareaSimple-tarea" 			type="submenu" />
+		<elemento codigo="103" name="Unidad Medida" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarUnidadMedida-unidadMedida" 	type="submenu" />
+		<elemento codigo="104" name="Idioma" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarIdioma-idioma" 				type="submenu" />
+		<elemento codigo="105" name="Moneda" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarMoneda-moneda" 				type="submenu" />
+		<elemento codigo="106" name="Pais" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarPais-pais" 					type="submenu" />
+		<elemento codigo="107" name="Documentacion" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDocumentacion-documentacion" type="submenu" />
 	</elemento>
-
+	
 </menues>
+

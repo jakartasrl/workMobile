@@ -1818,28 +1818,30 @@
 		
 	</operacion>
 	
-	<operacion name="RecuperarMenu" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.MenuOV">
+	<operacion name="RecuperarMenu" clase="com.jkt.operaciones.RecuperarMenu" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListMenuOV">
 		
 		<input>
-			<campoEntrada propertyOV="string1" name="entidad"/>
-			<campoEntrada propertyOV="string2" name="id"/>
+			<campoEntrada propertyOV="string1" name="oid_menu"/>
 		</input>
 		
 		<output>
 
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="nombre" />
+			<campoSalida target="type" value="tipo" />
+			<campoSalida target="link" value="enlace" />
 			
-			<campoSalida target="elementos" value="hijos">
-				<campoSalida target="id" value="id" />
-				<campoSalida target="codigo" value="nombre" />	
+<!-- 			<campoSalida target="elementos" value="hijos"> -->
+<!-- 				<campoSalida target="id" value="id" /> -->
+<!-- 				<campoSalida target="codigo" value="nombre" />	 -->
+<!-- 				<campoSalida target="type" value="tipo" /> -->
 				
 <!-- 				<campoSalida target="elementos" value="hijos"> -->
 <!-- 					<campoSalida target="id" value="id" /> -->
 <!-- 					<campoSalida target="codigo" value="nombre" />	 -->
 <!-- 				</campoSalida> -->
 				
-			</campoSalida>
+<!-- 			</campoSalida> -->
 						
 		</output>
 

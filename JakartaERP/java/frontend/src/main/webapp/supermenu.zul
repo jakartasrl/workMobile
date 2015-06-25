@@ -1,8 +1,17 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 <?init class="com.jkt.security.ServicioAcceso" ?>
 
-
 <zk>
+
+
+<script type="text/javascript">
+
+	function cargarMenues(arg){
+		debugger;
+		alert('q vaina e leon'+ JSON.stringify(arg) );
+	}
+	
+</script>
 
 <style src="/style/template-grey.css" />
 <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">

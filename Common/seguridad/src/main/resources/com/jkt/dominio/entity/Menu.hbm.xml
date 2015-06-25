@@ -11,9 +11,6 @@
 		<discriminator column="TIPO_ELEMENTO" type="string" />
 
 		<property name="codigo" column="CODIGO" />
-		<property name="descripcion" column="DESCRIPCION" />
-		<property name="activo" column="ACTIVO" type="boolean" />
-
 
 		<subclass name="com.jkt.dominio.menu.Programa" discriminator-value="PROGRAMA">
 		</subclass>
@@ -22,18 +19,11 @@
 		</subclass>
 
 		<subclass name="com.jkt.dominio.menu.Menu" discriminator-value="MENU">
-			<property name="orden" column="ORDEN" type="integer" />
-			<property name="imagen" column="IMAGEN" type="string" />
-			<property name="rutaDeImagen" column="RUTA_IMAGEN" type="string" />
-			<property name="argumento" column="ARGUMENTO" type="string" />
-			
-			<list name="textos" table="TEXTOS_MENU" lazy="true" cascade="all">
-				<key>
-					<column name="MENU_ID"></column>
-				</key>
-				<index column="ORDEN" />
-				<one-to-many class="com.jkt.dominio.menu.TextoMenu"/>
-			</list>
+			<property name="img" column="IMAGEN" type="string" />
+			<property name="size" column="TAMANIO" type="string" />
+			<property name="theme" column="COLOR" type="string" />
+			<property name="link" column="URL" type="string" />
+			<property name="type" column="TIPO" type="string" />
 			
 			<list name="elementos" table="MENU_HIJOS" lazy="true" cascade="all">
 				<key>
