@@ -3,41 +3,57 @@
 <zk>
 
 	<style src="/style/template.css" />
-	
-	<style>
-	body {
-	    background-image: url('pantallas/img/wallpaper/2.jpg');
-	}
-	
-</style>
-	
+		
 	<panel 
-		id="tool" height="150px" border="none" collapsible="false" closable="false" maximizable="false" 
-		style="margin-top:10%; margin-left:35%;margin-right:35% ; padding:30px;background-color:rgb(50, 50, 50)"
+		id="tool" height="200px" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 
+		style="margin-top:10%; margin-left:35%;margin-right:35% ; padding:30px;background-color:transparent"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')"
 	>
 	
-		<panelchildren style="background-color:rgb(50, 50, 50); margin:0px; padding:0px;" >
+		<panelchildren>
 		
-			<vlayout style="background-color:rgb(50, 50, 50)">
-			
-				<hlayout style="background-color:rgb(50, 50, 50)">
-					<label hflex="3" value="Usuario" style="color:white"></label>
-					<textbox hflex="5" value="@bind(vm.usuario)" onOK="@command('acceder')"/>
-				</hlayout>
-					
-				<hlayout >
-					<label hflex="3" value="Password" style="color:white"/>
-					<textbox hflex="5" type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
-				</hlayout>
+			<grid style="border-style:none">
+				<columns>
+					<column></column>
+					<column></column>
+				</columns>
 				
-				<hlayout style="text-align:center" >
-					<button hflex="1" label="Acceder" onClick="@command('acceder')" />
-				</hlayout>
+				<rows>
+					<row>
+						<cell>
+							<label style="margin-left:10px;" value="Usuario"></label>
+						</cell>
+						<cell>
+							<textbox value="@bind(vm.usuario)" onOK="@command('acceder')"/>
+						</cell>
+					</row>
 
-				<label style="color:red;font-size:10px;backgrond-color:rgb(50, 50, 50)" value="@bind(vm.error)" visible="@bind(vm.showError)" />
-			</vlayout>
+					<row>
+						<cell>
+							<label style="margin-left:10px;" value="Password" />
+						</cell>
+						<cell>
+							<textbox type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
+						</cell>
+					</row>
+					
+					<row>
+						<cell colspan="2" style="text-align:center">
+							<button label="Acceder" width="50%" onClick="@command('acceder')" />
+						</cell>
+					</row>
+
+					<row>
+						<cell colspan="2" style="text-align:center">
+							<label style="color:red;font-size:10px;" value="@bind(vm.error)" visible="@bind(vm.showError)" />
+						</cell>
+					</row>
+
+					
+				</rows>
+				
+			</grid>
 		
 		
 		</panelchildren>
