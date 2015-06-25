@@ -34,7 +34,6 @@ public class LoginVM {
 	
 //		ContainerOV containerMenu = new ContainerOV();
 //		containerMenu.setString1("menu1.xml");
-//		containerMenu.setString2("001");
 //		Operaciones.ejecutar("CrearMenues", containerMenu);
 		
 		ContainerOV objetoOV = new ContainerOV();

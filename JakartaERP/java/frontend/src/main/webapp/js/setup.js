@@ -189,7 +189,7 @@ var tiles2 = [
 ];
 
 //var tiles3 = [makeRandomTile(31), makeRandomTile(32), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36), makeRandomTile(33), makeRandomTile(34), makeRandomTile(35), makeRandomTile(36)];
-var tiles3 = [
+var tiles3 = [ 
 	{
 		'name'        : 'Salir',
 		'thumbnail'   : 'pantallas/img/exit.png',

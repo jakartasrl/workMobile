@@ -3,19 +3,65 @@
 
 <zk>
 
+<style src="/style/template-grey.css" />
+<style src="/style/metro.css" />
+<style src="/style/template-grey.css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/metro.js"></script>
+<!-- <script type="text/javascript" src="js/setup.js"></script> -->
 
 <script type="text/javascript">
 
 	function cargarMenues(arg){
+
 		debugger;
-		alert('q vaina e leon'+ JSON.stringify(arg) );
+
+		var backTiles = [
+		{
+			'name'        : 'Salir',
+			'thumbnail'   : 'pantallas/img/exit.png',
+			'content'     : 'Salir',
+			'size'        : '1x1',
+			'theme'       : 'blue',
+			'link'         : 'javascript:history.back()'
+		}
+	
+		];
+
+		var configTiles = [
+		{
+			'name'        : 'Salir',
+			'thumbnail'   : 'pantallas/img/exit.png',
+			'content'     : 'Salir',
+			'size'        : '1x1',
+			'theme'       : 'red',
+			'link'         : 'index.zul?action=logout',
+		}
+	
+		];
+	
+<!-- 		Metro.HTML.addContainer({'size':'half', 'tiles':backTiles}); -->
+		Metro.HTML.addContainer({'size':'full', 'tiles':arg});
+<!-- 		Metro.HTML.addContainer({'size':'half', 'tiles':configTiles}); -->
+		
+		$(document).ready(Metro.init);
 	}
 	
 </script>
 
-<style src="/style/template-grey.css" />
-<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">
-	<include id="menu" src="index.html" />
-</div>
+
+
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">
+	<!-- 	<include id="menu" src="index.html" /> -->
+	</div>
 
 </zk>
+
+
+
+<!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<!--         <link rel="stylesheet" type="text/css" href="style/metro_mobile.css" media="screen and (max-height: 500px), screen and (orientation:portrait)" /> -->
+<!--         <script type="text/javascript" src="js/jquery.js"></script> -->
+<!--         <script type="text/javascript" src="js/metro.js"></script> -->
+<!--         <script type="text/javascript" src="js/setup.js"></script> -->

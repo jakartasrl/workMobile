@@ -19,6 +19,7 @@
 		</subclass>
 
 		<subclass name="com.jkt.dominio.menu.Menu" discriminator-value="MENU">
+			<property name="name" column="NOMBRE" type="string" />
 			<property name="img" column="IMAGEN" type="string" />
 			<property name="size" column="TAMANIO" type="string" />
 			<property name="theme" column="COLOR" type="string" />

@@ -219,8 +219,11 @@ var Metro = {
                 if (container_data.size === 'full') {
                     widget_total += 12;
                 } else {
-                    widget_total += 4;
+                	widget_total += 4;
                 }
+//                else if(container_data.size === 'half') {
+//                	widget_total += 2;
+//                }
             });
 
             var CRLF = '\r\n';
@@ -484,4 +487,4 @@ var Metro = {
     }
 };
 
-$(document).ready(Metro.init);
+//$(document).ready(Metro.init);

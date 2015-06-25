@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.digester3.Digester;
+import org.hibernate.Query;
 
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.menu.ElementoMenu;
@@ -28,28 +29,25 @@ import com.jkt.excepcion.JakartaException;
 public class CrearMenues extends Operation {
 
 	
-	private static final String MENU_TYPE = "MENU";
-	private static final String SCRIPT = "SCRIPT";
-	private static final String PROGRAMA = "PROGRAMA";
-	private static final String CODIGO_MENU = "codigoMenu".toUpperCase();
+//	private static final String MENU_TYPE = "MENU";
+//	private static final String SCRIPT = "SCRIPT";
+//	private static final String PROGRAMA = "PROGRAMA";
+//	private static final String CODIGO_MENU = "codigoMenu".toUpperCase();
 	private static final String FILE_NAME = "fileName".toUpperCase();
 
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String fileName = (String) aParams.get(FILE_NAME);
-		String codigo = (String) aParams.get(CODIGO_MENU);
+//		String codigo = (String) aParams.get(CODIGO_MENU);
 		
 		Digester digester = generarReglas();
 		InputStream in = this.getClass().getResourceAsStream(fileName);
 		MenuContainerXML menues = (MenuContainerXML) digester.parse(in);
-		
-//		MenuXML menuXML = menues.getMenues().get(codigo);
 		
 		Collection<MenuXML> values = menues.getMenues().values();
 		for (MenuXML menuXML2 : values) {
 			Menu menu = (Menu) parsearRespuestaDesdeElXML(menuXML2);
 			this.serviceRepository.save(menu);
 		}
-//		
 	}
 	
 	private Digester generarReglas(){
@@ -86,6 +84,7 @@ public class CrearMenues extends Operation {
 	private ElementoMenu parsearRespuestaDesdeElXML(MenuXML menu) throws JakartaException{
 		
 		Menu m=  new Menu();
+		m.setName(menu.getName());
 		m.setCodigo(menu.getCodigo());
 		m.setImg(menu.getImg());
 		m.setLink(menu.getLink());

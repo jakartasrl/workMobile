@@ -1827,9 +1827,13 @@
 		<output>
 
 			<campoSalida target="id" value="id" />
-			<campoSalida target="codigo" value="nombre" />
-			<campoSalida target="type" value="tipo" />
-			<campoSalida target="link" value="enlace" />
+			<campoSalida target="name" value="name" />
+			<campoSalida target="img" value="img" />
+			<campoSalida target="size" value="size" />
+			<campoSalida target="theme" value="theme" />
+			<campoSalida target="link" value="link" />
+			<campoSalida target="type" value="type" />
+			
 			
 <!-- 			<campoSalida target="elementos" value="hijos"> -->
 <!-- 				<campoSalida target="id" value="id" /> -->
