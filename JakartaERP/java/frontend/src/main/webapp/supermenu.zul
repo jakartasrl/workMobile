@@ -4,8 +4,8 @@
 <zk>
 
 <style src="/style/template-grey.css" />
-<style src="/style/metro.css" />
 <style src="/style/template-grey.css" />
+<style src="/style/metro.css" />
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/metro.js"></script>
