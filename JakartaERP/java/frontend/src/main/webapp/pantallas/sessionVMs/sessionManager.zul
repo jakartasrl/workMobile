@@ -4,7 +4,21 @@
 <zk>
 
 	<style src="/style/template.css" />
-	<div style="margin:0px; padding:0px; background-color:transparent; width:auto; height:auto;" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ViewModelsManagerVM')" >
-		<include id="contenidoPrincipal" src="../../${ vm.url }" viewModel="${ vm.viewModel }" />
+	<div style="margin:0px; padding:0px; background-color:transparent; width:auto; height:auto;" 
+		apply="org.zkoss.bind.BindComposer" viewModel="@id('parentVM') @init('com.jkt.viewModels.ViewModelsManagerVM')" >
+
+			<div apply="org.zkoss.bind.BindComposer" viewModel="@id('childrenVM') @init(parentVM.vmClass)" >
+				<include src="../../${ parentVM.url }" viewModel="${childrenVM}" />
+			</div>
+
+<!-- 				<include src="../../${ parentVM.url }" apply="org.zkoss.bind.BindComposer"  elemento="@init(parentVM.vmClass)" if="{parentVM.viewModel == null }" /> -->
+<!-- 			<include src="../../${ parentVM.url }" elemento="${parentVM.viewModel}" /> -->
+
 	</div>
 </zk>
+
+
+<!-- 			<include src="../../${ parentVM.url }" viewModel="${ parentVM.viewModel != null ? @load(parentVM.viewModel) : @init(parentVM.viewModel) }" /> -->
+<!-- 			<include src="../../${ parentVM.url }" viewModel="@init(parentVM.viewModel)" /> -->
+
+<!-- 			<include src="../../${ parentVM.url }" apply="org.zkoss.bind.BindComposer" viewModel="@id('viewModel') @init(parentVM.vmClass)" if="${ parentVM.viewModel == null }" /> -->

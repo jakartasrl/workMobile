@@ -1,9 +1,30 @@
+<!-- <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?> -->
+<!-- <?init class="com.jkt.security.ServicioAcceso" ?> -->
+
+<!-- <zk> -->
+<!-- 	<style src="/style/template.css" /> -->
+<!-- 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.PresupuestoVM')" id="contenedorPrincipal"> -->
+		
+<!-- 		<div sclass="hboxToolBar" > -->
+<!-- 			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/> -->
+<!-- 		</div> -->
+
+<!-- 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px"> -->
+<!-- 			<include id="pedidoId" src="/pantallas/presupuesto/presupuesto.zul" viewModel="${vm}"/> -->
+<!-- 		</div> -->
+		
+<!-- 	</div> -->
+<!-- </zk> -->
+
+
+
+
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 <?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
 	<style src="/style/template.css" />
-	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.PresupuestoVM')" id="contenedorPrincipal">
+	<div vflex="1" hflex="1" viewModel="@id('vm') @load(viewModel)">
 		
 		<div sclass="hboxToolBar" >
 			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/>
@@ -15,4 +36,5 @@
 		
 	</div>
 </zk>
+
 

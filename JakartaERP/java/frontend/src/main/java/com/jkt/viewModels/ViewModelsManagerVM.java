@@ -37,12 +37,12 @@ public class ViewModelsManagerVM {
 		Object viewModelEnSesion = mapa.get(dto.getUrl());
 
 		if(viewModelEnSesion==null){
-			String claseViewModel = dto.getClaseViewModel();
-			if(claseViewModel==null || claseViewModel.isEmpty()){
+			this.vmClass = dto.getClaseViewModel();
+			if(this.vmClass==null || this.vmClass.isEmpty()){
 				throw new JakartaException("Ocurrio una inconsistencia en el motor que administra este modulo.");
 			}else{
-				Class<?> clase = Class.forName(claseViewModel);
-				this.viewModel = clase.newInstance();
+//				Class<?> clase = Class.forName(this.vmClass);
+//				this.viewModel = clase.newInstance();
 			}
 		}else{
 			this.viewModel= viewModelEnSesion;
@@ -50,5 +50,5 @@ public class ViewModelsManagerVM {
 		
 		this.url=dto.getUrl();
 	}
-	
+
 }

@@ -110,17 +110,17 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	@Init
 	public void init(){
 		
-		try {
-			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-			if(recuperarDesdeSesion!=null){
-				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-				return;// true; 
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage());
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e.getMessage());
-		}
+//		try {
+//			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+//			if(recuperarDesdeSesion!=null){
+//				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+//				return;// true; 
+//			}
+//		} catch (IllegalAccessException e) {
+//			throw new RuntimeException(e.getMessage());
+//		} catch (InvocationTargetException e) {
+//			throw new RuntimeException(e.getMessage());
+//		}
 
 		
 		super.nuevo();

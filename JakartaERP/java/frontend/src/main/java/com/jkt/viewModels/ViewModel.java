@@ -280,7 +280,13 @@ public abstract class ViewModel {
 		Session sess = Sessions.getCurrent();
 		
 		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
+		
+		
+		
+		
 		mapa.put(this.getClass().getCanonicalName(), this);
+		
+		
 		sess.setAttribute("ventanas", mapa);
 		Executions.sendRedirect("../../supermenu.zul");
 	}
