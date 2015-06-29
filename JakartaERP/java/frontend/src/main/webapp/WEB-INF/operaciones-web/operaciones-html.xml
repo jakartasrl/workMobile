@@ -1834,6 +1834,7 @@
 			<campoSalida target="link" value="link" />
 			<campoSalida target="type" value="type" />
 			
+			<campoSalida target="vm" value="vm" />
 			
 <!-- 			<campoSalida target="elementos" value="hijos"> -->
 <!-- 				<campoSalida target="id" value="id" /> -->

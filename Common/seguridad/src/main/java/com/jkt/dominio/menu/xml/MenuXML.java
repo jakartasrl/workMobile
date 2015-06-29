@@ -20,6 +20,8 @@ public class MenuXML {
 	private String theme;	
 	private String link;
 	private String type;
+
+	private String vm;
 	
 	private Map<String,MenuXML> hijos=new HashMap<String,MenuXML>();//Representa a los hijos
 

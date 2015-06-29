@@ -1,0 +1,10 @@
+<?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
+
+<zk>
+
+	<style src="/style/template.css" />
+	<div style="margin:0px; padding:0px; background-color:transparent; width:auto; height:auto;" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ViewModelsManagerVM')" >
+		<include id="contenidoPrincipal" src="../../${ vm.url }" viewModel="${ vm.viewModel }" />
+	</div>
+</zk>

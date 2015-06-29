@@ -92,6 +92,8 @@ public class CrearMenues extends Operation {
 		m.setType(menu.getType());
 		m.setTheme(menu.getTheme());
 		
+		m.setVm(menu.getVm());
+
 		Collection<MenuXML> values = menu.getHijos().values();
 		for (MenuXML menuXML : values) {
 			m.getElementos().add(parsearRespuestaDesdeElXML(menuXML));

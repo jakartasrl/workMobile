@@ -20,6 +20,8 @@ public class MenuOV extends ObjectView {
 	private String type;
 	private String url=StringUtils.EMPTY;
 	
+	private String vm;
+	
 
 	
 //	private String nombre, enlace, tipo;

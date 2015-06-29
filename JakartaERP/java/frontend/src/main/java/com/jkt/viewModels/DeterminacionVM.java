@@ -48,18 +48,6 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		ParametroOV laboratorioParam = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV(laboratorio), ParametroOV.class);
 		this.idLaboratorio = Long.valueOf(laboratorioParam.getValorNumero());
 		
-//		try {
-//			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-//			if(recuperarDesdeSesion!=null){
-//				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-//				return;// true; 
-//			}
-//		} catch (IllegalAccessException e) {
-//			throw new RuntimeException(e.getMessage());
-//		} catch (InvocationTargetException e) {
-//			throw new RuntimeException(e.getMessage());
-//		}
-		
 		this.setTitulo("Determinaciones");
 		this.determinacion.setIdLaboratorio(this.idLaboratorio);
 		this.determinacion.setListTipoResultado(this.cargarListTipoResultados());

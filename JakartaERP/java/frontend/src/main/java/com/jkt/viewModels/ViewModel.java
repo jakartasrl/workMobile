@@ -282,9 +282,7 @@ public abstract class ViewModel {
 		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
 		mapa.put(this.getClass().getCanonicalName(), this);
 		sess.setAttribute("ventanas", mapa);
-		
-		Executions.sendRedirect("index.html");
-//		Executions.sendRedirect("/pantallas/menu.zul");
+		Executions.sendRedirect("../../supermenu.zul");
 	}
 
 	@Command

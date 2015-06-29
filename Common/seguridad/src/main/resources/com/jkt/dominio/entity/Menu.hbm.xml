@@ -26,6 +26,8 @@
 			<property name="link" column="URL" type="string" />
 			<property name="type" column="TIPO" type="string" />
 			
+			<property name="vm" column="VM" type="string" />
+
 			<list name="elementos" table="MENU_HIJOS" lazy="true" cascade="all">
 				<key>
 					<column name="MENU_ID"></column>

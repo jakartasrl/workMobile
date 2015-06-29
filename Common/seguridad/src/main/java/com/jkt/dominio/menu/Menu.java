@@ -26,6 +26,8 @@ public class Menu extends ElementoMenu {
 	private String link;
 	private String type;
 	
+	private String vm;
+	
 	private List<ElementoMenu> elementos = new ArrayList<ElementoMenu>();
 
 	@Override
