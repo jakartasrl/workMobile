@@ -1,103 +1,51 @@
 package com.jkt.viewModels;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import lombok.Data;
 
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.annotation.QueryParam;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Messagebox;
 
+import com.google.gson.Gson;
 import com.jkt.common.Operaciones;
+import com.jkt.dto.SessionViewModelsDTO;
 import com.jkt.ov.ContainerOV;
+import com.jkt.ov.ListMenuOV;
 import com.jkt.ov.MenuOV;
 
 /**
  * Retorna todos los enlaces para generar un menu en la vista
- * 
- * @author ssuarez
- *
+ * 	
+ * @author Leonel Suarez - Jakarta SRL
  */
 @Data
 public class MenuVM {
 	
-    @Command
-	public void logOut(){
-		Session sess = Sessions.getCurrent();
-        sess.removeAttribute("userCredential");
-        sess.removeAttribute("ventanas");
-        Executions.sendRedirect("/index.zul");
-	}
-	
-	@Init
-	public void init(){
-		
-		ContainerOV containerOV = new ContainerOV();
-		containerOV.setString1("menu");
-		containerOV.setString2("1");
-
-		MenuOV menu = (MenuOV) Operaciones.ejecutar("RecuperarMenu", containerOV, MenuOV.class);
-		menu.getNombre();
-	}
-	
-/*
-	
-	private List<MenuOV> menues=new ArrayList<MenuOV>();
+	private String titulo = "Los Conce";
 	
 	private List<String> news=new ArrayList<String>();
 	private String currentNew;
 	private int index = 0;
 	
-	@Init
-	public void init(){
-		
-		menues.add(MenuOV.newInstance("Laboratorio", "index/index-laboratorio.zul", "small"));
-		menues.add(MenuOV.newInstance("Equipo", "index/index-equipo.zul", "small"));
-		menues.add(MenuOV.newInstance("Determinacion Electrica", "index/index-determinacion.zul?l=LaboratorioElectrico", "small"));
-		menues.add(MenuOV.newInstance("Determinacion Quimica", "index/index-determinacion.zul?l=LaboratorioQuimico", "small"));
-		menues.add(MenuOV.newInstance("Sector", "generic/genericList.zul", "small","guardarSector", "sector"));
-		menues.add(MenuOV.newInstance("Plantilla", "index/plantilla.zul", "small"));
-		menues.add(MenuOV.newInstance("Tarea", "generic/genericList.zul", "small","guardarTareaSimple", "tarea"));
-		menues.add(MenuOV.newInstance("Unidad Medida", "generic/genericList.zul", "small","guardarUnidadMedida", "unidadMedida"));
-//		menues.add(MenuOV.newInstance("Idioma", "generic/genericList.zul", "small","guardarIdioma", "idioma"));
-		menues.add(MenuOV.newInstance("Moneda", "generic/genericList.zul", "small","guardarMoneda", "moneda"));
-		menues.add(MenuOV.newInstance("Pais", "generic/genericList.zul", "small","guardarPais", "pais"));
-		menues.add(MenuOV.newInstance("Documentación", "generic/genericList.zul", "small","guardarDocumentacion", "documentacion"));
-		menues.add(MenuOV.newInstance("Cotizacion", "index/index-cotizacion.zul", "small"));
-		menues.add(MenuOV.newInstance("Modelo Cotizador", "index/index-modeloCotizador.zul", "small"));
-		menues.add(MenuOV.newInstance("Cotizador", "index/index-Cotizador.zul", "small"));
-		menues.add(MenuOV.newInstance("Presupuesto", "index/index-presupuesto.zul", "small"));
-		menues.add(MenuOV.newInstance("Pedido", "index/index-pedido.zul", "small"));
-		menues.add(MenuOV.newInstance("Planificación de Pedido", "index/index-agenda.zul", "small"));
-		menues.add(MenuOV.newInstance("Visor de Tareas por Sector", "index/index-vista-agenda-sector.zul", "small"));
-		menues.add(MenuOV.newInstance("Visor de Tareas por Pedido", "index/index-vista-agenda-pedido.zul", "small"));
-		menues.add(MenuOV.newInstance("Conceptos Presupuestarios", "index/index-conceptos.zul", "small"));
-//		menues.add(MenuOV.newInstance("Visor de Planificación", "index/visor-agenda.zul", "small"));
-
-		
-//		news.add("Miercoles 15 de Abril- River Plata gana 4-0 y logra acceder a octavos.");
-//		news.add("Jueves 16 de Abril- Argentina está de fiesta");
-//		news.add("Viernes 17 de Abril- Aique");
-			
-		news.add("Reactores - Serie o limitadores de corriente de cortocircuido. Paralelo, derivación o Shunt.");
-		news.add("Transformadores - Potencia - Distribución - Especiales ");
-		news.add("El Mural mas grande del mundo.");
-		news.add("Los Conce. Tel.:(+54 11)46932220");
-		
-//		news.add("Miercoles 6 de Mayo, o Jueves 7 - River Plate gana 3-0.");
-//		news.add("Miercoles 13 de Mayo, o Jueves 14 - River Plate gana 1-0. Logra pasar a Cuartos de final de la copa B. Libertadores.");
-//		news.add("Jueves 14, o Viernes 15 de Mayo- Argentina está de fiesta.");
-//		news.add("Sabado siguiente - Vamos Millonario!!.");
-
-//		news.add("18 de Abril - Daniel Shapochnik");
-//		news.add("13 de Mayo - Peñalva");
-//		news.add("17 de Mayo - Eliana");
-//		news.add("20 de Junio - Leo");
-//		news.add("30 de Junio - Marcos");
-//		news.add("30 de Octubre - Ema");
-		
-		currentNew=news.get(index);
-	}
+	private Map<String, String> mapaViewModel =  new HashMap<String, String>();
+	
 	
 	@Command
 	@NotifyChange("currentNew")
@@ -109,6 +57,79 @@ public class MenuVM {
 		currentNew=news.get(index);
 	}
 	
+	@Data
+	public class MenuDTO{
+		private String name, thumbnail, size, theme, link, content, url;
+	}
 	
-	*/
+	@Init
+	public void init(@QueryParam("menu") String idMenu) throws IllegalAccessException, InvocationTargetException{
+
+		loadNews();
+		
+		ContainerOV container =  new ContainerOV();
+
+		if(idMenu!= null && !idMenu.isEmpty()){
+			container.setString1(idMenu);
+		}else{
+			container.setString1("");
+		}
+		
+		List<MenuOV> menues = ((ListMenuOV) Operaciones.ejecutar("RecuperarMenu", container, ListMenuOV.class)).getList();
+		List<MenuDTO> menuesPlanos = new ArrayList<MenuVM.MenuDTO>();
+
+		MenuDTO menuDTO;
+		for (MenuOV menuOV : menues) {
+			this.mapaViewModel.put(menuOV.getLink(), menuOV.getVm()); //Meto en un mapa la url y el vm, para poder recuperarlo posteriormente
+			
+			menuDTO = new MenuDTO();
+			
+			if((menuOV.getLink()==null || menuOV.getLink().isEmpty()) && (menuOV.getType().equals("menu_principal") || menuOV.getType().equals("menu"))){
+				menuOV.setLink("supermenu.zul?menu="+String.valueOf(menuOV.getId()));
+			}else{
+				menuOV.setLink("javascript:executeCommand('"+menuOV.getLink()+"')");
+			}
+			
+			//NO puedo usar BeanUtils de apache xq los campos estan nombrados diferentes.
+			menuDTO = new MenuDTO();
+			
+			menuDTO.setName(menuOV.getName());
+			menuDTO.setContent(menuOV.getName());
+			menuDTO.setThumbnail(menuOV.getImg());
+			menuDTO.setSize(menuOV.getSize());
+			menuDTO.setTheme(menuOV.getTheme());
+			menuDTO.setLink(menuOV.getLink());
+			
+			
+			menuesPlanos.add(menuDTO);
+		}
+		
+		Gson g = new Gson();
+		String listJson = g.toJson(menuesPlanos);
+		
+		Clients.evalJavaScript("cargarMenues("+listJson+");");
+	}
+
+	protected void loadNews() {
+		news.add("Reactores - Serie o limitadores de corriente de cortocircuido. Paralelo, derivación o Shunt.");
+		news.add("Transformadores - Potencia - Distribución - Especiales ");
+		news.add("El Mural mas grande del mundo.");
+		news.add("Los Conce. Tel.:(+54 11)46932220");
+		
+		currentNew=news.get(index);
+	}
+	
+	/**
+	 * EndPoint for generate redirects and work with sessions.
+	 * 
+	 */
+	@Command
+	public void test(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
+	    String url = event.getData().toString();
+		Session sess = Sessions.getCurrent();
+		SessionViewModelsDTO dto = new SessionViewModelsDTO(url , this.mapaViewModel.get(url));
+		sess.setAttribute("sessionVMDTO", dto);
+	    Executions.sendRedirect("pantallas/sessionVMs/sessionManager.zul");
+	}	
+	
 }

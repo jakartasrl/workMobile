@@ -7,7 +7,6 @@ import lombok.Data;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -20,10 +19,10 @@ import com.jkt.ov.UserOV;
 @Data
 public class LoginVM {
 	
-	private String usuario="";
-	private String password="";
-//	private String usuario="lconce";
-//	private String password="lconce";
+//	private String usuario="";
+//	private String password="";
+	private String usuario="lconce";
+	private String password="lconce";
 	
 	private boolean showError=false;
 	private String error="";
@@ -32,6 +31,10 @@ public class LoginVM {
 	@NotifyChange({"error","showError"})
 	public void acceder(){
 	
+//		ContainerOV containerMenu = new ContainerOV();
+//		containerMenu.setString1("menu1.xml");
+//		Operaciones.ejecutar("CrearMenues", containerMenu);
+		
 		ContainerOV objetoOV = new ContainerOV();
 		
 		objetoOV.setString1(usuario);
@@ -51,26 +54,19 @@ public class LoginVM {
 			sess.setAttribute("userCredential",userOV);
 			
 			sess.setAttribute("ventanas",new HashMap<String, Object>());
-			
-//			ContainerOV containerMenu = new ContainerOV();
-//			containerMenu.setString1("menu1.xml");
-//			containerMenu.setString2("001");
-//			Operaciones.ejecutar("CrearMenues", containerMenu);
-//			
-			Executions.sendRedirect("index.html");
-//			Executions.sendRedirect("pantallas/menu.zul");
+
+			Executions.sendRedirect("supermenu.zul");
+//			Executions.sendRedirect("index.html");
 
 		}catch(Exception e){
 			this.showError=true;
 			this.error= e.getMessage();
 		}
-
 	}
 	
 	
 	@Init
 	public void logOut(){
-//	public void logOut(@QueryParam("l") String laboratorio){
 		Session sess = Sessions.getCurrent();
         sess.removeAttribute("userCredential");
         sess.removeAttribute("ventanas");

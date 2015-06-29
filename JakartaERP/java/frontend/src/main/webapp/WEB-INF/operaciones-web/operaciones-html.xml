@@ -651,9 +651,6 @@
 				<campoSalida target="descripcion" 			value="descripcion" />
 				<campoSalida target="input" 				value="input" />
 				<campoSalida target="resultadoFinal" 		value="resultadoFinal" />
-				
-				<campoSalida target="valorInput" 			value="valorInput" />
-				<campoSalida target="resultadoExpresion" 	value="resultadoExpresion" />
 			</campoSalida>
 			
 		</output>
@@ -1821,28 +1818,35 @@
 		
 	</operacion>
 	
-	<operacion name="RecuperarMenu" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.MenuOV">
+	<operacion name="RecuperarMenu" clase="com.jkt.operaciones.RecuperarMenu" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListMenuOV">
 		
 		<input>
-			<campoEntrada propertyOV="string1" name="entidad"/>
-			<campoEntrada propertyOV="string2" name="id"/>
+			<campoEntrada propertyOV="string1" name="oid_menu"/>
 		</input>
 		
 		<output>
 
 			<campoSalida target="id" value="id" />
-			<campoSalida target="codigo" value="nombre" />
+			<campoSalida target="name" value="name" />
+			<campoSalida target="img" value="img" />
+			<campoSalida target="size" value="size" />
+			<campoSalida target="theme" value="theme" />
+			<campoSalida target="link" value="link" />
+			<campoSalida target="type" value="type" />
 			
-			<campoSalida target="elementos" value="hijos">
-				<campoSalida target="id" value="id" />
-				<campoSalida target="codigo" value="nombre" />	
+			<campoSalida target="vm" value="vm" />
+			
+<!-- 			<campoSalida target="elementos" value="hijos"> -->
+<!-- 				<campoSalida target="id" value="id" /> -->
+<!-- 				<campoSalida target="codigo" value="nombre" />	 -->
+<!-- 				<campoSalida target="type" value="tipo" /> -->
 				
 <!-- 				<campoSalida target="elementos" value="hijos"> -->
 <!-- 					<campoSalida target="id" value="id" /> -->
 <!-- 					<campoSalida target="codigo" value="nombre" />	 -->
 <!-- 				</campoSalida> -->
 				
-			</campoSalida>
+<!-- 			</campoSalida> -->
 						
 		</output>
 
@@ -1850,7 +1854,50 @@
 	</operacion>
 	
 	
-		<operacion name="TraerDeterminacionesDePedido" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
+	<operacion name="TraerTareaConComentarios" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListTareaAgendaOV">
+	
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+	
+		<output>
+
+			<campoSalida value="id" target="id" />
+
+			<campoSalida target="logs" value="comentarios">
+				<campoSalida target="id" value="id" />
+				<campoSalida target="log" value="comentario" />
+				<campoSalida target="usuario" value="usuario" />
+				<campoSalida target="fecha" value="fecha" />
+			</campoSalida>
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
+	
+<!-- 	<operacion name="ActualizarComentariosTarea" clase="com.jkt.pedido.operaciones.ActualizarComentariosTarea" inputOV="com.jkt.ov.TareaAgendaOV" > -->
+	<operacion name="ActualizarComentariosTarea" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.TareaPedido" inputOV="com.jkt.ov.TareaAgendaOV" >
+	
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.TareaPedido"> 
+
+			<campoEntrada propertyOV="id" metodo="setId" />
+
+			<campoEntrada propertyOV="comentarios" metodo="setLogs">
+				<campoEntrada propertyOV="comentario" 		metodo="setLog" />
+				<campoEntrada propertyOV="fecha" 			metodo="setFecha" />
+				<campoEntrada propertyOV="usuario" 			metodo="setUsuario" />
+			</campoEntrada>
+			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+			<operacion name="TraerDeterminacionesDePedido" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
 		
 		<input>
 			<campoEntrada propertyOV="string1" name="entidad"/>
@@ -1944,5 +1991,6 @@
 		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
 	
 </entity>

@@ -400,7 +400,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 	}
 
-	@Init
+	@Init(superclass=true)
 	public void init(){
 		
 		try {

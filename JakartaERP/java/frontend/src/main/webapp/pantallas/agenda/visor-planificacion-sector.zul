@@ -24,7 +24,7 @@
 			<hlayout>
 				<label value="Sector" />
 
-				<combobox width="150px;" model="@bind(vm.sectores)" selectedItem="@bind(vm.sectorSeleccionado)" constraint="no empty" onChange="@command('limpiarGrilla')">
+				<combobox width="150px;" model="@bind(vm.sectores)" selectedItem="@bind(vm.sectorSeleccionado)" constraint="no empty" onChange="@command('limpiarGrilla')" readonly="true">
 					<template name="model" >
 						<comboitem label="@bind(each.descripcion)" />
 					</template>

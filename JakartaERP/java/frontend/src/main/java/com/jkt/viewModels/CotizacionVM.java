@@ -8,15 +8,12 @@ import java.util.Random;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.EventListener;
-
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Messagebox.ClickEvent;
 
@@ -107,20 +104,20 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		init();
 	}
 	
-	@Init
+	@Init(superclass=true)
 	public void init(){
 		
-		try {
-			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-			if(recuperarDesdeSesion!=null){
-				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-				return;// true; 
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage());
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e.getMessage());
-		}
+//		try {
+//			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
+//			if(recuperarDesdeSesion!=null){
+//				BeanUtils.copyProperties(this, recuperarDesdeSesion);
+//				return;// true; 
+//			}
+//		} catch (IllegalAccessException e) {
+//			throw new RuntimeException(e.getMessage());
+//		} catch (InvocationTargetException e) {
+//			throw new RuntimeException(e.getMessage());
+//		}
 
 		
 		super.nuevo();

@@ -1,10 +1,73 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
 
-<style src="/style/template-grey.css" />
-<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">
-	<include id="menu" src="index.html" />
-</div>
+	<style src="/style/template-grey.css" />
+	<style src="/style/template-grey.css" />
+	<style src="/style/metro.css" />
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/metro.js"></script>
+	
+	<style>
+	
+		body{ background-color:transparent }
+	
+		.titulo{ 
+			color : white ; 
+			font-size : 50px ;
+			margin-top : 50px;
+		}
+	
+	</style>
+
+	<script type="text/javascript">
+	
+		function executeCommand(url){
+			zAu.send(new zk.Event(zk.Widget.$('$btn'), 'onTest', url ), 10);
+		}
+	
+		function cargarMenues(arg){
+	
+			var configTiles = [
+				{
+					'name'        : 'Salir',
+					'thumbnail'   : 'pantallas/img/exit.png',
+					'content'     : 'Salir',
+					'size'        : '2x2',
+					'theme'       : 'red',
+					'link'         : 'index.zul?action=logout',
+				}
+		
+			];
+		
+			Metro.HTML.addContainer({'size':'full', 'tiles':arg});
+			Metro.HTML.addContainer({'size':'half', 'tiles':configTiles});
+			
+			$(document).ready(Metro.init);
+		}
+		
+	</script>
+	
+	
+<!-- 	CONTENT -->
+<!-- 	CONTENT -->
+<!-- 	CONTENT -->
+<!-- 	CONTENT -->
+
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">
+	
+		<div style="text-align:center">
+			<label sclass="titulo" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" value="@bind(vm.titulo)"></label>
+		</div>
+	
+		<div id="footer" width="100%" style="text-align:center; height:10%; border-top-color:white; border-top-style: solid; border-top-width:1px; position:absolute; bottom:0px;">
+			<label value="@bind(vm.currentNew)" style="font-size:15px;color:white;height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" onClick="@command('next')" tooltiptext="Click for load new text."/>
+		</div>
+		
+		<button id="btn" onTest="@command('test', url = arg )" visible="false" />
+
+	</div>
 
 </zk>

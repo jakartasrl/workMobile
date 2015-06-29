@@ -63,14 +63,10 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	@Override
 	@GlobalCommand("actualizarTodo")
 	@NotifyChange({"allTasks","fNoIniciadas", "fFinalizadas", "fEnEspera"})
-	public void actualizar() {
-
-	}
+	public void actualizar() {}
 
 	@Override
-	protected String retrieveMethod() {
-		return "actualizarTodo";
-	}
+	protected String retrieveMethod() {return "actualizarTodo";}
 
 	@Command
 	public void nuevo() throws JakartaException {
@@ -81,7 +77,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 			this.sectorSeleccionado = this.sectores.get(0);
 		}
 		
-		this.fechaFiltroInicio = LocalDate.now().toDate();
+		this.fechaFiltroInicio = LocalDate.now().minusDays(14).toDate();
 		this.fechaFiltroFin = LocalDate.now().toDate();
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
@@ -92,7 +88,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	@NotifyChange("allTasks")
 	public void filtrar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 
-		allTasks = new ArrayList<TareaAgendaOV>(); //limpio la lista!
+		allTasks = new ArrayList<TareaAgendaOV>();
 		
 		if(!fNoIniciadas && !fEnEspera && !fEnEjecucion && !fFinalizadas){
 			Messagebox.show("Debe completar un filtro de estado de tareas.");
@@ -112,27 +108,20 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		
 		List<TareaAgendaOV> tareasAMostrar = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPorSector", container , ListTareaAgendaOV.class )).getList();
 		
-//		Map<String, TareaAgendaOV> mapaTareasAMostrar = new HashMap<String, TareaAgendaOV>();
 		Set<Long> idsTareas = new HashSet<Long>();
 		Set<Long> idPedidos = new HashSet<Long>();
 		
 		for (TareaAgendaOV tareaAgendaOV : tareasAMostrar) {
 			
 			//completo elemento x elemento el mapa de tareas a mostrar, y los ids de los diferentes pedidos...
-//			mapaTareasAMostrar.put(String.valueOf(tareaAgendaOV.getId()), tareaAgendaOV);
 			idsTareas.add(tareaAgendaOV.getId());
 			idPedidos.add(tareaAgendaOV.getIdPedido());
-			
-//			DescriptibleOV descriptible = Operaciones.recuperarObjetoDescriptible("pedido", tareaAgendaOV.getIdPedido());
-//			tareaAgendaOV.setPedidoDescriptible(descriptible);
-			//Para mostrar el nº de comprobante de pedido
-//			tareaAgendaOV.setEstado(estadosEnMapa.get(String.valueOf(tareaAgendaOV.getIdEstado())));
+
 		}
 		
 		buscarTodosLosPedidos(idPedidos);
 		
 		//con la lista de ids, busco los pedidos y los asigno a la variable allTasks
-	
 		for (Long long1 : idsTareas) {
 			allTasks.add(mapaFinal.get(String.valueOf(long1)));
 		}
@@ -141,8 +130,10 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 
 	}
 	
-	
-	
+	/**
+	 * Busca todos los pedidos usando los ids, y a partir de ahí 
+	 * 
+	 */
 	private void buscarTodosLosPedidos(Set<Long> pedidos) {
 
 		ContainerOV container = new ContainerOV();
@@ -151,8 +142,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 		
 		for (Long idPedido : pedidos) {
 			container.setString2(String.valueOf(idPedido));
-			ListPedidoOV l = (ListPedidoOV) Operaciones.ejecutar("TraerPedidoConTareas", container, ListPedidoOV.class);
-			List list = l.getList();
+			List list = ((ListPedidoOV) Operaciones.ejecutar("TraerPedidoConTareas", container, ListPedidoOV.class)).getList();
 			if(list.isEmpty() || list.size()>1){
 				Messagebox.show("Ocurrio un error al intentar recuperar el pedido y sus tareas.");
 				return;
@@ -165,6 +155,10 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 	
 	final Map<String, TareaAgendaOV> mapaFinal = new HashMap<String, TareaAgendaOV>();
 
+	/**
+	 * Usando el Pedido, la lista de tareas, y la lista de precedentes, genera un grafo que contiene 
+	 * 
+	 */
 	private void armarGrafoYAsignarNotifiers(PedidoOV pedido, List<TareaAgendaOV> allTasks, List<PrecedenteOV> list) {
 		Map<String, TareaAgendaOV> tareasMap = new HashMap<String, TareaAgendaOV>();
 		
@@ -180,7 +174,7 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 			mapaFinal.put(String.valueOf(tareaAgendaOV.getId()), tareaAgendaOV); //mapa de todas las tareas por filtro, es decir, pueden estar TODAS, y no solo x pedido.
 		}
 		
-		//recorrer todos los precedentes y asignar los precentes tmb! esta todo en el mapa! 
+		//recorrer todos los precedentes y asignar los precedentes tmb! esta todo en el mapa! 
 		for (PrecedenteOV precedenteOV : list) {
 
 			TareaAgendaOV tareaActual = tareasMap.get(precedenteOV.getCodigo());
@@ -189,10 +183,11 @@ public class VisorAgendaPorSectorVM extends VisorAgendaVM {
 				TareaAgendaOV tareaAgendaOV = tareasMap.get(descriptibleOV.getCodigo());
 				tareaAgendaOV.addObserver(tareaActual); //Para notificar cambios de estado
 				tareaAgendaOV.agregarPosterior(tareaActual); // Para deshacer acciones.
-				tareaActual.getPrecedencias().add(tareaAgendaOV); // Para cambiar de estados. ¡??¡????
+				tareaActual.getPrecedencias().add(tareaAgendaOV); // Se usa luego en el notificar, cuando se ejecuta el metodo update, llega al metodo notify
+				//En ese metodo se usa la lista de precedentes para ver si tods cambiaron su estado.
 			}
-			
 		}
+		
 	}
 
 	@Override

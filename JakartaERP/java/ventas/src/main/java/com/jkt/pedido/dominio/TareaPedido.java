@@ -23,6 +23,8 @@ public class TareaPedido extends DatoNodo {
 	private String descripcionAbreviada;
 	private String descripcionCompleta;
 	
+	private List<LogTarea> logs = new ArrayList<LogTarea>();
+	
 //	@Min(message="Los dias de duración no puede ser cero. Como mínimo un dia.", value = 1)
 	private int diasDuracion;
 	
@@ -52,6 +54,7 @@ public class TareaPedido extends DatoNodo {
 	private List<TareaPedido> tareas=new ArrayList<TareaPedido>();
 	private List<Descriptible> tareasSimples=new ArrayList<Descriptible>();
 	private Pedido pedido;
+	
 	
 	/*
 	 * Estos metodos quedan sin utilidad, ya que serán utilizados para entidades mas complejas.
