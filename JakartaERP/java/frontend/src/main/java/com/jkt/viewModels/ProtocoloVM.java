@@ -68,7 +68,8 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		
 	}
 	
-	@Override
+	@Command
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV"})
 	public void guardar() throws JakartaException {
 		
 		Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV );

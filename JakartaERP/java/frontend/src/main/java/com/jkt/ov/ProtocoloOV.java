@@ -12,10 +12,10 @@ import com.jkt.view.ObjectView;
 public class ProtocoloOV extends ObjectView {
 	
 	private EquipoOV equipo;
-	private long idEquipoOV;
+	private long idEquipo;
 	
 	private PedidoOV pedido;
-	private long idPedidoOV;
+	private long idPedido;
 	
 	private long idCliente;
 	

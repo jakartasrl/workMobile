@@ -1914,38 +1914,32 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
 	
-		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.Protocolo">
 		
-			<campoEntrada propertyOV="id" 					metodo="setId" />
-			<campoEntrada propertyOV="fechaHoraMuestra" 	metodo="setFechaHoraMuestra" />
-			<campoEntrada propertyOV="idPedido" 			metodo="setPedido" />
-			<campoEntrada propertyOV="idModelo" 			metodo="setModelo" />
-			<campoEntrada propertyOV="codigoEstado" 	metodo="setCodigoEstado" />
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="fechaHoraMuestra" 			metodo="setFechaHoraMuestra" />
+			<campoEntrada propertyOV="idPedido" 					metodo="setPedido" />
+			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
 			
-			<campoEntrada propertyOV="idCotizacionDet" 	metodo="setItem" />
+			<campoEntrada propertyOV="idDiagnostico" 				metodo="setDiagnostico" />
 			
-			<campoEntrada propertyOV="idModelo" 		metodo="setModelo" />
+			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
 			
-			
-			<campoEntrada propertyOV="detalles" metodo="setDetalles">
-
-				<campoEntrada propertyOV="id" 					metodo="setId" />
-				<campoEntrada propertyOV="idNuevo" 				metodo="setTituloModeloCotizador" />
-				<campoEntrada propertyOV="idProducto" 			metodo="setProducto" />
-				<campoEntrada propertyOV="cantidad" 			metodo="setCantidad" />
-				<campoEntrada propertyOV="idUnidadMedida" 		metodo="setUnidadMedida" />
-				<campoEntrada propertyOV="precioUnitario" 		metodo="setPrecioUnitario" />
-				<campoEntrada propertyOV="idMoneda" 			metodo="setMoneda" />
-
-				<campoEntrada propertyOV="precio" 				metodo="setCotizacion" />
-				<campoEntrada propertyOV="markUp" 				metodo="setMarkUp" />
-
-				<campoEntrada propertyOV="importeVenta" 		metodo="setImporteVenta" />
-				<campoEntrada propertyOV="idC" 					metodo="setConceptoPresupuesto" />
+				<campoEntrada propertyOV="id" 						metodo="setId" />
+<!-- 				<campoEntrada propertyOV="codigo" 					metodo="setCodigo" /> -->
+				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
+				
+				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
+					<campoEntrada propertyOV="descripcion" 			metodo="setDescripcion" />
+					<campoEntrada propertyOV="input" 				metodo="setInput" />
+					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresionCadena" />
+					<campoEntrada propertyOV="valorInput" 			metodo="setInput" />
+					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						
+				</campoEntrada>
 			</campoEntrada>
-
+			
 		</input>
 		
 		<transformer clase="com.jkt.transformers.WebTransformer" />
