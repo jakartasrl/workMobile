@@ -1,0 +1,28 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<grid style="border-style:none;" sizedByContent="true">
+
+		<columns>
+			<column width="90px"/>
+			<column width="100px"/>
+			<column width="100px"/>
+			<column width="100px"/>
+			<column width="100px"/>
+			<column width="100px"/>
+		</columns>
+			
+		<rows>
+			<row sclass="fila-maestro">
+				<label value="Diagnostico : " />
+				<textbox sclass="campoCodigo-medium" value="@bind(vm.protocoloOV.codDiagnostico)" />
+			</row>
+			<row>
+				<label value="Comentario : " />
+				<cell colspan="4">
+					<textbox width="100%" value="@bind(vm.protocoloOV.comentario)" />
+				</cell>
+			</row>
+		</rows>
+	</grid>
+	
+</zk>

@@ -8,7 +8,7 @@ import com.jkt.laboratorio.dominio.Expresion;
 public class ExpresionesTest {
 
 	@Test
-	public void validarExpresion() {
+	public void validarExpresion() throws ValidacionDeNegocioException {
 		
 		String expresion ="A + B - 100";
 		Expresion exp = new Expresion();
@@ -19,7 +19,7 @@ public class ExpresionesTest {
 		} 
 				
 	    transformarExpresion(expresion);
-	   	   		
+	   		
 	}
 
 	private void transformarExpresion(String exp) {

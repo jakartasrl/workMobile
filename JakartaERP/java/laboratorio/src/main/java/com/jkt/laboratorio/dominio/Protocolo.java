@@ -143,12 +143,7 @@ public class Protocolo extends ComprobanteCliente {
 	public void setComentarioDiagnostico(String comentarioDiagnostico) {
 		this.comentarioDiagnostico = comentarioDiagnostico;
 	}
-//	public Pedido getPedido() {
-//		return pedido;
-//	}
-//	public void setPedido(Pedido pedido) {
-//		this.pedido = pedido;
-//	}
+
 	public boolean isImpreso() {
 		return impreso;
 	}
@@ -179,7 +174,7 @@ public class Protocolo extends ComprobanteCliente {
 		PENDIENTE_DE_APROBACION(2) {
 			@Override
 			public String getDescripcion() {
-				return "Pendiente de aprobación";
+				return "Pendiente de aprobaciï¿½n";
 			}
 		},
 		TERMINADO(3) {
