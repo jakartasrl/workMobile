@@ -12,6 +12,7 @@ import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Default;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
@@ -58,6 +59,11 @@ public abstract class ViewModel {
 		this.titulo = titulo;
 	}
 
+	@Init
+	public void initParent(){
+		System.out.println();
+	}
+	
 	@Command
 	public void validarCampo(@BindingParam("clase") String clase, @BindingParam("codigo") String campo, @BindingParam("ov") ObjectView ov,@BindingParam("post") String metodo) throws JakartaException{
 		

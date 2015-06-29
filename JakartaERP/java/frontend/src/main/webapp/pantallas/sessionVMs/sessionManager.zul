@@ -11,14 +11,22 @@
 				<include src="../../${ parentVM.url }" viewModel="${childrenVM}" />
 			</div>
 
-<!-- 				<include src="../../${ parentVM.url }" apply="org.zkoss.bind.BindComposer"  elemento="@init(parentVM.vmClass)" if="{parentVM.viewModel == null }" /> -->
-<!-- 			<include src="../../${ parentVM.url }" elemento="${parentVM.viewModel}" /> -->
-
 	</div>
 </zk>
 
 
+
+
+<!-- 				<include src="../../${ parentVM.url }" apply="org.zkoss.bind.BindComposer"  elemento="@init(parentVM.vmClass)" if="{parentVM.viewModel == null }" /> -->
+<!-- 			<include src="../../${ parentVM.url }" elemento="${parentVM.viewModel}" /> -->
+
+
+
+
 <!-- 			<include src="../../${ parentVM.url }" viewModel="${ parentVM.viewModel != null ? @load(parentVM.viewModel) : @init(parentVM.viewModel) }" /> -->
 <!-- 			<include src="../../${ parentVM.url }" viewModel="@init(parentVM.viewModel)" /> -->
+
+
+
 
 <!-- 			<include src="../../${ parentVM.url }" apply="org.zkoss.bind.BindComposer" viewModel="@id('viewModel') @init(parentVM.vmClass)" if="${ parentVM.viewModel == null }" /> -->

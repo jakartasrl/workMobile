@@ -20,6 +20,7 @@
   
   <properties>
   		<zk.version>7.0.3</zk.version>
+<!--   		<zk.version>8.0.0-RC</zk.version> -->
 		<java-version>1.6</java-version>
 		<springframework.version>4.0.5.RELEASE</springframework.version>
 <!-- 		<springframework.version>3.2.4.RELEASE</springframework.version> -->

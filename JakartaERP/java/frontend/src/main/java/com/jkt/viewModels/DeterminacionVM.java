@@ -41,7 +41,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	private String laboratorioParametroKey;
 	
 	
-	@Init
+	@Init(superclass=true)
 	@NotifyChange("determinacion")
 	public void init(@QueryParam("l") String laboratorio) {
 		this.laboratorioParametroKey = laboratorio;

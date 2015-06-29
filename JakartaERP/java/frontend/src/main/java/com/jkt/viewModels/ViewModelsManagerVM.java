@@ -1,9 +1,11 @@
 package com.jkt.viewModels;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -26,9 +28,10 @@ public class ViewModelsManagerVM {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 * @throws JakartaException 
+	 * @throws InvocationTargetException 
 	 */
 	@Init
-	public void init() throws ClassNotFoundException, InstantiationException, IllegalAccessException, JakartaException{
+	public void init() throws ClassNotFoundException, InstantiationException, IllegalAccessException, JakartaException, InvocationTargetException{
 		Session sess = Sessions.getCurrent();
 
 		SessionViewModelsDTO dto = (SessionViewModelsDTO) sess.getAttribute("sessionVMDTO"); //datos para ver si esta en sesion el vm o no, y para redireccionar
@@ -41,11 +44,12 @@ public class ViewModelsManagerVM {
 			if(this.vmClass==null || this.vmClass.isEmpty()){
 				throw new JakartaException("Ocurrio una inconsistencia en el motor que administra este modulo.");
 			}else{
-//				Class<?> clase = Class.forName(this.vmClass);
-//				this.viewModel = clase.newInstance();
+				Class<?> clase = Class.forName(this.vmClass);
+				this.viewModel = clase.newInstance();
 			}
 		}else{
 			this.viewModel= viewModelEnSesion;
+			BeanUtils.copyProperties(this.viewModel, viewModelEnSesion);
 		}
 		
 		this.url=dto.getUrl();
