@@ -272,59 +272,65 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		
 		DeterminacionOV det = (DeterminacionOV) Operaciones.ejecutar("TraerDeterminacion", containerOV, DeterminacionOV.class);
 		
-		ContainerOV containerOV2 = new ContainerOV();
-		for (MetodoOV metodo : det.getMetodos()) {
-			
-			long idMetodo = metodo.getId();
-			containerOV2.setString1(String.valueOf(idMetodo));
+		det = this.obtenerMetodosParaDeterminacion(det);
+				
+		this.setDeterminacion(det);
+	}
+
+	private DeterminacionOV obtenerMetodosParaDeterminacion(DeterminacionOV det) {
 		
-			List<ValorEsperadoOV> valoresEsperados = ((ListValorEsperadoOV) Operaciones.ejecutar("TraerValoresEsperados", containerOV2, ListValorEsperadoOV.class)).getList();
-			
-			ContainerOV containerOV3 = new ContainerOV();
-			containerOV3.setString1(String.valueOf(idMetodo));
-			List<VariableOV> variables = ((ListVariableOV) Operaciones.ejecutar("TraerVariables", containerOV3, ListVariableOV.class)).getList();
-			
+		ContainerOV containerOV = new ContainerOV();
+		
+		for (MetodoOV metodo : det.getMetodos()) {
+
+			long idMetodo = metodo.getId();
+			containerOV.setString1(String.valueOf(idMetodo));
+
+			List<ValorEsperadoOV> valoresEsperados = ((ListValorEsperadoOV) Operaciones.ejecutar("TraerValoresEsperados", containerOV, ListValorEsperadoOV.class)).getList();
+
+			containerOV.setString1(String.valueOf(idMetodo));
+			List<VariableOV> variables = ((ListVariableOV) Operaciones.ejecutar("TraerVariables", containerOV, ListVariableOV.class)).getList();
+
 			metodo.setVariables(variables);
-			
+
 			for (VariableOV variableOV : variables) {
-				if(variableOV.isResultadoFinal()){
+				if (variableOV.isResultadoFinal()) {
 					metodo.setResultadoFinal(variableOV);
 					break;
 				}
 			}
-			
+
 			metodo.setValoresEsperados(valoresEsperados);
 			metodo.getDeterminacion().setId(this.determinacion.getId());
 			metodo.setIdDeterminacion(this.determinacion.getId());
-			
+
 		}
-		
+
 		det.setListTipoResultado(this.cargarListTipoResultados());
 		det.setListFormato(this.cargarListFormato());
-		
+
 		String idTipoResultado = det.getIdTipoResultado();
-		DescriptibleOV tipoResultadoSeleccionado=null;
+		DescriptibleOV tipoResultadoSeleccionado = null;
 		for (DescriptibleOV tipoResultado : det.getListTipoResultado()) {
 			if (tipoResultado.getCodigo().equals(idTipoResultado)) {
-				tipoResultadoSeleccionado=tipoResultado;
+				tipoResultadoSeleccionado = tipoResultado;
 				break;
 			}
 		}
-		
+
 		det.setTipoResultado(tipoResultadoSeleccionado);
-		
+
 		String cadenaFormato = det.getIdFormato();
-		DescriptibleOV formatoSeleccionado=null;
+		DescriptibleOV formatoSeleccionado = null;
 		for (DescriptibleOV formato : det.getListFormato()) {
 			if (formato.getCodigo().equals(cadenaFormato)) {
-				formatoSeleccionado=formato;
+				formatoSeleccionado = formato;
 				break;
 			}
 		}
-		
+
 		det.setFormato(formatoSeleccionado);
-		
-		this.setDeterminacion(det);
+		return det;
 	}
 
 	@Command

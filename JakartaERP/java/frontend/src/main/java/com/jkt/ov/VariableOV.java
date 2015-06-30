@@ -19,4 +19,7 @@ public class VariableOV extends DescriptibleOV {
 	
 	private boolean resultadoFinal;
 	
+	private double valorInput;
+	private double resultadoExpresion;
+	
 }

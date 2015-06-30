@@ -44,6 +44,8 @@ public class ItemsOV extends ObjectView {
 	private double importeTotal;
 	
 	private Long idDeterminacion;
+	private String codDeterminacion;
+	private String descDeterminacion;
 	private String codigo;
 	private String descripcionDeterminacion;
 	private String codAnalisis;

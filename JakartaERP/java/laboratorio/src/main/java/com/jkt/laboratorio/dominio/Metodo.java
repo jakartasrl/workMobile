@@ -13,6 +13,7 @@ public class Metodo extends PersistentEntity {
 
 	private List<ValorEsperado> valoresEsperados = new ArrayList<ValorEsperado>();
 	private List<Variable> variables = new ArrayList<Variable>();
+	private List<Variable> variablesT = new ArrayList<Variable>();
 	
 	public List<Variable> getVariables() {
 		return variables;
@@ -76,9 +77,18 @@ public class Metodo extends PersistentEntity {
 		this.valoresEsperados = aValue;
 	}
 
+	public List<Variable> getVariablesT() {
+		return variablesT;
+	}
+
+	public void setVariablesT(List<Variable> variablesT) {
+		this.variablesT = variablesT;
+	}
+
 
 //	public boolean sinExpresion() {
 //		return getExpresion() == null || getExpresion().getExpresion().isEmpty();
 //	}
 
+	
 }

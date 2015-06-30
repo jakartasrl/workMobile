@@ -1896,5 +1896,101 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+
+			<operacion name="TraerDeterminacionesDePedido" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+	
+		
+		<output>
+			<campoSalida value="id" 					target="id" />
+			<campoSalida value="nro" 					target="nro" />
+			<campoSalida value="idCliente"	 			target="cliente.id" />
+			<campoSalida value="codCliente"	 			target="cliente.codigo" />
+			<campoSalida value="descCliente"	 		target="cliente.descripcion" />
+			
+			<campoSalida value="items"					target="detalles" >
+				<campoSalida value="tipoItem"			target="tipoDetalle" />
+				<campoSalida value="idDeterminacion"	target="determinacion.id" />
+			</campoSalida>
+									
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="calcularExpresiones" clase="com.jkt.laboratorio.operaciones.CalcularExpresionesDeMetodo" inputOV="com.jkt.ov.MetodoOV" outputOV="com.jkt.ov.MetodoOV">
+
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Metodo">		
+		
+			<campoEntrada>
+				<campoEntrada propertyOV="id" metodo="setId" />
+
+				<campoEntrada propertyOV="variables" 				metodo="setVariables">
+					<campoEntrada propertyOV="codigo" 				metodo="setCodigo" />
+					<campoEntrada propertyOV="input"				metodo="setInput" />
+					<campoEntrada propertyOV="valorInput" 			metodo="setValorInput" />
+					<campoEntrada propertyOV="resultadoExpresion"	metodo="setResultadoExpresion" />
+				</campoEntrada>
+				
+			</campoEntrada>
+			
+		</input>
+	
+		<output>
+			<campoSalida target="id" 						value="id"/>
+			<campoSalida target="metodo" 					value="metodo"/>
+			
+			<campoSalida target="variables" 				value="setVariables">
+				<campoSalida target="id" 					value="id" />
+				<campoSalida target="codigo" 				value="codigo" />
+				<campoSalida target="descripcion" 			value="descripcion" />
+				<campoSalida target="input" 				value="input" />
+				<campoSalida target="resultadoFinal" 		value="resultadoFinal" />
+				
+				<campoSalida target="valorInput" 			value="valorInput" />
+				<campoSalida target="resultadoExpresion" 	value="resultadoExpresion" />
+				
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	
+		<input keyName="objeto" clase="com.jkt.pedido.dominio.Protocolo">
+		
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="fechaHoraMuestra" 			metodo="setFechaHoraMuestra" />
+			<campoEntrada propertyOV="idPedido" 					metodo="setPedido" />
+			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
+			
+			<campoEntrada propertyOV="idDiagnostico" 				metodo="setDiagnostico" />
+			
+			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
+			
+				<campoEntrada propertyOV="id" 						metodo="setId" />
+<!-- 				<campoEntrada propertyOV="codigo" 					metodo="setCodigo" /> -->
+				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
+				
+				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
+					<campoEntrada propertyOV="descripcion" 			metodo="setDescripcion" />
+					<campoEntrada propertyOV="input" 				metodo="setInput" />
+					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresionCadena" />
+					<campoEntrada propertyOV="valorInput" 			metodo="setInput" />
+					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						
+				</campoEntrada>
+			</campoEntrada>
+			
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 	
 </entity>

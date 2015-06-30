@@ -1,4 +1,4 @@
-package com.jkt.laboratorio.dominio;
+package com.jkt.pedido.dominio;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import com.jkt.dominio.ComprobanteCliente;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.laboratorio.dominio.Diagnostico;
+import com.jkt.laboratorio.dominio.Equipo;
+import com.jkt.laboratorio.dominio.Laboratorio;
 
 /**
  * <p>Representa los trabajos que se deben hacer o hicieron en un laboratorio.</p>
@@ -21,7 +24,7 @@ public class Protocolo extends ComprobanteCliente {
 	@NotNull(message="Un protocolo debe tener asignado un laboratorio.")
 	private Laboratorio laboratorio;
 	
-//	private Pedido pedido;
+	private Pedido pedido;
 	
 	@NotNull(message="Un protocolo debe tener asignado un equipo.")
 	private Equipo equipo;
@@ -212,5 +215,13 @@ public class Protocolo extends ComprobanteCliente {
 		}
 	
 	}
-	
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+		
 }

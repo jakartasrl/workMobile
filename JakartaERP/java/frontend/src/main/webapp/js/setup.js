@@ -124,6 +124,22 @@ var tiles1 = [
 	'link'        : 'pantallas/index/index-vista-agenda-pedido.zul',
 	'size'        : '2x2',
 	'theme'       : 'red',
+},
+{
+	'name'        : 'Protocolo',
+	'thumbnail'   : 'pantallas/img/widget_tag.png',
+	'content'     : 'Protocolo',
+	'size'        : '4x2',
+	'theme'       : 'orange',
+	'link'         : 'pantallas/index/index-protocolo.zul?l=LaboratorioElectrico',
+},
+{
+	'name'        : 'Protocolo',
+	'thumbnail'   : 'pantallas/img/widget_tag.png',
+	'content'     : 'Protocolo',
+	'size'        : '4x2',
+	'theme'       : 'orange',
+	'link'         : 'pantallas/index/index-protocolo.zul?l=LaboratorioQuimico',
 }
 
 ];
