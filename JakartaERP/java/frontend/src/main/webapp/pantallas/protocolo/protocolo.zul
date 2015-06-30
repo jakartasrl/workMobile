@@ -21,7 +21,7 @@
 					
 						<row sclass="fila-maestro">
 							<label value="Fecha Emision : " />
-							<datebox id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" />
+							<datebox id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
 						</row>
 
 						<row>
@@ -64,7 +64,7 @@
 
 						<row>
 							<label value="Fecha de muestra : " />
-							<datebox id="fecha" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" />
+							<datebox id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
 						</row>
 						
 					</rows>
