@@ -372,8 +372,13 @@ public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
-	@Init
+	@Init(superclass=true)
 	public void init() throws JakartaException {
+		
+		if(isCargadoDesdeSession()){
+			return;
+		}
+		
 		this.nuevo();
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}

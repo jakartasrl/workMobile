@@ -535,25 +535,12 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 	}
 
-	@Init
+	@Init(superclass=true)
 	public void init(@BindingParam("modoAgenda") String modoAgenda) throws IllegalAccessException, InvocationTargetException{
 		
-		try {
-			PedidoVM recuperarDesdeSesion = (PedidoVM) recuperarDesdeSesion(this.getClass().getCanonicalName());
-
-			if(recuperarDesdeSesion!=null){
-				//si no se corresponden los modos agenda de cada VM...
-				if(recuperarDesdeSesion.isModoAgenda()==Boolean.parseBoolean(modoAgenda)){
-					BeanUtils.copyProperties(this, recuperarDesdeSesion);
-					return;
-				}
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage());
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e.getMessage());
+		if(isCargadoDesdeSession()){
+			return;
 		}
-
 		
 		if (modoAgenda.equals("true")) {
 			this.modoAgenda=true;

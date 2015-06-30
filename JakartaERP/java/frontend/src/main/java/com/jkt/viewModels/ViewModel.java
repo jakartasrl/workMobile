@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Data;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.zkoss.bind.BindUtils;
@@ -22,7 +25,6 @@ import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
-import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.HeaderHelpGenericoOV;
@@ -36,32 +38,28 @@ import com.jkt.view.ObjectView;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public abstract class ViewModel {
 
 	protected static final Logger log = Logger.getLogger(ViewModel.class);
 
 	private String filtro="filtroCodigo";
 	private String titulo="";
-
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+	
+	private boolean cargadoDesdeSession=false;
 
 	@Init
 	public void initParent(){
-		System.out.println();
+		String requestPath = StringUtils.substring(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath(),1);
+		
+		Session sess = Sessions.getCurrent();
+		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
+		Object viewModelAntiguo = mapa.get(requestPath);
+		
+		if(viewModelAntiguo!=null){
+			BeanUtils.copyProperties(viewModelAntiguo, this);
+			this.cargadoDesdeSession=true;
+		}
 	}
 	
 	@Command
@@ -284,15 +282,8 @@ public abstract class ViewModel {
 	@Command
 	public void irAInicio(){
 		Session sess = Sessions.getCurrent();
-		
 		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
-		
-		
-		
-		
-		mapa.put(this.getClass().getCanonicalName(), this);
-		
-		
+		mapa.put(StringUtils.substring(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath(), 1), this);
 		sess.setAttribute("ventanas", mapa);
 		Executions.sendRedirect("../../supermenu.zul");
 	}
@@ -300,16 +291,10 @@ public abstract class ViewModel {
 	@Command
 	public void cancelar() throws JakartaException{
 		Session sess = Sessions.getCurrent();
-	
 		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
-		mapa.remove(this.getClass().getCanonicalName());
-		
+		mapa.remove(StringUtils.substring(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath(), 1));
 		sess.setAttribute("ventanas", mapa);
-		
 		this.cancelarCustomizado();
-//		sess.removeAttribute(this.getClass().getCanonicalName());
-//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
-
 	}
 	
 	protected ViewModel recuperarDesdeSesion(String canonicalName){

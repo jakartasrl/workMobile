@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;

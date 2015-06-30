@@ -2,23 +2,16 @@
 <?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
-
 	<style src="/style/template.css" />
-	<div vflex="1" hflex="1" viewModel="@id('vm') @load(viewModel)" id="contenedorPrincipal">
-
-<!-- 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.CotizacionVM')" id="contenedorPrincipal"> -->
+	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.CotizacionVM')" id="contenedorPrincipal">
 		
 		<div sclass="hboxToolBar" >
 			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/>
 		</div>
 
 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<label value="${vm }"/>
 			<include id="pedidoId" src="/pantallas/cotizacion/cotizacion.zul" viewModel="${vm}"/>
-			<label value="${vm }"/>
-			<label value="asdsad"/>
 		</div>
 		
 	</div>
 </zk>
-

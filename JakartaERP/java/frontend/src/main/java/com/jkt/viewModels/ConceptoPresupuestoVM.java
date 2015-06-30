@@ -52,8 +52,12 @@ public class ConceptoPresupuestoVM extends ViewModel implements IBasicOperations
 	 */
 	
 	
-	@Init
+	@Init(superclass=true)
 	public void init() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
+		
+		if(isCargadoDesdeSession()){
+			return;
+		}
 		
 		log.info("Recuperando parametro de clasificador...");
 		ParametroOV paramClasificador = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV(KEY_PARAMETRO_CLASIFICADOR), ParametroOV.class);

@@ -17,6 +17,7 @@ import lombok.Data;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.AMedia;
@@ -46,6 +47,11 @@ import com.jkt.ov.tree.NodoNotas;
 @Data
 public abstract class ComprobanteVM extends ViewModel {
 
+	@Init(superclass=true)
+	public void init(){
+		System.out.println();
+	}
+	
 	protected boolean modoAgenda=false;
 	
 	protected DescriptibleOV clienteOV = new DescriptibleOV();

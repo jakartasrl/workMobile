@@ -13,7 +13,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	private ProtocoloOV protocolo = new ProtocoloOV();
 	
-	@Init
+	@Init(superclass=true)
 	public void init(){
 		this.setTitulo("Protocolo");
 	}
