@@ -58,7 +58,7 @@
 	<elemento key="tarea" value="com.jkt.dominio.Tarea"/>
 	<elemento key="tareaPedido" value="com.jkt.pedido.dominio.TareaPedido"/>
 	<elemento key="idioma" value="com.jkt.varios.dominio.Idioma"/>
-	<elemento key="idioma" value="com.jkt.varios.dominio.Idioma"/>
+	<elemento key="protocolo" value="com.jkt.laboratorio.dominio.Protocolo" validador="com.jkt.validadores.ValidadorProtocolo" />
 	<elemento key="menu" value="com.jkt.dominio.menu.ElementoMenu"/>
 
 </elementos>

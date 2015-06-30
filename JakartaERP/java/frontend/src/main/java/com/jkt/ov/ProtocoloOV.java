@@ -9,7 +9,7 @@ import lombok.Data;
 import com.jkt.view.ObjectView;
 
 @Data
-public class ProtocoloOV extends ObjectView {
+public class ProtocoloOV extends DescriptibleOV {
 	
 	private EquipoOV equipo;
 	private long idEquipo;
@@ -18,9 +18,10 @@ public class ProtocoloOV extends ObjectView {
 	private long idPedido;
 	
 	private long idCliente;
+	private long idLab;
 	
-	private Date fechaHoraEmision;
-	private Date fechaHoraMuestra;
+	private Date fechaHoraEmision = new Date() ;
+	private Date fechaHoraMuestra = new Date() ;
 	
 	private DescriptibleOV diagnostico = new DescriptibleOV();
 	private long idDiagnostico;
@@ -28,6 +29,7 @@ public class ProtocoloOV extends ObjectView {
 	private String descDiagnostico;
 	
 	private String comentario;
+	private String comentarioDiagnostico;
 	
 	List<DeterminacionOV> determinaciones = new ArrayList<DeterminacionOV>();
 		

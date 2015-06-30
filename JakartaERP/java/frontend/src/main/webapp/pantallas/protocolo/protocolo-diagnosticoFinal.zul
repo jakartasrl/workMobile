@@ -19,7 +19,7 @@
 			<row>
 				<label value="Comentario : " />
 				<cell colspan="4">
-					<textbox width="100%" value="@bind(vm.protocoloOV.comentario)" />
+					<textbox width="100%" value="@bind(vm.protocoloOV.comentarioDiagnostico)" />
 				</cell>
 			</row>
 		</rows>

@@ -1897,7 +1897,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 
-			<operacion name="TraerDeterminacionesDePedido" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
+	<operacion name="TraerDeterminacionesDePedido" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListPedidoOV">
 		
 		<input>
 			<campoEntrada propertyOV="string1" name="entidad"/>
@@ -1961,29 +1961,33 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
 	
-		<input keyName="objeto" clase="com.jkt.pedido.dominio.Protocolo">
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
 		
 			<campoEntrada propertyOV="id" 							metodo="setId" />
 			<campoEntrada propertyOV="fechaHoraMuestra" 			metodo="setFechaHoraMuestra" />
-			<campoEntrada propertyOV="idPedido" 					metodo="setPedido" />
+			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
+			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
+			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
 			
-			<campoEntrada propertyOV="idDiagnostico" 				metodo="setDiagnostico" />
+			<campoEntrada propertyOV="codDiagnostico" 				metodo="setComentario" />
+			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" />
 			
 			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
 			
 				<campoEntrada propertyOV="id" 						metodo="setId" />
-<!-- 				<campoEntrada propertyOV="codigo" 					metodo="setCodigo" /> -->
+<!-- 				<campoEntrada propertyOV="descripcion" 				metodo="setDescripcion" /> -->
 				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
 				
 				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
-					<campoEntrada propertyOV="descripcion" 			metodo="setDescripcion" />
-					<campoEntrada propertyOV="input" 				metodo="setInput" />
-					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresionCadena" />
-					<campoEntrada propertyOV="valorInput" 			metodo="setInput" />
-					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						
+					<campoEntrada propertyOV="descripcion" 			metodo="setVariable" />
+					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
+					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
+<!-- 					<campoEntrada propertyOV="input" 				metodo="setInput" /> -->
+<!-- 					<campoEntrada propertyOV="valorInput" 			metodo="setInput" /> -->
+<!-- 					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						 -->
 				</campoEntrada>
 			</campoEntrada>
 			
@@ -1992,5 +1996,82 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
+		
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="fechaHoraMuestra" 			metodo="setFechaHoraMuestra" />
+			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
+			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
+			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
+			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
+			
+			<campoEntrada propertyOV="codDiagnostico" 				metodo="setComentario" />
+			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" />
+			
+			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
+			
+				<campoEntrada propertyOV="id" 						metodo="setId" />
+<!-- 				<campoEntrada propertyOV="descripcion" 				metodo="setDescripcion" /> -->
+				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
+				
+				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
+					<campoEntrada propertyOV="descripcion" 			metodo="setVariable" />
+					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
+					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
+<!-- 					<campoEntrada propertyOV="input" 				metodo="setInput" /> -->
+<!-- 					<campoEntrada propertyOV="valorInput" 			metodo="setInput" /> -->
+<!-- 					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						 -->
+				</campoEntrada>
+			</campoEntrada>
+			
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerProtocolo" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" entidad="com.jkt.laboratorio.dominio.Protocolo"  inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListProtocoloOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+			<campoSalida value="id" 					target="id" />
+			<campoSalida value="idPedido" 				target="idPedido" />
+			<campoSalida value="fechaHoraEmision" 		target="fecha" />
+			<campoSalida value="fechaHoraMuestra" 		target="fechaHoraMuestra" />
+			<campoSalida value="idEquipo"		 		target="equipo.id" />
+			<campoSalida value="idLab"		 			target="laboratorio.id" />
+
+			<campoSalida value="determinaciones"		target="detalles" >
+				<campoSalida value="id" 				target="id" />
+				<campoSalida value="comentario" 		target="comentario" />	
+			</campoSalida>
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 	
 </entity>

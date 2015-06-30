@@ -68,7 +68,7 @@ public class TipoComprobante extends PersistentEntity {
 		ORDEN_FABRICACION(3) {
 			@Override
 			public String descripcion() {
-				return "Orden de fabricación";
+				return "Orden de fabricaciï¿½n";
 			}
 
 			@Override
@@ -101,10 +101,22 @@ public class TipoComprobante extends PersistentEntity {
 			}
 		},
 		
+		PROTOCOLO(7) {
+			@Override
+			public String descripcion() {
+				return "Protocolo";
+			}
+			
+			@Override
+			public String argumento() {
+				return "PRO";
+			}
+		},
+
 		COTIZACION(6) {
 			@Override
 			public String descripcion() {
-				return "Cotización";
+				return "Cotizaciï¿½n";
 			}
 
 			@Override

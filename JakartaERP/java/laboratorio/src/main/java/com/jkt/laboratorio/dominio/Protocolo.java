@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
 import com.jkt.dominio.ComprobanteCliente;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.JakartaException;
@@ -15,6 +17,7 @@ import com.jkt.excepcion.JakartaException;
  * <p>Se utilizara para la gestion del laboratorio. Indica que se debe hacer y los resultados de losensayos realizados.</p>
  * 
  */
+@Data
 public class Protocolo extends ComprobanteCliente {
 
 	
@@ -22,6 +25,7 @@ public class Protocolo extends ComprobanteCliente {
 	private Laboratorio laboratorio;
 	
 //	private Pedido pedido;
+	private long idPedido;
 	
 	@NotNull(message="Un protocolo debe tener asignado un equipo.")
 	private Equipo equipo;
@@ -34,10 +38,15 @@ public class Protocolo extends ComprobanteCliente {
 	private Date fechaHoraAprobacion;
 	private String comentario;
 	private Diagnostico diagnostico;
+
+	private String codigoDiagnostico;
 	private String comentarioDiagnostico;
+	
 	private boolean impreso;
 	private boolean enviado;
 	private List<ProtocoloDetalle> detalles=new ArrayList<ProtocoloDetalle>();
+	
+//	private String comentarioDiagnostico;
 	
 	public void agregarDetalle(ProtocoloDetalle p){
 		if (!this.detalles.contains(p)) {
@@ -76,87 +85,6 @@ public class Protocolo extends ComprobanteCliente {
 	public String obtenerEstado() throws JakartaException{
 		return Protocolo.Estado.getEstado(this.getEstado()).getDescripcion();
 	}
-	
-	public int getEstado() {
-		return estado;
-	}
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
-	public Laboratorio getLaboratorio() {
-		return laboratorio;
-	}
-	public void setLaboratorio(Laboratorio laboratorio) {
-		this.laboratorio = laboratorio;
-	}
-	public Equipo getEquipo() {
-		return equipo;
-	}
-	public void setEquipo(Equipo equipo) {
-		this.equipo = equipo;
-	}
-	public Date getFechaHoraMuestra() {
-		return fechaHoraMuestra;
-	}
-	public void setFechaHoraMuestra(Date fechaHoraMuestra) {
-		this.fechaHoraMuestra = fechaHoraMuestra;
-	}
-	public Date getFechaHoraResultado() {
-		return fechaHoraResultado;
-	}
-	public void setFechaHoraResultado(Date fechaHoraResultado) {
-		this.fechaHoraResultado = fechaHoraResultado;
-	}
-	public Usuario getUsuarioIngresoResultado() {
-		return usuarioIngresoResultado;
-	}
-	public void setUsuarioIngresoResultado(Usuario usuarioIngresoResultado) {
-		this.usuarioIngresoResultado = usuarioIngresoResultado;
-	}
-	public Usuario getUsuarioIngresoAprobacion() {
-		return usuarioIngresoAprobacion;
-	}
-	public void setUsuarioIngresoAprobacion(Usuario usuarioIngresoAprobacion) {
-		this.usuarioIngresoAprobacion = usuarioIngresoAprobacion;
-	}
-	public Date getFechaHoraAprobacion() {
-		return fechaHoraAprobacion;
-	}
-	public void setFechaHoraAprobacion(Date fechaHoraAprobacion) {
-		this.fechaHoraAprobacion = fechaHoraAprobacion;
-	}
-	public String getComentario() {
-		return comentario;
-	}
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-	public Diagnostico getDiagnostico() {
-		return diagnostico;
-	}
-	public void setDiagnostico(Diagnostico diagnostico) {
-		this.diagnostico = diagnostico;
-	}
-	public String getComentarioDiagnostico() {
-		return comentarioDiagnostico;
-	}
-	public void setComentarioDiagnostico(String comentarioDiagnostico) {
-		this.comentarioDiagnostico = comentarioDiagnostico;
-	}
-
-	public boolean isImpreso() {
-		return impreso;
-	}
-	public void setImpreso(boolean impreso) {
-		this.impreso = impreso;
-	}
-	public boolean isEnviado() {
-		return enviado;
-	}
-	public void setEnviado(boolean enviado) {
-		this.enviado = enviado;
-	}
-	
 	
 	/*
 	 * 
@@ -211,6 +139,14 @@ public class Protocolo extends ComprobanteCliente {
 			return e;
 		}
 	
+	}
+	
+	public String getCodigo(){
+		return this.getNro();
+	}
+	
+	public String getDescripcion(){
+		return this.getClienteSucursal().getCliente().getDescripcion();
 	}
 	
 }
