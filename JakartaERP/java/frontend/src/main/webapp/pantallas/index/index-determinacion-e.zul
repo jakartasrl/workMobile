@@ -1,10 +1,10 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
-<!-- <?init class="com.jkt.security.ServicioAcceso" ?> -->
+<?init class="com.jkt.security.ServicioAcceso" ?>
 
 
 <zk>
 	<style src="/style/template.css" />
-	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DeterminacionVM')" id="contenedorPrincipal">
+	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.DeterminacionVM' , l = 'LaboratorioElectrico' )" id="contenedorPrincipal">
 		
 		<div sclass="hboxToolBar" >
 			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/>

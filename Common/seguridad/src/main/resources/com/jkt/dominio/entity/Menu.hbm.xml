@@ -11,6 +11,7 @@
 		<discriminator column="TIPO_ELEMENTO" type="string" />
 
 		<property name="codigo" column="CODIGO" />
+		<property name="version" column="VERSION" />
 
 		<subclass name="com.jkt.dominio.menu.Programa" discriminator-value="PROGRAMA">
 		</subclass>

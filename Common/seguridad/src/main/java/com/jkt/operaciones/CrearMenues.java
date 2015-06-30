@@ -35,9 +35,16 @@ public class CrearMenues extends Operation {
 //	private static final String CODIGO_MENU = "codigoMenu".toUpperCase();
 	private static final String FILE_NAME = "fileName".toUpperCase();
 
+	private int version;
+	
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String fileName = (String) aParams.get(FILE_NAME);
 //		String codigo = (String) aParams.get(CODIGO_MENU);
+		
+		
+		Query obtenerMaximaVersion = crearHQL("Select max(version) from Menu");
+		int executeUpdate = (Integer) obtenerMaximaVersion.uniqueResult();
+		this.version=executeUpdate+1;
 		
 		Digester digester = generarReglas();
 		InputStream in = this.getClass().getResourceAsStream(fileName);
@@ -84,6 +91,9 @@ public class CrearMenues extends Operation {
 	private ElementoMenu parsearRespuestaDesdeElXML(MenuXML menu) throws JakartaException{
 		
 		Menu m=  new Menu();
+		
+		m.setVersion(this.version);
+
 		m.setName(menu.getName());
 		m.setCodigo(menu.getCodigo());
 		m.setImg(menu.getImg());

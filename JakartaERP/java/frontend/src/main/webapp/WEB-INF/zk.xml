@@ -34,10 +34,10 @@
 		<location>/error.zul</location>
 	</error-page>
 
-	<library-property>
-		<name>org.zkoss.theme.preferred</name>
-		<value>Atlantic</value> <!-- sapphire or silvertail, atlantic -->
-	</library-property>
+<!-- 	<library-property> -->
+<!-- 		<name>org.zkoss.theme.preferred</name> -->
+<!-- 		<value>Atlantic</value> -->
+<!-- 	</library-property> -->
 	
 	<language-config>
         <addon-uri>/WEB-INF/ckez-bind-addon.xml</addon-uri>

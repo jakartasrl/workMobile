@@ -58,7 +58,7 @@
 			    		<hlayout>
 							<label visible="false" value="@load(vm.lPreciosOV.id)"/>
 							<textbox sclass="campoCodigo-small" value="@bind(vm.lPreciosOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='listaPrecios', codigo=self.value, ov=vm.lPreciosOV, post='actualizarDeterminaciones')" tabindex="5" />
-							<button label="..." onClick="@command('openHelper', clase='listaPrecios', max='true', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
+							<button label="..." onClick="@command('openHelper', clase='listaPrecios', ov=vm.lPreciosOV, post='actualizarDeterminaciones')" />
 			    		</hlayout>
 
 						<cell colspan="4">

@@ -23,13 +23,25 @@ public class RecuperarMenu extends Operation {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		String oidRecibido=(String) aParams.get(CAMPO_OID_MENU);
 		Menu menu = null;
+		
+		Query obtenerMaximaVersion = crearHQL("Select max(version) from Menu");
+		int ultimaVersion = (Integer) obtenerMaximaVersion.uniqueResult();
+		
 		if (oidRecibido==null || oidRecibido.isEmpty()) {
-			Query hql = crearHQL("from Menu m where m.type = :type");
+			Query hql = crearHQL("from Menu m where m.type = :type and m.version = :ultimaVersion");
 			hql.setParameter("type", Menu.MENU_PRINCIPAL);
+			hql.setParameter("ultimaVersion", ultimaVersion);
 			notificarObjeto("",	hql.list());
 		}else{
 			int oidMenu = Integer.valueOf(oidRecibido).intValue();
-			menu = (Menu) obtener(Menu.class, oidMenu);
+//			menu = (Menu) obtener(Menu.class, oidMenu);
+			
+			Query hql = crearHQL("from Menu m where m.id = :identificador and m.version = :ultimaVersion");
+			hql.setParameter("identificador", (long)oidMenu);
+			hql.setParameter("ultimaVersion", ultimaVersion);
+			
+			menu = (Menu) hql.uniqueResult();
+			
 			notificarObjeto("", menu.getElementos());
 		}
 		

@@ -46,7 +46,9 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	@Init(superclass=true)
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
-	public void init(@QueryParam("l") String laboratorio){
+	public void init(@BindingParam("l") String laboratorio){
+		
+		if(isCargadoDesdeSession()){return;}
 		
 		this.setTitulo("Protocolo");
 		
