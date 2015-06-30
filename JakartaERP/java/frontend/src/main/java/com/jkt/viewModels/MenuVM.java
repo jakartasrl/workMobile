@@ -126,10 +126,11 @@ public class MenuVM {
 	@Command
 	public void test(@ContextParam(ContextType.TRIGGER_EVENT) Event event) {
 	    String url = event.getData().toString();
-		Session sess = Sessions.getCurrent();
-		SessionViewModelsDTO dto = new SessionViewModelsDTO(url , this.mapaViewModel.get(url));
-		sess.setAttribute("sessionVMDTO", dto);
-	    Executions.sendRedirect("pantallas/sessionVMs/sessionManager.zul");
-	}	
-	
+//		Session sess = Sessions.getCurrent();
+//		SessionViewModelsDTO dto = new SessionViewModelsDTO(url , this.mapaViewModel.get(url));
+//		sess.setAttribute("sessionVMDTO", dto);
+//	    Executions.sendRedirect("pantallas/sessionVMs/sessionManager.zul");
+	    Executions.sendRedirect(url);
+	}
+
 }

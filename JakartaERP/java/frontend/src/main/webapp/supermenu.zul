@@ -4,15 +4,13 @@
 <zk>
 
 	<style src="/style/template-grey.css" />
-	<style src="/style/template-grey.css" />
+<!-- 	<style src="/style/template.css" /> -->
 	<style src="/style/metro.css" />
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/metro.js"></script>
 	
 	<style>
-	
-		body{ background-color:transparent }
 	
 		.titulo{ 
 			color : white ; 
@@ -32,11 +30,19 @@
 	
 			var configTiles = [
 				{
+					'name'        : 'Inicio',
+					'thumbnail'   : 'pantallas/img/00-windows-phone-8.png',
+					'content'     : 'Inicio',
+					'size'        : '2x2',
+					'theme'       : 'white',
+					'link'         : 'supermenu.zul',
+				},
+				{
 					'name'        : 'Salir',
 					'thumbnail'   : 'pantallas/img/exit.png',
 					'content'     : 'Salir',
 					'size'        : '2x2',
-					'theme'       : 'red',
+					'theme'       : 'white',
 					'link'         : 'index.zul?action=logout',
 				}
 		

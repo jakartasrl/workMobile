@@ -403,16 +403,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	@Init(superclass=true)
 	public void init(){
 		
-		try {
-			ViewModel recuperarDesdeSesion = recuperarDesdeSesion(this.getClass().getCanonicalName());
-			if(recuperarDesdeSesion!=null){
-				BeanUtils.copyProperties(this, recuperarDesdeSesion);
-				return;// true; 
-			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage());
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e.getMessage());
+		if(isCargadoDesdeSession()){
+			return;
 		}
 		
 		log.info("Iniciando ViewModel de Pedido.");

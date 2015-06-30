@@ -31,7 +31,7 @@ public class LaboratorioVM extends ViewModel implements IBasicOperations{
 		this.ov = ov;
 	}
 
-	@Init
+	@Init(superclass=true)
 	@NotifyChange("ov")
 	public void init(){
 		this.setTitulo("Administracion de Laboratorios");

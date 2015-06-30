@@ -34,7 +34,7 @@ public class PlantillaVM extends ViewModel implements IBasicOperations{
 		return "actualizarOVs";
 	}
 
-	@Init
+	@Init(superclass=true)
 	public void init(){
 		this.setTitulo("Administración de Plantila");
 	}

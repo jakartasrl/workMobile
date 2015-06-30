@@ -42,8 +42,13 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 	private ListDescriptibleOV estados;//=new ListDescriptibleOV();
 	
 	
-	@Init
+	@Init(superclass=true)
 	public void init() {
+		
+		if(isCargadoDesdeSession()){
+			return;
+		}
+		
 		this.setTitulo("Planificación del Pedido");
 		this.agenda = new AgendaOV();
 		this.estados = (ListDescriptibleOV) Operaciones.ejecutar("TraerEstadosTareas", ListDescriptibleOV.class);

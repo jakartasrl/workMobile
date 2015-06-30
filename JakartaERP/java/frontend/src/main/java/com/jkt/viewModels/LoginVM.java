@@ -30,11 +30,11 @@ public class LoginVM {
 	@Command
 	@NotifyChange({"error","showError"})
 	public void acceder(){
-//	
-//		ContainerOV containerMenu = new ContainerOV();
-//		containerMenu.setString1("menu1.xml");
-//		Operaciones.ejecutar("CrearMenues", containerMenu);
-		
+	
+		ContainerOV containerMenu = new ContainerOV();
+		containerMenu.setString1("menu1.xml");
+		Operaciones.ejecutar("CrearMenues", containerMenu);
+//		
 		ContainerOV objetoOV = new ContainerOV();
 		
 		objetoOV.setString1(usuario);

@@ -317,9 +317,13 @@ public class CotizadorVM extends ViewModel implements IBasicOperations {
 	
 	}
 	
-	@Init
+	@Init(superclass=true)
 	@NotifyChange({"lsTipoDeCambio","monedas","totalCostoEn","totalImporteVenta","expresarEnMonedaSeleccionado","itemSelected","cotizacionEditable","apertura"})
 	public void init(){
+		
+		if(!isCargadoDesdeSession()){
+			return;
+		}
 		
 		expresarEnMonedaSeleccionado = new DescriptibleOV();
 		itemSelected = new ItemsOV();

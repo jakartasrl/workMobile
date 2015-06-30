@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -43,7 +42,10 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	
 	@Init(superclass=true)
 	@NotifyChange("determinacion")
-	public void init(@QueryParam("l") String laboratorio) {
+	public void init(@BindingParam("l") String laboratorio) {
+		
+		if(isCargadoDesdeSession()){return;}
+		
 		this.laboratorioParametroKey = laboratorio;
 		ParametroOV laboratorioParam = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV(laboratorio), ParametroOV.class);
 		this.idLaboratorio = Long.valueOf(laboratorioParam.getValorNumero());
