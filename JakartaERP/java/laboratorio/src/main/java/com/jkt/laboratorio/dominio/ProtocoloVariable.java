@@ -14,5 +14,9 @@ public class ProtocoloVariable extends PersistentEntity {
 	private String variable;
 	private String expresion; //Si no es input
 	private double valor;
+	
+	private boolean input;
+	
+	private double resultadoExpresion;
 
 }

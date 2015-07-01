@@ -49,6 +49,7 @@ public class DeterminacionOV extends DescriptibleOV {
 	private long idLaboratorio;
 	
 	private String comentario;
+	private String descMetodo;
 	
 }
 

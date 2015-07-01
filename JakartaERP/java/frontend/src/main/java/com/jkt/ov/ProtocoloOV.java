@@ -6,8 +6,6 @@ import java.util.List;
 
 import lombok.Data;
 
-import com.jkt.view.ObjectView;
-
 @Data
 public class ProtocoloOV extends DescriptibleOV {
 	
@@ -32,5 +30,7 @@ public class ProtocoloOV extends DescriptibleOV {
 	private String comentarioDiagnostico;
 	
 	List<DeterminacionOV> determinaciones = new ArrayList<DeterminacionOV>();
+	
+	private String ordenTrabajo;
 		
 }

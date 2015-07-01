@@ -25,6 +25,9 @@ public class ProtocoloDetalle extends PersistentEntity implements IDetalle {
 	private String comentario;
 	private List<ProtocoloVariable> variables=new ArrayList<ProtocoloVariable>();
 	
+	private String descDeterminacion;
+	private String descMetodo;
+	
 	public void agregarVariable(ProtocoloVariable protocoloVariable){
 		if (!this.variables.contains(protocoloVariable)) {
 			this.variables.add(protocoloVariable);

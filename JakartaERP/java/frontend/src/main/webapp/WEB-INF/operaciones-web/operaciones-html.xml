@@ -1966,6 +1966,7 @@
 			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
 			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
+			<campoEntrada propertyOV="ordenTrabajo" 				metodo="setOrdenTrabajo" />
 			
 			<campoEntrada propertyOV="codDiagnostico" 				metodo="setComentario" />
 			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" />
@@ -1973,16 +1974,17 @@
 			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
 			
 				<campoEntrada propertyOV="id" 						metodo="setId" />
-<!-- 				<campoEntrada propertyOV="descripcion" 				metodo="setDescripcion" /> -->
+				<campoEntrada propertyOV="descripcion" 				metodo="setDescDeterminacion" />
 				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
+				
+				<campoEntrada propertyOV="descMetodo" 				metodo="setDescMetodo" />
 				
 				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
 					<campoEntrada propertyOV="descripcion" 			metodo="setVariable" />
 					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
 					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
-<!-- 					<campoEntrada propertyOV="input" 				metodo="setInput" /> -->
-<!-- 					<campoEntrada propertyOV="valorInput" 			metodo="setInput" /> -->
-<!-- 					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						 -->
+					<campoEntrada propertyOV="input" 				metodo="setInput" />
+					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setResultadoExpresion" />						
 				</campoEntrada>
 			</campoEntrada>
 			
@@ -2007,18 +2009,24 @@
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
 			
-			<campoSalida value="codDiagnostico"		 			target="comentario" />
+			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
+			
+			<campoSalida value="codDiagnostico"		 		target="comentario" />
 			<campoSalida value="comentarioDiagnostico"		target="comentarioDiagnostico" />
 			
 			<campoSalida value="determinaciones"		target="detalles" >
 				<campoSalida value="id" 				target="id" />
-				<campoSalida value="descripcion" 		target="descripcion" />
+				<campoSalida value="descripcion" 		target="descDeterminacion" />
 				<campoSalida value="comentario" 		target="comentario" />
+				
+				<campoSalida value="descMetodo" 		target="descMetodo" />
 				
 				<campoSalida value="variables" 				target="variables" >
 					<campoSalida value="descripcion" 			target="variable" />
 					<campoSalida value="valorInput" 			target="valor" />
-					<campoSalida value="expresionCadena"  	target="expresion" />
+					<campoSalida value="expresionCadena"  		target="expresion" />
+					<campoSalida value="input"  				target="input" />
+					<campoSalida value="resultadoExpresion"  	target="resultadoExpresion" />	
 				</campoSalida>
 					
 			</campoSalida>

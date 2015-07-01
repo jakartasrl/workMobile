@@ -42,6 +42,8 @@ public class Protocolo extends ComprobanteCliente {
 	private String codigoDiagnostico;
 	private String comentarioDiagnostico;
 	
+	private String ordenTrabajo;
+	
 	private boolean impreso;
 	private boolean enviado;
 	private List<ProtocoloDetalle> detalles=new ArrayList<ProtocoloDetalle>();

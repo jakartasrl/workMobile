@@ -1,6 +1,6 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
-		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:15px;" width="73%" >
+		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:15px;" width="100%" >
 		
 			<listhead>
 				<listheader label="Determinaciones" />

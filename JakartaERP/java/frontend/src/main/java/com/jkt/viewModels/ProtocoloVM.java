@@ -81,6 +81,8 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 			MetodoOV metodoOV = determinacionOV.getMetodos().get(0); //JKT
 			determinacionOV.setVariables(metodoOV.getVariables());
 			
+			determinacionOV.setDescMetodo(metodoOV.getMetodo()); //guardamos la descripcion del metodo
+			
 			for (VariableOV variableOV : determinacionOV.getVariables()) {
 				 variableOV.setId(0L);
 			}
@@ -115,7 +117,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
 	public void cargarProtocolo() throws JakartaException {
 		
-ContainerOV containerOV = new ContainerOV();
+		ContainerOV containerOV = new ContainerOV();
 		containerOV.setString1("protocolo");
 		containerOV.setString2(String.valueOf(this.protocoloDescriptible.getId()));
 		
@@ -136,37 +138,18 @@ ContainerOV containerOV = new ContainerOV();
 		
 		this.pedidoOV = pedidoOV;
 		
-//		this.protocoloOV.setDeterminaciones(new ArrayList<DeterminacionOV>());
-//		
-//		List<Long> listaIdsDeterminaciones = new ArrayList<Long>();
-//		for (ItemsOV itemsOV : this.pedidoOV.getItems()) {
-//			if(itemsOV.getTipoItem()==this.tipoItem){
-//				listaIdsDeterminaciones.add(itemsOV.getIdDeterminacion());
-//			}
-//		}
-//		
-//		for (Long idDeterminacionActual : listaIdsDeterminaciones) {
-//			//buscar para cada uno, en la base, la determinacion con todos los datos.
-//			
-//			ContainerOV containerOVForDeterm = new ContainerOV();
-//			containerOVForDeterm.setString1(String.valueOf(idDeterminacionActual));
-//			containerOVForDeterm.setString2("Determinacion");
-//			
-//			DeterminacionOV det = (DeterminacionOV) Operaciones.ejecutar("TraerDeterminacion", containerOVForDeterm, DeterminacionOV.class);
-//			
-//			det = this.obtenerMetodosParaDeterminacion(det);
-//			
-//			this.protocoloOV.getDeterminaciones().add(det);
-//		}
-
+		List<DeterminacionOV> listDeterminaciones = new ArrayList<DeterminacionOV>(); 
 		for (DeterminacionOV det : this.protocoloOV.getDeterminaciones()){
-//			MetodoOV met = det.getMetodos().get(0);
 			MetodoOV met = new MetodoOV();
-	
 			met.setVariables(det.getVariables());
+			met.setMetodo(det.getDescMetodo());
 			det.getMetodos().add(met);
+			det.setDescMetodo(met.getMetodo());
+			listDeterminaciones.add(det);
 		}
 		
+		this.protocoloOV.setDeterminaciones(listDeterminaciones);
+
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 
 	}

@@ -14,6 +14,10 @@
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
+		<property name="input" column="INPUT" type="boolean" />
+		
+		<property name="resultadoExpresion" column="RESULTADO_EXPRESION" />
+		
 	</class>
 
 </hibernate-mapping>

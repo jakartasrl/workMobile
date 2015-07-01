@@ -24,6 +24,8 @@
 
 		<property name="comentario" column="COMENTARIO" />
 		<property name="comentarioDiagnostico" column="COMENTARIO_DIAGNOSTICO" />
+		
+		<property name="ordenTrabajo" column="ORDEN_TRABAJO" />
 
 		<many-to-one name="usuarioIngresoResultado" class="com.jkt.dominio.Usuario" column="USUARIO_RESULTADO_ID"/>
 		<many-to-one name="usuarioIngresoAprobacion" class="com.jkt.dominio.Usuario" column="USUARIO_APROBACION_ID"/>

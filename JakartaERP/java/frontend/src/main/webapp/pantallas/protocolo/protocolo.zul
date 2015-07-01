@@ -1,16 +1,14 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<vlayout>
-	
-		<panel sclass="panel-maestro" title="Datos Generales" style="overflow:hidden;padding:5px;" border="normal" width="55%">
+		
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="37%" >
 
 			<panelchildren>
 			
-				<grid style="border-style:none;" sizedByContent="true">
+				<grid width="auto" >
 
 					<columns>
-						<column width="120px"/>
-						<column width="120px"/>
 						<column width="120px"/>
 						<column width="120px"/>
 						<column width="120px"/>
@@ -35,7 +33,7 @@
 							<label value="Orden de Trabajo : " />
 							
 							<hlayout>
-								<textbox width="100%" value=""   />
+								<textbox width="100%" value="@bind(vm.protocoloOV.ordenTrabajo)" />
 <!-- 								<button label="..." /> -->
 							</hlayout>
 	
@@ -74,7 +72,7 @@
 			
 		</panel>
 		
-		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+		<panel style="margin-top:15px;" border="none" height="auto" width="50%">
 		
 			<panelchildren>
 			
