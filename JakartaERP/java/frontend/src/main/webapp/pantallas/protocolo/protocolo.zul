@@ -21,7 +21,7 @@
 					
 						<row sclass="fila-maestro">
 							<label value="Fecha Emision : " />
-							<datebox id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true" />
+							<datebox id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
 						</row>
 
 						<row>
@@ -44,11 +44,11 @@
 			    		<row>
 							<label value="Cliente : " />
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='')" />
-								<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" />
+								<textbox readonly="true" sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='')" />
+<!-- 								<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" /> -->
 							</hlayout>
 							<cell colspan="2">
-								<textbox width="100%" value="@bind(vm.clienteOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteOV', codigo=self.value, ov=vm.clienteOV, post='')" />
+								<textbox readonly="true" width="100%" value="@bind(vm.clienteOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteOV', codigo=self.value, ov=vm.clienteOV, post='')" />
 							</cell>
 						</row>
 												
@@ -59,12 +59,12 @@
 								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" />
 							</hlayout>
 														
-							<textbox width="100%" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='equipoOV', codigo=self.value, ov=vm.equipoOV, post='')" />
+							<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='equipoOV', codigo=self.value, ov=vm.equipoOV, post='')" />
 						</row>
 
 						<row>
 							<label value="Fecha de muestra : " />
-							<datebox id="fecha" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" />
+							<datebox id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
 						</row>
 						
 					</rows>

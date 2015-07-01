@@ -9,6 +9,7 @@
 		</id>
 
 		<property name="variable" column="VARIABLE" />
+		<property name="expresion" column="EXPRESION" />
 		<property name="valor" column="VALOR" />
 		
 		<property name="activo" column="ACTIVO" type="boolean" />

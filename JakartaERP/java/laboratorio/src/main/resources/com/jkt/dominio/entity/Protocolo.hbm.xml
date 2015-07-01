@@ -17,15 +17,20 @@
 		<many-to-one name="laboratorio" class="com.jkt.laboratorio.dominio.Laboratorio" column="LABORATORIO_ID"/>
 		<many-to-one name="equipo" class="com.jkt.laboratorio.dominio.Equipo" column="EQUIPO_ID"/>
 		
+		<property name="idPedido" column="ID_PEDIDO" />
 		<property name="estado" column="ESTADO" />
+
 		<property name="comentario" column="COMENTARIO" />
 		<property name="comentarioDiagnostico" column="COMENTARIO_DIAGNOSTICO" />
 
 		<many-to-one name="usuarioIngresoResultado" class="com.jkt.dominio.Usuario" column="USUARIO_RESULTADO_ID"/>
 		<many-to-one name="usuarioIngresoAprobacion" class="com.jkt.dominio.Usuario" column="USUARIO_APROBACION_ID"/>
 
-		<many-to-one name="diagnostico" class="com.jkt.laboratorio.dominio.Diagnostico" column="DIAGNOSTICO_ID"/>
+<!-- 		<many-to-one name="diagnostico" class="com.jkt.laboratorio.dominio.Diagnostico" column="DIAGNOSTICO_ID"/> -->
 
+		<property name="activo" column="ACTIVO" type="boolean" />
+
+		<property name="fecha" type="date" column="FECHA_EDICION"></property>
 		<property name="fechaHoraMuestra" type="date" column="FECHA_HORA_MUESTRA"></property>
 		<property name="fechaHoraResultado" type="date" column="FECHA_HORA_RESULTADO"></property>
 		<property name="fechaHoraAprobacion" type="date" column="FECHA_HORA_APROBACION"></property>
@@ -35,6 +40,7 @@
 			<index column="ORDEN" />
 			<one-to-many class="com.jkt.laboratorio.dominio.ProtocoloDetalle" />
 		</list>
+
 
 	</class>
 

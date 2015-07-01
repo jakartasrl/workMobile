@@ -41,9 +41,14 @@ public class CrearMenues extends Operation {
 		String fileName = (String) aParams.get(FILE_NAME);
 //		String codigo = (String) aParams.get(CODIGO_MENU);
 		
+		int executeUpdate;
+		try{
+			Query obtenerMaximaVersion = crearHQL("Select max(version) from Menu");
+			executeUpdate = (Integer) obtenerMaximaVersion.uniqueResult();
+		}catch(Exception e){
+			executeUpdate = 0;
+		}
 		
-		Query obtenerMaximaVersion = crearHQL("Select max(version) from Menu");
-		int executeUpdate = (Integer) obtenerMaximaVersion.uniqueResult();
 		this.version=executeUpdate+1;
 		
 		Digester digester = generarReglas();
