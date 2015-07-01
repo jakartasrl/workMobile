@@ -651,6 +651,10 @@
 				<campoSalida target="descripcion" 			value="descripcion" />
 				<campoSalida target="input" 				value="input" />
 				<campoSalida target="resultadoFinal" 		value="resultadoFinal" />
+				
+				<campoSalida target="valorInput" 			value="valorInput" />
+				<campoSalida target="resultadoExpresion" 	value="resultadoExpresion" />
+				
 			</campoSalida>
 			
 		</output>
@@ -2063,10 +2067,21 @@
 			<campoSalida value="fechaHoraMuestra" 		target="fechaHoraMuestra" />
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
-
+			
+			<campoSalida value="codDiagnostico" 		target="comentario" />
+			<campoSalida value="comentarioDiagnostico" 	target="comentarioDiagnostico" />
+			
 			<campoSalida value="determinaciones"		target="detalles" >
 				<campoSalida value="id" 				target="id" />
-				<campoSalida value="comentario" 		target="comentario" />	
+				<campoSalida value="descripcion" 		target="descripcion" />
+				<campoSalida value="comentario" 		target="comentario" />
+				
+				<campoSalida value="variables" 				target="variables" >
+					<campoSalida value="descripcion" 			target="variable" />
+					<campoSalida value="valorInput" 			target="valor" />
+					<campoSalida value="expresionCadena"  	target="expresion" />
+				</campoSalida>
+					
 			</campoSalida>
 
 		</output>

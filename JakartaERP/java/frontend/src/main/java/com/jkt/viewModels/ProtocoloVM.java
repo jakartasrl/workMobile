@@ -107,7 +107,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@Override
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openHelper("protocolo", "", this.protocoloDescriptible, "cargarProtocolo", "", "", "", false);
+		openHelper("protocolo", "", this.protocoloDescriptible, "cargarProtocolo", "Protocolos", "Codigo", "Descripcion", false);
 	}
 	
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
@@ -118,12 +118,13 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		containerOV.setString2(String.valueOf(this.protocoloDescriptible.getId()));
 		
 		ListProtocoloOV p = (ListProtocoloOV) Operaciones.ejecutar("TraerProtocolo", containerOV, ListProtocoloOV.class);
-		ProtocoloOV protocolo = (ProtocoloOV) p.getList().get(0);
+		this.protocoloOV = (ProtocoloOV) p.getList().get(0);
 		
-		this.equipoOV = Operaciones.recuperarObjetoDescriptible("equipo",protocolo.getIdEquipo());
+		
+		this.equipoOV = Operaciones.recuperarObjetoDescriptible("equipo",this.protocoloOV.getIdEquipo());
 
 		containerOV.setString1("pedido");
-		containerOV.setString2(String.valueOf(protocolo.getIdPedido()));
+		containerOV.setString2(String.valueOf(this.protocoloOV.getIdPedido()));
 		
 		PedidoOV pedidoOV = (PedidoOV) ((ListPedidoOV) Operaciones.ejecutar("TraerDeterminacionesDePedido", containerOV, ListPedidoOV.class)).getList().get(0);
 		
@@ -131,29 +132,39 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.clienteOV.setCodigo(pedidoOV.getCodCliente());
 		this.clienteOV.setDescripcion(pedidoOV.getDescCliente());
 		
-		this.pedidoOV = pedidoOV; 
+		this.pedidoOV = pedidoOV;
 		
-		List<Long> listaIdsDeterminaciones = new ArrayList<Long>();
-		for (ItemsOV itemsOV : this.pedidoOV.getItems()) {
-			if(itemsOV.getTipoItem()==this.tipoItem){
-				listaIdsDeterminaciones.add(itemsOV.getIdDeterminacion());
-			}
-		}
-		
-		for (Long idDeterminacionActual : listaIdsDeterminaciones) {
-			//buscar para cada uno, en la base, la determinacion con todos los datos.
-			
-			ContainerOV containerOVForDeterm = new ContainerOV();
-			containerOVForDeterm.setString1(String.valueOf(idDeterminacionActual));
-			containerOVForDeterm.setString2("Determinacion");
-			
-			DeterminacionOV det = (DeterminacionOV) Operaciones.ejecutar("TraerDeterminacion", containerOVForDeterm, DeterminacionOV.class);
-			
-			det = this.obtenerMetodosParaDeterminacion(det);
-			
-			this.protocoloOV.getDeterminaciones().add(det);
-		}
+//		this.protocoloOV.setDeterminaciones(new ArrayList<DeterminacionOV>());
+//		
+//		List<Long> listaIdsDeterminaciones = new ArrayList<Long>();
+//		for (ItemsOV itemsOV : this.pedidoOV.getItems()) {
+//			if(itemsOV.getTipoItem()==this.tipoItem){
+//				listaIdsDeterminaciones.add(itemsOV.getIdDeterminacion());
+//			}
+//		}
+//		
+//		for (Long idDeterminacionActual : listaIdsDeterminaciones) {
+//			//buscar para cada uno, en la base, la determinacion con todos los datos.
+//			
+//			ContainerOV containerOVForDeterm = new ContainerOV();
+//			containerOVForDeterm.setString1(String.valueOf(idDeterminacionActual));
+//			containerOVForDeterm.setString2("Determinacion");
+//			
+//			DeterminacionOV det = (DeterminacionOV) Operaciones.ejecutar("TraerDeterminacion", containerOVForDeterm, DeterminacionOV.class);
+//			
+//			det = this.obtenerMetodosParaDeterminacion(det);
+//			
+//			this.protocoloOV.getDeterminaciones().add(det);
+//		}
 
+		for (DeterminacionOV det : this.protocoloOV.getDeterminaciones()){
+//			MetodoOV met = det.getMetodos().get(0);
+			MetodoOV met = new MetodoOV();
+	
+			met.setVariables(det.getVariables());
+			det.getMetodos().add(met);
+		}
+		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 
 	}
@@ -168,6 +179,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 	@Override
