@@ -46,6 +46,7 @@
 	</elemento>
 	
 	<elemento codigo="100" name="Utilidades" img="pantallas/img/widget_dialog.png" size="4x2" theme="blue" type="menu_principal">
+		<elemento codigo="108" name="Plantilla" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="red" 		link="pantallas/index/plantilla.zul"									 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
 		<elemento codigo="101" name="Sector" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarSector-sector" 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
 		<elemento codigo="102" name="Tarea" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarTareaSimple-tarea" 			type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="103" name="Unidad Medida" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarUnidadMedida-unidadMedida" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
