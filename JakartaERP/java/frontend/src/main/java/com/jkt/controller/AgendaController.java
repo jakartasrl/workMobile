@@ -2,6 +2,7 @@ package com.jkt.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -10,6 +11,7 @@ import javax.servlet.ServletResponse;
 
 import lombok.Data;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -82,7 +84,10 @@ public class AgendaController extends ViewModel implements IBasicOperations {
 				color="#99D86F";
 			}
 			
-			result.add(new EventoDTO(1L,value , sdf.format(tarea.getFechaLimite()), sdf.format(tarea.getFechaCumplimiento()), color, color));
+			LocalDate inicio = LocalDate.fromDateFields(tarea.getFechaLimite()).minusDays(tarea.getDuracion());
+			LocalDate fin = LocalDate.fromDateFields(tarea.getFechaLimite());
+			
+			result.add(new EventoDTO(1L,value , sdf.format(inicio.toDate()), sdf.format(fin.toDate()), color, color));
 		}
 		
 		return result;
