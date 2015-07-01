@@ -2,7 +2,9 @@ package com.jkt.viewModels;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
@@ -113,7 +115,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
 	public void cargarProtocolo() throws JakartaException {
 		
-		ContainerOV containerOV = new ContainerOV();
+ContainerOV containerOV = new ContainerOV();
 		containerOV.setString1("protocolo");
 		containerOV.setString2(String.valueOf(this.protocoloDescriptible.getId()));
 		
@@ -179,7 +181,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 
 	@Override
@@ -296,7 +298,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 				}
 			}
 		}
-			
+		
 	}
 
 	@Command
@@ -304,9 +306,24 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	public void calcularExpresion(@BindingParam("determinacion") DeterminacionOV determinacionOV, @BindingParam("metodo") MetodoOV metodoOV){
 		
 		metodoOV.setId(0);
+		
+		Map<String, VariableOV> idsVar =  new HashMap<String, VariableOV>();
+		
+		List<VariableOV> variables = metodoOV.getVariables();
+		int i=1;
+		for (VariableOV variableOV : variables) {
+			variableOV.setIdTmp(i);
+			idsVar.put(String.valueOf(variableOV.getIdTmp()), variableOV);
+			variableOV.setId(0L);
+			i+=1;
+		}
+		
 		MetodoOV met = (MetodoOV) Operaciones.ejecutar("calcularExpresiones", metodoOV, MetodoOV.class);
 		
-//		System.out.println(met.getMetodo());
+		for (VariableOV variableOV :  met.getVariables()) {
+			VariableOV variableEnMapa = idsVar.get(String.valueOf(variableOV.getIdTmp()));
+			variableEnMapa.setResultadoExpresion(variableOV.getResultadoExpresion());
+		}
 		
 	}
 

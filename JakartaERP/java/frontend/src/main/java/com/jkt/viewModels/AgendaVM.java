@@ -39,8 +39,7 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 	
 	private AgendaOV agenda;
 	private String codigoTareaNueva;
-	private ListDescriptibleOV estados;//=new ListDescriptibleOV();
-	
+	private ListDescriptibleOV estados;
 	
 	@Init(superclass=true)
 	public void init() {
@@ -163,7 +162,6 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 			
 			tareaAgendaOV.setSector(Operaciones.recuperarObjetoDescriptible("sector",tareaAgendaOV.getIdSector()));
 			
-			
 			//Asigna el estado al combo.
 			DescriptibleOV estadoActual;
 			for (Object object : this.estados.getList()) {
@@ -172,7 +170,6 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 					tareaAgendaOV.setEstado(estadoActual);
 				}
 			}
-			
 			
 			this.tareaAgregada=tareaAgendaOV;
 			this.agenda.getTareasGenerales().add(this.tareaAgregada);
@@ -226,9 +223,7 @@ public class AgendaVM extends ViewModel implements IBasicOperations{
 
 	@GlobalCommand("actualizar")
 	@NotifyChange({"titulo","agenda","pedidoDescriptible"})
-	public void actualizar() {
-		
-	}
+	public void actualizar() {}
 
 	
 	protected String retrieveMethod() {

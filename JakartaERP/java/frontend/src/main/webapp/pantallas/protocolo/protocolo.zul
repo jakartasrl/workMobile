@@ -44,11 +44,10 @@
 			    		<row>
 							<label value="Cliente : " />
 							<hlayout>
-								<textbox readonly="true" sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV, post='')" />
-<!-- 								<button label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV, post='actualizarCamposDependientesDeCliente')" /> -->
+								<textbox readonly="true" sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" />
 							</hlayout>
 							<cell colspan="2">
-								<textbox readonly="true" width="100%" value="@bind(vm.clienteOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='clienteOV', codigo=self.value, ov=vm.clienteOV, post='')" />
+								<textbox readonly="true" width="100%" value="@bind(vm.clienteOV.descripcion)" constraint="no empty" />
 							</cell>
 						</row>
 												
@@ -59,7 +58,7 @@
 								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" />
 							</hlayout>
 														
-							<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" onBlur="@command('validarCampo', clase='equipoOV', codigo=self.value, ov=vm.equipoOV, post='')" />
+							<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" />
 						</row>
 
 						<row>

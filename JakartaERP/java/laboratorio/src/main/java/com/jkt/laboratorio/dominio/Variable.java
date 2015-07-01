@@ -21,7 +21,17 @@ public class Variable extends Descriptible {
 	private String expresion;
 	private List<Variable> variables=new ArrayList<Variable>();
 	
+	private long idTmp;
+	
 	private double valorInput;
+
+	public long getIdTmp() {
+		return idTmp;
+	}
+
+	public void setIdTmp(long idTmp) {
+		this.idTmp = idTmp;
+	}
 
 	public boolean isInput() {
 		return input;
