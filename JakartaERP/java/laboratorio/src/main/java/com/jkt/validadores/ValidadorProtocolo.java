@@ -12,7 +12,7 @@ import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.laboratorio.dominio.Protocolo;
 import com.jkt.operaciones.ValidacionDeNegocio;
 
-public class ValidadorProtocolo extends ValidacionDeNegocio {
+public class ValidadorProtocolo extends ValidadorComprobantes  {
 
 	public void validar(PersistentEntity entity) throws ValidacionDeNegocioException {
 		
@@ -38,14 +38,27 @@ public class ValidadorProtocolo extends ValidacionDeNegocio {
 			throw new RuntimeException(e);
 		}
 		
-		TipoComprobante tipoComprobante;
 		try {
-			tipoComprobante = (TipoComprobante) serviceRepository.getByOid(TipoComprobante.class, Long.valueOf(parametroTipoComportamiento.getValorNumero()));
+			TipoComprobante tipoComprobante = (TipoComprobante) serviceRepository.getByOid(TipoComprobante.class, Long.valueOf(parametroTipoComportamiento.getValorNumero()));
 			p.setTipoComprobante(tipoComprobante);
+			obtenerNumerador(p);
+		} catch (ClassNotFoundException e) {
+			MostrarError(e);
+		} catch (InstantiationException e) {
+			MostrarError(e);
+		} catch (IllegalAccessException e) {
+			MostrarError(e);
+		} catch (JakartaException e) {
+			MostrarError(e);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			MostrarError(e);
 		}
 		
 	}
+	
+	protected void MostrarError(Exception e)throws ValidacionDeNegocioException {
+		throw new ValidacionDeNegocioException("Error en la validacion de negocio:".concat(e.getMessage()));
+	}
+
 
 }
