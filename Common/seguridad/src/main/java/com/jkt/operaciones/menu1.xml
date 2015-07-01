@@ -40,6 +40,7 @@
 		<elemento codigo="018" name="Visores de Tareas" 		img="pantallas/img/planificacion.png" 	size="2x2" theme="red" type="menu" >
 			<elemento codigo="019" name="Tareas por Sector" 	img="pantallas/img/planificacion.png" 	size="4x2" theme="blue" link="pantallas/index/index-vista-agenda-sector.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorSectorVM" />
 			<elemento codigo="020" name="Tareas por Pedido" 	img="pantallas/img/planificacion.png" 	size="4x2" theme="orange" link="pantallas/index/index-vista-agenda-pedido.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
+			<elemento codigo="021" name="Visor Interactivo" 	img="pantallas/img/widget_char.png" 	size="4x2" theme="darkblue" link="pantallas/index/visor-agenda.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
 		</elemento>
 		
 	</elemento>
