@@ -22,4 +22,6 @@ public class VariableOV extends DescriptibleOV {
 	private double valorInput;
 	private double resultadoExpresion;
 	
+	private long idTmp;
+	
 }

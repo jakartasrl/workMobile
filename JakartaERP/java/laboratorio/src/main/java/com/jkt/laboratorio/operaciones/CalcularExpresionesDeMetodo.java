@@ -49,7 +49,7 @@ import com.jkt.operaciones.Operation;
 		}
 		
 		metodo.setVariables(new ArrayList<Variable>());
-		metodo.getVariables().addAll(variablesSimples);
+//		metodo.getVariables().addAll(variablesSimples);
 		metodo.getVariables().addAll(variablesComplejas);
 		
 		notificarObjeto("", metodo);
