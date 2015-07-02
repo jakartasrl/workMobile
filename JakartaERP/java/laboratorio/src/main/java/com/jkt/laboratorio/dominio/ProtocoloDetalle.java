@@ -28,6 +28,8 @@ public class ProtocoloDetalle extends PersistentEntity implements IDetalle {
 	private String descDeterminacion;
 	private String descMetodo;
 	
+	private long idMetodoUtilizado;
+	
 	public void agregarVariable(ProtocoloVariable protocoloVariable){
 		if (!this.variables.contains(protocoloVariable)) {
 			this.variables.add(protocoloVariable);

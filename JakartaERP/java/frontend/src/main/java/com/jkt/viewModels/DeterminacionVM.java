@@ -126,7 +126,8 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		this.determinacion.setDescFormato(this.determinacion.getFormato().getCodigo());
 		
 		Operaciones.ejecutar("saveDeterminacion", this.determinacion );
-		Executions.sendRedirect("/pantallas/index/index-determinacion.zul?l="+this.laboratorioParametroKey);
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+//		Executions.sendRedirect("/pantallas/index/index-determinacion.zul?l="+this.laboratorioParametroKey);
 
 		
 	}

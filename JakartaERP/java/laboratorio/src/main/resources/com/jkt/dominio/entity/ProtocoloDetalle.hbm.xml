@@ -15,6 +15,7 @@
 		
 		<property name="descDeterminacion" column="DESC_DETERMINACION" />
 		<property name="descMetodo" column="DESC_METODO" />
+		<property name="idMetodoUtilizado" column="ID_METODO_UTILIZADO" />
 		
 		<list name="variables" table="PROTOCOLO_VARIABLE" cascade="all">
 			<key column="PROTOCOLO_DETALLE_ID" />

@@ -32,5 +32,5 @@ public class ProtocoloOV extends DescriptibleOV {
 	List<DeterminacionOV> determinaciones = new ArrayList<DeterminacionOV>();
 	
 	private String ordenTrabajo;
-		
+
 }

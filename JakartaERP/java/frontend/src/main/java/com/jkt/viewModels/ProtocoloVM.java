@@ -15,6 +15,7 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -78,10 +79,10 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 
 		for (DeterminacionOV determinacionOV : this.protocoloOV.getDeterminaciones()) {
 			determinacionOV.setId(0L);
-			MetodoOV metodoOV = determinacionOV.getMetodos().get(0); //JKT
+			MetodoOV metodoOV = determinacionOV.getMetodoUtilizado();
 			determinacionOV.setVariables(metodoOV.getVariables());
 			
-			determinacionOV.setDescMetodo(metodoOV.getMetodo()); //guardamos la descripcion del metodo
+			determinacionOV.setDescMetodo(metodoOV.getMetodo());
 			
 			for (VariableOV variableOV : determinacionOV.getVariables()) {
 				 variableOV.setId(0L);
@@ -124,7 +125,6 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		ListProtocoloOV p = (ListProtocoloOV) Operaciones.ejecutar("TraerProtocolo", containerOV, ListProtocoloOV.class);
 		this.protocoloOV = (ProtocoloOV) p.getList().get(0);
 		
-		
 		this.equipoOV = Operaciones.recuperarObjetoDescriptible("equipo",this.protocoloOV.getIdEquipo());
 
 		containerOV.setString1("pedido");
@@ -137,15 +137,21 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.clienteOV.setDescripcion(pedidoOV.getDescCliente());
 		
 		this.pedidoOV = pedidoOV;
-		
+				
 		List<DeterminacionOV> listDeterminaciones = new ArrayList<DeterminacionOV>(); 
 		for (DeterminacionOV det : this.protocoloOV.getDeterminaciones()){
 			MetodoOV met = new MetodoOV();
 			met.setVariables(det.getVariables());
 			met.setMetodo(det.getDescMetodo());
+						
 			det.getMetodos().add(met);
 			det.setDescMetodo(met.getMetodo());
 			listDeterminaciones.add(det);
+			
+			if(!det.getMetodos().isEmpty()){
+				det.setMetodoUtilizado(det.getMetodos().get(0));
+			}
+			
 		}
 		
 		this.protocoloOV.setDeterminaciones(listDeterminaciones);
@@ -207,8 +213,8 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 			det = this.obtenerMetodosParaDeterminacion(det);
 			
 			this.protocoloOV.getDeterminaciones().add(det);
+			
 		}
-		
 		
 	}
 
@@ -260,30 +266,13 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 
 		det.setFormato(formatoSeleccionado);
 		
-		//JKT
-		MetodoOV metodoOV = det.getMetodos().get(0);
-		det.setMetodos(new ArrayList<MetodoOV>());
-		det.getMetodos().add(metodoOV);
+		if(!det.getMetodos().isEmpty()){
+			det.setMetodoUtilizado(det.getMetodos().get(0));
+		}
 		
 		return det;
 	}
 	
-	@Command
-	@NotifyChange({"protocoloOV","pedidoOV"})
-	public void agregarInput(@BindingParam("determinacion") DeterminacionOV determinacionOV, @BindingParam("metodo") MetodoOV metodoOV, @BindingParam("variable") VariableOV variableOV){
-		
-		for (DeterminacionOV det : protocoloOV.getDeterminaciones()) {
-			for (MetodoOV met : det.getMetodos()) {
-				for (VariableOV var : met.getVariables()) {
-					if (var == variableOV){
-						var = variableOV;
-					}
-				}
-			}
-		}
-		
-	}
-
 	@Command
 	@NotifyChange("protocoloOV")
 	public void calcularExpresion(@BindingParam("determinacion") DeterminacionOV determinacionOV, @BindingParam("metodo") MetodoOV metodoOV){
@@ -301,13 +290,20 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 			i+=1;
 		}
 		
-		MetodoOV met = (MetodoOV) Operaciones.ejecutar("calcularExpresiones", metodoOV, MetodoOV.class);
+		MetodoOV met = null;
 		
-		for (VariableOV variableOV :  met.getVariables()) {
-			VariableOV variableEnMapa = idsVar.get(String.valueOf(variableOV.getIdTmp()));
-			variableEnMapa.setResultadoExpresion(variableOV.getResultadoExpresion());
+		try{
+			met = (MetodoOV) Operaciones.ejecutar("calcularExpresiones", metodoOV, MetodoOV.class);
+
+			for (VariableOV variableOV :  met.getVariables()) {
+				VariableOV variableEnMapa = idsVar.get(String.valueOf(variableOV.getIdTmp()));
+				variableEnMapa.setResultadoExpresion(variableOV.getResultadoExpresion());
+			}
+			
+		} catch(Exception e) {
+			Messagebox.show("Verifique la expresión por favor.");
 		}
 		
 	}
-
+	
 }
