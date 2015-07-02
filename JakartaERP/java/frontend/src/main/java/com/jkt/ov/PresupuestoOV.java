@@ -28,7 +28,7 @@ public class PresupuestoOV extends ObjectView {
 	private boolean anulado = false;
 	private Date fecha;
 	
-	private Long idCotizacion=0L;
+	private Long idCotizacion=null;
 
 	private Long idCliente;
 	private Long idSucursal;

@@ -983,7 +983,7 @@
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
 			
-<!-- 			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" /> -->
+			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" />
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>

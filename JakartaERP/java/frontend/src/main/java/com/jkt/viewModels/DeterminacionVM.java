@@ -230,7 +230,6 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	public void nuevo() throws JakartaException {
 		this.determinacion = new DeterminacionOV();
 		this.init(this.laboratorioParametroKey);
-//		Executions.sendRedirect("/pantallas/index/index-determinacion.zul?l="+this.laboratorioParametroKey);
 		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 
@@ -360,7 +359,6 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		if (this.determinacion.getMetodos().isEmpty()) {
 			Messagebox.show("No hay metodos a eliminar.");
 		}else{
-//			int pos = this.determinacion.getMetodos().size();
 			this.determinacion.getMetodos().remove(nroMetodo);
 		}
 	

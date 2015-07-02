@@ -54,6 +54,10 @@ public abstract class Comprobante extends PersistentEntity {
 		return comprobanteRelacionado;
 	}
 	
+	public void limpiarComprobantesRelacionados(){
+		comprobanteRelacionado=null;
+	}
+	
 	public Comprobante(){
 		super();
 		this.fecha=new Date();
@@ -129,6 +133,9 @@ public abstract class Comprobante extends PersistentEntity {
 		return false;
 	}
 	public boolean isOrdenFabricacion(){
+		return false;
+	}
+	public boolean isProtocolo(){
 		return false;
 	}
 	
