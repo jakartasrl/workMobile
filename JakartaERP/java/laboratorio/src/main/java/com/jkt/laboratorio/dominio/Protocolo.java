@@ -151,4 +151,8 @@ public class Protocolo extends ComprobanteCliente {
 		return this.getClienteSucursal().getCliente().getDescripcion();
 	}
 	
+	public boolean isProtocolo(){
+		return true;
+	}
+	
 }

@@ -408,6 +408,7 @@
 			<campoSalida target="descripcion" value="descripcion" />
 			<campoSalida target="adicional" value="adicional" />
 			<campoSalida target="actividad.codigo" value="codigoActividad" />
+			<campoSalida target="subActividad.codigo" value="codigoSubActividad" />
 	
 		</output>
 
@@ -987,7 +988,7 @@
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
 			
-<!-- 			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" /> -->
+			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" />
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>

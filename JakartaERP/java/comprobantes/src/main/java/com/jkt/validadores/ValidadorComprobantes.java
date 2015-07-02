@@ -3,9 +3,7 @@ package com.jkt.validadores;
 import org.hibernate.Query;
 
 import com.jkt.dominio.Comprobante;
-import com.jkt.dominio.ComprobanteCliente;
 import com.jkt.dominio.NumeradorComprobantes;
-import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.TipoComprobante;
 import com.jkt.dominio.TipoComprobante.Comportamiento;
 import com.jkt.excepcion.JakartaException;
@@ -27,7 +25,9 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 		Comportamiento objetoComportamiento = TipoComprobante.Comportamiento.getComportamiento(comportamiento);
 		String numeroComprobante;
 		
-		if (comprobante.getComprobanteRelacionado()==null) {
+		if (comprobante.getComprobanteRelacionado()==null || comprobante.getComprobanteRelacionado().getId()==0) {
+			comprobante.limpiarComprobantesRelacionados();
+					
 			//nuevo numerador
 			
 			Query hql = this.getServiceRepository().crearHQL("select max(numerador.numero) from NumeradorComprobantes as numerador");
@@ -75,6 +75,10 @@ public abstract class ValidadorComprobantes extends ValidacionDeNegocio {
 				hql="from Pedido comprobante where comprobante.nro like :numero order by comprobante.nro desc";
 			}
 			
+			if (comprobante.isProtocolo()) {
+				hql="from Protocolo comprobante where comprobante.nro like :numero order by comprobante.nro desc";
+			}
+
 			if (hql.isEmpty()) {
 				throw new JakartaException("No es posible determinar el tipo de comprobante.");
 			}

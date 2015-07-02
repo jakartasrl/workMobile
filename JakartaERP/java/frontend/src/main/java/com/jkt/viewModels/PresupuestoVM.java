@@ -153,7 +153,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		cargarPresupuestoDesdeCotizacion(ovRecuperado);
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
-		this.aPartirDeCotizacion=true;
+//		this.aPartirDeCotizacion=true;
 	}
 	
 	private void cargarPresupuestoDesdeCotizacion(PresupuestoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException {
@@ -310,10 +310,10 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		}
 		
 		this.idCotizacion=this.comprobanteOV.getIdCotizacion();
-		if (this.idCotizacion!=0L) {
-			this.aPartirDeCotizacion=true;
-		}else{
+		if (this.idCotizacion==null) {
 			this.aPartirDeCotizacion=false;
+		}else{
+			this.aPartirDeCotizacion=true;
 		}
 		
 	}

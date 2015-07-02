@@ -18,17 +18,16 @@
 
 		<listhead style="heigth:10px;" >
 		
-			<listheader width="115px" label="Tarea"/>
+			<listheader width="110px" label="Tarea"/>
 			<listheader width="250px" label="Descripción"/>
 			<listheader width="250px" label="Comentario"/>
 			<listheader width="110px" label="Fecha Limite"/>
 			<listheader width="110px" label="Fecha Cumplida"/>
 			<listheader width="110px" label="Ultimo Prec."/>
-			<listheader width="50px" label="Dias"/>
+			<listheader width="40px" label="Dias"/>
 			<listheader width="110px" label="Sector"/>
 			<listheader width="130px" label="Estado"/>
-<!-- 			<listheader width="110px" label="Cumplimiento"/> -->
-<!-- 			<listheader width="110px" label="Fecha Lim."/> -->
+			<listheader width="50px" label="Comenteario"/>
 			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
@@ -41,28 +40,27 @@
 					<button label="..." onClick="@command('openHelper', clase='tarea', ov=each.tarea)" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }" />
 				</listcell>
 
-				<listcell >
+				<listcell>
 					<textbox width="100%" value="@bind(each.tarea.descripcion)" readonly="true"/>
 				</listcell>
 
-				<listcell >
+				<listcell>
 					<textbox width="100%" value="@bind(each.descripcionAbreviada)" readonly="${ each.idEstado eq 3 or each.idEstado eq 4 }"/>
 				</listcell>
 
-
-				<listcell >
+				<listcell>
 					<datebox width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" disabled="${ each.idEstado eq 3 or each.idEstado eq 4 }"/>
 				</listcell>
 
-				<listcell >
+				<listcell>
 					<datebox width="99%" value="@bind(each.fechaCumplimiento)" constraint="no empty" format="dd/MM/yyyy" disabled="true" />
 				</listcell>
 
-				<listcell >
+				<listcell>
 					<datebox width="99%" value="@bind(each.fechaUltimoPrecedente)" constraint="no empty" format="dd/MM/yyyy" disabled="true" />
 				</listcell>
 
-				<listcell >
+				<listcell>
 					<intbox width="100%" value="@bind(each.duracion)" sclass="importe" constraint="no empty" readonly="${ each.idEstado eq 3 or each.idEstado eq 4 }" />
 				</listcell>
 
@@ -74,11 +72,15 @@
 					</combobox>
 				</listcell>
 
-				<listcell >
+				<listcell>
 					<textbox width="100%" readonly="true" value="@bind(each.estado.descripcion)" sclass="importe" constraint="no empty" style="text-align:left"/>
 				</listcell>
 
-				<listcell >
+				<listcell>
+					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/detalle.png" label="" onClick="@command('modificarComentarioItem', tarea=each )" />
+				</listcell>
+
+				<listcell>
 					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarTarea', tarea=each )" />
 				</listcell>
 				

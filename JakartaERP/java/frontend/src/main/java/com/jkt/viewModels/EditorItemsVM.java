@@ -15,36 +15,47 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.jkt.excepcion.JakartaException;
+import com.jkt.operaciones.AgregarEmpresasAlUsuario;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.ItemsOV;
+import com.jkt.ov.TareaAgendaOV;
 
 @Data
 public class EditorItemsVM {
 	
 	private List<ItemsOV> items;
-//	private List<ItemsOV> itemsArticulos;
+	private Boolean agregacion;
 	
 	private List<ItemsOV> todosLosItems=new ArrayList<ItemsOV>();
 	
 	private PedidoVM pedidoVM;
 	private DescriptibleOV tarea;
+	private TareaAgendaOV tareaCompleta;
 	
 	@Init
 	public void init(	@ExecutionArgParam("items") List<ItemsOV> items,
-//						@ExecutionArgParam("itemsArticulos") List<ItemsOV> itemsArticulos,
 						@ExecutionArgParam("vm") PedidoVM vm,
-						@ExecutionArgParam("tarea") DescriptibleOV tarea){
-		this.items = items;
-//		this.itemsArticulos = itemsArticulos;
-		this.tarea = tarea;
-		this.pedidoVM = vm;
+						@ExecutionArgParam("tarea") DescriptibleOV tarea,
+						@ExecutionArgParam("tareaCompleta") TareaAgendaOV tareaCompleta,
+						@ExecutionArgParam("agregacion") Boolean agregacion
+						){
 		
-		for (ItemsOV itemsOV : items) {
-			itemsOV.setDescripcion(StringUtils.EMPTY);
+		this.agregacion = agregacion;
+		
+		if(agregacion){
+			this.items = items;
+			this.tarea = tarea;
+			this.pedidoVM = vm;
+			
+			for (ItemsOV itemsOV : items) {
+				itemsOV.setDescripcion(StringUtils.EMPTY);
+			}
+			
+			this.todosLosItems.addAll(items);
+		}else{
+			this.tareaCompleta = tareaCompleta;
 		}
 		
-//		this.todosLosItems.addAll(itemsArticulos);
-		this.todosLosItems.addAll(items);
 	}
 	
 	@Command
@@ -54,21 +65,27 @@ public class EditorItemsVM {
 
 	@Command
 	public void aceptar(@BindingParam("window") Window w) throws IllegalAccessException, InvocationTargetException, JakartaException{
-		for (ItemsOV itemsOV : todosLosItems) {
-			
-			if (itemsOV.getReferencia().isEmpty()) {
-				Messagebox.show("Complete la referencia de todos los items");
-				return;
+		
+		if(this.agregacion){
+			for (ItemsOV itemsOV : todosLosItems) {
+				
+				if (itemsOV.getReferencia().isEmpty()) {
+					Messagebox.show("Complete la referencia de todos los items");
+					return;
+				}
+	
+				if (itemsOV.getDescripcionAbreviada().isEmpty()) {
+					Messagebox.show("Complete la descripción (abreviada) de todos los items");
+					return;
+				}
+				
 			}
-
-			if (itemsOV.getDescripcionAbreviada().isEmpty()) {
-				Messagebox.show("Complete la descripción (abreviada) de todos los items");
-				return;
-			}
 			
+			pedidoVM.actualizarTareasDesdeHelpExterno(todosLosItems, tarea);
+		}else{
+			//No Hacer Nada!
 		}
 		
-		pedidoVM.actualizarTareasDesdeHelpExterno(todosLosItems, tarea);
 		w.detach();
 	}
 	

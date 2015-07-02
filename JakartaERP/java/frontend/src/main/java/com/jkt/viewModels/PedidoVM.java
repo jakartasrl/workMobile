@@ -363,7 +363,11 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	
 	private void cargarDesdeOV(PedidoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException{
 		this.vendedorOV = Operaciones.recuperarObjetoDescriptible("vendedor",ovRecuperado.getIdVendedor());
-		this.representanteOV = Operaciones.recuperarObjetoDescriptible("representante",ovRecuperado.getIdRepresentante());
+		
+		if(ovRecuperado.getIdRepresentante()!=null){
+			this.representanteOV = Operaciones.recuperarObjetoDescriptible("representante",ovRecuperado.getIdRepresentante());
+		}
+		
 		this.lPreciosOV =  Operaciones.recuperarObjetoDescriptible("listaPrecios",ovRecuperado.getIdListaPrecio());
 		this.clienteOV =  Operaciones.recuperarObjetoDescriptible("clientes",ovRecuperado.getIdCliente());
 		
@@ -743,12 +747,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 					itemsOV.getPlantilla().setDescripcion("Facturar producto : " + itemsOV.getProductoOV().getCodigo() + " " + itemsOV.getProductoOV().getDescripcion() );
 				}
 				
-				for (ItemsOV itemsOV : this.items) {
-					itemsOV.getPlantilla().setCampoAdicional1(Jsoup.parse(itemsOV.getPlantilla().getCampoAdicional1()).text());
-//					itemsOV.getPlantilla().setDescripcion(Jsoup.parse(itemsOV.getPlantilla().getDescripcion()).text());
-				}
-				
 				parametros.put("items", this.items);
+				parametros.put("agregacion", true);
 				
 				Window window = (Window) Executions.createComponents("/pantallas/pedido/editorItems.zul", null, parametros);
 				window.doModal();
@@ -903,5 +903,14 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.nuevo();
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	} 
+	
+	@Command
+	public void modificarComentarioItem(@BindingParam("tarea") TareaAgendaOV tarea){
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("tareaCompleta", tarea);
+		parametros.put("agregacion", false);
+		Window window = (Window) Executions.createComponents("/pantallas/pedido/editorItem.zul", null, parametros);
+		window.doModal();
+	}
 
 }
