@@ -1,11 +1,11 @@
 package com.jkt.presupuesto.dominio;
 
+import lombok.Data;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.jkt.dominio.Actividad;
 import com.jkt.dominio.Descriptible;
-import com.jkt.erp.varios.DomicilioEntrega;
-import com.jkt.varios.dominio.CondPagoDet;
 
 /**
  * Esta clase representa una nota que puede ser adjunta a un presupuesto, un pedido, en definitiva a un comprobante, o entidades que as� lo precisen.
@@ -13,9 +13,12 @@ import com.jkt.varios.dominio.CondPagoDet;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Nota extends Descriptible {
 	
 	private Actividad actividad;
+	
+	private Actividad subActividad;
 	
 	private String adicional=StringUtils.EMPTY;
 
@@ -26,23 +29,6 @@ public class Nota extends Descriptible {
 		return super.getDescripcion();
 	}
 	
-	public Actividad getActividad() {
-		return actividad;
-	}
-
-
-	public void setActividad(Actividad actividad) {
-		this.actividad = actividad;
-	}
-
-
-	public String getAdicional() {
-		return adicional;
-	}
-
-	public void setAdicional(String adicional) {
-		this.adicional = adicional;
-	}
 
 
 	/*

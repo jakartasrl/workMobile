@@ -17,6 +17,7 @@
 		<property name="activo" column="ACTIVO" type="boolean" />
 
 		<many-to-one name="actividad" class="com.jkt.dominio.Actividad" cascade="none" column="ACTIVIDAD_ID"/>
+		<many-to-one name="subActividad" class="com.jkt.dominio.Actividad" cascade="none" column="SUB_ACTIVIDAD_ID"/>
 
 	</class>
 	

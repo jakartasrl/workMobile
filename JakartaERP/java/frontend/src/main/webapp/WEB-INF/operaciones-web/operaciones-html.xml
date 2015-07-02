@@ -408,6 +408,7 @@
 			<campoSalida target="descripcion" value="descripcion" />
 			<campoSalida target="adicional" value="adicional" />
 			<campoSalida target="actividad.codigo" value="codigoActividad" />
+			<campoSalida target="subActividad.codigo" value="codigoSubActividad" />
 	
 		</output>
 

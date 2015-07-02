@@ -135,24 +135,20 @@ public abstract class ComprobanteVM extends ViewModel {
 		int nroItem = 1;
 		for (ItemsOV itemActual : this.items) {
 
-			if (!validarDescriptible(itemActual.getTipoVenta(),
-					"Complete el tipo de venta del item " + nroItem)) {
+			if (!validarDescriptible(itemActual.getTipoVenta(), "Complete el tipo de venta del item " + nroItem)) {
 				return false;
 			}
 
-			if (itemActual.getReferencia() == null
-					|| itemActual.getReferencia().isEmpty()) {
+			if (itemActual.getReferencia() == null || itemActual.getReferencia().isEmpty()) {
 				Messagebox.show("Complete la referencia del item " + nroItem);
 				return false;
 			}
 
-			if (!validarDescriptible(itemActual.getMoneda(),
-					"Complete la moneda del item " + nroItem)) {
+			if (!validarDescriptible(itemActual.getMoneda(), "Complete la moneda del item " + nroItem)) {
 				return false;
 			}
 
-			if (itemActual.getPlantilla().getDescripcion() == null
-					|| itemActual.getPlantilla().getDescripcion().isEmpty()) {
+			if (itemActual.getPlantilla().getDescripcion() == null || itemActual.getPlantilla().getDescripcion().isEmpty()) {
 				Messagebox.show("Complete la descripción del item " + nroItem);
 				return false;
 			}
@@ -162,9 +158,7 @@ public abstract class ComprobanteVM extends ViewModel {
 
 		nroItem = 1;
 		for (ItemsOV itemActual : this.lDeterminacionesQuimicas) {
-			if (!validarDescriptible(itemActual.getMoneda(),
-					"Complete la moneda de la determinación quimica número "
-							+ nroItem)) {
+			if (!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la determinación quimica número " + nroItem)) {
 				return false;
 			}
 			nroItem++;
@@ -172,9 +166,7 @@ public abstract class ComprobanteVM extends ViewModel {
 
 		nroItem = 1;
 		for (ItemsOV itemActual : this.lDeterminacionesElectricas) {
-			if (!validarDescriptible(itemActual.getMoneda(),
-					"Complete la moneda de la determinación eléctrica número "
-							+ nroItem)) {
+			if (!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la determinación eléctrica número " + nroItem)) {
 				return false;
 			}
 			nroItem++;
@@ -183,44 +175,33 @@ public abstract class ComprobanteVM extends ViewModel {
 		nroItem = 1;
 		for (ItemsOV itemActual : this.itemsArticulos) {
 
-			if (!validarDescriptible(itemActual.getMoneda(),
-					"Complete la moneda de la solapa de materiales, item número "
-							+ nroItem)) {
+			if (!validarDescriptible(itemActual.getMoneda(), "Complete la moneda de la solapa de materiales, item número " + nroItem)) {
 				return false;
 			}
 
-			if (!validarDescriptible(itemActual.getProductoOV(),
-					"Complete el producto de la solapa de materiales, item número "
-							+ nroItem)) {
+			if (!validarDescriptible(itemActual.getProductoOV(), "Complete el producto de la solapa de materiales, item número " + nroItem)) {
 				return false;
 			}
 
 			nroItem++;
 		}
 
-		if (!validarDescriptible(vendedorOV,
-				"Complete el vendedor en la solapa 'Dato Comerciales'.")) {
+		if (!validarDescriptible(vendedorOV,"Complete el vendedor en la solapa 'Dato Comerciales'.")) {
 			return false;
 		}
 
-		if (!validarDescriptible(representanteOV,
-				"Complete el representante en la solapa 'Dato Comerciales'.")) {
-			return false;
+		if (representanteOV.getCodigo() == null || representanteOV.getCodigo().isEmpty()) {
+			representanteOV.setId(-1);
 		}
-
-		if (!validarDescriptible(
-				contactoSeleccionado,
-				"Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")) {
+		
+		if (!validarDescriptible(contactoSeleccionado,"Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")) {
 			return false;
 		}
 
 		for (ArchivoOV archivoOV : this.archivos) {
-			if (archivoOV.getFileName() != null
-					&& !archivoOV.getFileName().isEmpty()) {
-				if (archivoOV.getDescripcion() == null
-						|| archivoOV.getDescripcion().isEmpty()) {
-					Messagebox
-							.show("Complete las descripciones de los archivos cargados por favor.");
+			if (archivoOV.getFileName() != null && !archivoOV.getFileName().isEmpty()) {
+				if (archivoOV.getDescripcion() == null || archivoOV.getDescripcion().isEmpty()) {
+					Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
 					return false;
 				}
 			}
@@ -230,8 +211,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	protected boolean validarDescriptible(DescriptibleOV desc, String mensaje) {
-		if (desc == null || desc.getCodigo() == null
-				|| desc.getCodigo().isEmpty()) {
+		if (desc == null || desc.getCodigo() == null || desc.getCodigo().isEmpty()) {
 			Messagebox.show(mensaje);
 			return false;
 		}
@@ -274,8 +254,7 @@ public abstract class ComprobanteVM extends ViewModel {
 		ArchivoOV archivoOV = new ArchivoOV();
 
 		archivoOV.setIdUsuario(this.userOV.getId());
-		archivoOV.setUsuario(this.userOV.getName() + " "
-				+ this.userOV.getLastName());
+		archivoOV.setUsuario(this.userOV.getName() + " " + this.userOV.getLastName());
 
 		this.archivos.add(0, archivoOV);
 	}
@@ -311,8 +290,7 @@ public abstract class ComprobanteVM extends ViewModel {
 		containerOV.setString1(parametroLaboratorio);
 		containerOV.setString2(String.valueOf(idListaPrecio));
 
-		ListItemsOV list = (ListItemsOV) Operaciones.ejecutar(
-				"TraerDeterminacionConPrecio", containerOV, ListItemsOV.class);
+		ListItemsOV list = (ListItemsOV) Operaciones.ejecutar("TraerDeterminacionConPrecio", containerOV, ListItemsOV.class);
 
 		List list2 = list.getList();
 
@@ -338,8 +316,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	 * </p>
 	 */
 	public void actualizarCampoSucursal() {
-		String text = this.clienteOV.getDescripcion().concat("/")
-				.concat(this.sucursalOV.getDescripcion());
+		String text = this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
 		this.sucursalOV.setDescripcionCompleta(text);
 
 		actualizarContactosReferencia();
@@ -352,15 +329,12 @@ public abstract class ComprobanteVM extends ViewModel {
 		ContainerOV containerOV = new ContainerOV();
 		containerOV.setString1(String.valueOf(this.sucursalOV.getId()));
 
-		this.contactos = (ListDescriptibleOV) Operaciones.ejecutar(
-				"RecuperarContactosDeSucursal", containerOV,
-				ListDescriptibleOV.class);
+		this.contactos = (ListDescriptibleOV) Operaciones.ejecutar("RecuperarContactosDeSucursal", containerOV, ListDescriptibleOV.class);
 
 		if (this.contactos.isEmpty()) {
 			log.warn("La sucursal no tiene contactos de referencias. Esto puede ocacioner errores.");
 		} else {
-			this.contactoSeleccionado = (DescriptibleOV) this.contactos
-					.getList().get(0);
+			this.contactoSeleccionado = (DescriptibleOV) this.contactos.getList().get(0);
 		}
 
 	}
@@ -447,8 +421,7 @@ public abstract class ComprobanteVM extends ViewModel {
 		if (media.isBinary()) {
 			Files.copy(new File(generarRuta(media)), media.getStreamData());
 		} else {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(
-					generarRuta(media)));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(generarRuta(media)));
 			Files.copy(writer, media.getReaderData());
 		}
 
@@ -464,28 +437,22 @@ public abstract class ComprobanteVM extends ViewModel {
 			@BindingParam("archivoActual") ArchivoOV archivoActual)
 			throws IOException {
 
-		if (archivoActual.getFileName() == null
-				|| archivoActual.getFileName().isEmpty()) {
+		if (archivoActual.getFileName() == null || archivoActual.getFileName().isEmpty()) {
 			return;
 		}
 
-		File f = new File(archivoActual.getFileURL()
-				+ archivoActual.getFileName());
+		File f = new File(archivoActual.getFileURL() + archivoActual.getFileName());
 		byte[] buffer = new byte[(int) f.length()];
 		FileInputStream fs = new FileInputStream(f);
 		fs.read(buffer);
 		fs.close();
 		ByteArrayInputStream is = new ByteArrayInputStream(buffer);
-		AMedia fileContent = new AMedia(archivoActual.getFileName(),
-				archivoActual.getFormat(), archivoActual.getContentType(), is);
+		AMedia fileContent = new AMedia(archivoActual.getFileName(), archivoActual.getFormat(), archivoActual.getContentType(), is);
 
-		if (fileContent.getFormat().equals("jpeg")
-				|| fileContent.getFormat().equals("png")
-				|| fileContent.getFormat().equals("pdf")) {
+		if (fileContent.getFormat().equals("jpeg") || fileContent.getFormat().equals("png") || fileContent.getFormat().equals("pdf")) {
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
 			hashMap.put("media", fileContent);
-			Window window = (Window) Executions.createComponents(
-					"/pantallas/visorArchivos.zul", null, hashMap);
+			Window window = (Window) Executions.createComponents("/pantallas/visorArchivos.zul", null, hashMap);
 			window.doModal();
 		} else {
 			Filedownload.save(fileContent);
@@ -502,24 +469,46 @@ public abstract class ComprobanteVM extends ViewModel {
 		NodoNotas root = new NodoNotas(new NotaOV(), true);
 
 		Map<String, NodoNotas> actividades = new HashMap<String, NodoNotas>();
+		Map<String, Map<String, NodoNotas>> subActividades = new HashMap<String, Map<String, NodoNotas>>();
 
 		for (NotaOV notaOV : this.lNotas) {
 
 			String actividad = notaOV.getCodigoActividad();
-			NodoNotas actividadNodo;
+			NodoNotas nodoLevelUno;
 
-			if (actividades.get(actividad) == null) {
+			if (actividades.get(actividad) == null) { //Si ya existe el primer nivel...
+				
+				//Creo el nodo actual
 				NotaOV nuevoNodo = new NotaOV();
 				nuevoNodo.setCodigo(actividad);
-				actividadNodo = new NodoNotas(nuevoNodo, true);
-				actividades.put(actividad, actividadNodo);
+				nodoLevelUno = new NodoNotas(nuevoNodo, true);
+				
+				//Pongo en el mapa la nueva actividad
+				actividades.put(actividad, nodoLevelUno);
+				
+				NotaOV nuevoSubNodo = new NotaOV();
+				nuevoSubNodo.setCodigo(notaOV.getCodigoSubActividad());
+				NodoNotas subNodo = new NodoNotas(nuevoSubNodo, true);
+				
+				nodoLevelUno.add(subNodo);
+				
+				//cargo en el mapa la referencia a CODPRINCIPAL- > (SUBCODIGO, NODO) 
+				Map<String,NodoNotas> subMapa = new HashMap<String, NodoNotas>();
+				subMapa.put(notaOV.getCodigoSubActividad(), subNodo);
+				subActividades.put(notaOV.getCodigoActividad(),subMapa);
+					
+				//tercer nivel
+				NodoNotas child = new NodoNotas(notaOV);
+				subNodo.add(child);
+				
 			} else {
-				actividadNodo = actividades.get(actividad);
+				nodoLevelUno = actividades.get(actividad);
+				NodoNotas subNodo = subActividades.get(notaOV.getCodigoActividad()).get(notaOV.getCodigoSubActividad());
+				NodoNotas child = new NodoNotas(notaOV);
+				subNodo.add(child);
 			}
 
-			NodoNotas child = new NodoNotas(notaOV);
-			actividadNodo.add(child);
-
+//			actividadNodo.add(child);
 		}
 
 		for (NodoNotas actividadActual : actividades.values()) {

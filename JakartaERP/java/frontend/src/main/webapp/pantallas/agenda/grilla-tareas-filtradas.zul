@@ -7,7 +7,7 @@
 					<auxheader label="Lista de Tareas" colspan="9" />
 				</auxhead>
 				        
-				<columns >
+				<columns>
 					
 					<column width="100px" label="Pedido" sort="auto(idPedido)" if="${vm.vistaPorSector}" />
 					<column width="200px" label="Cliente" if="${vm.vistaPorSector}" />
@@ -17,6 +17,10 @@
 					<column width="500px" label="Comentario" sort="auto(descripcionAbreviada)" />
 					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaLimite)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
+
+					<column width="50px" label="Inicio" align="center" style="text-align:center"  if="${vm.vistaPorPedido}" /> 
+					<column width="50px" label="Fin" align="center" style="text-align:center"  if="${vm.vistaPorPedido}" /> 
+
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
 					<column width="100px" label="Cambiar Estado" align="center" style="text-align:center" />
 					<column width="100px" label="Deshacer" align="center" style="text-align:center" />
@@ -32,7 +36,8 @@
 							<label value="@bind(each.descripcionCliente)" if="${vm.vistaPorSector}"/>
 							<label value="@bind(each.sector.descripcion)" maxlength="15" if="${vm.vistaPorPedido}"/>
 							<label value="@bind(each.descripcionTarea)" width="100%" if="${vm.vistaPorPedido}"/>
-							<label value="@bind(each.descripcionAbreviada)" width="100%"/>
+							<label value="@bind(each.descripcionAbreviada)" width="100%" if="${vm.vistaPorPedido}" />
+							<label value="@bind(each.descripcionTarea.concat(' ||| ').concat(each.descripcionAbreviada))" width="100%" unless="${vm.vistaPorPedido}"/>
 							<datebox disabled="true" width="99%" value="@bind(each.fechaLimite)" constraint="no empty" format="dd/MM/yyyy" />
 						
 							<cell>
@@ -41,6 +46,15 @@
 								<image src="/pantallas/icons/play.png" tooltiptext="En Ejecución" if="${each.idEstado eq 3 }"/>
 								<image src="/pantallas/icons/ok.png" tooltiptext="Completa" if="${each.idEstado eq 4 }"/>
 							</cell>
+							
+							<cell  if="${vm.vistaPorPedido}">
+								<datebox width="99%" value="@bind(each.fechaLimite)" format="dd/MM/yyyy" disabled="true"/>
+							</cell>
+
+							<cell  if="${vm.vistaPorPedido}">
+								<datebox width="99%" value="@bind(each.fechaCumplimiento)" format="dd/MM/yyyy" disabled="true"/>
+							</cell>
+							
 							
 							<cell>
 								<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/detalle.png" label="" onClick="@command('verDetalle', elemento=each )" />

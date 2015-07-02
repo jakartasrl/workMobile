@@ -4,7 +4,7 @@
 		<listbox 
 			model="@bind(vm.todosLosItems)" 
 			emptyMessage="No existen items disponible." mold="paging" pageSize="1"
-			hflex="1" vflex="1" 
+			hflex="1" 
 		>
 		
 		<auxhead>
@@ -31,7 +31,8 @@
 								<label value="Descripción Completa:" />
 							</hlayout>
 							
-							<textbox readonly="false" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.campoAdicional1)" />
+<!-- 							<textbox readonly="false" constraint="no empty" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;" multiline="true" rows="15" value="@bind(each.plantilla.campoAdicional1)" /> -->
+							<ckeditor value="@bind(each.plantilla.campoAdicional1)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" />
 
 					</groupbox>
 
