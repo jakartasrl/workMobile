@@ -25,8 +25,10 @@ import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Filedownload;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -221,7 +223,10 @@ public abstract class ComprobanteVM extends ViewModel {
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento() {
+//		this.items.add(new ItemsOV());
+//		l.setActivePage(this.items.size()-1);
 		this.items.add(0, new ItemsOV());
+//		Clients.evalJavaScript("irAlFinal();");
 	}
 	
 	@Command
