@@ -1957,6 +1957,23 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	
+	<operacion name="AprobarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
+		
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoAprobacion" />
+			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" /> <!-- CAMPO TEMPORAL -->
+			<campoEntrada propertyOV="fechaAprobacion" 				metodo="setFechaHoraAprobacion" /> 
+			<campoEntrada propertyOV="estado"		 				metodo="setEstado" /> 
+						
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
 	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
 	
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
@@ -1966,6 +1983,7 @@
 			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
 			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
+			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" />
 			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
 			<campoEntrada propertyOV="ordenTrabajo" 				metodo="setOrdenTrabajo" />
 			
@@ -2023,6 +2041,7 @@
 				<campoSalida value="descMetodo" 		target="descMetodo" />
 				
 				<campoSalida value="variables" 				target="variables" >
+					<campoSalida value="codigo"		 			target="variable" /><!-- 					es para poder enviar luego el codigo correcto a la operacion -->
 					<campoSalida value="descripcion" 			target="variable" />
 					<campoSalida value="valorInput" 			target="valor" />
 					<campoSalida value="expresionCadena"  		target="expresion" />

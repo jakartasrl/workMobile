@@ -60,6 +60,7 @@ public class ServiceRepository implements IServiceRepository {
 	
 	//FIXME USAR LA CLASE DE CONSTANTES DE TIPO ACA, TIPOSDEDATO
 	public static final String INTEGER = "integer";
+	public static final String LONG = "long";
 	public static final String STRING = "string";
 	public static final String BOOLEAN = "boolean";
 	public static final String DATE = "date";
@@ -303,6 +304,8 @@ public class ServiceRepository implements IServiceRepository {
 		if (BOOLEAN.equals(type)) {
 			return new Boolean(value.toLowerCase());
 		}else if (INTEGER.equals(type)) {
+			return Integer.valueOf(value);
+		}else if (LONG.equals(type)) {
 			return Long.valueOf(value);
 		}else if (STRING.equals(type)) {
 			return value;

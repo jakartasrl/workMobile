@@ -1,5 +1,10 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
+		<hlayout>
+			<button width="20px" height="20px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarDeterminacion')" />
+			<label style="margin-left:5px;" value="Agregar Determinación"></label>
+		</hlayout>
+
 		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:15px;" width="100%" >
 		
 			<listhead>
@@ -33,7 +38,7 @@
 														<hlayout>
 															<label value="Metodo : " />
 															<textbox value="@bind(determinacion.metodoUtilizado.metodo)" width="100%" readonly="true"/>
-															<button style="margin-bottom:2px;margin-left:3px;" label="Calcular Expresion" onClick="@command('calcularExpresion', determinacion=determinacion, metodo=determinacion.metodoUtilizado)" />
+															<button style="margin-bottom:2px;margin-left:3px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)" />
 														</hlayout>
 														
 <!-- 														comienza resultados -->

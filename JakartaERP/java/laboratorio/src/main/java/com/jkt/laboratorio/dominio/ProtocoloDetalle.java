@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.PersistentEntity;
@@ -17,6 +18,7 @@ import com.jkt.dominio.PersistentEntity;
  * <p>Control de humedad</p>
  */
 @Data
+@EqualsAndHashCode(callSuper=false, of={"id"})
 public class ProtocoloDetalle extends PersistentEntity implements IDetalle {
 
 	private Protocolo protocolo;

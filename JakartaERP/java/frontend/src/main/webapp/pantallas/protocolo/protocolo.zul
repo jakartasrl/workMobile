@@ -56,7 +56,9 @@
 								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" />
 							</hlayout>
 														
-							<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" />
+							<cell colspan="2">
+								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" />
+							</cell>
 						</row>
 
 						<row>
@@ -84,6 +86,8 @@
 			    	</tabs>
 			    	
 			    	<tabpanels>
+			    			        
+			    			        
 			    			        	
 			        	<tabpanel>
 							<include id="determinacionesContent" hflex="1" src="/pantallas/protocolo/protocolo-determinaciones.zul" viewModel="${vm}"/>

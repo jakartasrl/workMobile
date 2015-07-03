@@ -2,6 +2,7 @@ package com.jkt.viewModels;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,14 +16,22 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
+import com.jkt.laboratorio.dominio.Protocolo;
 import com.jkt.ov.ContainerOV;
+import com.jkt.ov.ContenedorFiltrosOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DeterminacionOV;
+import com.jkt.ov.FiltroOV;
+import com.jkt.ov.HeaderHelpGenericoOV;
 import com.jkt.ov.ItemsOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListPedidoOV;
 import com.jkt.ov.ListProtocoloOV;
 import com.jkt.ov.ListValorEsperadoOV;
@@ -31,8 +40,11 @@ import com.jkt.ov.MetodoOV;
 import com.jkt.ov.ParametroOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.ProtocoloOV;
+import com.jkt.ov.UserOV;
 import com.jkt.ov.ValorEsperadoOV;
 import com.jkt.ov.VariableOV;
+import com.jkt.service.ServiceRepository;
+import com.jkt.view.ObjectView;
 
 @Data
 public class ProtocoloVM extends ViewModel implements IBasicOperations {
@@ -41,7 +53,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	private DescriptibleOV clienteOV = new DescriptibleOV();
 	private DescriptibleOV equipoOV = new DescriptibleOV();
 	private PedidoOV pedidoOV = new PedidoOV();
-	
+
 	//Para manejar diferenciar los laboratorios quimicos y electricos
 	private long idLaboratorio;
 	private String laboratorioParametroKey;
@@ -49,11 +61,17 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	@Init(superclass=true)
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
-	public void init(@BindingParam("l") String laboratorio){
+	public void init(@BindingParam("l") String laboratorio, @BindingParam("modoAprobacion") Boolean modoAprobacion){
 		
 		if(isCargadoDesdeSession()){return;}
+
+		this.modoAprobacion=modoAprobacion;
 		
-		this.setTitulo("Protocolo");
+		if(this.modoAprobacion){
+			this.setTitulo("Aprobación de Protocolos");
+		}else{
+			this.setTitulo("Administración de Protocolos");
+		}
 		
 		this.protocoloOV = new ProtocoloOV();
 		this.clienteOV = new DescriptibleOV();
@@ -76,34 +94,73 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@Command
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV"})
 	public void guardar() throws JakartaException {
+		
+		Session sess = Sessions.getCurrent();
+		  
+		UserOV userOV = (UserOV) sess.getAttribute("userCredential");
+		this.protocoloOV.setIdUsuario(userOV.getId());
+		
+		if(this.modoAprobacion){
+			this.protocoloOV.setComentarioDiagnostico("APROBADO POR "+userOV.getName()+" "+userOV.getLastName());
+			this.protocoloOV.setFechaAprobacion(new Date());
+			this.protocoloOV.setEstado(Protocolo.Estado.APROBADO.getId());
+			Operaciones.ejecutar("AprobarProtocolo", this.protocoloOV );
+			Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 
-		for (DeterminacionOV determinacionOV : this.protocoloOV.getDeterminaciones()) {
-			determinacionOV.setId(0L);
-			MetodoOV metodoOV = determinacionOV.getMetodoUtilizado();
-			determinacionOV.setVariables(metodoOV.getVariables());
+		}else{
 			
-			determinacionOV.setDescMetodo(metodoOV.getMetodo());
+//			if(this.pedidoOV.getId()==0L || this.protocoloOV.getOrdenTrabajo().isEmpty()){ //Cuando existan las entidades correspondientes, reemplazar cadena por OVs
+//				Messagebox.show("Ingrese un pedido u orden de trabajo.");
+//				return;
+//			}
 			
-			for (VariableOV variableOV : determinacionOV.getVariables()) {
-				 variableOV.setId(0L);
+			if(this.equipoOV.getId()==0L){
+				Messagebox.show("Ingrese un equipo.");
+				return;
 			}
 			
+			if(!this.validarCalculosExpresiones()){
+				return;
+			}
+	
+			for (DeterminacionOV determinacionOV : this.protocoloOV.getDeterminaciones()) {
+				determinacionOV.setId(0L);
+				MetodoOV metodoOV = determinacionOV.getMetodoUtilizado();
+				determinacionOV.setVariables(metodoOV.getVariables());
+				
+				determinacionOV.setDescMetodo(metodoOV.getMetodo());
+				
+				for (VariableOV variableOV : determinacionOV.getVariables()) {
+					 variableOV.setId(0L);
+				}
+				
+			}
+			
+			this.protocoloOV.setIdPedido(this.pedidoOV.getId());
+			this.protocoloOV.setIdEquipo(this.equipoOV.getId());
+			this.protocoloOV.setIdLab(this.idLaboratorio);
+			
+			Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV );
+			
+			Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 		}
 		
-		this.protocoloOV.setIdPedido(this.pedidoOV.getId());
-		this.protocoloOV.setIdEquipo(this.equipoOV.getId());
-		this.protocoloOV.setIdLab(this.idLaboratorio);
+	}
+
+	private boolean validarCalculosExpresiones() {
 		
-		Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV );
-		
-		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+		for (DeterminacionOV det : this.protocoloOV.getDeterminaciones()) {
+			if(!this.calcularExpresion(det.getMetodoUtilizado())){
+				return false;
+			}
+		}
+		return true;
 		
 	}
 
 	@Command
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV"})
 	public void nuevo() throws JakartaException {
-		this.init(this.laboratorioParametroKey);
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 
 	
@@ -112,7 +169,35 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@Override
 	@Command
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		openHelper("protocolo", "", this.protocoloDescriptible, "cargarProtocolo", "Protocolos", "Codigo", "Descripcion", false);
+
+		ContenedorFiltrosOV c=new ContenedorFiltrosOV();
+		c.setClase("protocolo");
+		
+		List<FiltroOV> filtros=new ArrayList<FiltroOV>();
+		
+		filtros.add(new FiltroOV("estado", String.valueOf(Protocolo.Estado.ESTADO_INICIAL.getId()), ServiceRepository.CONDICION_IGUAL, ServiceRepository.INTEGER));
+		filtros.add(new FiltroOV("laboratorio.id", String.valueOf(this.idLaboratorio), ServiceRepository.CONDICION_IGUAL, ServiceRepository.LONG));
+		filtros.add(new FiltroOV("activo", String.valueOf(true), ServiceRepository.CONDICION_IGUAL, ServiceRepository.BOOLEAN));
+		
+		c.setFiltros(filtros);
+		
+		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
+		List resultado = listDescriptible.getList();
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+
+		map.put("clase","protocolo");
+		map.put("coleccion",resultado);
+		map.put("conFiltro",false);
+		map.put("refresh", retrieveMethod());
+		map.put("result", this.protocoloDescriptible);
+		map.put("invoke","cargarProtocolo" );
+		map.put("vm", this);
+
+		
+		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
+		window.doModal();
+
 	}
 	
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
@@ -201,21 +286,27 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 			}
 		}
 		
+		this.protocoloOV.setDeterminaciones(new ArrayList<DeterminacionOV>());
 		for (Long idDeterminacionActual : listaIdsDeterminaciones) {
 			//buscar para cada uno, en la base, la determinacion con todos los datos.
 			
-			ContainerOV containerOVForDeterm = new ContainerOV();
-			containerOVForDeterm.setString1(String.valueOf(idDeterminacionActual));
-			containerOVForDeterm.setString2("Determinacion");
-			
-			DeterminacionOV det = (DeterminacionOV) Operaciones.ejecutar("TraerDeterminacion", containerOVForDeterm, DeterminacionOV.class);
-			
-			det = this.obtenerMetodosParaDeterminacion(det);
+			DeterminacionOV det = obtenerDeterminacion(idDeterminacionActual);
 			
 			this.protocoloOV.getDeterminaciones().add(det);
 			
 		}
+	
+	}
+
+	private DeterminacionOV obtenerDeterminacion(Long idDeterminacionActual) {
+		ContainerOV containerOVForDeterm = new ContainerOV();
+		containerOVForDeterm.setString1(String.valueOf(idDeterminacionActual));
+		containerOVForDeterm.setString2("Determinacion");
 		
+		DeterminacionOV det = (DeterminacionOV) Operaciones.ejecutar("TraerDeterminacion", containerOVForDeterm, DeterminacionOV.class);
+		
+		det = this.obtenerMetodosParaDeterminacion(det);
+		return det;
 	}
 
 	private DeterminacionOV obtenerMetodosParaDeterminacion(DeterminacionOV det) {
@@ -273,9 +364,28 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		return det;
 	}
 	
+	
+	DescriptibleOV determinacionOV= new DescriptibleOV();
+	private Boolean modoAprobacion;
+	
 	@Command
+	public synchronized void agregarDeterminacion() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
+		openComplexHelper("determinacion", String.valueOf(idLaboratorio), determinacionOV, "traerDeterminacion", "Determinaciones", "Código", "Descripción",false, "","");
+	}
+	
+	public void traerDeterminacion(){
+		DeterminacionOV det = obtenerDeterminacion(determinacionOV.getId());
+		this.protocoloOV.getDeterminaciones().add(det);
+		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+	}
+	
+	@Command("calcularExpresion")
 	@NotifyChange("protocoloOV")
-	public void calcularExpresion(@BindingParam("determinacion") DeterminacionOV determinacionOV, @BindingParam("metodo") MetodoOV metodoOV){
+	public void calcularExpresionDesdeVista(@BindingParam("metodo") MetodoOV metodoOV) {
+		this.calcularExpresion(metodoOV);
+	}
+		
+	private boolean calcularExpresion(MetodoOV metodoOV) {
 		
 		metodoOV.setId(0);
 		
@@ -301,9 +411,11 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 			}
 			
 		} catch(Exception e) {
-			Messagebox.show("Verifique la expresión por favor.");
+			Messagebox.show("Verifique la expresión del metodo "+ metodoOV.getMetodo() +" por favor.");
+			return false;
 		}
 		
+		return true;
 	}
 	
 }
