@@ -29,7 +29,6 @@ import com.jkt.ov.ContenedorFiltrosOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DeterminacionOV;
 import com.jkt.ov.FiltroOV;
-import com.jkt.ov.HeaderHelpGenericoOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListPedidoOV;
@@ -44,7 +43,6 @@ import com.jkt.ov.UserOV;
 import com.jkt.ov.ValorEsperadoOV;
 import com.jkt.ov.VariableOV;
 import com.jkt.service.ServiceRepository;
-import com.jkt.view.ObjectView;
 
 @Data
 public class ProtocoloVM extends ViewModel implements IBasicOperations {

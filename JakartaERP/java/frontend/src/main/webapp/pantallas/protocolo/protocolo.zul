@@ -64,6 +64,8 @@
 						<row>
 							<label value="Fecha de muestra : " />
 							<datebox id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
+							<label value="Fecha Aprobacion : " />
+							<datebox id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>	
 						</row>
 						
 					</rows>
