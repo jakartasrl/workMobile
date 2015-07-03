@@ -25,7 +25,9 @@
 		<elemento codigo="005" name="Determinaciones Quimicas" 		img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="green" link="pantallas/index/index-determinacion-q.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
 
 		<elemento codigo="006" name="Protocolo Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
-		<elemento codigo="007" name="Protocolo Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="007" name="Aprobar P.Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="008" name="Protocolo Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="009" name="Aprobar P.Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
 	</elemento>
 
 	<elemento codigo="010" name="Ventas" img="pantallas/img/widget_map.png" size="4x2" theme="red" type="menu_principal">

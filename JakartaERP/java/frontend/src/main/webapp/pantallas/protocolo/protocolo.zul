@@ -1,16 +1,14 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<vlayout>
-	
-		<panel sclass="panel-maestro" title="Datos Generales" style="overflow:hidden;padding:5px;" border="normal" width="55%">
+		
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="37%" >
 
 			<panelchildren>
 			
-				<grid style="border-style:none;" sizedByContent="true">
+				<grid width="auto" >
 
 					<columns>
-						<column width="120px"/>
-						<column width="120px"/>
 						<column width="120px"/>
 						<column width="120px"/>
 						<column width="120px"/>
@@ -35,7 +33,7 @@
 							<label value="Orden de Trabajo : " />
 							
 							<hlayout>
-								<textbox width="100%" value=""   />
+								<textbox width="100%" value="@bind(vm.protocoloOV.ordenTrabajo)" />
 <!-- 								<button label="..." /> -->
 							</hlayout>
 	
@@ -58,12 +56,16 @@
 								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" />
 							</hlayout>
 														
-							<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" />
+							<cell colspan="2">
+								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" />
+							</cell>
 						</row>
 
 						<row>
 							<label value="Fecha de muestra : " />
 							<datebox id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
+							<label value="Fecha Aprobacion : " />
+							<datebox id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>	
 						</row>
 						
 					</rows>
@@ -74,7 +76,7 @@
 			
 		</panel>
 		
-		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+		<panel style="margin-top:15px;" border="none" height="auto" width="43%">
 		
 			<panelchildren>
 			
@@ -86,6 +88,8 @@
 			    	</tabs>
 			    	
 			    	<tabpanels>
+			    			        
+			    			        
 			    			        	
 			        	<tabpanel>
 							<include id="determinacionesContent" hflex="1" src="/pantallas/protocolo/protocolo-determinaciones.zul" viewModel="${vm}"/>

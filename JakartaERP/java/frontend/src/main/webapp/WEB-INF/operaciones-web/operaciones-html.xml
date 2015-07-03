@@ -652,6 +652,10 @@
 				<campoSalida target="descripcion" 			value="descripcion" />
 				<campoSalida target="input" 				value="input" />
 				<campoSalida target="resultadoFinal" 		value="resultadoFinal" />
+				
+				<campoSalida target="valorInput" 			value="valorInput" />
+				<campoSalida target="resultadoExpresion" 	value="resultadoExpresion" />
+				
 			</campoSalida>
 			
 		</output>
@@ -1953,6 +1957,23 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	
+	<operacion name="AprobarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
+		
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoAprobacion" />
+			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" /> <!-- CAMPO TEMPORAL -->
+			<campoEntrada propertyOV="fechaAprobacion" 				metodo="setFechaHoraAprobacion" /> 
+			<campoEntrada propertyOV="estado"		 				metodo="setEstado" /> 
+						
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
 	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
 	
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
@@ -1962,7 +1983,9 @@
 			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
 			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
+			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" />
 			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
+			<campoEntrada propertyOV="ordenTrabajo" 				metodo="setOrdenTrabajo" />
 			
 			<campoEntrada propertyOV="codDiagnostico" 				metodo="setComentario" />
 			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" />
@@ -1970,16 +1993,17 @@
 			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
 			
 				<campoEntrada propertyOV="id" 						metodo="setId" />
-<!-- 				<campoEntrada propertyOV="descripcion" 				metodo="setDescripcion" /> -->
+				<campoEntrada propertyOV="descripcion" 				metodo="setDescDeterminacion" />
 				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
+				
+				<campoEntrada propertyOV="descMetodo" 				metodo="setDescMetodo" />
 				
 				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
 					<campoEntrada propertyOV="descripcion" 			metodo="setVariable" />
 					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
 					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
-<!-- 					<campoEntrada propertyOV="input" 				metodo="setInput" /> -->
-<!-- 					<campoEntrada propertyOV="valorInput" 			metodo="setInput" /> -->
-<!-- 					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setExpresionCadena" />						 -->
+					<campoEntrada propertyOV="input" 				metodo="setInput" />
+					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setResultadoExpresion" />						
 				</campoEntrada>
 			</campoEntrada>
 			
@@ -2004,12 +2028,27 @@
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
 			
-			<campoSalida value="comentario"		 			target="comentario" />
+			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
+			
+			<campoSalida value="codDiagnostico"		 		target="comentario" />
 			<campoSalida value="comentarioDiagnostico"		target="comentarioDiagnostico" />
 			
 			<campoSalida value="determinaciones"		target="detalles" >
 				<campoSalida value="id" 				target="id" />
-				<campoSalida value="comentario" 		target="comentario" />	
+				<campoSalida value="descripcion" 		target="descDeterminacion" />
+				<campoSalida value="comentario" 		target="comentario" />
+				
+				<campoSalida value="descMetodo" 		target="descMetodo" />
+				
+				<campoSalida value="variables" 				target="variables" >
+					<campoSalida value="codigo"		 			target="variable" /><!-- 					es para poder enviar luego el codigo correcto a la operacion -->
+					<campoSalida value="descripcion" 			target="variable" />
+					<campoSalida value="valorInput" 			target="valor" />
+					<campoSalida value="expresionCadena"  		target="expresion" />
+					<campoSalida value="input"  				target="input" />
+					<campoSalida value="resultadoExpresion"  	target="resultadoExpresion" />	
+				</campoSalida>
+					
 			</campoSalida>
 
 		</output>

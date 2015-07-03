@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import lombok.Data;
+import org.apache.commons.lang.StringUtils;
 
-import com.jkt.view.ObjectView;
+import lombok.Data;
 
 @Data
 public class ProtocoloOV extends DescriptibleOV {
@@ -20,8 +20,9 @@ public class ProtocoloOV extends DescriptibleOV {
 	private long idCliente;
 	private long idLab;
 	
-	private Date fechaHoraEmision = new Date() ;
-	private Date fechaHoraMuestra = new Date() ;
+	private Date fechaHoraEmision = new Date();
+	private Date fechaHoraMuestra = new Date();
+	private Date fechaAprobacion = new Date();
 	
 	private DescriptibleOV diagnostico = new DescriptibleOV();
 	private long idDiagnostico;
@@ -32,5 +33,10 @@ public class ProtocoloOV extends DescriptibleOV {
 	private String comentarioDiagnostico;
 	
 	List<DeterminacionOV> determinaciones = new ArrayList<DeterminacionOV>();
-		
+	
+	private String ordenTrabajo=StringUtils.EMPTY;
+	
+	private long idUsuario;
+	private int estado;
+
 }

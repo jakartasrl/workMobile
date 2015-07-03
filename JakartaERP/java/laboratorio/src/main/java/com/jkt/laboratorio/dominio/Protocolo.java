@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 import com.jkt.dominio.ComprobanteCliente;
+import com.jkt.dominio.IDetalle;
 import com.jkt.dominio.Usuario;
 import com.jkt.excepcion.JakartaException;
 
@@ -18,7 +19,7 @@ import com.jkt.excepcion.JakartaException;
  * 
  */
 @Data
-public class Protocolo extends ComprobanteCliente {
+public class Protocolo extends ComprobanteCliente implements IDetalle{
 
 	
 	@NotNull(message="Un protocolo debe tener asignado un laboratorio.")
@@ -41,6 +42,8 @@ public class Protocolo extends ComprobanteCliente {
 
 	private String codigoDiagnostico;
 	private String comentarioDiagnostico;
+	
+	private String ordenTrabajo;
 	
 	private boolean impreso;
 	private boolean enviado;
@@ -69,7 +72,7 @@ public class Protocolo extends ComprobanteCliente {
 	 * En la creacion del protocolo se definen datos por defecto.
 	 */
 	public Protocolo() {
-		this.estado=Estado.PENDIENTE_DE_RESULTADOS.getId();
+		this.estado=Estado.ESTADO_INICIAL.getId();
 		this.impreso=false;
 		this.enviado=false;
 		this.fechaHoraMuestra=new Date();
@@ -93,22 +96,22 @@ public class Protocolo extends ComprobanteCliente {
 	 */
 	public enum Estado{
 
-		PENDIENTE_DE_RESULTADOS(1) {
+		ESTADO_INICIAL(1) {
 			@Override
 			public String getDescripcion() {
-				return "Pendiente de resultados";
+				return "Estado Inicial";
 			}
 		},
-		PENDIENTE_DE_APROBACION(2) {
+		APROBADO(2) {
 			@Override
 			public String getDescripcion() {
-				return "Pendiente de aprobaci�n";
+				return "Aprobado";
 			}
 		},
 		TERMINADO(3) {
 			@Override
 			public String getDescripcion() {
-				return "Termiando";
+				return "Terminado";
 			}
 		};
 		
@@ -151,6 +154,10 @@ public class Protocolo extends ComprobanteCliente {
 	
 	public boolean isProtocolo(){
 		return true;
+	}
+
+	public String getNombreDeMaestro() {
+		return "laboratorio";
 	}
 	
 }

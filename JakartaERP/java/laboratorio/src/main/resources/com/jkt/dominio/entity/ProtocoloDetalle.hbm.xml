@@ -12,7 +12,11 @@
 		<many-to-one name="resultado" column="RESULTADO_DETERMINACION_ID" class="com.jkt.laboratorio.dominio.Determinacion" />
 
 		<property name="comentario" column="COMENTARIO" />
-
+		
+		<property name="descDeterminacion" column="DESC_DETERMINACION" />
+		<property name="descMetodo" column="DESC_METODO" />
+		<property name="idMetodoUtilizado" column="ID_METODO_UTILIZADO" />
+		
 		<list name="variables" table="PROTOCOLO_VARIABLE" cascade="all">
 			<key column="PROTOCOLO_DETALLE_ID" />
 			<index column="ORDEN" />

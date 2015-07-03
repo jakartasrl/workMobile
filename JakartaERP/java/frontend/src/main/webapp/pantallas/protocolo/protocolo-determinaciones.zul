@@ -1,6 +1,11 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
-		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:15px;" width="73%" >
+		<hlayout>
+			<button width="20px" height="20px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarDeterminacion')" />
+			<label style="margin-left:5px;" value="Agregar Determinación"></label>
+		</hlayout>
+
+		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:15px;" width="100%" >
 		
 			<listhead>
 				<listheader label="Determinaciones" />
@@ -19,29 +24,26 @@
 									<label value="Determinacion : " />
 									<textbox value="@bind(determinacion.descripcion)" readonly="true"/>
 								</hlayout>
+								<hlayout>
+									<label value="Metodo Utilizado : " />
+									<combobox width="80px" model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)" readonly="true" >
+										<template name="model" var="metodo">
+											<comboitem label="@bind(metodo.metodo)" value="@bind(metodo.metodo)" />
+										</template>
+									</combobox>
+								</hlayout>
 								
-								<listbox model="@bind(determinacion.metodos)" mold="paging" pageSize="1" emptyMessage="No existen Metodos." >
-								
-								
-									<listhead>
-										<listheader label="Metodos" />
-									</listhead>
-									
-									<template name="model" var="metodo">
-									
-										<listitem>
-											<listcell>
-												<hbox>
+
 													<groupbox mold="3d"  width="100%" open="true" >
 														<hlayout>
 															<label value="Metodo : " />
-															<textbox value="@bind(metodo.metodo)" width="100%" readonly="true"/>
-															<button label="Calcular Expresion" onClick="@command('calcularExpresion', determinacion=determinacion, metodo=metodo)" />
+															<textbox value="@bind(determinacion.metodoUtilizado.metodo)" width="100%" readonly="true"/>
+															<button style="margin-bottom:2px;margin-left:3px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)" />
 														</hlayout>
 														
 <!-- 														comienza resultados -->
 														
-														<listbox model="@bind(metodo.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." >
+														<listbox model="@bind(determinacion.metodoUtilizado.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." >
 								
 															<listhead>
 																<listheader label="Variables" />
@@ -56,7 +58,7 @@
 																			<hlayout>
 																				<label value="Variable : " />
 																				<textbox value="@bind(variable.descripcion)" 		width="100%" readonly="true" />
-																				<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}" onBlur="@command('agregarInput', determinacion=determinacion, metodo=metodo, variable=variable)" />
+																				<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}" />
 																				<textbox value="@bind(variable.expresionCadena)" 	width="100%" readonly="true" if="${!variable.input}" />
 																				<textbox value="@bind(variable.resultadoExpresion)" width="100%" readonly="true" if="${!variable.input}" />
 																			</hlayout>
@@ -70,15 +72,11 @@
 <!-- 														termina resultados  -->
 																												
 													</groupbox>
-												</hbox>
-											</listcell>	
-										</listitem>
-									</template>
-								</listbox>
+
 								
 								<hlayout>
-									<label value="comentario : " />
-									<textbox value="@bind(determinacion.comentario)" />		
+									<label width="100%" value="comentario : " />
+									<textbox value="@bind(determinacion.comentario)" />
 								</hlayout>
 								
 							</groupbox>

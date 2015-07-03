@@ -6,7 +6,7 @@
 	<div vflex="1" hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ProtocoloVM', l = 'LaboratorioQuimico', modoAprobacion = false)" id="contenedorPrincipal">
 		
 		<div sclass="hboxToolBar" >
-			<include id="barraMenu" src="/pantallas/menues/toolBar.zul" viewModel="${vm}"/>
+			<include id="barraMenu" src="/pantallas/menues/toolBarSinNuevo.zul" viewModel="${vm}"/>
 		</div>
 
 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">

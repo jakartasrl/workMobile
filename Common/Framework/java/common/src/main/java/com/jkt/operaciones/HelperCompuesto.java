@@ -51,14 +51,14 @@ public class HelperCompuesto extends Helper {
 		IDetalle detalle=(IDetalle) newInstance;
 		
 		//El filtro buscado serÃ¡ del tipo impuesto.categoria.id=55;
-		Filtro filtroMaestro = crearFiltro(detalle.getNombreDeMaestro().concat(".id"),oidEntidadMaestra,"igual","integer");
+		Filtro filtroMaestro = crearFiltro(detalle.getNombreDeMaestro().concat(".id"),oidEntidadMaestra,"igual","long");
 //		Filtro filtroMaestro = crearFiltro(entidadMaestra.concat(".id"),oidEntidadMaestra,"igual","integer");
 		
 		return Arrays.asList(filtroActivo,filtroMaestro);
 	}
 
 	private void levantarExcepcion() throws JakartaException {
-		throw new JakartaException("Ocurrió un error al intentar recuperar la clase solicitada.");		
+		throw new JakartaException("Ocurriï¿½ un error al intentar recuperar la clase solicitada.");		
 	}
 	
 }
