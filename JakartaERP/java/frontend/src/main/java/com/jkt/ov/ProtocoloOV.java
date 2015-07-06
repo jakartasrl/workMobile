@@ -23,6 +23,7 @@ public class ProtocoloOV extends DescriptibleOV {
 	private Date fechaHoraEmision = new Date();
 	private Date fechaHoraMuestra = new Date();
 	private Date fechaAprobacion = new Date();
+	private Date fechaFinalizacion = new Date();
 	
 	private DescriptibleOV diagnostico = new DescriptibleOV();
 	private long idDiagnostico;

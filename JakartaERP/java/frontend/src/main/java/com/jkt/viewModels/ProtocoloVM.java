@@ -415,5 +415,12 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		
 		return true;
 	}
+
+	@Command
+	public void abrirNuevo(){
+		
+		Window window = (Window) Executions.createComponents("/pantallas/protocolo/nuevoEquipo.zul", null, null);
+		window.doModal();
+	}
 	
 }

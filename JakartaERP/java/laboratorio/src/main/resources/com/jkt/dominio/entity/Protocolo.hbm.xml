@@ -27,17 +27,19 @@
 		
 		<property name="ordenTrabajo" column="ORDEN_TRABAJO" />
 
-		<many-to-one name="usuarioIngresoResultado" class="com.jkt.dominio.Usuario" column="USUARIO_RESULTADO_ID"/>
-		<many-to-one name="usuarioIngresoAprobacion" class="com.jkt.dominio.Usuario" column="USUARIO_APROBACION_ID"/>
+		<many-to-one name="usuarioIngresoResultado" 	class="com.jkt.dominio.Usuario" column="USUARIO_RESULTADO_ID"/>
+		<many-to-one name="usuarioIngresoAprobacion" 	class="com.jkt.dominio.Usuario" column="USUARIO_APROBACION_ID"/>
+		<many-to-one name="usuarioFinalizado" 			class="com.jkt.dominio.Usuario" column="USUARIO_FINALIZACION_ID"/>
 
 <!-- 		<many-to-one name="diagnostico" class="com.jkt.laboratorio.dominio.Diagnostico" column="DIAGNOSTICO_ID"/> -->
 
 		<property name="activo" column="ACTIVO" type="boolean" />
 
-		<property name="fecha" type="date" column="FECHA_EDICION"></property>
-		<property name="fechaHoraMuestra" type="date" column="FECHA_HORA_MUESTRA"></property>
-		<property name="fechaHoraResultado" type="date" column="FECHA_HORA_RESULTADO"></property>
-		<property name="fechaHoraAprobacion" type="date" column="FECHA_HORA_APROBACION"></property>
+		<property name="fecha" 					type="date" column="FECHA_EDICION"></property>
+		<property name="fechaHoraMuestra" 		type="date" column="FECHA_HORA_MUESTRA"></property>
+		<property name="fechaHoraResultado" 	type="date" column="FECHA_HORA_RESULTADO"></property>
+		<property name="fechaHoraAprobacion" 	type="date" column="FECHA_HORA_APROBACION"></property>
+		<property name="fechaHoraFinalizacion" 	type="date" column="FECHA_HORA_FINALIZACION"></property>
 		
 		<list name="detalles" table="PROTOCOLO_DETALLE" cascade="all">
 			<key column="PROTOCOLO_ID" />

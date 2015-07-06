@@ -26,7 +26,7 @@
 								</hlayout>
 								<hlayout>
 									<label value="Metodo Utilizado : " />
-									<combobox width="80px" model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)" readonly="true" >
+									<combobox width="80px" model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)" readonly="${vm.modoAprobacion}" >
 										<template name="model" var="metodo">
 											<comboitem label="@bind(metodo.metodo)" value="@bind(metodo.metodo)" />
 										</template>
@@ -38,7 +38,7 @@
 														<hlayout>
 															<label value="Metodo : " />
 															<textbox value="@bind(determinacion.metodoUtilizado.metodo)" width="100%" readonly="true"/>
-															<button style="margin-bottom:2px;margin-left:3px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)" />
+															<button style="margin-bottom:2px;margin-left:3px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)" disabled="${vm.modoAprobacion}" />
 														</hlayout>
 														
 <!-- 														comienza resultados -->
@@ -58,7 +58,7 @@
 																			<hlayout>
 																				<label value="Variable : " />
 																				<textbox value="@bind(variable.descripcion)" 		width="100%" readonly="true" />
-																				<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}" />
+																				<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}" readonly="${vm.modoAprobacion}" />
 																				<textbox value="@bind(variable.expresionCadena)" 	width="100%" readonly="true" if="${!variable.input}" />
 																				<textbox value="@bind(variable.resultadoExpresion)" width="100%" readonly="true" if="${!variable.input}" />
 																			</hlayout>
@@ -76,7 +76,7 @@
 								
 								<hlayout>
 									<label width="100%" value="comentario : " />
-									<textbox value="@bind(determinacion.comentario)" />
+									<textbox value="@bind(determinacion.comentario)" readonly="${vm.modoAprobacion}" />
 								</hlayout>
 								
 							</groupbox>

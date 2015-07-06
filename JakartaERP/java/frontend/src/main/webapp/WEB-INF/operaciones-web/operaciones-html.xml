@@ -1973,6 +1973,21 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TerminarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
+		
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioFinalizado" />
+			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" /> <!-- CAMPO TEMPORAL -->
+			<campoEntrada propertyOV="fechaFinalizacion" 			metodo="setFechaHoraFinalizacion" /> 
+			<campoEntrada propertyOV="estado"		 				metodo="setEstado" /> 
+						
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 	
 	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
 	

@@ -2,7 +2,7 @@
 
 	<vlayout>
 		
-		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="37%" >
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="43%" >
 
 			<panelchildren>
 			
@@ -10,30 +10,32 @@
 
 					<columns>
 						<column width="120px"/>
+						<column width="160px"/>
 						<column width="120px"/>
-						<column width="120px"/>
-						<column width="120px"/>
+						<column width="160px"/>
 					</columns>
 			
 					<rows>
 					
 						<row sclass="fila-maestro">
 							<label value="Fecha Emision : " />
-							<datebox id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
+							<datebox width="100%" id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true"/>
+							<label value="Fecha de muestra : " />
+							<datebox width="100%" id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true"/>
 						</row>
 
 						<row>
 							<label value="Nro. de Pedido : " />
 								
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoOV.nro)" constraint="no empty" onBlur="@command('validarCampo', clase='pedido', codigo=self.value, ov=vm.pedidoOV, post='traerDeterminaciones')" />
-								<button label="..." onClick="@command('openHelper', clase='pedido', ov=vm.pedidoOV, post='traerDeterminaciones')" />
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoOV.nro)" constraint="no empty" onBlur="@command('validarCampo', clase='pedido', codigo=self.value, ov=vm.pedidoOV, post='traerDeterminaciones')" readonly="${vm.modoAprobacion}"/>
+								<button label="..." onClick="@command('openHelper', clase='pedido', ov=vm.pedidoOV, post='traerDeterminaciones')" disabled="${vm.modoAprobacion}" />
 							</hlayout>
 
 							<label value="Orden de Trabajo : " />
 							
 							<hlayout>
-								<textbox width="100%" value="@bind(vm.protocoloOV.ordenTrabajo)" />
+								<textbox width="100%" value="@bind(vm.protocoloOV.ordenTrabajo)" readonly="${vm.modoAprobacion}" />
 <!-- 								<button label="..." /> -->
 							</hlayout>
 	
@@ -52,8 +54,9 @@
 						<row>
 							<label value="Equipo : " />
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.equipoOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV, post='')" />
-								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" />
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.equipoOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV, post='')" readonly="${vm.modoAprobacion}" />
+								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" disabled="${vm.modoAprobacion}" />
+								<button label="..." onClick="@command('abrirNuevo')" />
 							</hlayout>
 														
 							<cell colspan="2">
@@ -62,12 +65,11 @@
 						</row>
 
 						<row>
-							<label value="Fecha de muestra : " />
-							<datebox id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>
-							<label value="Fecha Aprobacion : " />
-							<datebox id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" readonly="true"/>	
+							<label value="Fecha Aprobacion : " visible="${vm.modoAprobacion}" />
+							<datebox width="100%" id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true" visible="${vm.modoAprobacion}" />
+							<label value="Fecha Finalizacion : " visible="${vm.modoAprobacion}" />
+							<datebox width="100%" id="fechaHoraFinalizacion" value="@bind(vm.protocoloOV.fechaFinalizacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true" visible="${vm.modoAprobacion}" />	
 						</row>
-						
 					</rows>
 				
 				</grid>
