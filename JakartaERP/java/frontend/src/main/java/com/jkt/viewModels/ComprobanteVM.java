@@ -38,6 +38,8 @@ import com.jkt.ov.ArchivoOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.FormaFacturacionOV;
+import com.jkt.ov.HeaderHelpGenericoOV;
+import com.jkt.ov.HelperOV;
 import com.jkt.ov.ItemsOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListItemsOV;
@@ -50,9 +52,7 @@ import com.jkt.ov.tree.NodoNotas;
 public abstract class ComprobanteVM extends ViewModel {
 
 	@Init(superclass=true)
-	public void init(){
-		System.out.println();
-	}
+	public void init(){}
 	
 	protected boolean modoAgenda=false;
 	
@@ -68,8 +68,11 @@ public abstract class ComprobanteVM extends ViewModel {
 	protected ListDescriptibleOV lMonedas = new ListDescriptibleOV();
 	protected DescriptibleOV vendedorOV = new DescriptibleOV();
 	protected DescriptibleOV representanteOV = new DescriptibleOV();
+	
 	protected ListDescriptibleOV contactos = new ListDescriptibleOV();
+	protected List<DescriptibleOV> contactosSeleccionados =  new ArrayList<DescriptibleOV>();
 	protected DescriptibleOV contactoSeleccionado = new DescriptibleOV();
+	
 	protected List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
 	private DefaultTreeModel<NotaOV> arbolNotas;
 
@@ -83,7 +86,6 @@ public abstract class ComprobanteVM extends ViewModel {
 	
 	@Command
 	public void actualizarPlantilla(@BindingParam("ov") ItemsOV item, @BindingParam("plantilla") DescriptibleOV plantilla) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-//		@command('openHelper', clase='plantilla', ov=each.plantilla)
 		this.plantillaTemporal=plantilla;
 		openHelper("plantilla", "", this.plantillaTemporal, "actualizarHTML", "Plantillas", "" , " ", false);
 	}
@@ -99,8 +101,6 @@ public abstract class ComprobanteVM extends ViewModel {
 
 		plantillaTemporal.setCampoAdicional1(plantillaL.getCampoAdicional1());
 		plantillaTemporal.setDescripcion(plantillaL.getCampoAdicional1());
-//		plantillaTemporal=plantillaL;
-//		plantillaTemporal.setDescripcion(plantillaTemporal.getCampoAdicional1());
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
@@ -113,8 +113,7 @@ public abstract class ComprobanteVM extends ViewModel {
 		this.userOV = (UserOV) sess.getAttribute("userCredential");
 	}
 
-	@NotifyChange({ "items", "lDeterminacionesQuimicas",
-			"lDeterminacionesElectricas", "itemsArticulos" })
+	@NotifyChange({ "items", "lDeterminacionesQuimicas", "lDeterminacionesElectricas", "itemsArticulos" })
 	@Command
 	public void actualizarImporteTotal(@BindingParam("item") ItemsOV items) {
 		items.setImporteTotal(items.getImporte() * items.getCantidad());
@@ -192,14 +191,11 @@ public abstract class ComprobanteVM extends ViewModel {
 			return false;
 		}
 
+		//Para no ir a buscar a la base ni generar uno nuevo
 		if (representanteOV.getCodigo() == null || representanteOV.getCodigo().isEmpty()) {
 			representanteOV.setId(-1);
 		}
 		
-		if (!validarDescriptible(contactoSeleccionado,"Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")) {
-			return false;
-		}
-
 		for (ArchivoOV archivoOV : this.archivos) {
 			if (archivoOV.getFileName() != null && !archivoOV.getFileName().isEmpty()) {
 				if (archivoOV.getDescripcion() == null || archivoOV.getDescripcion().isEmpty()) {
@@ -223,10 +219,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento() {
-//		this.items.add(new ItemsOV());
-//		l.setActivePage(this.items.size()-1);
 		this.items.add(0, new ItemsOV());
-//		Clients.evalJavaScript("irAlFinal();");
 	}
 	
 	@Command
@@ -237,7 +230,7 @@ public abstract class ComprobanteVM extends ViewModel {
 			return;
 		}
 		
-		this.items.remove(indice);// add(0, new ItemsOV());
+		this.items.remove(indice);
 	}
 	
 
@@ -287,8 +280,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	 * laboratorio y una coleccion dnd depositar los resultados
 	 * 
 	 */
-	protected ArrayList<ItemsOV> actualizarDeterminaciones(
-			String parametroLaboratorio) {
+	protected ArrayList<ItemsOV> actualizarDeterminaciones(String parametroLaboratorio) {
 		Long idListaPrecio = this.lPreciosOV.getId();
 
 		ContainerOV containerOV = new ContainerOV();
@@ -313,12 +305,8 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	/**
-	 * Solamente actualiza el campo que representa la descripcion completa de la
-	 * sucursal.
-	 * <p>
-	 * ZK se encarga de actualizar el campo automaticamente con la ayuda del
-	 * metodo actualizar que está en cada ViewModel.
-	 * </p>
+	 * Solamente actualiza el campo que representa la descripcion completa de la sucursal.
+	 * <p> ZK se encarga de actualizar el campo automaticamente con la ayuda del metodo actualizar que está en cada ViewModel.</p>
 	 */
 	public void actualizarCampoSucursal() {
 		String text = this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
@@ -328,18 +316,14 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	protected void actualizarContactosReferencia() {
-		/*
-		 * Actualiza los contactos de referencia
-		 */
+
 		ContainerOV containerOV = new ContainerOV();
 		containerOV.setString1(String.valueOf(this.sucursalOV.getId()));
 
 		this.contactos = (ListDescriptibleOV) Operaciones.ejecutar("RecuperarContactosDeSucursal", containerOV, ListDescriptibleOV.class);
-
+		
 		if (this.contactos.isEmpty()) {
 			log.warn("La sucursal no tiene contactos de referencias. Esto puede ocacioner errores.");
-		} else {
-			this.contactoSeleccionado = (DescriptibleOV) this.contactos.getList().get(0);
 		}
 
 	}
@@ -438,9 +422,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	@Command
-	public void obtenerArchivo(
-			@BindingParam("archivoActual") ArchivoOV archivoActual)
-			throws IOException {
+	public void obtenerArchivo(@BindingParam("archivoActual") ArchivoOV archivoActual) throws IOException {
 
 		if (archivoActual.getFileName() == null || archivoActual.getFileName().isEmpty()) {
 			return;
@@ -526,7 +508,6 @@ public abstract class ComprobanteVM extends ViewModel {
 				subNodo.add(child);
 			}
 
-//			actividadNodo.add(child);
 		}
 
 		for (NodoNotas actividadActual : actividades.values()) {
@@ -569,4 +550,12 @@ public abstract class ComprobanteVM extends ViewModel {
 		return true;
 	}
 
+	@Command
+	public void nuevoContacto(){
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("vm", this);
+		Window window = (Window) Executions.createComponents("/pantallas/pedido/altaContactos.zul", null, map);
+		window.doModal();
+	}
+	
 }

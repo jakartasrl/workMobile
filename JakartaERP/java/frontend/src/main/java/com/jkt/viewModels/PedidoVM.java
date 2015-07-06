@@ -390,7 +390,22 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		crearArbolNotas();
 		
 		actualizarContactosReferencia();
-		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
+		
+		List<DescriptibleOV> contactosReferencia = ovRecuperado.getContactosReferencia();
+		
+		Map<String, DescriptibleOV> mapa = new HashMap<String, DescriptibleOV>();
+		List<DescriptibleOV> listaContactosTotal = this.contactos.getList();
+		for (DescriptibleOV descriptibleOV : listaContactosTotal) {
+			mapa.put(String.valueOf(descriptibleOV.getId()), descriptibleOV);
+		}
+		
+		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
+		
+		for (DescriptibleOV descriptibleOV : contactosReferencia) {
+			this.contactosSeleccionados.add(mapa.get(String.valueOf(descriptibleOV.getId())));
+		}
+		
+//		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
 		
 		DescriptibleOV plantilla;//para asignar la descripcion si el detalle es item o material.
@@ -491,7 +506,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		comprobanteOV.setIdSucursal(sucursalOV.getId());
 		comprobanteOV.setIdListaPrecio(lPreciosOV.getId());
 		comprobanteOV.setIdVendedor(vendedorOV.getId());
-		comprobanteOV.setIdRepresentante(representanteOV.getId());
+		
+		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
+		
 		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		
 		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);

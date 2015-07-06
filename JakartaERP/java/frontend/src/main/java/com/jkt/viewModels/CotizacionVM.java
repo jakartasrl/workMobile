@@ -33,7 +33,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	private String titulo = "Solicitud de Cotización";
 	private CotizacionOV cotizacionOV = new CotizacionOV();
 	
-	@SuppressWarnings("rawtypes")
 	@Command
 	public void guardar() throws JakartaException {
 				
@@ -44,7 +43,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.completarCotizacionOV();
 		
 		CotizacionOV cotizacionOV = (CotizacionOV) Operaciones.ejecutar("GuardarCotizacion", this.cotizacionOV , CotizacionOV.class );
-//		Messagebox.show("Se genero el numero de Cotizacion " + cotizacionOV.getNroCotizacion());
       
 		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
             public void onEvent(ClickEvent event) throws Exception {
@@ -99,8 +97,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	@Command
 	@NotifyChange({"cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos","archivos"})
 	public void nuevo(){
-//		super.nuevo();
-//		this.cotizacionOV= new CotizacionOV();
 		init();
 	}
 	
@@ -134,7 +130,6 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	@NotifyChange("cotizacionOV")
 	public void traerCotizacion() throws IllegalAccessException, InvocationTargetException, JakartaException {
 		
