@@ -20,17 +20,15 @@
 
 	<vlayout width="100%" style="text-align:center;">
 		<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
-		
-		
-		<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
-			 <attribute name="onClick"><![CDATA[
-					//box.pagingPosition = "top";
-					//siempre retorna a la primer pagina
-			        box.setActivePage(0);
-        		]]></attribute>
 		</button>
 		
-		</button>
+		
+<!-- 		<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item."> -->
+<!-- 			 <attribute name="onClick"><![CDATA[ -->
+<!-- 			        box.setActivePage(0); -->
+<!--         		]]></attribute> -->
+<!-- 		</button> -->
+		
 	</vlayout>
 	
 	<vlayout width="100%" style="text-align:center;" >

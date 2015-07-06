@@ -509,6 +509,19 @@ public abstract class ComprobanteVM extends ViewModel {
 			} else {
 				nodoLevelUno = actividades.get(actividad);
 				NodoNotas subNodo = subActividades.get(notaOV.getCodigoActividad()).get(notaOV.getCodigoSubActividad());
+				
+				//Puede existir A->B, pero no A->C, con lo cual tengo que crear C...
+				if(subNodo==null){
+					NotaOV nuevoSubNodo = new NotaOV();
+					nuevoSubNodo.setCodigo(notaOV.getCodigoSubActividad());
+					subNodo = new NodoNotas(nuevoSubNodo, true);
+					 
+					Map<String, NodoNotas> mapaSubNodos = subActividades.get(notaOV.getCodigoActividad());
+					mapaSubNodos.put(notaOV.getCodigoSubActividad(), subNodo);
+					subActividades.put(notaOV.getCodigoActividad(), mapaSubNodos);
+
+				}
+				
 				NodoNotas child = new NodoNotas(notaOV);
 				subNodo.add(child);
 			}
