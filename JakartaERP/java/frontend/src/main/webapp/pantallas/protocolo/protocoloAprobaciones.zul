@@ -1,0 +1,33 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
+	<vlayout>
+		
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Protocolos Pendientes de Aprobacion" border="normal" width="43%" >
+
+			<panelchildren>
+			
+				<grid model="@bind(vm.listProtocolo)" emptyMessage="No existen protocolos pendientes de aprobrar">
+
+					<columns>
+						<column label="Codigo" 		width="150px"/>
+						<column label="Descripcion" width="150px"/>
+					</columns>
+			
+					<rows>
+						<template name="model">
+							<row>
+								<textbox width="100%" value="@bind(each.codigo)" 		onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+								<textbox width="100%" value="@bind(each.descripcion)" 	onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+							</row>	
+						</template>					
+					</rows>
+				
+				</grid>
+				
+			</panelchildren>
+			
+		</panel>
+				
+	</vlayout>
+
+</zk>
