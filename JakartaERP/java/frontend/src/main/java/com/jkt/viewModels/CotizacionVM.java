@@ -4,6 +4,9 @@ import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import lombok.Data;
@@ -62,7 +65,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.cotizacionOV.setIdSucursal(sucursalOV.getId());
 		this.cotizacionOV.setIdVendedor(vendedorOV.getId());
 		this.cotizacionOV.setIdRepresentante(representanteOV.getId());
-		this.cotizacionOV.setIdContactoReferencia(contactoSeleccionado.getId());
+		this.cotizacionOV.setContactosReferencia(this.getContactosSeleccionados());
 		this.cotizacionOV.setArchivos(this.archivos);
 		
 		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
@@ -123,7 +126,8 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
-		this.contactoSeleccionado = new DescriptibleOV();
+		this.contactosSeleccionados=new ArrayList<DescriptibleOV>();
+//		this.contactoSeleccionado = new DescriptibleOV();
 		
 		this.cotizacionOV= new CotizacionOV();
 		this.archivos=new ArrayList<ArchivoOV>();
@@ -160,7 +164,8 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.items=new ArrayList<ItemsOV>();
 		
 		actualizarContactosReferencia();
-		this.contactoSeleccionado = completarCombo(this.contactos.getList(), cotizacionOV.getIdContactoReferencia());
+
+		actualizarContactosSeleccionados(cotizacionOV.getContactosReferencia());
 		
 		DescriptibleOV plantilla;
 		
@@ -191,6 +196,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.archivos=cotizacionOV.getArchivos();
 
 	}
+
 	
 	@Override
 	protected boolean validarOV() {
@@ -232,9 +238,9 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 			return false;
 		}
 
-		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")){
-			return false;
-		}
+//		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")){
+//			return false;
+//		}
 
 		for (ArchivoOV archivoOV : this.archivos) {
 			if (archivoOV.getFileName() !=null && !archivoOV.getFileName().isEmpty()) {

@@ -71,7 +71,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	
 	protected ListDescriptibleOV contactos = new ListDescriptibleOV();
 	protected List<DescriptibleOV> contactosSeleccionados =  new ArrayList<DescriptibleOV>();
-	protected DescriptibleOV contactoSeleccionado = new DescriptibleOV();
+//	protected DescriptibleOV contactoSeleccionado = new DescriptibleOV();
 	
 	protected List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
 	private DefaultTreeModel<NotaOV> arbolNotas;
@@ -334,7 +334,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	public void actualizarCamposDependientesDeCliente() {
 		this.sucursalOV = new SucursalOV();
 		this.contactos = new ListDescriptibleOV();
-		this.contactoSeleccionado = null;
+		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
 	}
 
 	public ListDescriptibleOV getlMonedas() {
@@ -391,11 +391,10 @@ public abstract class ComprobanteVM extends ViewModel {
 		this.lMonedas = new ListDescriptibleOV();
 
 		this.contactos = new ListDescriptibleOV();
+		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
 
 		this.vendedorOV = new DescriptibleOV();
 		this.representanteOV = new DescriptibleOV();
-
-		this.contactoSeleccionado = new DescriptibleOV();
 
 		this.archivos = new ArrayList<ArchivoOV>();
 		
@@ -557,5 +556,20 @@ public abstract class ComprobanteVM extends ViewModel {
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/altaContactos.zul", null, map);
 		window.doModal();
 	}
+	
+	protected void actualizarContactosSeleccionados(List<DescriptibleOV> contactosReferencia) {
+		Map<String, DescriptibleOV> mapa = new HashMap<String, DescriptibleOV>();
+		List<DescriptibleOV> listaContactosTotal = this.contactos.getList();
+		for (DescriptibleOV descriptibleOV : listaContactosTotal) {
+			mapa.put(String.valueOf(descriptibleOV.getId()), descriptibleOV);
+		}
+		
+		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
+		
+		for (DescriptibleOV descriptibleOV : contactosReferencia) {
+			this.contactosSeleccionados.add(mapa.get(String.valueOf(descriptibleOV.getId())));
+		}
+	}
+
 	
 }

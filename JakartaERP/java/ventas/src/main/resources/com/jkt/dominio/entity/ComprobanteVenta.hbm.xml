@@ -38,6 +38,11 @@
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID" />
 
 
+		<list name="contactosReferencia" cascade="all" table="CONTACTOS_REFERENCIA_COMPROBANTE">
+			<key column="COMPROBANTE_VENTA_ID" />
+			<index column="ORDEN" />
+			<many-to-many column="CONTACTO_ID" class="com.jkt.varios.dominio.Contacto" />
+		</list>
 
 
 <!-- 		COTIZACION MAPPING -->
@@ -76,11 +81,6 @@
 			
 <!-- 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one> -->
 			
-			<list name="contactosReferencia" cascade="all" table="CONTACTOS_REFERENCIA_COMPROBANTE">
-				<key column="PEDIDO_ID" />
-				<index column="ORDEN" />
-				<many-to-many column="CONTACTO_ID" class="com.jkt.varios.dominio.Contacto" />
-			</list>
 			
 			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />
 

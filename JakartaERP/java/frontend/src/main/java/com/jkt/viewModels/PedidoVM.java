@@ -390,23 +390,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		crearArbolNotas();
 		
 		actualizarContactosReferencia();
-		
-		List<DescriptibleOV> contactosReferencia = ovRecuperado.getContactosReferencia();
-		
-		Map<String, DescriptibleOV> mapa = new HashMap<String, DescriptibleOV>();
-		List<DescriptibleOV> listaContactosTotal = this.contactos.getList();
-		for (DescriptibleOV descriptibleOV : listaContactosTotal) {
-			mapa.put(String.valueOf(descriptibleOV.getId()), descriptibleOV);
-		}
-		
-		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
-		
-		for (DescriptibleOV descriptibleOV : contactosReferencia) {
-			this.contactosSeleccionados.add(mapa.get(String.valueOf(descriptibleOV.getId())));
-		}
-		
-//		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
-		
+		actualizarContactosSeleccionados(ovRecuperado.getContactosReferencia());
+
 		
 		DescriptibleOV plantilla;//para asignar la descripcion si el detalle es item o material.
 		//esta bindeado con la plantilla con lo cual debo asignar datos a la plantilla.
@@ -509,8 +494,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
 		
-		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
-		
 		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);
 		comprobanteOV.setArchivos(this.archivos);
 		
@@ -601,7 +584,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
-		this.contactoSeleccionado=new DescriptibleOV();
+		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
+//		this.contactoSeleccionado=new DescriptibleOV();
 		
 		this.comprobanteOV=new PedidoOV();
 		

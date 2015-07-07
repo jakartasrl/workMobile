@@ -62,12 +62,12 @@
 					
 					<listbox id="box" multiple="true" checkmark="true" model="@bind(vm.contactos.list)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" selectedItems="@bind(vm.contactosSeleccionados)" emptyMessage="No existen contactos para esta sucursal.">
 					
-						<listhead>
+						<listhead sizable="true">
 							<listheader style="text-align : center;" width="40px"></listheader>
 							<listheader>Nombre y Apellido</listheader>
 							<listheader>Telefono</listheader>
 							<listheader>Correo</listheader>
-							<listheader>Tipo</listheader>
+							<listheader sort="auto(campoAdicional2)">Tipo</listheader>
 						</listhead>
 						
 						<template name="model">

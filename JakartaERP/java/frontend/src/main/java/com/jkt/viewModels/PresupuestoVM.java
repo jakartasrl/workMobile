@@ -176,7 +176,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		crearArbolNotas();
 		
 		actualizarContactosReferencia();
-		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
+//		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
 		this.archivos=ovRecuperado.getArchivos();
 		
@@ -253,8 +253,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		crearArbolNotas();
 		
 		actualizarContactosReferencia();
-		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
-		
+		actualizarContactosSeleccionados(ovRecuperado.getContactosReferencia());
 		
 		DescriptibleOV plantilla;//para asignar la descripcion si el detalle es item o material.
 		//esta bindeado con la plantilla con lo cual debo asignar datos a la plantilla.
@@ -345,7 +344,11 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		comprobanteOV.setIdListaPrecio(lPreciosOV.getId());
 		comprobanteOV.setIdVendedor(vendedorOV.getId());
 		comprobanteOV.setIdRepresentante(representanteOV.getId());
-		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
+
+		//		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
+		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
+
+		
 		comprobanteOV.setArchivos(this.archivos);
 		
 		comprobanteOV.setIdCotizacion(idCotizacion);
@@ -423,7 +426,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
-		this.contactoSeleccionado=new DescriptibleOV();
+		this.contactosSeleccionados=new ArrayList<DescriptibleOV>();
 		
 		this.comprobanteOV= new PresupuestoOV();
 

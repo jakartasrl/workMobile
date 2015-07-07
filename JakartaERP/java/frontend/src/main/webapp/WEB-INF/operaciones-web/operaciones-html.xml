@@ -776,13 +776,17 @@
 			<campoSalida value="nro" 				target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
-			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
 			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
 			
 			<campoSalida value="idCotizacion" 			target="comprobanteRelacionado.id" />
+			
+			<campoSalida value="contactosReferencia" 	target="contactosReferencia" >
+				<campoSalida value="id" 		target="id"/>
+			</campoSalida>
 			
 			<campoSalida value="notas"					target="notasTransientes" >
 				<campoSalida value="id"					target="id" />
@@ -849,7 +853,7 @@
 			<campoSalida value="nro" 				target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
-			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
@@ -857,6 +861,9 @@
 			
 			<campoSalida value="idCotizacion" 			target="comprobanteRelacionado.id" />
 			
+			<campoSalida value="contactosReferencia" 	target="contactosReferencia" >
+				<campoSalida value="id" 		target="id"/>
+			</campoSalida>
 			
 			<campoSalida value="notas"					target="notasTransientes" >
 				<campoSalida value="id"					target="id" />
@@ -928,7 +935,7 @@
 			<campoSalida value="nroCotizacion" 		target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
-			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
@@ -945,6 +952,10 @@
 				<campoSalida value="idMoneda"			target="cotizador.monedaExpresada.id" />
 				<campoSalida value="idProducto"			target="cotizador.item.producto.id" />
 				
+			</campoSalida>
+			
+			<campoSalida value="contactosReferencia" 	target="contactosReferencia" >
+				<campoSalida value="id" 		target="id"/>
 			</campoSalida>
 			
 			<campoSalida value="archivos"			target="archivos" >
@@ -997,9 +1008,13 @@
 			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
-			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
+<!-- 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" /> -->
 			
 			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" />
+			
+			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">
+				<campoEntrada propertyOV="id" metodo="setId"/>
+			</campoEntrada>
 			
 			<campoEntrada propertyOV="notas" metodo="setNotas">
 				<campoEntrada propertyOV="id" metodo="setId"/>
@@ -1081,7 +1096,7 @@
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="fechaVencimiento" 	target="fechaVencimiento" />
 			<campoSalida value="referencia" 		target="referencia" />
-			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" />
+<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
@@ -1107,6 +1122,10 @@
 				<campoSalida value="descripcion" 	target="descripcion"/>
 			</campoSalida>
 			
+			<campoSalida value="contactosReferencia" 	target="contactosReferencia" >
+				<campoSalida value="id" 		target="id"/>
+			</campoSalida>
+			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -1126,7 +1145,7 @@
 			<campoEntrada propertyOV="idRepresentante" 		metodo="setRepresentante" />
 			<campoEntrada propertyOV="idCliente" 			metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" 			metodo="setClienteSucursal" />
-			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" />
+<!-- 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" /> -->
 			
 <!-- 			<campoEntrada propertyOV="items" metodo="setDetalles"> -->
 			<campoEntrada propertyOV="items" metodo="setDetallesConReferencias">
@@ -1148,6 +1167,10 @@
 				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
 				<campoEntrada propertyOV="format" metodo="setFormat"/>
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+			</campoEntrada>
+			
+			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">
+				<campoEntrada propertyOV="id" metodo="setId"/>
 			</campoEntrada>
 			
 		</input>
