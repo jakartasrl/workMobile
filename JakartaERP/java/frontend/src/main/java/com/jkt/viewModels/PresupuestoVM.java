@@ -104,8 +104,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			   		
 					Window window = (Window) Executions.createComponents("/pantallas/presupuesto/reporte.zul", null, hashMap);
 					window.doModal();
-
-//					Executions.sendRedirect("/pantallas/index/index-presupuesto.zul");		
 		        }
 		    }
 		}
@@ -129,8 +127,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	
 	
 	DescriptibleOV cotizacionDescriptible = new DescriptibleOV();
-
-//	DescriptibleOV presupuestoDescriptible = new DescriptibleOV();
 	PresupuestoOV presupuestoDescriptible = new PresupuestoOV();
 	
 	@Command
@@ -153,7 +149,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		cargarPresupuestoDesdeCotizacion(ovRecuperado);
 		
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
-//		this.aPartirDeCotizacion=true;
 	}
 	
 	private void cargarPresupuestoDesdeCotizacion(PresupuestoOV ovRecuperado) throws JakartaException, IllegalAccessException, InvocationTargetException {
@@ -164,9 +159,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		DescriptibleOV sucursal = Operaciones.recuperarObjetoDescriptible("clienteSucursal",ovRecuperado.getIdSucursal());
 		copyProperties(this.sucursalOV, sucursal);
 		
-		
 		actualizarCampoSucursal();
-		
 		
 		this.comprobanteOV.setId(ovRecuperado.getId());
 		this.comprobanteOV.setItems(new ArrayList<ItemsOV>());
@@ -301,7 +294,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
 		this.comprobanteOV.setNro(ovRecuperado.getNro());
-//		this.comprobanteOV.setNroCotizacion(ovRecuperado.getNroCotizacion());
 		this.comprobanteOV.setIdCotizacion(ovRecuperado.getIdCotizacion());
 		
 		this.comprobanteOV.setFacturaciones(ovRecuperado.getFacturaciones());
@@ -416,11 +408,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
 		crearArbolNotas();
 		
-		
-		//TODO aca cargar las condiciones comerciales?
-//		log.info("Recuperando documentos...");
-//		this.lDocumentacion = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class)).getList();
-
 		log.info("Recuperando monedas...");
 		this.lMonedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
 		
@@ -433,7 +420,6 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		
 		log.info("Inicializando items para articulos...");
 		this.itemsArticulos=new ArrayList<ItemsOV>();
-//		this.itemsArticulos.add(new ItemsOV());
 		
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
