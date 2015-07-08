@@ -14,6 +14,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -31,7 +32,6 @@ import com.jkt.ov.UserOV;
 
 @Data
 public class ProtocoloPopUpVM {
-	
 	
 	private ProtocoloOV protocoloOV = new ProtocoloOV();
 	private DescriptibleOV clienteOV = new DescriptibleOV();
@@ -90,12 +90,17 @@ public class ProtocoloPopUpVM {
 	public void guardar(@BindingParam("window") Window x) throws JakartaException {
 		
 		Session sess = Sessions.getCurrent();
-		  
 		UserOV userOV = (UserOV) sess.getAttribute("userCredential");
-		this.protocoloOV.setIdUsuario(userOV.getId());
 		
-		this.protocoloOV.setComentarioDiagnostico("APROBADO POR "+userOV.getName()+" "+userOV.getLastName());
-		this.protocoloOV.setFechaAprobacion(new Date());
+		if (this.validarUsuarios(userOV)){
+			Messagebox.show("Verifique que el usuario que crea el protocolo debe ser distinto al que lo aprueba.");
+			return;
+		}
+			 
+		this.protocoloOV.setIdUsuarioIngresoAprobacion(userOV.getId());
+		
+//		this.protocoloOV.setComentarioDiagnostico("APROBADO POR "+userOV.getName()+" "+userOV.getLastName());
+//		this.protocoloOV.setFechaAprobacion(new Date());
 		this.protocoloOV.setEstado(Protocolo.Estado.APROBADO.getId());
 		Operaciones.ejecutar("AprobarProtocolo", this.protocoloOV );
 		
@@ -103,6 +108,26 @@ public class ProtocoloPopUpVM {
 		BindUtils.postGlobalCommand(null, null,this.vm.retrieveMethod(), null);
 		
 		x.detach();
+	}
+
+	private boolean validarUsuarios(UserOV userOV) {
+		
+		long userCreadorProt;
+		
+		ContainerOV containerOV = new ContainerOV();
+		containerOV.setString1("protocolo");
+		containerOV.setString2(String.valueOf(vm.getProtocoloDescriptible().getId()));
+		
+		ListProtocoloOV p = (ListProtocoloOV) Operaciones.ejecutar("TraerProtocolo", containerOV, ListProtocoloOV.class);
+		this.protocoloOV = (ProtocoloOV) p.getList().get(0);
+		
+		userCreadorProt = this.protocoloOV.getIdUsuarioIngresoResultado(); 
+		
+		if (userCreadorProt == userOV.getId()){
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Command

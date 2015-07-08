@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import lombok.Data;
+
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -17,6 +19,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Window;
+
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Protocolo;
@@ -44,6 +47,8 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 	private PedidoOV pedidoOV = new PedidoOV();
 	
 	private Boolean modoAprobacion = true; // solo para que aparezcan todos los campos como readonly en el zul
+	
+	private List<DescriptibleOV> listProtocolo = new ArrayList<DescriptibleOV>();
 
 	//Para manejar diferenciar los laboratorios quimicos y electricos
 	private long idLaboratorio;
@@ -52,17 +57,10 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 	
 	@Init(superclass=true)
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
-	public void init(@BindingParam("l") String laboratorio){
+	public void init(@BindingParam("l") String laboratorio, @BindingParam("modoAprobacion") Boolean modoAprobacion){
 		
-		if(isCargadoDesdeSession()){return;}
-
 		this.setTitulo("Protocolos Terminados");
-
-		this.protocoloOV = new ProtocoloOV();
-		this.clienteOV = new DescriptibleOV();
-		this.equipoOV = new DescriptibleOV();
-		this.pedidoOV = new PedidoOV();
-		
+				
 		this.laboratorioParametroKey = laboratorio;
 		
 		if(laboratorio.equalsIgnoreCase("LaboratorioQuimico")){
@@ -73,6 +71,23 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 		
 		ParametroOV laboratorioParam = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV(laboratorio), ParametroOV.class);
 		this.idLaboratorio = Long.valueOf(laboratorioParam.getValorNumero());
+		
+		//Traemos la lista de protocolos
+		ContenedorFiltrosOV c=new ContenedorFiltrosOV();
+		c.setClase("protocolo");
+		
+		List<FiltroOV> filtros=new ArrayList<FiltroOV>();
+		
+		filtros.add(new FiltroOV("estado", String.valueOf(Protocolo.Estado.APROBADO.getId()), ServiceRepository.CONDICION_IGUAL, ServiceRepository.INTEGER));
+		filtros.add(new FiltroOV("laboratorio.id", String.valueOf(this.idLaboratorio), ServiceRepository.CONDICION_IGUAL, ServiceRepository.LONG));
+		filtros.add(new FiltroOV("activo", String.valueOf(true), ServiceRepository.CONDICION_IGUAL, ServiceRepository.BOOLEAN));
+		
+		c.setFiltros(filtros);
+		
+		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
+		List resultado = listDescriptible.getList();
+		
+		this.listProtocolo = resultado;
 		
 	}
 

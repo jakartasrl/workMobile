@@ -26,9 +26,9 @@
 					
 						<row sclass="fila-maestro">
 							<label value="Fecha Emision : " />
-							<datebox width="100%" id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true"/>
+							<datebox width="100%" id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" disabled="true" />
 							<label value="Fecha de muestra : " />
-							<datebox width="100%" id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true"/>
+							<datebox width="100%" id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" disabled="true" />
 						</row>
 
 						<row>
@@ -63,7 +63,7 @@
 							<hlayout>
 								<textbox sclass="campoCodigo-medium" value="@bind(vm.equipoOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV, post='')" readonly="${vm.modoAprobacion}" />
 								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" disabled="${vm.modoAprobacion}" />
-								<button label="..." onClick="@command('abrirNuevo')" />
+								<button label="..." onClick="@command('abrirNuevo')" disabled="${vm.modoAprobacion}" />
 							</hlayout>
 														
 							<cell colspan="2">
@@ -74,8 +74,8 @@
 						<row>
 							<label value="Fecha Aprobacion : " visible="${vm.modoAprobacion}" />
 							<datebox width="100%" id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true" visible="${vm.modoAprobacion}" />
-							<label value="Fecha Finalizacion : " visible="${vm.modoAprobacion}" />
-							<datebox width="100%" id="fechaHoraFinalizacion" value="@bind(vm.protocoloOV.fechaFinalizacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true" visible="${vm.modoAprobacion}" />	
+<!-- 							<label value="Fecha Finalizacion : " visible="${vm.modoAprobacion}" /> -->
+<!-- 							<datebox width="100%" id="fechaHoraFinalizacion" value="@bind(vm.protocoloOV.fechaFinalizacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" readonly="true" visible="${vm.modoAprobacion}" />	 -->
 						</row>
 					</rows>
 				
@@ -101,11 +101,11 @@
 			    			        
 			    			        	
 			        	<tabpanel>
-							<include id="determinacionesContent" hflex="1" src="/pantallas/protocolo/protocolo-determinaciones.zul" viewModel="${vm}"/>
+							<include id="determinacionesContent" hflex="1" src="/pantallas/protocolo/protocolo-deter-pend-aprob.zul" viewModel="${vm}"/>
 			        	</tabpanel>
 			        
 			        	<tabpanel>
-							<include id="diagnosticoFinalContent" hflex="1" src="/pantallas/protocolo/protocolo-diagnosticoFinal.zul" viewModel="${vm}" />
+							<include id="diagnosticoFinalContent" hflex="1" src="/pantallas/protocolo/protocolo-diagnostico-aprobaciones.zul" viewModel="${vm}" />
 						</tabpanel>
 										
 			    	</tabpanels>

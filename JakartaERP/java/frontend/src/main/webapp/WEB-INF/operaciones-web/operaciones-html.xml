@@ -1963,7 +1963,8 @@
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
 		
 			<campoEntrada propertyOV="id" 							metodo="setId" />
-			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoAprobacion" />
+<!-- 			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoAprobacion" /> -->
+			<campoEntrada propertyOV="idUsuarioIngresoAprobacion" 					metodo="setUsuarioIngresoAprobacion" />
 			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" /> <!-- CAMPO TEMPORAL -->
 			<campoEntrada propertyOV="fechaAprobacion" 				metodo="setFechaHoraAprobacion" /> 
 			<campoEntrada propertyOV="estado"		 				metodo="setEstado" /> 
@@ -1998,7 +1999,8 @@
 			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
 			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
-			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" />
+<!-- 			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" /> -->
+			<campoEntrada propertyOV="idUsuarioIngresoResultado" 					metodo="setUsuarioIngresoResultado" />
 			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
 			<campoEntrada propertyOV="ordenTrabajo" 				metodo="setOrdenTrabajo" />
 			
@@ -2043,6 +2045,8 @@
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
 			
+			<campoSalida value="idUsuarioIngresoResultado" 				target="usuarioIngresoResultado.id" />
+	
 			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
 			
 			<campoSalida value="codDiagnostico"		 		target="comentario" />

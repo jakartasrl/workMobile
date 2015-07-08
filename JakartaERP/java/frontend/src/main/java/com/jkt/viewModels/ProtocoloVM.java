@@ -2,7 +2,6 @@ package com.jkt.viewModels;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import lombok.Data;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -60,18 +58,12 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	@Init(superclass=true)
 	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
-	public void init(@BindingParam("l") String laboratorio, @BindingParam("modoAprobacion") Boolean modoAprobacion){
+	public void init(@BindingParam("l") String laboratorio){
 		
 		if(isCargadoDesdeSession()){return;}
 
-		this.modoAprobacion=modoAprobacion;
-		
-		if(this.modoAprobacion){
-			this.setTitulo("Aprobación de Protocolos");
-		}else{
-			this.setTitulo("Administración de Protocolos");
-		}
-		
+		this.setTitulo("Administración de Protocolos");
+
 		this.protocoloOV = new ProtocoloOV();
 		this.clienteOV = new DescriptibleOV();
 		this.equipoOV = new DescriptibleOV();
@@ -95,55 +87,42 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	public void guardar() throws JakartaException {
 		
 		Session sess = Sessions.getCurrent();
-		  
-		UserOV userOV = (UserOV) sess.getAttribute("userCredential");
-		this.protocoloOV.setIdUsuario(userOV.getId());
-		
-		if(this.modoAprobacion){
-			this.protocoloOV.setComentarioDiagnostico("APROBADO POR "+userOV.getName()+" "+userOV.getLastName());
-			this.protocoloOV.setFechaAprobacion(new Date());
-			this.protocoloOV.setEstado(Protocolo.Estado.APROBADO.getId());
-			Operaciones.ejecutar("AprobarProtocolo", this.protocoloOV );
-			Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 
-		}else{
-			
-//			if(this.pedidoOV.getId()==0L || this.protocoloOV.getOrdenTrabajo().isEmpty()){ //Cuando existan las entidades correspondientes, reemplazar cadena por OVs
-//				Messagebox.show("Ingrese un pedido u orden de trabajo.");
-//				return;
-//			}
-			
-			if(this.equipoOV.getId()==0L){
-				Messagebox.show("Ingrese un equipo.");
-				return;
-			}
-			
-			if(!this.validarCalculosExpresiones()){
-				return;
-			}
-	
-			for (DeterminacionOV determinacionOV : this.protocoloOV.getDeterminaciones()) {
-				determinacionOV.setId(0L);
-				MetodoOV metodoOV = determinacionOV.getMetodoUtilizado();
-				determinacionOV.setVariables(metodoOV.getVariables());
-				
-				determinacionOV.setDescMetodo(metodoOV.getMetodo());
-				
-				for (VariableOV variableOV : determinacionOV.getVariables()) {
-					 variableOV.setId(0L);
-				}
-				
-			}
-			
-			this.protocoloOV.setIdPedido(this.pedidoOV.getId());
-			this.protocoloOV.setIdEquipo(this.equipoOV.getId());
-			this.protocoloOV.setIdLab(this.idLaboratorio);
-			
-			Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV );
-			
-			Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+		UserOV userOV = (UserOV) sess.getAttribute("userCredential");
+
+		if (this.equipoOV.getId() == 0L) {
+			Messagebox.show("Ingrese un equipo.");
+			return;
 		}
-		
+
+		if (!this.validarCalculosExpresiones()) {
+			return;
+		}
+
+		for (DeterminacionOV determinacionOV : this.protocoloOV.getDeterminaciones()) {
+			
+			determinacionOV.setId(0L);
+			MetodoOV metodoOV = determinacionOV.getMetodoUtilizado();
+			determinacionOV.setVariables(metodoOV.getVariables());
+
+			determinacionOV.setDescMetodo(metodoOV.getMetodo());
+
+			for (VariableOV variableOV : determinacionOV.getVariables()) {
+				variableOV.setId(0L);
+			}
+
+		}
+
+		this.protocoloOV.setIdPedido(this.pedidoOV.getId());
+		this.protocoloOV.setIdEquipo(this.equipoOV.getId());
+		this.protocoloOV.setIdLab(this.idLaboratorio);
+		this.protocoloOV.setEstado(Protocolo.Estado.ESTADO_INICIAL.getId());
+		this.protocoloOV.setIdUsuarioIngresoResultado(userOV.getId());
+
+		Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV);
+
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+	
 	}
 
 	private boolean validarCalculosExpresiones() {
@@ -193,7 +172,6 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		map.put("invoke","cargarProtocolo" );
 		map.put("vm", this);
 
-		
 		Window window = (Window) Executions.createComponents("/pantallas/pedido/helpGenerico.zul", null, map);
 		window.doModal();
 
@@ -363,9 +341,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		return det;
 	}
 	
-	
 	DescriptibleOV determinacionOV= new DescriptibleOV();
-	private Boolean modoAprobacion;
 	
 	@Command
 	public synchronized void agregarDeterminacion() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
