@@ -38,22 +38,27 @@ public class ValidadorProtocolo extends ValidadorComprobantes  {
 			throw new RuntimeException(e);
 		}
 		
-		try {
-			TipoComprobante tipoComprobante = (TipoComprobante) serviceRepository.getByOid(TipoComprobante.class, Long.valueOf(parametroTipoComportamiento.getValorNumero()));
-			p.setTipoComprobante(tipoComprobante);
-			obtenerNumerador(p);
-		} catch (ClassNotFoundException e) {
-			MostrarError(e);
-		} catch (InstantiationException e) {
-			MostrarError(e);
-		} catch (IllegalAccessException e) {
-			MostrarError(e);
-		} catch (JakartaException e) {
-			MostrarError(e);
-		} catch (Exception e) {
-			MostrarError(e);
-		}
+		if (p.getId()>0) {//es una modificacion, solo puedo adjuntar archivos.Es una validacion rara esta, creo que seria antes del adapter...
+			
+		}else{
+			
+			try {
+				TipoComprobante tipoComprobante = (TipoComprobante) serviceRepository.getByOid(TipoComprobante.class, Long.valueOf(parametroTipoComportamiento.getValorNumero()));
+				p.setTipoComprobante(tipoComprobante);
+				obtenerNumerador(p);
+			} catch (ClassNotFoundException e) {
+				MostrarError(e);
+			} catch (InstantiationException e) {
+				MostrarError(e);
+			} catch (IllegalAccessException e) {
+				MostrarError(e);
+			} catch (JakartaException e) {
+				MostrarError(e);
+			} catch (Exception e) {
+				MostrarError(e);
+			}
 		
+		}
 	}
 	
 	protected void MostrarError(Exception e)throws ValidacionDeNegocioException {
