@@ -66,23 +66,6 @@ public class Determinacion extends Descriptible implements IDetalle {
 		this.leyendaValorCero = aValue;
 	}
 
-//	public String getTipoResultado() {
-//		return tipoResultado;
-//	}
-//
-//	@NotBlank(message = "El tipo de resultado no debe estar vacio.")
-//	public void setTipoResultado(String tipoResultado) {
-//		this.tipoResultado = tipoResultado;
-//	}
-//
-//	public String getFormato() {
-//		return formato;
-//	}
-//
-//	public void setFormato(String aValue) {
-//		this.formato = aValue;
-//	}
-
 	public boolean isCalculaResultado() {
 		return calculaResultado;
 	}

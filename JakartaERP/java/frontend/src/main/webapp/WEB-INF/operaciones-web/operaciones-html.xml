@@ -795,6 +795,8 @@
 				<campoSalida value="adicional"			target="adicional" />
 				<campoSalida value="codigoActividad"	target="actividad.codigo" />
 				<campoSalida value="activo"				target="incluida" />
+				<campoSalida target="subActividad.codigo" value="codigoSubActividad" />
+				
 			</campoSalida>
 
 			<campoSalida value="items"					target="detalles" >
@@ -872,6 +874,8 @@
 				<campoSalida value="adicional"			target="adicional" />
 				<campoSalida value="codigoActividad"	target="actividad.codigo" />
 				<campoSalida value="activo"				target="incluida" />
+				<campoSalida target="subActividad.codigo" value="codigoSubActividad" />
+				
 			</campoSalida>
 
 			<campoSalida value="items"					target="detalles" >

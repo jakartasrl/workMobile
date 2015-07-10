@@ -152,7 +152,11 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 	}
 
 	public String getAdicional1() {
-		return this.getFecha().toString();
+		if(this.getFecha()!=null){
+			return this.getFecha().toString();
+		}else{
+			return " ";
+		}
 	}
 
 	public String getAdicional2() {

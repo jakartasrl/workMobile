@@ -5,7 +5,6 @@ import java.util.List;
 
 import lombok.Data;
 
-import com.jkt.dominio.Comprobante;
 import com.jkt.dominio.ComprobanteVenta;
 import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.IDescriptible;
@@ -19,60 +18,18 @@ import com.jkt.pedido.dominio.FormaFacturacion;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-//@Data
+@Data
 public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 
 	// Ver en los padres, vendedor, representante, cliente, clienteSucursal, condPago, comprobanteRelacionado
 
-//	private List<CondicionComercial> condicionesComerciales = new ArrayList<CondicionComercial>();
 	private List<FormaFacturacion> formasFacturacion = new ArrayList<FormaFacturacion>();
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
 	
-	public List<FormaFacturacion> getFormasFacturacion() {
-		return formasFacturacion;
-	}
-
-	public void setFormasFacturacion(List<FormaFacturacion> formasFacturacion) {
-		this.formasFacturacion = formasFacturacion;
-	}
-
-	public List<Nota> getNotas() {
-		return notas;
-	}
-
-	public void setNotas(List<Nota> notas) {
-		this.notas = notas;
-	}
-
-	public List<PresupuestoDet> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<PresupuestoDet> detalles) {
-		this.detalles = detalles;
-	}
-
-	public ListaPrecios getListaPrecios() {
-		return listaPrecios;
-	}
-
-	public void setListaPrecios(ListaPrecios listaPrecios) {
-		this.listaPrecios = listaPrecios;
-	}
-
-	public List<Nota> getNotasTransientes() {
-		return notasTransientes;
-	}
-
-	public void setNotasTransientes(List<Nota> notasTransientes) {
-		this.notasTransientes = notasTransientes;
-	}
-
-	/*
-	 * Helper methods.
-	 */
+	private boolean versionar;
+	
 	/**
 	 * Resuelve cuáles notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
 	 * 
@@ -101,27 +58,6 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 			formasFacturacion.add(f);
 		}
 	}
-	
-//	public void agregarCondicionComercial(CondicionComercial n){
-//		
-//		if (n.isIncluida()) {
-//			if (!condicionesComerciales.contains(n)) {
-//				//Ya no existe en la lista y debe ser incluida, se agrega
-//				condicionesComerciales.add(n);
-//			}else{
-//				//Ya existia,no se hace nada.
-//			}
-//		}else{
-//			if (condicionesComerciales.contains(n)) {
-//				//Si no esta incluida y estaba en la lista, se elimina.
-//				condicionesComerciales.remove(n);
-//			}else{
-//				//Ya no existia,no se hace nada.
-//			}
-//		}
-//		
-//	}
-	
 	
 	/**
 	 * <p>Agrega un detalle al presupuesto.</p>
@@ -181,11 +117,7 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 	}
 	
 	public String getDescripcion(){
-		//busca en la sucursal xq previamente no estaba relacionado el cliente al comprobamte.
 		return this.getClienteSucursal().getCliente().getDescripcion();
-//		return String.format("%s / %s / %s",this.getVendedor().getApellido(), this.getRepresentante().getDescripcion(), this.getFecha().toString() );
-//		return String.format("%s", this.getFecha().toString() );
-//		return this.getReferencia();
 	}
 	
 	
@@ -203,13 +135,15 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 	}
 
 	public String getAdicional1() {
-//		return this.getVendedor().getDescripcion();
-		return this.getFecha().toString();
+		if(this.getFecha()!=null){
+			return this.getFecha().toString();
+		}else{
+			return " ";
+		}
 	}
 
 	public String getAdicional2() {
 		return "";
-//		return this.getRepresentante().getDescripcion();
 	}
 	
 	public void setComprobanteRelacionado(Cotizacion comprobanteRelacionado) {

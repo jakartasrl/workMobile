@@ -2,6 +2,7 @@ package com.jkt.pedido.validadores;
 
 import java.util.Date;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.Configuracion;
@@ -10,6 +11,7 @@ import com.jkt.dominio.TipoComprobante;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.pedido.dominio.Pedido;
+import com.jkt.presupuesto.dominio.PresupuestoHistorial;
 import com.jkt.validadores.ValidadorComprobantes;
 
 @Service
@@ -54,8 +56,24 @@ public class ValidadorPedido extends ValidadorComprobantes {
 				MostrarError(e);
 			}
 			
-			
 		}
+		
+//		PresupuestoHistorial historial = new PresupuestoHistorial();
+//		BeanUtils.copyProperties(p, historial);
+//		historial.setPresupuesto(p);
+//		historial.setVersion(55);
+//		historial.setFechaVersionado(new Date());
+//		try {
+//			serviceRepository.save(historial);
+//		} catch (ClassNotFoundException e) {
+//			MostrarError(e);
+//		} catch (InstantiationException e) {
+//			MostrarError(e);
+//		} catch (IllegalAccessException e) {
+//			MostrarError(e);
+//		} catch (JakartaException e) {
+//			MostrarError(e);
+//		}
 	}
 
 	protected void MostrarError(Exception e)throws ValidacionDeNegocioException {

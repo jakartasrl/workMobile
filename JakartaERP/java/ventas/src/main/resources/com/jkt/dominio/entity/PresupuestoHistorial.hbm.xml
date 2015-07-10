@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.jkt.presupuesto.dominio.PresupuestoHistorial" table="PRESUPUESTO_HISTORIAL" >
+
+		<id name="id" column="PRESUPUESTO_HISTORIAL_ID">
+			<generator class="hilo" />
+		</id>
+		
+		<property name="activo" column="ACTIVO" type="boolean" />
+		
+		<property name="lugarEmision" column="LUGAR_EMISION" />
+		<property name="anulado" column="ANULADO" type="boolean" />
+		<property name="nro" column="NUMERO" type="string" />
+		
+		<property name="fecha" column="FECHA" type="date" />
+
+		<property name="letra" type="string">
+            <column name="LETRA" length="1" />
+        </property>
+
+        <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID"></many-to-one>
+        
+        <list name="archivos" table="ARCHIVO_COMPROBANTES_HISTORIAL" lazy="true" cascade="all">
+			<key column="PRESUPUESTO_HISTORIAL_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
+		</list>
+		
+		<many-to-one name="clienteSucursal" class="com.jkt.erp.varios.ClienteSucursal" column="CLIENTE_SUCURSAL_ID"></many-to-one>
+		<many-to-one name="condicionPago" class="com.jkt.varios.dominio.CondPago" column="CONDICION_PAGO_ID"></many-to-one>
+
+		<many-to-one name="vendedor" class="com.jkt.erp.varios.Vendedor" cascade="all" column="VENDEDOR_ID" />
+		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="all" column="REPRESENTANTE_ID" />
+
+
+		<list name="contactosReferencia" cascade="all" table="CONTACTOS_REFERENCIA_COMPROBANTE_HISTORIAL">
+			<key column="PRESUPUESTO_HISTORIAL_ID" />
+			<index column="ORDEN" />
+			<many-to-many column="CONTACTO_ID" class="com.jkt.varios.dominio.Contacto" />
+		</list>
+
+		<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" />
+
+		<property name="referencia" column="REFERENCIA" type="string" />
+			
+		<list name="notas" cascade="all" table="PRESUPUESTO_NOTAS_HISTORIAL">
+			<key column="PRESUPUESTO_HISTORIAL_ID" />
+			<index column="ORDEN" />
+			<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
+		</list>
+			
+		<list name="formasFacturacion" cascade="all" table="FORMAS_FACTURACION_HISTORIAL" >
+			<key column="PRESUPUESTO_HISTORIAL_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
+		</list>
+
+		<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID"></many-to-one>
+
+		<list name="detalles" table="DETALLES_PRESUPUESTO_HISTORIAL" lazy="true" cascade="all">
+			<key column="PRESUPUESTO_HISTORIAL_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />
+		</list>
+
+	</class>
+</hibernate-mapping>
