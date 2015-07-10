@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
@@ -34,6 +36,7 @@ import com.jkt.ov.ValoresTablaOV;
  * 
  */
 
+@Data
 public class EquipoVM extends ViewModel implements IBasicOperations{
 	
 	private EquipoOV ov = new EquipoOV();
@@ -47,48 +50,6 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	private List<ValoresTablaOV> marcas = new ArrayList<ValoresTablaOV>();
 	private ValoresTablaOV marca= new ValoresTablaOV();
 	
-	public List<ValoresTablaOV> getMarcas() {
-		return marcas;
-	}
-
-	public void setMarcas(List<ValoresTablaOV> marcas) {
-		this.marcas = marcas;
-	}
-
-	public ValoresTablaOV getMarca() {
-		return marca;
-	}
-
-	public void setMarca(ValoresTablaOV marca) {
-		this.marca = marca;
-	}
-
-	public List<EquipoCaracteristicaOV> getEquipoCaracteristicas() {
-		return equipoCaracteristicas;
-	}
-
-	public void setEquipoCaracteristicas(
-			List<EquipoCaracteristicaOV> equipoCaracteristicas) {
-		this.equipoCaracteristicas = equipoCaracteristicas;
-	}
-
-	public CaracteristicaProductoOV getCaracteristicaProductoOV() {
-		return caracteristicaProductoOV;
-	}
-
-	public void setCaracteristicaProductoOV(
-			CaracteristicaProductoOV caracteristicaProductoOV) {
-		this.caracteristicaProductoOV = caracteristicaProductoOV;
-	}
-
-	public List<CaracteristicaProductoOV> getCaracteristicas() {
-		return caracteristicas;
-	}
-
-	public void setCaracteristicas(List<CaracteristicaProductoOV> caracteristicas) {
-		this.caracteristicas = caracteristicas;
-	}
-
 	@SuppressWarnings("unchecked")
 	@NotifyChange("caracteristicas")
 	public void traerTipoProducto() {
@@ -162,22 +123,6 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 			 
 		this.setOv(eq);
 		
-	}
-
-	public TipoProductoOV getTipoProductoOV() {
-		return tipoProductoOV;
-	}
-
-	public void setTipoProductoOV(TipoProductoOV tipoProductoOV) {
-		this.tipoProductoOV = tipoProductoOV;
-	}
-
-	public EquipoOV getOv() {
-		return ov;
-	}
-
-	public void setOv(EquipoOV ov) {
-		this.ov = ov;
 	}
 
 	@Init(superclass=true)
@@ -334,14 +279,6 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	private void levantarExcepcion(Exception e) throws JakartaException{
 		throw new JakartaException("Ocurrio un error al llamar al helper generico");
-	}
-
-	public DescriptibleOV getClienteOV() {
-		return clienteOV;
-	}
-
-	public void setClienteOV(DescriptibleOV clienteOV) {
-		this.clienteOV = clienteOV;
 	}
 
 	@Override
