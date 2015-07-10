@@ -25,7 +25,7 @@
 					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 
 					<cell>
-						<intbox width="80%" value="0" sclass="importe" constraint="no empty" onBlur="@command('actualizarImporteTotal', item=each)" />
+						<intbox width="80%" sclass="importe" value="@bind(each.cantidad)" constraint="no empty" onBlur="@command('actualizarImporteTotal', item=each)" />
 					</cell>
 
 
@@ -42,7 +42,7 @@
 
 					<cell>
 						$
-						<intbox width="80%" value="000" sclass="importe" readonly="true" />
+						<intbox width="80%" value="@bind(each.importeTotal)" sclass="importe" readonly="true" />
 					</cell>
 
 				</row>

@@ -192,7 +192,9 @@ public class GenerarComprobantePresupuesto extends Operation {
 
 			parameters.put("presentacion", datosEmpresa.getPresentacion());
 
-			parameters.put("contactoRef", p.getContactoReferencia().getApellidoYNombre());
+//			parameters.put("contactoRef", p.getContactoReferencia().getApellidoYNombre());
+//			parameters.put("contactoRef", p.getContactosReferencia().get(0));// .getApellidoYNombre());
+			parameters.put("contactoRef", "CONTACTO DE REF");// .getApellidoYNombre());
 			
 			parameters.put("referencia", p.getReferencia());
 

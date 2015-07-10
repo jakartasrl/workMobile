@@ -22,7 +22,7 @@ public class CotizacionOV extends ObjectView {
 	private long idCliente;
 	private long idSucursal;		
 	private Long idRepresentante;
-	private Long idContactoReferencia;
+	private List<DescriptibleOV> contactosReferencia =  new ArrayList<DescriptibleOV>();
 	
 	private List<ItemsOV> items=new ArrayList<ItemsOV>();
 	protected List<ArchivoOV> archivos=new ArrayList<ArchivoOV>();

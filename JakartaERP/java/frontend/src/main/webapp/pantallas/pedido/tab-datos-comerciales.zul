@@ -51,18 +51,49 @@
 
 
 			<row>
+			
 				<cell colspan="1" width="8%">
 					<label value="Contacto Ref : " />
 				</cell>
+
+				<cell>
+					
+					<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('nuevoContacto')" tooltiptext="Agregar un nuevo contacto." />
+					
+					<listbox id="box" multiple="true" checkmark="true" model="@bind(vm.contactos.list)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" selectedItems="@bind(vm.contactosSeleccionados)" emptyMessage="No existen contactos para esta sucursal.">
+					
+						<listhead sizable="true">
+							<listheader style="text-align : center;" width="40px"></listheader>
+							<listheader>Nombre y Apellido</listheader>
+							<listheader>Telefono</listheader>
+							<listheader>Correo</listheader>
+							<listheader sort="auto(campoAdicional2)">Tipo</listheader>
+						</listhead>
+						
+						<template name="model">
+							<listitem>
+
+								<listcell style="text-align:center">
+								</listcell>
+
+								<listcell>
+									<label value="@bind(each.codigo)" />
+								</listcell>
+								<listcell>
+									<label value="@bind(each.descripcion)" />
+								</listcell>
+								<listcell>
+									<label value="@bind(each.campoAdicional1)" />
+								</listcell>
+								<listcell>
+									<label value="@bind(each.campoAdicional2)" />
+								</listcell>
+							</listitem>
+									
+						</template>
+							
+					</listbox>
 				
-				<cell colspan="2" >
-					<hlayout>
-						<combobox  disabled="@bind(vm.modoAgenda)" model="@bind(vm.contactos.list)" selectedItem="@bind(vm.contactoSeleccionado)" readonly="true">
-							<template name="model">
-								<comboitem label="@bind(each.codigo)" />
-							</template>
-						</combobox>
-					</hlayout>
 				</cell>
 			</row>
 

@@ -26,7 +26,16 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 	private String referencia;
 	
 	@NotNull(message="El comprobante debe tener obligatoriamente un contacto de referencia.")
-	private Contacto contactoReferencia;
+//	private Contacto contactoReferencia;
+	private List<Contacto> contactosReferencia =  new ArrayList<Contacto>();
+
+	public List<Contacto> getContactosReferencia() {
+		return contactosReferencia;
+	}
+
+	public void setContactosReferencia(List<Contacto> contactosReferencia) {
+		this.contactosReferencia = contactosReferencia;
+	}
 
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
@@ -44,13 +53,13 @@ public abstract class ComprobanteVenta extends ComprobanteCliente {
 		this.referencia = referencia;
 	}
 
-	public Contacto getContactoReferencia() {
-		return contactoReferencia;
-	}
-
-	public void setContactoReferencia(Contacto contactoReferencia) {
-		this.contactoReferencia = contactoReferencia;
-	}
+//	public Contacto getContactoReferencia() {
+//		return contactoReferencia;
+//	}
+//
+//	public void setContactoReferencia(Contacto contactoReferencia) {
+//		this.contactoReferencia = contactoReferencia;
+//	}
 
 	public Vendedor getVendedor() {
 		return vendedor;

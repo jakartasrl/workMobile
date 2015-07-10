@@ -1,6 +1,8 @@
 body{
-	background-color: white;
-	background-image: none ; 
+/* 	background-color: white; */
+/* 	background-image: none ;  */
+	background-image : url("../pantallas/img/wallpaper/wallhaven-229265.jpg") 0 0 repeat;
+	
 }
 
 .z-vlayout{

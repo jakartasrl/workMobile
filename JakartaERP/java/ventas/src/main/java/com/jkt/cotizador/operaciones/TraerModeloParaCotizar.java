@@ -84,7 +84,7 @@ public class TraerModeloParaCotizar extends AbstractRecuperarModelo {
 			if (tituloModeloCotizador.getConcepto().isPideArticulo()) {
 				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
 				
-				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
+				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.LONG_TYPE);
 				List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
 				ProductoClasificador productoClasificador;
 				Producto producto;
