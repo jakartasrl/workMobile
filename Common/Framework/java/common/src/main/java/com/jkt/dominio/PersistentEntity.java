@@ -19,7 +19,7 @@ abstract public class PersistentEntity implements Serializable{
 	private long id;
 	private Date modificationDate;
 	private boolean activo=true;
-	private int version;
+	private int version=1;
 
 	
 	public boolean getActivo(){

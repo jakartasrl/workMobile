@@ -45,7 +45,6 @@ public class TraerPresupuestoWeb extends HelperRecuperarDeterminacionesConPrecio
 
 		notificarObjeto("", presupuesto);
 		
-		
 //		notificarCondiciones(presupuesto);
 
 //		notificarDetalles(presupuesto);

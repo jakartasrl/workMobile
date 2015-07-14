@@ -33,10 +33,10 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 			return;
 		}
 		
-		if (!documentacion.contains(documento)) {
-			documentacion.add(documento);
-			documento.setPedido(this);
-		}
+//		if (!documentacion.contains(documento)) {
+//			documentacion.add(documento);
+////			documento.setPedido(this);
+//		}
 		
 		/*
 		 * Si ya existia en la lista, de todos modos es modificado el pedido(Se modifica el elemento de la coleccion perteneciente al pedido).

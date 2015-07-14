@@ -430,7 +430,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Pedido" inputOV="com.jkt.ov.PedidoOV">
+	<operacion name="GuardarPedido" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.pedido.dominio.Pedido" inputOV="com.jkt.ov.PedidoOV" outputOV="com.jkt.ov.DescriptibleOV">
 		
 		<input keyName="objeto" clase="com.jkt.pedido.dominio.Pedido">
 			<campoEntrada propertyOV="id" metodo="setId" />
@@ -443,10 +443,6 @@
 			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
-<!-- 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" /> -->
-<!-- 			<campoEntrada propertyOV="cargaACargoDeCliente" metodo="setCargaACargoDeCliente" /> -->
-<!-- 			<campoEntrada propertyOV="descargaACargoDeCliente" metodo="setDescargaACargoDeCliente" /> -->
-<!-- 			<campoEntrada propertyOV="transporteACargoDeCliente" metodo="setTransporteACargoDeCliente" /> -->
 			
 			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">
 				<campoEntrada propertyOV="id" metodo="setId"/>
@@ -499,13 +495,16 @@
 
 			</campoEntrada>
 
-
 <!-- 			<campoEntrada propertyOV="docs" metodo="setDocumentacion"> -->
 <!-- 				<campoEntrada propertyOV="idDocumento" metodo="setDocumentacion"/> -->
 <!-- 				<campoEntrada propertyOV="entregado" metodo="setEntregado"/> -->
 <!-- 			</campoEntrada> -->
 
 		</input>
+		
+		<output>
+			<campoSalida target="id" value="id" />
+		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
@@ -538,10 +537,6 @@
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
 			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
 			
-<!-- 			<campoSalida value="cargaACargoDeCliente" 		target="cargaACargoDeCliente" /> -->
-<!-- 			<campoSalida value="descargaACargoDeCliente" 	target="descargaACargoDeCliente" /> -->
-<!-- 			<campoSalida value="transporteACargoDeCliente" 	target="transporteACargoDeCliente" /> -->
-
 			<campoSalida value="docs" target="documentacion">
 				<campoSalida value="id"					target="id" />
 				<campoSalida value="entregado"			target="entregado" />
@@ -879,7 +874,6 @@
 			</campoSalida>
 
 			<campoSalida value="items"					target="detalles" >
-<!-- 				<campoSalida value="id"					target="id" /> -->
 				<campoSalida value="cantidad"			target="cantidad" />
 				<campoSalida value="importe"			target="precio" />
 				<campoSalida value="referencia"			target="referencia" />
@@ -893,7 +887,7 @@
 
 				<campoSalida value="idDeterminacion"	target="determinacion.id" />
 				<campoSalida value="codigo"				target="determinacion.codigo" />
-				<campoSalida value="descripcionDeterminacion"		target="determinacion.descripcion" />
+				<campoSalida value="descripcionDeterminacion" target="determinacion.descripcion" />
 				
 			</campoSalida>
 			
@@ -939,7 +933,6 @@
 			<campoSalida value="nroCotizacion" 		target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
-<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
@@ -950,7 +943,6 @@
 				<campoSalida value="importe"			target="totalCotizado" />
 				<campoSalida value="referencia"			target="cotizador.item.referencia" />
 				<campoSalida value="descripcion"		target="cotizador.item.descripcion" />
-<!-- 				<campoSalida value="tipoItem"			target="tipoDetalle" /> TODOS LOS DE COTIZACION SON ITEMS. -->
 				<campoSalida value="tipo"				target="tipoVenta" />
 				
 				<campoSalida value="idMoneda"			target="cotizador.monedaExpresada.id" />
@@ -1012,7 +1004,6 @@
 			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
-<!-- 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" /> -->
 			
 			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" />
 			
@@ -1074,6 +1065,25 @@
 	</operacion>
 
 
+
+	<operacion name="GenerarHistoricoPedido" clase="com.jkt.pedido.operaciones.GenerarHistoricoPedido" inputOV="com.jkt.ov.ContainerOV" >
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID_PEDIDO"/>
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="GenerarHistoricoPresupuesto" clase="com.jkt.presupuesto.operaciones.GenerarHistoricoPresupuesto" inputOV="com.jkt.ov.ContainerOV" >
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID_PRESUPUESTO"/>
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 	<operacion name="GenerarComprobantePresupuesto" clase="com.jkt.presupuesto.operaciones.GenerarComprobantePresupuesto" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ContainerOV">
 		
 		<input>
@@ -1100,7 +1110,6 @@
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="fechaVencimiento" 	target="fechaVencimiento" />
 			<campoSalida value="referencia" 		target="referencia" />
-<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
@@ -1149,9 +1158,7 @@
 			<campoEntrada propertyOV="idRepresentante" 		metodo="setRepresentante" />
 			<campoEntrada propertyOV="idCliente" 			metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" 			metodo="setClienteSucursal" />
-<!-- 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" /> -->
 			
-<!-- 			<campoEntrada propertyOV="items" metodo="setDetalles"> -->
 			<campoEntrada propertyOV="items" metodo="setDetallesConReferencias">
 				<campoEntrada propertyOV="id" metodo="setId"/>
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
@@ -1351,7 +1358,6 @@
 			<campoEntrada propertyOV="id" metodo="setId" />
 			
 			<campoEntrada propertyOV="tareas" metodo="setTareas">
-<!-- 				<campoEntrada propertyOV="idTarea" metodo="setId" /> -->
 				<campoEntrada propertyOV="codigoTarea" metodo="setCodigo" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
 
@@ -1643,13 +1649,12 @@
 			<campoEntrada propertyOV="idCotizacionDet" 	metodo="setItem" />
 			
 			<campoEntrada propertyOV="idModelo" 		metodo="setModelo" />
-			
+
 <!-- 			<campoEntrada propertyOV="idVendedor" metodo="setVendedor" /> -->
 <!-- 			<campoEntrada propertyOV="idCliente" metodo="setCliente" /> -->
 <!-- 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" /> -->
-			
+
 			<campoEntrada propertyOV="detalles" metodo="setDetalles">
-<!-- 				<campoEntrada propertyOV="idComponenteValor"	metodo="setIdComponenteValor" /> -->
 				<campoEntrada propertyOV="id" 					metodo="setId" />
 				<campoEntrada propertyOV="idNuevo" 				metodo="setTituloModeloCotizador" />
 				<campoEntrada propertyOV="idProducto" 			metodo="setProducto" />
@@ -1657,10 +1662,8 @@
 				<campoEntrada propertyOV="idUnidadMedida" 		metodo="setUnidadMedida" />
 				<campoEntrada propertyOV="precioUnitario" 		metodo="setPrecioUnitario" />
 				<campoEntrada propertyOV="idMoneda" 			metodo="setMoneda" />
-<!-- 				<campoEntrada propertyOV="fechaPrecioCosto" metodo="setFechaPrecioCosto" /> -->
 				<campoEntrada propertyOV="precio" 				metodo="setCotizacion" />
 				<campoEntrada propertyOV="markUp" 				metodo="setMarkUp" />
-<!-- 				<campoEntrada propertyOV="costoEn" 			metodo="setCostoEn" /> -->
 				<campoEntrada propertyOV="importeVenta" 		metodo="setImporteVenta" />
 				<campoEntrada propertyOV="idC" 					metodo="setConceptoPresupuesto" />
 			</campoEntrada>
@@ -1719,7 +1722,6 @@
 			<campoSalida target="cotizador.monedaExpresada.codigo" 					value="codMoneda" />
 			
 			<campoSalida target="titulosTransientes" 								value="titulos">
-<!-- 				<campoSalida target="idComponenteValor" 							value="idComponenteValor" /> -->
 				<campoSalida target="idTransiente" 									value="id" />
 				<campoSalida target="codigo" 										value="codigo" />	
 				<campoSalida target="descripcion" 									value="descripcion" />
@@ -1879,18 +1881,6 @@
 			
 			<campoSalida target="vm" value="vm" />
 			
-<!-- 			<campoSalida target="elementos" value="hijos"> -->
-<!-- 				<campoSalida target="id" value="id" /> -->
-<!-- 				<campoSalida target="codigo" value="nombre" />	 -->
-<!-- 				<campoSalida target="type" value="tipo" /> -->
-				
-<!-- 				<campoSalida target="elementos" value="hijos"> -->
-<!-- 					<campoSalida target="id" value="id" /> -->
-<!-- 					<campoSalida target="codigo" value="nombre" />	 -->
-<!-- 				</campoSalida> -->
-				
-<!-- 			</campoSalida> -->
-						
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
@@ -2093,12 +2083,6 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
-	
-	
-	
-	
-	
-	
 	
 	<operacion name="GuardarContactoEnSucursal" clase="com.jkt.operaciones.GuardarContactoEnSucursal" outputOV="com.jkt.ov.ContactoOV" inputOV="com.jkt.ov.ContactoOV">
 		

@@ -29,6 +29,7 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 	private ListaPrecios listaPrecios;
 	
 	private boolean versionar;
+//	private int version=1;
 	
 	/**
 	 * Resuelve cuáles notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto

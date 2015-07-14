@@ -4,7 +4,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.dominio.ComprobanteVenta" table="COMPROBANTE_VENTA" abstract="true">
+	<class name="com.jkt.dominio.ComprobanteVenta" table="COMPROBANTE_VENTA" abstract="true" polymorphism="explicit">
 
 		<id name="id" column="COMPROBANTE_VENTA_ID">
 			<generator class="hilo" />
@@ -72,7 +72,11 @@
 <!-- 		PEDIDO MAPPING -->
 <!-- 		PEDIDO MAPPING -->
 		<union-subclass name="com.jkt.pedido.dominio.Pedido" table="PEDIDO">
+
+			<property name="version" column="VERSION"  />
+			
 			<many-to-one name="comprobanteRelacionado" class="com.jkt.presupuesto.dominio.Presupuesto" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
+
 
 			<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" />
 
@@ -126,11 +130,13 @@
 <!-- 		PRESUPUESTO MAPPING -->
 <!-- 		PRESUPUESTO MAPPING -->
 <!-- 		PRESUPUESTO MAPPING -->
-	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO">
+	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO" >
+
+			<property name="version" column="VERSION"  />
 
 			<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" /> <!-- el presupuesto ya esta en la mappedSuperclass -->
 
-        	<many-to-one name="comprobanteRelacionado" class="com.jkt.dominio.Cotizacion" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
+        	<many-to-one name="comprobanteRelacionado" class="com.jkt.dominio.Cotizacion" column="COMPROBANTE_RELACIONADO_ID" />
 
 <!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
 			<property name="referencia" column="REFERENCIA" type="string" />
@@ -155,12 +161,12 @@
 				<one-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
 			</list>
 
-			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID"></many-to-one>
+			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID"/>
 
-			<list name="detalles" table="DETALLES_PRESUPUESTO" lazy="true" cascade="all">
+			<list name="detalles" table="DETALLES_PRESUPUESTO" cascade="all">
 				<key column="PRESUPUESTO_ID" />
 				<index column="ORDEN" />
-				<one-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />
+				<many-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />
 			</list>
 
 		</union-subclass>

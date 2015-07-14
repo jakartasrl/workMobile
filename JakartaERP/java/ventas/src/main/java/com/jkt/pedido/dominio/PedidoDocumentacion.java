@@ -14,7 +14,7 @@ import com.jkt.presupuesto.dominio.Nota;
 @Data
 public class PedidoDocumentacion extends PersistentEntity {
 
-	private Pedido pedido;
+//	private Pedido pedido;
 	private Documentacion documentacion;
 	private boolean entregado = Boolean.FALSE;
 	

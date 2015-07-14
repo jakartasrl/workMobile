@@ -2,6 +2,7 @@ package com.jkt.viewModels;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
@@ -114,9 +116,19 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 
 			completarOV();
-			Operaciones.ejecutar("GuardarPedido", comprobanteOV);
-			cancelar();
-			Executions.sendRedirect("/pantallas/index/index-pedido.zul");		
+			final DescriptibleOV pedidoDescriptible = (DescriptibleOV) Operaciones.ejecutar("GuardarPedido", comprobanteOV, DescriptibleOV.class);
+			
+			Messagebox.show("¿Desea generar una nueva version final del pedido generado?", "Version de Pedido", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
+				public void onEvent(Event evt) throws InterruptedException, IOException {
+					if (evt.getName().equals("onOK")) {
+						ContainerOV container = new ContainerOV();
+						container.setString1(String.valueOf(pedidoDescriptible.getId()));
+						Operaciones.ejecutar("GenerarHistoricoPedido", container);
+						Executions.sendRedirect("/pantallas/index/index-pedido.zul");
+					}
+				}
+			});
+			
 		}
 	}
 	

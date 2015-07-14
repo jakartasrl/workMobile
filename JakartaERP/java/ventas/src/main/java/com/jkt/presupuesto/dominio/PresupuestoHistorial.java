@@ -14,8 +14,6 @@ import lombok.Data;
 public class PresupuestoHistorial extends Presupuesto {
 
 	private Presupuesto Presupuesto;
-	
-	private int version;
 	private Date fechaVersionado;
 	
 }

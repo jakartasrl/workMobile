@@ -4,9 +4,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-	<class name="com.jkt.presupuesto.dominio.PresupuestoHistorial" table="PRESUPUESTO_HISTORIAL" polymorphism="explicit" >
+	<class name="com.jkt.pedido.dominio.PedidoHistorial" table="PEDIDO_HISTORIAL" polymorphism="explicit" >
 	
-		<id name="id" column="PRESUPUESTO_HISTORIAL_ID">
+		<id name="id" column="PEDIDO_HISTORIAL_ID">
 			<generator class="native" />
 		</id>
 		
@@ -24,8 +24,8 @@
 
         <many-to-one name="tipoComprobante" class="com.jkt.dominio.TipoComprobante" column="TIPO_COMPROBANTE_ID" />
         
-        <list name="archivos" table="PRESUPUESTO_ARCHIVO_HISTORIAL" lazy="true" cascade="none">
-			<key column="PRESUPUESTO_HISTORIAL_ID" />
+        <list name="archivos" table="PEDIDO_ARCHIVO_HISTORIAL" lazy="true" cascade="none">
+			<key column="PEDIDO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many class="com.jkt.varios.dominio.Especificacion" column="ARCHIVO_ID"/>
 		</list>
@@ -37,8 +37,8 @@
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="none" column="REPRESENTANTE_ID" />
 
 
-		<list name="contactosReferencia" cascade="none" table="PRESUPUESTO_CONTACTOS_REFERENCIA_HISTORIAL">
-			<key column="PRESUPUESTO_HISTORIAL_ID" />
+		<list name="contactosReferencia" cascade="none" table="PEDIDO_CONTACTOS_REFERENCIA_HISTORIAL">
+			<key column="PEDIDO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many column="CONTACTO_ID" class="com.jkt.varios.dominio.Contacto" />
 		</list>
@@ -47,24 +47,30 @@
 
 		<property name="referencia" column="REFERENCIA" type="string" />
 			
-		<list name="notas" cascade="none" table="PRESUPUESTO_NOTAS_HISTORIAL">
-			<key column="PRESUPUESTO_HISTORIAL_ID" />
+		<list name="notas" cascade="none" table="PEDIDO_NOTAS_HISTORIAL">
+			<key column="PEDIDO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
 		</list>
 			
-		<list name="formasFacturacion" cascade="none" table="PRESUPUESTO_FORMAS_FACTURACION_HISTORIAL" >
-			<key column="PRESUPUESTO_HISTORIAL_ID" />
+		<list name="formasFacturacion" cascade="none" table="PEDIDO_FORMAS_FACTURACION_HISTORIAL" >
+			<key column="PEDIDO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
 		</list>
 
+		<list name="documentacion" cascade="none" table="PEDIDO_DOCUMENTACION_HISTORIAL" >
+			<key column="PEDIDO_HISTORIAL_ID" />
+			<index column="ORDEN" />
+			<many-to-many class="com.jkt.pedido.dominio.PedidoDocumentacion"/>
+		</list>
+
 		<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />
 
-		<list name="detalles" table="DETALLES_PRESUPUESTO_HISTORIAL" cascade="all">
-			<key column="PRESUPUESTO_HISTORIAL_ID" />
+		<list name="detalles" table="DETALLES_PEDIDO_HISTORIAL" cascade="all">
+			<key column="PEDIDO_HISTORIAL_ID" />
 			<index column="ORDEN" />
-			<many-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />
+			<many-to-many class="com.jkt.pedido.dominio.PedidoDet" />
 		</list>
 
 	</class>

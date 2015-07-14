@@ -32,6 +32,7 @@ import com.jkt.varios.dominio.ComponenteValor;
  */
 public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 
+	private static final String K = "1";
 	private static final String COTIZADOR_WRITER = "cotizador";
 	private static final String ITEM_WRITER = "item";
 
@@ -101,7 +102,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				}
 				
 				if(cotizadorDet.getProducto()==null){
-					mapComponenteValor.put(String.valueOf("1"), cotizadorDet);
+					mapComponenteValor.put(String.valueOf(K), cotizadorDet);
 				}else{
 					mapComponenteValor.put(String.valueOf(cotizadorDet.getProducto().getId()), cotizadorDet);
 				}
@@ -169,7 +170,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 				
 				ComponenteValor valor = tituloModeloCotizador.getConcepto().getComponenteValor();
 				
-				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.INTEGER_TYPE);
+				Filtro filtro = new Filtro("componenteValor.id", String.valueOf(valor.getId()), "igual", TiposDeDato.LONG_TYPE);
 				List<PersistentEntity> clasificacionesDeProducto = serviceRepository.getByProperties(ProductoClasificador.class, Arrays.asList(filtro));
 				ProductoClasificador productoClasificador;
 				Producto producto;
@@ -238,7 +239,7 @@ public class TraerCotizacionDelItem extends AbstractRecuperarModelo {
 //				ArrayList<CotizadorDet> values = (ArrayList<CotizadorDet>) mapaDeDetallesPorIdValor.values();
 				if(mapaDeDetallesPorIdValor!=null){
 					
-					CotizadorDet cotizadorDet = mapaDeDetallesPorIdValor.get("1");//values.get(0);
+					CotizadorDet cotizadorDet = mapaDeDetallesPorIdValor.get(K);//values.get(0);
 					if (cotizadorDet!=null) {
 	//				if (cotizadorDet!=null) {
 						tituloModeloCotizador.setDetalleDeConcepto(cotizadorDet);//puede setearse en un detalle existente o en un nulo...

@@ -32,6 +32,11 @@ public class Guardar extends Operation {
 		PersistentEntity objToSave = (PersistentEntity) object.get(0);
 		objToSave.setModificationDate(new Date());
 		serviceRepository.save(objToSave);//save the first
+		
+		if(CLIENTE_HTML.equals(this.getTipoCliente())){
+			notificarObjeto("", objToSave);
+		}
+
 	}
 
 }

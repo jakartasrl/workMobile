@@ -14,11 +14,11 @@
 		
         <grid model="@load(vm.coleccion)"  mold="paging" pageSize="10" emptyMessage="No se encuentran datos para la solicitud realizada."  >
         
-	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
+	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;" >
 	            <auxheader label="@load(vm.titulo)" colspan="@load(vm.getCantidad())" />
 	        </auxhead>
 
-            <columns>
+            <columns sizable="true">
 <!--                 <column hflex="1" label="@load(vm.id)" /> -->
                 <column hflex="1" label="@load(vm.codigo)" align="left" sort="auto(codigo)" />
                 <column hflex="2" label="@load(vm.descripcion)" align="left" sort="auto(descripcion)" />

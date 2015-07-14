@@ -44,14 +44,14 @@ public class SessionProvider implements ISessionProvider{
 		LOG.info("Iniciando el bean proveedor de sesiones.");
 	}
 	
-	public Session getSession(){
+	public synchronized Session getSession(){
 		if (session==null) {
 			session=sessionFactory.openSession();
 		}
 		return session;
 	}
 
-	public void destroySession() {
+	public synchronized void destroySession() {
 		if (session!=null) {
 			session.close();
 			session=null;

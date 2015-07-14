@@ -88,6 +88,17 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 		completarOV();
 		final DescriptibleOV descripcionPresupuesto = (DescriptibleOV) Operaciones.ejecutar("GuardarPresupuesto", comprobanteOV, DescriptibleOV.class);
+
+		
+		Messagebox.show("¿Desea generar una nueva version final del presupuesto generado?", "Version de Presupuesto", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
+			public void onEvent(Event evt) throws InterruptedException, IOException {
+				if (evt.getName().equals("onOK")) {
+					ContainerOV container = new ContainerOV();
+					container.setString1(String.valueOf(descripcionPresupuesto.getId()));
+					Operaciones.ejecutar("GenerarHistoricoPresupuesto", container);
+				}
+			}
+		});
 		
 		Messagebox.show("¿Desea generar un comprobante del presupuesto generado?", "Reporte de Presupuesto", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
 			public void onEvent(Event evt) throws InterruptedException, IOException {

@@ -9,7 +9,7 @@
 		</id>
 		
 		<property name="entregado" type="boolean" column="ENTREGADO"></property>
-		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" column="PEDIDO_ID" cascade="none" />
+<!-- 		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" column="PEDIDO_ID" cascade="none" /> -->
 		<many-to-one name="documentacion" class="com.jkt.pedido.dominio.Documentacion" column="DOCUMENTACION_ID" cascade="none" />
 
 	</class>
