@@ -9,15 +9,20 @@
 				<grid model="@bind(vm.listProtocolo)" emptyMessage="No existen protocolos pendientes de aprobrar">
 
 					<columns>
-						<column label="Codigo" 		width="150px"/>
-						<column label="Descripcion" width="150px"/>
+						<column label="Codigo" 			width="150px"/>
+						<column label="Descripcion" 	width="400px"/>
+						<column label="Fecha creacion"	width="150px"/>
+<!-- 						<column label="Usuario Creador"	width="150px"/> -->
+<!-- 						<column label="Nro Pedido"		width="150px"/> -->
+<!-- 						<column label="Equipo"			width="150px"/> -->
 					</columns>
 			
 					<rows>
 						<template name="model">
 							<row>
-								<textbox width="100%" value="@bind(each.codigo)" 		onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
-								<textbox width="100%" value="@bind(each.descripcion)" 	onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+								<textbox width="100%" value="@bind(each.codigo)" 			onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+								<textbox width="100%" value="@bind(each.descripcion)" 		onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+<!-- 								<textbox width="100%" value="@bind(each.fechaHoraEmision)" 	onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" /> -->
 							</row>	
 						</template>					
 					</rows>

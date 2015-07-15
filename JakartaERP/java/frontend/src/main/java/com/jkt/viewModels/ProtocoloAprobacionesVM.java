@@ -24,13 +24,16 @@ import com.jkt.ov.ContenedorFiltrosOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.FiltroOV;
 import com.jkt.ov.ListDescriptibleOV;
+import com.jkt.ov.ListProtocoloOV;
 import com.jkt.ov.ParametroOV;
+import com.jkt.ov.ProtocoloOV;
 import com.jkt.service.ServiceRepository;
 
 @Data
 public class ProtocoloAprobacionesVM extends ViewModel implements IBasicOperations {
 		
-	private List<DescriptibleOV> listProtocolo = new ArrayList<DescriptibleOV>();
+	private List<DescriptibleOV> listProtocoloDescriptible = new ArrayList<DescriptibleOV>();
+	private List<ProtocoloOV> listProtocolo = new ArrayList<ProtocoloOV>();
 
 	//Para manejar diferenciar los laboratorios quimicos y electricos
 	private long idLaboratorio;
@@ -76,8 +79,17 @@ public class ProtocoloAprobacionesVM extends ViewModel implements IBasicOperatio
 		
 		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
 		List resultado = listDescriptible.getList();
+		this.listProtocoloDescriptible = resultado;
 		
-		this.listProtocolo = resultado;
+		for(DescriptibleOV protocoloDescriptible : this.listProtocoloDescriptible){
+			ContainerOV containerOV = new ContainerOV();
+			containerOV.setString1("protocolo");
+			containerOV.setString2(String.valueOf(protocoloDescriptible.getId()));
+		
+			ListProtocoloOV p = (ListProtocoloOV) Operaciones.ejecutar("TraerProtocolo", containerOV, ListProtocoloOV.class);
+			ProtocoloOV protocoloOV = (ProtocoloOV) p.getList().get(0);
+			this.listProtocolo.add(protocoloOV);
+		}
 		
 	}
 	

@@ -1,9 +1,7 @@
 <?page title="PDF-Viewer" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="pdfwindow" width="80%" height="80%" title="PDF-Viewer"
-		border="normal" mode="modal" closable="true" maximizable="true"
-		>
-		<iframe id="pdfwindow_iframe" height="100%" width="100%" src="index-equipo.zul" />
+	<window id="pdfwindow" width="100%" height="100%" title="PDF-Viewer" border="normal"  closable="true" maximizable="true" >
+		<iframe id="pdfwindow_iframe" height="100%" width="100%" src="index-equipo-popup.zul" />
 
 	</window>
 </zk>

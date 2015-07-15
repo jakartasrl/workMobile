@@ -19,14 +19,15 @@ public class ValidadorProtocolo extends ValidadorComprobantes  {
 		Protocolo p =  (Protocolo) entity;
 		
 		
-		Query crearHQL = this.serviceRepository.crearHQL("select p.cliente from Pedido p where p.id = :idPedido");
-		crearHQL.setParameter("idPedido", p.getIdPedido());
+//		Query crearHQL = this.serviceRepository.crearHQL("select p.cliente from Pedido p where p.id = :idPedido");
+//		crearHQL.setParameter("idPedido", p.getIdPedido());
 		
-		Cliente c = (Cliente) crearHQL.uniqueResult();
-		ClienteSucursal s = c.getListaSucursales().get(0);
-		
-		p.setCliente(c);
-		p.setClienteSucursal(s);
+//		Cliente c = (Cliente) crearHQL.uniqueResult();
+//
+//		ClienteSucursal s = c.getListaSucursales().get(0);
+//
+//		p.setCliente(c);
+//		p.setClienteSucursal(s);		
 		
 		Configuracion parametroTipoComportamiento =null;
 		try {

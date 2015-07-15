@@ -59,6 +59,7 @@
 		<elemento codigo="105" name="Moneda" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarMoneda-moneda" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="106" name="Pais" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarPais-pais" 					type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="107" name="Documentacion" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDocumentacion-documentacion" type="submenu" vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="110" name="Diagnostico" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDiagnostico-diagnostico" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 	</elemento>
 	
 </menues>

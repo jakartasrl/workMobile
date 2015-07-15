@@ -60,5 +60,6 @@
 	<elemento key="idioma" value="com.jkt.varios.dominio.Idioma"/>
 	<elemento key="protocolo" value="com.jkt.laboratorio.dominio.Protocolo" validador="com.jkt.validadores.ValidadorProtocolo" />
 	<elemento key="menu" value="com.jkt.dominio.menu.ElementoMenu"/>
+	<elemento key="diagnostico" value="com.jkt.laboratorio.dominio.Diagnostico"/>
 
 </elementos>

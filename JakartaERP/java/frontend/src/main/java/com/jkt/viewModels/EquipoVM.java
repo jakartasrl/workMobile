@@ -27,6 +27,8 @@ import com.jkt.ov.EquipoCaracteristicaOV;
 import com.jkt.ov.EquipoOV;
 import com.jkt.ov.ListCaracteristicaProductoOV;
 import com.jkt.ov.ListMarcaOV;
+import com.jkt.ov.ListPropiedadMatricialOV;
+import com.jkt.ov.PropiedadMatricialOV;
 import com.jkt.ov.TipoProductoOV;
 import com.jkt.ov.ValoresTablaOV;
 
@@ -50,6 +52,9 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	private List<ValoresTablaOV> marcas = new ArrayList<ValoresTablaOV>();
 	private ValoresTablaOV marca= new ValoresTablaOV();
 	
+	private PropiedadMatricialOV propiedadMatricialOV = new PropiedadMatricialOV();
+	private ListPropiedadMatricialOV lsPropiedadMatricialOV = new ListPropiedadMatricialOV();
+	
 	@SuppressWarnings("unchecked")
 	@NotifyChange("caracteristicas")
 	public void traerTipoProducto() {
@@ -66,8 +71,8 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"ov","caracteristicas","marcas"})
-	public void traerEquipo() {
+	@NotifyChange({"ov","caracteristicas","marcas","propiedadMatricialOV","lsPropiedadMatricialOV"})
+	public void traerEquipo() throws IOException, Exception, JakartaException {
 		
 		long idEquipo = ov.getId();
 		String entidad = "Equipo";
@@ -79,6 +84,10 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		EquipoOV eq = (EquipoOV) Operaciones.ejecutar("TraerEquipo", containerOV, EquipoOV.class);
 	
 		this.setCaracteristicas(eq.getCaracteristicas());
+		
+		//Inicio
+		this.lsPropiedadMatricialOV = (ListPropiedadMatricialOV) Operaciones.ejecutar("TraerPropiedades", ListPropiedadMatricialOV.class);
+		//Fin
 		
 		DescriptibleOV clienteOV = new DescriptibleOV();
 		clienteOV.setId(eq.getIdCliente());
@@ -159,7 +168,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	@Override
 	@GlobalCommand("actualizar")
-	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas" })
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","propiedadMatricialOV","lsPropiedadMatricialOV"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -170,7 +179,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 	
 	@Command("guardar")
-	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas"})
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas","propiedadMatricialOV","lsPropiedadMatricialOV"})
 	public void guardar() throws JakartaException {
 		
 		if (!this.validar()){
@@ -247,7 +256,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 
 	@Command
-	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas"})
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas","propiedadMatricialOV","lsPropiedadMatricialOV"})
 	public void nuevo() {
 		//borrar topdos los ovs, asignando una nueva isntancia... ov= new ovm
 		this.ov = new EquipoOV();
@@ -282,7 +291,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 
 	@Override
-	@NotifyChange({"ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas"})
+	@NotifyChange({"ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas","lsPropiedadMatricialOV"})
 	public void cancelarCustomizado() throws JakartaException {
 		this.nuevo();
 		Executions.sendRedirect("/pantallas/index/index-equipo.zul");

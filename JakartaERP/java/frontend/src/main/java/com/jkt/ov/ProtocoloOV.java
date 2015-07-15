@@ -18,7 +18,13 @@ public class ProtocoloOV extends DescriptibleOV {
 	private long idPedido;
 	
 	private long idCliente;
+	private String codCliente;
+	
 	private long idLab;
+	
+	private long idSucursal;
+	private String codSucursal;
+	private String descripcionCompleta;
 	
 	private Date fechaHoraEmision = new Date();
 	private Date fechaHoraMuestra = new Date(); 

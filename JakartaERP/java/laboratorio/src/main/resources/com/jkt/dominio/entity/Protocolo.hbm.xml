@@ -31,7 +31,7 @@
 		<many-to-one name="usuarioIngresoAprobacion" 	class="com.jkt.dominio.Usuario" column="USUARIO_APROBACION_ID"/>
 		<many-to-one name="usuarioFinalizado" 			class="com.jkt.dominio.Usuario" column="USUARIO_FINALIZACION_ID"/>
 
-<!-- 		<many-to-one name="diagnostico" class="com.jkt.laboratorio.dominio.Diagnostico" column="DIAGNOSTICO_ID"/> -->
+		<many-to-one name="diagnostico" class="com.jkt.laboratorio.dominio.Diagnostico" column="DIAGNOSTICO_ID"/>
 
 		<property name="activo" column="ACTIVO" type="boolean" />
 

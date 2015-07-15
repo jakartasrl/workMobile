@@ -12,6 +12,7 @@ import com.jkt.dominio.PersistentEntity;
 public class ProtocoloVariable extends PersistentEntity {
 
 	private String variable;
+	private String descVariable;
 	private String expresion; //Si no es input
 	private double valor;
 	

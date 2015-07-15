@@ -3,22 +3,26 @@
 	<grid width="100%">
 
 		<columns>
-			<column width="90px"/>
-			<column width="90px"/>
-			<column width="90px"/>
-			<column width="90px"/>
-			<column width="90px"/>
-			<column width="90px"/>
+			<column width="80px"/>
+			<column width="100px"/>
+			<column width="255px"/>
+			<column width="130px"/>
 		</columns>
 			
 		<rows>
 			<row>
 				<label value="Diagnostico : " />
-				<textbox width="100%" value="@bind(vm.protocoloOV.codDiagnostico)" readonly="true"/>
+				<hlayout>
+					<textbox sclass="campoCodigo-large" value="@bind(vm.diagnosticoOV.codigo)" readonly="true" />
+<!-- 					<button label="..." onClick="@command('openHelper', clase='diagnostico', ov=vm.diagnosticoOV, post='')" disabled="true" /> -->
+				</hlayout>
+				<cell colspan="2">
+					<textbox width="100%" value="@bind(vm.diagnosticoOV.descripcion)" readonly="true"/>
+				</cell>
 			</row>
 			<row>
 				<label value="Comentario : " />
-				<cell colspan="5">
+				<cell colspan="3">
 					<textbox width="100%" value="@bind(vm.protocoloOV.comentarioDiagnostico)" readonly="true"/>
 				</cell>
 			</row>

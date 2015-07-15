@@ -1,9 +1,8 @@
 <?page title="Jakarta ERP" id="JakartaERP" cacheable="false"?>
 <?init class="com.jkt.security.ServicioAcceso" ?>
 
-<window id="modalDialog" title="" style="margin-top:5px;" width="700px" position="top,center" closable="true" >
+<window id="modalDialog" title="" style="margin-top:5px;" width="800px" position="top,center" closable="true" >
 
-	
 	<style src="/style/template.css" />
 
 	<div width="auto" height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ProtocoloPopUpVM')" id="h">
@@ -20,22 +19,23 @@
 						<column width="160px"/>
 						<column width="120px"/>
 						<column width="160px"/>
+						<column width="160px"/>
 					</columns>
 			
 					<rows>
 					
 						<row sclass="fila-maestro">
 							<label value="Fecha Emision : " />
-							<datebox width="100%" id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" disabled="true" />
+							<datebox width="100%" id="fechaHoraEmision" value="@bind(vm.protocoloOV.fechaHoraEmision)" format="dd/MM/yyyy" disabled="true" />
 							<label value="Fecha de muestra : " />
-							<datebox width="100%" id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" disabled="true" />
+							<datebox width="100%" id="fechaHoraMuestra" value="@bind(vm.protocoloOV.fechaHoraMuestra)" format="dd/MM/yyyy" disabled="true" />
 						</row>
 
 						<row>
 							<label value="Nro. de Pedido : " />
 								
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoOV.nro)" constraint="no empty" onBlur="@command('validarCampo', clase='pedido', codigo=self.value, ov=vm.pedidoOV, post='traerDeterminaciones')" readonly="${vm.modoAprobacion}"/>
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.pedidoOV.nro)"  readonly="${vm.modoAprobacion}"/>
 								<button label="..." onClick="@command('openHelper', clase='pedido', ov=vm.pedidoOV, post='traerDeterminaciones')" disabled="${vm.modoAprobacion}" />
 							</hlayout>
 
@@ -43,39 +43,44 @@
 							
 							<hlayout>
 								<textbox width="100%" value="@bind(vm.protocoloOV.ordenTrabajo)" readonly="${vm.modoAprobacion}" />
-<!-- 								<button label="..." /> -->
 							</hlayout>
 	
 						</row>
 						
 			    		<row>
-							<label value="Cliente : " />
+							<label value="Cliente | Sucursal : " />
+							
 							<hlayout>
-								<textbox readonly="true" sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" constraint="no empty" />
+								<textbox readonly="true" sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)"  />
+								<button label="..." disabled="true" />
 							</hlayout>
-							<cell colspan="2">
-								<textbox readonly="true" width="100%" value="@bind(vm.clienteOV.descripcion)" constraint="no empty" />
+
+							<hlayout>
+								<textbox readonly="true" sclass="campoCodigo-vsmall" value="@bind(vm.sucursalOV.codigo)" />
+								<button label="..." disabled="true"/>
+							</hlayout>
+
+							<cell colspan="3">
+								<textbox value="@bind(vm.sucursalOV.descripcionCompleta)" width="100%" readonly="true" />
 							</cell>
-						</row>
+			    		</row>
 												
 						<row>
 							<label value="Equipo : " />
 							<hlayout>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.equipoOV.codigo)" constraint="no empty" onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV, post='')" readonly="${vm.modoAprobacion}" />
-								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='')" disabled="${vm.modoAprobacion}" />
-								<button label="..." onClick="@command('abrirNuevo')" disabled="${vm.modoAprobacion}" />
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.equipoOV.codigo)"  readonly="${vm.modoAprobacion}" />
+								<button label="..."  disabled="${vm.modoAprobacion}" />
+								<button label="..."  disabled="${vm.modoAprobacion}" />
 							</hlayout>
 														
-							<cell colspan="2">
-								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)" constraint="no empty" />
+							<cell colspan="3">
+								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)"  />
 							</cell>
 						</row>
 
 						<row>
 							<label value="Fecha Aprobacion : " visible="${vm.modoAprobacion}" />
-							<datebox width="100%" id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" onCreate="self.value = new Date()" readonly="true" visible="${vm.modoAprobacion}" />
-<!-- 							<label value="Fecha Finalizacion : " visible="${vm.modoAprobacion}" /> -->
-<!-- 							<datebox width="100%" id="fechaHoraFinalizacion" value="@bind(vm.protocoloOV.fechaFinalizacion)" constraint="no empty" format="dd/MM/yyyy  hh:mm:ss" readonly="true" visible="${vm.modoAprobacion}" />	 -->
+							<datebox width="100%" id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)" format="dd/MM/yyyy" disabled="true" onCreate="self.value = new Date()" readonly="true" visible="${vm.modoAprobacion}" />
 						</row>
 					</rows>
 				
@@ -85,7 +90,7 @@
 			
 		</panel>
 		
-		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+		<panel style="margin-top:1px;" border="none" height="auto" width="75%">
 		
 			<panelchildren>
 			
@@ -97,9 +102,7 @@
 			    	</tabs>
 			    	
 			    	<tabpanels>
-			    			        
-			    			        
-			    			        	
+			    			        			    			          	
 			        	<tabpanel>
 							<include id="determinacionesContent" hflex="1" src="/pantallas/protocolo/protocolo-deter-pend-aprob.zul" viewModel="${vm}"/>
 			        	</tabpanel>
@@ -118,7 +121,7 @@
 				
 	</vlayout>
 	
-	<hlayout>
+	<hlayout width="25%" style="padding-left:5px;" >
         <button id="cerrar" hflex="1" label="Cancelar" onClick="@command('cerrarModal',window=modalDialog)"/>
         <button id="apro" hflex="1" label="Aprobar" onClick="@command('guardar',window=modalDialog)"/>
 	</hlayout>

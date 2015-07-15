@@ -38,6 +38,7 @@ import com.jkt.ov.MetodoOV;
 import com.jkt.ov.ParametroOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.ProtocoloOV;
+import com.jkt.ov.SucursalOV;
 import com.jkt.ov.UserOV;
 import com.jkt.ov.ValorEsperadoOV;
 import com.jkt.ov.VariableOV;
@@ -48,8 +49,10 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	private ProtocoloOV protocoloOV = new ProtocoloOV();
 	private DescriptibleOV clienteOV = new DescriptibleOV();
+	private SucursalOV sucursalOV = new SucursalOV();
 	private DescriptibleOV equipoOV = new DescriptibleOV();
 	private PedidoOV pedidoOV = new PedidoOV();
+	private DescriptibleOV diagnosticoOV = new DescriptibleOV();
 
 	//Para manejar diferenciar los laboratorios quimicos y electricos
 	private long idLaboratorio;
@@ -57,7 +60,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	private char tipoItem;
 	
 	@Init(superclass=true)
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem","sucursalOV","diagnosticoOV"})
 	public void init(@BindingParam("l") String laboratorio){
 		
 		if(isCargadoDesdeSession()){return;}
@@ -66,8 +69,10 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 
 		this.protocoloOV = new ProtocoloOV();
 		this.clienteOV = new DescriptibleOV();
+		this.sucursalOV = new SucursalOV();
 		this.equipoOV = new DescriptibleOV();
 		this.pedidoOV = new PedidoOV();
+		this.diagnosticoOV = new DescriptibleOV();
 		
 		this.laboratorioParametroKey = laboratorio;
 		
@@ -83,7 +88,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV"})
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","sucursalOV","diagnosticoOV"})
 	public void guardar() throws JakartaException {
 		
 		Session sess = Sessions.getCurrent();
@@ -94,7 +99,22 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 			Messagebox.show("Ingrese un equipo.");
 			return;
 		}
-
+		
+		if (this.clienteOV.getId() == 0L) {
+			Messagebox.show("Ingrese un cliente.");
+			return;
+		}
+		
+		if (this.sucursalOV.getId() == 0L) {
+			Messagebox.show("Ingrese sucursal.");
+			return;
+		}
+		
+		if (this.diagnosticoOV.getId() == 0L) {
+			Messagebox.show("Ingrese diagnostico.");
+			return;
+		}
+		
 		if (!this.validarCalculosExpresiones()) {
 			return;
 		}
@@ -115,9 +135,12 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 
 		this.protocoloOV.setIdPedido(this.pedidoOV.getId());
 		this.protocoloOV.setIdEquipo(this.equipoOV.getId());
+		this.protocoloOV.setIdCliente(this.clienteOV.getId());
+		this.protocoloOV.setIdSucursal(this.sucursalOV.getId());
 		this.protocoloOV.setIdLab(this.idLaboratorio);
 		this.protocoloOV.setEstado(Protocolo.Estado.ESTADO_INICIAL.getId());
 		this.protocoloOV.setIdUsuarioIngresoResultado(userOV.getId());
+		this.protocoloOV.setIdDiagnostico(this.diagnosticoOV.getId());
 
 		Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV);
 
@@ -177,7 +200,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 
 	}
 	
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem","sucursalOV","diagnosticoOV"})
 	public void cargarProtocolo() throws JakartaException {
 		
 		ContainerOV containerOV = new ContainerOV();
@@ -188,21 +211,27 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.protocoloOV = (ProtocoloOV) p.getList().get(0);
 		
 		this.equipoOV = Operaciones.recuperarObjetoDescriptible("equipo",this.protocoloOV.getIdEquipo());
+		this.diagnosticoOV = Operaciones.recuperarObjetoDescriptible("diagnostico",this.protocoloOV.getIdDiagnostico());
 
-		containerOV.setString1("pedido");
-		containerOV.setString2(String.valueOf(this.protocoloOV.getIdPedido()));
+		if (this.protocoloOV.getIdPedido() > 0){
+			containerOV.setString1("pedido");
+			containerOV.setString2(String.valueOf(this.protocoloOV.getIdPedido()));
 		
-		PedidoOV pedidoOV = (PedidoOV) ((ListPedidoOV) Operaciones.ejecutar("TraerDeterminacionesDePedido", containerOV, ListPedidoOV.class)).getList().get(0);
-		
-		this.clienteOV.setId(pedidoOV.getIdCliente());
-		this.clienteOV.setCodigo(pedidoOV.getCodCliente());
-		this.clienteOV.setDescripcion(pedidoOV.getDescCliente());
-		
-		this.pedidoOV = pedidoOV;
+			PedidoOV pedidoOV = (PedidoOV) ((ListPedidoOV) Operaciones.ejecutar("TraerDeterminacionesDePedido", containerOV, ListPedidoOV.class)).getList().get(0);
+			this.pedidoOV = pedidoOV;
+		}
+			
+		this.clienteOV.setId(this.protocoloOV.getIdCliente());
+		this.clienteOV.setCodigo(this.protocoloOV.getCodCliente());
+			
+		this.sucursalOV.setId(this.protocoloOV.getIdSucursal());
+		this.sucursalOV.setCodigo(this.protocoloOV.getCodSucursal());
+		this.sucursalOV.setDescripcionCompleta(this.protocoloOV.getDescripcionCompleta());
 				
 		List<DeterminacionOV> listDeterminaciones = new ArrayList<DeterminacionOV>(); 
 		for (DeterminacionOV det : this.protocoloOV.getDeterminaciones()){
 			MetodoOV met = new MetodoOV();
+			met.setId(det.getIdMetodoUtilizado()); //Seteamos el id del metodo utilizado
 			met.setVariables(det.getVariables());
 			met.setMetodo(det.getDescMetodo());
 						
@@ -224,7 +253,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	@Override
 	@GlobalCommand("actualizar")
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem","sucursalOV","diagnosticoOV"})
 	public void actualizar() {
 			
 	}
@@ -241,7 +270,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	}
 	
 	@Command("traerDeterminaciones")
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem","sucursalOV","diagnosticoOV"})
 	public void traerDeterminaciones(){
 				
 		ContainerOV containerOV = new ContainerOV();
@@ -350,7 +379,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	
 	public void traerDeterminacion(){
 		DeterminacionOV det = obtenerDeterminacion(determinacionOV.getId());
-		this.protocoloOV.getDeterminaciones().add(det);
+		this.protocoloOV.getDeterminaciones().add(0,det);
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
@@ -398,6 +427,15 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		
 		Window window = (Window) Executions.createComponents("/pantallas/protocolo/nuevoEquipo.zul", null, null);
 		window.doModal();
+	}
+	
+	public void actualizarCamposDependientesDeCliente() {
+		this.sucursalOV = new SucursalOV();
+	}
+	
+	public void actualizarCampoSucursal() {
+		String text = this.clienteOV.getDescripcion().concat("/").concat(this.sucursalOV.getDescripcion());
+		this.sucursalOV.setDescripcionCompleta(text);
 	}
 	
 }

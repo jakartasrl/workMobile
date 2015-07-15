@@ -28,6 +28,7 @@ import com.jkt.ov.ListProtocoloOV;
 import com.jkt.ov.MetodoOV;
 import com.jkt.ov.PedidoOV;
 import com.jkt.ov.ProtocoloOV;
+import com.jkt.ov.SucursalOV;
 import com.jkt.ov.UserOV;
 
 @Data
@@ -37,11 +38,13 @@ public class ProtocoloPopUpVM {
 	private DescriptibleOV clienteOV = new DescriptibleOV();
 	private DescriptibleOV equipoOV = new DescriptibleOV();
 	private PedidoOV pedidoOV = new PedidoOV();
+	private DescriptibleOV diagnosticoOV = new DescriptibleOV();
+	private SucursalOV sucursalOV = new SucursalOV();
 	private Boolean modoAprobacion=true;
 	private ProtocoloAprobacionesVM vm;
 	
 	@Init
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem","diagnosticoOV"})
 	public void init(@ExecutionArgParam("pd") DescriptibleOV protocoloDescriptible,@ExecutionArgParam("vm") ProtocoloAprobacionesVM vm) throws JakartaException{
 		
 		this.vm = vm;
@@ -54,17 +57,23 @@ public class ProtocoloPopUpVM {
 		this.protocoloOV = (ProtocoloOV) p.getList().get(0);
 		
 		this.equipoOV = Operaciones.recuperarObjetoDescriptible("equipo",this.protocoloOV.getIdEquipo());
+		this.diagnosticoOV = Operaciones.recuperarObjetoDescriptible("diagnostico",this.protocoloOV.getIdDiagnostico());
 
 		containerOV.setString1("pedido");
 		containerOV.setString2(String.valueOf(this.protocoloOV.getIdPedido()));
 		
-		PedidoOV pedidoOV = (PedidoOV) ((ListPedidoOV) Operaciones.ejecutar("TraerDeterminacionesDePedido", containerOV, ListPedidoOV.class)).getList().get(0);
+		if (this.protocoloOV.getIdPedido() > 0){
+			containerOV.setString1("pedido");
+			containerOV.setString2(String.valueOf(this.protocoloOV.getIdPedido()));
 		
-		this.clienteOV.setId(pedidoOV.getIdCliente());
-		this.clienteOV.setCodigo(pedidoOV.getCodCliente());
-		this.clienteOV.setDescripcion(pedidoOV.getDescCliente());
-		
-		this.pedidoOV = pedidoOV;
+			PedidoOV pedidoOV = (PedidoOV) ((ListPedidoOV) Operaciones.ejecutar("TraerDeterminacionesDePedido", containerOV, ListPedidoOV.class)).getList().get(0);
+			this.pedidoOV = pedidoOV;
+		} else {
+			this.clienteOV = Operaciones.recuperarObjetoDescriptible("clientes",this.protocoloOV.getIdCliente());
+			this.sucursalOV.setId(this.protocoloOV.getIdSucursal());
+			this.sucursalOV.setCodigo(this.protocoloOV.getCodSucursal());
+			this.sucursalOV.setDescripcionCompleta(this.protocoloOV.getDescripcionCompleta());
+		}
 				
 		List<DeterminacionOV> listDeterminaciones = new ArrayList<DeterminacionOV>(); 
 		for (DeterminacionOV det : this.protocoloOV.getDeterminaciones()){

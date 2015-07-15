@@ -1247,6 +1247,19 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="guardarDiagnostico" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Diagnostico" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Diagnostico">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 
 	<operacion name="guardarUnidadMedida" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.UnidadMedida" inputOV="com.jkt.ov.DescriptibleOV">
 	
@@ -2032,6 +2045,8 @@
 			<campoEntrada propertyOV="fechaHoraMuestra" 			metodo="setFechaHoraMuestra" />
 			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
 			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
+			<campoEntrada propertyOV="idCliente" 					metodo="setCliente" />
+			<campoEntrada propertyOV="idSucursal" 					metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
 <!-- 			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" /> -->
 			<campoEntrada propertyOV="idUsuarioIngresoResultado" 					metodo="setUsuarioIngresoResultado" />
@@ -2040,6 +2055,7 @@
 			
 			<campoEntrada propertyOV="codDiagnostico" 				metodo="setComentario" />
 			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" />
+			<campoEntrada propertyOV="idDiagnostico" 				metodo="setDiagnostico" />
 			
 			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
 			
@@ -2048,9 +2064,11 @@
 				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
 				
 				<campoEntrada propertyOV="descMetodo" 				metodo="setDescMetodo" />
+				<campoEntrada propertyOV="idMetodoUtilizado" 		metodo="setIdMetodoUtilizado" />
 				
 				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
-					<campoEntrada propertyOV="descripcion" 			metodo="setVariable" />
+					<campoEntrada propertyOV="codigo"	 			metodo="setVariable" />
+					<campoEntrada propertyOV="descripcion"	 		metodo="setDescVariable" />
 					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
 					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
 					<campoEntrada propertyOV="input" 				metodo="setInput" />
@@ -2078,6 +2096,11 @@
 			<campoSalida value="fechaHoraMuestra" 		target="fechaHoraMuestra" />
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
+			<campoSalida value="idCliente"		 		target="clienteSucursal.cliente.id" />
+			<campoSalida value="codCliente"		 		target="clienteSucursal.cliente.codigo" />
+			<campoSalida value="idSucursal"		 		target="clienteSucursal.id" />
+			<campoSalida value="codSucursal"		 	target="clienteSucursal.codigo" />
+			<campoSalida value="descripcionCompleta"	target="clienteSucursal.descripcionCompleta" />
 			
 			<campoSalida value="idUsuarioIngresoResultado" 				target="usuarioIngresoResultado.id" />
 	
@@ -2086,16 +2109,20 @@
 			<campoSalida value="codDiagnostico"		 		target="comentario" />
 			<campoSalida value="comentarioDiagnostico"		target="comentarioDiagnostico" />
 			
+			<campoSalida value="idDiagnostico"		 		target="diagnostico.id" />
+			
 			<campoSalida value="determinaciones"		target="detalles" >
 				<campoSalida value="id" 				target="id" />
 				<campoSalida value="descripcion" 		target="descDeterminacion" />
 				<campoSalida value="comentario" 		target="comentario" />
 				
 				<campoSalida value="descMetodo" 		target="descMetodo" />
+				<campoSalida value="idMetodoUtilizado"	target="idMetodoUtilizado" />
 				
 				<campoSalida value="variables" 				target="variables" >
+					<campoSalida target="id" 					value="id" />
 					<campoSalida value="codigo"		 			target="variable" /><!-- 					es para poder enviar luego el codigo correcto a la operacion -->
-					<campoSalida value="descripcion" 			target="variable" />
+					<campoSalida value="descripcion" 			target="descVariable" />
 					<campoSalida value="valorInput" 			target="valor" />
 					<campoSalida value="expresionCadena"  		target="expresion" />
 					<campoSalida value="input"  				target="input" />
@@ -2138,4 +2165,18 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TraerPropiedades" clase="com.jkt.laboratorio.operaciones.TraerPropiedades" outputOV="com.jkt.ov.ListPropiedadMatricialOV">
+		
+		<output>
+
+			<campoSalida target="nombre" 				value="nombre" />
+			<campoSalida target="id_valor_primario" 	value="id_valor_primario" />
+			<campoSalida target="id_valor_secundario" 	value="id_valor_secundario" />
+			<campoSalida target="id_valor_terciario" 	value="id_valor_terciario" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+		
 </entity>
