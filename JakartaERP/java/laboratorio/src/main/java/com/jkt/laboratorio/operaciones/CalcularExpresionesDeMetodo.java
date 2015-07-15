@@ -68,8 +68,7 @@ import com.jkt.operaciones.Operation;
 			case '-':
 			case '*':
 			case '/':
-				String op = (new StringBuffer().append(exp.charAt(x)))
-						.toString();
+				String op = (new StringBuffer().append(exp.charAt(x))).toString();
 				operadores.add(op);
 				break;
 			default:
