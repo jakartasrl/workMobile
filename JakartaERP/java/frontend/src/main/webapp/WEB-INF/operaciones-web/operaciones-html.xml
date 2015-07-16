@@ -2091,10 +2091,13 @@
 		
 		<output>
 			<campoSalida value="id" 					target="id" />
+			<campoSalida value="codigo" 				target="codigo" />
+			<campoSalida value="descripcion" 			target="descripcion" />
 			<campoSalida value="idPedido" 				target="idPedido" />
 			<campoSalida value="fechaHoraEmision" 		target="fecha" />
 			<campoSalida value="fechaHoraMuestra" 		target="fechaHoraMuestra" />
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
+			<campoSalida value="nombreEquipo"		 	target="equipo.descripcion" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
 			<campoSalida value="idCliente"		 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="codCliente"		 		target="clienteSucursal.cliente.codigo" />
@@ -2103,6 +2106,7 @@
 			<campoSalida value="descripcionCompleta"	target="clienteSucursal.descripcionCompleta" />
 			
 			<campoSalida value="idUsuarioIngresoResultado" 				target="usuarioIngresoResultado.id" />
+			<campoSalida value="nombreUsuarioIngresoResultado" 			target="usuarioIngresoResultado.descripcion" />
 	
 			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
 			
@@ -2178,5 +2182,5 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
-		
+	
 </entity>

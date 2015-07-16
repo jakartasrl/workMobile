@@ -121,10 +121,14 @@
 				
 	</vlayout>
 	
-	<hlayout width="25%" style="padding-left:5px;" >
-        <button id="cerrar" hflex="1" label="Cancelar" onClick="@command('cerrarModal',window=modalDialog)"/>
-        <button id="apro" hflex="1" label="Aprobar" onClick="@command('guardar',window=modalDialog)"/>
-	</hlayout>
+
+		<groupbox width="75%" style="text-align : center">
+			<caption label="Aprobacion" />
+        	<button  width="25%" label="Cancelar" 	onClick="@command('cerrarModal',window=modalDialog)"/>
+        	<button  width="25%" style="margin-bottom:2px;margin-left:3px;" label="Aceptar" 	onClick="@command('guardar',window=modalDialog)"/>
+        </groupbox>
+
+
 	
 	</div>
 

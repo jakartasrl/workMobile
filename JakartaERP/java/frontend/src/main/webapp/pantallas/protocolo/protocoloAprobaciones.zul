@@ -2,27 +2,32 @@
 
 	<vlayout>
 		
-		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Protocolos Pendientes de Aprobacion" border="normal" width="43%" >
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Protocolos Pendientes de Aprobacion" border="normal" width="90%" >
 
 			<panelchildren>
 			
 				<grid model="@bind(vm.listProtocolo)" emptyMessage="No existen protocolos pendientes de aprobrar">
 
 					<columns>
-						<column label="Codigo" 			width="150px"/>
-						<column label="Descripcion" 	width="400px"/>
-						<column label="Fecha creacion"	width="150px"/>
-<!-- 						<column label="Usuario Creador"	width="150px"/> -->
-<!-- 						<column label="Nro Pedido"		width="150px"/> -->
-<!-- 						<column label="Equipo"			width="150px"/> -->
+						<column label="Protocolo" 			width="100px"/>
+						<column label="Fecha"				width="80px"/>
+						<column label="Cliente/Sucursal" 	width="400px"/>
+						<column label="Nro Pedido"			width="100px"/>
+						<column label="Creador por"			width="150px"/>
+						<column label="Equipo"				width="300px"/>
+						<column label=""					width="50px"/>
 					</columns>
 			
 					<rows>
 						<template name="model">
 							<row>
-								<textbox width="100%" value="@bind(each.codigo)" 			onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
-								<textbox width="100%" value="@bind(each.descripcion)" 		onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
-<!-- 								<textbox width="100%" value="@bind(each.fechaHoraEmision)" 	onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" /> -->
+								<textbox width="100%" value="@bind(each.codigo)"   						onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" sclass="campoCodigo-medium" />
+								<datebox width="100%" value="@bind(each.fechaHoraEmision)"  			onDoubleClick="@command('aprobarProtocolo',protocolo=each)" buttonVisible="false" format="dd/MM/yyyy" />
+								<textbox width="100%" value="@bind(each.descripcionCompleta)" 					onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+								<textbox width="100%" value="@bind(each.nroPedido)" 					onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+								<textbox width="100%" value="@bind(each.nombreUsuarioIngresoResultado)" onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />
+								<textbox width="100%" value="@bind(each.nombreEquipo)" 					onDoubleClick="@command('aprobarProtocolo',protocolo=each)" readonly="true" />								
+								<button  width="90%"  image="/pantallas/icons/detalle.png"					onClick="@command('aprobarProtocolo',protocolo=each)" style="margin-bottom:2px;margin-left:3px;" />																
 							</row>	
 						</template>					
 					</rows>

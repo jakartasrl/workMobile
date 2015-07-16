@@ -13,9 +13,11 @@ public class ProtocoloOV extends DescriptibleOV {
 	
 	private EquipoOV equipo;
 	private long idEquipo;
+	private String nombreEquipo;
 	
 	private PedidoOV pedido;
 	private long idPedido;
+	private String nroPedido;
 	
 	private long idCliente;
 	private String codCliente;
@@ -49,5 +51,7 @@ public class ProtocoloOV extends DescriptibleOV {
 	private long idUsuarioIngresoResultado;
 	private long idUsuarioIngresoAprobacion;
 	private long idUsuarioFinalizado;
+	
+	private String nombreUsuarioIngresoResultado;
 
 }

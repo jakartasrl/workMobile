@@ -6,13 +6,12 @@
 			<column width="80px"/>
 			<column width="100px"/>
 			<column width="255px"/>
-			<column width="130px"/>
+			<column width="225px"/>
 		</columns>
 			
 		<rows>
 			<row>
-				<label value="Diagnostico : " />
-<!-- 				<textbox width="100%" value="@bind(vm.protocoloOV.codDiagnostico)" /> -->
+				<label width="100%" value="Diagnostico : " />
 				<hlayout>
 					<textbox sclass="campoCodigo-medium" value="@bind(vm.diagnosticoOV.codigo)" onBlur="@command('validarCampo', clase='diagnostico', codigo=self.value, ov=vm.diagnosticoOV, post='')" />
 					<button label="..." onClick="@command('openHelper', clase='diagnostico', ov=vm.diagnosticoOV, post='')"  />
@@ -22,9 +21,13 @@
 				</cell>
 			</row>
 			<row>
-				<label value="Comentario : " />
-				<cell colspan="3">
-					<textbox width="100%" value="@bind(vm.protocoloOV.comentarioDiagnostico)" />
+				<cell colspan="4">
+					<label width="100%" value="Comentario" />
+				</cell>
+			</row>
+			<row>
+				<cell colspan="4">
+					<ckeditor height="70px" width="100%" value="@bind(vm.protocoloOV.comentarioDiagnostico)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" />	
 				</cell>
 			</row>
 		</rows>
