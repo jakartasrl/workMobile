@@ -67,6 +67,31 @@
 			    		
 					</row>
 					
+					<row sclass="fila-maestro">
+						<label style="width:100px;" value="Referencia : " />
+						<cell colspan="5">
+							<textbox class="campoCodigo-large" value="@bind(vm.comprobanteOV.referencia)" tabindex="4" width="100%" />
+						</cell>
+					</row>
+					
+					<row sclass="fila-maestro">
+						<label style="width:100px;" value="Tags : " />
+						<cell colspan="5">
+							<textbox class="campoCodigo-large" value="@bind(vm.comprobanteOV.tags)" tabindex="4" width="100%" />
+						</cell>
+					</row>
+					
+					<row sclass="fila-maestro">
+						<label value="Tipo" />
+						<cell colspan="5">
+							<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(vm.comprobanteOV.tipoVenta)" constraint="no empty">
+								<template name="model" var="tVenta">
+									<comboitem label="@bind(tVenta.descripcion)" />
+								</template>
+							</combobox>
+						</cell>
+					</row>
+					
 				</rows>
 			</grid>
 

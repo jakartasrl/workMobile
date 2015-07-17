@@ -19,7 +19,7 @@ import com.jkt.pedido.dominio.FormaFacturacion;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
-//@Data
+@Data
 public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 
 	// Ver en los padres, vendedor, representante, cliente, clienteSucursal, condPago, comprobanteRelacionado
@@ -29,46 +29,9 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
-	
-	public List<FormaFacturacion> getFormasFacturacion() {
-		return formasFacturacion;
-	}
+	private String tags;
+	private String referencia;
 
-	public void setFormasFacturacion(List<FormaFacturacion> formasFacturacion) {
-		this.formasFacturacion = formasFacturacion;
-	}
-
-	public List<Nota> getNotas() {
-		return notas;
-	}
-
-	public void setNotas(List<Nota> notas) {
-		this.notas = notas;
-	}
-
-	public List<PresupuestoDet> getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(List<PresupuestoDet> detalles) {
-		this.detalles = detalles;
-	}
-
-	public ListaPrecios getListaPrecios() {
-		return listaPrecios;
-	}
-
-	public void setListaPrecios(ListaPrecios listaPrecios) {
-		this.listaPrecios = listaPrecios;
-	}
-
-	public List<Nota> getNotasTransientes() {
-		return notasTransientes;
-	}
-
-	public void setNotasTransientes(List<Nota> notasTransientes) {
-		this.notasTransientes = notasTransientes;
-	}
 
 	/*
 	 * Helper methods.

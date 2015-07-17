@@ -12,7 +12,7 @@
 		<div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
 			<include id="pedidoId" src="/pantallas/presupuesto/presupuesto.zul" viewModel="${vm}"/>
 		</div>
-		
+
 	</div>
 </zk>
 

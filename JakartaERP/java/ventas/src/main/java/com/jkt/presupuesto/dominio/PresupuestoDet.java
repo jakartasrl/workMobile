@@ -2,7 +2,7 @@ package com.jkt.presupuesto.dominio;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import lombok.Data;
 
 import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.dominio.CotizacionDet;
@@ -14,6 +14,7 @@ import com.jkt.varios.dominio.Moneda;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class PresupuestoDet extends ComprobanteVentaDet{
 
 	public static final char CHAR_ITEM = 'I';
@@ -31,48 +32,7 @@ public class PresupuestoDet extends ComprobanteVentaDet{
 	@NotNull(message="El detalle de presupuesto tiene que tener una moneda obligatoriamente.")
 	private Moneda moneda;
 	
-//	@NotEmpty(message="El detalle de presupuesto debe ser de un tipo permitido por el sistema.")
 	private char tipoDetalle;
-	
-	public char getTipoDetalle() {
-		return tipoDetalle;
-	}
-
-	public void setTipoDetalle(char tipoDetalle) {
-		this.tipoDetalle = tipoDetalle;
-	}
-
-	public CotizacionDet getItemCotizado() {
-		return itemCotizado;
-	}
-
-	public void setItemCotizado(CotizacionDet itemCotizado) {
-		this.itemCotizado = itemCotizado;
-	}
-
-	public Moneda getMoneda() {
-		return moneda;
-	}
-
-	public void setMoneda(Moneda moneda) {
-		this.moneda = moneda;
-	}
-
-	public Presupuesto getPresupuesto() {
-		return presupuesto;
-	}
-
-	public void setPresupuesto(Presupuesto presupuesto) {
-		this.presupuesto = presupuesto;
-	}
-
-	public Determinacion getDeterminacion() {
-		return determinacion;
-	}
-
-	public void setDeterminacion(Determinacion determinacion) {
-		this.determinacion = determinacion;
-	}
 	
 	/*
 	 * Helper methods

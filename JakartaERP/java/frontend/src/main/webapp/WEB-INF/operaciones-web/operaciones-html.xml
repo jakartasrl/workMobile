@@ -1008,8 +1008,11 @@
 			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
-<!-- 			<campoEntrada propertyOV="idContactoReferencia" metodo="setContactoReferencia" /> -->
 			
+			<campoEntrada propertyOV="tipo" metodo="setTipoVenta" />
+			<campoEntrada propertyOV="referencia" metodo="setReferencia" />
+			<campoEntrada propertyOV="tags" metodo="setTags" />
+
 			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" />
 			
 			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">

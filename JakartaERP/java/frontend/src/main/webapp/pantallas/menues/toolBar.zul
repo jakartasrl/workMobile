@@ -1,9 +1,23 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
-	<script>
+	<zscript>
+
+		import java.io.*;
+		import com.jkt.ov.*;
 		
-	</script>
-	
+		public void mostrarNombre(){
+		
+			Session sess = Sessions.getCurrent();
+			UserOV cre = (UserOV) sess.getAttribute("userCredential");
+			Label tb = (Label)event.getTarget();
+			String msg=cre.getName()+" "+cre.getLastName();
+			tb.setValue(msg);
+//			Clients.showNotification(msg, "info", sectorUsuario , "top_right", 1000);
+
+		}
+
+	</zscript>
+
 	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar" align="start">
 		<hlayout style="width:100%" id="idLayout">
 
@@ -23,8 +37,9 @@
 				<label value="@bind(vm.titulo)" style="vertical-align:middle; font-size:25px; color:grey;" />
 			</div>
 
-			<div hflex="1" droppable="true" style="text-align: right;">
-<!-- 				<toolbarbutton image="/pantallas/icons/export.png" onClick="@command('logOut')" tooltiptext="Salir" /> -->
+			<div id="sectorUsuario" hflex="1" style="text-align: right ; ">
+				<label value="Usuario : " style="font-size:15px; color:grey;  vertical-align: middle;" />
+				<label value="" style="font-size:15px; color:black;  vertical-align: middle;" onCreate="mostrarNombre()"/>
 			</div>
 
 		</hlayout>

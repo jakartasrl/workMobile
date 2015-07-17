@@ -6,16 +6,15 @@
 
 			<panelchildren>
 
-				<grid style="border-style:none;"
-					sizedByContent="true">
+				<grid style="border-style:none;" sizedByContent="true" >
 
 					<columns>
 						<column width="120px" />
 						<column width="120px" />
 						<column width="100px" />
-						<column width="120px"/>
-						<column width="120px"/>
-						<column width="150px"/>
+						<column width="120px" />
+						<column width="120px" />
+						<column width="150px" />
 					</columns>
 
 					<rows>

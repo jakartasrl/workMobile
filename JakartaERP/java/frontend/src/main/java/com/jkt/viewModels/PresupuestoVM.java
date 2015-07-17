@@ -8,15 +8,11 @@ import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -25,7 +21,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -41,7 +36,6 @@ import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.NotaOV;
 import com.jkt.ov.PresupuestoOV;
-import com.jkt.ov.tree.NodoNotas;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
 
@@ -344,10 +338,9 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		comprobanteOV.setIdListaPrecio(lPreciosOV.getId());
 		comprobanteOV.setIdVendedor(vendedorOV.getId());
 		comprobanteOV.setIdRepresentante(representanteOV.getId());
+		comprobanteOV.setTipo(Integer.valueOf(comprobanteOV.getTipoVenta().getCodigo()));
 
-		//		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
-
 		
 		comprobanteOV.setArchivos(this.archivos);
 		
@@ -429,6 +422,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.contactosSeleccionados=new ArrayList<DescriptibleOV>();
 		
 		this.comprobanteOV= new PresupuestoOV();
+		this.comprobanteOV.setTipoVenta((DescriptibleOV) (this.tiposVenta.isEmpty()?new DescriptibleOV():this.tiposVenta.getList().get(0)));
 
 	}
 

@@ -25,9 +25,11 @@ public class PresupuestoOV extends ObjectView {
 	private String letra;
 	private String lugarEmision;
 	private String nro;
+	private String tags;
 	private boolean anulado = false;
-	private Date fecha = new Date() ;
-	
+	private Date fecha = new Date();
+	private DescriptibleOV tipoVenta = new DescriptibleOV();
+
 	private Long idCotizacion=null;
 
 	private Long idCliente;
@@ -36,7 +38,7 @@ public class PresupuestoOV extends ObjectView {
 	private String referencia;
 	private Long idVendedor;
 	private Long idRepresentante;
-//	private Long idContactoReferencia;
+	private int tipo=0;
 	private List<DescriptibleOV> contactosReferencia =  new ArrayList<DescriptibleOV>();
 
 	private List<NotaOV> notas=new ArrayList<NotaOV>();	
@@ -66,5 +68,6 @@ public class PresupuestoOV extends ObjectView {
 		
 		return filtros;
 	}
+
 	
 }

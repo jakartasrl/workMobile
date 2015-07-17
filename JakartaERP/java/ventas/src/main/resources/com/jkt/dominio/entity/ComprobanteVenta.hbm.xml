@@ -12,7 +12,6 @@
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-<!-- 		<property name="comportamiento" column="COMPORTAMIENTO" /> -->
 		<property name="lugarEmision" column="LUGAR_EMISION" />
 		<property name="anulado" column="ANULADO" type="boolean" />
 		<property name="nro" column="NUMERO" type="string" />
@@ -44,17 +43,15 @@
 			<many-to-many column="CONTACTO_ID" class="com.jkt.varios.dominio.Contacto" />
 		</list>
 
+		<property name="referencia" column="REFERENCIA" type="string" />
 
-<!-- 		COTIZACION MAPPING -->
-<!-- 		COTIZACION MAPPING -->
-<!-- 		COTIZACION MAPPING -->
-<!-- 		COTIZACION MAPPING -->
+
+
+		<!-- ********************** COTIZACION ******************************************************************* -->
 	    <union-subclass name="com.jkt.dominio.Cotizacion" table="COTIZACION">
 			<property name="estado" column="ESTADO" />
 
 			<property name="fechaVencimiento" column="FECHA_VENCIMIENTO" type="date" />
-			<property name="referencia" column="REFERENCIA" type="string" />
-<!-- 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one> -->
 
 			<list name="detalles" table="DETALLES_COTIZACION" lazy="true" cascade="all">
 				<key column="COTIZACION_ID" />
@@ -65,23 +62,12 @@
 		</union-subclass>
 
 
-
-
-<!-- 		PEDIDO MAPPING -->
-<!-- 		PEDIDO MAPPING -->
-<!-- 		PEDIDO MAPPING -->
-<!-- 		PEDIDO MAPPING -->
+		<!-- ********************** PEDIDO *************************************************************************** -->
 		<union-subclass name="com.jkt.pedido.dominio.Pedido" table="PEDIDO">
 			<many-to-one name="comprobanteRelacionado" class="com.jkt.presupuesto.dominio.Presupuesto" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
 
 			<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" />
 
-<!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
-			<property name="referencia" column="REFERENCIA" type="string" />
-			
-<!-- 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one> -->
-			
-			
 			<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />
 
 			<list name="notas" cascade="all" table="PEDIDO_NOTAS">
@@ -122,32 +108,21 @@
 			
 		</union-subclass>
 
-<!-- 		PRESUPUESTO MAPPING -->
-<!-- 		PRESUPUESTO MAPPING -->
-<!-- 		PRESUPUESTO MAPPING -->
-<!-- 		PRESUPUESTO MAPPING -->
+		<!-- ********************** PRESUPUESTO ************************************************************************** -->
 	    <union-subclass name="com.jkt.presupuesto.dominio.Presupuesto" table="PRESUPUESTO">
 
+			<property name="tags" column="TAGS" type="string" />
+			<property name="tipoVenta" column="TIPO" type="integer" />
+			
 			<many-to-one name="cliente" class="com.jkt.erp.varios.Cliente" column="CLIENTE_ID" /> <!-- el presupuesto ya esta en la mappedSuperclass -->
 
         	<many-to-one name="comprobanteRelacionado" class="com.jkt.dominio.Cotizacion" column="COMPROBANTE_RELACIONADO_ID"></many-to-one>
 
-<!-- 			CAMPOS REPETIDOS DE LA COTIZACION, AUN NO SE SI IRAN EN EL PEDIDO, X ESO NO SE MAPEO ARRIBA EN LA SUPER CLASE -->
-			<property name="referencia" column="REFERENCIA" type="string" />
-<!-- 			<many-to-one name="contactoReferencia" class="com.jkt.varios.dominio.Contacto" column="CONTACTO_REFERENCIA_ID"></many-to-one> -->
-			
-			
 			<list name="notas" cascade="all" table="PRESUPUESTO_NOTAS">
 				<key column="PRESUPUESTO_ID" />
 				<index column="ORDEN" />
 				<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
 			</list>
-			
-<!-- 			<list name="condicionesComerciales" cascade="all" table="PRESUPUESTO_CONDICIONES_COMERCIALES"> -->
-<!-- 				<key column="PRESUPUESTO_ID" /> -->
-<!-- 				<index column="ORDEN" /> -->
-<!-- 				<many-to-many column="CONDICION_COMERCIAL_ID" class="com.jkt.presupuesto.dominio.CondicionComercial"/> -->
-<!-- 			</list> -->
 			
 			<list name="formasFacturacion" cascade="all" >
 				<key column="PRESUPUESTO_ID" />
@@ -164,7 +139,6 @@
 			</list>
 
 		</union-subclass>
-		
 		
 	</class>
 </hibernate-mapping>

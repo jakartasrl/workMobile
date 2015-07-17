@@ -32,6 +32,8 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 		try{
 			tx = session.beginTransaction();
 		}catch(org.hibernate.TransactionException e){
+			System.out.println("---POINTCUT---");
+			System.out.println(e.getStackTrace());
 			throw new JakartaException("Espere unos segundos mientras finaliza una operacion pendiente...Intente nuevamente en breves segundos...");
 		}	
 		try{
