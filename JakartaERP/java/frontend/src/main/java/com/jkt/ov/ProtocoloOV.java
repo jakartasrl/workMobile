@@ -53,5 +53,6 @@ public class ProtocoloOV extends DescriptibleOV {
 	private long idUsuarioFinalizado;
 	
 	private String nombreUsuarioIngresoResultado;
-
+	private String nombreUsuarioIngresoAprobacion;
+	
 }

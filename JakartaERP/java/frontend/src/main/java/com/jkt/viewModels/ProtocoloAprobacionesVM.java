@@ -52,6 +52,9 @@ public class ProtocoloAprobacionesVM extends ViewModel implements IBasicOperatio
 	@NotifyChange({"listProtocolo","listProtocoloDescriptible"})
 	public void init(@BindingParam("l") String laboratorio, @BindingParam("modoAprobacion") Boolean modoAprobacion){
 		
+		Session sess = Sessions.getCurrent();
+		UserOV userOV = (UserOV) sess.getAttribute("userCredential");
+		
 		listProtocolo = new ArrayList<ProtocoloOV>();
 		this.modoAprobacion=modoAprobacion;
 		
@@ -81,6 +84,7 @@ public class ProtocoloAprobacionesVM extends ViewModel implements IBasicOperatio
 		filtros.add(new FiltroOV("estado", String.valueOf(Protocolo.Estado.ESTADO_INICIAL.getId()), ServiceRepository.CONDICION_IGUAL, ServiceRepository.INTEGER));
 		filtros.add(new FiltroOV("laboratorio.id", String.valueOf(this.idLaboratorio), ServiceRepository.CONDICION_IGUAL, ServiceRepository.LONG));
 		filtros.add(new FiltroOV("activo", String.valueOf(true), ServiceRepository.CONDICION_IGUAL, ServiceRepository.BOOLEAN));
+		filtros.add(new FiltroOV("usuarioIngresoResultado.id", String.valueOf(userOV.getId()), ServiceRepository.CONDICION_DISTINTO, ServiceRepository.LONG));
 		
 		c.setFiltros(filtros);
 		

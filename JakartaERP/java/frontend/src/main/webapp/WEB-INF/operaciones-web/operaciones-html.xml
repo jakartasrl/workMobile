@@ -2077,7 +2077,7 @@
 			</campoEntrada>
 			
 		</input>
-		
+	
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
@@ -2105,8 +2105,9 @@
 			<campoSalida value="codSucursal"		 	target="clienteSucursal.codigo" />
 			<campoSalida value="descripcionCompleta"	target="clienteSucursal.descripcionCompleta" />
 			
-			<campoSalida value="idUsuarioIngresoResultado" 				target="usuarioIngresoResultado.id" />
-			<campoSalida value="nombreUsuarioIngresoResultado" 			target="usuarioIngresoResultado.descripcion" />
+			<campoSalida value="idUsuarioIngresoResultado" 			target="usuarioIngresoResultado.id" />
+			<campoSalida value="nombreUsuarioIngresoResultado" 		target="usuarioIngresoResultado.descripcion" />
+			<campoSalida value="nombreUsuarioIngresoAprobacion"		target="usuarioIngresoAprobacion.descripcion" />
 	
 			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
 			

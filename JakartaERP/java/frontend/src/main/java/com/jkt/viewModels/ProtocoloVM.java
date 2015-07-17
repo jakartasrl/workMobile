@@ -143,6 +143,7 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.protocoloOV.setIdDiagnostico(this.diagnosticoOV.getId());
 
 		Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV);
+//		final DescriptibleOV protocoloDescriptible = (DescriptibleOV) Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV, DescriptibleOV.class);
 
 		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	

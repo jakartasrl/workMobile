@@ -27,7 +27,7 @@
 			</row>
 			<row>
 				<cell colspan="4">
-					<ckeditor height="70px" width="100%" value="@bind(vm.protocoloOV.comentarioDiagnostico)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" />	
+					<ckeditor height="230px" width="100%" value="@bind(vm.protocoloOV.comentarioDiagnostico)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" />	
 				</cell>
 			</row>
 		</rows>

@@ -28,8 +28,8 @@
 			<elemento codigo="007" name="Protocolo Quimico" 			img="pantallas/img/widget_tag.png" 		size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-q.zul" 			type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
 			<elemento codigo="008" name="Aprobar Protocolo Electrico" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="green" 	link="pantallas/index/index-protocolo-e-aprobacion.zul" type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />		
 			<elemento codigo="009" name="Aprobar Protocolo Quimico" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="green" 	link="pantallas/index/index-protocolo-q-aprobacion.zul" type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
-			<elemento codigo="022" name="Protocolo Electrico Terminado" img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-e-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
-			<elemento codigo="023" name="Protocolo Quimico Terminado" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-q-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
+			<elemento codigo="022" name="Impresión de Protocolos Eléctricos" img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-e-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
+			<elemento codigo="023" name="Impresión de Protocolos Químicos" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-q-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
 		</elemento>
 	</elemento>
 
