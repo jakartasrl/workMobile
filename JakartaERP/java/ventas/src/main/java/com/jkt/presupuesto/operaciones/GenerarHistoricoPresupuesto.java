@@ -64,8 +64,9 @@ public class GenerarHistoricoPresupuesto extends Operation {
 
 		int nuevaVersion = p.getVersion()+1;
 		p.setVersion(nuevaVersion);
+		p.setVersionado(true);
 		
-		historial.setPresupuesto(p);
+//		historial.setPresupuesto(p);
 		historial.setVersion(nuevaVersion);
 		historial.setFechaVersionado(new Date());
 		historial.setId(0L);

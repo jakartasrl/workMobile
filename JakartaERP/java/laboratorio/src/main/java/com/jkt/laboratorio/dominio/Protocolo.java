@@ -49,6 +49,9 @@ public class Protocolo extends ComprobanteCliente implements IDetalle{
 	private boolean enviado;
 	private List<ProtocoloDetalle> detalles=new ArrayList<ProtocoloDetalle>();
 	
+	private Usuario usuarioFinalizado;
+	private Date fechaHoraFinalizacion;
+	
 //	private String comentarioDiagnostico;
 	
 	public void agregarDetalle(ProtocoloDetalle p){

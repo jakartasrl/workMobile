@@ -1,0 +1,71 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:10px;" width="100%" >
+											
+			<template name="model" var="determinacion">
+
+				<listitem>
+				
+					<listcell>
+
+						<hbox>
+							<groupbox mold="3d"  width="100%" open="true" >
+
+								<grid>
+									<columns>
+										<column width="110px" />
+										<column width="160px" />
+										<column width="120px"/>
+									</columns>
+									<rows>
+										<row>
+											<label width="100%" value="Determinacion " />
+											<textbox width="100%" value="@bind(determinacion.descripcion)" readonly="true"/>
+										</row>
+										<row>
+											<label width="100%" value="Metodo Utilizado " />
+											<textbox width="100%" value="@bind(determinacion.metodoUtilizado.metodo)" readonly="true"/>
+										</row>
+									</rows>
+								</grid>
+
+								<listbox model="@bind(determinacion.metodoUtilizado.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." >
+								
+									<listhead>
+										<listheader label="Variables" />
+									</listhead>
+									
+									<template name="model" var="variable">
+									
+										<listitem>
+											<listcell>
+												<hlayout>
+													<textbox value="@bind(variable.codigo)" 			width="100%" readonly="true" />
+													<textbox value="@bind(variable.descripcion)" 		width="100%" readonly="true" />
+													<textbox value="@bind(variable.valorInput)" 		width="100%" readonly="true" if="${variable.input}"  />
+													<textbox value="@bind(variable.expresionCadena)" 	width="100%" readonly="true" if="${!variable.input}" />
+													<textbox value="@bind(variable.resultadoExpresion)" width="100%" readonly="true" if="${!variable.input}" />
+												</hlayout>
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+														
+								<hlayout>
+									<label width="100%" value="comentario : " />
+									<textbox width="310%" value="@bind(determinacion.comentario)" readonly="true" />
+								</hlayout>
+								
+							</groupbox>
+							
+						</hbox>
+
+					</listcell>
+					
+				</listitem>
+			
+			</template>
+
+		</listbox>
+
+</zk>

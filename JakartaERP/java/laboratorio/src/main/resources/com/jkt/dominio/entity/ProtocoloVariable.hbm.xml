@@ -9,6 +9,7 @@
 		</id>
 
 		<property name="variable" column="VARIABLE" />
+		<property name="descVariable" column="DESC_VARIABLE" />
 		<property name="expresion" column="EXPRESION" />
 		<property name="valor" column="VALOR" />
 		

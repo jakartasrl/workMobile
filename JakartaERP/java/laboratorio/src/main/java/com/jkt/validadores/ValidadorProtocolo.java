@@ -19,14 +19,15 @@ public class ValidadorProtocolo extends ValidadorComprobantes  {
 		Protocolo p =  (Protocolo) entity;
 		
 		
-		Query crearHQL = this.serviceRepository.crearHQL("select p.cliente from Pedido p where p.id = :idPedido");
-		crearHQL.setParameter("idPedido", p.getIdPedido());
+//		Query crearHQL = this.serviceRepository.crearHQL("select p.cliente from Pedido p where p.id = :idPedido");
+//		crearHQL.setParameter("idPedido", p.getIdPedido());
 		
-		Cliente c = (Cliente) crearHQL.uniqueResult();
-		ClienteSucursal s = c.getListaSucursales().get(0);
-		
-		p.setCliente(c);
-		p.setClienteSucursal(s);
+//		Cliente c = (Cliente) crearHQL.uniqueResult();
+//
+//		ClienteSucursal s = c.getListaSucursales().get(0);
+//
+//		p.setCliente(c);
+//		p.setClienteSucursal(s);		
 		
 		Configuracion parametroTipoComportamiento =null;
 		try {
@@ -38,22 +39,27 @@ public class ValidadorProtocolo extends ValidadorComprobantes  {
 			throw new RuntimeException(e);
 		}
 		
-		try {
-			TipoComprobante tipoComprobante = (TipoComprobante) serviceRepository.getByOid(TipoComprobante.class, Long.valueOf(parametroTipoComportamiento.getValorNumero()));
-			p.setTipoComprobante(tipoComprobante);
-			obtenerNumerador(p);
-		} catch (ClassNotFoundException e) {
-			MostrarError(e);
-		} catch (InstantiationException e) {
-			MostrarError(e);
-		} catch (IllegalAccessException e) {
-			MostrarError(e);
-		} catch (JakartaException e) {
-			MostrarError(e);
-		} catch (Exception e) {
-			MostrarError(e);
-		}
+		if (p.getId()>0) {//es una modificacion, solo puedo adjuntar archivos.Es una validacion rara esta, creo que seria antes del adapter...
+			
+		}else{
+			
+			try {
+				TipoComprobante tipoComprobante = (TipoComprobante) serviceRepository.getByOid(TipoComprobante.class, Long.valueOf(parametroTipoComportamiento.getValorNumero()));
+				p.setTipoComprobante(tipoComprobante);
+				obtenerNumerador(p);
+			} catch (ClassNotFoundException e) {
+				MostrarError(e);
+			} catch (InstantiationException e) {
+				MostrarError(e);
+			} catch (IllegalAccessException e) {
+				MostrarError(e);
+			} catch (JakartaException e) {
+				MostrarError(e);
+			} catch (Exception e) {
+				MostrarError(e);
+			}
 		
+		}
 	}
 	
 	protected void MostrarError(Exception e)throws ValidacionDeNegocioException {

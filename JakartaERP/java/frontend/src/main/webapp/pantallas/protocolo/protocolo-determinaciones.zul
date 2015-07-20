@@ -1,15 +1,20 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
-		<hlayout>
-			<button width="20px" height="20px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarDeterminacion')" />
-			<label style="margin-left:5px;" value="Agregar Determinación"></label>
-		</hlayout>
-
-		<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" style="margin-top:15px;" width="100%" >
+	<hlayout>
+		<button width="20px" height="20px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarDeterminacion')" >
+			 <attribute name="onClick"><![CDATA[
+					listbox.setActivePage(0);
+        		]]></attribute>
+		</button>
 		
-			<listhead>
-				<listheader label="Determinaciones" />
-			</listhead>
+		<label style="margin-left:5px;" value="Agregar Determinación"></label>
+	</hlayout>
+
+	<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" width="100%" >
+		
+		<listhead>
+			<listheader label="Determinaciones" />
+		</listhead>
 									
 			<template name="model" var="determinacion">
 
@@ -19,64 +24,57 @@
 
 						<hbox>
 							<groupbox mold="3d"  width="100%" open="true" >
+							
+								<grid>
+									<columns>
+										<column width="110px" />
+										<column width="160px" />
+										<column width="120px"/>
+									</columns>
+									<rows>
+										<row>
+											<label width="100%" value="Determinacion " />
+											<textbox width="100%" value="@bind(determinacion.descripcion)" readonly="true"/>
+										</row>
+										<row>
+											<label width="100%" value="Metodo Utilizado " />
+											<combobox width="100%" model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)"  >
+												<template name="model" var="metodo">
+													<comboitem label="@bind(metodo.metodo)" value="@bind(metodo.metodo)" />
+												</template>
+											</combobox>
+											<button width="100%" style="margin-left:2px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)"  />	
+										</row>
+									</rows>
+								</grid>
 
-								<hlayout>
-									<label value="Determinacion : " />
-									<textbox value="@bind(determinacion.descripcion)" readonly="true"/>
-								</hlayout>
-								<hlayout>
-									<label value="Metodo Utilizado : " />
-									<combobox width="80px" model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)" readonly="true" >
-										<template name="model" var="metodo">
-											<comboitem label="@bind(metodo.metodo)" value="@bind(metodo.metodo)" />
-										</template>
-									</combobox>
-								</hlayout>
-								
-
-													<groupbox mold="3d"  width="100%" open="true" >
-														<hlayout>
-															<label value="Metodo : " />
-															<textbox value="@bind(determinacion.metodoUtilizado.metodo)" width="100%" readonly="true"/>
-															<button style="margin-bottom:2px;margin-left:3px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)" />
-														</hlayout>
-														
-<!-- 														comienza resultados -->
-														
-														<listbox model="@bind(determinacion.metodoUtilizado.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." >
-								
-															<listhead>
-																<listheader label="Variables" />
-															</listhead>
-									
-															<template name="model" var="variable">
-									
-															<listitem>
-																<listcell>
-																	<hbox>
-																		<groupbox mold="3d"  width="100%" open="true" >
-																			<hlayout>
-																				<label value="Variable : " />
-																				<textbox value="@bind(variable.descripcion)" 		width="100%" readonly="true" />
-																				<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}" />
-																				<textbox value="@bind(variable.expresionCadena)" 	width="100%" readonly="true" if="${!variable.input}" />
-																				<textbox value="@bind(variable.resultadoExpresion)" width="100%" readonly="true" if="${!variable.input}" />
-																			</hlayout>
-																		</groupbox>
-																	</hbox>
-																</listcell>
-															</listitem>
-															</template>
-														</listbox>
-														
-<!-- 														termina resultados  -->
 																												
-													</groupbox>
-
+									<listbox model="@bind(determinacion.metodoUtilizado.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." >
 								
+										<listhead>
+											<listheader label="Variables" />
+										</listhead>
+									
+											<template name="model" var="variable">
+									
+												<listitem>
+													<listcell>
+																<hlayout>
+																	<textbox value="@bind(variable.codigo)" 			width="100%" readonly="true" />
+																	<textbox value="@bind(variable.descripcion)" 		width="100%" readonly="true" />
+																	<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}"  />
+																	<textbox value="@bind(variable.expresionCadena)" 	width="100%" readonly="true" if="${!variable.input}" />
+																	<textbox value="@bind(variable.resultadoExpresion)" width="80%" readonly="true" if="${!variable.input}" />
+																</hlayout>
+																		
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+
 								<hlayout>
-									<label width="100%" value="comentario : " />
-									<textbox value="@bind(determinacion.comentario)" />
+									<label width="100%" value="comentario : " />	
+									<textbox width="310%" value="@bind(determinacion.comentario)"  />
 								</hlayout>
 								
 							</groupbox>

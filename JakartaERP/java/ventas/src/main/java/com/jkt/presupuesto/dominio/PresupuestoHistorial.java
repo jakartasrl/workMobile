@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class PresupuestoHistorial extends Presupuesto {
 
-	private Presupuesto Presupuesto;
+//	private Presupuesto presupuesto;
 	private Date fechaVersionado;
 	
 }

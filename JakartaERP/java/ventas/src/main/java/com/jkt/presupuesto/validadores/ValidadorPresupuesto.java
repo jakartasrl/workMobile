@@ -1,10 +1,5 @@
 package com.jkt.presupuesto.validadores;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.Configuracion;
@@ -12,14 +7,8 @@ import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.TipoComprobante;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
-import com.jkt.pedido.dominio.FormaFacturacion;
-import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
-import com.jkt.presupuesto.dominio.PresupuestoDet;
-import com.jkt.presupuesto.dominio.PresupuestoHistorial;
 import com.jkt.validadores.ValidadorComprobantes;
-import com.jkt.varios.dominio.Contacto;
-import com.jkt.varios.dominio.Especificacion;
 
 @Service
 public class ValidadorPresupuesto extends ValidadorComprobantes {

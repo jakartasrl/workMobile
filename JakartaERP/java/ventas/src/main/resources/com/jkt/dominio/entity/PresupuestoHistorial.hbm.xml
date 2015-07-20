@@ -37,7 +37,7 @@
 		<many-to-one name="representante" class="com.jkt.erp.varios.Representante" cascade="none" column="REPRESENTANTE_ID" />
 
 
-		<list name="contactosReferencia" cascade="none" table="PRESUPUESTO_CONTACTOS_REFERENCIA_HISTORIAL">
+		<list name="contactosReferencia" cascade="all" table="PRESUPUESTO_CONTACTOS_REFERENCIA_HISTORIAL">
 			<key column="PRESUPUESTO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many column="CONTACTO_ID" class="com.jkt.varios.dominio.Contacto" />
@@ -50,22 +50,22 @@
 		<list name="notas" cascade="none" table="PRESUPUESTO_NOTAS_HISTORIAL">
 			<key column="PRESUPUESTO_HISTORIAL_ID" />
 			<index column="ORDEN" />
-			<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota"/>
+			<many-to-many column="NOTA_ID" class="com.jkt.presupuesto.dominio.Nota" />
 		</list>
 			
 		<list name="formasFacturacion" cascade="none" table="PRESUPUESTO_FORMAS_FACTURACION_HISTORIAL" >
 			<key column="PRESUPUESTO_HISTORIAL_ID" />
 			<index column="ORDEN" />
-			<many-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
+			<many-to-many class="com.jkt.pedido.dominio.FormaFacturacion" />
 		</list>
 
 		<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />
 
-		<list name="detalles" table="DETALLES_PRESUPUESTO_HISTORIAL" cascade="all">
+		<list name="detalles" table="DETALLES_PRESUPUESTO_HISTORIAL" cascade="none">
 			<key column="PRESUPUESTO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />
 		</list>
-
+		
 	</class>
 </hibernate-mapping>

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.jkt.dominio.IDescriptible;
@@ -20,8 +22,8 @@ import com.jkt.varios.dominio.Idioma;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class Cliente extends PersistentEntity implements IDescriptible{
-//	public class Cliente extends Descriptible {
 
 	public Cliente() {
 		this.setCreationDate(new Date());
@@ -35,24 +37,6 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 		}
 	}
 	
-	/*
-	 * ***********************************************************************************************
-	 * Variables de instancia
-	 */
-	
-//	String codigo heredado de descriptible
-//	String nombreComercial es la descripcion
-	
-	public List<Especificacion> getArchivos() {
-		return archivos;
-	}
-
-	public void setArchivos(List<Especificacion> archivos) {
-		this.archivos = archivos;
-	}
-
-
-
 	private String codigo;
 
 	@NotNull(message="El Sujeto impositivo no debe estar vacio.")
@@ -66,47 +50,7 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 	private Representante representante;
 	private Vendedor vendedor;
 	
-	public Representante getRepresentante() {
-		return representante;
-	}
-
-	public void setRepresentante(Representante representante) {
-		this.representante = representante;
-	}
-
-	public Vendedor getVendedor() {
-		return vendedor;
-	}
-
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
-	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	public String getNroProveedor() {
-		return nroProveedor;
-	}
-
-	public void setNroProveedor(String nroProveedor) {
-		this.nroProveedor = nroProveedor;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-	//	@NotNull(message="El idioma no debe ser nulo.")
-	private Idioma idioma;//Idioma en el que se mostraran los productos o servicios en la documentacion del cliente
+	private Idioma idioma;
 	
 	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();
 	
@@ -127,41 +71,10 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
 	 */
 	public String getDescripcion(){
-		String valorCuit=(" (").concat(sujetoImpositivo.getCuit()==null?"-":sujetoImpositivo.getCuit()).concat(")");
-//		return sujetoImpositivo.getRazonSocial().concat(valorCuit);
+//		String valorCuit=(" (").concat(sujetoImpositivo.getCuit()==null?"-":sujetoImpositivo.getCuit()).concat(")");
 		return sujetoImpositivo.getRazonSocial();
 	}
-	/*
-	 * Metodo getDescripcion para mostrarlo en la lista generica de ayuda.
-	 */
 	
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	
-	public SujetoImpositivo getSujetoImpositivo() {
-		return sujetoImpositivo;
-	}
-
-	public List<ClienteClasificador> getListaClasificadores() {
-		return listaClasificadores;
-	}
-
-	public void setListaClasificadores(List<ClienteClasificador> listaClasificadores) {
-		this.listaClasificadores = listaClasificadores;
-	}
-
-	public CondPago getCondPago() {
-		return condPago;
-	}
-
-	public void setCondPago(CondPago condPago) {
-		this.condPago = condPago;
-	}
 
 	public void setSujetoImpositivo(SujetoImpositivo sujetoImpositivo) {
 		if (sujetoImpositivo!=null) {
@@ -170,38 +83,6 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 		}
 	}
 
-	public Idioma getIdioma() {
-		return idioma;
-	}
-
-	public void setIdioma(Idioma idioma) {
-		this.idioma = idioma;
-	}
-
-	public List<EsquemaPreciosCliente> getListaEsquemaPrecios() {
-		return listaEsquemaPrecios;
-	}
-
-	public void setListaEsquemaPrecios(
-			List<EsquemaPreciosCliente> listaEsquemaPrecios) {
-		this.listaEsquemaPrecios = listaEsquemaPrecios;
-	}
-
-	public List<ClienteSucursal> getListaSucursales() {
-		return listaSucursales;
-	}
-
-	public void setListaSucursales(List<ClienteSucursal> listaSucursales) {
-		this.listaSucursales = listaSucursales;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
 
 	/*
 	 * helper methods

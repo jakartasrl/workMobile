@@ -22,12 +22,14 @@
 		<elemento codigo="004" name="Determinaciones Electricas" 	img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="yellow" link="pantallas/index/index-determinacion-e.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
 		<elemento codigo="006" name="Protocolo Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
 		<elemento codigo="007" name="Aprobar P.Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="022" name="Protocolo Electrico Terminado" img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-e-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
 	</elemento>
 
 	<elemento codigo="401" name="Laboratorio Quimico" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
 		<elemento codigo="005" name="Determinaciones Quimicas" 		img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="green" link="pantallas/index/index-determinacion-q.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
 		<elemento codigo="008" name="Protocolo Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
 		<elemento codigo="009" name="Aprobar P.Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="023" name="Protocolo Quimico Terminado" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-q-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
 	</elemento>
 
 	<elemento codigo="001" name="Laboratorio" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
@@ -61,6 +63,7 @@
 		<elemento codigo="105" name="Moneda" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarMoneda-moneda" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="106" name="Pais" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarPais-pais" 					type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="107" name="Documentacion" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDocumentacion-documentacion" type="submenu" vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="110" name="Diagnostico" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDiagnostico-diagnostico" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 	</elemento>
 	
 </menues>

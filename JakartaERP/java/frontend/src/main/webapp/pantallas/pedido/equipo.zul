@@ -79,21 +79,14 @@
 					
 					
 					<columns>
-<!-- 						<column hflex="1" label="id" /> -->
-<!-- 						<column hflex="1" label="codigo" /> -->
 						<column hflex="1" label="Descripcion de caracteristica" /> 
-<!-- 						<column hflex="1" label="tipoDato" />	 -->
 						<column hflex="1" label="Valor de caracteristica" />
 					</columns>
 					
 					<rows>
 						<template name="model">
 							<row>
-<!-- 								<textbox value="@bind(each.id)" /> -->
-<!-- 								<textbox value="@bind(each.codigo)" /> -->
 								<label value="@bind(each.descripcion)"> </label>
-								
-<!-- 								<textbox value="@bind(each.tipoDato)" /> -->
 								<hlayout>
 									<zk switch="${each.tipoDato}" >
 										<zk case='Tabla' >
@@ -122,8 +115,26 @@
 					</rows>
 				
 				</grid>
-
-
-</vlayout>
+				
+				<grid model="@bind(vm.caracteristicas)" >
+					<columns>
+						<column label="propiedad" 	/>
+						<column label="primaria" 	/>
+						<column label="secundaria" 	/>
+						<column label="terciaria" 	/>
+					</columns>
+					<rows>
+						<template name="model">
+							<row>
+								<textbox value="" />
+								<textbox value="" />
+								<textbox value="" />
+								<textbox value="" />
+							</row>
+						</template>
+					</rows>
+				</grid>
+				
+	</vlayout>
 
 </zk>

@@ -8,15 +8,11 @@ import static org.apache.commons.beanutils.BeanUtils.copyProperties;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -25,7 +21,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -41,7 +36,6 @@ import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListNotasOV;
 import com.jkt.ov.NotaOV;
 import com.jkt.ov.PresupuestoOV;
-import com.jkt.ov.tree.NodoNotas;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
 
@@ -115,25 +109,26 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 			   		
 					Window window = (Window) Executions.createComponents("/pantallas/presupuesto/reporte.zul", null, hashMap);
 					window.doModal();
+					
+		        }else{
+		        	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 		        }
 		    }
 		}
 		);
-		
-		
 	}
 
 	@Command
 	@NotifyChange({"arbolNotas","archivos","aPartirDeCotizacion", "comprobanteOV","contactoSeleccionado","contactos","lNotas","items","itemsArticulos","lDocumentacion","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas","vendedorOV","representanteOV"})
 	public void nuevo(){
-		
-		this.aPartirDeCotizacion=false;
-		this.idCotizacion=0L;
-		
-		super.nuevo();
-		this.comprobanteOV= new PresupuestoOV();
-		this.aPartirDeCotizacion=false;
-		init();
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+//		this.aPartirDeCotizacion=false;
+//		this.idCotizacion=0L;
+//		
+//		super.nuevo();
+//		this.comprobanteOV= new PresupuestoOV();
+//		this.aPartirDeCotizacion=false;
+//		init();
 	}
 	
 	
@@ -269,7 +264,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.archivos=new ArrayList<ArchivoOV>();
 		
 		this.archivos=ovRecuperado.getArchivos();
-		
+
 		actualizarNotas(ovRecuperado);
 		crearArbolNotas();
 		
@@ -315,6 +310,13 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
 		this.comprobanteOV.setNro(ovRecuperado.getNro());
 		this.comprobanteOV.setIdCotizacion(ovRecuperado.getIdCotizacion());
+		
+		this.comprobanteOV.setVersion(ovRecuperado.getVersion());
+		this.comprobanteOV.setVersionado(ovRecuperado.isVersionado());
+		this.comprobanteOV.setReferencia(ovRecuperado.getReferencia());
+		this.comprobanteOV.setTags(ovRecuperado.getTags());
+		this.comprobanteOV.setTipo(ovRecuperado.getTipo());
+		this.comprobanteOV.setTipoVenta(completarCombo(this.tiposVenta.getList(), Long.valueOf(this.comprobanteOV.getTipo())));
 		
 		this.comprobanteOV.setFacturaciones(ovRecuperado.getFacturaciones());
 		for (FormaFacturacionOV formaFacturacionOV : this.comprobanteOV.getFacturaciones()) {
@@ -365,10 +367,10 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		comprobanteOV.setIdListaPrecio(lPreciosOV.getId());
 		comprobanteOV.setIdVendedor(vendedorOV.getId());
 		comprobanteOV.setIdRepresentante(representanteOV.getId());
+		comprobanteOV.setTipo(Integer.valueOf(comprobanteOV.getTipoVenta().getCodigo()));
+		comprobanteOV.setVersionado(false);
 
-		//		comprobanteOV.setIdContactoReferencia(contactoSeleccionado.getId());
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
-
 		
 		comprobanteOV.setArchivos(this.archivos);
 		
@@ -450,6 +452,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.contactosSeleccionados=new ArrayList<DescriptibleOV>();
 		
 		this.comprobanteOV= new PresupuestoOV();
+		this.comprobanteOV.setTipoVenta((DescriptibleOV) (this.tiposVenta.isEmpty()?new DescriptibleOV():this.tiposVenta.getList().get(0)));
 
 	}
 
@@ -490,8 +493,10 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 	@Override
 	public void cancelarCustomizado() {
-		this.nuevo();
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+
+//		this.nuevo();
+//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
 	

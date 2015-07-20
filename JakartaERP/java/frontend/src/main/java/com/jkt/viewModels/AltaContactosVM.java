@@ -55,6 +55,12 @@ public class AltaContactosVM {
 		
 		this.contactoOV.setIdTipoContacto(this.tipoDeContacto.getId());
 		
+		if(!validarTipoContacto()){
+			Messagebox.show("Complete todos los datos del contacto.");
+			x.detach();
+			return;
+		}
+		
 		ContactoOV contactoGuardado = (ContactoOV) Operaciones.ejecutar("GuardarContactoEnSucursal", this.contactoOV, ContactoOV.class);
 		
 		DescriptibleOV descriptibleOV = new DescriptibleOV();
@@ -95,6 +101,10 @@ public class AltaContactosVM {
 		
 		BindUtils.postGlobalCommand(null, null,this.vm.retrieveMethod(), null);
 		x.detach();
+	}
+
+	private boolean validarTipoContacto() {
+		return true;
 	}
 	
 }

@@ -3,8 +3,6 @@ package com.jkt.dominio;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * Representa a una empresa dentro del sistema.
- * 
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Empresa extends PersistentEntity implements IDescriptible {

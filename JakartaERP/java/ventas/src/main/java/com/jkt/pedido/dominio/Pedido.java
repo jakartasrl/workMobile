@@ -26,6 +26,11 @@ public class Pedido extends ComprobanteVenta implements IDescriptible{
 	private List<PedidoDocumentacion> documentacion=new ArrayList<PedidoDocumentacion>();
 	private List<FormaFacturacion> formasFacturacion = new ArrayList<FormaFacturacion>();
 	
+	/*
+	 * Indica si la instancia es versionada, o work
+	 */
+	private boolean versionado;
+	
 	public void agregarDocumentacion(PedidoDocumentacion documento){
 		
 		if (documento.getDocumentacion()==null) {

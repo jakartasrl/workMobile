@@ -90,7 +90,7 @@
 								<label value="Plantilla:" />
 							</hlayout>
 							
-							<ckeditor value="@bind(each.plantilla.descripcion)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" >
+							<ckeditor value="@bind(each.plantilla.descripcion)" toolbar="Complex" height="10%" customConfigurationsPath="/pantallas/common/config.js" >
 							
 							</ckeditor>
 

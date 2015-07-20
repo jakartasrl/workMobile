@@ -15,7 +15,7 @@
 		<property name="descripcion" column="DESCRIPCION" />
 		<property name="activo" column="ACTIVO" type="boolean" />
 		
-		<many-to-one name="laboratorio" column="ID_LABORATORIO"/>
+<!-- 		<many-to-one name="laboratorio" column="ID_LABORATORIO"/> -->
 
 	</class>
 

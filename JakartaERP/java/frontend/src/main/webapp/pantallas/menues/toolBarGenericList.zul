@@ -1,4 +1,19 @@
 <zk viewModel="@id('vm') @load(viewModel)">
+
+	<zscript>
+
+		import java.io.*;
+		import com.jkt.ov.*;
+		
+		public void mostrarNombre(){
+			Session sess = Sessions.getCurrent();
+			UserOV cre = (UserOV) sess.getAttribute("userCredential");
+			Label tb = (Label)event.getTarget();
+			tb.setValue(cre.getName()+" "+cre.getLastName());
+		}
+
+	</zscript>
+	
 	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar"
 		align="start">
 		<hlayout style="width:100%" id="idLayout">
@@ -6,9 +21,6 @@
 			<div hflex="1" id="idDiv">
 				<toolbarbutton image="/pantallas/icons/import.png" label="Guardar" onClick="@command('guardar')" tooltiptext="Guardar" />
 				<toolbarbutton image="/pantallas/icons/new.png" label="Agregar Elemento" onClick="@command('agregarElemento')" tooltiptext="Agregar elemento" />
-
-<!-- 				<space bar="true" style="vertical-align: middle; line-height: 18px;" /> -->
-<!-- 				<toolbarbutton image="/pantallas/icons/not.png" label="Cancelar" onClick="@command('cancelar')" tooltiptext="Cancelar" /> -->
 
 				<space bar="true" style="vertical-align: middle; line-height: 18px;" />
 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Menu" onClick="@command('irAInicio')" tooltiptext="Volver al menu" />
@@ -19,8 +31,9 @@
 				<label value="@load(vm.titulo)" style="vertical-align:middle; font-size:25px; color:grey;" />
 			</div>
 
-			<div hflex="1" droppable="true" style="text-align: right;">
-<!-- 				<toolbarbutton image="/pantallas/icons/help.png" onClick="@command('salir')" tooltiptext="Manual" /> -->
+			<div hflex="1" style="text-align: right ; ">
+				<label value="Usuario : " style="font-size:15px; color:grey;  vertical-align: middle;" />
+				<label value="El Zurdo systems" style="font-size:15px; color:black;  vertical-align: middle;" onCreate="mostrarNombre()"/>
 			</div>
 
 		</hlayout>

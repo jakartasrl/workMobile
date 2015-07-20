@@ -368,8 +368,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			recuperarAgendaPedido();
 		}
 		
-		
-		//Ejecuta evento para actualizar todas las relaciones
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 	
@@ -521,9 +519,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 		for (ItemsOV itemsOV : itemsArticulos) {
 			itemsOV.setIdMoneda(itemsOV.getMoneda().getId());
-//			itemsOV.setDescripcion(itemsOV.getPlantilla().getDescripcion());
 			itemsOV.setIdProducto(itemsOV.getProductoOV().getId());
-//			itemsOV.setTipo(Integer.valueOf(itemsOV.getTipoVenta().getCodigo()));
 			itemsOV.setTipoItem(PedidoDet.CHAR_MATERIAL);
 			itemsFinal.add(itemsOV);
 		}
@@ -597,7 +593,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		log.info("Inicializando contactos...");
 		this.contactos = new ListDescriptibleOV();
 		this.contactosSeleccionados = new ArrayList<DescriptibleOV>();
-//		this.contactoSeleccionado=new DescriptibleOV();
 		
 		this.comprobanteOV=new PedidoOV();
 		
@@ -611,7 +606,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				estadoDescriptible=(DescriptibleOV) estado;
 				estadosEnMapa.put(String.valueOf(estadoDescriptible.getCodigo()), estadoDescriptible.getDescripcion());
 			}
-			
 			
 		}
 		
@@ -687,10 +681,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	@Command
 	@NotifyChange("agenda")
 	public void agregarTareaGeneral() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
-		
 
 		this.tareaAgregada=new TareaAgendaOV();
-//		this.tareaAgregada.setEstado((DescriptibleOV) this.estados.getList().get(0));
 
 		if (this.codigoTareaNueva!=null && !this.codigoTareaNueva.isEmpty()) {
 			
@@ -807,9 +799,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 		}else{
-			
 			this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
-			
 			//Tarea estandar
 			actualizarTareasYArbol();
 		}

@@ -4,11 +4,14 @@
 <zk>
 
 	<style src="/style/template-grey.css" />
-<!-- 	<style src="/style/template.css" /> -->
 	<style src="/style/metro.css" />
+	<style src="style/metro_mobile.css" media="screen and (max-height: 500px), screen and (orientation:portrait)" />
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/metro.js"></script>
+	<script type="text/javascript" src="js/metro.js"></script>
+	
+	
 	
 	<style>
 	

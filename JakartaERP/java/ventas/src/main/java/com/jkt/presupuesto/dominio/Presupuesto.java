@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 
+import com.jkt.dominio.Comprobante;
 import com.jkt.dominio.ComprobanteVenta;
 import com.jkt.dominio.Cotizacion;
 import com.jkt.dominio.IDescriptible;
@@ -27,10 +28,17 @@ public class Presupuesto extends ComprobanteVenta implements IDescriptible{
 	private List<Nota> notas = new ArrayList<Nota>();
 	private List<PresupuestoDet> detalles = new ArrayList<PresupuestoDet>();
 	private ListaPrecios listaPrecios;
+	private String tags;
+	private String referencia;
 	
-	private boolean versionar;
-//	private int version=1;
-	
+	/*
+	 * Indica si la instancia es versionada, o work
+	 */
+	private boolean versionado;
+
+	/*
+	 * Helper methods.
+	 */
 	/**
 	 * Resuelve cuáles notas se actualizan, se insertan o se eliminan de la lista de notas del presupuesto
 	 * 

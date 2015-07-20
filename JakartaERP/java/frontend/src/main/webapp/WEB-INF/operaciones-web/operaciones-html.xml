@@ -850,11 +850,16 @@
 			<campoSalida value="nro" 				target="nro" />
 			<campoSalida value="fecha" 				target="fecha" />
 			<campoSalida value="idRepresentante" 	target="representante.id" />
-<!-- 			<campoSalida value="idContactoReferencia" 	target="contactoReferencia.id" /> -->
 			<campoSalida value="idVendedor" 		target="vendedor.id" />
 			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
 			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
+			<campoSalida value="version" 			target="version" />
+			<campoSalida value="versionado" 		target="versionado" />
+						
+			<campoSalida value="tipo"				target="tipoVenta" />
+			<campoSalida value="referencia" 		target="referencia" />
+			<campoSalida value="tags" 				target="tags" />
 			
 			<campoSalida value="idCotizacion" 			target="comprobanteRelacionado.id" />
 			
@@ -1005,6 +1010,11 @@
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
 			
+			<campoEntrada propertyOV="tipo" metodo="setTipoVenta" />
+			<campoEntrada propertyOV="referencia" metodo="setReferencia" />
+			<campoEntrada propertyOV="tags" metodo="setTags" />
+			<campoEntrada propertyOV="versionado" metodo="setVersionado" />
+
 			<campoEntrada propertyOV="idCotizacion" metodo="setComprobanteRelacionado" />
 			
 			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">
@@ -1258,6 +1268,19 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="guardarDiagnostico" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Diagnostico" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Diagnostico">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 
 	<operacion name="guardarUnidadMedida" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.UnidadMedida" inputOV="com.jkt.ov.DescriptibleOV">
 	
@@ -1991,9 +2014,25 @@
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
 		
 			<campoEntrada propertyOV="id" 							metodo="setId" />
-			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoAprobacion" />
+<!-- 			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoAprobacion" /> -->
+			<campoEntrada propertyOV="idUsuarioIngresoAprobacion" 					metodo="setUsuarioIngresoAprobacion" />
 			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" /> <!-- CAMPO TEMPORAL -->
 			<campoEntrada propertyOV="fechaAprobacion" 				metodo="setFechaHoraAprobacion" /> 
+			<campoEntrada propertyOV="estado"		 				metodo="setEstado" /> 
+						
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TerminarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	
+		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
+		
+			<campoEntrada propertyOV="id" 							metodo="setId" />
+			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioFinalizado" />
+			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" /> <!-- CAMPO TEMPORAL -->
+			<campoEntrada propertyOV="fechaFinalizacion" 			metodo="setFechaHoraFinalizacion" /> 
 			<campoEntrada propertyOV="estado"		 				metodo="setEstado" /> 
 						
 		</input>
@@ -2010,13 +2049,17 @@
 			<campoEntrada propertyOV="fechaHoraMuestra" 			metodo="setFechaHoraMuestra" />
 			<campoEntrada propertyOV="fechaHoraEmision"				metodo="setFecha" />
 			<campoEntrada propertyOV="idPedido" 					metodo="setIdPedido" />
+			<campoEntrada propertyOV="idCliente" 					metodo="setCliente" />
+			<campoEntrada propertyOV="idSucursal" 					metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
-			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" />
+<!-- 			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" /> -->
+			<campoEntrada propertyOV="idUsuarioIngresoResultado" 					metodo="setUsuarioIngresoResultado" />
 			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
 			<campoEntrada propertyOV="ordenTrabajo" 				metodo="setOrdenTrabajo" />
 			
 			<campoEntrada propertyOV="codDiagnostico" 				metodo="setComentario" />
 			<campoEntrada propertyOV="comentarioDiagnostico" 		metodo="setComentarioDiagnostico" />
+			<campoEntrada propertyOV="idDiagnostico" 				metodo="setDiagnostico" />
 			
 			<campoEntrada propertyOV="determinaciones" 				metodo="setDetalles">
 			
@@ -2025,9 +2068,11 @@
 				<campoEntrada propertyOV="comentario" 				metodo="setComentario" />
 				
 				<campoEntrada propertyOV="descMetodo" 				metodo="setDescMetodo" />
+				<campoEntrada propertyOV="idMetodoUtilizado" 		metodo="setIdMetodoUtilizado" />
 				
 				<campoEntrada propertyOV="variables" 				metodo="setVariables" >
-					<campoEntrada propertyOV="descripcion" 			metodo="setVariable" />
+					<campoEntrada propertyOV="codigo"	 			metodo="setVariable" />
+					<campoEntrada propertyOV="descripcion"	 		metodo="setDescVariable" />
 					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
 					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
 					<campoEntrada propertyOV="input" 				metodo="setInput" />
@@ -2055,11 +2100,20 @@
 			<campoSalida value="fechaHoraMuestra" 		target="fechaHoraMuestra" />
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
+			<campoSalida value="idCliente"		 		target="clienteSucursal.cliente.id" />
+			<campoSalida value="codCliente"		 		target="clienteSucursal.cliente.codigo" />
+			<campoSalida value="idSucursal"		 		target="clienteSucursal.id" />
+			<campoSalida value="codSucursal"		 	target="clienteSucursal.codigo" />
+			<campoSalida value="descripcionCompleta"	target="clienteSucursal.descripcionCompleta" />
 			
+			<campoSalida value="idUsuarioIngresoResultado" 				target="usuarioIngresoResultado.id" />
+	
 			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
 			
 			<campoSalida value="codDiagnostico"		 		target="comentario" />
 			<campoSalida value="comentarioDiagnostico"		target="comentarioDiagnostico" />
+			
+			<campoSalida value="idDiagnostico"		 		target="diagnostico.id" />
 			
 			<campoSalida value="determinaciones"		target="detalles" >
 				<campoSalida value="id" 				target="id" />
@@ -2067,10 +2121,12 @@
 				<campoSalida value="comentario" 		target="comentario" />
 				
 				<campoSalida value="descMetodo" 		target="descMetodo" />
+				<campoSalida value="idMetodoUtilizado"	target="idMetodoUtilizado" />
 				
 				<campoSalida value="variables" 				target="variables" >
+					<campoSalida target="id" 					value="id" />
 					<campoSalida value="codigo"		 			target="variable" /><!-- 					es para poder enviar luego el codigo correcto a la operacion -->
-					<campoSalida value="descripcion" 			target="variable" />
+					<campoSalida value="descripcion" 			target="descVariable" />
 					<campoSalida value="valorInput" 			target="valor" />
 					<campoSalida value="expresionCadena"  		target="expresion" />
 					<campoSalida value="input"  				target="input" />
@@ -2107,4 +2163,18 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TraerPropiedades" clase="com.jkt.laboratorio.operaciones.TraerPropiedades" outputOV="com.jkt.ov.ListPropiedadMatricialOV">
+		
+		<output>
+
+			<campoSalida target="nombre" 				value="nombre" />
+			<campoSalida target="id_valor_primario" 	value="id_valor_primario" />
+			<campoSalida target="id_valor_secundario" 	value="id_valor_secundario" />
+			<campoSalida target="id_valor_terciario" 	value="id_valor_terciario" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+		
 </entity>

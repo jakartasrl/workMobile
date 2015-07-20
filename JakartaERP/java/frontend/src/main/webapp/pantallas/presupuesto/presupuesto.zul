@@ -2,11 +2,11 @@
 
 	<div>
 <!-- 	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%"> -->
-	<panel sclass="panel-maestro" style="padding:5px;" border="normal" height="auto" width="100%">
+	<panel sclass="panel-maestro" style="padding:5px;" border="normal" height="auto" width="57%">
 
 		<panelchildren>
 
-			<grid style="border-style:none;" sizedByContent="true">
+			<grid style="border-style:none;padding : 5px" sizedByContent="true">
 
 				<columns>
 					<column width="150px"/>
@@ -67,13 +67,48 @@
 			    		
 					</row>
 					
+					<row sclass="fila-maestro">
+						<label style="width:100px;" value="Referencia : " />
+						<cell colspan="5">
+							<textbox class="campoCodigo-large" value="@bind(vm.comprobanteOV.referencia)" tabindex="4" width="100%" />
+						</cell>
+					</row>
+					
+					<row sclass="fila-maestro">
+						<label style="width:100px;" value="Tags : " />
+						<cell colspan="5">
+							<textbox class="campoCodigo-large" value="@bind(vm.comprobanteOV.tags)" tabindex="4" width="100%" />
+						</cell>
+					</row>
+					
+					<row sclass="fila-maestro">
+						<label value="Tipo" />
+						<cell colspan="5">
+							<combobox width="120px;" model="@bind(vm.tiposVenta.list)" selectedItem="@bind(vm.comprobanteOV.tipoVenta)" constraint="no empty">
+								<template name="model" var="tVenta">
+									<comboitem label="@bind(tVenta.descripcion)" />
+								</template>
+							</combobox>
+						</cell>
+					</row>
+					
+					<row>
+						<cell colspan="6">
+							<label value="Version de Presupuesto:" />
+							<label value="@bind(vm.comprobanteOV.version)" />
+							<label value=" | " />
+							<label value="Version borrador : " />
+							<label value="@bind(vm.comprobanteOV.versionado eq 'true'?'No':'Si')" />
+						</cell>
+					</row>
+					
 				</rows>
 			</grid>
 
 		</panelchildren>
 	</panel>
 	
-	<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+	<panel style="margin-top:15px;" border="none" height="auto" width="99%">
 		<panelchildren>
 			<tabbox id="contenidoTabs" >
 			    <tabs id="tabs">
