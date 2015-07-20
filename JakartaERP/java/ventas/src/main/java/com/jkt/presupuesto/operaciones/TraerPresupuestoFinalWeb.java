@@ -45,7 +45,11 @@ public class TraerPresupuestoFinalWeb extends HelperRecuperarDeterminacionesConP
 		}else{
 			
 			Query hql = this.crearHQL("from PresupuestoHistorial");// p where p.nro = :numero order by p.fechaVersionado"); 
+//			Query hql = this.crearHQL("from PresupuestoHistorial p where p.nro like :numero");
+			
 //			hql.setParameter("numero", presupuesto.getNro());
+//			hql.setString("numero", presupuesto.getNro());
+	
 			List historial = hql.list();
 			
 			PresupuestoHistorial p = (PresupuestoHistorial) historial.get(0);

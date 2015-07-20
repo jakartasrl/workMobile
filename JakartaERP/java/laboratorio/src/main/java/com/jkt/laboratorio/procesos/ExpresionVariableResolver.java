@@ -1,6 +1,5 @@
 package com.jkt.laboratorio.procesos;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -14,9 +13,14 @@ import net.sourceforge.jeval.function.FunctionException;
 
 import com.jkt.laboratorio.dominio.Variable;
 
-
+/**
+ * Resuelve el valor de una variable, sea compuesta o simple.
+ * 
+ * @author Leonel Suarez - Jakarta SRL
+ */
 @Data
 public class ExpresionVariableResolver extends Observable implements VariableResolver {
+
 	private Observer obs;
 	private Map<String, Variable> variablesDisponibles;
 	
@@ -31,28 +35,24 @@ public class ExpresionVariableResolver extends Observable implements VariableRes
 		if(variable.isInput()){
 			return String.valueOf(variable.getValorInput());
 		}else{
+			
 			try {
-
-				Collection<Variable> values = this.variablesDisponibles.values();
-				for (Variable variable2 : values) {
-					Evaluator evaluator = new Evaluator();
-					evaluator.setVariables(this.variablesDisponibles);
-					evaluator.setVariableResolver(new ExpresionVariableResolver(null , this.variablesDisponibles));
-					String resultado = evaluator.getVariableValue(variable2.getCodigo());
-//					this.variablesDisponibles.put(variable2.getCodigo(), resultado);
-				}
-				
+					
 				Evaluator evaluator = new Evaluator();
-				evaluator.setVariables(this.variablesDisponibles);
-				evaluator.setVariableResolver(new ExpresionVariableResolver(null , this.variablesDisponibles));
-				return evaluator.getVariableValue(variable.getCodigo());
-				
+				Map<String, Variable> mapa= new HashMap<String, Variable>();
+				mapa.putAll(this.variablesDisponibles);
+	
+				evaluator.setVariables(mapa);
+				evaluator.setVariableResolver(new ExpresionVariableResolver(null , mapa));
+				String resultado = evaluator.evaluate(variable.getExpresion());
+				variable.setValorInput(Double.valueOf(resultado));
+				return resultado;
 			} catch (EvaluationException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
-		return "0";
-		
+
 	}
 
 }

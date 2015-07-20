@@ -463,7 +463,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
 		this.comprobanteOV.setNro(ovRecuperado.getNro());
+		this.comprobanteOV.setVersion(ovRecuperado.getVersion());
+		this.comprobanteOV.setVersionado(ovRecuperado.isVersionado());
 
+		
 		this.comprobanteOV.setFacturaciones(ovRecuperado.getFacturaciones());
 		for (FormaFacturacionOV formaFacturacionOV : this.comprobanteOV.getFacturaciones()) {
 			formaFacturacionOV.setCondicionDePago(Operaciones.recuperarObjetoDescriptible("condicionPago", formaFacturacionOV.getIdCondicionDePago()));
@@ -511,7 +514,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		comprobanteOV.setIdSucursal(sucursalOV.getId());
 		comprobanteOV.setIdListaPrecio(lPreciosOV.getId());
 		comprobanteOV.setIdVendedor(vendedorOV.getId());
-		
+		comprobanteOV.setVersionado(false);
+
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
 		
 		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);

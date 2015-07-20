@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.0.1.final using JasperReports Library version 6.0.0  -->
-<!-- 2015-03-03T16:23:35 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="1130"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dataset1" uuid="30649ef3-a1f3-48ef-b7cf-efadd365c5fe"/>
 	<subDataset name="dataset2" uuid="4b618d69-e7c1-4033-8353-2fe2671af8e4">
@@ -59,6 +57,46 @@
 	<parameter name="logo" class="java.lang.String"/>
 	<parameter name="iso" class="java.lang.String"/>
 	<parameter name="firma" class="java.lang.String"/>
+	<background>
+		<band height="752">
+			<image>
+				<reportElement x="34" y="27" width="144" height="79" uuid="f68dff4b-7288-47a6-b64f-f7bdc6629b36"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="384" y="27" width="144" height="79" uuid="f2fab5c7-d43f-4ab4-b513-e386112ebf09"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="206" y="27" width="144" height="79" uuid="e2aac74f-2cb0-41af-a3bc-d6001507c4b0"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="36" y="132" width="144" height="79" uuid="473b9666-aee1-4490-b3f0-923170fcf09c"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="206" y="132" width="144" height="79" uuid="356025c4-34b5-4f8d-9bb1-00e21c3a4b02"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="384" y="132" width="144" height="79" uuid="8c4c89b0-ac8f-4eb9-a333-eb4c656aa911"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="36" y="247" width="144" height="79" uuid="c3339d6f-44d5-4d27-b5c0-911a44af2f59"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="206" y="247" width="144" height="79" uuid="39d53fd9-5667-4946-bc7c-9b9535a4d4c4"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="384" y="247" width="144" height="79" uuid="2849d8d4-820b-4acb-9112-8c1f200ea4bf"/>
+				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
 	<title>
 		<band height="11" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>

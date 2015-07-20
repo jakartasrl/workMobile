@@ -10,6 +10,7 @@ import com.jkt.operaciones.Operation;
 import com.jkt.pedido.dominio.FormaFacturacion;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
+import com.jkt.pedido.dominio.PedidoDocumentacion;
 import com.jkt.pedido.dominio.PedidoHistorial;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.varios.dominio.Contacto;
@@ -39,7 +40,9 @@ public class GenerarHistoricoPedido extends Operation {
 		historial.setContactosReferencia(new ArrayList<Contacto>());
 		historial.setNotas(new ArrayList<Nota>());
 		historial.setFormasFacturacion(new ArrayList<FormaFacturacion>());
+		historial.setDocumentacion(new ArrayList<PedidoDocumentacion>());
 
+		historial.getDocumentacion().addAll(p.getDocumentacion());
 		historial.getFormasFacturacion().addAll(p.getFormasFacturacion());
 		historial.getContactosReferencia().addAll(p.getContactosReferencia());
 		historial.getNotas().addAll(p.getNotas());
@@ -48,6 +51,7 @@ public class GenerarHistoricoPedido extends Operation {
 		
 		int nuevaVersion = p.getVersion()+1;
 		p.setVersion(nuevaVersion);
+		p.setVersionado(true);
 		
 		historial.setPedido(p);
 		historial.setVersion(nuevaVersion);

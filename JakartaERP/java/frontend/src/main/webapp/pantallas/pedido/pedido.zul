@@ -68,6 +68,16 @@
 			    		
 					</row>
 					
+					<row>
+						<cell colspan="6">
+							<label value="Version de Pedido : " />
+							<label value="@bind(vm.comprobanteOV.version)" />
+							<label value=" | " />
+							<label value="Version borrador : " />
+							<label value="@bind(vm.comprobanteOV.versionado eq 'true'?'No':'Si')" />
+						</cell>
+					</row>
+					
 				</rows>
 			</grid>
 

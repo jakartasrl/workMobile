@@ -443,6 +443,7 @@
 			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idListaPrecio" metodo="setListaPrecios" />
+			<campoEntrada propertyOV="versionado" metodo="setVersionado" />
 			
 			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">
 				<campoEntrada propertyOV="id" metodo="setId"/>
@@ -536,6 +537,9 @@
 			<campoSalida value="idCliente"	 		target="cliente.id" />
 			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
 			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
+			
+			<campoSalida value="version" 			target="version" />
+			<campoSalida value="versionado" 		target="versionado" />
 			
 			<campoSalida value="docs" target="documentacion">
 				<campoSalida value="id"					target="id" />
@@ -2067,6 +2071,7 @@
 					<campoEntrada propertyOV="input"				metodo="setInput" />
 					<campoEntrada propertyOV="valorInput" 			metodo="setValorInput" />
 					<campoEntrada propertyOV="expresionCadena"		metodo="setExpresion" />
+					<campoEntrada propertyOV="resultadoFinal"		metodo="setResultadoFinal" />
 					<campoEntrada propertyOV="idTmp"				metodo="setIdTmp" />
 				</campoEntrada>
 			

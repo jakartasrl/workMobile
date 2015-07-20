@@ -39,7 +39,9 @@ public class PedidoOV extends DescriptibleOV {
 	private Long idVendedor;
 	private Long idRepresentante;
 	
-//	private Long idContactoReferencia;
+	private int version;
+	private boolean versionado;
+	
 	private List<DescriptibleOV> contactosReferencia =  new ArrayList<DescriptibleOV>();
 	
 	private List<NotaOV> notas=new ArrayList<NotaOV>();	

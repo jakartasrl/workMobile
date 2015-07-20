@@ -59,10 +59,10 @@
 			<many-to-many class="com.jkt.pedido.dominio.FormaFacturacion"/>
 		</list>
 
-		<list name="documentacion" cascade="none" table="PEDIDO_DOCUMENTACION_HISTORIAL" >
+		<list name="documentacion" cascade="all" >
 			<key column="PEDIDO_HISTORIAL_ID" />
 			<index column="ORDEN" />
-			<many-to-many class="com.jkt.pedido.dominio.PedidoDocumentacion"/>
+			<one-to-many class="com.jkt.pedido.dominio.PedidoDocumentacion"/>
 		</list>
 
 		<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />

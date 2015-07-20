@@ -40,6 +40,7 @@ public class SessionProvider implements ISessionProvider{
 //	public void setup(){
 //		session=sessionFactory.openSession();
 //	}
+	
 	public SessionProvider() {
 		LOG.info("Iniciando el bean proveedor de sesiones.");
 	}

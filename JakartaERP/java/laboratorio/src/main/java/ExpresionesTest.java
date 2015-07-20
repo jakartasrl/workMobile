@@ -11,14 +11,47 @@ import net.sourceforge.jeval.Evaluator;
 
 import org.junit.Test;
 
+import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Variable;
 import com.jkt.laboratorio.procesos.ExpresionVariableResolver;
 
 public class ExpresionesTest implements Observer  {
 
 	@Test
-	public void validarResultados() throws EvaluationException{
+	public void validarResultados() throws EvaluationException, JakartaException{
 		
+		List<Variable> variablesDeMetodo = crearVariables();
+		
+		Evaluator evaluator = new Evaluator();
+		Map<String, Variable> mapa= new HashMap<String, Variable>();
+
+		Variable variableResultado = null;
+		
+		for (Variable variable : variablesDeMetodo) {
+			
+			if(variable.isResultadoFinal()){
+				variableResultado = variable;
+			}
+			
+			if(!variable.isInput()){
+				variable.setExpresion(transformarExpresion(variable.getExpresion()));
+			}
+			mapa.put(variable.getCodigo(), variable); 
+		}
+
+		
+		if(variableResultado==null){
+			throw new JakartaException("Verifique que alguna de las variables esta tildada como resultado final.");
+		}
+		
+		evaluator.setVariables(mapa);
+		evaluator.setVariableResolver(new ExpresionVariableResolver(this , mapa));
+//		String evaluate = evaluator.evaluate("#{A}");
+		String evaluate = evaluator.evaluate(variableResultado.getExpresion());
+		System.out.println(evaluate);
+	}
+
+	protected List<Variable> crearVariables() {
 		List<Variable> variablesDeMetodo = new ArrayList<Variable>();
 		Variable v1 = new Variable();
 		v1.setCodigo("A");
@@ -27,8 +60,9 @@ public class ExpresionesTest implements Observer  {
 		
 		Variable v2 = new Variable();
 		v2.setCodigo("B");
+		v2.setExpresion("A");
 		v2.setValorInput(55);
-		v2.setInput(true);
+		v2.setInput(false);
 		
 		
 		Variable vC = new Variable();
@@ -42,25 +76,12 @@ public class ExpresionesTest implements Observer  {
 		vR.setValorInput(55);
 		vR.setInput(false);
 		vR.setExpresion("C + B");
+		vR.setResultadoFinal(true);
 		
 		variablesDeMetodo.add(v1);
 		variablesDeMetodo.add(v2);
 		variablesDeMetodo.add(vC);
-		
-		List<Variable> variablesSimples = new ArrayList<Variable>();
-
-		Evaluator evaluator = new Evaluator();
-		Map<String, Variable> mapa= new HashMap<String, Variable>();
-
-		for (Variable variable : variablesDeMetodo) {
-			mapa.put(variable.getCodigo(), variable); 
-		}
-
-		evaluator.setVariables(mapa);
-		evaluator.setVariableResolver(new ExpresionVariableResolver(this , mapa));
-		String variableA = evaluator.getVariableValue("A");
-		String variableC = evaluator.getVariableValue("C");
-		
+		return variablesDeMetodo;
 	}
 	
 		private String transformarExpresion(String exp) {
@@ -97,8 +118,7 @@ public class ExpresionesTest implements Observer  {
 
 		}
 
-		private String armarExpresion(String variablesYConstantes,
-				List<String> operadores) {
+		private String armarExpresion(String variablesYConstantes,List<String> operadores) {
 
 			String result = "";
 			int i = 0;

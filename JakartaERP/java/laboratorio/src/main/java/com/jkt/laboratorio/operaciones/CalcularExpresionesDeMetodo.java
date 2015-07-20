@@ -8,56 +8,52 @@ import java.util.StringTokenizer;
 
 import net.sourceforge.jeval.Evaluator;
 
+import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Metodo;
 import com.jkt.laboratorio.dominio.Variable;
+import com.jkt.laboratorio.procesos.ExpresionVariableResolver;
 import com.jkt.operaciones.Operation;
 
  public class CalcularExpresionesDeMetodo extends Operation {
 	 
-	 private static final String OID = "oid".toUpperCase();
-
 	 @Override
 	 public void execute(Map<String, Object> aParams) throws Exception {
 		 
 		Metodo metodo =  (Metodo) aParams.get("objeto");
 		
-		List<Variable> variablesComplejas = new ArrayList<Variable>();
-		List<Variable> variablesSimples = new ArrayList<Variable>();
-
+		List<Variable> variablesDeMetodo = metodo.getVariables();
+		
 		Evaluator evaluator = new Evaluator();
-		Map<String, String> mapa= new HashMap<String, String>();
+		Map<String, Variable> mapa= new HashMap<String, Variable>();
+
+		Variable variableResultado = null;
 		
-		for (Variable variable : metodo.getVariables()) {
-			if (variable.isInput()) {
-				mapa.put(variable.getCodigo(), String.valueOf(variable.getValorInput())); //TODO cambiar a var valor
-				variablesSimples.add(variable);
-			} else {
-				variablesComplejas.add(variable);
-			}
-		}
-
-		evaluator.setVariables(mapa);
-
-		for (Variable variable : variablesComplejas) {
-
-			String expresion = transformarExpresion(variable.getExpresion());
-			//en expresion tengo #{A}+#{BEDF} 
+		for (Variable variable : variablesDeMetodo) {
 			
-			double resultado = evaluator.getNumberResult(expresion);
-			variable.setResultadoExpresion(resultado);
+			if(variable.isResultadoFinal()){
+				variableResultado = variable;
+			}
+			
+			if(!variable.isInput()){
+				variable.setExpresion(transformarExpresion(variable.getExpresion()));
+			}
+			mapa.put(variable.getCodigo(), variable); 
+		}
 
+		
+		if(variableResultado==null){
+			throw new JakartaException("Verifique que alguna de las variables esta tildada como resultado final.");
 		}
 		
-		metodo.setVariables(new ArrayList<Variable>());
-//		metodo.getVariables().addAll(variablesSimples);
-		metodo.getVariables().addAll(variablesComplejas);
+		evaluator.setVariables(mapa);
+		evaluator.setVariableResolver(new ExpresionVariableResolver(null , mapa));
+		String evaluate = evaluator.evaluate(variableResultado.getExpresion());
+		variableResultado.setValorInput(Double.valueOf(evaluate));
 		
 		notificarObjeto("", metodo);
-		
 	 }
-
-	// TODO helper for labs ops
-	private String transformarExpresion(String exp) {
+	 
+	 private String transformarExpresion(String exp) {
 
 		List<String> operadores = new ArrayList<String>();
 		String variablesYConstantes = "";
@@ -91,8 +87,7 @@ import com.jkt.operaciones.Operation;
 
 	}
 
-	private String armarExpresion(String variablesYConstantes,
-			List<String> operadores) {
+	private String armarExpresion(String variablesYConstantes,List<String> operadores) {
 
 		String result = "";
 		int i = 0;
@@ -117,7 +112,6 @@ import com.jkt.operaciones.Operation;
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
-
 	}
 
 }
