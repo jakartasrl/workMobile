@@ -17,6 +17,7 @@
 		<property name="nro" column="NUMERO" type="string" />
 		
 		<property name="fecha" column="FECHA" type="date" />
+		<property name="fechaVersionado" column="FECHA_VERSIONADO" type="date" />
 
 		<property name="letra" type="string">
             <column name="LETRA" length="1" />

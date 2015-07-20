@@ -760,6 +760,84 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TraerPresupuestoFinalParaPedido" clase="com.jkt.presupuesto.operaciones.TraerPresupuestoFinalWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PedidoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+		
+		<output>
+			<campoSalida value="nro" 				target="nro" />
+			<campoSalida value="fecha" 				target="fecha" />
+			<campoSalida value="idRepresentante" 	target="representante.id" />
+			<campoSalida value="idVendedor" 		target="vendedor.id" />
+			<campoSalida value="idCliente"	 		target="clienteSucursal.cliente.id" />
+			<campoSalida value="idSucursal" 		target="clienteSucursal.id" />
+			<campoSalida value="idListaPrecio" 		target="listaPrecios.id" />
+			
+			<campoSalida value="idCotizacion" 			target="comprobanteRelacionado.id" />
+			
+			<campoSalida value="contactosReferencia" 	target="contactosReferencia" >
+				<campoSalida value="id" 		target="id"/>
+			</campoSalida>
+			
+			<campoSalida value="notas"					target="notasTransientes" >
+				<campoSalida value="id"					target="id" />
+				<campoSalida value="codigo"				target="codigo" />
+				<campoSalida value="descripcion"		target="descripcion" />
+				<campoSalida value="adicional"			target="adicional" />
+				<campoSalida value="codigoActividad"	target="actividad.codigo" />
+				<campoSalida value="activo"				target="incluida" />
+				<campoSalida target="subActividad.codigo" value="codigoSubActividad" />
+				
+			</campoSalida>
+
+			<campoSalida value="items"					target="detalles" >
+				<campoSalida value="cantidad"			target="cantidad" />
+				<campoSalida value="importe"			target="precio" />
+				<campoSalida value="referencia"			target="referencia" />
+				<campoSalida value="tipoItem"			target="tipoDetalle" />
+				<campoSalida value="tipo"				target="tipoVenta" />
+				
+				<campoSalida value="idMoneda"			target="moneda.id" />
+				<campoSalida value="idProducto"			target="producto.id" />
+				
+				<campoSalida value="descripcion"		target="descripcion" />
+
+				<campoSalida value="idDeterminacion"	target="determinacion.id" />
+				<campoSalida value="codigo"				target="determinacion.codigo" />
+				<campoSalida value="descripcionDeterminacion"		target="determinacion.descripcion" />
+				
+			</campoSalida>
+			
+	
+			<campoSalida value="archivos"					target="archivos" >
+				
+				<campoSalida value="fileURL" 		target="ruta"/>
+				<campoSalida value="fileName" 		target="nombre"/>
+				<campoSalida value="fechaSubida"	target="fechaDeSubida"/>
+				<campoSalida value="comentario" 	target="comentario"/>
+				<campoSalida value="idUsuario" 		target="identificadorDeUsuario"/>
+				<campoSalida value="usuario" 		target="nombreUsuario"/>
+				<campoSalida value="contentType" 	target="contentType"/>
+				<campoSalida value="format" 		target="format"/>
+				<campoSalida value="descripcion" 	target="descripcion"/>
+			
+			</campoSalida>
+			
+			<campoSalida value="facturaciones" 			target="formasFacturacion" >
+				<campoSalida value="descripcion" 		target="descripcion"/>
+				<campoSalida value="porcentaje" 		target="porcentaje"/>
+				<campoSalida value="importe" 			target="importe"/>
+				<campoSalida value="idCondicionDePago" 	target="condicionPago.id"/>
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
 	<operacion name="TraerPresupuestoParaPedido" clase="com.jkt.presupuesto.operaciones.TraerPresupuestoWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.PedidoOV">
 		
 		<input>

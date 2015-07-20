@@ -335,7 +335,17 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 	public void cargarPresupuesto() throws IllegalAccessException, InvocationTargetException, JakartaException{
 		ContainerOV objetoOV = new ContainerOV();
 		objetoOV.setString1(String.valueOf(this.presupuestoDescriptible.getId()));
-		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPresupuestoParaPedido", objetoOV, PedidoOV.class);
+		
+		
+		/*
+		 * Cargar un presupuesto, desde un presupuesto version final siempre...
+		 */
+		
+		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPresupuestoFinalParaPedido", objetoOV, PedidoOV.class);
+		
+//		PedidoOV ovRecuperado = (PedidoOV) Operaciones.ejecutar("TraerPresupuestoParaPedido", objetoOV, PedidoOV.class);
+		
+		
 		
 		cargarDesdeOV(ovRecuperado);
 		

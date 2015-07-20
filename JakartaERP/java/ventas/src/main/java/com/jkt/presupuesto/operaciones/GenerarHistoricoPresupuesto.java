@@ -71,7 +71,7 @@ public class GenerarHistoricoPresupuesto extends Operation {
 		historial.setFechaVersionado(new Date());
 		historial.setId(0L);
 		serviceRepository.save(historial);
-		
+
 	}
 
 }

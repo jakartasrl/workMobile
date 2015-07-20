@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
+
 import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.ListaPrecioDetalle;
 import com.jkt.dominio.PersistentEntity;
@@ -14,18 +16,15 @@ import com.jkt.laboratorio.dominio.Laboratorio;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
+import com.jkt.presupuesto.dominio.PresupuestoHistorial;
 
 /**
- * Recupera un presupuesto y todas sus relaciones.
- * <p>Recupera las notas del presupuesto, y las notas totales sin chequear.</p>
- * <p>De la misma forma que con las notas, las condiciones comerciales.</p>
- * <p>Recupera todos los items, sean del sector de taller, de labo electrico, labo quimico o service.</p>
+ * Recupera un presupuesto y todas sus relaciones utilizando las versiones finales solamente.
  * 
  * @author Leonel Suarez - Jakarta SRL
- * @author Santiago Braceras - Jakarta SRL
  * 
  */
-public class TraerPresupuestoWeb extends HelperRecuperarDeterminacionesConPrecios {
+public class TraerPresupuestoFinalWeb extends HelperRecuperarDeterminacionesConPrecios {
 
 	private static final String LABORATORIO_ELECTRICO = "LaboratorioElectrico";
 	private static final String LABORATORIO_QUIMICO = "LaboratorioQuimico";
@@ -39,14 +38,22 @@ public class TraerPresupuestoWeb extends HelperRecuperarDeterminacionesConPrecio
 //		obtenerLaboratorios();
 		
 		Presupuesto presupuesto=(Presupuesto) obtener(Presupuesto.class, (String)aParams.get(OID));
-		asignarNotas(presupuesto);
+		if(presupuesto.isVersionado()){
+			//mostrar el presupuesto directamente..
+			asignarNotas(presupuesto);
+			notificarObjeto("", presupuesto);
+		}else{
+			
+			Query hql = this.crearHQL("from PresupuestoHistorial");// p where p.nro = :numero order by p.fechaVersionado"); 
+//			hql.setParameter("numero", presupuesto.getNro());
+			List historial = hql.list();
+			
+			PresupuestoHistorial p = (PresupuestoHistorial) historial.get(0);
+			asignarNotas(p);
+			notificarObjeto("", p);
+			
+		}
 
-		notificarObjeto("", presupuesto);
-		
-//		notificarCondiciones(presupuesto);
-
-//		notificarDetalles(presupuesto);
-		
 	}
 
 	Laboratorio laboQuimico, laboElectrico;
