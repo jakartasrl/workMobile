@@ -1,139 +1,137 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<vlayout>
-		<panel sclass="panel-maestro" title="Datos Principales de Equipo" style="overflow:hidden;padding:5px;" border="normal" width="42%">
+		<panel sclass="panel-maestro" title="Datos Principales de Equipo" style="overflow:hidden;padding:5px;" border="normal" width="51%">
 
 			<panelchildren>
 
 				<grid width="100%" height="100%" >
 					<columns>
-						<column  width="150px"></column>
-						<column width="130px"></column>
-						<column width="100px"></column>
-						<column width="150px"></column>
+						<column  width="90px"></column>
+						<column width="160px"></column>
+						<column width="60px"></column>
+						<column width="350px"></column>
 					</columns>
 					
-					<rows>	
+					<rows>
+						
 						<row>
 							
-								<label>Marca</label>
+							<label>Marca</label>
 								
-								<combobox width="90%" id="cmbMarca" model="@bind(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
-									<template name="model">
-										<comboitem label="@bind(each.descripcion)" value="@bind(each.id)" />
-									</template>
-								</combobox>
-								
-							
-								<label>Nro Serie</label>
-								<textbox value="@bind(vm.ov.nroSerie)" />
+							<combobox width="100%" id="cmbMarca" model="@bind(vm.ov.marcas)" selectedItem="@bind(vm.ov.marca)" >
+								<template name="model">
+									<comboitem label="@bind(each.descripcion)" value="@bind(each.id)" />
+								</template>
+							</combobox>
+														
+							<label>Nro Serie</label>
+							<textbox value="@bind(vm.ov.nroSerie)" />
 						
 						</row>
-
 						<row>
 							<label >Descripcion</label>
 							<cell colspan="3">
 								<textbox width="100%" value="@bind(vm.ov.descripcion)" />
 							</cell>
 						</row>
-
 						<row>
 							
-								<label>Cliente Actual</label>
+							<label>Cliente Actual</label>
 								
-								<cell>
-									<textbox sclass="campoCodigo-medium" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV)"/>
-									<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV,titulo='Clientes')" />
-								</cell>
+							<cell>
+								<textbox sclass="campoCodigo-large" value="@bind(vm.clienteOV.codigo)" onBlur="@command('validarCampo', clase='clientes', codigo=self.value, ov=vm.clienteOV)"/>
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='clientes', ov=vm.clienteOV,titulo='Clientes')" />
+							</cell>
 								
-								<cell colspan="2">
-									<textbox width="248px" value="@bind(vm.clienteOV.descripcion)" readonly="true" />
-								</cell>
+							<cell colspan="2">
+								<textbox width="100%" value="@bind(vm.clienteOV.descripcion)" readonly="true" />
+							</cell>
 															
 						</row>
 						<row>
 							
-								<label>Tipo Producto</label>
+							<label>Tipo Producto</label>
 								
-								<cell>
-									<textbox sclass="campoCodigo-medium" value="@bind(vm.tipoProductoOV.codigo)" onBlur="@command('validarCampo', clase='tipoProducto', codigo=self.value, ov=vm.tipoProductoOV, post='traerTipoProducto')" />
-									<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
-								</cell>
+							<cell>
+								<textbox sclass="campoCodigo-large" value="@bind(vm.tipoProductoOV.codigo)" onBlur="@command('validarCampo', clase='tipoProducto', codigo=self.value, ov=vm.tipoProductoOV, post='traerTipoProducto')" />
+								<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='tipoProducto', ov=vm.tipoProductoOV,titulo='Tipo Producto', post='traerTipoProducto')" />
+							</cell>
 
-								<cell colspan="2">
-									<textbox width="248px" value="@bind(vm.tipoProductoOV.descripcion)" readonly="true" />					
-								</cell>
+							<cell colspan="2">
+								<textbox width="100%" value="@bind(vm.tipoProductoOV.descripcion)" readonly="true" />					
+							</cell>
 						</row>
 					</rows>
 				
-			</grid>
+				</grid>
 			
-						</panelchildren>
+			</panelchildren>
+			
 		</panel>
 						
-				<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" width="60%" emptyMessage="No existen caracteristicas disponibles." style="margin-top:15px;">
+		<grid model="@bind(vm.caracteristicas)" mold="paging" pageSize="10" width="60%" emptyMessage="No existen caracteristicas disponibles." style="margin-top:5px;">
 					
-			        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
-			            <auxheader label="Caracteristicas del equipo" colspan="2" />
-			        </auxhead>
+	        <auxhead sclass="category-center" style="font-size:14px; text-align:center;">
+	            <auxheader label="Caracteristicas del equipo" colspan="2" />
+	        </auxhead>
+										
+			<columns>
+				<column hflex="1" label="Descripcion de caracteristica" /> 
+				<column hflex="1" label="Valor de caracteristica" />
+			</columns>
 					
-					
-					<columns>
-						<column hflex="1" label="Descripcion de caracteristica" /> 
-						<column hflex="1" label="Valor de caracteristica" />
-					</columns>
-					
-					<rows>
-						<template name="model">
-							<row>
-								<label value="@bind(each.descripcion)"> </label>
-								<hlayout>
-									<zk switch="${each.tipoDato}" >
-										<zk case='Tabla' >
-											<textbox value="@bind(each.valorTabla.descripcion)" />
-											<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla',oidEntidadMaestra=each.idTabla, ov=each.valorTabla , titulo='Tablas disponibles')"/>
-										</zk>
-										<zk case='Numero'>
-											<textbox value="@bind(each.valorEntero)" />
-										</zk>
-										<zk case='Booleano'>
-											<combobox selectedItem="@bind(each.valorBoolean)">
-													<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
-													<comboitem label="Falso" value="@bind(false)"></comboitem>										
-											</combobox>
-										</zk>
-										<zk case='String'>
-											<textbox value="@bind(each.valorString)" />
-										</zk>
-										<zk case='Double'>
-											<textbox value="@bind(each.valorDouble)" />
-										</zk>							
-									</zk>								
-								</hlayout>								
-							</row>
-						</template>
-					</rows>
+			<rows>
+				<template name="model">
+					<row>
+						<label value="@bind(each.descripcion)" /> 
+						<hlayout>
+							<zk switch="${each.tipoDato}" >
+								<zk case='Tabla' >
+									<textbox value="@bind(each.valorTabla.descripcion)" />
+										<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='valoresDeTabla',oidEntidadMaestra=each.idTabla, ov=each.valorTabla , titulo='Tablas disponibles')"/>
+								</zk>
+								<zk case='Numero'>
+									<textbox value="@bind(each.valorEntero)" />
+								</zk>
+								<zk case='Booleano'>
+									<combobox selectedItem="@bind(each.valorBoolean)">
+										<comboitem label="Verdadero" value="@bind(true)"></comboitem>												
+										<comboitem label="Falso" value="@bind(false)"></comboitem>										
+									</combobox>
+								</zk>
+								<zk case='String'>
+									<textbox value="@bind(each.valorString)" />
+								</zk>
+								<zk case='Double'>
+									<textbox value="@bind(each.valorDouble)" />
+								</zk>							
+							</zk>								
+						</hlayout>								
+					</row>
+				</template>
+			</rows>
 				
-				</grid>
+		</grid>
 				
-				<grid model="@bind(vm.caracteristicas)" >
-					<columns>
-						<column label="propiedad" 	/>
-						<column label="primaria" 	/>
-						<column label="secundaria" 	/>
-						<column label="terciaria" 	/>
-					</columns>
-					<rows>
-						<template name="model">
-							<row>
-								<textbox value="" />
-								<textbox value="" />
-								<textbox value="" />
-								<textbox value="" />
-							</row>
-						</template>
-					</rows>
-				</grid>
+		<grid model="@bind(vm.lsPropiedadMatricialOV.list)" width="30%" style="margin-top:5px;" >
+			<columns>
+				<column label="Propiedad" 	width="100px" />
+				<column label="Primaria"  	width="100px" />
+				<column label="Secundaria" 	width="100px" />
+				<column label="Terciaria" 	width="100px" />
+			</columns>
+			<rows>
+				<template name="model">
+					<row>
+						<label 	 value="@bind(each.nombre)" />
+						<textbox width="100%" value="@bind(each.valorPrimario)" 	/>
+						<textbox width="100%" value="@bind(each.valorSecundario)" 	/>
+						<textbox width="100%" value="@bind(each.valorTerciario)" 	/>
+					</row>
+				</template>
+			</rows>
+		</grid>
 				
 	</vlayout>
 

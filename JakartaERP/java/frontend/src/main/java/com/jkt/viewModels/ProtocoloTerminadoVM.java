@@ -46,20 +46,22 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 	private DescriptibleOV equipoOV = new DescriptibleOV();
 	private PedidoOV pedidoOV = new PedidoOV();
 	
+	private List<DescriptibleOV> listProtocoloDescriptible = new ArrayList<DescriptibleOV>();
+	private List<ProtocoloOV> listProtocolo = new ArrayList<ProtocoloOV>();
+	private UserOV userOV = new UserOV();
+	
 	private Boolean modoAprobacion = true; // solo para que aparezcan todos los campos como readonly en el zul
 	
-	private List<DescriptibleOV> listProtocolo = new ArrayList<DescriptibleOV>();
-
 	//Para manejar diferenciar los laboratorios quimicos y electricos
 	private long idLaboratorio;
 	private String laboratorioParametroKey;
 	private char tipoItem;
 	
 	@Init(superclass=true)
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"listProtocolo","listProtocoloDescriptible"})
 	public void init(@BindingParam("l") String laboratorio, @BindingParam("modoAprobacion") Boolean modoAprobacion){
 		
-		this.setTitulo("Protocolos Terminados");
+		this.setTitulo("Protocolos Pendientes de Impresión");
 				
 		this.laboratorioParametroKey = laboratorio;
 		
@@ -85,9 +87,25 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 		c.setFiltros(filtros);
 		
 		ListDescriptibleOV listDescriptible = (ListDescriptibleOV) Operaciones.ejecutar("HelperConFiltro", c, ListDescriptibleOV.class);		
-		List resultado = listDescriptible.getList();
+		this.listProtocoloDescriptible = listDescriptible.getList();
 		
-		this.listProtocolo = resultado;
+		ContainerOV containerOV = new ContainerOV();
+		for(DescriptibleOV protocoloDescriptible : this.listProtocoloDescriptible){
+			containerOV.setString1("protocolo");
+			containerOV.setString2(String.valueOf(protocoloDescriptible.getId()));
+		
+			ListProtocoloOV p = (ListProtocoloOV) Operaciones.ejecutar("TraerProtocolo", containerOV, ListProtocoloOV.class);
+			ProtocoloOV protocoloOV = (ProtocoloOV) p.getList().get(0);
+			
+			if (protocoloOV.getIdPedido() > 0){
+				containerOV.setString1(String.valueOf(protocoloOV.getIdPedido()));
+			
+				PedidoOV pedidoOV = (PedidoOV) Operaciones.ejecutar("TraerPedido", containerOV, PedidoOV.class);
+				protocoloOV.setNroPedido(pedidoOV.getNro());
+			}
+		
+			this.listProtocolo.add(protocoloOV);
+		}
 		
 	}
 
@@ -196,7 +214,7 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 
 	@Override
 	@GlobalCommand("actualizar")
-	@NotifyChange({"protocoloOV","clienteOV","equipoOV","pedidoOV","tipoItem"})
+	@NotifyChange({"listProtocolo","listProtocoloDescriptible"})
 	public void actualizar() {
 			
 	}
