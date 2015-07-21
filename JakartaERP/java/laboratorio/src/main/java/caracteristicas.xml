@@ -6,13 +6,13 @@
   <!ELEMENT propiedad EMPTY>
   
   <!ATTLIST propiedad nombre 				CDATA #REQUIRED> 
-  <!ATTLIST propiedad id_valor_primario 	CDATA #REQUIRED> 
-  <!ATTLIST propiedad id_valor_secundario 	CDATA #REQUIRED> 
-  <!ATTLIST propiedad id_valor_terciario 	CDATA #REQUIRED> 
+  <!ATTLIST propiedad idValorPrimario 		CDATA #REQUIRED> 
+  <!ATTLIST propiedad idValorSecundario 	CDATA #REQUIRED> 
+  <!ATTLIST propiedad idValorTerciario 		CDATA #REQUIRED> 
   
 ]>
 
 <propiedades>
-	<propiedad nombre="tension" 	id_valor_primario="1" id_valor_secundario="2" id_valor_terciario="3" />
-	<propiedad nombre="potencia" 	id_valor_primario="4" id_valor_secundario="5" id_valor_terciario="6" />
+	<propiedad nombre="tension" 	idValorPrimario="1" 	idValorSecundario="2" idValorTerciario="3" />
+	<propiedad nombre="potencia" 	idValorPrimario="4" 	idValorSecundario="5" idValorTerciario="6" />
 </propiedades>

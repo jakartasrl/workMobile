@@ -2175,9 +2175,9 @@
 		<output>
 
 			<campoSalida target="nombre" 				value="nombre" />
-			<campoSalida target="id_valor_primario" 	value="id_valor_primario" />
-			<campoSalida target="id_valor_secundario" 	value="id_valor_secundario" />
-			<campoSalida target="id_valor_terciario" 	value="id_valor_terciario" />
+			<campoSalida target="idValorPrimario" 		value="idValorPrimario" />
+			<campoSalida target="idValorSecundario" 	value="idValorSecundario" />
+			<campoSalida target="idValorTerciario" 		value="idValorTerciario" />
 			
 		</output>
 
