@@ -1,5 +1,6 @@
 package com.jkt.viewModels;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +18,11 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Messagebox.ClickEvent;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -141,11 +145,19 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.protocoloOV.setEstado(Protocolo.Estado.ESTADO_INICIAL.getId());
 		this.protocoloOV.setIdUsuarioIngresoResultado(userOV.getId());
 		this.protocoloOV.setIdDiagnostico(this.diagnosticoOV.getId());
-
-		Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV);
-//		final DescriptibleOV protocoloDescriptible = (DescriptibleOV) Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV, DescriptibleOV.class);
-
-		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+		
+		ProtocoloOV prot = (ProtocoloOV) Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV, ProtocoloOV.class);
+		                
+        Messagebox.show("Se genero el Protocolo " + prot.getCodigo(), "Nuevo Protocolo", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
+			public void onEvent(Event evt) throws InterruptedException, IOException {
+		        if (evt.getName().equals("onOK")) {
+				
+		        }else{
+		        	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+		        }
+		    }
+		}
+		);
 	
 	}
 
@@ -283,6 +295,10 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.clienteOV.setId(pedidoOV.getIdCliente());
 		this.clienteOV.setCodigo(pedidoOV.getCodCliente());
 		this.clienteOV.setDescripcion(pedidoOV.getDescCliente());
+		
+		this.sucursalOV.setId(pedidoOV.getIdSucursal());
+		this.sucursalOV.setCodigo(pedidoOV.getCodSucursal());
+		this.sucursalOV.setDescripcionCompleta(pedidoOV.getDescripcionCompleta());
 		
 		this.pedidoOV = pedidoOV; 
 		

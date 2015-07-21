@@ -55,7 +55,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
             }
         };
         
-        Messagebox.show("Se genero el numero de Cotizacion " + cotizacionOV.getNroCotizacion(), "Nro Cotizacion", new Messagebox.Button[]{
+        Messagebox.show("Se genero el numero de Cotizacion " + cotizacionOV.getNroCotizacion(), "| Cotizacion", new Messagebox.Button[]{
         		Messagebox.Button.OK }, Messagebox.INFORMATION, clickListener);
 	}
 

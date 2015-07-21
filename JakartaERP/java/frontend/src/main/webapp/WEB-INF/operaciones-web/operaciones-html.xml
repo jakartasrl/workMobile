@@ -2050,6 +2050,10 @@
 			<campoSalida value="codCliente"	 			target="cliente.codigo" />
 			<campoSalida value="descCliente"	 		target="cliente.descripcion" />
 			
+			<campoSalida value="idSucursal"	 			target="clienteSucursal.id" />
+			<campoSalida value="codSucursal"	 		target="clienteSucursal.codigo" />
+			<campoSalida value="descripcionCompleta"	target="clienteSucursal.descripcionCompleta" />
+			
 			<campoSalida value="items"					target="detalles" >
 				<campoSalida value="tipoItem"			target="tipoDetalle" />
 				<campoSalida value="idDeterminacion"	target="determinacion.id" />
@@ -2124,7 +2128,7 @@
 	</operacion>
 	
 	
-	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" inputOV="com.jkt.ov.ProtocoloOV">
+	<operacion name="GuardarProtocolo" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.laboratorio.dominio.Protocolo" outputOV="com.jkt.ov.ProtocoloOV" inputOV="com.jkt.ov.ProtocoloOV">
 	
 		<input keyName="objeto" clase="com.jkt.laboratorio.dominio.Protocolo">
 		
@@ -2135,8 +2139,7 @@
 			<campoEntrada propertyOV="idCliente" 					metodo="setCliente" />
 			<campoEntrada propertyOV="idSucursal" 					metodo="setClienteSucursal" />
 			<campoEntrada propertyOV="idEquipo" 					metodo="setEquipo" />
-<!-- 			<campoEntrada propertyOV="idUsuario" 					metodo="setUsuarioIngresoResultado" /> -->
-			<campoEntrada propertyOV="idUsuarioIngresoResultado" 					metodo="setUsuarioIngresoResultado" />
+			<campoEntrada propertyOV="idUsuarioIngresoResultado" 	metodo="setUsuarioIngresoResultado" />
 			<campoEntrada propertyOV="idLab" 						metodo="setLaboratorio" />
 			<campoEntrada propertyOV="ordenTrabajo" 				metodo="setOrdenTrabajo" />
 			
@@ -2164,6 +2167,10 @@
 			</campoEntrada>
 			
 		</input>
+		
+		<output>
+			<campoSalida target="codigo" 				value="codigo"/>
+		</output>
 	
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>

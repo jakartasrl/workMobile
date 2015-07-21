@@ -125,9 +125,9 @@
 				<template name="model">
 					<row>
 						<label 	 value="@bind(each.nombre)" />
-						<textbox width="100%" value="@bind(each.valorPrimario)" 	/>
-						<textbox width="100%" value="@bind(each.valorSecundario)" 	/>
-						<textbox width="100%" value="@bind(each.valorTerciario)" 	/>
+						<intbox width="100%" value="@bind(each.valorPrimario)" 	/>
+						<intbox width="100%" value="@bind(each.valorSecundario)" 	/>
+						<intbox width="100%" value="@bind(each.valorTerciario)" 	/>
 					</row>
 				</template>
 			</rows>

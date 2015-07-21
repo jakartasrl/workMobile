@@ -101,15 +101,14 @@ public class ProtocoloPopUpVM {
 		Session sess = Sessions.getCurrent();
 		UserOV userOV = (UserOV) sess.getAttribute("userCredential");
 		
-		if (this.validarUsuarios(userOV)){
-			Messagebox.show("Verifique que el usuario que crea el protocolo debe ser distinto al que lo aprueba.");
-			return;
-		}
+//		El usuario que crea el protocolo no lo puede aprobar
+//		if (this.validarUsuarios(userOV)){
+//			Messagebox.show("Verifique que el usuario que crea el protocolo debe ser distinto al que lo aprueba.");
+//			return;
+//		}
 			 
 		this.protocoloOV.setIdUsuarioIngresoAprobacion(userOV.getId());
 		
-//		this.protocoloOV.setComentarioDiagnostico("APROBADO POR "+userOV.getName()+" "+userOV.getLastName());
-//		this.protocoloOV.setFechaAprobacion(new Date());
 		this.protocoloOV.setEstado(Protocolo.Estado.APROBADO.getId());
 		Operaciones.ejecutar("AprobarProtocolo", this.protocoloOV );
 		
