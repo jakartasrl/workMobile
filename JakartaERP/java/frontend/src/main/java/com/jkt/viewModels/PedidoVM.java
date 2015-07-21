@@ -125,6 +125,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 						container.setString1(String.valueOf(pedidoDescriptible.getId()));
 						Operaciones.ejecutar("GenerarHistoricoPedido", container);
 						Executions.sendRedirect("/pantallas/index/index-pedido.zul");
+					}else{
+						Executions.sendRedirect("/pantallas/index/index-pedido.zul");
 					}
 				}
 			});

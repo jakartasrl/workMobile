@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -11,6 +14,8 @@ import org.apache.log4j.Logger;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
+@EqualsAndHashCode(of={"id"})
 abstract public class PersistentEntity implements Serializable{
 
 	protected static final Logger log = Logger.getLogger(PersistentEntity.class);
@@ -20,55 +25,6 @@ abstract public class PersistentEntity implements Serializable{
 	private Date modificationDate;
 	private boolean activo=true;
 	private int version=1;
-
-	
-	public boolean getActivo(){
-		return activo;
-	}
-	
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public PersistentEntity() {
-		this.creationDate = new Date();
-	}
-
-	public Date getModificationDate() {
-		return modificationDate;
-	}
-
-	public void setModificationDate(Date modificationDate) {
-		this.modificationDate = modificationDate;
-	}
 
 	/*
 	 * Helper methods for all entities

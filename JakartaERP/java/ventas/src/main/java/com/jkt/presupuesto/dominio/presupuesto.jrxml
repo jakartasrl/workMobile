@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-07-21T12:18:19 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31f03f61-82cb-4e52-ac35-14fb42da7bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -57,43 +59,79 @@
 	<parameter name="logo" class="java.lang.String"/>
 	<parameter name="iso" class="java.lang.String"/>
 	<parameter name="firma" class="java.lang.String"/>
+	<parameter name="mark" class="java.lang.String"/>
 	<background>
 		<band height="752">
 			<image>
-				<reportElement x="34" y="27" width="144" height="79" uuid="f68dff4b-7288-47a6-b64f-f7bdc6629b36"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="205" y="40" width="144" height="79" uuid="f68dff4b-7288-47a6-b64f-f7bdc6629b36"/>
 			</image>
 			<image>
-				<reportElement x="384" y="27" width="144" height="79" uuid="f2fab5c7-d43f-4ab4-b513-e386112ebf09"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="36" y="40" width="144" height="79" uuid="336037e6-4b92-4ef6-b55b-73282da11fa6"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="206" y="27" width="144" height="79" uuid="e2aac74f-2cb0-41af-a3bc-d6001507c4b0"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="390" y="40" width="144" height="79" uuid="ffa3e351-f381-408f-9aa6-0bc41cb56e22"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="36" y="132" width="144" height="79" uuid="473b9666-aee1-4490-b3f0-923170fcf09c"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="205" y="160" width="144" height="79" uuid="78b15a72-990f-486a-b8f2-64a4550d51e6"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="206" y="132" width="144" height="79" uuid="356025c4-34b5-4f8d-9bb1-00e21c3a4b02"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="390" y="160" width="144" height="79" uuid="03fdb723-e49b-44b4-a89e-a20b60dca3a9"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="384" y="132" width="144" height="79" uuid="8c4c89b0-ac8f-4eb9-a333-eb4c656aa911"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="36" y="160" width="144" height="79" uuid="44ed690d-14fa-443b-9b35-a7506133daee"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="36" y="247" width="144" height="79" uuid="c3339d6f-44d5-4d27-b5c0-911a44af2f59"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="205" y="280" width="144" height="79" uuid="ce258941-bc28-4a7b-afde-aa0d97cc36b2"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="206" y="247" width="144" height="79" uuid="39d53fd9-5667-4946-bc7c-9b9535a4d4c4"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="390" y="400" width="144" height="79" uuid="2c6e95dd-256c-4669-8b83-0dbc0fb55d70"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="384" y="247" width="144" height="79" uuid="2849d8d4-820b-4acb-9112-8c1f200ea4bf"/>
-				<imageExpression><![CDATA["C:\\Users\\ssuarez.JAKARTA\\Desktop\\waterMarkLC.png"]]></imageExpression>
+				<reportElement x="36" y="280" width="144" height="79" uuid="c5b77377-e940-457f-b66a-d0c33ed00e36"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="205" y="400" width="144" height="79" uuid="d84b85c1-fe6f-4988-a8e5-a4c18dbb1951"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="36" y="400" width="144" height="79" uuid="e4b43afa-63b4-409f-9d8a-ebb3532b851b"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="390" y="280" width="144" height="79" uuid="d99d9162-cdcd-4197-aefc-2b2c22ff14a7"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="205" y="510" width="144" height="79" uuid="57b9fe99-ab84-4d80-a79a-77c075b7b89d"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="390" y="630" width="144" height="79" uuid="57e96dfe-9c67-41c8-96f9-1231e4d06a39"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="36" y="510" width="144" height="79" uuid="afd1b71d-a13a-4475-9f7e-03dc078ee2de"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="205" y="630" width="144" height="79" uuid="a2e92f62-2887-44ae-8311-d82d4d702c13"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="36" y="630" width="144" height="79" uuid="44057b19-9e01-4a58-acec-2fe1812356e2"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="390" y="510" width="144" height="79" uuid="4f677fdf-32b6-440f-9d18-39de98784c9f"/>
+				<imageExpression><![CDATA[$P{mark}]]></imageExpression>
 			</image>
 		</band>
 	</background>

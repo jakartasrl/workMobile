@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.PersistentEntity;
 
 @Data
+@EqualsAndHashCode(callSuper=true,of={})
 public class Metodo extends PersistentEntity {
 
-	private Determinacion determinacion;
+//	private Determinacion determinacion;
 	private String metodo;
 	private Expresion expresion;
 
@@ -21,7 +23,7 @@ public class Metodo extends PersistentEntity {
 	public void addValorEsperado(ValorEsperado aValue) {
 		if (!valoresEsperados.contains(aValue)) {
 			valoresEsperados.add(aValue);
-			aValue.setMetodo(this);
+//			aValue.setMetodo(this);
 		}
 	}
 

@@ -1,6 +1,8 @@
 package com.jkt.erp.articulos;
 
-import com.jkt.constantes.TiposDeDato;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import com.jkt.dominio.Descriptible;
 
 /**
@@ -8,31 +10,11 @@ import com.jkt.dominio.Descriptible;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class CaracteristicaProducto extends Descriptible {
 
-	/**
-	 * Define el tipo de dato que contendra esta caracteristica.
-	 * 
-	 * @see TiposDeDato
-	 */
 	private String tipoDato;//Del mismo valor que la clase TiposDeDato.
-	
 	private TablaValoresCaracProd tabla;
-
-	public String getTipoDato() {
-		return tipoDato;
-	}
-
-	public void setTipoDato(String tipoDato) {
-		this.tipoDato = tipoDato;
-	}
-
-	public TablaValoresCaracProd getTabla() {
-		return tabla;
-	}
-
-	public void setTabla(TablaValoresCaracProd tabla) {
-		this.tabla = tabla;
-	}
 
 }

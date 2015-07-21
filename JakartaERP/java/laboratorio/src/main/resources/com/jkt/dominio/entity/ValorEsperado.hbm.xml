@@ -12,7 +12,7 @@
 		<property name="valorHasta" column="VALOR_HASTA" type="double" />
 		<property name="limite" column="LIMITE" type="string" />
 
-		<many-to-one name="metodo" column="ID_METODO" />
+<!-- 		<many-to-one name="metodo" column="ID_METODO" /> -->
 		<many-to-one name="caracteristica" column="CARACTERISTICA_PRODUCTO_ID" />
 
 	</class>

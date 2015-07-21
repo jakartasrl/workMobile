@@ -62,7 +62,7 @@
 
 		<many-to-one name="listaPrecios" class="com.jkt.dominio.ListaPrecios" column="LISTA_PRECIOS_ID" />
 
-		<list name="detalles" table="DETALLES_PRESUPUESTO_HISTORIAL" cascade="none">
+		<list name="detalles" table="DETALLES_PRESUPUESTO_HISTORIAL" cascade="all">
 			<key column="PRESUPUESTO_HISTORIAL_ID" />
 			<index column="ORDEN" />
 			<many-to-many class="com.jkt.presupuesto.dominio.PresupuestoDet" />

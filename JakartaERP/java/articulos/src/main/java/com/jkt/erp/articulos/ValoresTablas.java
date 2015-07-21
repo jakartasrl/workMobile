@@ -1,5 +1,8 @@
 package com.jkt.erp.articulos;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDetalle;
 
@@ -12,17 +15,11 @@ import com.jkt.dominio.IDetalle;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class ValoresTablas extends Descriptible implements IDetalle {
 
 	private TablaValoresCaracProd tablaValoresCaract;
-
-	public TablaValoresCaracProd getTablaValoresCaract() {
-		return tablaValoresCaract;
-	}
-
-	public void setTablaValoresCaract(TablaValoresCaracProd tablaValoresCaract) {
-		this.tablaValoresCaract = tablaValoresCaract;
-	}
 
 	public String getNombreDeMaestro() {
 		return "tablaValoresCaract";

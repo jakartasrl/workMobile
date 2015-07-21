@@ -177,6 +177,8 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			Map<String, Object> parameters=new HashMap<String, Object>();
 			
+			parameters.put("lugarFecha", String.format("%s, %s",datosEmpresa.getProvincia(), obtenerFechaActual()));			
+
 			String referenciaPresupuesto="Sobre un (1) Transformador TTE de 15/15/10 MVA - 132/33/12,2 kV (a�o 1975)";
 			parameters.put("descripcionPresupuesto", "-----------------------------");
 			
@@ -222,6 +224,12 @@ public class GenerarComprobantePresupuesto extends Operation {
 			parameters.put("titulo", "Gerente Comercial");
 			parameters.put("saludos", datosEmpresa.getSaludo());
 
+			
+			if(p.isVersionado()){
+				parameters.put("mark", rutaCompartida.concat(RUTA_IMAGENES).concat("blank.png"));
+			}else{
+				parameters.put("mark", rutaCompartida.concat(RUTA_IMAGENES).concat("water.png"));
+			}
 			
 			asignarImagenes(parameters);
 			asignarImagenesDeFirma(parameters);

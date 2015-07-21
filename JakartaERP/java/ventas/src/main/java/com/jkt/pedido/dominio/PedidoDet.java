@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
 import com.jkt.dominio.ComprobanteVentaDet;
 import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.varios.dominio.Moneda;
@@ -17,6 +19,7 @@ import com.jkt.varios.dominio.Moneda;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
 public class PedidoDet extends ComprobanteVentaDet {
 
 	public static final char CHAR_ITEM = 'I';
@@ -34,56 +37,6 @@ public class PedidoDet extends ComprobanteVentaDet {
 	private List<String> plazosEntrega=new ArrayList<String>();
 	private List<FormaFacturacion> formasFacturacion=new ArrayList<FormaFacturacion>();
 	
-	/*
-	 * Getter y setters
-	 */
-	public char getTipoDetalle() {
-		return tipoDetalle;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-
-	public List<String> getPlazosEntrega() {
-		return plazosEntrega;
-	}
-
-	public void setPlazosEntrega(List<String> plazosEntrega) {
-		this.plazosEntrega = plazosEntrega;
-	}
-
-	public List<FormaFacturacion> getFormasFacturacion() {
-		return formasFacturacion;
-	}
-
-	public void setFormasFacturacion(List<FormaFacturacion> formasFacturacion) {
-		this.formasFacturacion = formasFacturacion;
-	}
-
-	public void setTipoDetalle(char tipoDetalle) {
-		this.tipoDetalle = tipoDetalle;
-	}
-
-	public Moneda getMoneda() {
-		return moneda;
-	}
-
-	public void setMoneda(Moneda moneda) {
-		this.moneda = moneda;
-	}
-
-	public Determinacion getDeterminacion() {
-		return determinacion;
-	}
-
-	public void setDeterminacion(Determinacion determinacion) {
-		this.determinacion = determinacion;
-	}
 	
 	/*
 	 * Helper methods

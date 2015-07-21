@@ -2,6 +2,7 @@ package com.jkt.presupuesto.operaciones;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -40,33 +41,27 @@ public class GenerarHistoricoPresupuesto extends Operation {
 		historial.setNotas(new ArrayList<Nota>());
 		historial.setFormasFacturacion(new ArrayList<FormaFacturacion>());
 
+		historial.getFormasFacturacion().addAll(p.getFormasFacturacion());
+		historial.getContactosReferencia().addAll(p.getContactosReferencia());
+		historial.getNotas().addAll(p.getNotas());
+		historial.getArchivos().addAll(p.getArchivos());
+		historial.getDetalles().addAll(p.getDetalles());
 		
-		//TODO REEMPLAZAR FOREACHS POR ADDALL
-		for (FormaFacturacion f : p.getFormasFacturacion()) {
-			historial.agregarFormaFacturacion(f);
-		}
-
-		for (Contacto c : p.getContactosReferencia()) {
-			historial.getContactosReferencia().add(c);
-		}
-
-		for (Nota notas : p.getNotas()) {
-			historial.agregarNota(notas);
-		}
-
-		for (Especificacion especificacion : p.getArchivos()) {
-			historial.agregarEspecificacion(especificacion);
-		}
-
-		for (PresupuestoDet det : p.getDetalles()) {
-			historial.agregarDetalle(det);
-		}
+//		List<PresupuestoDet> detalles = p.getDetalles();
+//		for (PresupuestoDet presupuestoDet : detalles) {
+//			PresupuestoDet det = new PresupuestoDet();
+//			BeanUtils.copyProperties(det, presupuestoDet);
+//			det.setId(0L);
+//			historial.getDetalles().add(det);
+//		}
+		
+//		historial.getDetalles().addAll(p.getDetalles());
+		
 
 		int nuevaVersion = p.getVersion()+1;
 		p.setVersion(nuevaVersion);
 		p.setVersionado(true);
 		
-//		historial.setPresupuesto(p);
 		historial.setVersion(nuevaVersion);
 		historial.setFechaVersionado(new Date());
 		historial.setId(0L);

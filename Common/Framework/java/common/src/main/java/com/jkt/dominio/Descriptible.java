@@ -3,6 +3,7 @@ package com.jkt.dominio;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
+@EqualsAndHashCode(callSuper=true, of={"codigo"})
 public class Descriptible extends PersistentEntity {
 
 	@NotNull(message="El campo codigo no puede ser nulo.")

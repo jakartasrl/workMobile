@@ -12,7 +12,7 @@
 
 <!-- 		<one-to-one name="expresion" cascade="save-update" class="com.jkt.laboratorio.dominio.Expresion" /> -->
 
-		<many-to-one name="determinacion" column="ID_DETERMINACION" />
+<!-- 		<many-to-one name="determinacion" column="ID_DETERMINACION" /> -->
 
 		<list name="valoresEsperados" cascade="save-update">
 			<key column="ID_METODO" />

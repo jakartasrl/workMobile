@@ -3,6 +3,9 @@ package com.jkt.erp.articulos;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDetalle;
 
@@ -14,17 +17,11 @@ import com.jkt.dominio.IDetalle;
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class TablaValoresCaracProd extends Descriptible implements IDetalle {
 
 	private List<ValoresTablas> valoresDeTabla = new ArrayList<ValoresTablas>();
-
-	public List<ValoresTablas> getValoresDeTabla() {
-		return valoresDeTabla;
-	}
-
-	public void setValoresDeTabla(List<ValoresTablas> valoresDeTabla) {
-		this.valoresDeTabla = valoresDeTabla;
-	}
 
 	public void addValor(ValoresTablas valor){
 		if (!valoresDeTabla.contains(valor)) {
