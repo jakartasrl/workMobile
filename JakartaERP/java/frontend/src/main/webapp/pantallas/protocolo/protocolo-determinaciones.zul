@@ -21,66 +21,60 @@
 				<listitem>
 				
 					<listcell>
-
-						<hbox>
-							<groupbox mold="3d"  width="100%" open="true" >
 							
-								<grid>
-									<columns>
-										<column width="110px" />
-										<column width="160px" />
-										<column width="120px"/>
-									</columns>
-									<rows>
-										<row>
-											<label width="100%" value="Determinacion " />
-											<textbox width="100%" value="@bind(determinacion.descripcion)" readonly="true"/>
-										</row>
-										<row>
-											<label width="100%" value="Metodo Utilizado " />
-											<combobox width="100%" model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)"  >
-												<template name="model" var="metodo">
-													<comboitem label="@bind(metodo.metodo)" value="@bind(metodo.metodo)" />
-												</template>
-											</combobox>
-											<button width="100%" style="margin-left:2px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)"  />	
-										</row>
-									</rows>
-								</grid>
-
-																												
-									<listbox model="@bind(determinacion.metodoUtilizado.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." >
+						<hlayout>
+							<label value="Determinacion " />
+							<textbox sclass="campoCodigo-vlarge" value="@bind(determinacion.descripcion)" readonly="true"/>
+							<label value="Metodo Utilizado " />
+							<combobox model="@bind(determinacion.metodos)" selectedItem="@bind(determinacion.metodoUtilizado)"  >
+								<template name="model" var="metodo">
+									<comboitem label="@bind(metodo.metodo)" value="@bind(metodo.metodo)" />
+								</template>
+							</combobox>
+							<button style="margin-left:10px;" label="Calcular Expresion" onClick="@command('calcularExpresion', metodo=determinacion.metodoUtilizado)"  />	
+						</hlayout>
 								
-										<listhead>
-											<listheader label="Variables" />
-										</listhead>
-									
-											<template name="model" var="variable">
-									
-												<listitem>
-													<listcell>
-																<hlayout>
-																	<textbox value="@bind(variable.codigo)" 			width="100%" readonly="true" />
-																	<textbox value="@bind(variable.descripcion)" 		width="100%" readonly="true" />
-																	<textbox value="@bind(variable.valorInput)" 		width="100%" if="${variable.input}"  />
-																	<textbox value="@bind(variable.expresionCadena)" 	width="100%" readonly="true" if="${!variable.input}" />
-																	<textbox value="@bind(variable.resultadoExpresion)" width="80%" readonly="true" if="${!variable.input}" />
-																</hlayout>
-																		
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
+						<grid model="@bind(determinacion.metodoUtilizado.variables)" mold="paging" pageSize="9" emptyMessage="No existen Variables." style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+										
+							<columns>
+								<column label=""	width="100px" />
+								<column label="" 	width="200px"/>
+								<column label=""	width="200px"/>
+								<column label=""	width="150px"/>
+							</columns>
 
-								<hlayout>
-									<label width="100%" value="comentario : " />	
-									<textbox width="310%" value="@bind(determinacion.comentario)"  />
-								</hlayout>
-								
-							</groupbox>
+							<rows>
+								<template name="model" var="variable">
+									<row>
+	
+										<cell>
+											<label width="100%" value="@bind(variable.codigo)" />
+										</cell>
+	
+										<cell>
+											<label width="100%" value="@bind(variable.descripcion)" />
+										</cell>
+	
+										<cell>
+											<doublebox sclass="importe" value="@bind(variable.valorInput)" format="#.##" width="50%" if="${variable.input}"  />
+											<label width="80%" value="@bind(variable.expresionCadena)" if="${!variable.input}" />
+										</cell>
+	
+										<cell>
+											<label width="100%" value="@bind(variable.resultadoExpresion)" if="${!variable.input}" />
+											</cell>
+	
+									</row>									
+										
+								</template>
+										
+							</rows>
 							
-						</hbox>
-
+						</grid>																				
+									
+						<label width="100%" value="comentario" />	
+						<ckeditor height="70px" value="@bind(determinacion.comentario)" toolbar="Complex"  customConfigurationsPath="/pantallas/common/config.js" />
+	
 					</listcell>
 					
 				</listitem>

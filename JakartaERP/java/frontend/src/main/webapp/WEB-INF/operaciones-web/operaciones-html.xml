@@ -2080,7 +2080,7 @@
 			</campoEntrada>
 			
 		</input>
-		
+	
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
@@ -2094,10 +2094,13 @@
 		
 		<output>
 			<campoSalida value="id" 					target="id" />
+			<campoSalida value="codigo" 				target="codigo" />
+			<campoSalida value="descripcion" 			target="descripcion" />
 			<campoSalida value="idPedido" 				target="idPedido" />
 			<campoSalida value="fechaHoraEmision" 		target="fecha" />
 			<campoSalida value="fechaHoraMuestra" 		target="fechaHoraMuestra" />
 			<campoSalida value="idEquipo"		 		target="equipo.id" />
+			<campoSalida value="nombreEquipo"		 	target="equipo.descripcion" />
 			<campoSalida value="idLab"		 			target="laboratorio.id" />
 			<campoSalida value="idCliente"		 		target="clienteSucursal.cliente.id" />
 			<campoSalida value="codCliente"		 		target="clienteSucursal.cliente.codigo" />
@@ -2105,7 +2108,9 @@
 			<campoSalida value="codSucursal"		 	target="clienteSucursal.codigo" />
 			<campoSalida value="descripcionCompleta"	target="clienteSucursal.descripcionCompleta" />
 			
-			<campoSalida value="idUsuarioIngresoResultado" 				target="usuarioIngresoResultado.id" />
+			<campoSalida value="idUsuarioIngresoResultado" 			target="usuarioIngresoResultado.id" />
+			<campoSalida value="nombreUsuarioIngresoResultado" 		target="usuarioIngresoResultado.descripcion" />
+			<campoSalida value="nombreUsuarioIngresoAprobacion"		target="usuarioIngresoAprobacion.descripcion" />
 	
 			<campoSalida value="ordenTrabajo"		 	target="ordenTrabajo" />
 			
@@ -2173,13 +2178,13 @@
 		<output>
 
 			<campoSalida target="nombre" 				value="nombre" />
-			<campoSalida target="id_valor_primario" 	value="id_valor_primario" />
-			<campoSalida target="id_valor_secundario" 	value="id_valor_secundario" />
-			<campoSalida target="id_valor_terciario" 	value="id_valor_terciario" />
+			<campoSalida target="idValorPrimario" 		value="idValorPrimario" />
+			<campoSalida target="idValorSecundario" 	value="idValorSecundario" />
+			<campoSalida target="idValorTerciario" 		value="idValorTerciario" />
 			
 		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
-		
+	
 </entity>

@@ -5,9 +5,15 @@ import lombok.Data;
 @Data
 public class PropiedadMatricial {
 	
-	private String nombre; 
-	private long id_valor_primario; 
-	private long id_valor_secundario; 
-	private long  id_valor_terciario; 
+	private String 	nombre; 
+	
+	private long 	idValorPrimario;
+	private double 	valorPrimario;
+	
+	private long 	idValorSecundario;
+	private double 	valorSecundario;
+	
+	private long  	idValorTerciario;
+	private double 	valorTerciario;
 
 }

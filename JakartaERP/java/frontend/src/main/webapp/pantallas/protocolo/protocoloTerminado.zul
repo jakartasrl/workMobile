@@ -2,23 +2,33 @@
 
 	<vlayout>
 		
-		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Protocolos Aprobados" border="normal" width="43%" >
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="100%" >
 
 			<panelchildren>
 			
-				<grid model="@bind(vm.listProtocolo)" emptyMessage="No existen protocolos aprobados">
+				<grid model="@bind(vm.listProtocolo)" emptyMessage="No existen protocolos pendientes de impresión">
 
 					<columns>
-						<column label="Codigo" 		width="150px"/>
-						<column label="Descripcion" width="150px"/>
-						<column label="" 			width="150px"/>
+						<column label="Protocolo" 			width="100px"/>
+						<column label="Fecha"				width="80px"/>
+						<column label="Cliente/Sucursal" 	width="400px"/>
+						<column label="Nro Pedido"			width="100px"/>
+						<column label="Creador por"			width="150px"/>
+						<column label="Equipo"				width="300px"/>
+						<column label="Aprobado por"		width="150px"/>
+						<column label=""					width="50px"/>
 					</columns>
 			
 					<rows>
 						<template name="model">
 							<row>
-								<textbox width="100%" value="@bind(each.codigo)" 		readonly="true" />
-								<textbox width="100%" value="@bind(each.descripcion)" 	readonly="true" />
+								<textbox width="100%" value="@bind(each.codigo)"   							readonly="true" sclass="campoCodigo-medium" />
+								<datebox width="100%" value="@bind(each.fechaHoraEmision)"  				buttonVisible="false" format="dd/MM/yyyy" readonly="true" />
+								<textbox width="100%" value="@bind(each.descripcionCompleta)" 			 	readonly="true" />
+								<textbox width="100%" value="@bind(each.nroPedido)" 						readonly="true" />
+								<textbox width="100%" value="@bind(each.nombreUsuarioIngresoResultado)" 	readonly="true" />
+								<textbox width="100%" value="@bind(each.nombreEquipo)" 						readonly="true" />																								
+								<textbox width="100%" value="@bind(each.nombreUsuarioIngresoAprobacion)"	readonly="true" />
 								<checkbox />
 							</row>	
 						</template>					

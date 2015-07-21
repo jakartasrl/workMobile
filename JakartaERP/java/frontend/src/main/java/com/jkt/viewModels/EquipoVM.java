@@ -3,10 +3,15 @@ package com.jkt.viewModels;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
@@ -55,6 +60,10 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	private PropiedadMatricialOV propiedadMatricialOV = new PropiedadMatricialOV();
 	private ListPropiedadMatricialOV lsPropiedadMatricialOV = new ListPropiedadMatricialOV();
 	
+	Map<String,PropiedadMatricialOV> mapPropMatricial=new HashMap<String, PropiedadMatricialOV>();
+	
+	private List<CaracteristicaProductoOV> caracteristicasAux = new ArrayList<CaracteristicaProductoOV>();
+	
 	@SuppressWarnings("unchecked")
 	@NotifyChange("caracteristicas")
 	public void traerTipoProducto() {
@@ -67,11 +76,12 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 		ListCaracteristicaProductoOV determinaciones = (ListCaracteristicaProductoOV) Operaciones.ejecutar("TraerCaracteristicasDeProducto", containerOV, ListCaracteristicaProductoOV.class);
 		this.caracteristicas = determinaciones.getList();
+		this.sacarElementosDeCaracteristicas(caracteristicas); //Se agrego para quitar los valores numericos para pasarlos a la matriz
 
 	}
 	
 	@SuppressWarnings("unchecked")
-	@NotifyChange({"ov","caracteristicas","marcas","propiedadMatricialOV","lsPropiedadMatricialOV"})
+	@NotifyChange({"ov","caracteristicas","marcas","propiedadMatricialOV","lsPropiedadMatricialOV","caracteristicasAux"})
 	public void traerEquipo() throws IOException, Exception, JakartaException {
 		
 		long idEquipo = ov.getId();
@@ -83,11 +93,19 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		
 		EquipoOV eq = (EquipoOV) Operaciones.ejecutar("TraerEquipo", containerOV, EquipoOV.class);
 	
-		this.setCaracteristicas(eq.getCaracteristicas());
+		this.setCaracteristicas(eq.getCaracteristicas()); //Se Cargan provisoriamente los datos para cargar la matriz de propiedades 
 		
-		//Inicio
-		this.lsPropiedadMatricialOV = (ListPropiedadMatricialOV) Operaciones.ejecutar("TraerPropiedades", ListPropiedadMatricialOV.class);
-		//Fin
+		this.cargarMatrizPropiedades();
+
+		this.lsPropiedadMatricialOV.clear();
+		Collection<PropiedadMatricialOV> values = this.mapPropMatricial.values();
+	
+		for(Object current : values){
+			PropiedadMatricialOV protMat = (PropiedadMatricialOV) current;
+			this.lsPropiedadMatricialOV.add(protMat);
+		}
+		
+		this.sacarElementosDeCaracteristicas(eq.getCaracteristicas());	//Se cargan nuevamente los datos para trabajar con la misma instancia
 		
 		DescriptibleOV clienteOV = new DescriptibleOV();
 		clienteOV.setId(eq.getIdCliente());
@@ -104,7 +122,6 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		ListMarcaOV marcas = (ListMarcaOV) Operaciones.ejecutar("TraerMarca", ListMarcaOV.class);
 		eq.setMarcas(marcas.getList());
 		
-
 		List<ValoresTablaOV> marcasDisponibles = eq.getMarcas();
 		Long idMarca = eq.getIdMarca();
 		ValoresTablaOV marcaSeleccionada=null;
@@ -134,11 +151,81 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		
 	}
 
+	private void sacarElementosDeCaracteristicas(List<CaracteristicaProductoOV> caracteristicas) {
+		
+		List<CaracteristicaProductoOV> nuevaLista = new ArrayList<CaracteristicaProductoOV>();
+		this.caracteristicasAux = caracteristicas;
+		
+		List<Long> ids= new ArrayList<Long>();
+		for (Object caracteristicaProductoOV : this.lsPropiedadMatricialOV.getList()) {
+			PropiedadMatricialOV c= (PropiedadMatricialOV) caracteristicaProductoOV ;
+			ids.add(c.getIdValorPrimario());
+			ids.add(c.getIdValorSecundario());
+			ids.add(c.getIdValorTerciario());
+		}
+		
+		for(CaracteristicaProductoOV carac : caracteristicas){
+			if(!ids.contains(carac.getId())){
+				nuevaLista.add(carac);
+			}
+		}
+		
+		this.setCaracteristicas(nuevaLista);
+
+	}
+
+	private void cargarMatrizPropiedades() {
+		
+		for(CaracteristicaProductoOV carac : this.caracteristicas){
+			
+			long idCaracteristica = carac.getId();
+						
+			for (PropiedadMatricialOV propiedadMatricialOV : this.mapPropMatricial.values()) {
+				
+				if(propiedadMatricialOV.getIdValorPrimario() == idCaracteristica){
+					propiedadMatricialOV.setValorPrimario(carac.getValorEntero());
+					break;
+				}
+				
+				if(propiedadMatricialOV.getIdValorSecundario() == idCaracteristica){
+					propiedadMatricialOV.setValorSecundario(carac.getValorEntero());
+					break;
+				}
+
+				if(propiedadMatricialOV.getIdValorTerciario() == idCaracteristica){
+					propiedadMatricialOV.setValorTerciario(carac.getValorEntero());
+					break;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 	@Init(superclass=true)
-	@NotifyChange("ov")
+	@NotifyChange({"ov","lsPropiedadMatricialOV","mapPropMatricial"})
 	public void init() {
 		this.setTitulo("Administracion de Equipos");
 		this.traer();
+		this.lsPropiedadMatricialOV = (ListPropiedadMatricialOV) Operaciones.ejecutar("TraerPropiedades", ListPropiedadMatricialOV.class);
+		this.iniciarPropMatricial();
+	}
+
+	private void iniciarPropMatricial() {
+		
+		List list = this.lsPropiedadMatricialOV.getList();
+		
+		for(Object current : list){
+		
+			PropiedadMatricialOV protMat = (PropiedadMatricialOV) current;
+			
+			if (!this.mapPropMatricial.containsKey(protMat.getNombre())){
+				
+				this.mapPropMatricial.put(protMat.getNombre(), protMat);
+			}
+		}
+
 	}
 
 	@Command("traer")
@@ -168,7 +255,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 	@Override
 	@GlobalCommand("actualizar")
-	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","propiedadMatricialOV","lsPropiedadMatricialOV"})
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","propiedadMatricialOV","lsPropiedadMatricialOV","mapPropMatricial","caracteristicasAux"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -179,7 +266,7 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 	}
 	
 	@Command("guardar")
-	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas","propiedadMatricialOV","lsPropiedadMatricialOV"})
+	@NotifyChange({ "ov","clienteOV", "tipoProductoOV", "caracteristicas","caracteristicaProductoOV","marcas","marca","equipoCaracteristicas","propiedadMatricialOV","lsPropiedadMatricialOV","caracteristicasAux"})
 	public void guardar() throws JakartaException {
 		
 		if (!this.validar()){
@@ -194,6 +281,8 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 		
 		this.ov.setIdCliente(clienteOV.getId());
 		this.ov.setIdTipoProducto(this.tipoProductoOV.getId());
+		
+		this.recuperarCaracteristicas();
 
 		this.ov.setCaracteristicas(this.caracteristicas);
 		
@@ -222,6 +311,38 @@ public class EquipoVM extends ViewModel implements IBasicOperations{
 
 		Operaciones.ejecutar("saveEquipo", this.ov);
 		Executions.sendRedirect("/pantallas/index/index-equipo.zul");
+	}
+
+	private void recuperarCaracteristicas() {
+		
+//		private ListPropiedadMatricialOV lsPropiedadMatricialOV = new ListPropiedadMatricialOV();
+//		private List<CaracteristicaProductoOV> caracteristicas = new ArrayList<CaracteristicaProductoOV>();
+		
+		PropiedadMatricialOV protMat;
+		for(Object current : this.lsPropiedadMatricialOV.getList()){
+			
+			protMat = (PropiedadMatricialOV) current;
+			
+			for(CaracteristicaProductoOV carac : this.caracteristicasAux){
+				
+				if (carac.getId() == protMat.getIdValorPrimario()){
+					carac.setValorEntero((int)protMat.getValorPrimario());
+				}
+				
+				if (carac.getId() == protMat.getIdValorSecundario()){
+					carac.setValorEntero((int)protMat.getValorSecundario());
+				}
+				
+				if (carac.getId() == protMat.getIdValorTerciario()){
+					carac.setValorEntero((int)protMat.getValorTerciario());
+				}
+				
+			}
+			
+		}
+		
+		this.caracteristicas = this.caracteristicasAux;
+
 	}
 
 	private boolean validar() {
