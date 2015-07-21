@@ -46,6 +46,7 @@ public class ExpresionVariableResolver extends Observable implements VariableRes
 				evaluator.setVariableResolver(new ExpresionVariableResolver(null , mapa));
 				String resultado = evaluator.evaluate(variable.getExpresion());
 				variable.setValorInput(Double.valueOf(resultado));
+				variable.setResultadoExpresion(Double.valueOf(resultado));
 				return resultado;
 			} catch (EvaluationException e) {
 				e.printStackTrace();

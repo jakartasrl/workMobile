@@ -49,6 +49,7 @@ import com.jkt.operaciones.Operation;
 		evaluator.setVariableResolver(new ExpresionVariableResolver(null , mapa));
 		String evaluate = evaluator.evaluate(variableResultado.getExpresion());
 		variableResultado.setValorInput(Double.valueOf(evaluate));
+		variableResultado.setResultadoExpresion(Double.valueOf(evaluate));
 		
 		notificarObjeto("", metodo);
 	 }
