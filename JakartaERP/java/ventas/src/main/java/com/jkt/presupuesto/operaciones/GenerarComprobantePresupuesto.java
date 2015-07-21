@@ -289,7 +289,8 @@ public class GenerarComprobantePresupuesto extends Operation {
 		obtenerDetalles.add(espacio);
 
 		ItemResumen titulo = new ItemResumen();
-		titulo.setTitulo("<font size= \"4\" /><b>NOTAS</b>");
+		titulo.setTitulo("<br>");
+		titulo.setTitulo("<font size= \"5\" /><b>NOTAS</b>");
 		obtenerDetalles.add(titulo);
 		
 		ItemResumen nuevaNota;
@@ -442,9 +443,9 @@ public class GenerarComprobantePresupuesto extends Operation {
 			
 			
 			if (referencia==null || referencia.isEmpty()) {
-				itemResumen2.setTitulo("<font size= \"3\" /><b> Item ".concat(String.valueOf(nroItem++)));
+				itemResumen2.setTitulo("<font size= \"4\" /><b> Item ".concat(String.valueOf(nroItem++)));
 			}else{
-				itemResumen2.setTitulo("<font size= \"3\" /><b> Item ".concat(String.valueOf(nroItem++)).concat(" : ").concat(referencia));
+				itemResumen2.setTitulo("<font size= \"4\" /><b> Item ".concat(String.valueOf(nroItem++)).concat(" : ").concat(referencia));
 			}
 			
 			data.add(itemResumen2);
