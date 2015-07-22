@@ -2162,7 +2162,8 @@
 					<campoEntrada propertyOV="valorInput" 			metodo="setValor" />
 					<campoEntrada propertyOV="expresionCadena"  	metodo="setExpresion" />
 					<campoEntrada propertyOV="input" 				metodo="setInput" />
-					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setResultadoExpresion" />						
+					<campoEntrada propertyOV="resultadoExpresion"  	metodo="setResultadoExpresion" />
+					<campoEntrada propertyOV="resultadoFinal" 		metodo="setResultadoFinal" />						
 				</campoEntrada>
 			</campoEntrada>
 			
@@ -2226,7 +2227,7 @@
 					<campoSalida value="expresionCadena"  		target="expresion" />
 					<campoSalida value="input"  				target="input" />
 					<campoSalida value="resultadoExpresion"  	target="resultadoExpresion" />	
-<!-- 					<campoSalida target="resultadoFinal" 		value="resultadoFinal" /> -->
+					<campoSalida target="resultadoFinal" 		value="resultadoFinal" />
 				</campoSalida>
 					
 			</campoSalida>

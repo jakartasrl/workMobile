@@ -19,5 +19,7 @@ public class ProtocoloVariable extends PersistentEntity {
 	private boolean input;
 	
 	private double resultadoExpresion;
+	
+	private boolean resultadoFinal;
 
 }

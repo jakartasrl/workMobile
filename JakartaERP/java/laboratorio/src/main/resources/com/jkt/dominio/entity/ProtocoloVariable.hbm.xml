@@ -19,6 +19,8 @@
 		
 		<property name="resultadoExpresion" column="RESULTADO_EXPRESION" />
 		
+		<property name="resultadoFinal" column="RESULTADO_FINAL" type="boolean" />
+		
 	</class>
 
 </hibernate-mapping>
