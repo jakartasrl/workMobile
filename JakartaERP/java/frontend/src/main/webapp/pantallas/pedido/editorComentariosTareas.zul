@@ -1,4 +1,4 @@
-<window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.EditorComentariosTareasVM')" title="Edición de Tareas" style="margin-top:50px;" width="700px" position="top,center" closable="true" >
+<window id="modalDialog" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.EditorComentariosTareasVM')" title="Edición de Tareas" style="margin-top:50px;" width="800px" position="top,center" closable="true" >
     <vlayout>
 		
 		<div style="text-align:center">
@@ -17,37 +17,28 @@
 		</div>
 
 		<listbox 
-			id="box"
-			model="@bind(vm.comentarios)" 
-			emptyMessage="No existen comentarios disponible." mold="paging" pageSize="1"
-			hflex="1" height="auto" 
-		>
+			id="box" model="@bind(vm.comentarios)" emptyMessage="No existen comentarios disponible." mold="paging" pageSize="15" width="100%" hflex="1" height="auto" >
 		
-		<auxhead>
-			<auxheader label="Comentarios de tareas"/>
-		</auxhead>
+		<listhead>
+			<listheader label="Usuario" hflex="1"></listheader>
+			<listheader label="Fecha" hflex="1"></listheader>
+			<listheader label="Comentario" hflex="3"></listheader>
+		</listhead>
 		
 		<template name="model">
 			<listitem>
 				<listcell>
-
-					<groupbox width="100%" style="border-style:none; cursor: default">
-					
-							<hlayout style="margin-top:10px">
-								<label class="name" value="Usuario : " />
-								<label value="@bind(each.usuario)" />
-							</hlayout>
-							
-							<hlayout style="margin-top:10px">
-								<label class="name" value="Fecha de comentario: " />
-								<datebox value="@bind(each.fecha)" format="dd/MM/yyyy" onCreate="self.value = new Date()" lenient="true" buttonVisible="false" readonly="true"/>
-							</hlayout>
-
-							<textbox constraint="no empty" readonly="@bind(!each.nuevo)" style="font-size:16x; width:100%;vertical-align: middle;resize:none; overflow: hidden;margin-top:10px" multiline="true" rows="5" value="@bind(each.comentario)" placeholder="Ingrese aquí un comentario" />
-
-					</groupbox>
-
+					<label value="@bind(each.usuario)" />
 				</listcell>
+
+				<listcell>
+					<datebox value="@bind(each.fecha)" format="dd/MM/yyyy" onCreate="self.value = new Date()" lenient="true" buttonVisible="false" readonly="true"/>
+				</listcell>
+
+				<listcell>
+					<textbox constraint="no empty" style="width:100%" readonly="@bind(!each.nuevo)" maxlength="50" multiline="false" rows="1" value="@bind(each.comentario)" placeholder="Ingrese aquí un comentario" />
+				</listcell>
+
 			</listitem>
 		</template>
 	</listbox>

@@ -109,7 +109,7 @@ public class PedidoOV extends DescriptibleOV {
 	/*
 	 * Atributos para mostrar en formato plano datos del pedido.
 	 */
-	private String codSucursal, descripcionCompleta;
+	private String codSucursal, descripcionCompleta, descripcionClienteSucursal;
 	private String codListaPrecio, descripcionListaPrecio;
 	
 	private String codCliente;

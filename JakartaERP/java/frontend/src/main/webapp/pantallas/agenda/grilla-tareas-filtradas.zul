@@ -4,7 +4,7 @@
 			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="1312px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
 	
 				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
-					<auxheader label="Lista de Tareas" colspan="9" />
+					<auxheader label="Lista de Tareas" colspan="11" />
 				</auxhead>
 				        
 				<columns>
@@ -18,13 +18,13 @@
 					<column width="110px" label="Limite" align="center" style="text-align:center" sort="auto(fechaLimite)" /> 
 					<column width="50px" label="Estado" align="center" style="text-align:center" sort="auto(idEstado)"/> 
 
-					<column width="50px" label="Inicio" align="center" style="text-align:center"  if="${vm.vistaPorPedido}" /> 
-					<column width="50px" label="Fin" align="center" style="text-align:center"  if="${vm.vistaPorPedido}" /> 
+					<column width="70px" label="Inicio" align="center" style="text-align:center"  if="${vm.vistaPorPedido}" /> 
+					<column width="70px" label="Fin" align="center" style="text-align:center"  if="${vm.vistaPorPedido}" /> 
 
 					<column width="50px" label="Detalle" align="center" style="text-align:center" /> 
-					<column width="100px" label="Cambiar Estado" align="center" style="text-align:center" />
-					<column width="100px" label="Deshacer" align="center" style="text-align:center" />
-					<column width="100px" label="Comentarios" align="center" style="text-align:center" />
+					<column width="60px" label="Actualizar" align="center" style="text-align:center" />
+					<column width="50px" label="Deshacer" align="center" style="text-align:center" />
+					<column width="50px" label="Notas" align="center" style="text-align:center" />
 				
 				</columns>
 				
@@ -48,11 +48,11 @@
 							</cell>
 							
 							<cell  if="${vm.vistaPorPedido}">
-								<datebox width="99%" value="@bind(each.fechaLimite)" format="dd/MM/yyyy" disabled="true"/>
+								<datebox width="99%" value="@bind(each.fechaLimite)" buttonVisible="false" format="dd/MM/yyyy" disabled="true"/>
 							</cell>
 
 							<cell  if="${vm.vistaPorPedido}">
-								<datebox width="99%" value="@bind(each.fechaCumplimiento)" format="dd/MM/yyyy" disabled="true"/>
+								<datebox width="99%" value="@bind(each.fechaCumplimiento)" buttonVisible="false" format="dd/MM/yyyy" disabled="true"/>
 							</cell>
 							
 							

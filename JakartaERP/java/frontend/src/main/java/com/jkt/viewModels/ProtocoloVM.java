@@ -146,13 +146,16 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 		this.protocoloOV.setIdUsuarioIngresoResultado(userOV.getId());
 		this.protocoloOV.setIdDiagnostico(this.diagnosticoOV.getId());
 		
+		String msg = "Se generó ";
+		if(this.protocoloOV.getId()!=0L){
+			msg="Se actualizó ";
+		}
+		
 		ProtocoloOV prot = (ProtocoloOV) Operaciones.ejecutar("GuardarProtocolo", this.protocoloOV, ProtocoloOV.class);
-		                
-        Messagebox.show("Se genero el Protocolo " + prot.getCodigo(), "Nuevo Protocolo", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
+		
+        Messagebox.show(msg + "el Protocolo " + prot.getCodigo(), "Protocolo Guardado", Messagebox.OK , Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {    
 			public void onEvent(Event evt) throws InterruptedException, IOException {
 		        if (evt.getName().equals("onOK")) {
-				
-		        }else{
 		        	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 		        }
 		    }

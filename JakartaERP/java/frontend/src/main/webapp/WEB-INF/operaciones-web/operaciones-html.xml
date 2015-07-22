@@ -2226,6 +2226,7 @@
 					<campoSalida value="expresionCadena"  		target="expresion" />
 					<campoSalida value="input"  				target="input" />
 					<campoSalida value="resultadoExpresion"  	target="resultadoExpresion" />	
+<!-- 					<campoSalida target="resultadoFinal" 		value="resultadoFinal" /> -->
 				</campoSalida>
 					
 			</campoSalida>

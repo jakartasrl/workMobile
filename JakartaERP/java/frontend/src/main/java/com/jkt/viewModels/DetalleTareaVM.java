@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 import org.joda.time.LocalDate;
+import org.jsoup.Jsoup;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.Init;
 
@@ -30,6 +31,10 @@ public class DetalleTareaVM {
 		ContainerOV container = new ContainerOV();
 		container.setString1(String.valueOf(tarea.getPedidoDescriptible().getId()));
 		container.setString2(String.valueOf(tarea.getId()));
+		
+		if(!tarea.getDescripcionCompleta().isEmpty()){
+			tarea.setDescripcionCompleta(Jsoup.parse(tarea.getDescripcionCompleta()).text());
+		}
 		
 		precedencias = ((ListTareaAgendaOV) Operaciones.ejecutar("RecuperarTareasPrecedentes", container , ListTareaAgendaOV.class )).getList();
 

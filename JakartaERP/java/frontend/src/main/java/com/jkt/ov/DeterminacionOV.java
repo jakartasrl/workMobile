@@ -28,6 +28,7 @@ public class DeterminacionOV extends DescriptibleOV {
 	private DescriptibleOV moneda;
 	private String leyendaValorCero;
 	private boolean calculaResultado;
+	private boolean resultadoFinal;
 	
 	private DescriptibleOV tipoResultado;
 			
