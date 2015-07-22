@@ -1,0 +1,35 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+	<vlayout>
+		<panel sclass="panel-maestro" title="Estadistica" style="overflow:hidden;padding:5px;" border="normal" width="51%">
+			<panelchildren>
+				<grid width="auto" >
+					<columns>
+						<column width="105px"/>
+						<column width="175px"/>
+						<column width="110px"/>
+						<column width="255px"/>
+					</columns>
+					<rows>
+						<row>
+							<label value="Equipo : " />
+							<hlayout>
+								<textbox sclass="campoCodigo-vlarge" value="@bind(vm.equipoOV.nroSerie)"  onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV, post='traerEquipo')"  />
+								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='traerEquipo')"  />
+							</hlayout>						
+							<cell colspan="2">
+								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)"  />
+							</cell>
+						</row>
+						<row>
+							<label value="Cliente : " />
+							<textbox sclass="campoCodigo-vlarge" value="@bind(vm.equipoOV.codCliente)" />
+							<cell colspan="3">
+								<textbox value="@bind(vm.equipoOV.descCliente)" width="100%" readonly="true" />
+							</cell>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>							
+	</vlayout>
+</zk>

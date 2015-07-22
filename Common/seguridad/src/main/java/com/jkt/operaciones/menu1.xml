@@ -15,7 +15,7 @@
 	<!ATTLIST elemento vm	CDATA #IMPLIED>
 
 ]>
-
+<!-- 501 9999 -->
 <menues>
 
 	<elemento codigo="501" name="Laboratorio Electrico" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
@@ -35,6 +35,7 @@
 	<elemento codigo="001" name="Laboratorio" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
 		<elemento codigo="002" name="Laboratorio" 					img="pantallas/img/labs.png" 			size="2x2" theme="grey" link="pantallas/index/index-laboratorio.zul" 							type="submenu" vm="com.jkt.viewModels.LaboratorioVM"/>
 		<elemento codigo="003" name="Equipo" 						img="pantallas/img/widget_tag.png" 	size="2x2" theme="grey" link="pantallas/index/index-equipo.zul" 									type="submenu" vm="com.jkt.viewModels.EquipoVM" />
+		<elemento codigo="9999" name="Estadisticas de Equipo" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="grey" link="pantallas/index/index-estadistica-equipo.zul" 									type="submenu" vm="com.jkt.viewModels.EquipoVM" />
 	</elemento>
 
 	<elemento codigo="010" name="Ventas" img="pantallas/img/widget_map.png" size="4x2" theme="red" type="menu_principal">
