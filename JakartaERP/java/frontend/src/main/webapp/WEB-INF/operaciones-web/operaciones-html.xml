@@ -729,7 +729,8 @@
 			<campoEntrada propertyOV="metodos" 				metodo="setMetodos">
 				<campoEntrada propertyOV="id" 				metodo="setId"/>
 				<campoEntrada propertyOV="metodo" 			metodo="setMetodo"/>
-				<campoEntrada propertyOV="idDeterminacion" 	metodo="setDeterminacion"/>		
+<!-- 				<campoEntrada propertyOV="idDeterminacion" 	metodo="setDeterminacion"/>		 --> 
+<!-- NO ES NECESARIO ESTO  -->
 				
 				<campoEntrada propertyOV="variables" 				metodo="setVariables">
 					<campoEntrada propertyOV="id" 					metodo="setId"/>
