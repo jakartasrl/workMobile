@@ -14,13 +14,14 @@
 
 	</zscript>
 	
-	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar"
-		align="start">
+	<toolbar vflex="1" hflex="1" id="gralToolBar" align="start" style="width:100%; height: auto; cursor:default;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+		<timer id="timer" delay="300000" repeats="true" onTimer="@command('ping', elemento=self)" />
 		<hlayout style="width:100%" id="idLayout">
 
 			<div hflex="1" id="idDiv">
 				<toolbarbutton image="/pantallas/icons/import.png" label="Guardar" onClick="@command('guardar')" tooltiptext="Guardar" />
 				<toolbarbutton image="/pantallas/icons/new.png" label="Agregar Elemento" onClick="@command('agregarElemento')" tooltiptext="Agregar elemento" />
+				<toolbarbutton image="/pantallas/icons/refreshSistema.png" label="Actualizar" onClick="@command('buscar')" tooltiptext="Actualizar" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 18px;" />
 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Menu" onClick="@command('irAInicio')" tooltiptext="Volver al menu" />

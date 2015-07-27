@@ -1,23 +1,21 @@
 package com.jkt.operaciones;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.digester3.Digester;
 import org.hibernate.Query;
 
-import com.jkt.dominio.PersistentEntity;
 import com.jkt.dominio.menu.ElementoMenu;
 import com.jkt.dominio.menu.Menu;
-import com.jkt.dominio.menu.Programa;
-import com.jkt.dominio.menu.Script;
-import com.jkt.dominio.menu.TextoMenu;
 import com.jkt.dominio.menu.xml.MenuContainerXML;
 import com.jkt.dominio.menu.xml.MenuXML;
-import com.jkt.dominio.menu.xml.TextoXML;
 import com.jkt.excepcion.JakartaException;
 
 /**
@@ -55,7 +53,23 @@ public class CrearMenues extends Operation {
 		InputStream in = this.getClass().getResourceAsStream(fileName);
 		MenuContainerXML menues = (MenuContainerXML) digester.parse(in);
 		
-		Collection<MenuXML> values = menues.getMenues().values();
+//		Collection<MenuXML> values = menues.getMenues().values();
+		
+		List<MenuXML> values = new ArrayList<MenuXML>();
+		values.addAll(menues.getMenues().values());
+//				Arrays.asList(menues.getMenues().values());
+		//ordenar esta lista!!
+		Collections.sort(values, new Comparator() {
+
+			public int compare(Object arg0, Object arg1) {
+				MenuXML m1=(MenuXML) arg0;
+				MenuXML m2=(MenuXML) arg1;
+				return m1.getOrden().compareTo(m2.getOrden());
+//				return new Integer(m1.getOrden()).compareTo(new Integer(m2.getOrden()));
+			}
+		});
+		
+		
 		for (MenuXML menuXML2 : values) {
 			Menu menu = (Menu) parsearRespuestaDesdeElXML(menuXML2);
 			this.serviceRepository.save(menu);

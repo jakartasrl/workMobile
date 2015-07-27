@@ -13,57 +13,58 @@
 	<!ATTLIST elemento link	CDATA #IMPLIED>
 	<!ATTLIST elemento type	CDATA #REQUIRED>
 	<!ATTLIST elemento vm	CDATA #IMPLIED>
+	<!ATTLIST elemento orden	CDATA #REQUIRED>
 
 ]>
 
 <menues>
 
-	<elemento codigo="501" name="Laboratorio Electrico" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
-		<elemento codigo="004" name="Determinaciones Electricas" 	img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="yellow" link="pantallas/index/index-determinacion-e.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
-		<elemento codigo="006" name="Protocolo Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
-		<elemento codigo="007" name="Aprobar P.Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
-		<elemento codigo="022" name="Protocolo Electrico Terminado" img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-e-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
+	<elemento orden="1" codigo="501" name="Laboratorio Electrico" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
+		<elemento orden="2" codigo="004" name="Determinaciones Electricas" 	img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="yellow" link="pantallas/index/index-determinacion-e.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
+		<elemento orden="3" codigo="006" name="Protocolo Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento orden="4" codigo="007" name="Aprobar P.Electrico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-protocolo-e-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento orden="5" codigo="022" name="Protocolo Electrico Terminado" img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-e-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
 	</elemento>
 
-	<elemento codigo="401" name="Laboratorio Quimico" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
-		<elemento codigo="005" name="Determinaciones Quimicas" 		img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="green" link="pantallas/index/index-determinacion-q.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
-		<elemento codigo="008" name="Protocolo Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
-		<elemento codigo="009" name="Aprobar P.Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
-		<elemento codigo="023" name="Protocolo Quimico Terminado" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-q-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
+	<elemento codigo="401" orden="6" name="Laboratorio Quimico" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
+		<elemento codigo="005" orden="7" name="Determinaciones Quimicas" 		img="pantallas/img/widget_tooltip.png" 	size="4x2" theme="green" link="pantallas/index/index-determinacion-q.zul" 	type="submenu" vm="com.jkt.viewModels.DeterminacionVM" />
+		<elemento codigo="008" orden="8" name="Protocolo Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="009" orden="9" name="Aprobar P.Quimico" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="green" link="pantallas/index/index-protocolo-q-aprobacion.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloVM" />
+		<elemento codigo="023" orden="10" name="Protocolo Quimico Terminado" 	img="pantallas/img/widget_tag.png" 		size="4x2" theme="orange" 	link="pantallas/index/index-protocolo-q-terminado.zul" 	type="submenu" vm="com.jkt.viewModels.ProtocoloTerminadoVM" />
 	</elemento>
 
-	<elemento codigo="001" name="Laboratorio" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
-		<elemento codigo="002" name="Laboratorio" 					img="pantallas/img/labs.png" 			size="2x2" theme="grey" link="pantallas/index/index-laboratorio.zul" 							type="submenu" vm="com.jkt.viewModels.LaboratorioVM"/>
-		<elemento codigo="003" name="Equipo" 						img="pantallas/img/widget_tag.png" 	size="2x2" theme="grey" link="pantallas/index/index-equipo.zul" 									type="submenu" vm="com.jkt.viewModels.EquipoVM" />
+	<elemento codigo="001" orden="11" name="Equipos" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
+		<elemento codigo="003" orden="12" name="Equipo" 						img="pantallas/img/widget_tag.png" 	size="2x2" theme="grey" link="pantallas/index/index-equipo.zul" 									type="submenu" vm="com.jkt.viewModels.EquipoVM" />
 	</elemento>
 
-	<elemento codigo="010" name="Ventas" img="pantallas/img/widget_map.png" size="4x2" theme="red" type="menu_principal">
-		<elemento codigo="011" name="Cotizacion" 				img="pantallas/img/widget_dialog.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-cotizacion.zul" 		type="submenu" vm="com.jkt.viewModels.CotizacionVM"/>
-		<elemento codigo="012" name="Modelo de Cotizador" 		img="pantallas/img/modeloCotizador.png" size="2x2" theme="orange" link="pantallas/index/index-modeloCotizador.zul" 	type="submenu" vm="com.jkt.viewModels.ModeloCotizadorVM" />
-		<elemento codigo="013" name="Conceptos Presupuestarios" img="pantallas/img/modeloCotizador.png" size="2x2" theme="orange" link="pantallas/index/index-conceptos.zul" 		type="submenu" vm="com.jkt.viewModels.ConceptoPresupuestoVM" />
-		<elemento codigo="014" name="Cotizador" 				img="pantallas/img/cotizador.png" 		size="4x2" theme="grey" link="pantallas/index/index-cotizador.zul" 		type="submenu" vm="com.jkt.viewModels.CotizadorVM" />
-		<elemento codigo="015" name="Presupuesto" 				img="pantallas/img/presupuesto.png" 	size="4x2" theme="orange" link="pantallas/index/index-presupuesto.zul" 		type="submenu" vm="com.jkt.viewModels.PresupuestoVM" />
-		<elemento codigo="016" name="Pedido" 					img="pantallas/img/order.png" 			size="4x2" theme="green" link="pantallas/index/index-pedido.zul" 			type="submenu" vm="com.jkt.viewModels.PedidoVM" />
-		<elemento codigo="017" name="Planificacion de Pedido" 	img="pantallas/img/calendar_tasks.png" 	size="4x2" theme="white" link="pantallas/index/index-agenda.zul" 			type="submenu" vm="com.jkt.viewModels.PedidoVM" />
+	<elemento codigo="010" orden="13" name="Ventas" img="pantallas/img/widget_map.png" size="4x2" theme="red" type="menu_principal">
+		<elemento codigo="011" orden="14" name="Cotizacion" 				img="pantallas/img/widget_dialog.png" 	size="4x2" theme="darkblue" link="pantallas/index/index-cotizacion.zul" 		type="submenu" vm="com.jkt.viewModels.CotizacionVM"/>
+		<elemento codigo="012" orden="15" name="Modelo de Cotizador" 		img="pantallas/img/modeloCotizador.png" size="2x2" theme="orange" link="pantallas/index/index-modeloCotizador.zul" 	type="submenu" vm="com.jkt.viewModels.ModeloCotizadorVM" />
+		<elemento codigo="013" orden="16" name="Conceptos Presupuestarios" img="pantallas/img/modeloCotizador.png" size="2x2" theme="orange" link="pantallas/index/index-conceptos.zul" 		type="submenu" vm="com.jkt.viewModels.ConceptoPresupuestoVM" />
+		<elemento codigo="014" orden="17" name="Cotizador" 				img="pantallas/img/cotizador.png" 		size="4x2" theme="grey" link="pantallas/index/index-cotizador.zul" 		type="submenu" vm="com.jkt.viewModels.CotizadorVM" />
+		<elemento codigo="015" orden="18" name="Presupuesto" 				img="pantallas/img/presupuesto.png" 	size="4x2" theme="orange" link="pantallas/index/index-presupuesto.zul" 		type="submenu" vm="com.jkt.viewModels.PresupuestoVM" />
+		<elemento codigo="016" orden="19" name="Pedido" 					img="pantallas/img/order.png" 			size="4x2" theme="green" link="pantallas/index/index-pedido.zul" 			type="submenu" vm="com.jkt.viewModels.PedidoVM" />
+		<elemento codigo="017" orden="20" name="Planificacion de Pedido" 	img="pantallas/img/calendar_tasks.png" 	size="4x2" theme="white" link="pantallas/index/index-agenda.zul" 			type="submenu" vm="com.jkt.viewModels.PedidoVM" />
 		
-		<elemento codigo="018" name="Visores de Tareas" 		img="pantallas/img/planificacion.png" 	size="2x2" theme="red" type="menu" >
-			<elemento codigo="019" name="Tareas por Sector" 	img="pantallas/img/planificacion.png" 	size="4x2" theme="blue" link="pantallas/index/index-vista-agenda-sector.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorSectorVM" />
-			<elemento codigo="020" name="Tareas por Pedido" 	img="pantallas/img/planificacion.png" 	size="4x2" theme="orange" link="pantallas/index/index-vista-agenda-pedido.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
-			<elemento codigo="021" name="Visor Interactivo" 	img="pantallas/img/widget_char.png" 	size="4x2" theme="darkblue" link="pantallas/index/visor-agenda.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
+		<elemento codigo="018" orden="21" name="Visores de Tareas" 		img="pantallas/img/planificacion.png" 	size="2x2" theme="red" type="menu" >
+			<elemento codigo="019" orden="22" name="Tareas por Sector" 	img="pantallas/img/planificacion.png" 	size="4x2" theme="blue" link="pantallas/index/index-vista-agenda-sector.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorSectorVM" />
+			<elemento codigo="020" orden="23" name="Tareas por Pedido" 	img="pantallas/img/planificacion.png" 	size="4x2" theme="orange" link="pantallas/index/index-vista-agenda-pedido.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
+			<elemento codigo="021" orden="24" name="Visor Interactivo" 	img="pantallas/img/widget_char.png" 	size="4x2" theme="darkblue" link="pantallas/index/visor-agenda.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
 		</elemento>
 		
 	</elemento>
 	
-	<elemento codigo="100" name="Utilidades" img="pantallas/img/widget_dialog.png" size="4x2" theme="blue" type="menu_principal">
-		<elemento codigo="108" name="Plantilla" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="red" 		link="pantallas/index/plantilla.zul"									 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
-		<elemento codigo="101" name="Sector" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarSector-sector" 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
-		<elemento codigo="102" name="Tarea" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarTareaSimple-tarea" 			type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
-		<elemento codigo="103" name="Unidad Medida" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarUnidadMedida-unidadMedida" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
-		<elemento codigo="104" name="Idioma" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarIdioma-idioma" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
-		<elemento codigo="105" name="Moneda" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarMoneda-moneda" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
-		<elemento codigo="106" name="Pais" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarPais-pais" 					type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
-		<elemento codigo="107" name="Documentacion" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDocumentacion-documentacion" type="submenu" vm="com.jkt.viewModels.GenericListVM"/>
-		<elemento codigo="110" name="Diagnostico" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDiagnostico-diagnostico" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+	<elemento codigo="100" orden="25" name="Utilidades" img="pantallas/img/widget_dialog.png" size="4x2" theme="blue" type="menu_principal">
+		<elemento codigo="002" orden="26" name="Laboratorio" 					img="pantallas/img/labs.png" 			size="2x2" theme="grey" link="pantallas/index/index-laboratorio.zul" 							type="submenu" vm="com.jkt.viewModels.LaboratorioVM"/>
+		<elemento codigo="108" orden="27" name="Plantilla" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="red" 		link="pantallas/index/plantilla.zul"									 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
+		<elemento codigo="101" orden="28" name="Sector" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarSector-sector" 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
+		<elemento codigo="102" orden="29" name="Tarea" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarTareaSimple-tarea" 			type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="103" orden="30" name="Unidad Medida" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarUnidadMedida-unidadMedida" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="104" orden="31" name="Idioma" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarIdioma-idioma" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="105" orden="32" name="Moneda" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarMoneda-moneda" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="106" orden="33" name="Pais" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarPais-pais" 					type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="107" orden="34" name="Documentacion" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDocumentacion-documentacion" type="submenu" vm="com.jkt.viewModels.GenericListVM"/>
+		<elemento codigo="110" orden="35" name="Diagnostico" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarDiagnostico-diagnostico" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 	</elemento>
 	
 </menues>

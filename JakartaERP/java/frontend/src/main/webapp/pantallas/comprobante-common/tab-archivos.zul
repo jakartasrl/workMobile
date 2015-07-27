@@ -1,59 +1,75 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<vlayout width="100%" style="text-align:left;" visible="@bind(!vm.modoAgenda)" >
-		<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivo')" tooltiptext="Agregar un nuevo archivo.">
-			 <attribute name="onClick"><![CDATA[
-					//box.pagingPosition = "top";
-					//siempre retorna a la primer pagina
-					boxArchivos.setActivePage(0);
-        		]]></attribute>
-		</button>
-			<label value="Agregar un item"></label>
-	</vlayout>
+	<hlayout>
+		<vlayout width="100%" style="text-align:left;margin-left:20px" visible="@bind(!vm.modoAgenda)" >
+			<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivoImagen')" tooltiptext="Agregar un nuevo archivo.">
+			</button>
+				<label value="Imagen"></label>
+		</vlayout>
+		<vlayout width="100%" style="text-align:left;margin-left:20px" visible="@bind(!vm.modoAgenda)" >
+			<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivoFactura')" tooltiptext="Agregar un nuevo archivo.">
+			</button>
+				<label value="Comprobante"></label>
+		</vlayout>
+		
+		<vlayout width="100%" style="text-align:left;margin-left:20px" visible="@bind(!vm.modoAgenda)" >
+			<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivo')" tooltiptext="Agregar un nuevo archivo.">
+			</button>
+				<label value="Archivo"></label>
+		</vlayout>
+	</hlayout>
+
+	
+	<tree id="categoriesTree" model="@load(vm.arbolArchivos)" width="100%"  >
+    <treecols>
+        
+   			<treecol width="200px" label="Fecha de subida"/>
+			<treecol width="200px" label="Usuario"/>
+			<treecol width="500px" label="Descripción"/>
+			<treecol width="300px" label="Archivo"/>
+			<treecol width="50px" label="Borrar"/>
+        
+    </treecols>
+
+    <template name="model">
+        <treeitem>
+	    	<attribute name="onCreate">
+        		self.setOpen(true);
+        	</attribute>
+        	
+            <treerow >
+                
+                <treecell unless="${each.leaf}" >
+					<label value="@bind(each.data.descripcion)" ></label>
+				</treecell>
+                
+                
+                <treecell if="${each.leaf}">
+					<datebox readonly="@bind(vm.modoAgenda)" value="@bind(each.data.fechaSubida)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" disabled="true"/>
+				</treecell>
+
+				<treecell if="${each.leaf}">
+					<textbox width="100%" value="@bind(each.data.usuario)" readonly="true"/>
+				</treecell>
+
+				<treecell if="${each.leaf}">
+					<textbox readonly="@bind(vm.modoAgenda)" width="100%" constraint="no empty" value="@bind(each.data.descripcion)" />
+				</treecell>
 
 
-	<listbox id="boxArchivos" multiple="false" checkmark="false" model="@bind(vm.archivos)" mold="paging" pageSize="8" emptyMessage="No existen archivos.">
+				<treecell if="${each.leaf}">
+					<textbox width="80%" value="@bind(each.data.fileName)" readonly="true" onClick="@command('obtenerArchivo',archivoActual=each.data)" tooltiptext="@bind(each.data.fileName)" />
+					<button disabled="@bind(vm.modoAgenda)" width="20%" label="Subir" upload="true,maxsize=5000" onUpload="@command('subirArchivo',archivo=event.media, archivoActual=each.data)" />
+				</treecell>
 
-		<listhead style="heigth:10px;" >
-			<listheader width="150px" label="Fecha de subida"/>
-			<listheader width="200px" label="Usuario"/>
-			<listheader width="500px" label="Descripción"/>
-			<listheader width="300px" label="Archivo"/>
-			<listheader width="50px" label="Borrar"/>
-<!-- 			<listheader width="300px" label="Comentario"/> -->
-		</listhead>
-
-		<template name="model">
-			<listitem>
-
-				<listcell >
-					<datebox readonly="@bind(vm.modoAgenda)" value="@bind(each.fechaSubida)" constraint="no empty" format="dd/MM/yyyy" onCreate="self.value = new Date()" disabled="true"/>
-				</listcell>
-
-				<listcell >
-					<textbox width="100%" value="@bind(each.usuario)" readonly="true"/>
-				</listcell>
-
-				<listcell >
-					<textbox readonly="@bind(vm.modoAgenda)" width="100%" constraint="no empty" value="@bind(each.descripcion)" />
-				</listcell>
-
-
-				<listcell >
-					<textbox width="80%" value="@bind(each.fileName)" readonly="true" onClick="@command('obtenerArchivo',archivoActual=each)" tooltiptext="@bind(each.fileName)" />
-					<button disabled="@bind(vm.modoAgenda)" width="20%" label="Subir" upload="true,maxsize=5000" onUpload="@command('subirArchivo',archivo=event.media, archivoActual=each)" />
-				</listcell>
-
-				<listcell>
+				<treecell if="${each.leaf}">
 					<button disabled="@bind(vm.modoAgenda)" style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarArchivo', elemento=each )" />
-				</listcell>
-
-<!-- 				<listcell > -->
-<!-- 					<textbox width="100%" value="@bind(each.comentario)" readonly="false"/> -->
-<!-- 				</listcell> -->
-
-			</listitem>
-		</template>
-
-	</listbox>
+				</treecell>
+                
+            </treerow>
+        </treeitem>
+    </template>
+	</tree>
+	
+	
 </zk>

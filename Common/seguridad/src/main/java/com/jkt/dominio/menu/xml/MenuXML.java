@@ -20,6 +20,7 @@ public class MenuXML {
 	private String theme;	
 	private String link;
 	private String type;
+	private String orden;
 
 	private String vm;
 	

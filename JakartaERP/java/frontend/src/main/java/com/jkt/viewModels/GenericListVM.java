@@ -11,6 +11,7 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -93,6 +94,8 @@ public class GenericListVM extends ViewModel implements IBasicOperations{
 		for (Object object : list) {
 			Operaciones.ejecutar(operacion, object);
 		}
+		
+		Clients.showNotification("Se completo el guardado exitosamente", "info", null, "end_before", 1000);
 		
 	}
 

@@ -493,6 +493,7 @@
 				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
 				<campoEntrada propertyOV="format" metodo="setFormat"/>
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="idCategoria" metodo="setIdCategoria"/>
 
 			</campoEntrada>
 
@@ -590,6 +591,7 @@
 				<campoSalida value="contentType" 	target="contentType"/>
 				<campoSalida value="format" 		target="format"/>
 				<campoSalida value="descripcion" 	target="descripcion"/>
+				<campoSalida value="idCategoria" 	target="idCategoria"/>
 			
 			</campoSalida>
 			
@@ -827,6 +829,7 @@
 				<campoSalida value="contentType" 	target="contentType"/>
 				<campoSalida value="format" 		target="format"/>
 				<campoSalida value="descripcion" 	target="descripcion"/>
+				<campoSalida value="idCategoria" 	target="idCategoria"/>
 			
 			</campoSalida>
 			
@@ -908,6 +911,7 @@
 				<campoSalida value="contentType" 	target="contentType"/>
 				<campoSalida value="format" 		target="format"/>
 				<campoSalida value="descripcion" 	target="descripcion"/>
+				<campoSalida value="idCategoria" 	target="idCategoria"/>
 			
 			</campoSalida>
 			
@@ -991,6 +995,8 @@
 				<campoSalida value="contentType" 	target="contentType"/>
 				<campoSalida value="format" 		target="format"/>
 				<campoSalida value="descripcion" 	target="descripcion"/>
+				<campoSalida value="idCategoria" 	target="idCategoria"/>
+			
 			
 			</campoSalida>
 			
@@ -1052,6 +1058,8 @@
 				<campoSalida value="contentType" 	target="contentType"/>
 				<campoSalida value="format" 		target="format"/>
 				<campoSalida value="descripcion" 	target="descripcion"/>
+				<campoSalida value="idCategoria" 	target="idCategoria"/>
+				
 			</campoSalida>
 
 		</output>
@@ -1142,6 +1150,7 @@
 				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
 				<campoEntrada propertyOV="format" metodo="setFormat"/>
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="idCategoria" metodo="setIdCategoria"/>
 
 			</campoEntrada>
 			
@@ -1226,6 +1235,7 @@
 				<campoSalida value="contentType" 	target="contentType"/>
 				<campoSalida value="format" 		target="format"/>
 				<campoSalida value="descripcion" 	target="descripcion"/>
+				<campoSalida value="idCategoria" 	target="idCategoria"/>
 			</campoSalida>
 			
 			<campoSalida value="contactosReferencia" 	target="contactosReferencia" >
@@ -1271,6 +1281,7 @@
 				<campoEntrada propertyOV="contentType" metodo="setContentType"/>
 				<campoEntrada propertyOV="format" metodo="setFormat"/>
 				<campoEntrada propertyOV="descripcion" metodo="setDescripcion"/>
+				<campoEntrada propertyOV="idCategoria" metodo="setIdCategoria"/>
 			</campoEntrada>
 			
 			<campoEntrada propertyOV="contactosReferencia" metodo="setContactosReferencia">
@@ -2274,5 +2285,19 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+	
+	<operacion name="TraerTiposDeArchivos" clase="com.jkt.varios.operaciones.TraerTiposDeArchivos" outputOV="com.jkt.ov.ListDescriptibleOV">
+		
+		<output>
+
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="descripcion" 		value="descripcion" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	
 	
 </entity>

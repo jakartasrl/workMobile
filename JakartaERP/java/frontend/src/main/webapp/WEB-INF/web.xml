@@ -9,6 +9,9 @@
 <!-- 		<param-value>/WEB-INF/spring/root-context.xml</param-value> -->
 <!-- 	</context-param> -->
 
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
 
 	<display-name>frontend</display-name>
 	<listener>

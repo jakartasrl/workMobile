@@ -31,6 +31,7 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.grafo.DatoNodo.Estado;
 import com.jkt.ov.AgendaOV;
+import com.jkt.ov.ArchivoOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.FormaFacturacionOV;
@@ -410,6 +411,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		actualizarNotas(ovRecuperado);
 		crearArbolNotas();
+
+		actualizarArbolArchivos(ovRecuperado.getArchivos());
 		
 		actualizarContactosReferencia();
 		actualizarContactosSeleccionados(ovRecuperado.getContactosReferencia());
@@ -521,7 +524,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
 		
 		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);
-		comprobanteOV.setArchivos(this.archivos);
+
+		
+		comprobanteOV.setArchivos(this.completarListaDesdeArbol());
 		
 		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
 		
@@ -587,6 +592,10 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
 		crearArbolNotas();
 		
+		log.info("Recuperando arbol de archivos...");
+		crearArbolArchivos();
+		
+		
 		log.info("Recuperando documentos...");
 		this.lDocumentacion = ((ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("documentacion"), ListDescriptibleOV.class)).getList();
 
@@ -638,7 +647,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"titulo","agenda","pedidoDescriptible","arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"arbolArchivos","titulo","agenda","pedidoDescriptible","arbolNotas","archivos","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {
@@ -919,8 +928,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-		this.nuevo();
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+    	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	} 
 	
 	@Command

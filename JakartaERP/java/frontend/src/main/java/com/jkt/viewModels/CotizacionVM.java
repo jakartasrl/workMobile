@@ -16,6 +16,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Messagebox.ClickEvent;
@@ -49,9 +50,10 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
       
 		EventListener<ClickEvent> clickListener = new EventListener<Messagebox.ClickEvent>() {
             public void onEvent(ClickEvent event) throws Exception {
-                if(Messagebox.Button.OK.equals(event.getButton())) {
-                	cancelarCustomizado();
-                }
+//                if(Messagebox.Button.OK.equals(event.getButton())) {
+//                	cancelarCustomizado();
+//                }
+	        	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
             }
         };
         
@@ -66,7 +68,10 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.cotizacionOV.setIdVendedor(vendedorOV.getId());
 		this.cotizacionOV.setIdRepresentante(representanteOV.getId());
 		this.cotizacionOV.setContactosReferencia(this.getContactosSeleccionados());
-		this.cotizacionOV.setArchivos(this.archivos);
+//		this.cotizacionOV.setArchivos(this.archivos);
+		
+		this.cotizacionOV.setArchivos(this.completarListaDesdeArbol());
+
 		
 		ArrayList<ItemsOV> itemsFinal = new ArrayList<ItemsOV>();
 		
@@ -88,7 +93,7 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	}
 
 	@GlobalCommand("actualizar")
-	@NotifyChange({"cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos","archivos"})
+	@NotifyChange({"arbolArchivos","cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos","archivos"})
 	public void actualizar() {
 		log.warn("Actualizando datos...");
 	}
@@ -100,7 +105,8 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 	@Command
 	@NotifyChange({"cotizacionOV","clienteOV","sucursalOV","vendedorOV","representanteOV","contactoSeleccionado","contactos","items","itemsArticulos","archivos"})
 	public void nuevo(){
-		init();
+//		init();
+    	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 	
 	@Init(superclass=true)
@@ -117,6 +123,9 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.items=new ArrayList<ItemsOV>();
 		this.items.add(new ItemsOV());
 
+		log.info("Recuperando arbol de archivos...");
+		crearArbolArchivos();
+		
 		log.info("Iniciando tipos de venta...");
 		this.tiposVenta=(ListDescriptibleOV) Operaciones.ejecutar("TraerTiposDeVenta", ListDescriptibleOV.class);
 		
@@ -193,7 +202,10 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 		this.cotizacionOV.setNroCotizacion(cotizacionOV.getNroCotizacion());
 		
 		this.archivos=new ArrayList<ArchivoOV>();
-		this.archivos=cotizacionOV.getArchivos();
+//		this.archivos=cotizacionOV.getArchivos();
+		
+		actualizarArbolArchivos(cotizacionOV.getArchivos());
+
 
 	}
 
@@ -256,8 +268,10 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-		this.nuevo();
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+//		this.nuevo();
+//		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+    	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+
 	}
 
 }

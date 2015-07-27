@@ -22,6 +22,6 @@ public class ArchivoOV extends ObjectView {
 	
 	private String contentType;
 	private String format;
-	
+	private int idCategoria;
 
 }

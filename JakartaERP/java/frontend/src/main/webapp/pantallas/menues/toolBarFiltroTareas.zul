@@ -14,8 +14,8 @@
 
 	</zscript>
 	
-	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar"
-		align="start">
+	<toolbar vflex="1" hflex="1" id="gralToolBar" align="start" style="width:100%; height: auto; cursor:default;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+		<timer id="timer" delay="300000" repeats="true" onTimer="@command('ping', elemento=self)" />
 		<hlayout style="width:100%" id="idLayout">
 
 			<div hflex="1" id="idDiv">

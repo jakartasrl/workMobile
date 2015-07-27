@@ -6,6 +6,7 @@ import java.util.Calendar;
 import lombok.Data;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.excepcion.JakartaException;
 
 /**
  * <p>Hace referencia a un archivo adjunto.</p>
@@ -44,6 +45,7 @@ public class Especificacion extends PersistentEntity {
 	private Timestamp fechaDeSubida;
 	
 	private String comentario;
+	
 	
 	
 	private String contentType;
@@ -97,6 +99,57 @@ public class Especificacion extends PersistentEntity {
 		}
 		
 		this.ruta=ruta;
+	}
+	
+	private int idCategoria;
+	
+	public enum Categoria{
+
+		IMAGENES(1) {
+			@Override
+			public String getDescripcion() {
+				return "Imagenes";
+			}
+		},
+		ARCHIVOS(2) {
+			@Override
+			public String getDescripcion() {
+				return "Archivos";
+			}
+		},
+		COMPROBANTES(3) {
+			@Override
+			public String getDescripcion() {
+				return "Comprobantes";
+			}
+		};
+		
+		private int id;
+		public abstract String getDescripcion();
+	
+		private Categoria(int id) {
+			this.id=id;
+		}
+		
+		public int getId(){
+			return this.id;
+		}
+		
+		public static Categoria getEstado(int value) throws JakartaException{
+			Categoria[] values = values();
+			Categoria e = null;
+			for (Categoria estado : values) {
+				if(estado.getId()==value){
+					e=estado;
+					break; 
+				}
+			}
+			if (e==null) {
+				throw new JakartaException("No existe una Categoria para la solicitud recibida.");
+			}
+			return e;
+		}
+	
 	}
 	
 }

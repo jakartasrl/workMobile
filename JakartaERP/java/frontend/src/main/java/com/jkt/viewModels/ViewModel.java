@@ -20,7 +20,9 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Timer;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -242,9 +244,13 @@ public abstract class ViewModel {
 	 *  @NotifyChange({"clienteOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas"})
 	 *  public void actualizar(){}
 	 * </code>
+	 * @throws JakartaException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
 	 * 
 	 */
-	public abstract void actualizar();
+	public abstract void actualizar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException;
 
 	public abstract void cancelarCustomizado() throws JakartaException;
 
@@ -314,5 +320,12 @@ public abstract class ViewModel {
 		}
 		return false;
 	}
+	
+	/**
+	 * Metodo para no perder la session.
+	 * Se debera configurar un timer como parametro, y que cada lapso sea un ping sobre el modelo de capas de zkoss
+	 */
+	@Command
+	public void ping(@BindingParam("elemento") Timer timer){}
 
 }

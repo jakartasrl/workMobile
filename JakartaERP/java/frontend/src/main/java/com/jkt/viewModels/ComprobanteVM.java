@@ -30,6 +30,7 @@ import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -46,7 +47,9 @@ import com.jkt.ov.ListItemsOV;
 import com.jkt.ov.NotaOV;
 import com.jkt.ov.SucursalOV;
 import com.jkt.ov.UserOV;
+import com.jkt.ov.tree.NodoArchivos;
 import com.jkt.ov.tree.NodoNotas;
+import com.jkt.varios.dominio.Especificacion;
 
 @Data
 public abstract class ComprobanteVM extends ViewModel {
@@ -56,6 +59,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	
 	protected boolean modoAgenda=false;
 	
+	protected List<DescriptibleOV> categoriasArchivos = new ArrayList<DescriptibleOV>();
 	protected DescriptibleOV clienteOV = new DescriptibleOV();
 	protected SucursalOV sucursalOV = new SucursalOV();
 	protected DescriptibleOV lPreciosOV = new DescriptibleOV();
@@ -74,6 +78,7 @@ public abstract class ComprobanteVM extends ViewModel {
 //	protected DescriptibleOV contactoSeleccionado = new DescriptibleOV();
 	
 	protected List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
+	private DefaultTreeModel<ArchivoOV> arbolArchivos;
 	private DefaultTreeModel<NotaOV> arbolNotas;
 
 	private DescriptibleOV plantillaTemporal = new DescriptibleOV();
@@ -247,20 +252,66 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	@Command
-	@NotifyChange("archivos")
+	@NotifyChange("arbolArchivos")
 	public void agregarArchivo() {
 		ArchivoOV archivoOV = new ArchivoOV();
 
 		archivoOV.setIdUsuario(this.userOV.getId());
 		archivoOV.setUsuario(this.userOV.getName() + " " + this.userOV.getLastName());
 
-		this.archivos.add(0, archivoOV);
+		int idCategoria = Especificacion.Categoria.ARCHIVOS.getId();
+		archivoOV.setIdCategoria(idCategoria);
+
+		NodoArchivos nodoArchivos = this.mapaCategoriasArchivos.get(String.valueOf(idCategoria));
+		nodoArchivos.add(new NodoArchivos(archivoOV));
+		
+	}
+
+	@Command
+	@NotifyChange("arbolArchivos")
+	public void agregarArchivoFactura() {
+		ArchivoOV archivoOV = new ArchivoOV();
+		
+		archivoOV.setIdUsuario(this.userOV.getId());
+		archivoOV.setUsuario(this.userOV.getName() + " " + this.userOV.getLastName());
+		int idCategoria = Especificacion.Categoria.COMPROBANTES.getId();
+		archivoOV.setIdCategoria(idCategoria);
+
+		NodoArchivos nodoArchivos = this.mapaCategoriasArchivos.get(String.valueOf(idCategoria));
+		nodoArchivos.add(new NodoArchivos(archivoOV));
+		
+	}
+
+	@Command
+	@NotifyChange("arbolArchivos")
+	public void agregarArchivoImagen() {
+		ArchivoOV archivoOV = new ArchivoOV();
+		
+		archivoOV.setIdUsuario(this.userOV.getId());
+		archivoOV.setUsuario(this.userOV.getName() + " " + this.userOV.getLastName());
+		int idCategoria = Especificacion.Categoria.IMAGENES.getId();
+		archivoOV.setIdCategoria(idCategoria);
+
+		NodoArchivos nodoArchivos = this.mapaCategoriasArchivos.get(String.valueOf(idCategoria));
+		nodoArchivos.add(new NodoArchivos(archivoOV));
+		
+//		this.archivos.add(0, archivoOV);
 	}
 	
 	@Command
-	@NotifyChange("archivos")
-	public void eliminarArchivo(@BindingParam("elemento") ArchivoOV archivo){
-		this.archivos.remove(archivo);
+	@NotifyChange("arbolArchivos")
+	public void eliminarArchivo(@BindingParam("elemento") NodoArchivos archivo){
+//		this.archivos.remove(archivo);
+		
+		NodoArchivos nodoArchivo = this.mapaCategoriasArchivos.get(String.valueOf(archivo.getData().getIdCategoria()));
+//		List<TreeNode<ArchivoOV>> children = nodoArchivos.getChildren();
+//		for (TreeNode<ArchivoOV> treeNode : children) {
+//			if(treeNode.getData()==archivo){
+//				
+//			}
+//		}
+		nodoArchivo.remove(archivo);
+		
 	}
 	
 
@@ -401,10 +452,8 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	@Command
-	@NotifyChange("archivos")
-	public void subirArchivo(@BindingParam("archivo") Media media,
-			@BindingParam("archivoActual") ArchivoOV archivoActual)
-			throws IOException {
+	@NotifyChange("arbolArchivos")
+	public void subirArchivo(@BindingParam("archivo") Media media,@BindingParam("archivoActual") ArchivoOV archivoActual)throws IOException {
 
 		if (media.isBinary()) {
 			Files.copy(new File(generarRuta(media)), media.getStreamData());
@@ -450,6 +499,54 @@ public abstract class ComprobanteVM extends ViewModel {
 		return this.rutaCompartida + media.getName();
 	}
 
+	
+	Map<String,NodoArchivos > mapaCategoriasArchivos =  new HashMap<String, NodoArchivos>();
+	
+	protected void actualizarArbolArchivos(List<ArchivoOV> archivos) {
+		
+		crearArbolArchivos();
+		
+		for (ArchivoOV archivoOV : archivos) {
+			NodoArchivos nodo = this.mapaCategoriasArchivos.get(String.valueOf(archivoOV.getIdCategoria()));
+			nodo.add(new NodoArchivos(archivoOV));
+		}
+	}
+
+	protected List<ArchivoOV> completarListaDesdeArbol(){
+		DefaultTreeModel<ArchivoOV> arbolArchivos = this.arbolArchivos;
+		List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
+
+		List<TreeNode<ArchivoOV>> children = arbolArchivos.getRoot().getChildren();
+		for (TreeNode<ArchivoOV> categoria : children) {
+			NodoArchivos nodoCategoria = (NodoArchivos) categoria;
+			List<TreeNode<ArchivoOV>> archivosCategoria = nodoCategoria.getChildren();
+			for (TreeNode<ArchivoOV> hoja : archivosCategoria) {
+				archivos.add(hoja.getData());
+			}
+		}
+		
+		return archivos;
+	}
+	
+	protected void crearArbolArchivos(){
+		this.categoriasArchivos = ((ListDescriptibleOV) Operaciones.ejecutar("TraerTiposDeArchivos", com.jkt.ov.ListDescriptibleOV.class)).getList();
+		//Armar el arbol directamente
+		
+		NodoArchivos root = new NodoArchivos(new ArchivoOV(), true);
+		
+		for (DescriptibleOV categoria : this.categoriasArchivos) {
+			ArchivoOV data = new ArchivoOV();
+			data.setId(categoria.getId());
+			data.setDescripcion(categoria.getDescripcion());
+			NodoArchivos hijo = new NodoArchivos(data, true);
+			this.mapaCategoriasArchivos.put(String.valueOf(data.getId()), hijo);
+			root.add(hijo);
+		}
+		
+		this.arbolArchivos = new DefaultTreeModel<ArchivoOV>(root);
+		
+	}
+	
 	protected void crearArbolNotas() {
 
 		NodoNotas root = new NodoNotas(new NotaOV(), true);

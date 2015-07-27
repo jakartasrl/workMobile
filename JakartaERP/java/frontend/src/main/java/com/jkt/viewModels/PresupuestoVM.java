@@ -190,7 +190,9 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		actualizarContactosReferencia();
 //		this.contactoSeleccionado = completarCombo(this.contactos.getList(), ovRecuperado.getIdContactoReferencia());
 		
-		this.archivos=ovRecuperado.getArchivos();
+//		this.archivos=ovRecuperado.getArchivos();
+		actualizarArbolArchivos(ovRecuperado.getArchivos());
+
 		
 		DescriptibleOV plantilla;
 		
@@ -263,10 +265,9 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.lDeterminacionesQuimicas=new ArrayList<ItemsOV>();
 		this.archivos=new ArrayList<ArchivoOV>();
 		
-		this.archivos=ovRecuperado.getArchivos();
+		actualizarArbolArchivos(ovRecuperado.getArchivos());
 
 		actualizarNotas(ovRecuperado);
-		crearArbolNotas();
 		
 		actualizarContactosReferencia();
 		actualizarContactosSeleccionados(ovRecuperado.getContactosReferencia());
@@ -372,7 +373,8 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
 		
-		comprobanteOV.setArchivos(this.archivos);
+//		comprobanteOV.setArchivos(this.archivos);
+		comprobanteOV.setArchivos(this.completarListaDesdeArbol());
 		
 		comprobanteOV.setIdCotizacion(idCotizacion);
 		
@@ -434,6 +436,9 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		this.lNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNotas", ListNotasOV.class)).getList();
 		crearArbolNotas();
 		
+		log.info("Recuperando arbol de archivos...");
+		crearArbolArchivos();
+		
 		log.info("Recuperando monedas...");
 		this.lMonedas = (ListDescriptibleOV) Operaciones.ejecutar("Helper", new HelperOV("moneda"), ListDescriptibleOV.class);
 		
@@ -468,7 +473,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 	
 
 	@GlobalCommand("actualizarOVs")
-	@NotifyChange({"arbolNotas","archivos","aPartirDeCotizacion","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
+	@NotifyChange({"arbolArchivos","arbolNotas","archivos","aPartirDeCotizacion","comprobanteOV","contactoSeleccionado","contactos","clienteOV","sucursalOV","lPreciosOV","lDeterminacionesQuimicas","lDeterminacionesElectricas", "items","itemsArticulos","vendedorOV","representanteOV","lDocumentacion"})
 	public void actualizar(){}
 	
 	protected String retrieveMethod() {

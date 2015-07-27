@@ -19,6 +19,7 @@
 		<property name="nombreUsuario" column="NOMBRE_USUARIO" />
 		<property name="contentType" column="CONTENT_TYPE" />
 		<property name="format" column="EXTENSION" />
+		<property name="idCategoria" column="ID_CATEGORIA" />
 		
 	</class>
 	

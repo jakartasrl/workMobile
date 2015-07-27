@@ -2,19 +2,16 @@
 
 
 <zk>
+
 	<device-config>
 		<device-type>ajax</device-type>
-		<timeout-uri>/index.zul</timeout-uri><!-- An empty URL can cause the browser 
-			to reload the same URL -->
+		<timeout-uri>/index.zul</timeout-uri><!-- An empty URL can cause the browser to reload the same URL -->
 	</device-config>
 
-<!-- 	<session-config> -->
-<!-- 		<session-timeout>0</session-timeout> -->
-<!-- 		<timer-keep-alive>false</timer-keep-alive> -->
-<!-- 		<max-desktops-per-session>50</max-desktops-per-session> -->
-<!-- 		<max-requests-per-session>50</max-requests-per-session> -->
-<!-- 		<max-pushes-per-session>50</max-pushes-per-session> -->
-<!-- 	</session-config> -->
+	<session-config>
+		<session-timeout>-1</session-timeout>
+		<timer-keep-alive>true</timer-keep-alive>
+	</session-config>
 
 	<error-page>
 		<exception-type>com.jkt.common.ServletException</exception-type>
