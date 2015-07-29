@@ -2298,6 +2298,25 @@
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
+
+	<operacion name="RecuperarProtocolosEstadisticas" clase="com.jkt.pedido.operaciones.RecuperarProtocolosEstadisticas" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListProtocoloEstadisticaOV" >
+	
+		<input>
+			<campoEntrada propertyOV="long1" 	name="ID_EQUIPO"/>
+			<campoEntrada propertyOV="fecha1" 	name="FECHA_DESDE" />
+			<campoEntrada propertyOV="fecha2" 	name="FECHA_HASTA" />
+		</input>
+		
+		<output>
+			<campoSalida value="idDeterminacion" 		target="idDeterminacion" />
+			<campoSalida value="descDeterminacion" 		target="descDeterminacion" />
+			<campoSalida value="fechaCreacion" 			target="fechaCreacion" />
+			<campoSalida value="resultadoExpresion" 	target="resultadoExpresion" />			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
 	
 	
 	

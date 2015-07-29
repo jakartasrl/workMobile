@@ -1,0 +1,51 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+	<vlayout>
+		<panel id="panel" sclass="panel-maestro" title="Estadistica" style="overflow:hidden;padding:5px;" border="normal" width="auto">
+			<panelchildren id="childrenPanel222">
+				<grid width="auto" >
+					<columns>
+						<column width="120px"/>
+						<column width="175px"/>
+						<column width="175px"/>
+						<column width="255px"/>
+					</columns>
+					<rows>
+						<row>
+							<label value="Equipo : " />
+							<hlayout>
+								<textbox sclass="campoCodigo-vlarge" value="@bind(vm.equipoOV.nroSerie)"  onBlur="@command('validarCampo', clase='equipo', codigo=self.value, ov=vm.equipoOV, post='traerEquipo')"  />
+								<button label="..." onClick="@command('openHelper', clase='equipo', ov=vm.equipoOV, post='traerEquipo')"  />
+							</hlayout>						
+							<cell colspan="2">
+								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)"  />
+							</cell>
+						</row>
+						<row>
+							<label value="Cliente : " />
+							<textbox sclass="campoCodigo-vlarge" value="@bind(vm.equipoOV.codCliente)" readonly="true" />
+							<cell colspan="3">
+								<textbox value="@bind(vm.equipoOV.descCliente)" width="100%" readonly="true" />
+							</cell>
+						</row>
+						<row>
+							<label value="Fecha Desde/Hasta : " />
+							<datebox id="fechaDesde" width="70%" value="@bind(vm.fechaDesde)" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+							<datebox id="fechahasta" width="70%" value="@bind(vm.fechaHasta)" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+						</row>
+						<row>
+							<cell colspan="4" style="text-align:center">
+								<button image="/pantallas/icons/search.png" style="height: 35px;width: 35px;" zclass="" onClick="@command('generarGrilla',componente=childrenPanel)" tooltiptext="Filtrar" />
+							</cell>
+						</row>
+					</rows>
+				</grid>
+				
+				<separator></separator>
+				
+				<hlayout id="childrenPanel">
+				</hlayout>
+	
+			</panelchildren>
+		</panel>							
+	</vlayout>
+</zk>

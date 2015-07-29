@@ -35,6 +35,7 @@
 
 	<elemento codigo="001" orden="11" name="Equipos" img="pantallas/img/labs.png" size="4x2" theme="grey" type="menu_principal">
 		<elemento codigo="003" orden="12" name="Equipo" 						img="pantallas/img/widget_tag.png" 	size="2x2" theme="grey" link="pantallas/index/index-equipo.zul" 									type="submenu" vm="com.jkt.viewModels.EquipoVM" />
+		<elemento codigo="9999" orden="13" name="Estadisticas de Equipo" 		img="pantallas/img/widget_tag.png" 	size="4x2" theme="grey" link="pantallas/index/index-estadistica-equipo.zul" 									type="submenu" vm="com.jkt.viewModels.EquipoVM" />
 	</elemento>
 
 	<elemento codigo="010" orden="13" name="Ventas" img="pantallas/img/widget_map.png" size="4x2" theme="red" type="menu_principal">

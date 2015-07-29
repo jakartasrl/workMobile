@@ -38,7 +38,6 @@
 							
 							<hlayout>
 								<textbox width="100%" value="@bind(vm.protocoloOV.ordenTrabajo)"  />
-<!-- 								<button label="..." /> -->
 							</hlayout>
 	
 						</row>
@@ -70,19 +69,12 @@
 							
 							<hlayout>
 								<button width="90%" style="margin-left:5px" image="/pantallas/icons/addSmall.png" label="" onClick="@command('abrirNuevo')" />
-<!-- 								<label style="margin-left:5px;" value="Agregar Nuevo" /> -->
 							</hlayout>						
 							<cell colspan="3">
 								<textbox width="100%" readonly="true" value="@bind(vm.equipoOV.descripcion)"  />
 							</cell>
 						</row>
 
-<!-- 						<row> -->
-<!-- 							<label value="Fecha Aprobacion : " visible="${vm.modoAprobacion}" /> -->
-<!-- 							<datebox width="100%" id="fechaHoraAprobacion" value="@bind(vm.protocoloOV.fechaAprobacion)"  format="dd/MM/yyyy  hh:mm:ss" readonly="true" visible="${vm.modoAprobacion}" /> -->
-<!-- 							<label value="Fecha Finalizacion : " visible="${vm.modoAprobacion}" /> -->
-<!-- 							<datebox width="100%" id="fechaHoraFinalizacion" value="@bind(vm.protocoloOV.fechaFinalizacion)"  format="dd/MM/yyyy  hh:mm:ss" readonly="true" visible="${vm.modoAprobacion}" />	 -->
-<!-- 						</row> -->
 					</rows>
 				
 				</grid>
