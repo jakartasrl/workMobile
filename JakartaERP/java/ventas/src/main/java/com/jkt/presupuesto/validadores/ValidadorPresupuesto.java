@@ -1,5 +1,8 @@
 package com.jkt.presupuesto.validadores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.jkt.dominio.Configuracion;
@@ -8,6 +11,7 @@ import com.jkt.dominio.TipoComprobante;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.presupuesto.dominio.Presupuesto;
+import com.jkt.presupuesto.dominio.PresupuestoDet;
 import com.jkt.validadores.ValidadorComprobantes;
 
 @Service
@@ -47,6 +51,26 @@ public class ValidadorPresupuesto extends ValidadorComprobantes {
 				MostrarError(e);
 			}
 		}
+		
+		
+		List<PresupuestoDet> detallesFinal = new ArrayList<PresupuestoDet>();
+		detallesFinal.addAll(p.getDetalles());
+		p.getDetalles().clear();
+		
+		for (PresupuestoDet det : detallesFinal) {
+		
+			if (det.getCantidad()<1) {
+				continue;
+			}
+			
+			if (det.getPrecio()==0) {
+				continue;
+			}
+			
+			p.getDetalles().add(det);
+			
+		}
+		
 		
 		/*
 		PresupuestoHistorial historial = new PresupuestoHistorial();

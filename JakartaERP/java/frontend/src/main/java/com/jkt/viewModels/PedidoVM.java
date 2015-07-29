@@ -465,7 +465,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				break;
 			}
 		}
-		
 		this.comprobanteOV.setFecha(ovRecuperado.getFecha());
 		this.comprobanteOV.setNro(ovRecuperado.getNro());
 		this.comprobanteOV.setVersion(ovRecuperado.getVersion());
