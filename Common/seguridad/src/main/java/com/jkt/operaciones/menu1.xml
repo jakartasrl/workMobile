@@ -59,6 +59,7 @@
 		<elemento codigo="108" orden="27" name="Plantilla" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="red" 		link="pantallas/index/plantilla.zul"									 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
 		<elemento codigo="101" orden="28" name="Sector" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarSector-sector" 				type="submenu" vm="com.jkt.viewModels.GenericListVM" />
 		<elemento codigo="102" orden="29" name="Tarea" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarTareaSimple-tarea" 			type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
+
 		<elemento codigo="103" orden="30" name="Unidad Medida" img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarUnidadMedida-unidadMedida" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="104" orden="31" name="Idioma" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarIdioma-idioma" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>
 		<elemento codigo="105" orden="32" name="Moneda" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarMoneda-moneda" 				type="submenu"  vm="com.jkt.viewModels.GenericListVM"/>

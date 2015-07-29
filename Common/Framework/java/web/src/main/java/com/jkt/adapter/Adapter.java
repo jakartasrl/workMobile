@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import org.hibernate.Session;
+import org.hibernate.SessionException;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,10 +33,14 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 		try{
 			tx = session.beginTransaction();
 		}catch(org.hibernate.TransactionException e){
-			System.out.println("---POINTCUT---");
-			System.out.println(e.getStackTrace());
-			throw new JakartaException("Espere unos segundos mientras finaliza una operacion pendiente...Intente nuevamente en breves segundos...");
+			tx = throwException(tx);
+		}catch(SessionException sE){
+			tx = throwException(tx);
+		}catch(org.hibernate.ResourceClosedException rE){
+			tx = throwException(tx);
 		}	
+		
+		
 		try{
 			T map = adaptRequestHook(input, operation);
 			tx.commit();
@@ -69,7 +74,6 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 				throw e;
 			}
 		}
-		
 //		finally{
 //				if (tx.isActive()) {
 //					tx.commit();
@@ -78,6 +82,21 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 //		}
 	}
 
+	/**
+	 * Se intenta reestrablecer la conexion nuevamente.
+	 * 
+	 */
+	protected Transaction throwException(Transaction tx) throws JakartaException {
+		try{
+			sessionProvider.destroySession();
+			session = sessionProvider.getSession();
+			tx = session.beginTransaction();
+		}catch(org.hibernate.TransactionException e2){
+			throw new JakartaException("Espere unos segundos mientras finaliza una operacion pendiente...Intente nuevamente en breves segundos...", e2);
+		}
+		return tx;
+	}
+	
 	protected abstract T adaptRequestHook(T2 input, EventBusiness operation) throws Exception,EntityNotFoundException;
 	
 	@Autowired

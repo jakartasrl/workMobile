@@ -28,7 +28,7 @@ public class RecuperarMenu extends Operation {
 		int ultimaVersion = (Integer) obtenerMaximaVersion.uniqueResult();
 		
 		if (oidRecibido==null || oidRecibido.isEmpty()) {
-			Query hql = crearHQL("from Menu m where m.type = :type and m.version = :ultimaVersion");
+			Query hql = crearHQL("from Menu m where m.type = :type and m.version = :ultimaVersion order by m.orden");
 			hql.setParameter("type", Menu.MENU_PRINCIPAL);
 			hql.setParameter("ultimaVersion", ultimaVersion);
 			notificarObjeto("",	hql.list());
@@ -36,7 +36,7 @@ public class RecuperarMenu extends Operation {
 			int oidMenu = Integer.valueOf(oidRecibido).intValue();
 //			menu = (Menu) obtener(Menu.class, oidMenu);
 			
-			Query hql = crearHQL("from Menu m where m.id = :identificador and m.version = :ultimaVersion");
+			Query hql = crearHQL("from Menu m where m.id = :identificador and m.version = :ultimaVersion order by m.orden");
 			hql.setParameter("identificador", (long)oidMenu);
 			hql.setParameter("ultimaVersion", ultimaVersion);
 			

@@ -24,6 +24,7 @@
 			<property name="img" column="IMAGEN" type="string" />
 			<property name="size" column="TAMANIO" type="string" />
 			<property name="theme" column="COLOR" type="string" />
+			<property name="orden" column="ORDEN" type="string" />
 			<property name="link" column="URL" type="string" />
 			<property name="type" column="TIPO" type="string" />
 			

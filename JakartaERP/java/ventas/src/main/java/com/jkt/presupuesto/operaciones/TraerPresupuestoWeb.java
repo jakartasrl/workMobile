@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
+
 import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.ListaPrecioDetalle;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.laboratorio.dominio.Laboratorio;
 import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
+import com.jkt.varios.dominio.Moneda;
 
 /**
  * Recupera un presupuesto y todas sus relaciones.
@@ -31,21 +35,24 @@ public class TraerPresupuestoWeb extends HelperRecuperarDeterminacionesConPrecio
 	private static final String LABORATORIO_QUIMICO = "LaboratorioQuimico";
 
 	private static final String OID = "oid".toUpperCase();
-
+	
+	private Moneda monedaporDefecto ;
+		
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
 		
-//		obtenerLaboratorios();
+		Configuracion configuracionMonedaPorDefecto = obtenerConfiguracion(NOMBRE_PARAMETRO_MONEDA_POR_DEFECTO);
+		monedaporDefecto = (Moneda) obtener(Moneda.class, Long.valueOf(configuracionMonedaPorDefecto.getValorNumero()));
+		obtenerLaboratorios();
 		
 		Presupuesto presupuesto=(Presupuesto) obtener(Presupuesto.class, (String)aParams.get(OID));
+		
 		asignarNotas(presupuesto);
+		asignarDeterminaciones(presupuesto, PresupuestoDet.CHAR_QUIMICO, laboQuimico.getId());
+		asignarDeterminaciones(presupuesto, PresupuestoDet.CHAR_ELECTRICO, laboElectrico.getId());
 
 		notificarObjeto("", presupuesto);
-		
-//		notificarCondiciones(presupuesto);
-
-//		notificarDetalles(presupuesto);
 		
 	}
 
@@ -62,6 +69,33 @@ public class TraerPresupuestoWeb extends HelperRecuperarDeterminacionesConPrecio
 		
 	}
 
+
+	private void asignarDeterminaciones(Presupuesto presupuesto, char tipoDetalle, long idLaboratorio) {
+		Query hql = this.crearHQL("from Determinacion d where d.laboratorio.id = :idLaboratorio");
+		hql.setParameter("idLaboratorio", idLaboratorio);
+		List<Determinacion> allDets = hql.list();
+		
+		List<PresupuestoDet> allDetails = presupuesto.getDetalles();
+		List<Long> idDeterminaciones = new ArrayList<Long>();
+
+		for (PresupuestoDet presupuestoDet : allDetails) {
+			if(presupuestoDet.getTipoDetalle()==tipoDetalle){
+				idDeterminaciones.add(presupuestoDet.getDeterminacion().getId());
+			}
+		}
+		
+		for (Determinacion determinacion : allDets) {
+			if(!idDeterminaciones.contains(determinacion.getId())){
+				PresupuestoDet presupuestoDet = new PresupuestoDet();
+				presupuestoDet.setDeterminacion(determinacion);
+				presupuestoDet.setTipoDetalle(tipoDetalle);
+				presupuestoDet.setMoneda(monedaporDefecto);
+				presupuesto.getDetalles().add(presupuestoDet);
+			}
+		}
+		
+	}
+	
 	private void asignarNotas(Presupuesto presupuesto) throws Exception, IllegalAccessException, InvocationTargetException {
 		// Obtengo todas las Notas...
 		List<PersistentEntity> notas = serviceRepository.getAll(Nota.class);

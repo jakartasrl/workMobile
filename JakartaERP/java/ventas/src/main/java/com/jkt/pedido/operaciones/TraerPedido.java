@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
+
 import com.jkt.dominio.Configuracion;
 import com.jkt.dominio.ListaPrecioDetalle;
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.laboratorio.dominio.Determinacion;
 import com.jkt.laboratorio.dominio.Laboratorio;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
@@ -18,6 +21,7 @@ import com.jkt.presupuesto.dominio.Nota;
 import com.jkt.presupuesto.dominio.Presupuesto;
 import com.jkt.presupuesto.dominio.PresupuestoDet;
 import com.jkt.presupuesto.operaciones.HelperRecuperarDeterminacionesConPrecios;
+import com.jkt.varios.dominio.Moneda;
 
 /**
  * Recupera un presupuesto y todas sus relaciones.
@@ -45,15 +49,23 @@ public class TraerPedido extends HelperRecuperarDeterminacionesConPrecios {
 	private static final String WRITER_NOTAS= "notas";
 	private static final String WRITER_COND_COMERCIAL= "condicionesComerciales";
 
+	private Moneda monedaporDefecto ;
+	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada(aParams.get(OID));
+		
+		Configuracion configuracionMonedaPorDefecto = obtenerConfiguracion(NOMBRE_PARAMETRO_MONEDA_POR_DEFECTO);
+		monedaporDefecto = (Moneda) obtener(Moneda.class, Long.valueOf(configuracionMonedaPorDefecto.getValorNumero()));
 		
 		obtenerLaboratorios();
 		
 		Pedido pedido=(Pedido) obtener(Pedido.class, (String)aParams.get(OID));
 
 		asignarNotas(pedido);
+		
+		asignarDeterminaciones(pedido, PresupuestoDet.CHAR_QUIMICO, laboQuimico.getId());
+		asignarDeterminaciones(pedido, PresupuestoDet.CHAR_ELECTRICO, laboElectrico.getId());
 		
 		asignarDetalles(pedido);		
 
@@ -63,6 +75,32 @@ public class TraerPedido extends HelperRecuperarDeterminacionesConPrecios {
 
 	}
 
+	private void asignarDeterminaciones(Pedido pedido, char tipoDetalle, long idLaboratorio) {
+		Query hql = this.crearHQL("from Determinacion d where d.laboratorio.id = :idLaboratorio");
+		hql.setParameter("idLaboratorio", idLaboratorio);
+		List<Determinacion> allDets = hql.list();
+		
+		List<PedidoDet> allDetails = pedido.getDetalles();
+		List<Long> idDeterminaciones = new ArrayList<Long>();
+
+		for (PedidoDet pedidoDet : allDetails) {
+			if(pedidoDet.getTipoDetalle()==tipoDetalle){
+				idDeterminaciones.add(pedidoDet.getDeterminacion().getId());
+			}
+		}
+		
+		for (Determinacion determinacion : allDets) {
+			if(!idDeterminaciones.contains(determinacion.getId())){
+				PedidoDet pedidoDet = new PedidoDet();
+				pedidoDet.setDeterminacion(determinacion);
+				pedidoDet.setTipoDetalle(tipoDetalle);
+				pedidoDet.setMoneda(monedaporDefecto);
+				pedido.getDetalles().add(pedidoDet);
+			}
+		}
+		
+	}
+	
 	private void asignarDocs(Pedido pedido) {
 		
 	}

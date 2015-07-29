@@ -246,22 +246,27 @@ public class CotizacionVM extends ComprobanteVM implements IBasicOperations {
 			return false;
 		}
 
-		if(!validarDescriptible(representanteOV, "Complete el representante en la solapa 'Dato Comerciales'.")){
-			return false;
-		}
+//		if(!validarDescriptible(representanteOV, "Complete el representante en la solapa 'Dato Comerciales'.")){
+//			return false;
+//		}
 
 //		if(!validarDescriptible(contactoSeleccionado, "Complete el contacto de referencia en la solapa 'Dato Comerciales'. Compruebe que la sucursal contiene contactos de referencia.")){
 //			return false;
 //		}
-
-		for (ArchivoOV archivoOV : this.archivos) {
-			if (archivoOV.getFileName() !=null && !archivoOV.getFileName().isEmpty()) {
-				if (archivoOV.getDescripcion()==null || archivoOV.getDescripcion().isEmpty()) {
-					Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
-					return false;
-				}
-			}
+		
+		if(!validarArchivos()){
+			return false;
 		}
+
+		
+//		for (ArchivoOV archivoOV : this.archivos) {
+//			if (archivoOV.getFileName() !=null && !archivoOV.getFileName().isEmpty()) {
+//				if (archivoOV.getDescripcion()==null || archivoOV.getDescripcion().isEmpty()) {
+//					Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
+//					return false;
+//				}
+//			}
+//		}
 		
 		return true;
 	}

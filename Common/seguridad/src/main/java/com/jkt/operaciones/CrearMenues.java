@@ -120,6 +120,7 @@ public class CrearMenues extends Operation {
 		m.setSize(menu.getSize());
 		m.setType(menu.getType());
 		m.setTheme(menu.getTheme());
+		m.setOrden(menu.getOrden());
 		
 		m.setVm(menu.getVm());
 

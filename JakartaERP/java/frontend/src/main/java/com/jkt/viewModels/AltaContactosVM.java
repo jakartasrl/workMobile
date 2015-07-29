@@ -57,7 +57,7 @@ public class AltaContactosVM {
 		
 		if(!validarTipoContacto()){
 			Messagebox.show("Complete todos los datos del contacto.");
-			x.detach();
+//			x.detach();
 			return;
 		}
 		
@@ -104,6 +104,17 @@ public class AltaContactosVM {
 	}
 
 	private boolean validarTipoContacto() {
+		if(contactoOV.getApellidoYNombre()==null || contactoOV.getApellidoYNombre().isEmpty() ){
+			return false;
+		}
+		
+		if(contactoOV.getTelefono()==null || contactoOV.getTelefono().isEmpty() ){
+			return false;
+		}
+		if(contactoOV.getIdTipoContacto()==0){
+			return false;
+		}
+		
 		return true;
 	}
 	

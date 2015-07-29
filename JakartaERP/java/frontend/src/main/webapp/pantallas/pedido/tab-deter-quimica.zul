@@ -2,13 +2,13 @@
 
 	<grid width="100%" vflex="true" model="@bind(vm.lDeterminacionesQuimicas)" emptyMessage="No existen determinaciones disponibles" mold="paging" pageSize="10">
 		<auxhead>
-			<auxheader colspan="7" class="topic">
+			<auxheader colspan="6" class="topic">
 				Determinaciones Químicas
 			</auxheader>
 		</auxhead>
 
 		<columns>
-			<column width="7%" label="Cód.Analisis" align="center" sort="auto(auto)" />
+<!-- 			<column width="7%" label="Cód.Analisis" align="center" sort="auto(auto)" /> -->
 			<column width="7%" label="Cód Det." tooltip="Código de Determinación"  align="center" />
 			<column width="53%" label="Determinación" />
 			<column width="7%" label="Cantidad" align="center" />
@@ -20,7 +20,7 @@
 		<rows>
 			<template name="model">
 				<row sclass="fila-maestro">
-					<label width="100%" value="@bind(each.codAnalisis)" />
+<!-- 					<label width="100%" value="@bind(each.codAnalisis)" /> -->
 					<label width="100%" value="@bind(each.codigo)" />
 					<label width="90%" value="@bind(each.descripcionDeterminacion)" />
 

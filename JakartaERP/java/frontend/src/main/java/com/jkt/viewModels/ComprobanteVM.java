@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,12 +202,45 @@ public abstract class ComprobanteVM extends ViewModel {
 			representanteOV.setId(-1);
 		}
 		
-		for (ArchivoOV archivoOV : this.archivos) {
-			if (archivoOV.getFileName() != null && !archivoOV.getFileName().isEmpty()) {
-				if (archivoOV.getDescripcion() == null || archivoOV.getDescripcion().isEmpty()) {
-					Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
+		
+		if(!validarArchivos()){
+//			Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
+			return false;
+		}
+//		for (ArchivoOV archivoOV : this.archivos) {
+//			if (archivoOV.getFileName() != null && !archivoOV.getFileName().isEmpty()) {
+//				if (archivoOV.getDescripcion() == null || archivoOV.getDescripcion().isEmpty()) {
+//					Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
+//					return false;
+//				}
+//			}
+//		}
+		
+		return true;
+	}
+
+	/**
+	 * Valida todos los archivos existentes, en cuanto a nombres y descripciones.
+	 */
+	protected boolean validarArchivos() {
+		Collection<NodoArchivos> values = this.mapaCategoriasArchivos.values();
+		for (NodoArchivos nodoArchivos : values) {
+			List<TreeNode<ArchivoOV>> children = nodoArchivos.getChildren();
+			ArchivoOV archivoOV;
+			for (TreeNode<ArchivoOV> treeNode : children) {
+				archivoOV=treeNode.getData();
+				
+				if(archivoOV.getFileName() == null || archivoOV.getFileName().isEmpty()){
+					Messagebox.show("Complete los archivos por favor.");
 					return false;
 				}
+				
+//				if (archivoOV.getFileName() != null && !archivoOV.getFileName().isEmpty()) {
+//					if (archivoOV.getDescripcion() == null || archivoOV.getDescripcion().isEmpty()) {
+//						Messagebox.show("Complete las descripciones de los archivos cargados por favor.");
+//						return false;
+//					}
+//				}
 			}
 		}
 		
@@ -513,6 +547,9 @@ public abstract class ComprobanteVM extends ViewModel {
 	}
 
 	protected List<ArchivoOV> completarListaDesdeArbol(){
+		
+//		crearArbolArchivos();
+		
 		DefaultTreeModel<ArchivoOV> arbolArchivos = this.arbolArchivos;
 		List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
 

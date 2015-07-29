@@ -62,7 +62,8 @@ public class ProtocoloTerminadoVM extends ViewModel implements IBasicOperations 
 	public void init(@BindingParam("l") String laboratorio, @BindingParam("modoAprobacion") Boolean modoAprobacion){
 		
 		this.setTitulo("Protocolos Pendientes de Impresión");
-				
+		this.listProtocolo = new ArrayList<ProtocoloOV>();
+		
 		this.laboratorioParametroKey = laboratorio;
 		
 		if(laboratorio.equalsIgnoreCase("LaboratorioQuimico")){

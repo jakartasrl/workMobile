@@ -104,10 +104,31 @@ body{
 	min-height: 18px;
 }
 
-.z-combobox-input, .z-bandbox-input, .z-datebox-input, .z-timebox-input, .z-spinner-input, .z-doublespinner-input{
-	padding:0px;
-	min-height: 18px;
+.z-combobox-input, .z-datebox-input, .z-timebox-input{
+       height: 18px;
 }
+
+.z-combobox-button {
+   padding-left: 6px;
+   padding-top: 2px;
+   height: 18px;
+   min-height: 18px;
+}
+
+.z-datebox-button{
+    padding-top: 1px;
+    height: 18px;
+    min-height: 18px;
+}
+
+/* .z-combobox-input, .z-bandbox-input, .z-datebox-input, .z-timebox-input, .z-spinner-input, .z-doublespinner-input{ */
+/* 	padding:0px; */
+/* 	min-height: 18px; */
+/* } */
+/* .z-bandbox-input, .z-datebox-input, .z-timebox-input, .z-spinner-input, .z-doublespinner-input{ */
+/* 	padding:0px; */
+/* 	min-height: 18px; */
+/* } */
 
 .z-combobox, .z-bandbox, .z-datebox, .z-timebox, .z-spinner, .z-doublespinner {
 	padding:0px;

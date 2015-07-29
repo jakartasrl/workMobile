@@ -29,7 +29,7 @@
 		
 		<many-to-one name="sector" class="com.jkt.dominio.Sector" column="SECTOR_ID" cascade="all"></many-to-one>
 		
-		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" cascade="none" column="PEDIDO_ID"/>
+<!-- 		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" cascade="none" column="PEDIDO_ID"/> -->
 		
 		<list name="logs" lazy="true" cascade="all">
 			<key column="TAREA_PEDIDO__ID" />

@@ -30,7 +30,8 @@
 
             <rows>
 	            <template name="model">
-	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" >
+	                <row onClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" >
+<!-- 	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" > -->
 <!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
 	                    <label hflex="2" value="@load(each.descripcion)" />

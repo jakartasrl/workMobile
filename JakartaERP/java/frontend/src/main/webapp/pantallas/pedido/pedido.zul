@@ -86,7 +86,7 @@
 	
 	<panel style="margin-top:15px;" border="none" height="auto" width="100%">
 		<panelchildren>
-			<tabbox id="contenidoTabs" >
+			<tabbox id="contenidoTabs" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
 			    <tabs id="tabs">
 			        <tab id="items" label="Fabricación/Reparación/Service" visible="@bind((vm.modoAgenda and !vm.items.isEmpty()) or !vm.modoAgenda)" />
 			        <tab id="labElec" label="Laboratorio Electrico" visible="@bind((vm.modoAgenda and !vm.lDeterminacionesElectricas.isEmpty()) or !vm.modoAgenda)" />

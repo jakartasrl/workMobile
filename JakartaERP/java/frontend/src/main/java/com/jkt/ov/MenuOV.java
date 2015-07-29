@@ -20,39 +20,7 @@ public class MenuOV extends ObjectView {
 	private String type;
 	private String url=StringUtils.EMPTY;
 	
+	private String orden;
 	private String vm;
-	
-
-	
-//	private String nombre, enlace, tipo;
-//	
-//	private String operacion, clase;
-//
-//	private List<MenuOV> hijos =  new ArrayList<MenuOV>();
-//	
-//	public MenuOV(String nombre, String enlace, String tipo) {
-//		super();
-//		this.nombre = nombre;
-//		this.enlace = enlace;
-//		this.tipo = tipo;
-//	}
-//
-//	public MenuOV(String nombre, String enlace, String tipo,String operacion ,String clase) {
-//		super();
-//		this.nombre = nombre;
-//		this.enlace = enlace;
-//		this.tipo = tipo;
-//		this.operacion=operacion;
-//		this.clase=clase;
-//	}
-//	
-//	public MenuOV() {}
-//	
-//	public static MenuOV newInstance(String nombre, String enlace, String tipo){
-//		return new MenuOV(nombre, enlace, tipo);
-//	}
-//	public static MenuOV newInstance(String nombre, String enlace, String tipo,String operacion, String clase){
-//		return new MenuOV(nombre, enlace, tipo, operacion, clase);
-//	}
 	
 }

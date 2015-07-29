@@ -40,7 +40,7 @@
 							<textbox class="campoCodigo-medium" value="@bind(vm.pedido.nro)" readonly="true"/>
 		
 							<label class="name" value="Fecha : " />
-							<datebox id="fecha" value="@bind(vm.pedido.fecha)" format="dd/MM/yyyy" disabled="true" />
+							<datebox id="fecha" value="@bind(vm.pedido.fecha)" format="dd/MM/yyyy" disabled="true" buttonVisible="false"/>
 							
 						</row>
 						

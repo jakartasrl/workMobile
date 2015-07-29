@@ -53,7 +53,7 @@ public class TareaPedido extends DatoNodo {
 	
 	private List<TareaPedido> tareas=new ArrayList<TareaPedido>();
 	private List<Descriptible> tareasSimples=new ArrayList<Descriptible>();
-	private Pedido pedido;
+//	private Pedido pedido;
 	
 	
 	/*

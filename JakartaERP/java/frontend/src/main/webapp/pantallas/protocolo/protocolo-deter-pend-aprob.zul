@@ -38,7 +38,7 @@
 										</cell>
 	
 										<cell>
-											<textbox value="@bind(variable.valorInput)" width="50%" if="${variable.input}"  />
+											<textbox value="@bind(variable.valorInput)" width="50%" if="${variable.input}" readonly="true" />
 											<label width="80%" value="@bind(variable.expresionCadena)" if="${!variable.input}" />
 										</cell>
 	

@@ -1,25 +1,15 @@
 <zk id="contentGB" viewModel="@id('vm') @load(viewModel)">
 
-	<hlayout>
-		<vlayout width="100%" style="text-align:left;margin-left:20px" visible="@bind(!vm.modoAgenda)" >
-			<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivoImagen')" tooltiptext="Agregar un nuevo archivo.">
-			</button>
-				<label value="Imagen"></label>
-		</vlayout>
-		<vlayout width="100%" style="text-align:left;margin-left:20px" visible="@bind(!vm.modoAgenda)" >
-			<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivoFactura')" tooltiptext="Agregar un nuevo archivo.">
-			</button>
-				<label value="Comprobante"></label>
-		</vlayout>
-		
-		<vlayout width="100%" style="text-align:left;margin-left:20px" visible="@bind(!vm.modoAgenda)" >
-			<button style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/new.png" label="" onClick="@command('agregarArchivo')" tooltiptext="Agregar un nuevo archivo.">
-			</button>
-				<label value="Archivo"></label>
-		</vlayout>
-	</hlayout>
+    <menubar autodrop="true">
+	    <menu label="Agregar">
+	        <menupopup>
+	            <menuitem label="Imagen" onClick='@command("agregarArchivoImagen")'/>
+	            <menuitem label="Factura" onClick='@command("agregarArchivoFactura")'/>
+	            <menuitem label="Varios" onClick='@command("agregarArchivo")' />
+	        </menupopup>
+	    </menu>
+	</menubar>
 
-	
 	<tree id="categoriesTree" model="@load(vm.arbolArchivos)" width="100%"  >
     <treecols>
         
@@ -53,7 +43,7 @@
 				</treecell>
 
 				<treecell if="${each.leaf}">
-					<textbox readonly="@bind(vm.modoAgenda)" width="100%" constraint="no empty" value="@bind(each.data.descripcion)" />
+					<textbox readonly="@bind(vm.modoAgenda)" width="100%" value="@bind(each.data.descripcion)" />
 				</treecell>
 
 
@@ -70,6 +60,5 @@
         </treeitem>
     </template>
 	</tree>
-	
 	
 </zk>

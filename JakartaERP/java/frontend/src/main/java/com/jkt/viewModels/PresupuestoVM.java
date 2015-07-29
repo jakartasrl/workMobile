@@ -268,6 +268,7 @@ public class PresupuestoVM extends ComprobanteVM implements IBasicOperations{
 		actualizarArbolArchivos(ovRecuperado.getArchivos());
 
 		actualizarNotas(ovRecuperado);
+		crearArbolNotas();
 		
 		actualizarContactosReferencia();
 		actualizarContactosSeleccionados(ovRecuperado.getContactosReferencia());

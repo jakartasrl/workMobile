@@ -65,7 +65,7 @@
 <!-- 	CONTENT -->
 <!-- 	CONTENT -->
 
-	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')">
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')" context="menuContextualConcepto">
 	
 		<div style="text-align:center">
 			<label sclass="titulo" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" value="@bind(vm.titulo)"></label>
@@ -78,5 +78,13 @@
 		<button id="btn" onTest="@command('test', url = arg )" visible="false" />
 
 	</div>
+
+	<menupopup id="menuContextualConcepto" >
+        <menuitem label="Los Conce">
+       		<attribute name="onClick">
+       			Messagebox.show("info@losconce.com.ar");
+       		</attribute>
+        </menuitem>
+    </menupopup>
 
 </zk>

@@ -456,6 +456,11 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Command
 	public boolean validarExpresion(@BindingParam("metodo") String metodoName, @BindingParam("expresion") String expresion, @BindingParam("variables") List<VariableOV> variables){
 		
+		if(expresion.isEmpty()){
+			Messagebox.show("Complete todas las expresiones del metodo "+metodoName);
+			return false;
+		}
+		
 		String expresionTransformada = "";
 		expresionTransformada = this.transformarExpresion(expresion);
 		
