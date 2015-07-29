@@ -1,25 +1,11 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 	
-	<zscript>
-
-		import java.io.*;
-		import com.jkt.ov.*;
-		
-		public void mostrarNombre(){
-			Session sess = Sessions.getCurrent();
-			UserOV cre = (UserOV) sess.getAttribute("userCredential");
-			Label tb = (Label)event.getTarget();
-			tb.setValue(cre.getName()+" "+cre.getLastName());
-		}
-
-	</zscript>
-	
 	<toolbar vflex="1" style="width:100%" hflex="1" id="gralToolBar"
 		align="start">
 		<hlayout style="width:100%" id="idLayout">
 
 			<div hflex="1" id="idDiv">
-				<toolbarbutton image="/pantallas/icons/search.png" label="Filtrar" onClick="@command('filtrar')" tooltiptext="Filtrar" />
+				<toolbarbutton image="/pantallas/icons/search.png" label="Filtrar" onClick="@command('generarGrilla',componente=childrenPanel)" tooltiptext="Filtrar" />
 
 				<space bar="true" style="vertical-align: middle; line-height: 20px;" />
 				<toolbarbutton image="/pantallas/icons/win-phone.png" label="Inicio" href="../../supermenu.zul" tooltiptext="Volver al menu" />
