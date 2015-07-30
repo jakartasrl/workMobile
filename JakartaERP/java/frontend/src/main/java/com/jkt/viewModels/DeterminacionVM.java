@@ -2,6 +2,7 @@ package com.jkt.viewModels;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -14,6 +15,7 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -229,8 +231,8 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	@Command
 	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
-		this.determinacion = new DeterminacionOV();
-		this.init(this.laboratorioParametroKey);
+//		this.determinacion = new DeterminacionOV();
+//		this.init(this.laboratorioParametroKey);
 		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 
@@ -563,7 +565,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-		this.nuevo();
+//		this.nuevo();
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 

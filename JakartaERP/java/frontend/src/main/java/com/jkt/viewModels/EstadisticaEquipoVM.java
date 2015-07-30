@@ -20,6 +20,7 @@ import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Messagebox;
 
