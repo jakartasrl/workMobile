@@ -1,7 +1,7 @@
 <zk>
 
 <div style="background: white;	margin-top: 5px; padding-right:0px; width:100%;margin-bottom:5px">
-			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="1312px" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
+			<grid id ="grid" model="@bind(vm.allTasks)" mold="paging" pageSize="18" width="100%" emptyMessage="No existen tareas disponibles." style="margin-top:5px;">
 	
 				<auxhead sclass="category-center" style="font-size:14px; text-align:center;">
 					<auxheader label="Lista de Tareas" colspan="11" />

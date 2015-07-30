@@ -2,7 +2,7 @@
 
 	<div>
 <!-- 	<panel sclass="panel-maestro" style="padding:5px;"  title="Identificación" border="normal" height="auto" width="100%"> -->
-	<panel sclass="panel-maestro" style="padding:5px;" border="normal" height="auto" width="57%">
+	<panel sclass="panel-maestro" style="padding:5px;" border="normal" height="auto" width="100%">
 
 		<panelchildren>
 
