@@ -17,7 +17,7 @@
 		
 	</style>
 		
-	<div width="55%" >	
+	<div width="100%" >	
 		<panel sclass="panel-maestro" title="Pedido" border="normal" height="auto" width="100%">
 	
 			<panelchildren>
@@ -40,7 +40,7 @@
 							<textbox class="campoCodigo-medium" value="@bind(vm.pedido.nro)" readonly="true"/>
 		
 							<label class="name" value="Fecha : " />
-							<datebox id="fecha" value="@bind(vm.pedido.fecha)" format="dd/MM/yyyy" disabled="true" buttonVisible="false"/>
+							<datebox id="fecha" width="90%" value="@bind(vm.pedido.fecha)" format="dd/MM/yyyy" disabled="true" buttonVisible="false"/>
 							
 						</row>
 						

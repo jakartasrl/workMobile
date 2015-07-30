@@ -1,6 +1,7 @@
 package com.jkt.viewModels;
 
 import static org.apache.commons.beanutils.BeanUtils.copyProperties;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +9,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import lombok.Data;
+
+import org.joda.time.LocalDate;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -17,6 +21,8 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Hlayout;
+import org.zkoss.zul.Messagebox;
+
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.ProtocoloEstadistica;
@@ -33,7 +39,7 @@ public class EstadisticaEquipoVM extends ViewModel implements IBasicOperations {
 	private ProtocoloOV protocoloOV = new ProtocoloOV();
 	private EquipoOV equipoOV = new EquipoOV();
 	
-	private Date fechaDesde = new Date();
+	private Date fechaDesde = LocalDate.now().minusMonths(1).toDate();
 	private Date fechaHasta = new Date();
 	
 	private Map<Date,List<ProtocoloEstadisticaOV>> mapFechas=new HashMap<Date,List<ProtocoloEstadisticaOV>>();
@@ -72,14 +78,14 @@ public class EstadisticaEquipoVM extends ViewModel implements IBasicOperations {
 	}
 		
 	@Init(superclass=true)
-	@NotifyChange({"protocoloOV","equipoOV"})
+	@NotifyChange({"protocoloOV","equipoOV","fechaDesde","fechaHasta"})
 	public void init(){
 		
 		if(isCargadoDesdeSession()){
 			return;
 		}
 
-		this.setTitulo("Estadistica de Equipo");
+		this.setTitulo("Historia de Equipos");
 		this.protocoloOV = new ProtocoloOV();
 		this.equipoOV = new EquipoOV();
 		this.fechaDesde = new Date();
@@ -121,6 +127,18 @@ public class EstadisticaEquipoVM extends ViewModel implements IBasicOperations {
 	@Command
 	public void generarGrilla(@BindingParam("componente") Hlayout panel) throws InterruptedException, Exception, Exception{
 
+		if(this.equipoOV.getId()==0){
+			Messagebox.show("Complete el equipo.");
+			return;
+		}
+		
+		if(this.fechaDesde.after(this.fechaHasta)){
+			Messagebox.show("Verifique la consistencia de filtro de fechas.");
+			return;
+		}
+		
+		limpiarGrilla(panel);
+
 		ContainerOV container = new ContainerOV();
 		container.setLong1(this.equipoOV.getId());		
 		container.setFecha1(this.fechaDesde);
@@ -130,7 +148,6 @@ public class EstadisticaEquipoVM extends ViewModel implements IBasicOperations {
 		
 		this.generarMatrizDeterminaciones(listProtocoloEstadisticaOV);
 
-		limpiarGrilla(panel);
 		
 		//Cargamos la determinaciones en la matriz
 		List<ProtocoloEstadistica> lsDeterminaciones = new ArrayList<ProtocoloEstadistica>();
@@ -160,6 +177,7 @@ public class EstadisticaEquipoVM extends ViewModel implements IBasicOperations {
 		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
 	}
 
+	@NotifyChange
 	private void limpiarGrilla(Hlayout panel) {
 		panel.getChildren().clear();
 	}

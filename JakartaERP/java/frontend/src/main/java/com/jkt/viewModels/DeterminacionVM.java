@@ -508,6 +508,8 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 				case '-':
 				case '*':
 				case '/':
+				case '(':
+				case ')':
 					String op = (new StringBuffer().append(exp.charAt(x))).toString();
 					operadores.add(op);
 					break;

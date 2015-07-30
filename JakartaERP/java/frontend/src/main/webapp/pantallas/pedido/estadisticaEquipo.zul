@@ -29,8 +29,8 @@
 						</row>
 						<row>
 							<label value="Fecha Desde/Hasta : " />
-							<datebox id="fechaDesde" width="70%" value="@bind(vm.fechaDesde)" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
-							<datebox id="fechahasta" width="70%" value="@bind(vm.fechaHasta)" format="dd/MM/yyyy" onCreate="self.value = new Date()" />
+							<datebox id="fechaDesde" width="70%" value="@bind(vm.fechaDesde)" format="dd/MM/yyyy"  />
+							<datebox id="fechahasta" width="70%" value="@bind(vm.fechaHasta)" format="dd/MM/yyyy"  />
 						</row>
 						<row>
 							<cell colspan="4" style="text-align:center">
