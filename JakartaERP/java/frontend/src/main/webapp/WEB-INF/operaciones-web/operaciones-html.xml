@@ -2318,6 +2318,65 @@
 		
 	</operacion>
 	
+	<operacion name="guardarActividad" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.dominio.Actividad" inputOV="com.jkt.ov.DescriptibleOV">
 	
+		<input keyName="objeto" clase="com.jkt.dominio.Actividad">
+			<campoEntrada propertyOV="id" metodo="setId" />
+			<campoEntrada propertyOV="codigo" metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerNota" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListNotasOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" 						value="id" />
+			<campoSalida target="codigo" 					value="codigo" />
+			<campoSalida target="descripcion"				value="descripcion" />
+			<campoSalida target="adicional" 				value="adicional" />
+			
+			<campoSalida target="actividad.id" 				value="actividad.id" />
+			<campoSalida target="actividad.codigo" 			value="actividad.codigo" />
+			<campoSalida target="actividad.descripcion" 	value="actividad.descripcion" />
+			
+			<campoSalida target="subActividad.id" 			value="subActividad.id" />
+			<campoSalida target="subActividad.codigo" 		value="subActividad.codigo" />
+			<campoSalida target="subActividad.descripcion" 	value="subActividad.descripcion" />
+			
+			<campoSalida target="activo" 					value="activo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarNota" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.presupuesto.dominio.Nota" inputOV="com.jkt.ov.NotaOV">
+	
+		<input keyName="objeto" clase="com.jkt.presupuesto.dominio.Nota">
+ 			
+ 			<campoEntrada propertyOV="id" 						metodo="setId" />
+			<campoEntrada propertyOV="codigo" 					metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion"				metodo="setDescripcion" />
+			<campoEntrada propertyOV="adicional" 				metodo="setAdicional" />
+			
+			<campoEntrada propertyOV="idActividad" 				metodo="setActividad" />
+			
+			<campoEntrada propertyOV="idSubActividad" 			metodo="setSubActividad" />
+			
+			<campoEntrada propertyOV="activo" 					metodo="setActivo" />
+ 			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 	
 </entity>

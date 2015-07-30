@@ -53,6 +53,9 @@
 			<elemento codigo="021" orden="24" name="Visor Interactivo" 	img="pantallas/img/widget_char.png" 	size="4x2" theme="darkblue" link="pantallas/index/visor-agenda.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
 		</elemento>
 		
+		<elemento codigo="036" orden="36" name="Actividad" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarActividad-actividad" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM" />
+		<elemento codigo="037" orden="37" name="Notas" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/index/index-nota.zul" 											type="submenu"  vm="com.jkt.viewModels.NotaVM" />
+		
 	</elemento>
 	
 	<elemento codigo="100" orden="25" name="Utilidades" img="pantallas/img/widget_dialog.png" size="4x2" theme="blue" type="menu_principal">
