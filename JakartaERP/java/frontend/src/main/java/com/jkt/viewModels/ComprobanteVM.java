@@ -76,8 +76,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	
 	protected ListDescriptibleOV contactos = new ListDescriptibleOV();
 	protected List<DescriptibleOV> contactosSeleccionados =  new ArrayList<DescriptibleOV>();
-//	protected DescriptibleOV contactoSeleccionado = new DescriptibleOV();
-	
+
 	protected List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
 	private DefaultTreeModel<ArchivoOV> arbolArchivos;
 	private DefaultTreeModel<NotaOV> arbolNotas;
