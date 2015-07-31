@@ -191,6 +191,10 @@
 			<campoEntrada propertyOV="idMarca" metodo="setMarca" />
 			<campoEntrada propertyOV="idCliente" metodo="setCliente" />
 			<campoEntrada propertyOV="idTipoProducto" metodo="setTipoDeProducto" />
+			
+			<campoEntrada propertyOV="fluidoAislante" metodo="setFluidoAislante" />
+			<campoEntrada propertyOV="denominacionInterna" metodo="setDenominacionInterna" />
+			
 			<campoEntrada propertyOV="nroSerie" metodo="setNroSerie" />
 			<campoEntrada propertyOV="caracteristicasEquipo" metodo="setCaracteristicas" >
 				<campoEntrada propertyOV="idCaracteristica" metodo="setCaracProducto" />
@@ -218,6 +222,9 @@
 			<campoSalida target="nroSerie" 						value="nroSerie" />
 			<campoSalida target="marca.id" 						value="idMarca" />
 			<campoSalida target="marca.descripcion" 			value="descMarca" />
+
+			<campoSalida target="fluidoAislante" 				value="fluidoAislante" />
+			<campoSalida target="denominacionInterna" 			value="denominacionInterna" />
 			
 <!-- 			<campoSalida target="marcas" 						value="marcas"> -->
 <!-- 				<campoSalida target="id" 						value="id"/> -->

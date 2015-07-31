@@ -258,7 +258,8 @@ public abstract class ComprobanteVM extends ViewModel {
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento() {
-		this.items.add(0, new ItemsOV());
+//		this.items.add(0, new ItemsOV());
+		this.items.add(new ItemsOV());
 	}
 	
 	@Command

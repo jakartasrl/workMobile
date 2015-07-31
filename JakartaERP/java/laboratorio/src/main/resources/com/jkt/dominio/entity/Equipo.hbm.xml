@@ -17,6 +17,9 @@
 
 		<property name="nroSerie" column="NRO_SERIE" />
 
+		<property name="fluidoAislante" column="FLUIDO_AISLANTE" />
+		<property name="denominacionInterna" column="DENOMINACION_INTERNA" />
+
 		<many-to-one name="cliente" column="CLIENTE_ID" class="com.jkt.erp.varios.Cliente"/>
 		<many-to-one name="marca" class="com.jkt.erp.articulos.ValoresTablas" column="MARCA_ID" cascade="none"/>
 		<many-to-one name="tipoDeProducto" class="com.jkt.erp.articulos.TipoProducto" column="TIPO_PRODUCTO_ID" cascade="none" />		

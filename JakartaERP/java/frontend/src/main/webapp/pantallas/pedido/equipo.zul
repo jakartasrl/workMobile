@@ -1,7 +1,7 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 
 	<vlayout>
-		<panel sclass="panel-maestro" title="Datos Principales de Equipo" style="overflow:hidden;padding:5px;" border="normal" width="51%">
+		<panel sclass="panel-maestro" title="Datos Principales de Equipo" style="overflow:hidden;padding:5px;" border="normal" width="100%">
 
 			<panelchildren>
 
@@ -62,6 +62,22 @@
 								<textbox width="100%" value="@bind(vm.tipoProductoOV.descripcion)" readonly="true" />					
 							</cell>
 						</row>
+
+						<row>
+							
+							<cell colspan="3">
+								<label>Denominación interna:</label>
+								<textbox value="@bind(vm.ov.denominacionInterna)"  />
+							</cell>
+							
+							<cell>
+								<label>Fluido aislante:</label>
+								<textbox value="@bind(vm.ov.fluidoAislante)"   />
+							</cell>
+							
+							
+						</row>
+
 					</rows>
 				
 				</grid>
