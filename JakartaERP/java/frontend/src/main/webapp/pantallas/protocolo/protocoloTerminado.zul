@@ -10,26 +10,28 @@
 
 					<columns>
 						<column label="Protocolo" 			width="100px"/>
-						<column label="Fecha"				width="80px"/>
+						<column label="Fecha"				width="90px"/>
 						<column label="Cliente/Sucursal" 	width="400px"/>
 						<column label="Nro Pedido"			width="100px"/>
 						<column label="Creador por"			width="150px"/>
 						<column label="Equipo"				width="300px"/>
 						<column label="Aprobado por"		width="150px"/>
-						<column label=""					width="50px"/>
+						<column label=""					width="auto"/>
 					</columns>
 			
 					<rows>
 						<template name="model">
 							<row>
-								<textbox width="100%" value="@bind(each.codigo)"   							readonly="true" sclass="campoCodigo-medium" />
-								<datebox width="100%" value="@bind(each.fechaHoraEmision)"  				buttonVisible="false" format="dd/MM/yyyy" readonly="true" />
-								<textbox width="100%" value="@bind(each.descripcionCompleta)" 			 	readonly="true" />
-								<textbox width="100%" value="@bind(each.nroPedido)" 						readonly="true" />
-								<textbox width="100%" value="@bind(each.nombreUsuarioIngresoResultado)" 	readonly="true" />
-								<textbox width="100%" value="@bind(each.nombreEquipo)" 						readonly="true" />																								
-								<textbox width="100%" value="@bind(each.nombreUsuarioIngresoAprobacion)"	readonly="true" />
-								<checkbox />
+								<label width="100%" value="@bind(each.codigo)"   							sclass="campoCodigo-medium" />
+								<datebox width="100%" value="@bind(each.fechaHoraEmision)" disabled="true" buttonVisible="false" format="dd/MM/yyyy" />
+								<label width="100%" value="@bind(each.descripcionCompleta)" 			 	/>
+								<label width="100%" value="@bind(each.nroPedido)" 						/>
+								<label width="100%" value="@bind(each.nombreUsuarioIngresoResultado)" 	/>
+								<label width="100%" value="@bind(each.nombreEquipo)" 						/>																								
+								<label width="100%" value="@bind(each.nombreUsuarioIngresoAprobacion)"	/>
+								<cell style="text-align:center">
+									<checkbox />
+								</cell>
 							</row>	
 						</template>					
 					</rows>

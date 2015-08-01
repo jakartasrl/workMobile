@@ -25,6 +25,7 @@ import org.zkoss.zk.ui.util.Clients;
 import com.google.gson.Gson;
 import com.jkt.common.Operaciones;
 import com.jkt.ov.ContainerOV;
+import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListMenuOV;
 import com.jkt.ov.MenuOV;
 
@@ -37,6 +38,7 @@ import com.jkt.ov.MenuOV;
 public class MenuVM {
 	
 	private String titulo = "Los Conce";
+	private boolean isHomePage=true;
 	
 	private List<String> news=new ArrayList<String>();
 	private String currentNew;
@@ -65,8 +67,19 @@ public class MenuVM {
 
 		loadNews();
 		
+		if(idMenu!= null && !idMenu.isEmpty()){
+			ContainerOV containerSimple =  new ContainerOV();
+			containerSimple.setString1("menu");
+			containerSimple.setString2(idMenu);
+			MenuOV menu = (MenuOV) ((ListMenuOV) Operaciones.ejecutar("TraerMenuSimple", containerSimple, ListMenuOV.class)).getList().get(0);
+			this.titulo=menu.getName();
+			this.isHomePage=false;
+		}else{
+			this.titulo="Los Conce";
+			this.isHomePage=true;
+		}
+		
 		ContainerOV container =  new ContainerOV();
-
 		if(idMenu!= null && !idMenu.isEmpty()){
 			container.setString1(idMenu);
 		}else{
@@ -83,7 +96,7 @@ public class MenuVM {
 			menuDTO = new MenuDTO();
 			
 			if((menuOV.getLink()==null || menuOV.getLink().isEmpty()) && (menuOV.getType().equals("menu_principal") || menuOV.getType().equals("menu"))){
-				menuOV.setLink("supermenu.zul?menu="+String.valueOf(menuOV.getId()));
+				menuOV.setLink("javascript:accederSubMenu('"+menuOV.getId()+"')");
 			}else{
 				menuOV.setLink("javascript:executeCommand('"+menuOV.getLink()+"')");
 			}
@@ -123,6 +136,11 @@ public class MenuVM {
 		String listJson = g.toJson(menuesPlanos);
 		
 		Clients.evalJavaScript("cargarMenues("+listJson+");");
+	}
+	
+	@Command
+	public void back(){
+		Clients.evalJavaScript("back();");
 	}
 
 	protected void loadNews() {

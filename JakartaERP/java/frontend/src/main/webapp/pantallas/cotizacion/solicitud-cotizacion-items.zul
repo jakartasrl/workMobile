@@ -5,8 +5,6 @@
 	<vlayout width="100%" style="text-align:center;">
 		<button width="30px" height="30px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarElemento')" tooltiptext="Agregar un nuevo item.">
 			 <attribute name="onClick"><![CDATA[
-					//box.pagingPosition = "top";
-					//siempre retorna a la primer pagina
 			        box.setActivePage(0);
         		]]></attribute>
 		</button>
@@ -48,19 +46,6 @@
 								<label value="Cantidad:" />
 								<textbox width="40px;" value="@bind(each.cantidad)" sclass="importe" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/>
 		
-<!-- 								<label value="Moneda:" /> -->
-<!-- 								<combobox width="80px;" model="@bind(vm.lMonedas.list)" selectedItem="@bind(each.moneda)" constraint="no empty"> -->
-<!-- 									<template name="model" var="moneda"> -->
-<!-- 										<comboitem label="@bind(moneda.descripcion)" /> -->
-<!-- 									</template> -->
-<!-- 								</combobox> -->
-		
-<!-- 								<label value="Importe:" /> -->
-<!-- 								<textbox width="50px;" style="text-align: right;" sclass="importe" value="@bind(each.importe)" onBlur="@command('actualizarImporteTotal', item=each)" constraint="no empty"/> -->
-							
-<!-- 								<label value="Importe Total:" /> -->
-<!-- 								<textbox width="50px;" sclass="importe" value="@bind(each.importeTotal)" readonly="true"/> -->
-								
 							</hlayout>
 							
 							<hlayout style="margin:10px;">
@@ -69,10 +54,7 @@
 								<button label="..." onClick="@command('actualizarPlantilla', ov=each, plantilla = each.plantilla)" />
 							</hlayout>
 							
-							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100px" 
-									toolbar="Complex" 
-				        			customConfigurationsPath="/pantallas/common/config.js"  
-				        		/>
+							<ckeditor  value="@bind(each.plantilla.descripcion)" height="100%" toolbar="Complex" customConfigurationsPath="/pantallas/common/config.js" />
 
 					</groupbox>
 

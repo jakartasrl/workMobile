@@ -9,14 +9,13 @@
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/metro.js"></script>
-	<script type="text/javascript" src="js/metro.js"></script>
 	
 	
 	
 	<style>
 	
 		.titulo{ 
-			color : white ; 
+			color : white ;
 			font-size : 50px ;
 			margin-top : 50px;
 		}
@@ -25,7 +24,25 @@
 
 	<script type="text/javascript">
 	
+		function accederSubMenu(id){
+			window.location = 'supermenu.zul?menu='+id;
+
+			historial = localStorage.getItem("historial");
+			if(historial==null){
+				historial = {};
+				historial.urls=[];
+				historial.urls.push(window.location.href);
+			}else{
+				historial = JSON.parse(historial);
+				historial.urls.push(window.location.href);
+			}
+			
+			localStorage.setItem("historial",JSON.stringify(historial));
+		
+		}
+	
 		function executeCommand(url){
+		
 			zAu.send(new zk.Event(zk.Widget.$('$btn'), 'onTest', url ), 10);
 		}
 	
@@ -57,18 +74,31 @@
 			$(document).ready(Metro.init);
 		}
 		
+		
+		function back(){
+			historial = localStorage.getItem("historial");
+			historial = JSON.parse(historial);
+			url = historial.urls.pop(); //saca el ultimo elemento
+			localStorage.setItem("historial", JSON.stringify(historial));
+			window.location.href=url;
+		}
+		
 	</script>
 	
 	
-<!-- 	CONTENT -->
-<!-- 	CONTENT -->
-<!-- 	CONTENT -->
-<!-- 	CONTENT -->
 
 	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.MenuVM')" context="menuContextualConcepto">
 	
 		<div style="text-align:center">
 			<label sclass="titulo" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" value="@bind(vm.titulo)"></label>
+		
+			<div onClick="@command('back')" class="widget widget1x1 widget_white widget_link" style="width:50px; height:50px;position: absolute;right: 25px;top: 0px;" visible="@bind(!vm.isHomePage())">
+				<div class="widget_content">
+					<div class="main" style="background-image:url('pantallas/img/metro/back.png');">
+					</div>
+				</div>
+			</div>
+
 		</div>
 	
 		<div id="footer" width="100%" style="text-align:center; height:10%; border-top-color:white; border-top-style: solid; border-top-width:1px; position:absolute; bottom:0px;">

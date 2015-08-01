@@ -14,7 +14,7 @@ import com.jkt.ov.UserOV;
 public class ServicioAcceso implements Initiator {
 
 	@Override
-	public void doInit(Page page, Map<String, Object> args) throws Exception {
+	public synchronized void doInit(Page page, Map<String, Object> args) throws Exception {
 		Session sess = Sessions.getCurrent();
 		UserOV cre = (UserOV) sess.getAttribute("userCredential");
 		if (cre == null) {

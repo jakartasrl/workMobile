@@ -2325,6 +2325,20 @@
 		
 	</operacion>
 	
+		<operacion name="TraerMenuSimple" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListMenuOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+			<campoSalida target="id" value="id" />
+			<campoSalida target="name" value="name" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 	
 	
 </entity>
