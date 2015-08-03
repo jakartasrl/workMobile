@@ -92,7 +92,7 @@
 		<div style="text-align:center">
 			<label sclass="titulo" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" value="@bind(vm.titulo)"></label>
 		
-			<div onClick="@command('back')" class="widget widget1x1 widget_white widget_link" style="width:50px; height:50px;position: absolute;right: 25px;top: 0px;" visible="@bind(!vm.isHomePage())">
+			<div onClick="@command('back')" class="widget widget1x1 widget_white widget_link" style="width:50px; height:50px;position: absolute;left: 67px;/*right: 25px;*/top: 0px;" visible="@bind(!vm.isHomePage())">
 				<div class="widget_content">
 					<div class="main" style="background-image:url('pantallas/img/metro/back.png');">
 					</div>
