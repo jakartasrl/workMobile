@@ -2,7 +2,7 @@
 
 	<vlayout>
 		
-		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Protocolos Pendientes de Aprobacion" border="normal" width="90%" >
+		<panel title="Protocolos Pendientes de Aprobacion" border="normal" >
 
 			<panelchildren>
 			

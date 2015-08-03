@@ -2,7 +2,7 @@
 
 	<vlayout>
 		
-		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="73%" >
+		<panel title="Datos Generales" border="normal" >
 
 			<panelchildren>
 			

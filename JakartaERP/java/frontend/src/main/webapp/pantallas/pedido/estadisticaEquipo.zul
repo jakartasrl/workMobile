@@ -1,6 +1,6 @@
 <zk viewModel="@id('vm') @load(viewModel)"  >
 	<vlayout>
-		<panel id="panel" sclass="panel-maestro" title="Estadistica" style="overflow:hidden;padding:5px;" border="normal" width="auto">
+		<panel id="panel" title="Estadistica" border="normal" width="auto">
 			<panelchildren id="childrenPanel222">
 				<grid width="auto" >
 					<columns>

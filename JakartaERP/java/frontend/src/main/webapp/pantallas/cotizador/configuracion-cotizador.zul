@@ -31,7 +31,7 @@
 						
 							<cell colspan="2">
 							
-							<panel sclass="panel-maestro" style="padding:5px;" title="Tipos de Cambio" border="normal" width="100%">
+							<panel title="Tipos de Cambio" border="normal" >
 							
 							<panelchildren>
 							

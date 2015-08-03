@@ -2,7 +2,7 @@
 
 	<div>
 
-		<panel sclass="panel-maestro" style="padding:5px;" title="Detalles del ítem a cotizar" border="normal" height="auto" width="100%">
+		<panel title="Detalles del ítem a cotizar" border="normal" height="auto" >
 
 			<panelchildren>
 

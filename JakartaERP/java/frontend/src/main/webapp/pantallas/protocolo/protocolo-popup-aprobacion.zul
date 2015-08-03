@@ -8,7 +8,7 @@
 	<div width="auto" height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ProtocoloPopUpVM')" id="h">
 		<vlayout>
 		
-		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="100%" >
+		<panel title="Datos Generales" border="normal" >
 
 			<panelchildren>
 			

@@ -21,8 +21,7 @@
         
 
 	<vlayout>
-		<panel sclass="panel-maestro" style="padding:5px" height="auto" width="44%" >
-<!-- 		<panel sclass="panel-maestro" style="padding:5px;"  title="Determinación" border="normal" height="auto" width="64%" > -->
+		<panel  height="auto" >
 		
 			<panelchildren>	
 			

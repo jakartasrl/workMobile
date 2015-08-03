@@ -18,7 +18,7 @@
 	</style>
 		
 	<div width="100%" >	
-		<panel sclass="panel-maestro" title="Pedido" border="normal" height="auto" width="100%">
+		<panel title="Pedido" border="normal" height="auto" >
 	
 			<panelchildren>
 	

@@ -6,6 +6,17 @@ body{
 	
 }
 
+.panel-maestro .z-panel .z-panel-noframe{
+	overflow:hidden;
+	padding:5px;
+	width:100%;
+}
+
+table{
+	table-layout:fixed;
+	line-height: normal;
+}
+
 .z-vlayout{
 	width: 100%
 }
