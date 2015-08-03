@@ -1,0 +1,59 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
+	<div>
+
+	<panel sclass="panel-maestro" style="padding:5px;"   border="normal" height="auto" width="100%">
+
+		<panelchildren>
+		
+			<grid style="border-style:none;" model="@bind(vm.lsNotas)" >
+
+				<columns>
+					<column label="Codigo" 					width="10%"	/>
+					<column label="Descripcion" 			width="40%"	/>
+					<column label="Adicional"				width="20%" />
+					<column label="Cod. Actividad" 			width="10%" />
+					<column label="Desc. Actividad" 		width="15%" />		
+					<column label="Cod. Sub. Actividad"		width="12%" />
+					<column label="Desc. Sub. Actividad" 	width="15%" />				
+					<column label="Activo" 					width="5%"	/>
+				</columns>
+			
+				<rows>
+					<template name="model" >
+					
+			    		<row sclass="fila-maestro" >
+			    	
+			    			<textbox width="100%" value="@bind(each.codigo)" />
+			    			<textbox width="100%" value="@bind(each.descripcion)" />
+			  
+			    			<textbox width="100%" value="@bind(each.adicional)" />
+			    			
+			    			<hlayout>
+			    				<textbox sclass="campoCodigo-medium" value="@bind(each.actividad.codigo)" />
+			    				<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='actividad', ov=each.actividad,titulo='Actividad')" />
+			    			</hlayout>
+			    			<label value="@bind(each.actividad.descripcion)" />
+			    		
+			    			<hlayout>	
+			    				<textbox sclass="campoCodigo-medium" value="@bind(each.subActividad.codigo)" />
+			    				<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='actividad', ov=each.subActividad,titulo='Actividad')" />
+			    			</hlayout>
+			    			<label value="@bind(each.subActividad.descripcion)" />	
+			    							    						    			
+			    			<checkbox checked="@bind(each.activo)" />
+			    			
+						</row>
+						
+					</template>
+							
+				</rows>
+				
+			</grid>
+		
+		</panelchildren>
+	</panel>
+		
+</div>
+	
+</zk>
