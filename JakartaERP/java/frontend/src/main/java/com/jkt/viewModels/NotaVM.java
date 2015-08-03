@@ -46,8 +46,12 @@ public class NotaVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Override
+	@Command
+	@NotifyChange("lsNotas")
 	public void buscar() throws JakartaException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		
+		ContainerOV containerOV = new ContainerOV();
+		containerOV.setString1("nota");
+		this.lsNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNota", containerOV, ListNotasOV.class)).getList();
 	}
 
 	@Override
@@ -77,7 +81,6 @@ public class NotaVM extends ViewModel implements IBasicOperations {
 		
 		this.lsNotas = ((ListNotasOV) Operaciones.ejecutar("TraerNota", containerOV, ListNotasOV.class)).getList();
 		
-		System.out.println();
 	}
 	
 	@Command
