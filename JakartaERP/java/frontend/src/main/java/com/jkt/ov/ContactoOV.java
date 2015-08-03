@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import com.jkt.view.ObjectView;
 
 @Data
-@EqualsAndHashCode(of={"id"})
+@EqualsAndHashCode(callSuper=true)
 public class ContactoOV extends ObjectView {
 
 	private String apellidoYNombre;
