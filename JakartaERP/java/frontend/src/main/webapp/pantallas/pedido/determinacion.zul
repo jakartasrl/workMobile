@@ -105,69 +105,28 @@
 				<listitem>
 					<listcell>
 
-						<hbox>
-							<groupbox mold="3d"  width="100%" open="true" >
-
 								<hlayout>
 									<label value="Nombre de metodo : " />
 									<textbox value="@bind(each.metodo)" />
 								</hlayout>
 								
-								<hbox style="margin-top:20px;">
 								
+								<tabbox style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+			    					<tabs >
+			        					<tab label="Variables" />
+			        					<tab label="Valores esperados" />
+									</tabs>
 									
-									<!-- Valores Esperados -->
-									
-									<vlayout style="margin-top:20px;" >
-										
-										<hlayout>
-										
-											<button
-												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
-												label="Agregar Valor"
-												onClick="@command('agregarValor', metodoActual=each)"
-												tooltiptext="Agregar nuevo valor." />
-										
-											<button 
-												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/deleteRow.png"
-												label="Borrar Valor"
-												onClick="@command('borrarValor', metodoActual=each)"
-												tooltiptext="Borrar valor." />
-									
-										</hlayout>
-									
-										<listbox model="@bind(each.valoresEsperados)"  emptyMessage="No existen Valores." width="55%" >
-											<listhead>
-												<listheader width="150px" label="Tension Desde" />
-												<listheader width="150px" label="Tension Hasta" />
-												<listheader width="150px" label="Valor Esperado" />
-											</listhead>
-											<template name="model"
-												var="valor">
-												<listitem>
-													<listcell>
-														<textbox value="@bind(valor.valorDesde)" width="100%" />
-													</listcell>
-													<listcell>
-														<textbox
-															value="@bind(valor.valorHasta)" width="100%" />
-													</listcell>
-													<listcell>
-														<textbox
-															value="@bind(valor.limite)" width="100%" />
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
-										
-										<hlayout style="margin-top:20px;"  >
+									<tabpanels>
+
+									    <tabpanel>
+											<hlayout>
 									
 											<button
 												style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
 												label="Agregar Variable"
 												onClick="@command('agregarVariable', metodoActual=each)"
 												tooltiptext="Agregar nueva variable." />
-											<!-- Variables -->
 	
 											<button
 												style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/deleteRow.png"
@@ -177,7 +136,6 @@
 
 										</hlayout> 
 
-										<!-- Variables -->
 										<radiogroup id="${id}" />
 										<listbox model="@bind(each.variables)" mold="paging" pageSize="5" emptyMessage="No existen Variables." >
 										
@@ -210,13 +168,51 @@
 												</listitem>
 											</template>
 										</listbox>
-
-										</vlayout>
-								</hbox>
-
-							</groupbox>
-						</hbox>
-
+										</tabpanel>
+										
+										<tabpanel>
+											<hlayout>
+											
+												<button
+													style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/addSmall.png"
+													label="Agregar Valor"
+													onClick="@command('agregarValor', metodoActual=each)"
+													tooltiptext="Agregar nuevo valor." />
+											
+												<button 
+													style="margin-bottom:2px;margin-left:3px" image="/pantallas/icons/deleteRow.png"
+													label="Borrar Valor"
+													onClick="@command('borrarValor', metodoActual=each)"
+													tooltiptext="Borrar valor." />
+										
+											</hlayout>
+										
+											<listbox model="@bind(each.valoresEsperados)"  emptyMessage="No existen Valores." width="55%" >
+												<listhead>
+													<listheader width="150px" label="Tension Desde" />
+													<listheader width="150px" label="Tension Hasta" />
+													<listheader width="150px" label="Valor Esperado" />
+												</listhead>
+												<template name="model"
+													var="valor">
+													<listitem>
+														<listcell>
+															<textbox value="@bind(valor.valorDesde)" width="100%" />
+														</listcell>
+														<listcell>
+															<textbox
+																value="@bind(valor.valorHasta)" width="100%" />
+														</listcell>
+														<listcell>
+															<textbox
+																value="@bind(valor.limite)" width="100%" />
+														</listcell>
+													</listitem>
+												</template>
+											</listbox>
+										</tabpanel>
+									</tabpanels>
+						</tabbox>
 					</listcell>
 				</listitem>
 

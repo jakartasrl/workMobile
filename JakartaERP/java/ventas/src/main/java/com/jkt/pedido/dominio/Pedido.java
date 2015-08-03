@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.ComprobanteVenta;
 import com.jkt.dominio.IDescriptible;
@@ -18,6 +19,7 @@ import com.jkt.presupuesto.dominio.Presupuesto;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class Pedido extends ComprobanteVenta implements IDescriptible{
 
 	private ListaPrecios listaPrecios;

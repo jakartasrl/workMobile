@@ -19,6 +19,25 @@ import com.jkt.erp.varios.Cliente;
  */
 public class Equipo  extends Descriptible {
 
+	private String fluidoAislante;
+	private String denominacionInterna;
+	
+	public String getFluidoAislante() {
+		return fluidoAislante;
+	}
+
+	public void setFluidoAislante(String fluidoAislante) {
+		this.fluidoAislante = fluidoAislante;
+	}
+
+	public String getDenominacionInterna() {
+		return denominacionInterna;
+	}
+
+	public void setDenominacionInterna(String denominacionInterna) {
+		this.denominacionInterna = denominacionInterna;
+	}
+
 	public Equipo() {
 		this.setActivo(true);
 	}

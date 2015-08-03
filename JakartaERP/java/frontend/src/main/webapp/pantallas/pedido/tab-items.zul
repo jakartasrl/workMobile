@@ -38,9 +38,9 @@
 
 	</hlayout>
 
-	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun.">
+	<listbox id="box" multiple="false" checkmark="false" model="@bind(vm.items)" mold="paging" pageSize="1" emptyMessage="No existen items aun." >
 
-		<listhead>
+ <listhead>
 			<listheader />
 		</listhead>
 

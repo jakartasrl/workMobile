@@ -53,7 +53,9 @@ public class RecuperarTareasPorSector extends Operation {
 		Criteria criteria = crearCriterio(TareaPedido.class);
 		
 		criteria.add(Restrictions.eq("sector.id", idSector));
-		criteria.add(Restrictions.isNotNull("pedido"));// eq("sector.id", idSector));
+		
+		//criteria.add(Restrictions.isNotNull("pedido"));
+		// eq("sector.id", idSector));
 		
 		
 		Disjunction or = null;

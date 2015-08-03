@@ -1,13 +1,8 @@
 <zk viewModel="@id('vm') @load(viewModel)">
 
 	<hlayout>
-		<button width="20px" height="20px" style="margin-bottom:2px;margin-left:5px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarDeterminacion')" >
-			 <attribute name="onClick"><![CDATA[
-					listbox.setActivePage(0);
-        		]]></attribute>
-		</button>
-		
-		<label style="margin-left:5px;" value="Agregar Determinación"></label>
+		<button width="20px" height="20px" style="margin-bottom:2px;margin-left:10px;" image="/pantallas/icons/addSmall.png" label="" onClick="@command('agregarDeterminacion')" tooltiptext="Agregar Determinación" />
+		<button width="20px" height="20px" style="margin-bottom:2px;margin-left:10px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('eliminarDeterminacion' , indice = listbox.activePage  )" tooltiptext="Eliminar Determinación" />
 	</hlayout>
 
 	<listbox id="listbox" model="@bind(vm.protocoloOV.determinaciones)" emptyMessage="No existen Determinaciones." mold="paging" pageSize="1" width="100%" >

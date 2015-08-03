@@ -76,8 +76,7 @@ public abstract class ComprobanteVM extends ViewModel {
 	
 	protected ListDescriptibleOV contactos = new ListDescriptibleOV();
 	protected List<DescriptibleOV> contactosSeleccionados =  new ArrayList<DescriptibleOV>();
-//	protected DescriptibleOV contactoSeleccionado = new DescriptibleOV();
-	
+
 	protected List<ArchivoOV> archivos = new ArrayList<ArchivoOV>();
 	private DefaultTreeModel<ArchivoOV> arbolArchivos;
 	private DefaultTreeModel<NotaOV> arbolNotas;
@@ -258,7 +257,8 @@ public abstract class ComprobanteVM extends ViewModel {
 	@Command
 	@NotifyChange("items")
 	public void agregarElemento() {
-		this.items.add(0, new ItemsOV());
+//		this.items.add(0, new ItemsOV());
+		this.items.add(new ItemsOV());
 	}
 	
 	@Command

@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import lombok.Data;
+
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -17,8 +19,10 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
+
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.laboratorio.dominio.Protocolo;
@@ -392,6 +396,17 @@ public class ProtocoloVM extends ViewModel implements IBasicOperations {
 	@Command
 	public synchronized void agregarDeterminacion() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException{
 		openComplexHelper("determinacion", String.valueOf(idLaboratorio), determinacionOV, "traerDeterminacion", "Determinaciones", "Código", "Descripción",false, "","");
+	}
+	
+	@Command
+	@NotifyChange("protocoloOV")
+	public void eliminarDeterminacion(@BindingParam("indice") int i){
+		List<DeterminacionOV> determinaciones = this.protocoloOV.getDeterminaciones();
+		if(determinaciones.isEmpty()){
+			Messagebox.show("No existen determinaciones a borrar");
+			return;
+		}
+		determinaciones.remove(i);
 	}
 	
 	public void traerDeterminacion(){

@@ -34,7 +34,7 @@
 <!-- 	                <row onDoubleClick="@command('obtenerElemento', objeto=each , window=modalDialog)" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" > -->
 <!-- 	                    <label value="@load(each.id)" /> -->
 	                    <label hflex="1" value="@load(each.codigo)" />
-	                    <label hflex="2" value="@load(each.descripcion)" />
+	                    <label hflex="2" maxlength="500" value="@load(each.descripcion)" tooltiptext="@load(each.descripcion)"/>
 	                    <label hflex="2" value="@load(each.campoAdicional1)" unless="${empty each.campoAdicional1 }"/>
 	                    <label hflex="2" value="@load(each.campoAdicional2)" unless="${empty each.campoAdicional2 }"/>
 	                </row>

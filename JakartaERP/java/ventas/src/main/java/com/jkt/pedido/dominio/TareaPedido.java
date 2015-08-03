@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.Sector;
@@ -14,6 +15,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.grafo.DatoNodo;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class TareaPedido extends DatoNodo {
 	
 	
@@ -76,23 +78,23 @@ public class TareaPedido extends DatoNodo {
 	private long idSector;
 	private Date fechaFiltro1 , fechaFiltro2;
 	
-	public boolean equals(Object other) {
-		if (this == other) return true;
-		if ( !(other instanceof TareaPedido) ) return false;
-		
-		final TareaPedido entity = (TareaPedido) other;
-		
-		if (entity.getId()==0) return false;
-		
-		if ( !(entity.getId()==getId())) return false;
-		
-		return true;
-	}
-	
-	public int hashCode() {
-		int result;
-		result = (int) (29 * getId());
-		return result;
-	}
+//	public boolean equals(Object other) {
+//		if (this == other) return true;
+//		if ( !(other instanceof TareaPedido) ) return false;
+//		
+//		final TareaPedido entity = (TareaPedido) other;
+//		
+//		if (entity.getId()==0) return false;
+//		
+//		if ( !(entity.getId()==getId())) return false;
+//		
+//		return true;
+//	}
+//	
+//	public int hashCode() {
+//		int result;
+//		result = (int) (29 * getId());
+//		return result;
+//	}
 	
 }

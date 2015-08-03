@@ -291,10 +291,7 @@ public abstract class ViewModel {
 		Map<String,Object> mapa = (Map<String, Object>) sess.getAttribute("ventanas");
 		mapa.put(StringUtils.substring(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath(), 1), this);
 		sess.setAttribute("ventanas", mapa);
-//		Executions.sendRedirect("../../supermenu.zul");
 		Executions.sendRedirect((String) sess.getAttribute("urlAnterior"));
-//		sess.setAttribute("urlAnterior", urlActual);
-		
 	}
 
 	@Command

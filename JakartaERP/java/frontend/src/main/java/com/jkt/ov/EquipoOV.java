@@ -27,6 +27,9 @@ public class EquipoOV extends ObjectView {
 	private TipoProductoOV tipoProductoOV;
 	private String nroSerie;
 	
+	private String fluidoAislante;
+	private String denominacionInterna;
+	
 	private Long idMarca;
 	private String descMarca;
 

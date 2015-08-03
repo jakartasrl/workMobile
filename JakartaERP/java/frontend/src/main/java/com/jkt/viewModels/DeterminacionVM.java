@@ -13,7 +13,6 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
@@ -227,10 +226,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
-	@NotifyChange({"determinacion"})
 	public void nuevo() throws JakartaException {
-		this.determinacion = new DeterminacionOV();
-		this.init(this.laboratorioParametroKey);
 		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 
@@ -384,7 +380,6 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 	}
 
 	@Command
-	@NotifyChange("determinacion")
 	public void borrarValor(@BindingParam("metodoActual") MetodoOV m){
 	
 		if (m.getValoresEsperados().isEmpty()) {
@@ -393,10 +388,11 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		}
 		m.getValoresEsperados().remove(m.getValoresEsperados().size()-1);
 		
+		BindUtils.postNotifyChange(null,null,m,"valoresEsperados");
+		
 	}
 
 	@Command
-	@NotifyChange("determinacion")
 	public void borrarVar(@BindingParam("metodoActual") MetodoOV m){
 		
 		if (m.getVariables().isEmpty()) {
@@ -405,25 +401,25 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 		}
 		m.getVariables().remove(m.getVariables().size()-1);
 		
+		BindUtils.postNotifyChange(null,null,m,"variables");
+
 	}
 	
 	@Command("agregarValor")
-	@NotifyChange("determinacion")
 	public void agregarValor(@BindingParam("metodoActual") MetodoOV m){
 		
 		ValorEsperadoOV valor = new ValorEsperadoOV();
 		m.getValoresEsperados().add(valor);
+		
+		BindUtils.postNotifyChange(null,null,m,"valoresEsperados");
 
 	}
 	
 	@Command("agregarVariable")
-	@NotifyChange("determinacion")
 	public void agregarVariable(@BindingParam("metodoActual") MetodoOV m){
-		
 		VariableOV variable = new VariableOV();
-//		variable.setCodigo("Nueva Variable");
 		m.getVariables().add(variable);
-		
+		BindUtils.postNotifyChange(null,null,m,"variables");
 	}
 	
 	private List<DescriptibleOV> cargarListFormato() {
@@ -563,8 +559,7 @@ public class DeterminacionVM extends ViewModel implements IBasicOperations {
 
 	@Override
 	public void cancelarCustomizado() throws JakartaException {
-		this.nuevo();
-		BindUtils.postGlobalCommand(null, null,retrieveMethod(), null);
+		Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
 	}
 
 }
