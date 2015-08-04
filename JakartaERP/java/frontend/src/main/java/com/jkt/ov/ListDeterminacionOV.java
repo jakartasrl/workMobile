@@ -6,7 +6,7 @@ import java.util.List;
 import com.jkt.view.ListOV;
 
 /**
- * Implementación de ListObjectView
+ * Implementacion de ListObjectView
  * 
  * @author Leonel Suarez - Jakarta SRL
  */
