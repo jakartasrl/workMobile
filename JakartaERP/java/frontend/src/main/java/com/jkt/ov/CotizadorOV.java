@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class CotizadorOV extends DescriptibleOV {
 	
 	private String nro;

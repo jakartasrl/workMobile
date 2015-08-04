@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Random;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import org.apache.velocity.runtime.directive.Foreach;
 import org.zkoss.bind.BindUtils;
@@ -46,6 +47,7 @@ import com.jkt.ov.tree.AdvancedTreeModel;
 import com.jkt.ov.tree.NodoTitulos;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class ModeloCotizadorVM extends ViewModel implements IBasicOperations {
 		
 	private String titulo = "Modelos de Cotizador";
