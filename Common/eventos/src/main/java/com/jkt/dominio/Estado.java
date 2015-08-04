@@ -1,6 +1,5 @@
-package com.jkt.grafo;
+package com.jkt.dominio;
 
-import com.jkt.dominio.Descriptible;
 
 /**
  * Estado perteneciente a la maquina de estados
@@ -8,5 +7,10 @@ import com.jkt.dominio.Descriptible;
  * @author Leonel Suarez - Jakarta SRL
  */
 public class Estado extends Descriptible {
+
+	public Estado(String descripcion) {
+		super();
+		this.setDescripcion(descripcion);
+	}
 
 }
