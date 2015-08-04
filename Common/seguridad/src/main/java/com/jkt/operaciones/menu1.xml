@@ -53,8 +53,12 @@
 			<elemento codigo="021" orden="24" name="Visor Interactivo" 	img="pantallas/img/widget_char.png" 	size="4x2" theme="darkblue" link="pantallas/index/visor-agenda.zul" type="submenu" vm="com.jkt.viewModels.VisorAgendaPorPedidoVM" />
 		</elemento>
 		
-		<elemento codigo="036" orden="36" name="Actividad" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarActividad-actividad" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM" />
-		<elemento codigo="037" orden="37" name="Notas" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/index/index-nota.zul" 											type="submenu"  vm="com.jkt.viewModels.NotaVM" />
+		<elemento codigo="036" orden="36" name="Actividad" 			img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarActividad-actividad" 		type="submenu"  vm="com.jkt.viewModels.GenericListVM" />
+		<elemento codigo="037" orden="37" name="Notas" 				img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/index/index-nota.zul" 												type="submenu"  vm="com.jkt.viewModels.NotaVM" />
+		<elemento codigo="038" orden="38" name="Representantes" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/index/index-representante.zul" 										type="submenu"  vm="com.jkt.viewModels.RepresentanteVM" />
+		<elemento codigo="039" orden="39" name="Tipo de Contacto"	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/generic/genericList.zul?metadata=guardarTipoContacto-tipoContacto" 	type="submenu"  vm="com.jkt.viewModels.GenericListVM" />
+		<elemento codigo="040" orden="40" name="Vendedores" 		img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/index/index-vendedor.zul" 											type="submenu"  vm="com.jkt.viewModels.VendedorVM" />
+		<elemento codigo="041" orden="41" name="Condición de Pago" 	img="pantallas/img/widget_dialog.png" 	size="2x2" theme="darkblue" link="pantallas/index/index-condicionPago.zul" 										type="submenu"  vm="com.jkt.viewModels.CondicionPagoVM" />
 		
 	</elemento>
 	
