@@ -2352,7 +2352,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="TraerNota" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListNotasOV">
+	<operacion name="TraerNota" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListaClienteOV">
 		
 		<input>
 			<campoEntrada propertyOV="string1" name="entidad"/>
@@ -2530,6 +2530,41 @@
 			</campoEntrada>
  			
 		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerCliente" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListaClienteOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+			<campoSalida value="id" 				target="id" />
+			<campoSalida value="codigo" 			target="codigo" />
+			<campoSalida value="telefono" 			target="telefono" />
+			<campoSalida value="fax" 				target="fax" />
+			<campoSalida value="mail" 				target="mail" />
+			<campoSalida value="nroProveedor" 		target="nroProveedor" />
+			<campoSalida value="activo" 			target="activo" />
+
+			<campoSalida value="idSujetoImpositivo" target="sujetoImpositivo.id" />
+			<campoSalida value="razonSocial" 		target="sujetoImpositivo.razonSocial" />
+			<campoSalida value="cuit" 				target="sujetoImpositivo.cuit" />
+			<campoSalida value="personaJuridica" 	target="sujetoImpositivo.isPersonaJuridica" />
+			
+			<campoSalida value="direccion" 			target="sujetoImpositivo.direccionLegal.direccion" />
+			<campoSalida value="codigoPostal" 		target="sujetoImpositivo.direccionLegal.codigoPostal" />
+			<campoSalida value="localidad" 			target="sujetoImpositivo.direccionLegal.localidad" />
+			<campoSalida value="idProvincia" 		target="sujetoImpositivo.direccionLegal.provincia.id" />
+			<campoSalida value="codProvincia" 		target="sujetoImpositivo.direccionLegal.provincia.codigo" />
+			<campoSalida value="descProvincia" 		target="sujetoImpositivo.direccionLegal.provincia.descripcion" />
+			<campoSalida value="idPais" 			target="sujetoImpositivo.direccionLegal.pais.id" />
+			<campoSalida value="codPais" 			target="sujetoImpositivo.direccionLegal.pais.codigo" />
+			<campoSalida value="descPais" 			target="sujetoImpositivo.direccionLegal.pais.descripcion" />
+		</output>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
