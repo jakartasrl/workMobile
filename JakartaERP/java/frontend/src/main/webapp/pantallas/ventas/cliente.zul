@@ -2,7 +2,7 @@
 
 	<div>
 
-		<panel title="Datos del Cliente" border="normal">
+		<panel title="Datos del Cliente" border="normal" style="margin-top:10px;" >
 
 			<panelchildren>
 
@@ -36,108 +36,35 @@
 
 		</panel>
 
-		<panel title="Datos Legales / Impositivos" border="normal"
-			style="margin-top:10px;">
-
+		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
 			<panelchildren>
-
-				<grid width="100%" height="100%">
-
-					<columns>
-						<column width="55px" />
-						<column width="150px" />
-						<column width="120px" />
-						<column width="px" />
-					</columns>
-
-					<rows>
-
-						<row>
-							<label value="CUIT : " />
-							<textbox sclass="campoCodigo-large" value="@bind(vm.cliente.cuit)" />
-							<label value="Persona Juridica : " />
-							<checkbox sclass="campoCodigo-small" checked="@bind(vm.cliente.personaJuridica)" />
-						</row>
-
-						<row>
-
-							<cell colspan="4" >
-							<panel title="Domicilio Fiscal" border="normal">
-
-								<panelchildren>
-
-									<grid width="100%" height="100%">
-
-										<columns>
-											<column width="70px"  />
-											<column width="110px" />
-											<column width="255px" />
-											<column width="70px" />
-											<column width="110px" />
-											<column width="255px" />
-											<column width="70px" />
-											<column width="255px" />
-										</columns>
-
-										<rows>
-
-											<row>
-												<label value="Dirección : " />
-												<cell colspan="2">
-													<textbox width="100%" value="@bind(vm.cliente.direccion)" />
-												</cell>
-												<label value="Localidad : " />
-												<cell colspan="2">
-													<textbox width="100%" value="@bind(vm.cliente.localidad)" />
-												</cell>
-												<label value="Cod. Postal : " />
-												<textbox sclass="campoCodigo-small" value="@bind(vm.cliente.codigoPostal)" />
-											</row>
-											
-											<row>
-												<label value="País : " />
-												<hlayout>
-													<textbox sclass="campoCodigo-medium" value="@bind(vm.pais.codigo)" onBlur="@command('validarCampo', clase='pais', codigo=self.value, ov=vm.pais, post='')" />
-													<button label="..." onClick="@command('openHelper', clase='pais',  ov=vm.pais , post='' )" />
-												</hlayout>
-												<textbox width="100%" value="@bind(vm.pais.descripcion)" />											
-												<label value="Provincia : " />
-												<hlayout>
-													<textbox sclass="campoCodigo-medium" value="@bind(vm.provincia.codigo)" onBlur="@command('validarCampo', clase='provincia', codigo=self.value, ov=vm.provincia, post='')" />
-													<button label="..." onClick="@command('openHelper', clase='provincia',  ov=vm.provincia , oidEntidadMaestra= vm.pais.id, post='' )" />
-												</hlayout>
-												<textbox width="100%" value="@bind(vm.provincia.descripcion)" />
-											</row>
-											
-											<row>
-												<label value="Teléfonos : " />
-												<cell colspan="2">
-													<textbox width="100%" value="@bind(vm.cliente.telefono)" />
-												</cell>
-												<label value="Fax : " />
-												<cell colspan="2">
-													<textbox sclass="campoCodigo-medium" value="@bind(vm.cliente.fax)" />
-												</cell>
-												<label value="E-mail : " />
-												<textbox width="100%" value="@bind(vm.cliente.mail)" />
-											</row>
-
-										</rows>
-
-									</grid>
-
-								</panelchildren>
-
-							</panel>
-							</cell>
-						</row>
-
-					</rows>
-
-				</grid>
-
+				<tabbox id="contenidoTabs" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+			    	<tabs id="tabs">
+			        	<tab id="datosLegalesImpositivos" 	label="Datos Legales / Impositivos" />
+			        	<tab id="datosComerciales" 			label="Datos Comerciales" />
+			        	<tab id="sucursales" 				label="Sucursales" />
+			    	</tabs>
+		
+			    	<tabpanels>
+			    			        	
+			        	<tabpanel>
+							<include id="datosLegalesImpositivosContent" 	hflex="1" src="/pantallas/ventas/datosLegalesImpositivos.zul" viewModel="${vm}" />
+			        	</tabpanel>
+			        
+			        	<tabpanel>
+							<include id="datosComercialesContent" 			hflex="1" src="/pantallas/ventas/datosComerciales.zul" viewModel="${vm}" />
+						</tabpanel>
+					
+			        	<tabpanel>
+							<include id="sucursalesContent" 				hflex="1" src="/pantallas/ventas/sucursales.zul" viewModel="${vm}" />
+						</tabpanel>
+					
+			    	</tabpanels>
+			    
+				</tabbox>
+			
 			</panelchildren>
-
+		
 		</panel>
 
 	</div>

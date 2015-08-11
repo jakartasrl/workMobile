@@ -2,8 +2,8 @@ package com.jkt.ov;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.Data;
-import com.jkt.erp.varios.InscripcionImpositiva;
 
 @Data
 public class SujetoImpositivoOV extends DescriptibleOV {
@@ -14,6 +14,7 @@ public class SujetoImpositivoOV extends DescriptibleOV {
 	private DireccionOV direccionLegal;
 	private boolean local;
 	private String cuit;
-	private List<InscripcionImpositiva> inscripcionesImpositivas=new ArrayList<InscripcionImpositiva>();
+	
+	private List<InscripcionImpositivaOV> inscripcionesImpositivas=new ArrayList<InscripcionImpositivaOV>();
 
 }

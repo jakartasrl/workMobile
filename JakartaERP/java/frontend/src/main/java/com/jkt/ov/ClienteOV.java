@@ -3,17 +3,7 @@ package com.jkt.ov;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import lombok.Data;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.jkt.erp.varios.ClienteClasificador;
-import com.jkt.erp.varios.ClienteSucursal;
-import com.jkt.erp.varios.EsquemaPreciosCliente;
-import com.jkt.varios.dominio.CondPago;
-import com.jkt.varios.dominio.Idioma;
 
 @Data
 public class ClienteOV extends DescriptibleOV {
@@ -32,6 +22,8 @@ public class ClienteOV extends DescriptibleOV {
 	private boolean local;
 	private String cuit;
 	
+	private List<InscripcionImpositivaOV> inscripcionesImpositivas = new ArrayList<InscripcionImpositivaOV>();
+	
 	//Datos de la direccion
 	private String direccion;
 	private String codigoPostal;
@@ -46,31 +38,25 @@ public class ClienteOV extends DescriptibleOV {
 	private String codPais;
 	private String descPais;
 	
+	private CondPagoOV condPago;
+	private long idCondPago;
+	private String codCondPago;
+	private String descCondPago;
+	
 	private RepresentanteOV representante;
+	private long idRepresentante;
+	private String codRepresentante;
+	private String descRepresentante;
+	
 	private VendedorOV vendedor;
+	private long idVendedor;
+	private String codVendedor;
+	private String descVendedor;
 	
-	private Idioma idioma;
+	private List<ClienteSucursalOV> listaSucursales=new ArrayList<ClienteSucursalOV>();
 	
-	private List<EsquemaPreciosCliente> listaEsquemaPrecios=new ArrayList<EsquemaPreciosCliente>();
+	private List<DomicilioEntregaOV> domiciliosDeEntrega=new ArrayList<DomicilioEntregaOV>();
 	
-	@NotEmpty(message="Es necesario que el cliente tenga como minimo una sucursal.")
-	private List<ClienteSucursal> listaSucursales=new ArrayList<ClienteSucursal>();
-	
-	private List<ClienteClasificador> listaClasificadores=new ArrayList<ClienteClasificador>();
-	
-	@NotNull(message="El cliente debe tener una condicion de pago.")
-	private CondPago condPago;
-	
-	public String getDescripcion(){
-		return sujetoImpositivo.getRazonSocial();
-	}
-	
-	public String getAdicional1() {
-		return this.getTelefono();
-	}
-
-	public String getAdicional2() {
-		return this.getFax();
-	}
+	private List<ContactoOV> contactos=new ArrayList<ContactoOV>();
 
 }

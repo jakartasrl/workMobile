@@ -1,0 +1,85 @@
+<zk viewModel="@id('vm') @load(viewModel)" >
+
+	<div>
+
+		<panel title="Datos Generales" border="normal" >
+
+			<panelchildren>
+
+				<grid width="100%" height="100%" >
+				
+					<columns>
+						<column width="100px" /> 
+						<column width="255px" />
+						<column width="80px" />
+						<column width="255px" />
+						<column width="50px" />
+						<column width="20px" />
+					</columns>
+					
+					<rows>
+						<row>
+							<label value="Código : " />
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.impuesto.codigo)" />
+							<label value="Descripción : " />
+							<textbox sclass="campoCodigo-vlarge" value="@bind(vm.impuesto.descripcion)" width="100%"/>
+			    			<label value="Activo : " />
+			    			<checkbox checked="@bind(vm.impuesto.activo)" />
+						</row>
+						<row>
+							<label value="Comportamiento : " />
+			    			<combobox  model="@bind(vm.comportamientos)" selectedItem="@bind(vm.comportamientoSeleccionado)" width="100%" height="auto" >
+								<template name="model" var="comportamiento" >
+									<comboitem label="@bind(comportamiento.descripcion)" value="@bind(comportamiento.descripcion)" />											
+								</template>										
+							</combobox>
+						</row>
+
+					</rows>
+				
+				</grid>
+			
+			</panelchildren>
+			
+		</panel>
+		
+<!-- 		<panel title="Categorías de Inscripción" style="margin-top:5px;" border="normal" > -->
+
+<!-- 			<panelchildren> -->
+			
+		<groupbox width="100%" style="margin-top:10px;">
+								
+			<caption label="Categorías de Inscripción" />
+		
+			<button style="margin-bottom:2px;margin-left:3px;margin-top:3px;"
+				image="/pantallas/icons/addSmall.png" label=""
+				onClick="@command('agregarCategoria')"
+				tooltiptext="Agregar Categoria" >
+			</button>
+		
+			<grid model="@bind(vm.categorias)" style="margin-top:2px;" width="450px" emptyMessage="No hay categorias." >
+				<columns>
+					<column width="100px" 	label="Codigo" /> 
+					<column width="255px" 	label="Descripcion" />
+					<column width="45px" 	label="Activo" />
+				</columns>
+				<rows>
+					<template name="model">
+						<row>
+							<textbox 	width="100%" value="@bind(each.codigo)" />
+							<textbox 	width="100%" value="@bind(each.descripcion)" />
+							<checkbox 	width="100%" checked="@bind(each.activo)" />
+						</row>
+					</template>
+				</rows>
+			</grid>
+			
+		</groupbox>
+
+<!-- 		</panelchildren> -->
+		
+<!-- 		</panel> -->
+				
+	</div>
+	
+</zk>

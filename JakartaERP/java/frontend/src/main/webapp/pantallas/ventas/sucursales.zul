@@ -1,0 +1,90 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<div>
+	
+		<button style="margin-bottom:2px;margin-left:3px;margin-top:2px;"
+				image="/pantallas/icons/addSmall.png" label=""
+				onClick="@command('agregarSucursal')"
+				tooltiptext="Agregar Sucursal." >
+		</button>
+	
+		<grid model="@bind(vm.cliente.listaSucursales)" width="100%" height="100%" emptyMessage="No hay Sucursales." >
+
+			<columns>
+				<column width="100px" label="Nro. Sucursal" />
+				<column width="350px" label="Descripción" />
+				<column width="255px" label="Dirección" />
+				<column width="150px" label="Localidad" />
+				<column width="90px"  label="Cód. Postal" />
+				<column width="150px" label="Provincia"	/>
+				<column width="150px" label="Telefonos"	/>
+				<column width="200px" label="Domicilio Entrega Facturas" />
+				<column width="255px" label="Vendedor" />				
+				<column width="255px" label="Representante" />
+				<column width="60px"  label="Activo" />
+				<column width="60px"  label="Borrar" />
+			</columns>
+
+			<rows>
+				<template name="model">
+				<row>
+					<textbox width="100%" value="@bind(each.numero)" />
+					<textbox width="100%" value="@bind(each.descripcion)" />
+					<textbox width="100%" value="@bind(each.direccion)" />
+					<textbox width="100%" value="@bind(each.localidad)" />
+					<textbox width="100%" value="@bind(each.codigoPostal)" />
+					<textbox width="100%" value="@bind(each.descProvincia)" />
+					<textbox width="100%" value="@bind(each.telefono)" />
+					<textbox width="100%" value="@bind(each.domicilioEntregaDeFactura)" />
+<!-- 					<textbox width="100%" value="@bind(each.descVendedor)" /> -->
+
+					<hlayout width="100%">
+						<textbox sclass="campoCodigo-small" value="@bind(each.vendedor.codigo)" onBlur="@command('validarCampo', clase='vendedor', codigo=self.value, ov=each.vendedor, post='')" />
+						<button label="..." onClick="@command('openHelper', clase='vendedor',  ov=each.vendedor , post='' )" />
+						<textbox sclass="campoCodigo-vlarge" value="@bind(each.vendedor.descripcion)" />
+					</hlayout>
+						
+<!-- 					<textbox width="100%" value="@bind(each.descRepresentante)" /> -->
+
+					<hlayout width="100%">
+						<textbox sclass="campoCodigo-small" value="@bind(each.representante.codigo)" onBlur="@command('validarCampo', clase='representante', codigo=self.value, ov=each.representante, post='')" />
+						<button label="..." onClick="@command('openHelper', clase='representante',  ov=each.representante , post='' )" />
+						<textbox sclass="campoCodigo-vlarge" value="@bind(each.representante.descripcion)" />
+					</hlayout>
+					
+					<checkbox checked="@bind(each.activo)" />
+					<button style="margin-bottom:2px;margin-left:3px;" image="/pantallas/icons/deleteRow.png" label="" onClick="@command('borrarSucursal', sucursal=each )" />							
+				</row>
+				</template>
+			</rows>
+			
+		</grid>
+		
+		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+			<panelchildren>
+				<tabbox id="contenidoTabs" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+			    	<tabs id="tabs">
+			        	<tab id="domiciliosDeEntrega" 	label="Domicilios de Entrega" />
+			        	<tab id="contactos" 			label="Contactos" />
+			    	</tabs>
+		
+			    	<tabpanels>
+			    			        	
+			        	<tabpanel>
+							<include id="domiciliosDeEntregaContent" 	hflex="1" src="/pantallas/ventas/domiciliosDeEntrega.zul" viewModel="${vm}" />
+			        	</tabpanel>
+			        
+			        	<tabpanel>
+							<include id="contactosContent" 				hflex="1" src="/pantallas/ventas/contactos.zul" viewModel="${vm}" />
+						</tabpanel>
+					
+			    	</tabpanels>
+			    
+				</tabbox>
+			
+			</panelchildren>
+		</panel>
+	
+	</div>
+	
+</zk>
