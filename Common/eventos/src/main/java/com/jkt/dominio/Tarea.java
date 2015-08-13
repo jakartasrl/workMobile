@@ -14,8 +14,9 @@ import com.jkt.excepcion.JakartaException;
  * @author Leonel Suarez - Jakarta SRL
  */
 @Data
-public abstract class Tarea {
+public abstract class Tarea extends PersistentEntity {
 	
+	private String nombre;
 	private Estado estadoActual;
 	private MaquinaEstado maquinaEstado;
 	

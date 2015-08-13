@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.IDetalle;
+import com.jkt.erp.articulos.Producto;
 
 /**
  * Representa una Determinación, o ensayo, que forma parte de un Análisis. Se
@@ -26,6 +27,8 @@ public class Determinacion extends Descriptible implements IDetalle {
 	private List<Metodo> metodos = new ArrayList<Metodo>();
 	private List<Variable> variables = new ArrayList<Variable>();
 
+	private Producto articuloRelacionado;
+	
 	public void removeMetodo(Metodo aValue) {
 		aValue.setActivo(false);
 	}
