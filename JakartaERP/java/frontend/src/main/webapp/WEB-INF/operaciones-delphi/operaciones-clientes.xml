@@ -267,15 +267,15 @@
 			<campoSalida value="Activo" target="isActivo" />
 		</output>
 		
-		<output name="archivos" tableName="mtArchivos">
-			<campoSalida value="oid_arch" target="id" />
-			<campoSalida value="oid_Cliente" target="cliente.id" />
-			<campoSalida value="fecha_subida" target="fechaDeSubidaPlana" />
-			<campoSalida value="oid_usu" target="identificadorDeUsuario" />
-			<campoSalida value="usuario" target="nombreUsuario" />
-			<campoSalida value="comentario" target="comentario" />
-			<campoSalida value="archivo" target="nombreCompleto" />
-		</output>
+<!-- 		<output name="archivos" tableName="mtArchivos"> -->
+<!-- 			<campoSalida value="oid_arch" target="id" /> -->
+<!-- 			<campoSalida value="oid_Cliente" target="cliente.id" /> -->
+<!-- 			<campoSalida value="fecha_subida" target="fechaDeSubidaPlana" /> -->
+<!-- 			<campoSalida value="oid_usu" target="identificadorDeUsuario" /> -->
+<!-- 			<campoSalida value="usuario" target="nombreUsuario" /> -->
+<!-- 			<campoSalida value="comentario" target="comentario" /> -->
+<!-- 			<campoSalida value="archivo" target="nombreCompleto" /> -->
+<!-- 		</output> -->
 
 		<transformer clase="com.jkt.transformers.ParalelResponseListenerTransformer"></transformer>
 

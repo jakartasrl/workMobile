@@ -42,12 +42,16 @@ public class TraerCliente extends Operation {
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
 		Cliente cliente = (Cliente) obtener(Cliente.class, (String) aParams.get(IDENTIFICADOR));
-		mostrarCliente(cliente);
-		mostrarClasificadores(cliente);
+//		mostrarCliente(cliente);
+//		mostrarClasificadores(cliente);
 		mostrarInscripciones(cliente);
 		mostrarSucursales(cliente);
 		
-		notificarObjetos(WRITER_ARCHIVOS, cliente.getArchivos());
+//		notificarObjetos(WRITER_ARCHIVOS, cliente.getArchivos());
+		
+		//Creado por ER
+		notificarObjeto("", cliente);
+		
 	}
 	
 	
@@ -65,12 +69,10 @@ public class TraerCliente extends Operation {
 	 */
 	private void mostrarSucursales(Cliente cliente) {
 		for (ClienteSucursal clienteSucursal : cliente.getListaSucursales()) {
-
-			mostrarSucursal(clienteSucursal);
+//			mostrarSucursal(clienteSucursal);
 			mostrarDomicilios(clienteSucursal);
 			mostrarContactos(clienteSucursal);
-			mostrarClasificadoresSucursal(clienteSucursal);
-			
+//			mostrarClasificadoresSucursal(clienteSucursal);
 		}
 	}
 	
@@ -138,7 +140,8 @@ public class TraerCliente extends Operation {
 		long id = clienteSucursal.getId();
 		for (Contacto contacto : contactos) {
 			contacto.setClienteSucursal(id);
-			notificarObjeto(WRITER_CONTACTOS, contacto);
+//			notificarObjeto(WRITER_CONTACTOS, contacto);
+			clienteSucursal.getCliente().getContactosTransientes().add(contacto); //Se agregan contactos para mostrar por pantalla
 		}
 	}
 
@@ -148,7 +151,8 @@ public class TraerCliente extends Operation {
 	private void mostrarDomicilios(ClienteSucursal clienteSucursal) {
 		List<DomicilioEntrega> domiciliosEntrega=clienteSucursal.getDomiciliosDeEntrega();
 		for (DomicilioEntrega domicilioEntrega : domiciliosEntrega) {
-			notificarObjeto(WRITER_DOMICILIOS_ENTREGA, domicilioEntrega);
+//			notificarObjeto(WRITER_DOMICILIOS_ENTREGA, domicilioEntrega);
+			clienteSucursal.getCliente().getDomiciliosDeEntregaTransientes().add(domicilioEntrega); //Se agregan domicilios de entrega para mostrar por pantalla
 		}
 	}
 
@@ -168,7 +172,8 @@ public class TraerCliente extends Operation {
 		
 		SujetoImpositivo sujetoImpositivo = cliente.getSujetoImpositivo();
 		for (InscripcionImpositiva inscripcionImpositiva : sujetoImpositivo.getInscripcionesImpositivas()) {
-			notificarObjeto(WRITER_INSCRIPCIONES, inscripcionImpositiva);
+//			notificarObjeto(WRITER_INSCRIPCIONES, inscripcionImpositiva);
+			cliente.getInscripcionesImpositivasTransientes().add(inscripcionImpositiva); //Se agregan inscripciones impositivas para mostrar por pantalla
 			impuestos.remove(String.valueOf(inscripcionImpositiva.getImpuesto().getId()));
 		}
 		
@@ -179,7 +184,7 @@ public class TraerCliente extends Operation {
 			nuevaInscripcion.setImpuesto(impuesto);
 			nuevaInscripcion.setSujetoImpositivo(cliente.getSujetoImpositivo());
 			
-			notificarObjeto(WRITER_INSCRIPCIONES, nuevaInscripcion);
+//			notificarObjeto(WRITER_INSCRIPCIONES, nuevaInscripcion);
 		}
 		
 	}

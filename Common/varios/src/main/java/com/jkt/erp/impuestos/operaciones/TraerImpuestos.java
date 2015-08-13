@@ -1,9 +1,6 @@
 package com.jkt.erp.impuestos.operaciones;
 
-import java.util.List;
 import java.util.Map;
-
-import com.jkt.erp.impuestos.dominio.CategoriaImpuesto;
 import com.jkt.erp.impuestos.dominio.Impuesto;
 import com.jkt.excepcion.EntityNotFoundException;
 import com.jkt.operaciones.Operation;
@@ -27,8 +24,8 @@ public class TraerImpuestos extends Operation {
 			throw new EntityNotFoundException("No existe el impuesto con identificador "+oid);
 		}
 
-		notificarObjeto("impuesto", impuesto);
-		notificarObjetos("categorias", impuesto.getCategorias());
+		notificarObjeto("", impuesto);
+//		notificarObjetos("", impuesto.getCategorias());
 		
 	}
 

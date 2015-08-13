@@ -30,13 +30,13 @@
 			    			<textbox width="100%" value="@bind(each.adicional)" />
 			    			
 			    			<hlayout>
-			    				<textbox sclass="campoCodigo-medium" value="@bind(each.actividad.codigo)" />
+			    				<textbox sclass="campoCodigo-medium" value="@bind(each.actividad.codigo)" onBlur="@command('validarCampo', clase='actividad', codigo=each.actividad.codigo, ov=each.actividad)" />
 			    				<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='actividad', ov=each.actividad,titulo='Actividad')" />
 			    			</hlayout>
 			    			<label value="@bind(each.actividad.descripcion)" />
 			    		
 			    			<hlayout>	
-			    				<textbox sclass="campoCodigo-medium" value="@bind(each.subActividad.codigo)" />
+			    				<textbox sclass="campoCodigo-medium" value="@bind(each.subActividad.codigo)" onBlur="@command('validarCampo', clase='actividad', codigo=each.subActividad.codigo, ov=each.subActividad)" />
 			    				<button style="padding-left:-15px;" label="..." onClick="@command('openHelper', clase='actividad', ov=each.subActividad,titulo='Actividad')" />
 			    			</hlayout>
 			    			<label value="@bind(each.subActividad.descripcion)" />	

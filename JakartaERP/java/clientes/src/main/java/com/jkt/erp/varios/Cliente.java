@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.jkt.dominio.IDescriptible;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.varios.dominio.CondPago;
+import com.jkt.varios.dominio.Contacto;
 import com.jkt.varios.dominio.Especificacion;
 import com.jkt.varios.dominio.Idioma;
 
@@ -115,4 +116,11 @@ public class Cliente extends PersistentEntity implements IDescriptible{
 		return this.getFax();
 	}
 	
+	//Se crea solo para mostrar en pantalla
+	private List<InscripcionImpositiva> inscripcionesImpositivasTransientes = new ArrayList<InscripcionImpositiva>();
+	
+	private List<DomicilioEntrega> domiciliosDeEntregaTransientes=new ArrayList<DomicilioEntrega>();
+	
+	private List<Contacto> contactosTransientes=new ArrayList<Contacto>();
+		
 }

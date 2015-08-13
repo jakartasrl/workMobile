@@ -1,0 +1,72 @@
+<zk viewModel="@id('vm') @load(viewModel)">
+
+	<div>
+
+		<panel title="Datos del Cliente" border="normal" style="margin-top:10px;" >
+
+			<panelchildren>
+
+				<grid width="100%" height="100%">
+
+					<columns>
+						<column width="55px" />
+						<column width="150px" />
+						<column width="90px" />
+						<column width="255px" />
+						<column width="55px" />
+						<column width="20px" />
+					</columns>
+
+					<rows>
+
+						<row>
+							<label value="Código : " />
+							<textbox sclass="campoCodigo-large" value="@bind(vm.cliente.codigo)" />
+							<label value="Razón Social : " />
+							<textbox width="100%" value="@bind(vm.cliente.razonSocial)" />
+							<label value="Activo : " />
+							<checkbox sclass="campoCodigo-small" checked="@bind(vm.cliente.activo)" />
+						</row>
+
+					</rows>
+
+				</grid>
+
+			</panelchildren>
+
+		</panel>
+
+		<panel style="margin-top:15px;" border="none" height="auto" width="100%">
+			<panelchildren>
+				<tabbox id="contenidoTabs" style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
+			    	<tabs id="tabs">
+			        	<tab id="datosLegalesImpositivos" 	label="Datos Legales / Impositivos" />
+			        	<tab id="datosComerciales" 			label="Datos Comerciales" />
+			        	<tab id="sucursales" 				label="Sucursales" />
+			    	</tabs>
+		
+			    	<tabpanels>
+			    			        	
+			        	<tabpanel>
+							<include id="datosLegalesImpositivosContent" 	hflex="1" src="/pantallas/ventas/datosLegalesImpositivos.zul" viewModel="${vm}" />
+			        	</tabpanel>
+			        
+			        	<tabpanel>
+							<include id="datosComercialesContent" 			hflex="1" src="/pantallas/ventas/datosComerciales.zul" viewModel="${vm}" />
+						</tabpanel>
+					
+			        	<tabpanel>
+							<include id="sucursalesContent" 				hflex="1" src="/pantallas/ventas/sucursales.zul" viewModel="${vm}" />
+						</tabpanel>
+					
+			    	</tabpanels>
+			    
+				</tabbox>
+			
+			</panelchildren>
+		
+		</panel>
+
+	</div>
+
+</zk>

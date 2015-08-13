@@ -2352,7 +2352,7 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
-	<operacion name="TraerNota" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListNotasOV">
+	<operacion name="TraerNota" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListaClienteOV">
 		
 		<input>
 			<campoEntrada propertyOV="string1" name="entidad"/>
@@ -2401,5 +2401,296 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="TraerRepresentante" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListRepresentantesOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" 			value="id" />
+			<campoSalida target="codigo" 		value="codigo" />
+			<campoSalida target="descripcion"	value="descripcion" />
+			<campoSalida target="mail" 			value="mail" />
+			<campoSalida target="telefono" 		value="telefono" />			
+			<campoSalida target="activo" 		value="activo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarRepresentante" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.erp.varios.Representante" inputOV="com.jkt.ov.RepresentanteOV">
+	
+		<input keyName="objeto" clase="com.jkt.erp.varios.Representante">
+ 			
+ 			<campoEntrada propertyOV="id" 			metodo="setId" />
+			<campoEntrada propertyOV="codigo" 		metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion"	metodo="setDescripcion" />
+			<campoEntrada propertyOV="mail" 		metodo="setMail" />			
+			<campoEntrada propertyOV="telefono" 	metodo="setTelefono" />
+			<campoEntrada propertyOV="activo" 		metodo="setActivo" />
+ 			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="guardarTipoContacto" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.TipoContacto" inputOV="com.jkt.ov.DescriptibleOV">
+	
+		<input keyName="objeto" clase="com.jkt.varios.dominio.TipoContacto">
+			<campoEntrada propertyOV="id" 			metodo="setId" />
+			<campoEntrada propertyOV="codigo" 		metodo="setNombre" />
+			<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion" />
+ 			<campoEntrada propertyOV="activo" 		metodo="setActivo" /> 
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+
+	<operacion name="TraerVendedor" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListVendedoresOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="entidad"/>
+			<campoEntrada propertyOV="string2" name="id"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" 			value="id" />
+			<campoSalida target="codigo" 		value="codigo" />
+			<campoSalida target="apellido"		value="apellido" />
+			<campoSalida target="nombres"		value="nombres" />
+			<campoSalida target="mail" 			value="mail" />
+			<campoSalida target="telefono" 		value="telefono" />			
+			<campoSalida target="activo" 		value="activo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarVendedor" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.erp.varios.Vendedor" inputOV="com.jkt.ov.VendedorOV">
+	
+		<input keyName="objeto" clase="com.jkt.erp.varios.Vendedor">
+ 			
+ 			<campoEntrada propertyOV="id" 			metodo="setId" />
+			<campoEntrada propertyOV="codigo" 		metodo="setCodigo" />
+			<campoEntrada propertyOV="apellido"		metodo="setApellido" />
+			<campoEntrada propertyOV="nombres"		metodo="setNombres" />
+			<campoEntrada propertyOV="mail" 		metodo="setMail" />			
+			<campoEntrada propertyOV="telefono" 	metodo="setTelefono" />
+			<campoEntrada propertyOV="activo" 		metodo="setActivo" />
+ 			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerCondPago" clase="com.jkt.erp.impuestos.operaciones.TraerCondPago" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.CondPagoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+			<campoEntrada propertyOV="string2" name="CONDICION_PAGO"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="codigo" 			value="codigo" />
+			<campoSalida target="descripcion"		value="descripcion" />
+			<campoSalida target="baseFechaFactura"	value="baseFechaFactura" />
+			<campoSalida target="baseFechaRecep" 	value="baseFechaRecep" />			
+			<campoSalida target="activo" 			value="activo" />
+			<campoSalida target="detalles" 			value="detalles">
+				<campoSalida target="dias" 			value="dias" />
+				<campoSalida target="porcentaje" 	value="porcentaje" />
+			</campoSalida>
+		
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarCondPago" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.varios.dominio.CondPago" inputOV="com.jkt.ov.CondPagoOV">
+	
+		<input keyName="objeto" clase="com.jkt.varios.dominio.CondPago">
+ 			
+ 			<campoEntrada propertyOV="id" 				metodo="setId" />
+			<campoEntrada propertyOV="codigo" 			metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion"		metodo="setDescripcion" />
+			<campoEntrada propertyOV="baseFechaFactura"	metodo="setBaseFechaFactura" />
+			<campoEntrada propertyOV="baseFechaRecep" 	metodo="setBaseFechaRecep" />			
+			<campoEntrada propertyOV="activo" 			metodo="setActivo" />
+			<campoEntrada propertyOV="detalles" 			metodo="setDetalles">
+				<campoEntrada propertyOV="dias" 			metodo="setDias" />
+				<campoEntrada propertyOV="porcentaje" 	metodo="setPorcentaje" />
+			</campoEntrada>
+ 			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerCliente" clase="com.jkt.erp.operaciones.TraerCliente" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ClienteOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+		</input>
+		
+		<output>
+			<campoSalida value="id" 				target="id" />
+			<campoSalida value="codigo" 			target="codigo" />
+			<campoSalida value="telefono" 			target="telefono" />
+			<campoSalida value="fax" 				target="fax" />
+			<campoSalida value="mail" 				target="mail" />
+			<campoSalida value="nroProveedor" 		target="nroProveedor" />
+			<campoSalida value="activo" 			target="activo" />
+
+			<campoSalida value="idSujetoImpositivo" target="sujetoImpositivo.id" />
+			<campoSalida value="razonSocial" 		target="sujetoImpositivo.razonSocial" />
+			<campoSalida value="cuit" 				target="sujetoImpositivo.cuit" />
+			<campoSalida value="personaJuridica" 	target="sujetoImpositivo.isPersonaJuridica" />
+			
+			<campoSalida value="direccion" 			target="sujetoImpositivo.direccionLegal.direccion" />
+			<campoSalida value="codigoPostal" 		target="sujetoImpositivo.direccionLegal.codigoPostal" />
+			<campoSalida value="localidad" 			target="sujetoImpositivo.direccionLegal.localidad" />
+			<campoSalida value="idProvincia" 		target="sujetoImpositivo.direccionLegal.provincia.id" />
+			<campoSalida value="codProvincia" 		target="sujetoImpositivo.direccionLegal.provincia.codigo" />
+			<campoSalida value="descProvincia" 		target="sujetoImpositivo.direccionLegal.provincia.descripcion" />
+			<campoSalida value="idPais" 			target="sujetoImpositivo.direccionLegal.pais.id" />
+			<campoSalida value="codPais" 			target="sujetoImpositivo.direccionLegal.pais.codigo" />
+			<campoSalida value="descPais" 			target="sujetoImpositivo.direccionLegal.pais.descripcion" />
+
+			<campoSalida value="idVendedor" 		target="vendedor.id" />
+			<campoSalida value="codVendedor" 		target="vendedor.codigo" />
+			<campoSalida value="descVendedor" 		target="vendedor.descripcion" />
+			
+			<campoSalida value="idRepresentante" 	target="representante.id" />
+			<campoSalida value="codRepresentante" 	target="representante.codigo" />
+			<campoSalida value="descRepresentante" 	target="representante.descripcion" />
+
+			<campoSalida value="idCondPago" 		target="condPago.id" />
+			<campoSalida value="codCondPago" 		target="condPago.codigo" />
+			<campoSalida value="descCondPago" 		target="condPago.descripcion" />
+						
+			<campoSalida value="inscripcionesImpositivas" 	target="inscripcionesImpositivasTransientes">
+				<campoSalida value="codImpuesto" 			target="impuesto.codigo" />
+				<campoSalida value="descImpuesto" 			target="impuesto.descripcion" />
+				<campoSalida value="numero" 				target="numero" />
+				<campoSalida value="codCategoria" 			target="categoria.codigo" />
+				<campoSalida value="descCategoria" 			target="categoria.descripcion" />				
+				<campoSalida value="fechaVigencia" 			target="fechaVigencia" />
+				<campoSalida value="activo" 				target="activo" />
+			</campoSalida>
+
+			<campoSalida value="listaSucursales" 				target="listaSucursales">
+				<campoSalida value="numero" 					target="numero" />
+				<campoSalida value="descripcion" 				target="descripcion" />
+				<campoSalida value="direccion" 					target="direccion.direccion" />
+				<campoSalida value="localidad" 					target="direccion.localidad" />
+				<campoSalida value="codigoPostal" 				target="direccion.codigoPostal" />				
+				<campoSalida value="descProvincia" 				target="direccion.provincia.descripcion" />
+				<campoSalida value="telefono" 					target="telefono" />
+				<campoSalida value="domicilioEntregaDeFactura"	target="domicilioEntregaDeFactura" />
+				<campoSalida value="codVendedor"				target="vendedorComercial.codigo" />
+				<campoSalida value="descVendedor"				target="vendedorComercial.descripcion" />
+				
+				<campoSalida value="codRepresentante"			target="representante.codigo" />
+				<campoSalida value="descRepresentante"			target="representante.descripcion" />
+				
+				<campoSalida value="activo"						target="activo" />
+			</campoSalida>
+			
+			<campoSalida value="domiciliosDeEntrega" 			target="domiciliosDeEntregaTransientes">
+				<campoSalida value="nroDomicilio" 				target="numero" />
+				<campoSalida value="descripcion" 				target="descripcion" />
+				<campoSalida value="direccion" 					target="direccion.direccion" />
+				<campoSalida value="localidad" 					target="direccion.localidad" />
+				<campoSalida value="codigoPostal" 				target="direccion.codigoPostal" />				
+				<campoSalida value="descProvincia" 				target="direccion.provincia.descripcion" />
+				<campoSalida value="telefono" 					target="telefono" />
+				<campoSalida value="horariosEntrega" 			target="diasEntrega" />
+				<campoSalida value="activo" 					target="activo" />
+			</campoSalida>
+		
+			<campoSalida value="contactos" 						target="contactosTransientes">
+				<campoSalida value="descripcionTipo" 			target="tipoContacto.descripcion" />
+				<campoSalida value="apellidoYNombre" 			target="apellidoYNombre" />
+				<campoSalida value="tratamiento" 				target="tratamiento" />
+				<campoSalida value="telefono" 					target="telefono" />
+				<campoSalida value="telefonoAlternativo" 		target="telefonoAlternativo" />				
+				<campoSalida value="celular" 					target="celular" />
+				<campoSalida value="mail" 						target="mail" />
+				<campoSalida value="activo" 					target="activo" />
+			</campoSalida>
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerImpuesto" clase="com.jkt.erp.impuestos.operaciones.TraerImpuestos" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ImpuestoOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="OID"/>
+			<campoEntrada propertyOV="string2" name="IMPUESTO"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" 				value="id" />
+			<campoSalida target="codigo" 			value="codigo" />
+			<campoSalida target="descripcion"		value="descripcion" />
+			<campoSalida target="comportamiento"	value="comportamiento" />		
+			<campoSalida target="isActivo" 			value="activo" />
+			<campoSalida target="categorias" 		value="categorias">
+				<campoSalida target="id" 			value="id" />
+				<campoSalida target="impuesto.id" 	value="idImpuesto" />
+			
+				<campoSalida target="codigo" 		value="codigo" />
+				<campoSalida target="descripcion" 	value="descripcion" />
+				<campoSalida target="isActivo" 		value="activo" />
+			</campoSalida>
+		
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="TraerComportamientos" clase="com.jkt.erp.impuestos.operaciones.TraerComportamientosImpuesto" outputOV="com.jkt.ov.ListDescriptibleOV">
+		
+		<output>
+			<campoSalida target="codigo" value="id" />
+			<campoSalida target="descripcion" value="descripcion" />
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarImpuesto" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.erp.impuestos.dominio.Impuesto" inputOV="com.jkt.ov.ImpuestoOV">
+	
+		<input keyName="objeto" clase="com.jkt.erp.impuestos.dominio.Impuesto">
+ 			
+ 			<campoEntrada propertyOV="id" 				metodo="setId" />
+			<campoEntrada propertyOV="codigo" 			metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion"		metodo="setDescripcion" />
+			<campoEntrada propertyOV="comportamiento"	metodo="setComportamiento" />			
+			<campoEntrada propertyOV="activo" 			metodo="setActivo" />
+			
+			<campoEntrada propertyOV="categorias" 		value="setCategorias">
+				<campoEntrada propertyOV="id" 			value="setId" />
+				<campoEntrada propertyOV="idImpuesto" 	value="setImpuesto" />
+				<campoEntrada propertyOV="codigo" 		value="setCodigo" />
+				<campoEntrada propertyOV="descripcion" 	value="setDescripcion" />
+				<campoEntrada propertyOV="activo" 		value="setActivo" />
+			</campoEntrada>
+ 			
+		</input>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
 	
 </entity>
