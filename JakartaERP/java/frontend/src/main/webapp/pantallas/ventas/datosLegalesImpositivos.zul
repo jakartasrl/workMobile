@@ -53,7 +53,7 @@
 													<textbox width="100%" value="@bind(vm.cliente.localidad)" />
 												</cell>
 												<label value="Cod. Postal : " />
-												<textbox sclass="campoCodigo-small" value="@bind(vm.cliente.codigoPostal)" />
+												<textbox sclass="campoCodigo-small" value="@bind(vm.sujetoImpositivo.direccionLegal.codigoPostal)" />
 											</row>
 											
 											<row>

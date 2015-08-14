@@ -2548,12 +2548,13 @@
 			<campoSalida value="mail" 				target="mail" />
 			<campoSalida value="nroProveedor" 		target="nroProveedor" />
 			<campoSalida value="activo" 			target="activo" />
-
+			
 			<campoSalida value="idSujetoImpositivo" target="sujetoImpositivo.id" />
 			<campoSalida value="razonSocial" 		target="sujetoImpositivo.razonSocial" />
 			<campoSalida value="cuit" 				target="sujetoImpositivo.cuit" />
 			<campoSalida value="personaJuridica" 	target="sujetoImpositivo.isPersonaJuridica" />
 			
+			<campoSalida value="idDir" 				target="sujetoImpositivo.direccionLegal.id" />
 			<campoSalida value="direccion" 			target="sujetoImpositivo.direccionLegal.direccion" />
 			<campoSalida value="codigoPostal" 		target="sujetoImpositivo.direccionLegal.codigoPostal" />
 			<campoSalida value="localidad" 			target="sujetoImpositivo.direccionLegal.localidad" />
@@ -2591,43 +2592,136 @@
 				<campoSalida value="descripcion" 				target="descripcion" />
 				<campoSalida value="direccion" 					target="direccion.direccion" />
 				<campoSalida value="localidad" 					target="direccion.localidad" />
-				<campoSalida value="codigoPostal" 				target="direccion.codigoPostal" />				
+				<campoSalida value="codigoPostal" 				target="direccion.codigoPostal" />	
+				<campoSalida value="idProvincia" 				target="direccion.provincia.id" />
+				<campoSalida value="codProvincia" 				target="direccion.provincia.codigo" />
 				<campoSalida value="descProvincia" 				target="direccion.provincia.descripcion" />
+				<campoSalida value="idPais" 					target="direccion.pais.id" />
+				<campoSalida value="codPais" 					target="direccion.pais.codigo" />
+				<campoSalida value="descPais" 					target="direccion.pais.descripcion" />
 				<campoSalida value="telefono" 					target="telefono" />
 				<campoSalida value="domicilioEntregaDeFactura"	target="domicilioEntregaDeFactura" />
 				<campoSalida value="codVendedor"				target="vendedorComercial.codigo" />
 				<campoSalida value="descVendedor"				target="vendedorComercial.descripcion" />
-				
 				<campoSalida value="codRepresentante"			target="representante.codigo" />
 				<campoSalida value="descRepresentante"			target="representante.descripcion" />
-				
 				<campoSalida value="activo"						target="activo" />
-			</campoSalida>
-			
-			<campoSalida value="domiciliosDeEntrega" 			target="domiciliosDeEntregaTransientes">
-				<campoSalida value="nroDomicilio" 				target="numero" />
-				<campoSalida value="descripcion" 				target="descripcion" />
-				<campoSalida value="direccion" 					target="direccion.direccion" />
-				<campoSalida value="localidad" 					target="direccion.localidad" />
-				<campoSalida value="codigoPostal" 				target="direccion.codigoPostal" />				
-				<campoSalida value="descProvincia" 				target="direccion.provincia.descripcion" />
-				<campoSalida value="telefono" 					target="telefono" />
-				<campoSalida value="horariosEntrega" 			target="diasEntrega" />
-				<campoSalida value="activo" 					target="activo" />
-			</campoSalida>
+				
+				<campoSalida value="domiciliosDeEntrega" 			target="domiciliosDeEntrega">
+					<campoSalida value="nroDomicilio" 				target="numero" />
+					<campoSalida value="descripcion" 				target="descripcion" />
+					<campoSalida value="direccion" 					target="direccion.direccion" />
+					<campoSalida value="localidad" 					target="direccion.localidad" />
+					<campoSalida value="codigoPostal" 				target="direccion.codigoPostal" />				
+					<campoSalida value="descProvincia" 				target="direccion.provincia.descripcion" />
+					<campoSalida value="telefono" 					target="telefono" />
+					<campoSalida value="horariosEntrega" 			target="diasEntrega" />
+					<campoSalida value="activo" 					target="activo" />
+				</campoSalida>
 		
-			<campoSalida value="contactos" 						target="contactosTransientes">
-				<campoSalida value="descripcionTipo" 			target="tipoContacto.descripcion" />
-				<campoSalida value="apellidoYNombre" 			target="apellidoYNombre" />
-				<campoSalida value="tratamiento" 				target="tratamiento" />
-				<campoSalida value="telefono" 					target="telefono" />
-				<campoSalida value="telefonoAlternativo" 		target="telefonoAlternativo" />				
-				<campoSalida value="celular" 					target="celular" />
-				<campoSalida value="mail" 						target="mail" />
-				<campoSalida value="activo" 					target="activo" />
+				<campoSalida value="contactos" 						target="contactos">
+					<campoSalida value="idTipoContacto" 			target="tipoContacto.id" />
+					<campoSalida value="descripcionTipo" 			target="tipoContacto.descripcion" />
+					<campoSalida value="apellidoYNombre" 			target="apellidoYNombre" />
+					<campoSalida value="tratamiento" 				target="tratamiento" />
+					<campoSalida value="telefono" 					target="telefono" />
+					<campoSalida value="telefonoAlternativo" 		target="telefonoAlternativo" />				
+					<campoSalida value="celular" 					target="celular" />
+					<campoSalida value="mail" 						target="mail" />
+					<campoSalida value="activo" 					target="activo" />
+				</campoSalida>
+				
 			</campoSalida>
 			
 		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
+	<operacion name="GuardarCliente" clase="com.jkt.operaciones.Guardar" entidad="com.jkt.erp.varios.Cliente" inputOV="com.jkt.ov.ClienteOV">
+		
+		<input keyName="objeto" clase="com.jkt.erp.varios.Cliente">
+		
+			<campoEntrada propertyOV="id" 					metodo="setId" />
+			<campoEntrada propertyOV="codigo" 				metodo="setCodigo" />
+			<campoEntrada propertyOV="telefono" 			metodo="setTelefono" />
+			<campoEntrada propertyOV="fax" 					metodo="setFax" />
+			<campoEntrada propertyOV="mail" 				metodo="setMail" />
+			<campoEntrada propertyOV="nroProveedor" 		metodo="setNroProveedor" />
+			<campoEntrada propertyOV="activo" 				metodo="setActivo" />
+
+			<campoEntrada propertyOV="idSujetoImpositivo" 	metodo="setSujetoImpositivo" />
+<!-- 			<campoEntrada propertyOV="razonSocial" 			metodo="setRazonSocial" /> -->
+<!-- 			<campoEntrada propertyOV="cuit" 				metodo="setCuit" /> -->
+<!-- 			<campoEntrada propertyOV="personaJuridica" 		metodo="setPersonaJuridica" /> -->
+			
+<!-- 			<campoEntrada propertyOV="direccion" 			metodo="setDireccion" /> -->
+
+<!-- 			<campoEntrada propertyOV="localidad" 			metodo="setLocalidad" /> -->
+<!-- 			<campoEntrada propertyOV="idProvincia" 			metodo="setProvincia" /> -->
+<!-- 			<campoEntrada propertyOV="codProvincia" 		metodo="setCodProvincia" /> -->
+<!-- 			<campoEntrada propertyOV="descProvincia" 		metodo="setDescProvincia" /> -->
+<!-- 			<campoEntrada propertyOV="idPais" 				metodo="setPais" /> -->
+<!-- 			<campoEntrada propertyOV="codPais" 				metodo="setCodPais" /> -->
+<!-- 			<campoEntrada propertyOV="descPais" 			metodo="setDescPais" /> -->
+
+			<campoEntrada propertyOV="idVendedor" 			metodo="setVendedor" />
+			<campoEntrada propertyOV="idRepresentante" 		metodo="setRepresentante" />
+			<campoEntrada propertyOV="idCondPago" 				metodo="setCondPago" />
+
+						
+<!-- 			<campoEntrada propertyOV="inscripcionesImpositivas" metodo="setInscripcionesImpositivasTransientes"> -->
+<!-- 				<campoEntrada propertyOV="codImpuesto" 			metodo="setCodImpuesto" /> -->
+<!-- 				<campoEntrada propertyOV="descImpuesto" 		metodo="setDescImpuesto" /> -->
+<!-- 				<campoEntrada propertyOV="numero" 				metodo="setNumero" /> -->
+<!-- 				<campoEntrada propertyOV="codCategoria" 		metodo="setCodCategoria" /> -->
+<!-- 				<campoEntrada propertyOV="descCategoria" 		metodo="setDescCategoria" />				 -->
+<!-- 				<campoEntrada propertyOV="fechaVigencia" 		metodo="setFechaVigencia" /> -->
+<!-- 				<campoEntrada propertyOV="activo" 				metodo="setActivo" /> -->
+<!-- 			</campoEntrada> -->
+
+<!-- 			<campoEntrada propertyOV="listaSucursales" 					metodo="setListaSucursales"> -->
+<!-- 				<campoEntrada propertyOV="numero" 						metodo="setNumero" /> -->
+<!-- 				<campoEntrada propertyOV="descripcion" 					metodo="setDescripcion" /> -->
+<!-- 				<campoEntrada propertyOV="direccion" 					metodo="setDireccion" /> -->
+<!-- 				<campoEntrada propertyOV="localidad" 					metodo="setLocalidad" /> -->
+<!-- 				<campoEntrada propertyOV="codigoPostal" 				metodo="setCodigoPostal" />				 -->
+<!-- 				<campoEntrada propertyOV="descProvincia" 				metodo="setDescProvincia" /> -->
+<!-- 				<campoEntrada propertyOV="telefono" 					metodo="setTelefono" /> -->
+<!-- 				<campoEntrada propertyOV="domicilioEntregaDeFactura"	metodo="setDomicilioEntregaDeFactura" /> -->
+<!-- 				<campoEntrada propertyOV="codVendedor"					metodo="setCodVendedor" /> -->
+<!-- 				<campoEntrada propertyOV="descVendedor"					metodo="setDescVendedor" /> -->
+<!-- 				<campoEntrada propertyOV="codRepresentante"				metodo="setCodRepresentante" /> -->
+<!-- 				<campoEntrada propertyOV="descRepresentante"			metodo="setDescRepresentante" /> -->
+<!-- 				<campoEntrada propertyOV="activo"						metodo="setActivo" /> -->
+				
+<!-- 				<campoEntrada propertyOV="domiciliosDeEntrega" 			metodo="setDomiciliosDeEntrega"> -->
+<!-- 					<campoEntrada propertyOV="nroDomicilio" 			metodo="setNumero" /> -->
+<!-- 					<campoEntrada propertyOV="descripcion" 				metodo="setDescripcion" /> -->
+<!-- 					<campoEntrada propertyOV="direccion" 				metodo="setDireccion" /> -->
+<!-- 					<campoEntrada propertyOV="localidad" 				metodo="setLocalidad" /> -->
+<!-- 					<campoEntrada propertyOV="codigoPostal" 			metodo="setCodigoPostal" />				 -->
+<!-- 					<campoEntrada propertyOV="descProvincia" 			metodo="setDescProvincia" /> -->
+<!-- 					<campoEntrada propertyOV="telefono" 				metodo="setTelefono" /> -->
+<!-- 					<campoEntrada propertyOV="horariosEntrega" 			metodo="setDiasEntrega" /> -->
+<!-- 					<campoEntrada propertyOV="activo" 					metodo="setActivo" /> -->
+<!-- 				</campoEntrada> -->
+		
+<!-- 				<campoEntrada propertyOV="contactos" 					metodo="setContactos"> -->
+<!-- 					<campoEntrada propertyOV="idTipoContacto" 			metodo="setTipoContacto" /> -->
+<!-- 					<campoEntrada propertyOV="descripcionTipo" 			metodo="setDescripcionTipo" /> -->
+<!-- 					<campoEntrada propertyOV="apellidoYNombre" 			metodo="setApellidoYNombre" /> -->
+<!-- 					<campoEntrada propertyOV="tratamiento" 				metodo="setTratamiento" /> -->
+<!-- 					<campoEntrada propertyOV="telefono" 				metodo="setTelefono" /> -->
+<!-- 					<campoEntrada propertyOV="telefonoAlternativo" 		metodo="setTelefonoAlternativo" />				 -->
+<!-- 					<campoEntrada propertyOV="celular" 					metodo="setCelular" /> -->
+<!-- 					<campoEntrada propertyOV="mail" 					metodo="setMail" /> -->
+<!-- 					<campoEntrada propertyOV="activo" 					metodo="setActivo" /> -->
+<!-- 				</campoEntrada> -->
+				
+<!-- 			</campoEntrada> -->
+			
+		</input>
 
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
