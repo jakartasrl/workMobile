@@ -2680,12 +2680,12 @@
 			<campoEntrada propertyOV="comportamiento"	metodo="setComportamiento" />			
 			<campoEntrada propertyOV="activo" 			metodo="setActivo" />
 			
-			<campoEntrada propertyOV="categorias" 		value="setCategorias">
-				<campoEntrada propertyOV="id" 			value="setId" />
-				<campoEntrada propertyOV="idImpuesto" 	value="setImpuesto" />
-				<campoEntrada propertyOV="codigo" 		value="setCodigo" />
-				<campoEntrada propertyOV="descripcion" 	value="setDescripcion" />
-				<campoEntrada propertyOV="activo" 		value="setActivo" />
+			<campoEntrada propertyOV="categorias" 		metodo="setCategorias">
+				<campoEntrada propertyOV="id" 			metodo="setId" />
+				<campoEntrada propertyOV="idImpuesto" 	metodo="setImpuesto" />
+				<campoEntrada propertyOV="codigo" 		metodo="setCodigo" />
+				<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion" />
+				<campoEntrada propertyOV="activo" 		metodo="setActivo" />
 			</campoEntrada>
  			
 		</input>
