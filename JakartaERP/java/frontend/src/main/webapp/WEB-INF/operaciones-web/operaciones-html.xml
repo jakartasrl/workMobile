@@ -487,6 +487,7 @@
 				<campoEntrada propertyOV="porcentaje" metodo="setPorcentaje"/>
 				<campoEntrada propertyOV="importe" metodo="setImporte"/>
 				<campoEntrada propertyOV="idCondicionDePago" metodo="setCondicionPago"/>
+				<campoEntrada propertyOV="idProducto" metodo="setProducto"/>
 			</campoEntrada>
 			
 			<campoEntrada propertyOV="archivos" metodo="setArchivos" >
@@ -611,6 +612,7 @@
 				<campoSalida value="porcentaje" 		target="porcentaje"/>
 				<campoSalida value="importe" 			target="importe"/>
 				<campoSalida value="idCondicionDePago" 	target="condicionPago.id"/>
+				<campoSalida value="idProducto"			target="producto.id"/>
 			</campoSalida>
 			
 			<campoSalida value="tareas" target="tareas" >

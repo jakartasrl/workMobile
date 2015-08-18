@@ -12,8 +12,6 @@ import java.util.Random;
 
 import lombok.Data;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.jsoup.Jsoup;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -31,7 +29,6 @@ import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.grafo.DatoNodo.Estado;
 import com.jkt.ov.AgendaOV;
-import com.jkt.ov.ArchivoOV;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.FormaFacturacionOV;
@@ -238,6 +235,22 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			return;
 		}
 		PedidoOV pedido = (PedidoOV) list.get(0);
+		
+		if(pedido.getTareas().isEmpty()){
+			//debo cargar todas las tareas de formas de facturacion por defecto
+			ParametroOV paramTareaFacturar = (ParametroOV) Operaciones.ejecutar("TraerParametro", new ContainerOV("tareaFacturar"), ParametroOV.class);
+			
+			TareaAgendaOV tareaAgendaOV = new TareaAgendaOV();
+			
+			DescriptibleOV tarea = Operaciones.recuperarObjetoDescriptible("tarea", Long.valueOf(paramTareaFacturar.getValorNumero()));
+			
+			tareaAgendaOV.setTarea(tarea);
+			this.tareaAgregada= tareaAgendaOV;
+
+			tratamientoTarea();
+			return;
+			
+		}
 		
 		/*
 		 * Genero el grafo.
@@ -474,6 +487,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		this.comprobanteOV.setFacturaciones(ovRecuperado.getFacturaciones());
 		for (FormaFacturacionOV formaFacturacionOV : this.comprobanteOV.getFacturaciones()) {
 			formaFacturacionOV.setCondicionDePago(Operaciones.recuperarObjetoDescriptible("condicionPago", formaFacturacionOV.getIdCondicionDePago()));
+			formaFacturacionOV.setProductoOV(Operaciones.recuperarObjetoDescriptible("articulos", formaFacturacionOV.getIdProducto()));
 		}
 	
 	}
@@ -523,7 +537,6 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		comprobanteOV.setContactosReferencia(this.getContactosSeleccionados());
 		
 		comprobanteOV.completarListaDocumentos(lDocumentacion, docEntregados);
-
 		
 		comprobanteOV.setArchivos(this.completarListaDesdeArbol());
 		
@@ -563,6 +576,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 		
 		for (FormaFacturacionOV formaFacturacionOV : comprobanteOV.getFacturaciones()) {
 			formaFacturacionOV.setIdCondicionDePago(formaFacturacionOV.getCondicionDePago().getId());
+			formaFacturacionOV.setIdProducto(formaFacturacionOV.getProductoOV().getId());
 		}
 		
 	}
@@ -764,6 +778,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			
 			//Tareas para cuando la tarea es de tipo taller
 			if(this.items.isEmpty() && this.itemsArticulos.isEmpty()){
+				this.tareaAgregada.setDescripcionAbreviada(this.tareaAgregada.getTarea().getDescripcion());
+				this.tareaAgregada.setDescripcionCompleta(this.tareaAgregada.getTarea().getDescripcion());
 				actualizarTareasYArbol();
 			}else{
 				//Comportamiento que maneja todos los items en una ventana separada, y al aceptar, agrega todos esos items como tareas.
@@ -788,6 +804,8 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			DescriptibleOV tarea = this.tareaAgregada.getTarea();
 			this.tareaAgregada.setEstado(estadoTemporal);
 			if(this.lDeterminacionesQuimicas.isEmpty()){
+				this.tareaAgregada.setDescripcionAbreviada(this.tareaAgregada.getTarea().getDescripcion());
+				this.tareaAgregada.setDescripcionCompleta(this.tareaAgregada.getTarea().getDescripcion());
 				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 				actualizarTareasYArbol();
 			}else{
@@ -823,8 +841,11 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			}
 			
 		}else{
-			this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 			//Tarea estandar
+			this.tareaAgregada.setEstado(estadoTemporal);
+			this.tareaAgregada.setDescripcionCompleta(this.tareaAgregada.getTarea().getDescripcion());
+			this.tareaAgregada.setDescripcionAbreviada(this.tareaAgregada.getTarea().getDescripcion());
+			this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
 			actualizarTareasYArbol();
 		}
 	}

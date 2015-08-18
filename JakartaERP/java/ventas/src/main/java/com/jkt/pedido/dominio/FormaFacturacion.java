@@ -3,6 +3,7 @@ package com.jkt.pedido.dominio;
 import lombok.Data;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.erp.articulos.Producto;
 import com.jkt.varios.dominio.CondPago;
 
 /**
@@ -14,6 +15,7 @@ import com.jkt.varios.dominio.CondPago;
 @Data
 public class FormaFacturacion extends PersistentEntity {
 
+	private Producto producto;
 	private String descripcion;
 	private double porcentaje;
 	private double importe;

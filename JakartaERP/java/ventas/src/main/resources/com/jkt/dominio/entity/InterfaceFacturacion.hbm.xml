@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.facturacion.InterfaceFacturacion" table="INTERFACE_FACTURACION">
+		<id name="id" column="INTERFACE_FACTURACION_ID">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="itemPedidoJakartaERP" column="ID_ITEM_PEDIDO_JAKARTA_ERP"/>
+		<property name="oidComprobanteFactura" column="OID_COMPROBANTEFACTURA"/>
+		<property name="facturado" column="FACTURADO" type="boolean" />
+		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="fechaFactura" column="FECHA_FACTURA" type="date" />
+		<property name="nroFactura" column="NRO_FACTURA" />
+		<property name="rutaPDFFactura" column="RUTA_PDF_FACTURA" />
+
+	</class>
+	
+</hibernate-mapping>

@@ -14,17 +14,21 @@
 	</vlayout>
 
 
-	<listbox width="960px" id="boxFF" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
+	<listbox width="100%" id="boxFF" multiple="false" checkmark="false" model="@bind(vm.comprobanteOV.facturaciones)" mold="paging" pageSize="8" emptyMessage="No existen formas de facturación aun.">
 
 		<listhead style="heigth:10px;" >
 		
-			<listheader width="310px" label="Descripción"/>
+			<listheader width="300px" label="Descripción"/>
 			
-			<listheader width="90px" label="%"/>
-			<listheader width="90px" label="Importe"/>
+			<listheader width="80px" label="%"/>
+			<listheader width="80px" label="Importe"/>
 			
 			<listheader width="100px" label="Cod.Cond.Pago"/>
 			<listheader width="310px" label="Descripción Cond.Pago"/>
+			
+			<listheader width="90px" label="Cod.Articulo"/>
+			<listheader width="300px" label="Desc.Articulo"/>
+			
 			<listheader width="50px" label="Borrar"/>
 		
 		</listhead>
@@ -57,6 +61,17 @@
 								
 				<listcell>
 					<textbox width="300px" value="@bind(each.condicionDePago.descripcion)" readonly="true"/>
+				</listcell>
+
+				<listcell style="text-align:center">
+					<hlayout>
+						<textbox constraint="no empty" sclass="campoCodigo-small" value="@bind(each.productoOV.codigo)" onBlur="@command('validarCampo', clase='articulos', codigo=self.value, ov=each.productoOV )" />
+						<button label="..." onClick="@command('openHelper', clase='articulos', ov=each.productoOV )" />
+					</hlayout>
+				</listcell>
+						
+				<listcell>
+					<textbox width="300px" value="@bind(each.productoOV.descripcion)" readonly="true"/>
 				</listcell>
 
 				<listcell>

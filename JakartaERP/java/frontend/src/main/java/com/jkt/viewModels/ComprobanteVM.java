@@ -664,6 +664,11 @@ public abstract class ComprobanteVM extends ViewModel {
 				Messagebox.show("Complete la descripción del item "+i+" en la solapa 'Formas de facturación'.");
 				return false;
 			}
+			
+			if(!this.validarDescriptible(formaFacturacionOV.getProductoOV(), "Complete el producto del elemento "+i+" en la \n solapa 'Formas de facturación'.")){
+				return false;
+			}
+
 			i++;
 		}
 		
