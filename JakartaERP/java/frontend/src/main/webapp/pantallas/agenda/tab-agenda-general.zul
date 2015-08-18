@@ -27,7 +27,7 @@
 			<listheader width="40px" label="Dias"/>
 			<listheader width="110px" label="Sector"/>
 			<listheader width="130px" label="Estado"/>
-			<listheader width="50px" label="Comenteario"/>
+			<listheader width="47px" label="Detalle"/>
 			<listheader width="50px" label="Borrar"/>
 			
 		</listhead>
