@@ -141,7 +141,7 @@ public class TraerCliente extends Operation {
 		for (Contacto contacto : contactos) {
 			contacto.setClienteSucursal(id);
 //			notificarObjeto(WRITER_CONTACTOS, contacto);
-			clienteSucursal.getCliente().getContactosTransientes().add(contacto); //Se agregan contactos para mostrar por pantalla
+//			clienteSucursal.getCliente().getContactosTransientes().add(contacto); //Se agregan contactos para mostrar por pantalla
 		}
 	}
 
@@ -152,7 +152,7 @@ public class TraerCliente extends Operation {
 		List<DomicilioEntrega> domiciliosEntrega=clienteSucursal.getDomiciliosDeEntrega();
 		for (DomicilioEntrega domicilioEntrega : domiciliosEntrega) {
 //			notificarObjeto(WRITER_DOMICILIOS_ENTREGA, domicilioEntrega);
-			clienteSucursal.getCliente().getDomiciliosDeEntregaTransientes().add(domicilioEntrega); //Se agregan domicilios de entrega para mostrar por pantalla
+//			clienteSucursal.getCliente().getDomiciliosDeEntregaTransientes().add(domicilioEntrega); //Se agregan domicilios de entrega para mostrar por pantalla
 		}
 	}
 

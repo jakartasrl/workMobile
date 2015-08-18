@@ -20,4 +20,6 @@ public class ContactoOV extends ObjectView {
 	private long clienteSucursalId;
 	private String descripcionTipo;
 	
+	private DescriptibleOV tipoContacto = new DescriptibleOV();
+	
 }

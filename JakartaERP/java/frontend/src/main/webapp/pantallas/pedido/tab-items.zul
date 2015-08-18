@@ -41,8 +41,6 @@
 			<listitem>
 				<listcell>
 
-					<groupbox width="100%" style="border-style:none; cursor: default">
-					
 							<hlayout>
 							
 								<label value="Tipo" />
@@ -86,9 +84,7 @@
 							<ckeditor value="@bind(each.plantilla.descripcion)" toolbar="Complex" height="10%" customConfigurationsPath="/pantallas/common/config.js" >
 							
 							</ckeditor>
-
-					</groupbox>
-
+							
 				</listcell>
 			</listitem>
 		</template>

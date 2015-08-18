@@ -8,14 +8,14 @@
 				tooltiptext="Agregar Domicilio de Entrega." >
 		</button>
 	
-		<grid model="@bind(vm.cliente.domiciliosDeEntrega)" width="100%" height="100%" emptyMessage="No hay Domicilios de Entrega." >
+		<grid model="@bind(vm.sucursalSeleccionada.domiciliosDeEntrega)" width="100%" height="100%" emptyMessage="No hay Domicilios de Entrega." >
 
 			<columns>
-				<column width="100px" label="Nro. Domicilio" />
-				<column width="350px" label="Descripción" />
+				<column width="90px" label="Nro. Domicilio" />
+				<column width="255px" label="Descripción" />
 				<column width="255px" label="Dirección" />
 				<column width="150px" label="Localidad" />
-				<column width="90px"  label="Cód. Postal" />
+				<column width="80px"  label="Cód. Postal" />
 				<column width="150px" label="Provincia"	/>
 				<column width="150px" label="Telefonos" />
 				<column width="200px" label="Horarios de Entrega" />

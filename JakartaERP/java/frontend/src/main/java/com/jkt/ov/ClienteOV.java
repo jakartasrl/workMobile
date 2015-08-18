@@ -25,6 +25,8 @@ public class ClienteOV extends DescriptibleOV {
 	private List<InscripcionImpositivaOV> inscripcionesImpositivas = new ArrayList<InscripcionImpositivaOV>();
 	
 	//Datos de la direccion
+	private DireccionOV dir = new DireccionOV();
+	private long idDir;
 	private String direccion;
 	private String codigoPostal;
 	private String localidad;
@@ -54,9 +56,15 @@ public class ClienteOV extends DescriptibleOV {
 	private String descVendedor;
 	
 	private List<ClienteSucursalOV> listaSucursales=new ArrayList<ClienteSucursalOV>();
-	
-	private List<DomicilioEntregaOV> domiciliosDeEntrega=new ArrayList<DomicilioEntregaOV>();
-	
-	private List<ContactoOV> contactos=new ArrayList<ContactoOV>();
 
+	
+	public List obtenerFiltro(){
+		ArrayList<FiltroOV> filtros = new ArrayList<FiltroOV>();
+		filtros.add(new FiltroOV("codigo", this.getFiltroCodigo(), "like", "string"));
+		filtros.add(new FiltroOV("descripcion", this.getFiltroDescripcion(), "like", "string"));
+		filtros.add(new FiltroOV("activo", "true", "igual", "boolean"));
+		return filtros;
+	}
+	
+	
 }
