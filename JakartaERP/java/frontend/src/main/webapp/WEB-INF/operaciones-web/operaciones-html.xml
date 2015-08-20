@@ -2789,4 +2789,13 @@
 		<transformer clase="com.jkt.transformers.WebTransformer" />
 	</operacion>
 	
+	<operacion name="facturar" clase="com.jkt.facturacion.operaciones.Facturar" inputOV="com.jkt.ov.ContainerOV" >
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="ID"/>
+		</input>
+		
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 </entity>

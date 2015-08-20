@@ -55,4 +55,6 @@ public class ProtocoloOV extends DescriptibleOV {
 	private String nombreUsuarioIngresoResultado;
 	private String nombreUsuarioIngresoAprobacion;
 	
+	private boolean seleccionado = false;
+	
 }

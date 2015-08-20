@@ -30,7 +30,7 @@
 								<label width="100%" value="@bind(each.nombreEquipo)" 						/>																								
 								<label width="100%" value="@bind(each.nombreUsuarioIngresoAprobacion)"	/>
 								<cell style="text-align:center">
-									<checkbox />
+									<checkbox checked="@bind(each.seleccionado)"/>
 								</cell>
 							</row>	
 						</template>					

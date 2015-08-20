@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.jkt.facturacion.InterfaceFacturacion" table="INTERFACE_FACTURACION">
+	<class name="com.jkt.facturacion.dominio.InterfaceFacturacion" table="INTERFACE_FACTURACION">
 		<id name="id" column="INTERFACE_FACTURACION_ID">
 			<generator class="native"></generator>
 		</id>

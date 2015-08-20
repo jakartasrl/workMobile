@@ -28,7 +28,7 @@
 
 			<div hflex="1" style="text-align: right ; ">
 				<label value="Usuario : " style="font-size:15px; color:grey;  vertical-align: middle;" />
-				<label value="El Zurdo systems" style="font-size:15px; color:black;  vertical-align: middle;" onCreate="mostrarNombre()"/>
+				<label value=" " style="font-size:15px; color:black;  vertical-align: middle;" onCreate="mostrarNombre()"/>
 			</div>
 
 		</hlayout>
