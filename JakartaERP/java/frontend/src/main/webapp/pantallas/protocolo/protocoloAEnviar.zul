@@ -1,0 +1,47 @@
+<zk viewModel="@id('vm') @load(viewModel)"  >
+
+	<vlayout>
+		
+		<panel sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Datos Generales" border="normal" width="100%" >
+
+			<panelchildren>
+			
+				<grid model="@bind(vm.listProtocolo)" emptyMessage="No existen protocolos pendientes de impresión">
+
+					<columns>
+						<column label="Protocolo" 			width="100px"/>
+						<column label="Fecha"				width="90px"/>
+						<column label="Cliente/Sucursal" 	width="400px"/>
+						<column label="Nro Pedido"			width="100px"/>
+						<column label="Creador por"			width="150px"/>
+						<column label="Equipo"				width="300px"/>
+						<column label="Aprobado por"		width="150px"/>
+						<column label=""					width="auto"/>
+					</columns>
+			
+					<rows>
+						<template name="model">
+							<row>
+								<label width="100%" value="@bind(each.codigo)"   							sclass="campoCodigo-medium" />
+								<datebox width="100%" value="@bind(each.fechaHoraEmision)" disabled="true" buttonVisible="false" format="dd/MM/yyyy" />
+								<label width="100%" value="@bind(each.descripcionCompleta)" 			 	/>
+								<label width="100%" value="@bind(each.nroPedido)" 						/>
+								<label width="100%" value="@bind(each.nombreUsuarioIngresoResultado)" 	/>
+								<label width="100%" value="@bind(each.nombreEquipo)" 						/>																								
+								<label width="100%" value="@bind(each.nombreUsuarioIngresoAprobacion)"	/>
+								<cell style="text-align:center">
+									<checkbox />
+								</cell>
+							</row>	
+						</template>					
+					</rows>
+				
+				</grid>
+				
+			</panelchildren>
+			
+		</panel>
+				
+	</vlayout>
+
+</zk>
