@@ -18,6 +18,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
@@ -246,7 +247,9 @@ public class ProtocoloAEnviarVM extends ViewModel implements IBasicOperations {
 		}
 		
 		if(seFacturo){
-			
+			redirectToMyself();
+		}else{
+			Clients.showNotification("No se ha facturado ningun protocolo. Seleccione los protocolos a facturar e intente nuevamente.");
 		}
 		
 	}

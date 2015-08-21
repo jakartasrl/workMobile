@@ -325,4 +325,11 @@ public abstract class ViewModel {
 	@Command
 	public void ping(@BindingParam("elemento") Timer timer){}
 
+	/**
+	 * Redirige hacia mi mismo, cumpliendo la funcion de actualizar.
+	 */
+	protected void redirectToMyself(){
+    	Executions.sendRedirect(Executions.getCurrent().getDesktop().getFirstPage().getRequestPath());
+	}
+	
 }
