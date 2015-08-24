@@ -20,6 +20,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.TreeNode;
@@ -825,14 +826,17 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			List<FormaFacturacionOV> facturaciones = this.comprobanteOV.getFacturaciones();
 
 			if (facturaciones.isEmpty()) {
-				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
-				actualizarTareasYArbol();
+				
+				Clients.showNotification("No existen formas de facturacion para facturar.");
+//				this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());
+//				actualizarTareasYArbol();
 			}else{
 				for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
 					
 					this.tareaAgregada.setEsTareaFacturacion(true);
+					this.tareaAgregada.setIdFormaFacturacion(formaFacturacionOV.getId());
 					
 					this.tareaAgregada.setEstado(estadoTemporal);
 					

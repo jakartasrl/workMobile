@@ -20,9 +20,7 @@ public class ValidadorTareasPedido extends ValidacionDeNegocio {
 				if(DatoNodo.Estado.EN_EJECUCION==tarea.getEstado().getEstado(tarea.getIdEstado())){
 					//Facturar el pedido, con la forma de facturacion.
 					JakartaERPFacturador facturador = new FacturadorPedido(getServiceRepository());
-//					facturador.ejecutarFacturacion(tarea.getPedido());
-					facturador.ejecutarFacturacion(null);
-
+					facturador.ejecutarFacturacion(tarea);
 				}
 			}
 		} catch (JakartaException e) {

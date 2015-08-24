@@ -52,6 +52,7 @@ public class GenerarPlanificacionPedido extends Operation {
 		//Todas las tareas deben ser persistidas, y ademas deben ser agregadas a un mapa, para poder generar el grafo de correspondencias...
 		Map<String, TareaPedido> tareasEnMapa=new HashMap<String, TareaPedido>();
 		for (TareaPedido tareaPedido : tareas) {
+			tareaPedido.setPedido(pedidoOriginal); //para las dobles referencias y asi poder recuperar desde la tarea, el pedido, y poder facturarlo...
 			guardar(tareaPedido);
 			tareasEnMapa.put(String.valueOf(tareaPedido.getRandomNumber()), tareaPedido);
 		}

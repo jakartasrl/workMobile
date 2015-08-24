@@ -78,7 +78,6 @@ public class ValidadorPedido extends ValidadorComprobantes {
 			
 		}
 		
-
 //		List<TareaPedido> tareas = p.getTareas();
 //		for (TareaPedido tareaPedido : tareas) {
 //			tareaPedido.setPedido(p);

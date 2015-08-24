@@ -7,7 +7,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.Sector;
@@ -15,13 +14,17 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.grafo.DatoNodo;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
+//@EqualsAndHashCode(callSuper=true)
 public class TareaPedido extends DatoNodo {
 
-//	@NotNull(message="Un detalle de pedido debe estar relacionado a un pedido.")
-//	private Pedido pedido;
+//	@NotNull(message="Una tarea de pedido debe estar relacionado a un pedido.")
+	private Pedido pedido;
 	
+	/*
+	 * Si es una tarea a facturase, tendra una forma de facturacion asociada
+	 */
 	private boolean esTareaFacturacion = false;
+	private FormaFacturacion formaFacturacion;
 	
 	//transiente! para generar las correspondencias.
 	private int randomNumber;
@@ -82,23 +85,23 @@ public class TareaPedido extends DatoNodo {
 	private long idSector;
 	private Date fechaFiltro1 , fechaFiltro2;
 	
-//	public boolean equals(Object other) {
-//		if (this == other) return true;
-//		if ( !(other instanceof TareaPedido) ) return false;
-//		
-//		final TareaPedido entity = (TareaPedido) other;
-//		
-//		if (entity.getId()==0) return false;
-//		
-//		if ( !(entity.getId()==getId())) return false;
-//		
-//		return true;
-//	}
-//	
-//	public int hashCode() {
-//		int result;
-//		result = (int) (29 * getId());
-//		return result;
-//	}
+	public boolean equals(Object other) {
+		if (this == other) return true;
+		if ( !(other instanceof TareaPedido) ) return false;
+		
+		final TareaPedido entity = (TareaPedido) other;
+		
+		if (entity.getId()==0) return false;
+		
+		if ( !(entity.getId()==getId())) return false;
+		
+		return true;
+	}
+	
+	public int hashCode() {
+		int result;
+		result = (int) (29 * getId());
+		return result;
+	}
 	
 }

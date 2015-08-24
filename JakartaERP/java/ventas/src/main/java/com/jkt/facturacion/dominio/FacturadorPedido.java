@@ -1,12 +1,15 @@
 package com.jkt.facturacion.dominio;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.jkt.dominio.PersistentEntity;
+import com.jkt.pedido.dominio.FormaFacturacion;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
+import com.jkt.pedido.dominio.TareaPedido;
 import com.jkt.persistencia.IServiceRepository;
 
 public class FacturadorPedido extends JakartaERPFacturador {
@@ -17,20 +20,20 @@ public class FacturadorPedido extends JakartaERPFacturador {
 
 	@Override
 	public List<Long> ejecutarFacturacion(PersistentEntity entity) throws Exception {
-		Pedido pedido = (Pedido) entity;
-		String requestERP = requestERP(getRequestXMLBytes(pedido));
+		TareaPedido tarea = (TareaPedido) entity;
+		String requestERP = requestERP(getRequestXMLBytes(tarea));
 		return returnResult(requestERP);
 	}
 
-	private byte[] getRequestXMLBytes(Pedido pedido) throws Exception {
+	private byte[] getRequestXMLBytes(TareaPedido tarea) throws Exception {
 		StringBuffer str = generarHeader();
-		str.append(crearTablaDesdePedido(pedido));
+		str.append(crearTablaDesdePedido(tarea));
 		finalizarHeader(str);
 		return str.toString().getBytes();
 	}
 
-	private String crearTablaDesdePedido(Pedido pedido) {
-		TablaFacturacionCabeceraDTO dto = crearDTODesdePedido(pedido);
+	private String crearTablaDesdePedido(TareaPedido tareaPedido) {
+		TablaFacturacionCabeceraDTO dto = crearDTODesdePedido(tareaPedido.getPedido());
 		
 		StringBuffer str=new StringBuffer();
 		str.append(StringUtils.EMPTY)
@@ -75,10 +78,10 @@ public class FacturadorPedido extends JakartaERPFacturador {
 		
 		.append(">");
 		
-		List<PedidoDet> detalles = pedido.getDetalles();
-		for (PedidoDet pedidoDetalle : detalles) {
-			str.append(crearDetalle(pedidoDetalle));
-		}
+//		List<PedidoDet> detalles = pedido.getDetalles();
+//		for (PedidoDet pedidoDetalle : detalles) {
+			str.append(crearDetalle(tareaPedido.getFormaFacturacion()));
+//		}
 		
 		str.append("</Fila>")
 		.append("</Tabla>");
@@ -86,9 +89,9 @@ public class FacturadorPedido extends JakartaERPFacturador {
 		return str.toString();
 	}
 	
-	private String crearDetalle(PedidoDet pedidoDet) {
+	private String crearDetalle(FormaFacturacion fFacturacion) {
 		
-		TablaFacturacionDetalleDTO dto = crearDTODesdeDetallePedido(pedidoDet);
+		TablaFacturacionDetalleDTO dto = crearDTODesdeFormaFacturacion(fFacturacion);
 		
 		StringBuffer str=new StringBuffer();
 		str.append(StringUtils.EMPTY)
@@ -137,14 +140,21 @@ public class FacturadorPedido extends JakartaERPFacturador {
 		return str.toString();
 	}
 
+	static private SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yy");
+
 	private TablaFacturacionCabeceraDTO crearDTODesdePedido(Pedido pedido) {
 		TablaFacturacionCabeceraDTO dto = new TablaFacturacionCabeceraDTO();
+		dto.setCodListaPrecio(pedido.getListaPrecios().getCodigo());
+		dto.setCodMon(pedido.getListaPrecios().getMoneda().getCodigo());
+		dto.setFecEmision(sdf.format(pedido.getFecha()));//creo que deberia usar el format del date...
+		dto.setObsPed(pedido.getReferencia());
+		dto.setOidCliSuc(String.valueOf(pedido.getClienteSucursal().getId()));
 		return dto;
 	}
 	
-	private TablaFacturacionDetalleDTO crearDTODesdeDetallePedido(PedidoDet pedidoDetalle) {
+	private TablaFacturacionDetalleDTO crearDTODesdeFormaFacturacion(FormaFacturacion fFacturacion) {
 		TablaFacturacionDetalleDTO dto = new TablaFacturacionDetalleDTO();
-		dto.setOidPedDet(String.valueOf(pedidoDetalle.getId()));
+//		dto.setOidPedDet(String.valueOf(pedidoDetalle.getId()));
 		return dto;
 	}
 

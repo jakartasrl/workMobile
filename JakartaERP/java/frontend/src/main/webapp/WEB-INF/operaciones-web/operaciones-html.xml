@@ -608,6 +608,7 @@
 			</campoSalida>
 
 			<campoSalida value="facturaciones" 			target="formasFacturacion" >
+				<campoSalida value="id"			 		target="id"/>
 				<campoSalida value="descripcion" 		target="descripcion"/>
 				<campoSalida value="porcentaje" 		target="porcentaje"/>
 				<campoSalida value="importe" 			target="importe"/>
@@ -1488,6 +1489,8 @@
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
 
 				<campoEntrada propertyOV="esTareaFacturacion" metodo="setEsTareaFacturacion" />
+				<campoEntrada propertyOV="idFormaFacturacion" metodo="setFormaFacturacion" />
+
 				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="descripcionAbreviada" metodo="setDescripcionAbreviada" /> <!-- texto corto -->
 				<campoEntrada propertyOV="descripcionCompleta" metodo="setDescripcionCompleta" /> <!-- texto largo -->
