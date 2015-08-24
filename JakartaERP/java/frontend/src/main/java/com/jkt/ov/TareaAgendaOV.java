@@ -28,6 +28,7 @@ public class TareaAgendaOV extends ObjectView implements Observer{
 	private String descripcionTarea;
 	private String descripcionAbreviada;
 	private String descripcionCompleta;
+	private boolean esTareaFacturacion = false;
 	
 	private List<ComentarioTareaOV> comentarios =  new ArrayList<ComentarioTareaOV>();
 	

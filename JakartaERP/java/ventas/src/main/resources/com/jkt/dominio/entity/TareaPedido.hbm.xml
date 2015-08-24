@@ -15,6 +15,8 @@
         </property>
 		
 		<property name="activo" column="ACTIVO" type="boolean" />
+		<property name="esTareaFacturacion" column="TAREA_FACTURACION" type="boolean" />
+		
 		
 		<property name="descripcion" column="DESCRIPCION"/>
 		<property name="descripcionAbreviada" column="DESCRIPCION_ABREV"/>
@@ -29,6 +31,7 @@
 		
 		<many-to-one name="sector" class="com.jkt.dominio.Sector" column="SECTOR_ID" cascade="all"></many-to-one>
 		
+<!-- 		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" cascade="none" column="PEDIDO_ID"/> -->
 <!-- 		<many-to-one name="pedido" class="com.jkt.pedido.dominio.Pedido" cascade="none" column="PEDIDO_ID"/> -->
 		
 		<list name="logs" lazy="true" cascade="all">

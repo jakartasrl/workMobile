@@ -13,6 +13,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.excepcion.ValidacionDeNegocioException;
 import com.jkt.pedido.dominio.Pedido;
 import com.jkt.pedido.dominio.PedidoDet;
+import com.jkt.pedido.dominio.TareaPedido;
 import com.jkt.validadores.ValidadorComprobantes;
 
 @Service
@@ -77,6 +78,11 @@ public class ValidadorPedido extends ValidadorComprobantes {
 			
 		}
 		
+
+//		List<TareaPedido> tareas = p.getTareas();
+//		for (TareaPedido tareaPedido : tareas) {
+//			tareaPedido.setPedido(p);
+//		}
 		
 //		PresupuestoHistorial historial = new PresupuestoHistorial();
 //		BeanUtils.copyProperties(p, historial);

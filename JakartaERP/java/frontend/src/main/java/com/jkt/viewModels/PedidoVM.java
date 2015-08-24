@@ -245,6 +245,7 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 			DescriptibleOV tarea = Operaciones.recuperarObjetoDescriptible("tarea", Long.valueOf(paramTareaFacturar.getValorNumero()));
 			
 			tareaAgendaOV.setTarea(tarea);
+			tareaAgendaOV.setEsTareaFacturacion(true);
 			this.tareaAgregada= tareaAgendaOV;
 
 			tratamientoTarea();
@@ -830,7 +831,9 @@ public class PedidoVM extends ComprobanteVM implements IBasicOperations {
 				for (FormaFacturacionOV formaFacturacionOV : facturaciones) {
 					this.tareaAgregada=new TareaAgendaOV();
 					this.tareaAgregada.setTarea(tarea);
-
+					
+					this.tareaAgregada.setEsTareaFacturacion(true);
+					
 					this.tareaAgregada.setEstado(estadoTemporal);
 					
 					this.tareaAgregada.setDescripcionTarea(this.tareaAgregada.getTarea().getDescripcion());

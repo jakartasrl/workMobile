@@ -2,6 +2,7 @@ package com.jkt.facturacion.operaciones;
 
 import java.util.Map;
 
+import com.jkt.facturacion.dominio.FacturadorProtocolo;
 import com.jkt.facturacion.dominio.JakartaERPFacturador;
 import com.jkt.laboratorio.dominio.Protocolo;
 import com.jkt.operaciones.Operation;
@@ -25,10 +26,8 @@ public class Facturar extends Operation {
 			Pedido pedido = (Pedido) obtener(Pedido.class, String.valueOf(idPedido));
 		}
 		
-		
-		JakartaERPFacturador facturador = new JakartaERPFacturador(getServiceRepository());
+		JakartaERPFacturador facturador = new FacturadorProtocolo(getServiceRepository());
 		facturador.ejecutarFacturacion(protocolo);
-		
 		
 	}
 

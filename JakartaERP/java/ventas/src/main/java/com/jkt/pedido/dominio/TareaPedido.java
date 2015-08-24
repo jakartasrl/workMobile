@@ -17,7 +17,11 @@ import com.jkt.grafo.DatoNodo;
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class TareaPedido extends DatoNodo {
+
+//	@NotNull(message="Un detalle de pedido debe estar relacionado a un pedido.")
+//	private Pedido pedido;
 	
+	private boolean esTareaFacturacion = false;
 	
 	//transiente! para generar las correspondencias.
 	private int randomNumber;

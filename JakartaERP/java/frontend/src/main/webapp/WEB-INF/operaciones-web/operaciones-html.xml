@@ -1487,6 +1487,7 @@
 				<campoEntrada propertyOV="codigoTarea" metodo="setCodigo" />
 				<campoEntrada propertyOV="randomNumber" metodo="setRandomNumber" />
 
+				<campoEntrada propertyOV="esTareaFacturacion" metodo="setEsTareaFacturacion" />
 				<campoEntrada propertyOV="descripcionTarea" metodo="setDescripcion" />
 				<campoEntrada propertyOV="descripcionAbreviada" metodo="setDescripcionAbreviada" /> <!-- texto corto -->
 				<campoEntrada propertyOV="descripcionCompleta" metodo="setDescripcionCompleta" /> <!-- texto largo -->

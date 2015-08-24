@@ -84,6 +84,7 @@ public class ProtocoloAEnviarVM extends ViewModel implements IBasicOperations {
 		
 		filtros.add(new FiltroOV("estado", String.valueOf(Protocolo.Estado.TERMINADO.getId()), ServiceRepository.CONDICION_IGUAL, ServiceRepository.INTEGER));
 		filtros.add(new FiltroOV("laboratorio.id", String.valueOf(this.idLaboratorio), ServiceRepository.CONDICION_IGUAL, ServiceRepository.LONG));
+		filtros.add(new FiltroOV("idPedido", String.valueOf(0L), ServiceRepository.CONDICION_DISTINTO, ServiceRepository.LONG));
 		filtros.add(new FiltroOV("activo", String.valueOf(true), ServiceRepository.CONDICION_IGUAL, ServiceRepository.BOOLEAN));
 		
 		c.setFiltros(filtros);
