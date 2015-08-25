@@ -18,14 +18,18 @@ import com.jkt.ov.DescriptibleOV;
 @Data
 public class ConsultaStockVM extends ViewModel {
 
+	private String filtroCodigo;
+	private String filtroDescripcion;
+	
 	private List<DescriptibleOV> productos = new ArrayList<DescriptibleOV>();
+	private List<DescriptibleOV> tiposDeProducto = new ArrayList<DescriptibleOV>();
 	
 	private void mostrarMensajeInfo(String msg){
-		mostrarMensaje(msg,"error");
+		mostrarMensaje(msg,"info");
 	}
 	
 	private void mostrarMensajeError(String msg){
-		mostrarMensaje(msg,"info");
+		mostrarMensaje(msg,"error");
 	}
 	
 	private void mostrarMensaje(String msg, String tipo){
@@ -34,6 +38,45 @@ public class ConsultaStockVM extends ViewModel {
 	
 	@Init
 	public void init(){
+//		mostrarMensajeInfo("Bienvenido a Spirax Sarco");
+		
+		DescriptibleOV tipo1 = new DescriptibleOV();
+		tipo1.setCodigo("T1");
+		tipo1.setDescripcion("Transformador");
+
+		DescriptibleOV tipo2 = new DescriptibleOV();
+		tipo2.setCodigo("T2");
+		tipo2.setDescripcion("Bobina");
+		
+		DescriptibleOV tipo3 = new DescriptibleOV();
+		tipo3.setCodigo("T3");
+		tipo3.setDescripcion("Vidrio");
+		
+		tiposDeProducto.add(tipo1);
+		tiposDeProducto.add(tipo2);
+		tiposDeProducto.add(tipo3);
+	}
+	
+	@Override
+	@GlobalCommand("actualizacionGrilla")
+	@NotifyChange("productos")
+	public void actualizar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException {}
+
+	@Override
+	public void cancelarCustomizado() throws JakartaException {
+
+	}
+
+	@Override
+	protected String retrieveMethod() {
+		return "actualizacionGrilla";
+	}
+	
+	@Command
+	@NotifyChange("productos")
+	public void filtrar(){
+		
+		this.productos=new ArrayList<DescriptibleOV>();
 		
 		DescriptibleOV d1=new DescriptibleOV();
 		d1.setCodigo("POT");
@@ -63,26 +106,12 @@ public class ConsultaStockVM extends ViewModel {
 		productos.add(d3);
 		productos.add(d4);
 		productos.add(d1);
-	}
-	
-	@Override
-	@GlobalCommand("actualizacionGrilla")
-	@NotifyChange("productos")
-	public void actualizar() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, JakartaException {}
-
-	@Override
-	public void cancelarCustomizado() throws JakartaException {
-
+		
 	}
 
-	@Override
-	protected String retrieveMethod() {
-		return "actualizacionGrilla";
-	}
-	
 	@Command
-	public void filtrar(){
-		mostrarMensajeError("Espere a que se desarrolle señor!");
+	public void limpiar(){
+		redirectToMyself();
 	}
-
+	
 }

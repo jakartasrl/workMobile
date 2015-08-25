@@ -84,6 +84,13 @@ table{
 	height: 2px;
 }
 
+.campoCodigo-maximum{
+/* 	text-align: center; */
+	padding: 0px;	
+	width: 300px;
+	height: 2px;
+}
+
 .z-listcell-content{
 	background-color: white;
 }

@@ -1,32 +1,39 @@
 <?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
 
+
 <zk>
 
+	<style src="/style/template.css" />
+	
 	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
 	
 		<vlayout>
 	
 	
-			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Filtros" border="normal" >
-				<panelchildren>
+			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Stock de Productos" border="normal" >
+				<panelchildren style="padding:10px;">
 					<vlayout>
 						<hlayout hflex="1">
 							<label width="auto">Ingrese un código</label>
-							<textbox sclass="campoCodigo-medium" width="30%"></textbox>
+							<textbox sclass="campoCodigo-medium" value="@bind(vm.filtroCodigo)" ></textbox>
 							
 							<space></space>
 							<label width="auto">Ingrese una descripción</label>
-							<textbox sclass="campoCodigo-large" ></textbox>
+							<textbox sclass="campoCodigo-maximum" value="@bind(vm.filtroDescripcion)"></textbox>
 
 							<space></space>
 							<label width="auto">Ingrese un tipo de producto</label>
-							<textbox sclass="campoCodigo-evlarge"></textbox>
+							<combobox sclass="campoCodigo-evlarge" model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos">
+								<template name="model" var="tProd">
+									<comboitem label="@bind(tProd.descripcion)" />
+								</template>
+							</combobox>
 							
+							<space></space>
+							<button label="Filtrar" onClick="@command('filtrar')" />
+							<space></space>					
+							<button label="Limpiar" onClick="@command('limpiar')" />						
 							
-							
-						</hlayout>
-						<hlayout>
-							<button label="Filtrar" onClick="@command('filtrar')"></button>						
 						</hlayout>
 					</vlayout>
 				</panelchildren>
@@ -40,10 +47,10 @@
 					<grid model="@bind(vm.productos)" emptyMessage="No existen productos">
 	
 						<columns>
-							<column label="Codigo" align="center"			hflex="1"/>
-							<column label="Descripcion"	align="center"	hflex="4"/>
-							<column label="Stock"		align="center"	hflex="1"/>
-							<column label="Disponible"	align="center"	hflex="1"/>
+							<column label="Codigo" align="left"		hflex="1"/>
+							<column label="Descripcion"	align="left"	hflex="4"/>
+							<column label="Stock"		align="left"	hflex="1"/>
+							<column label="Disponible"	align="left"	hflex="1"/>
 						</columns>
 				
 						<rows>
