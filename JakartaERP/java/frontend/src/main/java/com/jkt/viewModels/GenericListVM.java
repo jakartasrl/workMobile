@@ -6,22 +6,17 @@ import lombok.Data;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Window;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
-import com.jkt.ov.LaboratorioOV;
 import com.jkt.ov.ListDescriptibleOV;
-import com.jkt.ov.ListLaboratorioOV;
 
 
 /**

@@ -5,24 +5,19 @@
     <groupId>com.jkt</groupId>
     <artifactId>jkt</artifactId>
     <version>0.0.1</version>
-<!--     ..java -->
-<!--     ../..jakartaERP -->
-<!--     ../../..App3000 -->
     <relativePath>../../../pom.xml</relativePath>
   </parent>
 
 
-  <artifactId>frontend</artifactId>
+  <artifactId>spiraxsarco</artifactId>
   <packaging>war</packaging>
-  <name>frontend</name>
-  <description>WebApp definicion</description>
+  <name>spiraxsarco</name>
+  <description></description>
   
   <properties>
   		<zk.version>7.0.3</zk.version>
-<!--   		<zk.version>8.0.0-RC</zk.version> -->
 		<java-version>1.6</java-version>
 		<springframework.version>4.0.5.RELEASE</springframework.version>
-<!-- 		<springframework.version>3.2.4.RELEASE</springframework.version> -->
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -200,20 +195,6 @@
 	</dependencies>
 	<build>
 		<plugins>
-<!-- 			<plugin> -->
-<!-- 				<artifactId>maven-eclipse-plugin</artifactId> -->
-<!-- 				<version>2.9</version> -->
-<!-- 				<configuration> -->
-<!-- 					<additionalProjectnatures> -->
-<!-- 						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature> -->
-<!-- 					</additionalProjectnatures> -->
-<!-- 					<additionalBuildcommands> -->
-<!-- 						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand> -->
-<!-- 					</additionalBuildcommands> -->
-<!-- 					<downloadSources>true</downloadSources> -->
-<!-- 					<downloadJavadocs>true</downloadJavadocs> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -228,15 +209,6 @@
 				</configuration>
 			</plugin>
 			
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.codehaus.mojo</groupId> -->
-<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
-<!-- 				<version>1.2.1</version> -->
-<!-- 				<configuration> -->
-<!-- 					<mainClass>org.test.int1.Main</mainClass> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-		
 		</plugins>
 	</build>
 </project>

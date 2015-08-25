@@ -1,62 +1,68 @@
-<?page title="Jakarta ERP" id="JakartaERP" cacheable="false" ?>
+<?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
 
 <zk>
 
-	<style src="/style/template.css" />
-		
-	<panel 
-		id="tool" height="200px" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 
-		style="margin-top:10%; margin-left:35%;margin-right:35% ; padding:30px;background-color:transparent"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')"
-	>
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
 	
-		<panelchildren>
-		
-			<grid style="border-style:none">
-				<columns>
-					<column></column>
-					<column></column>
-				</columns>
+		<vlayout>
+	
+	
+			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Filtros" border="normal" >
+				<panelchildren>
+					<vlayout>
+						<hlayout hflex="1">
+							<label width="auto">Ingrese un código</label>
+							<textbox sclass="campoCodigo-medium" width="30%"></textbox>
+							
+							<space></space>
+							<label width="auto">Ingrese una descripción</label>
+							<textbox sclass="campoCodigo-large" ></textbox>
+
+							<space></space>
+							<label width="auto">Ingrese un tipo de producto</label>
+							<textbox sclass="campoCodigo-evlarge"></textbox>
+							
+							
+							
+						</hlayout>
+						<hlayout>
+							<button label="Filtrar" onClick="@command('filtrar')"></button>						
+						</hlayout>
+					</vlayout>
+				</panelchildren>
 				
-				<rows>
-					<row>
-						<cell>
-							<label style="margin-left:10px;" value="Usuario"></label>
-						</cell>
-						<cell>
-							<textbox value="@bind(vm.usuario)" onOK="@command('acceder')"/>
-						</cell>
-					</row>
-
-					<row>
-						<cell>
-							<label style="margin-left:10px;" value="Password" />
-						</cell>
-						<cell>
-							<textbox type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
-						</cell>
-					</row>
-					
-					<row>
-						<cell colspan="2" style="text-align:center">
-							<button label="Acceder" width="50%" onClick="@command('acceder')" />
-						</cell>
-					</row>
-
-					<row>
-						<cell colspan="2" style="text-align:center">
-							<label style="color:red;font-size:10px;" value="@bind(vm.error)" visible="@bind(vm.showError)" />
-						</cell>
-					</row>
-
-					
-				</rows>
+			</panel>
+			
+			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Stock de Productos" border="normal" >
+	
+				<panelchildren>
 				
-			</grid>
-		
-		
-		</panelchildren>
-	</panel>
-
+					<grid model="@bind(vm.productos)" emptyMessage="No existen productos">
+	
+						<columns>
+							<column label="Codigo" align="center"			hflex="1"/>
+							<column label="Descripcion"	align="center"	hflex="4"/>
+							<column label="Stock"		align="center"	hflex="1"/>
+							<column label="Disponible"	align="center"	hflex="1"/>
+						</columns>
+				
+						<rows>
+							<template name="model">
+								<row>
+									<label width="100%" value="@bind(each.codigo)" />
+									<label width="100%" value="@bind(each.descripcion)" />
+									<label width="100%" value="@bind(each.campoAdicional1)" />
+									<label width="100%" value="@bind(each.campoAdicional2)" />
+								</row>
+							</template>					
+						</rows>
+					
+					</grid>
+					
+				</panelchildren>
+				
+			</panel>
+					
+		</vlayout>
+	</div>
 </zk>

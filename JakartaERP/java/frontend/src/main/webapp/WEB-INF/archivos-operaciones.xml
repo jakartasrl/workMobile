@@ -10,13 +10,5 @@
 ]>
 
 <operaciones>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones.xml" />
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-varios.xml"/>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-common.xml"/>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-seguridad.xml"/>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-ventas.xml"/>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-laboratorio.xml"/>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-articulos.xml"/>
-	<operacion ruta="/WEB-INF/operaciones-delphi/operaciones-clientes.xml"/>
 </operaciones>
 
