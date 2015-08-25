@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(of={"id"})
 public abstract class ObjectView extends Observable implements Serializable {
 	private long id=0L;
 	private String nameOV;// Key para cando tenga mas de 2 input/envie 2 OV para una misma operacion
