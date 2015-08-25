@@ -184,36 +184,13 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.6</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.jkt</groupId>
 			<artifactId>web</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>com.jkt</groupId>
-			<artifactId>clientes</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jkt</groupId>
-			<artifactId>comprobantes</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jkt</groupId>
-			<artifactId>laboratorio</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jkt</groupId>
-			<artifactId>varios</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jkt</groupId>
-			<artifactId>ventas</artifactId>
-			<version>0.0.1</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-cypher-commons</artifactId>

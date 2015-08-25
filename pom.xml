@@ -27,35 +27,10 @@
 		<module>./Common/Framework/java/common</module>
 		<module>./Common/Framework/java/context</module>
 		<module>./JakartaERP/java/frontend</module>
-		<module>./Common/varios</module>
-		<module>./Common/eventos</module>
 		<module>./Common/Framework/java/web</module>
 		<module>./Common/Framework/java/persistencia</module>
 		<module>./Common/Framework/java/objetosVista</module>
-		<module>./Common/seguridad</module>
 	
-		<module>./JakartaERP/java/articulos</module>
-		<module>./JakartaERP/java/laboratorio</module>
-		<module>./JakartaERP/java/clientes</module>
-		<module>./JakartaERP/java/ventas</module>
-		<module>./JakartaERP/java/comprobantes</module>
-	
-	
-	<!-- para el nexus 
-		<module>common</module>
-		<module>context</module>
-		<module>frontend</module>
-		<module>varios</module>
-		<module>web</module>
-		<module>persistencia</module>
-		<module>seguridad</module>
-	
-		<module>articulos</module>
-		<module>laboratorio</module>
-		<module>clientes</module>
-		<module>ventas</module>
-		<module>comprobantes</module>
--->
 
 	</modules>
 	
