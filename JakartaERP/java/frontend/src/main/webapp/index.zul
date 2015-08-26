@@ -1,40 +1,46 @@
 <?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
-
+<?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
 
 <zk>
-
 	<style src="/style/template.css" />
 	
-	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
+	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
 	
-		<vlayout>
+		<vlayout hflex="1" height="auto">
 	
 	
 			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Stock de Productos" border="normal" >
 				<panelchildren style="padding:10px;">
-					<vlayout>
+					<vlayout >
 						<hlayout hflex="1">
-							<label width="auto">Ingrese un código</label>
-							<textbox sclass="campoCodigo-medium" value="@bind(vm.filtroCodigo)" ></textbox>
+							<hlayout hflex="1">
+								<label width="auto">Código</label>
+								<textbox sclass="campoCodigo-medium" value="@bind(vm.filtroCodigo)" ></textbox>
+							</hlayout>
 							
-							<space></space>
-							<label width="auto">Ingrese una descripción</label>
-							<textbox sclass="campoCodigo-maximum" value="@bind(vm.filtroDescripcion)"></textbox>
+							<hlayout hflex="1">
+								<label width="auto">Descripción</label>
+								<textbox sclass="campoCodigo-maximum" value="@bind(vm.filtroDescripcion)"></textbox>
+							</hlayout>
 
-							<space></space>
-							<label width="auto">Ingrese un tipo de producto</label>
-							<combobox sclass="campoCodigo-evlarge" model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos">
-								<template name="model" var="tProd">
-									<comboitem label="@bind(tProd.descripcion)" />
-								</template>
-							</combobox>
+							<hlayout hflex="1">
+								<label width="auto">Tipo de Producto</label>
+								<combobox sclass="campoCodigo-evlarge" model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos">
+									<template name="model" var="tProd">
+										<comboitem label="@bind(tProd.descripcion)" />
+									</template>
+								</combobox>
+							</hlayout>
 							
-							<space></space>
+							
+						</hlayout>
+						
+						<hlayout hflex="1">
 							<button label="Filtrar" onClick="@command('filtrar')" />
 							<space></space>					
 							<button label="Limpiar" onClick="@command('limpiar')" />						
-							
 						</hlayout>
+						
 					</vlayout>
 				</panelchildren>
 				
