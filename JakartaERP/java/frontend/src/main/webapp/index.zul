@@ -4,48 +4,99 @@
 <zk>
 	<style src="/style/template.css" />
 	
+	<style>
+		table{
+			line-height: normal;
+			table-layout:fixed;
+		}
+	</style>
+	
 	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
 	
 		<vlayout hflex="1" height="auto">
 	
+			<hlayout style="text-align:center; padding:3px;">
+				<label style="color: darkblue;font-size: 100%;font-weight: bold;">Spirax Sarco</label>
+			</hlayout>
 	
-			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Stock de Productos" border="normal" >
-				<panelchildren style="padding:10px;">
-					<vlayout >
-						<hlayout hflex="1">
-							<hlayout hflex="1">
-								<label width="auto">Código</label>
-								<textbox sclass="campoCodigo-medium" value="@bind(vm.filtroCodigo)" ></textbox>
-							</hlayout>
-							
-							<hlayout hflex="1">
-								<label width="auto">Descripción</label>
-								<textbox sclass="campoCodigo-maximum" value="@bind(vm.filtroDescripcion)"></textbox>
-							</hlayout>
+			<groupbox id="gb3" mold="3d" style="overflow:hidden;padding:5px;" hflex="1" open="true">
+                <attribute name="onOpen">
+                    <![CDATA[arrow.setSclass("open-" + self.isOpen());]]>
+                </attribute>
+                <caption label="@bind(vm.descripcionFiltro)" width="100%" sclass="customIcon" id="captionGB">
+                    <span id="arrow" class="open-true" />
+                </caption>
+                
+                <vlayout >
+					<hlayout hflex="1" >
+						<hlayout hflex="1" >
+							<label width="auto">Código</label>
+							<textbox hflex="1" sclass="campoCodigo-medium" value="@bind(vm.filtroCodigo)" ></textbox>
+						</hlayout>
+						
+						<hlayout hflex="2" >
+							<label width="auto">Descripción</label>
+							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"></textbox>
+						</hlayout>
+					</hlayout>
 
-							<hlayout hflex="1">
-								<label width="auto">Tipo de Producto</label>
-								<combobox sclass="campoCodigo-evlarge" model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos">
-									<template name="model" var="tProd">
-										<comboitem label="@bind(tProd.descripcion)" />
-									</template>
-								</combobox>
-							</hlayout>
-							
-							
-						</hlayout>
+					<hlayout >
+						<label width="auto">Tipo de Producto</label>
+						<combobox model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos" onSelect="@command('activarFiltro')" selectedItem="@bind(vm.tipoProductoSeleccionado)">
+							<template name="model" var="tProd">
+								<comboitem label="@bind(tProd.descripcion)" />
+							</template>
+						</combobox>
+					</hlayout>
+					
+					<hlayout id="filtroTipoProducto" visible="@bind(vm.filtroProductoActivo)">
 						
-						<hlayout hflex="1">
-							<button label="Filtrar" onClick="@command('filtrar')" />
-							<space></space>					
-							<button label="Limpiar" onClick="@command('limpiar')" />						
-						</hlayout>
 						
-					</vlayout>
-				</panelchildren>
-				
-			</panel>
-			
+						
+						
+						
+						<listbox model="@bind(vm.detallesTipoProducto)">
+							
+							<listhead>
+								<listheader value="UNO"></listheader>
+								<listheader value="DOS"></listheader>
+							</listhead>
+							
+							<template name="model" >
+								<listitem>
+									<listcell label="@bind(each.id)"></listcell>								
+									<listcell label="@bind(each.descripcion)"></listcell>								
+								</listitem>						
+							</template>
+						
+						</listbox>
+						
+												
+<!-- 						<groupbox hflex="1"> -->
+<!-- 							<caption label="Caracteristicas de producto" ></caption> -->
+							
+<!-- 							<vlayout> -->
+<!-- 								<combobox model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos" > -->
+<!-- 									<template name="model" var="tProd"> -->
+<!-- 										<comboitem label="@bind(tProd.descripcion)" /> -->
+<!-- 									</template> -->
+<!-- 								</combobox> -->
+<!-- 							</vlayout> -->
+
+<!-- 						</groupbox> -->
+
+					</hlayout>
+							
+					
+					<hlayout style="overflow:hidden;padding:5px;text-align:center">
+						<button label="Filtrar" onClick="@command('filtrar', groupbox = gb3, caption = captionGB)" />
+						<space></space>
+						<button label="Limpiar" onClick="@command('limpiar')" />
+					</hlayout>
+						
+				</vlayout>
+            </groupbox>
+	
 			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Stock de Productos" border="normal" >
 	
 				<panelchildren>
@@ -53,10 +104,10 @@
 					<grid model="@bind(vm.productos)" emptyMessage="No existen productos">
 	
 						<columns>
-							<column label="Codigo" align="left"		hflex="1"/>
-							<column label="Descripcion"	align="left"	hflex="4"/>
+							<column label="Codigo" 		align="left"	hflex="1" sort="auto(codigo)"/>
+							<column label="Descripcion"	align="left"	hflex="4" sort="auto(descripcion)"/>
 							<column label="Stock"		align="left"	hflex="1"/>
-							<column label="Disponible"	align="left"	hflex="1"/>
+<!-- 							<column label="Disponible"	align="left"	hflex="1"/> -->
 						</columns>
 				
 						<rows>
@@ -65,7 +116,7 @@
 									<label width="100%" value="@bind(each.codigo)" />
 									<label width="100%" value="@bind(each.descripcion)" />
 									<label width="100%" value="@bind(each.campoAdicional1)" />
-									<label width="100%" value="@bind(each.campoAdicional2)" />
+<!-- 									<label width="100%" value="@bind(each.campoAdicional2)" /> -->
 								</row>
 							</template>					
 						</rows>

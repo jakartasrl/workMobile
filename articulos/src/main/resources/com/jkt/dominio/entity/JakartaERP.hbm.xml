@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jkt.dominio.JakartaERP" table="cnJakartaERP">
+		<id name="id" column="jakarta_erp_id">
+			<generator class="native" />
+		</id>
+
+		<property name="ip" column="ip" />
+		<property name="port" column="port" />
+		<property name="aplicacion" column="aplicacion" />
+		<property name="servlet" column="servlet" />
+		<property name="usuario" column="usuario" />
+		<property name="password" column="password" />
+		<property name="ipBD" column="ip_bd" />
+		<property name="portBD" column="port_bd" />
+		<property name="userBD" column="user_bd"/>
+		<property name="passBD" column="pass_bd"/>
+		<property name="sid" column="sid"/>
+
+	</class>
+</hibernate-mapping>

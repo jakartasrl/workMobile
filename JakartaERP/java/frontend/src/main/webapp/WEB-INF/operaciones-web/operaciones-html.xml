@@ -48,6 +48,48 @@
 
 <entity>
 	
+	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerTiposDeProducto" outputOV="com.jkt.ov.ListDescriptibleOV">
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="activo" value="activo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
+	<operacion name="RecuperarDetallesCaracteristicaProducto" clase="com.jkt.operaciones.RecuperarDetallesCaracteristicaProducto" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDetalleCaracteristicaProductoListOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="id"/>
+		</input>
+		
+		<output>
+			<campoSalida target="id" 			value="oid" />
+			<campoSalida target="codigo" 		value="codigo" />
+			<campoSalida target="descripcion" 	value="descripcion" />
+			<campoSalida target="longitud" 		value="longitud" />
+			<campoSalida target="tipo" 			value="tipo" />
+				
+			<campoSalida target="detallesFinal" value="detalles" >
+				<campoSalida target="id" value="id" />
+				<campoSalida target="codigo" value="codigo" />
+				<campoSalida target="descripcion" value="descripcion" />
+			</campoSalida>
+
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+	
+	
+
 	<operacion name="Traer" clase="com.jkt.operaciones.TraerEntidadesRelacionWeb" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDescriptibleOV">
 		
 		<input>
