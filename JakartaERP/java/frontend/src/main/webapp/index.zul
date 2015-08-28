@@ -49,45 +49,53 @@
 						</combobox>
 					</hlayout>
 					
-					<hlayout id="filtroTipoProducto" visible="@bind(vm.filtroProductoActivo)">
+					<hlayout hflex="1" id="filtroTipoProducto" visible="@bind(vm.filtroProductoActivo)">
+						
+						<groupbox hflex="1" >
+							<caption label="Caracteristicas de producto" ></caption>
 						
 						
+							<grid hflex="1" model="@bind(vm.detallesTipoProducto)" mold="paging" pageSize="10" emptyMessage="Seleccione un tipo de producto" style="margin-top:5px;">
 						
+								<columns>
+									<column hflex="1" /> 
+									<column hflex="1" />
+								</columns>
 						
-						
-						<listbox model="@bind(vm.detallesTipoProducto)">
+								<rows>
+									<template name="model">
+										<row>
+											<label hflex="2" value="@bind(each.descripcion)" /> 
+											<hlayout hflex="3">
+												<zk switch="${each.tipo}" >
+													
+													<zk case='NUM'>
+														<intbox hflex="1" value="@bind(each.valorEntero)" />
+													</zk>
+													
+													<zk case='COMPO'>
+														<combobox hflex="1" model="@bind(each.detalles)" readonly="true" placeholder="Todos" selectedItem="@bind(each.valorSeleccionado)">
+															<template name="model" var="detalle">
+																<comboitem label="@bind(detalle.descripcion)" />
+															</template>
+														</combobox>
+													</zk>
+													
+													<zk case='TEXT'>
+														<textbox hflex="1" value="@bind(each.valorString)" />
+													</zk>
+													
+												</zk>								
+											</hlayout>								
+										</row>
+									</template>
+								</rows>
 							
-							<listhead>
-								<listheader value="UNO"></listheader>
-								<listheader value="DOS"></listheader>
-							</listhead>
-							
-							<template name="model" >
-								<listitem>
-									<listcell label="@bind(each.id)"></listcell>								
-									<listcell label="@bind(each.descripcion)"></listcell>								
-								</listitem>						
-							</template>
+							</grid>
 						
-						</listbox>
-						
-												
-<!-- 						<groupbox hflex="1"> -->
-<!-- 							<caption label="Caracteristicas de producto" ></caption> -->
-							
-<!-- 							<vlayout> -->
-<!-- 								<combobox model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos" > -->
-<!-- 									<template name="model" var="tProd"> -->
-<!-- 										<comboitem label="@bind(tProd.descripcion)" /> -->
-<!-- 									</template> -->
-<!-- 								</combobox> -->
-<!-- 							</vlayout> -->
-
-<!-- 						</groupbox> -->
-
+						</groupbox>
 					</hlayout>
 							
-					
 					<hlayout style="overflow:hidden;padding:5px;text-align:center">
 						<button label="Filtrar" onClick="@command('filtrar', groupbox = gb3, caption = captionGB)" />
 						<space></space>

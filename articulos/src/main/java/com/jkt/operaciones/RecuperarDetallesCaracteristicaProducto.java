@@ -14,20 +14,12 @@ import org.dom4j.DocumentHelper;
 
 import com.google.gson.Gson;
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.DetalleCaracteristicaProducto;
 
 public class RecuperarDetallesCaracteristicaProducto extends JakartaERPSistExt {
 
-	
 	private static final String KEY = "id".toUpperCase();
 	private static final String OPERATION_NAME = "TraerCaracteristicaProductoMobile";
-
-	
-	@Data
-	public class Detalle{
-		private String id, codigo, descripcion, tipo, longitud;
-		private List detalles=new ArrayList();
-		private List detallesFinal=new ArrayList();
-	}
 	
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
@@ -46,14 +38,14 @@ public class RecuperarDetallesCaracteristicaProducto extends JakartaERPSistExt {
 		List result =  new ArrayList();
 		result = g.fromJson(contenido, List.class);
 
-		List<Detalle> resultadoFinal = new ArrayList<Detalle>();
+		List<DetalleCaracteristicaProducto> resultadoFinal = new ArrayList<DetalleCaracteristicaProducto>();
 		for (Object object : result) {
-			Detalle d = new Detalle();
+			DetalleCaracteristicaProducto d = new DetalleCaracteristicaProducto();
 			BeanUtils.populate(d, (Map) object);
 			
 			if(!d.getDetalles().isEmpty()){
 				for (Object subObject : d.getDetalles()) {
-					Detalle d2 = new Detalle();
+					DetalleCaracteristicaProducto d2 = new DetalleCaracteristicaProducto();
 					BeanUtils.populate(d2, (Map) subObject);
 					d.getDetallesFinal().add(d2);
 				}

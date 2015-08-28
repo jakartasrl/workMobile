@@ -11,6 +11,13 @@ import com.jkt.view.ObjectView;
 public class DetalleCaracteristicaProductoOV extends ObjectView {
 
 	private String oid, codigo, descripcion, tipo, longitud;
+	private String valorString;
+	private int valorEntero;
+	
+	private DetalleCaracteristicaProductoOV valorSeleccionado;
+	private String idValorCombo;
+	private String codigoCombo;
+
 	private List<DetalleCaracteristicaProductoOV> detalles=new ArrayList<DetalleCaracteristicaProductoOV>();
 	
 }

@@ -48,6 +48,40 @@
 
 <entity>
 	
+	<operacion name="buscarProductos" clase="com.jkt.operaciones.TraerProductos" outputOV="com.jkt.ov.ListDescriptibleOV" inputOV="com.jkt.ov.FiltroProductosOV">
+
+		<input keyName="objeto" clase="com.jkt.dominio.FiltroProducto" >
+			
+			<campoEntrada propertyOV="codigo" 		metodo="setCodigo" />
+			<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion" />
+			<campoEntrada propertyOV="oidTipoProducto" 	metodo="setOidTipoProducto" />
+			
+			<campoEntrada propertyOV="detallesTipoProducto" metodo="setDetallesTipoProducto" >
+				<campoEntrada propertyOV="oid" 					metodo="setOid" />
+				<campoEntrada propertyOV="codigo" 				metodo="setCodigo" />
+				<campoEntrada propertyOV="descripcion" 			metodo="setDescripcion" />
+				<campoEntrada propertyOV="tipo" 				metodo="setTipo" />
+				<campoEntrada propertyOV="valorString" 			metodo="setValorString" />
+				<campoEntrada propertyOV="valorEntero" 			metodo="setValorEntero" />
+				<campoEntrada propertyOV="idValorCombo" 		metodo="setIdValorCombo" />
+				<campoEntrada propertyOV="codigoCombo" 		metodo="setCodigoCombo" />
+			</campoEntrada>
+			
+		</input>
+		
+		<output>
+
+			<campoSalida target="id" value="id" />
+			<campoSalida target="codigo" value="codigo" />
+			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="activo" value="activo" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+		
+	</operacion>
+
 	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerTiposDeProducto" outputOV="com.jkt.ov.ListDescriptibleOV">
 		
 		<output>
@@ -77,7 +111,7 @@
 			<campoSalida target="tipo" 			value="tipo" />
 				
 			<campoSalida target="detallesFinal" value="detalles" >
-				<campoSalida target="id" value="id" />
+				<campoSalida target="id" value="oid" />
 				<campoSalida target="codigo" value="codigo" />
 				<campoSalida target="descripcion" value="descripcion" />
 			</campoSalida>

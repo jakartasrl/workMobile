@@ -21,6 +21,7 @@ import com.jkt.excepcion.JakartaException;
 import com.jkt.ov.ContainerOV;
 import com.jkt.ov.DescriptibleOV;
 import com.jkt.ov.DetalleCaracteristicaProductoOV;
+import com.jkt.ov.FiltroProductosOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListDetalleCaracteristicaProductoListOV;
 
@@ -86,38 +87,25 @@ public class ConsultaStockVM extends ViewModel {
 		
 		this.productos=new ArrayList<DescriptibleOV>();
 		
-		DescriptibleOV d1=new DescriptibleOV();
-		d1.setCodigo("POT");
-		d1.setDescripcion("Articulo Pot xrejq1");
-		d1.setCampoAdicional1("470");
-		d1.setCampoAdicional2("No Disponible");
 		
-		DescriptibleOV d2=new DescriptibleOV();
-		d2.setCodigo("TRANF");
-		d2.setDescripcion("Transformador de potencia xxro33");
-		d2.setCampoAdicional1("41");
-		d2.setCampoAdicional2("Disponible");
+		FiltroProductosOV filtro = new FiltroProductosOV();
+		filtro.setCodigo(this.filtroCodigo);
+		filtro.setDescripcion(this.filtroDescripcion);
+		filtro.setOidTipoProducto(String.valueOf(this.tipoProductoSeleccionado.getId()));
+		filtro.setDetallesTipoProducto(this.detallesTipoProducto);
 		
-		if(filtroProductoActivo){
-			DescriptibleOV d3=new DescriptibleOV();
-			d3.setCodigo("Bob");
-			d3.setDescripcion("Bobina");
-			d3.setCampoAdicional1("567");
-			d3.setCampoAdicional2("Disponible a partir de 4/6/2016");
-			
-			DescriptibleOV d4=new DescriptibleOV();
-			d4.setCodigo("TRRT");
-			d4.setDescripcion("Super transformador");
-			d4.setCampoAdicional1("1");
-			d4.setCampoAdicional2("Disponible");
-			
-			productos.add(d3);
-			productos.add(d4);
+		/*
+		 * Se agrega el elemento a una lista ya que no esta el fwk en condiciones de enviar una clase comun y corriente...
+		 */
+		List<DetalleCaracteristicaProductoOV> detalles = filtro.getDetallesTipoProducto();
+		for (DetalleCaracteristicaProductoOV detalleCaracteristicaProductoOV : detalles) {
+			if(detalleCaracteristicaProductoOV.getValorSeleccionado()!=null){
+				detalleCaracteristicaProductoOV.setIdValorCombo(String.valueOf(detalleCaracteristicaProductoOV.getValorSeleccionado().getOid()));
+				detalleCaracteristicaProductoOV.setCodigoCombo(detalleCaracteristicaProductoOV.getValorSeleccionado().getCodigo());
+			}
 		}
 		
-		productos.add(d2);
-		productos.add(d1);
-		
+		this.productos = ((ListDescriptibleOV)Operaciones.ejecutar("buscarProductos", filtro, ListDescriptibleOV.class)).getList();
 	}
 
 	private String formatCodigo() {
