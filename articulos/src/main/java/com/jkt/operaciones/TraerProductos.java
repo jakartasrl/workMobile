@@ -14,13 +14,14 @@ import com.google.gson.Gson;
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.DetalleCaracteristicaProducto;
 import com.jkt.dominio.FiltroProducto;
+import com.jkt.dominio.ProductoDTO;
 import com.jkt.excepcion.JakartaException;
 
 public class TraerProductos extends JakartaERPSistExt {
 
 	private static final String KEY_MAP = "objeto";
 	private static final String OPERATION_NAME = "TraerArticulosByComponentesMobile"; //ERP operacion
-	private String oidCaracteristica="3000000";
+//	private String oidCaracteristica="3000000";
 	
 	@Override
 	protected List returnResult(String requestERP) throws DocumentException, IllegalAccessException, InvocationTargetException {
@@ -30,9 +31,9 @@ public class TraerProductos extends JakartaERPSistExt {
 		List result =  new ArrayList();
 		result = g.fromJson(contenido, List.class);
 
-		List<Descriptible> resultadoFinal = new ArrayList<Descriptible>();
+		List<ProductoDTO> resultadoFinal = new ArrayList<ProductoDTO>();
 		for (Object object : result) {
-			Descriptible d = new Descriptible();
+			ProductoDTO d = new ProductoDTO();
 			BeanUtils.populate(d, (Map) object);
 			resultadoFinal.add(d);
 		}
@@ -58,7 +59,13 @@ public class TraerProductos extends JakartaERPSistExt {
 	}
 
 	private byte[] getRequestXMLBytes(FiltroProducto filtro) throws Exception {
-		StringBuffer str = generarHeader(OPERATION_NAME, " oid_estruc=\""+oidCaracteristica+"\" ");
+		StringBuffer str;
+		if(filtro.getOidTipoProducto()==null){
+			str = generarHeader(OPERATION_NAME);
+		}else{
+			str = generarHeader(OPERATION_NAME, " oid_estruc=\""+filtro.getOidTipoProducto()+"\" ");
+		}
+		
 		str.append(crearTablaConsulta(filtro));
 		finalizarHeader(str);
 		return str.toString().getBytes();
@@ -69,13 +76,25 @@ public class TraerProductos extends JakartaERPSistExt {
 		builder.append("<Tabla nombre=\"MTValorAtributo\">").
 		append("<Fila "); //abre la fila
 		
+		if (filtro.getCodigo()!=null && !filtro.getCodigo().isEmpty()) {
+			builder.append(" codigo = \""+filtro.getCodigo()+"\" ");
+		}
+
+		if (filtro.getDescripcion()!=null && !filtro.getDescripcion().isEmpty()) {
+			builder.append(" descripcion = \""+filtro.getDescripcion().replace("\"", "%")+"\" ");
+		}
+		
 		for (DetalleCaracteristicaProducto detalleCaracteristicaProducto : filtro.getDetallesTipoProducto()) {
 			
 			String atributo;
 			if("COMPO".equals(detalleCaracteristicaProducto.getTipo())){
 				atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getIdValorCombo()+"\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getCodigoCombo()+"\""; 
 			}else if("TEXT".equals(detalleCaracteristicaProducto.getTipo())){
-				atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\"0\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getValorString()+"\""; 
+				if(detalleCaracteristicaProducto.getValorString()!=null && !detalleCaracteristicaProducto.getValorString().isEmpty()){
+					atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\"0\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getValorString()+"\""; 
+				}else{
+					continue;
+				}
 			}else if("NUM".equals(detalleCaracteristicaProducto.getTipo())){
 				atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\"0\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getValorEntero()+"\""; 
 			}else{

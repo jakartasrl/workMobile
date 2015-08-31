@@ -157,7 +157,8 @@ abstract public class JakartaERPSistExt extends Operation {
 				String status = parseText.getRootElement().attribute("STATUS").getValue();
 				if(!"OK".equals(status)){
 					String msj = parseText.getRootElement().attribute("MENSAJE").getValue();
-					throw new JakartaException("Error en el sistema externo: "+msj);
+//					throw new JakartaException("Error en el sistema externo: "+msj);
+					throw new JakartaException(msj);
 				}
 				
 				return result;

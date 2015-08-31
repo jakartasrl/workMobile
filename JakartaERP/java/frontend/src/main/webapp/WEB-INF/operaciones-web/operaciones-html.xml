@@ -74,6 +74,7 @@
 			<campoSalida target="id" value="id" />
 			<campoSalida target="codigo" value="codigo" />
 			<campoSalida target="descripcion" value="descripcion" />
+			<campoSalida target="campoAdicional1" value="campoAdicional1" />
 			<campoSalida target="activo" value="activo" />
 			
 		</output>

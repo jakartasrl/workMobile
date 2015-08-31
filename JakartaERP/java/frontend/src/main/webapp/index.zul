@@ -36,13 +36,13 @@
 						
 						<hlayout hflex="2" >
 							<label width="auto">Descripción</label>
-							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"></textbox>
+							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"  ></textbox>
 						</hlayout>
 					</hlayout>
 
 					<hlayout >
 						<label width="auto">Tipo de Producto</label>
-						<combobox model="@bind(vm.tiposDeProducto)" readonly="true" placeholder="Todos" onSelect="@command('activarFiltro')" selectedItem="@bind(vm.tipoProductoSeleccionado)">
+						<combobox model="@bind(vm.tiposDeProducto)"   readonly="true" placeholder="Todos" onSelect="@command('activarFiltro')" selectedItem="@bind(vm.tipoProductoSeleccionado)">
 							<template name="model" var="tProd">
 								<comboitem label="@bind(tProd.descripcion)" />
 							</template>
@@ -70,19 +70,21 @@
 												<zk switch="${each.tipo}" >
 													
 													<zk case='NUM'>
-														<intbox hflex="1" value="@bind(each.valorEntero)" />
+														<intbox   hflex="1" value="@bind(each.valorEntero)" />
 													</zk>
 													
 													<zk case='COMPO'>
-														<combobox hflex="1" model="@bind(each.detalles)" readonly="true" placeholder="Todos" selectedItem="@bind(each.valorSeleccionado)">
+														<combobox   hflex="1" model="@bind(each.detalles)" readonly="true" placeholder="Seleccione..." selectedItem="@bind(each.valorSeleccionado)">
 															<template name="model" var="detalle">
 																<comboitem label="@bind(detalle.descripcion)" />
 															</template>
 														</combobox>
 													</zk>
 													
+<!-- 													disabled="@bind(!vm.filtroCodigo.isEmpty())" -->
+													
 													<zk case='TEXT'>
-														<textbox hflex="1" value="@bind(each.valorString)" />
+														<textbox   hflex="1" value="@bind(each.valorString)" />
 													</zk>
 													
 												</zk>								

@@ -15,6 +15,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Caption;
 import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.Messagebox;
 
 import com.jkt.common.Operaciones;
 import com.jkt.excepcion.JakartaException;
@@ -28,6 +29,7 @@ import com.jkt.ov.ListDetalleCaracteristicaProductoListOV;
 @Data
 public class ConsultaStockVM extends ViewModel {
 
+	private static final String POSITION = "middle_center";
 	private static final String ADDITIONAL = "...";
 	private static final int MAX_WIDTH_DESCRIPTION = 9;
 	private static final int MAX_WIDTH_CODIGO = 4;
@@ -50,7 +52,7 @@ public class ConsultaStockVM extends ViewModel {
 	}
 	
 	private void mostrarMensaje(String msg, String tipo){
-		Clients.showNotification(msg, tipo, null, "center", 1000);
+		Clients.showNotification(msg, tipo, null, POSITION, 1000);
 	}
 	
 	@Init
@@ -77,13 +79,17 @@ public class ConsultaStockVM extends ViewModel {
 	@NotifyChange({"productos","descripcionFiltro"})
 	public void filtrar(@BindingParam("groupbox") Groupbox groupBox, @BindingParam("caption") Caption caption){
 		
-		groupBox.setOpen(false);
+		if(!preValidacionFiltros()){
+			return;
+		}
 		
-		String codigo = formatCodigo();
-		String descripcion = formatDescripcion();
 		
-		this.descripcionFiltro = String.format("Filtro : Codigo '%s' , Descripcion '%s'", codigo, descripcion);
-		caption.setLabel(this.descripcionFiltro);
+//		String codigo = formatCodigo();
+//		String descripcion = formatDescripcion();
+		
+//		this.descripcionFiltro = String.format("Filtro : Codigo '%s' , Descripcion '%s'", codigo, descripcion);
+//		this.descripcionFiltro = String.format("Filtro : Codigo '%s' , Descripcion '%s'", codigo, descripcion);
+//		caption.setLabel(this.descripcionFiltro);
 		
 		this.productos=new ArrayList<DescriptibleOV>();
 		
@@ -91,13 +97,41 @@ public class ConsultaStockVM extends ViewModel {
 		FiltroProductosOV filtro = new FiltroProductosOV();
 		filtro.setCodigo(this.filtroCodigo);
 		filtro.setDescripcion(this.filtroDescripcion);
-		filtro.setOidTipoProducto(String.valueOf(this.tipoProductoSeleccionado.getId()));
-		filtro.setDetallesTipoProducto(this.detallesTipoProducto);
+		if(this.tipoProductoSeleccionado!=null){
+			filtro.setOidTipoProducto(String.valueOf(this.tipoProductoSeleccionado.getId()));
+			filtro.setDetallesTipoProducto(this.detallesTipoProducto);
+		}
 		
 		/*
 		 * Se agrega el elemento a una lista ya que no esta el fwk en condiciones de enviar una clase comun y corriente...
 		 */
 		List<DetalleCaracteristicaProductoOV> detalles = filtro.getDetallesTipoProducto();
+
+		//valida que se completen los combos.
+//		if(this.filtroCodigo.isEmpty()){
+		if(this.tipoProductoSeleccionado!=null){
+			
+		
+			for (DetalleCaracteristicaProductoOV detalleCaracteristicaProductoOV : detalles) {
+				if("COMPO".equals(detalleCaracteristicaProductoOV.getTipo())){
+					if(detalleCaracteristicaProductoOV.getValorSeleccionado()==null){
+						mostrarMensajeInfo("Complete el valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion());
+//						Clients.showNotification();
+						return;
+					}
+				}
+				
+//				if("TEXT".equals(detalleCaracteristicaProductoOV.getTipo())){
+//					if(detalleCaracteristicaProductoOV.getValorString()==null || detalleCaracteristicaProductoOV.getValorString().isEmpty()){
+//						Messagebox.show("Complete el valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion());
+//						return;
+//					}
+//				}
+				
+			}
+		
+		}
+		
 		for (DetalleCaracteristicaProductoOV detalleCaracteristicaProductoOV : detalles) {
 			if(detalleCaracteristicaProductoOV.getValorSeleccionado()!=null){
 				detalleCaracteristicaProductoOV.setIdValorCombo(String.valueOf(detalleCaracteristicaProductoOV.getValorSeleccionado().getOid()));
@@ -106,8 +140,31 @@ public class ConsultaStockVM extends ViewModel {
 		}
 		
 		this.productos = ((ListDescriptibleOV)Operaciones.ejecutar("buscarProductos", filtro, ListDescriptibleOV.class)).getList();
+		groupBox.setOpen(false);
 	}
 
+	private boolean preValidacionFiltros() {
+		
+		if(this.filtroCodigo.isEmpty() && this.filtroDescripcion.isEmpty() && (this.tipoProductoSeleccionado==null || this.tipoProductoSeleccionado.getId()==0L)){
+			this.mostrarMensajeInfo("Complete algun filtro para continuar.");
+			return false;
+		}
+		
+//		if(this.filtroCodigo.isEmpty() && this.filtroDescripcion.isEmpty()){
+//			Messagebox.show("Complete el codigo o la descripción para realizar un filtro");
+//			return false;
+//		}
+
+//		if(this.filtroCodigo.isEmpty()){ //si se filtra x descripcion, activar el filtro de productos
+//			if(this.tipoProductoSeleccionado==null || this.tipoProductoSeleccionado.getId()==0L){
+//				Messagebox.show("Complete el tipo de producto para realizar un filtro");
+//				return false;
+//			}
+//		}
+		
+		return true;
+	}
+	
 	private String formatCodigo() {
 		String codigo = this.filtroCodigo;
 		if(codigo.length()>MAX_WIDTH_CODIGO){
