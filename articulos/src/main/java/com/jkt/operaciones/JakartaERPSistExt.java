@@ -31,7 +31,7 @@ abstract public class JakartaERPSistExt extends Operation {
 	
 	protected StringBuffer generarHeader(String operacion, String parametroHeader) throws Exception {
 		StringBuffer str=new StringBuffer();
-		LoginDTO login = login();
+		LoginDTO login = this.loginDTO;
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yy");
 		str.append("<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"?>")
 		.append("<Request")
@@ -48,7 +48,7 @@ abstract public class JakartaERPSistExt extends Operation {
 
 	protected StringBuffer generarHeader(String operacion, List<String> parametrosHeader) throws Exception {
 		StringBuffer str=new StringBuffer();
-		LoginDTO login = login();
+		LoginDTO login = this.loginDTO;
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yy");
 		str.append("<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"?>")
 		.append("<Request")
@@ -64,7 +64,7 @@ abstract public class JakartaERPSistExt extends Operation {
 
 	protected StringBuffer generarHeader(String operacion) throws Exception {
 		StringBuffer str=new StringBuffer();
-		LoginDTO login = login();
+		LoginDTO login = this.loginDTO;
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yy");
 		str.append("<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"?>")
 		.append("<Request")
@@ -84,16 +84,23 @@ abstract public class JakartaERPSistExt extends Operation {
 	
 	abstract protected List ejecutarConsultaAERP(Object entity) throws Exception;
 
-	private  LoginDTO loginDTO;
+	protected LoginDTO loginDTO;
 	
-	public LoginDTO login() throws Exception {
-		String requestERP = requestERP(getLoginXMLBytes());
-		fillLoginDTO(requestERP);
-		return loginDTO;
+	public LoginDTO login() throws JakartaException {
+		String requestERP;
+		try{
+			requestERP = requestERP(getLoginXMLBytes());
+			fillLoginDTO(requestERP);
+			return loginDTO;
+		}catch(com.jkt.excepcion.JakartaException e){
+			throw new JakartaException("Verifique usuario y contraseña");
+		} catch (Exception e) {
+			throw new JakartaException("Verifique usuario y contraseña");
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")
-	private void fillLoginDTO(String requestERP) throws Exception {
+	protected void fillLoginDTO(String requestERP) throws Exception {
 		Document parseText = DocumentHelper.parseText(requestERP);
 		Iterator nodeIterator = parseText.getRootElement().nodeIterator();
 		loginDTO=new LoginDTO();

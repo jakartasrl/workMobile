@@ -48,9 +48,33 @@
 
 <entity>
 	
+	<operacion name="Login" clase="com.jkt.operaciones.LoginERP" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.UserOV">
+		
+		<input>
+			<campoEntrada propertyOV="string1" name="USUARIO"/>
+			<campoEntrada propertyOV="string2" name="PASSWORD"/>
+		</input>
+		
+		<output>
+
+			<campoSalida target="certificado" value="certificado" />
+			<campoSalida target="session" value="session" />
+			<campoSalida target="sucursal" value="sucursal" />
+			<campoSalida target="empleado" value="empleado" />
+			
+		</output>
+
+		<transformer clase="com.jkt.transformers.WebTransformer" />
+	</operacion>
+	
 	<operacion name="buscarProductos" clase="com.jkt.operaciones.TraerProductos" outputOV="com.jkt.ov.ListDescriptibleOV" inputOV="com.jkt.ov.FiltroProductosOV">
 
 		<input keyName="objeto" clase="com.jkt.dominio.FiltroProducto" >
+
+			<campoEntrada propertyOV="certificado" 	metodo="setCertificado" />
+			<campoEntrada propertyOV="session" 		metodo="setSession" />
+			<campoEntrada propertyOV="empleado" 	metodo="setEmpleado" />
+			<campoEntrada propertyOV="sucursal" 	metodo="setSucursal" />			
 			
 			<campoEntrada propertyOV="codigo" 		metodo="setCodigo" />
 			<campoEntrada propertyOV="descripcion" 	metodo="setDescripcion" />
@@ -83,7 +107,17 @@
 		
 	</operacion>
 
-	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerTiposDeProducto" outputOV="com.jkt.ov.ListDescriptibleOV">
+	<operacion name="TraerTiposDeProducto" clase="com.jkt.operaciones.TraerTiposDeProducto" inputOV="com.jkt.ov.UserOV"  outputOV="com.jkt.ov.ListDescriptibleOV">
+		
+		
+		<input keyName="credenciales" clase="com.jkt.dominio.LoginDTO" >
+			
+			<campoEntrada propertyOV="certificado" 	metodo="setCertificado" />
+			<campoEntrada propertyOV="session" 		metodo="setSession" />
+			<campoEntrada propertyOV="empleado" 	metodo="setEmpleado" />
+			<campoEntrada propertyOV="sucursal" 	metodo="setSucursal" />
+			
+		</input>
 		
 		<output>
 
@@ -100,8 +134,19 @@
 	
 	<operacion name="RecuperarDetallesCaracteristicaProducto" clase="com.jkt.operaciones.RecuperarDetallesCaracteristicaProducto" inputOV="com.jkt.ov.ContainerOV" outputOV="com.jkt.ov.ListDetalleCaracteristicaProductoListOV">
 		
-		<input>
-			<campoEntrada propertyOV="string1" name="id"/>
+<!-- 		<input > -->
+<!-- 			<campoEntrada propertyOV="string1" name="id"/> -->
+<!-- 		</input> -->
+		
+		<input keyName="credenciales" clase="com.jkt.dominio.LoginDTO" >
+			
+			<campoEntrada propertyOV="string1" name="id"/> 
+
+			<campoEntrada propertyOV="certificado" 	metodo="setCertificado" />
+			<campoEntrada propertyOV="session" 		metodo="setSession" />
+			<campoEntrada propertyOV="empleado" 	metodo="setEmpleado" />
+			<campoEntrada propertyOV="sucursal" 	metodo="setSucursal" />
+			
 		</input>
 		
 		<output>

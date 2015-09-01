@@ -38,5 +38,10 @@ public abstract class ObjectView extends Observable implements Serializable {
 	public void limpiarFiltro() {
 		return;
 	};
+	
+	private String certificado;
+	private String session;
+	private String sucursal;
+	private String empleado;
 
 }

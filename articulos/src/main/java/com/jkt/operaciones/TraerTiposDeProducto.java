@@ -12,6 +12,7 @@ import org.dom4j.DocumentHelper;
 
 import com.google.gson.Gson;
 import com.jkt.dominio.Descriptible;
+import com.jkt.dominio.LoginDTO;
 import com.jkt.dominio.PersistentEntity;
 
 /**
@@ -34,6 +35,9 @@ public class TraerTiposDeProducto extends JakartaERPSistExt {
 
 	@Override
 	public void execute(Map<String, Object> aParams) throws Exception {
+		
+		this.loginDTO = (LoginDTO) aParams.get("credenciales");
+		
 		List resultado = ejecutarConsultaAERP(null);
 		notificarObjeto("", resultado);
 	}

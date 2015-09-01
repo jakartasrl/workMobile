@@ -1,5 +1,6 @@
 <?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
 <?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
 	<style src="/style/template.css" />
@@ -9,17 +10,26 @@
 			line-height: normal;
 			table-layout:fixed;
 		}
+		
+		noSeleccionable{
+			height: auto; cursor:pointer;
+			-moz-user-select: none; 
+			-webkit-user-select: none; 
+			-ms-user-select:none; 
+			user-select:none;
+			-o-user-select:none;
+		}
 	</style>
 	
 	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
 	
 		<vlayout hflex="1" height="auto">
-	
-			<hlayout style="text-align:center; padding:3px;">
+		
+			<hlayout style="text-align:center; padding:3px;" hflex="1">
 				<label style="color: darkblue;font-size: 100%;font-weight: bold;">Spirax Sarco</label>
 			</hlayout>
 	
-			<groupbox id="gb3" mold="3d" style="overflow:hidden;padding:5px;" hflex="1" open="true">
+			<groupbox id="gb3" mold="3d" style="overflow:hidden;padding:5px;height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" hflex="1" open="true">
                 <attribute name="onOpen">
                     <![CDATA[arrow.setSclass("open-" + self.isOpen());]]>
                 </attribute>
@@ -30,13 +40,13 @@
                 <vlayout >
 					<hlayout hflex="1" >
 						<hlayout hflex="1" >
-							<label width="auto">Código</label>
-							<textbox hflex="1" sclass="campoCodigo-medium" value="@bind(vm.filtroCodigo)" ></textbox>
+<!-- 							<label width="auto">Código</label> -->
+							<textbox hflex="1" sclass="campoCodigo-medium" style="margin-left:2px" value="@bind(vm.filtroCodigo)" placeholder="Codigo"></textbox>
 						</hlayout>
 						
 						<hlayout hflex="2" >
-							<label width="auto">Descripción</label>
-							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"  ></textbox>
+<!-- 							<label width="auto">Descripción</label> -->
+							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"  style="margin-left:2px" placeholder="Descripcion"></textbox>
 						</hlayout>
 					</hlayout>
 
@@ -51,20 +61,20 @@
 					
 					<hlayout hflex="1" id="filtroTipoProducto" visible="@bind(vm.filtroProductoActivo)">
 						
-						<groupbox hflex="1" >
+						<groupbox hflex="1" closable="false">
 							<caption label="Caracteristicas de producto" ></caption>
 						
 						
-							<grid hflex="1" model="@bind(vm.detallesTipoProducto)" mold="paging" pageSize="10" emptyMessage="Seleccione un tipo de producto" style="margin-top:5px;">
+							<grid hflex="1" model="@bind(vm.detallesTipoProducto)" mold="paging" pageSize="10" emptyMessage="Seleccione un tipo de producto" style="border:none; margin-top:5px;">
 						
 								<columns>
 									<column hflex="1" /> 
 									<column hflex="1" />
 								</columns>
 						
-								<rows>
+								<rows style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
 									<template name="model">
-										<row>
+										<row style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
 											<label hflex="2" value="@bind(each.descripcion)" /> 
 											<hlayout hflex="3">
 												<zk switch="${each.tipo}" >
@@ -84,7 +94,7 @@
 <!-- 													disabled="@bind(!vm.filtroCodigo.isEmpty())" -->
 													
 													<zk case='TEXT'>
-														<textbox   hflex="1" value="@bind(each.valorString)" />
+														<textbox hflex="1" value="@bind(each.valorString)" />
 													</zk>
 													
 												</zk>								
@@ -107,11 +117,11 @@
 				</vlayout>
             </groupbox>
 	
-			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;" title="Stock de Productos" border="normal" >
+			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" title="Stock de Productos" border="normal" >
 	
 				<panelchildren>
 				
-					<grid model="@bind(vm.productos)" emptyMessage="No existen productos">
+					<grid model="@bind(vm.productos)" emptyMessage="No existen productos" sclass="noSeleccionable" >
 	
 						<columns>
 							<column label="Codigo" 		align="left"	hflex="1" sort="auto(codigo)"/>
@@ -120,9 +130,9 @@
 <!-- 							<column label="Disponible"	align="left"	hflex="1"/> -->
 						</columns>
 				
-						<rows>
+						<rows sclass="noSeleccionable" >
 							<template name="model">
-								<row>
+								<row style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
 									<label width="100%" value="@bind(each.codigo)" />
 									<label width="100%" value="@bind(each.descripcion)" />
 									<label width="100%" value="@bind(each.campoAdicional1)" />
@@ -137,6 +147,12 @@
 				
 			</panel>
 					
+					
+			<hlayout style="text-align:center; padding:3px;" hflex="1">
+				<button label="Salir" onClick="@command('salir')" />
+			</hlayout>
+			
+			
 		</vlayout>
 	</div>
 </zk>

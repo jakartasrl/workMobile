@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.DetalleCaracteristicaProducto;
 import com.jkt.dominio.FiltroProducto;
+import com.jkt.dominio.LoginDTO;
 import com.jkt.dominio.ProductoDTO;
 import com.jkt.excepcion.JakartaException;
 
@@ -54,6 +55,10 @@ public class TraerProductos extends JakartaERPSistExt {
 	@Override
 	protected List ejecutarConsultaAERP(Object entity) throws Exception {
 		FiltroProducto filtro = (FiltroProducto) entity;
+		
+		this.loginDTO = new LoginDTO();
+		BeanUtils.copyProperties(this.loginDTO, filtro);
+		
 		String requestERP = requestERP(getRequestXMLBytes(filtro));
 		return returnResult(requestERP);
 	}

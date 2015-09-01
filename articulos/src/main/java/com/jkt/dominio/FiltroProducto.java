@@ -13,4 +13,9 @@ public class FiltroProducto extends PersistentEntity {
 	private String oidTipoProducto;
 	private List<DetalleCaracteristicaProducto> detallesTipoProducto = new ArrayList<DetalleCaracteristicaProducto>();
 	
+	private String certificado;
+	private String session;
+	private String sucursal;
+	private String empleado;
+	
 }

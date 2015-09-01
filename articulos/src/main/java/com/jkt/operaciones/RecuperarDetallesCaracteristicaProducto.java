@@ -15,6 +15,7 @@ import org.dom4j.DocumentHelper;
 import com.google.gson.Gson;
 import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.DetalleCaracteristicaProducto;
+import com.jkt.dominio.LoginDTO;
 
 public class RecuperarDetallesCaracteristicaProducto extends JakartaERPSistExt {
 
@@ -25,6 +26,9 @@ public class RecuperarDetallesCaracteristicaProducto extends JakartaERPSistExt {
 	public void execute(Map<String, Object> aParams) throws Exception {
 		validarEntrada((String)aParams.get(KEY));
 		String id = (String) aParams.get(KEY);
+		
+		this.loginDTO = (LoginDTO) aParams.get("credenciales");
+		
 		List resultado = ejecutarConsultaAERP(id);
 		notificarObjeto("", resultado);
 		

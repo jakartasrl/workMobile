@@ -6,12 +6,16 @@ import java.util.List;
 
 import lombok.Data;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Caption;
 import org.zkoss.zul.Groupbox;
@@ -25,6 +29,7 @@ import com.jkt.ov.DetalleCaracteristicaProductoOV;
 import com.jkt.ov.FiltroProductosOV;
 import com.jkt.ov.ListDescriptibleOV;
 import com.jkt.ov.ListDetalleCaracteristicaProductoListOV;
+import com.jkt.ov.UserOV;
 
 @Data
 public class ConsultaStockVM extends ViewModel {
@@ -38,6 +43,8 @@ public class ConsultaStockVM extends ViewModel {
 	private String descripcionFiltro="Filtro";
 	private boolean filtroProductoActivo=false;
 	private DescriptibleOV tipoProductoSeleccionado;
+	
+	private UserOV credenciales;
 	
 	private List<DescriptibleOV> productos = new ArrayList<DescriptibleOV>();
 	private List<DescriptibleOV> tiposDeProducto = new ArrayList<DescriptibleOV>();
@@ -57,7 +64,12 @@ public class ConsultaStockVM extends ViewModel {
 	
 	@Init
 	public void init(){
-		tiposDeProducto = ((ListDescriptibleOV)Operaciones.ejecutar("TraerTiposDeProducto", ListDescriptibleOV.class)).getList();
+		Session sess = Sessions.getCurrent();
+		credenciales = (UserOV) sess.getAttribute("userCredential");
+		if(credenciales==null){
+			Executions.sendRedirect("login.zul");
+		}
+		tiposDeProducto = ((ListDescriptibleOV)Operaciones.ejecutar("TraerTiposDeProducto", credenciales, ListDescriptibleOV.class)).getList();
 	}
 	
 	@Override
@@ -77,26 +89,23 @@ public class ConsultaStockVM extends ViewModel {
 	
 	@Command
 	@NotifyChange({"productos","descripcionFiltro"})
-	public void filtrar(@BindingParam("groupbox") Groupbox groupBox, @BindingParam("caption") Caption caption){
+	public void filtrar(@BindingParam("groupbox") Groupbox groupBox, @BindingParam("caption") Caption caption) throws IllegalAccessException, InvocationTargetException{
 		
 		if(!preValidacionFiltros()){
 			return;
 		}
 		
-		
-//		String codigo = formatCodigo();
-//		String descripcion = formatDescripcion();
-		
-//		this.descripcionFiltro = String.format("Filtro : Codigo '%s' , Descripcion '%s'", codigo, descripcion);
-//		this.descripcionFiltro = String.format("Filtro : Codigo '%s' , Descripcion '%s'", codigo, descripcion);
-//		caption.setLabel(this.descripcionFiltro);
-		
 		this.productos=new ArrayList<DescriptibleOV>();
 		
 		
 		FiltroProductosOV filtro = new FiltroProductosOV();
+		
+		BeanUtils.copyProperties(filtro, this.credenciales);
+		
+		
 		filtro.setCodigo(this.filtroCodigo);
 		filtro.setDescripcion(this.filtroDescripcion);
+		
 		if(this.tipoProductoSeleccionado!=null){
 			filtro.setOidTipoProducto(String.valueOf(this.tipoProductoSeleccionado.getId()));
 			filtro.setDetallesTipoProducto(this.detallesTipoProducto);
@@ -107,8 +116,6 @@ public class ConsultaStockVM extends ViewModel {
 		 */
 		List<DetalleCaracteristicaProductoOV> detalles = filtro.getDetallesTipoProducto();
 
-		//valida que se completen los combos.
-//		if(this.filtroCodigo.isEmpty()){
 		if(this.tipoProductoSeleccionado!=null){
 			
 		
@@ -116,17 +123,9 @@ public class ConsultaStockVM extends ViewModel {
 				if("COMPO".equals(detalleCaracteristicaProductoOV.getTipo())){
 					if(detalleCaracteristicaProductoOV.getValorSeleccionado()==null){
 						mostrarMensajeInfo("Complete el valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion());
-//						Clients.showNotification();
 						return;
 					}
 				}
-				
-//				if("TEXT".equals(detalleCaracteristicaProductoOV.getTipo())){
-//					if(detalleCaracteristicaProductoOV.getValorString()==null || detalleCaracteristicaProductoOV.getValorString().isEmpty()){
-//						Messagebox.show("Complete el valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion());
-//						return;
-//					}
-//				}
 				
 			}
 		
@@ -150,39 +149,9 @@ public class ConsultaStockVM extends ViewModel {
 			return false;
 		}
 		
-//		if(this.filtroCodigo.isEmpty() && this.filtroDescripcion.isEmpty()){
-//			Messagebox.show("Complete el codigo o la descripción para realizar un filtro");
-//			return false;
-//		}
-
-//		if(this.filtroCodigo.isEmpty()){ //si se filtra x descripcion, activar el filtro de productos
-//			if(this.tipoProductoSeleccionado==null || this.tipoProductoSeleccionado.getId()==0L){
-//				Messagebox.show("Complete el tipo de producto para realizar un filtro");
-//				return false;
-//			}
-//		}
-		
 		return true;
 	}
 	
-	private String formatCodigo() {
-		String codigo = this.filtroCodigo;
-		if(codigo.length()>MAX_WIDTH_CODIGO){
-			codigo = StringUtils.substring(codigo, 0, MAX_WIDTH_CODIGO);
-			codigo.concat(ADDITIONAL);
-		}
-		return codigo;
-	}
-
-	private String formatDescripcion() {
-		String descripcion = this.filtroDescripcion;
-		if(descripcion.length()>MAX_WIDTH_DESCRIPTION){
-			descripcion = StringUtils.substring(descripcion, 0, MAX_WIDTH_DESCRIPTION);
-			descripcion.concat(ADDITIONAL);
-		}
-		return descripcion;
-	}
-
 	@Command
 	public void limpiar(){
 		redirectToMyself();
@@ -195,7 +164,18 @@ public class ConsultaStockVM extends ViewModel {
 		
 		ContainerOV container = new ContainerOV();
 		container.setString1(String.valueOf(tipoProductoSeleccionado.getId()));
+		container.setCertificado(this.credenciales.getCertificado());
+		container.setEmpleado(this.credenciales.getEmpleado());
+		container.setSucursal(this.credenciales.getSucursal());
+		container.setSession(this.credenciales.getSession());
 		detallesTipoProducto = ((ListDetalleCaracteristicaProductoListOV)Operaciones.ejecutar("RecuperarDetallesCaracteristicaProducto", container, ListDetalleCaracteristicaProductoListOV.class)).getList();
+	}
+	
+	@Command
+	public void salir(){
+		Session sess = Sessions.getCurrent();
+		sess.removeAttribute("userCredential");
+		Executions.sendRedirect("login.zul");
 	}
 	
 }

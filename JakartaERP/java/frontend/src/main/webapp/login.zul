@@ -1,0 +1,61 @@
+<?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
+<?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
+
+<zk>
+
+	<style src="/style/template.css" />
+		
+	<panel 
+		id="tool" height="auto" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 
+		style="background-color:transparent; margin-top:10%" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')"
+	>
+	
+		<panelchildren>
+		
+			<grid hflex="1" style="border-style:none">
+				<columns>
+					<column hflex="1"></column>
+					<column hflex="2"></column>
+				</columns>
+				
+				<rows>
+					<row>
+						<cell>
+							<label style="margin-left:10px;" value="Usuario"></label>
+						</cell>
+						<cell>
+							<textbox style="text-transform: lowercase;" hflex="1" value="@bind(vm.usuario)" onOK="@command('acceder')"/>
+						</cell>
+					</row>
+
+					<row>
+						<cell>
+							<label style="margin-left:10px;" value="Password" />
+						</cell>
+						<cell>
+							<textbox hflex="1"  type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
+						</cell>
+					</row>
+					
+					<row>
+						<cell colspan="2" style="text-align:center">
+							<button label="Acceder" width="50%" onClick="@command('acceder')" />
+						</cell>
+					</row>
+
+					<row>
+						<cell colspan="2" style="text-align:center">
+							<label style="color:red;font-size:10px;" value="@bind(vm.error)" visible="@bind(vm.showError)" />
+						</cell>
+					</row>
+
+					
+				</rows>
+				
+			</grid>
+		
+		
+		</panelchildren>
+	</panel>
+
+</zk>
