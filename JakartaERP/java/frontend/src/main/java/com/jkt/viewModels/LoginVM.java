@@ -31,7 +31,7 @@ public class LoginVM {
 	
 		ContainerOV objetoOV = new ContainerOV();
 		
-		objetoOV.setString1(usuario);
+		objetoOV.setString1(usuario.toLowerCase());
 		objetoOV.setString2(password);
 		
 		UserOV result= new UserOV();
