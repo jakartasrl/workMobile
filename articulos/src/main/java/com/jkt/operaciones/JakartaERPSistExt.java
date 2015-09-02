@@ -1,5 +1,7 @@
 package com.jkt.operaciones;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.HttpURLConnection;
@@ -9,24 +11,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
+import javax.servlet.ServletContext;
+
+import org.apache.commons.digester3.Digester;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.tree.DefaultElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.xml.sax.SAXException;
 
-import com.google.gson.Gson;
-import com.jkt.dominio.Descriptible;
 import com.jkt.dominio.JakartaERP;
 import com.jkt.dominio.LoginDTO;
 import com.jkt.dominio.PersistentEntity;
 import com.jkt.excepcion.JakartaException;
 
+@Component
 abstract public class JakartaERPSistExt extends Operation {
 
+	@Autowired
+	private ServletContext servletContext;
+	
 	abstract protected List returnResult(String requestERP) throws DocumentException, IllegalAccessException, InvocationTargetException;
 	
 	protected StringBuffer generarHeader(String operacion, String parametroHeader) throws Exception {
@@ -203,9 +211,38 @@ abstract public class JakartaERPSistExt extends Operation {
 	}
 
 	protected String getUrl() throws Exception{
-		JakartaERP conf = getConfiguracion();
+		JakartaERP conf;// = getConfiguracion();
+		 
+		try {
+			Digester digester = generarReglas();
+			InputStream in = JakartaERPSistExt.class.getResourceAsStream("configuracionERP.xml");
+			
+			List elementos=(List)digester.parse(in);
+			if (elementos.size()!=1) {
+				throw new JakartaException("Existen inconsistencias en el archivo de configuracion de ERP.");
+			}
+			conf=(JakartaERP) elementos.get(0);//Hay que obtener el primero.
+		} catch (IOException e) {
+			throw new RuntimeException("Error de entrada/salida.");
+		} catch (SAXException e) {
+			throw new RuntimeException("Error de parseo en el archivo de configuracion de ERP");
+		}
+		
 		return "http://"+conf.getIp()+":"+conf.getPort()+"/"+conf.getAplicacion()+"/"+conf.getServlet();
 	}
 
+	
+	private Digester generarReglas() {
+		Digester digester = new Digester();
+		digester.setValidating(false);
+		
+		digester.addObjectCreate("elementos", ArrayList.class);
+		
+		digester.addObjectCreate("elementos/elemento", JakartaERP.class.getName());
+		digester.addSetProperties("elementos/elemento");
+		digester.addSetNext("elementos/elemento", "add", JakartaERP.class.getName());
+
+		return digester;
+	}
 
 }

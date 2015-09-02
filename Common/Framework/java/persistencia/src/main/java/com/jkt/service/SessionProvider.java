@@ -30,7 +30,7 @@ public class SessionProvider implements ISessionProvider{
 	
 	private static final Logger LOG = Logger.getLogger(SessionProvider.class);
 	
-	@Autowired
+//	@Autowired
 	private SessionFactory sessionFactory;//gets from hibernate and datasource config
 	
 	private static Session session;

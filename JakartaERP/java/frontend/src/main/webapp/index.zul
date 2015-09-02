@@ -40,12 +40,10 @@
                 <vlayout >
 					<hlayout hflex="1" >
 						<hlayout hflex="1" >
-<!-- 							<label width="auto">Código</label> -->
 							<textbox hflex="1" sclass="campoCodigo-medium" style="margin-left:2px" value="@bind(vm.filtroCodigo)" placeholder="Codigo"></textbox>
 						</hlayout>
 						
 						<hlayout hflex="2" >
-<!-- 							<label width="auto">Descripción</label> -->
 							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"  style="margin-left:2px" placeholder="Descripcion"></textbox>
 						</hlayout>
 					</hlayout>
@@ -91,8 +89,6 @@
 														</combobox>
 													</zk>
 													
-<!-- 													disabled="@bind(!vm.filtroCodigo.isEmpty())" -->
-													
 													<zk case='TEXT'>
 														<textbox hflex="1" value="@bind(each.valorString)" />
 													</zk>
@@ -109,7 +105,7 @@
 					</hlayout>
 							
 					<hlayout style="overflow:hidden;padding:5px;text-align:center">
-						<button label="Filtrar" onClick="@command('filtrar', groupbox = gb3, caption = captionGB)" />
+						<button label="Buscar" onClick="@command('filtrar', groupbox = gb3, caption = captionGB)" />
 						<space></space>
 						<button label="Limpiar" onClick="@command('limpiar')" />
 					</hlayout>
@@ -136,7 +132,6 @@
 									<label width="100%" value="@bind(each.codigo)" />
 									<label width="100%" value="@bind(each.descripcion)" />
 									<label width="100%" value="@bind(each.campoAdicional1)" />
-<!-- 									<label width="100%" value="@bind(each.campoAdicional2)" /> -->
 								</row>
 							</template>					
 						</rows>

@@ -3,7 +3,7 @@
 
 <zk>
 
-	<style src="/style/template.css" />
+<!-- 	<style src="/style/template.css" /> -->
 		
 	<panel 
 		id="tool" height="auto" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 

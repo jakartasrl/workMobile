@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE elementos [
+	<!ELEMENT elementos			(elemento*)>
+	<!ELEMENT elemento			EMPTY>
+
+	<!ATTLIST elemento	ip	CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	port		CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	aplicacion	CDATA 	#REQUIRED> 
+	<!ATTLIST elemento	servlet		CDATA 	#REQUIRED> 
+	
+]>
+
+<elementos>
+
+	<elemento 
+		ip="localhost"
+		port="8080"
+		aplicacion="Pampa"
+		servlet="FrontServletXML"
+	/>
+
+</elementos>

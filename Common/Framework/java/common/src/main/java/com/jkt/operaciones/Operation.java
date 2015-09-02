@@ -198,12 +198,13 @@ public abstract class Operation extends Observable {
 	 * @throws Exception cuando ocurre cualquier error, deberia wrapper la exception y guardarle dentro de {@link Exception}
 	 */
 	public void runOperation(Map<String, Object> aParams) throws Exception{
-		session = sessionProvider.getSession();
+		execute(aParams);//UOW
+
+		/*session = sessionProvider.getSession();
 		serviceRepository.setSessionProvider(sessionProvider);
 		serviceRepository.setRepositorioClases(repositorioClases);
 		Transaction tx = session.beginTransaction();
 		try{
-			execute(aParams);//UOW
 			tx.commit();
 			sessionProvider.destroySession();
 		}catch(javax.validation.ConstraintViolationException e){
@@ -235,7 +236,7 @@ public abstract class Operation extends Observable {
 				tx.commit();
 			}
 			sessionProvider.destroySession();
-		}
+		}*/
 	}
 	
 	public abstract void execute(Map<String, Object> aParams) throws Exception;

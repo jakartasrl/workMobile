@@ -153,7 +153,7 @@ public abstract class RequestProcessor extends BaseController{
 		transformer.write();
 		
 		}finally{
-			sessionProvider.destroySession();
+//			sessionProvider.destroySession();
 		}
 		log.info("Finalizó la operación...");
 	}

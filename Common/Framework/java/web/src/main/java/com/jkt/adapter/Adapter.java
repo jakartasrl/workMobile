@@ -28,25 +28,25 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 	 * 
 	 */
 	public T adaptRequest(T2 input, EventBusiness operation) throws Exception,EntityNotFoundException {
-		session = sessionProvider.getSession();
-		Transaction tx = null;
-		try{
-			tx = session.beginTransaction();
-		}catch(org.hibernate.TransactionException e){
-			tx = throwException(tx);
-		}catch(SessionException sE){
-			tx = throwException(tx);
-		}catch(org.hibernate.ResourceClosedException rE){
-			tx = throwException(tx);
-		}	
-		
+//		session = sessionProvider.getSession();
+//		Transaction tx = null;
+//		try{
+//			tx = session.beginTransaction();
+//		}catch(org.hibernate.TransactionException e){
+//			tx = throwException(tx);
+//		}catch(SessionException sE){
+//			tx = throwException(tx);
+//		}catch(org.hibernate.ResourceClosedException rE){
+//			tx = throwException(tx);
+//		}	
+//		
 		
 		try{
 			T map = adaptRequestHook(input, operation);
-			tx.commit();
+//			tx.commit();
 			return map;
 		}catch(JakartaException e){
-			tx.rollback();
+//			tx.rollback();
 			sessionProvider.destroySession();
 			throw e;
 		}catch(javax.validation.ConstraintViolationException e){
@@ -60,13 +60,13 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 					break;
 				}
 				
-				tx.rollback();
-				sessionProvider.destroySession();
+//				tx.rollback();
+//				sessionProvider.destroySession();
 				
 				throw new ValidacionDeNegocioException(buffer.toString());
 		}catch(Exception e){
-			tx.rollback();
-			sessionProvider.destroySession();
+//			tx.rollback();
+//			sessionProvider.destroySession();
 			
 			if (e.getCause()!=null) {
 				throw new JakartaException(e.getCause().getMessage());
@@ -99,7 +99,7 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 	
 	protected abstract T adaptRequestHook(T2 input, EventBusiness operation) throws Exception,EntityNotFoundException;
 	
-	@Autowired
+//	@Autowired
 	public void setSession(SessionProvider sessionProvider) {
 		this.sessionProvider=sessionProvider;
 	}
@@ -113,16 +113,18 @@ public abstract class Adapter<T,T2> implements  AdapterInterface<T,T2> {
 	 * @throws Exception
 	 */
 	public PersistentEntity recuperarObjecto(Class<?> clazz, long oid) throws EntityNotFoundException,InstantiationException, IllegalAccessException{
-		Object newInstance;
-		if (oid<1) {//Si el id buscado es 0 o negativo, se retorna una nueva instancia
-			newInstance	= clazz.newInstance();
-		}else{
-			newInstance=session.get(clazz, oid);
-			if (newInstance==null) {
-				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz.getSimpleName(), String.valueOf(oid)));
-			}
-		}
-		return (PersistentEntity) newInstance;
+		return (PersistentEntity)clazz.newInstance();
+		
+//		Object newInstance;
+//		if (oid<1) {//Si el id buscado es 0 o negativo, se retorna una nueva instancia
+//			newInstance	= clazz.newInstance();
+//		}else{
+//			newInstance=session.get(clazz, oid);
+//			if (newInstance==null) {
+//				throw new EntityNotFoundException(String.format("No existe la entidad de tipo %s con oid %s.", clazz.getSimpleName(), String.valueOf(oid)));
+//			}
+//		}
+//		return (PersistentEntity) newInstance;
 	}
 	
 	public Session getSession(){

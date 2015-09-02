@@ -74,12 +74,12 @@ public class ServiceRepository implements IServiceRepository {
 		return repositorioClases;
 	}
 
-	@Autowired
+//	@Autowired
 	public void setRepositorioClases(IRepositorioClases repositorioClases) {
 		this.repositorioClases = repositorioClases;
 	}
 
-	@Autowired
+//	@Autowired
 	public void setSessionProvider(ISessionProvider sessionProvider) {
 		this.sessionProvider=sessionProvider;
 	}
