@@ -86,7 +86,7 @@ public class TraerProductos extends JakartaERPSistExt {
 		}
 
 		if (filtro.getDescripcion()!=null && !filtro.getDescripcion().isEmpty()) {
-			builder.append(" descripcion = \""+filtro.getDescripcion().replace("\"", "%")+"\" ");
+			builder.append(" descripcion = \""+filtro.getDescripcion().replace("\"", "%").replace("*", "%")+"\" ");
 		}
 		
 		for (DetalleCaracteristicaProducto detalleCaracteristicaProducto : filtro.getDetallesTipoProducto()) {
