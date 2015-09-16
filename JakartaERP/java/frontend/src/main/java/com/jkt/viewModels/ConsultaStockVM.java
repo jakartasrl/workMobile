@@ -117,34 +117,30 @@ public class ConsultaStockVM extends ViewModel {
 		List<DetalleCaracteristicaProductoOV> detalles = filtro.getDetallesTipoProducto();
 
 
-//		if(this.tipoProductoSeleccionado!=null){
-//			
-//		
-//			for (DetalleCaracteristicaProductoOV detalleCaracteristicaProductoOV : detalles) {
+		if(this.tipoProductoSeleccionado!=null){
+
+			for (DetalleCaracteristicaProductoOV detalleCaracteristicaProductoOV : detalles) {
 //				if("COMPO".equals(detalleCaracteristicaProductoOV.getTipo())){
 //					if(detalleCaracteristicaProductoOV.getValorSeleccionado()==null){
 //						mostrarMensajeInfo("Complete el valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion());
 //						return;
 //					}
 //				}
-//				if("NUM".equals(detalleCaracteristicaProductoOV.getTipo())){
-//					
-//					if(!detalleCaracteristicaProductoOV.getValorSeleccionado().getDescripcion().isEmpty()){
-//					
-//					}
-//					
-//					try{
-//						Integer.valueOf(detalleCaracteristicaProductoOV.getValorSeleccionado().getDescripcion());
-//					}catch(NumberFormatException e){
-//						mostrarMensajeInfo("El valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion()+" debe ser numérico");
-//						return;
-//					}
-//					
-//				}
-//				
-//			}
+				if("NUM".equals(detalleCaracteristicaProductoOV.getTipo())){
+
+					if(detalleCaracteristicaProductoOV.getValorEntero()!=null && !detalleCaracteristicaProductoOV.getValorEntero().isEmpty()){
+						try{
+							Integer.valueOf(detalleCaracteristicaProductoOV.getValorEntero());
+						}catch(NumberFormatException e){
+							mostrarMensajeInfo("El valor del filtro "+detalleCaracteristicaProductoOV.getDescripcion()+" debe ser numérico");
+							return;
+						}
+					}
+					
+				}
+			}
 		
-//		}
+		}
 		
 		for (DetalleCaracteristicaProductoOV detalleCaracteristicaProductoOV : detalles) {
 			if(detalleCaracteristicaProductoOV.getValorSeleccionado()!=null){

@@ -12,7 +12,8 @@ public class DetalleCaracteristicaProductoOV extends ObjectView {
 
 	private String oid, codigo, descripcion, tipo, longitud;
 	private String valorString;
-	private int valorEntero;
+//	private int valorEntero;
+	private String valorEntero;
 	
 	private DetalleCaracteristicaProductoOV valorSeleccionado;
 	private String idValorCombo;

@@ -108,7 +108,11 @@ public class TraerProductos extends JakartaERPSistExt {
 					continue;
 				}
 			}else if("NUM".equals(detalleCaracteristicaProducto.getTipo())){
-				atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\"0\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getValorEntero()+"\""; 
+				if(detalleCaracteristicaProducto.getValorEntero()!=null && !detalleCaracteristicaProducto.getValorEntero().isEmpty()){
+					atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\"0\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getValorEntero()+"\""; 
+				}else{
+					continue;
+				}
 			}else{
 				throw new JakartaException("Verifique el tipo de dato del detalle de la caracteritica de produto.");
 			}

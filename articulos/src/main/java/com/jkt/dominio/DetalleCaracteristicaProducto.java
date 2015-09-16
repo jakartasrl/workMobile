@@ -28,7 +28,8 @@ public class DetalleCaracteristicaProducto extends PersistentEntity {
 	
 	//Para enviar valores al ERP
 	private String valorString;
-	private int valorEntero;
+	private String valorEntero;
+//	private int valorEntero;
 //	private String valorOid; 
 //	private DetalleCaracteristicaProducto valorSeleccionado;
 	
