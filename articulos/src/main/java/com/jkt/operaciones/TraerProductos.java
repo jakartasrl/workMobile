@@ -93,7 +93,14 @@ public class TraerProductos extends JakartaERPSistExt {
 			
 			String atributo;
 			if("COMPO".equals(detalleCaracteristicaProducto.getTipo())){
-				atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getIdValorCombo()+"\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getCodigoCombo()+"\""; 
+				
+				if(detalleCaracteristicaProducto.getCodigoCombo()==null || detalleCaracteristicaProducto.getCodigoCombo().isEmpty()){
+					//no agregar al filtro
+					continue;
+				}else{
+					atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getIdValorCombo()+"\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getCodigoCombo()+"\""; 
+				}
+			
 			}else if("TEXT".equals(detalleCaracteristicaProducto.getTipo())){
 				if(detalleCaracteristicaProducto.getValorString()!=null && !detalleCaracteristicaProducto.getValorString().isEmpty()){
 					atributo = " oid_atri_"+detalleCaracteristicaProducto.getOid()+"=\"0\" atri_"+detalleCaracteristicaProducto.getOid()+"=\""+detalleCaracteristicaProducto.getValorString()+"\""; 
