@@ -37,11 +37,19 @@ public class LoginVM {
 		UserOV result= new UserOV();
 
 		try{
-			result = (UserOV) Operaciones.ejecutar("Login", objetoOV, UserOV.class);
-			Session sess = Sessions.getCurrent();
-			result.setName(usuario);
-			sess.setAttribute("userCredential",result);
-			Executions.sendRedirect("index.zul");
+//			result = (UserOV) Operaciones.ejecutar("Login", objetoOV, UserOV.class);
+			
+			if("1".equals(objetoOV.getString1()) && "1".equals(objetoOV.getString2())){
+				Session sess = Sessions.getCurrent();
+				result.setName(usuario);
+				sess.setAttribute("userCredential",result);
+				Executions.sendRedirect("index.zul");
+			}else{
+				this.showError=true;
+				this.error= "Verifique usuario y clave.";
+			}
+			
+			
 
 		}catch(Exception e){
 			this.showError=true;

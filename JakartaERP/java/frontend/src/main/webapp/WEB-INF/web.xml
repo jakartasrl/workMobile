@@ -7,7 +7,7 @@
 		<session-timeout>-1</session-timeout>
 	</session-config>
 
-	<display-name>spiraxsarco</display-name>
+	<display-name>nexo</display-name>
 	<listener>
 		<description>Used to cleanup when a session is destroyed</description>
 		<display-name>ZK Session cleaner</display-name>
@@ -65,5 +65,10 @@
 	<welcome-file-list>  
         <welcome-file>/index.zul</welcome-file>  
     </welcome-file-list>  
+    
+    <error-page>
+	    <exception-type>java.lang.Throwable</exception-type>    
+	    <location>/WEB-INF/errorDetalle.zul</location>    
+	</error-page>
 
 </web-app>

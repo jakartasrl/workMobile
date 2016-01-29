@@ -1,0 +1,60 @@
+<?page title="Nexo" id="sSarco" cacheable="false" ?>
+<?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
+
+<zk>
+
+	<style src="/style/template.css" />
+	<style src="/style/workMobile.css" />
+
+	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ArticuloCodigoVM')" >
+	
+		<vlayout hflex="1" height="auto">
+		
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<label style="color: black;font-size: 100%;font-weight: bold;">Orden actual : </label>
+				<label style="color: black;font-size: 100%;font-weight: bold;" value="@bind(vm.orden.descripcionOrdenActual)"></label>
+			</hlayout>
+
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<label style="color: black;font-size: 100%;font-weight: bold;">Cliente/Suc. actual : </label>
+				<label style="color: black;font-size: 100%;font-weight: bold;" value="@bind(vm.orden.descripcionClienteActual)"></label>
+			</hlayout>
+	
+			<hlayout hflex="1" >
+				<textbox id="t1" maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" hflex="1" value="@bind(vm.orden.codigoBarraArticulo)" placeholder="Codigo de articulo" visible="@bind(!vm.orden.codigoBarraArticuloEncontrado and !vm.orden.codigoBarraArticuloNoEncontrado)"  />
+				<textbox id="t2" maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" style="background-color: greenyellow !important;color: black; border: 2px solid black;" hflex="1" value="@bind(vm.orden.codigoBarraArticulo)" placeholder="Codigo de articulo" visible="@bind(vm.orden.codigoBarraArticuloEncontrado)" />
+				<textbox id="t3" maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" style="background-color: red !important;color: black; border: 2px solid black;" hflex="1" value="@bind(vm.orden.codigoBarraArticulo)" placeholder="Codigo de articulo" visible="@bind(vm.orden.codigoBarraArticuloNoEncontrado)" />
+			</hlayout>
+				
+			<listbox style="height: 105px" id="box" multiple="false" checkmark="false" model="@bind(vm.orden.articulos)" emptyMessage="No existen items aun." visible="@bind(!vm.orden.articulos.isEmpty())">
+
+				<listhead>
+					<listheader hflex="1"/>
+					<listheader hflex="2"/>
+				</listhead>
+
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@bind(each.codigo)"></label>
+						</listcell>
+
+						<listcell>
+							<label value="@bind(each.descripcion)"></label>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>			
+			
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<button sclass="botones" hflex="1" label="Ir a cliente/suc."  onClick="@command('volverCliente')" />
+				<button sclass="botones" hflex="1" label="Por Codigo de Barra" onClick="@command('cargarArticulo')" />
+			</hlayout>
+			
+		</vlayout>
+		
+		<button style="position: absolute;bottom: 0px;width: 100%;" label="Salir" onClick="@command('salir')" />
+		
+	</div>
+</zk>

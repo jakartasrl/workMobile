@@ -1,0 +1,44 @@
+<?page title="Nexo" id="sSarco" cacheable="false" ?>
+<?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
+
+<window id="ventana" title="" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaArticulosVM')" style="margin-top:5px;" width="80%" height="auto" position="top,center" closable="true" onCreate="@command('asignarVentana', window=self)">
+
+	<style src="/style/template.css" />
+	<style src="/style/workMobile.css" />
+
+	<div hflex="1"  height="auto"  >
+	
+		<vlayout hflex="1" height="auto">
+		
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<label style="color: black;;font-weight: bold;">Cliente/Suc. actual : </label>
+				<label style="color: black;font-size: 100%;font-weight: bold;" value="@bind(vm.descripcionCliente)"></label>
+			</hlayout>
+	
+			<listbox style="height: 105px" id="box" multiple="false" checkmark="false" model="@bind(vm.articulos)" emptyMessage="No existen items aun." >
+
+				<listhead>
+					<listheader hflex="1"/>
+					<listheader hflex="2"/>
+				</listhead>
+
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@bind(each.codigo)"></label>
+						</listcell>
+
+						<listcell>
+							<label value="@bind(each.descripcion)"></label>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>			
+			
+		</vlayout>
+		
+		<button style="position: absolute;bottom: 0px;width: 100%;" label="Cerrar Cliente/Sucursal" onClick="@command('cerrar', ventana = ventana)" />
+		
+	</div>
+</window>

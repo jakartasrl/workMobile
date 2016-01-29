@@ -1,61 +1,60 @@
-<?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
+<?page title="Nexo" id="sSarco" cacheable="false" ?>
 <?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
 
 <zk>
 
 <!-- 	<style src="/style/template.css" /> -->
 		
-	<panel 
-		id="tool" height="auto" title="Acceso" border="normal" collapsible="false" closable="false" maximizable="false" 
-		style="background-color:transparent; margin-top:10%" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')"
-	>
-	
-		<panelchildren>
+		<style>
+			.inputs{
+			    vertical-align: middle;
+			    font-size: 40px;
+			}
+			
+			.inputLogin{
+				border-style : solid;
+				border-width: 2px;
+				border-color : black;
+				text-align:center;
+			}
+		</style>
 		
-			<grid hflex="1" style="border-style:none">
+		<div  apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.LoginVM')">
+		
+			<grid hflex="1" style="border-style:none; margin-top: 15%">
 				<columns>
 					<column hflex="1"></column>
-					<column hflex="2"></column>
 				</columns>
 				
 				<rows>
 					<row>
 						<cell>
-							<label style="margin-left:10px;" value="Usuario"></label>
-						</cell>
-						<cell>
-							<textbox style="text-transform: lowercase;" hflex="1" value="@bind(vm.usuario)" onOK="@command('acceder')"/>
+							<textbox sclass="inputLogin" style="text-transform: uppercase;height: 50px;font-size: 15px" hflex="1" value="@bind(vm.usuario)" onOK="@command('acceder')" placeholder="Usuario"/>
 						</cell>
 					</row>
 
 					<row>
 						<cell>
-							<label style="margin-left:10px;" value="Password" />
-						</cell>
-						<cell>
-							<textbox hflex="1"  type="password" value="@bind(vm.password)" onOK="@command('acceder')" />
+							<textbox sclass="inputLogin" hflex="1" type="password" style="height: 50px;font-size: 15px" value="@bind(vm.password)" onOK="@command('acceder')" placeholder="CLAVE"/>
 						</cell>
 					</row>
 					
 					<row>
-						<cell colspan="2" style="text-align:center">
-							<button label="Acceder" width="50%" onClick="@command('acceder')" />
+						<cell colspan="1" style="text-align:center">
+							<button label="Acceder" width="50%" sclass="inputLogin" style="border-width:1px;height: 50px;font-size: 15px" onClick="@command('acceder')" />
 						</cell>
 					</row>
 
 					<row>
-						<cell colspan="2" style="text-align:center">
-							<label style="color:red;font-size:10px;" value="@bind(vm.error)" visible="@bind(vm.showError)" />
+						<cell colspan="1" style="text-align:center">
+							<label style="color:red;font-size:13px; " value="@bind(vm.error)" visible="@bind(vm.showError)" />
 						</cell>
 					</row>
 
-					
 				</rows>
 				
 			</grid>
 		
+		</div>
 		
-		</panelchildren>
-	</panel>
-
 </zk>

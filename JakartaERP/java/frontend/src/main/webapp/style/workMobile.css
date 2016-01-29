@@ -1,0 +1,38 @@
+table {
+	line-height: normal;
+	table-layout: fixed;
+}
+
+noSeleccionable {
+	height: auto;
+	cursor: pointer;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-o-user-select: none;
+}
+
+.campoCodigo {
+	text-transform: uppercase;
+	text-align: center;
+	height: 20px;
+	font-size: 13px;
+}
+
+.etiqueta {
+	font-size: 15px;
+}
+
+.botones {
+	height: 30px;
+	font-size: 12px;
+}
+/* .botones { */
+/* 	height: 50px; */
+/* 	font-size: 15px; */
+/* } */
+.z-listheader-content, .z-listcell-content, .z-listgroup-content,
+	.z-listgroupfoot-content, .z-listfooter-content, .z-auxheader-content {
+	line-height: normal;
+}

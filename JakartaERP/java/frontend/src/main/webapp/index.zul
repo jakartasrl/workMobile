@@ -1,153 +1,65 @@
-<?page title="Spirax Sarco" id="sSarco" cacheable="false" ?>
+<?page title="Nexo" id="sSarco" cacheable="false" ?>
 <?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
 <?init class="com.jkt.security.ServicioAcceso" ?>
 
 <zk>
+
 	<style src="/style/template.css" />
+	<style src="/style/workMobile.css" />
 	
-	<style>
-		table{
-			line-height: normal;
-			table-layout:fixed;
-		}
-		
-		noSeleccionable{
-			height: auto; cursor:pointer;
-			-moz-user-select: none; 
-			-webkit-user-select: none; 
-			-ms-user-select:none; 
-			user-select:none;
-			-o-user-select:none;
-		}
-	</style>
-	
-	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ConsultaStockVM')" >
+	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.OrdenCargaVM')" >
 	
 		<vlayout hflex="1" height="auto">
 		
-			<hlayout style="text-align:center; padding:3px;" hflex="1">
-				<label style="color: darkblue;font-size: 100%;font-weight: bold;">Spirax Sarco</label>
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<label style="color: black;font-size: 100%;font-weight: bold;">Orden actual : </label>
+				<label style="color: black;font-size: 100%;font-weight: bold;" value="@bind(vm.orden.descripcionOrdenActual)"></label>
 			</hlayout>
 	
-			<groupbox id="gb3" mold="3d" style="overflow:hidden;padding:5px;height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" hflex="1" open="true">
-                <attribute name="onOpen">
-                    <![CDATA[arrow.setSclass("open-" + self.isOpen());]]>
-                </attribute>
-                <caption label="@bind(vm.descripcionFiltro)" width="100%" sclass="customIcon" id="captionGB">
-                    <span id="arrow" class="open-true" />
-                </caption>
-                
-                <vlayout >
-					<hlayout hflex="1" >
-						<hlayout hflex="1" >
-							<textbox hflex="1" sclass="campoCodigo-medium" style="margin-left:2px" value="@bind(vm.filtroCodigo)" placeholder="Codigo"></textbox>
-						</hlayout>
-						
-						<hlayout hflex="2" >
-							<textbox hflex="1" value="@bind(vm.filtroDescripcion)"  style="margin-left:2px" placeholder="Descripcion"></textbox>
-						</hlayout>
-					</hlayout>
+			<hlayout hflex="1" >
+				<textbox  maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" hflex="1" value="@bind(vm.orden.codigoBarraOrden)" placeholder="Orden de carga" visible="@bind(!vm.orden.codigoBarraOrdenEncontrado and !vm.orden.codigoBarraOrdenNoEncontrado)"  />
+				<textbox  maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" style="background-color: greenyellow !important;color: black; border: 2px solid black;" hflex="1" value="@bind(vm.orden.codigoBarraOrden)" placeholder="Orden de carga" visible="@bind(vm.orden.codigoBarraOrdenEncontrado)" />
+				<textbox  maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" style="background-color: red !important;color: black; border: 2px solid black;" hflex="1" value="@bind(vm.orden.codigoBarraOrden)" placeholder="Orden de carga" visible="@bind(vm.orden.codigoBarraOrdenNoEncontrado)" />
+			</hlayout>
+				
+			<vlayout hflex="1" visible="@bind(vm.orden.codigoBarraOrdenNoEncontrado)">
+				<label sclass="campoCodigo" style="text-align:center; font-size: 12px;padding-left: 15px;" hflex="1" value="Orden de carga no existente."  />
+			</vlayout>
 
-					<hlayout >
-						<label width="auto">Tipo de Producto</label>
-						<combobox model="@bind(vm.tiposDeProducto)"   readonly="true" placeholder="Todos" onSelect="@command('activarFiltro')" selectedItem="@bind(vm.tipoProductoSeleccionado)">
-							<template name="model" var="tProd">
-								<comboitem label="@bind(tProd.descripcion)" />
-							</template>
-						</combobox>
-					</hlayout>
-					
-					<hlayout hflex="1" id="filtroTipoProducto" visible="@bind(vm.filtroProductoActivo)">
-						
-						<groupbox hflex="1" closable="false">
-							<caption label="Caracteristicas de producto" ></caption>
-						
-						
-							<grid hflex="1" model="@bind(vm.detallesTipoProducto)" mold="paging" pageSize="10" emptyMessage="Seleccione un tipo de producto" style="border:none; margin-top:5px;">
-						
-								<columns>
-									<column hflex="1" /> 
-									<column hflex="1" />
-								</columns>
-						
-								<rows style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
-									<template name="model">
-										<row style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
-											<label hflex="2" value="@bind(each.descripcion)" /> 
-											<hlayout hflex="3">
-												<zk switch="${each.tipo}" >
-													
-													<zk case='NUM'>
-														<textbox hflex="1" value="@bind(each.valorEntero)" />
-													</zk>
-													
-													<zk case='COMPO'>
-														<combobox   hflex="1" model="@bind(each.detalles)" readonly="true" placeholder="Seleccione..." selectedItem="@bind(each.valorSeleccionado)">
-															<template name="model" var="detalle">
-																<comboitem label="@bind(detalle.descripcion)" />
-															</template>
-														</combobox>
-													</zk>
-													
-													<zk case='TEXT'>
-														<textbox hflex="1" value="@bind(each.valorString)" />
-													</zk>
-													
-												</zk>								
-											</hlayout>								
-										</row>
-									</template>
-								</rows>
-							
-							</grid>
-						
-						</groupbox>
-					</hlayout>
-							
-					<hlayout style="overflow:hidden;padding:5px;text-align:center">
-						<button label="Buscar" onClick="@command('filtrar', groupbox = gb3, caption = captionGB)" />
-						<space></space>
-						<button label="Limpiar" onClick="@command('limpiar')" />
-					</hlayout>
-						
-				</vlayout>
-            </groupbox>
-	
-			<panel hflex="1" sclass="panel-maestro" style="overflow:hidden;padding:5px;height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" title="Stock de Productos" border="normal" >
-	
-				<panelchildren>
-				
-					<grid model="@bind(vm.productos)" emptyMessage="No existen productos" sclass="noSeleccionable" >
-	
-						<columns>
-							<column label="Codigo" 		align="left"	hflex="1" sort="auto(codigo)"/>
-							<column label="Descripcion"	align="left"	hflex="4" sort="auto(descripcion)"/>
-							<column label="Stock"		align="left"	hflex="1"/>
-<!-- 							<column label="Disponible"	align="left"	hflex="1"/> -->
-						</columns>
-				
-						<rows sclass="noSeleccionable" >
-							<template name="model">
-								<row style="height: auto; cursor:pointer;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;">
-									<label width="100%" value="@bind(each.codigo)" />
-									<label width="100%" value="@bind(each.descripcion)" />
-									<label width="100%" value="@bind(each.campoAdicional1)" />
-								</row>
-							</template>					
-						</rows>
-					
-					</grid>
-					
-				</panelchildren>
-				
-			</panel>
-					
-					
-			<hlayout style="text-align:center; padding:3px;" hflex="1">
-				<button label="Salir" onClick="@command('salir')" />
+			<hlayout style="text-align:center; padding:3px;" hflex="1" visible="@bind(vm.orden.codigoBarraOrdenEncontrado)" >
+				<button sclass="botones" hflex="1" label="Cerrar Orden"  onClick="@command('cerrarOrden')" />
+				<button sclass="botones" hflex="1" label="Cliente/Suc" onClick="@command('continuar')" />
 			</hlayout>
 			
+			<listbox style="height: 130px" id="box" multiple="false" checkmark="false"  model="@bind(vm.orden.clientes)" emptyMessage="No existen clientes cerrados aun." visible="@bind(!vm.orden.clientes.isEmpty())">
+				
+				<auxhead>
+		            <auxheader colspan="2" class="topic" style="text-align:center;">Clientes/Suc cerrados</auxheader>
+		        </auxhead>
+				
+				<listhead>
+					<listheader hflex="1" label="Codigo"/>
+					<listheader hflex="2" label="Razon Social"/>
+				</listhead>
+
+				<template name="model">
+					<listitem >
+						<listcell onDoubleClick="@command('mostrarArticulos', cliente = each)">
+							<label value="@bind(each.codigo)"></label>
+						</listcell>
+
+						<listcell onDoubleClick="@command('mostrarArticulos', cliente = each)">
+							<label value="@bind(each.descripcion)"></label>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
 			
 		</vlayout>
+	
+		<button style="position: absolute;bottom: 0px;width: 100%;" label="Salir" onClick="@command('salir')" />
+	
 	</div>
+	
+	
 </zk>

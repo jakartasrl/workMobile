@@ -14,9 +14,18 @@
 
 	<elemento 
 		ip="localhost"
-		port="8090"
-		aplicacion="Pampa"
+		port="8097"
+		aplicacion="JakartaERP"
 		servlet="FrontServletXML"
 	/>
+
+<!-- 		aplicacion="Pampa" -->
+
+<!-- 	<elemento  -->
+<!-- 		ip="10.2.1.140" -->
+<!-- 		port="8080" -->
+<!-- 		aplicacion="jakarta_dv2" -->
+<!-- 		servlet="FrontServletXML" -->
+<!-- 	/> -->
 
 </elementos>

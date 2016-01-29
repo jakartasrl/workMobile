@@ -12,10 +12,10 @@ body{
 	width:100%;
 }
 
-table{
-	table-layout:fixed;
-	line-height: normal;
-}
+/* table{ */
+/* 	table-layout:fixed; */
+/* 	line-height: normal; */
+/* } */
 
 .z-vlayout{
 	width: 100%
@@ -98,15 +98,15 @@ table{
 /* header */
 /* header */
 
-.z-row-content, .z-row-content:hover , .z-row-inner, .z-row-inner:hover , .z-row, .z-row:hover, .z-cell, .z-cell:hover {
-/* 	background-color: white !important; */
-	padding: 0px !important;
-	margin: 0px !important;
-}
+/* .z-row-content, .z-row-content:hover , .z-row-inner, .z-row-inner:hover , .z-row, .z-row:hover, .z-cell, .z-cell:hover { */
+/* /* 	background-color: white !important; */ */
+/* 	padding: 0px !important; */
+/* 	margin: 0px !important; */
+/* } */
 
-.z-row-content .fila-maestro{
-	height: 29px !important;
-}
+/* .z-row-content .fila-maestro{ */
+/* 	height: 29px !important; */
+/* } */
 
 .z-panel-header .panel-maestro{
 	height: 29px;

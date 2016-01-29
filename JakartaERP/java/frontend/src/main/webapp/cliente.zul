@@ -1,0 +1,69 @@
+<?page title="Nexo" id="sSarco" cacheable="false" ?>
+<?meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" ?>
+<?init class="com.jkt.security.ServicioAcceso" ?>
+
+<zk>
+
+	<style src="/style/template.css" />
+	<style src="/style/workMobile.css" />
+		
+	<div hflex="1"  height="auto" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.jkt.viewModels.ClienteVM')" >
+	
+		<vlayout hflex="1" height="auto">
+		
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<label style="color: black;font-size: 100%;font-weight: bold;">Orden actual : </label>
+				<label style="color: black;font-size: 100%;font-weight: bold;" value="@bind(vm.orden.descripcionOrdenActual)"></label>
+			</hlayout>
+
+			<hlayout style="text-align:center; padding:3px;" hflex="1" >
+				<label style="color: black;font-size: 100%;font-weight: bold;">Cliente/Suc. actual : </label>
+				<label style="color: black;font-size: 100%;font-weight: bold;" value="@bind(vm.orden.descripcionClienteActual)"></label>
+			</hlayout>
+	
+			<hlayout hflex="1" >
+				<textbox id="t1" maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" hflex="1" value="@bind(vm.orden.codigoBarraCliente)" placeholder="Codigo de cliente/suc" visible="@bind(!vm.orden.codigoBarraClienteEncontrado and !vm.orden.codigoBarraClienteNoEncontrado)"  />
+				<textbox id="t2" maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" style="background-color: greenyellow !important;color: black; border: 2px solid black;" hflex="1" value="@bind(vm.orden.codigoBarraCliente)" placeholder="Codigo de cliente/suc" visible="@bind(vm.orden.codigoBarraClienteEncontrado)" />
+				<textbox id="t3" maxlength="13" onOK="@command('buscarCodigoBarraOrdenCarga',codigoBarraCompra= self.value)" sclass="campoCodigo" style="background-color: red !important;color: black; border: 2px solid black;" hflex="1" value="@bind(vm.orden.codigoBarraCliente)" placeholder="Codigo de cliente/suc" visible="@bind(vm.orden.codigoBarraClienteNoEncontrado)" />
+			</hlayout>
+				
+			<vlayout hflex="1" visible="@bind(vm.orden.codigoBarraClienteNoEncontrado)">
+				<label sclass="campoCodigo" style="text-align:center; font-size: 12px;padding-left: 15px;" hflex="1" value="Cliente no existente."  />
+			</vlayout>
+
+			<hlayout style="text-align:center; padding:3px;" hflex="1"  >
+				<button sclass="botones" hflex="2" label="Orden"  onClick="@command('volverOrden')" />
+				<button sclass="botones" hflex="3" label="CerrarCliente/Suc" onClick="@command('cerrarCliente')" visible="@bind(vm.orden.codigoBarraClienteEncontrado)"/>
+				<button sclass="botones" hflex="2" label="Articulos"  onClick="@command('continuar')" visible="@bind(vm.orden.codigoBarraClienteEncontrado)" />
+			</hlayout>
+			
+			<listbox style="height: 100px" id="box" multiple="false" checkmark="false"  model="@bind(vm.orden.clientes)" emptyMessage="No existen clientes cerrados aun." visible="@bind(!vm.orden.clientes.isEmpty())">
+				
+				<auxhead>
+		            <auxheader colspan="2" class="topic" style="text-align:center;">Clientes/Suc. cerrados</auxheader>
+		        </auxhead>
+				
+				<listhead>
+					<listheader hflex="1" label="Codigo"/>
+					<listheader hflex="2" label="Razon Social"/>
+				</listhead>
+				
+				<template name="model">
+					<listitem>
+						<listcell>
+							<label value="@bind(each.codigo)"></label>
+						</listcell>
+
+						<listcell>
+							<label value="@bind(each.descripcion)"></label>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+			
+		</vlayout>
+		
+		<button style="position: absolute;bottom: 0px;width: 100%;" label="Salir" onClick="@command('salir')" />
+		
+	</div>
+</zk>

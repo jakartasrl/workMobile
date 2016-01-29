@@ -2,11 +2,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
-	<window id="error" mode="modal" sizable="true" closable="true" title="Error" style="width:350px;" height="110px;">
-		<hlayout  >
-			<image src="/pantallas/icons/dialog-error2.png"   vflex="min"/>
-			<label multiline="true" hflex="1"	vflex="1" value="${requestScope['javax.servlet.error.exception'].message}" 
-					style="font-size: 15px;margin-left:10px;"/>
-		</hlayout>
-	</window>
+
+	<label>ERROR</label>
+
 </zk>
